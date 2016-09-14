@@ -189,7 +189,17 @@ namespace Tower_Crush
     }
     public class Player
     {
-        private int money = 9000;
+        //private int money = 350;
+        //private int lives = 30;
+        //private int oil = 0;
+        //private int core = 0;
+        //private int energy = 20;
+        //private int energyDemand = 0; // Energiebedarf des Spielers
+        //private int metal = 0;
+        //private int worker = 0;
+        //private int waveFinished = 0; // Anzahl der geschaften Wellen
+
+        private int money = 90000;
         private int lives = 30;
         private int oil = 500;
         private int core = 100;
