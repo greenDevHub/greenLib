@@ -6,8 +6,19 @@ To do :
 -Spreadsheet zeugs
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 Hallo Welt
+=======
+Hallo Welt nochmal neu :) hhgjn
+>>>>>>> origin/InfoAG
 
+<<<<<<< HEAD
+=======
 Hallo Freunde;) 
+<<<<<<< HEAD
+=======
+
+-Teamarbeit
+>>>>>>> origin/InfoAG
 >>>>>>> origin/InfoAG
