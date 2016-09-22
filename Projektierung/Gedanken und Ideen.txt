@@ -1,0 +1,7 @@
+To do : 
+-Datenbanken / Database
+-Programm zur Datenbankverwaltung
+-Website
+-Spiele / Games
+-Spreadsheet zeugs
+
