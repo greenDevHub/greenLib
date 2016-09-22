@@ -5,3 +5,9 @@ To do :
 -Spiele / Games
 -Spreadsheet zeugs
 
+<<<<<<< HEAD
+=======
+Hallo Welt
+
+Hallo Freunde;) 
+>>>>>>> origin/InfoAG
