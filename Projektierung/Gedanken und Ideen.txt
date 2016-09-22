@@ -4,7 +4,17 @@ To do :
 -Website
 -Spiele / Games
 -Spreadsheet zeugs
-- Blumen sind rot
 -Teamarbeit
 >>>>>>> origin/InfoAG
 >>>>>>> origin/InfoAG
+
+
+Was wir alles machen wollen:
+-interresse an web desing 
+-Projekt Schulbibliothek
+-Msql zeugs 
+-Essen Essen Essen ( also tool zum bestellen )( für Grünbach ) ( muss aber web basierend sein )  
+
+
+Der Plan : 
+- Rohling bauen ( in bezug auf daten analyse ) 
