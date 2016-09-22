@@ -7,3 +7,9 @@ To do :
 
 Hallo Welt nochmal neu :) hhgjn
 
+<<<<<<< HEAD
+=======
+Hallo Freunde;) 
+
+-Teamarbeit
+>>>>>>> origin/InfoAG
