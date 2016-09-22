@@ -18,3 +18,11 @@ Was wir alles machen wollen:
 
 Der Plan : 
 - Rohling bauen ( in bezug auf daten analyse ) 
+
+Master of Github: Phi Long
+Master Structure: Cedric Groß
+Entwickler: Joshi / Max / Flo / Lukas / Justin 
+PR Zeugs : 1. Lukas / 2. Cedric 
+Qualitätsmanagement: Laurenz
+Datenbankverwaltung / Master of Database: Erik
+Mädchen für alles / Head of desaster:Johnaß
