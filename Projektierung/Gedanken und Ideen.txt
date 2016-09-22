@@ -6,3 +6,5 @@ To do :
 -Spreadsheet zeugs
 - Blumen sind rot
 -Teamarbeit
+>>>>>>> origin/InfoAG
+>>>>>>> origin/InfoAG
