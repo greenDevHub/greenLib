@@ -13,16 +13,18 @@ Was wir alles machen wollen:
 -interresse an web desing 
 -Projekt Schulbibliothek
 -Msql zeugs 
--Essen Essen Essen ( also tool zum bestellen )( für Grünbach ) ( muss aber web basierend sein )  
+-Essen Essen Essen ( also tool zum bestellen )( fÃ¼r GrÃ¼nbach ) ( muss aber web basierend sein )  
 
 
 Der Plan : 
 - Rohling bauen ( in bezug auf daten analyse ) 
 
 Master of Github: Phi Long
-Master Structure: Cedric Groß
+Master Structure: Cedric GroÃŸ
 Entwickler: Joshi / Max / Flo / Lukas / Justin 
 PR Zeugs : 1. Lukas / 2. Cedric 
-Qualitätsmanagement: Laurenz
+QualitÃ¤tsmanagement: Laurenz
 Datenbankverwaltung / Master of Database: Erik
-Mädchen für alles / Head of desaster:Jonaß
+MÃ¤dchen fÃ¼r alles / Head of desaster:JonaÃŸ
+
+:trollface:
