@@ -110,6 +110,8 @@ namespace Tower_Crush.TowerType
                 radius = (radius * 1.2f);
                 shootingSpeed = shootingSpeed * 0.8f;
             }
+            // Hotfix für Double Layer
+            textureType = TextureType.Single; // Achtung ist nur wirklich nur Hotfik bis die Grafik hinzugefügt wurden ist wie in #1
         }
 
         public CannonTower(Texture2D[] texture, Texture2D bulletTexture, Texture2D rangeBorderTexture, Texture2D headupDisplayTexture, ObjectTypeConfig objectTypeConfig, Vector2 position)

@@ -143,6 +143,7 @@ namespace Tower_Crush
         public ObjectType GetObjectType
         {
             get { return objectType; }
+            set { objectType = value; }
         }
         protected int tier = 0; // Gibt die Stuffe eines Objekts an
         /// <summary>
