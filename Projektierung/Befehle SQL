@@ -1,0 +1,9 @@
+Befehle zum Erstellen von Datenbanken;
+	-"use" 					--> Benutze diese Datenbank, nicht über Master
+	-"drop table" 				--> Löscht die vorherige Tabelle
+	-"create table" 			--> erstellte ien bestimmte Tabelle in der Datenbank
+	-"Primary Key" 				--> legt Primärschlüssel fest
+	-"insert into [Tabellenname] values" 	--> fügt die Zeilen ein
+							-mehrere Zeilen können durch , abgetrennt werden
+								-Bsp: ('Lukas', 'Dörfel', '17'),('Florian', Schneider', '17'), ... ;
+	-"select * from" 

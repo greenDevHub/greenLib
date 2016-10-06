@@ -5,3 +5,25 @@ To do :
 -Spiele / Games
 -Spreadsheet zeugs
 -Teamarbeit
+>>>>>>> origin/InfoAG
+>>>>>>> origin/InfoAG
+
+
+Was wir alles machen wollen:
+-interresse an web desing 
+-Projekt Schulbibliothek
+-Msql zeugs 
+-Essen Essen Essen ( also tool zum bestellen )( für Grünbach ) ( muss aber web basierend sein )  
+
+
+Der Plan : 
+- Rohling bauen ( in bezug auf daten analyse ) 
+
+Master of Github: Phi Long
+Master Structure: Cedric Groß
+Entwickler: Joshi / Max / Flo / Lukas / Justin 
+PR Zeugs : 1. Lukas / 2. Cedric 
+Qualitätsmanagement: Laurenz
+Datenbankverwaltung / Master of Database: Erik
+Mädchen für alles / Head of desaster:Jonaß
+.....
