@@ -110,6 +110,11 @@ namespace Tower_Crush.TowerType
                 radius = (radius * 1.2f);
                 shootingSpeed = shootingSpeed * 0.8f;
             }
+            if (Tier >= 2)
+            {
+                UsePercingShell = true;
+                PercingShellPercent = 0.1f;
+            }
             // Hotfix für Double Layer
             textureType = TextureType.Single; // Achtung ist nur wirklich nur Hotfik bis die Grafik hinzugefügt wurden ist wie in #1
         }
@@ -133,7 +138,7 @@ namespace Tower_Crush.TowerType
                 if (this.HasEnergy)
                 {
                     Bullet bullet = new Bullet(bulletTexture, Vector2.Subtract(center, new Vector2(bulletTexture.Width / 2)), rotation, (int)bulletSpeed, damage, target, this);
-
+                    if (UsePercingShell) bullet.ArmorIgnore = PercingShellPercent;
                     bulletList.Add(bullet);
                 }
                 bulletTimer = 0;                

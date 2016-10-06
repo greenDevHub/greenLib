@@ -108,7 +108,7 @@ namespace Tower_Crush
                             }
                         case EnemyType.Boss:
                             {
-                                Enemy enemy = new EnemyStorage.Boss(enemyTexture[1], level.Waypoints.Peek(), 1500, 0.4f, 0.1f);
+                                Enemy enemy = new EnemyStorage.Boss(enemyTexture[1], level.Waypoints.Peek(), 150, 0.4f, 0.1f);
                                 enemyNeedToSpawn.Remove(enemyNeedToSpawn[0]);
                                 return enemy;
                             }

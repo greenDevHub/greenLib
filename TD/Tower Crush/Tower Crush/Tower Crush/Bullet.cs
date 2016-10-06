@@ -24,6 +24,8 @@ namespace Tower_Crush
 
         private bool longBullet = false; // Gibt ab ob die Kugel "langgezogen" werden soll laserstrahl und so
 
+        private float armorIgnoreValue = 1.0f; // Gibt an wie viel von der Rüstung aus der Schadensberechnung ausgeschlossen wird
+
         /// <summary>
         /// Gibt den Schaden einer Kugel an
         /// </summary>
@@ -48,6 +50,12 @@ namespace Tower_Crush
         public bool IsLongBullet
         {
             set { longBullet = value; }
+        }
+
+        public float ArmorIgnore
+        {
+            get { return armorIgnoreValue; }
+            set { armorIgnoreValue = value; }
         }
 
         // Constructor

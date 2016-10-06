@@ -317,6 +317,24 @@ namespace Tower_Crush
         protected float armorPenetration; // Gibt an wie viel Durschlag eine Waffe an Rüstung hat (Rüstung)
         protected float shieldDamagePercent; // Gibt an wie viel Schaden anteilig angerichtet wird (Schild)
         protected float shieldPenetration; // Gibt an wie viel Durschlag eine Waffe an Schild hat  (Schild)
+        protected bool usePercingShell = false; // Darf ein Turm die Panzerbrechende Munition verweden (Rüstung)
+        /// <summary>
+        /// Gibt an ob ein Turm Panzerbrechende Munition überhaupt verwenden darf
+        /// </summary>
+        public bool UsePercingShell
+        {
+            get { return usePercingShell; }
+            set { usePercingShell = value; }
+        }
+        protected float percingShellPercent = 1.0f; // Gibt an wie viel von der Rüstung noch vom Shaden abgezogen wird
+        /// <summary>
+        /// Gibt an wie viel von der Rüstung noch vom Shaden abgezogen wird
+        /// </summary>
+        public float PercingShellPercent
+        {
+            get { return percingShellPercent; }
+            set { percingShellPercent = value; }
+        }
         /// <summary>
         /// Gibt den Schaden wieder den der Turm auch wirklich anrichtet
         /// </summary>
@@ -339,7 +357,7 @@ namespace Tower_Crush
                 // Schaden am Panzer = (Schaden * Schaden am Panzer in Prozent) * (Durschlag am Panzer * Schadens Panzer Manipulator)
                 armorDamageValue = (damageValue * armorDamagePercent) * (armorPenetration * enemy.ArmorManipulation);
                 enemy.ArmorValue -= armorDamageValue;
-                damageValue -= enemy.Armor;
+                damageValue -= enemy.Armor * PercingShellPercent;
             }
             // Berechnung des Schadens Schild
             if (hasShield)
