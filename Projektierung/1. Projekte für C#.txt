@@ -1,0 +1,12 @@
+Idea List: 
+
+- Programmieren eines Terminplaners 
+   hatten uns gedacht, das wir im hintergrund eine Datenbank setzten,
+   von welcher dann alle Einträge abgerufen werden  
+- programmieren eines chatprogramms
+   dieses sollte auf einem netzwerk und einer Datenbank basieren  
+- Ein programm, mit welchem es möglich ist notizen zu machen und diese abzuspeichern :trollface:
+
+Überlegt euch mal was euch am Besten gefällt... wir hängen uns momentan mal ins Notizprogramm rein ...
+wir können natürlich auch alles machen und dann in gruppen 
+.... LG M3T4
