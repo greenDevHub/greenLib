@@ -1,0 +1,45 @@
+Idee_01 
+3 Tabellen 
+Tab 1 
+ Bücher
+ -Standort in Bibliothek
+ -Zustand
+ -Verfügbar ?
+ -Isbn/Primärschlüssel
+ -Genre
+ -Titel
+ -Anzahl
+ -Autor
+ -Verlag
+ -Erscheinungsjahr
+ -Erscheinungsdatum 
+ - Auflage
+ -Preis
+    +Preis im verhältnis zum alter( -exponentielle funktion)
+ -Sprache
+ - 
+Tab 2
+ Kunden 
+ -Straße 
+ -Postleitzahl /Ort 
+ -Hausnummer
+ -Vertrauenswürdigkeit
+ -Kundennummer/ Kunden id / Primärschlüssel
+ -Klasse
+ -Name
+ -E-mail
+ -Telefonnummer
+Tab 3
+ Ausgeliehen 
+ -Abbildung der Beziehung zwischen Kunde und Buch
+ -Isbn Fremdschlüssel Tab 1 Bücher
+ -wann ausgeliehen
+ -Rückgabedatum 
+ -Kunden id / Fremdschlüssel Tab 2 Kunden
+ -Leihnummer/ Primärschlüssel
+Tab 4
+ Bestand 
+ -Isbn Fremdschlüssel 
+ -Sollbestand der jeweiligen isbn
+ -Istbestand der jewiligen isbn ( sollbestand - ausgeliehen )
+ -
