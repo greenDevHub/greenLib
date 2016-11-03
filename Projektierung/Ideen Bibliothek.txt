@@ -1,24 +1,21 @@
-Idee_01 
-3 Tabellen 
-Tab 1 
+	Idee_01 
+4 Tabellen 
+Tab 1 - zugehörige id 
  Bücher
  -Standort in Bibliothek
- -Zustand
- -Verfügbar ?
- -Isbn/Primärschlüssel
- -Genre
- -Titel
- -Anzahl
- -Autor
- -Verlag
+ -Zustand fremdschlüssel tab5
+ -Isbn
+ -Titel 
+ -fremdschlüssel tab 6
+ -fremdschlüssel tab 7
+ -fremdschlüssel tab 8
+ -fremdschlüssel tab 10
  -Erscheinungsjahr
  -Erscheinungsdatum 
+ - Datum der eingliederung
  - Auflage
- -Preis
-    +Preis im verhältnis zum alter( -exponentielle funktion)
- -Sprache
- - 
-Tab 2
+ -Neupreis
+Tab 2- zugehörige id
  Kunden 
  -Straße 
  -Postleitzahl /Ort 
@@ -29,7 +26,7 @@ Tab 2
  -Name
  -E-mail
  -Telefonnummer
-Tab 3
+Tab 3- zugehörige id
  Ausgeliehen 
  -Abbildung der Beziehung zwischen Kunde und Buch
  -Isbn Fremdschlüssel Tab 1 Bücher
@@ -37,9 +34,24 @@ Tab 3
  -Rückgabedatum 
  -Kunden id / Fremdschlüssel Tab 2 Kunden
  -Leihnummer/ Primärschlüssel
-Tab 4
+Tab 4- zugehörige id
  Bestand 
  -Isbn Fremdschlüssel 
  -Sollbestand der jeweiligen isbn
  -Istbestand der jewiligen isbn ( sollbestand - ausgeliehen )
  -
+Tab 5- zugehörige id
+ Zustandstabelle 
+-Bezeichnung
+-Verleihfähig
+Tab 6 -zugehörige id
+-Genre
+Tab 7- zugehörige id
+-Autor
+Tab 8- zugehörige id 
+-Verlag
+-Fremdschlüssel tab 9
+Tab 9- zugehörige id
+-Adresse
+Tab 10- zugehörige id
+-Sprache
