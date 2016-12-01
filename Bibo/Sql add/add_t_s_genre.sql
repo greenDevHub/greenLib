@@ -1,3 +1,4 @@
+use Bibo_Verwaltung
 /****** Object:  Table [dbo].[t_s_genre]    Script Date: 03.11.2016 18:51:50 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_genre]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_genre]
