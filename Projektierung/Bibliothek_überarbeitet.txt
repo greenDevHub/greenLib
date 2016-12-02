@@ -1,0 +1,60 @@
+Tabelle 1: Bücher
+	-ID (Primärschlüssel)
+	-Standort in Bibliothek
+	-Zustand fremdschlüssel tab5
+	-Isbn
+	-Titel 
+	-Genre (Fremdschlüssel Tabelle 6)
+	-Autor (Fremdschlüssel Tabelle 7)
+	-Verlag (Fremdschlüssel Tabelle 8)
+	-Sprache (Fremdschlüssel Tabelle 9)
+	-Erscheinungsdatum 
+	-Aufnahmedatum
+	-Auflage
+	-Neupreis
+
+Tabelle 2: Kunden
+	-ID/Kundennummer (Primärschlüssel)
+	-Vorname
+	-Nachname
+	-Straße 
+	-Hausnummer
+	-Postleitzahl
+	-Ort
+	-Vertrauenswürdigkeit
+	-Klasse
+	-E-Mail
+	-Telefonnummer
+
+Tabelle 3: Ausgeliehen
+	-Leihnummer (Primärschlüssel)
+	-Buch ID (Fremdschlüssel Tabelle 1)
+	-Ausleihdatum
+	-Rückgabedatum
+	-Kunden ID (Fremdschlüssel Tabelle 2)
+
+Tabelle 4: Bestand
+	-ISBN (Fremdschlüssel Tabelle 1)
+	-Sollbestand
+	-Istbestand
+
+Tabelle 5: Buchzustand
+	-Buch ID (Fremdschlüssel Tabelle 1)
+	-Zustand
+	-Verleihfähig
+
+Tabelle 6: Genre
+	-Buch ID (Fremdschlüssel Tabelle 1)
+	-Genre
+
+Tabelle 7: Autor
+	-Nummer/ID (Primärschlüssel)
+	-Autor
+
+Tabelle 8: Verlag
+	-Nummer/ID (Primärschlüssel)
+	-Verlag
+
+Tabelle 9: Sprache
+	-Nummer/ID (Primärschlüssel)
+	-Sprache
