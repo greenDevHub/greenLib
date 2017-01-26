@@ -13,9 +13,14 @@ CREATE TABLE [dbo].[t_s_ausgeliehen](
 	PRIMARY KEY (aus_leihnummer),
 	FOREIGN KEY (aus_buchid)
 		REFERENCES t_s_buecher (buch_id),
+<<<<<<< HEAD
     FOREIGN KEY (aus_kundenid)
 	    REFERENCES t_s_kunden (kunde_id))
+=======
+	FOREIGN KEY (aus_kundenid)
+		REFERENCES t_s_kunden (kunde_ID))
+>>>>>>> origin/InfoAG
 	INSERT INTO t_s_ausgeliehen (aus_buchid, aus_leihdatum, aus_rückgabedatum, aus_kundenid) 
-	VALUES (2, '11.11.2016', '18.11.2016', 1)
+	VALUES (1, '11.11.2016', '18.11.2016', 1)
 	Select * from t_s_ausgeliehen
 	END
