@@ -7,4 +7,5 @@ Arbeitsanweisung bis 23.02.2017
 		Büchertabelle überarbeiten
 		Soll/Ist-Bestand per Abfrage klären
 4.	Visual Studio Style Guide aufstellen
+5.	Load Methode fertig machen
 	
