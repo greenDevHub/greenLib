@@ -37,13 +37,17 @@ namespace Bibo_Verwaltung
 
         }
 
-        private void textBox3_Validated(object sender, EventArgs e)
+        private void tb_Neupreis_Validated(object sender, EventArgs e)
         {
             if (!IsNumeric(tb_Neupreis.Text))
             {
                 MessageBox.Show("Bitte nur Zahlen eingeben!");
                 tb_Neupreis.Text = "";
             }
+        }
+        private void lb_Titel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
