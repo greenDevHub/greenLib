@@ -28,244 +28,242 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.groupBox1.SuspendLayout();
+            this.gb_GroupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_Sprache_s = new System.Windows.Forms.Button();
+            this.cb_Sprache = new System.Windows.Forms.ComboBox();
+            this.lb_Sprache = new System.Windows.Forms.Label();
+            this.bt_Autor_s = new System.Windows.Forms.Button();
+            this.cb_Autor = new System.Windows.Forms.ComboBox();
+            this.lb_Verlag = new System.Windows.Forms.Label();
+            this.lb_Autor = new System.Windows.Forms.Label();
+            this.bt_Verlag_s = new System.Windows.Forms.Button();
+            this.bt_Genre_s = new System.Windows.Forms.Button();
+            this.cb_Verlag = new System.Windows.Forms.ComboBox();
+            this.cb_Genre = new System.Windows.Forms.ComboBox();
+            this.lb_Genre = new System.Windows.Forms.Label();
+            this.tb_Neupreis = new System.Windows.Forms.TextBox();
+            this.lb_Neupreis = new System.Windows.Forms.Label();
+            this.tb_Titel = new System.Windows.Forms.TextBox();
+            this.lb_Titel = new System.Windows.Forms.Label();
+            this.tb_ISBN = new System.Windows.Forms.TextBox();
+            this.lb_ISBN = new System.Windows.Forms.Label();
+            this.gb_GroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // gb_GroupBox1
             // 
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.comboBox4);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.comboBox3);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(299, 45);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(325, 231);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            this.gb_GroupBox1.Controls.Add(this.bt_Sprache_s);
+            this.gb_GroupBox1.Controls.Add(this.cb_Sprache);
+            this.gb_GroupBox1.Controls.Add(this.lb_Sprache);
+            this.gb_GroupBox1.Controls.Add(this.bt_Autor_s);
+            this.gb_GroupBox1.Controls.Add(this.cb_Autor);
+            this.gb_GroupBox1.Controls.Add(this.lb_Verlag);
+            this.gb_GroupBox1.Controls.Add(this.lb_Autor);
+            this.gb_GroupBox1.Controls.Add(this.bt_Verlag_s);
+            this.gb_GroupBox1.Controls.Add(this.bt_Genre_s);
+            this.gb_GroupBox1.Controls.Add(this.cb_Verlag);
+            this.gb_GroupBox1.Controls.Add(this.cb_Genre);
+            this.gb_GroupBox1.Controls.Add(this.lb_Genre);
+            this.gb_GroupBox1.Controls.Add(this.tb_Neupreis);
+            this.gb_GroupBox1.Controls.Add(this.lb_Neupreis);
+            this.gb_GroupBox1.Controls.Add(this.tb_Titel);
+            this.gb_GroupBox1.Controls.Add(this.lb_Titel);
+            this.gb_GroupBox1.Controls.Add(this.tb_ISBN);
+            this.gb_GroupBox1.Controls.Add(this.lb_ISBN);
+            this.gb_GroupBox1.Location = new System.Drawing.Point(299, 45);
+            this.gb_GroupBox1.Name = "gb_GroupBox1";
+            this.gb_GroupBox1.Size = new System.Drawing.Size(325, 231);
+            this.gb_GroupBox1.TabIndex = 0;
+            this.gb_GroupBox1.TabStop = false;
+            this.gb_GroupBox1.Text = "groupBox1";
             // 
-            // label1
+            // bt_Sprache_s
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(31, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "ISBN:";
+            this.bt_Sprache_s.Location = new System.Drawing.Point(286, 158);
+            this.bt_Sprache_s.Name = "bt_Sprache_s";
+            this.bt_Sprache_s.Size = new System.Drawing.Size(22, 22);
+            this.bt_Sprache_s.TabIndex = 16;
+            this.bt_Sprache_s.Text = "s";
+            this.bt_Sprache_s.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // cb_Sprache
             // 
-            this.textBox1.Location = new System.Drawing.Point(103, 23);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(205, 20);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.cb_Sprache.FormattingEnabled = true;
+            this.cb_Sprache.Location = new System.Drawing.Point(103, 158);
+            this.cb_Sprache.Name = "cb_Sprache";
+            this.cb_Sprache.Size = new System.Drawing.Size(177, 21);
+            this.cb_Sprache.TabIndex = 15;
             // 
-            // textBox2
+            // lb_Sprache
             // 
-            this.textBox2.Location = new System.Drawing.Point(103, 49);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(205, 20);
-            this.textBox2.TabIndex = 4;
+            this.lb_Sprache.AutoSize = true;
+            this.lb_Sprache.Location = new System.Drawing.Point(30, 163);
+            this.lb_Sprache.Name = "lb_Sprache";
+            this.lb_Sprache.Size = new System.Drawing.Size(50, 13);
+            this.lb_Sprache.TabIndex = 14;
+            this.lb_Sprache.Text = "Sprache:";
             // 
-            // label2
+            // bt_Autor_s
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 52);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(30, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Titel:";
+            this.bt_Autor_s.Location = new System.Drawing.Point(286, 73);
+            this.bt_Autor_s.Name = "bt_Autor_s";
+            this.bt_Autor_s.Size = new System.Drawing.Size(22, 22);
+            this.bt_Autor_s.TabIndex = 13;
+            this.bt_Autor_s.Text = "s";
+            this.bt_Autor_s.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // cb_Autor
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(31, 136);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Genre:";
+            this.cb_Autor.FormattingEnabled = true;
+            this.cb_Autor.Location = new System.Drawing.Point(103, 74);
+            this.cb_Autor.Name = "cb_Autor";
+            this.cb_Autor.Size = new System.Drawing.Size(177, 21);
+            this.cb_Autor.TabIndex = 12;
             // 
-            // comboBox1
+            // lb_Verlag
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(103, 131);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(177, 21);
-            this.comboBox1.TabIndex = 7;
+            this.lb_Verlag.AutoSize = true;
+            this.lb_Verlag.Location = new System.Drawing.Point(30, 107);
+            this.lb_Verlag.Name = "lb_Verlag";
+            this.lb_Verlag.Size = new System.Drawing.Size(40, 13);
+            this.lb_Verlag.TabIndex = 10;
+            this.lb_Verlag.Text = "Verlag:";
             // 
-            // button1
+            // lb_Autor
             // 
-            this.button1.Location = new System.Drawing.Point(286, 131);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(22, 22);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "s";
-            this.button1.UseVisualStyleBackColor = true;
+            this.lb_Autor.AutoSize = true;
+            this.lb_Autor.Location = new System.Drawing.Point(31, 78);
+            this.lb_Autor.Name = "lb_Autor";
+            this.lb_Autor.Size = new System.Drawing.Size(35, 13);
+            this.lb_Autor.TabIndex = 8;
+            this.lb_Autor.Text = "Autor:";
             // 
-            // label4
+            // bt_Verlag_s
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(31, 78);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Autor:";
+            this.bt_Verlag_s.Location = new System.Drawing.Point(286, 104);
+            this.bt_Verlag_s.Name = "bt_Verlag_s";
+            this.bt_Verlag_s.Size = new System.Drawing.Size(22, 22);
+            this.bt_Verlag_s.TabIndex = 7;
+            this.bt_Verlag_s.Text = "s";
+            this.bt_Verlag_s.UseVisualStyleBackColor = true;
             // 
-            // label5
+            // bt_Genre_s
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(30, 107);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Verlag:";
+            this.bt_Genre_s.Location = new System.Drawing.Point(286, 131);
+            this.bt_Genre_s.Name = "bt_Genre_s";
+            this.bt_Genre_s.Size = new System.Drawing.Size(22, 22);
+            this.bt_Genre_s.TabIndex = 7;
+            this.bt_Genre_s.Text = "s";
+            this.bt_Genre_s.UseVisualStyleBackColor = true;
             // 
-            // comboBox2
+            // cb_Verlag
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(103, 74);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(177, 21);
-            this.comboBox2.TabIndex = 12;
+            this.cb_Verlag.FormattingEnabled = true;
+            this.cb_Verlag.Location = new System.Drawing.Point(103, 104);
+            this.cb_Verlag.Name = "cb_Verlag";
+            this.cb_Verlag.Size = new System.Drawing.Size(177, 21);
+            this.cb_Verlag.TabIndex = 7;
             // 
-            // button2
+            // cb_Genre
             // 
-            this.button2.Location = new System.Drawing.Point(286, 73);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(22, 22);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "s";
-            this.button2.UseVisualStyleBackColor = true;
+            this.cb_Genre.FormattingEnabled = true;
+            this.cb_Genre.Location = new System.Drawing.Point(103, 131);
+            this.cb_Genre.Name = "cb_Genre";
+            this.cb_Genre.Size = new System.Drawing.Size(177, 21);
+            this.cb_Genre.TabIndex = 7;
             // 
-            // comboBox3
+            // lb_Genre
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(103, 104);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(177, 21);
-            this.comboBox3.TabIndex = 7;
+            this.lb_Genre.AutoSize = true;
+            this.lb_Genre.Location = new System.Drawing.Point(31, 136);
+            this.lb_Genre.Name = "lb_Genre";
+            this.lb_Genre.Size = new System.Drawing.Size(39, 13);
+            this.lb_Genre.TabIndex = 5;
+            this.lb_Genre.Text = "Genre:";
             // 
-            // button3
+            // tb_Neupreis
             // 
-            this.button3.Location = new System.Drawing.Point(286, 104);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(22, 22);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "s";
-            this.button3.UseVisualStyleBackColor = true;
+            this.tb_Neupreis.Location = new System.Drawing.Point(103, 185);
+            this.tb_Neupreis.Name = "tb_Neupreis";
+            this.tb_Neupreis.Size = new System.Drawing.Size(205, 20);
+            this.tb_Neupreis.TabIndex = 4;
             // 
-            // button4
+            // lb_Neupreis
             // 
-            this.button4.Location = new System.Drawing.Point(286, 158);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(22, 22);
-            this.button4.TabIndex = 16;
-            this.button4.Text = "s";
-            this.button4.UseVisualStyleBackColor = true;
+            this.lb_Neupreis.AutoSize = true;
+            this.lb_Neupreis.Location = new System.Drawing.Point(31, 188);
+            this.lb_Neupreis.Name = "lb_Neupreis";
+            this.lb_Neupreis.Size = new System.Drawing.Size(52, 13);
+            this.lb_Neupreis.TabIndex = 3;
+            this.lb_Neupreis.Text = "Neupreis:";
             // 
-            // comboBox4
+            // tb_Titel
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(103, 158);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(177, 21);
-            this.comboBox4.TabIndex = 15;
+            this.tb_Titel.Location = new System.Drawing.Point(103, 49);
+            this.tb_Titel.Name = "tb_Titel";
+            this.tb_Titel.Size = new System.Drawing.Size(205, 20);
+            this.tb_Titel.TabIndex = 4;
             // 
-            // label6
+            // lb_Titel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(30, 163);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 13);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Sprache:";
+            this.lb_Titel.AutoSize = true;
+            this.lb_Titel.Location = new System.Drawing.Point(31, 52);
+            this.lb_Titel.Name = "lb_Titel";
+            this.lb_Titel.Size = new System.Drawing.Size(30, 13);
+            this.lb_Titel.TabIndex = 3;
+            this.lb_Titel.Text = "Titel:";
+            this.lb_Titel.Click += new System.EventHandler(this.lb_Titel_Click);
             // 
-            // label7
+            // tb_ISBN
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(31, 188);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 13);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "Neupreis:";
+            this.tb_ISBN.Location = new System.Drawing.Point(103, 23);
+            this.tb_ISBN.Name = "tb_ISBN";
+            this.tb_ISBN.Size = new System.Drawing.Size(205, 20);
+            this.tb_ISBN.TabIndex = 2;
             // 
-            // textBox3
+            // lb_ISBN
             // 
-            this.textBox3.Location = new System.Drawing.Point(103, 185);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(205, 20);
-            this.textBox3.TabIndex = 4;
-            this.textBox3.Validated += new System.EventHandler(this.textBox3_Validated);
+            this.lb_ISBN.AutoSize = true;
+            this.lb_ISBN.Location = new System.Drawing.Point(31, 26);
+            this.lb_ISBN.Name = "lb_ISBN";
+            this.lb_ISBN.Size = new System.Drawing.Size(35, 13);
+            this.lb_ISBN.TabIndex = 1;
+            this.lb_ISBN.Text = "ISBN:";
             // 
             // w_s_buecher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 682);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gb_GroupBox1);
             this.Name = "w_s_buecher";
             this.Text = "w_s_buecher";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gb_GroupBox1.ResumeLayout(false);
+            this.gb_GroupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox gb_GroupBox1;
+        private System.Windows.Forms.TextBox tb_ISBN;
+        private System.Windows.Forms.Label lb_ISBN;
+        private System.Windows.Forms.Button bt_Sprache_s;
+        private System.Windows.Forms.ComboBox cb_Sprache;
+        private System.Windows.Forms.Label lb_Sprache;
+        private System.Windows.Forms.Button bt_Autor_s;
+        private System.Windows.Forms.ComboBox cb_Autor;
+        private System.Windows.Forms.Label lb_Verlag;
+        private System.Windows.Forms.Label lb_Autor;
+        private System.Windows.Forms.Button bt_Verlag_s;
+        private System.Windows.Forms.Button bt_Genre_s;
+        private System.Windows.Forms.ComboBox cb_Verlag;
+        private System.Windows.Forms.ComboBox cb_Genre;
+        private System.Windows.Forms.Label lb_Genre;
+        private System.Windows.Forms.TextBox tb_Neupreis;
+        private System.Windows.Forms.Label lb_Neupreis;
+        private System.Windows.Forms.TextBox tb_Titel;
+        private System.Windows.Forms.Label lb_Titel;
     }
 }

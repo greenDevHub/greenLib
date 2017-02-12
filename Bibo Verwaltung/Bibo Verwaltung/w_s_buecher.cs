@@ -17,25 +17,33 @@ namespace Bibo_Verwaltung
             float output;
             return float.TryParse(s, out output);
         }
+        public void Load()
+        {
+
+        }
 
         public w_s_buecher()
         {
             InitializeComponent();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void gb_GroupBox1_Enter(object sender, EventArgs e)
         {
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void tb_ISBN_TextChanged(object sender, EventArgs e)
         {
 
         }
 
         private void textBox3_Validated(object sender, EventArgs e)
         {
-            if (IsNumeric(textBox3.Text)) MessageBox.Show("Bitte nur Zahlen eingeben!");
+            if (!IsNumeric(tb_Neupreis.Text))
+            {
+                MessageBox.Show("Bitte nur Zahlen eingeben!");
+                tb_Neupreis.Text = "";
+            }
         }
     }
 }
