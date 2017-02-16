@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gb_GroupBox1 = new System.Windows.Forms.GroupBox();
+            this.gb_ = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             this.bt_Sprache_s = new System.Windows.Forms.Button();
             this.cb_Sprache = new System.Windows.Forms.ComboBox();
             this.lb_Sprache = new System.Windows.Forms.Label();
@@ -47,35 +49,61 @@
             this.lb_Titel = new System.Windows.Forms.Label();
             this.tb_ISBN = new System.Windows.Forms.TextBox();
             this.lb_ISBN = new System.Windows.Forms.Label();
-            this.gb_GroupBox1.SuspendLayout();
+            this.tb_Auflage = new System.Windows.Forms.TextBox();
+            this.lb_Auflage = new System.Windows.Forms.Label();
+            this.gb_.SuspendLayout();
             this.SuspendLayout();
             // 
-            // gb_GroupBox1
+            // gb_
             // 
-            this.gb_GroupBox1.Controls.Add(this.bt_Sprache_s);
-            this.gb_GroupBox1.Controls.Add(this.cb_Sprache);
-            this.gb_GroupBox1.Controls.Add(this.lb_Sprache);
-            this.gb_GroupBox1.Controls.Add(this.bt_Autor_s);
-            this.gb_GroupBox1.Controls.Add(this.cb_Autor);
-            this.gb_GroupBox1.Controls.Add(this.lb_Verlag);
-            this.gb_GroupBox1.Controls.Add(this.lb_Autor);
-            this.gb_GroupBox1.Controls.Add(this.bt_Verlag_s);
-            this.gb_GroupBox1.Controls.Add(this.bt_Genre_s);
-            this.gb_GroupBox1.Controls.Add(this.cb_Verlag);
-            this.gb_GroupBox1.Controls.Add(this.cb_Genre);
-            this.gb_GroupBox1.Controls.Add(this.lb_Genre);
-            this.gb_GroupBox1.Controls.Add(this.tb_Neupreis);
-            this.gb_GroupBox1.Controls.Add(this.lb_Neupreis);
-            this.gb_GroupBox1.Controls.Add(this.tb_Titel);
-            this.gb_GroupBox1.Controls.Add(this.lb_Titel);
-            this.gb_GroupBox1.Controls.Add(this.tb_ISBN);
-            this.gb_GroupBox1.Controls.Add(this.lb_ISBN);
-            this.gb_GroupBox1.Location = new System.Drawing.Point(299, 45);
-            this.gb_GroupBox1.Name = "gb_GroupBox1";
-            this.gb_GroupBox1.Size = new System.Drawing.Size(325, 231);
-            this.gb_GroupBox1.TabIndex = 0;
-            this.gb_GroupBox1.TabStop = false;
-            this.gb_GroupBox1.Text = "groupBox1";
+            this.gb_.Controls.Add(this.tb_Auflage);
+            this.gb_.Controls.Add(this.lb_Auflage);
+            this.gb_.Controls.Add(this.button1);
+            this.gb_.Controls.Add(this.label8);
+            this.gb_.Controls.Add(this.bt_Sprache_s);
+            this.gb_.Controls.Add(this.cb_Sprache);
+            this.gb_.Controls.Add(this.lb_Sprache);
+            this.gb_.Controls.Add(this.bt_Autor_s);
+            this.gb_.Controls.Add(this.cb_Autor);
+            this.gb_.Controls.Add(this.lb_Verlag);
+            this.gb_.Controls.Add(this.lb_Autor);
+            this.gb_.Controls.Add(this.bt_Verlag_s);
+            this.gb_.Controls.Add(this.bt_Genre_s);
+            this.gb_.Controls.Add(this.cb_Verlag);
+            this.gb_.Controls.Add(this.cb_Genre);
+            this.gb_.Controls.Add(this.lb_Genre);
+            this.gb_.Controls.Add(this.tb_Neupreis);
+            this.gb_.Controls.Add(this.lb_Neupreis);
+            this.gb_.Controls.Add(this.tb_Titel);
+            this.gb_.Controls.Add(this.lb_Titel);
+            this.gb_.Controls.Add(this.tb_ISBN);
+            this.gb_.Controls.Add(this.lb_ISBN);
+            this.gb_.Location = new System.Drawing.Point(299, 45);
+            this.gb_.Name = "gb_";
+            this.gb_.Size = new System.Drawing.Size(414, 281);
+            this.gb_.TabIndex = 0;
+            this.gb_.TabStop = false;
+            this.gb_.Text = "groupBox1";
+            this.gb_.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(156, 237);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(108, 31);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Laden";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.load);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(314, 214);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(13, 13);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "€";
             // 
             // bt_Sprache_s
             // 
@@ -183,15 +211,16 @@
             // 
             // tb_Neupreis
             // 
-            this.tb_Neupreis.Location = new System.Drawing.Point(103, 185);
+            this.tb_Neupreis.Location = new System.Drawing.Point(103, 211);
             this.tb_Neupreis.Name = "tb_Neupreis";
             this.tb_Neupreis.Size = new System.Drawing.Size(205, 20);
             this.tb_Neupreis.TabIndex = 4;
+            this.tb_Neupreis.Validated += new System.EventHandler(this.tb_Neupreis_Validated);
             // 
             // lb_Neupreis
             // 
             this.lb_Neupreis.AutoSize = true;
-            this.lb_Neupreis.Location = new System.Drawing.Point(31, 188);
+            this.lb_Neupreis.Location = new System.Drawing.Point(31, 214);
             this.lb_Neupreis.Name = "lb_Neupreis";
             this.lb_Neupreis.Size = new System.Drawing.Size(52, 13);
             this.lb_Neupreis.TabIndex = 3;
@@ -212,7 +241,6 @@
             this.lb_Titel.Size = new System.Drawing.Size(30, 13);
             this.lb_Titel.TabIndex = 3;
             this.lb_Titel.Text = "Titel:";
-            this.lb_Titel.Click += new System.EventHandler(this.lb_Titel_Click);
             // 
             // tb_ISBN
             // 
@@ -220,6 +248,7 @@
             this.tb_ISBN.Name = "tb_ISBN";
             this.tb_ISBN.Size = new System.Drawing.Size(205, 20);
             this.tb_ISBN.TabIndex = 2;
+            this.tb_ISBN.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // lb_ISBN
             // 
@@ -230,23 +259,39 @@
             this.lb_ISBN.TabIndex = 1;
             this.lb_ISBN.Text = "ISBN:";
             // 
+            // tb_Auflage
+            // 
+            this.tb_Auflage.Location = new System.Drawing.Point(103, 185);
+            this.tb_Auflage.Name = "tb_Auflage";
+            this.tb_Auflage.Size = new System.Drawing.Size(205, 20);
+            this.tb_Auflage.TabIndex = 19;
+            // 
+            // lb_Auflage
+            // 
+            this.lb_Auflage.AutoSize = true;
+            this.lb_Auflage.Location = new System.Drawing.Point(31, 188);
+            this.lb_Auflage.Name = "lb_Auflage";
+            this.lb_Auflage.Size = new System.Drawing.Size(43, 13);
+            this.lb_Auflage.TabIndex = 18;
+            this.lb_Auflage.Text = "Auflage";
+            // 
             // w_s_buecher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 682);
-            this.Controls.Add(this.gb_GroupBox1);
+            this.Controls.Add(this.gb_);
             this.Name = "w_s_buecher";
             this.Text = "w_s_buecher";
-            this.gb_GroupBox1.ResumeLayout(false);
-            this.gb_GroupBox1.PerformLayout();
+            this.gb_.ResumeLayout(false);
+            this.gb_.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox gb_GroupBox1;
+        private System.Windows.Forms.GroupBox gb_;
         private System.Windows.Forms.TextBox tb_ISBN;
         private System.Windows.Forms.Label lb_ISBN;
         private System.Windows.Forms.Button bt_Sprache_s;
@@ -265,5 +310,9 @@
         private System.Windows.Forms.Label lb_Neupreis;
         private System.Windows.Forms.TextBox tb_Titel;
         private System.Windows.Forms.Label lb_Titel;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox tb_Auflage;
+        private System.Windows.Forms.Label lb_Auflage;
     }
 }
