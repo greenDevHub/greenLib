@@ -32,7 +32,7 @@
             this.tb_Auflage = new System.Windows.Forms.TextBox();
             this.lb_Auflage = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lb_Neupreis_Euro = new System.Windows.Forms.Label();
             this.bt_Sprache_s = new System.Windows.Forms.Button();
             this.cb_Sprache = new System.Windows.Forms.ComboBox();
             this.lb_Sprache = new System.Windows.Forms.Label();
@@ -59,7 +59,7 @@
             this.gb_.Controls.Add(this.tb_Auflage);
             this.gb_.Controls.Add(this.lb_Auflage);
             this.gb_.Controls.Add(this.button1);
-            this.gb_.Controls.Add(this.label8);
+            this.gb_.Controls.Add(this.lb_Neupreis_Euro);
             this.gb_.Controls.Add(this.bt_Sprache_s);
             this.gb_.Controls.Add(this.cb_Sprache);
             this.gb_.Controls.Add(this.lb_Sprache);
@@ -112,14 +112,14 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.load);
             // 
-            // label8
+            // lb_Neupreis_Euro
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(314, 214);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(13, 13);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "€";
+            this.lb_Neupreis_Euro.AutoSize = true;
+            this.lb_Neupreis_Euro.Location = new System.Drawing.Point(314, 214);
+            this.lb_Neupreis_Euro.Name = "lb_Neupreis_Euro";
+            this.lb_Neupreis_Euro.Size = new System.Drawing.Size(13, 13);
+            this.lb_Neupreis_Euro.TabIndex = 1;
+            this.lb_Neupreis_Euro.Text = "€";
             // 
             // bt_Sprache_s
             // 
@@ -318,7 +318,7 @@
         private System.Windows.Forms.Label lb_Neupreis;
         private System.Windows.Forms.TextBox tb_Titel;
         private System.Windows.Forms.Label lb_Titel;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lb_Neupreis_Euro;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox tb_Auflage;
         private System.Windows.Forms.Label lb_Auflage;

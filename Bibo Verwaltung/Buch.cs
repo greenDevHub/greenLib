@@ -15,21 +15,47 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Isbn Nummer eines Buches
         /// </summary>
-        public string Isbn
-        {
-            get { return  isbn;}
-            set { isbn = value; }
-        }
+        public string Isbn { get { return  isbn;} set { isbn = value; } }
+
         string titel;
+        /// <summary>
+        /// Titel eines Buches
+        /// </summary>
         public string Titel { get { return titel; } set { titel = value; } }
+
         string genre;
+        /// <summary>
+        /// Genre eines Buches
+        /// </summary>
         public string Genre { get { return genre; } set { genre = value; } }
+
         string verlag;
+        /// <summary>
+        /// Verlag des Buches
+        /// </summary>
+        public string Verlag { get { return verlag; } set { verlag = value; } }
+
         string autor;
-        DateTime er_datum;
+        /// <summary>
+        /// Autor eines Buches
+        /// </summary>
+        public string Autor { get { return autor; } set { autor = value; } }
+
         string sprache;
+        /// <summary>
+        /// Sprache des Buches
+        /// </summary>
+        public string Sprache { get { return sprache; } set { sprache = value; } }
+
         string auflage;
+        /// <summary>
+        /// Auflage eines Buches
+        /// </summary>
+        public string Auflage { get { return auflage; } set { auflage = value; } }
+
+        DateTime er_datum;
         double neupreis;
+
 
         /// <summary>
         /// Erschaft das Objekt Buch

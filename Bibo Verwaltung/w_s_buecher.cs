@@ -58,11 +58,11 @@ namespace Bibo_Verwaltung
 
             tb_ISBN.Text = b.Isbn;
             tb_Titel.Text = b.Titel;
-            //cb_Autor.Text = autor;
-            //cb_Verlag.Text = verlag;
-            //cb_Sprache.Text = sprache;
-            //tb_Auflage.Text = auflage;
-            //tb_Neupreis.Text = neupreis;
+            cb_Autor.Text = b.Autor;
+            cb_Verlag.Text = b.Verlag;
+            cb_Sprache.Text = b.Sprache;
+            tb_Auflage.Text = b.Auflage;
+            //tb_Neupreis.Text = b.neupreis;
             cb_Genre.Text = b.Genre;
         }
 
