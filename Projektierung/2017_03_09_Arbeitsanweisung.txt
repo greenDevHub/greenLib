@@ -1,0 +1,4 @@
+Arbeitsanweisungen zum 09.03.2017
+
+	1. Buchklasse zuende machen
+	2. selbstladende Klassen für Autor, Verlag und Kunde erstellen
