@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.gb_ = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
+            this.dTP_Erscheinungsdatum = new System.Windows.Forms.DateTimePicker();
+            this.lb_Erscheinungsdatum = new System.Windows.Forms.Label();
             this.tb_Auflage = new System.Windows.Forms.TextBox();
             this.lb_Auflage = new System.Windows.Forms.Label();
             this.bt_laden_buecher = new System.Windows.Forms.Button();
@@ -54,41 +54,41 @@
             this.tb_ISBN = new System.Windows.Forms.TextBox();
             this.lb_ISBN = new System.Windows.Forms.Label();
             this.gb2_ = new System.Windows.Forms.GroupBox();
+            this.bt_laden_kunden = new System.Windows.Forms.Button();
+            this.lb_Telefonnummer = new System.Windows.Forms.Label();
+            this.tb_Telefonnummer = new System.Windows.Forms.TextBox();
+            this.lb_Mail = new System.Windows.Forms.Label();
+            this.tb_Mail = new System.Windows.Forms.TextBox();
+            this.tb_Klasse = new System.Windows.Forms.TextBox();
+            this.lb_Klasse = new System.Windows.Forms.Label();
+            this.cb_Vertrauenswuerdigkeit = new System.Windows.Forms.ComboBox();
+            this.lb_Vertrauenswuerdigkeit = new System.Windows.Forms.Label();
+            this.tb_Ort = new System.Windows.Forms.TextBox();
+            this.lb_Ort = new System.Windows.Forms.Label();
+            this.tb_Postleitzahl = new System.Windows.Forms.TextBox();
+            this.lb_Postleitzahl = new System.Windows.Forms.Label();
+            this.tb_Hausnummer = new System.Windows.Forms.TextBox();
+            this.lb_Hausnummer = new System.Windows.Forms.Label();
             this.tb_Strasse = new System.Windows.Forms.TextBox();
             this.lb_Strasse = new System.Windows.Forms.Label();
             this.tb_Nachname = new System.Windows.Forms.TextBox();
             this.lb_Nachname = new System.Windows.Forms.Label();
             this.tb_Vorname = new System.Windows.Forms.TextBox();
             this.lb_Vorname = new System.Windows.Forms.Label();
-            this.tb_KUNDENID = new System.Windows.Forms.TextBox();
-            this.lb_KUNDENID = new System.Windows.Forms.Label();
+            this.tb_KundenID = new System.Windows.Forms.TextBox();
+            this.lb_KundenID = new System.Windows.Forms.Label();
             this.gb3_ = new System.Windows.Forms.GroupBox();
-            this.gb4_ = new System.Windows.Forms.GroupBox();
-            this.lb_Hausnummer = new System.Windows.Forms.Label();
-            this.tb_Hausnummer = new System.Windows.Forms.TextBox();
-            this.lb_Postleitzahl = new System.Windows.Forms.Label();
-            this.tb_Postleitzahl = new System.Windows.Forms.TextBox();
-            this.lb_Ort = new System.Windows.Forms.Label();
-            this.tb_Ort = new System.Windows.Forms.TextBox();
-            this.lb_Vertrauenswuerdigkeit = new System.Windows.Forms.Label();
-            this.cb_Vertrauenswuerdigkeit = new System.Windows.Forms.ComboBox();
-            this.lb_Klasse = new System.Windows.Forms.Label();
-            this.tb_Klasse = new System.Windows.Forms.TextBox();
-            this.tb_Mail = new System.Windows.Forms.TextBox();
-            this.lb_Mail = new System.Windows.Forms.Label();
-            this.tb_Telefonnummer = new System.Windows.Forms.TextBox();
-            this.lb_Telefonnummer = new System.Windows.Forms.Label();
-            this.bt_laden_kunden = new System.Windows.Forms.Button();
-            this.lb_VERLAGID = new System.Windows.Forms.Label();
-            this.tb_VERLAGID = new System.Windows.Forms.TextBox();
-            this.lb_Verlagname = new System.Windows.Forms.Label();
-            this.tb_Name = new System.Windows.Forms.TextBox();
-            this.lb_AUTORID = new System.Windows.Forms.Label();
-            this.tb_AUTORID = new System.Windows.Forms.TextBox();
-            this.tb_Autor = new System.Windows.Forms.TextBox();
-            this.lb_Autorname = new System.Windows.Forms.Label();
             this.bt_laden_verlag = new System.Windows.Forms.Button();
+            this.tb_Verlagname = new System.Windows.Forms.TextBox();
+            this.lb_Verlagname = new System.Windows.Forms.Label();
+            this.tb_VerlagID = new System.Windows.Forms.TextBox();
+            this.lb_VerlagID = new System.Windows.Forms.Label();
+            this.gb4_ = new System.Windows.Forms.GroupBox();
             this.bt_laden_autor = new System.Windows.Forms.Button();
+            this.lb_Autorname = new System.Windows.Forms.Label();
+            this.tb_Autorname = new System.Windows.Forms.TextBox();
+            this.tb_AutorID = new System.Windows.Forms.TextBox();
+            this.lb_AutorID = new System.Windows.Forms.Label();
             this.gb_.SuspendLayout();
             this.gb2_.SuspendLayout();
             this.gb3_.SuspendLayout();
@@ -97,8 +97,8 @@
             // 
             // gb_
             // 
-            this.gb_.Controls.Add(this.dateTimePicker1);
-            this.gb_.Controls.Add(this.label4);
+            this.gb_.Controls.Add(this.dTP_Erscheinungsdatum);
+            this.gb_.Controls.Add(this.lb_Erscheinungsdatum);
             this.gb_.Controls.Add(this.tb_Auflage);
             this.gb_.Controls.Add(this.lb_Auflage);
             this.gb_.Controls.Add(this.bt_laden_buecher);
@@ -129,21 +129,21 @@
             this.gb_.Text = "groupBox1";
             this.gb_.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // dateTimePicker1
+            // dTP_Erscheinungsdatum
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(140, 234);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 25;
+            this.dTP_Erscheinungsdatum.Location = new System.Drawing.Point(140, 234);
+            this.dTP_Erscheinungsdatum.Name = "dTP_Erscheinungsdatum";
+            this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(200, 20);
+            this.dTP_Erscheinungsdatum.TabIndex = 25;
             // 
-            // label4
+            // lb_Erscheinungsdatum
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 240);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(103, 13);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "Erscheinungsdatum:";
+            this.lb_Erscheinungsdatum.AutoSize = true;
+            this.lb_Erscheinungsdatum.Location = new System.Drawing.Point(6, 240);
+            this.lb_Erscheinungsdatum.Name = "lb_Erscheinungsdatum";
+            this.lb_Erscheinungsdatum.Size = new System.Drawing.Size(103, 13);
+            this.lb_Erscheinungsdatum.TabIndex = 20;
+            this.lb_Erscheinungsdatum.Text = "Erscheinungsdatum:";
             // 
             // tb_Auflage
             // 
@@ -169,7 +169,7 @@
             this.bt_laden_buecher.TabIndex = 17;
             this.bt_laden_buecher.Text = "Laden";
             this.bt_laden_buecher.UseVisualStyleBackColor = true;
-            this.bt_laden_buecher.Click += new System.EventHandler(this.load);
+            this.bt_laden_buecher.Click += new System.EventHandler(this.load_buecher);
             // 
             // lb_Neupreis_Euro
             // 
@@ -365,14 +365,137 @@
             this.gb2_.Controls.Add(this.lb_Nachname);
             this.gb2_.Controls.Add(this.tb_Vorname);
             this.gb2_.Controls.Add(this.lb_Vorname);
-            this.gb2_.Controls.Add(this.tb_KUNDENID);
-            this.gb2_.Controls.Add(this.lb_KUNDENID);
+            this.gb2_.Controls.Add(this.tb_KundenID);
+            this.gb2_.Controls.Add(this.lb_KundenID);
             this.gb2_.Location = new System.Drawing.Point(432, 12);
             this.gb2_.Name = "gb2_";
             this.gb2_.Size = new System.Drawing.Size(419, 359);
             this.gb2_.TabIndex = 1;
             this.gb2_.TabStop = false;
             this.gb2_.Text = "groupBox2";
+            // 
+            // bt_laden_kunden
+            // 
+            this.bt_laden_kunden.Location = new System.Drawing.Point(119, 315);
+            this.bt_laden_kunden.Name = "bt_laden_kunden";
+            this.bt_laden_kunden.Size = new System.Drawing.Size(108, 31);
+            this.bt_laden_kunden.TabIndex = 26;
+            this.bt_laden_kunden.Text = "Laden";
+            this.bt_laden_kunden.UseVisualStyleBackColor = true;
+            this.bt_laden_kunden.Click += new System.EventHandler(this.load_kunden);
+            // 
+            // lb_Telefonnummer
+            // 
+            this.lb_Telefonnummer.AutoSize = true;
+            this.lb_Telefonnummer.Location = new System.Drawing.Point(7, 292);
+            this.lb_Telefonnummer.Name = "lb_Telefonnummer";
+            this.lb_Telefonnummer.Size = new System.Drawing.Size(83, 13);
+            this.lb_Telefonnummer.TabIndex = 39;
+            this.lb_Telefonnummer.Text = "Telefonnummer:";
+            // 
+            // tb_Telefonnummer
+            // 
+            this.tb_Telefonnummer.Location = new System.Drawing.Point(119, 289);
+            this.tb_Telefonnummer.Name = "tb_Telefonnummer";
+            this.tb_Telefonnummer.Size = new System.Drawing.Size(205, 20);
+            this.tb_Telefonnummer.TabIndex = 38;
+            // 
+            // lb_Mail
+            // 
+            this.lb_Mail.AutoSize = true;
+            this.lb_Mail.Location = new System.Drawing.Point(7, 266);
+            this.lb_Mail.Name = "lb_Mail";
+            this.lb_Mail.Size = new System.Drawing.Size(29, 13);
+            this.lb_Mail.TabIndex = 37;
+            this.lb_Mail.Text = "Mail:";
+            // 
+            // tb_Mail
+            // 
+            this.tb_Mail.Location = new System.Drawing.Point(119, 263);
+            this.tb_Mail.Name = "tb_Mail";
+            this.tb_Mail.Size = new System.Drawing.Size(205, 20);
+            this.tb_Mail.TabIndex = 36;
+            // 
+            // tb_Klasse
+            // 
+            this.tb_Klasse.Location = new System.Drawing.Point(119, 237);
+            this.tb_Klasse.Name = "tb_Klasse";
+            this.tb_Klasse.Size = new System.Drawing.Size(79, 20);
+            this.tb_Klasse.TabIndex = 35;
+            // 
+            // lb_Klasse
+            // 
+            this.lb_Klasse.AutoSize = true;
+            this.lb_Klasse.Location = new System.Drawing.Point(7, 240);
+            this.lb_Klasse.Name = "lb_Klasse";
+            this.lb_Klasse.Size = new System.Drawing.Size(41, 13);
+            this.lb_Klasse.TabIndex = 34;
+            this.lb_Klasse.Text = "Klasse:";
+            // 
+            // cb_Vertrauenswuerdigkeit
+            // 
+            this.cb_Vertrauenswuerdigkeit.FormattingEnabled = true;
+            this.cb_Vertrauenswuerdigkeit.Location = new System.Drawing.Point(119, 211);
+            this.cb_Vertrauenswuerdigkeit.Name = "cb_Vertrauenswuerdigkeit";
+            this.cb_Vertrauenswuerdigkeit.Size = new System.Drawing.Size(79, 21);
+            this.cb_Vertrauenswuerdigkeit.TabIndex = 26;
+            // 
+            // lb_Vertrauenswuerdigkeit
+            // 
+            this.lb_Vertrauenswuerdigkeit.AutoSize = true;
+            this.lb_Vertrauenswuerdigkeit.Location = new System.Drawing.Point(7, 214);
+            this.lb_Vertrauenswuerdigkeit.Name = "lb_Vertrauenswuerdigkeit";
+            this.lb_Vertrauenswuerdigkeit.Size = new System.Drawing.Size(109, 13);
+            this.lb_Vertrauenswuerdigkeit.TabIndex = 33;
+            this.lb_Vertrauenswuerdigkeit.Text = "Vertrauenswürdigkeit:";
+            // 
+            // tb_Ort
+            // 
+            this.tb_Ort.Location = new System.Drawing.Point(119, 185);
+            this.tb_Ort.Name = "tb_Ort";
+            this.tb_Ort.Size = new System.Drawing.Size(205, 20);
+            this.tb_Ort.TabIndex = 32;
+            // 
+            // lb_Ort
+            // 
+            this.lb_Ort.AutoSize = true;
+            this.lb_Ort.Location = new System.Drawing.Point(7, 188);
+            this.lb_Ort.Name = "lb_Ort";
+            this.lb_Ort.Size = new System.Drawing.Size(24, 13);
+            this.lb_Ort.TabIndex = 31;
+            this.lb_Ort.Text = "Ort:";
+            // 
+            // tb_Postleitzahl
+            // 
+            this.tb_Postleitzahl.Location = new System.Drawing.Point(119, 160);
+            this.tb_Postleitzahl.Name = "tb_Postleitzahl";
+            this.tb_Postleitzahl.Size = new System.Drawing.Size(79, 20);
+            this.tb_Postleitzahl.TabIndex = 30;
+            // 
+            // lb_Postleitzahl
+            // 
+            this.lb_Postleitzahl.AutoSize = true;
+            this.lb_Postleitzahl.Location = new System.Drawing.Point(7, 162);
+            this.lb_Postleitzahl.Name = "lb_Postleitzahl";
+            this.lb_Postleitzahl.Size = new System.Drawing.Size(63, 13);
+            this.lb_Postleitzahl.TabIndex = 29;
+            this.lb_Postleitzahl.Text = "Postleitzahl:";
+            // 
+            // tb_Hausnummer
+            // 
+            this.tb_Hausnummer.Location = new System.Drawing.Point(119, 133);
+            this.tb_Hausnummer.Name = "tb_Hausnummer";
+            this.tb_Hausnummer.Size = new System.Drawing.Size(79, 20);
+            this.tb_Hausnummer.TabIndex = 28;
+            // 
+            // lb_Hausnummer
+            // 
+            this.lb_Hausnummer.AutoSize = true;
+            this.lb_Hausnummer.Location = new System.Drawing.Point(7, 134);
+            this.lb_Hausnummer.Name = "lb_Hausnummer";
+            this.lb_Hausnummer.Size = new System.Drawing.Size(72, 13);
+            this.lb_Hausnummer.TabIndex = 27;
+            this.lb_Hausnummer.Text = "Hausnummer:";
             // 
             // tb_Strasse
             // 
@@ -423,29 +546,29 @@
             this.lb_Vorname.TabIndex = 21;
             this.lb_Vorname.Text = "Vorname:";
             // 
-            // tb_KUNDENID
+            // tb_KundenID
             // 
-            this.tb_KUNDENID.Location = new System.Drawing.Point(119, 17);
-            this.tb_KUNDENID.Name = "tb_KUNDENID";
-            this.tb_KUNDENID.Size = new System.Drawing.Size(205, 20);
-            this.tb_KUNDENID.TabIndex = 20;
+            this.tb_KundenID.Location = new System.Drawing.Point(119, 17);
+            this.tb_KundenID.Name = "tb_KundenID";
+            this.tb_KundenID.Size = new System.Drawing.Size(205, 20);
+            this.tb_KundenID.TabIndex = 20;
             // 
-            // lb_KUNDENID
+            // lb_KundenID
             // 
-            this.lb_KUNDENID.AutoSize = true;
-            this.lb_KUNDENID.Location = new System.Drawing.Point(7, 20);
-            this.lb_KUNDENID.Name = "lb_KUNDENID";
-            this.lb_KUNDENID.Size = new System.Drawing.Size(61, 13);
-            this.lb_KUNDENID.TabIndex = 0;
-            this.lb_KUNDENID.Text = "Kunden-ID:";
+            this.lb_KundenID.AutoSize = true;
+            this.lb_KundenID.Location = new System.Drawing.Point(7, 20);
+            this.lb_KundenID.Name = "lb_KundenID";
+            this.lb_KundenID.Size = new System.Drawing.Size(61, 13);
+            this.lb_KundenID.TabIndex = 0;
+            this.lb_KundenID.Text = "Kunden-ID:";
             // 
             // gb3_
             // 
             this.gb3_.Controls.Add(this.bt_laden_verlag);
-            this.gb3_.Controls.Add(this.tb_Name);
+            this.gb3_.Controls.Add(this.tb_Verlagname);
             this.gb3_.Controls.Add(this.lb_Verlagname);
-            this.gb3_.Controls.Add(this.tb_VERLAGID);
-            this.gb3_.Controls.Add(this.lb_VERLAGID);
+            this.gb3_.Controls.Add(this.tb_VerlagID);
+            this.gb3_.Controls.Add(this.lb_VerlagID);
             this.gb3_.Location = new System.Drawing.Point(12, 377);
             this.gb3_.Name = "gb3_";
             this.gb3_.Size = new System.Drawing.Size(414, 137);
@@ -453,157 +576,22 @@
             this.gb3_.TabStop = false;
             this.gb3_.Text = "groupBox3";
             // 
-            // gb4_
+            // bt_laden_verlag
             // 
-            this.gb4_.Controls.Add(this.bt_laden_autor);
-            this.gb4_.Controls.Add(this.lb_Autorname);
-            this.gb4_.Controls.Add(this.tb_Autor);
-            this.gb4_.Controls.Add(this.tb_AUTORID);
-            this.gb4_.Controls.Add(this.lb_AUTORID);
-            this.gb4_.Location = new System.Drawing.Point(432, 377);
-            this.gb4_.Name = "gb4_";
-            this.gb4_.Size = new System.Drawing.Size(419, 137);
-            this.gb4_.TabIndex = 3;
-            this.gb4_.TabStop = false;
-            this.gb4_.Text = "groupBox4";
+            this.bt_laden_verlag.Location = new System.Drawing.Point(140, 69);
+            this.bt_laden_verlag.Name = "bt_laden_verlag";
+            this.bt_laden_verlag.Size = new System.Drawing.Size(108, 31);
+            this.bt_laden_verlag.TabIndex = 40;
+            this.bt_laden_verlag.Text = "Laden";
+            this.bt_laden_verlag.UseVisualStyleBackColor = true;
+            this.bt_laden_verlag.Click += new System.EventHandler(this.load_verlag);
             // 
-            // lb_Hausnummer
+            // tb_Verlagname
             // 
-            this.lb_Hausnummer.AutoSize = true;
-            this.lb_Hausnummer.Location = new System.Drawing.Point(7, 134);
-            this.lb_Hausnummer.Name = "lb_Hausnummer";
-            this.lb_Hausnummer.Size = new System.Drawing.Size(72, 13);
-            this.lb_Hausnummer.TabIndex = 27;
-            this.lb_Hausnummer.Text = "Hausnummer:";
-            // 
-            // tb_Hausnummer
-            // 
-            this.tb_Hausnummer.Location = new System.Drawing.Point(119, 133);
-            this.tb_Hausnummer.Name = "tb_Hausnummer";
-            this.tb_Hausnummer.Size = new System.Drawing.Size(79, 20);
-            this.tb_Hausnummer.TabIndex = 28;
-            // 
-            // lb_Postleitzahl
-            // 
-            this.lb_Postleitzahl.AutoSize = true;
-            this.lb_Postleitzahl.Location = new System.Drawing.Point(7, 162);
-            this.lb_Postleitzahl.Name = "lb_Postleitzahl";
-            this.lb_Postleitzahl.Size = new System.Drawing.Size(63, 13);
-            this.lb_Postleitzahl.TabIndex = 29;
-            this.lb_Postleitzahl.Text = "Postleitzahl:";
-            // 
-            // tb_Postleitzahl
-            // 
-            this.tb_Postleitzahl.Location = new System.Drawing.Point(119, 160);
-            this.tb_Postleitzahl.Name = "tb_Postleitzahl";
-            this.tb_Postleitzahl.Size = new System.Drawing.Size(79, 20);
-            this.tb_Postleitzahl.TabIndex = 30;
-            // 
-            // lb_Ort
-            // 
-            this.lb_Ort.AutoSize = true;
-            this.lb_Ort.Location = new System.Drawing.Point(7, 188);
-            this.lb_Ort.Name = "lb_Ort";
-            this.lb_Ort.Size = new System.Drawing.Size(24, 13);
-            this.lb_Ort.TabIndex = 31;
-            this.lb_Ort.Text = "Ort:";
-            // 
-            // tb_Ort
-            // 
-            this.tb_Ort.Location = new System.Drawing.Point(119, 185);
-            this.tb_Ort.Name = "tb_Ort";
-            this.tb_Ort.Size = new System.Drawing.Size(205, 20);
-            this.tb_Ort.TabIndex = 32;
-            // 
-            // lb_Vertrauenswuerdigkeit
-            // 
-            this.lb_Vertrauenswuerdigkeit.AutoSize = true;
-            this.lb_Vertrauenswuerdigkeit.Location = new System.Drawing.Point(7, 214);
-            this.lb_Vertrauenswuerdigkeit.Name = "lb_Vertrauenswuerdigkeit";
-            this.lb_Vertrauenswuerdigkeit.Size = new System.Drawing.Size(109, 13);
-            this.lb_Vertrauenswuerdigkeit.TabIndex = 33;
-            this.lb_Vertrauenswuerdigkeit.Text = "Vertrauenswürdigkeit:";
-            // 
-            // cb_Vertrauenswuerdigkeit
-            // 
-            this.cb_Vertrauenswuerdigkeit.FormattingEnabled = true;
-            this.cb_Vertrauenswuerdigkeit.Location = new System.Drawing.Point(119, 211);
-            this.cb_Vertrauenswuerdigkeit.Name = "cb_Vertrauenswuerdigkeit";
-            this.cb_Vertrauenswuerdigkeit.Size = new System.Drawing.Size(79, 21);
-            this.cb_Vertrauenswuerdigkeit.TabIndex = 26;
-            // 
-            // lb_Klasse
-            // 
-            this.lb_Klasse.AutoSize = true;
-            this.lb_Klasse.Location = new System.Drawing.Point(7, 240);
-            this.lb_Klasse.Name = "lb_Klasse";
-            this.lb_Klasse.Size = new System.Drawing.Size(41, 13);
-            this.lb_Klasse.TabIndex = 34;
-            this.lb_Klasse.Text = "Klasse:";
-            // 
-            // tb_Klasse
-            // 
-            this.tb_Klasse.Location = new System.Drawing.Point(119, 237);
-            this.tb_Klasse.Name = "tb_Klasse";
-            this.tb_Klasse.Size = new System.Drawing.Size(79, 20);
-            this.tb_Klasse.TabIndex = 35;
-            // 
-            // tb_Mail
-            // 
-            this.tb_Mail.Location = new System.Drawing.Point(119, 263);
-            this.tb_Mail.Name = "tb_Mail";
-            this.tb_Mail.Size = new System.Drawing.Size(205, 20);
-            this.tb_Mail.TabIndex = 36;
-            // 
-            // lb_Mail
-            // 
-            this.lb_Mail.AutoSize = true;
-            this.lb_Mail.Location = new System.Drawing.Point(7, 266);
-            this.lb_Mail.Name = "lb_Mail";
-            this.lb_Mail.Size = new System.Drawing.Size(29, 13);
-            this.lb_Mail.TabIndex = 37;
-            this.lb_Mail.Text = "Mail:";
-            // 
-            // tb_Telefonnummer
-            // 
-            this.tb_Telefonnummer.Location = new System.Drawing.Point(119, 289);
-            this.tb_Telefonnummer.Name = "tb_Telefonnummer";
-            this.tb_Telefonnummer.Size = new System.Drawing.Size(205, 20);
-            this.tb_Telefonnummer.TabIndex = 38;
-            // 
-            // lb_Telefonnummer
-            // 
-            this.lb_Telefonnummer.AutoSize = true;
-            this.lb_Telefonnummer.Location = new System.Drawing.Point(7, 292);
-            this.lb_Telefonnummer.Name = "lb_Telefonnummer";
-            this.lb_Telefonnummer.Size = new System.Drawing.Size(83, 13);
-            this.lb_Telefonnummer.TabIndex = 39;
-            this.lb_Telefonnummer.Text = "Telefonnummer:";
-            // 
-            // bt_laden_kunden
-            // 
-            this.bt_laden_kunden.Location = new System.Drawing.Point(119, 315);
-            this.bt_laden_kunden.Name = "bt_laden_kunden";
-            this.bt_laden_kunden.Size = new System.Drawing.Size(108, 31);
-            this.bt_laden_kunden.TabIndex = 26;
-            this.bt_laden_kunden.Text = "Laden";
-            this.bt_laden_kunden.UseVisualStyleBackColor = true;
-            // 
-            // lb_VERLAGID
-            // 
-            this.lb_VERLAGID.AutoSize = true;
-            this.lb_VERLAGID.Location = new System.Drawing.Point(6, 20);
-            this.lb_VERLAGID.Name = "lb_VERLAGID";
-            this.lb_VERLAGID.Size = new System.Drawing.Size(54, 13);
-            this.lb_VERLAGID.TabIndex = 26;
-            this.lb_VERLAGID.Text = "Verlag-ID:";
-            // 
-            // tb_VERLAGID
-            // 
-            this.tb_VERLAGID.Location = new System.Drawing.Point(140, 17);
-            this.tb_VERLAGID.Name = "tb_VERLAGID";
-            this.tb_VERLAGID.Size = new System.Drawing.Size(200, 20);
-            this.tb_VERLAGID.TabIndex = 26;
+            this.tb_Verlagname.Location = new System.Drawing.Point(140, 43);
+            this.tb_Verlagname.Name = "tb_Verlagname";
+            this.tb_Verlagname.Size = new System.Drawing.Size(200, 20);
+            this.tb_Verlagname.TabIndex = 28;
             // 
             // lb_Verlagname
             // 
@@ -614,35 +602,45 @@
             this.lb_Verlagname.TabIndex = 27;
             this.lb_Verlagname.Text = "Name:";
             // 
-            // tb_Name
+            // tb_VerlagID
             // 
-            this.tb_Name.Location = new System.Drawing.Point(140, 43);
-            this.tb_Name.Name = "tb_Name";
-            this.tb_Name.Size = new System.Drawing.Size(200, 20);
-            this.tb_Name.TabIndex = 28;
+            this.tb_VerlagID.Location = new System.Drawing.Point(140, 17);
+            this.tb_VerlagID.Name = "tb_VerlagID";
+            this.tb_VerlagID.Size = new System.Drawing.Size(200, 20);
+            this.tb_VerlagID.TabIndex = 26;
             // 
-            // lb_AUTORID
+            // lb_VerlagID
             // 
-            this.lb_AUTORID.AutoSize = true;
-            this.lb_AUTORID.Location = new System.Drawing.Point(6, 20);
-            this.lb_AUTORID.Name = "lb_AUTORID";
-            this.lb_AUTORID.Size = new System.Drawing.Size(49, 13);
-            this.lb_AUTORID.TabIndex = 29;
-            this.lb_AUTORID.Text = "Autor-ID:";
+            this.lb_VerlagID.AutoSize = true;
+            this.lb_VerlagID.Location = new System.Drawing.Point(6, 20);
+            this.lb_VerlagID.Name = "lb_VerlagID";
+            this.lb_VerlagID.Size = new System.Drawing.Size(54, 13);
+            this.lb_VerlagID.TabIndex = 26;
+            this.lb_VerlagID.Text = "Verlag-ID:";
             // 
-            // tb_AUTORID
+            // gb4_
             // 
-            this.tb_AUTORID.Location = new System.Drawing.Point(119, 17);
-            this.tb_AUTORID.Name = "tb_AUTORID";
-            this.tb_AUTORID.Size = new System.Drawing.Size(200, 20);
-            this.tb_AUTORID.TabIndex = 29;
+            this.gb4_.Controls.Add(this.bt_laden_autor);
+            this.gb4_.Controls.Add(this.lb_Autorname);
+            this.gb4_.Controls.Add(this.tb_Autorname);
+            this.gb4_.Controls.Add(this.tb_AutorID);
+            this.gb4_.Controls.Add(this.lb_AutorID);
+            this.gb4_.Location = new System.Drawing.Point(432, 377);
+            this.gb4_.Name = "gb4_";
+            this.gb4_.Size = new System.Drawing.Size(419, 137);
+            this.gb4_.TabIndex = 3;
+            this.gb4_.TabStop = false;
+            this.gb4_.Text = "groupBox4";
             // 
-            // tb_Autor
+            // bt_laden_autor
             // 
-            this.tb_Autor.Location = new System.Drawing.Point(119, 43);
-            this.tb_Autor.Name = "tb_Autor";
-            this.tb_Autor.Size = new System.Drawing.Size(200, 20);
-            this.tb_Autor.TabIndex = 30;
+            this.bt_laden_autor.Location = new System.Drawing.Point(119, 69);
+            this.bt_laden_autor.Name = "bt_laden_autor";
+            this.bt_laden_autor.Size = new System.Drawing.Size(108, 31);
+            this.bt_laden_autor.TabIndex = 40;
+            this.bt_laden_autor.Text = "Laden";
+            this.bt_laden_autor.UseVisualStyleBackColor = true;
+            this.bt_laden_autor.Click += new System.EventHandler(this.load_autor);
             // 
             // lb_Autorname
             // 
@@ -653,23 +651,28 @@
             this.lb_Autorname.TabIndex = 31;
             this.lb_Autorname.Text = "Autor:";
             // 
-            // bt_laden_verlag
+            // tb_Autorname
             // 
-            this.bt_laden_verlag.Location = new System.Drawing.Point(140, 69);
-            this.bt_laden_verlag.Name = "bt_laden_verlag";
-            this.bt_laden_verlag.Size = new System.Drawing.Size(108, 31);
-            this.bt_laden_verlag.TabIndex = 40;
-            this.bt_laden_verlag.Text = "Laden";
-            this.bt_laden_verlag.UseVisualStyleBackColor = true;
+            this.tb_Autorname.Location = new System.Drawing.Point(119, 43);
+            this.tb_Autorname.Name = "tb_Autorname";
+            this.tb_Autorname.Size = new System.Drawing.Size(200, 20);
+            this.tb_Autorname.TabIndex = 30;
             // 
-            // bt_laden_autor
+            // tb_AutorID
             // 
-            this.bt_laden_autor.Location = new System.Drawing.Point(119, 69);
-            this.bt_laden_autor.Name = "bt_laden_autor";
-            this.bt_laden_autor.Size = new System.Drawing.Size(108, 31);
-            this.bt_laden_autor.TabIndex = 40;
-            this.bt_laden_autor.Text = "Laden";
-            this.bt_laden_autor.UseVisualStyleBackColor = true;
+            this.tb_AutorID.Location = new System.Drawing.Point(119, 17);
+            this.tb_AutorID.Name = "tb_AutorID";
+            this.tb_AutorID.Size = new System.Drawing.Size(200, 20);
+            this.tb_AutorID.TabIndex = 29;
+            // 
+            // lb_AutorID
+            // 
+            this.lb_AutorID.AutoSize = true;
+            this.lb_AutorID.Location = new System.Drawing.Point(6, 20);
+            this.lb_AutorID.Name = "lb_AutorID";
+            this.lb_AutorID.Size = new System.Drawing.Size(49, 13);
+            this.lb_AutorID.TabIndex = 29;
+            this.lb_AutorID.Text = "Autor-ID:";
             // 
             // w_s_buecher
             // 
@@ -719,8 +722,8 @@
         private System.Windows.Forms.Button bt_laden_buecher;
         private System.Windows.Forms.TextBox tb_Auflage;
         private System.Windows.Forms.Label lb_Auflage;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DateTimePicker dTP_Erscheinungsdatum;
+        private System.Windows.Forms.Label lb_Erscheinungsdatum;
         private System.Windows.Forms.GroupBox gb2_;
         private System.Windows.Forms.TextBox tb_Strasse;
         private System.Windows.Forms.Label lb_Strasse;
@@ -728,8 +731,8 @@
         private System.Windows.Forms.Label lb_Nachname;
         private System.Windows.Forms.TextBox tb_Vorname;
         private System.Windows.Forms.Label lb_Vorname;
-        private System.Windows.Forms.TextBox tb_KUNDENID;
-        private System.Windows.Forms.Label lb_KUNDENID;
+        private System.Windows.Forms.TextBox tb_KundenID;
+        private System.Windows.Forms.Label lb_KundenID;
         private System.Windows.Forms.GroupBox gb3_;
         private System.Windows.Forms.GroupBox gb4_;
         private System.Windows.Forms.Button bt_laden_kunden;
@@ -747,15 +750,15 @@
         private System.Windows.Forms.Label lb_Postleitzahl;
         private System.Windows.Forms.TextBox tb_Hausnummer;
         private System.Windows.Forms.Label lb_Hausnummer;
-        private System.Windows.Forms.TextBox tb_Name;
+        private System.Windows.Forms.TextBox tb_Verlagname;
         private System.Windows.Forms.Label lb_Verlagname;
-        private System.Windows.Forms.TextBox tb_VERLAGID;
-        private System.Windows.Forms.Label lb_VERLAGID;
+        private System.Windows.Forms.TextBox tb_VerlagID;
+        private System.Windows.Forms.Label lb_VerlagID;
         private System.Windows.Forms.Button bt_laden_verlag;
         private System.Windows.Forms.Button bt_laden_autor;
         private System.Windows.Forms.Label lb_Autorname;
-        private System.Windows.Forms.TextBox tb_Autor;
-        private System.Windows.Forms.TextBox tb_AUTORID;
-        private System.Windows.Forms.Label lb_AUTORID;
+        private System.Windows.Forms.TextBox tb_Autorname;
+        private System.Windows.Forms.TextBox tb_AutorID;
+        private System.Windows.Forms.Label lb_AutorID;
     }
 }

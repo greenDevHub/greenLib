@@ -15,7 +15,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Isbn Nummer eines Buches
         /// </summary>
-        public string Isbn { get { return  isbn;} set { isbn = value; } }
+        public string ISBN { get { return  isbn;} set { isbn = value; } }
 
         string titel;
         /// <summary>
@@ -88,15 +88,15 @@ namespace Bibo_Verwaltung
             // Einlesen der Datenzeilen und Ausgabe an der Konsole 
             while (dr.Read())
             {
-                Isbn = dr["buch_isbn"].ToString();
+                ISBN = dr["buch_isbn"].ToString();
                 Titel = dr["buch_titel"].ToString();
                 Genre = dr["ger_name"].ToString();
-                autor = dr["au_autor"].ToString();
-                verlag = dr["ver_name"].ToString();
-                //er_datum = dr["buch_erscheinungsdatum"].ToString();
-                sprache = dr["sprach_name"].ToString();
-                auflage = dr["buch_auflage"].ToString();
-                //neupreis = dr["buch_neupreis"].ToString();
+                Autor = dr["au_autor"].ToString();
+                Verlag = dr["ver_name"].ToString();
+                //Er_datum = dr["buch_erscheinungsdatum"].ToString();
+                Sprache = dr["sprach_name"].ToString();
+                Auflage = dr["buch_auflage"].ToString();
+                //Neupreis = dr["buch_neupreis"].ToString();
             }
             // DataReader schließen 
             dr.Close();

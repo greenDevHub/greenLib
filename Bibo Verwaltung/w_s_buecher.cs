@@ -49,25 +49,63 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private void load(object sender, EventArgs e)
+        private void load_buecher(object sender, EventArgs e)
         {
             Buch b = new Buch(tb_ISBN.Text);
 
             Buch b1 = new Buch("978-3608938289");
             Buch b2 = new Buch("978-3423715669");
 
-            tb_ISBN.Text = b.Isbn;
+            tb_ISBN.Text = b.ISBN;
             tb_Titel.Text = b.Titel;
             cb_Autor.Text = b.Autor;
             cb_Verlag.Text = b.Verlag;
             cb_Sprache.Text = b.Sprache;
             tb_Auflage.Text = b.Auflage;
             //tb_Neupreis.Text = b.neupreis;
+            //tb_Erscheinungsdatum.Text = b.erscheinungsdatum;
             cb_Genre.Text = b.Genre;
         }
 
+        private void load_kunden(object sender, EventArgs e)
+        {
+            Kunde k = new Kunde(tb_KundenID.Text);
 
+            Kunde k1 = new Kunde("1");
 
+            tb_KundenID.Text = k.KundenID;
+            tb_Vorname.Text = k.Vorname;
+            tb_Nachname.Text = k.Nachname;
+            tb_Ort.Text = k.Ort;
+            tb_Klasse.Text = k.Klasse;
+            tb_Mail.Text = k.Mail;
+            tb_Hausnummer.Text = k.Hausnummer;
+            tb_Postleitzahl.Text = k.Postleitzahl;
+            tb_Strasse.Text = k.Strasse;
+            tb_Telefonnummer.Text = k.Telefonnummer;
+            cb_Vertrauenswuerdigkeit.Text = k.Vertrauenswuerdigkeit;
+        }
+
+        private void load_verlag(object sender, EventArgs e)
+        {
+            Verlag v = new Verlag(tb_VerlagID.Text);
+
+            Verlag v1 = new Verlag("1");
+            Verlag v2 = new Verlag("2");
+
+            tb_VerlagID.Text = v.VerlagID;
+            tb_Verlagname.Text = v.Verlagname;
+        }
+
+        private void load_autor(object sender, EventArgs e)
+        {
+            Autor a = new Autor(tb_AutorID.Text);
+
+            Autor a1 = new Autor("1");
+
+            tb_AutorID.Text = a.AutorID;
+            tb_Autorname.Text = a.Autorname;
+        }
 
 
 
