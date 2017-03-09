@@ -54,7 +54,9 @@ namespace Bibo_Verwaltung
         public string Auflage { get { return auflage; } set { auflage = value; } }
 
         DateTime er_datum;
-        double neupreis;
+        public DateTime Er_datum { get { return er_datum; } set { er_datum = value; } }
+        decimal neupreis;
+        public decimal Neupreis { get { return neupreis; } set { neupreis = value; } }
 
 
         /// <summary>
@@ -73,7 +75,7 @@ namespace Bibo_Verwaltung
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM t_s_buecher "
+            string strSQL = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' FROM t_s_buecher "
                 + "left join t_s_genre on buch_genre_id = ger_id "
                 + "left join t_s_autor on buch_autor_id = au_id "
                 + "left join t_s_verlag on buch_verlag_id = ver_id "
@@ -93,10 +95,11 @@ namespace Bibo_Verwaltung
                 Genre = dr["ger_name"].ToString();
                 Autor = dr["au_autor"].ToString();
                 Verlag = dr["ver_name"].ToString();
-                //Er_datum = dr["buch_erscheinungsdatum"].ToString();
+                Er_datum = (DateTime)dr["verified_erscheinungsdatum"];
                 Sprache = dr["sprach_name"].ToString();
                 Auflage = dr["buch_auflage"].ToString();
-                //Neupreis = dr["buch_neupreis"].ToString();
+                string test = dr["buch_neupreis"].ToString().Replace(".", ",");
+                Neupreis = Convert.ToDecimal(test);
             }
             // DataReader schließen 
             dr.Close();

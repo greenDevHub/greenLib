@@ -62,8 +62,8 @@ namespace Bibo_Verwaltung
             cb_Verlag.Text = b.Verlag;
             cb_Sprache.Text = b.Sprache;
             tb_Auflage.Text = b.Auflage;
-            //tb_Neupreis.Text = b.neupreis;
-            //tb_Erscheinungsdatum.Text = b.erscheinungsdatum;
+            tb_Neupreis.Text = b.Neupreis.ToString();
+            dTP_Erscheinungsdatum.Value = b.Er_datum;
             cb_Genre.Text = b.Genre;
         }
 
