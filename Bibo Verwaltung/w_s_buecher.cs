@@ -30,6 +30,7 @@ namespace Bibo_Verwaltung
             InitializeComponent();
         }
 
+
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
@@ -58,13 +59,21 @@ namespace Bibo_Verwaltung
 
             tb_ISBN.Text = b.ISBN;
             tb_Titel.Text = b.Titel;
-            cb_Autor.Text = b.Autor;
-            cb_Verlag.Text = b.Verlag;
+            cb_Autor.Text = b.Autor.Autorname;
+            cb_Verlag.Text = b.Verlag.Verlagname;
             cb_Sprache.Text = b.Sprache;
             tb_Auflage.Text = b.Auflage;
             tb_Neupreis.Text = b.Neupreis.ToString();
             dTP_Erscheinungsdatum.Value = b.Er_datum;
             cb_Genre.Text = b.Genre;
+
+            // Füllen Autor
+            tb_AutorID.Text = b.Autor.AutorID;
+            tb_Autorname.Text = b.Autor.Autorname;
+
+            // Füllen Verlag
+            tb_VerlagID.Text = b.Verlag.VerlagID;
+            tb_Verlagname.Text = b.Verlag.Verlagname;
         }
 
         private void load_kunden(object sender, EventArgs e)
@@ -107,6 +116,7 @@ namespace Bibo_Verwaltung
             tb_Autorname.Text = a.Autorname;
         }
 
+        
 
 
         //-----------------------------------------
@@ -154,6 +164,11 @@ namespace Bibo_Verwaltung
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }

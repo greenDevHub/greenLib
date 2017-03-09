@@ -29,17 +29,17 @@ namespace Bibo_Verwaltung
         /// </summary>
         public string Genre { get { return genre; } set { genre = value; } }
 
-        string verlag;
+        Verlag verlag;
         /// <summary>
         /// Verlag des Buches
         /// </summary>
-        public string Verlag { get { return verlag; } set { verlag = value; } }
+        public Verlag Verlag { get { return verlag; } set { verlag = value; } }
 
-        string autor;
+        Autor autor;
         /// <summary>
         /// Autor eines Buches
         /// </summary>
-        public string Autor { get { return autor; } set { autor = value; } }
+        public Autor Autor { get { return autor; } set { autor = value; } }
 
         string sprache;
         /// <summary>
@@ -93,8 +93,10 @@ namespace Bibo_Verwaltung
                 ISBN = dr["buch_isbn"].ToString();
                 Titel = dr["buch_titel"].ToString();
                 Genre = dr["ger_name"].ToString();
-                Autor = dr["au_autor"].ToString();
-                Verlag = dr["ver_name"].ToString();
+                Autor = new Autor(dr["buch_autor_id"].ToString());
+                //Autor = dr["au_autor"].ToString();
+                Verlag = new Verlag(dr["buch_verlag_id"].ToString());
+                //Verlag = dr["ver_name"].ToString();
                 Er_datum = (DateTime)dr["verified_erscheinungsdatum"];
                 Sprache = dr["sprach_name"].ToString();
                 Auflage = dr["buch_auflage"].ToString();
