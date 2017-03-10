@@ -19,6 +19,7 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_buecher : Form
     {
+        Buch b;
         public bool IsNumeric(string s)
         {
             float output;
@@ -52,7 +53,7 @@ namespace Bibo_Verwaltung
 
         private void load_buecher(object sender, EventArgs e)
         {
-            Buch b = new Buch(tb_ISBN.Text);
+            b = new Buch(tb_ISBN.Text);
 
             Buch b1 = new Buch("978-3608938289");
             Buch b2 = new Buch("978-3423715669");
@@ -170,7 +171,8 @@ namespace Bibo_Verwaltung
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            b.Titel = tb_Titel.Text;
+            b.Save();
         }
         //-----------------------------------------
 

@@ -1,0 +1,7 @@
+Arbeitsauftrag bis 23.03.2017
+
+	1.Zahlenproblematik klären (regionsbezogen)
+	2.stabile Umwandlung von Werten 
+	3.Speichern für alles
+	4.Masken aufräumen
+	5.Bei Eingabefehler (ISBN: Buchstabe --> Fehlermeldung)

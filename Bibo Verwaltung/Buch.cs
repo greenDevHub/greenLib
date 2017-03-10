@@ -108,5 +108,18 @@ namespace Bibo_Verwaltung
             // Verbindung schließen 
             con.Close();
         }
+
+        public void Save()
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
+            string strSQL = "UPDATE [dbo].[t_s_buecher] set buch_titel = '" + Titel + "' WHERE buch_isbn = '" + isbn + "'"; 
+
+            SqlCommand cmd = new SqlCommand(strSQL, con);
+
+            // Verbindung öffnen 
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+        }
     }
 }
