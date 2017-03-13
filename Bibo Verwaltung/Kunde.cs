@@ -76,9 +76,6 @@ namespace Bibo_Verwaltung
         /// </summary>
         public string Vertrauenswuerdigkeit { get { return vertrauenswuerdigkeit; } set { vertrauenswuerdigkeit = value; } }
 
-
-
-
         /// <summary>
         /// Erschaft das Objekt Buch
         /// </summary>
@@ -95,8 +92,7 @@ namespace Bibo_Verwaltung
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM t_s_kunden "
-                + "WHERE kunde_ID = '" + kundenid + "'";
+            string strSQL = "SELECT * FROM t_s_kunden WHERE kunde_ID = '" + kundenid + "'";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
 

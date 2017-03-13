@@ -8,12 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using System.Windows; 
-using Microsoft.Win32; 
-
-
-
+using System.Windows;
+using Microsoft.Win32;
+using System.Text.RegularExpressions;
 
 namespace Bibo_Verwaltung
 {
@@ -25,35 +22,49 @@ namespace Bibo_Verwaltung
             return float.TryParse(s, out output);
         }
 
+        public bool IsIsbn(string s)
+        {
+            if (Regex.IsMatch(s, "^[-0-9]*$"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public w_s_buecher()
         {
             InitializeComponent();
-        }
-
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        }  
 
         private void tb_Neupreis_Validated(object sender, EventArgs e)
         {
             if (IsNumeric(tb_Neupreis.Text) == false)
             {
-                MessageBox.Show("Bitte nur Zahlen eingeben!");
+                MessageBox.Show("Bitte nur Zahlen eingeben!", "Fehler",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 tb_Neupreis.Text = "";
+            }
+        }
+
+        private void tb_ISBN_inputOk(object sender, EventArgs e)
+        {
+            if (IsIsbn(tb_ISBN.Text) == false)
+            {
+                MessageBox.Show("Bitte keine Buchstaben eingeben!", "Warnung",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //nicht erlaubte Zeichen entfernen
+                Regex pattern = new Regex("[µ€@´`<>´+*~#'_.:°^!§$%&/()=?;,a-zA-ZäÄüÜöÖß ]");
+                tb_ISBN.Text = pattern.Replace(tb_ISBN.Text, "");
             }
         }
 
         private void load_buecher(object sender, EventArgs e)
         {
             Buch b = new Buch(tb_ISBN.Text);
-
+            
             Buch b1 = new Buch("978-3608938289");
             Buch b2 = new Buch("978-3423715669");
 
@@ -119,9 +130,20 @@ namespace Bibo_Verwaltung
         
 
 
-        //-----------------------------------------
-        
 
+
+
+
+
+
+
+
+
+
+
+
+
+        //---------------------------------------------------------------
         private void search(object sender, EventArgs e)
         {
             //ComboBox-Items in Array speichern
@@ -137,44 +159,8 @@ namespace Bibo_Verwaltung
                 {
                 cb_Autor.SelectedItem = autor_dialog.such_auswahl;
                 }
-
-
-
-
-           
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-        //-----------------------------------------
-
+        //---------------------------------------------------------------
 
     }
-
 }

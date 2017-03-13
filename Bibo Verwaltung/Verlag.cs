@@ -12,19 +12,18 @@ namespace Bibo_Verwaltung
     {
         string verlagid;
         /// <summary>
-        /// Isbn Nummer eines Buches
+        /// VerlagID eines Verlags
         /// </summary>
         public string VerlagID { get { return verlagid; } set { verlagid = value; } }
 
         string verlagname;
         /// <summary>
-        /// Titel eines Buches
+        /// Verlagname eines Verlags
         /// </summary>
         public string Verlagname { get { return verlagname; } set { verlagname = value; } }
 
-
         /// <summary>
-        /// Erschaft das Objekt Buch
+        /// Erschaft das Objekt Verlag
         /// </summary>
         public Verlag()
         {
@@ -39,8 +38,7 @@ namespace Bibo_Verwaltung
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM t_s_verlag "
-                + "WHERE ver_id = '" + verlagid + "'";
+            string strSQL = "SELECT * FROM t_s_verlag WHERE ver_id = '" + verlagid + "'";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
 

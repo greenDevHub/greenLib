@@ -12,19 +12,18 @@ namespace Bibo_Verwaltung
     {
         string autorid;
         /// <summary>
-        /// Isbn Nummer eines Buches
+        /// AutorID eines Autors
         /// </summary>
         public string AutorID { get { return autorid; } set { autorid = value; } }
 
         string autorname;
         /// <summary>
-        /// Titel eines Buches
+        /// Autorname eines Autors
         /// </summary>
         public string Autorname { get { return autorname; } set { autorname = value; } }
 
-
         /// <summary>
-        /// Erschaft das Objekt Buch
+        /// Erschaft das Objekt Autor
         /// </summary>
         public Autor()
         {
@@ -39,8 +38,7 @@ namespace Bibo_Verwaltung
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM t_s_autor "
-                + "WHERE au_id = '" + autorid + "'";
+            string strSQL = "SELECT * FROM t_s_autor WHERE au_id = '" + autorid + "'";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
 
