@@ -172,6 +172,8 @@ namespace Bibo_Verwaltung
         private void button1_Click(object sender, EventArgs e)
         {
             b.Titel = tb_Titel.Text;
+            b.Autor.AutorID = tb_AutorID.Text;
+            b.Verlag.VerlagID = tb_VerlagID.Text;
             b.Save();
         }
         //-----------------------------------------

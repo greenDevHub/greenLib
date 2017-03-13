@@ -113,13 +113,15 @@ namespace Bibo_Verwaltung
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "UPDATE [dbo].[t_s_buecher] set buch_titel = '" + Titel + "' WHERE buch_isbn = '" + isbn + "'"; 
+            string strSQL = "UPDATE [dbo].[t_s_buecher] set buch_titel = '" + Titel + "', buch_autor_id = '" + Autor.AutorID + "', buch_verlag_id = '" + Verlag.VerlagID + "' WHERE buch_isbn = '" + isbn + "'"; 
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
 
             // Verbindung öffnen 
             con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
+            cmd.ExecuteNonQuery();
+            //Verbindung schließen
+            con.Close();
         }
     }
 }

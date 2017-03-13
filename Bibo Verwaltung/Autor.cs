@@ -12,19 +12,19 @@ namespace Bibo_Verwaltung
     {
         string autorid;
         /// <summary>
-        /// Isbn Nummer eines Buches
+        /// ID des Autors
         /// </summary>
         public string AutorID { get { return autorid; } set { autorid = value; } }
 
         string autorname;
         /// <summary>
-        /// Titel eines Buches
+        /// Name des Autors
         /// </summary>
         public string Autorname { get { return autorname; } set { autorname = value; } }
 
 
         /// <summary>
-        /// Erschaft das Objekt Buch
+        /// Erschaft das Objekt Autor
         /// </summary>
         public Autor()
         {

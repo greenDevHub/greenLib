@@ -12,19 +12,19 @@ namespace Bibo_Verwaltung
     {
         string verlagid;
         /// <summary>
-        /// Isbn Nummer eines Buches
+        /// ID des Verlags
         /// </summary>
         public string VerlagID { get { return verlagid; } set { verlagid = value; } }
 
         string verlagname;
         /// <summary>
-        /// Titel eines Buches
+        /// Name des Verlags
         /// </summary>
         public string Verlagname { get { return verlagname; } set { verlagname = value; } }
 
 
         /// <summary>
-        /// Erschaft das Objekt Buch
+        /// Erschaft das Objekt Verlag
         /// </summary>
         public Verlag()
         {

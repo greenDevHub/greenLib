@@ -80,7 +80,7 @@ namespace Bibo_Verwaltung
 
 
         /// <summary>
-        /// Erschaft das Objekt Buch
+        /// Erschaft das Objekt Kunde
         /// </summary>
         public Kunde()
         {
