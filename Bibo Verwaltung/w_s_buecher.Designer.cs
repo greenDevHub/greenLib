@@ -726,7 +726,6 @@
         private System.Windows.Forms.ComboBox cb_Verlag;
         private System.Windows.Forms.ComboBox cb_Genre;
         private System.Windows.Forms.Label lb_Genre;
-        private System.Windows.Forms.TextBox tb_Neupreis;
         private System.Windows.Forms.Label lb_Neupreis;
         private System.Windows.Forms.TextBox tb_Titel;
         private System.Windows.Forms.Label lb_Titel;
@@ -773,5 +772,6 @@
         private System.Windows.Forms.TextBox tb_AutorID;
         private System.Windows.Forms.Label lb_AutorID;
         private System.Windows.Forms.Button bt_speichern_buecher;
+        private System.Windows.Forms.TextBox tb_Neupreis;
     }
 }

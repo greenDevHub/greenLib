@@ -44,11 +44,11 @@ namespace Bibo_Verwaltung
 
         private void tb_Neupreis_Validated(object sender, EventArgs e)
         {
-            if (IsNumeric(tb_Neupreis.Text) == false)
-            {
-                MessageBox.Show("Bitte nur Zahlen eingeben!");
-                tb_Neupreis.Text = "";
-            }
+           // if (IsNumeric(tb_Neupreis.Text) == false)
+           // {
+           //     MessageBox.Show("Bitte nur Zahlen eingeben!");
+           //     tb_Neupreis.Text = "";
+          //  }
         }
         #region Load_Buecher
         private void load_buecher(object sender, EventArgs e)

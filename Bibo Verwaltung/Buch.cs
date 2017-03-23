@@ -104,6 +104,21 @@ namespace Bibo_Verwaltung
                 Sprache = dr["sprach_name"].ToString();
                 Auflage = dr["buch_auflage"].ToString();
                 string test = dr["buch_neupreis"].ToString().Replace(".", ",");
+
+                try
+                {
+                    Neupreis = Convert.ToDecimal(test);
+                }
+
+                catch(FormatException)
+                {
+                    Neupreis = 0;
+                    MessageBox.Show("Bitte nur Zahlen eingeben!");
+                    
+                }
+                
+
+
                 Neupreis = Convert.ToDecimal(test);
             }
             // DataReader schließen 
@@ -128,5 +143,18 @@ namespace Bibo_Verwaltung
             con.Close();
         }
         #endregion
+    }
+
+    internal class MessageBox
+    {
+        internal static void Show(string v)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void Show(char v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
