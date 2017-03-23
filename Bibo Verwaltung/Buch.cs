@@ -64,12 +64,8 @@ namespace Bibo_Verwaltung
         /// Neupreis eines Buches
         /// </summary>
         public decimal Neupreis { get { return neupreis; } set { neupreis = value; } }
-<<<<<<< HEAD
-
-=======
         #endregion
         #region Objekt Buch
->>>>>>> origin/InfoAG
         /// <summary>
         /// Erschaft das Objekt Buch
         /// </summary>

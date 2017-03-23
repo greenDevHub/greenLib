@@ -8,17 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-<<<<<<< HEAD
 using System.Windows;
 using Microsoft.Win32;
 using System.Text.RegularExpressions;
-=======
-using System.Windows; 
-using Microsoft.Win32; 
 
-
-
->>>>>>> origin/InfoAG
 
 namespace Bibo_Verwaltung
 {
@@ -31,19 +24,15 @@ namespace Bibo_Verwaltung
             float output;
             return float.TryParse(s, out output);
         }
-<<<<<<< HEAD
 
-        public bool IsIsbn(string s)
-=======
+
         #endregion
         public w_s_buecher()
         {
             InitializeComponent();
         }
 
-
-        private void groupBox1_Enter(object sender, EventArgs e)
->>>>>>> origin/InfoAG
+        public bool IsIsbn(string s)
         {
             if (Regex.IsMatch(s, "^[-0-9]*$"))
             {
@@ -55,11 +44,6 @@ namespace Bibo_Verwaltung
             }
         }
 
-        public w_s_buecher()
-        {
-            InitializeComponent();
-        }  
-
         private void tb_Neupreis_Validated(object sender, EventArgs e)
         {
             if (IsNumeric(tb_Neupreis.Text) == false)
@@ -69,8 +53,6 @@ namespace Bibo_Verwaltung
                 tb_Neupreis.Text = "";
             }
         }
-<<<<<<< HEAD
-
         private void tb_ISBN_inputOk(object sender, EventArgs e)
         {
             if (IsIsbn(tb_ISBN.Text) == false)
@@ -83,17 +65,11 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private void load_buecher(object sender, EventArgs e)
-        {
-            Buch b = new Buch(tb_ISBN.Text);
-            
-=======
         #region Load_Buecher
         private void load_buecher(object sender, EventArgs e)
         {
             b = new Buch(tb_ISBN.Text);
 
->>>>>>> origin/InfoAG
             Buch b1 = new Buch("978-3608938289");
             Buch b2 = new Buch("978-3423715669");
 
@@ -158,29 +134,8 @@ namespace Bibo_Verwaltung
             tb_AutorID.Text = a.AutorID;
             tb_Autorname.Text = a.Autorname;
         }
-<<<<<<< HEAD
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //---------------------------------------------------------------
-=======
         #endregion
         #region Search
->>>>>>> origin/InfoAG
         private void search(object sender, EventArgs e)
         {
             //ComboBox-Items in Array speichern
@@ -195,12 +150,6 @@ namespace Bibo_Verwaltung
             if (autor_dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 cb_Autor.SelectedItem = autor_dialog.such_auswahl;
-<<<<<<< HEAD
-                }
-        }
-        //---------------------------------------------------------------
-
-=======
             }
         }
         #endregion
@@ -213,6 +162,5 @@ namespace Bibo_Verwaltung
             b.Save();
         }
         #endregion
->>>>>>> origin/InfoAG
     }
 }

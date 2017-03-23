@@ -13,28 +13,18 @@ namespace Bibo_Verwaltung
         #region Strings
         string verlagid;
         /// <summary>
-<<<<<<< HEAD
         /// VerlagID eines Verlags
-=======
         /// ID des Verlags
->>>>>>> origin/InfoAG
         /// </summary>
         public string VerlagID { get { return verlagid; } set { verlagid = value; } }
 
         string verlagname;
         /// <summary>
-<<<<<<< HEAD
         /// Verlagname eines Verlags
-        /// </summary>
-        public string Verlagname { get { return verlagname; } set { verlagname = value; } }
-
-=======
-        /// Name des Verlags
         /// </summary>
         public string Verlagname { get { return verlagname; } set { verlagname = value; } }
         #endregion
         #region Objekt Verlag
->>>>>>> origin/InfoAG
         /// <summary>
         /// Erschaft das Objekt Verlag
         /// </summary>

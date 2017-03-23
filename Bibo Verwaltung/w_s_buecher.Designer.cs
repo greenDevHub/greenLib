@@ -28,11 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-<<<<<<< HEAD
-            this.gb_ = new System.Windows.Forms.GroupBox();
-=======
             this.gb_buecher = new System.Windows.Forms.GroupBox();
->>>>>>> origin/InfoAG
             this.bt_speichern_buecher = new System.Windows.Forms.Button();
             this.dTP_Erscheinungsdatum = new System.Windows.Forms.DateTimePicker();
             this.lb_Erscheinungsdatum = new System.Windows.Forms.Label();
@@ -94,47 +90,7 @@
             this.tb_Autorname = new System.Windows.Forms.TextBox();
             this.tb_AutorID = new System.Windows.Forms.TextBox();
             this.lb_AutorID = new System.Windows.Forms.Label();
-<<<<<<< HEAD
-            this.gb_.SuspendLayout();
-            this.gb2_.SuspendLayout();
-            this.gb3_.SuspendLayout();
-            this.gb4_.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // gb_
-            // 
-            this.gb_.Controls.Add(this.bt_speichern_buecher);
-            this.gb_.Controls.Add(this.dTP_Erscheinungsdatum);
-            this.gb_.Controls.Add(this.lb_Erscheinungsdatum);
-            this.gb_.Controls.Add(this.tb_Auflage);
-            this.gb_.Controls.Add(this.lb_Auflage);
-            this.gb_.Controls.Add(this.bt_laden_buecher);
-            this.gb_.Controls.Add(this.lb_Neupreis_Euro);
-            this.gb_.Controls.Add(this.bt_Sprache_s);
-            this.gb_.Controls.Add(this.cb_Sprache);
-            this.gb_.Controls.Add(this.lb_Sprache);
-            this.gb_.Controls.Add(this.bt_Autor_s);
-            this.gb_.Controls.Add(this.cb_Autor);
-            this.gb_.Controls.Add(this.lb_Verlag);
-            this.gb_.Controls.Add(this.lb_Autor);
-            this.gb_.Controls.Add(this.bt_Verlag_s);
-            this.gb_.Controls.Add(this.bt_Genre_s);
-            this.gb_.Controls.Add(this.cb_Verlag);
-            this.gb_.Controls.Add(this.cb_Genre);
-            this.gb_.Controls.Add(this.lb_Genre);
-            this.gb_.Controls.Add(this.tb_Neupreis);
-            this.gb_.Controls.Add(this.lb_Neupreis);
-            this.gb_.Controls.Add(this.tb_Titel);
-            this.gb_.Controls.Add(this.lb_Titel);
-            this.gb_.Controls.Add(this.tb_ISBN);
-            this.gb_.Controls.Add(this.lb_ISBN);
-            this.gb_.Location = new System.Drawing.Point(12, 12);
-            this.gb_.Name = "gb_";
-            this.gb_.Size = new System.Drawing.Size(414, 359);
-            this.gb_.TabIndex = 0;
-            this.gb_.TabStop = false;
-            this.gb_.Text = "groupBox1";
-=======
             this.gb_buecher.SuspendLayout();
             this.gb_kunde.SuspendLayout();
             this.gb_verlag.SuspendLayout();
@@ -174,26 +130,18 @@
             this.gb_buecher.TabIndex = 0;
             this.gb_buecher.TabStop = false;
             this.gb_buecher.Text = "Buecher";
-            this.gb_buecher.Enter += new System.EventHandler(this.groupBox1_Enter);
->>>>>>> origin/InfoAG
             // 
             // bt_speichern_buecher
             // 
             this.bt_speichern_buecher.Location = new System.Drawing.Point(248, 260);
-<<<<<<< HEAD
             this.bt_speichern_buecher.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
-=======
             this.bt_speichern_buecher.Margin = new System.Windows.Forms.Padding(1);
->>>>>>> origin/InfoAG
             this.bt_speichern_buecher.Name = "bt_speichern_buecher";
             this.bt_speichern_buecher.Size = new System.Drawing.Size(90, 31);
             this.bt_speichern_buecher.TabIndex = 26;
             this.bt_speichern_buecher.Text = "Speichern";
             this.bt_speichern_buecher.UseVisualStyleBackColor = true;
-<<<<<<< HEAD
-=======
             this.bt_speichern_buecher.Click += new System.EventHandler(this.Save);
->>>>>>> origin/InfoAG
             // 
             // dTP_Erscheinungsdatum
             // 
@@ -407,40 +355,6 @@
             this.lb_ISBN.Size = new System.Drawing.Size(35, 13);
             this.lb_ISBN.TabIndex = 1;
             this.lb_ISBN.Text = "ISBN:";
-            // 
-<<<<<<< HEAD
-            // gb2_
-            // 
-            this.gb2_.Controls.Add(this.bt_laden_kunden);
-            this.gb2_.Controls.Add(this.lb_Telefonnummer);
-            this.gb2_.Controls.Add(this.tb_Telefonnummer);
-            this.gb2_.Controls.Add(this.lb_Mail);
-            this.gb2_.Controls.Add(this.tb_Mail);
-            this.gb2_.Controls.Add(this.tb_Klasse);
-            this.gb2_.Controls.Add(this.lb_Klasse);
-            this.gb2_.Controls.Add(this.cb_Vertrauenswuerdigkeit);
-            this.gb2_.Controls.Add(this.lb_Vertrauenswuerdigkeit);
-            this.gb2_.Controls.Add(this.tb_Ort);
-            this.gb2_.Controls.Add(this.lb_Ort);
-            this.gb2_.Controls.Add(this.tb_Postleitzahl);
-            this.gb2_.Controls.Add(this.lb_Postleitzahl);
-            this.gb2_.Controls.Add(this.tb_Hausnummer);
-            this.gb2_.Controls.Add(this.lb_Hausnummer);
-            this.gb2_.Controls.Add(this.tb_Strasse);
-            this.gb2_.Controls.Add(this.lb_Strasse);
-            this.gb2_.Controls.Add(this.tb_Nachname);
-            this.gb2_.Controls.Add(this.lb_Nachname);
-            this.gb2_.Controls.Add(this.tb_Vorname);
-            this.gb2_.Controls.Add(this.lb_Vorname);
-            this.gb2_.Controls.Add(this.tb_KundenID);
-            this.gb2_.Controls.Add(this.lb_KundenID);
-            this.gb2_.Location = new System.Drawing.Point(432, 12);
-            this.gb2_.Name = "gb2_";
-            this.gb2_.Size = new System.Drawing.Size(419, 359);
-            this.gb2_.TabIndex = 1;
-            this.gb2_.TabStop = false;
-            this.gb2_.Text = "groupBox2";
-=======
             // gb_kunde
             // 
             this.gb_kunde.Controls.Add(this.bt_laden_kunden);
@@ -472,7 +386,6 @@
             this.gb_kunde.TabIndex = 1;
             this.gb_kunde.TabStop = false;
             this.gb_kunde.Text = "Kunde";
->>>>>>> origin/InfoAG
             // 
             // bt_laden_kunden
             // 
@@ -660,22 +573,6 @@
             this.lb_KundenID.Size = new System.Drawing.Size(61, 13);
             this.lb_KundenID.TabIndex = 0;
             this.lb_KundenID.Text = "Kunden-ID:";
-            // 
-<<<<<<< HEAD
-            // gb3_
-            // 
-            this.gb3_.Controls.Add(this.bt_laden_verlag);
-            this.gb3_.Controls.Add(this.tb_Verlagname);
-            this.gb3_.Controls.Add(this.lb_Verlagname);
-            this.gb3_.Controls.Add(this.tb_VerlagID);
-            this.gb3_.Controls.Add(this.lb_VerlagID);
-            this.gb3_.Location = new System.Drawing.Point(12, 377);
-            this.gb3_.Name = "gb3_";
-            this.gb3_.Size = new System.Drawing.Size(414, 137);
-            this.gb3_.TabIndex = 2;
-            this.gb3_.TabStop = false;
-            this.gb3_.Text = "groupBox3";
-=======
             // gb_verlag
             // 
             this.gb_verlag.Controls.Add(this.bt_laden_verlag);
@@ -689,7 +586,6 @@
             this.gb_verlag.TabIndex = 2;
             this.gb_verlag.TabStop = false;
             this.gb_verlag.Text = "Verlag";
->>>>>>> origin/InfoAG
             // 
             // bt_laden_verlag
             // 
@@ -732,22 +628,6 @@
             this.lb_VerlagID.Size = new System.Drawing.Size(54, 13);
             this.lb_VerlagID.TabIndex = 26;
             this.lb_VerlagID.Text = "Verlag-ID:";
-            // 
-<<<<<<< HEAD
-            // gb4_
-            // 
-            this.gb4_.Controls.Add(this.bt_laden_autor);
-            this.gb4_.Controls.Add(this.lb_Autorname);
-            this.gb4_.Controls.Add(this.tb_Autorname);
-            this.gb4_.Controls.Add(this.tb_AutorID);
-            this.gb4_.Controls.Add(this.lb_AutorID);
-            this.gb4_.Location = new System.Drawing.Point(432, 377);
-            this.gb4_.Name = "gb4_";
-            this.gb4_.Size = new System.Drawing.Size(419, 137);
-            this.gb4_.TabIndex = 3;
-            this.gb4_.TabStop = false;
-            this.gb4_.Text = "groupBox4";
-=======
             // gb_autor
             // 
             this.gb_autor.Controls.Add(this.bt_laden_autor);
@@ -761,7 +641,6 @@
             this.gb_autor.TabIndex = 3;
             this.gb_autor.TabStop = false;
             this.gb_autor.Text = "Autor";
->>>>>>> origin/InfoAG
             // 
             // bt_laden_autor
             // 
@@ -809,19 +688,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(863, 523);
-            this.Controls.Add(this.gb4_);
-            this.Controls.Add(this.gb3_);
-            this.Controls.Add(this.gb2_);
-            this.Controls.Add(this.gb_);
-=======
             this.ClientSize = new System.Drawing.Size(890, 555);
             this.Controls.Add(this.gb_autor);
             this.Controls.Add(this.gb_verlag);
             this.Controls.Add(this.gb_kunde);
             this.Controls.Add(this.gb_buecher);
->>>>>>> origin/InfoAG
             this.Name = "w_s_buecher";
             this.Text = "w_s_buecher";
             this.gb_buecher.ResumeLayout(false);

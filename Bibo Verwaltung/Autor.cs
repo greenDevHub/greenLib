@@ -13,28 +13,18 @@ namespace Bibo_Verwaltung
         #region Strings
         string autorid;
         /// <summary>
-<<<<<<< HEAD
         /// AutorID eines Autors
-=======
         /// ID des Autors
->>>>>>> origin/InfoAG
         /// </summary>
         public string AutorID { get { return autorid; } set { autorid = value; } }
 
         string autorname;
         /// <summary>
-<<<<<<< HEAD
         /// Autorname eines Autors
-        /// </summary>
-        public string Autorname { get { return autorname; } set { autorname = value; } }
-
-=======
-        /// Name des Autors
         /// </summary>
         public string Autorname { get { return autorname; } set { autorname = value; } }
         #endregion
         #region Objekt Autor
->>>>>>> origin/InfoAG
         /// <summary>
         /// Erschaft das Objekt Autor
         /// </summary>

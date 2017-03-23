@@ -76,12 +76,8 @@ namespace Bibo_Verwaltung
         /// Vertrauenswürdigkeit des Kunden
         /// </summary>
         public string Vertrauenswuerdigkeit { get { return vertrauenswuerdigkeit; } set { vertrauenswuerdigkeit = value; } }
-<<<<<<< HEAD
-
-=======
         #endregion
         #region Objekt Kunde
->>>>>>> origin/InfoAG
         /// <summary>
         /// Erschaft das Objekt Kunde
         /// </summary>
