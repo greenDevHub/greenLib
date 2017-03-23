@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
@@ -149,19 +150,5 @@ namespace Bibo_Verwaltung
             con.Close();
         }
         #endregion
-    }
-
-
-    internal class MessageBox
-    {
-        internal static void Show(string v)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void Show(char v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
