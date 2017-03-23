@@ -10,6 +10,7 @@ namespace Bibo_Verwaltung
 {
     class Autor
     {
+        #region Strings
         string autorid;
         /// <summary>
         /// ID des Autors
@@ -21,8 +22,8 @@ namespace Bibo_Verwaltung
         /// Name des Autors
         /// </summary>
         public string Autorname { get { return autorname; } set { autorname = value; } }
-
-
+        #endregion
+        #region Objekt Autor
         /// <summary>
         /// Erschaft das Objekt Autor
         /// </summary>
@@ -35,6 +36,8 @@ namespace Bibo_Verwaltung
             this.autorid = autorid;
             Load();
         }
+        #endregion
+        #region Load
         private void Load()
         {
             SqlConnection con = new SqlConnection();
@@ -58,5 +61,6 @@ namespace Bibo_Verwaltung
             // Verbindung schließen 
             con.Close();
         }
+        #endregion
     }
 }

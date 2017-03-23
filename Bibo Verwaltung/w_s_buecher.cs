@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using System.Windows; 
 using Microsoft.Win32; 
 
@@ -20,12 +19,13 @@ namespace Bibo_Verwaltung
     public partial class w_s_buecher : Form
     {
         Buch b;
+        #region IsNumeric
         public bool IsNumeric(string s)
         {
             float output;
             return float.TryParse(s, out output);
         }
-
+        #endregion
         public w_s_buecher()
         {
             InitializeComponent();
@@ -50,7 +50,7 @@ namespace Bibo_Verwaltung
                 tb_Neupreis.Text = "";
             }
         }
-
+        #region Load_Buecher
         private void load_buecher(object sender, EventArgs e)
         {
             b = new Buch(tb_ISBN.Text);
@@ -76,8 +76,9 @@ namespace Bibo_Verwaltung
             tb_VerlagID.Text = b.Verlag.VerlagID;
             tb_Verlagname.Text = b.Verlag.Verlagname;
         }
-
-        private void load_kunden(object sender, EventArgs e)
+        #endregion
+        #region Load_Kunde
+        private void load_kunde(object sender, EventArgs e)
         {
             Kunde k = new Kunde(tb_KundenID.Text);
 
@@ -95,7 +96,8 @@ namespace Bibo_Verwaltung
             tb_Telefonnummer.Text = k.Telefonnummer;
             cb_Vertrauenswuerdigkeit.Text = k.Vertrauenswuerdigkeit;
         }
-
+        #endregion
+        #region Load_Verlag
         private void load_verlag(object sender, EventArgs e)
         {
             Verlag v = new Verlag(tb_VerlagID.Text);
@@ -106,7 +108,8 @@ namespace Bibo_Verwaltung
             tb_VerlagID.Text = v.VerlagID;
             tb_Verlagname.Text = v.Verlagname;
         }
-
+        #endregion
+        #region Load_Autor
         private void load_autor(object sender, EventArgs e)
         {
             Autor a = new Autor(tb_AutorID.Text);
@@ -116,13 +119,8 @@ namespace Bibo_Verwaltung
             tb_AutorID.Text = a.AutorID;
             tb_Autorname.Text = a.Autorname;
         }
-
-        
-
-
-        //-----------------------------------------
-        
-
+        #endregion
+        #region Search
         private void search(object sender, EventArgs e)
         {
             //ComboBox-Items in Array speichern
@@ -134,51 +132,20 @@ namespace Bibo_Verwaltung
 
             //Suche öffnen
             Combo_Search autor_dialog = new Combo_Search(strAutor);
-                if (autor_dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
+            if (autor_dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
                 cb_Autor.SelectedItem = autor_dialog.such_auswahl;
-                }
-
-
-
-
-           
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            }
         }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        #endregion
+        #region Save
+        private void Save(object sender, EventArgs e)
         {
             b.Titel = tb_Titel.Text;
             b.Autor.AutorID = tb_AutorID.Text;
             b.Verlag.VerlagID = tb_VerlagID.Text;
             b.Save();
         }
-        //-----------------------------------------
-
-
+        #endregion
     }
-
 }

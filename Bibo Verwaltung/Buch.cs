@@ -11,6 +11,7 @@ namespace Bibo_Verwaltung
 {
     class Buch
     {
+        #region Strings
         string isbn;
         /// <summary>
         /// Isbn Nummer eines Buches
@@ -57,8 +58,8 @@ namespace Bibo_Verwaltung
         public DateTime Er_datum { get { return er_datum; } set { er_datum = value; } }
         decimal neupreis;
         public decimal Neupreis { get { return neupreis; } set { neupreis = value; } }
-
-
+        #endregion
+        #region Objekt Buch
         /// <summary>
         /// Erschaft das Objekt Buch
         /// </summary>
@@ -71,6 +72,8 @@ namespace Bibo_Verwaltung
             this.isbn = isbn;
             Load();
         }
+        #endregion
+        #region Load
         private void Load()
         {
             SqlConnection con = new SqlConnection();
@@ -108,7 +111,8 @@ namespace Bibo_Verwaltung
             // Verbindung schließen 
             con.Close();
         }
-
+        #endregion
+        #region Save
         public void Save()
         {
             SqlConnection con = new SqlConnection();
@@ -123,5 +127,6 @@ namespace Bibo_Verwaltung
             //Verbindung schließen
             con.Close();
         }
+        #endregion
     }
 }
