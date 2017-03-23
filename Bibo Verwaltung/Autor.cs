@@ -13,13 +13,14 @@ namespace Bibo_Verwaltung
         #region Strings
         string autorid;
         /// <summary>
+        /// AutorID eines Autors
         /// ID des Autors
         /// </summary>
         public string AutorID { get { return autorid; } set { autorid = value; } }
 
         string autorname;
         /// <summary>
-        /// Name des Autors
+        /// Autorname eines Autors
         /// </summary>
         public string Autorname { get { return autorname; } set { autorname = value; } }
         #endregion
@@ -42,8 +43,7 @@ namespace Bibo_Verwaltung
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM t_s_autor "
-                + "WHERE au_id = '" + autorid + "'";
+            string strSQL = "SELECT * FROM t_s_autor WHERE au_id = '" + autorid + "'";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
 

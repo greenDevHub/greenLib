@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 
-
 namespace Bibo_Verwaltung
 {
     class Buch
@@ -55,8 +54,15 @@ namespace Bibo_Verwaltung
         public string Auflage { get { return auflage; } set { auflage = value; } }
 
         DateTime er_datum;
+        /// <summary>
+        /// Erscheinungsdatum eines Buches
+        /// </summary>
         public DateTime Er_datum { get { return er_datum; } set { er_datum = value; } }
+
         decimal neupreis;
+        /// <summary>
+        /// Neupreis eines Buches
+        /// </summary>
         public decimal Neupreis { get { return neupreis; } set { neupreis = value; } }
         #endregion
         #region Objekt Buch
@@ -144,6 +150,7 @@ namespace Bibo_Verwaltung
         }
         #endregion
     }
+<<<<<<< HEAD
 
     internal class MessageBox
     {
@@ -158,3 +165,6 @@ namespace Bibo_Verwaltung
         }
     }
 }
+=======
+}
+>>>>>>> origin/InfoAG

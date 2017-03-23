@@ -13,13 +13,14 @@ namespace Bibo_Verwaltung
         #region Strings
         string verlagid;
         /// <summary>
+        /// VerlagID eines Verlags
         /// ID des Verlags
         /// </summary>
         public string VerlagID { get { return verlagid; } set { verlagid = value; } }
 
         string verlagname;
         /// <summary>
-        /// Name des Verlags
+        /// Verlagname eines Verlags
         /// </summary>
         public string Verlagname { get { return verlagname; } set { verlagname = value; } }
         #endregion
@@ -42,8 +43,7 @@ namespace Bibo_Verwaltung
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM t_s_verlag "
-                + "WHERE ver_id = '" + verlagid + "'";
+            string strSQL = "SELECT * FROM t_s_verlag WHERE ver_id = '" + verlagid + "'";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
 

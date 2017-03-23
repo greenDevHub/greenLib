@@ -8,10 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows; 
-using Microsoft.Win32; 
-
-
+using System.Windows;
+using Microsoft.Win32;
+using System.Text.RegularExpressions;
 
 
 namespace Bibo_Verwaltung
@@ -25,31 +24,55 @@ namespace Bibo_Verwaltung
             float output;
             return float.TryParse(s, out output);
         }
+
+
         #endregion
         public w_s_buecher()
         {
             InitializeComponent();
         }
 
-
-        private void groupBox1_Enter(object sender, EventArgs e)
+        public bool IsIsbn(string s)
         {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
+            if (Regex.IsMatch(s, "^[-0-9]*$"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void tb_Neupreis_Validated(object sender, EventArgs e)
         {
+<<<<<<< HEAD
            // if (IsNumeric(tb_Neupreis.Text) == false)
            // {
            //     MessageBox.Show("Bitte nur Zahlen eingeben!");
            //     tb_Neupreis.Text = "";
           //  }
+=======
+            if (IsNumeric(tb_Neupreis.Text) == false)
+            {
+                MessageBox.Show("Bitte nur Zahlen eingeben!", "Fehler",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tb_Neupreis.Text = "";
+            }
+>>>>>>> origin/InfoAG
         }
+        private void tb_ISBN_inputOk(object sender, EventArgs e)
+        {
+            if (IsIsbn(tb_ISBN.Text) == false)
+            {
+                MessageBox.Show("Bitte keine Buchstaben eingeben!", "Warnung",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //nicht erlaubte Zeichen entfernen
+                Regex pattern = new Regex("[µ€@´`<>´+*~#'_.:°^!§$%&/()=?;,a-zA-ZäÄüÜöÖß ]");
+                tb_ISBN.Text = pattern.Replace(tb_ISBN.Text, "");
+            }
+        }
+
         #region Load_Buecher
         private void load_buecher(object sender, EventArgs e)
         {

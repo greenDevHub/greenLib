@@ -90,6 +90,7 @@
             this.tb_Autorname = new System.Windows.Forms.TextBox();
             this.tb_AutorID = new System.Windows.Forms.TextBox();
             this.lb_AutorID = new System.Windows.Forms.Label();
+            this.SuspendLayout();
             this.gb_buecher.SuspendLayout();
             this.gb_kunde.SuspendLayout();
             this.gb_verlag.SuspendLayout();
@@ -129,11 +130,11 @@
             this.gb_buecher.TabIndex = 0;
             this.gb_buecher.TabStop = false;
             this.gb_buecher.Text = "Buecher";
-            this.gb_buecher.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // bt_speichern_buecher
             // 
             this.bt_speichern_buecher.Location = new System.Drawing.Point(248, 260);
+            this.bt_speichern_buecher.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.bt_speichern_buecher.Margin = new System.Windows.Forms.Padding(1);
             this.bt_speichern_buecher.Name = "bt_speichern_buecher";
             this.bt_speichern_buecher.Size = new System.Drawing.Size(90, 31);
@@ -344,7 +345,7 @@
             this.tb_ISBN.Name = "tb_ISBN";
             this.tb_ISBN.Size = new System.Drawing.Size(200, 20);
             this.tb_ISBN.TabIndex = 2;
-            this.tb_ISBN.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.tb_ISBN.TextChanged += new System.EventHandler(this.tb_ISBN_inputOk);
             // 
             // lb_ISBN
             // 
@@ -354,7 +355,6 @@
             this.lb_ISBN.Size = new System.Drawing.Size(35, 13);
             this.lb_ISBN.TabIndex = 1;
             this.lb_ISBN.Text = "ISBN:";
-            // 
             // gb_kunde
             // 
             this.gb_kunde.Controls.Add(this.bt_laden_kunden);
@@ -573,7 +573,6 @@
             this.lb_KundenID.Size = new System.Drawing.Size(61, 13);
             this.lb_KundenID.TabIndex = 0;
             this.lb_KundenID.Text = "Kunden-ID:";
-            // 
             // gb_verlag
             // 
             this.gb_verlag.Controls.Add(this.bt_laden_verlag);
@@ -629,7 +628,6 @@
             this.lb_VerlagID.Size = new System.Drawing.Size(54, 13);
             this.lb_VerlagID.TabIndex = 26;
             this.lb_VerlagID.Text = "Verlag-ID:";
-            // 
             // gb_autor
             // 
             this.gb_autor.Controls.Add(this.bt_laden_autor);
@@ -690,6 +688,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(863, 523);
             this.ClientSize = new System.Drawing.Size(890, 555);
             this.Controls.Add(this.gb_autor);
             this.Controls.Add(this.gb_verlag);

@@ -96,8 +96,7 @@ namespace Bibo_Verwaltung
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM t_s_kunden "
-                + "WHERE kunde_ID = '" + kundenid + "'";
+            string strSQL = "SELECT * FROM t_s_kunden WHERE kunde_ID = '" + kundenid + "'";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
 
