@@ -46,27 +46,25 @@ namespace Bibo_Verwaltung
 
         private void tb_Neupreis_Validated(object sender, EventArgs e)
         {
-<<<<<<< HEAD
+
            // if (IsNumeric(tb_Neupreis.Text) == false)
            // {
            //     MessageBox.Show("Bitte nur Zahlen eingeben!");
            //     tb_Neupreis.Text = "";
           //  }
-=======
+
             if (IsNumeric(tb_Neupreis.Text) == false)
             {
-                MessageBox.Show("Bitte nur Zahlen eingeben!", "Fehler",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Bitte nur Zahlen eingeben!");
                 tb_Neupreis.Text = "";
             }
->>>>>>> origin/InfoAG
+
         }
         private void tb_ISBN_inputOk(object sender, EventArgs e)
         {
             if (IsIsbn(tb_ISBN.Text) == false)
             {
-                MessageBox.Show("Bitte keine Buchstaben eingeben!", "Warnung",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Bitte keine Buchstaben eingeben!");
                 //nicht erlaubte Zeichen entfernen
                 Regex pattern = new Regex("[µ€@´`<>´+*~#'_.:°^!§$%&/()=?;,a-zA-ZäÄüÜöÖß ]");
                 tb_ISBN.Text = pattern.Replace(tb_ISBN.Text, "");

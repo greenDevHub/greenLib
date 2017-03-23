@@ -150,7 +150,7 @@ namespace Bibo_Verwaltung
         }
         #endregion
     }
-<<<<<<< HEAD
+
 
     internal class MessageBox
     {
@@ -165,6 +165,3 @@ namespace Bibo_Verwaltung
         }
     }
 }
-=======
-}
->>>>>>> origin/InfoAG
