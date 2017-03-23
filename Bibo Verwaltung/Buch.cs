@@ -10,6 +10,7 @@ namespace Bibo_Verwaltung
 {
     class Buch
     {
+        #region Strings
         string isbn;
         /// <summary>
         /// Isbn Nummer eines Buches
@@ -63,7 +64,12 @@ namespace Bibo_Verwaltung
         /// Neupreis eines Buches
         /// </summary>
         public decimal Neupreis { get { return neupreis; } set { neupreis = value; } }
+<<<<<<< HEAD
 
+=======
+        #endregion
+        #region Objekt Buch
+>>>>>>> origin/InfoAG
         /// <summary>
         /// Erschaft das Objekt Buch
         /// </summary>
@@ -76,6 +82,8 @@ namespace Bibo_Verwaltung
             this.isbn = isbn;
             Load();
         }
+        #endregion
+        #region Load
         private void Load()
         {
             SqlConnection con = new SqlConnection();
@@ -113,5 +121,22 @@ namespace Bibo_Verwaltung
             // Verbindung schließen 
             con.Close();
         }
+        #endregion
+        #region Save
+        public void Save()
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
+            string strSQL = "UPDATE [dbo].[t_s_buecher] set buch_titel = '" + Titel + "', buch_autor_id = '" + Autor.AutorID + "', buch_verlag_id = '" + Verlag.VerlagID + "' WHERE buch_isbn = '" + isbn + "'"; 
+
+            SqlCommand cmd = new SqlCommand(strSQL, con);
+
+            // Verbindung öffnen 
+            con.Open();
+            cmd.ExecuteNonQuery();
+            //Verbindung schließen
+            con.Close();
+        }
+        #endregion
     }
 }

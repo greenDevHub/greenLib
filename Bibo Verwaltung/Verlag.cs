@@ -10,18 +10,31 @@ namespace Bibo_Verwaltung
 {
     class Verlag
     {
+        #region Strings
         string verlagid;
         /// <summary>
+<<<<<<< HEAD
         /// VerlagID eines Verlags
+=======
+        /// ID des Verlags
+>>>>>>> origin/InfoAG
         /// </summary>
         public string VerlagID { get { return verlagid; } set { verlagid = value; } }
 
         string verlagname;
         /// <summary>
+<<<<<<< HEAD
         /// Verlagname eines Verlags
         /// </summary>
         public string Verlagname { get { return verlagname; } set { verlagname = value; } }
 
+=======
+        /// Name des Verlags
+        /// </summary>
+        public string Verlagname { get { return verlagname; } set { verlagname = value; } }
+        #endregion
+        #region Objekt Verlag
+>>>>>>> origin/InfoAG
         /// <summary>
         /// Erschaft das Objekt Verlag
         /// </summary>
@@ -34,6 +47,8 @@ namespace Bibo_Verwaltung
             this.verlagid = verlagid;
             Load();
         }
+        #endregion
+        #region Load
         private void Load()
         {
             SqlConnection con = new SqlConnection();
@@ -56,5 +71,6 @@ namespace Bibo_Verwaltung
             // Verbindung schließen 
             con.Close();
         }
+        #endregion
     }
 }

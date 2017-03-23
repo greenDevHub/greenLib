@@ -10,6 +10,7 @@ namespace Bibo_Verwaltung
 {
     class Kunde
     {
+        #region Strings
         string kundenid;
         /// <summary>
         /// ID des Kunden
@@ -75,9 +76,14 @@ namespace Bibo_Verwaltung
         /// Vertrauenswürdigkeit des Kunden
         /// </summary>
         public string Vertrauenswuerdigkeit { get { return vertrauenswuerdigkeit; } set { vertrauenswuerdigkeit = value; } }
+<<<<<<< HEAD
 
+=======
+        #endregion
+        #region Objekt Kunde
+>>>>>>> origin/InfoAG
         /// <summary>
-        /// Erschaft das Objekt Buch
+        /// Erschaft das Objekt Kunde
         /// </summary>
         public Kunde()
         {
@@ -88,6 +94,8 @@ namespace Bibo_Verwaltung
             this.kundenid = kundenid;
             Load();
         }
+        #endregion
+        #region Load
         private void Load()
         {
             SqlConnection con = new SqlConnection();
@@ -119,6 +127,7 @@ namespace Bibo_Verwaltung
             // Verbindung schließen 
             con.Close();
         }
+        #endregion
     }
 }
 
