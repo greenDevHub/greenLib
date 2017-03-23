@@ -55,7 +55,8 @@ namespace Bibo_Verwaltung
 
             if (IsNumeric(tb_Neupreis.Text) == false)
             {
-                MessageBox.Show("Bitte nur Zahlen eingeben!");
+                MessageBox.Show("Bitte nur Zahlen eingeben!", "Fehler",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 tb_Neupreis.Text = "";
             }
 
@@ -64,9 +65,10 @@ namespace Bibo_Verwaltung
         {
             if (IsIsbn(tb_ISBN.Text) == false)
             {
-                MessageBox.Show("Bitte keine Buchstaben eingeben!");
+                MessageBox.Show("Bitte keine Buchstaben eingeben!", "Achtung", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 //nicht erlaubte Zeichen entfernen
-                Regex pattern = new Regex("[µ€@´`<>´+*~#'_.:°^!§$%&/()=?;,a-zA-ZäÄüÜöÖß ]");
+                Regex pattern = new Regex("[µ€@´`<>´+*~#'_.:°^!§$%&/\"()=?;,a-zA-ZäÄüÜöÖß ]");
                 tb_ISBN.Text = pattern.Replace(tb_ISBN.Text, "");
             }
         }
