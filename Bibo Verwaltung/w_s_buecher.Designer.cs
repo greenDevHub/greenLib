@@ -90,11 +90,31 @@
             this.tb_Autorname = new System.Windows.Forms.TextBox();
             this.tb_AutorID = new System.Windows.Forms.TextBox();
             this.lb_AutorID = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.gb_genre = new System.Windows.Forms.GroupBox();
+            this.bt_laden_genre = new System.Windows.Forms.Button();
+            this.lb_Genrename = new System.Windows.Forms.Label();
+            this.tb_Genrename = new System.Windows.Forms.TextBox();
+            this.tb_GenreID = new System.Windows.Forms.TextBox();
+            this.lb_GenreID = new System.Windows.Forms.Label();
+            this.gb_sprache = new System.Windows.Forms.GroupBox();
+            this.bt_laden_sprache = new System.Windows.Forms.Button();
+            this.lb_Sprachename = new System.Windows.Forms.Label();
+            this.tb_Sprachename = new System.Windows.Forms.TextBox();
+            this.tb_SpracheID = new System.Windows.Forms.TextBox();
+            this.lb_SpracheID = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.gb_buecher.SuspendLayout();
             this.gb_kunde.SuspendLayout();
             this.gb_verlag.SuspendLayout();
             this.gb_autor.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.gb_genre.SuspendLayout();
+            this.gb_sprache.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb_buecher
@@ -124,7 +144,7 @@
             this.gb_buecher.Controls.Add(this.lb_Titel);
             this.gb_buecher.Controls.Add(this.tb_ISBN);
             this.gb_buecher.Controls.Add(this.lb_ISBN);
-            this.gb_buecher.Location = new System.Drawing.Point(12, 12);
+            this.gb_buecher.Location = new System.Drawing.Point(231, 60);
             this.gb_buecher.Name = "gb_buecher";
             this.gb_buecher.Size = new System.Drawing.Size(414, 359);
             this.gb_buecher.TabIndex = 0;
@@ -134,7 +154,6 @@
             // bt_speichern_buecher
             // 
             this.bt_speichern_buecher.Location = new System.Drawing.Point(248, 260);
-            this.bt_speichern_buecher.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.bt_speichern_buecher.Margin = new System.Windows.Forms.Padding(1);
             this.bt_speichern_buecher.Name = "bt_speichern_buecher";
             this.bt_speichern_buecher.Size = new System.Drawing.Size(90, 31);
@@ -355,6 +374,7 @@
             this.lb_ISBN.Size = new System.Drawing.Size(35, 13);
             this.lb_ISBN.TabIndex = 1;
             this.lb_ISBN.Text = "ISBN:";
+            // 
             // gb_kunde
             // 
             this.gb_kunde.Controls.Add(this.bt_laden_kunden);
@@ -380,7 +400,7 @@
             this.gb_kunde.Controls.Add(this.lb_Vorname);
             this.gb_kunde.Controls.Add(this.tb_KundenID);
             this.gb_kunde.Controls.Add(this.lb_KundenID);
-            this.gb_kunde.Location = new System.Drawing.Point(432, 12);
+            this.gb_kunde.Location = new System.Drawing.Point(6, 6);
             this.gb_kunde.Name = "gb_kunde";
             this.gb_kunde.Size = new System.Drawing.Size(419, 359);
             this.gb_kunde.TabIndex = 1;
@@ -573,6 +593,7 @@
             this.lb_KundenID.Size = new System.Drawing.Size(61, 13);
             this.lb_KundenID.TabIndex = 0;
             this.lb_KundenID.Text = "Kunden-ID:";
+            // 
             // gb_verlag
             // 
             this.gb_verlag.Controls.Add(this.bt_laden_verlag);
@@ -580,7 +601,7 @@
             this.gb_verlag.Controls.Add(this.lb_Verlagname);
             this.gb_verlag.Controls.Add(this.tb_VerlagID);
             this.gb_verlag.Controls.Add(this.lb_VerlagID);
-            this.gb_verlag.Location = new System.Drawing.Point(12, 377);
+            this.gb_verlag.Location = new System.Drawing.Point(431, 6);
             this.gb_verlag.Name = "gb_verlag";
             this.gb_verlag.Size = new System.Drawing.Size(414, 137);
             this.gb_verlag.TabIndex = 2;
@@ -609,9 +630,9 @@
             this.lb_Verlagname.AutoSize = true;
             this.lb_Verlagname.Location = new System.Drawing.Point(6, 46);
             this.lb_Verlagname.Name = "lb_Verlagname";
-            this.lb_Verlagname.Size = new System.Drawing.Size(38, 13);
+            this.lb_Verlagname.Size = new System.Drawing.Size(40, 13);
             this.lb_Verlagname.TabIndex = 27;
-            this.lb_Verlagname.Text = "Name:";
+            this.lb_Verlagname.Text = "Verlag:";
             // 
             // tb_VerlagID
             // 
@@ -628,6 +649,7 @@
             this.lb_VerlagID.Size = new System.Drawing.Size(54, 13);
             this.lb_VerlagID.TabIndex = 26;
             this.lb_VerlagID.Text = "Verlag-ID:";
+            // 
             // gb_autor
             // 
             this.gb_autor.Controls.Add(this.bt_laden_autor);
@@ -635,7 +657,7 @@
             this.gb_autor.Controls.Add(this.tb_Autorname);
             this.gb_autor.Controls.Add(this.tb_AutorID);
             this.gb_autor.Controls.Add(this.lb_AutorID);
-            this.gb_autor.Location = new System.Drawing.Point(432, 377);
+            this.gb_autor.Location = new System.Drawing.Point(431, 152);
             this.gb_autor.Name = "gb_autor";
             this.gb_autor.Size = new System.Drawing.Size(419, 137);
             this.gb_autor.TabIndex = 3;
@@ -684,16 +706,172 @@
             this.lb_AutorID.TabIndex = 29;
             this.lb_AutorID.Text = "Autor-ID:";
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(-2, -1);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(959, 579);
+            this.tabControl1.TabIndex = 4;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.gb_buecher);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(951, 553);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Buch";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.gb_sprache);
+            this.tabPage2.Controls.Add(this.gb_genre);
+            this.tabPage2.Controls.Add(this.gb_kunde);
+            this.tabPage2.Controls.Add(this.gb_autor);
+            this.tabPage2.Controls.Add(this.gb_verlag);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(951, 553);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Objekte";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // gb_genre
+            // 
+            this.gb_genre.Controls.Add(this.bt_laden_genre);
+            this.gb_genre.Controls.Add(this.lb_Genrename);
+            this.gb_genre.Controls.Add(this.tb_Genrename);
+            this.gb_genre.Controls.Add(this.tb_GenreID);
+            this.gb_genre.Controls.Add(this.lb_GenreID);
+            this.gb_genre.Location = new System.Drawing.Point(431, 298);
+            this.gb_genre.Name = "gb_genre";
+            this.gb_genre.Size = new System.Drawing.Size(419, 137);
+            this.gb_genre.TabIndex = 41;
+            this.gb_genre.TabStop = false;
+            this.gb_genre.Text = "Genre";
+            // 
+            // bt_laden_genre
+            // 
+            this.bt_laden_genre.Location = new System.Drawing.Point(119, 69);
+            this.bt_laden_genre.Name = "bt_laden_genre";
+            this.bt_laden_genre.Size = new System.Drawing.Size(108, 31);
+            this.bt_laden_genre.TabIndex = 40;
+            this.bt_laden_genre.Text = "Laden";
+            this.bt_laden_genre.UseVisualStyleBackColor = true;
+            this.bt_laden_genre.Click += new System.EventHandler(this.load_genre);
+            // 
+            // lb_Genrename
+            // 
+            this.lb_Genrename.AutoSize = true;
+            this.lb_Genrename.Location = new System.Drawing.Point(6, 46);
+            this.lb_Genrename.Name = "lb_Genrename";
+            this.lb_Genrename.Size = new System.Drawing.Size(39, 13);
+            this.lb_Genrename.TabIndex = 31;
+            this.lb_Genrename.Text = "Genre:";
+            // 
+            // tb_Genrename
+            // 
+            this.tb_Genrename.Location = new System.Drawing.Point(119, 43);
+            this.tb_Genrename.Name = "tb_Genrename";
+            this.tb_Genrename.Size = new System.Drawing.Size(200, 20);
+            this.tb_Genrename.TabIndex = 30;
+            // 
+            // tb_GenreID
+            // 
+            this.tb_GenreID.Location = new System.Drawing.Point(119, 17);
+            this.tb_GenreID.Name = "tb_GenreID";
+            this.tb_GenreID.Size = new System.Drawing.Size(200, 20);
+            this.tb_GenreID.TabIndex = 29;
+            // 
+            // lb_GenreID
+            // 
+            this.lb_GenreID.AutoSize = true;
+            this.lb_GenreID.Location = new System.Drawing.Point(6, 20);
+            this.lb_GenreID.Name = "lb_GenreID";
+            this.lb_GenreID.Size = new System.Drawing.Size(53, 13);
+            this.lb_GenreID.TabIndex = 29;
+            this.lb_GenreID.Text = "Genre-ID:";
+            // 
+            // gb_sprache
+            // 
+            this.gb_sprache.Controls.Add(this.bt_laden_sprache);
+            this.gb_sprache.Controls.Add(this.lb_Sprachename);
+            this.gb_sprache.Controls.Add(this.tb_Sprachename);
+            this.gb_sprache.Controls.Add(this.tb_SpracheID);
+            this.gb_sprache.Controls.Add(this.lb_SpracheID);
+            this.gb_sprache.Location = new System.Drawing.Point(6, 371);
+            this.gb_sprache.Name = "gb_sprache";
+            this.gb_sprache.Size = new System.Drawing.Size(419, 137);
+            this.gb_sprache.TabIndex = 41;
+            this.gb_sprache.TabStop = false;
+            this.gb_sprache.Text = "Sprache";
+            // 
+            // bt_laden_sprache
+            // 
+            this.bt_laden_sprache.Location = new System.Drawing.Point(119, 69);
+            this.bt_laden_sprache.Name = "bt_laden_sprache";
+            this.bt_laden_sprache.Size = new System.Drawing.Size(108, 31);
+            this.bt_laden_sprache.TabIndex = 40;
+            this.bt_laden_sprache.Text = "Laden";
+            this.bt_laden_sprache.UseVisualStyleBackColor = true;
+            this.bt_laden_sprache.Click += new System.EventHandler(this.load_sprache);
+            // 
+            // lb_Sprachename
+            // 
+            this.lb_Sprachename.AutoSize = true;
+            this.lb_Sprachename.Location = new System.Drawing.Point(6, 46);
+            this.lb_Sprachename.Name = "lb_Sprachename";
+            this.lb_Sprachename.Size = new System.Drawing.Size(50, 13);
+            this.lb_Sprachename.TabIndex = 31;
+            this.lb_Sprachename.Text = "Sprache:";
+            // 
+            // tb_Sprachename
+            // 
+            this.tb_Sprachename.Location = new System.Drawing.Point(119, 43);
+            this.tb_Sprachename.Name = "tb_Sprachename";
+            this.tb_Sprachename.Size = new System.Drawing.Size(200, 20);
+            this.tb_Sprachename.TabIndex = 30;
+            // 
+            // tb_SpracheID
+            // 
+            this.tb_SpracheID.Location = new System.Drawing.Point(119, 17);
+            this.tb_SpracheID.Name = "tb_SpracheID";
+            this.tb_SpracheID.Size = new System.Drawing.Size(200, 20);
+            this.tb_SpracheID.TabIndex = 29;
+            // 
+            // lb_SpracheID
+            // 
+            this.lb_SpracheID.AutoSize = true;
+            this.lb_SpracheID.Location = new System.Drawing.Point(6, 20);
+            this.lb_SpracheID.Name = "lb_SpracheID";
+            this.lb_SpracheID.Size = new System.Drawing.Size(64, 13);
+            this.lb_SpracheID.TabIndex = 29;
+            this.lb_SpracheID.Text = "Sprache-ID:";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(550, 451);
+            this.button1.Margin = new System.Windows.Forms.Padding(1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(177, 46);
+            this.button1.TabIndex = 42;
+            this.button1.Text = "Speichern";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Save);
+            // 
             // w_s_buecher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(863, 523);
-            this.ClientSize = new System.Drawing.Size(890, 555);
-            this.Controls.Add(this.gb_autor);
-            this.Controls.Add(this.gb_verlag);
-            this.Controls.Add(this.gb_kunde);
-            this.Controls.Add(this.gb_buecher);
+            this.ClientSize = new System.Drawing.Size(954, 576);
+            this.Controls.Add(this.tabControl1);
             this.Name = "w_s_buecher";
             this.Text = "w_s_buecher";
             this.gb_buecher.ResumeLayout(false);
@@ -704,6 +882,13 @@
             this.gb_verlag.PerformLayout();
             this.gb_autor.ResumeLayout(false);
             this.gb_autor.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.gb_genre.ResumeLayout(false);
+            this.gb_genre.PerformLayout();
+            this.gb_sprache.ResumeLayout(false);
+            this.gb_sprache.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -772,5 +957,21 @@
         private System.Windows.Forms.Label lb_AutorID;
         private System.Windows.Forms.Button bt_speichern_buecher;
         private System.Windows.Forms.TextBox tb_Neupreis;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.GroupBox gb_sprache;
+        private System.Windows.Forms.Button bt_laden_sprache;
+        private System.Windows.Forms.Label lb_Sprachename;
+        private System.Windows.Forms.TextBox tb_Sprachename;
+        private System.Windows.Forms.TextBox tb_SpracheID;
+        private System.Windows.Forms.Label lb_SpracheID;
+        private System.Windows.Forms.GroupBox gb_genre;
+        private System.Windows.Forms.Button bt_laden_genre;
+        private System.Windows.Forms.Label lb_Genrename;
+        private System.Windows.Forms.TextBox tb_Genrename;
+        private System.Windows.Forms.TextBox tb_GenreID;
+        private System.Windows.Forms.Label lb_GenreID;
+        private System.Windows.Forms.Button button1;
     }
 }

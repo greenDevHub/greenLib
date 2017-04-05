@@ -24,11 +24,11 @@ namespace Bibo_Verwaltung
         /// </summary>
         public string Titel { get { return titel; } set { titel = value; } }
 
-        string genre;
+        Genre genre;
         /// <summary>
         /// Genre eines Buches
         /// </summary>
-        public string Genre { get { return genre; } set { genre = value; } }
+        public Genre Genre { get { return genre; } set { genre = value; } }
 
         Verlag verlag;
         /// <summary>
@@ -42,11 +42,11 @@ namespace Bibo_Verwaltung
         /// </summary>
         public Autor Autor { get { return autor; } set { autor = value; } }
 
-        string sprache;
+        Sprache sprache;
         /// <summary>
         /// Sprache des Buches
         /// </summary>
-        public string Sprache { get { return sprache; } set { sprache = value; } }
+        public Sprache Sprache { get { return sprache; } set { sprache = value; } }
 
         string auflage;
         /// <summary>
@@ -102,13 +102,13 @@ namespace Bibo_Verwaltung
             {
                 ISBN = dr["buch_isbn"].ToString();
                 Titel = dr["buch_titel"].ToString();
-                Genre = dr["ger_name"].ToString();
+                Genre = new Genre(dr["buch_genre_id"].ToString());
                 Autor = new Autor(dr["buch_autor_id"].ToString());
                 //Autor = dr["au_autor"].ToString();
                 Verlag = new Verlag(dr["buch_verlag_id"].ToString());
                 //Verlag = dr["ver_name"].ToString();
                 Er_datum = (DateTime)dr["verified_erscheinungsdatum"];
-                Sprache = dr["sprach_name"].ToString();
+                Sprache = new Sprache(dr["buch_sprache_id"].ToString());
                 Auflage = dr["buch_auflage"].ToString();
                 string test = dr["buch_neupreis"].ToString().Replace(".", ",");
 
@@ -139,7 +139,9 @@ namespace Bibo_Verwaltung
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "UPDATE [dbo].[t_s_buecher] set buch_titel = '" + Titel + "', buch_autor_id = '" + Autor.AutorID + "', buch_verlag_id = '" + Verlag.VerlagID + "' WHERE buch_isbn = '" + isbn + "'"; 
+            string strSQL = "UPDATE [dbo].[t_s_buecher] set buch_titel = '" + Titel + "', buch_autor_id = '" + Autor.AutorID + "', buch_genre_id = '" + Genre.GenreID + "', buch_sprache_id = '" + Sprache.SpracheID + "', buch_verlag_id = '" + Verlag.VerlagID + "', buch_auflage = '" + Auflage + "', buch_erscheinungsdatum = '" + Er_datum 
+               // + "', buch_neupreis = '" + Neupreis 
+                + "' WHERE buch_isbn = '" + isbn + "'";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
 

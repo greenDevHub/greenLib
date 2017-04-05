@@ -5,35 +5,36 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    class Verlag
+    class Sprache
     {
         #region Strings
-        string verlagid;
+        string spracheid;
         /// <summary>
-        /// ID des Verlags
+        /// ID der Sprache
         /// </summary>
-        public string VerlagID { get { return verlagid; } set { verlagid = value; } }
+        public string SpracheID { get { return spracheid; } set { spracheid = value; } }
 
-        string verlagname;
+        string sprachename;
         /// <summary>
-        /// Name des Verlags
+        /// Name der Sprache
         /// </summary>
-        public string Verlagname { get { return verlagname; } set { verlagname = value; } }
+        public string Sprachename { get { return sprachename; } set { sprachename = value; } }
         #endregion
-        #region Objekt Verlag
+        #region Objekt Sprache
         /// <summary>
-        /// Erschaft das Objekt Verlag
+        /// Erschaft das Objekt Sprache
         /// </summary>
-        public Verlag()
+        public Sprache()
         {
 
         }
-        public Verlag(string verlagid)
+        public Sprache(string spracheid)
         {
-            this.verlagid = verlagid;
+            this.spracheid = spracheid;
             Load();
         }
         #endregion
@@ -42,7 +43,7 @@ namespace Bibo_Verwaltung
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM t_s_verlag WHERE ver_id = '" + verlagid + "'";
+            string strSQL = "SELECT * FROM t_s_sprache WHERE sprach_id = '" + spracheid + "'";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
 
@@ -52,8 +53,8 @@ namespace Bibo_Verwaltung
             // Einlesen der Datenzeilen und Ausgabe an der Konsole 
             while (dr.Read())
             {
-                VerlagID = dr["ver_id"].ToString();
-                Verlagname = dr["ver_name"].ToString();
+                SpracheID = dr["sprach_id"].ToString();
+                Sprachename = dr["sprach_name"].ToString();
             }
             // DataReader schließen 
             dr.Close();

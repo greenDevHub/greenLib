@@ -13,7 +13,6 @@ namespace Bibo_Verwaltung
         #region Strings
         string autorid;
         /// <summary>
-        /// AutorID eines Autors
         /// ID des Autors
         /// </summary>
         public string AutorID { get { return autorid; } set { autorid = value; } }

@@ -5,35 +5,36 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    class Verlag
+    class Genre
     {
         #region Strings
-        string verlagid;
+        string genreid;
         /// <summary>
-        /// ID des Verlags
+        /// ID des Genres
         /// </summary>
-        public string VerlagID { get { return verlagid; } set { verlagid = value; } }
+        public string GenreID { get { return genreid; } set { genreid = value; } }
 
-        string verlagname;
+        string genrename;
         /// <summary>
-        /// Name des Verlags
+        /// Name des Genres
         /// </summary>
-        public string Verlagname { get { return verlagname; } set { verlagname = value; } }
+        public string Genrename { get { return genrename; } set { genrename = value; } }
         #endregion
-        #region Objekt Verlag
+        #region Objekt Genre
         /// <summary>
-        /// Erschaft das Objekt Verlag
+        /// Erschaft das Objekt Genre
         /// </summary>
-        public Verlag()
+        public Genre()
         {
 
         }
-        public Verlag(string verlagid)
+        public Genre(string genreid)
         {
-            this.verlagid = verlagid;
+            this.genreid = genreid;
             Load();
         }
         #endregion
@@ -42,7 +43,7 @@ namespace Bibo_Verwaltung
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM t_s_verlag WHERE ver_id = '" + verlagid + "'";
+            string strSQL = "SELECT * FROM t_s_genre WHERE ger_id = '" + genreid + "'";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
 
@@ -52,8 +53,8 @@ namespace Bibo_Verwaltung
             // Einlesen der Datenzeilen und Ausgabe an der Konsole 
             while (dr.Read())
             {
-                VerlagID = dr["ver_id"].ToString();
-                Verlagname = dr["ver_name"].ToString();
+                GenreID = dr["ger_id"].ToString();
+                Genrename = dr["ger_name"].ToString();
             }
             // DataReader schließen 
             dr.Close();

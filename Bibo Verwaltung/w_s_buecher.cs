@@ -18,18 +18,11 @@ namespace Bibo_Verwaltung
     public partial class w_s_buecher : Form
     {
         Buch b;
-        #region IsNumeric
+        #region Zeichenabfrage
         public bool IsNumeric(string s)
         {
             float output;
             return float.TryParse(s, out output);
-        }
-
-
-        #endregion
-        public w_s_buecher()
-        {
-            InitializeComponent();
         }
 
         public bool IsIsbn(string s)
@@ -42,6 +35,12 @@ namespace Bibo_Verwaltung
             {
                 return false;
             }
+        }
+        #endregion
+
+        public w_s_buecher()
+        {
+            InitializeComponent();
         }
 
         private void tb_Neupreis_Validated(object sender, EventArgs e)
@@ -85,12 +84,12 @@ namespace Bibo_Verwaltung
             tb_Titel.Text = b.Titel;
             cb_Autor.Text = b.Autor.Autorname;
             cb_Verlag.Text = b.Verlag.Verlagname;
-            cb_Sprache.Text = b.Sprache;
+            cb_Sprache.Text = b.Sprache.Sprachename;
             tb_Auflage.Text = b.Auflage;
             tb_Neupreis.Text = b.Neupreis.ToString();
             dTP_Erscheinungsdatum.Value = b.Er_datum;
-            cb_Genre.Text = b.Genre;
-
+            cb_Genre.Text = b.Genre.Genrename;
+            
             // Füllen Autor
             tb_AutorID.Text = b.Autor.AutorID;
             tb_Autorname.Text = b.Autor.Autorname;
@@ -98,6 +97,14 @@ namespace Bibo_Verwaltung
             // Füllen Verlag
             tb_VerlagID.Text = b.Verlag.VerlagID;
             tb_Verlagname.Text = b.Verlag.Verlagname;
+
+            // Füllen Genre
+            tb_GenreID.Text = b.Genre.GenreID;
+            tb_Genrename.Text = b.Genre.Genrename;
+
+            // Füllen Sprache
+            tb_SpracheID.Text = b.Sprache.SpracheID;
+            tb_Sprachename.Text = b.Sprache.Sprachename;
         }
         #endregion
         #region Load_Kunde
@@ -143,6 +150,28 @@ namespace Bibo_Verwaltung
             tb_Autorname.Text = a.Autorname;
         }
         #endregion
+        #region Load_Genre
+        private void load_genre(object sender, EventArgs e)
+        {
+            Genre g = new Genre(tb_GenreID.Text);
+
+            Genre g1 = new Genre("1");
+
+            tb_GenreID.Text = g.GenreID;
+            tb_Genrename.Text = g.Genrename;
+        }
+        #endregion
+        #region Load_Sprache
+        private void load_sprache(object sender, EventArgs e)
+        {
+            Sprache s = new Sprache(tb_SpracheID.Text);
+
+            Sprache s1 = new Sprache("1");
+
+            tb_SpracheID.Text = s.SpracheID;
+            tb_Sprachename.Text = s.Sprachename;
+        }
+        #endregion
         #region Search
         private void search(object sender, EventArgs e)
         {
@@ -167,6 +196,11 @@ namespace Bibo_Verwaltung
             b.Titel = tb_Titel.Text;
             b.Autor.AutorID = tb_AutorID.Text;
             b.Verlag.VerlagID = tb_VerlagID.Text;
+            b.Auflage = tb_Auflage.Text;
+            b.Genre.GenreID = tb_GenreID.Text;
+            b.Sprache.SpracheID = tb_SpracheID.Text;
+            b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
+            b.Er_datum = dTP_Erscheinungsdatum.Value;
             b.Save();
         }
         #endregion
