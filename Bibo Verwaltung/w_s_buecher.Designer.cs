@@ -83,7 +83,6 @@
             this.tb_Genrename = new System.Windows.Forms.TextBox();
             this.tb_GenreID = new System.Windows.Forms.TextBox();
             this.lb_GenreID = new System.Windows.Forms.Label();
-            this.tb_SpracheID = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.gb_kunde = new System.Windows.Forms.GroupBox();
             this.bt_laden_kunden = new System.Windows.Forms.Button();
@@ -568,7 +567,6 @@
             this.tabPage2.Controls.Add(this.gb_sprache);
             this.tabPage2.Controls.Add(this.gb_genre);
             this.tabPage2.Controls.Add(this.gb_autor);
-            this.tabPage2.Controls.Add(this.tb_SpracheID);
             this.tabPage2.Controls.Add(this.gb_verlag);
             this.tabPage2.Location = new System.Drawing.Point(10, 48);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
@@ -608,7 +606,8 @@
             // 
             // cb_SpracheID
             // 
-            this.cb_SpracheID.DataSource = this.biboVerwaltungDataSetBindingSource;
+            this.cb_SpracheID.DataSource = this.tsspracheBindingSource;
+            this.cb_SpracheID.DisplayMember = "sprach_id";
             this.cb_SpracheID.FormattingEnabled = true;
             this.cb_SpracheID.Location = new System.Drawing.Point(317, 40);
             this.cb_SpracheID.Name = "cb_SpracheID";
@@ -716,14 +715,6 @@
             this.lb_GenreID.Size = new System.Drawing.Size(138, 32);
             this.lb_GenreID.TabIndex = 29;
             this.lb_GenreID.Text = "Genre-ID:";
-            // 
-            // tb_SpracheID
-            // 
-            this.tb_SpracheID.Location = new System.Drawing.Point(467, 108);
-            this.tb_SpracheID.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.tb_SpracheID.Name = "tb_SpracheID";
-            this.tb_SpracheID.Size = new System.Drawing.Size(527, 38);
-            this.tb_SpracheID.TabIndex = 29;
             // 
             // tabPage3
             // 
@@ -1016,7 +1007,6 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             this.gb_sprache.ResumeLayout(false);
             this.gb_sprache.PerformLayout();
             this.gb_genre.ResumeLayout(false);
@@ -1078,7 +1068,6 @@
         private System.Windows.Forms.Button bt_laden_sprache;
         private System.Windows.Forms.Label lb_Sprachename;
         private System.Windows.Forms.TextBox tb_Sprachename;
-        private System.Windows.Forms.TextBox tb_SpracheID;
         private System.Windows.Forms.Label lb_SpracheID;
         private System.Windows.Forms.GroupBox gb_genre;
         private System.Windows.Forms.Button bt_laden_genre;

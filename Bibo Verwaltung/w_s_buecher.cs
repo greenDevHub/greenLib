@@ -36,6 +36,17 @@ namespace Bibo_Verwaltung
                 return false;
             }
         }
+
+        public string ToIsbn(string s)
+        {
+            string output = "";
+            Regex pattern = new Regex("[^-0 -9]");
+            output = pattern.Replace(s, "");
+
+            // output = output.Replace("--", "-");
+
+            return output;
+        }
         #endregion
 
         public w_s_buecher()
@@ -68,7 +79,7 @@ namespace Bibo_Verwaltung
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 //nicht erlaubte Zeichen entfernen
                 Regex pattern = new Regex("[µ€@´`<>´+*~#'_.:°^!§$%&/\"()=?;,a-zA-ZäÄüÜöÖß ]");
-                tb_ISBN.Text = pattern.Replace(tb_ISBN.Text, "");
+                tb_ISBN.Text = ToIsbn(tb_ISBN.Text);
             }
         }
 
@@ -206,44 +217,9 @@ namespace Bibo_Verwaltung
 
         private void w_s_buecher_Load(object sender, EventArgs e)
         {
-            // TODO: Diese Codezeile lädt Daten in die Tabelle "bibo_VerwaltungDataSet.t_s_sprache". Sie können sie bei Bedarf verschieben oder entfernen.
-            this.t_s_spracheTableAdapter.Fill(this.bibo_VerwaltungDataSet.t_s_sprache);
 
         }
         #endregion
-
-        //private void Form1_Load(object sender, EventArgs e)
-        //{
-
-        //  SqlConnection conn = new SqlConnection(@"Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi");
-        //conn.Open();
-        //SqlCommand sc = new SqlCommand("select sprach_id,sprach_name from t_s_sprache", conn);
-        //SqlDataReader reader;
-
-        //reader = sc.ExecuteReader();
-        //DataTable dt = new DataTable();
-        //dt.Columns.Add("sprach_id", typeof(string));
-        //dt.Columns.Add("sprach_name", typeof(string));
-        //dt.Load(reader);
-
-        //cb_SpracheID.ValueMember = "sprach_id";
-        //cb_SpracheID.DisplayMember = "sprach_name";
-        //cb_SpracheID.DataSource = dt;
-
-        //conn.Close();
-
-
-        //}
-        //private void cb_SpracheID_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //  string ID = cb_SpracheID.SelectedValue.ToString();
-        //}
-
-
-
-
-
-
 
 
 
