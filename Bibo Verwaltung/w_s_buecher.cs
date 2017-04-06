@@ -103,7 +103,7 @@ namespace Bibo_Verwaltung
             tb_Genrename.Text = b.Genre.Genrename;
 
             // Füllen Sprache
-            tb_SpracheID.Text = b.Sprache.SpracheID;
+            cb_SpracheID.Text = b.Sprache.SpracheID;
             tb_Sprachename.Text = b.Sprache.Sprachename;
         }
         #endregion
@@ -164,11 +164,11 @@ namespace Bibo_Verwaltung
         #region Load_Sprache
         private void load_sprache(object sender, EventArgs e)
         {
-            Sprache s = new Sprache(tb_SpracheID.Text);
+            Sprache s = new Sprache(cb_SpracheID.Text);
 
             Sprache s1 = new Sprache("1");
 
-            tb_SpracheID.Text = s.SpracheID;
+            cb_SpracheID.Text = s.SpracheID;
             tb_Sprachename.Text = s.Sprachename;
         }
         #endregion
@@ -198,11 +198,54 @@ namespace Bibo_Verwaltung
             b.Verlag.VerlagID = tb_VerlagID.Text;
             b.Auflage = tb_Auflage.Text;
             b.Genre.GenreID = tb_GenreID.Text;
-            b.Sprache.SpracheID = tb_SpracheID.Text;
+            b.Sprache.SpracheID = cb_SpracheID.Text;
             b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
             b.Er_datum = dTP_Erscheinungsdatum.Value;
             b.Save();
         }
+
+        private void w_s_buecher_Load(object sender, EventArgs e)
+        {
+            // TODO: Diese Codezeile lädt Daten in die Tabelle "bibo_VerwaltungDataSet.t_s_sprache". Sie können sie bei Bedarf verschieben oder entfernen.
+            this.t_s_spracheTableAdapter.Fill(this.bibo_VerwaltungDataSet.t_s_sprache);
+
+        }
         #endregion
+
+        //private void Form1_Load(object sender, EventArgs e)
+        //{
+
+        //  SqlConnection conn = new SqlConnection(@"Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi");
+        //conn.Open();
+        //SqlCommand sc = new SqlCommand("select sprach_id,sprach_name from t_s_sprache", conn);
+        //SqlDataReader reader;
+
+        //reader = sc.ExecuteReader();
+        //DataTable dt = new DataTable();
+        //dt.Columns.Add("sprach_id", typeof(string));
+        //dt.Columns.Add("sprach_name", typeof(string));
+        //dt.Load(reader);
+
+        //cb_SpracheID.ValueMember = "sprach_id";
+        //cb_SpracheID.DisplayMember = "sprach_name";
+        //cb_SpracheID.DataSource = dt;
+
+        //conn.Close();
+
+
+        //}
+        //private void cb_SpracheID_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //  string ID = cb_SpracheID.SelectedValue.ToString();
+        //}
+
+
+
+
+
+
+
+
+
     }
 }
