@@ -218,7 +218,7 @@ namespace Bibo_Verwaltung
             b.Verlag.VerlagID = tb_VerlagID.Text;
             b.Auflage = tb_Auflage.Text;
             b.Genre.GenreID = tb_GenreID.Text;
-            b.Sprache.SpracheID = cb_SpracheID.Text;
+            b.Sprache.SpracheID = cb_Sprache.ValueMember;
             b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
             b.Er_datum = dTP_Erscheinungsdatum.Value;
             b.Save();
