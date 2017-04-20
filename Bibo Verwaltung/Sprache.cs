@@ -62,5 +62,33 @@ namespace Bibo_Verwaltung
             con.Close();
         }
         #endregion
+        private DataTable GetDataSource()
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
+            string strSQL = "SELECT * FROM t_s_sprache";
+
+            SqlCommand cmd = new SqlCommand(strSQL, con);
+
+            // Verbindung öffnen 
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+
+            // DataReader schließen 
+            dr.Close();
+            // Verbindung schließen 
+            con.Close();
+
+            return dt;
+        }
+        public void FillCombobox(ref ComboBox cb, object value)
+        {
+            cb.DataSource = GetDataSource();
+            cb.ValueMember = "sprach_id";
+            cb.DisplayMember = "sprach_name";
+            cb.SelectedValue = value;
+        }
     }
 }

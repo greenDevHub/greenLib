@@ -117,9 +117,10 @@ namespace Bibo_Verwaltung
             cb_SpracheID.Text = b.Sprache.SpracheID;
             tb_Sprachename.Text = b.Sprache.Sprachename;
 
-            StringBuilder sb = new StringBuilder();
+            b.Sprache.FillCombobox(ref cb_Sprache, b.Sprache.SpracheID);
 
             // Bespiel für Stringaufbau unter Parametern
+            StringBuilder sb = new StringBuilder();
             double test = 1.04;
             sb.Append(String.Format("Dies ist eine meldung mit der nummer {0} und kommt von {1}", test, "klaus"));
             MessageBox.Show(sb.ToString());
