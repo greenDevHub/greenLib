@@ -1,0 +1,6 @@
+Arbeitsauftrag bis 18.05.2017
+
+	1. SQL-Befehle umschreiben, dass Parameter verwendet werden
+	2. Stellt bitte alle Comboboxen auf das neue Load-Verfahren wie in Sprache (Klasse) zu sehen um (fillcombobox)!
+	3. Maske "BÜcher" so gestalten, dass es eine Maske ist, wo die Bücher drin sind und nicht mehr. -Alex, 20.04.2017
+	4. Weitere einzelne Fenster für das andere Zeug (z.B. Ein Hauptfenster mit Buttons, mit denen man auf einzelne Fenster verwiesen wird.)
