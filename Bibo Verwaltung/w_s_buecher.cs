@@ -29,22 +29,34 @@ namespace Bibo_Verwaltung
         {
             if (Regex.IsMatch(s, "^[-0-9]*$"))
             {
-                return true;
+                if (s.Contains("--"))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
             }
             else
             {
                 return false;
             }
         }
-
         public string ToIsbn(string s)
         {
             string output = "";
-            Regex pattern = new Regex("[^-0 -9]");
+            Regex pattern = new Regex("[^-0-9]");
             output = pattern.Replace(s, "");
 
-            // output = output.Replace("--", "-");
-
+            for (int i = 1; i <= s.Length; i++)
+            {
+                if (s.Contains("--"))
+                {
+                    output = output.Replace("--", "-");
+                }
+            }
             return output;
         }
         #endregion
