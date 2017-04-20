@@ -116,7 +116,15 @@ namespace Bibo_Verwaltung
             // Füllen Sprache
             cb_SpracheID.Text = b.Sprache.SpracheID;
             tb_Sprachename.Text = b.Sprache.Sprachename;
+
+            StringBuilder sb = new StringBuilder();
+
+            // Bespiel für Stringaufbau unter Parametern
+            double test = 1.04;
+            sb.Append(String.Format("Dies ist eine meldung mit der nummer {0} und kommt von {1}", test, "klaus"));
+            MessageBox.Show(sb.ToString());
         }
+
         #endregion
         #region Load_Kunde
         private void load_kunde(object sender, EventArgs e)
