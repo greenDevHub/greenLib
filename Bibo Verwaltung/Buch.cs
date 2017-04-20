@@ -140,10 +140,11 @@ namespace Bibo_Verwaltung
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
             string strSQL = "UPDATE [dbo].[t_s_buecher] set buch_titel = '" + Titel + "', buch_autor_id = '" + Autor.AutorID + "', buch_genre_id = '" + Genre.GenreID + "', buch_sprache_id = '" + Sprache.SpracheID + "', buch_verlag_id = '" + Verlag.VerlagID + "', buch_auflage = '" + Auflage + "', buch_erscheinungsdatum = '" + Er_datum
-               + "', buch_neupreis = '" + Neupreis
-                + "' WHERE buch_isbn = '" + isbn + "'";
+               + "', buch_neupreis = @neupreis"
+                + " WHERE buch_isbn = '" + isbn + "'";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
+            cmd.Parameters.AddWithValue("@neupreis", neupreis);
 
             // Verbindung öffnen 
             con.Open();
