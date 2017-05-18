@@ -18,13 +18,16 @@ namespace Bibo_Verwaltung
     public partial class w_s_buecher : Form
     {
         Buch b;
-        #region Zeichenabfrage
+
+        #region Zeichenabfrage (IsNumeric)
         public bool IsNumeric(string s)
         {
             float output;
             return float.TryParse(s, out output);
         }
+        #endregion
 
+        #region Isbn Prüfung (IsIsbn)
         public bool IsIsbn(string s)
         {
             if (Regex.IsMatch(s, "^[-0-9]*$"))
@@ -44,6 +47,9 @@ namespace Bibo_Verwaltung
                 return false;
             }
         }
+        #endregion
+
+        #region ToIsbn
         public string ToIsbn(string s)
         {
             string output = "";
@@ -66,15 +72,9 @@ namespace Bibo_Verwaltung
             InitializeComponent();
         }
 
+        #region Prüfung Numeric & ISBN
         private void tb_Neupreis_Validated(object sender, EventArgs e)
         {
-
-           // if (IsNumeric(tb_Neupreis.Text) == false)
-           // {
-           //     MessageBox.Show("Bitte nur Zahlen eingeben!");
-           //     tb_Neupreis.Text = "";
-          //  }
-
             if (IsNumeric(tb_Neupreis.Text) == false)
             {
                 MessageBox.Show("Bitte nur Zahlen eingeben!", "Fehler",
@@ -90,12 +90,12 @@ namespace Bibo_Verwaltung
                 MessageBox.Show("Bitte keine Buchstaben eingeben!", "Achtung", 
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 //nicht erlaubte Zeichen entfernen
-                Regex pattern = new Regex("[µ€@´`<>´+*~#'_.:°^!§$%&/\"()=?;,a-zA-ZäÄüÜöÖß ]");
                 tb_ISBN.Text = ToIsbn(tb_ISBN.Text);
             }
         }
+        #endregion
 
-        #region Load_Buecher
+        #region Load Buch
         private void load_buecher(object sender, EventArgs e)
         {
             b = new Buch(tb_ISBN.Text);
@@ -113,98 +113,33 @@ namespace Bibo_Verwaltung
             dTP_Erscheinungsdatum.Value = b.Er_datum;
             cb_Genre.Text = b.Genre.Genrename;
             
-            // Füllen Autor
-            tb_AutorID.Text = b.Autor.AutorID;
-            tb_Autorname.Text = b.Autor.Autorname;
+            //// Füllen Autor
+            //tb_AutorID.Text = b.Autor.AutorID;
+            //tb_Autorname.Text = b.Autor.Autorname;
 
-            // Füllen Verlag
-            tb_VerlagID.Text = b.Verlag.VerlagID;
-            tb_Verlagname.Text = b.Verlag.Verlagname;
+            b.Autor.FillCombobox(ref cb_Autor, b.Autor.AutorID);
 
-            // Füllen Genre
-            tb_GenreID.Text = b.Genre.GenreID;
-            tb_Genrename.Text = b.Genre.Genrename;
+            //// Füllen Verlag
+            //tb_VerlagID.Text = b.Verlag.VerlagID;
+            //tb_Verlagname.Text = b.Verlag.Verlagname;
 
-            // Füllen Sprache
-            cb_SpracheID.Text = b.Sprache.SpracheID;
-            tb_Sprachename.Text = b.Sprache.Sprachename;
+            b.Verlag.FillCombobox(ref cb_Verlag, b.Verlag.VerlagID);
+
+            //// Füllen Genre
+            //tb_GenreID.Text = b.Genre.GenreID;
+            //tb_Genrename.Text = b.Genre.Genrename;
+
+            b.Genre.FillCombobox(ref cb_Genre, b.Genre.GenreID);
+
+            //// Füllen Sprache
+            //cb_SpracheID.Text = b.Sprache.SpracheID;
+            //tb_Sprachename.Text = b.Sprache.Sprachename;
 
             b.Sprache.FillCombobox(ref cb_Sprache, b.Sprache.SpracheID);
-
-            // Bespiel für Stringaufbau unter Parametern
-            StringBuilder sb = new StringBuilder();
-            double test = 1.04;
-            sb.Append(String.Format("Dies ist eine meldung mit der nummer {0} und kommt von {1}", test, "klaus"));
-            MessageBox.Show(sb.ToString());
-        }
-
-        #endregion
-        #region Load_Kunde
-        private void load_kunde(object sender, EventArgs e)
-        {
-            Kunde k = new Kunde(tb_KundenID.Text);
-
-            Kunde k1 = new Kunde("1");
-
-            tb_KundenID.Text = k.KundenID;
-            tb_Vorname.Text = k.Vorname;
-            tb_Nachname.Text = k.Nachname;
-            tb_Ort.Text = k.Ort;
-            tb_Klasse.Text = k.Klasse;
-            tb_Mail.Text = k.Mail;
-            tb_Hausnummer.Text = k.Hausnummer;
-            tb_Postleitzahl.Text = k.Postleitzahl;
-            tb_Strasse.Text = k.Strasse;
-            tb_Telefonnummer.Text = k.Telefonnummer;
-            cb_Vertrauenswuerdigkeit.Text = k.Vertrauenswuerdigkeit;
         }
         #endregion
-        #region Load_Verlag
-        private void load_verlag(object sender, EventArgs e)
-        {
-            Verlag v = new Verlag(tb_VerlagID.Text);
 
-            Verlag v1 = new Verlag("1");
-            Verlag v2 = new Verlag("2");
-
-            tb_VerlagID.Text = v.VerlagID;
-            tb_Verlagname.Text = v.Verlagname;
-        }
-        #endregion
-        #region Load_Autor
-        private void load_autor(object sender, EventArgs e)
-        {
-            Autor a = new Autor(tb_AutorID.Text);
-
-            Autor a1 = new Autor("1");
-
-            tb_AutorID.Text = a.AutorID;
-            tb_Autorname.Text = a.Autorname;
-        }
-        #endregion
-        #region Load_Genre
-        private void load_genre(object sender, EventArgs e)
-        {
-            Genre g = new Genre(tb_GenreID.Text);
-
-            Genre g1 = new Genre("1");
-
-            tb_GenreID.Text = g.GenreID;
-            tb_Genrename.Text = g.Genrename;
-        }
-        #endregion
-        #region Load_Sprache
-        private void load_sprache(object sender, EventArgs e)
-        {
-            Sprache s = new Sprache(cb_SpracheID.Text);
-
-            Sprache s1 = new Sprache("1");
-
-            cb_SpracheID.Text = s.SpracheID;
-            tb_Sprachename.Text = s.Sprachename;
-        }
-        #endregion
-        #region Search
+            #region Search
         private void search(object sender, EventArgs e)
         {
             //ComboBox-Items in Array speichern
@@ -222,27 +157,21 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
-        #region Save
+
+        #region Save Buch
         private void Save(object sender, EventArgs e)
         {
             b.Titel = tb_Titel.Text;
-            b.Autor.AutorID = tb_AutorID.Text;
-            b.Verlag.VerlagID = tb_VerlagID.Text;
+            b.Autor.AutorID = cb_Autor.SelectedValue.ToString();
+            b.Verlag.VerlagID = cb_Verlag.SelectedValue.ToString();
             b.Auflage = tb_Auflage.Text;
-            b.Genre.GenreID = tb_GenreID.Text;
+            b.Genre.GenreID = cb_Genre.SelectedValue.ToString();
             b.Sprache.SpracheID = cb_Sprache.SelectedValue.ToString();
             b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
             b.Er_datum = dTP_Erscheinungsdatum.Value;
             b.Save();
         }
-
-        private void w_s_buecher_Load(object sender, EventArgs e)
-        {
-
-        }
         #endregion
-
-
 
     }
 }

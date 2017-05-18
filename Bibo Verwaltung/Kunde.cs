@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
@@ -96,9 +97,10 @@ namespace Bibo_Verwaltung
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM t_s_kunden WHERE kunde_ID = '" + kundenid + "'";
+            string strSQL = "SELECT * FROM t_s_kunden WHERE kunde_ID = @kundenid";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
+            cmd.Parameters.AddWithValue("@kundenid", kundenid);
 
             // Verbindung öffnen 
             con.Open();
@@ -121,6 +123,34 @@ namespace Bibo_Verwaltung
             // DataReader schließen 
             dr.Close();
             // Verbindung schließen 
+            con.Close();
+        }
+       
+        #endregion
+        #region Save
+        public void Save()
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
+            string strSQL = "UPDATE [dbo].[t_s_kunden] set kunde_vorname = @vorname , kunde_nachname = @nachname, kunde_ort = @ort, kunde_postleitzahl = @postleitzahl, kunde_strasse = @strasse, kunde_telefonnummer = @telefonnummer, kunde_hausnummer = @hausnummer, kunde_mail = @mail, kunde_klasse = @klasse, kunde_vertrauenswürdigkeit = @vertrauenswürdigkeit WHERE kunde_ID = @k_ID";
+
+            SqlCommand cmd = new SqlCommand(strSQL, con);
+            cmd.Parameters.AddWithValue("@vorname", Vorname);
+            cmd.Parameters.AddWithValue("@nachname", Nachname);
+            cmd.Parameters.AddWithValue("@ort", Ort);
+            cmd.Parameters.AddWithValue("@postleitzahl", Postleitzahl);
+            cmd.Parameters.AddWithValue("@strasse", Strasse);
+            cmd.Parameters.AddWithValue("@telefonnummer", Telefonnummer);
+            cmd.Parameters.AddWithValue("@hausnummer", Hausnummer);
+            cmd.Parameters.AddWithValue("@mail", Mail);
+            cmd.Parameters.AddWithValue("@klasse", Klasse);
+            cmd.Parameters.AddWithValue("@vertrauenswürdigkeit", Vertrauenswuerdigkeit);
+            cmd.Parameters.AddWithValue("@k_ID", KundenID);
+
+            // Verbindung öffnen 
+            con.Open();
+            cmd.ExecuteNonQuery();
+            //Verbindung schließen
             con.Close();
         }
         #endregion

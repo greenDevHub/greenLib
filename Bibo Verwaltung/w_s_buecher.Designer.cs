@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.tsspracheBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.biboVerwaltungDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.bibo_VerwaltungDataSet = new Bibo_Verwaltung.Bibo_VerwaltungDataSet();
+            this.t_s_spracheTableAdapter = new Bibo_Verwaltung.Bibo_VerwaltungDataSetTableAdapters.t_s_spracheTableAdapter();
             this.gb_buecher = new System.Windows.Forms.GroupBox();
             this.bt_speichern_buecher = new System.Windows.Forms.Button();
             this.dTP_Erscheinungsdatum = new System.Windows.Forms.DateTimePicker();
@@ -55,77 +59,30 @@
             this.lb_Titel = new System.Windows.Forms.Label();
             this.tb_ISBN = new System.Windows.Forms.TextBox();
             this.lb_ISBN = new System.Windows.Forms.Label();
-            this.gb_verlag = new System.Windows.Forms.GroupBox();
-            this.bt_laden_verlag = new System.Windows.Forms.Button();
-            this.tb_Verlagname = new System.Windows.Forms.TextBox();
-            this.lb_Verlagname = new System.Windows.Forms.Label();
-            this.tb_VerlagID = new System.Windows.Forms.TextBox();
-            this.lb_VerlagID = new System.Windows.Forms.Label();
-            this.gb_autor = new System.Windows.Forms.GroupBox();
-            this.bt_laden_autor = new System.Windows.Forms.Button();
-            this.lb_Autorname = new System.Windows.Forms.Label();
-            this.tb_Autorname = new System.Windows.Forms.TextBox();
-            this.tb_AutorID = new System.Windows.Forms.TextBox();
-            this.lb_AutorID = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.gb_sprache = new System.Windows.Forms.GroupBox();
-            this.cb_SpracheID = new System.Windows.Forms.ComboBox();
-            this.bt_laden_sprache = new System.Windows.Forms.Button();
-            this.lb_Sprachename = new System.Windows.Forms.Label();
-            this.tb_Sprachename = new System.Windows.Forms.TextBox();
-            this.lb_SpracheID = new System.Windows.Forms.Label();
-            this.gb_genre = new System.Windows.Forms.GroupBox();
-            this.bt_laden_genre = new System.Windows.Forms.Button();
-            this.lb_Genrename = new System.Windows.Forms.Label();
-            this.tb_Genrename = new System.Windows.Forms.TextBox();
-            this.tb_GenreID = new System.Windows.Forms.TextBox();
-            this.lb_GenreID = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.gb_kunde = new System.Windows.Forms.GroupBox();
-            this.bt_laden_kunden = new System.Windows.Forms.Button();
-            this.lb_Telefonnummer = new System.Windows.Forms.Label();
-            this.tb_Telefonnummer = new System.Windows.Forms.TextBox();
-            this.lb_Mail = new System.Windows.Forms.Label();
-            this.tb_Mail = new System.Windows.Forms.TextBox();
-            this.tb_Klasse = new System.Windows.Forms.TextBox();
-            this.lb_Klasse = new System.Windows.Forms.Label();
-            this.cb_Vertrauenswuerdigkeit = new System.Windows.Forms.ComboBox();
-            this.lb_Vertrauenswuerdigkeit = new System.Windows.Forms.Label();
-            this.tb_Ort = new System.Windows.Forms.TextBox();
-            this.lb_Ort = new System.Windows.Forms.Label();
-            this.tb_Postleitzahl = new System.Windows.Forms.TextBox();
-            this.lb_Postleitzahl = new System.Windows.Forms.Label();
-            this.tb_Hausnummer = new System.Windows.Forms.TextBox();
-            this.lb_Hausnummer = new System.Windows.Forms.Label();
-            this.tb_Strasse = new System.Windows.Forms.TextBox();
-            this.lb_Strasse = new System.Windows.Forms.Label();
-            this.tb_Nachname = new System.Windows.Forms.TextBox();
-            this.lb_Nachname = new System.Windows.Forms.Label();
-            this.tb_Vorname = new System.Windows.Forms.TextBox();
-            this.lb_Vorname = new System.Windows.Forms.Label();
-            this.tb_KundenID = new System.Windows.Forms.TextBox();
-            this.lb_KundenID = new System.Windows.Forms.Label();
-            this.tsspracheBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.biboVerwaltungDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.bibo_VerwaltungDataSet = new Bibo_Verwaltung.Bibo_VerwaltungDataSet();
-            this.t_s_spracheTableAdapter = new Bibo_Verwaltung.Bibo_VerwaltungDataSetTableAdapters.t_s_spracheTableAdapter();
-            this.gb_buecher.SuspendLayout();
-            this.gb_verlag.SuspendLayout();
-            this.gb_autor.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.gb_sprache.SuspendLayout();
-            this.gb_genre.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.gb_kunde.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).BeginInit();
+            this.gb_buecher.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // tsspracheBindingSource
+            // 
+            this.tsspracheBindingSource.DataMember = "t_s_sprache";
+            this.tsspracheBindingSource.DataSource = this.biboVerwaltungDataSetBindingSource;
+            // 
+            // biboVerwaltungDataSetBindingSource
+            // 
+            this.biboVerwaltungDataSetBindingSource.DataSource = this.bibo_VerwaltungDataSet;
+            this.biboVerwaltungDataSetBindingSource.Position = 0;
+            // 
+            // bibo_VerwaltungDataSet
+            // 
+            this.bibo_VerwaltungDataSet.DataSetName = "Bibo_VerwaltungDataSet";
+            this.bibo_VerwaltungDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // t_s_spracheTableAdapter
+            // 
+            this.t_s_spracheTableAdapter.ClearBeforeFill = true;
             // 
             // gb_buecher
             // 
@@ -154,19 +111,19 @@
             this.gb_buecher.Controls.Add(this.lb_Titel);
             this.gb_buecher.Controls.Add(this.tb_ISBN);
             this.gb_buecher.Controls.Add(this.lb_ISBN);
-            this.gb_buecher.Location = new System.Drawing.Point(231, 60);
+            this.gb_buecher.Location = new System.Drawing.Point(12, 12);
             this.gb_buecher.Name = "gb_buecher";
-            this.gb_buecher.Size = new System.Drawing.Size(414, 359);
+            this.gb_buecher.Size = new System.Drawing.Size(355, 359);
             this.gb_buecher.TabIndex = 0;
             this.gb_buecher.TabStop = false;
             this.gb_buecher.Text = "Buecher";
             // 
             // bt_speichern_buecher
             // 
-            this.bt_speichern_buecher.Location = new System.Drawing.Point(248, 260);
+            this.bt_speichern_buecher.Location = new System.Drawing.Point(226, 253);
             this.bt_speichern_buecher.Margin = new System.Windows.Forms.Padding(1);
             this.bt_speichern_buecher.Name = "bt_speichern_buecher";
-            this.bt_speichern_buecher.Size = new System.Drawing.Size(90, 31);
+            this.bt_speichern_buecher.Size = new System.Drawing.Size(90, 33);
             this.bt_speichern_buecher.TabIndex = 26;
             this.bt_speichern_buecher.Text = "Speichern";
             this.bt_speichern_buecher.UseVisualStyleBackColor = true;
@@ -174,7 +131,8 @@
             // 
             // dTP_Erscheinungsdatum
             // 
-            this.dTP_Erscheinungsdatum.Location = new System.Drawing.Point(140, 234);
+            this.dTP_Erscheinungsdatum.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dTP_Erscheinungsdatum.Location = new System.Drawing.Point(116, 229);
             this.dTP_Erscheinungsdatum.Name = "dTP_Erscheinungsdatum";
             this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(200, 20);
             this.dTP_Erscheinungsdatum.TabIndex = 25;
@@ -182,7 +140,7 @@
             // lb_Erscheinungsdatum
             // 
             this.lb_Erscheinungsdatum.AutoSize = true;
-            this.lb_Erscheinungsdatum.Location = new System.Drawing.Point(6, 240);
+            this.lb_Erscheinungsdatum.Location = new System.Drawing.Point(7, 235);
             this.lb_Erscheinungsdatum.Name = "lb_Erscheinungsdatum";
             this.lb_Erscheinungsdatum.Size = new System.Drawing.Size(103, 13);
             this.lb_Erscheinungsdatum.TabIndex = 20;
@@ -190,7 +148,7 @@
             // 
             // tb_Auflage
             // 
-            this.tb_Auflage.Location = new System.Drawing.Point(140, 185);
+            this.tb_Auflage.Location = new System.Drawing.Point(116, 177);
             this.tb_Auflage.Name = "tb_Auflage";
             this.tb_Auflage.Size = new System.Drawing.Size(200, 20);
             this.tb_Auflage.TabIndex = 19;
@@ -198,7 +156,7 @@
             // lb_Auflage
             // 
             this.lb_Auflage.AutoSize = true;
-            this.lb_Auflage.Location = new System.Drawing.Point(6, 188);
+            this.lb_Auflage.Location = new System.Drawing.Point(7, 180);
             this.lb_Auflage.Name = "lb_Auflage";
             this.lb_Auflage.Size = new System.Drawing.Size(43, 13);
             this.lb_Auflage.TabIndex = 18;
@@ -206,7 +164,7 @@
             // 
             // bt_laden_buecher
             // 
-            this.bt_laden_buecher.Location = new System.Drawing.Point(140, 260);
+            this.bt_laden_buecher.Location = new System.Drawing.Point(116, 255);
             this.bt_laden_buecher.Name = "bt_laden_buecher";
             this.bt_laden_buecher.Size = new System.Drawing.Size(93, 31);
             this.bt_laden_buecher.TabIndex = 17;
@@ -217,7 +175,7 @@
             // lb_Neupreis_Euro
             // 
             this.lb_Neupreis_Euro.AutoSize = true;
-            this.lb_Neupreis_Euro.Location = new System.Drawing.Point(346, 214);
+            this.lb_Neupreis_Euro.Location = new System.Drawing.Point(322, 206);
             this.lb_Neupreis_Euro.Name = "lb_Neupreis_Euro";
             this.lb_Neupreis_Euro.Size = new System.Drawing.Size(13, 13);
             this.lb_Neupreis_Euro.TabIndex = 1;
@@ -225,9 +183,9 @@
             // 
             // bt_Sprache_s
             // 
-            this.bt_Sprache_s.Location = new System.Drawing.Point(349, 157);
+            this.bt_Sprache_s.Location = new System.Drawing.Point(322, 150);
             this.bt_Sprache_s.Name = "bt_Sprache_s";
-            this.bt_Sprache_s.Size = new System.Drawing.Size(22, 22);
+            this.bt_Sprache_s.Size = new System.Drawing.Size(22, 21);
             this.bt_Sprache_s.TabIndex = 16;
             this.bt_Sprache_s.Text = "s";
             this.bt_Sprache_s.UseVisualStyleBackColor = true;
@@ -235,7 +193,7 @@
             // cb_Sprache
             // 
             this.cb_Sprache.FormattingEnabled = true;
-            this.cb_Sprache.Location = new System.Drawing.Point(140, 159);
+            this.cb_Sprache.Location = new System.Drawing.Point(116, 150);
             this.cb_Sprache.Name = "cb_Sprache";
             this.cb_Sprache.Size = new System.Drawing.Size(200, 21);
             this.cb_Sprache.TabIndex = 15;
@@ -243,7 +201,7 @@
             // lb_Sprache
             // 
             this.lb_Sprache.AutoSize = true;
-            this.lb_Sprache.Location = new System.Drawing.Point(7, 162);
+            this.lb_Sprache.Location = new System.Drawing.Point(7, 153);
             this.lb_Sprache.Name = "lb_Sprache";
             this.lb_Sprache.Size = new System.Drawing.Size(50, 13);
             this.lb_Sprache.TabIndex = 14;
@@ -251,9 +209,9 @@
             // 
             // bt_Autor_s
             // 
-            this.bt_Autor_s.Location = new System.Drawing.Point(349, 73);
+            this.bt_Autor_s.Location = new System.Drawing.Point(322, 69);
             this.bt_Autor_s.Name = "bt_Autor_s";
-            this.bt_Autor_s.Size = new System.Drawing.Size(22, 22);
+            this.bt_Autor_s.Size = new System.Drawing.Size(22, 21);
             this.bt_Autor_s.TabIndex = 13;
             this.bt_Autor_s.Text = "s";
             this.bt_Autor_s.UseVisualStyleBackColor = true;
@@ -262,13 +220,7 @@
             // cb_Autor
             // 
             this.cb_Autor.FormattingEnabled = true;
-            this.cb_Autor.Items.AddRange(new object[] {
-            "f",
-            "gh",
-            "s",
-            "ds",
-            "xc"});
-            this.cb_Autor.Location = new System.Drawing.Point(140, 75);
+            this.cb_Autor.Location = new System.Drawing.Point(116, 69);
             this.cb_Autor.Name = "cb_Autor";
             this.cb_Autor.Size = new System.Drawing.Size(200, 21);
             this.cb_Autor.TabIndex = 12;
@@ -276,7 +228,7 @@
             // lb_Verlag
             // 
             this.lb_Verlag.AutoSize = true;
-            this.lb_Verlag.Location = new System.Drawing.Point(6, 107);
+            this.lb_Verlag.Location = new System.Drawing.Point(7, 99);
             this.lb_Verlag.Name = "lb_Verlag";
             this.lb_Verlag.Size = new System.Drawing.Size(40, 13);
             this.lb_Verlag.TabIndex = 10;
@@ -285,7 +237,7 @@
             // lb_Autor
             // 
             this.lb_Autor.AutoSize = true;
-            this.lb_Autor.Location = new System.Drawing.Point(7, 78);
+            this.lb_Autor.Location = new System.Drawing.Point(7, 72);
             this.lb_Autor.Name = "lb_Autor";
             this.lb_Autor.Size = new System.Drawing.Size(35, 13);
             this.lb_Autor.TabIndex = 8;
@@ -293,9 +245,9 @@
             // 
             // bt_Verlag_s
             // 
-            this.bt_Verlag_s.Location = new System.Drawing.Point(349, 104);
+            this.bt_Verlag_s.Location = new System.Drawing.Point(322, 96);
             this.bt_Verlag_s.Name = "bt_Verlag_s";
-            this.bt_Verlag_s.Size = new System.Drawing.Size(22, 22);
+            this.bt_Verlag_s.Size = new System.Drawing.Size(22, 21);
             this.bt_Verlag_s.TabIndex = 7;
             this.bt_Verlag_s.Text = "s";
             this.bt_Verlag_s.UseVisualStyleBackColor = true;
@@ -303,9 +255,9 @@
             // 
             // bt_Genre_s
             // 
-            this.bt_Genre_s.Location = new System.Drawing.Point(349, 131);
+            this.bt_Genre_s.Location = new System.Drawing.Point(322, 123);
             this.bt_Genre_s.Name = "bt_Genre_s";
-            this.bt_Genre_s.Size = new System.Drawing.Size(22, 22);
+            this.bt_Genre_s.Size = new System.Drawing.Size(22, 21);
             this.bt_Genre_s.TabIndex = 7;
             this.bt_Genre_s.Text = "s";
             this.bt_Genre_s.UseVisualStyleBackColor = true;
@@ -313,7 +265,7 @@
             // cb_Verlag
             // 
             this.cb_Verlag.FormattingEnabled = true;
-            this.cb_Verlag.Location = new System.Drawing.Point(140, 104);
+            this.cb_Verlag.Location = new System.Drawing.Point(116, 96);
             this.cb_Verlag.Name = "cb_Verlag";
             this.cb_Verlag.Size = new System.Drawing.Size(200, 21);
             this.cb_Verlag.TabIndex = 7;
@@ -321,7 +273,7 @@
             // cb_Genre
             // 
             this.cb_Genre.FormattingEnabled = true;
-            this.cb_Genre.Location = new System.Drawing.Point(140, 131);
+            this.cb_Genre.Location = new System.Drawing.Point(116, 123);
             this.cb_Genre.Name = "cb_Genre";
             this.cb_Genre.Size = new System.Drawing.Size(200, 21);
             this.cb_Genre.TabIndex = 7;
@@ -329,7 +281,7 @@
             // lb_Genre
             // 
             this.lb_Genre.AutoSize = true;
-            this.lb_Genre.Location = new System.Drawing.Point(7, 134);
+            this.lb_Genre.Location = new System.Drawing.Point(7, 126);
             this.lb_Genre.Name = "lb_Genre";
             this.lb_Genre.Size = new System.Drawing.Size(39, 13);
             this.lb_Genre.TabIndex = 5;
@@ -337,7 +289,7 @@
             // 
             // tb_Neupreis
             // 
-            this.tb_Neupreis.Location = new System.Drawing.Point(140, 211);
+            this.tb_Neupreis.Location = new System.Drawing.Point(116, 203);
             this.tb_Neupreis.Name = "tb_Neupreis";
             this.tb_Neupreis.Size = new System.Drawing.Size(200, 20);
             this.tb_Neupreis.TabIndex = 4;
@@ -346,7 +298,7 @@
             // lb_Neupreis
             // 
             this.lb_Neupreis.AutoSize = true;
-            this.lb_Neupreis.Location = new System.Drawing.Point(7, 214);
+            this.lb_Neupreis.Location = new System.Drawing.Point(7, 206);
             this.lb_Neupreis.Name = "lb_Neupreis";
             this.lb_Neupreis.Size = new System.Drawing.Size(52, 13);
             this.lb_Neupreis.TabIndex = 3;
@@ -354,7 +306,7 @@
             // 
             // tb_Titel
             // 
-            this.tb_Titel.Location = new System.Drawing.Point(140, 46);
+            this.tb_Titel.Location = new System.Drawing.Point(116, 43);
             this.tb_Titel.Name = "tb_Titel";
             this.tb_Titel.Size = new System.Drawing.Size(200, 20);
             this.tb_Titel.TabIndex = 4;
@@ -362,7 +314,7 @@
             // lb_Titel
             // 
             this.lb_Titel.AutoSize = true;
-            this.lb_Titel.Location = new System.Drawing.Point(6, 49);
+            this.lb_Titel.Location = new System.Drawing.Point(7, 46);
             this.lb_Titel.Name = "lb_Titel";
             this.lb_Titel.Size = new System.Drawing.Size(30, 13);
             this.lb_Titel.TabIndex = 3;
@@ -370,7 +322,7 @@
             // 
             // tb_ISBN
             // 
-            this.tb_ISBN.Location = new System.Drawing.Point(140, 17);
+            this.tb_ISBN.Location = new System.Drawing.Point(116, 17);
             this.tb_ISBN.Name = "tb_ISBN";
             this.tb_ISBN.Size = new System.Drawing.Size(200, 20);
             this.tb_ISBN.TabIndex = 2;
@@ -379,573 +331,42 @@
             // lb_ISBN
             // 
             this.lb_ISBN.AutoSize = true;
-            this.lb_ISBN.Location = new System.Drawing.Point(6, 20);
+            this.lb_ISBN.Location = new System.Drawing.Point(7, 20);
             this.lb_ISBN.Name = "lb_ISBN";
             this.lb_ISBN.Size = new System.Drawing.Size(35, 13);
             this.lb_ISBN.TabIndex = 1;
             this.lb_ISBN.Text = "ISBN:";
             // 
-            // gb_verlag
-            // 
-            this.gb_verlag.Controls.Add(this.bt_laden_verlag);
-            this.gb_verlag.Controls.Add(this.tb_Verlagname);
-            this.gb_verlag.Controls.Add(this.lb_Verlagname);
-            this.gb_verlag.Controls.Add(this.tb_VerlagID);
-            this.gb_verlag.Controls.Add(this.lb_VerlagID);
-            this.gb_verlag.Location = new System.Drawing.Point(441, 81);
-            this.gb_verlag.Name = "gb_verlag";
-            this.gb_verlag.Size = new System.Drawing.Size(419, 137);
-            this.gb_verlag.TabIndex = 2;
-            this.gb_verlag.TabStop = false;
-            this.gb_verlag.Text = "Verlag";
-            // 
-            // bt_laden_verlag
-            // 
-            this.bt_laden_verlag.Location = new System.Drawing.Point(140, 69);
-            this.bt_laden_verlag.Name = "bt_laden_verlag";
-            this.bt_laden_verlag.Size = new System.Drawing.Size(108, 31);
-            this.bt_laden_verlag.TabIndex = 40;
-            this.bt_laden_verlag.Text = "Laden";
-            this.bt_laden_verlag.UseVisualStyleBackColor = true;
-            this.bt_laden_verlag.Click += new System.EventHandler(this.load_verlag);
-            // 
-            // tb_Verlagname
-            // 
-            this.tb_Verlagname.Location = new System.Drawing.Point(140, 43);
-            this.tb_Verlagname.Name = "tb_Verlagname";
-            this.tb_Verlagname.Size = new System.Drawing.Size(200, 20);
-            this.tb_Verlagname.TabIndex = 28;
-            // 
-            // lb_Verlagname
-            // 
-            this.lb_Verlagname.AutoSize = true;
-            this.lb_Verlagname.Location = new System.Drawing.Point(6, 46);
-            this.lb_Verlagname.Name = "lb_Verlagname";
-            this.lb_Verlagname.Size = new System.Drawing.Size(40, 13);
-            this.lb_Verlagname.TabIndex = 27;
-            this.lb_Verlagname.Text = "Verlag:";
-            // 
-            // tb_VerlagID
-            // 
-            this.tb_VerlagID.Location = new System.Drawing.Point(140, 17);
-            this.tb_VerlagID.Name = "tb_VerlagID";
-            this.tb_VerlagID.Size = new System.Drawing.Size(200, 20);
-            this.tb_VerlagID.TabIndex = 26;
-            // 
-            // lb_VerlagID
-            // 
-            this.lb_VerlagID.AutoSize = true;
-            this.lb_VerlagID.Location = new System.Drawing.Point(6, 20);
-            this.lb_VerlagID.Name = "lb_VerlagID";
-            this.lb_VerlagID.Size = new System.Drawing.Size(54, 13);
-            this.lb_VerlagID.TabIndex = 26;
-            this.lb_VerlagID.Text = "Verlag-ID:";
-            // 
-            // gb_autor
-            // 
-            this.gb_autor.Controls.Add(this.bt_laden_autor);
-            this.gb_autor.Controls.Add(this.lb_Autorname);
-            this.gb_autor.Controls.Add(this.tb_Autorname);
-            this.gb_autor.Controls.Add(this.tb_AutorID);
-            this.gb_autor.Controls.Add(this.lb_AutorID);
-            this.gb_autor.Location = new System.Drawing.Point(441, 221);
-            this.gb_autor.Name = "gb_autor";
-            this.gb_autor.Size = new System.Drawing.Size(419, 137);
-            this.gb_autor.TabIndex = 3;
-            this.gb_autor.TabStop = false;
-            this.gb_autor.Text = "Autor";
-            // 
-            // bt_laden_autor
-            // 
-            this.bt_laden_autor.Location = new System.Drawing.Point(119, 69);
-            this.bt_laden_autor.Name = "bt_laden_autor";
-            this.bt_laden_autor.Size = new System.Drawing.Size(108, 31);
-            this.bt_laden_autor.TabIndex = 40;
-            this.bt_laden_autor.Text = "Laden";
-            this.bt_laden_autor.UseVisualStyleBackColor = true;
-            this.bt_laden_autor.Click += new System.EventHandler(this.load_autor);
-            // 
-            // lb_Autorname
-            // 
-            this.lb_Autorname.AutoSize = true;
-            this.lb_Autorname.Location = new System.Drawing.Point(6, 46);
-            this.lb_Autorname.Name = "lb_Autorname";
-            this.lb_Autorname.Size = new System.Drawing.Size(35, 13);
-            this.lb_Autorname.TabIndex = 31;
-            this.lb_Autorname.Text = "Autor:";
-            // 
-            // tb_Autorname
-            // 
-            this.tb_Autorname.Location = new System.Drawing.Point(119, 43);
-            this.tb_Autorname.Name = "tb_Autorname";
-            this.tb_Autorname.Size = new System.Drawing.Size(200, 20);
-            this.tb_Autorname.TabIndex = 30;
-            // 
-            // tb_AutorID
-            // 
-            this.tb_AutorID.Location = new System.Drawing.Point(119, 17);
-            this.tb_AutorID.Name = "tb_AutorID";
-            this.tb_AutorID.Size = new System.Drawing.Size(200, 20);
-            this.tb_AutorID.TabIndex = 29;
-            // 
-            // lb_AutorID
-            // 
-            this.lb_AutorID.AutoSize = true;
-            this.lb_AutorID.Location = new System.Drawing.Point(6, 20);
-            this.lb_AutorID.Name = "lb_AutorID";
-            this.lb_AutorID.Size = new System.Drawing.Size(49, 13);
-            this.lb_AutorID.TabIndex = 29;
-            this.lb_AutorID.Text = "Autor-ID:";
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(-2, -1);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(959, 579);
-            this.tabControl1.TabIndex = 4;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.gb_buecher);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(951, 553);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Buch";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.gb_sprache);
-            this.tabPage2.Controls.Add(this.gb_genre);
-            this.tabPage2.Controls.Add(this.gb_autor);
-            this.tabPage2.Controls.Add(this.gb_verlag);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(951, 553);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Objekte";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(347, 367);
-            this.button1.Margin = new System.Windows.Forms.Padding(1);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(177, 46);
-            this.button1.TabIndex = 42;
-            this.button1.Text = "Speichern";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Save);
-            // 
-            // gb_sprache
-            // 
-            this.gb_sprache.Controls.Add(this.cb_SpracheID);
-            this.gb_sprache.Controls.Add(this.bt_laden_sprache);
-            this.gb_sprache.Controls.Add(this.lb_Sprachename);
-            this.gb_sprache.Controls.Add(this.tb_Sprachename);
-            this.gb_sprache.Controls.Add(this.lb_SpracheID);
-            this.gb_sprache.Location = new System.Drawing.Point(12, 81);
-            this.gb_sprache.Name = "gb_sprache";
-            this.gb_sprache.Size = new System.Drawing.Size(419, 137);
-            this.gb_sprache.TabIndex = 41;
-            this.gb_sprache.TabStop = false;
-            this.gb_sprache.Text = "Sprache";
-            // 
-            // cb_SpracheID
-            // 
-            this.cb_SpracheID.DataSource = this.tsspracheBindingSource;
-            this.cb_SpracheID.DisplayMember = "sprach_id";
-            this.cb_SpracheID.FormattingEnabled = true;
-            this.cb_SpracheID.Location = new System.Drawing.Point(119, 17);
-            this.cb_SpracheID.Margin = new System.Windows.Forms.Padding(1);
-            this.cb_SpracheID.Name = "cb_SpracheID";
-            this.cb_SpracheID.Size = new System.Drawing.Size(200, 21);
-            this.cb_SpracheID.TabIndex = 41;
-            // 
-            // bt_laden_sprache
-            // 
-            this.bt_laden_sprache.Location = new System.Drawing.Point(119, 69);
-            this.bt_laden_sprache.Name = "bt_laden_sprache";
-            this.bt_laden_sprache.Size = new System.Drawing.Size(108, 31);
-            this.bt_laden_sprache.TabIndex = 40;
-            this.bt_laden_sprache.Text = "Laden";
-            this.bt_laden_sprache.UseVisualStyleBackColor = true;
-            this.bt_laden_sprache.Click += new System.EventHandler(this.load_sprache);
-            // 
-            // lb_Sprachename
-            // 
-            this.lb_Sprachename.AutoSize = true;
-            this.lb_Sprachename.Location = new System.Drawing.Point(6, 46);
-            this.lb_Sprachename.Name = "lb_Sprachename";
-            this.lb_Sprachename.Size = new System.Drawing.Size(50, 13);
-            this.lb_Sprachename.TabIndex = 31;
-            this.lb_Sprachename.Text = "Sprache:";
-            // 
-            // tb_Sprachename
-            // 
-            this.tb_Sprachename.Location = new System.Drawing.Point(119, 43);
-            this.tb_Sprachename.Name = "tb_Sprachename";
-            this.tb_Sprachename.Size = new System.Drawing.Size(200, 20);
-            this.tb_Sprachename.TabIndex = 30;
-            // 
-            // lb_SpracheID
-            // 
-            this.lb_SpracheID.AutoSize = true;
-            this.lb_SpracheID.Location = new System.Drawing.Point(6, 20);
-            this.lb_SpracheID.Name = "lb_SpracheID";
-            this.lb_SpracheID.Size = new System.Drawing.Size(64, 13);
-            this.lb_SpracheID.TabIndex = 29;
-            this.lb_SpracheID.Text = "Sprache-ID:";
-            // 
-            // gb_genre
-            // 
-            this.gb_genre.Controls.Add(this.bt_laden_genre);
-            this.gb_genre.Controls.Add(this.lb_Genrename);
-            this.gb_genre.Controls.Add(this.tb_Genrename);
-            this.gb_genre.Controls.Add(this.tb_GenreID);
-            this.gb_genre.Controls.Add(this.lb_GenreID);
-            this.gb_genre.Location = new System.Drawing.Point(16, 221);
-            this.gb_genre.Name = "gb_genre";
-            this.gb_genre.Size = new System.Drawing.Size(419, 137);
-            this.gb_genre.TabIndex = 41;
-            this.gb_genre.TabStop = false;
-            this.gb_genre.Text = "Genre";
-            // 
-            // bt_laden_genre
-            // 
-            this.bt_laden_genre.Location = new System.Drawing.Point(119, 69);
-            this.bt_laden_genre.Name = "bt_laden_genre";
-            this.bt_laden_genre.Size = new System.Drawing.Size(108, 31);
-            this.bt_laden_genre.TabIndex = 40;
-            this.bt_laden_genre.Text = "Laden";
-            this.bt_laden_genre.UseVisualStyleBackColor = true;
-            this.bt_laden_genre.Click += new System.EventHandler(this.load_genre);
-            // 
-            // lb_Genrename
-            // 
-            this.lb_Genrename.AutoSize = true;
-            this.lb_Genrename.Location = new System.Drawing.Point(6, 46);
-            this.lb_Genrename.Name = "lb_Genrename";
-            this.lb_Genrename.Size = new System.Drawing.Size(39, 13);
-            this.lb_Genrename.TabIndex = 31;
-            this.lb_Genrename.Text = "Genre:";
-            // 
-            // tb_Genrename
-            // 
-            this.tb_Genrename.Location = new System.Drawing.Point(119, 43);
-            this.tb_Genrename.Name = "tb_Genrename";
-            this.tb_Genrename.Size = new System.Drawing.Size(200, 20);
-            this.tb_Genrename.TabIndex = 30;
-            // 
-            // tb_GenreID
-            // 
-            this.tb_GenreID.Location = new System.Drawing.Point(119, 17);
-            this.tb_GenreID.Name = "tb_GenreID";
-            this.tb_GenreID.Size = new System.Drawing.Size(200, 20);
-            this.tb_GenreID.TabIndex = 29;
-            // 
-            // lb_GenreID
-            // 
-            this.lb_GenreID.AutoSize = true;
-            this.lb_GenreID.Location = new System.Drawing.Point(6, 20);
-            this.lb_GenreID.Name = "lb_GenreID";
-            this.lb_GenreID.Size = new System.Drawing.Size(53, 13);
-            this.lb_GenreID.TabIndex = 29;
-            this.lb_GenreID.Text = "Genre-ID:";
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.gb_kunde);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(1);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(951, 553);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Kunde";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // gb_kunde
-            // 
-            this.gb_kunde.Controls.Add(this.bt_laden_kunden);
-            this.gb_kunde.Controls.Add(this.lb_Telefonnummer);
-            this.gb_kunde.Controls.Add(this.tb_Telefonnummer);
-            this.gb_kunde.Controls.Add(this.lb_Mail);
-            this.gb_kunde.Controls.Add(this.tb_Mail);
-            this.gb_kunde.Controls.Add(this.tb_Klasse);
-            this.gb_kunde.Controls.Add(this.lb_Klasse);
-            this.gb_kunde.Controls.Add(this.cb_Vertrauenswuerdigkeit);
-            this.gb_kunde.Controls.Add(this.lb_Vertrauenswuerdigkeit);
-            this.gb_kunde.Controls.Add(this.tb_Ort);
-            this.gb_kunde.Controls.Add(this.lb_Ort);
-            this.gb_kunde.Controls.Add(this.tb_Postleitzahl);
-            this.gb_kunde.Controls.Add(this.lb_Postleitzahl);
-            this.gb_kunde.Controls.Add(this.tb_Hausnummer);
-            this.gb_kunde.Controls.Add(this.lb_Hausnummer);
-            this.gb_kunde.Controls.Add(this.tb_Strasse);
-            this.gb_kunde.Controls.Add(this.lb_Strasse);
-            this.gb_kunde.Controls.Add(this.tb_Nachname);
-            this.gb_kunde.Controls.Add(this.lb_Nachname);
-            this.gb_kunde.Controls.Add(this.tb_Vorname);
-            this.gb_kunde.Controls.Add(this.lb_Vorname);
-            this.gb_kunde.Controls.Add(this.tb_KundenID);
-            this.gb_kunde.Controls.Add(this.lb_KundenID);
-            this.gb_kunde.Location = new System.Drawing.Point(266, 98);
-            this.gb_kunde.Name = "gb_kunde";
-            this.gb_kunde.Size = new System.Drawing.Size(419, 359);
-            this.gb_kunde.TabIndex = 2;
-            this.gb_kunde.TabStop = false;
-            this.gb_kunde.Text = "Kunde";
-            // 
-            // bt_laden_kunden
-            // 
-            this.bt_laden_kunden.Location = new System.Drawing.Point(119, 315);
-            this.bt_laden_kunden.Name = "bt_laden_kunden";
-            this.bt_laden_kunden.Size = new System.Drawing.Size(108, 31);
-            this.bt_laden_kunden.TabIndex = 26;
-            this.bt_laden_kunden.Text = "Laden";
-            this.bt_laden_kunden.UseVisualStyleBackColor = true;
-            // 
-            // lb_Telefonnummer
-            // 
-            this.lb_Telefonnummer.AutoSize = true;
-            this.lb_Telefonnummer.Location = new System.Drawing.Point(7, 292);
-            this.lb_Telefonnummer.Name = "lb_Telefonnummer";
-            this.lb_Telefonnummer.Size = new System.Drawing.Size(83, 13);
-            this.lb_Telefonnummer.TabIndex = 39;
-            this.lb_Telefonnummer.Text = "Telefonnummer:";
-            // 
-            // tb_Telefonnummer
-            // 
-            this.tb_Telefonnummer.Location = new System.Drawing.Point(119, 289);
-            this.tb_Telefonnummer.Name = "tb_Telefonnummer";
-            this.tb_Telefonnummer.Size = new System.Drawing.Size(205, 20);
-            this.tb_Telefonnummer.TabIndex = 38;
-            // 
-            // lb_Mail
-            // 
-            this.lb_Mail.AutoSize = true;
-            this.lb_Mail.Location = new System.Drawing.Point(7, 266);
-            this.lb_Mail.Name = "lb_Mail";
-            this.lb_Mail.Size = new System.Drawing.Size(29, 13);
-            this.lb_Mail.TabIndex = 37;
-            this.lb_Mail.Text = "Mail:";
-            // 
-            // tb_Mail
-            // 
-            this.tb_Mail.Location = new System.Drawing.Point(119, 263);
-            this.tb_Mail.Name = "tb_Mail";
-            this.tb_Mail.Size = new System.Drawing.Size(205, 20);
-            this.tb_Mail.TabIndex = 36;
-            // 
-            // tb_Klasse
-            // 
-            this.tb_Klasse.Location = new System.Drawing.Point(119, 237);
-            this.tb_Klasse.Name = "tb_Klasse";
-            this.tb_Klasse.Size = new System.Drawing.Size(79, 20);
-            this.tb_Klasse.TabIndex = 35;
-            // 
-            // lb_Klasse
-            // 
-            this.lb_Klasse.AutoSize = true;
-            this.lb_Klasse.Location = new System.Drawing.Point(7, 240);
-            this.lb_Klasse.Name = "lb_Klasse";
-            this.lb_Klasse.Size = new System.Drawing.Size(41, 13);
-            this.lb_Klasse.TabIndex = 34;
-            this.lb_Klasse.Text = "Klasse:";
-            // 
-            // cb_Vertrauenswuerdigkeit
-            // 
-            this.cb_Vertrauenswuerdigkeit.FormattingEnabled = true;
-            this.cb_Vertrauenswuerdigkeit.Location = new System.Drawing.Point(119, 211);
-            this.cb_Vertrauenswuerdigkeit.Name = "cb_Vertrauenswuerdigkeit";
-            this.cb_Vertrauenswuerdigkeit.Size = new System.Drawing.Size(79, 21);
-            this.cb_Vertrauenswuerdigkeit.TabIndex = 26;
-            // 
-            // lb_Vertrauenswuerdigkeit
-            // 
-            this.lb_Vertrauenswuerdigkeit.AutoSize = true;
-            this.lb_Vertrauenswuerdigkeit.Location = new System.Drawing.Point(7, 214);
-            this.lb_Vertrauenswuerdigkeit.Name = "lb_Vertrauenswuerdigkeit";
-            this.lb_Vertrauenswuerdigkeit.Size = new System.Drawing.Size(109, 13);
-            this.lb_Vertrauenswuerdigkeit.TabIndex = 33;
-            this.lb_Vertrauenswuerdigkeit.Text = "Vertrauenswürdigkeit:";
-            // 
-            // tb_Ort
-            // 
-            this.tb_Ort.Location = new System.Drawing.Point(119, 185);
-            this.tb_Ort.Name = "tb_Ort";
-            this.tb_Ort.Size = new System.Drawing.Size(205, 20);
-            this.tb_Ort.TabIndex = 32;
-            // 
-            // lb_Ort
-            // 
-            this.lb_Ort.AutoSize = true;
-            this.lb_Ort.Location = new System.Drawing.Point(7, 188);
-            this.lb_Ort.Name = "lb_Ort";
-            this.lb_Ort.Size = new System.Drawing.Size(24, 13);
-            this.lb_Ort.TabIndex = 31;
-            this.lb_Ort.Text = "Ort:";
-            // 
-            // tb_Postleitzahl
-            // 
-            this.tb_Postleitzahl.Location = new System.Drawing.Point(119, 160);
-            this.tb_Postleitzahl.Name = "tb_Postleitzahl";
-            this.tb_Postleitzahl.Size = new System.Drawing.Size(79, 20);
-            this.tb_Postleitzahl.TabIndex = 30;
-            // 
-            // lb_Postleitzahl
-            // 
-            this.lb_Postleitzahl.AutoSize = true;
-            this.lb_Postleitzahl.Location = new System.Drawing.Point(7, 162);
-            this.lb_Postleitzahl.Name = "lb_Postleitzahl";
-            this.lb_Postleitzahl.Size = new System.Drawing.Size(63, 13);
-            this.lb_Postleitzahl.TabIndex = 29;
-            this.lb_Postleitzahl.Text = "Postleitzahl:";
-            // 
-            // tb_Hausnummer
-            // 
-            this.tb_Hausnummer.Location = new System.Drawing.Point(119, 133);
-            this.tb_Hausnummer.Name = "tb_Hausnummer";
-            this.tb_Hausnummer.Size = new System.Drawing.Size(79, 20);
-            this.tb_Hausnummer.TabIndex = 28;
-            // 
-            // lb_Hausnummer
-            // 
-            this.lb_Hausnummer.AutoSize = true;
-            this.lb_Hausnummer.Location = new System.Drawing.Point(7, 134);
-            this.lb_Hausnummer.Name = "lb_Hausnummer";
-            this.lb_Hausnummer.Size = new System.Drawing.Size(72, 13);
-            this.lb_Hausnummer.TabIndex = 27;
-            this.lb_Hausnummer.Text = "Hausnummer:";
-            // 
-            // tb_Strasse
-            // 
-            this.tb_Strasse.Location = new System.Drawing.Point(119, 106);
-            this.tb_Strasse.Name = "tb_Strasse";
-            this.tb_Strasse.Size = new System.Drawing.Size(205, 20);
-            this.tb_Strasse.TabIndex = 26;
-            // 
-            // lb_Strasse
-            // 
-            this.lb_Strasse.AutoSize = true;
-            this.lb_Strasse.Location = new System.Drawing.Point(7, 107);
-            this.lb_Strasse.Name = "lb_Strasse";
-            this.lb_Strasse.Size = new System.Drawing.Size(45, 13);
-            this.lb_Strasse.TabIndex = 25;
-            this.lb_Strasse.Text = "Strasse:";
-            // 
-            // tb_Nachname
-            // 
-            this.tb_Nachname.Location = new System.Drawing.Point(119, 75);
-            this.tb_Nachname.Name = "tb_Nachname";
-            this.tb_Nachname.Size = new System.Drawing.Size(205, 20);
-            this.tb_Nachname.TabIndex = 24;
-            // 
-            // lb_Nachname
-            // 
-            this.lb_Nachname.AutoSize = true;
-            this.lb_Nachname.Location = new System.Drawing.Point(7, 78);
-            this.lb_Nachname.Name = "lb_Nachname";
-            this.lb_Nachname.Size = new System.Drawing.Size(62, 13);
-            this.lb_Nachname.TabIndex = 23;
-            this.lb_Nachname.Text = "Nachname:";
-            // 
-            // tb_Vorname
-            // 
-            this.tb_Vorname.Location = new System.Drawing.Point(119, 46);
-            this.tb_Vorname.Name = "tb_Vorname";
-            this.tb_Vorname.Size = new System.Drawing.Size(205, 20);
-            this.tb_Vorname.TabIndex = 22;
-            // 
-            // lb_Vorname
-            // 
-            this.lb_Vorname.AutoSize = true;
-            this.lb_Vorname.Location = new System.Drawing.Point(6, 49);
-            this.lb_Vorname.Name = "lb_Vorname";
-            this.lb_Vorname.Size = new System.Drawing.Size(52, 13);
-            this.lb_Vorname.TabIndex = 21;
-            this.lb_Vorname.Text = "Vorname:";
-            // 
-            // tb_KundenID
-            // 
-            this.tb_KundenID.Location = new System.Drawing.Point(119, 17);
-            this.tb_KundenID.Name = "tb_KundenID";
-            this.tb_KundenID.Size = new System.Drawing.Size(205, 20);
-            this.tb_KundenID.TabIndex = 20;
-            // 
-            // lb_KundenID
-            // 
-            this.lb_KundenID.AutoSize = true;
-            this.lb_KundenID.Location = new System.Drawing.Point(7, 20);
-            this.lb_KundenID.Name = "lb_KundenID";
-            this.lb_KundenID.Size = new System.Drawing.Size(61, 13);
-            this.lb_KundenID.TabIndex = 0;
-            this.lb_KundenID.Text = "Kunden-ID:";
-            // 
-            // tsspracheBindingSource
-            // 
-            this.tsspracheBindingSource.DataMember = "t_s_sprache";
-            this.tsspracheBindingSource.DataSource = this.biboVerwaltungDataSetBindingSource;
-            // 
-            // biboVerwaltungDataSetBindingSource
-            // 
-            this.biboVerwaltungDataSetBindingSource.DataSource = this.bibo_VerwaltungDataSet;
-            this.biboVerwaltungDataSetBindingSource.Position = 0;
-            // 
-            // bibo_VerwaltungDataSet
-            // 
-            this.bibo_VerwaltungDataSet.DataSetName = "Bibo_VerwaltungDataSet";
-            this.bibo_VerwaltungDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // t_s_spracheTableAdapter
-            // 
-            this.t_s_spracheTableAdapter.ClearBeforeFill = true;
-            // 
             // w_s_buecher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(958, 550);
-            this.Controls.Add(this.tabControl1);
+            this.ClientSize = new System.Drawing.Size(385, 387);
+            this.Controls.Add(this.gb_buecher);
             this.Name = "w_s_buecher";
             this.Text = "w_s_buecher";
-            this.Load += new System.EventHandler(this.w_s_buecher_Load);
-            this.gb_buecher.ResumeLayout(false);
-            this.gb_buecher.PerformLayout();
-            this.gb_verlag.ResumeLayout(false);
-            this.gb_verlag.PerformLayout();
-            this.gb_autor.ResumeLayout(false);
-            this.gb_autor.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.gb_sprache.ResumeLayout(false);
-            this.gb_sprache.PerformLayout();
-            this.gb_genre.ResumeLayout(false);
-            this.gb_genre.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.gb_kunde.ResumeLayout(false);
-            this.gb_kunde.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).EndInit();
+            this.gb_buecher.ResumeLayout(false);
+            this.gb_buecher.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
+        private System.Windows.Forms.BindingSource biboVerwaltungDataSetBindingSource;
+        private Bibo_VerwaltungDataSet bibo_VerwaltungDataSet;
+        private System.Windows.Forms.BindingSource tsspracheBindingSource;
+        private Bibo_VerwaltungDataSetTableAdapters.t_s_spracheTableAdapter t_s_spracheTableAdapter;
         private System.Windows.Forms.GroupBox gb_buecher;
-        private System.Windows.Forms.TextBox tb_ISBN;
-        private System.Windows.Forms.Label lb_ISBN;
+        private System.Windows.Forms.Button bt_speichern_buecher;
+        private System.Windows.Forms.DateTimePicker dTP_Erscheinungsdatum;
+        private System.Windows.Forms.Label lb_Erscheinungsdatum;
+        private System.Windows.Forms.TextBox tb_Auflage;
+        private System.Windows.Forms.Label lb_Auflage;
+        private System.Windows.Forms.Button bt_laden_buecher;
+        private System.Windows.Forms.Label lb_Neupreis_Euro;
         private System.Windows.Forms.Button bt_Sprache_s;
         private System.Windows.Forms.ComboBox cb_Sprache;
         private System.Windows.Forms.Label lb_Sprache;
@@ -958,73 +379,11 @@
         private System.Windows.Forms.ComboBox cb_Verlag;
         private System.Windows.Forms.ComboBox cb_Genre;
         private System.Windows.Forms.Label lb_Genre;
+        private System.Windows.Forms.TextBox tb_Neupreis;
         private System.Windows.Forms.Label lb_Neupreis;
         private System.Windows.Forms.TextBox tb_Titel;
         private System.Windows.Forms.Label lb_Titel;
-        private System.Windows.Forms.Label lb_Neupreis_Euro;
-        private System.Windows.Forms.Button bt_laden_buecher;
-        private System.Windows.Forms.TextBox tb_Auflage;
-        private System.Windows.Forms.Label lb_Auflage;
-        private System.Windows.Forms.DateTimePicker dTP_Erscheinungsdatum;
-        private System.Windows.Forms.Label lb_Erscheinungsdatum;
-        private System.Windows.Forms.GroupBox gb_verlag;
-        private System.Windows.Forms.GroupBox gb_autor;
-        private System.Windows.Forms.TextBox tb_Verlagname;
-        private System.Windows.Forms.Label lb_Verlagname;
-        private System.Windows.Forms.TextBox tb_VerlagID;
-        private System.Windows.Forms.Label lb_VerlagID;
-        private System.Windows.Forms.Button bt_laden_verlag;
-        private System.Windows.Forms.Button bt_laden_autor;
-        private System.Windows.Forms.Label lb_Autorname;
-        private System.Windows.Forms.TextBox tb_Autorname;
-        private System.Windows.Forms.TextBox tb_AutorID;
-        private System.Windows.Forms.Label lb_AutorID;
-        private System.Windows.Forms.Button bt_speichern_buecher;
-        private System.Windows.Forms.TextBox tb_Neupreis;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.GroupBox gb_sprache;
-        private System.Windows.Forms.Button bt_laden_sprache;
-        private System.Windows.Forms.Label lb_Sprachename;
-        private System.Windows.Forms.TextBox tb_Sprachename;
-        private System.Windows.Forms.Label lb_SpracheID;
-        private System.Windows.Forms.GroupBox gb_genre;
-        private System.Windows.Forms.Button bt_laden_genre;
-        private System.Windows.Forms.Label lb_Genrename;
-        private System.Windows.Forms.TextBox tb_Genrename;
-        private System.Windows.Forms.TextBox tb_GenreID;
-        private System.Windows.Forms.Label lb_GenreID;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.GroupBox gb_kunde;
-        private System.Windows.Forms.Button bt_laden_kunden;
-        private System.Windows.Forms.Label lb_Telefonnummer;
-        private System.Windows.Forms.TextBox tb_Telefonnummer;
-        private System.Windows.Forms.Label lb_Mail;
-        private System.Windows.Forms.TextBox tb_Mail;
-        private System.Windows.Forms.TextBox tb_Klasse;
-        private System.Windows.Forms.Label lb_Klasse;
-        private System.Windows.Forms.ComboBox cb_Vertrauenswuerdigkeit;
-        private System.Windows.Forms.Label lb_Vertrauenswuerdigkeit;
-        private System.Windows.Forms.TextBox tb_Ort;
-        private System.Windows.Forms.Label lb_Ort;
-        private System.Windows.Forms.TextBox tb_Postleitzahl;
-        private System.Windows.Forms.Label lb_Postleitzahl;
-        private System.Windows.Forms.TextBox tb_Hausnummer;
-        private System.Windows.Forms.Label lb_Hausnummer;
-        private System.Windows.Forms.TextBox tb_Strasse;
-        private System.Windows.Forms.Label lb_Strasse;
-        private System.Windows.Forms.TextBox tb_Nachname;
-        private System.Windows.Forms.Label lb_Nachname;
-        private System.Windows.Forms.TextBox tb_Vorname;
-        private System.Windows.Forms.Label lb_Vorname;
-        private System.Windows.Forms.TextBox tb_KundenID;
-        private System.Windows.Forms.Label lb_KundenID;
-        private System.Windows.Forms.ComboBox cb_SpracheID;
-        private System.Windows.Forms.BindingSource biboVerwaltungDataSetBindingSource;
-        private Bibo_VerwaltungDataSet bibo_VerwaltungDataSet;
-        private System.Windows.Forms.BindingSource tsspracheBindingSource;
-        private Bibo_VerwaltungDataSetTableAdapters.t_s_spracheTableAdapter t_s_spracheTableAdapter;
+        private System.Windows.Forms.TextBox tb_ISBN;
+        private System.Windows.Forms.Label lb_ISBN;
     }
 }

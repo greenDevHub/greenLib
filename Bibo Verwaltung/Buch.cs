@@ -11,7 +11,7 @@ namespace Bibo_Verwaltung
 {
     class Buch
     {
-        #region Strings
+        #region Buch Eigenschaften
         string isbn;
         /// <summary>
         /// Isbn Nummer eines Buches
@@ -66,6 +66,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public decimal Neupreis { get { return neupreis; } set { neupreis = value; } }
         #endregion
+
         #region Objekt Buch
         /// <summary>
         /// Erschaft das Objekt Buch
@@ -80,6 +81,7 @@ namespace Bibo_Verwaltung
             Load();
         }
         #endregion
+
         #region Load
         private void Load()
         {
@@ -90,9 +92,10 @@ namespace Bibo_Verwaltung
                 + "left join t_s_autor on buch_autor_id = au_id "
                 + "left join t_s_verlag on buch_verlag_id = ver_id "
                 + "left join t_s_sprache on buch_sprache_id = sprach_id "
-                + "WHERE buch_isbn = '" + isbn + "'";
+                + "WHERE buch_isbn = @isbn";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
+            cmd.Parameters.AddWithValue("@isbn", isbn);
 
             // Verbindung öffnen 
             con.Open();
@@ -123,9 +126,6 @@ namespace Bibo_Verwaltung
                     MessageBox.Show("Bitte nur Zahlen eingeben!");
 
                 }
-
-
-
                 Neupreis = Convert.ToDecimal(test);
             }
             // DataReader schließen 
@@ -134,17 +134,24 @@ namespace Bibo_Verwaltung
             con.Close();
         }
         #endregion
+
         #region Save
         public void Save()
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "UPDATE [dbo].[t_s_buecher] set buch_titel = '" + Titel + "', buch_autor_id = '" + Autor.AutorID + "', buch_genre_id = '" + Genre.GenreID + "', buch_sprache_id = '" + Sprache.SpracheID + "', buch_verlag_id = '" + Verlag.VerlagID + "', buch_auflage = '" + Auflage + "', buch_erscheinungsdatum = '" + Er_datum
-               + "', buch_neupreis = @neupreis"
-                + " WHERE buch_isbn = '" + isbn + "'";
+            string strSQL = "UPDATE [dbo].[t_s_buecher] set buch_titel = @titel , buch_autor_id = @autor, buch_genre_id = @genre, buch_sprache_id = @sprache, buch_verlag_id = @verlag, buch_auflage = @auflage, buch_erscheinungsdatum = @er_datum, buch_neupreis = @neupreis WHERE buch_isbn = @isbn";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
+            cmd.Parameters.AddWithValue("@titel", Titel);
+            cmd.Parameters.AddWithValue("@autor", Autor.AutorID);
+            cmd.Parameters.AddWithValue("@genre", Genre.GenreID);
+            cmd.Parameters.AddWithValue("@sprache", Sprache.SpracheID);
+            cmd.Parameters.AddWithValue("@verlag", Verlag.VerlagID);
+            cmd.Parameters.AddWithValue("@auflage", Auflage);
+            cmd.Parameters.AddWithValue("@er_datum", Er_datum);
             cmd.Parameters.AddWithValue("@neupreis", neupreis);
+            cmd.Parameters.AddWithValue("@isbn", isbn);
 
             // Verbindung öffnen 
             con.Open();
