@@ -1,0 +1,7 @@
+Arbeitsauftrag bis 15.06.2017
+
+	1. KundeID entfernen (in Bearbeiten)
+	2. Korrekter Sart des Programms (ohne Abbruch beim Verbindungsaufbau zur Datenbank)
+	3. Möglichkeit zum Initialisieren der Datenbank beim Installer (Skript schon vorhanden) 
+	   (Knopf "Initialisieren" zum Prüfen, ob Verbindung i.O. ist, falls nicht der Fall Möglichkeit zum Anlegen der Datenbank mit vorhandenem Skript)
+	4. Zentrale Ablage der Zugangsdaten (Vorschlag Datei) (Textdatei oder Direkteingabe für Zugangsdaten; Laden der Zugangsdaten aus der Datei und nicht aus dem Quellcode)
