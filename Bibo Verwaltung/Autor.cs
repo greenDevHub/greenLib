@@ -31,12 +31,13 @@ namespace Bibo_Verwaltung
         /// </summary>
         public Autor()
         {
-
+            FillObject();
         }
         public Autor(string autorid)
         {
             this.autorid = autorid;
             Load();
+            FillObject();
         }
         #endregion
 
@@ -45,7 +46,7 @@ namespace Bibo_Verwaltung
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM t_s_autor WHERE au_id = @autor";
+            string strSQL = "SELECT * FROM [dbo].[t_s_autor] WHERE au_id = @autor";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
             cmd.Parameters.AddWithValue("@autor", autorid);
@@ -66,85 +67,54 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        #region Fill Combobox
-        private DataTable GetDataSource()
+        #region Fill Object
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
+        SqlCommandBuilder comb = new SqlCommandBuilder();
+        SqlConnection con = new SqlConnection();
+        private void FillObject()
         {
-            SqlConnection con = new SqlConnection();
+            con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM t_s_autor";
+            string strSQL = "SELECT * FROM [dbo].[t_s_autor]";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
 
             // Verbindung öffnen 
             con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(dr);
+            adapter = new SqlDataAdapter(strSQL, con);
+            adapter.Fill(ds);
+            adapter.Fill(dt);
 
-            // DataReader schließen 
-            dr.Close();
-            // Verbindung schließen 
             con.Close();
-
-            return dt;
         }
         public void FillCombobox(ref ComboBox cb, object value)
         {
-            cb.DataSource = GetDataSource();
+            cb.DataSource = dt;
             cb.ValueMember = "au_id";
             cb.DisplayMember = "au_autor";
             cb.SelectedValue = value;
         }
+        
+
+        public void FillGrid(ref DataGridView grid, object value = null)
+        {
+            grid.DataSource = ds.Tables[0];
+            grid.Columns[0].Visible = false;
+            grid.Columns["au_autor"].HeaderText = "Bezeichnung";
+        }
         #endregion
 
-        #region New/Update/Drop Sprache
-        public void NewAutor()
+        #region Speichern Grid
+        public void SaveGrid(ref DataGridView grid)
         {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "INSERT INTO [dbo].[t_s_autor] (au_autor) VALUES (@autor)";
-
-            SqlCommand cmd = new SqlCommand(strSQL, con);
-            cmd.Parameters.AddWithValue("@autor", Autorname);
-
-            // Verbindung öffnen 
-            con.Open();
-            cmd.ExecuteNonQuery();
-            //Verbindung schließen
-            con.Close();
-        }
-
-        public void UpdateAutor()
-        {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "UPDATE [dbo].[t_s_autor] set au_autor = @autorname WHERE au_id = @autorid";
-
-            SqlCommand cmd = new SqlCommand(strSQL, con);
-            cmd.Parameters.AddWithValue("@autorname", Autorname);
-            cmd.Parameters.AddWithValue("@autorid", AutorID);
-
-            // Verbindung öffnen 
-            con.Open();
-            cmd.ExecuteNonQuery();
-            //Verbindung schließen
-            con.Close();
-        }
-
-        public void DropAutor()
-        {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "DELETE FROM [dbo].[t_s_autor] WHERE au_id =  @autorid";
-
-            SqlCommand cmd = new SqlCommand(strSQL, con);
-            cmd.Parameters.AddWithValue("@autorid", AutorID);
-
-            // Verbindung öffnen 
-            con.Open();
-            cmd.ExecuteNonQuery();
-            //Verbindung schließen
-            con.Close();
+            comb = new SqlCommandBuilder(adapter);
+            DataSet changes = ds.GetChanges();
+            if (changes != null)
+            {
+                adapter.Update(changes);
+            }
         }
         #endregion
     }

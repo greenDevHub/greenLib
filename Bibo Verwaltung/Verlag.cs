@@ -31,12 +31,13 @@ namespace Bibo_Verwaltung
         /// </summary>
         public Verlag()
         {
-
+            FillObject();
         }
         public Verlag(string verlagid)
         {
             this.verlagid = verlagid;
             Load();
+            FillObject();
         }
         #endregion
 
@@ -65,86 +66,55 @@ namespace Bibo_Verwaltung
             con.Close();
         }
         #endregion       
-        
-        #region Fill Combobox
-        private DataTable GetDataSource()
+
+        #region Fill Object
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
+        SqlCommandBuilder comb = new SqlCommandBuilder();
+        SqlConnection con = new SqlConnection();
+        private void FillObject()
         {
-            SqlConnection con = new SqlConnection();
+            con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM t_s_verlag";
+            string strSQL = "SELECT * FROM [dbo].[t_s_verlag]";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
 
             // Verbindung öffnen 
             con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(dr);
+            adapter = new SqlDataAdapter(strSQL, con);
+            adapter.Fill(ds);
+            adapter.Fill(dt);
 
-            // DataReader schließen 
-            dr.Close();
-            // Verbindung schließen 
             con.Close();
-
-            return dt;
         }
+
         public void FillCombobox(ref ComboBox cb, object value)
         {
-            cb.DataSource = GetDataSource();
+            cb.DataSource = dt;
             cb.ValueMember = "ver_id";
             cb.DisplayMember = "ver_name";
             cb.SelectedValue = value;
         }
+  
+        public void FillGrid(ref DataGridView grid, object value = null)
+        {
+            grid.DataSource = ds.Tables[0];
+            grid.Columns[0].Visible = false;
+            grid.Columns["ver_name"].HeaderText = "Bezeichnung";
+        }
         #endregion
 
-        #region New/Update/Drop Sprache
-        public void NewVerlag()
+        #region Speichern Grid
+        public void SaveGrid(ref DataGridView grid)
         {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "INSERT INTO [dbo].[t_s_verlag] (ver_name) VALUES (@verlag)";
-
-            SqlCommand cmd = new SqlCommand(strSQL, con);
-            cmd.Parameters.AddWithValue("@verlag", Verlagname);
-
-            // Verbindung öffnen 
-            con.Open();
-            cmd.ExecuteNonQuery();
-            //Verbindung schließen
-            con.Close();
-        }
-
-        public void UpdateVerlag()
-        {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "UPDATE [dbo].[t_s_verlag] set ver_name = @v_name WHERE ver_id = @v_id";
-
-            SqlCommand cmd = new SqlCommand(strSQL, con);
-            cmd.Parameters.AddWithValue("@v_name", Verlagname);
-            cmd.Parameters.AddWithValue("@v_id", VerlagID);
-
-            // Verbindung öffnen 
-            con.Open();
-            cmd.ExecuteNonQuery();
-            //Verbindung schließen
-            con.Close();
-        }
-
-        public void DropVerlag()
-        {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "DELETE FROM [dbo].[t_s_verlag] WHERE ver_id =  @v_id";
-
-            SqlCommand cmd = new SqlCommand(strSQL, con);
-            cmd.Parameters.AddWithValue("@v_id", VerlagID);
-
-            // Verbindung öffnen 
-            con.Open();
-            cmd.ExecuteNonQuery();
-            //Verbindung schließen
-            con.Close();
+            comb = new SqlCommandBuilder(adapter);
+            DataSet changes = ds.GetChanges();
+            if (changes != null)
+            {
+                adapter.Update(changes);
+            }
         }
         #endregion
     }

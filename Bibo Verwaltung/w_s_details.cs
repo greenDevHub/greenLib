@@ -15,6 +15,10 @@ namespace Bibo_Verwaltung
         public w_s_details()
         {
             InitializeComponent();
+            b.FillGrid(ref gv_Details);
         }
+
+        Details details = new Details();
+        Buch b = new Buch();
     }
 }

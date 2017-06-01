@@ -28,42 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.hdef = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.gv_Details = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Details)).BeginInit();
             this.SuspendLayout();
             // 
-            // listView1
+            // gv_Details
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.hdef,
-            this.columnHeader2,
-            this.columnHeader3});
-            this.listView1.Location = new System.Drawing.Point(12, 62);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(412, 183);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.gv_Details.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gv_Details.Location = new System.Drawing.Point(12, 12);
+            this.gv_Details.Name = "gv_Details";
+            this.gv_Details.Size = new System.Drawing.Size(1035, 374);
+            this.gv_Details.TabIndex = 0;
             // 
             // w_s_details
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 365);
-            this.Controls.Add(this.listView1);
+            this.ClientSize = new System.Drawing.Size(1059, 611);
+            this.Controls.Add(this.gv_Details);
             this.Name = "w_s_details";
             this.Text = "w_s_details";
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Details)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader hdef;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.DataGridView gv_Details;
     }
 }

@@ -73,12 +73,13 @@ namespace Bibo_Verwaltung
         /// </summary>
         public Buch()
         {
-
+            FillObject();
         }
         public Buch(string isbn)
         {
             this.isbn = isbn;
             Load();
+            FillObject();
         }
         #endregion
 
@@ -87,12 +88,7 @@ namespace Bibo_Verwaltung
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' FROM t_s_buecher "
-                + "left join t_s_genre on buch_genre_id = ger_id "
-                + "left join t_s_autor on buch_autor_id = au_id "
-                + "left join t_s_verlag on buch_verlag_id = ver_id "
-                + "left join t_s_sprache on buch_sprache_id = sprach_id "
-                + "WHERE buch_isbn = @isbn";
+            string strSQL = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' FROM t_s_buecher left join t_s_genre on buch_genre_id = ger_id left join t_s_autor on buch_autor_id = au_id left join t_s_verlag on buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id WHERE buch_isbn = @isbn";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
             cmd.Parameters.AddWithValue("@isbn", isbn);
@@ -158,6 +154,69 @@ namespace Bibo_Verwaltung
             cmd.ExecuteNonQuery();
             //Verbindung schließen
             con.Close();
+        }
+        #endregion
+
+
+
+
+        #region Fill Object
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
+        SqlCommandBuilder comb = new SqlCommandBuilder();
+        SqlConnection con = new SqlConnection();
+        private void FillObject()
+        {
+            con = new SqlConnection();
+            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
+            //string strSQL = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' FROM t_s_buecher left join t_s_genre on buch_genre_id = ger_id left join t_s_autor on buch_autor_id = au_id left join t_s_verlag on buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id";// WHERE buch_isbn = @isbn";
+
+            string strSQL = "SELECT * FROM t_s_buchid left join t_s_zustand on bu_zustandsid = zu_id left join t_bd_ausgeliehen on aus_buchid = bu_id left join t_s_kunden on kunde_ID = aus_kundenid left join t_s_buecher on bu_isbn = buch_isbn left join t_s_genre on buch_genre_id = ger_id left join t_s_autor on buch_autor_id = au_id left join t_s_verlag on buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id";
+
+            SqlCommand cmd = new SqlCommand(strSQL, con);
+
+            // Verbindung öffnen 
+            con.Open();
+            adapter = new SqlDataAdapter(strSQL, con);
+            adapter.Fill(ds);
+            adapter.Fill(dt);
+
+            con.Close();
+        }
+
+        public void FillGrid(ref DataGridView grid, object value = null)
+        {
+            DataGridViewLinkColumn links = new DataGridViewLinkColumn();
+            links.UseColumnTextForLinkValue = true;
+            links.LinkBehavior = LinkBehavior.SystemDefault;
+            links.TrackVisitedState = true;
+
+            //grid.CurrentCellAddress[1,grid.RowCount] = grid.Columns.Add(links);
+
+
+            grid.DataSource = ds.Tables[0];
+            grid.Columns[2].Visible = false;
+            grid.Columns[4].Visible = false;
+            grid.Columns[8].Visible = false;
+            //grid.Columns[9].Visible = false;
+            //grid.Columns[10].Visible = false;
+            //grid.Columns[11].Visible = false;
+            //grid.Columns[13].Visible = false;
+            //grid.Columns[16].Visible = false;
+            //grid.Columns[18].Visible = false;
+            //grid.Columns[20].Visible = false;
+            //grid.Columns[22].Visible = false;
+
+            grid.Columns["bu_id"].HeaderText = "Buch-ID:";
+            grid.Columns["bu_isbn"].HeaderText = "Buch-ISBN:";
+            grid.Columns["bu_aufnahmedatum"].HeaderText = "aufgenommen am:";
+            grid.Columns["zu_zustand"].HeaderText = "Zustand:";
+            grid.Columns["zu_verleihfähig"].HeaderText = "verleihfähig:";
+            grid.Columns["buch_titel"].HeaderText = "Titel:";
+            grid.Columns["buch_erscheinungsdatum"].HeaderText = "Erscheinungsdatum:";
+
+
         }
         #endregion
     }

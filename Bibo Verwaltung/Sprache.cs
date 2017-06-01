@@ -25,7 +25,7 @@ namespace Bibo_Verwaltung
         public string Sprachename { get { return sprachename; } set { sprachename = value; } }
         #endregion
 
-        #region Objekt Sprache
+        #region Objekt Constructor
         /// <summary>
         /// Erschaft das Objekt Sprache
         /// </summary>
@@ -46,7 +46,7 @@ namespace Bibo_Verwaltung
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM t_s_sprache WHERE sprach_id = @spracheid";
+            string strSQL = "SELECT * FROM [dbo].[t_s_sprache] WHERE sprach_id = @spracheid";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
             cmd.Parameters.AddWithValue("@spracheid", spracheid);
@@ -54,7 +54,7 @@ namespace Bibo_Verwaltung
             // Verbindung öffnen 
             con.Open();
             SqlDataReader dr = cmd.ExecuteReader();
-            // Einlesen der Datenzeilen und Ausgabe an der Konsole 
+            // Einlesen der Datenzeilen 
             while (dr.Read())
             {
                 SpracheID = dr["sprach_id"].ToString();
@@ -67,7 +67,7 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        #region Fill Combobox
+        #region Fill Object
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
         DataTable dt = new DataTable();
@@ -77,7 +77,7 @@ namespace Bibo_Verwaltung
         {
             con = new SqlConnection();
             con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM t_s_sprache";
+            string strSQL = "SELECT * FROM [dbo].[t_s_sprache]";
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
 
@@ -88,8 +88,8 @@ namespace Bibo_Verwaltung
             adapter.Fill(dt);
 
             con.Close();
-
         }
+
         public void FillCombobox(ref ComboBox cb, object value)
         {
             cb.DataSource = dt;
@@ -97,63 +97,12 @@ namespace Bibo_Verwaltung
             cb.DisplayMember = "sprach_name";
             cb.SelectedValue = value;
         }
+
         public void FillGrid(ref DataGridView grid, object value = null)
         {
-            //FillObject();
             grid.DataSource = ds.Tables[0];
             grid.Columns[0].Visible = false;
             grid.Columns["sprach_name"].HeaderText = "Bezeichnung";
-        }
-        #endregion
-
-        #region New/Update/Drop Genre-Methoden
-        public void NewSprache()
-        {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "INSERT INTO [dbo].[t_s_sprache] (sprach_name) VALUES (@sprache)";
-
-            SqlCommand cmd = new SqlCommand(strSQL, con);
-            cmd.Parameters.AddWithValue("@sprache", Sprachename);
-
-            // Verbindung öffnen 
-            con.Open();
-            cmd.ExecuteNonQuery();
-            //Verbindung schließen
-            con.Close();
-        }
-
-        public void UpdateSprache()
-        {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "UPDATE [dbo].[t_s_sprache] set sprach_name = @s_name WHERE sprach_id = @s_id";
-
-            SqlCommand cmd = new SqlCommand(strSQL, con);
-            cmd.Parameters.AddWithValue("@s_name", Sprachename);
-            cmd.Parameters.AddWithValue("@s_id", SpracheID);
-
-            // Verbindung öffnen 
-            con.Open();
-            cmd.ExecuteNonQuery();
-            //Verbindung schließen
-            con.Close();
-        }
-
-        public void DropSprache()
-        {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "DELETE FROM [dbo].[t_s_sprache] WHERE sprach_id =  @s_id";
-
-            SqlCommand cmd = new SqlCommand(strSQL, con);
-            cmd.Parameters.AddWithValue("@s_id", SpracheID);
-
-            // Verbindung öffnen 
-            con.Open();
-            cmd.ExecuteNonQuery();
-            //Verbindung schließen
-            con.Close();
         }
         #endregion
 
