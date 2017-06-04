@@ -129,7 +129,7 @@ namespace Bibo_Verwaltung
             if (rb_KundeBearbeiten.Checked)
             {
                 bt_laden_kunden.Enabled = true;
-                tb_KundenID.Enabled = true;
+                tb_KundenID.Enabled = false;
 
             } else if (rb_Neukunde.Checked)
             {
