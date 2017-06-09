@@ -62,7 +62,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -189,7 +189,6 @@
     <EmbeddedResource Include="w_s_buecher.resx">
       <DependentUpon>w_s_buecher.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Bibo Verwaltung_TemporaryKey.pfx" />
     <None Include="Bibo_VerwaltungDataSet.xsc">
       <DependentUpon>Bibo_VerwaltungDataSet.xsd</DependentUpon>
     </None>
