@@ -44,16 +44,10 @@ namespace Bibo_Verwaltung
         #region Load
         private void Load()
         {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM [dbo].[t_s_sprache] WHERE sprach_id = @spracheid";
-
-            SqlCommand cmd = new SqlCommand(strSQL, con);
-            cmd.Parameters.AddWithValue("@spracheid", spracheid);
-
-            // Verbindung öffnen 
-            con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT * FROM [dbo].[t_s_sprache] WHERE sprach_id = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, spracheid);
             // Einlesen der Datenzeilen 
             while (dr.Read())
             {
@@ -72,18 +66,14 @@ namespace Bibo_Verwaltung
         DataSet ds = new DataSet();
         DataTable dt = new DataTable();
         SqlCommandBuilder comb = new SqlCommandBuilder();
-        SqlConnection con = new SqlConnection();
         private void FillObject()
         {
-            con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM [dbo].[t_s_sprache]";
-
-            SqlCommand cmd = new SqlCommand(strSQL, con);
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT * FROM [dbo].[t_s_sprache]";
 
             // Verbindung öffnen 
-            con.Open();
-            adapter = new SqlDataAdapter(strSQL, con);
+            adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
             adapter.Fill(dt);
 

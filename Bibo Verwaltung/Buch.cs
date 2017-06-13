@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Bibo_Verwaltung
 {
@@ -82,20 +83,13 @@ namespace Bibo_Verwaltung
             FillObject();
         }
         #endregion
-
         #region Load
         private void Load()
         {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' FROM t_s_buecher left join t_s_genre on buch_genre_id = ger_id left join t_s_autor on buch_autor_id = au_id left join t_s_verlag on buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id WHERE buch_isbn = @isbn";
-
-            SqlCommand cmd = new SqlCommand(strSQL, con);
-            cmd.Parameters.AddWithValue("@isbn", isbn);
-
-            // Verbindung öffnen 
-            con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' FROM t_s_buecher left join t_s_genre on buch_genre_id = ger_id left join t_s_autor on buch_autor_id = au_id left join t_s_verlag on buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id WHERE buch_isbn = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, isbn);
             // Einlesen der Datenzeilen und Ausgabe an der Konsole 
             while (dr.Read())
             {
@@ -109,20 +103,18 @@ namespace Bibo_Verwaltung
                 Er_datum = (DateTime)dr["verified_erscheinungsdatum"];
                 Sprache = new Sprache(dr["buch_sprache_id"].ToString());
                 Auflage = dr["buch_auflage"].ToString();
-                string test = dr["buch_neupreis"].ToString().Replace(".", ",");
+                string price = dr["buch_neupreis"].ToString().Replace(".", ",");
 
                 try
                 {
-                    Neupreis = Convert.ToDecimal(test);
+                    Neupreis = Convert.ToDecimal(price);
                 }
 
                 catch (FormatException)
                 {
                     Neupreis = 0;
                     MessageBox.Show("Bitte nur Zahlen eingeben!");
-
                 }
-                Neupreis = Convert.ToDecimal(test);
             }
             // DataReader schließen 
             dr.Close();
@@ -134,23 +126,22 @@ namespace Bibo_Verwaltung
         #region Save
         public void Save()
         {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "UPDATE [dbo].[t_s_buecher] set buch_titel = @titel , buch_autor_id = @autor, buch_genre_id = @genre, buch_sprache_id = @sprache, buch_verlag_id = @verlag, buch_auflage = @auflage, buch_erscheinungsdatum = @er_datum, buch_neupreis = @neupreis WHERE buch_isbn = @isbn";
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            string RawCommand = "UPDATE [dbo].[t_s_buecher] set buch_titel = @titel , buch_autor_id = @autor, buch_genre_id = @genre, buch_sprache_id = @sprache, buch_verlag_id = @verlag, buch_auflage = @auflage, buch_erscheinungsdatum = @er_datum, buch_neupreis = @neupreis WHERE buch_isbn = @isbn";
 
-            SqlCommand cmd = new SqlCommand(strSQL, con);
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             cmd.Parameters.AddWithValue("@titel", Titel);
             cmd.Parameters.AddWithValue("@autor", Autor.AutorID);
             cmd.Parameters.AddWithValue("@genre", Genre.GenreID);
             cmd.Parameters.AddWithValue("@sprache", Sprache.SpracheID);
             cmd.Parameters.AddWithValue("@verlag", Verlag.VerlagID);
             cmd.Parameters.AddWithValue("@auflage", Auflage);
-            cmd.Parameters.AddWithValue("@er_datum", Er_datum);
-            cmd.Parameters.AddWithValue("@neupreis", neupreis);
+            cmd.Parameters.AddWithValue("@er_datum", Er_datum.ToString());
+            cmd.Parameters.AddWithValue("@neupreis", neupreis.ToString());
             cmd.Parameters.AddWithValue("@isbn", isbn);
 
             // Verbindung öffnen 
-            con.Open();
             cmd.ExecuteNonQuery();
             //Verbindung schließen
             con.Close();
@@ -165,20 +156,14 @@ namespace Bibo_Verwaltung
         DataSet ds = new DataSet();
         DataTable dt = new DataTable();
         SqlCommandBuilder comb = new SqlCommandBuilder();
-        SqlConnection con = new SqlConnection();
         private void FillObject()
         {
-            con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
             //string strSQL = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' FROM t_s_buecher left join t_s_genre on buch_genre_id = ger_id left join t_s_autor on buch_autor_id = au_id left join t_s_verlag on buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id";// WHERE buch_isbn = @isbn";
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT * FROM t_s_buchid left join t_s_zustand on bu_zustandsid = zu_id left join t_bd_ausgeliehen on aus_buchid = bu_id left join t_s_kunden on kunde_ID = aus_kundenid left join t_s_buecher on bu_isbn = buch_isbn left join t_s_genre on buch_genre_id = ger_id left join t_s_autor on buch_autor_id = au_id left join t_s_verlag on buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id";
 
-            string strSQL = "SELECT * FROM t_s_buchid left join t_s_zustand on bu_zustandsid = zu_id left join t_bd_ausgeliehen on aus_buchid = bu_id left join t_s_kunden on kunde_ID = aus_kundenid left join t_s_buecher on bu_isbn = buch_isbn left join t_s_genre on buch_genre_id = ger_id left join t_s_autor on buch_autor_id = au_id left join t_s_verlag on buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id";
-
-            SqlCommand cmd = new SqlCommand(strSQL, con);
-
-            // Verbindung öffnen 
-            con.Open();
-            adapter = new SqlDataAdapter(strSQL, con);
+            adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
             adapter.Fill(dt);
 

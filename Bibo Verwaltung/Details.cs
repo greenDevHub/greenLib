@@ -41,18 +41,16 @@ namespace Bibo_Verwaltung
         DataSet ds = new DataSet();
         DataTable dt = new DataTable();
         SqlCommandBuilder comb = new SqlCommandBuilder();
-        SqlConnection con = new SqlConnection();
         private void FillObject()
         {
-            con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM [dbo].[t_s_buecher]";
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT * FROM [dbo].[t_s_buecher]";
 
-            SqlCommand cmd = new SqlCommand(strSQL, con);
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
 
             // Verbindung öffnen 
-            con.Open();
-            adapter = new SqlDataAdapter(strSQL, con);
+            adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
             adapter.Fill(dt);
 

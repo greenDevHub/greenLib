@@ -21,64 +21,53 @@ namespace Bibo_Verwaltung
         #region Load Stats
         private void Load_All(object sender, EventArgs e)
         {
-
             if (error == true) return;
             // Gesamtübersicht laden
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=BiboVerwaltung; Integrated Security=sspi";
-            try
+            SQL_Verbindung con = new SQL_Verbindung();
+            con.ConnectError();
+
+            string strSQL1 = "SELECT * FROM t_s_buecher";
+            string strSQL2 = "SELECT * FROM t_bd_ausgeliehen";
+
+            SqlDataAdapter adapter_1 = new SqlDataAdapter(strSQL1, con.Con);
+            DataTable tbl_1 = new DataTable();
+            adapter_1.Fill(tbl_1);
+
+            int rows_1 = 0;
+            for (int i = 0; i < tbl_1.Rows.Count; i++)
             {
-                con.Open();
-                string strSQL1 = "SELECT * FROM t_s_buecher";
-                string strSQL2 = "SELECT * FROM t_bd_ausgeliehen";
-
-                SqlDataAdapter adapter_1 = new SqlDataAdapter(strSQL1, con);
-                DataTable tbl_1 = new DataTable();
-                adapter_1.Fill(tbl_1);
-
-                int rows_1 = 0;
-                for (int i = 0; i < tbl_1.Rows.Count; i++)
-                {
-                    rows_1 = rows_1 + 1;
-                }
-                tbl_1.Reset();
-                lb_Bestandzahl.Text = rows_1.ToString();
-                linkLabel1.Text = rows_1.ToString();
-
-                SqlDataAdapter adapter_2 = new SqlDataAdapter(strSQL2, con);
-                DataTable tbl_2 = new DataTable();
-                adapter_2.Fill(tbl_2);
-
-                int rows_2 = 0;
-                for (int i = 0; i < tbl_2.Rows.Count; i++)
-                {
-                    rows_2 = rows_2 + 1;
-                }
-                lb_Ausleihzahl.Text = rows_2.ToString();
-                tbl_2.Reset();
-                con.Close();
-
-                lb_Lagerzahl.Text = (rows_1 - rows_2).ToString();
-
-                // Comboboxen füllen
-                Genre genre = new Genre();
-                genre.FillCombobox(ref cb_Genre, -1);
-
-                Autor autor = new Autor();
-                autor.FillCombobox(ref cb_Autor, -1);
-
-                Verlag verlag = new Verlag();
-                verlag.FillCombobox(ref cb_Verlag, -1);
-
-                error = false;
+                rows_1 = rows_1 + 1;
             }
-            catch (SqlException)
+            tbl_1.Reset();
+            lb_Bestandzahl.Text = rows_1.ToString();
+            linkLabel1.Text = rows_1.ToString();
+
+            SqlDataAdapter adapter_2 = new SqlDataAdapter(strSQL2, con.Con);
+            DataTable tbl_2 = new DataTable();
+            adapter_2.Fill(tbl_2);
+
+            int rows_2 = 0;
+            for (int i = 0; i < tbl_2.Rows.Count; i++)
             {
-                MessageBox.Show("Die Verbindung zu dem SQL-Server konnte nicht hergestellt werden.", "Fehler", MessageBoxButtons.OK,MessageBoxIcon.Error);
-                error = true;
+                rows_2 = rows_2 + 1;
             }
+            lb_Ausleihzahl.Text = rows_2.ToString();
+            tbl_2.Reset();
+
+            lb_Lagerzahl.Text = (rows_1 - rows_2).ToString();
+
+            // Comboboxen füllen
+            Genre genre = new Genre();
+            genre.FillCombobox(ref cb_Genre, -1);
+
+            Autor autor = new Autor();
+            autor.FillCombobox(ref cb_Autor, -1);
+
+            Verlag verlag = new Verlag();
+            verlag.FillCombobox(ref cb_Verlag, -1);
+
+            con.Close();
         }
-
             #endregion
 
             #region Formulare aufrufen
@@ -203,24 +192,24 @@ namespace Bibo_Verwaltung
                 }
                 Console.WriteLine("weiter");
                 // Verbindung öffnen 
-                //con.Open();
-                //SqlDataReader dr = cmd.ExecuteReader();
-                //// Einlesen der Datenzeilen und Ausgabe an der Konsole 
-                //while (dr.Read())
-                //{
-                //    // Buch b = new Buch(dr["buch_isbn"].ToString());
-                //    string[] row = { "Hallo", "djhf", "Hallo", "djhf", "Hallo" };// dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString() };
-                //    var listViewItem = new ListViewItem(row);
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                ///Einlesen der Datenzeilen und Ausgabe an der Konsole 
+                while (dr.Read())
+                {
+                Buch b = new Buch(dr["buch_isbn"].ToString());
+                    string[] row = { "Hallo", "djhf", "Hallo", "djhf", "Hallo" };// dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString() };
+                    var listViewItem = new ListViewItem(row);
 
-                //    listView1.Items.Add(listViewItem);
-                //    listView1.Show();
-                //    Console.WriteLine("Jdjsadsadsadasd");
-                //}
+                    listView1.Items.Add(listViewItem);
+                    listView1.Show();
+                    Console.WriteLine("Jdjsadsadsadasd");
+                }
 
                 //// DataReader schließen 
-                //dr.Close();
+                dr.Close();
                 //// Verbindung schließen 
-                //con.Close();
+                con.Close();
             }
             #endregion
 

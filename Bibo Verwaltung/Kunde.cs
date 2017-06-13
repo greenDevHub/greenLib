@@ -93,18 +93,12 @@ namespace Bibo_Verwaltung
         }
         #endregion
         #region Load
+        SQL_Verbindung con = new SQL_Verbindung();
         private void Load()
         {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT * FROM t_s_kunden WHERE kunde_ID = @kundenid";
-
-            SqlCommand cmd = new SqlCommand(strSQL, con);
-            cmd.Parameters.AddWithValue("@kundenid", kundenid);
-
-            // Verbindung öffnen 
-            con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT * FROM [dbo].[t_s_kunden] WHERE kunde_ID = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, kundenid);
             // Einlesen der Datenzeilen und Ausgabe an der Konsole 
             while (dr.Read())
             {
@@ -130,11 +124,10 @@ namespace Bibo_Verwaltung
         #region Save
         public void Save()
         {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "UPDATE [dbo].[t_s_kunden] set kunde_vorname = @vorname , kunde_nachname = @nachname, kunde_ort = @ort, kunde_postleitzahl = @postleitzahl, kunde_strasse = @strasse, kunde_telefonnummer = @telefonnummer, kunde_hausnummer = @hausnummer, kunde_mail = @mail, kunde_klasse = @klasse, kunde_vertrauenswürdigkeit = @vertrauenswürdigkeit WHERE kunde_ID = @k_ID";
+            string RawCommand = "UPDATE [dbo].[t_s_kunden] set kunde_vorname = @vorname , kunde_nachname = @nachname, kunde_ort = @ort, kunde_postleitzahl = @postleitzahl, kunde_strasse = @strasse, kunde_telefonnummer = @telefonnummer, kunde_hausnummer = @hausnummer, kunde_mail = @mail, kunde_klasse = @klasse, kunde_vertrauenswürdigkeit = @vertrauenswürdigkeit WHERE kunde_ID = @k_ID";
+            con.ConnectError();
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
 
-            SqlCommand cmd = new SqlCommand(strSQL, con);
             cmd.Parameters.AddWithValue("@vorname", Vorname);
             cmd.Parameters.AddWithValue("@nachname", Nachname);
             cmd.Parameters.AddWithValue("@ort", Ort);
@@ -148,7 +141,6 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@k_ID", KundenID);
 
             // Verbindung öffnen 
-            con.Open();
             cmd.ExecuteNonQuery();
             //Verbindung schließen
             con.Close();
