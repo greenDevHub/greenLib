@@ -127,9 +127,8 @@ namespace Bibo_Verwaltung
         public void Save()
         {
             SQL_Verbindung con = new SQL_Verbindung();
-            if (con.ConnectError()) return;
             string RawCommand = "UPDATE [dbo].[t_s_buecher] set buch_titel = @titel , buch_autor_id = @autor, buch_genre_id = @genre, buch_sprache_id = @sprache, buch_verlag_id = @verlag, buch_auflage = @auflage, buch_erscheinungsdatum = @er_datum, buch_neupreis = @neupreis WHERE buch_isbn = @isbn";
-
+            
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             cmd.Parameters.AddWithValue("@titel", Titel);
             cmd.Parameters.AddWithValue("@autor", Autor.AutorID);

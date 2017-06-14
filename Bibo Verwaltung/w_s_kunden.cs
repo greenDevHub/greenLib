@@ -60,11 +60,11 @@ namespace Bibo_Verwaltung
                     tb_Klasse.Text = k.Klasse;
                     tb_Mail.Text = k.Mail;
                     tb_Telefonnummer.Text = k.Telefonnummer;
-                   // cb_Vertrauenswuerdigkeit.Text = 
+                    cb_Vertrauenswuerdigkeit.Text = k.Vertrauenswuerdigkeit;
                 }
                 catch (SqlException)
                 {
-                    MessageBox.Show("Der Kunde könnte nicht geladen werden!", "Error",
+                    MessageBox.Show("Der Kunde konnte nicht geladen werden!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                     
@@ -81,17 +81,17 @@ namespace Bibo_Verwaltung
 
         private void bt_save_kunde_Click(object sender, EventArgs e)
         {
-            if (tb_KundenID.Text.Equals("") 
-                && tb_Vorname.Text.Equals("") 
-                && tb_Nachname.Text.Equals("")
-                && tb_Strasse.Text.Equals("")
-                && tb_Hausnummer.Text.Equals("") 
-                && tb_Postleitzahl.Text.Equals("")
-                && tb_Ort.Text.Equals("")
-                && cb_Vertrauenswuerdigkeit.Text.Equals("")
-                && tb_Klasse.Text.Equals("")
-                && tb_Mail.Text.Equals("")
-                && tb_Telefonnummer.Text.Equals("") == false)
+            if (!tb_KundenID.Text.Equals("") 
+                && !tb_Vorname.Text.Equals("") 
+                && !tb_Nachname.Text.Equals("")
+                && !tb_Strasse.Text.Equals("")
+                && !tb_Hausnummer.Text.Equals("") 
+                && !tb_Postleitzahl.Text.Equals("")
+                && !tb_Ort.Text.Equals("")
+                && !cb_Vertrauenswuerdigkeit.Text.Equals("")
+                && !tb_Klasse.Text.Equals("")
+                && !tb_Mail.Text.Equals("")
+                && !tb_Telefonnummer.Text.Equals(""))
             {
                 try
                 {                   
@@ -110,7 +110,7 @@ namespace Bibo_Verwaltung
                 }
                 catch (SqlException)
                 {
-                    MessageBox.Show("Der Kunde könnte nicht gespeichert werden!", "Error",
+                    MessageBox.Show("Der Kunde konnte nicht gespeichert werden!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
@@ -129,7 +129,7 @@ namespace Bibo_Verwaltung
             if (rb_KundeBearbeiten.Checked)
             {
                 bt_laden_kunden.Enabled = true;
-                tb_KundenID.Enabled = false;
+                tb_KundenID.Enabled = true;
 
             } else if (rb_Neukunde.Checked)
             {

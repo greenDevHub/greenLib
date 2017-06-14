@@ -98,44 +98,62 @@ namespace Bibo_Verwaltung
         #region Load Buch
         private void load_buecher(object sender, EventArgs e)
         {
-            b = new Buch(tb_ISBN.Text);
+            if (tb_ISBN.Text.Equals("") == false)
+            {
+                try
+                {
+                    b = new Buch(tb_ISBN.Text);
 
-            Buch b1 = new Buch("978-3608938289");
-            Buch b2 = new Buch("978-3423715669");
+                    Buch b1 = new Buch("978-3608938289");
+                    Buch b2 = new Buch("978-3423715669");
 
-            tb_ISBN.Text = b.ISBN;
-            tb_Titel.Text = b.Titel;
-            cb_Autor.Text = b.Autor.Autorname;
-            cb_Verlag.Text = b.Verlag.Verlagname;
-            cb_Sprache.Text = b.Sprache.Sprachename;
-            tb_Auflage.Text = b.Auflage;
-            tb_Neupreis.Text = b.Neupreis.ToString();
-            dTP_Erscheinungsdatum.Value = b.Er_datum;
-            cb_Genre.Text = b.Genre.Genrename;
-            
-            //// Füllen Autor
-            //tb_AutorID.Text = b.Autor.AutorID;
-            //tb_Autorname.Text = b.Autor.Autorname;
+                    tb_ISBN.Text = b.ISBN;
+                    tb_Titel.Text = b.Titel;
+                    cb_Autor.Text = b.Autor.Autorname;
+                    cb_Verlag.Text = b.Verlag.Verlagname;
+                    cb_Sprache.Text = b.Sprache.Sprachename;
+                    tb_Auflage.Text = b.Auflage;
+                    tb_Neupreis.Text = b.Neupreis.ToString();
+                    dTP_Erscheinungsdatum.Value = b.Er_datum;
+                    cb_Genre.Text = b.Genre.Genrename;
 
-            b.Autor.FillCombobox(ref cb_Autor, b.Autor.AutorID);
+                    //// Füllen Autor
+                    //tb_AutorID.Text = b.Autor.AutorID;
+                    //tb_Autorname.Text = b.Autor.Autorname;
 
-            //// Füllen Verlag
-            //tb_VerlagID.Text = b.Verlag.VerlagID;
-            //tb_Verlagname.Text = b.Verlag.Verlagname;
+                    b.Autor.FillCombobox(ref cb_Autor, b.Autor.AutorID);
 
-            b.Verlag.FillCombobox(ref cb_Verlag, b.Verlag.VerlagID);
+                    //// Füllen Verlag
+                    //tb_VerlagID.Text = b.Verlag.VerlagID;
+                    //tb_Verlagname.Text = b.Verlag.Verlagname;
 
-            //// Füllen Genre
-            //tb_GenreID.Text = b.Genre.GenreID;
-            //tb_Genrename.Text = b.Genre.Genrename;
+                    b.Verlag.FillCombobox(ref cb_Verlag, b.Verlag.VerlagID);
 
-            b.Genre.FillCombobox(ref cb_Genre, b.Genre.GenreID);
+                    //// Füllen Genre
+                    //tb_GenreID.Text = b.Genre.GenreID;
+                    //tb_Genrename.Text = b.Genre.Genrename;
 
-            //// Füllen Sprache
-            //cb_SpracheID.Text = b.Sprache.SpracheID;
-            //tb_Sprachename.Text = b.Sprache.Sprachename;
+                    b.Genre.FillCombobox(ref cb_Genre, b.Genre.GenreID);
 
-            b.Sprache.FillCombobox(ref cb_Sprache, b.Sprache.SpracheID);
+                    //// Füllen Sprache
+                    //cb_SpracheID.Text = b.Sprache.SpracheID;
+                    //tb_Sprachename.Text = b.Sprache.Sprachename;
+
+                    b.Sprache.FillCombobox(ref cb_Sprache, b.Sprache.SpracheID);
+                }
+                catch(SqlException)
+                {
+                    MessageBox.Show("Das Buch konnte nicht geladen werden!", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Füllen Sie das markierte Feld, um ein Buch zu laden!", "Achtung",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                tb_ISBN.BackColor = Color.Red;
+                tb_ISBN.Text = "";
+            }
         }
         #endregion
 
@@ -161,15 +179,38 @@ namespace Bibo_Verwaltung
         #region Save Buch
         private void Save(object sender, EventArgs e)
         {
-            b.Titel = tb_Titel.Text;
-            b.Autor.AutorID = cb_Autor.SelectedValue.ToString();
-            b.Verlag.VerlagID = cb_Verlag.SelectedValue.ToString();
-            b.Auflage = tb_Auflage.Text;
-            b.Genre.GenreID = cb_Genre.SelectedValue.ToString();
-            b.Sprache.SpracheID = cb_Sprache.SelectedValue.ToString();
-            b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
-            b.Er_datum = dTP_Erscheinungsdatum.Value;
-            b.Save();
+            if(!tb_ISBN.Text.Equals("")
+                && !tb_Titel.Text.Equals("")
+                && !cb_Autor.Text.Equals("")
+                && !cb_Verlag.Text.Equals("")
+                && !cb_Genre.Text.Equals("")
+                && !cb_Sprache.Text.Equals("")
+                && !tb_Auflage.Text.Equals("")
+                && !tb_Neupreis.Text.Equals(""))
+                {
+                    try
+                {
+                    b.Titel = tb_Titel.Text;
+                    b.Autor.AutorID = cb_Autor.SelectedValue.ToString();
+                    b.Verlag.VerlagID = cb_Verlag.SelectedValue.ToString();
+                    b.Auflage = tb_Auflage.Text;
+                    b.Genre.GenreID = cb_Genre.SelectedValue.ToString();
+                    b.Sprache.SpracheID = cb_Sprache.SelectedValue.ToString();
+                    b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
+                    b.Er_datum = dTP_Erscheinungsdatum.Value;
+                    b.Save();
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show("Das Buch konnte nicht gespeichert werden!", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Füllen Sie alle Felder aus, um ein Buch zu speichern!", "Achtung",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
         #endregion
 

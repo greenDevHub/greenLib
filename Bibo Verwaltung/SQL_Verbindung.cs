@@ -72,7 +72,6 @@ namespace Bibo_Verwaltung
             try
             {
                 con.Open();
-                Debug.WriteLine(con.State);
                 error = false;
             }
             catch (SqlException)
