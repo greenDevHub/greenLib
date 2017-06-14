@@ -98,7 +98,7 @@ namespace Bibo_Verwaltung
         #region Load Buch
         private void load_buecher(object sender, EventArgs e)
         {
-            if (tb_ISBN.Text.Equals("") == false)
+            if (!tb_ISBN.Text.Equals(""))
             {
                 try
                 {
@@ -141,7 +141,56 @@ namespace Bibo_Verwaltung
 
                     b.Sprache.FillCombobox(ref cb_Sprache, b.Sprache.SpracheID);
                 }
-                catch(SqlException)
+                catch (SqlException)
+                {
+                    MessageBox.Show("Das Buch konnte nicht geladen werden!", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (!tb_Titel.Text.Equals(""))
+            {
+                try
+                {
+                    b = new Buch(tb_Titel.Text);
+
+                    Buch b1 = new Buch("Der Herr der Ringe");
+                    Buch b2 = new Buch("Der kleine Hobbit2");
+
+                    tb_ISBN.Text = b.ISBN;
+                    tb_Titel.Text = b.Titel;
+                    cb_Autor.Text = b.Autor.Autorname;
+                    cb_Verlag.Text = b.Verlag.Verlagname;
+                    cb_Sprache.Text = b.Sprache.Sprachename;
+                    tb_Auflage.Text = b.Auflage;
+                    tb_Neupreis.Text = b.Neupreis.ToString();
+                    dTP_Erscheinungsdatum.Value = b.Er_datum;
+                    cb_Genre.Text = b.Genre.Genrename;
+
+                    //// Füllen Autor
+                    //tb_AutorID.Text = b.Autor.AutorID;
+                    //tb_Autorname.Text = b.Autor.Autorname;
+
+                    b.Autor.FillCombobox(ref cb_Autor, b.Autor.AutorID);
+
+                    //// Füllen Verlag
+                    //tb_VerlagID.Text = b.Verlag.VerlagID;
+                    //tb_Verlagname.Text = b.Verlag.Verlagname;
+
+                    b.Verlag.FillCombobox(ref cb_Verlag, b.Verlag.VerlagID);
+
+                    //// Füllen Genre
+                    //tb_GenreID.Text = b.Genre.GenreID;
+                    //tb_Genrename.Text = b.Genre.Genrename;
+
+                    b.Genre.FillCombobox(ref cb_Genre, b.Genre.GenreID);
+
+                    //// Füllen Sprache
+                    //cb_SpracheID.Text = b.Sprache.SpracheID;
+                    //tb_Sprachename.Text = b.Sprache.Sprachename;
+
+                    b.Sprache.FillCombobox(ref cb_Sprache, b.Sprache.SpracheID);
+                }
+                catch (SqlException)
                 {
                     MessageBox.Show("Das Buch konnte nicht geladen werden!", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -149,15 +198,23 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MessageBox.Show("Füllen Sie das markierte Feld, um ein Buch zu laden!", "Achtung",
+                MessageBox.Show("Füllen Sie eines der markierten Felder aus, um ein Buch zu laden!", "Achtung",
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                tb_ISBN.BackColor = Color.Red;
                 tb_ISBN.Text = "";
+                tb_Titel.Text = "";
+                cb_Autor.Text = "";
+                cb_Verlag.Text = "";
+                cb_Genre.Text = "";
+                cb_Sprache.Text = "";
+                tb_Auflage.Text = "";
+                tb_Neupreis.Text = "";
+                tb_ISBN.BackColor = Color.Red;
+                tb_Titel.BackColor = Color.Red;
             }
         }
         #endregion
 
-            #region Search
+        #region Search
         private void search(object sender, EventArgs e)
         {
             //ComboBox-Items in Array speichern
@@ -214,5 +271,18 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
+        #region Clear Buch
+        private void bt_clear_buecher_Click(object sender, EventArgs e)
+        {
+            tb_ISBN.Text = "";
+            tb_Titel.Text = "";
+            cb_Autor.Text = "";
+            cb_Verlag.Text = "";
+            cb_Genre.Text = "";
+            cb_Sprache.Text = "";
+            tb_Auflage.Text = "";
+            tb_Neupreis.Text = "";
+        }
+        #endregion
     }
 }

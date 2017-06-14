@@ -45,6 +45,7 @@
             this.lb_Bestand = new System.Windows.Forms.Label();
             this.gb_Leihen = new System.Windows.Forms.GroupBox();
             this.gb_IstVorhanden = new System.Windows.Forms.GroupBox();
+            this.lb_SuchErgebnisse = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
             this.ch_Buch_ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ch_Titel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -64,7 +65,6 @@
             this.lb_Genre = new System.Windows.Forms.Label();
             this.cb_Genre = new System.Windows.Forms.ComboBox();
             this.bt_Suchen = new System.Windows.Forms.Button();
-            this.lb_SuchErgebnisse = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.gb_Uebersicht.SuspendLayout();
             this.gb_IstVorhanden.SuspendLayout();
@@ -75,7 +75,7 @@
             this.bt_Sprachen.Location = new System.Drawing.Point(212, 131);
             this.bt_Sprachen.Name = "bt_Sprachen";
             this.bt_Sprachen.Size = new System.Drawing.Size(200, 50);
-            this.bt_Sprachen.TabIndex = 4;
+            this.bt_Sprachen.TabIndex = 5;
             this.bt_Sprachen.Text = "Sprachen";
             this.bt_Sprachen.UseVisualStyleBackColor = true;
             this.bt_Sprachen.Click += new System.EventHandler(this.bt_Sprachen_Click);
@@ -85,7 +85,7 @@
             this.bt_Verlage.Location = new System.Drawing.Point(6, 131);
             this.bt_Verlage.Name = "bt_Verlage";
             this.bt_Verlage.Size = new System.Drawing.Size(200, 50);
-            this.bt_Verlage.TabIndex = 3;
+            this.bt_Verlage.TabIndex = 4;
             this.bt_Verlage.Text = "Verlage";
             this.bt_Verlage.UseVisualStyleBackColor = true;
             this.bt_Verlage.Click += new System.EventHandler(this.bt_Verlage_Click);
@@ -95,7 +95,7 @@
             this.bt_Genres.Location = new System.Drawing.Point(212, 75);
             this.bt_Genres.Name = "bt_Genres";
             this.bt_Genres.Size = new System.Drawing.Size(200, 50);
-            this.bt_Genres.TabIndex = 2;
+            this.bt_Genres.TabIndex = 3;
             this.bt_Genres.Text = "Genres";
             this.bt_Genres.UseVisualStyleBackColor = true;
             this.bt_Genres.Click += new System.EventHandler(this.bt_Genres_Click);
@@ -105,7 +105,7 @@
             this.bt_Autoren.Location = new System.Drawing.Point(6, 75);
             this.bt_Autoren.Name = "bt_Autoren";
             this.bt_Autoren.Size = new System.Drawing.Size(200, 50);
-            this.bt_Autoren.TabIndex = 1;
+            this.bt_Autoren.TabIndex = 2;
             this.bt_Autoren.Text = "Autoren";
             this.bt_Autoren.UseVisualStyleBackColor = true;
             this.bt_Autoren.Click += new System.EventHandler(this.bt_Autoren_Click);
@@ -131,7 +131,7 @@
             this.groupBox1.Location = new System.Drawing.Point(409, 338);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(418, 284);
-            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Verwaltung von:";
             // 
@@ -140,7 +140,7 @@
             this.bt_Buecher.Location = new System.Drawing.Point(212, 19);
             this.bt_Buecher.Name = "bt_Buecher";
             this.bt_Buecher.Size = new System.Drawing.Size(200, 50);
-            this.bt_Buecher.TabIndex = 5;
+            this.bt_Buecher.TabIndex = 1;
             this.bt_Buecher.Text = "Bücher";
             this.bt_Buecher.UseVisualStyleBackColor = true;
             this.bt_Buecher.Click += new System.EventHandler(this.bt_Buecher_Click);
@@ -157,7 +157,7 @@
             this.gb_Uebersicht.Location = new System.Drawing.Point(12, 12);
             this.gb_Uebersicht.Name = "gb_Uebersicht";
             this.gb_Uebersicht.Size = new System.Drawing.Size(391, 170);
-            this.gb_Uebersicht.TabIndex = 7;
+            this.gb_Uebersicht.TabIndex = 1;
             this.gb_Uebersicht.TabStop = false;
             this.gb_Uebersicht.Text = "Gesamtübersicht:";
             // 
@@ -167,7 +167,7 @@
             this.linkLabel1.Location = new System.Drawing.Point(161, 25);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(55, 13);
-            this.linkLabel1.TabIndex = 6;
+            this.linkLabel1.TabIndex = 5;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "linkLabel1";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
@@ -178,7 +178,7 @@
             this.lb_Ausleihzahl.Location = new System.Drawing.Point(116, 75);
             this.lb_Ausleihzahl.Name = "lb_Ausleihzahl";
             this.lb_Ausleihzahl.Size = new System.Drawing.Size(10, 13);
-            this.lb_Ausleihzahl.TabIndex = 5;
+            this.lb_Ausleihzahl.TabIndex = 4;
             this.lb_Ausleihzahl.Text = "-";
             // 
             // lb_Ausgeliehen
@@ -187,7 +187,7 @@
             this.lb_Ausgeliehen.Location = new System.Drawing.Point(6, 75);
             this.lb_Ausgeliehen.Name = "lb_Ausgeliehen";
             this.lb_Ausgeliehen.Size = new System.Drawing.Size(104, 13);
-            this.lb_Ausgeliehen.TabIndex = 4;
+            this.lb_Ausgeliehen.TabIndex = 2;
             this.lb_Ausgeliehen.Text = "Bücher ausgeliehen:";
             // 
             // lb_Lagerzahl
@@ -205,7 +205,7 @@
             this.lb_IstBestand.Location = new System.Drawing.Point(6, 50);
             this.lb_IstBestand.Name = "lb_IstBestand";
             this.lb_IstBestand.Size = new System.Drawing.Size(87, 13);
-            this.lb_IstBestand.TabIndex = 2;
+            this.lb_IstBestand.TabIndex = 1;
             this.lb_IstBestand.Text = "Bücher im Lager:";
             // 
             // lb_Bestandzahl
@@ -214,7 +214,7 @@
             this.lb_Bestandzahl.Location = new System.Drawing.Point(116, 25);
             this.lb_Bestandzahl.Name = "lb_Bestandzahl";
             this.lb_Bestandzahl.Size = new System.Drawing.Size(10, 13);
-            this.lb_Bestandzahl.TabIndex = 1;
+            this.lb_Bestandzahl.TabIndex = 2;
             this.lb_Bestandzahl.Text = "-";
             // 
             // lb_Bestand
@@ -231,7 +231,7 @@
             this.gb_Leihen.Location = new System.Drawing.Point(409, 12);
             this.gb_Leihen.Name = "gb_Leihen";
             this.gb_Leihen.Size = new System.Drawing.Size(418, 318);
-            this.gb_Leihen.TabIndex = 8;
+            this.gb_Leihen.TabIndex = 2;
             this.gb_Leihen.TabStop = false;
             this.gb_Leihen.Text = "Buch ausleihen:";
             // 
@@ -255,9 +255,18 @@
             this.gb_IstVorhanden.Location = new System.Drawing.Point(12, 188);
             this.gb_IstVorhanden.Name = "gb_IstVorhanden";
             this.gb_IstVorhanden.Size = new System.Drawing.Size(391, 434);
-            this.gb_IstVorhanden.TabIndex = 9;
+            this.gb_IstVorhanden.TabIndex = 1;
             this.gb_IstVorhanden.TabStop = false;
             this.gb_IstVorhanden.Text = "Buchverfügbarkeitsprüfung:";
+            // 
+            // lb_SuchErgebnisse
+            // 
+            this.lb_SuchErgebnisse.AutoSize = true;
+            this.lb_SuchErgebnisse.Location = new System.Drawing.Point(6, 245);
+            this.lb_SuchErgebnisse.Name = "lb_SuchErgebnisse";
+            this.lb_SuchErgebnisse.Size = new System.Drawing.Size(86, 13);
+            this.lb_SuchErgebnisse.TabIndex = 9;
+            this.lb_SuchErgebnisse.Text = "Suchergebnisse:";
             // 
             // listView1
             // 
@@ -270,7 +279,7 @@
             this.listView1.Location = new System.Drawing.Point(6, 268);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(379, 160);
-            this.listView1.TabIndex = 17;
+            this.listView1.TabIndex = 10;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
@@ -303,7 +312,7 @@
             this.rb_SuchVerlag.Location = new System.Drawing.Point(6, 175);
             this.rb_SuchVerlag.Name = "rb_SuchVerlag";
             this.rb_SuchVerlag.Size = new System.Drawing.Size(125, 17);
-            this.rb_SuchVerlag.TabIndex = 16;
+            this.rb_SuchVerlag.TabIndex = 3;
             this.rb_SuchVerlag.Text = "Nach Verlag suchen:";
             this.rb_SuchVerlag.UseVisualStyleBackColor = true;
             this.rb_SuchVerlag.CheckedChanged += new System.EventHandler(this.Suchtyp);
@@ -314,7 +323,7 @@
             this.rb_SuchAutor.Location = new System.Drawing.Point(6, 125);
             this.rb_SuchAutor.Name = "rb_SuchAutor";
             this.rb_SuchAutor.Size = new System.Drawing.Size(120, 17);
-            this.rb_SuchAutor.TabIndex = 15;
+            this.rb_SuchAutor.TabIndex = 2;
             this.rb_SuchAutor.Text = "Nach Autor suchen:";
             this.rb_SuchAutor.UseVisualStyleBackColor = true;
             this.rb_SuchAutor.CheckedChanged += new System.EventHandler(this.Suchtyp);
@@ -325,7 +334,7 @@
             this.rb_SuchGenre.Location = new System.Drawing.Point(6, 75);
             this.rb_SuchGenre.Name = "rb_SuchGenre";
             this.rb_SuchGenre.Size = new System.Drawing.Size(124, 17);
-            this.rb_SuchGenre.TabIndex = 14;
+            this.rb_SuchGenre.TabIndex = 1;
             this.rb_SuchGenre.Text = "Nach Genre suchen:";
             this.rb_SuchGenre.UseVisualStyleBackColor = true;
             this.rb_SuchGenre.CheckedChanged += new System.EventHandler(this.Suchtyp);
@@ -337,7 +346,7 @@
             this.rb_SuchTitel.Location = new System.Drawing.Point(6, 25);
             this.rb_SuchTitel.Name = "rb_SuchTitel";
             this.rb_SuchTitel.Size = new System.Drawing.Size(115, 17);
-            this.rb_SuchTitel.TabIndex = 13;
+            this.rb_SuchTitel.TabIndex = 0;
             this.rb_SuchTitel.TabStop = true;
             this.rb_SuchTitel.Text = "Nach Titel suchen:";
             this.rb_SuchTitel.UseVisualStyleBackColor = true;
@@ -352,7 +361,7 @@
             this.cb_Verlag.Location = new System.Drawing.Point(127, 198);
             this.cb_Verlag.Name = "cb_Verlag";
             this.cb_Verlag.Size = new System.Drawing.Size(120, 21);
-            this.cb_Verlag.TabIndex = 8;
+            this.cb_Verlag.TabIndex = 7;
             // 
             // lb_Verlag
             // 
@@ -379,7 +388,7 @@
             this.tb_Titel.Location = new System.Drawing.Point(127, 47);
             this.tb_Titel.Name = "tb_Titel";
             this.tb_Titel.Size = new System.Drawing.Size(120, 20);
-            this.tb_Titel.TabIndex = 5;
+            this.tb_Titel.TabIndex = 4;
             // 
             // lb_Autor
             // 
@@ -418,26 +427,17 @@
             this.cb_Genre.Name = "cb_Genre";
             this.cb_Genre.Size = new System.Drawing.Size(120, 21);
             this.cb_Genre.Sorted = true;
-            this.cb_Genre.TabIndex = 1;
+            this.cb_Genre.TabIndex = 5;
             // 
             // bt_Suchen
             // 
             this.bt_Suchen.Location = new System.Drawing.Point(267, 193);
             this.bt_Suchen.Name = "bt_Suchen";
             this.bt_Suchen.Size = new System.Drawing.Size(105, 28);
-            this.bt_Suchen.TabIndex = 0;
+            this.bt_Suchen.TabIndex = 8;
             this.bt_Suchen.Text = "Suchen";
             this.bt_Suchen.UseVisualStyleBackColor = true;
             this.bt_Suchen.Click += new System.EventHandler(this.Suchen);
-            // 
-            // lb_SuchErgebnisse
-            // 
-            this.lb_SuchErgebnisse.AutoSize = true;
-            this.lb_SuchErgebnisse.Location = new System.Drawing.Point(6, 245);
-            this.lb_SuchErgebnisse.Name = "lb_SuchErgebnisse";
-            this.lb_SuchErgebnisse.Size = new System.Drawing.Size(86, 13);
-            this.lb_SuchErgebnisse.TabIndex = 18;
-            this.lb_SuchErgebnisse.Text = "Suchergebnisse:";
             // 
             // w_s_main
             // 

@@ -34,6 +34,7 @@
             this.bibo_VerwaltungDataSet = new Bibo_Verwaltung.Bibo_VerwaltungDataSet();
             this.t_s_spracheTableAdapter = new Bibo_Verwaltung.Bibo_VerwaltungDataSetTableAdapters.t_s_spracheTableAdapter();
             this.gb_buecher = new System.Windows.Forms.GroupBox();
+            this.bt_clear_buecher = new System.Windows.Forms.Button();
             this.bt_speichern_buecher = new System.Windows.Forms.Button();
             this.dTP_Erscheinungsdatum = new System.Windows.Forms.DateTimePicker();
             this.lb_Erscheinungsdatum = new System.Windows.Forms.Label();
@@ -59,6 +60,7 @@
             this.lb_Titel = new System.Windows.Forms.Label();
             this.tb_ISBN = new System.Windows.Forms.TextBox();
             this.lb_ISBN = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).BeginInit();
@@ -86,6 +88,8 @@
             // 
             // gb_buecher
             // 
+            this.gb_buecher.Controls.Add(this.label1);
+            this.gb_buecher.Controls.Add(this.bt_clear_buecher);
             this.gb_buecher.Controls.Add(this.bt_speichern_buecher);
             this.gb_buecher.Controls.Add(this.dTP_Erscheinungsdatum);
             this.gb_buecher.Controls.Add(this.lb_Erscheinungsdatum);
@@ -118,13 +122,23 @@
             this.gb_buecher.TabStop = false;
             this.gb_buecher.Text = "Buecher";
             // 
+            // bt_clear_buecher
+            // 
+            this.bt_clear_buecher.Location = new System.Drawing.Point(116, 293);
+            this.bt_clear_buecher.Name = "bt_clear_buecher";
+            this.bt_clear_buecher.Size = new System.Drawing.Size(200, 37);
+            this.bt_clear_buecher.TabIndex = 15;
+            this.bt_clear_buecher.Text = "Clear";
+            this.bt_clear_buecher.UseVisualStyleBackColor = true;
+            this.bt_clear_buecher.Click += new System.EventHandler(this.bt_clear_buecher_Click);
+            // 
             // bt_speichern_buecher
             // 
             this.bt_speichern_buecher.Location = new System.Drawing.Point(226, 253);
             this.bt_speichern_buecher.Margin = new System.Windows.Forms.Padding(1);
             this.bt_speichern_buecher.Name = "bt_speichern_buecher";
             this.bt_speichern_buecher.Size = new System.Drawing.Size(90, 33);
-            this.bt_speichern_buecher.TabIndex = 26;
+            this.bt_speichern_buecher.TabIndex = 14;
             this.bt_speichern_buecher.Text = "Speichern";
             this.bt_speichern_buecher.UseVisualStyleBackColor = true;
             this.bt_speichern_buecher.Click += new System.EventHandler(this.Save);
@@ -135,7 +149,7 @@
             this.dTP_Erscheinungsdatum.Location = new System.Drawing.Point(116, 229);
             this.dTP_Erscheinungsdatum.Name = "dTP_Erscheinungsdatum";
             this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(200, 20);
-            this.dTP_Erscheinungsdatum.TabIndex = 25;
+            this.dTP_Erscheinungsdatum.TabIndex = 12;
             // 
             // lb_Erscheinungsdatum
             // 
@@ -151,7 +165,7 @@
             this.tb_Auflage.Location = new System.Drawing.Point(116, 177);
             this.tb_Auflage.Name = "tb_Auflage";
             this.tb_Auflage.Size = new System.Drawing.Size(200, 20);
-            this.tb_Auflage.TabIndex = 19;
+            this.tb_Auflage.TabIndex = 10;
             // 
             // lb_Auflage
             // 
@@ -167,7 +181,7 @@
             this.bt_laden_buecher.Location = new System.Drawing.Point(116, 255);
             this.bt_laden_buecher.Name = "bt_laden_buecher";
             this.bt_laden_buecher.Size = new System.Drawing.Size(93, 31);
-            this.bt_laden_buecher.TabIndex = 17;
+            this.bt_laden_buecher.TabIndex = 13;
             this.bt_laden_buecher.Text = "Laden";
             this.bt_laden_buecher.UseVisualStyleBackColor = true;
             this.bt_laden_buecher.Click += new System.EventHandler(this.load_buecher);
@@ -186,7 +200,7 @@
             this.bt_Sprache_s.Location = new System.Drawing.Point(322, 150);
             this.bt_Sprache_s.Name = "bt_Sprache_s";
             this.bt_Sprache_s.Size = new System.Drawing.Size(22, 21);
-            this.bt_Sprache_s.TabIndex = 16;
+            this.bt_Sprache_s.TabIndex = 9;
             this.bt_Sprache_s.Text = "s";
             this.bt_Sprache_s.UseVisualStyleBackColor = true;
             // 
@@ -196,7 +210,7 @@
             this.cb_Sprache.Location = new System.Drawing.Point(116, 150);
             this.cb_Sprache.Name = "cb_Sprache";
             this.cb_Sprache.Size = new System.Drawing.Size(200, 21);
-            this.cb_Sprache.TabIndex = 15;
+            this.cb_Sprache.TabIndex = 8;
             // 
             // lb_Sprache
             // 
@@ -212,7 +226,7 @@
             this.bt_Autor_s.Location = new System.Drawing.Point(322, 69);
             this.bt_Autor_s.Name = "bt_Autor_s";
             this.bt_Autor_s.Size = new System.Drawing.Size(22, 21);
-            this.bt_Autor_s.TabIndex = 13;
+            this.bt_Autor_s.TabIndex = 3;
             this.bt_Autor_s.Text = "s";
             this.bt_Autor_s.UseVisualStyleBackColor = true;
             this.bt_Autor_s.Click += new System.EventHandler(this.search);
@@ -223,7 +237,7 @@
             this.cb_Autor.Location = new System.Drawing.Point(116, 69);
             this.cb_Autor.Name = "cb_Autor";
             this.cb_Autor.Size = new System.Drawing.Size(200, 21);
-            this.cb_Autor.TabIndex = 12;
+            this.cb_Autor.TabIndex = 2;
             // 
             // lb_Verlag
             // 
@@ -248,7 +262,7 @@
             this.bt_Verlag_s.Location = new System.Drawing.Point(322, 96);
             this.bt_Verlag_s.Name = "bt_Verlag_s";
             this.bt_Verlag_s.Size = new System.Drawing.Size(22, 21);
-            this.bt_Verlag_s.TabIndex = 7;
+            this.bt_Verlag_s.TabIndex = 5;
             this.bt_Verlag_s.Text = "s";
             this.bt_Verlag_s.UseVisualStyleBackColor = true;
             this.bt_Verlag_s.Click += new System.EventHandler(this.search);
@@ -268,7 +282,7 @@
             this.cb_Verlag.Location = new System.Drawing.Point(116, 96);
             this.cb_Verlag.Name = "cb_Verlag";
             this.cb_Verlag.Size = new System.Drawing.Size(200, 21);
-            this.cb_Verlag.TabIndex = 7;
+            this.cb_Verlag.TabIndex = 4;
             // 
             // cb_Genre
             // 
@@ -276,7 +290,7 @@
             this.cb_Genre.Location = new System.Drawing.Point(116, 123);
             this.cb_Genre.Name = "cb_Genre";
             this.cb_Genre.Size = new System.Drawing.Size(200, 21);
-            this.cb_Genre.TabIndex = 7;
+            this.cb_Genre.TabIndex = 6;
             // 
             // lb_Genre
             // 
@@ -292,7 +306,7 @@
             this.tb_Neupreis.Location = new System.Drawing.Point(116, 203);
             this.tb_Neupreis.Name = "tb_Neupreis";
             this.tb_Neupreis.Size = new System.Drawing.Size(200, 20);
-            this.tb_Neupreis.TabIndex = 4;
+            this.tb_Neupreis.TabIndex = 11;
             this.tb_Neupreis.Validated += new System.EventHandler(this.tb_Neupreis_Validated);
             // 
             // lb_Neupreis
@@ -309,7 +323,7 @@
             this.tb_Titel.Location = new System.Drawing.Point(116, 43);
             this.tb_Titel.Name = "tb_Titel";
             this.tb_Titel.Size = new System.Drawing.Size(200, 20);
-            this.tb_Titel.TabIndex = 4;
+            this.tb_Titel.TabIndex = 1;
             // 
             // lb_Titel
             // 
@@ -325,7 +339,7 @@
             this.tb_ISBN.Location = new System.Drawing.Point(116, 17);
             this.tb_ISBN.Name = "tb_ISBN";
             this.tb_ISBN.Size = new System.Drawing.Size(200, 20);
-            this.tb_ISBN.TabIndex = 2;
+            this.tb_ISBN.TabIndex = 0;
             this.tb_ISBN.TextChanged += new System.EventHandler(this.tb_ISBN_inputOk);
             // 
             // lb_ISBN
@@ -336,6 +350,15 @@
             this.lb_ISBN.Size = new System.Drawing.Size(35, 13);
             this.lb_ISBN.TabIndex = 1;
             this.lb_ISBN.Text = "ISBN:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(144, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(145, 13);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "ISBN-Form: 123-0123456789";
             // 
             // w_s_buecher
             // 
@@ -385,5 +408,7 @@
         private System.Windows.Forms.Label lb_Titel;
         private System.Windows.Forms.TextBox tb_ISBN;
         private System.Windows.Forms.Label lb_ISBN;
+        private System.Windows.Forms.Button bt_clear_buecher;
+        private System.Windows.Forms.Label label1;
     }
 }

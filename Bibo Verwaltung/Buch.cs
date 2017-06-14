@@ -83,6 +83,7 @@ namespace Bibo_Verwaltung
             FillObject();
         }
         #endregion
+
         #region Load
         private void Load()
         {
@@ -120,6 +121,41 @@ namespace Bibo_Verwaltung
             dr.Close();
             // Verbindung schließen 
             con.Close();
+
+            SQL_Verbindung con1 = new SQL_Verbindung();
+            if (con1.ConnectError()) return;
+            string RawCommand1 = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' FROM t_s_buecher left join t_s_genre on buch_genre_id = ger_id left join t_s_autor on buch_autor_id = au_id left join t_s_verlag on buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id WHERE buch_titel = @0";
+            SqlDataReader dr1 = con1.ExcecuteCommand(RawCommand1, isbn);
+            // Einlesen der Datenzeilen und Ausgabe an der Konsole 
+            while (dr1.Read())
+            {
+                ISBN = dr1["buch_isbn"].ToString();
+                Titel = dr1["buch_titel"].ToString();
+                Genre = new Genre(dr1["buch_genre_id"].ToString());
+                Autor = new Autor(dr1["buch_autor_id"].ToString());
+                //Autor = dr["au_autor"].ToString();
+                Verlag = new Verlag(dr1["buch_verlag_id"].ToString());
+                //Verlag = dr["ver_name"].ToString();
+                Er_datum = (DateTime)dr1["verified_erscheinungsdatum"];
+                Sprache = new Sprache(dr1["buch_sprache_id"].ToString());
+                Auflage = dr1["buch_auflage"].ToString();
+                string price = dr1["buch_neupreis"].ToString().Replace(".", ",");
+
+                try
+                {
+                    Neupreis = Convert.ToDecimal(price);
+                }
+
+                catch (FormatException)
+                {
+                    Neupreis = 0;
+                    MessageBox.Show("Bitte nur Zahlen eingeben!");
+                }
+            }
+            // DataReader schließen 
+            dr1.Close();
+            // Verbindung schließen 
+            con1.Close();
         }
         #endregion
 
@@ -128,6 +164,7 @@ namespace Bibo_Verwaltung
         {
             SQL_Verbindung con = new SQL_Verbindung();
             string RawCommand = "UPDATE [dbo].[t_s_buecher] set buch_titel = @titel , buch_autor_id = @autor, buch_genre_id = @genre, buch_sprache_id = @sprache, buch_verlag_id = @verlag, buch_auflage = @auflage, buch_erscheinungsdatum = @er_datum, buch_neupreis = @neupreis WHERE buch_isbn = @isbn";
+            if (con.ConnectError()) return;
             
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             cmd.Parameters.AddWithValue("@titel", Titel);
@@ -146,9 +183,6 @@ namespace Bibo_Verwaltung
             con.Close();
         }
         #endregion
-
-
-
 
         #region Fill Object
         SqlDataAdapter adapter = new SqlDataAdapter();

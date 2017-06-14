@@ -70,7 +70,7 @@ namespace Bibo_Verwaltung
         }
             #endregion
 
-            #region Formulare aufrufen
+        #region Formulare aufrufen
             private void bt_Kunden_Click(object sender, EventArgs e)
             {
                 Form Kunden = new w_s_kunden();
@@ -108,7 +108,7 @@ namespace Bibo_Verwaltung
             }
             #endregion
 
-            #region Buch-Suche
+        #region Buch-Suche
             public void Suchtyp(object sender, EventArgs e)
             {
                 if (rb_SuchAutor.Checked)
