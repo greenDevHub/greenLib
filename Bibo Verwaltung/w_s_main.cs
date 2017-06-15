@@ -150,7 +150,6 @@ namespace Bibo_Verwaltung
                     + "WHERE @buch_value = @value";
 
                 SqlCommand cmd = new SqlCommand(strSQL, con);
-                Console.WriteLine("Los");
                 if (rb_SuchAutor.Checked)
                 {
                     cmd.Parameters.AddWithValue("@buch_value", "buch_autor_id");
@@ -177,7 +176,6 @@ namespace Bibo_Verwaltung
 
                         listView1.Items.Add(listViewItem);
                         listView1.Show();
-                        Console.WriteLine("Jdjsadsadsadasd");
                     }
 
                     // DataReader schließen 
@@ -190,7 +188,6 @@ namespace Bibo_Verwaltung
                     cmd.Parameters.AddWithValue("@buch_value", "buch_verlag_id");
                     cmd.Parameters.AddWithValue("@value", cb_Verlag.SelectedValue.ToString());
                 }
-                Console.WriteLine("weiter");
                 // Verbindung öffnen 
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -203,7 +200,6 @@ namespace Bibo_Verwaltung
 
                     listView1.Items.Add(listViewItem);
                     listView1.Show();
-                    Console.WriteLine("Jdjsadsadsadasd");
                 }
 
                 //// DataReader schließen 
@@ -218,5 +214,11 @@ namespace Bibo_Verwaltung
                 Form Details = new w_s_details();
                 Details.ShowDialog(this);
             }
+
+        private void bt_Suchen_Buecher_Click(object sender, EventArgs e)
+        {
+            Buch b = new Buch();
+            b.FillGrid1(ref Grid_Buch);
         }
+    }
     }

@@ -34,6 +34,7 @@
             this.bibo_VerwaltungDataSet = new Bibo_Verwaltung.Bibo_VerwaltungDataSet();
             this.t_s_spracheTableAdapter = new Bibo_Verwaltung.Bibo_VerwaltungDataSetTableAdapters.t_s_spracheTableAdapter();
             this.gb_buecher = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.bt_clear_buecher = new System.Windows.Forms.Button();
             this.bt_speichern_buecher = new System.Windows.Forms.Button();
             this.dTP_Erscheinungsdatum = new System.Windows.Forms.DateTimePicker();
@@ -60,7 +61,6 @@
             this.lb_Titel = new System.Windows.Forms.Label();
             this.tb_ISBN = new System.Windows.Forms.TextBox();
             this.lb_ISBN = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).BeginInit();
@@ -121,6 +121,15 @@
             this.gb_buecher.TabIndex = 0;
             this.gb_buecher.TabStop = false;
             this.gb_buecher.Text = "Buecher";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(144, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(145, 13);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "ISBN-Form: 123-0123456789";
             // 
             // bt_clear_buecher
             // 
@@ -350,15 +359,6 @@
             this.lb_ISBN.Size = new System.Drawing.Size(35, 13);
             this.lb_ISBN.TabIndex = 1;
             this.lb_ISBN.Text = "ISBN:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(144, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(145, 13);
-            this.label1.TabIndex = 28;
-            this.label1.Text = "ISBN-Form: 123-0123456789";
             // 
             // w_s_buecher
             // 

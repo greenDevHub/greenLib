@@ -75,13 +75,15 @@ namespace Bibo_Verwaltung
         /// </summary>
         public Buch()
         {
-            FillObject();
+            //FillObject();
+            FillObject1();
         }
         public Buch(string isbn)
         {
             this.isbn = isbn;
             Load();
-            FillObject();
+            //FillObject();
+            FillObject1();
         }
         #endregion
 
@@ -234,6 +236,31 @@ namespace Bibo_Verwaltung
             grid.Columns["buch_erscheinungsdatum"].HeaderText = "Erscheinungsdatum:";
 
 
+        }
+
+        private void FillObject1()
+        {
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            string RawCommand = "select buch_isbn as 'ISBN', buch_titel as 'Titel', ger_name as 'Genre',  isnull(buch_erscheinungsdatum, '01.01.1990') as 'Erscheinungsdatum', "
+            + "buch_auflage as 'Auflage', buch_neupreis as 'Neupreis', "
+            + "au_autor as 'Autor', ver_name as 'Verlag', sprach_name as 'Sprache' "
+            + "from t_s_buecher "
+            + "left join t_s_genre on buch_genre_id = ger_id "
+            + "left join t_s_autor on buch_autor_id = au_id "
+            + "left join t_s_verlag on buch_verlag_id = ver_id "
+            + "left join t_s_sprache on buch_sprache_id = sprach_id ";
+                
+            // Verbindung öffnen 
+            adapter = new SqlDataAdapter(RawCommand, con.Con);
+            adapter.Fill(ds);
+
+            con.Close();
+
+        }
+        public void FillGrid1(ref DataGridView grid, object value = null)
+        {
+            grid.DataSource = ds.Tables[0];
         }
         #endregion
     }

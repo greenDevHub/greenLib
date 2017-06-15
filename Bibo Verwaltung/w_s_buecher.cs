@@ -154,7 +154,7 @@ namespace Bibo_Verwaltung
                     b = new Buch(tb_Titel.Text);
 
                     Buch b1 = new Buch("Der Herr der Ringe");
-                    Buch b2 = new Buch("Der kleine Hobbit2");
+                    Buch b2 = new Buch("Der kleine Hobbit");
 
                     tb_ISBN.Text = b.ISBN;
                     tb_Titel.Text = b.Titel;
