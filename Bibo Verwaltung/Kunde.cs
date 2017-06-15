@@ -146,29 +146,78 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
+        #region Add
+        public void Add()
+        {
+            {
+                string RawCommand = "INSERT INTO [dbo].[t_s_kunden] (kunde_vorname, kunde_nachname, kunde_ort, kunde_postleitzahl, kunde_strasse, kunde_telefonnummer, kunde_hausnummer, kunde_mail, kunde_klasse, kunde_vertrauenswürdigkeit) VALUES (@vorname, @nachname, @ort, @postleitzahl, @strasse, @telefonnummer, @hausnummer, @mail, @klasse, @vertrauenswürdigkeit)";
+                con.ConnectError();
+                SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+
+                cmd.Parameters.AddWithValue("@vorname", Vorname);
+                cmd.Parameters.AddWithValue("@nachname", Nachname);
+                cmd.Parameters.AddWithValue("@ort", Ort);
+                cmd.Parameters.AddWithValue("@postleitzahl", Postleitzahl);
+                cmd.Parameters.AddWithValue("@strasse", Strasse);
+                cmd.Parameters.AddWithValue("@telefonnummer", Telefonnummer);
+                cmd.Parameters.AddWithValue("@hausnummer", Hausnummer);
+                cmd.Parameters.AddWithValue("@mail", Mail);
+                cmd.Parameters.AddWithValue("@klasse", Klasse);
+                cmd.Parameters.AddWithValue("@vertrauenswürdigkeit", Vertrauenswuerdigkeit);
+                cmd.Parameters.AddWithValue("@k_ID", KundenID);
+
+                // Verbindung öffnen 
+                cmd.ExecuteNonQuery();
+                //Verbindung schließen
+                con.Close();
+            }
+        }
+        #endregion
+
         #region Save
         public void Save()
         {
-            string RawCommand = "UPDATE [dbo].[t_s_kunden] set kunde_vorname = @vorname , kunde_nachname = @nachname, kunde_ort = @ort, kunde_postleitzahl = @postleitzahl, kunde_strasse = @strasse, kunde_telefonnummer = @telefonnummer, kunde_hausnummer = @hausnummer, kunde_mail = @mail, kunde_klasse = @klasse, kunde_vertrauenswürdigkeit = @vertrauenswürdigkeit WHERE kunde_ID = @k_ID";
-            con.ConnectError();
-            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            {
+                string RawCommand = "UPDATE [dbo].[t_s_kunden] SET kunde_vorname = @vorname, kunde_nachname = @nachname, kunde_ort = @ort, kunde_postleitzahl = @postleitzahl, kunde_strasse = @strasse, kunde_telefonnummer = @telefonnummer, kunde_hausnummer = @hausnummer, kunde_mail = @mail, kunde_klasse = @klasse, kunde_vertrauenswürdigkeit = @vertrauenswürdigkeit WHERE kunde_ID = @k_ID";
+                con.ConnectError();
+                SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
 
-            cmd.Parameters.AddWithValue("@vorname", Vorname);
-            cmd.Parameters.AddWithValue("@nachname", Nachname);
-            cmd.Parameters.AddWithValue("@ort", Ort);
-            cmd.Parameters.AddWithValue("@postleitzahl", Postleitzahl);
-            cmd.Parameters.AddWithValue("@strasse", Strasse);
-            cmd.Parameters.AddWithValue("@telefonnummer", Telefonnummer);
-            cmd.Parameters.AddWithValue("@hausnummer", Hausnummer);
-            cmd.Parameters.AddWithValue("@mail", Mail);
-            cmd.Parameters.AddWithValue("@klasse", Klasse);
-            cmd.Parameters.AddWithValue("@vertrauenswürdigkeit", Vertrauenswuerdigkeit);
-            cmd.Parameters.AddWithValue("@k_ID", KundenID);
+                cmd.Parameters.AddWithValue("@vorname", Vorname);
+                cmd.Parameters.AddWithValue("@nachname", Nachname);
+                cmd.Parameters.AddWithValue("@ort", Ort);
+                cmd.Parameters.AddWithValue("@postleitzahl", Postleitzahl);
+                cmd.Parameters.AddWithValue("@strasse", Strasse);
+                cmd.Parameters.AddWithValue("@telefonnummer", Telefonnummer);
+                cmd.Parameters.AddWithValue("@hausnummer", Hausnummer);
+                cmd.Parameters.AddWithValue("@mail", Mail);
+                cmd.Parameters.AddWithValue("@klasse", Klasse);
+                cmd.Parameters.AddWithValue("@vertrauenswürdigkeit", Vertrauenswuerdigkeit);
+                cmd.Parameters.AddWithValue("@k_ID", KundenID);
 
-            // Verbindung öffnen 
-            cmd.ExecuteNonQuery();
-            //Verbindung schließen
-            con.Close();
+                // Verbindung öffnen 
+                cmd.ExecuteNonQuery();
+                //Verbindung schließen
+                con.Close();
+            }
+        }
+        #endregion
+
+        #region Delete
+        public void Delete()
+        {
+            {
+                string RawCommand = "DELETE FROM [dbo].[t_s_kunden] WHERE kunde_vorname = @vorname AND kunde_nachname = @nachname";
+                con.ConnectError();
+                SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+
+                cmd.Parameters.AddWithValue("@vorname", Vorname);
+                cmd.Parameters.AddWithValue("@nachname", Nachname);
+
+                // Verbindung öffnen 
+                cmd.ExecuteNonQuery();
+                //Verbindung schließen
+                con.Close();
+            }
         }
         #endregion
     }

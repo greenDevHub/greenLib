@@ -121,10 +121,11 @@ namespace Bibo_Verwaltung
         #region Save Kunde
         private void bt_save_kunde_Click(object sender, EventArgs e)
         {
-            if (!tb_Vorname.Text.Equals("") 
+            if (rb_KundeBearbeiten.Checked
+                && !tb_Vorname.Text.Equals("")
                 && !tb_Nachname.Text.Equals("")
                 && !tb_Strasse.Text.Equals("")
-                && !tb_Hausnummer.Text.Equals("") 
+                && !tb_Hausnummer.Text.Equals("")
                 && !tb_Postleitzahl.Text.Equals("")
                 && !tb_Ort.Text.Equals("")
                 && !cb_Vertrauenswuerdigkeit.Text.Equals("")
@@ -133,7 +134,7 @@ namespace Bibo_Verwaltung
                 && !tb_Telefonnummer.Text.Equals(""))
             {
                 try
-                {                   
+                {
                     k.KundenID = tb_KundenID.Text;
                     k.Vorname = tb_Vorname.Text;
                     k.Nachname = tb_Nachname.Text;
@@ -153,14 +154,83 @@ namespace Bibo_Verwaltung
                     MessageBox.Show("Der Kunde konnte nicht gespeichert werden!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
             }
-            else
+            else if (rb_KundeLoeschen.Checked
+                && !tb_Vorname.Text.Equals("")
+                && !tb_Nachname.Text.Equals(""))
+            {
+                try
+                {
+                    k.KundenID = tb_KundenID.Text;
+                    k.Vorname = tb_Vorname.Text;
+                    k.Nachname = tb_Nachname.Text;
+                    k.Strasse = tb_Strasse.Text;
+                    k.Hausnummer = tb_Hausnummer.Text;
+                    k.Postleitzahl = tb_Postleitzahl.Text;
+                    k.Ort = tb_Ort.Text;
+                    k.Vertrauenswuerdigkeit = cb_Vertrauenswuerdigkeit.Text;
+                    k.Klasse = tb_Klasse.Text;
+                    k.Mail = tb_Mail.Text;
+                    k.Telefonnummer = tb_Telefonnummer.Text;
+                    k.Delete();
+                    MessageBox.Show("Der Kunde wurde erfolgreich gelöscht!");
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show("Der Kunde konnte nicht gelöscht werden!", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (rb_Neukunde.Checked
+              && !tb_Vorname.Text.Equals("")
+              && !tb_Nachname.Text.Equals("")
+              && !tb_Strasse.Text.Equals("")
+              && !tb_Hausnummer.Text.Equals("")
+              && !tb_Postleitzahl.Text.Equals("")
+              && !tb_Ort.Text.Equals("")
+              && !cb_Vertrauenswuerdigkeit.Text.Equals("")
+              && !tb_Klasse.Text.Equals("")
+              && !tb_Mail.Text.Equals("")
+              && !tb_Telefonnummer.Text.Equals(""))
+            {
+                try
+                {
+                    k.KundenID = tb_KundenID.Text;
+                    k.Vorname = tb_Vorname.Text;
+                    k.Nachname = tb_Nachname.Text;
+                    k.Strasse = tb_Strasse.Text;
+                    k.Hausnummer = tb_Hausnummer.Text;
+                    k.Postleitzahl = tb_Postleitzahl.Text;
+                    k.Ort = tb_Ort.Text;
+                    k.Vertrauenswuerdigkeit = cb_Vertrauenswuerdigkeit.Text;
+                    k.Klasse = tb_Klasse.Text;
+                    k.Mail = tb_Mail.Text;
+                    k.Telefonnummer = tb_Telefonnummer.Text;
+                    k.Add();
+                    MessageBox.Show("Der Kunde wurde erfolgreich hinzugefügt!");
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show("Der Kunde konnte nicht hinzugefügt werden!", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (rb_KundeBearbeiten.Checked)
             {
                 MessageBox.Show("Füllen Sie die markierten Felder aus, um einen Kunden zu speichern!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 IsOK();
+            }
+            else if (rb_Neukunde.Checked)
+            {
+                MessageBox.Show("Füllen Sie alle Felder aus, um einen neuen Kunden hinzuzufügen!", "Achtung",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (rb_KundeLoeschen.Checked)
+            {
+                MessageBox.Show("Füllen Sie alle Felder aus, um einen Kunden zu löschen!", "Achtung",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         #endregion
@@ -187,18 +257,81 @@ namespace Bibo_Verwaltung
         {
             if (rb_KundeBearbeiten.Checked)
             {
+                tb_Vorname.Text = "";
+                tb_Nachname.Text = "";
+                tb_Strasse.Text = "";
+                tb_Hausnummer.Text = "";
+                tb_Postleitzahl.Text = "";
+                tb_Ort.Text = "";
+                tb_Klasse.Text = "";
+                tb_Mail.Text = "";
+                tb_Telefonnummer.Text = "";
+                cb_Vertrauenswuerdigkeit.Text = "";
+                tb_KundenID.Text = "";
                 bt_laden_kunden.Enabled = true;
                 tb_KundenID.Enabled = true;
+                tb_Vorname.Enabled = true;
+                tb_Nachname.Enabled = true;
+                tb_Strasse.Enabled = true;
+                tb_Hausnummer.Enabled = true;
+                tb_Postleitzahl.Enabled = true;
+                tb_Ort.Enabled = true;
+                cb_Vertrauenswuerdigkeit.Enabled = true;
+                tb_Klasse.Enabled = true;
+                tb_Mail.Enabled = true;
+                tb_Telefonnummer.Enabled = true;
 
             } else if (rb_Neukunde.Checked)
             {
+                tb_Vorname.Text = "";
+                tb_Nachname.Text = "";
+                tb_Strasse.Text = "";
+                tb_Hausnummer.Text = "";
+                tb_Postleitzahl.Text = "";
+                tb_Ort.Text = "";
+                tb_Klasse.Text = "";
+                tb_Mail.Text = "";
+                tb_Telefonnummer.Text = "";
+                cb_Vertrauenswuerdigkeit.Text = "";
+                tb_KundenID.Text = "";
                 bt_laden_kunden.Enabled = false;
                 tb_KundenID.Enabled = false;
+                tb_Vorname.Enabled = true;
+                tb_Nachname.Enabled = true;
+                tb_Strasse.Enabled = true;
+                tb_Hausnummer.Enabled = true;
+                tb_Postleitzahl.Enabled = true;
+                tb_Ort.Enabled = true;
+                cb_Vertrauenswuerdigkeit.Enabled = true;
+                tb_Klasse.Enabled = true;
+                tb_Mail.Enabled = true;
+                tb_Telefonnummer.Enabled = true;
 
             } else if (rb_KundeLoeschen.Checked)
             {
+                tb_Vorname.Text = "";
+                tb_Nachname.Text = "";
+                tb_Strasse.Text = "";
+                tb_Hausnummer.Text = "";
+                tb_Postleitzahl.Text = "";
+                tb_Ort.Text = "";
+                tb_Klasse.Text = "";
+                tb_Mail.Text = "";
+                tb_Telefonnummer.Text = "";
+                cb_Vertrauenswuerdigkeit.Text = "";
+                tb_KundenID.Text = "";
                 bt_laden_kunden.Enabled = false;
-                tb_KundenID.Enabled = true;
+                tb_KundenID.Enabled = false;
+                tb_Vorname.Enabled = true;
+                tb_Nachname.Enabled = true;
+                tb_Strasse.Enabled = false;
+                tb_Hausnummer.Enabled = false;
+                tb_Postleitzahl.Enabled = false;
+                tb_Ort.Enabled = false;
+                cb_Vertrauenswuerdigkeit.Enabled = false;
+                tb_Klasse.Enabled = false;
+                tb_Mail.Enabled = false;
+                tb_Telefonnummer.Enabled = false;
             }
         }
         #endregion
