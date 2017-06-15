@@ -11,6 +11,7 @@ namespace Bibo_Verwaltung
 {
     class Kunde
     {
+        SQL_Verbindung con = new SQL_Verbindung();
         #region Strings
         string kundenid;
         /// <summary>
@@ -95,7 +96,6 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Load
-        SQL_Verbindung con = new SQL_Verbindung();
         private void Load()
         {
             if (con.ConnectError()) return;

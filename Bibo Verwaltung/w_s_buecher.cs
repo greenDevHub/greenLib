@@ -247,6 +247,7 @@ namespace Bibo_Verwaltung
                 {
                     try
                 {
+                    b.ISBN = tb_ISBN.Text;
                     b.Titel = tb_Titel.Text;
                     b.Autor.AutorID = cb_Autor.SelectedValue.ToString();
                     b.Verlag.VerlagID = cb_Verlag.SelectedValue.ToString();
@@ -256,6 +257,7 @@ namespace Bibo_Verwaltung
                     b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
                     b.Er_datum = dTP_Erscheinungsdatum.Value;
                     b.Save();
+                    MessageBox.Show("Das Buch wurde erfolgreich bearbeitet!");
                 }
                 catch (SqlException)
                 {

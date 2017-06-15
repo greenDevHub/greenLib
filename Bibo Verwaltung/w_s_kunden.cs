@@ -146,6 +146,7 @@ namespace Bibo_Verwaltung
                     k.Mail = tb_Mail.Text;
                     k.Telefonnummer = tb_Telefonnummer.Text;
                     k.Save();
+                    MessageBox.Show("Der Kunde wurde erfolgreich bearbeitet!");
                 }
                 catch (SqlException)
                 {

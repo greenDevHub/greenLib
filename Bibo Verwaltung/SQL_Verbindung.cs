@@ -59,7 +59,7 @@ namespace Bibo_Verwaltung
                 build = true;
             } else
             {
-                Console.WriteLine("Du hast SSPI gewählt! Benutzte bitte SQL_Verbinung(String Server) ODER SQL_Verbindung(String Server, String Database)!");
+                Console.WriteLine("Du hast SSPI gewählt! Benutzte bitte SQL_Verbindung(String Server) ODER SQL_Verbindung(String Server, String Database)!");
                 build = false;
             }  
         }

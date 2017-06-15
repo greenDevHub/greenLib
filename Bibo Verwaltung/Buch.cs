@@ -12,6 +12,7 @@ namespace Bibo_Verwaltung
 {
     class Buch
     {
+        SQL_Verbindung con = new SQL_Verbindung();
         #region Buch Eigenschaften
         string isbn;
         /// <summary>
@@ -87,7 +88,6 @@ namespace Bibo_Verwaltung
         #region Load
         private void Load()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
             string RawCommand = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' FROM t_s_buecher left join t_s_genre on buch_genre_id = ger_id left join t_s_autor on buch_autor_id = au_id left join t_s_verlag on buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id WHERE buch_isbn = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, isbn);
@@ -162,19 +162,18 @@ namespace Bibo_Verwaltung
         #region Save
         public void Save()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
             string RawCommand = "UPDATE [dbo].[t_s_buecher] set buch_titel = @titel , buch_autor_id = @autor, buch_genre_id = @genre, buch_sprache_id = @sprache, buch_verlag_id = @verlag, buch_auflage = @auflage, buch_erscheinungsdatum = @er_datum, buch_neupreis = @neupreis WHERE buch_isbn = @isbn";
             if (con.ConnectError()) return;
-            
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+
             cmd.Parameters.AddWithValue("@titel", Titel);
             cmd.Parameters.AddWithValue("@autor", Autor.AutorID);
             cmd.Parameters.AddWithValue("@genre", Genre.GenreID);
             cmd.Parameters.AddWithValue("@sprache", Sprache.SpracheID);
             cmd.Parameters.AddWithValue("@verlag", Verlag.VerlagID);
             cmd.Parameters.AddWithValue("@auflage", Auflage);
-            cmd.Parameters.AddWithValue("@er_datum", Er_datum.ToString());
-            cmd.Parameters.AddWithValue("@neupreis", neupreis.ToString());
+            cmd.Parameters.AddWithValue("@er_datum", Er_datum);
+            cmd.Parameters.AddWithValue("@neupreis", neupreis);
             cmd.Parameters.AddWithValue("@isbn", isbn);
 
             // Verbindung öffnen 
