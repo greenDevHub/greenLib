@@ -220,5 +220,11 @@ namespace Bibo_Verwaltung
             Buch b = new Buch();
             b.FillGrid1(ref Grid_Buch);
         }
+
+        private void bt_Einstellung_Click(object sender, EventArgs e)
+        {
+            Form Einstellungen = new w_s_einstellung();
+            Einstellungen.ShowDialog(this);
+        }
     }
     }
