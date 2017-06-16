@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <Server>Base_Server</Server>
+  <Datenbank>Bibo_Verwaltung</Datenbank>
+  <Verifizierung>SQL-Verifizierung</Verifizierung>
+  <Nutzername>Heinz</Nutzername>
+ <Passwort>Mustermann</Passwort>
+</Settings>

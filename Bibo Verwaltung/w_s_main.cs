@@ -212,6 +212,7 @@ namespace Bibo_Verwaltung
             Buch b = new Buch();
             b.FillGrid1(ref Grid_Buch);
         }
+<<<<<<< HEAD
         #endregion
 
         #region Link-Label
@@ -221,5 +222,13 @@ namespace Bibo_Verwaltung
             Details.ShowDialog(this);
         }
         #endregion
+=======
+
+        private void bt_Einstellung_Click(object sender, EventArgs e)
+        {
+            Form Einstellungen = new w_s_einstellung();
+            Einstellungen.ShowDialog(this);
+        }
+>>>>>>> origin/InfoAG
     }
 }

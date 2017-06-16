@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Autor.cs" />
+    <Compile Include="Einstellung.cs" />
     <Compile Include="Details.cs" />
     <Compile Include="SQL_Verbindung.cs" />
     <Compile Include="w_s_autoren.cs">
@@ -113,6 +114,12 @@
     </Compile>
     <Compile Include="w_s_details.Designer.cs">
       <DependentUpon>w_s_details.cs</DependentUpon>
+    </Compile>
+    <Compile Include="w_s_einstellung.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_einstellung.Designer.cs">
+      <DependentUpon>w_s_einstellung.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_genres.cs">
       <SubType>Form</SubType>
@@ -163,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_details.resx">
       <DependentUpon>w_s_details.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="w_s_einstellung.resx">
+      <DependentUpon>w_s_einstellung.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_genres.resx">
       <DependentUpon>w_s_genres.cs</DependentUpon>
@@ -222,6 +232,11 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SQLDaten.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
