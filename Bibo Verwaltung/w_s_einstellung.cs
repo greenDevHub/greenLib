@@ -18,16 +18,12 @@ namespace Bibo_Verwaltung
         public w_s_einstellung()
         {
             InitializeComponent();
-        }
-
-        private void Button2_Click(object sender, EventArgs e)
-        {
             XmlDocument doc = new XmlDocument();
             doc.Load("C:/Users/Anwender/Documents/GitHub/GameDev/Bibo Verwaltung/SQLDaten.xml");
 
             XmlNode node1 = doc.SelectSingleNode("/Settings/Nutzername");
             textBox1.Text = node1.InnerText;
-           
+
             XmlNode node2 = doc.SelectSingleNode("/Settings/Passwort");
             textBox2.Text = node2.InnerText;
             XmlNode node3 = doc.SelectSingleNode("/Settings/Server");
@@ -37,8 +33,12 @@ namespace Bibo_Verwaltung
             XmlNode node5 = doc.SelectSingleNode("/Settings/Verifizierung");
             comboBox3.Text = node5.InnerText;
 
+        }
+
+       
+
 
         }
     }
-    }
+    
 

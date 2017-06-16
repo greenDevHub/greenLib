@@ -132,16 +132,7 @@
             this.label5.Size = new System.Drawing.Size(50, 13);
             this.label5.TabIndex = 9;
             this.label5.Text = "Passwort";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(174, 205);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Laden";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
+       
             // 
             // w_s_einstellung
             // 
