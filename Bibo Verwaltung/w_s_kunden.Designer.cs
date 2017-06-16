@@ -52,6 +52,9 @@
             this.tb_KundenID = new System.Windows.Forms.TextBox();
             this.lb_KundenID = new System.Windows.Forms.Label();
             this.gb_kunde = new System.Windows.Forms.GroupBox();
+            this.lb_kunde_add = new System.Windows.Forms.Label();
+            this.lb_kunde_delete = new System.Windows.Forms.Label();
+            this.lb_kunde_save = new System.Windows.Forms.Label();
             this.rb_KundeLoeschen = new System.Windows.Forms.RadioButton();
             this.rb_KundeBearbeiten = new System.Windows.Forms.RadioButton();
             this.rb_Neukunde = new System.Windows.Forms.RadioButton();
@@ -66,10 +69,10 @@
             this.bt_laden_kunden.Location = new System.Drawing.Point(118, 365);
             this.bt_laden_kunden.Name = "bt_laden_kunden";
             this.bt_laden_kunden.Size = new System.Drawing.Size(102, 31);
-            this.bt_laden_kunden.TabIndex = 14;
+            this.bt_laden_kunden.TabIndex = 12;
             this.bt_laden_kunden.Text = "Laden";
             this.bt_laden_kunden.UseVisualStyleBackColor = true;
-            this.bt_laden_kunden.Click += new System.EventHandler(this.bt_laden_kunden_Click);
+            this.bt_laden_kunden.Click += new System.EventHandler(this.Load_Kunde);
             // 
             // lb_Telefonnummer
             // 
@@ -85,13 +88,13 @@
             this.tb_Telefonnummer.Location = new System.Drawing.Point(118, 339);
             this.tb_Telefonnummer.Name = "tb_Telefonnummer";
             this.tb_Telefonnummer.Size = new System.Drawing.Size(205, 20);
-            this.tb_Telefonnummer.TabIndex = 13;
+            this.tb_Telefonnummer.TabIndex = 11;
             this.tb_Telefonnummer.TextChanged += new System.EventHandler(this.tb_Telefonnummer_TextChanged);
             // 
             // lb_Mail
             // 
             this.lb_Mail.AutoSize = true;
-            this.lb_Mail.Location = new System.Drawing.Point(6, 316);
+            this.lb_Mail.Location = new System.Drawing.Point(7, 316);
             this.lb_Mail.Name = "lb_Mail";
             this.lb_Mail.Size = new System.Drawing.Size(29, 13);
             this.lb_Mail.TabIndex = 37;
@@ -102,7 +105,7 @@
             this.tb_Mail.Location = new System.Drawing.Point(118, 313);
             this.tb_Mail.Name = "tb_Mail";
             this.tb_Mail.Size = new System.Drawing.Size(205, 20);
-            this.tb_Mail.TabIndex = 12;
+            this.tb_Mail.TabIndex = 10;
             this.tb_Mail.TextChanged += new System.EventHandler(this.tb_Mail_TextChanged);
             // 
             // tb_Klasse
@@ -110,7 +113,7 @@
             this.tb_Klasse.Location = new System.Drawing.Point(118, 287);
             this.tb_Klasse.Name = "tb_Klasse";
             this.tb_Klasse.Size = new System.Drawing.Size(79, 20);
-            this.tb_Klasse.TabIndex = 11;
+            this.tb_Klasse.TabIndex = 9;
             this.tb_Klasse.TextChanged += new System.EventHandler(this.tb_Klasse_TextChanged);
             // 
             // lb_Klasse
@@ -132,7 +135,7 @@
             this.cb_Vertrauenswuerdigkeit.Location = new System.Drawing.Point(118, 260);
             this.cb_Vertrauenswuerdigkeit.Name = "cb_Vertrauenswuerdigkeit";
             this.cb_Vertrauenswuerdigkeit.Size = new System.Drawing.Size(205, 21);
-            this.cb_Vertrauenswuerdigkeit.TabIndex = 10;
+            this.cb_Vertrauenswuerdigkeit.TabIndex = 8;
             // 
             // lb_Vertrauenswuerdigkeit
             // 
@@ -148,7 +151,7 @@
             this.tb_Ort.Location = new System.Drawing.Point(118, 234);
             this.tb_Ort.Name = "tb_Ort";
             this.tb_Ort.Size = new System.Drawing.Size(205, 20);
-            this.tb_Ort.TabIndex = 9;
+            this.tb_Ort.TabIndex = 7;
             this.tb_Ort.TextChanged += new System.EventHandler(this.tb_Ort_TextChanged);
             // 
             // lb_Ort
@@ -165,7 +168,7 @@
             this.tb_Postleitzahl.Location = new System.Drawing.Point(118, 208);
             this.tb_Postleitzahl.Name = "tb_Postleitzahl";
             this.tb_Postleitzahl.Size = new System.Drawing.Size(79, 20);
-            this.tb_Postleitzahl.TabIndex = 8;
+            this.tb_Postleitzahl.TabIndex = 6;
             this.tb_Postleitzahl.TextChanged += new System.EventHandler(this.tb_Postleitzahl_TextChanged);
             // 
             // lb_Postleitzahl
@@ -182,7 +185,7 @@
             this.tb_Hausnummer.Location = new System.Drawing.Point(118, 182);
             this.tb_Hausnummer.Name = "tb_Hausnummer";
             this.tb_Hausnummer.Size = new System.Drawing.Size(79, 20);
-            this.tb_Hausnummer.TabIndex = 7;
+            this.tb_Hausnummer.TabIndex = 5;
             this.tb_Hausnummer.TextChanged += new System.EventHandler(this.tb_Hausnummer_TextChanged);
             // 
             // lb_Hausnummer
@@ -199,7 +202,7 @@
             this.tb_Strasse.Location = new System.Drawing.Point(118, 156);
             this.tb_Strasse.Name = "tb_Strasse";
             this.tb_Strasse.Size = new System.Drawing.Size(205, 20);
-            this.tb_Strasse.TabIndex = 6;
+            this.tb_Strasse.TabIndex = 4;
             this.tb_Strasse.TextChanged += new System.EventHandler(this.tb_Strasse_TextChanged);
             // 
             // lb_Strasse
@@ -216,7 +219,7 @@
             this.tb_Nachname.Location = new System.Drawing.Point(118, 104);
             this.tb_Nachname.Name = "tb_Nachname";
             this.tb_Nachname.Size = new System.Drawing.Size(205, 20);
-            this.tb_Nachname.TabIndex = 4;
+            this.tb_Nachname.TabIndex = 2;
             this.tb_Nachname.TextChanged += new System.EventHandler(this.tb_Nachname_TextChanged);
             // 
             // lb_Nachname
@@ -233,7 +236,7 @@
             this.tb_Vorname.Location = new System.Drawing.Point(118, 78);
             this.tb_Vorname.Name = "tb_Vorname";
             this.tb_Vorname.Size = new System.Drawing.Size(205, 20);
-            this.tb_Vorname.TabIndex = 3;
+            this.tb_Vorname.TabIndex = 1;
             this.tb_Vorname.TextChanged += new System.EventHandler(this.tb_Vorname_TextChanged);
             // 
             // lb_Vorname
@@ -250,7 +253,7 @@
             this.tb_KundenID.Location = new System.Drawing.Point(118, 130);
             this.tb_KundenID.Name = "tb_KundenID";
             this.tb_KundenID.Size = new System.Drawing.Size(205, 20);
-            this.tb_KundenID.TabIndex = 5;
+            this.tb_KundenID.TabIndex = 3;
             this.tb_KundenID.TextChanged += new System.EventHandler(this.tb_KundenID_TextChanged);
             // 
             // lb_KundenID
@@ -264,6 +267,9 @@
             // 
             // gb_kunde
             // 
+            this.gb_kunde.Controls.Add(this.lb_kunde_add);
+            this.gb_kunde.Controls.Add(this.lb_kunde_delete);
+            this.gb_kunde.Controls.Add(this.lb_kunde_save);
             this.gb_kunde.Controls.Add(this.rb_KundeLoeschen);
             this.gb_kunde.Controls.Add(this.rb_KundeBearbeiten);
             this.gb_kunde.Controls.Add(this.rb_Neukunde);
@@ -298,13 +304,43 @@
             this.gb_kunde.TabStop = false;
             this.gb_kunde.Text = "Kunden verwalten";
             // 
+            // lb_kunde_add
+            // 
+            this.lb_kunde_add.AutoSize = true;
+            this.lb_kunde_add.Location = new System.Drawing.Point(120, 405);
+            this.lb_kunde_add.Name = "lb_kunde_add";
+            this.lb_kunde_add.Size = new System.Drawing.Size(203, 13);
+            this.lb_kunde_add.TabIndex = 40;
+            this.lb_kunde_add.Text = "Der Kunde wurde erfolgreich hinzugefügt!";
+            this.lb_kunde_add.Visible = false;
+            // 
+            // lb_kunde_delete
+            // 
+            this.lb_kunde_delete.AutoSize = true;
+            this.lb_kunde_delete.Location = new System.Drawing.Point(120, 405);
+            this.lb_kunde_delete.Name = "lb_kunde_delete";
+            this.lb_kunde_delete.Size = new System.Drawing.Size(188, 13);
+            this.lb_kunde_delete.TabIndex = 39;
+            this.lb_kunde_delete.Text = "Der Kunde wurde erfolgreich gelöscht!";
+            this.lb_kunde_delete.Visible = false;
+            // 
+            // lb_kunde_save
+            // 
+            this.lb_kunde_save.AutoSize = true;
+            this.lb_kunde_save.Location = new System.Drawing.Point(120, 405);
+            this.lb_kunde_save.Name = "lb_kunde_save";
+            this.lb_kunde_save.Size = new System.Drawing.Size(195, 13);
+            this.lb_kunde_save.TabIndex = 38;
+            this.lb_kunde_save.Text = "Der Kunde wurde erfolgreich bearbeitet!";
+            this.lb_kunde_save.Visible = false;
+            // 
             // rb_KundeLoeschen
             // 
             this.rb_KundeLoeschen.AutoSize = true;
             this.rb_KundeLoeschen.Location = new System.Drawing.Point(286, 19);
             this.rb_KundeLoeschen.Name = "rb_KundeLoeschen";
             this.rb_KundeLoeschen.Size = new System.Drawing.Size(105, 17);
-            this.rb_KundeLoeschen.TabIndex = 2;
+            this.rb_KundeLoeschen.TabIndex = 0;
             this.rb_KundeLoeschen.Text = "Kunde Entfernen";
             this.rb_KundeLoeschen.UseVisualStyleBackColor = true;
             this.rb_KundeLoeschen.CheckedChanged += new System.EventHandler(this.rb_KundeLoeschen_CheckedChanged);
@@ -316,7 +352,7 @@
             this.rb_KundeBearbeiten.Location = new System.Drawing.Point(167, 19);
             this.rb_KundeBearbeiten.Name = "rb_KundeBearbeiten";
             this.rb_KundeBearbeiten.Size = new System.Drawing.Size(110, 17);
-            this.rb_KundeBearbeiten.TabIndex = 1;
+            this.rb_KundeBearbeiten.TabIndex = 0;
             this.rb_KundeBearbeiten.TabStop = true;
             this.rb_KundeBearbeiten.Text = "Kunde Bearbeiten";
             this.rb_KundeBearbeiten.UseVisualStyleBackColor = true;
@@ -338,10 +374,10 @@
             this.bt_save_kunde.Location = new System.Drawing.Point(221, 365);
             this.bt_save_kunde.Name = "bt_save_kunde";
             this.bt_save_kunde.Size = new System.Drawing.Size(102, 31);
-            this.bt_save_kunde.TabIndex = 15;
+            this.bt_save_kunde.TabIndex = 13;
             this.bt_save_kunde.Text = "Speichern";
             this.bt_save_kunde.UseVisualStyleBackColor = true;
-            this.bt_save_kunde.Click += new System.EventHandler(this.bt_save_kunde_Click);
+            this.bt_save_kunde.Click += new System.EventHandler(this.Save_Kunde);
             // 
             // bt_OK
             // 
@@ -349,7 +385,7 @@
             this.bt_OK.Location = new System.Drawing.Point(334, 447);
             this.bt_OK.Name = "bt_OK";
             this.bt_OK.Size = new System.Drawing.Size(97, 23);
-            this.bt_OK.TabIndex = 2;
+            this.bt_OK.TabIndex = 15;
             this.bt_OK.Text = "Schließen";
             this.bt_OK.UseVisualStyleBackColor = true;
             // 
@@ -358,10 +394,10 @@
             this.bt_clear_kunden.Location = new System.Drawing.Point(21, 447);
             this.bt_clear_kunden.Name = "bt_clear_kunden";
             this.bt_clear_kunden.Size = new System.Drawing.Size(97, 23);
-            this.bt_clear_kunden.TabIndex = 1;
+            this.bt_clear_kunden.TabIndex = 14;
             this.bt_clear_kunden.Text = "Clear";
             this.bt_clear_kunden.UseVisualStyleBackColor = true;
-            this.bt_clear_kunden.Click += new System.EventHandler(this.bt_clear_kunden_Click);
+            this.bt_clear_kunden.Click += new System.EventHandler(this.Clear_Kunde);
             // 
             // w_s_kunden
             // 
@@ -412,5 +448,8 @@
         private System.Windows.Forms.RadioButton rb_KundeBearbeiten;
         private System.Windows.Forms.RadioButton rb_Neukunde;
         private System.Windows.Forms.Button bt_clear_kunden;
+        private System.Windows.Forms.Label lb_kunde_save;
+        private System.Windows.Forms.Label lb_kunde_delete;
+        private System.Windows.Forms.Label lb_kunde_add;
     }
 }

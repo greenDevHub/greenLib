@@ -207,18 +207,19 @@ namespace Bibo_Verwaltung
                 //// Verbindung schließen 
                 con.Close();
             }
-            #endregion
-
-            private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-            {
-                Form Details = new w_s_details();
-                Details.ShowDialog(this);
-            }
-
         private void bt_Suchen_Buecher_Click(object sender, EventArgs e)
         {
             Buch b = new Buch();
             b.FillGrid1(ref Grid_Buch);
         }
+        #endregion
+
+        #region Link-Label
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Form Details = new w_s_details();
+            Details.ShowDialog(this);
+        }
+        #endregion
     }
-    }
+}

@@ -14,6 +14,7 @@ namespace Bibo_Verwaltung
 {
     class SQL_Verbindung
     {
+        #region Aufbau
         private string ConnectionString;
         private static string Base_Server = "Data Source=";
         private static string Default_Server = ".\\SQLEXPRESS";
@@ -29,7 +30,9 @@ namespace Bibo_Verwaltung
 
         private SqlConnection con = new SqlConnection();
         public SqlConnection Con { get { return con; } set { con = value; } }
+        #endregion
 
+        #region Arten von Verbindungen
         public SQL_Verbindung()
         {
             ConnectionString = Base_Server + Default_Server + ";" + Base_Database + Default_Database + ";" 
@@ -59,11 +62,13 @@ namespace Bibo_Verwaltung
                 build = true;
             } else
             {
-                Console.WriteLine("Du hast SSPI gewählt! Benutzte bitte SQL_Verbindung(String Server) ODER SQL_Verbindung(String Server, String Database)!");
+                Console.WriteLine("Du hast SSPI gewählt! Benutze bitte SQL_Verbindung(String Server) ODER SQL_Verbindung(String Server, String Database)!");
                 build = false;
             }  
         }
+        #endregion
 
+        #region Fehler bei der Verbindung
         public bool ConnectError()
         {
             if (build == false) return true;
@@ -81,12 +86,16 @@ namespace Bibo_Verwaltung
             }
             return error;
         }
+        #endregion
 
+        #region Schließen der Verbindung
         public void Close()
         {
             con.Close();
         }
+        #endregion
 
+        #region DataReader
         public SqlDataReader ExcecuteCommand(String sqlCommand, params object [] parameter)
         {
             SqlCommand cmd = new SqlCommand(sqlCommand, con);
@@ -96,5 +105,6 @@ namespace Bibo_Verwaltung
             }
             return cmd.ExecuteReader();
         }
+        #endregion
     }
 }

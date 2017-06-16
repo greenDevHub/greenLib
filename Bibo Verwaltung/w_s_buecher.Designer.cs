@@ -150,7 +150,7 @@
             this.bt_speichern_buecher.TabIndex = 14;
             this.bt_speichern_buecher.Text = "Speichern";
             this.bt_speichern_buecher.UseVisualStyleBackColor = true;
-            this.bt_speichern_buecher.Click += new System.EventHandler(this.Save);
+            this.bt_speichern_buecher.Click += new System.EventHandler(this.Save_Buecher);
             // 
             // dTP_Erscheinungsdatum
             // 
@@ -193,7 +193,7 @@
             this.bt_laden_buecher.TabIndex = 13;
             this.bt_laden_buecher.Text = "Laden";
             this.bt_laden_buecher.UseVisualStyleBackColor = true;
-            this.bt_laden_buecher.Click += new System.EventHandler(this.load_buecher);
+            this.bt_laden_buecher.Click += new System.EventHandler(this.Load_Buecher);
             // 
             // lb_Neupreis_Euro
             // 
@@ -238,7 +238,7 @@
             this.bt_Autor_s.TabIndex = 3;
             this.bt_Autor_s.Text = "s";
             this.bt_Autor_s.UseVisualStyleBackColor = true;
-            this.bt_Autor_s.Click += new System.EventHandler(this.search);
+            this.bt_Autor_s.Click += new System.EventHandler(this.Search);
             // 
             // cb_Autor
             // 
@@ -274,7 +274,7 @@
             this.bt_Verlag_s.TabIndex = 5;
             this.bt_Verlag_s.Text = "s";
             this.bt_Verlag_s.UseVisualStyleBackColor = true;
-            this.bt_Verlag_s.Click += new System.EventHandler(this.search);
+            this.bt_Verlag_s.Click += new System.EventHandler(this.Search);
             // 
             // bt_Genre_s
             // 
@@ -284,6 +284,7 @@
             this.bt_Genre_s.TabIndex = 7;
             this.bt_Genre_s.Text = "s";
             this.bt_Genre_s.UseVisualStyleBackColor = true;
+            this.bt_Genre_s.Click += new System.EventHandler(this.bt_Genre_s_Click);
             // 
             // cb_Verlag
             // 
@@ -333,6 +334,7 @@
             this.tb_Titel.Name = "tb_Titel";
             this.tb_Titel.Size = new System.Drawing.Size(200, 20);
             this.tb_Titel.TabIndex = 1;
+            this.tb_Titel.TextChanged += new System.EventHandler(this.tb_Titel_TextChanged);
             // 
             // lb_Titel
             // 
@@ -349,7 +351,7 @@
             this.tb_ISBN.Name = "tb_ISBN";
             this.tb_ISBN.Size = new System.Drawing.Size(200, 20);
             this.tb_ISBN.TabIndex = 0;
-            this.tb_ISBN.TextChanged += new System.EventHandler(this.tb_ISBN_inputOk);
+            this.tb_ISBN.TextChanged += new System.EventHandler(this.tb_ISBN_TextChanged);
             // 
             // lb_ISBN
             // 

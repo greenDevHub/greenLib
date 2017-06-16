@@ -44,6 +44,8 @@
             this.lb_Bestandzahl = new System.Windows.Forms.Label();
             this.lb_Bestand = new System.Windows.Forms.Label();
             this.gb_Leihen = new System.Windows.Forms.GroupBox();
+            this.bt_Suchen_Buecher = new System.Windows.Forms.Button();
+            this.Grid_Buch = new System.Windows.Forms.DataGridView();
             this.gb_IstVorhanden = new System.Windows.Forms.GroupBox();
             this.lb_SuchErgebnisse = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -65,13 +67,11 @@
             this.lb_Genre = new System.Windows.Forms.Label();
             this.cb_Genre = new System.Windows.Forms.ComboBox();
             this.bt_Suchen = new System.Windows.Forms.Button();
-            this.Grid_Buch = new System.Windows.Forms.DataGridView();
-            this.bt_Suchen_Buecher = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gb_Uebersicht.SuspendLayout();
             this.gb_Leihen.SuspendLayout();
-            this.gb_IstVorhanden.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Buch)).BeginInit();
+            this.gb_IstVorhanden.SuspendLayout();
             this.SuspendLayout();
             // 
             // bt_Sprachen
@@ -171,7 +171,7 @@
             this.linkLabel1.Location = new System.Drawing.Point(161, 25);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(55, 13);
-            this.linkLabel1.TabIndex = 5;
+            this.linkLabel1.TabIndex = 9;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "linkLabel1";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
@@ -240,6 +240,24 @@
             this.gb_Leihen.TabIndex = 2;
             this.gb_Leihen.TabStop = false;
             this.gb_Leihen.Text = "Buch ausleihen:";
+            // 
+            // bt_Suchen_Buecher
+            // 
+            this.bt_Suchen_Buecher.Location = new System.Drawing.Point(111, 261);
+            this.bt_Suchen_Buecher.Name = "bt_Suchen_Buecher";
+            this.bt_Suchen_Buecher.Size = new System.Drawing.Size(204, 28);
+            this.bt_Suchen_Buecher.TabIndex = 10;
+            this.bt_Suchen_Buecher.Text = "Suchen";
+            this.bt_Suchen_Buecher.UseVisualStyleBackColor = true;
+            this.bt_Suchen_Buecher.Click += new System.EventHandler(this.bt_Suchen_Buecher_Click);
+            // 
+            // Grid_Buch
+            // 
+            this.Grid_Buch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Grid_Buch.Location = new System.Drawing.Point(18, 25);
+            this.Grid_Buch.Name = "Grid_Buch";
+            this.Grid_Buch.Size = new System.Drawing.Size(394, 218);
+            this.Grid_Buch.TabIndex = 0;
             // 
             // gb_IstVorhanden
             // 
@@ -318,7 +336,7 @@
             this.rb_SuchVerlag.Location = new System.Drawing.Point(6, 175);
             this.rb_SuchVerlag.Name = "rb_SuchVerlag";
             this.rb_SuchVerlag.Size = new System.Drawing.Size(125, 17);
-            this.rb_SuchVerlag.TabIndex = 3;
+            this.rb_SuchVerlag.TabIndex = 6;
             this.rb_SuchVerlag.Text = "Nach Verlag suchen:";
             this.rb_SuchVerlag.UseVisualStyleBackColor = true;
             this.rb_SuchVerlag.CheckedChanged += new System.EventHandler(this.Suchtyp);
@@ -329,7 +347,7 @@
             this.rb_SuchAutor.Location = new System.Drawing.Point(6, 125);
             this.rb_SuchAutor.Name = "rb_SuchAutor";
             this.rb_SuchAutor.Size = new System.Drawing.Size(120, 17);
-            this.rb_SuchAutor.TabIndex = 2;
+            this.rb_SuchAutor.TabIndex = 6;
             this.rb_SuchAutor.Text = "Nach Autor suchen:";
             this.rb_SuchAutor.UseVisualStyleBackColor = true;
             this.rb_SuchAutor.CheckedChanged += new System.EventHandler(this.Suchtyp);
@@ -340,7 +358,7 @@
             this.rb_SuchGenre.Location = new System.Drawing.Point(6, 75);
             this.rb_SuchGenre.Name = "rb_SuchGenre";
             this.rb_SuchGenre.Size = new System.Drawing.Size(124, 17);
-            this.rb_SuchGenre.TabIndex = 1;
+            this.rb_SuchGenre.TabIndex = 6;
             this.rb_SuchGenre.Text = "Nach Genre suchen:";
             this.rb_SuchGenre.UseVisualStyleBackColor = true;
             this.rb_SuchGenre.CheckedChanged += new System.EventHandler(this.Suchtyp);
@@ -352,7 +370,7 @@
             this.rb_SuchTitel.Location = new System.Drawing.Point(6, 25);
             this.rb_SuchTitel.Name = "rb_SuchTitel";
             this.rb_SuchTitel.Size = new System.Drawing.Size(115, 17);
-            this.rb_SuchTitel.TabIndex = 0;
+            this.rb_SuchTitel.TabIndex = 6;
             this.rb_SuchTitel.TabStop = true;
             this.rb_SuchTitel.Text = "Nach Titel suchen:";
             this.rb_SuchTitel.UseVisualStyleBackColor = true;
@@ -387,14 +405,14 @@
             this.cb_Autor.Location = new System.Drawing.Point(127, 147);
             this.cb_Autor.Name = "cb_Autor";
             this.cb_Autor.Size = new System.Drawing.Size(120, 21);
-            this.cb_Autor.TabIndex = 6;
+            this.cb_Autor.TabIndex = 7;
             // 
             // tb_Titel
             // 
             this.tb_Titel.Location = new System.Drawing.Point(127, 47);
             this.tb_Titel.Name = "tb_Titel";
             this.tb_Titel.Size = new System.Drawing.Size(120, 20);
-            this.tb_Titel.TabIndex = 4;
+            this.tb_Titel.TabIndex = 7;
             // 
             // lb_Autor
             // 
@@ -433,7 +451,7 @@
             this.cb_Genre.Name = "cb_Genre";
             this.cb_Genre.Size = new System.Drawing.Size(120, 21);
             this.cb_Genre.Sorted = true;
-            this.cb_Genre.TabIndex = 5;
+            this.cb_Genre.TabIndex = 7;
             // 
             // bt_Suchen
             // 
@@ -444,24 +462,6 @@
             this.bt_Suchen.Text = "Suchen";
             this.bt_Suchen.UseVisualStyleBackColor = true;
             this.bt_Suchen.Click += new System.EventHandler(this.Suchen);
-            // 
-            // Grid_Buch
-            // 
-            this.Grid_Buch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Grid_Buch.Location = new System.Drawing.Point(18, 25);
-            this.Grid_Buch.Name = "Grid_Buch";
-            this.Grid_Buch.Size = new System.Drawing.Size(394, 218);
-            this.Grid_Buch.TabIndex = 0;
-            // 
-            // bt_Suchen_Buecher
-            // 
-            this.bt_Suchen_Buecher.Location = new System.Drawing.Point(111, 261);
-            this.bt_Suchen_Buecher.Name = "bt_Suchen_Buecher";
-            this.bt_Suchen_Buecher.Size = new System.Drawing.Size(204, 28);
-            this.bt_Suchen_Buecher.TabIndex = 1;
-            this.bt_Suchen_Buecher.Text = "Suchen";
-            this.bt_Suchen_Buecher.UseVisualStyleBackColor = true;
-            this.bt_Suchen_Buecher.Click += new System.EventHandler(this.bt_Suchen_Buecher_Click);
             // 
             // w_s_main
             // 
@@ -479,9 +479,9 @@
             this.gb_Uebersicht.ResumeLayout(false);
             this.gb_Uebersicht.PerformLayout();
             this.gb_Leihen.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Grid_Buch)).EndInit();
             this.gb_IstVorhanden.ResumeLayout(false);
             this.gb_IstVorhanden.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grid_Buch)).EndInit();
             this.ResumeLayout(false);
 
         }

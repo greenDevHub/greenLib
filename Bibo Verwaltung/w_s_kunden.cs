@@ -46,9 +46,9 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Load Kunde
-        private void bt_laden_kunden_Click(object sender, EventArgs e)
+        private void Load_Kunde(object sender, EventArgs e)
         {
-            if (!tb_KundenID.Text.Equals(""))
+            if(!tb_KundenID.Text.Equals(""))
             {
                 try
                 {
@@ -67,8 +67,9 @@ namespace Bibo_Verwaltung
                 }
                 catch (SqlException)
                 {
-                    MessageBox.Show("Der Kunde konnte nicht geladen werden!", "Error",
+                    MessageBox.Show("Der Kunde existiert nicht!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Clear();
                 }             
             }
             else if (!tb_Vorname.Text.Equals("")
@@ -92,25 +93,16 @@ namespace Bibo_Verwaltung
                 }
                 catch (SqlException)
                 {
-                    MessageBox.Show("Der Kunde konnte nicht geladen werden!", "Error",
+                    MessageBox.Show("Der Kunde existiert nicht!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Clear();
                 }
                     }
             else
             {
                 MessageBox.Show("Füllen Sie nur die markierten Felder aus, um einen Kunden zu laden!", "Achtung",
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                tb_Vorname.Text = "";
-                tb_Nachname.Text = "";
-                tb_Strasse.Text = "";
-                tb_Hausnummer.Text = "";
-                tb_Postleitzahl.Text = "";
-                tb_Ort.Text = "";
-                tb_Klasse.Text = "";
-                tb_Mail.Text = "";
-                tb_Telefonnummer.Text = "";
-                cb_Vertrauenswuerdigkeit.Text = "";
-                tb_KundenID.Text = "";
+                Clear();
                 tb_Vorname.BackColor = Color.Red;
                 tb_Nachname.BackColor = Color.Red;
             }
@@ -119,7 +111,7 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Save Kunde
-        private void bt_save_kunde_Click(object sender, EventArgs e)
+        private void Save_Kunde(object sender, EventArgs e)
         {
             if (rb_KundeBearbeiten.Checked
                 && !tb_Vorname.Text.Equals("")
@@ -135,6 +127,7 @@ namespace Bibo_Verwaltung
             {
                 try
                 {
+                    lb_kunde_save.Visible = false;
                     k.KundenID = tb_KundenID.Text;
                     k.Vorname = tb_Vorname.Text;
                     k.Nachname = tb_Nachname.Text;
@@ -147,7 +140,7 @@ namespace Bibo_Verwaltung
                     k.Mail = tb_Mail.Text;
                     k.Telefonnummer = tb_Telefonnummer.Text;
                     k.Save();
-                    MessageBox.Show("Der Kunde wurde erfolgreich bearbeitet!");
+                    lb_kunde_save.Visible = true;
                 }
                 catch (SqlException)
                 {
@@ -161,6 +154,7 @@ namespace Bibo_Verwaltung
             {
                 try
                 {
+                    lb_kunde_delete.Visible = false;
                     k.KundenID = tb_KundenID.Text;
                     k.Vorname = tb_Vorname.Text;
                     k.Nachname = tb_Nachname.Text;
@@ -173,7 +167,7 @@ namespace Bibo_Verwaltung
                     k.Mail = tb_Mail.Text;
                     k.Telefonnummer = tb_Telefonnummer.Text;
                     k.Delete();
-                    MessageBox.Show("Der Kunde wurde erfolgreich gelöscht!");
+                    lb_kunde_delete.Visible = true;                    
                 }
                 catch (SqlException)
                 {
@@ -195,6 +189,7 @@ namespace Bibo_Verwaltung
             {
                 try
                 {
+                    lb_kunde_add.Visible = false;
                     k.KundenID = tb_KundenID.Text;
                     k.Vorname = tb_Vorname.Text;
                     k.Nachname = tb_Nachname.Text;
@@ -207,7 +202,8 @@ namespace Bibo_Verwaltung
                     k.Mail = tb_Mail.Text;
                     k.Telefonnummer = tb_Telefonnummer.Text;
                     k.Add();
-                    MessageBox.Show("Der Kunde wurde erfolgreich hinzugefügt!");
+                    lb_kunde_add.Visible = true;
+                    
                 }
                 catch (SqlException)
                 {
@@ -236,8 +232,16 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Clear Kunde
-        private void bt_clear_kunden_Click(object sender, EventArgs e)
+        private void Clear_Kunde(object sender, EventArgs e)
         {
+            Clear();
+        }
+
+        private void Clear()
+        {
+            lb_kunde_save.Visible = false;
+            lb_kunde_delete.Visible = false;
+            lb_kunde_add.Visible = false;
             tb_Vorname.Text = "";
             tb_Nachname.Text = "";
             tb_Strasse.Text = "";
@@ -249,6 +253,17 @@ namespace Bibo_Verwaltung
             tb_Telefonnummer.Text = "";
             cb_Vertrauenswuerdigkeit.Text = "";
             tb_KundenID.Text = "";
+            tb_KundenID.BackColor = Color.White;
+            tb_Vorname.BackColor = Color.White;
+            tb_Nachname.BackColor = Color.White;
+            tb_Strasse.BackColor = Color.White;
+            tb_Hausnummer.BackColor = Color.White;
+            tb_Postleitzahl.BackColor = Color.White;
+            tb_Ort.BackColor = Color.White;
+            tb_Klasse.BackColor = Color.White;
+            tb_Mail.BackColor = Color.White;
+            tb_Telefonnummer.BackColor = Color.White;
+            cb_Vertrauenswuerdigkeit.BackColor = Color.White;
         }
         #endregion
 
@@ -257,17 +272,7 @@ namespace Bibo_Verwaltung
         {
             if (rb_KundeBearbeiten.Checked)
             {
-                tb_Vorname.Text = "";
-                tb_Nachname.Text = "";
-                tb_Strasse.Text = "";
-                tb_Hausnummer.Text = "";
-                tb_Postleitzahl.Text = "";
-                tb_Ort.Text = "";
-                tb_Klasse.Text = "";
-                tb_Mail.Text = "";
-                tb_Telefonnummer.Text = "";
-                cb_Vertrauenswuerdigkeit.Text = "";
-                tb_KundenID.Text = "";
+                Clear();
                 bt_laden_kunden.Enabled = true;
                 tb_KundenID.Enabled = true;
                 tb_Vorname.Enabled = true;
@@ -283,17 +288,7 @@ namespace Bibo_Verwaltung
 
             } else if (rb_Neukunde.Checked)
             {
-                tb_Vorname.Text = "";
-                tb_Nachname.Text = "";
-                tb_Strasse.Text = "";
-                tb_Hausnummer.Text = "";
-                tb_Postleitzahl.Text = "";
-                tb_Ort.Text = "";
-                tb_Klasse.Text = "";
-                tb_Mail.Text = "";
-                tb_Telefonnummer.Text = "";
-                cb_Vertrauenswuerdigkeit.Text = "";
-                tb_KundenID.Text = "";
+                Clear();
                 bt_laden_kunden.Enabled = false;
                 tb_KundenID.Enabled = false;
                 tb_Vorname.Enabled = true;
@@ -309,17 +304,7 @@ namespace Bibo_Verwaltung
 
             } else if (rb_KundeLoeschen.Checked)
             {
-                tb_Vorname.Text = "";
-                tb_Nachname.Text = "";
-                tb_Strasse.Text = "";
-                tb_Hausnummer.Text = "";
-                tb_Postleitzahl.Text = "";
-                tb_Ort.Text = "";
-                tb_Klasse.Text = "";
-                tb_Mail.Text = "";
-                tb_Telefonnummer.Text = "";
-                cb_Vertrauenswuerdigkeit.Text = "";
-                tb_KundenID.Text = "";
+                Clear();
                 bt_laden_kunden.Enabled = false;
                 tb_KundenID.Enabled = false;
                 tb_Vorname.Enabled = true;
@@ -513,5 +498,6 @@ namespace Bibo_Verwaltung
             Modus();
         }
         #endregion
+
     }
 }

@@ -96,7 +96,7 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Load Buch
-        private void load_buecher(object sender, EventArgs e)
+        private void Load_Buecher(object sender, EventArgs e)
         {
             if (!tb_ISBN.Text.Equals(""))
             {
@@ -143,8 +143,15 @@ namespace Bibo_Verwaltung
                 }
                 catch (SqlException)
                 {
-                    MessageBox.Show("Das Buch konnte nicht geladen werden!", "Error",
+                    MessageBox.Show("Das Buch existiert nicht!", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Clear();
+                }
+                catch(NullReferenceException)
+                {
+                    MessageBox.Show("Das Buch existiert nicht!", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Clear();
                 }
             }
             else if (!tb_Titel.Text.Equals(""))
@@ -192,22 +199,16 @@ namespace Bibo_Verwaltung
                 }
                 catch (SqlException)
                 {
-                    MessageBox.Show("Das Buch konnte nicht geladen werden!", "Error",
+                    MessageBox.Show("Das Buch existiert nicht!", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Clear();
                 }
             }
             else
             {
                 MessageBox.Show("Füllen Sie eines der markierten Felder aus, um ein Buch zu laden!", "Achtung",
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                tb_ISBN.Text = "";
-                tb_Titel.Text = "";
-                cb_Autor.Text = "";
-                cb_Verlag.Text = "";
-                cb_Genre.Text = "";
-                cb_Sprache.Text = "";
-                tb_Auflage.Text = "";
-                tb_Neupreis.Text = "";
+                Clear();
                 tb_ISBN.BackColor = Color.Red;
                 tb_Titel.BackColor = Color.Red;
             }
@@ -215,7 +216,7 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Search
-        private void search(object sender, EventArgs e)
+        private void Search(object sender, EventArgs e)
         {
             //ComboBox-Items in Array speichern
             string[] strAutor = new string[cb_Autor.Items.Count];
@@ -231,10 +232,20 @@ namespace Bibo_Verwaltung
                 cb_Autor.SelectedItem = autor_dialog.such_auswahl;
             }
         }
+        private void bt_Genre_s_Click(object sender, EventArgs e)
+        {
+            Form Genres = new w_s_genres();
+            Genres.ShowDialog(this);
+        }
+        private void bt_Sprache_s_Click(object sender, EventArgs e)
+        {
+            Form Sprache = new w_s_sprachen();
+            Sprache.ShowDialog(this);
+        }
         #endregion
 
         #region Save Buch
-        private void Save(object sender, EventArgs e)
+        private void Save_Buecher(object sender, EventArgs e)
         {
             if(!tb_ISBN.Text.Equals("")
                 && !tb_Titel.Text.Equals("")
@@ -276,6 +287,10 @@ namespace Bibo_Verwaltung
         #region Clear Buch
         private void bt_clear_buecher_Click(object sender, EventArgs e)
         {
+            Clear();
+        }
+        private void Clear()
+        {
             tb_ISBN.Text = "";
             tb_Titel.Text = "";
             cb_Autor.Text = "";
@@ -284,6 +299,25 @@ namespace Bibo_Verwaltung
             cb_Sprache.Text = "";
             tb_Auflage.Text = "";
             tb_Neupreis.Text = "";
+            tb_ISBN.BackColor = Color.White;
+            tb_Titel.BackColor = Color.White;
+            cb_Autor.BackColor = Color.White;
+            cb_Verlag.BackColor = Color.White;
+            cb_Genre.BackColor = Color.White;
+            cb_Sprache.BackColor = Color.White;
+            tb_Auflage.BackColor = Color.White;
+            tb_Neupreis.BackColor = Color.White;
+        }
+        #endregion
+
+        #region Textboxfarbe
+        private void tb_ISBN_TextChanged(object sender, EventArgs e)
+        {
+            tb_ISBN.BackColor = Color.White;
+        }
+        private void tb_Titel_TextChanged(object sender, EventArgs e)
+        {
+            tb_Titel.BackColor = Color.White;
         }
         #endregion
     }
