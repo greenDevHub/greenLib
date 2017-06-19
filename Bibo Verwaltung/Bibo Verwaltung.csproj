@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Autor.cs" />
+    <Compile Include="Einstellung.cs" />
     <Compile Include="Details.cs" />
     <Compile Include="SQL_Verbindung.cs" />
     <Compile Include="w_s_autoren.cs">
