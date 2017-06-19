@@ -67,7 +67,6 @@
             this.lb_Genre = new System.Windows.Forms.Label();
             this.cb_Genre = new System.Windows.Forms.ComboBox();
             this.bt_Suchen = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gb_Uebersicht.SuspendLayout();
             this.gb_Leihen.SuspendLayout();
@@ -127,7 +126,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.bt_Buecher);
             this.groupBox1.Controls.Add(this.bt_Sprachen);
             this.groupBox1.Controls.Add(this.bt_Verlage);
@@ -248,7 +246,6 @@
             this.bt_Suchen_Buecher.Location = new System.Drawing.Point(111, 261);
             this.bt_Suchen_Buecher.Name = "bt_Suchen_Buecher";
             this.bt_Suchen_Buecher.Size = new System.Drawing.Size(204, 28);
-            this.bt_Suchen_Buecher.TabIndex = 10;
             this.bt_Suchen_Buecher.TabIndex = 1;
             this.bt_Suchen_Buecher.Text = "Suchen";
             this.bt_Suchen_Buecher.UseVisualStyleBackColor = true;
@@ -466,16 +463,6 @@
             this.bt_Suchen.UseVisualStyleBackColor = true;
             this.bt_Suchen.Click += new System.EventHandler(this.Suchen);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(311, 255);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Einstellungen";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.bt_Einstellung_Click);
-            // 
             // w_s_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -540,6 +527,5 @@
         private System.Windows.Forms.Label lb_SuchErgebnisse;
         private System.Windows.Forms.DataGridView Grid_Buch;
         private System.Windows.Forms.Button bt_Suchen_Buecher;
-        private System.Windows.Forms.Button button1;
     }
 }
