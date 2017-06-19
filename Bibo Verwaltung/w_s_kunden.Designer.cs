@@ -1,6 +1,6 @@
 ﻿namespace Bibo_Verwaltung
 {
-    partial class w_s_kunden
+    partial class w_s_Kunden
     {
         /// <summary>
         /// Required designer variable.

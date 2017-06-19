@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_kunden : Form
+    public partial class w_s_Kunden : Form
     {
         Kunde k = new Kunde();
 
-        public w_s_kunden()
+        public w_s_Kunden()
         {
             InitializeComponent();
         }

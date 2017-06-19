@@ -73,7 +73,7 @@ namespace Bibo_Verwaltung
         #region Formulare aufrufen
             private void bt_Kunden_Click(object sender, EventArgs e)
             {
-                Form Kunden = new w_s_kunden();
+                Form Kunden = new w_s_Kunden();
                 Kunden.ShowDialog(this);
             }
 
@@ -106,10 +106,15 @@ namespace Bibo_Verwaltung
                 Form Buecher = new w_s_buecher();
                 Buecher.ShowDialog(this);
             }
-            #endregion
+            private void bt_Einstellungen_Click(object sender, EventArgs e)
+            {
+                Form Einstellungen = new w_s_Einstellungen();
+                Einstellungen.ShowDialog(this);
+            }
+        #endregion
 
         #region Buch-Suche
-            public void Suchtyp(object sender, EventArgs e)
+        public void Suchtyp(object sender, EventArgs e)
             {
                 if (rb_SuchAutor.Checked)
                 {
@@ -219,6 +224,11 @@ namespace Bibo_Verwaltung
         {
             Buch b = new Buch();
             b.FillGrid1(ref Grid_Buch);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
     }
