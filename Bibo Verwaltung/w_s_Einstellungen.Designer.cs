@@ -2,18 +2,18 @@
 {
     partial class w_s_Einstellungen
     {
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label cb_Server;
+        private System.Windows.Forms.Label lb_Server;
         private System.Windows.Forms.Button bt_save;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Label cb_Database;
-        private System.Windows.Forms.Label cb_Security;
-        private System.Windows.Forms.Button b_Schließen;
-        private System.Windows.Forms.Label tb_Benutzername;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label tb_Passwort;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cb_Security;
+        private System.Windows.Forms.Label lb_Database;
+        private System.Windows.Forms.Label lb_Security;
+        private System.Windows.Forms.Button bt_Schließen;
+        private System.Windows.Forms.Label lb_Benutzername;
+        private System.Windows.Forms.TextBox tb_Benutzername;
+        private System.Windows.Forms.TextBox tb_Passwort;
+        private System.Windows.Forms.Label lb_Passwort;
+        private System.Windows.Forms.TextBox tb_Server;
+        private System.Windows.Forms.TextBox tb_Database;
+        private System.Windows.Forms.Button bt_Laden;
     }
 }
