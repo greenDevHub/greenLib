@@ -14,7 +14,9 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_Einstellungen : Form
     {
-        string Pfad = "C:/Users/Anwender/Documents/Einstellungen.txt";
+        Einstellung set = new Einstellung();
+
+        string path = "C:/Users/Anwender/Documents/Einstellungen.txt";
         public w_s_Einstellungen()
         {
             InitializeComponent();
@@ -23,7 +25,7 @@ namespace Bibo_Verwaltung
 
         private bool File_Exists()
         {
-            if (File.Exists(Pfad))
+            if (File.Exists(path))
             {
                 return true;
             }
@@ -32,79 +34,54 @@ namespace Bibo_Verwaltung
                 return false;
             }
         }
-
+        
         #region FileHandling
         private void Save(object sender, EventArgs e)
         {
             // combobox nimmt den ausgewählten Wert an
-            cb_Security.Select();
             //Auslesen und Variablen beschreiben
-            string server = tb_Server.Text;
-            string database = tb_Database.Text;
-            string security = cb_Security.Text;
-            string name = tb_Benutzername.Text;
-            string pw = tb_Passwort.Text;
-
-            if (server != "" && database != "" && security != "")
+            if (tb_Server.Text != "" && tb_Database.Text != "" && cb_Security.Text != "")
             {
-                File.WriteAllText(Pfad, server + "\r\n" + database + "\r\n" + security + "\r\n" + name + "\r\n" + pw);
-                MessageBox.Show("Speichern erfolgreich!");
+
+                set.Pw = tb_Passwort.Text;
+                set.Security = cb_Security.Text;
+                set.Name = tb_Benutzername.Text;
+                set.Server = tb_Server.Text;
+                set.Database = tb_Database.Text;
+                
+                set.Save();
+                
+
             }
             else
             {
-                Error_Handling();
+                ErrorHandling();
             }
-
         }
         
         
         private void Load()
         {
-            if (!File_Exists())
-            {
-                File.WriteAllText(Pfad, "\r\n\r\n\r\n\r\n\r\n");
-            }
-            //alle Zeilen lesen
-            var zeilen = File.ReadLines(Pfad);
-            //Zeichen in die Textboxen füllen
-            if (zeilen.Count() >= 1) tb_Server.Text = zeilen.First();
-            if (zeilen.Count() >= 2) tb_Database.Text = zeilen.Skip(1).First();
-            if (zeilen.Count() >= 4) tb_Benutzername.Text = zeilen.Skip(3).First();
-            if (zeilen.Count() >= 5) tb_Passwort.Text = zeilen.Skip(4).First();
+            set.Load();
+            tb_Server.Text = set.Server;
+            tb_Database.Text = set.Database;
+            cb_Security.Text = set.Security;
+            tb_Benutzername.Text = set.Name;
+            tb_Passwort.Text = set.Pw;
+            
 
-            
-            if(zeilen.Count() >= 3)
-            {
-                if (zeilen.Skip(2).First() == "Windows Authentifizierung")
-                {
-                    cb_Security.SelectedItem = "Windows Authentifizierung";
-                }
-                else if (zeilen.Skip(2).First() == "SQL Authentifizierung")
-                {
-                    cb_Security.SelectedItem = "SQL Authentifizierung";
-                }
-                else
-                {
-                    MessageBox.Show("Unbekannte Authentifizierungsart. Windows Authentifizierung wurde ausgewählt");
-                    cb_Security.SelectedItem = "Windows Authentifizierung";
-                }
-            }
-            
         }
         #endregion
 
 
-        private void Error_Handling()
+        private void ErrorHandling()
         {
-            if (tb_Server.Text == "" || tb_Database.Text == "" || cb_Security.Text == "")
-            {
-                tb_Server.BackColor = Color.Red;
-                tb_Database.BackColor = Color.Red;
-                cb_Security.BackColor = Color.Red;
-                tb_Benutzername.BackColor = Color.Red;
-                tb_Passwort.BackColor = Color.Red;
-                MessageBox.Show("Bitte füllen Sie alle Felder aus");
-            }
+            if(tb_Server.Text == "") tb_Server.BackColor = Color.Red;
+            if(tb_Database.Text == "") tb_Database.BackColor = Color.Red;
+            if(cb_Security.Text == "") cb_Security.BackColor = Color.Red;
+            if(tb_Benutzername.Text == "") tb_Benutzername.BackColor = Color.Red;
+            if(tb_Passwort.Text == "") tb_Passwort.BackColor = Color.Red;
+            MessageBox.Show("Bitte füllen Sie alle Felder aus");
         }
         
         #region Buttons
@@ -124,7 +101,7 @@ namespace Bibo_Verwaltung
             tb_Passwort.BackColor = Color.White;
             cb_Security.BackColor = Color.White;
         }
-        private void Visible(object sender, EventArgs e)
+        private void Visibility(object sender, EventArgs e)
         {
             if(cb_Security.Text == "Windows Authentifizierung")
             {
@@ -141,7 +118,7 @@ namespace Bibo_Verwaltung
                 lb_Passwort.Visible = true;
             }
         }
-        private void Laden(object sender, EventArgs e)
+        private void Load2(object sender, EventArgs e)
         {
             Load();
         }
@@ -195,8 +172,8 @@ namespace Bibo_Verwaltung
             this.cb_Security.Name = "cb_Security";
             this.cb_Security.Size = new System.Drawing.Size(121, 21);
             this.cb_Security.TabIndex = 3;
-            this.cb_Security.TextChanged += new System.EventHandler(this.Visible);
-            this.cb_Security.Click += new System.EventHandler(this.Visible);
+            this.cb_Security.TextChanged += new System.EventHandler(this.Visibility);
+            this.cb_Security.Click += new System.EventHandler(this.Visibility);
             // 
             // lb_Database
             // 
@@ -241,7 +218,7 @@ namespace Bibo_Verwaltung
             this.tb_Benutzername.Name = "tb_Benutzername";
             this.tb_Benutzername.Size = new System.Drawing.Size(121, 20);
             this.tb_Benutzername.TabIndex = 4;
-            this.tb_Benutzername.Click += new System.EventHandler(this.Visible);
+            this.tb_Benutzername.Click += new System.EventHandler(this.Visibility);
             this.tb_Benutzername.TextChanged += new System.EventHandler(this.tb_White);
             // 
             // tb_Passwort
@@ -250,7 +227,7 @@ namespace Bibo_Verwaltung
             this.tb_Passwort.Name = "tb_Passwort";
             this.tb_Passwort.Size = new System.Drawing.Size(121, 20);
             this.tb_Passwort.TabIndex = 5;
-            this.tb_Passwort.Click += new System.EventHandler(this.Visible);
+            this.tb_Passwort.Click += new System.EventHandler(this.Visibility);
             this.tb_Passwort.TextChanged += new System.EventHandler(this.tb_White);
             // 
             // lb_Passwort
@@ -268,7 +245,7 @@ namespace Bibo_Verwaltung
             this.tb_Server.Name = "tb_Server";
             this.tb_Server.Size = new System.Drawing.Size(121, 20);
             this.tb_Server.TabIndex = 1;
-            this.tb_Server.Click += new System.EventHandler(this.Visible);
+            this.tb_Server.Click += new System.EventHandler(this.Visibility);
             this.tb_Server.TextChanged += new System.EventHandler(this.tb_White);
             // 
             // tb_Database
@@ -277,7 +254,7 @@ namespace Bibo_Verwaltung
             this.tb_Database.Name = "tb_Database";
             this.tb_Database.Size = new System.Drawing.Size(121, 20);
             this.tb_Database.TabIndex = 2;
-            this.tb_Database.Click += new System.EventHandler(this.Visible);
+            this.tb_Database.Click += new System.EventHandler(this.Visibility);
             this.tb_Database.TextChanged += new System.EventHandler(this.tb_White);
             // 
             // bt_Laden
@@ -288,7 +265,7 @@ namespace Bibo_Verwaltung
             this.bt_Laden.TabIndex = 14;
             this.bt_Laden.Text = "Laden";
             this.bt_Laden.UseVisualStyleBackColor = true;
-            this.bt_Laden.Click += new System.EventHandler(this.Laden);
+            this.bt_Laden.Click += new System.EventHandler(this.Load2);
             // 
             // w_s_Einstellungen
             // 
@@ -307,7 +284,7 @@ namespace Bibo_Verwaltung
             this.Controls.Add(this.bt_save);
             this.Controls.Add(this.lb_Server);
             this.Name = "w_s_Einstellungen";
-            this.Click += new System.EventHandler(this.Visible);
+            this.Click += new System.EventHandler(this.Visibility);
             this.ResumeLayout(false);
             this.PerformLayout();
 
