@@ -25,5 +25,30 @@ namespace Bibo_Verwaltung
         {
             genre.SaveGrid(ref gv_Genres);
         }
+
+        private void dataGridView_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Back)
+            {
+                try
+                {
+                    var selectedCell = gv_Genres.SelectedCells[0];
+                    gv_Genres.Rows.Remove(gv_Genres.CurrentRow);
+                }
+                catch
+                {
+                    if (gv_Genres.CurrentRow.Selected == true)
+                    {
+                        MessageBox.Show("Diese Zeile kann nicht entfernt werden!", "Achtung",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Markieren Sie eine Zeile!", "Achtung",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+        }
     }
 }

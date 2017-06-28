@@ -25,5 +25,30 @@ namespace Bibo_Verwaltung
         {
             autor.SaveGrid(ref gv_Autoren);
         }
+
+        private void dataGridView_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Back)
+            {
+                try
+                {
+                    var selectedCell = gv_Autoren.SelectedCells[0];
+                    gv_Autoren.Rows.Remove(gv_Autoren.CurrentRow);
+                }
+                catch
+                {
+                    if (gv_Autoren.CurrentRow.Selected == true)
+                    {
+                        MessageBox.Show("Diese Zeile kann nicht entfernt werden!", "Achtung",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Markieren Sie eine Zeile!", "Achtung",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+        }
     }
 }
