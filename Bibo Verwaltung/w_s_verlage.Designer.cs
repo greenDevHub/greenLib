@@ -48,6 +48,7 @@
             // 
             this.gv_Verlage.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_Verlage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gv_Verlage.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.gv_Verlage.Location = new System.Drawing.Point(12, 25);
             this.gv_Verlage.MultiSelect = false;
             this.gv_Verlage.Name = "gv_Verlage";
