@@ -35,14 +35,14 @@ namespace Bibo_Verwaltung
         #region Arten von Verbindungen
         public SQL_Verbindung()
         {
-            ConnectionString = Base_Server + Default_Server + ";" + Base_Database + Default_Database + ";" 
+            ConnectionString = Base_Server + Default_Server + ";" + Base_Database + Default_Database + ";"
                 + Base_Server_Integrated_Security + Default_Server_Integrated_Security + ";";
             build = true;
         }
 
         public SQL_Verbindung(string Server)
         {
-            ConnectionString = Base_Server + Server.ToLower() + ";" + Base_Database + Default_Database + ";" 
+            ConnectionString = Base_Server + Server.ToLower() + ";" + Base_Database + Default_Database + ";"
                 + Base_Server_Integrated_Security + Default_Server_Integrated_Security + ";";
             build = true;
         }
@@ -57,14 +57,15 @@ namespace Bibo_Verwaltung
         {
             if (Security == false)
             {
-                ConnectionString = Base_Server + Server.ToLower() + ";" + Base_Database + Default_Database + ";" 
+                ConnectionString = Base_Server + Server.ToLower() + ";" + Base_Database + Database.ToLower() + ";"
                     + Base_Server_Integrated_Security + "false;" + Base_Username + Username + ";" + Base_Password + Password + ";";
                 build = true;
-            } else
+            }
+            else
             {
-                Console.WriteLine("Du hast SSPI gewählt! Benutze bitte SQL_Verbindung(String Server) ODER SQL_Verbindung(String Server, String Database)!");
-                build = false;
-            }  
+                ConnectionString = Base_Server + Server.ToLower() + ";" + Base_Database + Database.ToLower() + ";"
+                    + Base_Server_Integrated_Security + Default_Server_Integrated_Security;
+            }
         }
         #endregion
 
@@ -96,7 +97,7 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region DataReader
-        public SqlDataReader ExcecuteCommand(String sqlCommand, params object [] parameter)
+        public SqlDataReader ExcecuteCommand(String sqlCommand, params object[] parameter)
         {
             SqlCommand cmd = new SqlCommand(sqlCommand, con);
             for (int i = 0; i < parameter.Length; i++)
@@ -106,5 +107,6 @@ namespace Bibo_Verwaltung
             return cmd.ExecuteReader();
         }
         #endregion
+
     }
 }

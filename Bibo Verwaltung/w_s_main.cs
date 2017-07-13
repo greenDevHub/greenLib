@@ -225,10 +225,11 @@ namespace Bibo_Verwaltung
             Buch b = new Buch();
             b.FillGrid1(ref Grid_Buch);
         }
+       
 
         private void button1_Click(object sender, EventArgs e)
         {
-
         }
+
     }
     }

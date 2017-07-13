@@ -15,5 +15,6 @@
         private System.Windows.Forms.TextBox tb_Server;
         private System.Windows.Forms.TextBox tb_Database;
         private System.Windows.Forms.Button bt_Laden;
+        private System.Windows.Forms.Button button1;
     }
 }

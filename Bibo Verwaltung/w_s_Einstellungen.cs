@@ -141,6 +141,7 @@ namespace Bibo_Verwaltung
             this.tb_Server = new System.Windows.Forms.TextBox();
             this.tb_Database = new System.Windows.Forms.TextBox();
             this.bt_Laden = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lb_Server
@@ -156,7 +157,7 @@ namespace Bibo_Verwaltung
             // 
             this.bt_save.Location = new System.Drawing.Point(174, 226);
             this.bt_save.Name = "bt_save";
-            this.bt_save.Size = new System.Drawing.Size(75, 23);
+            this.bt_save.Size = new System.Drawing.Size(83, 23);
             this.bt_save.TabIndex = 6;
             this.bt_save.Text = "Speichern";
             this.bt_save.UseVisualStyleBackColor = true;
@@ -267,9 +268,20 @@ namespace Bibo_Verwaltung
             this.bt_Laden.UseVisualStyleBackColor = true;
             this.bt_Laden.Click += new System.EventHandler(this.Load2);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(263, 226);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(119, 23);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Verbindungstest";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // w_s_Einstellungen
             // 
             this.ClientSize = new System.Drawing.Size(531, 259);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.bt_Laden);
             this.Controls.Add(this.tb_Database);
             this.Controls.Add(this.tb_Server);
@@ -289,9 +301,17 @@ namespace Bibo_Verwaltung
             this.PerformLayout();
 
         }
+
         #endregion
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            bool auth;
+            if (set.Security == "SQL Authentifizierung") auth = false;
+            else auth = true;
+            SQL_Verbindung con = new SQL_Verbindung(set.Server, set.Database, auth, set.Name, set.Pw);
+            if (con.ConnectError()) MessageBox.Show("Verbindung zum Server " + set.Server + " fehlgeschlagen");
+        }
     }
 }
 
