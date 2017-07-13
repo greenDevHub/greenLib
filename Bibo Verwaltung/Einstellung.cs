@@ -31,7 +31,7 @@ namespace Bibo_Verwaltung
         private string pw;
         public string Pw { get { return pw; } set { pw = value; } }
 
-        private string path = "C:/Users/Anwender/Documents/Einstellungen.txt";
+        private string path = Environment.ExpandEnvironmentVariables(@"C:/Users/%USERNAME%/Documents/Einstellungen.txt");
 
         #endregion
 
@@ -50,11 +50,24 @@ namespace Bibo_Verwaltung
                 return false;
             }
         }
-
+        private bool IsFileReadOnly(string path)
+        {
+            // Create a new FileInfo object.
+            FileInfo fInfo = new FileInfo(path);
+            // Return the IsReadOnly property value.
+            return fInfo.IsReadOnly;
+        }
         public void Save()
         {
+            if (!IsFileReadOnly(path))
+            {
             File.WriteAllText(path, Server + "\r\n" + Database + "\r\n" + Security + "\r\n" + Name + "\r\n" + Pw);
             MessageBox.Show("Speichern erfolgreich!");
+            }
+            else
+            {
+                MessageBox.Show("Speichern nicht erfolgreich! Die Datei ist schreibgeschützt!");
+            }
         }
         public void Load()
         {

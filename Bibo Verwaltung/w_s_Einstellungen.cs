@@ -148,7 +148,7 @@ namespace Bibo_Verwaltung
             this.lb_Server.AutoSize = true;
             this.lb_Server.Location = new System.Drawing.Point(44, 33);
             this.lb_Server.Name = "lb_Server";
-            this.lb_Server.Size = new System.Drawing.Size(38, 13);
+            this.lb_Server.Size = new System.Drawing.Size(50, 17);
             this.lb_Server.TabIndex = 3;
             this.lb_Server.Text = "Server";
             // 
@@ -170,7 +170,7 @@ namespace Bibo_Verwaltung
             "SQL Authentifizierung"});
             this.cb_Security.Location = new System.Drawing.Point(93, 112);
             this.cb_Security.Name = "cb_Security";
-            this.cb_Security.Size = new System.Drawing.Size(121, 21);
+            this.cb_Security.Size = new System.Drawing.Size(403, 24);
             this.cb_Security.TabIndex = 3;
             this.cb_Security.TextChanged += new System.EventHandler(this.Visibility);
             this.cb_Security.Click += new System.EventHandler(this.Visibility);
@@ -180,7 +180,7 @@ namespace Bibo_Verwaltung
             this.lb_Database.AutoSize = true;
             this.lb_Database.Location = new System.Drawing.Point(34, 74);
             this.lb_Database.Name = "lb_Database";
-            this.lb_Database.Size = new System.Drawing.Size(53, 13);
+            this.lb_Database.Size = new System.Drawing.Size(69, 17);
             this.lb_Database.TabIndex = 7;
             this.lb_Database.Text = "Database";
             // 
@@ -189,7 +189,7 @@ namespace Bibo_Verwaltung
             this.lb_Security.AutoSize = true;
             this.lb_Security.Location = new System.Drawing.Point(41, 115);
             this.lb_Security.Name = "lb_Security";
-            this.lb_Security.Size = new System.Drawing.Size(45, 13);
+            this.lb_Security.Size = new System.Drawing.Size(59, 17);
             this.lb_Security.TabIndex = 8;
             this.lb_Security.Text = "Security";
             // 
@@ -208,7 +208,7 @@ namespace Bibo_Verwaltung
             this.lb_Benutzername.AutoSize = true;
             this.lb_Benutzername.Location = new System.Drawing.Point(9, 164);
             this.lb_Benutzername.Name = "lb_Benutzername";
-            this.lb_Benutzername.Size = new System.Drawing.Size(75, 13);
+            this.lb_Benutzername.Size = new System.Drawing.Size(100, 17);
             this.lb_Benutzername.TabIndex = 10;
             this.lb_Benutzername.Text = "Benutzername";
             // 
@@ -216,7 +216,7 @@ namespace Bibo_Verwaltung
             // 
             this.tb_Benutzername.Location = new System.Drawing.Point(93, 161);
             this.tb_Benutzername.Name = "tb_Benutzername";
-            this.tb_Benutzername.Size = new System.Drawing.Size(121, 20);
+            this.tb_Benutzername.Size = new System.Drawing.Size(403, 22);
             this.tb_Benutzername.TabIndex = 4;
             this.tb_Benutzername.Click += new System.EventHandler(this.Visibility);
             this.tb_Benutzername.TextChanged += new System.EventHandler(this.tb_White);
@@ -225,7 +225,7 @@ namespace Bibo_Verwaltung
             // 
             this.tb_Passwort.Location = new System.Drawing.Point(93, 187);
             this.tb_Passwort.Name = "tb_Passwort";
-            this.tb_Passwort.Size = new System.Drawing.Size(121, 20);
+            this.tb_Passwort.Size = new System.Drawing.Size(403, 22);
             this.tb_Passwort.TabIndex = 5;
             this.tb_Passwort.Click += new System.EventHandler(this.Visibility);
             this.tb_Passwort.TextChanged += new System.EventHandler(this.tb_White);
@@ -235,7 +235,7 @@ namespace Bibo_Verwaltung
             this.lb_Passwort.AutoSize = true;
             this.lb_Passwort.Location = new System.Drawing.Point(32, 190);
             this.lb_Passwort.Name = "lb_Passwort";
-            this.lb_Passwort.Size = new System.Drawing.Size(50, 13);
+            this.lb_Passwort.Size = new System.Drawing.Size(65, 17);
             this.lb_Passwort.TabIndex = 13;
             this.lb_Passwort.Text = "Passwort";
             // 
@@ -243,7 +243,7 @@ namespace Bibo_Verwaltung
             // 
             this.tb_Server.Location = new System.Drawing.Point(93, 33);
             this.tb_Server.Name = "tb_Server";
-            this.tb_Server.Size = new System.Drawing.Size(121, 20);
+            this.tb_Server.Size = new System.Drawing.Size(403, 22);
             this.tb_Server.TabIndex = 1;
             this.tb_Server.Click += new System.EventHandler(this.Visibility);
             this.tb_Server.TextChanged += new System.EventHandler(this.tb_White);
@@ -252,7 +252,7 @@ namespace Bibo_Verwaltung
             // 
             this.tb_Database.Location = new System.Drawing.Point(93, 71);
             this.tb_Database.Name = "tb_Database";
-            this.tb_Database.Size = new System.Drawing.Size(121, 20);
+            this.tb_Database.Size = new System.Drawing.Size(403, 22);
             this.tb_Database.TabIndex = 2;
             this.tb_Database.Click += new System.EventHandler(this.Visibility);
             this.tb_Database.TextChanged += new System.EventHandler(this.tb_White);
@@ -269,7 +269,7 @@ namespace Bibo_Verwaltung
             // 
             // w_s_Einstellungen
             // 
-            this.ClientSize = new System.Drawing.Size(249, 261);
+            this.ClientSize = new System.Drawing.Size(531, 259);
             this.Controls.Add(this.bt_Laden);
             this.Controls.Add(this.tb_Database);
             this.Controls.Add(this.tb_Server);
