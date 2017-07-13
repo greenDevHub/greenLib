@@ -1,0 +1,2 @@
+- Einstellungen anpassen, json syntax einbinden (in Projekt) -> syntax lernen
+- Verbindungstest fertigstellen und an allen notwendigen Stellen einsetzen
