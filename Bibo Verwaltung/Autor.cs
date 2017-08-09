@@ -86,7 +86,6 @@ namespace Bibo_Verwaltung
             cb.DisplayMember = "au_autor";
             cb.SelectedValue = value;
         }
-        
 
         public void FillGrid(ref DataGridView grid, object value = null)
         {

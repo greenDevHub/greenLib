@@ -250,7 +250,7 @@ namespace Bibo_Verwaltung
             + "left join t_s_autor on buch_autor_id = au_id "
             + "left join t_s_verlag on buch_verlag_id = ver_id "
             + "left join t_s_sprache on buch_sprache_id = sprach_id ";
-                
+
             // Verbindung öffnen 
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);

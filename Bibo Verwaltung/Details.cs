@@ -27,12 +27,13 @@ namespace Bibo_Verwaltung
         {
             FillObject();
         }
+
         public Details(string typid)
         {
             this.typid = typid;
             //Load();
             FillObject();
-           // Buch b = new Buch("978-3608938289");
+            // Buch b = new Buch("978-3608938289");
         }
         #endregion
 

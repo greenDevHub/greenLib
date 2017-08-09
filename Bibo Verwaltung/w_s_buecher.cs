@@ -83,11 +83,12 @@ namespace Bibo_Verwaltung
             }
 
         }
+
         private void tb_ISBN_inputOk(object sender, EventArgs e)
         {
             if (IsIsbn(tb_ISBN.Text) == false)
             {
-                MessageBox.Show("Bitte keine Buchstaben eingeben!", "Achtung", 
+                MessageBox.Show("Bitte keine Buchstaben eingeben!", "Achtung",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 //nicht erlaubte Zeichen entfernen
                 tb_ISBN.Text = ToIsbn(tb_ISBN.Text);
@@ -147,7 +148,7 @@ namespace Bibo_Verwaltung
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Clear();
                 }
-                catch(NullReferenceException)
+                catch (NullReferenceException)
                 {
                     MessageBox.Show("Das Buch existiert nicht!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -232,11 +233,13 @@ namespace Bibo_Verwaltung
                 cb_Autor.SelectedItem = autor_dialog.such_auswahl;
             }
         }
+
         private void bt_Genre_s_Click(object sender, EventArgs e)
         {
             Form Genres = new w_s_genres();
             Genres.ShowDialog(this);
         }
+
         private void bt_Sprache_s_Click(object sender, EventArgs e)
         {
             Form Sprache = new w_s_sprachen();
@@ -247,7 +250,7 @@ namespace Bibo_Verwaltung
         #region Save Buch
         private void Save_Buecher(object sender, EventArgs e)
         {
-            if(!tb_ISBN.Text.Equals("")
+            if (!tb_ISBN.Text.Equals("")
                 && !tb_Titel.Text.Equals("")
                 && !cb_Autor.Text.Equals("")
                 && !cb_Verlag.Text.Equals("")
@@ -255,8 +258,8 @@ namespace Bibo_Verwaltung
                 && !cb_Sprache.Text.Equals("")
                 && !tb_Auflage.Text.Equals("")
                 && !tb_Neupreis.Text.Equals(""))
-                {
-                    try
+            {
+                try
                 {
                     b.ISBN = tb_ISBN.Text;
                     b.Titel = tb_Titel.Text;
@@ -289,6 +292,7 @@ namespace Bibo_Verwaltung
         {
             Clear();
         }
+
         private void Clear()
         {
             tb_ISBN.Text = "";
@@ -315,6 +319,7 @@ namespace Bibo_Verwaltung
         {
             tb_ISBN.BackColor = Color.White;
         }
+
         private void tb_Titel_TextChanged(object sender, EventArgs e)
         {
             tb_Titel.BackColor = Color.White;

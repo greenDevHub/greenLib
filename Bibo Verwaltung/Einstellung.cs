@@ -14,7 +14,7 @@ using System.IO;
 namespace Bibo_Verwaltung
 {
     class Einstellung
-    {   
+    {
         #region Eigenschaften
         private string server;
         public string Server { get { return server; } set { server = value; } }
@@ -35,10 +35,7 @@ namespace Bibo_Verwaltung
 
         #endregion
 
-        
         #region Methoden
-
-
         private bool File_Exists(string path)
         {
             if (File.Exists(path))
@@ -50,6 +47,7 @@ namespace Bibo_Verwaltung
                 return false;
             }
         }
+
         private bool IsFileReadOnly(string path)
         {
             // Create a new FileInfo object.
@@ -57,21 +55,23 @@ namespace Bibo_Verwaltung
             // Return the IsReadOnly property value.
             return fInfo.IsReadOnly;
         }
+
         public void Save()
         {
             if (!IsFileReadOnly(path))
             {
-            File.WriteAllText(path, Server + "\r\n" + Database + "\r\n" + Security + "\r\n" + Name + "\r\n" + Pw);
-            MessageBox.Show("Speichern erfolgreich!");
+                File.WriteAllText(path, Server + "\r\n" + Database + "\r\n" + Security + "\r\n" + Name + "\r\n" + Pw);
+                MessageBox.Show("Speichern erfolgreich!");
             }
             else
             {
                 MessageBox.Show("Speichern nicht erfolgreich! Die Datei ist schreibgeschützt!");
             }
         }
+
         public void Load()
         {
-            
+
             if (!File_Exists(path))
             {
                 File.WriteAllText(path, "\r\n\r\n\r\n\r\n\r\n");
@@ -83,7 +83,6 @@ namespace Bibo_Verwaltung
             if (zeilen.Count() >= 2) Database = zeilen.Skip(1).First();
             if (zeilen.Count() >= 4) Name = zeilen.Skip(3).First();
             if (zeilen.Count() >= 5) Pw = zeilen.Skip(4).First();
-
 
             if (zeilen.Count() >= 3)
             {
@@ -99,12 +98,8 @@ namespace Bibo_Verwaltung
                 {
                     MessageBox.Show("Unbekannte Authentifizierungsart. Windows Authentifizierung wurde ausgewählt");
                     Security = "Windows Authentifizierung";
-                    
                 }
-                
-                 
             }
-
             #endregion
         }
     }
