@@ -86,12 +86,13 @@ namespace Bibo_Verwaltung
         /// </summary>
         public Kunde()
         {
-
+            FillObject1();
         }
         public Kunde(string kundenid)
         {
             this.kundenid = kundenid;
             Load();
+            FillObject1();
         }
         #endregion
 
@@ -220,6 +221,28 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
+        SqlCommandBuilder comb = new SqlCommandBuilder();
+        private void FillObject1()
+        {
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            string RawCommand = "select kunde_ID as 'ID', kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_strasse as 'Straße', kunde_hausnummer as 'Hausnummer', kunde_postleitzahl as 'Postleitzahl', kunde_ort as 'Wohnort', kunde_vertrauenswürdigkeit as 'Vertrauenwürdigkeit', kunde_klasse as 'Klasse', kunde_mail as 'Mail', kunde_telefonnummer as 'Telefonnummer'"
+            + "from t_s_kunden";
+
+            // Verbindung öffnen 
+            adapter = new SqlDataAdapter(RawCommand, con.Con);
+            adapter.Fill(ds);
+
+            con.Close();
+
+        }
+        public void FillGrid1(ref DataGridView grid, object value = null)
+        {
+            grid.DataSource = ds.Tables[0];
+        }
     }
 }
 

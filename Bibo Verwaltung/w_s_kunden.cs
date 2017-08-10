@@ -18,6 +18,8 @@ namespace Bibo_Verwaltung
         public w_s_Kunden()
         {
             InitializeComponent();
+            Kunde k = new Kunde();
+            k.FillGrid1(ref Grid_Kunde);
         }
 
         #region Fill Combobox
