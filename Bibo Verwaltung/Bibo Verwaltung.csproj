@@ -102,12 +102,6 @@
     <Compile Include="Combo_Search.Designer.cs">
       <DependentUpon>Combo_Search.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Genre.cs" />
     <Compile Include="w_s_details.cs">
       <SubType>Form</SubType>
