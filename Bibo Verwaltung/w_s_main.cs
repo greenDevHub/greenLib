@@ -145,74 +145,129 @@ namespace Bibo_Verwaltung
                 tb_Titel.Enabled = false;
             }
         }
-
-        public void Suchen(object sender, EventArgs e)
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
+        SqlCommandBuilder comb = new SqlCommandBuilder();
+        public void Suchen()
         {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
-            string strSQL = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' FROM t_s_buecher "
+            string suchtyp = "";
+            string suchwert = "";
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            if (rb_SuchAutor.Checked)
+            {
+                suchtyp = "buch_autor_id";
+                MessageBox.Show(cb_Autor.Text);
+                suchwert = cb_Autor.Text;
+            }
+            else if (rb_SuchGenre.Checked)
+            {
+                suchtyp = "buch_genre_id";
+                suchwert = cb_Genre.Text;
+            }
+            else if (rb_SuchTitel.Checked)
+            {
+                suchtyp = "buch_titel";
+                suchwert = tb_Titel.Text;
+            }
+            else if (rb_SuchVerlag.Checked)
+            {
+                suchtyp = "buch_verlag_id";
+                suchwert = cb_Verlag.Text;
+            }
+            string RawCommand = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' FROM t_s_buecher "
+                + "left join t_s_buchid on buch_isbn = bu_isbn "
                 + "left join t_s_genre on buch_genre_id = ger_id "
                 + "left join t_s_autor on buch_autor_id = au_id "
                 + "left join t_s_verlag on buch_verlag_id = ver_id "
                 + "left join t_s_sprache on buch_sprache_id = sprach_id "
-                + "WHERE @buch_value = @value";
+                + "WHERE " +suchtyp+ " = '"+ suchwert +"'";
 
-            SqlCommand cmd = new SqlCommand(strSQL, con);
-            if (rb_SuchAutor.Checked)
-            {
-                cmd.Parameters.AddWithValue("@buch_value", "buch_autor_id");
-                cmd.Parameters.AddWithValue("@value", cb_Autor.SelectedValue.ToString());
-            }
-            else if (rb_SuchGenre.Checked)
-            {
-                cmd.Parameters.AddWithValue("@buch_value", "buch_genre_id");
-                cmd.Parameters.AddWithValue("@value", cb_Genre.SelectedValue.ToString());
-            }
-            else if (rb_SuchTitel.Checked)
-            {
-                cmd.Parameters.AddWithValue("@buch_value", "buch_titel");
-                cmd.Parameters.AddWithValue("@value", tb_Titel.Text);
-                // Verbindung öffnen 
-                con.Open();
-                SqlDataReader dr1 = cmd.ExecuteReader();
-                // Einlesen der Datenzeilen und Ausgabe an der Konsole 
-                while (dr1.Read())
-                {
-                    Buch b = new Buch(dr1["buch_isbn"].ToString());
-                    string[] row = { "Hallo", "djhf", "Hallo", "djhf", "Hallo" };// dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString() };
-                    var listViewItem = new ListViewItem(row);
 
-                    listView1.Items.Add(listViewItem);
-                    listView1.Show();
-                }
+            adapter = new SqlDataAdapter(RawCommand, con.Con);
+            adapter.Fill(ds);
+            adapter.Fill(dt);
 
-                // DataReader schließen 
-                dr1.Close();
-                // Verbindung schließen 
-                con.Close();
-            }
-            else if (rb_SuchVerlag.Checked)
-            {
-                cmd.Parameters.AddWithValue("@buch_value", "buch_verlag_id");
-                cmd.Parameters.AddWithValue("@value", cb_Verlag.SelectedValue.ToString());
-            }
-            // Verbindung öffnen 
-            con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-            ///Einlesen der Datenzeilen und Ausgabe an der Konsole 
-            while (dr.Read())
-            {
-                Buch b = new Buch(dr["buch_isbn"].ToString());
-                string[] row = { "Hallo", "djhf", "Hallo", "djhf", "Hallo" };// dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString() };
-                var listViewItem = new ListViewItem(row);
-
-                listView1.Items.Add(listViewItem);
-                listView1.Show();
-            }
-            //// DataReader schließen 
-            dr.Close();
-            //// Verbindung schließen 
             con.Close();
+            //SqlConnection con = new SqlConnection();
+            //con.ConnectionString = "Data Source=.\\SQLEXPRESS; Initial Catalog=Bibo_Verwaltung; Integrated Security=sspi";
+            //string strSQL = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' FROM t_s_buecher "
+            //    + "left join t_s_genre on buch_genre_id = ger_id "
+            //    + "left join t_s_autor on buch_autor_id = au_id "
+            //    + "left join t_s_verlag on buch_verlag_id = ver_id "
+            //    + "left join t_s_sprache on buch_sprache_id = sprach_id "
+            //    + "WHERE @buch_value = @value";
+
+            //SqlCommand cmd = new SqlCommand(strSQL, con);
+            //if (rb_SuchAutor.Checked)
+            //{
+            //    cmd.Parameters.AddWithValue("@buch_value", "buch_autor_id");
+            //    cmd.Parameters.AddWithValue("@value", cb_Autor.SelectedValue.ToString());
+            //}
+            //else if (rb_SuchGenre.Checked)
+            //{
+            //    cmd.Parameters.AddWithValue("@buch_value", "buch_genre_id");
+            //    cmd.Parameters.AddWithValue("@value", cb_Genre.SelectedValue.ToString());
+            //}
+            //else if (rb_SuchTitel.Checked)
+            //{
+            //    cmd.Parameters.AddWithValue("@buch_value", "buch_titel");
+            //    cmd.Parameters.AddWithValue("@value", tb_Titel.Text);
+            //    // Verbindung öffnen 
+            //    con.Open();
+            //    SqlDataReader dr1 = cmd.ExecuteReader();
+            //    // Einlesen der Datenzeilen und Ausgabe an der Konsole 
+            //    while (dr1.Read())
+            //    {
+            //        Buch b = new Buch(dr1["buch_isbn"].ToString());
+            //        string[] row = { "Hallo", "djhf", "Hallo", "djhf", "Hallo" };// dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString() };
+            //        var listViewItem = new ListViewItem(row);
+
+            //        listView1.Items.Add(listViewItem);
+            //        listView1.Show();
+            //    }
+
+            //    // DataReader schließen 
+            //    dr1.Close();
+            //    // Verbindung schließen 
+            //    con.Close();
+            //}
+            //else if (rb_SuchVerlag.Checked)
+            //{
+            //    cmd.Parameters.AddWithValue("@buch_value", "buch_verlag_id");
+            //    cmd.Parameters.AddWithValue("@value", cb_Verlag.SelectedValue.ToString());
+            //}
+            //// Verbindung öffnen 
+            //con.Open();
+            //SqlDataReader dr = cmd.ExecuteReader();
+            /////Einlesen der Datenzeilen und Ausgabe an der Konsole 
+            //while (dr.Read())
+            //{
+            //    Buch b = new Buch(dr["buch_isbn"].ToString());
+            //    string[] row = { "Hallo", "djhf", "Hallo", "djhf", "Hallo" };// dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString(), dr["buch_titel"].ToString() };
+            //    var listViewItem = new ListViewItem(row);
+
+            //    listView1.Items.Add(listViewItem);
+            //    listView1.Show();
+            //}
+            ////// DataReader schließen 
+            //dr.Close();
+            ////// Verbindung schließen 
+            //con.Close();
+        }
+        public void FillGrid(ref DataGridView grid, object value = null)
+        {
+            while (grid.Rows.Count > 0)
+            {
+                grid.Rows.RemoveAt(0);
+            }
+            //grid.DataSource = null;
+            //grid.Rows.Clear();
+            //grid.Refresh();
+            grid.DataSource = ds.Tables[0];
+            //grid.Columns[0].Visible = false;
+            grid.Columns["sprach_name"].HeaderText = "Bezeichnung";
         }
         #endregion
 
@@ -232,5 +287,10 @@ namespace Bibo_Verwaltung
         {
         }
 
+        private void bt_Suchen_Click(object sender, EventArgs e)
+        {
+            Suchen();
+            FillGrid(ref Grid_Buch);
+        }
     }
 }
