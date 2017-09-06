@@ -76,14 +76,14 @@ namespace Bibo_Verwaltung
         public Buch()
         {
             //FillObject();
-            FillObject1();
+            FillObject();
         }
         public Buch(string isbn)
         {
             this.isbn = isbn;
             Load();
             //FillObject();
-            FillObject1();
+            FillObject();
         }
         #endregion
 
@@ -100,9 +100,7 @@ namespace Bibo_Verwaltung
                 Titel = dr["buch_titel"].ToString();
                 Genre = new Genre(dr["buch_genre_id"].ToString());
                 Autor = new Autor(dr["buch_autor_id"].ToString());
-                //Autor = dr["au_autor"].ToString();
                 Verlag = new Verlag(dr["buch_verlag_id"].ToString());
-                //Verlag = dr["ver_name"].ToString();
                 Er_datum = (DateTime)dr["verified_erscheinungsdatum"];
                 Sprache = new Sprache(dr["buch_sprache_id"].ToString());
                 Auflage = dr["buch_auflage"].ToString();
@@ -112,7 +110,6 @@ namespace Bibo_Verwaltung
                 {
                     Neupreis = Convert.ToDecimal(price);
                 }
-
                 catch (FormatException)
                 {
                     Neupreis = 0;
@@ -123,41 +120,6 @@ namespace Bibo_Verwaltung
             dr.Close();
             // Verbindung schließen 
             con.Close();
-
-            SQL_Verbindung con1 = new SQL_Verbindung();
-            if (con1.ConnectError()) return;
-            string RawCommand1 = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' FROM t_s_buecher left join t_s_genre on buch_genre_id = ger_id left join t_s_autor on buch_autor_id = au_id left join t_s_verlag on buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id WHERE buch_titel = @0";
-            SqlDataReader dr1 = con1.ExcecuteCommand(RawCommand1, isbn);
-            // Einlesen der Datenzeilen und Ausgabe an der Konsole 
-            while (dr1.Read())
-            {
-                ISBN = dr1["buch_isbn"].ToString();
-                Titel = dr1["buch_titel"].ToString();
-                Genre = new Genre(dr1["buch_genre_id"].ToString());
-                Autor = new Autor(dr1["buch_autor_id"].ToString());
-                //Autor = dr["au_autor"].ToString();
-                Verlag = new Verlag(dr1["buch_verlag_id"].ToString());
-                //Verlag = dr["ver_name"].ToString();
-                Er_datum = (DateTime)dr1["verified_erscheinungsdatum"];
-                Sprache = new Sprache(dr1["buch_sprache_id"].ToString());
-                Auflage = dr1["buch_auflage"].ToString();
-                string price = dr1["buch_neupreis"].ToString().Replace(".", ",");
-
-                try
-                {
-                    Neupreis = Convert.ToDecimal(price);
-                }
-
-                catch (FormatException)
-                {
-                    Neupreis = 0;
-                    MessageBox.Show("Bitte nur Zahlen eingeben!");
-                }
-            }
-            // DataReader schließen 
-            dr1.Close();
-            // Verbindung schließen 
-            con1.Close();
         }
         #endregion
 
@@ -192,40 +154,31 @@ namespace Bibo_Verwaltung
         SqlCommandBuilder comb = new SqlCommandBuilder();
         private void FillObject()
         {
-            //string strSQL = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' FROM t_s_buecher left join t_s_genre on buch_genre_id = ger_id left join t_s_autor on buch_autor_id = au_id left join t_s_verlag on buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id";// WHERE buch_isbn = @isbn";
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT * FROM t_s_buchid left join t_s_zustand on bu_zustandsid = zu_id left join t_bd_ausgeliehen on aus_buchid = bu_id left join t_s_kunden on kunde_ID = aus_kundenid left join t_s_buecher on bu_isbn = buch_isbn left join t_s_genre on buch_genre_id = ger_id left join t_s_autor on buch_autor_id = au_id left join t_s_verlag on buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id";
-
+            string RawCommand = "SELECT * FROM t_s_buchid left join t_s_buecher on bu_isbn = buch_isbn left join t_s_genre on buch_genre_id = ger_id left join t_s_autor on buch_autor_id = au_id left join t_s_verlag on buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id left join t_s_zustand on bu_zustandsid = zu_id left join t_bd_ausgeliehen on aus_buchid = bu_id left join t_s_kunden on kunde_ID = aus_kundenid";
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
             adapter.Fill(dt);
-
             con.Close();
         }
 
         public void FillGrid(ref DataGridView grid, object value = null)
         {
-            DataGridViewLinkColumn links = new DataGridViewLinkColumn();
-            links.UseColumnTextForLinkValue = true;
-            links.LinkBehavior = LinkBehavior.SystemDefault;
-            links.TrackVisitedState = true;
-
-            //grid.CurrentCellAddress[1,grid.RowCount] = grid.Columns.Add(links);
-
-
             grid.DataSource = ds.Tables[0];
             grid.Columns[2].Visible = false;
             grid.Columns[4].Visible = false;
+            grid.Columns[6].Visible = false;
+            grid.Columns[7].Visible = false;
             grid.Columns[8].Visible = false;
-            //grid.Columns[9].Visible = false;
-            //grid.Columns[10].Visible = false;
-            //grid.Columns[11].Visible = false;
-            //grid.Columns[13].Visible = false;
-            //grid.Columns[16].Visible = false;
-            //grid.Columns[18].Visible = false;
-            //grid.Columns[20].Visible = false;
-            //grid.Columns[22].Visible = false;
+            grid.Columns[10].Visible = false;
+            grid.Columns[13].Visible = false;
+            grid.Columns[15].Visible = false;
+            grid.Columns[17].Visible = false;
+            grid.Columns[19].Visible = false;
+            grid.Columns[21].Visible = false;
+            grid.Columns[25].Visible = false;
+            grid.Columns[28].Visible = false;
 
             grid.Columns["bu_id"].HeaderText = "Buch-ID:";
             grid.Columns["bu_isbn"].HeaderText = "Buch-ISBN:";
@@ -233,35 +186,53 @@ namespace Bibo_Verwaltung
             grid.Columns["zu_zustand"].HeaderText = "Zustand:";
             grid.Columns["zu_verleihfähig"].HeaderText = "verleihfähig:";
             grid.Columns["buch_titel"].HeaderText = "Titel:";
-            grid.Columns["buch_erscheinungsdatum"].HeaderText = "Erscheinungsdatum:";
-
+            grid.Columns["buch_erscheinungsdatum"].HeaderText = "erschienen am:";
+            grid.Columns["buch_auflage"].HeaderText = "Auflage:";
+            grid.Columns["buch_neupreis"].HeaderText = "Neupreis:";
+            grid.Columns["ger_name"].HeaderText = "Genre:";
+            grid.Columns["au_autor"].HeaderText = "Autor:";
+            grid.Columns["ver_name"].HeaderText = "Verlag:";
+            grid.Columns["sprach_name"].HeaderText = "Sprache:";
+            grid.Columns["aus_leihnummer"].HeaderText = "Ausleihnummer:";
+            grid.Columns["aus_leihdatum"].HeaderText = "ausgeliehen am:";
+            grid.Columns["aus_rückgabedatum"].HeaderText = "Rückgabe am:";
 
         }
 
-        private void FillObject1()
+        //private void FillObject1()
+        //{
+        //    SQL_Verbindung con = new SQL_Verbindung();
+        //    if (con.ConnectError()) return;
+        //    string RawCommand = "select buch_isbn as 'ISBN', buch_titel as 'Titel', ger_name as 'Genre',  isnull(buch_erscheinungsdatum, '01.01.1990') as 'Erscheinungsdatum', "
+        //    + "buch_auflage as 'Auflage', buch_neupreis as 'Neupreis', "
+        //    + "au_autor as 'Autor', ver_name as 'Verlag', sprach_name as 'Sprache' "
+        //    + "from t_s_buecher "
+        //    + "left join t_s_genre on buch_genre_id = ger_id "
+        //    + "left join t_s_autor on buch_autor_id = au_id "
+        //    + "left join t_s_verlag on buch_verlag_id = ver_id "
+        //    + "left join t_s_sprache on buch_sprache_id = sprach_id ";
+        //    // Verbindung öffnen 
+        //    adapter = new SqlDataAdapter(RawCommand, con.Con);
+        //    adapter.Fill(ds);
+        //    con.Close();
+        //}
+        #endregion
+
+        public void Ausleihen(int bu_id, string aus_d, string rück_d, int kunde)
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            string RawCommand = "INSERT into [dbo].[t_bd_ausgeliehen] (aus_buchid, aus_leihdatum, aus_rückgabedatum, aus_kundenid) VALUES(@buchid, @ausdatum, @rückdatum, @kunde)";
             if (con.ConnectError()) return;
-            string RawCommand = "select buch_isbn as 'ISBN', buch_titel as 'Titel', ger_name as 'Genre',  isnull(buch_erscheinungsdatum, '01.01.1990') as 'Erscheinungsdatum', "
-            + "buch_auflage as 'Auflage', buch_neupreis as 'Neupreis', "
-            + "au_autor as 'Autor', ver_name as 'Verlag', sprach_name as 'Sprache' "
-            + "from t_s_buecher "
-            + "left join t_s_genre on buch_genre_id = ger_id "
-            + "left join t_s_autor on buch_autor_id = au_id "
-            + "left join t_s_verlag on buch_verlag_id = ver_id "
-            + "left join t_s_sprache on buch_sprache_id = sprach_id ";
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+
+            cmd.Parameters.AddWithValue("@buchid", bu_id);
+            cmd.Parameters.AddWithValue("@ausdatum", aus_d);
+            cmd.Parameters.AddWithValue("@rückdatum", rück_d);
+            cmd.Parameters.AddWithValue("@kunde", kunde);
 
             // Verbindung öffnen 
-            adapter = new SqlDataAdapter(RawCommand, con.Con);
-            adapter.Fill(ds);
-
+            cmd.ExecuteNonQuery();
+            //Verbindung schließen
             con.Close();
-
         }
-        public void FillGrid1(ref DataGridView grid, object value = null)
-        {
-            grid.DataSource = ds.Tables[0];
-        }
-        #endregion
     }
 }

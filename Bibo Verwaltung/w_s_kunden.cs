@@ -19,7 +19,7 @@ namespace Bibo_Verwaltung
         {
             InitializeComponent();
             Kunde k = new Kunde();
-            k.FillGrid1(ref Grid_Kunde);
+            k.FillGrid(ref Grid_Kunde);
         }
 
         #region Fill Combobox
@@ -39,7 +39,7 @@ namespace Bibo_Verwaltung
             //string g = dr["kunde_vertrauenswürdigkeit"].ToString();
 
             //string[] cbItems = { "vertrauenswürdig", "nicht vertrauenswürdig", "noch nicht bestimmt" };
-            
+
 
             cb.ValueMember = dr["kunde_vertrauenswürdigkeit"].ToString();
             cb.DisplayMember = dr["kunde_vertrauenswürdigkeit"].ToString();
@@ -50,12 +50,11 @@ namespace Bibo_Verwaltung
         #region Load Kunde
         private void Load_Kunde(object sender, EventArgs e)
         {
-            if(!tb_KundenID.Text.Equals(""))
+            if (!tb_KundenID.Text.Equals(""))
             {
                 try
                 {
                     Kunde k = new Kunde(tb_KundenID.Text);
-
                     tb_Vorname.Text = k.Vorname;
                     tb_Nachname.Text = k.Nachname;
                     tb_Strasse.Text = k.Strasse;
@@ -72,7 +71,7 @@ namespace Bibo_Verwaltung
                     MessageBox.Show("Der Kunde existiert nicht!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Clear();
-                }             
+                }
             }
             else if (!tb_Vorname.Text.Equals("")
                  && !tb_Nachname.Text.Equals(""))
@@ -80,7 +79,6 @@ namespace Bibo_Verwaltung
                 try
                 {
                     Kunde k = new Kunde(tb_Vorname.Text);
-
                     tb_KundenID.Text = k.KundenID;
                     tb_Vorname.Text = k.Vorname;
                     tb_Nachname.Text = k.Nachname;
@@ -99,7 +97,7 @@ namespace Bibo_Verwaltung
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Clear();
                 }
-                    }
+            }
             else
             {
                 MessageBox.Show("Füllen Sie nur die markierten Felder aus, um einen Kunden zu laden!", "Achtung",
@@ -108,7 +106,7 @@ namespace Bibo_Verwaltung
                 tb_Vorname.BackColor = Color.Red;
                 tb_Nachname.BackColor = Color.Red;
             }
-           
+
         }
         #endregion
 
@@ -169,7 +167,7 @@ namespace Bibo_Verwaltung
                     k.Mail = tb_Mail.Text;
                     k.Telefonnummer = tb_Telefonnummer.Text;
                     k.Delete();
-                    lb_kunde_delete.Visible = true;                    
+                    lb_kunde_delete.Visible = true;
                 }
                 catch (SqlException)
                 {
@@ -205,7 +203,7 @@ namespace Bibo_Verwaltung
                     k.Telefonnummer = tb_Telefonnummer.Text;
                     k.Add();
                     lb_kunde_add.Visible = true;
-                    
+
                 }
                 catch (SqlException)
                 {
@@ -288,7 +286,8 @@ namespace Bibo_Verwaltung
                 tb_Mail.Enabled = true;
                 tb_Telefonnummer.Enabled = true;
 
-            } else if (rb_Neukunde.Checked)
+            }
+            else if (rb_Neukunde.Checked)
             {
                 Clear();
                 bt_laden_kunden.Enabled = false;
@@ -304,7 +303,8 @@ namespace Bibo_Verwaltung
                 tb_Mail.Enabled = true;
                 tb_Telefonnummer.Enabled = true;
 
-            } else if (rb_KundeLoeschen.Checked)
+            }
+            else if (rb_KundeLoeschen.Checked)
             {
                 Clear();
                 bt_laden_kunden.Enabled = false;
