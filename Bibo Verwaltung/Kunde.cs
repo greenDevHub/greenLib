@@ -153,7 +153,7 @@ namespace Bibo_Verwaltung
         DataSet ds = new DataSet();
         DataTable dt = new DataTable();
         SqlCommandBuilder comb = new SqlCommandBuilder();
-        private void FillObject1()
+        public void FillObject1()
         {
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
@@ -167,6 +167,10 @@ namespace Bibo_Verwaltung
 
         }
 
+        public void ClearDS()
+        {
+            ds.Tables[0].Rows.Clear();
+        }
         public void FillGrid(ref DataGridView grid, object value = null)
         {
             grid.DataSource = ds.Tables[0];
@@ -245,13 +249,11 @@ namespace Bibo_Verwaltung
         public void Delete()
         {
             {
-                string RawCommand = "DELETE FROM [dbo].[t_s_kunden] WHERE kunde_id = @id AND kunde_vorname = @vorname AND kunde_nachname = @nachname";
+                string RawCommand = "DELETE FROM [dbo].[t_s_kunden] WHERE kunde_id = @id";
                 con.ConnectError();
                 SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
 
                 cmd.Parameters.AddWithValue("@id", KundenID);
-                cmd.Parameters.AddWithValue("@vorname", Vorname);
-                cmd.Parameters.AddWithValue("@nachname", Nachname);
 
                 // Verbindung öffnen 
                 cmd.ExecuteNonQuery();

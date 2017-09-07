@@ -131,6 +131,9 @@ namespace Bibo_Verwaltung
                     k.Telefonnummer = tb_Telefonnummer.Text;
                     k.Save();
                     lb_kunde_save.Visible = true;
+                    k.ClearDS();
+                    k.FillObject1();
+                    k.FillGrid(ref Grid_Kunde);
                 }
                 catch (SqlException)
                 {
@@ -139,8 +142,6 @@ namespace Bibo_Verwaltung
                 }
             }
             else if (rb_KundeLoeschen.Checked
-                && !tb_Vorname.Text.Equals("")
-                && !tb_Nachname.Text.Equals("")
                 && !tb_KundenID.Text.Equals(""))
             {
                 try
@@ -159,6 +160,10 @@ namespace Bibo_Verwaltung
                     k.Telefonnummer = tb_Telefonnummer.Text;
                     k.Delete();
                     lb_kunde_delete.Visible = true;
+                    k.ClearDS();
+                    k.FillObject1();
+                    k.FillGrid(ref Grid_Kunde);
+                    Clear();
                 }
                 catch (SqlException)
                 {
@@ -194,7 +199,11 @@ namespace Bibo_Verwaltung
                     k.Telefonnummer = tb_Telefonnummer.Text;
                     k.Add();
                     lb_kunde_add.Visible = true;
-                    
+                    k.ClearDS();
+                    k.FillObject1();
+                    k.FillGrid(ref Grid_Kunde);
+                    Clear();
+
 
                 }
                 catch (SqlException)
@@ -327,8 +336,8 @@ namespace Bibo_Verwaltung
                 bt_save_kunde.Text = "Löschen";
                 bt_laden_kunden.Enabled = false;
                 tb_KundenID.Enabled = true;
-                tb_Vorname.Enabled = true;
-                tb_Nachname.Enabled = true;
+                tb_Vorname.Enabled = false;
+                tb_Nachname.Enabled = false;
                 tb_Strasse.Enabled = false;
                 tb_Hausnummer.Enabled = false;
                 tb_Postleitzahl.Enabled = false;
