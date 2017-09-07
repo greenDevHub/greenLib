@@ -100,7 +100,7 @@ namespace Bibo_Verwaltung
         private void Load()
         {
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT * FROM [dbo].[t_s_kunden] WHERE kunde_vorname = @0";
+            string RawCommand = "SELECT * FROM [dbo].[t_s_kunden] WHERE  kunde_id = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, kundenid);
             // Einlesen der Datenzeilen und Ausgabe an der Konsole 
             while (dr.Read())
@@ -122,28 +122,28 @@ namespace Bibo_Verwaltung
             // Verbindung schließen 
             con.Close();
 
-            if (con.ConnectError()) return;
-            string RawCommand1 = "SELECT * FROM [dbo].[t_s_kunden] WHERE kunde_ID = @0";
-            SqlDataReader dr1 = con.ExcecuteCommand(RawCommand1, kundenid);
-            // Einlesen der Datenzeilen und Ausgabe an der Konsole 
-            while (dr1.Read())
-            {
-                KundenID = dr1["kunde_ID"].ToString();
-                Vorname = dr1["kunde_vorname"].ToString();
-                Nachname = dr1["kunde_nachname"].ToString();
-                Ort = dr1["kunde_ort"].ToString();
-                Postleitzahl = dr1["kunde_postleitzahl"].ToString();
-                Strasse = dr1["kunde_strasse"].ToString();
-                Telefonnummer = dr1["kunde_telefonnummer"].ToString();
-                Hausnummer = dr1["kunde_hausnummer"].ToString();
-                Mail = dr1["kunde_mail"].ToString();
-                Klasse = dr1["kunde_klasse"].ToString();
-                Vertrauenswuerdigkeit = dr1["kunde_vertrauenswürdigkeit"].ToString();
-            }
-            // DataReader schließen 
-            dr1.Close();
-            // Verbindung schließen 
-            con.Close();
+            //if (con.ConnectError()) return;
+            //string RawCommand1 = "SELECT * FROM [dbo].[t_s_kunden] WHERE kunde_ID = @0";
+            //SqlDataReader dr1 = con.ExcecuteCommand(RawCommand1, kundenid);
+            //// Einlesen der Datenzeilen und Ausgabe an der Konsole 
+            //while (dr1.Read())
+            //{
+            //    KundenID = dr1["kunde_ID"].ToString();
+            //    Vorname = dr1["kunde_vorname"].ToString();
+            //    Nachname = dr1["kunde_nachname"].ToString();
+            //    Ort = dr1["kunde_ort"].ToString();
+            //    Postleitzahl = dr1["kunde_postleitzahl"].ToString();
+            //    Strasse = dr1["kunde_strasse"].ToString();
+            //    Telefonnummer = dr1["kunde_telefonnummer"].ToString();
+            //    Hausnummer = dr1["kunde_hausnummer"].ToString();
+            //    Mail = dr1["kunde_mail"].ToString();
+            //    Klasse = dr1["kunde_klasse"].ToString();
+            //    Vertrauenswuerdigkeit = dr1["kunde_vertrauenswürdigkeit"].ToString();
+            //}
+            //// DataReader schließen 
+            //dr1.Close();
+            //// Verbindung schließen 
+            //con.Close();
         }
         #endregion
         //____________________________________________________________________________________
@@ -245,10 +245,11 @@ namespace Bibo_Verwaltung
         public void Delete()
         {
             {
-                string RawCommand = "DELETE FROM [dbo].[t_s_kunden] WHERE kunde_vorname = @vorname AND kunde_nachname = @nachname";
+                string RawCommand = "DELETE FROM [dbo].[t_s_kunden] WHERE kunde_id = @id AND kunde_vorname = @vorname AND kunde_nachname = @nachname";
                 con.ConnectError();
                 SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
 
+                cmd.Parameters.AddWithValue("@id", KundenID);
                 cmd.Parameters.AddWithValue("@vorname", Vorname);
                 cmd.Parameters.AddWithValue("@nachname", Nachname);
 

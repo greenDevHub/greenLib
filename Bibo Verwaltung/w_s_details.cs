@@ -184,9 +184,9 @@ namespace Bibo_Verwaltung
                 tb_BuchID.Text = bu_id;
                 tb_Titel.Text = bu_titel;
             }
-            catch
+            catch (Exception e1)
             {
-                MessageBox.Show("Wählen Sie ein Buch aus!");
+                MessageBox.Show("Wählen Sie ein Buch aus!"+e1.Message);
             }
         }
 
@@ -203,6 +203,54 @@ namespace Bibo_Verwaltung
         private void bt_Suchen_Click(object sender, EventArgs e)
         {
             Buch_Suchen();
+        }
+
+        private void cb_s_Titel_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_s_Titel.Checked == true)
+            {
+                tb_s_Titel.Enabled = true;
+            }
+            else
+            {
+                tb_s_Titel.Enabled = false;
+            }
+        }
+
+        private void cb_s_Autor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_s_Autor.Checked == true)
+            {
+                tb_s_Autor.Enabled = true;
+            }
+            else
+            {
+                tb_s_Autor.Enabled = false;
+            }
+        }
+
+        private void cb_s_Genre_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_s_Genre.Checked == true)
+            {
+                tb_s_Genre.Enabled = true;
+            }
+            else
+            {
+                tb_s_Genre.Enabled = false;
+            }
+        }
+
+        private void cb_s_Verlag_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_s_Verlag.Checked == true)
+            {
+                tb_s_Verlag.Enabled = true;
+            }
+            else
+            {
+                tb_s_Verlag.Enabled = false;
+            }
         }
     }
 }

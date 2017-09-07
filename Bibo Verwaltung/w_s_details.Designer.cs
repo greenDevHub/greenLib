@@ -43,15 +43,15 @@
             this.tb_BuchID = new System.Windows.Forms.TextBox();
             this.bt_Ausleihen = new System.Windows.Forms.Button();
             this.gb_Suchen = new System.Windows.Forms.GroupBox();
-            this.tb_s_Titel = new System.Windows.Forms.TextBox();
-            this.tb_s_Genre = new System.Windows.Forms.TextBox();
-            this.tb_s_Autor = new System.Windows.Forms.TextBox();
-            this.tb_s_Verlag = new System.Windows.Forms.TextBox();
-            this.cb_s_Titel = new System.Windows.Forms.CheckBox();
-            this.cb_s_Verlag = new System.Windows.Forms.CheckBox();
-            this.cb_s_Genre = new System.Windows.Forms.CheckBox();
-            this.cb_s_Autor = new System.Windows.Forms.CheckBox();
             this.bt_Suchen = new System.Windows.Forms.Button();
+            this.cb_s_Autor = new System.Windows.Forms.CheckBox();
+            this.cb_s_Genre = new System.Windows.Forms.CheckBox();
+            this.cb_s_Verlag = new System.Windows.Forms.CheckBox();
+            this.cb_s_Titel = new System.Windows.Forms.CheckBox();
+            this.tb_s_Verlag = new System.Windows.Forms.TextBox();
+            this.tb_s_Autor = new System.Windows.Forms.TextBox();
+            this.tb_s_Genre = new System.Windows.Forms.TextBox();
+            this.tb_s_Titel = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Details)).BeginInit();
             this.cb_Ausleihen.SuspendLayout();
             this.gb_Suchen.SuspendLayout();
@@ -218,63 +218,15 @@
             this.gb_Suchen.TabStop = false;
             this.gb_Suchen.Text = "Suchen nach:";
             // 
-            // tb_s_Titel
+            // bt_Suchen
             // 
-            this.tb_s_Titel.Location = new System.Drawing.Point(64, 19);
-            this.tb_s_Titel.Name = "tb_s_Titel";
-            this.tb_s_Titel.Size = new System.Drawing.Size(180, 20);
-            this.tb_s_Titel.TabIndex = 17;
-            // 
-            // tb_s_Genre
-            // 
-            this.tb_s_Genre.Location = new System.Drawing.Point(580, 19);
-            this.tb_s_Genre.Name = "tb_s_Genre";
-            this.tb_s_Genre.Size = new System.Drawing.Size(180, 20);
-            this.tb_s_Genre.TabIndex = 18;
-            // 
-            // tb_s_Autor
-            // 
-            this.tb_s_Autor.Location = new System.Drawing.Point(320, 19);
-            this.tb_s_Autor.Name = "tb_s_Autor";
-            this.tb_s_Autor.Size = new System.Drawing.Size(180, 20);
-            this.tb_s_Autor.TabIndex = 19;
-            // 
-            // tb_s_Verlag
-            // 
-            this.tb_s_Verlag.Location = new System.Drawing.Point(841, 19);
-            this.tb_s_Verlag.Name = "tb_s_Verlag";
-            this.tb_s_Verlag.Size = new System.Drawing.Size(180, 20);
-            this.tb_s_Verlag.TabIndex = 20;
-            // 
-            // cb_s_Titel
-            // 
-            this.cb_s_Titel.AutoSize = true;
-            this.cb_s_Titel.Location = new System.Drawing.Point(9, 21);
-            this.cb_s_Titel.Name = "cb_s_Titel";
-            this.cb_s_Titel.Size = new System.Drawing.Size(49, 17);
-            this.cb_s_Titel.TabIndex = 21;
-            this.cb_s_Titel.Text = "Titel:";
-            this.cb_s_Titel.UseVisualStyleBackColor = true;
-            // 
-            // cb_s_Verlag
-            // 
-            this.cb_s_Verlag.AutoSize = true;
-            this.cb_s_Verlag.Location = new System.Drawing.Point(776, 21);
-            this.cb_s_Verlag.Name = "cb_s_Verlag";
-            this.cb_s_Verlag.Size = new System.Drawing.Size(59, 17);
-            this.cb_s_Verlag.TabIndex = 22;
-            this.cb_s_Verlag.Text = "Verlag:";
-            this.cb_s_Verlag.UseVisualStyleBackColor = true;
-            // 
-            // cb_s_Genre
-            // 
-            this.cb_s_Genre.AutoSize = true;
-            this.cb_s_Genre.Location = new System.Drawing.Point(516, 21);
-            this.cb_s_Genre.Name = "cb_s_Genre";
-            this.cb_s_Genre.Size = new System.Drawing.Size(58, 17);
-            this.cb_s_Genre.TabIndex = 23;
-            this.cb_s_Genre.Text = "Genre:";
-            this.cb_s_Genre.UseVisualStyleBackColor = true;
+            this.bt_Suchen.Location = new System.Drawing.Point(921, 45);
+            this.bt_Suchen.Name = "bt_Suchen";
+            this.bt_Suchen.Size = new System.Drawing.Size(100, 23);
+            this.bt_Suchen.TabIndex = 25;
+            this.bt_Suchen.Text = "Suchen";
+            this.bt_Suchen.UseVisualStyleBackColor = true;
+            this.bt_Suchen.Click += new System.EventHandler(this.bt_Suchen_Click);
             // 
             // cb_s_Autor
             // 
@@ -285,16 +237,72 @@
             this.cb_s_Autor.TabIndex = 24;
             this.cb_s_Autor.Text = "Autor:";
             this.cb_s_Autor.UseVisualStyleBackColor = true;
+            this.cb_s_Autor.CheckedChanged += new System.EventHandler(this.cb_s_Autor_CheckedChanged);
             // 
-            // bt_Suchen
+            // cb_s_Genre
             // 
-            this.bt_Suchen.Location = new System.Drawing.Point(921, 45);
-            this.bt_Suchen.Name = "bt_Suchen";
-            this.bt_Suchen.Size = new System.Drawing.Size(100, 23);
-            this.bt_Suchen.TabIndex = 25;
-            this.bt_Suchen.Text = "Suchen";
-            this.bt_Suchen.UseVisualStyleBackColor = true;
-            this.bt_Suchen.Click += new System.EventHandler(this.bt_Suchen_Click);
+            this.cb_s_Genre.AutoSize = true;
+            this.cb_s_Genre.Location = new System.Drawing.Point(516, 21);
+            this.cb_s_Genre.Name = "cb_s_Genre";
+            this.cb_s_Genre.Size = new System.Drawing.Size(58, 17);
+            this.cb_s_Genre.TabIndex = 23;
+            this.cb_s_Genre.Text = "Genre:";
+            this.cb_s_Genre.UseVisualStyleBackColor = true;
+            this.cb_s_Genre.CheckedChanged += new System.EventHandler(this.cb_s_Genre_CheckedChanged);
+            // 
+            // cb_s_Verlag
+            // 
+            this.cb_s_Verlag.AutoSize = true;
+            this.cb_s_Verlag.Location = new System.Drawing.Point(776, 21);
+            this.cb_s_Verlag.Name = "cb_s_Verlag";
+            this.cb_s_Verlag.Size = new System.Drawing.Size(59, 17);
+            this.cb_s_Verlag.TabIndex = 22;
+            this.cb_s_Verlag.Text = "Verlag:";
+            this.cb_s_Verlag.UseVisualStyleBackColor = true;
+            this.cb_s_Verlag.CheckedChanged += new System.EventHandler(this.cb_s_Verlag_CheckedChanged);
+            // 
+            // cb_s_Titel
+            // 
+            this.cb_s_Titel.AutoSize = true;
+            this.cb_s_Titel.Location = new System.Drawing.Point(9, 21);
+            this.cb_s_Titel.Name = "cb_s_Titel";
+            this.cb_s_Titel.Size = new System.Drawing.Size(49, 17);
+            this.cb_s_Titel.TabIndex = 21;
+            this.cb_s_Titel.Text = "Titel:";
+            this.cb_s_Titel.UseVisualStyleBackColor = true;
+            this.cb_s_Titel.CheckedChanged += new System.EventHandler(this.cb_s_Titel_CheckedChanged);
+            // 
+            // tb_s_Verlag
+            // 
+            this.tb_s_Verlag.Enabled = false;
+            this.tb_s_Verlag.Location = new System.Drawing.Point(841, 19);
+            this.tb_s_Verlag.Name = "tb_s_Verlag";
+            this.tb_s_Verlag.Size = new System.Drawing.Size(180, 20);
+            this.tb_s_Verlag.TabIndex = 20;
+            // 
+            // tb_s_Autor
+            // 
+            this.tb_s_Autor.Enabled = false;
+            this.tb_s_Autor.Location = new System.Drawing.Point(320, 19);
+            this.tb_s_Autor.Name = "tb_s_Autor";
+            this.tb_s_Autor.Size = new System.Drawing.Size(180, 20);
+            this.tb_s_Autor.TabIndex = 19;
+            // 
+            // tb_s_Genre
+            // 
+            this.tb_s_Genre.Enabled = false;
+            this.tb_s_Genre.Location = new System.Drawing.Point(580, 19);
+            this.tb_s_Genre.Name = "tb_s_Genre";
+            this.tb_s_Genre.Size = new System.Drawing.Size(180, 20);
+            this.tb_s_Genre.TabIndex = 18;
+            // 
+            // tb_s_Titel
+            // 
+            this.tb_s_Titel.Enabled = false;
+            this.tb_s_Titel.Location = new System.Drawing.Point(64, 19);
+            this.tb_s_Titel.Name = "tb_s_Titel";
+            this.tb_s_Titel.Size = new System.Drawing.Size(180, 20);
+            this.tb_s_Titel.TabIndex = 17;
             // 
             // w_s_details
             // 
