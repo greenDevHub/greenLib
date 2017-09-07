@@ -76,72 +76,25 @@ namespace Bibo_Verwaltung
                         && tb_Telefonnummer.Text == ""
                         && cb_Vertrauenswuerdigkeit.Text == "")
                     {
-                        MessageBox.Show("Ein Kunde mit dieser ID existiert nicht!");
+                        MessageBox.Show("Ein Kunde mit dieser ID existiert nicht!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Clear();
                     }
 
-                    else if (!tb_Vorname.Text.Equals("")
-                         && !tb_Nachname.Text.Equals(""))
-                    {
-                        try
-                        {
-                            Kunde ku = new Kunde(tb_Vorname.Text);
-                            tb_KundenID.Text = ku.KundenID;
-                            tb_Vorname.Text = ku.Vorname;
-                            tb_Nachname.Text = ku.Nachname;
-                            tb_Strasse.Text = ku.Strasse;
-                            tb_Hausnummer.Text = ku.Hausnummer;
-                            tb_Postleitzahl.Text = ku.Postleitzahl;
-                            tb_Ort.Text = ku.Ort;
-                            tb_Klasse.Text = ku.Klasse;
-                            tb_Mail.Text = ku.Mail;
-                            tb_Telefonnummer.Text = ku.Telefonnummer;
-                            cb_Vertrauenswuerdigkeit.Text = ku.Vertrauenswuerdigkeit;
-                        }
-                        catch (SqlException)
-                        {
-                            MessageBox.Show("Der Kunde existiert nicht!", "Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            Clear();
-                        }
-                    }
-                    //else if (!tb_Vorname.Text.Equals("")
-                    //     && !tb_Nachname.Text.Equals(""))
-                    //{
-                    //    try
-                    //    {
-                    //        Kunde k = new Kunde(tb_Vorname.Text);
 
-                    //        tb_KundenID.Text = k.KundenID;
-                    //        tb_Vorname.Text = k.Vorname;
-                    //        tb_Nachname.Text = k.Nachname;
-                    //        tb_Strasse.Text = k.Strasse;
-                    //        tb_Hausnummer.Text = k.Hausnummer;
-                    //        tb_Postleitzahl.Text = k.Postleitzahl;
-                    //        tb_Ort.Text = k.Ort;
-                    //        tb_Klasse.Text = k.Klasse;
-                    //        tb_Mail.Text = k.Mail;
-                    //        tb_Telefonnummer.Text = k.Telefonnummer;
-                    //        cb_Vertrauenswuerdigkeit.Text = k.Vertrauenswuerdigkeit;
-                    //    }
-                    //    catch (SqlException)
-                    //    {
-                    //        MessageBox.Show("Der Kunde existiert nicht!", "Error",
-                    //            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //        Clear();
-                    //    }
-                    //        }
-                    else
-                    {
-                        MessageBox.Show("Füllen Sie nur die markierten Felder aus, um einen Kunden zu laden!", "Achtung",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        Clear();
-                        tb_Vorname.BackColor = Color.Red;
-                        tb_Nachname.BackColor = Color.Red;
-                    }
                 }
-                catch { }
+                catch (SqlException)
+                {
+                    MessageBox.Show("Der Kunde konnte nicht geladen werden!", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                }
+            else
+            {
+                MessageBox.Show("Füllen Sie nur die markierten Felder aus, um einen Kunden zu laden!", "Achtung",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Clear();
+                tb_KundenID.BackColor = Color.Red;
+            }
         }
 
 
@@ -241,6 +194,7 @@ namespace Bibo_Verwaltung
                     k.Telefonnummer = tb_Telefonnummer.Text;
                     k.Add();
                     lb_kunde_add.Visible = true;
+                    
 
                 }
                 catch (SqlException)
@@ -311,6 +265,7 @@ namespace Bibo_Verwaltung
             if (rb_Laden.Checked)
             {
                 Clear();
+                bt_laden_kunden.Text = "Laden";
                 bt_save_kunde.Enabled = false;
                 bt_save_kunde.Text = "";
                 bt_laden_kunden.Enabled = true;
@@ -328,9 +283,10 @@ namespace Bibo_Verwaltung
             }
             else if (rb_KundeBearbeiten.Checked)
             {
+                bt_laden_kunden.Text = "";
                 bt_save_kunde.Enabled = true;
                 bt_save_kunde.Text = "Speichern";
-                bt_laden_kunden.Enabled = true;
+                bt_laden_kunden.Enabled = false;
                 tb_KundenID.Enabled = false;
                 tb_Vorname.Enabled = true;
                 tb_Nachname.Enabled = true;
@@ -347,8 +303,10 @@ namespace Bibo_Verwaltung
             else if (rb_Neukunde.Checked)
             {
                 Clear();
+                bt_laden_kunden.Text = "";
                 bt_save_kunde.Text = "Speichern";
                 bt_laden_kunden.Enabled = false;
+                bt_save_kunde.Enabled = true;
                 tb_KundenID.Enabled = false;
                 tb_Vorname.Enabled = true;
                 tb_Nachname.Enabled = true;
@@ -365,6 +323,7 @@ namespace Bibo_Verwaltung
             else if (rb_KundeLoeschen.Checked)
             {
                 bt_save_kunde.Enabled = true;
+                bt_laden_kunden.Text = "";
                 bt_save_kunde.Text = "Löschen";
                 bt_laden_kunden.Enabled = false;
                 tb_KundenID.Enabled = true;
