@@ -121,6 +121,33 @@ namespace Bibo_Verwaltung
             // Verbindung schließen 
             con.Close();
         }
+
+        public bool Pruefe_Ausgeliehen(string s)
+        {
+            bool ergebnis = false;
+            if (con.ConnectError()) return false;
+            string RawCommand = "SELECT * FROM t_bd_ausgeliehen WHERE bu_id = @0";       
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, s);
+            // Einlesen der Datenzeilen und Ausgabe an der Konsole 
+            while (dr.Read())
+            {
+                string bu_id = dr["bu_id"].ToString();
+                if (bu_id.Equals(""))
+                {
+                    ergebnis = true;
+                }
+                else
+                {
+                    ergebnis = false;
+                }
+                  
+            }
+            // DataReader schließen 
+            dr.Close();
+            // Verbindung schließen 
+            con.Close();
+            return ergebnis;
+        }
         #endregion
 
         #region Save

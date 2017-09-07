@@ -37,9 +37,8 @@
             this.lb_Kunde = new System.Windows.Forms.Label();
             this.tb_Kunde = new System.Windows.Forms.TextBox();
             this.lb_Rück = new System.Windows.Forms.Label();
-            this.lb_Titel = new System.Windows.Forms.Label();
+            this.lb_Buch = new System.Windows.Forms.Label();
             this.tb_Titel = new System.Windows.Forms.TextBox();
-            this.lb_BuchId = new System.Windows.Forms.Label();
             this.tb_BuchID = new System.Windows.Forms.TextBox();
             this.bt_Ausleihen = new System.Windows.Forms.Button();
             this.gb_Suchen = new System.Windows.Forms.GroupBox();
@@ -52,6 +51,7 @@
             this.tb_s_Autor = new System.Windows.Forms.TextBox();
             this.tb_s_Genre = new System.Windows.Forms.TextBox();
             this.tb_s_Titel = new System.Windows.Forms.TextBox();
+            this.tb_KID = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Details)).BeginInit();
             this.cb_Ausleihen.SuspendLayout();
             this.gb_Suchen.SuspendLayout();
@@ -97,20 +97,20 @@
             // 
             // dateTimePickerAusleihen
             // 
-            this.dateTimePickerAusleihen.Location = new System.Drawing.Point(101, 113);
+            this.dateTimePickerAusleihen.Location = new System.Drawing.Point(101, 74);
             this.dateTimePickerAusleihen.Name = "dateTimePickerAusleihen";
             this.dateTimePickerAusleihen.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerAusleihen.TabIndex = 3;
             // 
             // cb_Ausleihen
             // 
+            this.cb_Ausleihen.Controls.Add(this.tb_KID);
             this.cb_Ausleihen.Controls.Add(this.button1);
             this.cb_Ausleihen.Controls.Add(this.lb_Kunde);
             this.cb_Ausleihen.Controls.Add(this.tb_Kunde);
             this.cb_Ausleihen.Controls.Add(this.lb_Rück);
-            this.cb_Ausleihen.Controls.Add(this.lb_Titel);
+            this.cb_Ausleihen.Controls.Add(this.lb_Buch);
             this.cb_Ausleihen.Controls.Add(this.tb_Titel);
-            this.cb_Ausleihen.Controls.Add(this.lb_BuchId);
             this.cb_Ausleihen.Controls.Add(this.tb_BuchID);
             this.cb_Ausleihen.Controls.Add(this.dateTimePickerAusleihen);
             this.cb_Ausleihen.Location = new System.Drawing.Point(12, 407);
@@ -122,7 +122,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(206, 139);
+            this.button1.Location = new System.Drawing.Point(206, 100);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(95, 23);
             this.button1.TabIndex = 11;
@@ -133,7 +133,7 @@
             // lb_Kunde
             // 
             this.lb_Kunde.AutoSize = true;
-            this.lb_Kunde.Location = new System.Drawing.Point(6, 90);
+            this.lb_Kunde.Location = new System.Drawing.Point(6, 51);
             this.lb_Kunde.Name = "lb_Kunde";
             this.lb_Kunde.Size = new System.Drawing.Size(41, 13);
             this.lb_Kunde.TabIndex = 10;
@@ -141,7 +141,7 @@
             // 
             // tb_Kunde
             // 
-            this.tb_Kunde.Location = new System.Drawing.Point(101, 87);
+            this.tb_Kunde.Location = new System.Drawing.Point(101, 48);
             this.tb_Kunde.Name = "tb_Kunde";
             this.tb_Kunde.ReadOnly = true;
             this.tb_Kunde.Size = new System.Drawing.Size(200, 20);
@@ -150,45 +150,38 @@
             // lb_Rück
             // 
             this.lb_Rück.AutoSize = true;
-            this.lb_Rück.Location = new System.Drawing.Point(6, 119);
+            this.lb_Rück.Location = new System.Drawing.Point(6, 80);
             this.lb_Rück.Name = "lb_Rück";
             this.lb_Rück.Size = new System.Drawing.Size(89, 13);
             this.lb_Rück.TabIndex = 8;
             this.lb_Rück.Text = "Rückgabedatum:";
             // 
-            // lb_Titel
+            // lb_Buch
             // 
-            this.lb_Titel.AutoSize = true;
-            this.lb_Titel.Location = new System.Drawing.Point(6, 64);
-            this.lb_Titel.Name = "lb_Titel";
-            this.lb_Titel.Size = new System.Drawing.Size(30, 13);
-            this.lb_Titel.TabIndex = 7;
-            this.lb_Titel.Text = "Titel:";
+            this.lb_Buch.AutoSize = true;
+            this.lb_Buch.Location = new System.Drawing.Point(6, 25);
+            this.lb_Buch.Name = "lb_Buch";
+            this.lb_Buch.Size = new System.Drawing.Size(35, 13);
+            this.lb_Buch.TabIndex = 7;
+            this.lb_Buch.Text = "Buch:";
             // 
             // tb_Titel
             // 
-            this.tb_Titel.Location = new System.Drawing.Point(101, 61);
+            this.tb_Titel.Location = new System.Drawing.Point(101, 22);
             this.tb_Titel.Name = "tb_Titel";
             this.tb_Titel.ReadOnly = true;
             this.tb_Titel.Size = new System.Drawing.Size(200, 20);
             this.tb_Titel.TabIndex = 6;
             // 
-            // lb_BuchId
-            // 
-            this.lb_BuchId.AutoSize = true;
-            this.lb_BuchId.Location = new System.Drawing.Point(6, 38);
-            this.lb_BuchId.Name = "lb_BuchId";
-            this.lb_BuchId.Size = new System.Drawing.Size(49, 13);
-            this.lb_BuchId.TabIndex = 5;
-            this.lb_BuchId.Text = "Buch-ID:";
-            // 
             // tb_BuchID
             // 
-            this.tb_BuchID.Location = new System.Drawing.Point(101, 35);
+            this.tb_BuchID.Enabled = false;
+            this.tb_BuchID.Location = new System.Drawing.Point(307, 22);
             this.tb_BuchID.Name = "tb_BuchID";
             this.tb_BuchID.ReadOnly = true;
-            this.tb_BuchID.Size = new System.Drawing.Size(200, 20);
+            this.tb_BuchID.Size = new System.Drawing.Size(24, 20);
             this.tb_BuchID.TabIndex = 4;
+            this.tb_BuchID.Visible = false;
             // 
             // bt_Ausleihen
             // 
@@ -304,6 +297,16 @@
             this.tb_s_Titel.Size = new System.Drawing.Size(180, 20);
             this.tb_s_Titel.TabIndex = 17;
             // 
+            // tb_KID
+            // 
+            this.tb_KID.Enabled = false;
+            this.tb_KID.Location = new System.Drawing.Point(307, 48);
+            this.tb_KID.Name = "tb_KID";
+            this.tb_KID.ReadOnly = true;
+            this.tb_KID.Size = new System.Drawing.Size(24, 20);
+            this.tb_KID.TabIndex = 12;
+            this.tb_KID.Visible = false;
+            // 
             // w_s_details
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -335,9 +338,8 @@
         private System.Windows.Forms.CheckBox cb_Ferfügbark_Anz;
         private System.Windows.Forms.DateTimePicker dateTimePickerAusleihen;
         private System.Windows.Forms.GroupBox cb_Ausleihen;
-        private System.Windows.Forms.Label lb_Titel;
+        private System.Windows.Forms.Label lb_Buch;
         private System.Windows.Forms.TextBox tb_Titel;
-        private System.Windows.Forms.Label lb_BuchId;
         private System.Windows.Forms.TextBox tb_BuchID;
         private System.Windows.Forms.Label lb_Kunde;
         private System.Windows.Forms.TextBox tb_Kunde;
@@ -354,5 +356,6 @@
         private System.Windows.Forms.TextBox tb_s_Autor;
         private System.Windows.Forms.TextBox tb_s_Genre;
         private System.Windows.Forms.TextBox tb_s_Titel;
+        private System.Windows.Forms.TextBox tb_KID;
     }
 }

@@ -178,7 +178,8 @@ namespace Bibo_Verwaltung
                         string k_vmane = form.KundenVName;
                         string k_nname = form.KundenNName;
 
-                        this.tb_Kunde.Text = "(" + k_id + ") " + k_vmane + " " + k_nname;
+                        this.tb_Kunde.Text = k_vmane + " " + k_nname;
+                        this.tb_KID.Text = k_id;
                     }
                 }
                 tb_BuchID.Text = bu_id;
@@ -192,12 +193,18 @@ namespace Bibo_Verwaltung
 
         private void ausleihen(object sender, EventArgs e)
         {
+            bool h;
             int bu_id = Convert.ToInt32(tb_BuchID.Text);
-            string aus_d = DateTime.Today.ToString();
-            string rück_d = dateTimePickerAusleihen.Value.ToString();
-            string k_id = tb_Kunde.Text.Substring(1, 1);
-            int kunde = Convert.ToInt32(k_id);
-            b.Ausleihen(bu_id, aus_d, rück_d, kunde);
+            Buch b = new Buch();
+            if (b.Pruefe_Ausgeliehen(bu_id.ToString()))
+            {
+                string aus_d = DateTime.Today.ToString();
+                string rück_d = dateTimePickerAusleihen.Value.ToString();
+                int k_id = Convert.ToInt32(tb_KID.Text);
+                b.Ausleihen(bu_id, aus_d, rück_d, k_id);
+                MessageBox.Show("Das Buch wurde erfolgreich ausgeliehen!", "Information",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void bt_Suchen_Click(object sender, EventArgs e)

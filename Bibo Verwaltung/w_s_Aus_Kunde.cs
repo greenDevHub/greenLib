@@ -35,14 +35,14 @@ namespace Bibo_Verwaltung
             InitializeComponent();
             kunde.FillGrid(ref gv_Aus_Kunde);
             //Alles_Einblenden();
-            gv_Aus_Kunde.Columns[0].Visible = false;
-            gv_Aus_Kunde.Columns[3].Visible = false;
-            gv_Aus_Kunde.Columns[4].Visible = false;
-            gv_Aus_Kunde.Columns[5].Visible = false;
-            gv_Aus_Kunde.Columns[6].Visible = false;
-            gv_Aus_Kunde.Columns[9].Visible = false;
-            gv_Aus_Kunde.Columns[10].Visible = false;
-            gv_Aus_Kunde.Columns[11].Visible = false;
+            //gv_Aus_Kunde.Columns[0].Visible = false;
+            //gv_Aus_Kunde.Columns[3].Visible = false;
+            //gv_Aus_Kunde.Columns[4].Visible = false;
+            //gv_Aus_Kunde.Columns[5].Visible = false;
+            //gv_Aus_Kunde.Columns[6].Visible = false;
+            //gv_Aus_Kunde.Columns[9].Visible = false;
+            //gv_Aus_Kunde.Columns[10].Visible = false;
+            //gv_Aus_Kunde.Columns[11].Visible = false;
         }
 
         Kunde kunde = new Kunde();
