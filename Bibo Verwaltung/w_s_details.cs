@@ -166,8 +166,6 @@ namespace Bibo_Verwaltung
             {
                 string bu_id = gv_Details.CurrentRow.Cells[0].Value.ToString();
                 string bu_titel = gv_Details.CurrentRow.Cells[5].Value.ToString();
-                //string aus_d = DateTime.Today.ToString();
-                //string rück_d = dateTimePickerAusleihen.Value.ToString();
 
                 using (var form = new w_s_Aus_Kunde())
                 {
@@ -185,25 +183,33 @@ namespace Bibo_Verwaltung
                 tb_BuchID.Text = bu_id;
                 tb_Titel.Text = bu_titel;
             }
-            catch (Exception e1)
+            catch
             {
-                MessageBox.Show("Wählen Sie ein Buch aus!"+e1.Message);
+                MessageBox.Show("Der Auslehvorgang konnte nicht gestartet werden!", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void ausleihen(object sender, EventArgs e)
         {
-            bool h;
-            int bu_id = Convert.ToInt32(tb_BuchID.Text);
-            Buch b = new Buch();
-            if (b.Pruefe_Ausgeliehen(bu_id.ToString()))
+            try
             {
-                string aus_d = DateTime.Today.ToString();
-                string rück_d = dateTimePickerAusleihen.Value.ToString();
-                int k_id = Convert.ToInt32(tb_KID.Text);
-                b.Ausleihen(bu_id, aus_d, rück_d, k_id);
-                MessageBox.Show("Das Buch wurde erfolgreich ausgeliehen!", "Information",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                int bu_id = Convert.ToInt32(tb_BuchID.Text);
+                Buch b = new Buch();
+                if (b.Pruefe_Ausgeliehen(bu_id.ToString()))
+                {
+                    string aus_d = DateTime.Today.ToString();
+                    string rück_d = dateTimePickerAusleihen.Value.ToString();
+                    int k_id = Convert.ToInt32(tb_KID.Text);
+                    b.Ausleihen(bu_id, aus_d, rück_d, k_id);
+                    MessageBox.Show("Das Buch wurde erfolgreich ausgeliehen!", "Information",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Das Buch konnte nicht ausgeliehen werden! ", "Error",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
