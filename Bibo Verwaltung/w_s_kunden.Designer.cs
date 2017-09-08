@@ -49,6 +49,7 @@
             this.tb_Vorname = new System.Windows.Forms.TextBox();
             this.lb_Vorname = new System.Windows.Forms.Label();
             this.tb_KundenID = new System.Windows.Forms.TextBox();
+            this.lb_KundenID = new System.Windows.Forms.Label();
             this.gb_kunde = new System.Windows.Forms.GroupBox();
             this.lb_kunde_add = new System.Windows.Forms.Label();
             this.bt_clear_kunden = new System.Windows.Forms.Button();
@@ -69,51 +70,57 @@
             // lb_Telefonnummer
             // 
             this.lb_Telefonnummer.AutoSize = true;
-            this.lb_Telefonnummer.Location = new System.Drawing.Point(41, 288);
+            this.lb_Telefonnummer.Location = new System.Drawing.Point(8, 421);
+            this.lb_Telefonnummer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_Telefonnummer.Name = "lb_Telefonnummer";
-            this.lb_Telefonnummer.Size = new System.Drawing.Size(83, 13);
+            this.lb_Telefonnummer.Size = new System.Drawing.Size(111, 17);
             this.lb_Telefonnummer.TabIndex = 16;
             this.lb_Telefonnummer.Text = "Telefonnummer:";
             // 
             // tb_Telefonnummer
             // 
-            this.tb_Telefonnummer.Location = new System.Drawing.Point(156, 285);
+            this.tb_Telefonnummer.Location = new System.Drawing.Point(158, 417);
+            this.tb_Telefonnummer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_Telefonnummer.Name = "tb_Telefonnummer";
-            this.tb_Telefonnummer.Size = new System.Drawing.Size(205, 20);
+            this.tb_Telefonnummer.Size = new System.Drawing.Size(272, 22);
             this.tb_Telefonnummer.TabIndex = 11;
             this.tb_Telefonnummer.TextChanged += new System.EventHandler(this.tb_Telefonnummer_TextChanged);
             // 
             // lb_Mail
             // 
             this.lb_Mail.AutoSize = true;
-            this.lb_Mail.Location = new System.Drawing.Point(41, 262);
+            this.lb_Mail.Location = new System.Drawing.Point(10, 389);
+            this.lb_Mail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_Mail.Name = "lb_Mail";
-            this.lb_Mail.Size = new System.Drawing.Size(29, 13);
+            this.lb_Mail.Size = new System.Drawing.Size(37, 17);
             this.lb_Mail.TabIndex = 37;
             this.lb_Mail.Text = "Mail:";
             // 
             // tb_Mail
             // 
-            this.tb_Mail.Location = new System.Drawing.Point(156, 259);
+            this.tb_Mail.Location = new System.Drawing.Point(158, 385);
+            this.tb_Mail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_Mail.Name = "tb_Mail";
-            this.tb_Mail.Size = new System.Drawing.Size(205, 20);
+            this.tb_Mail.Size = new System.Drawing.Size(272, 22);
             this.tb_Mail.TabIndex = 10;
             this.tb_Mail.TextChanged += new System.EventHandler(this.tb_Mail_TextChanged);
             // 
             // tb_Klasse
             // 
-            this.tb_Klasse.Location = new System.Drawing.Point(156, 233);
+            this.tb_Klasse.Location = new System.Drawing.Point(158, 353);
+            this.tb_Klasse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_Klasse.Name = "tb_Klasse";
-            this.tb_Klasse.Size = new System.Drawing.Size(79, 20);
+            this.tb_Klasse.Size = new System.Drawing.Size(104, 22);
             this.tb_Klasse.TabIndex = 9;
             this.tb_Klasse.TextChanged += new System.EventHandler(this.tb_Klasse_TextChanged);
             // 
             // lb_Klasse
             // 
             this.lb_Klasse.AutoSize = true;
-            this.lb_Klasse.Location = new System.Drawing.Point(41, 236);
+            this.lb_Klasse.Location = new System.Drawing.Point(8, 357);
+            this.lb_Klasse.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_Klasse.Name = "lb_Klasse";
-            this.lb_Klasse.Size = new System.Drawing.Size(41, 13);
+            this.lb_Klasse.Size = new System.Drawing.Size(54, 17);
             this.lb_Klasse.TabIndex = 34;
             this.lb_Klasse.Text = "Klasse:";
             // 
@@ -124,133 +131,155 @@
             "vertrauenswürdig",
             "nicht vertrauenswürdig",
             "noch nicht bestimmt"});
-            this.cb_Vertrauenswuerdigkeit.Location = new System.Drawing.Point(156, 206);
+            this.cb_Vertrauenswuerdigkeit.Location = new System.Drawing.Point(158, 320);
+            this.cb_Vertrauenswuerdigkeit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cb_Vertrauenswuerdigkeit.Name = "cb_Vertrauenswuerdigkeit";
-            this.cb_Vertrauenswuerdigkeit.Size = new System.Drawing.Size(205, 21);
+            this.cb_Vertrauenswuerdigkeit.Size = new System.Drawing.Size(272, 24);
             this.cb_Vertrauenswuerdigkeit.TabIndex = 8;
             this.cb_Vertrauenswuerdigkeit.TextChanged += new System.EventHandler(this.cb_Vertrauenswuerdigkeit_TextChanged_1);
             // 
             // lb_Vertrauenswuerdigkeit
             // 
             this.lb_Vertrauenswuerdigkeit.AutoSize = true;
-            this.lb_Vertrauenswuerdigkeit.Location = new System.Drawing.Point(41, 211);
+            this.lb_Vertrauenswuerdigkeit.Location = new System.Drawing.Point(8, 324);
+            this.lb_Vertrauenswuerdigkeit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_Vertrauenswuerdigkeit.Name = "lb_Vertrauenswuerdigkeit";
-            this.lb_Vertrauenswuerdigkeit.Size = new System.Drawing.Size(109, 13);
+            this.lb_Vertrauenswuerdigkeit.Size = new System.Drawing.Size(145, 17);
             this.lb_Vertrauenswuerdigkeit.TabIndex = 33;
             this.lb_Vertrauenswuerdigkeit.Text = "Vertrauenswürdigkeit:";
             // 
             // tb_Ort
             // 
-            this.tb_Ort.Location = new System.Drawing.Point(156, 180);
+            this.tb_Ort.Location = new System.Drawing.Point(158, 288);
+            this.tb_Ort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_Ort.Name = "tb_Ort";
-            this.tb_Ort.Size = new System.Drawing.Size(205, 20);
+            this.tb_Ort.Size = new System.Drawing.Size(272, 22);
             this.tb_Ort.TabIndex = 7;
             this.tb_Ort.TextChanged += new System.EventHandler(this.tb_Ort_TextChanged);
             // 
             // lb_Ort
             // 
             this.lb_Ort.AutoSize = true;
-            this.lb_Ort.Location = new System.Drawing.Point(41, 183);
+            this.lb_Ort.Location = new System.Drawing.Point(8, 292);
+            this.lb_Ort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_Ort.Name = "lb_Ort";
-            this.lb_Ort.Size = new System.Drawing.Size(51, 13);
+            this.lb_Ort.Size = new System.Drawing.Size(66, 17);
             this.lb_Ort.TabIndex = 31;
             this.lb_Ort.Text = "Wohnort:";
             // 
             // tb_Postleitzahl
             // 
-            this.tb_Postleitzahl.Location = new System.Drawing.Point(156, 154);
+            this.tb_Postleitzahl.Location = new System.Drawing.Point(158, 256);
+            this.tb_Postleitzahl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_Postleitzahl.Name = "tb_Postleitzahl";
-            this.tb_Postleitzahl.Size = new System.Drawing.Size(79, 20);
+            this.tb_Postleitzahl.Size = new System.Drawing.Size(104, 22);
             this.tb_Postleitzahl.TabIndex = 6;
             this.tb_Postleitzahl.TextChanged += new System.EventHandler(this.tb_Postleitzahl_TextChanged);
             // 
             // lb_Postleitzahl
             // 
             this.lb_Postleitzahl.AutoSize = true;
-            this.lb_Postleitzahl.Location = new System.Drawing.Point(41, 157);
+            this.lb_Postleitzahl.Location = new System.Drawing.Point(8, 260);
+            this.lb_Postleitzahl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_Postleitzahl.Name = "lb_Postleitzahl";
-            this.lb_Postleitzahl.Size = new System.Drawing.Size(63, 13);
+            this.lb_Postleitzahl.Size = new System.Drawing.Size(84, 17);
             this.lb_Postleitzahl.TabIndex = 29;
             this.lb_Postleitzahl.Text = "Postleitzahl:";
             // 
             // tb_Hausnummer
             // 
-            this.tb_Hausnummer.Location = new System.Drawing.Point(156, 128);
+            this.tb_Hausnummer.Location = new System.Drawing.Point(158, 224);
+            this.tb_Hausnummer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_Hausnummer.Name = "tb_Hausnummer";
-            this.tb_Hausnummer.Size = new System.Drawing.Size(79, 20);
+            this.tb_Hausnummer.Size = new System.Drawing.Size(104, 22);
             this.tb_Hausnummer.TabIndex = 5;
             this.tb_Hausnummer.TextChanged += new System.EventHandler(this.tb_Hausnummer_TextChanged);
             // 
             // lb_Hausnummer
             // 
             this.lb_Hausnummer.AutoSize = true;
-            this.lb_Hausnummer.Location = new System.Drawing.Point(41, 131);
+            this.lb_Hausnummer.Location = new System.Drawing.Point(8, 228);
+            this.lb_Hausnummer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_Hausnummer.Name = "lb_Hausnummer";
-            this.lb_Hausnummer.Size = new System.Drawing.Size(72, 13);
+            this.lb_Hausnummer.Size = new System.Drawing.Size(96, 17);
             this.lb_Hausnummer.TabIndex = 27;
             this.lb_Hausnummer.Text = "Hausnummer:";
             // 
             // tb_Strasse
             // 
-            this.tb_Strasse.Location = new System.Drawing.Point(156, 102);
+            this.tb_Strasse.Location = new System.Drawing.Point(158, 192);
+            this.tb_Strasse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_Strasse.Name = "tb_Strasse";
-            this.tb_Strasse.Size = new System.Drawing.Size(205, 20);
+            this.tb_Strasse.Size = new System.Drawing.Size(272, 22);
             this.tb_Strasse.TabIndex = 4;
             this.tb_Strasse.TextChanged += new System.EventHandler(this.tb_Strasse_TextChanged);
             // 
             // lb_Strasse
             // 
             this.lb_Strasse.AutoSize = true;
-            this.lb_Strasse.Location = new System.Drawing.Point(41, 105);
+            this.lb_Strasse.Location = new System.Drawing.Point(8, 196);
+            this.lb_Strasse.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_Strasse.Name = "lb_Strasse";
-            this.lb_Strasse.Size = new System.Drawing.Size(45, 13);
+            this.lb_Strasse.Size = new System.Drawing.Size(60, 17);
             this.lb_Strasse.TabIndex = 7;
             this.lb_Strasse.Text = "Strasse:";
             // 
             // tb_Nachname
             // 
-            this.tb_Nachname.Location = new System.Drawing.Point(156, 76);
+            this.tb_Nachname.Location = new System.Drawing.Point(158, 128);
+            this.tb_Nachname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_Nachname.Name = "tb_Nachname";
-            this.tb_Nachname.Size = new System.Drawing.Size(205, 20);
+            this.tb_Nachname.Size = new System.Drawing.Size(272, 22);
             this.tb_Nachname.TabIndex = 2;
             this.tb_Nachname.TextChanged += new System.EventHandler(this.tb_Nachname_TextChanged);
             // 
             // lb_Nachname
             // 
             this.lb_Nachname.AutoSize = true;
-            this.lb_Nachname.Location = new System.Drawing.Point(41, 79);
+            this.lb_Nachname.Location = new System.Drawing.Point(8, 132);
+            this.lb_Nachname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_Nachname.Name = "lb_Nachname";
-            this.lb_Nachname.Size = new System.Drawing.Size(62, 13);
+            this.lb_Nachname.Size = new System.Drawing.Size(80, 17);
             this.lb_Nachname.TabIndex = 23;
             this.lb_Nachname.Text = "Nachname:";
             // 
             // tb_Vorname
             // 
-            this.tb_Vorname.Location = new System.Drawing.Point(156, 50);
+            this.tb_Vorname.Location = new System.Drawing.Point(158, 96);
+            this.tb_Vorname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_Vorname.Name = "tb_Vorname";
-            this.tb_Vorname.Size = new System.Drawing.Size(205, 20);
+            this.tb_Vorname.Size = new System.Drawing.Size(272, 22);
             this.tb_Vorname.TabIndex = 1;
             this.tb_Vorname.TextChanged += new System.EventHandler(this.tb_Vorname_TextChanged);
             // 
             // lb_Vorname
             // 
             this.lb_Vorname.AutoSize = true;
-            this.lb_Vorname.Location = new System.Drawing.Point(41, 53);
+            this.lb_Vorname.Location = new System.Drawing.Point(8, 100);
+            this.lb_Vorname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_Vorname.Name = "lb_Vorname";
-            this.lb_Vorname.Size = new System.Drawing.Size(52, 13);
+            this.lb_Vorname.Size = new System.Drawing.Size(69, 17);
             this.lb_Vorname.TabIndex = 21;
             this.lb_Vorname.Text = "Vorname:";
             // 
             // tb_KundenID
             // 
-            this.tb_KundenID.Enabled = false;
-            this.tb_KundenID.Location = new System.Drawing.Point(367, 50);
+            this.tb_KundenID.Location = new System.Drawing.Point(158, 160);
+            this.tb_KundenID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_KundenID.Name = "tb_KundenID";
-            this.tb_KundenID.ReadOnly = true;
-            this.tb_KundenID.Size = new System.Drawing.Size(20, 20);
+            this.tb_KundenID.Size = new System.Drawing.Size(272, 22);
             this.tb_KundenID.TabIndex = 3;
-            this.tb_KundenID.Visible = false;
             this.tb_KundenID.TextChanged += new System.EventHandler(this.tb_KundenID_TextChanged);
+            // 
+            // lb_KundenID
+            // 
+            this.lb_KundenID.AutoSize = true;
+            this.lb_KundenID.Location = new System.Drawing.Point(8, 164);
+            this.lb_KundenID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lb_KundenID.Name = "lb_KundenID";
+            this.lb_KundenID.Size = new System.Drawing.Size(79, 17);
+            this.lb_KundenID.TabIndex = 0;
+            this.lb_KundenID.Text = "Kunden-ID:";
             // 
             // gb_kunde
             // 
@@ -282,9 +311,12 @@
             this.gb_kunde.Controls.Add(this.tb_Vorname);
             this.gb_kunde.Controls.Add(this.lb_Vorname);
             this.gb_kunde.Controls.Add(this.tb_KundenID);
-            this.gb_kunde.Location = new System.Drawing.Point(372, 11);
+            this.gb_kunde.Controls.Add(this.lb_KundenID);
+            this.gb_kunde.Location = new System.Drawing.Point(466, 13);
+            this.gb_kunde.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gb_kunde.Name = "gb_kunde";
-            this.gb_kunde.Size = new System.Drawing.Size(400, 378);
+            this.gb_kunde.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gb_kunde.Size = new System.Drawing.Size(558, 565);
             this.gb_kunde.TabIndex = 0;
             this.gb_kunde.TabStop = false;
             this.gb_kunde.Text = "Kunden verwalten";
@@ -292,18 +324,20 @@
             // lb_kunde_add
             // 
             this.lb_kunde_add.AutoSize = true;
-            this.lb_kunde_add.Location = new System.Drawing.Point(100, 350);
+            this.lb_kunde_add.Location = new System.Drawing.Point(154, 499);
+            this.lb_kunde_add.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_kunde_add.Name = "lb_kunde_add";
-            this.lb_kunde_add.Size = new System.Drawing.Size(203, 13);
+            this.lb_kunde_add.Size = new System.Drawing.Size(270, 17);
             this.lb_kunde_add.TabIndex = 40;
             this.lb_kunde_add.Text = "Der Kunde wurde erfolgreich hinzugefügt!";
             this.lb_kunde_add.Visible = false;
             // 
             // bt_clear_kunden
             // 
-            this.bt_clear_kunden.Location = new System.Drawing.Point(261, 311);
+            this.bt_clear_kunden.Location = new System.Drawing.Point(292, 457);
+            this.bt_clear_kunden.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bt_clear_kunden.Name = "bt_clear_kunden";
-            this.bt_clear_kunden.Size = new System.Drawing.Size(100, 23);
+            this.bt_clear_kunden.Size = new System.Drawing.Size(136, 38);
             this.bt_clear_kunden.TabIndex = 14;
             this.bt_clear_kunden.Text = "Clear";
             this.bt_clear_kunden.UseVisualStyleBackColor = true;
@@ -312,9 +346,10 @@
             // rb_KundeLoeschen
             // 
             this.rb_KundeLoeschen.AutoSize = true;
-            this.rb_KundeLoeschen.Location = new System.Drawing.Point(289, 19);
+            this.rb_KundeLoeschen.Location = new System.Drawing.Point(382, 23);
+            this.rb_KundeLoeschen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rb_KundeLoeschen.Name = "rb_KundeLoeschen";
-            this.rb_KundeLoeschen.Size = new System.Drawing.Size(105, 17);
+            this.rb_KundeLoeschen.Size = new System.Drawing.Size(136, 21);
             this.rb_KundeLoeschen.TabIndex = 0;
             this.rb_KundeLoeschen.Text = "Kunde Entfernen";
             this.rb_KundeLoeschen.UseVisualStyleBackColor = true;
@@ -323,9 +358,10 @@
             // rb_KundeBearbeiten
             // 
             this.rb_KundeBearbeiten.AutoSize = true;
-            this.rb_KundeBearbeiten.Location = new System.Drawing.Point(173, 19);
+            this.rb_KundeBearbeiten.Location = new System.Drawing.Point(222, 23);
+            this.rb_KundeBearbeiten.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rb_KundeBearbeiten.Name = "rb_KundeBearbeiten";
-            this.rb_KundeBearbeiten.Size = new System.Drawing.Size(110, 17);
+            this.rb_KundeBearbeiten.Size = new System.Drawing.Size(143, 21);
             this.rb_KundeBearbeiten.TabIndex = 0;
             this.rb_KundeBearbeiten.Text = "Kunde Bearbeiten";
             this.rb_KundeBearbeiten.UseVisualStyleBackColor = true;
@@ -335,9 +371,10 @@
             // 
             this.rb_Neukunde.AutoSize = true;
             this.rb_Neukunde.Checked = true;
-            this.rb_Neukunde.Location = new System.Drawing.Point(15, 19);
+            this.rb_Neukunde.Location = new System.Drawing.Point(12, 23);
+            this.rb_Neukunde.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rb_Neukunde.Name = "rb_Neukunde";
-            this.rb_Neukunde.Size = new System.Drawing.Size(152, 17);
+            this.rb_Neukunde.Size = new System.Drawing.Size(198, 21);
             this.rb_Neukunde.TabIndex = 0;
             this.rb_Neukunde.TabStop = true;
             this.rb_Neukunde.Text = "Neuen Kunden hinzufügen";
@@ -346,9 +383,10 @@
             // 
             // bt_save_kunde
             // 
-            this.bt_save_kunde.Location = new System.Drawing.Point(156, 311);
+            this.bt_save_kunde.Location = new System.Drawing.Point(158, 457);
+            this.bt_save_kunde.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bt_save_kunde.Name = "bt_save_kunde";
-            this.bt_save_kunde.Size = new System.Drawing.Size(100, 23);
+            this.bt_save_kunde.Size = new System.Drawing.Size(136, 38);
             this.bt_save_kunde.TabIndex = 13;
             this.bt_save_kunde.Text = "Speichern";
             this.bt_save_kunde.UseVisualStyleBackColor = true;
@@ -357,9 +395,10 @@
             // bt_OK
             // 
             this.bt_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.bt_OK.Location = new System.Drawing.Point(675, 395);
+            this.bt_OK.Location = new System.Drawing.Point(0, 535);
+            this.bt_OK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bt_OK.Name = "bt_OK";
-            this.bt_OK.Size = new System.Drawing.Size(97, 23);
+            this.bt_OK.Size = new System.Drawing.Size(130, 28);
             this.bt_OK.TabIndex = 15;
             this.bt_OK.Text = "Schließen";
             this.bt_OK.UseVisualStyleBackColor = true;
@@ -369,11 +408,11 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.tb_search);
             this.groupBox1.Controls.Add(this.Grid_Kunde);
-            this.groupBox1.Location = new System.Drawing.Point(11, 11);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.groupBox1.Location = new System.Drawing.Point(12, 13);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.groupBox1.Size = new System.Drawing.Size(356, 378);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.groupBox1.Size = new System.Drawing.Size(448, 563);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Kunden anzeigen";
@@ -383,17 +422,13 @@
             this.Grid_Kunde.AllowUserToAddRows = false;
             this.Grid_Kunde.AllowUserToDeleteRows = false;
             this.Grid_Kunde.AllowUserToResizeColumns = false;
-            this.Grid_Kunde.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.Grid_Kunde.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Grid_Kunde.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Grid_Kunde.Location = new System.Drawing.Point(4, 19);
-            this.Grid_Kunde.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.Grid_Kunde.MultiSelect = false;
+            this.Grid_Kunde.Location = new System.Drawing.Point(16, 21);
+            this.Grid_Kunde.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.Grid_Kunde.Name = "Grid_Kunde";
             this.Grid_Kunde.ReadOnly = true;
             this.Grid_Kunde.RowTemplate.Height = 24;
-            this.Grid_Kunde.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.Grid_Kunde.Size = new System.Drawing.Size(348, 353);
+            this.Grid_Kunde.Size = new System.Drawing.Size(426, 493);
             this.Grid_Kunde.TabIndex = 0;
             this.Grid_Kunde.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Kunde_CellDoubleClick);
             // 
@@ -416,15 +451,14 @@
             // 
             // w_s_Kunden
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 430);
+            this.ClientSize = new System.Drawing.Size(1042, 589);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gb_kunde);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "w_s_Kunden";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Kundenverwaltung";
             this.Activated += new System.EventHandler(this.w_s_kunden_Activated);
             this.gb_kunde.ResumeLayout(false);
             this.gb_kunde.PerformLayout();
@@ -457,6 +491,7 @@
         private System.Windows.Forms.TextBox tb_Vorname;
         private System.Windows.Forms.Label lb_Vorname;
         private System.Windows.Forms.TextBox tb_KundenID;
+        private System.Windows.Forms.Label lb_KundenID;
         private System.Windows.Forms.GroupBox gb_kunde;
         private System.Windows.Forms.Button bt_OK;
         private System.Windows.Forms.Button bt_save_kunde;
