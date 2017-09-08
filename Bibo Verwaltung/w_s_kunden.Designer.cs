@@ -59,6 +59,8 @@
             this.bt_OK = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Grid_Kunde = new System.Windows.Forms.DataGridView();
+            this.tb_search = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.gb_kunde.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Kunde)).BeginInit();
@@ -254,6 +256,7 @@
             // 
             this.gb_kunde.Controls.Add(this.lb_kunde_add);
             this.gb_kunde.Controls.Add(this.bt_clear_kunden);
+            this.gb_kunde.Controls.Add(this.bt_OK);
             this.gb_kunde.Controls.Add(this.rb_KundeLoeschen);
             this.gb_kunde.Controls.Add(this.rb_KundeBearbeiten);
             this.gb_kunde.Controls.Add(this.rb_Neukunde);
@@ -363,6 +366,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.tb_search);
             this.groupBox1.Controls.Add(this.Grid_Kunde);
             this.groupBox1.Location = new System.Drawing.Point(11, 11);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -392,13 +397,29 @@
             this.Grid_Kunde.TabIndex = 0;
             this.Grid_Kunde.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Kunde_CellDoubleClick);
             // 
+            // tb_search
+            // 
+            this.tb_search.Location = new System.Drawing.Point(182, 521);
+            this.tb_search.Name = "tb_search";
+            this.tb_search.Size = new System.Drawing.Size(260, 22);
+            this.tb_search.TabIndex = 17;
+            this.tb_search.TextChanged += new System.EventHandler(this.tb_search_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 524);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(154, 17);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Nach Vorname Suchen";
+            // 
             // w_s_Kunden
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 430);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.bt_OK);
             this.Controls.Add(this.gb_kunde);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "w_s_Kunden";
@@ -408,6 +429,7 @@
             this.gb_kunde.ResumeLayout(false);
             this.gb_kunde.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Kunde)).EndInit();
             this.ResumeLayout(false);
 
@@ -445,5 +467,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView Grid_Kunde;
         private System.Windows.Forms.RadioButton rb_Neukunde;
+        private System.Windows.Forms.TextBox tb_search;
+        private System.Windows.Forms.Label label1;
     }
 }

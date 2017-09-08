@@ -460,11 +460,6 @@ namespace Bibo_Verwaltung
             Modus();
         }
 
-        private void rb_laden_CheckedChanged(object sender, EventArgs e)
-        {
-            Modus();
-        }
-
         private void w_s_kunden_Activated(object sender, EventArgs e)
         {
             Modus();
@@ -495,6 +490,9 @@ namespace Bibo_Verwaltung
             }
         }
 
-        
+        private void tb_search_TextChanged(object sender, EventArgs e)
+        {
+            (Grid_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'", tb_search.Text);
+        }
     }
 }
