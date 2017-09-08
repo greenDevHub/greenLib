@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.bt_laden_kunden = new System.Windows.Forms.Button();
             this.lb_Telefonnummer = new System.Windows.Forms.Label();
             this.tb_Telefonnummer = new System.Windows.Forms.TextBox();
             this.lb_Mail = new System.Windows.Forms.Label();
@@ -52,10 +51,7 @@
             this.tb_KundenID = new System.Windows.Forms.TextBox();
             this.lb_KundenID = new System.Windows.Forms.Label();
             this.gb_kunde = new System.Windows.Forms.GroupBox();
-            this.rb_Laden = new System.Windows.Forms.RadioButton();
             this.lb_kunde_add = new System.Windows.Forms.Label();
-            this.lb_kunde_delete = new System.Windows.Forms.Label();
-            this.lb_kunde_save = new System.Windows.Forms.Label();
             this.rb_KundeLoeschen = new System.Windows.Forms.RadioButton();
             this.rb_KundeBearbeiten = new System.Windows.Forms.RadioButton();
             this.rb_Neukunde = new System.Windows.Forms.RadioButton();
@@ -68,17 +64,6 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Kunde)).BeginInit();
             this.SuspendLayout();
-            // 
-            // bt_laden_kunden
-            // 
-            this.bt_laden_kunden.Location = new System.Drawing.Point(315, 870);
-            this.bt_laden_kunden.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.bt_laden_kunden.Name = "bt_laden_kunden";
-            this.bt_laden_kunden.Size = new System.Drawing.Size(272, 74);
-            this.bt_laden_kunden.TabIndex = 12;
-            this.bt_laden_kunden.Text = "Laden";
-            this.bt_laden_kunden.UseVisualStyleBackColor = true;
-            this.bt_laden_kunden.Click += new System.EventHandler(this.Load_Kunde);
             // 
             // lb_Telefonnummer
             // 
@@ -149,6 +134,7 @@
             this.cb_Vertrauenswuerdigkeit.Name = "cb_Vertrauenswuerdigkeit";
             this.cb_Vertrauenswuerdigkeit.Size = new System.Drawing.Size(540, 39);
             this.cb_Vertrauenswuerdigkeit.TabIndex = 8;
+            this.cb_Vertrauenswuerdigkeit.TextChanged += new System.EventHandler(this.cb_Vertrauenswuerdigkeit_TextChanged_1);
             // 
             // lb_Vertrauenswuerdigkeit
             // 
@@ -295,15 +281,12 @@
             // 
             // gb_kunde
             // 
-            this.gb_kunde.Controls.Add(this.rb_Laden);
             this.gb_kunde.Controls.Add(this.lb_kunde_add);
-            this.gb_kunde.Controls.Add(this.lb_kunde_delete);
-            this.gb_kunde.Controls.Add(this.lb_kunde_save);
+            this.gb_kunde.Controls.Add(this.bt_clear_kunden);
             this.gb_kunde.Controls.Add(this.rb_KundeLoeschen);
             this.gb_kunde.Controls.Add(this.rb_KundeBearbeiten);
             this.gb_kunde.Controls.Add(this.rb_Neukunde);
             this.gb_kunde.Controls.Add(this.bt_save_kunde);
-            this.gb_kunde.Controls.Add(this.bt_laden_kunden);
             this.gb_kunde.Controls.Add(this.lb_Telefonnummer);
             this.gb_kunde.Controls.Add(this.tb_Telefonnummer);
             this.gb_kunde.Controls.Add(this.lb_Mail);
@@ -335,51 +318,16 @@
             this.gb_kunde.TabStop = false;
             this.gb_kunde.Text = "Kunden verwalten";
             // 
-            // rb_Laden
-            // 
-            this.rb_Laden.AutoSize = true;
-            this.rb_Laden.Checked = true;
-            this.rb_Laden.Location = new System.Drawing.Point(24, 98);
-            this.rb_Laden.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.rb_Laden.Name = "rb_Laden";
-            this.rb_Laden.Size = new System.Drawing.Size(132, 36);
-            this.rb_Laden.TabIndex = 41;
-            this.rb_Laden.TabStop = true;
-            this.rb_Laden.Text = "Laden";
-            this.rb_Laden.UseVisualStyleBackColor = true;
-            // 
             // lb_kunde_add
             // 
             this.lb_kunde_add.AutoSize = true;
-            this.lb_kunde_add.Location = new System.Drawing.Point(320, 966);
+            this.lb_kunde_add.Location = new System.Drawing.Point(309, 966);
             this.lb_kunde_add.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lb_kunde_add.Name = "lb_kunde_add";
             this.lb_kunde_add.Size = new System.Drawing.Size(539, 32);
             this.lb_kunde_add.TabIndex = 40;
             this.lb_kunde_add.Text = "Der Kunde wurde erfolgreich hinzugefügt!";
             this.lb_kunde_add.Visible = false;
-            // 
-            // lb_kunde_delete
-            // 
-            this.lb_kunde_delete.AutoSize = true;
-            this.lb_kunde_delete.Location = new System.Drawing.Point(320, 966);
-            this.lb_kunde_delete.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
-            this.lb_kunde_delete.Name = "lb_kunde_delete";
-            this.lb_kunde_delete.Size = new System.Drawing.Size(497, 32);
-            this.lb_kunde_delete.TabIndex = 39;
-            this.lb_kunde_delete.Text = "Der Kunde wurde erfolgreich gelöscht!";
-            this.lb_kunde_delete.Visible = false;
-            // 
-            // lb_kunde_save
-            // 
-            this.lb_kunde_save.AutoSize = true;
-            this.lb_kunde_save.Location = new System.Drawing.Point(320, 966);
-            this.lb_kunde_save.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
-            this.lb_kunde_save.Name = "lb_kunde_save";
-            this.lb_kunde_save.Size = new System.Drawing.Size(518, 32);
-            this.lb_kunde_save.TabIndex = 38;
-            this.lb_kunde_save.Text = "Der Kunde wurde erfolgreich bearbeitet!";
-            this.lb_kunde_save.Visible = false;
             // 
             // rb_KundeLoeschen
             // 
@@ -408,18 +356,20 @@
             // rb_Neukunde
             // 
             this.rb_Neukunde.AutoSize = true;
+            this.rb_Neukunde.Checked = true;
             this.rb_Neukunde.Location = new System.Drawing.Point(24, 45);
             this.rb_Neukunde.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.rb_Neukunde.Name = "rb_Neukunde";
             this.rb_Neukunde.Size = new System.Drawing.Size(390, 36);
             this.rb_Neukunde.TabIndex = 0;
+            this.rb_Neukunde.TabStop = true;
             this.rb_Neukunde.Text = "Neuen Kunden hinzufügen";
             this.rb_Neukunde.UseVisualStyleBackColor = true;
             this.rb_Neukunde.CheckedChanged += new System.EventHandler(this.rb_Neukunde_CheckedChanged);
             // 
             // bt_save_kunde
             // 
-            this.bt_save_kunde.Location = new System.Drawing.Point(589, 870);
+            this.bt_save_kunde.Location = new System.Drawing.Point(315, 885);
             this.bt_save_kunde.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.bt_save_kunde.Name = "bt_save_kunde";
             this.bt_save_kunde.Size = new System.Drawing.Size(272, 74);
@@ -441,10 +391,10 @@
             // 
             // bt_clear_kunden
             // 
-            this.bt_clear_kunden.Location = new System.Drawing.Point(56, 1066);
+            this.bt_clear_kunden.Location = new System.Drawing.Point(583, 885);
             this.bt_clear_kunden.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.bt_clear_kunden.Name = "bt_clear_kunden";
-            this.bt_clear_kunden.Size = new System.Drawing.Size(259, 55);
+            this.bt_clear_kunden.Size = new System.Drawing.Size(272, 74);
             this.bt_clear_kunden.TabIndex = 14;
             this.bt_clear_kunden.Text = "Clear";
             this.bt_clear_kunden.UseVisualStyleBackColor = true;
@@ -475,6 +425,7 @@
             this.Grid_Kunde.RowTemplate.Height = 24;
             this.Grid_Kunde.Size = new System.Drawing.Size(853, 956);
             this.Grid_Kunde.TabIndex = 0;
+            this.Grid_Kunde.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Kunde_CellDoubleClick);
             // 
             // w_s_Kunden
             // 
@@ -482,7 +433,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2083, 1142);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.bt_clear_kunden);
             this.Controls.Add(this.bt_OK);
             this.Controls.Add(this.gb_kunde);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -498,8 +448,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button bt_laden_kunden;
         private System.Windows.Forms.Label lb_Telefonnummer;
         private System.Windows.Forms.TextBox tb_Telefonnummer;
         private System.Windows.Forms.Label lb_Mail;
@@ -527,13 +475,10 @@
         private System.Windows.Forms.Button bt_save_kunde;
         private System.Windows.Forms.RadioButton rb_KundeLoeschen;
         private System.Windows.Forms.RadioButton rb_KundeBearbeiten;
-        private System.Windows.Forms.RadioButton rb_Neukunde;
         private System.Windows.Forms.Button bt_clear_kunden;
-        private System.Windows.Forms.Label lb_kunde_save;
-        private System.Windows.Forms.Label lb_kunde_delete;
         private System.Windows.Forms.Label lb_kunde_add;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView Grid_Kunde;
-        private System.Windows.Forms.RadioButton rb_Laden;
+        private System.Windows.Forms.RadioButton rb_Neukunde;
     }
 }
