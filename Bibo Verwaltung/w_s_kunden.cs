@@ -183,11 +183,20 @@ namespace Bibo_Verwaltung
             {
                 MessageBox.Show("Füllen Sie alle Felder aus, um einen neuen Kunden hinzuzufügen!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                IsOK();
             }
             else if (rb_KundeLoeschen.Checked)
             {
                 MessageBox.Show("Füllen Sie alle Felder aus, um einen Kunden zu löschen!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (tb_KundenID.Text.Equals(""))
+                {
+                    tb_KundenID.BackColor = Color.Red;
+                }
+                else
+                {
+                    tb_KundenID.BackColor = Color.White;
+                }
             }
         }
         #endregion
@@ -286,15 +295,6 @@ namespace Bibo_Verwaltung
         #region IsOK
         private void IsOK()
         {
-            if (tb_KundenID.Text.Equals(""))
-            {
-                tb_KundenID.BackColor = Color.Red;
-            }
-            else
-            {
-                tb_KundenID.BackColor = Color.White;
-            }
-
             if (tb_Vorname.Text.Equals(""))
             {
                 tb_Vorname.BackColor = Color.Red;
@@ -448,16 +448,19 @@ namespace Bibo_Verwaltung
         private void rb_KundeBearbeiten_CheckedChanged(object sender, EventArgs e)
         {
             Modus();
+            White();
         }
 
         private void rb_KundeLoeschen_CheckedChanged(object sender, EventArgs e)
         {
             Modus();
+            White();
         }
 
         private void rb_Neukunde_CheckedChanged(object sender, EventArgs e)
         {
             Modus();
+            White();
         }
 
         private void w_s_kunden_Activated(object sender, EventArgs e)
@@ -466,6 +469,20 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
+        private void White()
+        {
+            tb_Vorname.BackColor = Color.White;
+            tb_Nachname.BackColor = Color.White;
+            tb_KundenID.BackColor = Color.White;
+            tb_Hausnummer.BackColor = Color.White;
+            tb_Strasse.BackColor = Color.White;
+            tb_Postleitzahl.BackColor = Color.White;
+            tb_Ort.BackColor = Color.White;
+            tb_Klasse.BackColor = Color.White;
+            tb_Mail.BackColor = Color.White;
+            tb_Telefonnummer.BackColor = Color.White;
+            cb_Vertrauenswuerdigkeit.BackColor = Color.White;
+        }
 
 
         private void Grid_Kunde_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

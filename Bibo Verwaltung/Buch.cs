@@ -26,25 +26,25 @@ namespace Bibo_Verwaltung
         /// </summary>
         public string Titel { get { return titel; } set { titel = value; } }
 
-        Genre genre;
+        Genre genre = new Genre();
         /// <summary>
         /// Genre eines Buches
         /// </summary>
         public Genre Genre { get { return genre; } set { genre = value; } }
 
-        Verlag verlag;
+        Verlag verlag = new Verlag();
         /// <summary>
         /// Verlag des Buches
         /// </summary>
         public Verlag Verlag { get { return verlag; } set { verlag = value; } }
 
-        Autor autor;
+        Autor autor = new Autor();
         /// <summary>
         /// Autor eines Buches
         /// </summary>
         public Autor Autor { get { return autor; } set { autor = value; } }
 
-        Sprache sprache;
+        Sprache sprache = new Sprache();
         /// <summary>
         /// Sprache des Buches
         /// </summary>
@@ -75,15 +75,20 @@ namespace Bibo_Verwaltung
         /// </summary>
         public Buch()
         {
-            //FillObject();
-            FillObject();
+            FillObjectBuch();
+            FillObjectLeihen();
         }
+        //public Buch()
+        //{
+        //    //FillObject();
+        //    FillObjectLeihen();
+        //}
         public Buch(string isbn)
         {
             this.isbn = isbn;
             Load();
             //FillObject();
-            FillObject();
+            FillObjectLeihen();
         }
         #endregion
 
@@ -174,22 +179,113 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        #region Fill Object
+        #region Add
+        public void Add()
+        {
+            {
+                string RawCommand = "INSERT INTO [dbo].[t_s_buecher] (buch_isbn, buch_titel, buch_genre_id, buch_autor_id, buch_verlag_id, "
+                    + "buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis) VALUES "
+                    + "(@isbn, @titel, @genreid, @autorid, @verlagid, @erscheinungsdatum, @sprachid, @auflage, @neupreis)";
+                con.ConnectError();
+                SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+
+                cmd.Parameters.AddWithValue("@isbn", ISBN);
+                cmd.Parameters.AddWithValue("@titel", Titel);
+                cmd.Parameters.AddWithValue("@genreid", Genre.GenreID);
+                cmd.Parameters.AddWithValue("@autorid", Autor.AutorID);
+                cmd.Parameters.AddWithValue("@verlagid", Verlag.VerlagID);
+                cmd.Parameters.AddWithValue("@erscheinungsdatum", Er_datum);
+                cmd.Parameters.AddWithValue("@sprachid", Sprache.SpracheID);
+                cmd.Parameters.AddWithValue("@auflage", Auflage);
+                cmd.Parameters.AddWithValue("@neupreis", Neupreis);
+
+                // Verbindung öffnen 
+                cmd.ExecuteNonQuery();
+                //Verbindung schließen
+                con.Close();
+            }
+        }
+                #endregion
+
+        #region Delete
+                public void Delete()
+        {
+            string RawCommand = "DELETE FROM [dbo].[t_s_buecher] WHERE buch_isbn = @isbn";
+            con.ConnectError();
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@isbn", ISBN);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        #endregion
+
+        #region Fill ObjectLeihen
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
         DataTable dt = new DataTable();
         SqlCommandBuilder comb = new SqlCommandBuilder();
-        private void FillObject()
+        private void FillObjectLeihen()
         {
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT * FROM t_s_buchid left join t_s_buecher on bu_isbn = buch_isbn left join t_s_genre on buch_genre_id = ger_id left join t_s_autor on buch_autor_id = au_id left join t_s_verlag on buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id left join t_s_zustand on bu_zustandsid = zu_id left join t_bd_ausgeliehen on aus_buchid = bu_id left join t_s_kunden on kunde_ID = aus_kundenid";
+            string RawCommand = "SELECT * FROM t_s_buchid " 
+                +"left join t_s_buecher on bu_isbn = buch_isbn " 
+                +"left join t_s_genre on buch_genre_id = ger_id " 
+                +"left join t_s_autor on buch_autor_id = au_id "
+                +"left join t_s_verlag on buch_verlag_id = ver_id "
+                +"left join t_s_sprache on buch_sprache_id = sprach_id " 
+                +"left join t_s_zustand on bu_zustandsid = zu_id " 
+                +"left join t_bd_ausgeliehen on aus_buchid = bu_id " 
+                +"left join t_s_kunden on kunde_ID = aus_kundenid";
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
             adapter.Fill(dt);
             con.Close();
         }
+        #endregion
 
+        #region Fill ObjectBuch
+        SqlDataAdapter adapter2 = new SqlDataAdapter();
+        DataSet ds2 = new DataSet();
+        DataTable dt2 = new DataTable();
+        SqlCommandBuilder comb2 = new SqlCommandBuilder();
+        SQL_Verbindung con2 = new SQL_Verbindung();
+        public void FillObjectBuch()
+        {
+            if (con2.ConnectError()) return;
+            //string RawCommand = "SELECT buch_isbn, buch_titel, buch_erscheinungsdatum, buch_auflage, buch_neupreis, ger_name, au_autor, ver_name, sprach_name FROM t_s_buecher left join t_s_genre on buch_genre_id = ger_id left join t_s_autor buch_autor_id = au_id left join t_s_verlag buch_verlag_id = ver_id left join t_s_sprache buch_sprache = sprach_id";
+            string RawCommand = "SELECT buch_isbn as 'ISBN',"
+                + "buch_titel as 'Titel',"
+                + "ger_name as 'Genre',"
+                + "au_autor as 'Autor',"
+                + "ver_name as 'Verlag',"
+                + "buch_erscheinungsdatum as 'Erscheinungsdatum',"
+                + "sprach_name as 'Sprache',"
+                + "buch_auflage as 'Auflage',"
+                + "buch_neupreis as 'Neupreis' from t_s_buecher "
+                + "left join t_s_genre on buch_genre_id = ger_id "
+                + "left join t_s_autor on buch_autor_id = au_id "
+                + "left join t_s_verlag on buch_verlag_id = ver_id "
+                + "left join t_s_sprache on buch_sprache_id = sprach_id";
+            adapter = new SqlDataAdapter(RawCommand, con2.Con);
+            adapter.Fill(ds2);
+            adapter.Fill(dt2);
+            con2.Close();
+        }
+        #endregion
+
+        #region ClearDS()
+        public void ClearDSBuch()
+        {
+            ds2.Tables[0].Rows.Clear();
+        }
+        #endregion
+
+        #region FillGrid
+        public void FillGridBuch(ref DataGridView grid, object value = null)
+        {
+            grid.DataSource = ds2.Tables[0];
+        }
         public void FillGrid(ref DataGridView grid, object value = null)
         {
             grid.DataSource = ds.Tables[0];
@@ -212,7 +308,7 @@ namespace Bibo_Verwaltung
             grid.Columns["bu_aufnahmedatum"].HeaderText = "aufgenommen am:";
             grid.Columns["zu_zustand"].HeaderText = "Zustand:";
             grid.Columns["zu_verleihfähig"].HeaderText = "verleihfähig:";
-            grid.Columns["buch_titel"].HeaderText = "Titel:";
+            grid.Columns["buch_titel"].HeaderText = "Titel";
             grid.Columns["buch_erscheinungsdatum"].HeaderText = "erschienen am:";
             grid.Columns["buch_auflage"].HeaderText = "Auflage:";
             grid.Columns["buch_neupreis"].HeaderText = "Neupreis:";
@@ -225,24 +321,6 @@ namespace Bibo_Verwaltung
             grid.Columns["aus_rückgabedatum"].HeaderText = "Rückgabe am:";
 
         }
-
-        //private void FillObject1()
-        //{
-        //    SQL_Verbindung con = new SQL_Verbindung();
-        //    if (con.ConnectError()) return;
-        //    string RawCommand = "select buch_isbn as 'ISBN', buch_titel as 'Titel', ger_name as 'Genre',  isnull(buch_erscheinungsdatum, '01.01.1990') as 'Erscheinungsdatum', "
-        //    + "buch_auflage as 'Auflage', buch_neupreis as 'Neupreis', "
-        //    + "au_autor as 'Autor', ver_name as 'Verlag', sprach_name as 'Sprache' "
-        //    + "from t_s_buecher "
-        //    + "left join t_s_genre on buch_genre_id = ger_id "
-        //    + "left join t_s_autor on buch_autor_id = au_id "
-        //    + "left join t_s_verlag on buch_verlag_id = ver_id "
-        //    + "left join t_s_sprache on buch_sprache_id = sprach_id ";
-        //    // Verbindung öffnen 
-        //    adapter = new SqlDataAdapter(RawCommand, con.Con);
-        //    adapter.Fill(ds);
-        //    con.Close();
-        //}
         #endregion
 
         public void Ausleihen(int bu_id, string aus_d, string rück_d, int kunde)
