@@ -364,6 +364,14 @@ namespace Bibo_Verwaltung
         private void w_s_buecher_Activated(object sender, EventArgs e)
         {
             Modus();
+            b.Autor.FillCombobox(ref cb_Autor,1);
+            b.Verlag.FillCombobox(ref cb_Verlag, 1);
+            b.Genre.FillCombobox(ref cb_Genre, 1);
+            b.Sprache.FillCombobox(ref cb_Sprache, 1);
+            cb_Autor.Text = "";
+            cb_Verlag.Text = "";
+            cb_Genre.Text = "";
+            cb_Sprache.Text = "";
         }
         #endregion
 
@@ -383,28 +391,10 @@ namespace Bibo_Verwaltung
                 tb_Neupreis.Text = b.Neupreis.ToString();
                 dTP_Erscheinungsdatum.Value = b.Er_datum;
                 cb_Genre.Text = b.Genre.Genrename;
-                //// Füllen Autor
-                //tb_AutorID.Text = b.Autor.AutorID;
-                //tb_Autorname.Text = b.Autor.Autorname;
-
+                
                 b.Autor.FillCombobox(ref cb_Autor, b.Autor.AutorID);
-
-                //// Füllen Verlag
-                //tb_VerlagID.Text = b.Verlag.VerlagID;
-                //tb_Verlagname.Text = b.Verlag.Verlagname;
-
                 b.Verlag.FillCombobox(ref cb_Verlag, b.Verlag.VerlagID);
-
-                //// Füllen Genre
-                //tb_GenreID.Text = b.Genre.GenreID;
-                //tb_Genrename.Text = b.Genre.Genrename;
-
                 b.Genre.FillCombobox(ref cb_Genre, b.Genre.GenreID);
-
-                //// Füllen Sprache
-                //cb_SpracheID.Text = b.Sprache.SpracheID;
-                //tb_Sprachename.Text = b.Sprache.Sprachename;
-
                 b.Sprache.FillCombobox(ref cb_Sprache, b.Sprache.SpracheID);
             }
         }
