@@ -196,7 +196,7 @@ namespace Bibo_Verwaltung
             {
                 int bu_id = Convert.ToInt32(tb_BuchID.Text);
                 Buch b = new Buch();
-                if (b.Pruefe_Ausgeliehen(bu_id.ToString()))
+                if (b.Pruefe_Ausgeliehen(bu_id.ToString())==false)
                 {
                     string aus_d = DateTime.Today.ToString();
                     string rück_d = dateTimePickerAusleihen.Value.ToString();
@@ -205,10 +205,15 @@ namespace Bibo_Verwaltung
                     MessageBox.Show("Das Buch wurde erfolgreich ausgeliehen!", "Information",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                else
+                {
+                    MessageBox.Show("Das Buch wurde bereits ausgeliehen!", "Information",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            catch
+            catch (Exception w)
             {
-                MessageBox.Show("Das Buch konnte nicht ausgeliehen werden! ", "Error",
+                MessageBox.Show("Das Buch konnte nicht ausgeliehen werden! "+w, "Error",
                            MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -264,6 +269,15 @@ namespace Bibo_Verwaltung
             {
                 tb_s_Verlag.Enabled = false;
             }
+        }
+
+        private void bt_Clear_Click(object sender, EventArgs e)
+        {
+            tb_s_Titel.Text = "";
+            tb_s_Autor.Text = "";
+            tb_s_Genre.Text = "";
+            tb_s_Verlag.Text = "";
+            Buch_Suchen();
         }
     }
 }

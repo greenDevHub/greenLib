@@ -33,6 +33,7 @@
             this.cb_Ferfügbark_Anz = new System.Windows.Forms.CheckBox();
             this.dateTimePickerAusleihen = new System.Windows.Forms.DateTimePicker();
             this.cb_Ausleihen = new System.Windows.Forms.GroupBox();
+            this.tb_KID = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.lb_Kunde = new System.Windows.Forms.Label();
             this.tb_Kunde = new System.Windows.Forms.TextBox();
@@ -51,7 +52,8 @@
             this.tb_s_Autor = new System.Windows.Forms.TextBox();
             this.tb_s_Genre = new System.Windows.Forms.TextBox();
             this.tb_s_Titel = new System.Windows.Forms.TextBox();
-            this.tb_KID = new System.Windows.Forms.TextBox();
+            this.bt_Rueckgabe = new System.Windows.Forms.Button();
+            this.bt_Clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Details)).BeginInit();
             this.cb_Ausleihen.SuspendLayout();
             this.gb_Suchen.SuspendLayout();
@@ -119,6 +121,16 @@
             this.cb_Ausleihen.TabIndex = 5;
             this.cb_Ausleihen.TabStop = false;
             this.cb_Ausleihen.Text = "Buch ausleihen:";
+            // 
+            // tb_KID
+            // 
+            this.tb_KID.Enabled = false;
+            this.tb_KID.Location = new System.Drawing.Point(307, 48);
+            this.tb_KID.Name = "tb_KID";
+            this.tb_KID.ReadOnly = true;
+            this.tb_KID.Size = new System.Drawing.Size(24, 20);
+            this.tb_KID.TabIndex = 12;
+            this.tb_KID.Visible = false;
             // 
             // button1
             // 
@@ -195,6 +207,7 @@
             // 
             // gb_Suchen
             // 
+            this.gb_Suchen.Controls.Add(this.bt_Clear);
             this.gb_Suchen.Controls.Add(this.bt_Suchen);
             this.gb_Suchen.Controls.Add(this.cb_s_Autor);
             this.gb_Suchen.Controls.Add(this.cb_s_Genre);
@@ -297,21 +310,31 @@
             this.tb_s_Titel.Size = new System.Drawing.Size(180, 20);
             this.tb_s_Titel.TabIndex = 17;
             // 
-            // tb_KID
+            // bt_Rueckgabe
             // 
-            this.tb_KID.Enabled = false;
-            this.tb_KID.Location = new System.Drawing.Point(307, 48);
-            this.tb_KID.Name = "tb_KID";
-            this.tb_KID.ReadOnly = true;
-            this.tb_KID.Size = new System.Drawing.Size(24, 20);
-            this.tb_KID.TabIndex = 12;
-            this.tb_KID.Visible = false;
+            this.bt_Rueckgabe.Location = new System.Drawing.Point(143, 368);
+            this.bt_Rueckgabe.Name = "bt_Rueckgabe";
+            this.bt_Rueckgabe.Size = new System.Drawing.Size(113, 23);
+            this.bt_Rueckgabe.TabIndex = 14;
+            this.bt_Rueckgabe.Text = "Buchrückgabe";
+            this.bt_Rueckgabe.UseVisualStyleBackColor = true;
+            // 
+            // bt_Clear
+            // 
+            this.bt_Clear.Location = new System.Drawing.Point(841, 45);
+            this.bt_Clear.Name = "bt_Clear";
+            this.bt_Clear.Size = new System.Drawing.Size(74, 23);
+            this.bt_Clear.TabIndex = 26;
+            this.bt_Clear.Text = "Clear";
+            this.bt_Clear.UseVisualStyleBackColor = true;
+            this.bt_Clear.Click += new System.EventHandler(this.bt_Clear_Click);
             // 
             // w_s_details
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 611);
+            this.Controls.Add(this.bt_Rueckgabe);
             this.Controls.Add(this.gb_Suchen);
             this.Controls.Add(this.bt_Ausleihen);
             this.Controls.Add(this.cb_Ausleihen);
@@ -357,5 +380,7 @@
         private System.Windows.Forms.TextBox tb_s_Genre;
         private System.Windows.Forms.TextBox tb_s_Titel;
         private System.Windows.Forms.TextBox tb_KID;
+        private System.Windows.Forms.Button bt_Clear;
+        private System.Windows.Forms.Button bt_Rueckgabe;
     }
 }
