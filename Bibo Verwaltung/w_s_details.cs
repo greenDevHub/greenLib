@@ -16,6 +16,9 @@ namespace Bibo_Verwaltung
         {
             InitializeComponent();
             b.FillGrid(ref gv_Details);
+            b.Autor.FillCombobox(ref combo_Autor, -1);
+            b.Verlag.FillCombobox(ref combo_Verlag, -1);
+            b.Genre.FillCombobox(ref combo_Genre, -1);
             K_Einblenden();
             V_Einblenden();
         }
@@ -46,7 +49,7 @@ namespace Bibo_Verwaltung
             {
                 for (int i = 0; i < gv_Details.RowCount; i++)
                 {
-                    string suche = tb_s_Autor.Text;
+                    string suche = combo_Autor.Text;
                     string ergebnis = gv_Details.Rows[i].Cells[16].Value.ToString();
                     if (ergebnis.Contains(suche) == false)
                     {
@@ -61,7 +64,7 @@ namespace Bibo_Verwaltung
             {
                 for (int i = 0; i < gv_Details.RowCount; i++)
                 {
-                    string suche = tb_s_Genre.Text;
+                    string suche = combo_Genre.Text;
                     string ergebnis = gv_Details.Rows[i].Cells[14].Value.ToString();
                     if (ergebnis.Contains(suche) == false)
                     {
@@ -76,7 +79,7 @@ namespace Bibo_Verwaltung
             {
                 for (int i = 0; i < gv_Details.RowCount; i++)
                 {
-                    string suche = tb_s_Verlag.Text;
+                    string suche = combo_Verlag.Text;
                     string ergebnis = gv_Details.Rows[i].Cells[18].Value.ToString();
                     if (ergebnis.Contains(suche) == false)
                     {
@@ -218,7 +221,7 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private void bt_Suchen_Click(object sender, EventArgs e)
+        public void Buchsuche_ausfuehren(object sender, EventArgs e)
         {
             Buch_Suchen();
         }
@@ -239,11 +242,11 @@ namespace Bibo_Verwaltung
         {
             if (cb_s_Autor.Checked == true)
             {
-                tb_s_Autor.Enabled = true;
+                combo_Autor.Enabled = true;
             }
             else
             {
-                tb_s_Autor.Enabled = false;
+                combo_Autor.Enabled = false;
             }
         }
 
@@ -251,11 +254,11 @@ namespace Bibo_Verwaltung
         {
             if (cb_s_Genre.Checked == true)
             {
-                tb_s_Genre.Enabled = true;
+                combo_Genre.Enabled = true;
             }
             else
             {
-                tb_s_Genre.Enabled = false;
+                combo_Genre.Enabled = false;
             }
         }
 
@@ -263,20 +266,20 @@ namespace Bibo_Verwaltung
         {
             if (cb_s_Verlag.Checked == true)
             {
-                tb_s_Verlag.Enabled = true;
+                combo_Verlag.Enabled = true;
             }
             else
             {
-                tb_s_Verlag.Enabled = false;
+                combo_Verlag.Enabled = false;
             }
         }
 
         private void bt_Clear_Click(object sender, EventArgs e)
         {
             tb_s_Titel.Text = "";
-            tb_s_Autor.Text = "";
-            tb_s_Genre.Text = "";
-            tb_s_Verlag.Text = "";
+            combo_Autor.Text = "";
+            combo_Genre.Text = "";
+            combo_Verlag.Text = "";
             Buch_Suchen();
         }
     }

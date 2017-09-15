@@ -45,13 +45,18 @@ namespace Bibo_Verwaltung
             //gv_Aus_Kunde.Columns[11].Visible = false;
         }
 
+        public void Load_Tabelle(object sender, EventArgs e)
+        {
+            kunde.FillGrid(ref gv_Aus_Kunde);
+        }
+
         Kunde kunde = new Kunde();
 
         private void Alles_Einblenden()
         {
             if (cb_Alles.Checked == true)
             {
-                gv_Aus_Kunde.Columns[0].Visible = true; //1278
+                gv_Aus_Kunde.Columns[0].Visible = true;
                 gv_Aus_Kunde.Columns[3].Visible = true;
                 gv_Aus_Kunde.Columns[4].Visible = true;
                 gv_Aus_Kunde.Columns[5].Visible = true;
@@ -85,6 +90,12 @@ namespace Bibo_Verwaltung
         private void cb_Alles_CheckedChanged(object sender, EventArgs e)
         {
             Alles_Einblenden();
+        }
+
+        private void bt_NeuKunde_Click(object sender, EventArgs e)
+        {
+            Form Kunden = new w_s_Kunden();
+            Kunden.ShowDialog(this);
         }
     }
 }

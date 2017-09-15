@@ -43,17 +43,16 @@
             this.tb_BuchID = new System.Windows.Forms.TextBox();
             this.bt_Ausleihen = new System.Windows.Forms.Button();
             this.gb_Suchen = new System.Windows.Forms.GroupBox();
-            this.bt_Suchen = new System.Windows.Forms.Button();
+            this.combo_Verlag = new System.Windows.Forms.ComboBox();
+            this.combo_Genre = new System.Windows.Forms.ComboBox();
+            this.combo_Autor = new System.Windows.Forms.ComboBox();
+            this.bt_Clear = new System.Windows.Forms.Button();
             this.cb_s_Autor = new System.Windows.Forms.CheckBox();
             this.cb_s_Genre = new System.Windows.Forms.CheckBox();
             this.cb_s_Verlag = new System.Windows.Forms.CheckBox();
             this.cb_s_Titel = new System.Windows.Forms.CheckBox();
-            this.tb_s_Verlag = new System.Windows.Forms.TextBox();
-            this.tb_s_Autor = new System.Windows.Forms.TextBox();
-            this.tb_s_Genre = new System.Windows.Forms.TextBox();
             this.tb_s_Titel = new System.Windows.Forms.TextBox();
             this.bt_Rueckgabe = new System.Windows.Forms.Button();
-            this.bt_Clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Details)).BeginInit();
             this.cb_Ausleihen.SuspendLayout();
             this.gb_Suchen.SuspendLayout();
@@ -207,15 +206,14 @@
             // 
             // gb_Suchen
             // 
+            this.gb_Suchen.Controls.Add(this.combo_Verlag);
+            this.gb_Suchen.Controls.Add(this.combo_Genre);
+            this.gb_Suchen.Controls.Add(this.combo_Autor);
             this.gb_Suchen.Controls.Add(this.bt_Clear);
-            this.gb_Suchen.Controls.Add(this.bt_Suchen);
             this.gb_Suchen.Controls.Add(this.cb_s_Autor);
             this.gb_Suchen.Controls.Add(this.cb_s_Genre);
             this.gb_Suchen.Controls.Add(this.cb_s_Verlag);
             this.gb_Suchen.Controls.Add(this.cb_s_Titel);
-            this.gb_Suchen.Controls.Add(this.tb_s_Verlag);
-            this.gb_Suchen.Controls.Add(this.tb_s_Autor);
-            this.gb_Suchen.Controls.Add(this.tb_s_Genre);
             this.gb_Suchen.Controls.Add(this.tb_s_Titel);
             this.gb_Suchen.Location = new System.Drawing.Point(12, 12);
             this.gb_Suchen.Name = "gb_Suchen";
@@ -224,15 +222,54 @@
             this.gb_Suchen.TabStop = false;
             this.gb_Suchen.Text = "Suchen nach:";
             // 
-            // bt_Suchen
+            // combo_Verlag
             // 
-            this.bt_Suchen.Location = new System.Drawing.Point(921, 45);
-            this.bt_Suchen.Name = "bt_Suchen";
-            this.bt_Suchen.Size = new System.Drawing.Size(100, 23);
-            this.bt_Suchen.TabIndex = 25;
-            this.bt_Suchen.Text = "Suchen";
-            this.bt_Suchen.UseVisualStyleBackColor = true;
-            this.bt_Suchen.Click += new System.EventHandler(this.bt_Suchen_Click);
+            this.combo_Verlag.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.combo_Verlag.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.combo_Verlag.Enabled = false;
+            this.combo_Verlag.FormattingEnabled = true;
+            this.combo_Verlag.Location = new System.Drawing.Point(841, 19);
+            this.combo_Verlag.Name = "combo_Verlag";
+            this.combo_Verlag.Size = new System.Drawing.Size(180, 21);
+            this.combo_Verlag.Sorted = true;
+            this.combo_Verlag.TabIndex = 29;
+            this.combo_Verlag.TextChanged += new System.EventHandler(this.Buchsuche_ausfuehren);
+            // 
+            // combo_Genre
+            // 
+            this.combo_Genre.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.combo_Genre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.combo_Genre.Enabled = false;
+            this.combo_Genre.FormattingEnabled = true;
+            this.combo_Genre.Location = new System.Drawing.Point(580, 19);
+            this.combo_Genre.Name = "combo_Genre";
+            this.combo_Genre.Size = new System.Drawing.Size(180, 21);
+            this.combo_Genre.Sorted = true;
+            this.combo_Genre.TabIndex = 28;
+            this.combo_Genre.TextChanged += new System.EventHandler(this.Buchsuche_ausfuehren);
+            // 
+            // combo_Autor
+            // 
+            this.combo_Autor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.combo_Autor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.combo_Autor.Enabled = false;
+            this.combo_Autor.FormattingEnabled = true;
+            this.combo_Autor.Location = new System.Drawing.Point(320, 19);
+            this.combo_Autor.Name = "combo_Autor";
+            this.combo_Autor.Size = new System.Drawing.Size(180, 21);
+            this.combo_Autor.Sorted = true;
+            this.combo_Autor.TabIndex = 27;
+            this.combo_Autor.TextChanged += new System.EventHandler(this.Buchsuche_ausfuehren);
+            // 
+            // bt_Clear
+            // 
+            this.bt_Clear.Location = new System.Drawing.Point(841, 45);
+            this.bt_Clear.Name = "bt_Clear";
+            this.bt_Clear.Size = new System.Drawing.Size(74, 23);
+            this.bt_Clear.TabIndex = 26;
+            this.bt_Clear.Text = "Clear";
+            this.bt_Clear.UseVisualStyleBackColor = true;
+            this.bt_Clear.Click += new System.EventHandler(this.bt_Clear_Click);
             // 
             // cb_s_Autor
             // 
@@ -278,30 +315,6 @@
             this.cb_s_Titel.UseVisualStyleBackColor = true;
             this.cb_s_Titel.CheckedChanged += new System.EventHandler(this.cb_s_Titel_CheckedChanged);
             // 
-            // tb_s_Verlag
-            // 
-            this.tb_s_Verlag.Enabled = false;
-            this.tb_s_Verlag.Location = new System.Drawing.Point(841, 19);
-            this.tb_s_Verlag.Name = "tb_s_Verlag";
-            this.tb_s_Verlag.Size = new System.Drawing.Size(180, 20);
-            this.tb_s_Verlag.TabIndex = 20;
-            // 
-            // tb_s_Autor
-            // 
-            this.tb_s_Autor.Enabled = false;
-            this.tb_s_Autor.Location = new System.Drawing.Point(320, 19);
-            this.tb_s_Autor.Name = "tb_s_Autor";
-            this.tb_s_Autor.Size = new System.Drawing.Size(180, 20);
-            this.tb_s_Autor.TabIndex = 19;
-            // 
-            // tb_s_Genre
-            // 
-            this.tb_s_Genre.Enabled = false;
-            this.tb_s_Genre.Location = new System.Drawing.Point(580, 19);
-            this.tb_s_Genre.Name = "tb_s_Genre";
-            this.tb_s_Genre.Size = new System.Drawing.Size(180, 20);
-            this.tb_s_Genre.TabIndex = 18;
-            // 
             // tb_s_Titel
             // 
             this.tb_s_Titel.Enabled = false;
@@ -309,6 +322,7 @@
             this.tb_s_Titel.Name = "tb_s_Titel";
             this.tb_s_Titel.Size = new System.Drawing.Size(180, 20);
             this.tb_s_Titel.TabIndex = 17;
+            this.tb_s_Titel.TextChanged += new System.EventHandler(this.Buchsuche_ausfuehren);
             // 
             // bt_Rueckgabe
             // 
@@ -318,16 +332,6 @@
             this.bt_Rueckgabe.TabIndex = 14;
             this.bt_Rueckgabe.Text = "Buchrückgabe";
             this.bt_Rueckgabe.UseVisualStyleBackColor = true;
-            // 
-            // bt_Clear
-            // 
-            this.bt_Clear.Location = new System.Drawing.Point(841, 45);
-            this.bt_Clear.Name = "bt_Clear";
-            this.bt_Clear.Size = new System.Drawing.Size(74, 23);
-            this.bt_Clear.TabIndex = 26;
-            this.bt_Clear.Text = "Clear";
-            this.bt_Clear.UseVisualStyleBackColor = true;
-            this.bt_Clear.Click += new System.EventHandler(this.bt_Clear_Click);
             // 
             // w_s_details
             // 
@@ -370,17 +374,16 @@
         private System.Windows.Forms.Button bt_Ausleihen;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox gb_Suchen;
-        private System.Windows.Forms.Button bt_Suchen;
         private System.Windows.Forms.CheckBox cb_s_Autor;
         private System.Windows.Forms.CheckBox cb_s_Genre;
         private System.Windows.Forms.CheckBox cb_s_Verlag;
         private System.Windows.Forms.CheckBox cb_s_Titel;
-        private System.Windows.Forms.TextBox tb_s_Verlag;
-        private System.Windows.Forms.TextBox tb_s_Autor;
-        private System.Windows.Forms.TextBox tb_s_Genre;
         private System.Windows.Forms.TextBox tb_s_Titel;
         private System.Windows.Forms.TextBox tb_KID;
         private System.Windows.Forms.Button bt_Clear;
         private System.Windows.Forms.Button bt_Rueckgabe;
+        private System.Windows.Forms.ComboBox combo_Genre;
+        private System.Windows.Forms.ComboBox combo_Autor;
+        private System.Windows.Forms.ComboBox combo_Verlag;
     }
 }
