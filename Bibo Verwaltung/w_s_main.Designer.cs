@@ -37,7 +37,6 @@
             this.bt_Einstellungen = new System.Windows.Forms.Button();
             this.bt_Buecher = new System.Windows.Forms.Button();
             this.gb_Uebersicht = new System.Windows.Forms.GroupBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.lb_Ausleihzahl = new System.Windows.Forms.Label();
             this.lb_Ausgeliehen = new System.Windows.Forms.Label();
             this.lb_Lagerzahl = new System.Windows.Forms.Label();
@@ -51,9 +50,9 @@
             // 
             // bt_Sprachen
             // 
-            this.bt_Sprachen.Location = new System.Drawing.Point(212, 131);
+            this.bt_Sprachen.Location = new System.Drawing.Point(192, 111);
             this.bt_Sprachen.Name = "bt_Sprachen";
-            this.bt_Sprachen.Size = new System.Drawing.Size(200, 50);
+            this.bt_Sprachen.Size = new System.Drawing.Size(180, 40);
             this.bt_Sprachen.TabIndex = 5;
             this.bt_Sprachen.Text = "Sprachen";
             this.bt_Sprachen.UseVisualStyleBackColor = true;
@@ -61,9 +60,9 @@
             // 
             // bt_Verlage
             // 
-            this.bt_Verlage.Location = new System.Drawing.Point(6, 131);
+            this.bt_Verlage.Location = new System.Drawing.Point(6, 111);
             this.bt_Verlage.Name = "bt_Verlage";
-            this.bt_Verlage.Size = new System.Drawing.Size(200, 50);
+            this.bt_Verlage.Size = new System.Drawing.Size(180, 40);
             this.bt_Verlage.TabIndex = 4;
             this.bt_Verlage.Text = "Verlage";
             this.bt_Verlage.UseVisualStyleBackColor = true;
@@ -71,9 +70,9 @@
             // 
             // bt_Genres
             // 
-            this.bt_Genres.Location = new System.Drawing.Point(212, 75);
+            this.bt_Genres.Location = new System.Drawing.Point(192, 65);
             this.bt_Genres.Name = "bt_Genres";
-            this.bt_Genres.Size = new System.Drawing.Size(200, 50);
+            this.bt_Genres.Size = new System.Drawing.Size(180, 40);
             this.bt_Genres.TabIndex = 3;
             this.bt_Genres.Text = "Genres";
             this.bt_Genres.UseVisualStyleBackColor = true;
@@ -81,9 +80,9 @@
             // 
             // bt_Autoren
             // 
-            this.bt_Autoren.Location = new System.Drawing.Point(6, 75);
+            this.bt_Autoren.Location = new System.Drawing.Point(6, 65);
             this.bt_Autoren.Name = "bt_Autoren";
-            this.bt_Autoren.Size = new System.Drawing.Size(200, 50);
+            this.bt_Autoren.Size = new System.Drawing.Size(180, 40);
             this.bt_Autoren.TabIndex = 2;
             this.bt_Autoren.Text = "Autoren";
             this.bt_Autoren.UseVisualStyleBackColor = true;
@@ -93,7 +92,7 @@
             // 
             this.bt_Kunden.Location = new System.Drawing.Point(6, 19);
             this.bt_Kunden.Name = "bt_Kunden";
-            this.bt_Kunden.Size = new System.Drawing.Size(200, 50);
+            this.bt_Kunden.Size = new System.Drawing.Size(180, 40);
             this.bt_Kunden.TabIndex = 0;
             this.bt_Kunden.Text = "Kunden";
             this.bt_Kunden.UseVisualStyleBackColor = true;
@@ -108,17 +107,17 @@
             this.groupBox1.Controls.Add(this.bt_Genres);
             this.groupBox1.Controls.Add(this.bt_Autoren);
             this.groupBox1.Controls.Add(this.bt_Kunden);
-            this.groupBox1.Location = new System.Drawing.Point(253, 10);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox1.Location = new System.Drawing.Point(204, 10);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(419, 223);
+            this.groupBox1.Size = new System.Drawing.Size(381, 188);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Verwaltung von:";
             // 
             // bt_Einstellungen
             // 
-            this.bt_Einstellungen.Location = new System.Drawing.Point(334, 193);
+            this.bt_Einstellungen.Location = new System.Drawing.Point(294, 157);
             this.bt_Einstellungen.Name = "bt_Einstellungen";
             this.bt_Einstellungen.Size = new System.Drawing.Size(78, 23);
             this.bt_Einstellungen.TabIndex = 6;
@@ -128,9 +127,9 @@
             // 
             // bt_Buecher
             // 
-            this.bt_Buecher.Location = new System.Drawing.Point(212, 19);
+            this.bt_Buecher.Location = new System.Drawing.Point(192, 19);
             this.bt_Buecher.Name = "bt_Buecher";
-            this.bt_Buecher.Size = new System.Drawing.Size(200, 50);
+            this.bt_Buecher.Size = new System.Drawing.Size(180, 40);
             this.bt_Buecher.TabIndex = 1;
             this.bt_Buecher.Text = "Bücher";
             this.bt_Buecher.UseVisualStyleBackColor = true;
@@ -138,7 +137,7 @@
             // 
             // gb_Uebersicht
             // 
-            this.gb_Uebersicht.Controls.Add(this.linkLabel1);
+            this.gb_Uebersicht.Controls.Add(this.bt_Suchen_Ausleihen);
             this.gb_Uebersicht.Controls.Add(this.lb_Ausleihzahl);
             this.gb_Uebersicht.Controls.Add(this.lb_Ausgeliehen);
             this.gb_Uebersicht.Controls.Add(this.lb_Lagerzahl);
@@ -147,21 +146,10 @@
             this.gb_Uebersicht.Controls.Add(this.lb_Bestand);
             this.gb_Uebersicht.Location = new System.Drawing.Point(12, 10);
             this.gb_Uebersicht.Name = "gb_Uebersicht";
-            this.gb_Uebersicht.Size = new System.Drawing.Size(237, 172);
+            this.gb_Uebersicht.Size = new System.Drawing.Size(188, 188);
             this.gb_Uebersicht.TabIndex = 1;
             this.gb_Uebersicht.TabStop = false;
             this.gb_Uebersicht.Text = "Gesamtübersicht:";
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(161, 25);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(55, 13);
-            this.linkLabel1.TabIndex = 9;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "linkLabel1";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // lb_Ausleihzahl
             // 
@@ -219,10 +207,10 @@
             // 
             // bt_Suchen_Ausleihen
             // 
-            this.bt_Suchen_Ausleihen.Location = new System.Drawing.Point(12, 186);
-            this.bt_Suchen_Ausleihen.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.bt_Suchen_Ausleihen.Location = new System.Drawing.Point(4, 111);
+            this.bt_Suchen_Ausleihen.Margin = new System.Windows.Forms.Padding(1);
             this.bt_Suchen_Ausleihen.Name = "bt_Suchen_Ausleihen";
-            this.bt_Suchen_Ausleihen.Size = new System.Drawing.Size(237, 47);
+            this.bt_Suchen_Ausleihen.Size = new System.Drawing.Size(180, 40);
             this.bt_Suchen_Ausleihen.TabIndex = 11;
             this.bt_Suchen_Ausleihen.Text = "Bücher Suchen/Ausleihen";
             this.bt_Suchen_Ausleihen.UseVisualStyleBackColor = true;
@@ -232,8 +220,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(683, 243);
-            this.Controls.Add(this.bt_Suchen_Ausleihen);
+            this.ClientSize = new System.Drawing.Size(594, 206);
             this.Controls.Add(this.gb_Uebersicht);
             this.Controls.Add(this.groupBox1);
             this.Name = "w_s_main";
@@ -263,7 +250,6 @@
         private System.Windows.Forms.Label lb_IstBestand;
         private System.Windows.Forms.Label lb_Bestandzahl;
         private System.Windows.Forms.Label lb_Bestand;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button bt_Einstellungen;
         private System.Windows.Forms.Button bt_Suchen_Ausleihen;
     }

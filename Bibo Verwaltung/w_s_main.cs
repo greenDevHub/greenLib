@@ -40,7 +40,7 @@ namespace Bibo_Verwaltung
             }
             tbl_1.Reset();
             lb_Bestandzahl.Text = rows_1.ToString();
-            linkLabel1.Text = rows_1.ToString();
+            //linkLabel1.Text = rows_1.ToString();
 
             SqlDataAdapter adapter_2 = new SqlDataAdapter(strSQL2, con.Con);
             DataTable tbl_2 = new DataTable();
