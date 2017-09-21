@@ -122,32 +122,8 @@ namespace Bibo_Verwaltung
             // Verbindung schließen 
             con.Close();
 
-            //if (con.ConnectError()) return;
-            //string RawCommand1 = "SELECT * FROM [dbo].[t_s_kunden] WHERE kunde_ID = @0";
-            //SqlDataReader dr1 = con.ExcecuteCommand(RawCommand1, kundenid);
-            //// Einlesen der Datenzeilen und Ausgabe an der Konsole 
-            //while (dr1.Read())
-            //{
-            //    KundenID = dr1["kunde_ID"].ToString();
-            //    Vorname = dr1["kunde_vorname"].ToString();
-            //    Nachname = dr1["kunde_nachname"].ToString();
-            //    Ort = dr1["kunde_ort"].ToString();
-            //    Postleitzahl = dr1["kunde_postleitzahl"].ToString();
-            //    Strasse = dr1["kunde_strasse"].ToString();
-            //    Telefonnummer = dr1["kunde_telefonnummer"].ToString();
-            //    Hausnummer = dr1["kunde_hausnummer"].ToString();
-            //    Mail = dr1["kunde_mail"].ToString();
-            //    Klasse = dr1["kunde_klasse"].ToString();
-            //    Vertrauenswuerdigkeit = dr1["kunde_vertrauenswürdigkeit"].ToString();
-            //}
-            //// DataReader schließen 
-            //dr1.Close();
-            //// Verbindung schließen 
-            //con.Close();
         }
         #endregion
-        //____________________________________________________________________________________
-
         #region Fill Object
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();

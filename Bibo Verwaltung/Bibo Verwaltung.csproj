@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Autor.cs" />
+    <Compile Include="BuchID.cs" />
     <Compile Include="Einstellung.cs" />
     <Compile Include="Details.cs" />
     <Compile Include="SQL_Verbindung.cs" />
@@ -115,6 +116,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Genre.cs" />
+    <Compile Include="w_s_buchid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_buchid.Designer.cs">
+      <DependentUpon>w_s_buchid.cs</DependentUpon>
+    </Compile>
     <Compile Include="w_s_details.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +175,13 @@
     <Compile Include="w_s_buecher.Designer.cs">
       <DependentUpon>w_s_buecher.cs</DependentUpon>
     </Compile>
+    <Compile Include="w_s_zustand.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_zustand.Designer.cs">
+      <DependentUpon>w_s_zustand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Zustand.cs" />
     <EmbeddedResource Include="w_s_Aus_Kunde.resx">
       <DependentUpon>w_s_Aus_Kunde.cs</DependentUpon>
     </EmbeddedResource>
@@ -176,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Combo_Search.resx">
       <DependentUpon>Combo_Search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="w_s_buchid.resx">
+      <DependentUpon>w_s_buchid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_details.resx">
       <DependentUpon>w_s_details.cs</DependentUpon>
@@ -210,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_buecher.resx">
       <DependentUpon>w_s_buecher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="w_s_zustand.resx">
+      <DependentUpon>w_s_zustand.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Bibo_VerwaltungDataSet.xsc">
       <DependentUpon>Bibo_VerwaltungDataSet.xsd</DependentUpon>

@@ -198,6 +198,9 @@ namespace Bibo_Verwaltung
                     b.ClearDSBuch();
                     b.FillObjectBuch();
                     b.FillGridBuch(ref Grid_Buch);
+                    Form Buchid = new w_s_buchid();
+                    Buchid.ShowDialog(this);
+                    Clear();
                 }
                 catch(SqlException)
                 {
@@ -270,6 +273,7 @@ namespace Bibo_Verwaltung
         #region Textboxfarbe
         private void tb_ISBN_TextChanged(object sender, EventArgs e)
         {
+            (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("ISBN LIKE '{0}%'", tb_ISBN.Text);
             tb_ISBN.BackColor = Color.White;
         }
 
@@ -391,7 +395,6 @@ namespace Bibo_Verwaltung
                 tb_Neupreis.Text = b.Neupreis.ToString();
                 dTP_Erscheinungsdatum.Value = b.Er_datum;
                 cb_Genre.Text = b.Genre.Genrename;
-                
                 b.Autor.FillCombobox(ref cb_Autor, b.Autor.AutorID);
                 b.Verlag.FillCombobox(ref cb_Verlag, b.Verlag.VerlagID);
                 b.Genre.FillCombobox(ref cb_Genre, b.Genre.GenreID);
@@ -477,5 +480,21 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
+        private void Grid_Buch_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string isbnAktuell;
+            if(e.Button == MouseButtons.Right)
+            {
+                if(e.RowIndex >= 0)
+                {
+                    DataGridViewRow row = this.Grid_Buch.Rows[e.RowIndex];
+                    isbnAktuell = row.Cells["ISBN"].Value.ToString();
+                    tb_ISBN.Text = isbnAktuell;
+                    Form Buchid = new w_s_buchid();
+                    Buchid.ShowDialog(this);
+                    tb_ISBN.Text = "";
+                }
+            }
+        }
     }
 }
