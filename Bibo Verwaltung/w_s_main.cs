@@ -114,5 +114,11 @@ namespace Bibo_Verwaltung
             Form Details = new w_s_details();
             Details.ShowDialog(this);
         }
+
+        private void bt_Zustand_Click(object sender, EventArgs e)
+        {
+            Form Zustand = new w_s_zustand();
+            Zustand.ShowDialog(this);
+        }
     }
 }

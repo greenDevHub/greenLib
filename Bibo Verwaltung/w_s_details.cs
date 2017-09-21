@@ -242,7 +242,6 @@ namespace Bibo_Verwaltung
                 gv_Details.Columns[36].Visible = false;
                 gv_Details.Columns[37].Visible = false;
                 gv_Details.Columns[38].Visible = false;
-                gv_Details.Columns[39].Visible = false;
             }
         }
 

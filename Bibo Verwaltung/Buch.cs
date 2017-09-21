@@ -281,7 +281,6 @@ namespace Bibo_Verwaltung
             grid.Columns["bu_isbn"].HeaderText = "Buch-ISBN:";
             grid.Columns["bu_aufnahmedatum"].HeaderText = "aufgenommen am:";
             grid.Columns["zu_zustand"].HeaderText = "Zustand:";
-            grid.Columns["zu_verleihfähig"].HeaderText = "verleihfähig:";
             grid.Columns["buch_titel"].HeaderText = "Titel:";
             grid.Columns["buch_erscheinungsdatum"].HeaderText = "erschienen am:";
             grid.Columns["buch_auflage"].HeaderText = "Auflage:";
