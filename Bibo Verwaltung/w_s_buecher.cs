@@ -496,5 +496,13 @@ namespace Bibo_Verwaltung
                 }
             }
         }
+
+        private void bt_Excel_Click(object sender, EventArgs e)
+        {
+            ExcelExport export = new ExcelExport();
+
+            export.ToExcel(Grid_Buch, "Bibo_Buecherliste", "Buecherliste");
+
+        }
     }
 }
