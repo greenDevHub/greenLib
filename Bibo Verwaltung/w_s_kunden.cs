@@ -484,7 +484,6 @@ namespace Bibo_Verwaltung
             cb_Vertrauenswuerdigkeit.BackColor = Color.White;
         }
 
-
         private void Grid_Kunde_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -510,6 +509,13 @@ namespace Bibo_Verwaltung
         private void tb_search_TextChanged(object sender, EventArgs e)
         {
             (Grid_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'", tb_search.Text);
+        }
+
+        private void bt_Excel_Click(object sender, EventArgs e)
+        {
+            ExcelExport export = new ExcelExport();
+
+            export.ToExcel(Grid_Kunde, "Bibo_Kundenliste","Kundenliste");
         }
     }
 }

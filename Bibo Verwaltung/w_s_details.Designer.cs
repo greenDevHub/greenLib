@@ -84,9 +84,9 @@
             // cb_KundeAnz
             // 
             this.cb_KundeAnz.AutoSize = true;
-            this.cb_KundeAnz.Location = new System.Drawing.Point(866, 368);
+            this.cb_KundeAnz.Location = new System.Drawing.Point(837, 368);
             this.cb_KundeAnz.Name = "cb_KundeAnz";
-            this.cb_KundeAnz.Size = new System.Drawing.Size(181, 17);
+            this.cb_KundeAnz.Size = new System.Drawing.Size(210, 19);
             this.cb_KundeAnz.TabIndex = 1;
             this.cb_KundeAnz.Text = "Kundeninformationen einblenden";
             this.cb_KundeAnz.UseVisualStyleBackColor = true;
@@ -95,9 +95,9 @@
             // cb_Ferfügbark_Anz
             // 
             this.cb_Ferfügbark_Anz.AutoSize = true;
-            this.cb_Ferfügbark_Anz.Location = new System.Drawing.Point(659, 368);
+            this.cb_Ferfügbark_Anz.Location = new System.Drawing.Point(601, 368);
             this.cb_Ferfügbark_Anz.Name = "cb_Ferfügbark_Anz";
-            this.cb_Ferfügbark_Anz.Size = new System.Drawing.Size(201, 17);
+            this.cb_Ferfügbark_Anz.Size = new System.Drawing.Size(230, 19);
             this.cb_Ferfügbark_Anz.TabIndex = 2;
             this.cb_Ferfügbark_Anz.Text = "Nur verleihbereite Bücher einblenden";
             this.cb_Ferfügbark_Anz.UseVisualStyleBackColor = true;
@@ -137,7 +137,7 @@
             this.lb_verleihfaehig.AutoSize = true;
             this.lb_verleihfaehig.Location = new System.Drawing.Point(6, 51);
             this.lb_verleihfaehig.Name = "lb_verleihfaehig";
-            this.lb_verleihfaehig.Size = new System.Drawing.Size(65, 13);
+            this.lb_verleihfaehig.Size = new System.Drawing.Size(75, 15);
             this.lb_verleihfaehig.TabIndex = 16;
             this.lb_verleihfaehig.Text = "Verleihfähig:";
             // 
@@ -155,7 +155,7 @@
             this.lb_Zustand.AutoSize = true;
             this.lb_Zustand.Location = new System.Drawing.Point(6, 77);
             this.lb_Zustand.Name = "lb_Zustand";
-            this.lb_Zustand.Size = new System.Drawing.Size(49, 13);
+            this.lb_Zustand.Size = new System.Drawing.Size(54, 15);
             this.lb_Zustand.TabIndex = 14;
             this.lb_Zustand.Text = "Zustand:";
             // 
@@ -194,7 +194,7 @@
             this.lb_Kunde.AutoSize = true;
             this.lb_Kunde.Location = new System.Drawing.Point(6, 103);
             this.lb_Kunde.Name = "lb_Kunde";
-            this.lb_Kunde.Size = new System.Drawing.Size(41, 13);
+            this.lb_Kunde.Size = new System.Drawing.Size(46, 15);
             this.lb_Kunde.TabIndex = 10;
             this.lb_Kunde.Text = "Kunde:";
             // 
@@ -212,7 +212,7 @@
             this.lb_Rück.AutoSize = true;
             this.lb_Rück.Location = new System.Drawing.Point(6, 132);
             this.lb_Rück.Name = "lb_Rück";
-            this.lb_Rück.Size = new System.Drawing.Size(89, 13);
+            this.lb_Rück.Size = new System.Drawing.Size(101, 15);
             this.lb_Rück.TabIndex = 8;
             this.lb_Rück.Text = "Rückgabedatum:";
             // 
@@ -221,7 +221,7 @@
             this.lb_Buch.AutoSize = true;
             this.lb_Buch.Location = new System.Drawing.Point(6, 25);
             this.lb_Buch.Name = "lb_Buch";
-            this.lb_Buch.Size = new System.Drawing.Size(35, 13);
+            this.lb_Buch.Size = new System.Drawing.Size(38, 15);
             this.lb_Buch.TabIndex = 7;
             this.lb_Buch.Text = "Buch:";
             // 
@@ -326,7 +326,7 @@
             this.cb_s_Autor.AutoSize = true;
             this.cb_s_Autor.Location = new System.Drawing.Point(260, 21);
             this.cb_s_Autor.Name = "cb_s_Autor";
-            this.cb_s_Autor.Size = new System.Drawing.Size(54, 17);
+            this.cb_s_Autor.Size = new System.Drawing.Size(57, 19);
             this.cb_s_Autor.TabIndex = 24;
             this.cb_s_Autor.Text = "Autor:";
             this.cb_s_Autor.UseVisualStyleBackColor = true;
@@ -337,7 +337,7 @@
             this.cb_s_Genre.AutoSize = true;
             this.cb_s_Genre.Location = new System.Drawing.Point(516, 21);
             this.cb_s_Genre.Name = "cb_s_Genre";
-            this.cb_s_Genre.Size = new System.Drawing.Size(58, 17);
+            this.cb_s_Genre.Size = new System.Drawing.Size(63, 19);
             this.cb_s_Genre.TabIndex = 23;
             this.cb_s_Genre.Text = "Genre:";
             this.cb_s_Genre.UseVisualStyleBackColor = true;
@@ -348,7 +348,7 @@
             this.cb_s_Verlag.AutoSize = true;
             this.cb_s_Verlag.Location = new System.Drawing.Point(776, 21);
             this.cb_s_Verlag.Name = "cb_s_Verlag";
-            this.cb_s_Verlag.Size = new System.Drawing.Size(59, 17);
+            this.cb_s_Verlag.Size = new System.Drawing.Size(64, 19);
             this.cb_s_Verlag.TabIndex = 22;
             this.cb_s_Verlag.Text = "Verlag:";
             this.cb_s_Verlag.UseVisualStyleBackColor = true;
@@ -359,7 +359,7 @@
             this.cb_s_Titel.AutoSize = true;
             this.cb_s_Titel.Location = new System.Drawing.Point(9, 21);
             this.cb_s_Titel.Name = "cb_s_Titel";
-            this.cb_s_Titel.Size = new System.Drawing.Size(49, 17);
+            this.cb_s_Titel.Size = new System.Drawing.Size(52, 19);
             this.cb_s_Titel.TabIndex = 21;
             this.cb_s_Titel.Text = "Titel:";
             this.cb_s_Titel.UseVisualStyleBackColor = true;
