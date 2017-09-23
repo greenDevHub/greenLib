@@ -1,0 +1,4 @@
+-	Exportfunktion der GridView für Excel (schön formatiert)--> Erik
+-	Bilder (auch in Datenbank) --> Justin
+-	Combobox-Fehler beheben, UI Verbessern, ISBN-Validierung --> Laurenz
+-	Rückgabeprozess optimieren, Fehler beheben, Status berücksichtigen (Zustand beschädigt), zu jeder BuchID einen Barcode erstellen --> Robert
