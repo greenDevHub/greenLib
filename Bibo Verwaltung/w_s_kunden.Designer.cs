@@ -51,6 +51,7 @@
             this.tb_KundenID = new System.Windows.Forms.TextBox();
             this.lb_KundenID = new System.Windows.Forms.Label();
             this.gb_kunde = new System.Windows.Forms.GroupBox();
+            this.bt_Excel = new System.Windows.Forms.Button();
             this.lb_kunde_add = new System.Windows.Forms.Label();
             this.bt_clear_kunden = new System.Windows.Forms.Button();
             this.bt_OK = new System.Windows.Forms.Button();
@@ -62,7 +63,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tb_search = new System.Windows.Forms.TextBox();
             this.Grid_Kunde = new System.Windows.Forms.DataGridView();
-            this.bt_Excel = new System.Windows.Forms.Button();
             this.gb_kunde.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Kunde)).BeginInit();
@@ -299,6 +299,16 @@
             this.gb_kunde.TabStop = false;
             this.gb_kunde.Text = "Kunden verwalten";
             // 
+            // bt_Excel
+            // 
+            this.bt_Excel.Location = new System.Drawing.Point(199, 433);
+            this.bt_Excel.Name = "bt_Excel";
+            this.bt_Excel.Size = new System.Drawing.Size(213, 23);
+            this.bt_Excel.TabIndex = 41;
+            this.bt_Excel.Text = "Kunden in Exceltabelle speichern";
+            this.bt_Excel.UseVisualStyleBackColor = true;
+            this.bt_Excel.Click += new System.EventHandler(this.bt_Excel_Click);
+            // 
             // lb_kunde_add
             // 
             this.lb_kunde_add.AutoSize = true;
@@ -401,7 +411,7 @@
             // tb_search
             // 
             this.tb_search.Location = new System.Drawing.Point(136, 423);
-            this.tb_search.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_search.Margin = new System.Windows.Forms.Padding(2);
             this.tb_search.Name = "tb_search";
             this.tb_search.Size = new System.Drawing.Size(196, 20);
             this.tb_search.TabIndex = 17;
@@ -421,16 +431,6 @@
             this.Grid_Kunde.Size = new System.Drawing.Size(320, 401);
             this.Grid_Kunde.TabIndex = 0;
             this.Grid_Kunde.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Kunde_CellDoubleClick);
-            // 
-            // bt_Excel
-            // 
-            this.bt_Excel.Location = new System.Drawing.Point(150, 450);
-            this.bt_Excel.Name = "bt_Excel";
-            this.bt_Excel.Size = new System.Drawing.Size(213, 23);
-            this.bt_Excel.TabIndex = 41;
-            this.bt_Excel.Text = "Kunden in Exceltabelle speichern";
-            this.bt_Excel.UseVisualStyleBackColor = true;
-            this.bt_Excel.Click += new System.EventHandler(this.bt_Excel_Click);
             // 
             // w_s_Kunden
             // 

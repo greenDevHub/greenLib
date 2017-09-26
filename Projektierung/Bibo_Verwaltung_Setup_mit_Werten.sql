@@ -211,10 +211,10 @@ CREATE TABLE [dbo].[t_s_zustand](
 	[zu_id] [int] IDENTITY (1,1) NOT NULL,
 	[zu_zustand] [nvarchar](128) NOT NULL,
 	PRIMARY KEY (zu_id))
-	INSERT INTO t_s_zustand (zu_id, zu_zustand) VALUES (1, 'neuwertig')
-	INSERT INTO t_s_zustand (zu_id, zu_zustand) VALUES (2, 'gut')
-	INSERT INTO t_s_zustand (zu_id, zu_zustand) VALUES (3, 'gebraucht')
-	INSERT INTO t_s_zustand (zu_id, zu_zustand) VALUES (4, 'beschädigt')
+	INSERT INTO t_s_zustand (zu_zustand) VALUES ('neuwertig')
+	INSERT INTO t_s_zustand (zu_zustand) VALUES ('gut')
+	INSERT INTO t_s_zustand (zu_zustand) VALUES ('gebraucht')
+	INSERT INTO t_s_zustand (zu_zustand) VALUES ('beschädigt')
 	Select * from t_s_zustand
 	END
 
@@ -290,13 +290,14 @@ CREATE TABLE [dbo].[t_bd_ausgeliehen](
 	[aus_leihdatum] [date] NOT NULL,
 	[aus_rückgabedatum] [date] NOT NULL,
 	[aus_kundenid] [int] NOT NULL,
+	[aus_barcode] [nvarchar] (128) NOT NULL,
 	PRIMARY KEY (aus_leihnummer),
 	FOREIGN KEY (aus_buchid)
 		REFERENCES t_s_buchid (bu_id),
     FOREIGN KEY (aus_kundenid)
 	    REFERENCES t_s_kunden (kunde_id))
 
-	INSERT INTO t_bd_ausgeliehen (aus_buchid, aus_leihdatum, aus_rückgabedatum, aus_kundenid) 
-	VALUES (1, '11.11.2016', '18.11.2016', 1)
+	INSERT INTO t_bd_ausgeliehen (aus_buchid, aus_leihdatum, aus_rückgabedatum, aus_kundenid, aus_barcode) 
+	VALUES (1, '11.11.2016', '18.11.2016', 1,'233254')
 	Select * from t_bd_ausgeliehen
 	END
