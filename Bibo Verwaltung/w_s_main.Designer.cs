@@ -110,9 +110,9 @@
             this.groupBox1.Controls.Add(this.bt_Autoren);
             this.groupBox1.Controls.Add(this.bt_Kunden);
             this.groupBox1.Location = new System.Drawing.Point(204, 10);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(381, 203);
+            this.groupBox1.Size = new System.Drawing.Size(381, 205);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Verwaltung von:";
@@ -129,9 +129,9 @@
             // 
             // bt_Einstellungen
             // 
-            this.bt_Einstellungen.Location = new System.Drawing.Point(192, 157);
+            this.bt_Einstellungen.Location = new System.Drawing.Point(294, 157);
             this.bt_Einstellungen.Name = "bt_Einstellungen";
-            this.bt_Einstellungen.Size = new System.Drawing.Size(180, 40);
+            this.bt_Einstellungen.Size = new System.Drawing.Size(78, 23);
             this.bt_Einstellungen.TabIndex = 6;
             this.bt_Einstellungen.Text = "Einstellungen";
             this.bt_Einstellungen.UseVisualStyleBackColor = true;
@@ -158,7 +158,7 @@
             this.gb_Uebersicht.Controls.Add(this.lb_Bestand);
             this.gb_Uebersicht.Location = new System.Drawing.Point(12, 10);
             this.gb_Uebersicht.Name = "gb_Uebersicht";
-            this.gb_Uebersicht.Size = new System.Drawing.Size(188, 188);
+            this.gb_Uebersicht.Size = new System.Drawing.Size(188, 205);
             this.gb_Uebersicht.TabIndex = 1;
             this.gb_Uebersicht.TabStop = false;
             this.gb_Uebersicht.Text = "Gesamtübersicht:";
@@ -166,20 +166,20 @@
             // bt_Suchen_Ausleihen
             // 
             this.bt_Suchen_Ausleihen.Location = new System.Drawing.Point(4, 111);
-            this.bt_Suchen_Ausleihen.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.bt_Suchen_Ausleihen.Margin = new System.Windows.Forms.Padding(1);
             this.bt_Suchen_Ausleihen.Name = "bt_Suchen_Ausleihen";
             this.bt_Suchen_Ausleihen.Size = new System.Drawing.Size(180, 40);
             this.bt_Suchen_Ausleihen.TabIndex = 11;
             this.bt_Suchen_Ausleihen.Text = "Bücher Suchen/Ausleihen";
             this.bt_Suchen_Ausleihen.UseVisualStyleBackColor = true;
-            this.bt_Suchen_Ausleihen.Click += new System.EventHandler(this.button1_Click_1);
+            this.bt_Suchen_Ausleihen.Click += new System.EventHandler(this.bt_Suchen_Ausleihen_Click);
             // 
             // lb_Ausleihzahl
             // 
             this.lb_Ausleihzahl.AutoSize = true;
             this.lb_Ausleihzahl.Location = new System.Drawing.Point(116, 75);
             this.lb_Ausleihzahl.Name = "lb_Ausleihzahl";
-            this.lb_Ausleihzahl.Size = new System.Drawing.Size(11, 15);
+            this.lb_Ausleihzahl.Size = new System.Drawing.Size(10, 13);
             this.lb_Ausleihzahl.TabIndex = 4;
             this.lb_Ausleihzahl.Text = "-";
             // 
@@ -188,7 +188,7 @@
             this.lb_Ausgeliehen.AutoSize = true;
             this.lb_Ausgeliehen.Location = new System.Drawing.Point(6, 75);
             this.lb_Ausgeliehen.Name = "lb_Ausgeliehen";
-            this.lb_Ausgeliehen.Size = new System.Drawing.Size(120, 15);
+            this.lb_Ausgeliehen.Size = new System.Drawing.Size(104, 13);
             this.lb_Ausgeliehen.TabIndex = 2;
             this.lb_Ausgeliehen.Text = "Bücher ausgeliehen:";
             // 
@@ -197,7 +197,7 @@
             this.lb_Lagerzahl.AutoSize = true;
             this.lb_Lagerzahl.Location = new System.Drawing.Point(116, 50);
             this.lb_Lagerzahl.Name = "lb_Lagerzahl";
-            this.lb_Lagerzahl.Size = new System.Drawing.Size(11, 15);
+            this.lb_Lagerzahl.Size = new System.Drawing.Size(10, 13);
             this.lb_Lagerzahl.TabIndex = 3;
             this.lb_Lagerzahl.Text = "-";
             // 
@@ -206,7 +206,7 @@
             this.lb_IstBestand.AutoSize = true;
             this.lb_IstBestand.Location = new System.Drawing.Point(6, 50);
             this.lb_IstBestand.Name = "lb_IstBestand";
-            this.lb_IstBestand.Size = new System.Drawing.Size(101, 15);
+            this.lb_IstBestand.Size = new System.Drawing.Size(87, 13);
             this.lb_IstBestand.TabIndex = 1;
             this.lb_IstBestand.Text = "Bücher im Lager:";
             // 
@@ -215,7 +215,7 @@
             this.lb_Bestandzahl.AutoSize = true;
             this.lb_Bestandzahl.Location = new System.Drawing.Point(116, 25);
             this.lb_Bestandzahl.Name = "lb_Bestandzahl";
-            this.lb_Bestandzahl.Size = new System.Drawing.Size(11, 15);
+            this.lb_Bestandzahl.Size = new System.Drawing.Size(10, 13);
             this.lb_Bestandzahl.TabIndex = 2;
             this.lb_Bestandzahl.Text = "-";
             // 
@@ -224,7 +224,7 @@
             this.lb_Bestand.AutoSize = true;
             this.lb_Bestand.Location = new System.Drawing.Point(6, 25);
             this.lb_Bestand.Name = "lb_Bestand";
-            this.lb_Bestand.Size = new System.Drawing.Size(114, 15);
+            this.lb_Bestand.Size = new System.Drawing.Size(99, 13);
             this.lb_Bestand.TabIndex = 0;
             this.lb_Bestand.Text = "Bücher im Bestand:";
             // 
@@ -232,13 +232,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(594, 223);
+            this.ClientSize = new System.Drawing.Size(594, 222);
             this.Controls.Add(this.gb_Uebersicht);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "w_s_main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bibliotheksverwaltung";
-            this.Activated += new System.EventHandler(this.Load_All);
+            this.Activated += new System.EventHandler(this.Load_Uebersicht);
             this.groupBox1.ResumeLayout(false);
             this.gb_Uebersicht.ResumeLayout(false);
             this.gb_Uebersicht.PerformLayout();

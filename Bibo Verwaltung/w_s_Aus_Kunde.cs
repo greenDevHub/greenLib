@@ -12,6 +12,7 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_Aus_Kunde : Form
     {
+        #region Eigenschaften des gewaehlten Kunden
         string kundeid;
         /// <summary>
         /// ID des gewaehlten Kunden
@@ -29,55 +30,28 @@ namespace Bibo_Verwaltung
         /// Nachname des gewaehlten Kunden
         /// </summary>
         public string KundenNName { get { return kundenname; } set { kundenname = value; } }
+        #endregion
 
+        #region Objekt Constructor
+        /// <summary>
+        /// Erschaft die Form
+        /// </summary>
         public w_s_Aus_Kunde()
         {
             InitializeComponent();
-            kunde.FillGrid(ref gv_Aus_Kunde);
-            //Alles_Einblenden();
-            //gv_Aus_Kunde.Columns[0].Visible = false;
-            //gv_Aus_Kunde.Columns[3].Visible = false;
-            //gv_Aus_Kunde.Columns[4].Visible = false;
-            //gv_Aus_Kunde.Columns[5].Visible = false;
-            //gv_Aus_Kunde.Columns[6].Visible = false;
-            //gv_Aus_Kunde.Columns[9].Visible = false;
-            //gv_Aus_Kunde.Columns[10].Visible = false;
-            //gv_Aus_Kunde.Columns[11].Visible = false;
         }
-
-        public void Load_Tabelle(object sender, EventArgs e)
-        {
-            kunde.FillGrid(ref gv_Aus_Kunde);
-        }
+        #endregion
 
         Kunde kunde = new Kunde();
 
-        private void Alles_Einblenden()
+        #region Kunden Laden
+        public void Load_Kunden(object sender, EventArgs e)
         {
-            if (cb_Alles.Checked == true)
-            {
-                gv_Aus_Kunde.Columns[0].Visible = true;
-                gv_Aus_Kunde.Columns[3].Visible = true;
-                gv_Aus_Kunde.Columns[4].Visible = true;
-                gv_Aus_Kunde.Columns[5].Visible = true;
-                gv_Aus_Kunde.Columns[6].Visible = true;
-                gv_Aus_Kunde.Columns[9].Visible = true;
-                gv_Aus_Kunde.Columns[10].Visible = true;
-                gv_Aus_Kunde.Columns[11].Visible = true;
-            }
-            else if (cb_Alles.Checked == false)
-            {
-                gv_Aus_Kunde.Columns[0].Visible = false;
-                gv_Aus_Kunde.Columns[3].Visible = false;
-                gv_Aus_Kunde.Columns[4].Visible = false;
-                gv_Aus_Kunde.Columns[5].Visible = false;
-                gv_Aus_Kunde.Columns[6].Visible = false;
-                gv_Aus_Kunde.Columns[9].Visible = false;
-                gv_Aus_Kunde.Columns[10].Visible = false;
-                gv_Aus_Kunde.Columns[11].Visible = false;
-            }
+            kunde.FillGrid(ref gv_Aus_Kunde);
         }
+        #endregion
 
+        #region Gewaehlten Kunden zurueckgeben
         private void bt_Ausweahlen_Click(object sender, EventArgs e)
         {
             this.KundenID = gv_Aus_Kunde.CurrentRow.Cells[0].Value.ToString();
@@ -86,16 +60,14 @@ namespace Bibo_Verwaltung
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+        #endregion
 
-        private void cb_Alles_CheckedChanged(object sender, EventArgs e)
-        {
-            Alles_Einblenden();
-        }
-
+        #region Neuer Kunde
         private void bt_NeuKunde_Click(object sender, EventArgs e)
         {
             Form Kunden = new w_s_Kunden();
             Kunden.ShowDialog(this);
         }
+        #endregion
     }
 }

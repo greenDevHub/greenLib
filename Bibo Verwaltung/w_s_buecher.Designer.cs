@@ -34,12 +34,12 @@
             this.bibo_VerwaltungDataSet = new Bibo_Verwaltung.Bibo_VerwaltungDataSet();
             this.t_s_spracheTableAdapter = new Bibo_Verwaltung.Bibo_VerwaltungDataSetTableAdapters.t_s_spracheTableAdapter();
             this.gb_buch = new System.Windows.Forms.GroupBox();
-            this.rb_Edit = new System.Windows.Forms.RadioButton();
+            this.rb_Update_Buch = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.bt_clear_buecher = new System.Windows.Forms.Button();
-            this.rb_Neubuch = new System.Windows.Forms.RadioButton();
+            this.rb_Add_Buch = new System.Windows.Forms.RadioButton();
             this.bt_speichern_buecher = new System.Windows.Forms.Button();
-            this.rb_Delete = new System.Windows.Forms.RadioButton();
+            this.rb_Delete_Buch = new System.Windows.Forms.RadioButton();
             this.dTP_Erscheinungsdatum = new System.Windows.Forms.DateTimePicker();
             this.lb_Erscheinungsdatum = new System.Windows.Forms.Label();
             this.tb_Auflage = new System.Windows.Forms.TextBox();
@@ -64,6 +64,7 @@
             this.tb_ISBN = new System.Windows.Forms.TextBox();
             this.lb_ISBN = new System.Windows.Forms.Label();
             this.Grid_Buch = new System.Windows.Forms.DataGridView();
+            this.bt_Schliessen = new System.Windows.Forms.Button();
             this.bt_Excel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).BeginInit();
@@ -93,12 +94,12 @@
             // 
             // gb_buch
             // 
-            this.gb_buch.Controls.Add(this.rb_Edit);
+            this.gb_buch.Controls.Add(this.rb_Update_Buch);
             this.gb_buch.Controls.Add(this.label1);
             this.gb_buch.Controls.Add(this.bt_clear_buecher);
-            this.gb_buch.Controls.Add(this.rb_Neubuch);
+            this.gb_buch.Controls.Add(this.rb_Add_Buch);
             this.gb_buch.Controls.Add(this.bt_speichern_buecher);
-            this.gb_buch.Controls.Add(this.rb_Delete);
+            this.gb_buch.Controls.Add(this.rb_Delete_Buch);
             this.gb_buch.Controls.Add(this.dTP_Erscheinungsdatum);
             this.gb_buch.Controls.Add(this.lb_Erscheinungsdatum);
             this.gb_buch.Controls.Add(this.tb_Auflage);
@@ -122,31 +123,31 @@
             this.gb_buch.Controls.Add(this.lb_Titel);
             this.gb_buch.Controls.Add(this.tb_ISBN);
             this.gb_buch.Controls.Add(this.lb_ISBN);
-            this.gb_buch.Location = new System.Drawing.Point(15, 12);
+            this.gb_buch.Location = new System.Drawing.Point(12, 12);
             this.gb_buch.Name = "gb_buch";
-            this.gb_buch.Size = new System.Drawing.Size(361, 359);
+            this.gb_buch.Size = new System.Drawing.Size(365, 359);
             this.gb_buch.TabIndex = 0;
             this.gb_buch.TabStop = false;
             this.gb_buch.Text = "Buecher";
             // 
-            // rb_Edit
+            // rb_Update_Buch
             // 
-            this.rb_Edit.AutoSize = true;
-            this.rb_Edit.Location = new System.Drawing.Point(129, 23);
-            this.rb_Edit.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.rb_Edit.Name = "rb_Edit";
-            this.rb_Edit.Size = new System.Drawing.Size(115, 19);
-            this.rb_Edit.TabIndex = 43;
-            this.rb_Edit.Text = "Buch bearbeiten";
-            this.rb_Edit.UseVisualStyleBackColor = true;
-            this.rb_Edit.CheckedChanged += new System.EventHandler(this.rb_Edit_CheckedChanged);
+            this.rb_Update_Buch.AutoSize = true;
+            this.rb_Update_Buch.Location = new System.Drawing.Point(151, 23);
+            this.rb_Update_Buch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.rb_Update_Buch.Name = "rb_Update_Buch";
+            this.rb_Update_Buch.Size = new System.Drawing.Size(104, 17);
+            this.rb_Update_Buch.TabIndex = 43;
+            this.rb_Update_Buch.Text = "Buch Bearbeiten";
+            this.rb_Update_Buch.UseVisualStyleBackColor = true;
+            this.rb_Update_Buch.CheckedChanged += new System.EventHandler(this.rb_Edit_CheckedChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(129, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(169, 15);
+            this.label1.Size = new System.Drawing.Size(145, 13);
             this.label1.TabIndex = 28;
             this.label1.Text = "ISBN-Form: 123-0123456789";
             // 
@@ -160,19 +161,19 @@
             this.bt_clear_buecher.UseVisualStyleBackColor = true;
             this.bt_clear_buecher.Click += new System.EventHandler(this.bt_clear_buecher_Click);
             // 
-            // rb_Neubuch
+            // rb_Add_Buch
             // 
-            this.rb_Neubuch.AutoSize = true;
-            this.rb_Neubuch.Checked = true;
-            this.rb_Neubuch.Location = new System.Drawing.Point(8, 23);
-            this.rb_Neubuch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.rb_Neubuch.Name = "rb_Neubuch";
-            this.rb_Neubuch.Size = new System.Drawing.Size(117, 19);
-            this.rb_Neubuch.TabIndex = 41;
-            this.rb_Neubuch.TabStop = true;
-            this.rb_Neubuch.Text = "Buch hinzufügen";
-            this.rb_Neubuch.UseVisualStyleBackColor = true;
-            this.rb_Neubuch.CheckedChanged += new System.EventHandler(this.rb_Neubuch_CheckedChanged);
+            this.rb_Add_Buch.AutoSize = true;
+            this.rb_Add_Buch.Checked = true;
+            this.rb_Add_Buch.Location = new System.Drawing.Point(8, 23);
+            this.rb_Add_Buch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.rb_Add_Buch.Name = "rb_Add_Buch";
+            this.rb_Add_Buch.Size = new System.Drawing.Size(139, 17);
+            this.rb_Add_Buch.TabIndex = 41;
+            this.rb_Add_Buch.TabStop = true;
+            this.rb_Add_Buch.Text = "Neues Buch hinzufügen";
+            this.rb_Add_Buch.UseVisualStyleBackColor = true;
+            this.rb_Add_Buch.CheckedChanged += new System.EventHandler(this.rb_Neubuch_CheckedChanged);
             // 
             // bt_speichern_buecher
             // 
@@ -185,17 +186,17 @@
             this.bt_speichern_buecher.UseVisualStyleBackColor = true;
             this.bt_speichern_buecher.Click += new System.EventHandler(this.Save_Buecher);
             // 
-            // rb_Delete
+            // rb_Delete_Buch
             // 
-            this.rb_Delete.AutoSize = true;
-            this.rb_Delete.Location = new System.Drawing.Point(249, 23);
-            this.rb_Delete.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.rb_Delete.Name = "rb_Delete";
-            this.rb_Delete.Size = new System.Drawing.Size(108, 19);
-            this.rb_Delete.TabIndex = 42;
-            this.rb_Delete.Text = "Buch entfernen";
-            this.rb_Delete.UseVisualStyleBackColor = true;
-            this.rb_Delete.CheckedChanged += new System.EventHandler(this.rb_Delete_CheckedChanged);
+            this.rb_Delete_Buch.AutoSize = true;
+            this.rb_Delete_Buch.Location = new System.Drawing.Point(259, 23);
+            this.rb_Delete_Buch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.rb_Delete_Buch.Name = "rb_Delete_Buch";
+            this.rb_Delete_Buch.Size = new System.Drawing.Size(99, 17);
+            this.rb_Delete_Buch.TabIndex = 42;
+            this.rb_Delete_Buch.Text = "Buch Entfernen";
+            this.rb_Delete_Buch.UseVisualStyleBackColor = true;
+            this.rb_Delete_Buch.CheckedChanged += new System.EventHandler(this.rb_Delete_CheckedChanged);
             // 
             // dTP_Erscheinungsdatum
             // 
@@ -210,7 +211,7 @@
             this.lb_Erscheinungsdatum.AutoSize = true;
             this.lb_Erscheinungsdatum.Location = new System.Drawing.Point(5, 276);
             this.lb_Erscheinungsdatum.Name = "lb_Erscheinungsdatum";
-            this.lb_Erscheinungsdatum.Size = new System.Drawing.Size(120, 15);
+            this.lb_Erscheinungsdatum.Size = new System.Drawing.Size(103, 13);
             this.lb_Erscheinungsdatum.TabIndex = 20;
             this.lb_Erscheinungsdatum.Text = "Erscheinungsdatum:";
             // 
@@ -226,7 +227,7 @@
             this.lb_Auflage.AutoSize = true;
             this.lb_Auflage.Location = new System.Drawing.Point(5, 219);
             this.lb_Auflage.Name = "lb_Auflage";
-            this.lb_Auflage.Size = new System.Drawing.Size(48, 15);
+            this.lb_Auflage.Size = new System.Drawing.Size(43, 13);
             this.lb_Auflage.TabIndex = 18;
             this.lb_Auflage.Text = "Auflage";
             // 
@@ -235,7 +236,7 @@
             this.lb_Neupreis_Euro.AutoSize = true;
             this.lb_Neupreis_Euro.Location = new System.Drawing.Point(320, 245);
             this.lb_Neupreis_Euro.Name = "lb_Neupreis_Euro";
-            this.lb_Neupreis_Euro.Size = new System.Drawing.Size(14, 15);
+            this.lb_Neupreis_Euro.Size = new System.Drawing.Size(13, 13);
             this.lb_Neupreis_Euro.TabIndex = 1;
             this.lb_Neupreis_Euro.Text = "€";
             // 
@@ -262,7 +263,7 @@
             this.lb_Sprache.AutoSize = true;
             this.lb_Sprache.Location = new System.Drawing.Point(5, 192);
             this.lb_Sprache.Name = "lb_Sprache";
-            this.lb_Sprache.Size = new System.Drawing.Size(56, 15);
+            this.lb_Sprache.Size = new System.Drawing.Size(50, 13);
             this.lb_Sprache.TabIndex = 14;
             this.lb_Sprache.Text = "Sprache:";
             // 
@@ -289,7 +290,7 @@
             this.lb_Verlag.AutoSize = true;
             this.lb_Verlag.Location = new System.Drawing.Point(5, 139);
             this.lb_Verlag.Name = "lb_Verlag";
-            this.lb_Verlag.Size = new System.Drawing.Size(45, 15);
+            this.lb_Verlag.Size = new System.Drawing.Size(40, 13);
             this.lb_Verlag.TabIndex = 10;
             this.lb_Verlag.Text = "Verlag:";
             // 
@@ -298,7 +299,7 @@
             this.lb_Autor.AutoSize = true;
             this.lb_Autor.Location = new System.Drawing.Point(5, 112);
             this.lb_Autor.Name = "lb_Autor";
-            this.lb_Autor.Size = new System.Drawing.Size(38, 15);
+            this.lb_Autor.Size = new System.Drawing.Size(35, 13);
             this.lb_Autor.TabIndex = 8;
             this.lb_Autor.Text = "Autor:";
             // 
@@ -343,7 +344,7 @@
             this.lb_Genre.AutoSize = true;
             this.lb_Genre.Location = new System.Drawing.Point(5, 166);
             this.lb_Genre.Name = "lb_Genre";
-            this.lb_Genre.Size = new System.Drawing.Size(44, 15);
+            this.lb_Genre.Size = new System.Drawing.Size(39, 13);
             this.lb_Genre.TabIndex = 5;
             this.lb_Genre.Text = "Genre:";
             // 
@@ -360,7 +361,7 @@
             this.lb_Neupreis.AutoSize = true;
             this.lb_Neupreis.Location = new System.Drawing.Point(5, 245);
             this.lb_Neupreis.Name = "lb_Neupreis";
-            this.lb_Neupreis.Size = new System.Drawing.Size(60, 15);
+            this.lb_Neupreis.Size = new System.Drawing.Size(52, 13);
             this.lb_Neupreis.TabIndex = 3;
             this.lb_Neupreis.Text = "Neupreis:";
             // 
@@ -377,7 +378,7 @@
             this.lb_Titel.AutoSize = true;
             this.lb_Titel.Location = new System.Drawing.Point(5, 86);
             this.lb_Titel.Name = "lb_Titel";
-            this.lb_Titel.Size = new System.Drawing.Size(33, 15);
+            this.lb_Titel.Size = new System.Drawing.Size(30, 13);
             this.lb_Titel.TabIndex = 3;
             this.lb_Titel.Text = "Titel:";
             // 
@@ -394,7 +395,7 @@
             this.lb_ISBN.AutoSize = true;
             this.lb_ISBN.Location = new System.Drawing.Point(5, 60);
             this.lb_ISBN.Name = "lb_ISBN";
-            this.lb_ISBN.Size = new System.Drawing.Size(38, 15);
+            this.lb_ISBN.Size = new System.Drawing.Size(35, 13);
             this.lb_ISBN.TabIndex = 1;
             this.lb_ISBN.Text = "ISBN:";
             // 
@@ -403,16 +404,32 @@
             this.Grid_Buch.AllowUserToAddRows = false;
             this.Grid_Buch.AllowUserToDeleteRows = false;
             this.Grid_Buch.AllowUserToResizeColumns = false;
+            this.Grid_Buch.AllowUserToResizeRows = false;
+            this.Grid_Buch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.Grid_Buch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Grid_Buch.Location = new System.Drawing.Point(381, 12);
+            this.Grid_Buch.Location = new System.Drawing.Point(382, 12);
             this.Grid_Buch.Margin = new System.Windows.Forms.Padding(2);
+            this.Grid_Buch.MultiSelect = false;
             this.Grid_Buch.Name = "Grid_Buch";
             this.Grid_Buch.ReadOnly = true;
+            this.Grid_Buch.RowHeadersVisible = false;
+            this.Grid_Buch.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.Grid_Buch.RowTemplate.Height = 40;
-            this.Grid_Buch.Size = new System.Drawing.Size(309, 359);
+            this.Grid_Buch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.Grid_Buch.Size = new System.Drawing.Size(341, 359);
             this.Grid_Buch.TabIndex = 0;
             this.Grid_Buch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Buch_CellDoubleClick);
             this.Grid_Buch.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Grid_Buch_CellMouseClick);
+            // 
+            // bt_Schliessen
+            // 
+            this.bt_Schliessen.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.bt_Schliessen.Location = new System.Drawing.Point(623, 376);
+            this.bt_Schliessen.Name = "bt_Schliessen";
+            this.bt_Schliessen.Size = new System.Drawing.Size(100, 23);
+            this.bt_Schliessen.TabIndex = 1;
+            this.bt_Schliessen.Text = "Schließen";
+            this.bt_Schliessen.UseVisualStyleBackColor = true;
             // 
             // bt_Excel
             // 
@@ -428,12 +445,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(701, 414);
+            this.ClientSize = new System.Drawing.Size(734, 406);
             this.Controls.Add(this.bt_Excel);
+            this.Controls.Add(this.bt_Schliessen);
             this.Controls.Add(this.Grid_Buch);
             this.Controls.Add(this.gb_buch);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "w_s_buecher";
-            this.Text = "w_s_buecher";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Bücherverwaltung";
             this.Activated += new System.EventHandler(this.w_s_buecher_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).EndInit();
@@ -477,10 +499,11 @@
         private System.Windows.Forms.Button bt_clear_buecher;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView Grid_Buch;
-        private System.Windows.Forms.RadioButton rb_Neubuch;
-        private System.Windows.Forms.RadioButton rb_Edit;
-        private System.Windows.Forms.RadioButton rb_Delete;
+        private System.Windows.Forms.RadioButton rb_Add_Buch;
+        private System.Windows.Forms.RadioButton rb_Update_Buch;
+        private System.Windows.Forms.RadioButton rb_Delete_Buch;
         public System.Windows.Forms.TextBox tb_ISBN;
+        private System.Windows.Forms.Button bt_Schliessen;
         private System.Windows.Forms.Button bt_Excel;
     }
 }

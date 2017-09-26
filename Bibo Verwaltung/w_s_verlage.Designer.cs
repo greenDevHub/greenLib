@@ -76,6 +76,8 @@
             this.Controls.Add(this.gv_Verlage);
             this.Controls.Add(this.bt_OK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "w_s_verlage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Verlage";

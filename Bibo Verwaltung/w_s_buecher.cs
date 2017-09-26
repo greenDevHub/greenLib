@@ -17,6 +17,12 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_buecher : Form
     {
+        public w_s_buecher()
+        {
+            InitializeComponent();
+            b.FillGrid_Buch(ref Grid_Buch);
+        }
+
         Buch b = new Buch();
         Sprache s = new Sprache();
 
@@ -49,6 +55,7 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
+        //TODO
 
         #region ToIsbn
         public string ToIsbn(string s)
@@ -67,14 +74,9 @@ namespace Bibo_Verwaltung
             return output;
         }
         #endregion
+        //TODO
 
-        public w_s_buecher()
-        {
-            InitializeComponent();
-            b.FillGridBuch(ref Grid_Buch);
-        }
-
-        #region Prüfung Numeric & ISBN
+        #region Prüfung Numeric und Isbn
         private void tb_Neupreis_Validated(object sender, EventArgs e)
         {
             if (IsNumeric(tb_Neupreis.Text) == false)
@@ -98,7 +100,7 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        #region Search
+        #region ComboBox Button
         private void bt_Verlag_s_Click(object sender, EventArgs e)
         {
             Form Verlag = new w_s_verlage();
@@ -110,11 +112,13 @@ namespace Bibo_Verwaltung
             Form Autor = new w_s_autoren();
             Autor.ShowDialog(this);
         }
+
         private void bt_Genre_s_Click(object sender, EventArgs e)
         {
             Form Genres = new w_s_genres();
             Genres.ShowDialog(this);
         }
+
         private void bt_Sprache_s_Click_1(object sender, EventArgs e)
         {
             Form Sprache = new w_s_sprachen();
@@ -125,15 +129,8 @@ namespace Bibo_Verwaltung
         #region Save Buch
         private void Save_Buecher(object sender, EventArgs e)
         {
-            if (rb_Edit.Checked
-                && !tb_ISBN.Text.Equals("")
-                && !tb_Titel.Text.Equals("")
-                && !cb_Autor.Text.Equals("")
-                && !cb_Verlag.Text.Equals("")
-                && !cb_Genre.Text.Equals("")
-                && !cb_Sprache.Text.Equals("")
-                && !tb_Auflage.Text.Equals("")
-                && !tb_Neupreis.Text.Equals(""))
+            if (rb_Update_Buch.Checked && !tb_ISBN.Text.Equals("") && !tb_Titel.Text.Equals("") && !cb_Autor.Text.Equals("") && !cb_Verlag.Text.Equals("")
+                && !cb_Genre.Text.Equals("") && !cb_Sprache.Text.Equals("") && !tb_Auflage.Text.Equals("") && !tb_Neupreis.Text.Equals(""))
             {
                 try
                 {
@@ -146,10 +143,11 @@ namespace Bibo_Verwaltung
                     b.Sprache.SpracheID = cb_Sprache.SelectedValue.ToString();
                     b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
                     b.Er_datum = dTP_Erscheinungsdatum.Value;
-                    b.Save();
+
+                    b.Update_Buch();
                     b.ClearDSBuch();
                     b.FillObjectBuch();
-                    b.FillGridBuch(ref Grid_Buch);
+                    b.FillGrid_Buch(ref Grid_Buch);
                 }
                 catch (SqlException)
                 {
@@ -157,31 +155,23 @@ namespace Bibo_Verwaltung
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else if(rb_Delete.Checked
-                && !tb_ISBN.Text.Equals(""))
+            else if (rb_Delete_Buch.Checked && !tb_ISBN.Text.Equals(""))
             {
                 try
                 {
                     b.ISBN = tb_ISBN.Text;
-                    b.Delete();
+                    b.Delete_Buch();
                     b.ClearDSBuch();
                     b.FillObjectBuch();
-                    b.FillGridBuch(ref Grid_Buch);
+                    b.FillGrid_Buch(ref Grid_Buch);
                 }
-                catch(SqlException)
+                catch (SqlException)
                 {
                     MessageBox.Show("Das Buch konnte nicht gelöscht werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else if(rb_Neubuch.Checked
-                && !tb_ISBN.Text.Equals("")
-                && !tb_Titel.Text.Equals("")
-                && !cb_Autor.Text.Equals("")
-                && !cb_Verlag.Text.Equals("")
-                && !cb_Genre.Text.Equals("")
-                && !cb_Sprache.Text.Equals("")
-                && !tb_Auflage.Text.Equals("")
-                && !tb_Neupreis.Text.Equals(""))
+            else if (rb_Add_Buch.Checked && !tb_ISBN.Text.Equals("") && !tb_Titel.Text.Equals("") && !cb_Autor.Text.Equals("") && !cb_Verlag.Text.Equals("")
+                     && !cb_Genre.Text.Equals("") && !cb_Sprache.Text.Equals("") && !tb_Auflage.Text.Equals("") && !tb_Neupreis.Text.Equals(""))
             {
                 try
                 {
@@ -194,26 +184,27 @@ namespace Bibo_Verwaltung
                     b.Sprache.SpracheID = cb_Sprache.SelectedValue.ToString();
                     b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
                     b.Er_datum = dTP_Erscheinungsdatum.Value;
-                    b.Add();
+
+                    b.Add_Buch();
                     b.ClearDSBuch();
                     b.FillObjectBuch();
-                    b.FillGridBuch(ref Grid_Buch);
+                    b.FillGrid_Buch(ref Grid_Buch);
                     Form Buchid = new w_s_buchid();
                     Buchid.ShowDialog(this);
-                    Clear();
+                    Clear_All();
                 }
-                catch(SqlException)
+                catch (SqlException)
                 {
                     MessageBox.Show("Das Buch konnte nicht hinzugefügt werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else if(rb_Edit.Checked)
+            else if (rb_Update_Buch.Checked)
             {
                 MessageBox.Show("Füllen Sie die markierten Felder aus, um ein Buch zu speichern!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 IsOK();
             }
-            else if(rb_Delete.Checked)
+            else if (rb_Delete_Buch.Checked)
             {
                 MessageBox.Show("Füllen Sie die markierten Felder aus, um ein Buch zu löschen!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -226,7 +217,7 @@ namespace Bibo_Verwaltung
                     tb_ISBN.BackColor = Color.White;
                 }
             }
-            else if (rb_Neubuch.Checked)
+            else if (rb_Add_Buch.Checked)
             {
                 MessageBox.Show("Füllen Sie die markierten Felder aus, um ein Buch hinzuzufügen!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -242,14 +233,15 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
+        //TODO
 
-        #region Clear Buch
+        #region Alle Objekte leeren
         private void bt_clear_buecher_Click(object sender, EventArgs e)
         {
-            Clear();
+            Clear_All();
         }
 
-        private void Clear()
+        private void Clear_All()
         {
             tb_ISBN.Text = "";
             tb_Titel.Text = "";
@@ -273,8 +265,8 @@ namespace Bibo_Verwaltung
         #region Textboxfarbe
         private void tb_ISBN_TextChanged(object sender, EventArgs e)
         {
-            (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("ISBN LIKE '{0}%'", tb_ISBN.Text);
-            tb_ISBN.BackColor = Color.White;
+            //(Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("ISBN LIKE '{0}%'", tb_ISBN.Text);
+            //tb_ISBN.BackColor = Color.White;
         }
 
         private void tb_Titel_TextChanged(object sender, EventArgs e)
@@ -283,10 +275,10 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        #region Modus
+        #region Modus nach RadioButton-Auswahl 
         private void Modus()
         {
-            if(rb_Neubuch.Checked)
+            if (rb_Add_Buch.Checked)
             {
                 tb_ISBN.Enabled = true;
                 tb_Titel.Enabled = true;
@@ -300,7 +292,7 @@ namespace Bibo_Verwaltung
                 bt_speichern_buecher.Enabled = true;
                 bt_speichern_buecher.Text = "Hinzufügen";
             }
-            if(rb_Edit.Checked)
+            if (rb_Update_Buch.Checked)
             {
                 tb_ISBN.Enabled = false;
                 tb_Titel.Enabled = true;
@@ -314,7 +306,7 @@ namespace Bibo_Verwaltung
                 bt_speichern_buecher.Enabled = true;
                 bt_speichern_buecher.Text = "Speichern";
             }
-            if(rb_Delete.Checked)
+            if (rb_Delete_Buch.Checked)
             {
                 tb_ISBN.Enabled = true;
                 tb_Titel.Enabled = false;
@@ -331,8 +323,8 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        #region White
-        private void White()
+        #region Backgroundfarben zuruecksetzten (Weiß)
+        private void Objekt_White()
         {
             tb_ISBN.BackColor = Color.White;
             tb_Titel.BackColor = Color.White;
@@ -346,46 +338,44 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        #region CheckedChanged
+        #region RadioButoon CheckedChanged
         private void rb_Neubuch_CheckedChanged(object sender, EventArgs e)
         {
             Modus();
-            White();
+            Objekt_White();
         }
 
         private void rb_Edit_CheckedChanged(object sender, EventArgs e)
         {
             Modus();
-            White();
+            Objekt_White();
         }
 
         private void rb_Delete_CheckedChanged(object sender, EventArgs e)
         {
             Modus();
-            White();
-        }
-
-        private void w_s_buecher_Activated(object sender, EventArgs e)
-        {
-            Modus();
-            b.Autor.FillCombobox(ref cb_Autor,1);
-            b.Verlag.FillCombobox(ref cb_Verlag, 1);
-            b.Genre.FillCombobox(ref cb_Genre, 1);
-            b.Sprache.FillCombobox(ref cb_Sprache, 1);
-            cb_Autor.Text = "";
-            cb_Verlag.Text = "";
-            cb_Genre.Text = "";
-            cb_Sprache.Text = "";
+            Objekt_White();
         }
         #endregion
 
-        #region Grid_Laden
+        #region Form Update
+        private void w_s_buecher_Activated(object sender, EventArgs e)
+        {
+            Modus();
+            b.Autor.FillCombobox(ref cb_Autor, -1);
+            b.Verlag.FillCombobox(ref cb_Verlag, -1);
+            b.Genre.FillCombobox(ref cb_Genre, -1);
+            b.Sprache.FillCombobox(ref cb_Sprache, -1);
+        }
+        #endregion
+
+        #region Clicks in DataGridViewRow
         private void Grid_Buch_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.Grid_Buch.Rows[e.RowIndex];
-                tb_ISBN.Text = row.Cells["ISBN"].Value.ToString();
+                tb_ISBN.Text = row.Cells[0].Value.ToString();
                 Buch b = new Buch(tb_ISBN.Text);
                 tb_Titel.Text = b.Titel;
                 cb_Autor.Text = b.Autor.Autorname;
@@ -401,9 +391,26 @@ namespace Bibo_Verwaltung
                 b.Sprache.FillCombobox(ref cb_Sprache, b.Sprache.SpracheID);
             }
         }
+
+        private void Grid_Buch_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string isbnAktuell;
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.RowIndex >= 0)
+                {
+                    DataGridViewRow row = this.Grid_Buch.Rows[e.RowIndex];
+                    isbnAktuell = row.Cells[0].Value.ToString();
+                    tb_ISBN.Text = isbnAktuell;
+                    Form Buchid = new w_s_buchid();
+                    Buchid.ShowDialog(this);
+                    tb_ISBN.Text = "";
+                }
+            }
+        }
         #endregion
 
-        #region IsOK
+        #region Objekt auf Inhalt pruefen und Background setzten
         private void IsOK()
         {
             if (tb_Titel.Text.Equals(""))
@@ -480,29 +487,11 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        private void Grid_Buch_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            string isbnAktuell;
-            if(e.Button == MouseButtons.Right)
-            {
-                if(e.RowIndex >= 0)
-                {
-                    DataGridViewRow row = this.Grid_Buch.Rows[e.RowIndex];
-                    isbnAktuell = row.Cells["ISBN"].Value.ToString();
-                    tb_ISBN.Text = isbnAktuell;
-                    Form Buchid = new w_s_buchid();
-                    Buchid.ShowDialog(this);
-                    tb_ISBN.Text = "";
-                }
-            }
-        }
-
         private void bt_Excel_Click(object sender, EventArgs e)
         {
             ExcelExport export = new ExcelExport();
 
             export.ToExcel(Grid_Buch, "Bibo_Buecherliste", "Buecherliste");
-
         }
     }
 }

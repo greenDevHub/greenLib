@@ -484,6 +484,7 @@ namespace Bibo_Verwaltung
             cb_Vertrauenswuerdigkeit.BackColor = Color.White;
         }
 
+
         private void Grid_Kunde_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -515,7 +516,7 @@ namespace Bibo_Verwaltung
         {
             ExcelExport export = new ExcelExport();
 
-            export.ToExcel(Grid_Kunde, "Bibo_Kundenliste","Kundenliste");
+            export.ToExcel(Grid_Kunde, "Bibo_Kundenliste", "Kundenliste");
         }
     }
 }

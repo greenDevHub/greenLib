@@ -15,7 +15,7 @@ namespace Bibo_Verwaltung
     class SQL_Verbindung
     {
         #region Aufbau
-        private string ConnectionString;
+        public string ConnectionString;
         private static string Base_Server = "Data Source=";
         private static string Default_Server = ".\\SQLEXPRESS";
         private static string Base_Database = "Initial Catalog=";
@@ -65,6 +65,7 @@ namespace Bibo_Verwaltung
             {
                 ConnectionString = Base_Server + Server.ToLower() + ";" + Base_Database + Database.ToLower() + ";"
                     + Base_Server_Integrated_Security + Default_Server_Integrated_Security;
+                build = true;
             }
         }
         #endregion

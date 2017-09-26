@@ -75,6 +75,8 @@
             this.Controls.Add(this.gv_Genres);
             this.Controls.Add(this.bt_OK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "w_s_genres";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Genres";

@@ -289,6 +289,8 @@ namespace Bibo_Verwaltung
             this.Controls.Add(this.cb_Security);
             this.Controls.Add(this.bt_save);
             this.Controls.Add(this.lb_Server);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "w_s_Einstellungen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Datenbankserver-Verbindungskonfigurationen";

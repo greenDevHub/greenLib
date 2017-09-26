@@ -13,48 +13,52 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_main : Form
     {
-        bool error = false;
+
+        #region Datenbank-Verbinding bereitstellen
+        SQL_Verbindung con = new SQL_Verbindung();
+        #endregion
+
         public w_s_main()
         {
             InitializeComponent();
         }
-        #region Load Stats
-        private void Load_All(object sender, EventArgs e)
+
+        #region Load Uerbersicht
+        private void Load_Uebersicht(object sender, EventArgs e)
         {
-            if (error == true) return;
-            // Gesamtübersicht laden
-            SQL_Verbindung con = new SQL_Verbindung();
-            con.ConnectError();
+            //SQL-Verbindung pruefen
+            if (con.ConnectError()) return;
+            string bestandSQL = "SELECT * FROM t_s_buchid";
+            string ausgeliehenSQL = "SELECT * FROM t_bd_ausgeliehen";
 
-            string strSQL1 = "SELECT * FROM t_s_buecher";
-            string strSQL2 = "SELECT * FROM t_bd_ausgeliehen";
+            //zaehlt den Buecher-Bestand
+            SqlDataAdapter adapter_bestand = new SqlDataAdapter(bestandSQL, con.Con);
+            DataTable tbl_bastand = new DataTable();
+            adapter_bestand.Fill(tbl_bastand);
 
-            SqlDataAdapter adapter_1 = new SqlDataAdapter(strSQL1, con.Con);
-            DataTable tbl_1 = new DataTable();
-            adapter_1.Fill(tbl_1);
-
-            int rows_1 = 0;
-            for (int i = 0; i < tbl_1.Rows.Count; i++)
+            int bestand = 0;
+            for (int i = 0; i < tbl_bastand.Rows.Count; i++)
             {
-                rows_1 = rows_1 + 1;
+                bestand = bestand + 1;
             }
-            tbl_1.Reset();
-            lb_Bestandzahl.Text = rows_1.ToString();
-            //linkLabel1.Text = rows_1.ToString();
+            tbl_bastand.Reset();
+            lb_Bestandzahl.Text = bestand.ToString();
 
-            SqlDataAdapter adapter_2 = new SqlDataAdapter(strSQL2, con.Con);
-            DataTable tbl_2 = new DataTable();
-            adapter_2.Fill(tbl_2);
+            //zaehlt ausgeliehene Buecher
+            SqlDataAdapter adapter_ausgeliehen = new SqlDataAdapter(ausgeliehenSQL, con.Con);
+            DataTable tbl_ausgeliehen = new DataTable();
+            adapter_ausgeliehen.Fill(tbl_ausgeliehen);
 
-            int rows_2 = 0;
-            for (int i = 0; i < tbl_2.Rows.Count; i++)
+            int ausgeliehen = 0;
+            for (int i = 0; i < tbl_ausgeliehen.Rows.Count; i++)
             {
-                rows_2 = rows_2 + 1;
+                ausgeliehen = ausgeliehen + 1;
             }
-            lb_Ausleihzahl.Text = rows_2.ToString();
-            tbl_2.Reset();
+            lb_Ausleihzahl.Text = ausgeliehen.ToString();
+            tbl_ausgeliehen.Reset();
 
-            lb_Lagerzahl.Text = (rows_1 - rows_2).ToString();
+            //zaehlt den Lagerbestand
+            lb_Lagerzahl.Text = (bestand - ausgeliehen).ToString();
 
             con.Close();
         }
@@ -101,24 +105,18 @@ namespace Bibo_Verwaltung
             Form Einstellungen = new w_s_Einstellungen();
             Einstellungen.ShowDialog(this);
         }
-        #endregion
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Form Details = new w_s_details();
-            Details.ShowDialog(this);
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            Form Details = new w_s_details();
-            Details.ShowDialog(this);
-        }
 
         private void bt_Zustand_Click(object sender, EventArgs e)
         {
             Form Zustand = new w_s_zustand();
             Zustand.ShowDialog(this);
         }
+
+        private void bt_Suchen_Ausleihen_Click(object sender, EventArgs e)
+        {
+            Form Details = new w_s_details();
+            Details.ShowDialog(this);
+        }
     }
+    #endregion
 }
