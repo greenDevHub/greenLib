@@ -58,6 +58,7 @@ namespace Bibo_Verwaltung
         #region Fill Object
         public void FillCombobox(ref ComboBox cb, object value)
         {
+            FillObject();
             cb.DataSource = dt;
             cb.ValueMember = "zu_id";
             cb.DisplayMember = "zu_zustand";
@@ -69,6 +70,7 @@ namespace Bibo_Verwaltung
         SqlCommandBuilder comb = new SqlCommandBuilder();
         private void FillObject()
         {
+            dt.Clear();
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
             string RawCommand = "SELECT * FROM [dbo].[t_s_zustand]";

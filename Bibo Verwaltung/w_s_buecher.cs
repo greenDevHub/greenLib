@@ -11,7 +11,8 @@ using System.Windows.Forms;
 using System.Windows;
 using Microsoft.Win32;
 using System.Text.RegularExpressions;
-
+using System.Net;
+using System.IO;
 
 namespace Bibo_Verwaltung
 {
@@ -21,6 +22,7 @@ namespace Bibo_Verwaltung
         {
             InitializeComponent();
             b.FillGrid_Buch(ref Grid_Buch);
+            Comboboxen();
         }
 
         Buch b = new Buch();
@@ -105,24 +107,28 @@ namespace Bibo_Verwaltung
         {
             Form Verlag = new w_s_verlage();
             Verlag.ShowDialog(this);
+            b.Verlag.FillCombobox(ref cb_Verlag, 0);
         }
 
         private void bt_Autor_s_Click(object sender, EventArgs e)
         {
             Form Autor = new w_s_autoren();
             Autor.ShowDialog(this);
+            b.Autor.FillCombobox(ref cb_Autor, 0);
         }
 
         private void bt_Genre_s_Click(object sender, EventArgs e)
         {
             Form Genres = new w_s_genres();
             Genres.ShowDialog(this);
+            b.Genre.FillCombobox(ref cb_Genre, 0);
         }
 
         private void bt_Sprache_s_Click_1(object sender, EventArgs e)
         {
             Form Sprache = new w_s_sprachen();
             Sprache.ShowDialog(this);
+            b.Sprache.FillCombobox(ref cb_Sprache, 0);
         }
         #endregion
 
@@ -159,11 +165,23 @@ namespace Bibo_Verwaltung
             {
                 try
                 {
-                    b.ISBN = tb_ISBN.Text;
-                    b.Delete_Buch();
-                    b.ClearDSBuch();
-                    b.FillObjectBuch();
-                    b.FillGrid_Buch(ref Grid_Buch);
+                    DialogResult dialogResult = MessageBox.Show("Sämtliche zu diesem Buch gehörende Exemplare werden auch aus der Datenbank gelöscht. Fortfahren?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        BuchID buchid = new BuchID();
+                        buchid.DeleteWhereISBN(tb_ISBN.Text);
+                        b.ISBN = tb_ISBN.Text;
+                        b.Delete_Buch();
+                        Clear_All();
+                        b.ClearDSBuch();
+                        b.FillObjectBuch();
+                        b.FillGrid_Buch(ref Grid_Buch);
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        MessageBox.Show("Der Löschvorgang wurde abgebrochen!","Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    
                 }
                 catch (SqlException)
                 {
@@ -184,14 +202,35 @@ namespace Bibo_Verwaltung
                     b.Sprache.SpracheID = cb_Sprache.SelectedValue.ToString();
                     b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
                     b.Er_datum = dTP_Erscheinungsdatum.Value;
-
-                    b.Add_Buch();
-                    b.ClearDSBuch();
-                    b.FillObjectBuch();
-                    b.FillGrid_Buch(ref Grid_Buch);
-                    Form Buchid = new w_s_buchid();
-                    Buchid.ShowDialog(this);
-                    Clear_All();
+                    if (ValidateISBN())
+                    {
+                        b.Add_Buch();
+                        b.ClearDSBuch();
+                        b.FillObjectBuch();
+                        b.FillGrid_Buch(ref Grid_Buch);
+                        Form Buchid = new w_s_buchid();
+                        Buchid.ShowDialog(this);
+                        Clear_All();
+                    }
+                    else
+                    {
+                        DialogResult dialogResult = MessageBox.Show("Die ISBN konnte nicht Verifiziert werden. Trotzdem speichern?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                        if(dialogResult == DialogResult.Yes)
+                        {
+                            b.Add_Buch();
+                            b.ClearDSBuch();
+                            b.FillObjectBuch();
+                            b.FillGrid_Buch(ref Grid_Buch);
+                            Form Buchid = new w_s_buchid();
+                            Buchid.ShowDialog(this);
+                            Clear_All();
+                        }
+                        else if(dialogResult == DialogResult.No)
+                        {
+                            tb_ISBN.Focus();
+                        }
+                    }
+                    
                 }
                 catch (SqlException)
                 {
@@ -265,13 +304,42 @@ namespace Bibo_Verwaltung
         #region Textboxfarbe
         private void tb_ISBN_TextChanged(object sender, EventArgs e)
         {
-            //(Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("ISBN LIKE '{0}%'", tb_ISBN.Text);
-            //tb_ISBN.BackColor = Color.White;
+            (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("ISBN LIKE '{0}%'", tb_ISBN.Text);
+            tb_ISBN.BackColor = Color.White;
         }
 
         private void tb_Titel_TextChanged(object sender, EventArgs e)
         {
             tb_Titel.BackColor = Color.White;
+        }
+        private void tb_Neupreis_TextChanged(object sender, EventArgs e)
+        {
+            tb_Neupreis.BackColor = Color.White;
+        }
+
+        private void tb_Auflage_TextChanged(object sender, EventArgs e)
+        {
+            tb_Auflage.BackColor = Color.White;
+        }
+
+        private void cb_Sprache_TextChanged(object sender, EventArgs e)
+        {
+            cb_Sprache.BackColor = Color.White;
+        }
+
+        private void cb_Genre_TextChanged(object sender, EventArgs e)
+        {
+            cb_Genre.BackColor = Color.White;
+        }
+
+        private void cb_Verlag_TextChanged(object sender, EventArgs e)
+        {
+            cb_Verlag.BackColor = Color.White;
+        }
+
+        private void cb_Autor_TextChanged(object sender, EventArgs e)
+        {
+            cb_Autor.BackColor = Color.White;
         }
         #endregion
 
@@ -362,10 +430,6 @@ namespace Bibo_Verwaltung
         private void w_s_buecher_Activated(object sender, EventArgs e)
         {
             Modus();
-            b.Autor.FillCombobox(ref cb_Autor, -1);
-            b.Verlag.FillCombobox(ref cb_Verlag, -1);
-            b.Genre.FillCombobox(ref cb_Genre, -1);
-            b.Sprache.FillCombobox(ref cb_Sprache, -1);
         }
         #endregion
 
@@ -385,10 +449,12 @@ namespace Bibo_Verwaltung
                 tb_Neupreis.Text = b.Neupreis.ToString();
                 dTP_Erscheinungsdatum.Value = b.Er_datum;
                 cb_Genre.Text = b.Genre.Genrename;
+                pictureBox1.Image = Image.FromFile(b.BildPfad);
                 b.Autor.FillCombobox(ref cb_Autor, b.Autor.AutorID);
                 b.Verlag.FillCombobox(ref cb_Verlag, b.Verlag.VerlagID);
                 b.Genre.FillCombobox(ref cb_Genre, b.Genre.GenreID);
                 b.Sprache.FillCombobox(ref cb_Sprache, b.Sprache.SpracheID);
+                lb_isbn_vorlage.Visible = false;
             }
         }
 
@@ -404,7 +470,7 @@ namespace Bibo_Verwaltung
                     tb_ISBN.Text = isbnAktuell;
                     Form Buchid = new w_s_buchid();
                     Buchid.ShowDialog(this);
-                    tb_ISBN.Text = "";
+                    Clear_All();
                 }
             }
         }
@@ -492,6 +558,59 @@ namespace Bibo_Verwaltung
             ExcelExport export = new ExcelExport();
 
             export.ToExcel(Grid_Buch, "Bibo_Buecherliste", "Buecherliste");
+        }
+
+        private void tb_ISBN_Click(object sender, EventArgs e)
+        {
+            lb_isbn_vorlage.Visible = false;
+        }
+
+        private void lb_isbn_vorlage_Click(object sender, EventArgs e)
+        {
+            lb_isbn_vorlage.Visible = false;
+            tb_ISBN.Focus();
+        }
+        private bool ValidateISBN()
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            WebClient client = new WebClient();
+            client.DownloadFile("http://www.buecher-nach-isbn.info/"+ tb_ISBN.Text, path+"\\Bibliothek\\html\\html.html");
+            string file = path + "\\Bibliothek\\html\\html.html";
+            string test = System.IO.File.ReadAllText(file);
+            File.Delete(path + "\\Bibliothek\\html\\html.html");
+            if (test.Contains("<h1 class=\"title\">"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void Comboboxen()
+        {
+            b.Autor.FillCombobox(ref cb_Autor, 0);
+            b.Verlag.FillCombobox(ref cb_Verlag, 0);
+            b.Genre.FillCombobox(ref cb_Genre, 0);
+            b.Sprache.FillCombobox(ref cb_Sprache, 0);
+        }
+
+        private void bt_picture_Click(object sender, EventArgs e)
+        {
+            string imgLocation = "";
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "png files(*.png)|*.png|jpg files(*.jpg)|*.jpg|All files(*.*)|*.*";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                imgLocation = dialog.FileName.ToString();
+                pictureBox1.ImageLocation = imgLocation;
+                Image bildd = Image.FromFile(imgLocation);
+            }
+        }
+
+        private void bt_pic_add_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

@@ -23,7 +23,14 @@ namespace Bibo_Verwaltung
 
         private void w_s_genres_FormClosing(object sender, FormClosingEventArgs e)
         {
-            genre.SaveGrid(ref gv_Genres);
+            try
+            {
+                genre.SaveGrid(ref gv_Genres);
+            }
+            catch
+            {
+                MessageBox.Show("Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dataGridView_KeyPress(object sender, KeyPressEventArgs e)

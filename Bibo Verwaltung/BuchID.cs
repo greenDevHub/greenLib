@@ -106,6 +106,15 @@ namespace Bibo_Verwaltung
             cmd.ExecuteNonQuery();
             con.Close();
         }
+        public void DeleteWhereISBN(string isbn)
+        {
+            string RawCommand = "DELETE FROM [dbo].[t_s_buchid] WHERE bu_isbn = @isbn";
+            con.ConnectError();
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@isbn", isbn);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
         #endregion
 
         #region FillObject
@@ -140,7 +149,7 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        #region ClearDS()
+        #region ClearDS
         public void ClearDS()
         {
             ds2.Tables[0].Rows.Clear();

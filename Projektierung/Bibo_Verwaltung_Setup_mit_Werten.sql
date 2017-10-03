@@ -235,6 +235,7 @@ CREATE TABLE [dbo].[t_s_buecher](
 	[buch_auflage] [nvarchar](128) NOT NULL,
 	[buch_neupreis] [numeric](18,2) NOT NULL,
 
+
 	PRIMARY KEY (buch_isbn),
 	FOREIGN KEY (buch_genre_id)
 		REFERENCES t_s_genre (ger_id),

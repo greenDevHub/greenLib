@@ -21,7 +21,14 @@ namespace Bibo_Verwaltung
 
         private void w_s_zustand_FormClosing(object sender, FormClosingEventArgs e)
         {
-            zustand.SaveGrid(ref Grid_Zustand);
+            try
+            {
+                zustand.SaveGrid(ref Grid_Zustand);
+            }
+            catch
+            {
+                MessageBox.Show("Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Grid_Zustand_KeyPress(object sender, KeyPressEventArgs e)

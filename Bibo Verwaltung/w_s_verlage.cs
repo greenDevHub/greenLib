@@ -23,7 +23,14 @@ namespace Bibo_Verwaltung
 
         private void w_s_verlage_FormClosing(object sender, FormClosingEventArgs e)
         {
-            verlag.SaveGrid(ref gv_Verlage);
+            try
+            {
+                verlag.SaveGrid(ref gv_Verlage);
+            }
+            catch
+            {
+                MessageBox.Show("Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dataGridView_KeyPress(object sender, KeyPressEventArgs e)

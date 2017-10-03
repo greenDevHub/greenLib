@@ -258,7 +258,7 @@ namespace Bibo_Verwaltung
             else if (rb_Neukunde.Checked)
             {
                 Clear();
-                bt_save_kunde.Text = "Speichern";
+                bt_save_kunde.Text = "Hinzufügen";
                 bt_save_kunde.Enabled = true;
                 tb_KundenID.Enabled = false;
                 tb_Vorname.Enabled = true;
@@ -396,6 +396,7 @@ namespace Bibo_Verwaltung
         private void tb_Vorname_TextChanged(object sender, EventArgs e)
         {
             tb_Vorname.BackColor = Color.White;
+            (Grid_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'", tb_Vorname.Text);
         }
 
         private void tb_Nachname_TextChanged(object sender, EventArgs e)
@@ -505,11 +506,6 @@ namespace Bibo_Verwaltung
                 cb_Vertrauenswuerdigkeit.Text = k.Vertrauenswuerdigkeit;
 
             }
-        }
-
-        private void tb_search_TextChanged(object sender, EventArgs e)
-        {
-            (Grid_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'", tb_search.Text);
         }
 
         private void bt_Excel_Click(object sender, EventArgs e)

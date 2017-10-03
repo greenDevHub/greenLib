@@ -23,7 +23,14 @@ namespace Bibo_Verwaltung
 
         private void w_s_sprachen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            sprache.SaveGrid(ref gv_Sprachen);
+            try
+            {
+                sprache.SaveGrid(ref gv_Sprachen);
+            }
+            catch
+            {
+                MessageBox.Show("Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dataGridView_KeyPress(object sender, KeyPressEventArgs e)

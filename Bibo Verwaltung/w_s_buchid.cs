@@ -17,8 +17,9 @@ namespace Bibo_Verwaltung
         public w_s_buchid()
         {
             InitializeComponent();
-            b.FillGrid(ref Grid_Buchid);
+            b.FillGrid(ref grid_buchid);
             tb_isbn.Text = b.ISBN;
+            b.Zustand.FillCombobox(ref cb_zustand, 0);
         }
 
 
@@ -27,7 +28,7 @@ namespace Bibo_Verwaltung
         {
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow row = this.Grid_Buchid.Rows[e.RowIndex];
+                DataGridViewRow row = this.grid_buchid.Rows[e.RowIndex];
                 tb_id.Text = row.Cells["BuchID"].Value.ToString();
                 BuchID b = new BuchID(tb_id.Text);
                 tb_id.Text = b.ID;
@@ -50,7 +51,7 @@ namespace Bibo_Verwaltung
                 lb.Hide();
                 t.Stop();
             };
-            if(rb_Neu.Checked && !cb_zustand.Text.Equals(""))
+            if(rb_neu.Checked && !cb_zustand.Text.Equals(""))
             {
                 try
                 {
@@ -64,7 +65,7 @@ namespace Bibo_Verwaltung
                     lb.Visible = true;
                     b.ClearDS();
                     b.FillObject();
-                    b.FillGrid(ref Grid_Buchid);
+                    b.FillGrid(ref grid_buchid);
                     t.Start();
                 }
                 catch (SqlException)
@@ -73,7 +74,7 @@ namespace Bibo_Verwaltung
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else if(rb_Delete.Checked && !tb_id.Text.Equals(""))
+            else if(rb_delete.Checked && !tb_id.Text.Equals(""))
             {
                 try
                 {
@@ -87,7 +88,7 @@ namespace Bibo_Verwaltung
                     lb.Visible = true;
                     b.ClearDS();
                     b.FillObject();
-                    b.FillGrid(ref Grid_Buchid);
+                    b.FillGrid(ref grid_buchid);
                     t.Start();
                 }
                 catch (SqlException)
@@ -96,7 +97,7 @@ namespace Bibo_Verwaltung
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else if(rb_Edit.Checked && !cb_zustand.Text.Equals(""))
+            else if(rb_edit.Checked && !cb_zustand.Text.Equals(""))
             {
                 try
                 {
@@ -110,7 +111,7 @@ namespace Bibo_Verwaltung
                     lb.Visible = true;
                     b.ClearDS();
                     b.FillObject();
-                    b.FillGrid(ref Grid_Buchid);
+                    b.FillGrid(ref grid_buchid);
                     t.Start();
                 }
                 catch (SqlException)
@@ -119,19 +120,19 @@ namespace Bibo_Verwaltung
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else if (rb_Edit.Checked)
+            else if (rb_edit.Checked)
             {
                 MessageBox.Show("Füllen Sie alle Felder aus, um ein Buch zu bearbeiten!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 IsOK();
             }
-            else if (rb_Neu.Checked)
+            else if (rb_neu.Checked)
             {
                 MessageBox.Show("Füllen Sie alle Felder aus, um ein neues Buch hinzuzufügen!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 IsOK();
             }
-            else if (rb_Delete.Checked)
+            else if (rb_delete.Checked)
             {
                 MessageBox.Show("Füllen Sie alle Felder aus, um ein Buch zu löschen!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -155,29 +156,29 @@ namespace Bibo_Verwaltung
         #region Modus
         private void Modus()
         {
-            if (rb_Neu.Checked)
+            if (rb_neu.Checked)
             {
                 Clear();
                 lb.Text = "Das Buch wurde hinzugefügt!";
-                bt.Text = "Hinzufügen";
+                bt_add.Text = "Hinzufügen";
                 tb_id.Enabled = false;
                 tb_isbn.Enabled = false;
                 cb_zustand.Enabled = true;
                 dTP_aufnahme.Enabled = true;
             }
-            else if (rb_Delete.Checked)
+            else if (rb_delete.Checked)
             {
                 lb.Text = "Das Buch wurde gelöscht!";
-                bt.Text = "Löschen";
+                bt_add.Text = "Löschen";
                 tb_id.Enabled = true;
                 tb_isbn.Enabled = false;
                 cb_zustand.Enabled = false;
                 dTP_aufnahme.Enabled = false;
             }
-            else if (rb_Edit.Checked)
+            else if (rb_edit.Checked)
             {
                 lb.Text = "Das Buch wurde gespeichert!";
-                bt.Text = "Speichern";
+                bt_add.Text = "Speichern";
                 tb_id.Enabled = false;
                 tb_isbn.Enabled = false;
                 cb_zustand.Enabled = true;
@@ -264,6 +265,7 @@ namespace Bibo_Verwaltung
         {
             Form Zustand = new w_s_zustand();
             Zustand.ShowDialog(this);
+            b.Zustand.FillCombobox(ref cb_zustand, 0);
         }
     }
 }

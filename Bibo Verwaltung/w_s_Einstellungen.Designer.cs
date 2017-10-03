@@ -16,5 +16,6 @@
         private System.Windows.Forms.TextBox tb_Database;
         private System.Windows.Forms.Button bt_Laden;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

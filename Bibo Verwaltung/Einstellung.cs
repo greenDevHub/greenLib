@@ -31,7 +31,7 @@ namespace Bibo_Verwaltung
         private string pw;
         public string Pw { get { return pw; } set { pw = value; } }
 
-        private string path = Environment.ExpandEnvironmentVariables(@"C:/Users/%USERNAME%/Documents/Einstellungen.txt");
+        public string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\einstellungen\\Einstellungen.txt";
 
         #endregion
 

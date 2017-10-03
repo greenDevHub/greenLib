@@ -28,54 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.bt_OK = new System.Windows.Forms.Button();
             this.gv_Autoren = new System.Windows.Forms.DataGridView();
-            this.lb_Autoren = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Autoren)).BeginInit();
             this.SuspendLayout();
-            // 
-            // bt_OK
-            // 
-            this.bt_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.bt_OK.Location = new System.Drawing.Point(102, 361);
-            this.bt_OK.Name = "bt_OK";
-            this.bt_OK.Size = new System.Drawing.Size(110, 23);
-            this.bt_OK.TabIndex = 47;
-            this.bt_OK.Text = "Übernehmen";
-            this.bt_OK.UseVisualStyleBackColor = true;
             // 
             // gv_Autoren
             // 
             this.gv_Autoren.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_Autoren.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_Autoren.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.gv_Autoren.Location = new System.Drawing.Point(12, 25);
+            this.gv_Autoren.Location = new System.Drawing.Point(13, 13);
+            this.gv_Autoren.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gv_Autoren.MultiSelect = false;
             this.gv_Autoren.Name = "gv_Autoren";
             this.gv_Autoren.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.gv_Autoren.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_Autoren.Size = new System.Drawing.Size(200, 330);
+            this.gv_Autoren.Size = new System.Drawing.Size(256, 527);
             this.gv_Autoren.TabIndex = 48;
             this.gv_Autoren.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridView_KeyPress);
             // 
-            // lb_Autoren
-            // 
-            this.lb_Autoren.AutoSize = true;
-            this.lb_Autoren.Location = new System.Drawing.Point(9, 9);
-            this.lb_Autoren.Name = "lb_Autoren";
-            this.lb_Autoren.Size = new System.Drawing.Size(134, 13);
-            this.lb_Autoren.TabIndex = 49;
-            this.lb_Autoren.Text = "Einträge in der Datenbank:";
-            // 
             // w_s_autoren
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(224, 396);
-            this.Controls.Add(this.lb_Autoren);
+            this.ClientSize = new System.Drawing.Size(282, 553);
             this.Controls.Add(this.gv_Autoren);
-            this.Controls.Add(this.bt_OK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "w_s_autoren";
@@ -84,13 +63,10 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_autoren_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Autoren)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button bt_OK;
         private System.Windows.Forms.DataGridView gv_Autoren;
-        private System.Windows.Forms.Label lb_Autoren;
     }
 }

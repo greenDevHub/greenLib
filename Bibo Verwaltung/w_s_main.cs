@@ -21,6 +21,10 @@ namespace Bibo_Verwaltung
         public w_s_main()
         {
             InitializeComponent();
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            System.IO.Directory.CreateDirectory(path + "\\Bibliothek");
+            System.IO.Directory.CreateDirectory(path + "\\Bibliothek\\html");
+            System.IO.Directory.CreateDirectory(path + "\\Bibliothek\\einstellungen");
         }
 
         #region Load Uerbersicht
