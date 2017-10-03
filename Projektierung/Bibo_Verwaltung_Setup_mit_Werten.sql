@@ -234,6 +234,7 @@ CREATE TABLE [dbo].[t_s_buecher](
 	[buch_sprache_id] [int] NOT NULL,
 	[buch_auflage] [nvarchar](128) NOT NULL,
 	[buch_neupreis] [numeric](18,2) NOT NULL,
+	[buch_bild] [nvarchar] (256),
 
 
 	PRIMARY KEY (buch_isbn),
