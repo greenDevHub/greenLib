@@ -147,7 +147,7 @@ namespace Bibo_Verwaltung
         {
             //SQL-Verbindung pruefen
             if (con.ConnectError()) return;
-            string RawCommand = "UPDATE [dbo].[t_s_buecher] set buch_titel = @titel , buch_autor_id = @autor, buch_genre_id = @genre, buch_sprache_id = @sprache, buch_verlag_id = @verlag, buch_auflage = @auflage, buch_erscheinungsdatum = @er_datum, buch_neupreis = @neupreis, WHERE buch_isbn = @isbn";
+            string RawCommand = "UPDATE [dbo].[t_s_buecher] set buch_titel = @titel , buch_autor_id = @autor, buch_genre_id = @genre, buch_sprache_id = @sprache, buch_verlag_id = @verlag, buch_auflage = @auflage, buch_erscheinungsdatum = @er_datum, buch_neupreis = @neupreis, buch_bild = @bild WHERE buch_isbn = @isbn";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
 
             cmd.Parameters.AddWithValue("@titel", Titel);
@@ -159,6 +159,7 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@er_datum", Er_datum);
             cmd.Parameters.AddWithValue("@neupreis", neupreis);
             cmd.Parameters.AddWithValue("@isbn", isbn);
+            cmd.Parameters.AddWithValue("@bild", bildPfad);
             cmd.ExecuteNonQuery();
             con.Close();
         }
@@ -169,7 +170,7 @@ namespace Bibo_Verwaltung
         {
             //SQL-Verbindung pruefen
             if (con.ConnectError()) return;
-            string RawCommand = "INSERT INTO [dbo].[t_s_buecher] (buch_isbn, buch_titel, buch_genre_id, buch_autor_id, buch_verlag_id, buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis) VALUES (@isbn, @titel, @genreid, @autorid, @verlagid, @erscheinungsdatum, @sprachid, @auflage, @neupreis)";
+            string RawCommand = "INSERT INTO [dbo].[t_s_buecher] (buch_isbn, buch_titel, buch_genre_id, buch_autor_id, buch_verlag_id, buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, buch_bild) VALUES (@isbn, @titel, @genreid, @autorid, @verlagid, @erscheinungsdatum, @sprachid, @auflage, @neupreis, @bild)";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
 
             cmd.Parameters.AddWithValue("@isbn", ISBN);
@@ -181,6 +182,7 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@sprachid", Sprache.SpracheID);
             cmd.Parameters.AddWithValue("@auflage", Auflage);
             cmd.Parameters.AddWithValue("@neupreis", Neupreis);
+            cmd.Parameters.AddWithValue("@bild", BildPfad);
 
             cmd.ExecuteNonQuery();
             con.Close();

@@ -283,6 +283,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Exemplare";
             this.Activated += new System.EventHandler(this.w_s_buchid_Activated);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_buchid_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.grid_buchid)).EndInit();
             this.gB_buchid.ResumeLayout(false);
             this.gB_buchid.PerformLayout();

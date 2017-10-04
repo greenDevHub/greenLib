@@ -34,6 +34,9 @@
             this.bibo_VerwaltungDataSet = new Bibo_Verwaltung.Bibo_VerwaltungDataSet();
             this.t_s_spracheTableAdapter = new Bibo_Verwaltung.Bibo_VerwaltungDataSetTableAdapters.t_s_spracheTableAdapter();
             this.gb_buch = new System.Windows.Forms.GroupBox();
+            this.bt_pic_delete = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.bt_picture = new System.Windows.Forms.Button();
             this.lb_isbn_vorlage = new System.Windows.Forms.Label();
             this.rb_Update_Buch = new System.Windows.Forms.RadioButton();
             this.bt_clear_buecher = new System.Windows.Forms.Button();
@@ -66,15 +69,12 @@
             this.Grid_Buch = new System.Windows.Forms.DataGridView();
             this.bt_Schliessen = new System.Windows.Forms.Button();
             this.bt_Excel = new System.Windows.Forms.Button();
-            this.bt_picture = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.bt_pic_add = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).BeginInit();
             this.gb_buch.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grid_Buch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Grid_Buch)).BeginInit();
             this.SuspendLayout();
             // 
             // tsspracheBindingSource
@@ -98,7 +98,7 @@
             // 
             // gb_buch
             // 
-            this.gb_buch.Controls.Add(this.bt_pic_add);
+            this.gb_buch.Controls.Add(this.bt_pic_delete);
             this.gb_buch.Controls.Add(this.pictureBox1);
             this.gb_buch.Controls.Add(this.bt_picture);
             this.gb_buch.Controls.Add(this.lb_isbn_vorlage);
@@ -138,6 +138,38 @@
             this.gb_buch.TabIndex = 0;
             this.gb_buch.TabStop = false;
             this.gb_buch.Text = "Bücher";
+            // 
+            // bt_pic_delete
+            // 
+            this.bt_pic_delete.Location = new System.Drawing.Point(4, 376);
+            this.bt_pic_delete.Margin = new System.Windows.Forms.Padding(4);
+            this.bt_pic_delete.Name = "bt_pic_delete";
+            this.bt_pic_delete.Size = new System.Drawing.Size(141, 30);
+            this.bt_pic_delete.TabIndex = 47;
+            this.bt_pic_delete.Text = "Bild entfernen";
+            this.bt_pic_delete.UseVisualStyleBackColor = true;
+            this.bt_pic_delete.Click += new System.EventHandler(this.bt_pic_add_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(151, 338);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(210, 141);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 46;
+            this.pictureBox1.TabStop = false;
+            // 
+            // bt_picture
+            // 
+            this.bt_picture.Location = new System.Drawing.Point(5, 338);
+            this.bt_picture.Margin = new System.Windows.Forms.Padding(4);
+            this.bt_picture.Name = "bt_picture";
+            this.bt_picture.Size = new System.Drawing.Size(140, 30);
+            this.bt_picture.TabIndex = 45;
+            this.bt_picture.Text = "Bild auswählen";
+            this.bt_picture.UseVisualStyleBackColor = true;
+            this.bt_picture.Click += new System.EventHandler(this.bt_picture_Click);
             // 
             // lb_isbn_vorlage
             // 
@@ -460,7 +492,7 @@
             this.Grid_Buch.ReadOnly = true;
             this.Grid_Buch.RowHeadersVisible = false;
             this.Grid_Buch.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.Grid_Buch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.Grid_Buch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.Grid_Buch.Size = new System.Drawing.Size(761, 488);
             this.Grid_Buch.TabIndex = 0;
             this.Grid_Buch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Buch_CellDoubleClick);
@@ -488,38 +520,6 @@
             this.bt_Excel.UseVisualStyleBackColor = true;
             this.bt_Excel.Click += new System.EventHandler(this.bt_Excel_Click);
             // 
-            // bt_picture
-            // 
-            this.bt_picture.Location = new System.Drawing.Point(5, 338);
-            this.bt_picture.Margin = new System.Windows.Forms.Padding(4);
-            this.bt_picture.Name = "bt_picture";
-            this.bt_picture.Size = new System.Drawing.Size(140, 30);
-            this.bt_picture.TabIndex = 45;
-            this.bt_picture.Text = "Bild auswählen";
-            this.bt_picture.UseVisualStyleBackColor = true;
-            this.bt_picture.Click += new System.EventHandler(this.bt_picture_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(151, 338);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(210, 141);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 46;
-            this.pictureBox1.TabStop = false;
-            // 
-            // bt_pic_add
-            // 
-            this.bt_pic_add.Location = new System.Drawing.Point(4, 376);
-            this.bt_pic_add.Margin = new System.Windows.Forms.Padding(4);
-            this.bt_pic_add.Name = "bt_pic_add";
-            this.bt_pic_add.Size = new System.Drawing.Size(140, 30);
-            this.bt_pic_add.TabIndex = 47;
-            this.bt_pic_add.Text = "Bild adden";
-            this.bt_pic_add.UseVisualStyleBackColor = true;
-            this.bt_pic_add.Click += new System.EventHandler(this.bt_pic_add_Click);
-            // 
             // w_s_buecher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -542,8 +542,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).EndInit();
             this.gb_buch.ResumeLayout(false);
             this.gb_buch.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grid_Buch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Grid_Buch)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -588,6 +588,6 @@
         private System.Windows.Forms.Label lb_isbn_vorlage;
         private System.Windows.Forms.Button bt_picture;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button bt_pic_add;
+        private System.Windows.Forms.Button bt_pic_delete;
     }
 }

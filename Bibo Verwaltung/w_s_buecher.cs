@@ -149,7 +149,14 @@ namespace Bibo_Verwaltung
                     b.Sprache.SpracheID = cb_Sprache.SelectedValue.ToString();
                     b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
                     b.Er_datum = dTP_Erscheinungsdatum.Value;
-
+                    if(pictureBox1.ImageLocation == null)
+                    {
+                        b.BildPfad = "";
+                    }
+                    else
+                    {
+                        b.BildPfad = pictureBox1.ImageLocation;
+                    }
                     b.Update_Buch();
                     b.ClearDSBuch();
                     b.FillObjectBuch();
@@ -202,6 +209,14 @@ namespace Bibo_Verwaltung
                     b.Sprache.SpracheID = cb_Sprache.SelectedValue.ToString();
                     b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
                     b.Er_datum = dTP_Erscheinungsdatum.Value;
+                    if(pictureBox1.ImageLocation == null)
+                    {
+                        b.BildPfad = "";
+                    }
+                    else
+                    {
+                        b.BildPfad = pictureBox1.ImageLocation;
+                    }
                     if (ValidateISBN())
                     {
                         b.Add_Buch();
@@ -290,6 +305,8 @@ namespace Bibo_Verwaltung
             cb_Sprache.Text = "";
             tb_Auflage.Text = "";
             tb_Neupreis.Text = "";
+            pictureBox1.Image = null;
+            pictureBox1.ImageLocation = null;
             tb_ISBN.BackColor = Color.White;
             tb_Titel.BackColor = Color.White;
             cb_Autor.BackColor = Color.White;
@@ -359,6 +376,9 @@ namespace Bibo_Verwaltung
                 dTP_Erscheinungsdatum.Enabled = true;
                 bt_speichern_buecher.Enabled = true;
                 bt_speichern_buecher.Text = "Hinzufügen";
+                bt_picture.Enabled = true;
+                bt_pic_delete.Enabled = true;
+                pictureBox1.Enabled = true;
             }
             if (rb_Update_Buch.Checked)
             {
@@ -373,6 +393,9 @@ namespace Bibo_Verwaltung
                 dTP_Erscheinungsdatum.Enabled = true;
                 bt_speichern_buecher.Enabled = true;
                 bt_speichern_buecher.Text = "Speichern";
+                bt_picture.Enabled = true;
+                bt_pic_delete.Enabled = true;
+                pictureBox1.Enabled = true;
             }
             if (rb_Delete_Buch.Checked)
             {
@@ -387,6 +410,9 @@ namespace Bibo_Verwaltung
                 dTP_Erscheinungsdatum.Enabled = false;
                 bt_speichern_buecher.Enabled = true;
                 bt_speichern_buecher.Text = "Löschen";
+                bt_picture.Enabled = false;
+                bt_pic_delete.Enabled = false;
+                pictureBox1.Enabled = false;
             }
         }
         #endregion
@@ -449,7 +475,15 @@ namespace Bibo_Verwaltung
                 tb_Neupreis.Text = b.Neupreis.ToString();
                 dTP_Erscheinungsdatum.Value = b.Er_datum;
                 cb_Genre.Text = b.Genre.Genrename;
-                pictureBox1.Image = Image.FromFile(b.BildPfad);
+                if(!b.BildPfad.Equals(""))
+                {
+                    pictureBox1.Image = Image.FromFile(b.BildPfad);
+                }
+                else
+                {
+                    pictureBox1.Image = null;
+                    pictureBox1.ImageLocation = null;
+                }
                 b.Autor.FillCombobox(ref cb_Autor, b.Autor.AutorID);
                 b.Verlag.FillCombobox(ref cb_Verlag, b.Verlag.VerlagID);
                 b.Genre.FillCombobox(ref cb_Genre, b.Genre.GenreID);
@@ -572,20 +606,27 @@ namespace Bibo_Verwaltung
         }
         private bool ValidateISBN()
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             WebClient client = new WebClient();
-            client.DownloadFile("http://www.buecher-nach-isbn.info/"+ tb_ISBN.Text, path+"\\Bibliothek\\html\\html.html");
-            string file = path + "\\Bibliothek\\html\\html.html";
-            string test = System.IO.File.ReadAllText(file);
-            File.Delete(path + "\\Bibliothek\\html\\html.html");
-            if (test.Contains("<h1 class=\"title\">"))
+            try
             {
-                return true;
+                string test = client.DownloadString("http://www.buecher-nach-isbn.info/" + tb_ISBN.Text);
+                MessageBox.Show(test);
+
+                if (test.Contains("<h1 class=\"title\">"))
+                {
+                    MessageBox.Show("Erkannt");
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch
             {
                 return false;
             }
+                
         }
         private void Comboboxen()
         {
@@ -604,13 +645,13 @@ namespace Bibo_Verwaltung
             {
                 imgLocation = dialog.FileName.ToString();
                 pictureBox1.ImageLocation = imgLocation;
-                Image bildd = Image.FromFile(imgLocation);
             }
         }
 
         private void bt_pic_add_Click(object sender, EventArgs e)
         {
-            
+            pictureBox1.Image = null;
+            pictureBox1.ImageLocation = null;
         }
     }
 }

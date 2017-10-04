@@ -267,5 +267,22 @@ namespace Bibo_Verwaltung
             Zustand.ShowDialog(this);
             b.Zustand.FillCombobox(ref cb_zustand, 0);
         }
+
+        private void w_s_buchid_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(grid_buchid.RowCount == 0)
+            {
+                if (MessageBox.Show("Sie haben für dieses Buch kein Exemplar hinzugefügt. Wollen Sie das Fenster wirklich schließen?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    e.Cancel = true;
+
+                }
+
+            }
+        }
     }
 }
