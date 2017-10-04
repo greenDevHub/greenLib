@@ -224,7 +224,7 @@ namespace Bibo_Verwaltung
                 {
                     string vergleich = "";
                     string zustand = "beschädigt";
-                    
+
                     if (vergleich.Equals(gv_Details.Rows[i].Cells[24].Value.ToString()) == false | zustand.Equals(gv_Details.Rows[i].Cells[22].Value.ToString()) == true)
                     {
                         CurrencyManager cuma = (CurrencyManager)gv_Details.BindingContext[gv_Details.DataSource];
@@ -286,101 +286,57 @@ namespace Bibo_Verwaltung
         #region Buch ausleihen
         private void Ausleihvorgang(object sender, EventArgs e)
         {
-            tb_BuchIDAusleihen.Text = "";
-            tb_KundenIDAusleihen.Text = "";
-            tb_BuchAusleihen.Text = "";
-            tb_KundeAusleihen.Text = "";
-            tb_ZustandAusleihen.Text = "";
-            tb_verleihfaehigAusleihen.Text = "";
-            dateTimePickerAusleihen.ResetText();
-            bt_Abschliessen.Enabled = false;
-            bt_Ausleihen.Enabled = false;
-            bt_AbbrechenAusleihen.Enabled = true;
-
-            int row_index = this.gv_Details.CurrentRow.Index;
-            if (row_index >= 0 && row_index <= this.gv_Details.RowCount)
+            if (gv_Details.SelectedRows.Count > 0)
             {
-                DataGridViewRow row = this.gv_Details.CurrentRow;
-                try
+                tb_BuchIDAusleihen.Text = "";
+                tb_KundenIDAusleihen.Text = "";
+                tb_BuchAusleihen.Text = "";
+                tb_KundeAusleihen.Text = "";
+                tb_ZustandAusleihen.Text = "";
+                tb_verleihfaehigAusleihen.Text = "";
+                dateTimePickerAusleihen.ResetText();
+                bt_Abschliessen.Enabled = false;
+                bt_Ausleihen.Enabled = false;
+                bt_AbbrechenAusleihen.Enabled = true;
+
+                int row_index = this.gv_Details.CurrentRow.Index;
+                if (row_index >= 0 && row_index <= this.gv_Details.RowCount)
                 {
-                    string buch_id = row.Cells[0].Value.ToString();
-                    string buch_titel = row.Cells[5].Value.ToString();           
-                    string buch_zustand = row.Cells[22].Value.ToString();
-                    //string buch_verleihfaehig = row.Cells[21].Value.ToString();
-
-                    using (var kunden = new w_s_Aus_Kunde())
+                    DataGridViewRow row = this.gv_Details.CurrentRow;
+                    try
                     {
-                        var result = kunden.ShowDialog();
-                        if (result == DialogResult.OK)
-                        {
-                            string k_id = kunden.KundenID;
-                            string k_vmane = kunden.KundenVName;
-                            string k_nname = kunden.KundenNName;
+                        string buch_id = row.Cells[0].Value.ToString();
+                        string buch_titel = row.Cells[5].Value.ToString();
+                        string buch_zustand = row.Cells[22].Value.ToString();
 
-                            this.tb_KundeAusleihen.Text = k_vmane + " " + k_nname;
-                            this.tb_KundenIDAusleihen.Text = k_id;
+                        using (var kunden = new w_s_Aus_Kunde())
+                        {
+                            var result = kunden.ShowDialog();
+                            if (result == DialogResult.OK)
+                            {
+                                string k_id = kunden.KundenID;
+                                string k_vmane = kunden.KundenVName;
+                                string k_nname = kunden.KundenNName;
+
+                                this.tb_KundeAusleihen.Text = k_vmane + " " + k_nname;
+                                this.tb_KundenIDAusleihen.Text = k_id;
+                                tb_BuchIDAusleihen.Text = buch_id;
+                                tb_BuchAusleihen.Text = buch_titel;
+                                tb_ZustandAusleihen.Text = buch_zustand;
+                                bt_Abschliessen.Enabled = true;
+                                string date = DateTime.Today.Day.ToString() + DateTime.Today.Month.ToString() + DateTime.Today.Year.ToString();
+                                Barcode bar = new Barcode(tb_BuchIDAusleihen.Text, tb_KundenIDAusleihen.Text, date);
+                                bar.FillPictureBox(ref picBoxAusleihen);
+                                tb_BarcodeAusleihen.Text = tb_BuchIDAusleihen.Text + tb_KundenIDAusleihen.Text + date;
+                            }
+                            else
+                            {
+                                Ausleihen_Abbrechen();
+                            }
                         }
                     }
-                    tb_BuchIDAusleihen.Text = buch_id;
-                    tb_BuchAusleihen.Text = buch_titel;
-                    //tb_verleihfaehig.Text = buch_verleihfaehig;
-                    tb_ZustandAusleihen.Text = buch_zustand;
-                    bt_Abschliessen.Enabled = true;
-                    string date = DateTime.Today.Day.ToString() + DateTime.Today.Month.ToString() + DateTime.Today.Year.ToString();
-                    Barcode bar = new Barcode(tb_BuchIDAusleihen.Text, tb_KundenIDAusleihen.Text, date);
-                    bar.FillPictureBox(ref picBoxAusleihen);
-                    tb_BarcodeAusleihen.Text = tb_BuchIDAusleihen.Text + tb_KundenIDAusleihen.Text + date;
-                }
-                catch
-                {
-                    tb_BuchIDAusleihen.Text = "";
-                    tb_KundenIDAusleihen.Text = "";
-                    tb_BuchAusleihen.Text = "";
-                    tb_KundeAusleihen.Text = "";
-                    tb_ZustandAusleihen.Text = "";
-                    tb_verleihfaehigAusleihen.Text = "";
-                    tb_BarcodeAusleihen.Text = "";
-                    dateTimePickerAusleihen.ResetText();
-                    bt_Abschliessen.Enabled = false;
-                    picBoxAusleihen.ResetText();
-                    MessageBox.Show("Der Auslehvorgang konnte nicht gestartet werden!", "Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void Ausleihen_Bestaetigen(object sender, EventArgs e)
-        {
-            if (tb_BuchIDAusleihen.Text != "" && tb_KundeAusleihen.Text != "")
-            {
-
-
-
-                
-
-                try
-                {
-                    int buch_id = Convert.ToInt32(tb_BuchIDAusleihen.Text);
-
-                    if (b.Pruefe_Ausgeliehen(tb_BuchIDAusleihen.Text) == false)
+                    catch
                     {
-                        string aus_datum = DateTime.Today.ToString();
-                        string rück_datum = dateTimePickerAusleihen.Value.ToString();
-                        int kunden_id = Convert.ToInt32(tb_KundenIDAusleihen.Text);
-
-
-                        //Form Barcode = new w_s_barcode();
-                        //                Barcode.ShowDialog(this);
-
-
-                        //tb_Barcode.Text = tb_BuchID + tb_KID.Text + aus_datum;
-
-
-                        b.Ausleihen(buch_id, aus_datum, rück_datum, kunden_id, tb_BarcodeAusleihen.Text);
-                        //druken
-
-                        MessageBox.Show("Das Buch wurde erfolgreich an: '" + tb_KundeAusleihen.Text + "' ausgeliehen!", "Information",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
                         tb_BuchIDAusleihen.Text = "";
                         tb_KundenIDAusleihen.Text = "";
                         tb_BuchAusleihen.Text = "";
@@ -389,27 +345,72 @@ namespace Bibo_Verwaltung
                         tb_verleihfaehigAusleihen.Text = "";
                         tb_BarcodeAusleihen.Text = "";
                         dateTimePickerAusleihen.ResetText();
-                        picBoxAusleihen.Image = null;
                         bt_Abschliessen.Enabled = false;
-                        bt_Ausleihen.Enabled = true;
-                        bt_AbbrechenAusleihen.Enabled = false;
+                        picBoxAusleihen.ResetText();
+                        MessageBox.Show("Der Auslehvorgang konnte nicht gestartet werden!", "Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    else
-                    {
-                        MessageBox.Show("Das Buch wurde bereits ausgeliehen!", "Information",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                catch (Exception w)
-                {
-                    MessageBox.Show("Das Buch konnte nicht ausgeliehen werden! " + w, "Error",
-                               MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Es wurde kein Buch bzw. Kunde ausgewählt!", "Information",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Es wurde kein Buch ausgewählt!", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Ausleihen_Bestaetigen(object sender, EventArgs e)
+        {
+            try
+            {
+                int buch_id = Convert.ToInt32(tb_BuchIDAusleihen.Text);
+
+                if (b.Pruefe_Ausgeliehen(tb_BuchIDAusleihen.Text) == false)
+                {
+                    string aus_datum = DateTime.Today.ToString();
+                    string rück_datum = dateTimePickerAusleihen.Value.ToString();
+                    int kunden_id = Convert.ToInt32(tb_KundenIDAusleihen.Text);
+
+                    b.Ausleihen(buch_id, aus_datum, rück_datum, kunden_id, tb_BarcodeAusleihen.Text);
+                    //drucken
+
+                    MessageBox.Show("Das Buch wurde erfolgreich an: '" + tb_KundeAusleihen.Text + "' ausgeliehen!", "Information",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    tb_BuchIDAusleihen.Text = "";
+                    tb_KundenIDAusleihen.Text = "";
+                    tb_BuchAusleihen.Text = "";
+                    tb_KundeAusleihen.Text = "";
+                    tb_ZustandAusleihen.Text = "";
+                    tb_verleihfaehigAusleihen.Text = "";
+                    tb_BarcodeAusleihen.Text = "";
+                    dateTimePickerAusleihen.ResetText();
+                    picBoxAusleihen.Image = null;
+                    bt_Abschliessen.Enabled = false;
+                    bt_Ausleihen.Enabled = true;
+                    bt_AbbrechenAusleihen.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Das Buch wurde bereits ausgeliehen!", "Information",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    tb_BuchIDAusleihen.Text = "";
+                    tb_KundenIDAusleihen.Text = "";
+                    tb_BuchAusleihen.Text = "";
+                    tb_KundeAusleihen.Text = "";
+                    tb_ZustandAusleihen.Text = "";
+                    tb_verleihfaehigAusleihen.Text = "";
+                    tb_BarcodeAusleihen.Text = "";
+                    dateTimePickerAusleihen.ResetText();
+                    picBoxAusleihen.Image = null;
+                    bt_Abschliessen.Enabled = false;
+                    bt_Ausleihen.Enabled = true;
+                    bt_AbbrechenAusleihen.Enabled = false;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Das Buch konnte nicht ausgeliehen werden!", "Error",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -417,8 +418,6 @@ namespace Bibo_Verwaltung
         #region Buch-Rückgabe
         private void bt_Rueckgabe_Click(object sender, EventArgs e)
         {
-
-
             if (tb_BuchIDAusleihen.Text != "") //&& gv_Details.CurrentRow.Cells[29].Value.ToString() != ""
             {
                 int row_index = gv_Details.CurrentRow.Index;
@@ -460,7 +459,7 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        private void bt_AbbrechenAusleihen_Click(object sender, EventArgs e)
+        private void Ausleihen_Abbrechen()
         {
             tb_BuchIDAusleihen.Text = "";
             tb_KundenIDAusleihen.Text = "";
@@ -473,9 +472,14 @@ namespace Bibo_Verwaltung
             picBoxAusleihen.Image = null;
             bt_Abschliessen.Enabled = false;
             bt_Ausleihen.Enabled = true;
-            bt_AbbrechenAusleihen.Enabled = false;      
+            bt_AbbrechenAusleihen.Enabled = false;
             MessageBox.Show("Der Ausleihvorgang wurde abbgebrochen!", "Information",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void bt_AbbrechenAusleihen_Click(object sender, EventArgs e)
+        {
+            Ausleihen_Abbrechen();
         }
 
         private void tb_ZustandAusleihen_TextChanged(object sender, EventArgs e)

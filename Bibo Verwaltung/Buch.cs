@@ -319,21 +319,20 @@ namespace Bibo_Verwaltung
         {
             bool ergebnis = false;
             if (con.ConnectError()) return false;
-            string RawCommand = "SELECT * FROM t_bd_ausgeliehen WHERE aus_buchid = @0";
-            SqlDataReader dr = con.ExcecuteCommand(RawCommand, buch_id);
-            while (dr.Read())
+            string RawCommand = "SELECT COUNT(*) FROM t_bd_ausgeliehen WHERE aus_buchid = @buch_id";
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@buch_id", buch_id);
+
+            int anzahl = Convert.ToInt16(cmd.ExecuteScalar());
+ 
+            if (anzahl >= 1)
             {
-                string bu_id = dr["bu_id"].ToString();
-                if (bu_id.Equals(""))
-                {
                     ergebnis = true;
                 }
                 else
                 {
                     ergebnis = false;
                 }
-            }
-            dr.Close();
             con.Close();
             return ergebnis;
         }
