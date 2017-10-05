@@ -610,11 +610,8 @@ namespace Bibo_Verwaltung
             try
             {
                 string test = client.DownloadString("http://www.buecher-nach-isbn.info/" + tb_ISBN.Text);
-                MessageBox.Show(test);
-
                 if (test.Contains("<h1 class=\"title\">"))
                 {
-                    MessageBox.Show("Erkannt");
                     return true;
                 }
                 else
