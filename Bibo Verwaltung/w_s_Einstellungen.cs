@@ -154,19 +154,18 @@ namespace Bibo_Verwaltung
             // lb_Server
             // 
             this.lb_Server.AutoSize = true;
-            this.lb_Server.Location = new System.Drawing.Point(14, 48);
-            this.lb_Server.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lb_Server.Location = new System.Drawing.Point(5, 20);
+            this.lb_Server.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_Server.Name = "lb_Server";
-            this.lb_Server.Size = new System.Drawing.Size(106, 32);
+            this.lb_Server.Size = new System.Drawing.Size(41, 13);
             this.lb_Server.TabIndex = 3;
             this.lb_Server.Text = "Server:";
             // 
             // bt_save
             // 
-            this.bt_save.Location = new System.Drawing.Point(258, 337);
-            this.bt_save.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_save.Location = new System.Drawing.Point(97, 141);
             this.bt_save.Name = "bt_save";
-            this.bt_save.Size = new System.Drawing.Size(192, 58);
+            this.bt_save.Size = new System.Drawing.Size(72, 24);
             this.bt_save.TabIndex = 6;
             this.bt_save.Text = "Speichern";
             this.bt_save.UseVisualStyleBackColor = true;
@@ -178,10 +177,9 @@ namespace Bibo_Verwaltung
             this.cb_Security.Items.AddRange(new object[] {
             "Windows Authentifizierung",
             "SQL Authentifizierung"});
-            this.cb_Security.Location = new System.Drawing.Point(258, 159);
-            this.cb_Security.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.cb_Security.Location = new System.Drawing.Point(97, 67);
             this.cb_Security.Name = "cb_Security";
-            this.cb_Security.Size = new System.Drawing.Size(416, 39);
+            this.cb_Security.Size = new System.Drawing.Size(158, 21);
             this.cb_Security.TabIndex = 3;
             this.cb_Security.TextChanged += new System.EventHandler(this.Visibility);
             this.cb_Security.Click += new System.EventHandler(this.Visibility);
@@ -189,60 +187,57 @@ namespace Bibo_Verwaltung
             // lb_Database
             // 
             this.lb_Database.AutoSize = true;
-            this.lb_Database.Location = new System.Drawing.Point(14, 107);
-            this.lb_Database.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lb_Database.Location = new System.Drawing.Point(5, 45);
+            this.lb_Database.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_Database.Name = "lb_Database";
-            this.lb_Database.Size = new System.Drawing.Size(161, 32);
+            this.lb_Database.Size = new System.Drawing.Size(63, 13);
             this.lb_Database.TabIndex = 7;
             this.lb_Database.Text = "Datenbank:";
             // 
             // lb_Security
             // 
             this.lb_Security.AutoSize = true;
-            this.lb_Security.Location = new System.Drawing.Point(14, 165);
-            this.lb_Security.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lb_Security.Location = new System.Drawing.Point(5, 69);
+            this.lb_Security.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_Security.Name = "lb_Security";
-            this.lb_Security.Size = new System.Drawing.Size(151, 32);
+            this.lb_Security.Size = new System.Drawing.Size(57, 13);
             this.lb_Security.TabIndex = 8;
             this.lb_Security.Text = "Sicherheit:";
             // 
             // bt_Schließen
             // 
-            this.bt_Schließen.Location = new System.Drawing.Point(258, 411);
-            this.bt_Schließen.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_Schließen.Location = new System.Drawing.Point(97, 172);
             this.bt_Schließen.Name = "bt_Schließen";
-            this.bt_Schließen.Size = new System.Drawing.Size(162, 58);
+            this.bt_Schließen.Size = new System.Drawing.Size(61, 24);
             this.bt_Schließen.TabIndex = 7;
-            this.bt_Schließen.Text = "Reset";
+            this.bt_Schließen.Text = "Leeren";
             this.bt_Schließen.UseVisualStyleBackColor = true;
             this.bt_Schließen.Click += new System.EventHandler(this.Reset);
             // 
             // lb_Benutzername
             // 
             this.lb_Benutzername.AutoSize = true;
-            this.lb_Benutzername.Location = new System.Drawing.Point(14, 227);
-            this.lb_Benutzername.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lb_Benutzername.Location = new System.Drawing.Point(5, 95);
+            this.lb_Benutzername.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_Benutzername.Name = "lb_Benutzername";
-            this.lb_Benutzername.Size = new System.Drawing.Size(208, 32);
+            this.lb_Benutzername.Size = new System.Drawing.Size(78, 13);
             this.lb_Benutzername.TabIndex = 10;
             this.lb_Benutzername.Text = "Benutzername:";
             // 
             // tb_Benutzername
             // 
-            this.tb_Benutzername.Location = new System.Drawing.Point(258, 221);
-            this.tb_Benutzername.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.tb_Benutzername.Location = new System.Drawing.Point(97, 93);
             this.tb_Benutzername.Name = "tb_Benutzername";
-            this.tb_Benutzername.Size = new System.Drawing.Size(416, 38);
+            this.tb_Benutzername.Size = new System.Drawing.Size(158, 20);
             this.tb_Benutzername.TabIndex = 4;
             this.tb_Benutzername.Click += new System.EventHandler(this.Visibility);
             this.tb_Benutzername.TextChanged += new System.EventHandler(this.tb_White);
             // 
             // tb_Passwort
             // 
-            this.tb_Passwort.Location = new System.Drawing.Point(258, 279);
-            this.tb_Passwort.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.tb_Passwort.Location = new System.Drawing.Point(97, 117);
             this.tb_Passwort.Name = "tb_Passwort";
-            this.tb_Passwort.Size = new System.Drawing.Size(416, 38);
+            this.tb_Passwort.Size = new System.Drawing.Size(158, 20);
             this.tb_Passwort.TabIndex = 5;
             this.tb_Passwort.UseSystemPasswordChar = true;
             this.tb_Passwort.Click += new System.EventHandler(this.Visibility);
@@ -251,39 +246,36 @@ namespace Bibo_Verwaltung
             // lb_Passwort
             // 
             this.lb_Passwort.AutoSize = true;
-            this.lb_Passwort.Location = new System.Drawing.Point(14, 285);
-            this.lb_Passwort.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lb_Passwort.Location = new System.Drawing.Point(5, 120);
+            this.lb_Passwort.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_Passwort.Name = "lb_Passwort";
-            this.lb_Passwort.Size = new System.Drawing.Size(139, 32);
+            this.lb_Passwort.Size = new System.Drawing.Size(53, 13);
             this.lb_Passwort.TabIndex = 13;
             this.lb_Passwort.Text = "Passwort:";
             // 
             // tb_Server
             // 
-            this.tb_Server.Location = new System.Drawing.Point(258, 43);
-            this.tb_Server.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.tb_Server.Location = new System.Drawing.Point(97, 18);
             this.tb_Server.Name = "tb_Server";
-            this.tb_Server.Size = new System.Drawing.Size(416, 38);
+            this.tb_Server.Size = new System.Drawing.Size(158, 20);
             this.tb_Server.TabIndex = 1;
             this.tb_Server.Click += new System.EventHandler(this.Visibility);
             this.tb_Server.TextChanged += new System.EventHandler(this.tb_White);
             // 
             // tb_Database
             // 
-            this.tb_Database.Location = new System.Drawing.Point(258, 101);
-            this.tb_Database.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.tb_Database.Location = new System.Drawing.Point(97, 42);
             this.tb_Database.Name = "tb_Database";
-            this.tb_Database.Size = new System.Drawing.Size(416, 38);
+            this.tb_Database.Size = new System.Drawing.Size(158, 20);
             this.tb_Database.TabIndex = 2;
             this.tb_Database.Click += new System.EventHandler(this.Visibility);
             this.tb_Database.TextChanged += new System.EventHandler(this.tb_White);
             // 
             // bt_Laden
             // 
-            this.bt_Laden.Location = new System.Drawing.Point(486, 337);
-            this.bt_Laden.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_Laden.Location = new System.Drawing.Point(182, 141);
             this.bt_Laden.Name = "bt_Laden";
-            this.bt_Laden.Size = new System.Drawing.Size(192, 58);
+            this.bt_Laden.Size = new System.Drawing.Size(72, 24);
             this.bt_Laden.TabIndex = 14;
             this.bt_Laden.Text = "Laden";
             this.bt_Laden.UseVisualStyleBackColor = true;
@@ -291,10 +283,9 @@ namespace Bibo_Verwaltung
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(436, 411);
-            this.button1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.button1.Location = new System.Drawing.Point(164, 172);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(242, 58);
+            this.button1.Size = new System.Drawing.Size(91, 24);
             this.button1.TabIndex = 15;
             this.button1.Text = "Verbindungstest";
             this.button1.UseVisualStyleBackColor = true;
@@ -316,22 +307,22 @@ namespace Bibo_Verwaltung
             this.groupBox1.Controls.Add(this.tb_Passwort);
             this.groupBox1.Controls.Add(this.lb_Benutzername);
             this.groupBox1.Controls.Add(this.tb_Benutzername);
-            this.groupBox1.Location = new System.Drawing.Point(24, 23);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Location = new System.Drawing.Point(9, 10);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.groupBox1.Size = new System.Drawing.Size(716, 637);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.groupBox1.Size = new System.Drawing.Size(268, 267);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             // 
             // w_s_Einstellungen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(764, 684);
+            this.ClientSize = new System.Drawing.Size(286, 287);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "w_s_Einstellungen";
