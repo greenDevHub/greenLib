@@ -158,8 +158,6 @@ namespace Bibo_Verwaltung
                         b.BildPfad = pictureBox1.ImageLocation;
                     }
                     b.Update_Buch();
-                    b.ClearDSBuch();
-                    b.FillObjectBuch();
                     b.FillGrid_Buch(ref Grid_Buch);
                 }
                 catch (SqlException)
@@ -180,8 +178,6 @@ namespace Bibo_Verwaltung
                         b.ISBN = tb_ISBN.Text;
                         b.Delete_Buch();
                         Clear_All();
-                        b.ClearDSBuch();
-                        b.FillObjectBuch();
                         b.FillGrid_Buch(ref Grid_Buch);
                     }
                     else if (dialogResult == DialogResult.No)
@@ -220,8 +216,6 @@ namespace Bibo_Verwaltung
                     if (ValidateISBN())
                     {
                         b.Add_Buch();
-                        b.ClearDSBuch();
-                        b.FillObjectBuch();
                         b.FillGrid_Buch(ref Grid_Buch);
                         Form Buchid = new w_s_buchid();
                         Buchid.ShowDialog(this);
@@ -233,8 +227,6 @@ namespace Bibo_Verwaltung
                         if(dialogResult == DialogResult.Yes)
                         {
                             b.Add_Buch();
-                            b.ClearDSBuch();
-                            b.FillObjectBuch();
                             b.FillGrid_Buch(ref Grid_Buch);
                             Form Buchid = new w_s_buchid();
                             Buchid.ShowDialog(this);

@@ -231,7 +231,7 @@ namespace Bibo_Verwaltung
         DataTable dt2 = new DataTable();
         SqlCommandBuilder comb2 = new SqlCommandBuilder();
         SQL_Verbindung con2 = new SQL_Verbindung();
-        public void FillObjectBuch()
+        private void FillObjectBuch()
         {
             if (con2.ConnectError()) return;
             string RawCommand = "SELECT buch_isbn as 'ISBN',"
@@ -255,8 +255,9 @@ namespace Bibo_Verwaltung
         }
         #endregion
         #region DataSet zuruecksetzen
-        public void ClearDSBuch()
+        private void ClearDSBuch()
         {
+            ds.Tables[0].Rows.Clear();
             ds2.Tables[0].Rows.Clear();
         }
         #endregion
@@ -264,11 +265,15 @@ namespace Bibo_Verwaltung
         #region DataGridView fuellen
         public void FillGrid_Buch(ref DataGridView grid, object value = null)
         {
+            ClearDSBuch();
+            FillObjectBuch();
             grid.DataSource = ds2.Tables[0];
         }
 
         public void FillGrid_Load_All(ref DataGridView grid, object value = null)
         {
+            ClearDSBuch();
+            FillObject_All();
             grid.DataSource = ds.Tables[0];
             grid.Columns[2].Visible = false;
             grid.Columns[4].Visible = false;
