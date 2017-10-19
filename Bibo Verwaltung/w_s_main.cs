@@ -106,7 +106,7 @@ namespace Bibo_Verwaltung
         }
         private void bt_Einstellungen_Click(object sender, EventArgs e)
         {
-            Form Einstellungen = new w_s_Einstellungen();
+            Form Einstellungen = new w_s_einstellungen();
             Einstellungen.ShowDialog(this);
         }
 

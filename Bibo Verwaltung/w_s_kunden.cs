@@ -257,7 +257,6 @@ namespace Bibo_Verwaltung
             }
             else if (rb_Neukunde.Checked)
             {
-                Clear();
                 bt_save_kunde.Text = "Hinzufügen";
                 bt_save_kunde.Enabled = true;
                 tb_KundenID.Enabled = false;

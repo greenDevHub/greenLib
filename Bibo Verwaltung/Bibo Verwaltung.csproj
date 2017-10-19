@@ -146,6 +146,12 @@
     <Compile Include="w_s_details.Designer.cs">
       <DependentUpon>w_s_details.cs</DependentUpon>
     </Compile>
+    <Compile Include="w_s_einstellungen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_einstellungen.Designer.cs">
+      <DependentUpon>w_s_einstellungen.cs</DependentUpon>
+    </Compile>
     <Compile Include="w_s_genres.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,12 +181,6 @@
       <DependentUpon>w_s_sprachen.cs</DependentUpon>
     </Compile>
     <Compile Include="Verlag.cs" />
-    <Compile Include="w_s_Einstellungen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_Einstellungen.Designer.cs">
-      <DependentUpon>w_s_Einstellungen.cs</DependentUpon>
-    </Compile>
     <Compile Include="w_s_verlage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,6 +221,9 @@
     <EmbeddedResource Include="w_s_details.resx">
       <DependentUpon>w_s_details.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="w_s_einstellungen.resx">
+      <DependentUpon>w_s_einstellungen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="w_s_genres.resx">
       <DependentUpon>w_s_genres.cs</DependentUpon>
     </EmbeddedResource>
@@ -242,9 +245,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_sprachen.resx">
       <DependentUpon>w_s_sprachen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_Einstellungen.resx">
-      <DependentUpon>w_s_Einstellungen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_verlage.resx">
       <DependentUpon>w_s_verlage.cs</DependentUpon>
