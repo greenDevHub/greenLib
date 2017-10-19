@@ -23,7 +23,7 @@ namespace Bibo_Verwaltung
             InitializeComponent();
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             System.IO.Directory.CreateDirectory(path + "\\Bibliothek");
-            System.IO.Directory.CreateDirectory(path + "\\Bibliothek\\html");
+            System.IO.Directory.CreateDirectory(path + "\\Bibliothek\\bilder");
             System.IO.Directory.CreateDirectory(path + "\\Bibliothek\\einstellungen");
         }
 

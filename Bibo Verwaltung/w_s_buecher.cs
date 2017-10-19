@@ -24,7 +24,7 @@ namespace Bibo_Verwaltung
             b.FillGrid_Buch(ref Grid_Buch);
             Comboboxen();
         }
-
+        private string location = "";
         Buch b = new Buch();
         Sprache s = new Sprache();
 
@@ -151,10 +151,13 @@ namespace Bibo_Verwaltung
                     b.Er_datum = dTP_Erscheinungsdatum.Value;
                     if(pictureBox1.ImageLocation == null)
                     {
+                        MessageBox.Show("LOOL " + location);
                         b.BildPfad = "";
+                        Delete_picture(location);
                     }
                     else
                     {
+                        Copy_picture();
                         b.BildPfad = pictureBox1.ImageLocation;
                     }
                     b.Update_Buch();
@@ -177,6 +180,7 @@ namespace Bibo_Verwaltung
                         buchid.DeleteWhereISBN(tb_ISBN.Text);
                         b.ISBN = tb_ISBN.Text;
                         b.Delete_Buch();
+                        Delete_picture(location);
                         Clear_All();
                         b.FillGrid_Buch(ref Grid_Buch);
                     }
@@ -211,6 +215,7 @@ namespace Bibo_Verwaltung
                     }
                     else
                     {
+                        Copy_picture();
                         b.BildPfad = pictureBox1.ImageLocation;
                     }
                     if (ValidateISBN())
@@ -469,7 +474,15 @@ namespace Bibo_Verwaltung
                 cb_Genre.Text = b.Genre.Genrename;
                 if(!b.BildPfad.Equals(""))
                 {
-                    pictureBox1.Image = Image.FromFile(b.BildPfad);
+                    try
+                    {
+                        pictureBox1.ImageLocation = b.BildPfad;
+                        pictureBox1.Image = Image.FromFile(b.BildPfad);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Das Bild wurde nicht gefunden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
@@ -637,10 +650,40 @@ namespace Bibo_Verwaltung
             }
         }
 
+        private void Copy_picture()
+        {
+            string oldLocation = pictureBox1.ImageLocation;
+            string newLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\bilder\\" + tb_ISBN.Text + Path.GetExtension(oldLocation);
+            if(!File.Exists(newLocation))
+            {
+                File.Copy(oldLocation, newLocation);
+                pictureBox1.ImageLocation = newLocation;
+            }
+            else
+            {
+                File.Delete(newLocation);
+                Copy_picture();
+            }
+        }
+
+        private void Delete_picture(string location)
+        {
+            MessageBox.Show(location);
+            if (File.Exists(location) && location.Contains("\\Bibliothek\\bilder\\"))
+            {
+                File.Delete(location);
+            }
+
+        }
+
         private void bt_pic_add_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("1" + pictureBox1.ImageLocation);
+            location = pictureBox1.ImageLocation;
+            MessageBox.Show(location);
             pictureBox1.Image = null;
             pictureBox1.ImageLocation = null;
+            MessageBox.Show(location);
         }
     }
 }
