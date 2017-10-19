@@ -1,12 +1,11 @@
 -	Kunden/bücherform Suchmodus (nach allen Feldern suchen)
 -	Neue Variante des Exports (Verschiedene Export-Modi)
--	Büchertabelle (w_s_buecher) neue Spalte mit anzahl der exemplare
--	Neupreis Prüfung besser, punkt komma problem
--	Einstellungsklasse für Verbindung zur Datenbank verwenden
 -	FillObject Buch Leihen (neue Klasse?)
 -	Kunde auswählen bei Ausleihvorgang -> suchen, aktualisieren
--	Kundenform Clear bei fehlenden angaben bug
 -	Buch ausleih form bug buch zurückgeben, Suche nach Kunde
+
 -	Bild Filter: alle Bilddateitypen
--	Automatische Kopie der Bilder in einem Ordner und Umbenennung zu ISBN (oder andere eindeutige zuordnung)
+-	Einstellungsklasse für Verbindung zur Datenbank verwenden
+-	Neupreis Prüfung besser, punkt komma problem
+-	Büchertabelle (w_s_buecher) neue Spalte mit anzahl der exemplare
 
