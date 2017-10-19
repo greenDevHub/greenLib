@@ -668,7 +668,6 @@ namespace Bibo_Verwaltung
 
         private void Delete_picture(string location)
         {
-            MessageBox.Show(location);
             if (File.Exists(location) && location.Contains("\\Bibliothek\\bilder\\"))
             {
                 File.Delete(location);
@@ -680,10 +679,8 @@ namespace Bibo_Verwaltung
         {
             MessageBox.Show("1" + pictureBox1.ImageLocation);
             location = pictureBox1.ImageLocation;
-            MessageBox.Show(location);
             pictureBox1.Image = null;
             pictureBox1.ImageLocation = null;
-            MessageBox.Show(location);
         }
     }
 }
