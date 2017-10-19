@@ -151,7 +151,6 @@ namespace Bibo_Verwaltung
                     b.Er_datum = dTP_Erscheinungsdatum.Value;
                     if(pictureBox1.ImageLocation == null)
                     {
-                        MessageBox.Show("LOOL " + location);
                         b.BildPfad = "";
                         Delete_picture(location);
                     }
@@ -494,6 +493,7 @@ namespace Bibo_Verwaltung
                 b.Genre.FillCombobox(ref cb_Genre, b.Genre.GenreID);
                 b.Sprache.FillCombobox(ref cb_Sprache, b.Sprache.SpracheID);
                 lb_isbn_vorlage.Visible = false;
+                rb_Update_Buch.Focus();
             }
         }
 
@@ -677,7 +677,6 @@ namespace Bibo_Verwaltung
 
         private void bt_pic_add_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("1" + pictureBox1.ImageLocation);
             location = pictureBox1.ImageLocation;
             pictureBox1.Image = null;
             pictureBox1.ImageLocation = null;
