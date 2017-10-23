@@ -79,6 +79,13 @@ namespace Bibo_Verwaltung
         /// Bild eines Buches
         /// </summary>
         public string BildPfad { get { return bildPfad; } set { bildPfad = value; } }
+
+        int anzahl;
+        /// <summary>
+        /// Anzahl der Exemplare
+        /// </summary>
+        public int Anzahl { get { return anzahl; } set { anzahl = value; } }
+
         #endregion
 
         #region Objekt Buch
@@ -124,6 +131,7 @@ namespace Bibo_Verwaltung
                 Auflage = dr["buch_auflage"].ToString();
                 string price = dr["buch_neupreis"].ToString().Replace(".", ",");
                 BildPfad = dr["buch_bild"].ToString();
+                Anzahl = int.Parse(dr["buch_anzahl"].ToString());
 
                 try
                 {
@@ -147,7 +155,7 @@ namespace Bibo_Verwaltung
         {
             //SQL-Verbindung pruefen
             if (con.ConnectError()) return;
-            string RawCommand = "UPDATE [dbo].[t_s_buecher] set buch_titel = @titel , buch_autor_id = @autor, buch_genre_id = @genre, buch_sprache_id = @sprache, buch_verlag_id = @verlag, buch_auflage = @auflage, buch_erscheinungsdatum = @er_datum, buch_neupreis = @neupreis, buch_bild = @bild WHERE buch_isbn = @isbn";
+            string RawCommand = "UPDATE [dbo].[t_s_buecher] set buch_titel = @titel , buch_autor_id = @autor, buch_genre_id = @genre, buch_sprache_id = @sprache, buch_verlag_id = @verlag, buch_auflage = @auflage, buch_erscheinungsdatum = @er_datum, buch_neupreis = @neupreis, buch_bild = @bild, buch_anzahl = @anzahl WHERE buch_isbn = @isbn";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
 
             cmd.Parameters.AddWithValue("@titel", Titel);
@@ -160,6 +168,7 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@neupreis", neupreis);
             cmd.Parameters.AddWithValue("@isbn", isbn);
             cmd.Parameters.AddWithValue("@bild", bildPfad);
+            cmd.Parameters.AddWithValue("@anzahl", anzahl);
             cmd.ExecuteNonQuery();
             con.Close();
         }
@@ -170,7 +179,7 @@ namespace Bibo_Verwaltung
         {
             //SQL-Verbindung pruefen
             if (con.ConnectError()) return;
-            string RawCommand = "INSERT INTO [dbo].[t_s_buecher] (buch_isbn, buch_titel, buch_genre_id, buch_autor_id, buch_verlag_id, buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, buch_bild) VALUES (@isbn, @titel, @genreid, @autorid, @verlagid, @erscheinungsdatum, @sprachid, @auflage, @neupreis, @bild)";
+            string RawCommand = "INSERT INTO [dbo].[t_s_buecher] (buch_isbn, buch_titel, buch_genre_id, buch_autor_id, buch_verlag_id, buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, buch_bild, buch_anzahl) VALUES (@isbn, @titel, @genreid, @autorid, @verlagid, @erscheinungsdatum, @sprachid, @auflage, @neupreis, @bild, @anzahl)";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
 
             cmd.Parameters.AddWithValue("@isbn", ISBN);
@@ -183,6 +192,8 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@auflage", Auflage);
             cmd.Parameters.AddWithValue("@neupreis", Neupreis);
             cmd.Parameters.AddWithValue("@bild", BildPfad);
+            cmd.Parameters.AddWithValue("@anzahl", Anzahl);
+
 
             cmd.ExecuteNonQuery();
             con.Close();
@@ -201,6 +212,34 @@ namespace Bibo_Verwaltung
             con.Close();
         }
         #endregion
+
+        private int CountRows(string isbnAktuell)
+        {
+            if (con.ConnectError()) return 0;
+            string RawCommand = "SELECT COUNT(*) FROM t_s_buchid where bu_isbn = @isbn";
+            int count = 0;
+            using (SqlCommand cmdCount = new SqlCommand(RawCommand, con.Con))
+            {
+                cmdCount.Parameters.AddWithValue("@isbn", isbnAktuell);
+                count = (int)cmdCount.ExecuteScalar();
+                con.Close();
+            }
+            
+            return count;
+
+        }
+
+        private void UpdateCount(string isbnAktuell)
+        {
+            //SQL-Verbindung pruefen
+            if (con.ConnectError()) return;
+            string RawCommand = "UPDATE [dbo].[t_s_buecher] set buch_anzahl = @anzahl where buch_isbn = @isbn";
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@anzahl", CountRows(isbnAktuell));
+            cmd.Parameters.AddWithValue("@isbn", isbnAktuell);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
 
         #region DataSet + DataTable fuellen (Fill Object)
         SqlDataAdapter adapter = new SqlDataAdapter();
@@ -243,7 +282,8 @@ namespace Bibo_Verwaltung
                 + "sprach_name as 'Sprache',"
                 + "buch_auflage as 'Auflage',"
                 + "buch_neupreis as 'Neupreis', "
-                + "buch_bild as 'Bild' from t_s_buecher "
+                + "buch_bild as 'Bild', " 
+                + "buch_anzahl as 'Anzahl Exemplare' from t_s_buecher "
                 + "left join t_s_genre on buch_genre_id = ger_id "
                 + "left join t_s_autor on buch_autor_id = au_id "
                 + "left join t_s_verlag on buch_verlag_id = ver_id "
@@ -265,6 +305,13 @@ namespace Bibo_Verwaltung
         #region DataGridView fuellen
         public void FillGrid_Buch(ref DataGridView grid, object value = null)
         {
+            ClearDSBuch();
+            FillObjectBuch();
+            List<string> s = dt2.AsEnumerable().Select(x => x[0].ToString()).ToList();
+            foreach(string e in s)
+            {
+                UpdateCount(e);
+            }
             ClearDSBuch();
             FillObjectBuch();
             grid.DataSource = ds2.Tables[0];

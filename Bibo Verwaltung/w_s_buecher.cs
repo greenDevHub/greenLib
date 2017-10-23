@@ -208,6 +208,7 @@ namespace Bibo_Verwaltung
                     b.Sprache.SpracheID = cb_Sprache.SelectedValue.ToString();
                     b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
                     b.Er_datum = dTP_Erscheinungsdatum.Value;
+                    b.Anzahl = 0;
                     if(pictureBox1.ImageLocation == null)
                     {
                         b.BildPfad = "";
@@ -220,9 +221,9 @@ namespace Bibo_Verwaltung
                     if (ValidateISBN())
                     {
                         b.Add_Buch();
-                        b.FillGrid_Buch(ref Grid_Buch);
                         Form Buchid = new w_s_buchid();
                         Buchid.ShowDialog(this);
+                        b.FillGrid_Buch(ref Grid_Buch);
                         Clear_All();
                     }
                     else
@@ -231,9 +232,9 @@ namespace Bibo_Verwaltung
                         if(dialogResult == DialogResult.Yes)
                         {
                             b.Add_Buch();
-                            b.FillGrid_Buch(ref Grid_Buch);
                             Form Buchid = new w_s_buchid();
                             Buchid.ShowDialog(this);
+                            b.FillGrid_Buch(ref Grid_Buch);
                             Clear_All();
                         }
                         else if(dialogResult == DialogResult.No)
@@ -301,6 +302,7 @@ namespace Bibo_Verwaltung
             cb_Sprache.Text = "";
             tb_Auflage.Text = "";
             tb_Neupreis.Text = "";
+            tb_anzahl.Text = "";
             pictureBox1.Image = null;
             pictureBox1.ImageLocation = null;
             tb_ISBN.BackColor = Color.White;
@@ -311,6 +313,7 @@ namespace Bibo_Verwaltung
             cb_Sprache.BackColor = Color.White;
             tb_Auflage.BackColor = Color.White;
             tb_Neupreis.BackColor = Color.White;
+            tb_anzahl.BackColor = Color.White;
         }
         #endregion
 
@@ -471,6 +474,7 @@ namespace Bibo_Verwaltung
                 tb_Neupreis.Text = b.Neupreis.ToString();
                 dTP_Erscheinungsdatum.Value = b.Er_datum;
                 cb_Genre.Text = b.Genre.Genrename;
+                tb_anzahl.Text = b.Anzahl.ToString();
                 if(!b.BildPfad.Equals(""))
                 {
                     try
@@ -509,6 +513,7 @@ namespace Bibo_Verwaltung
                     tb_ISBN.Text = isbnAktuell;
                     Form Buchid = new w_s_buchid();
                     Buchid.ShowDialog(this);
+                    b.FillGrid_Buch(ref Grid_Buch);
                     Clear_All();
                 }
             }
@@ -642,7 +647,7 @@ namespace Bibo_Verwaltung
         {
             string imgLocation = "";
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "png files(*.png)|*.png|jpg files(*.jpg)|*.jpg|All files(*.*)|*.*";
+            dialog.Filter = "Bilddateien(*.png, *.jpg, *.bmp, *.gif)|*.png; *.jpg; *.bmp; *.gif|Alle Dateien(*.*)|*.*";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 imgLocation = dialog.FileName.ToString();

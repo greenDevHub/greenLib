@@ -235,6 +235,7 @@ CREATE TABLE [dbo].[t_s_buecher](
 	[buch_auflage] [nvarchar](128) NOT NULL,
 	[buch_neupreis] [numeric](18,2) NOT NULL,
 	[buch_bild] [nvarchar] (256),
+	[buch_anzahl] [int] NOT NULL,
 
 
 	PRIMARY KEY (buch_isbn),
@@ -248,11 +249,11 @@ CREATE TABLE [dbo].[t_s_buecher](
 		REFERENCES t_s_sprache (sprach_id))
 
 	INSERT INTO t_s_buecher (buch_isbn, buch_titel, buch_genre_id, buch_autor_id, buch_verlag_id,
-	buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis) VALUES 
-	('978-3608938289', 'Der Herr der Ringe', 3, 1, 1, '01.12.2014', 1, 'Auflage 6', 49.95)
+	buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, buch_anzahl) VALUES 
+	('978-3608938289', 'Der Herr der Ringe', 3, 1, 1, '01.12.2014', 1, 'Auflage 6', 49.95, 0)
 	INSERT INTO t_s_buecher (buch_isbn, buch_titel, buch_genre_id, buch_autor_id, buch_verlag_id, 
-	buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis) VALUES
-	('978-3423715669', 'Der kleine Hobbit', 2, 1, 2, '01.11.2013', 1, 'Auflage 1', 8.95)
+	buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, buch_anzahl) VALUES
+	('978-3423715669', 'Der kleine Hobbit', 2, 1, 2, '01.11.2013', 1, 'Auflage 1', 8.95, 2)
 
 	Select * from t_s_buecher
 	END

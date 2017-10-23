@@ -20,6 +20,7 @@ namespace Bibo_Verwaltung
             b.FillGrid(ref grid_buchid);
             tb_isbn.Text = b.ISBN;
             b.Zustand.FillCombobox(ref cb_zustand, 0);
+            tb_anzahl.Text = grid_buchid.RowCount.ToString();
         }
 
 
@@ -66,6 +67,7 @@ namespace Bibo_Verwaltung
                     b.ClearDS();
                     b.FillObject();
                     b.FillGrid(ref grid_buchid);
+                    tb_anzahl.Text = grid_buchid.RowCount.ToString();
                     t.Start();
                 }
                 catch (SqlException)
@@ -89,6 +91,7 @@ namespace Bibo_Verwaltung
                     b.ClearDS();
                     b.FillObject();
                     b.FillGrid(ref grid_buchid);
+                    tb_anzahl.Text = grid_buchid.RowCount.ToString();
                     t.Start();
                 }
                 catch (SqlException)
@@ -112,6 +115,7 @@ namespace Bibo_Verwaltung
                     b.ClearDS();
                     b.FillObject();
                     b.FillGrid(ref grid_buchid);
+                    tb_anzahl.Text = grid_buchid.RowCount.ToString();
                     t.Start();
                 }
                 catch (SqlException)
