@@ -149,7 +149,7 @@ namespace Bibo_Verwaltung
                     b.Sprache.SpracheID = cb_Sprache.SelectedValue.ToString();
                     b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
                     b.Er_datum = dTP_Erscheinungsdatum.Value;
-                    if(pictureBox1.ImageLocation == null)
+                    if(pictureBox1.ImageLocation == null || pictureBox1.ImageLocation.Equals(""))
                     {
                         b.BildPfad = "";
                         Delete_picture(location);
@@ -209,7 +209,7 @@ namespace Bibo_Verwaltung
                     b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
                     b.Er_datum = dTP_Erscheinungsdatum.Value;
                     b.Anzahl = 0;
-                    if(pictureBox1.ImageLocation == null)
+                    if(pictureBox1.ImageLocation == null || pictureBox1.ImageLocation.Equals(""))
                     {
                         b.BildPfad = "";
                     }
@@ -614,25 +614,94 @@ namespace Bibo_Verwaltung
             lb_isbn_vorlage.Visible = false;
             tb_ISBN.Focus();
         }
+        string htmlData;
+        bool test = false;
+        private string getPicture()
+        {
+            if (ValidateISBN())
+            {
+                test = true;
+                try
+                {
+                    List<string> imageList = new List<string>();
+                    string imageHtmlCode = "<img";
+                    string imageSrcCode = @"src=""";
+                    int index = htmlData.IndexOf(imageHtmlCode);
+                    while (index != -1)
+                    {
+                        //Remove previous data
+                        htmlData = htmlData.Substring(index);
+
+                        //Find the location of the two quotes that mark the image's location
+                        int brackedEnd = htmlData.IndexOf('>'); //make sure data will be inside img tag
+                        int start = htmlData.IndexOf(imageSrcCode) + imageSrcCode.Length;
+                        int end = htmlData.IndexOf('"', start + 1);
+
+                        //Extract the line
+                        if (end > start && start < brackedEnd)
+                        {
+                            string loc = htmlData.Substring(start, end - start);
+
+                            //Store line
+                            imageList.Add(loc);
+                        }
+
+                        //Move index to next image location
+                        if (imageHtmlCode.Length < htmlData.Length)
+                            index = htmlData.IndexOf(imageHtmlCode, imageHtmlCode.Length);
+                        else
+                            index = -1;
+                    }
+                    string bildURL = "http://www.buecher-nach-isbn.info/" + imageList[0];
+                    string fileURL = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Downloads\\" + b.ISBN + "_DOWNLOAD.jpg";
+                    WebClient client = new WebClient();
+                    client.DownloadFile(bildURL, fileURL);
+                    pictureBox1.ImageLocation = fileURL;
+                    return fileURL;
+                }
+                catch
+                {
+                    MessageBox.Show("Es konnte kein Bild geladen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return "";
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Es konnte kein Bild geladen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                test = false;
+                return "";
+            }
+            
+        }
         private bool ValidateISBN()
         {
-            WebClient client = new WebClient();
-            try
+            if(test == false)
             {
-                string test = client.DownloadString("http://www.buecher-nach-isbn.info/" + tb_ISBN.Text);
-                if (test.Contains("<h1 class=\"title\">"))
+                WebClient client = new WebClient();
+                try
                 {
-                    return true;
+                    htmlData = client.DownloadString("http://www.buecher-nach-isbn.info/" + tb_ISBN.Text);
+                    if (htmlData.Contains("<h1 class=\"title\">"))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
                 }
-                else
+                catch
                 {
                     return false;
                 }
             }
-            catch
+            else
             {
-                return false;
+                return true;
             }
+            
                 
         }
         private void Comboboxen()
@@ -646,12 +715,21 @@ namespace Bibo_Verwaltung
         private void bt_picture_Click(object sender, EventArgs e)
         {
             string imgLocation = "";
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Bilddateien(*.png, *.jpg, *.bmp, *.gif)|*.png; *.jpg; *.bmp; *.gif|Alle Dateien(*.*)|*.*";
-            if (dialog.ShowDialog() == DialogResult.OK)
+            DialogResult dialogResult = MessageBox.Show("Soll das Bild anhand der ISBN automatisch geladen werden?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
             {
-                imgLocation = dialog.FileName.ToString();
+                imgLocation = getPicture();
                 pictureBox1.ImageLocation = imgLocation;
+            }
+            if(dialogResult == DialogResult.No)
+            {
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Filter = "Bilddateien(*.png, *.jpg, *.bmp, *.gif)|*.png; *.jpg; *.bmp; *.gif|Alle Dateien(*.*)|*.*";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    imgLocation = dialog.FileName.ToString();
+                    pictureBox1.ImageLocation = imgLocation;
+                }
             }
         }
 
