@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows;
-using Microsoft.Win32;
 using System.Text.RegularExpressions;
 using System.Net;
 using System.IO;
+using System.Drawing.Imaging;
+using System.Text;
 
 namespace Bibo_Verwaltung
 {
@@ -23,10 +19,11 @@ namespace Bibo_Verwaltung
             InitializeComponent();
             b.FillGrid_Buch(ref Grid_Buch);
             Comboboxen();
+            pictureBox2.Visible = false;
+            gb_zoom.Visible = false;
         }
         private string location = "";
         Buch b = new Buch();
-        Sprache s = new Sprache();
 
         #region Zeichenabfrage (IsNumeric)
         public bool IsNumeric(string s)
@@ -57,7 +54,6 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
-        //TODO
 
         #region ToIsbn
         public string ToIsbn(string s)
@@ -76,7 +72,6 @@ namespace Bibo_Verwaltung
             return output;
         }
         #endregion
-        //TODO
 
         #region Prüfung Numeric und Isbn
         private void tb_Neupreis_Validated(object sender, EventArgs e)
@@ -114,7 +109,7 @@ namespace Bibo_Verwaltung
         {
             Form Autor = new w_s_autoren();
             Autor.ShowDialog(this);
-            b.Autor.FillCombobox(ref cb_Autor, 0);
+            b.AutorListe.Autor.FillCombobox(ref cb_Autor, 0);
         }
 
         private void bt_Genre_s_Click(object sender, EventArgs e)
@@ -132,17 +127,17 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        #region Save Buch
+        #region Save/Update/Delete Buch
         private void Save_Buecher(object sender, EventArgs e)
         {
-            if (rb_Update_Buch.Checked && !tb_ISBN.Text.Equals("") && !tb_Titel.Text.Equals("") && !cb_Autor.Text.Equals("") && !cb_Verlag.Text.Equals("")
+            if (rb_Update_Buch.Checked && !checkbox_autor.Checked && !tb_ISBN.Text.Equals("") && !tb_Titel.Text.Equals("") && !cb_Autor.Text.Equals("") && !cb_Verlag.Text.Equals("")
                 && !cb_Genre.Text.Equals("") && !cb_Sprache.Text.Equals("") && !tb_Auflage.Text.Equals("") && !tb_Neupreis.Text.Equals(""))
             {
                 try
                 {
                     b.ISBN = tb_ISBN.Text;
                     b.Titel = tb_Titel.Text;
-                    b.Autor.AutorID = cb_Autor.SelectedValue.ToString();
+                    b.AutorListe.AutorIDs.Add(cb_Autor.SelectedValue.ToString());
                     b.Verlag.VerlagID = cb_Verlag.SelectedValue.ToString();
                     b.Auflage = tb_Auflage.Text;
                     b.Genre.GenreID = cb_Genre.SelectedValue.ToString();
@@ -158,11 +153,14 @@ namespace Bibo_Verwaltung
                     {
                         Copy_picture();
                         b.BildPfad = pictureBox1.ImageLocation;
+                        b.Image = System.IO.File.ReadAllBytes(b.BildPfad);
+                        DateTime dt = DateTime.UtcNow;
+                        b.ImageDate = dt;
                     }
                     b.Update_Buch();
                     b.FillGrid_Buch(ref Grid_Buch);
                 }
-                catch (SqlException)
+                catch
                 {
                     MessageBox.Show("Das Buch konnte nicht gespeichert werden!", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -194,14 +192,14 @@ namespace Bibo_Verwaltung
                     MessageBox.Show("Das Buch konnte nicht gelöscht werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else if (rb_Add_Buch.Checked && !tb_ISBN.Text.Equals("") && !tb_Titel.Text.Equals("") && !cb_Autor.Text.Equals("") && !cb_Verlag.Text.Equals("")
+            else if (rb_Add_Buch.Checked && !checkbox_autor.Checked && !tb_ISBN.Text.Equals("") && !tb_Titel.Text.Equals("") && !cb_Autor.Text.Equals("") && !cb_Verlag.Text.Equals("")
                      && !cb_Genre.Text.Equals("") && !cb_Sprache.Text.Equals("") && !tb_Auflage.Text.Equals("") && !tb_Neupreis.Text.Equals(""))
             {
                 try
                 {
                     b.ISBN = tb_ISBN.Text;
                     b.Titel = tb_Titel.Text;
-                    b.Autor.AutorID = cb_Autor.SelectedValue.ToString();
+                    b.AutorListe.AutorIDs.Add(cb_Autor.SelectedValue.ToString());
                     b.Verlag.VerlagID = cb_Verlag.SelectedValue.ToString();
                     b.Auflage = tb_Auflage.Text;
                     b.Genre.GenreID = cb_Genre.SelectedValue.ToString();
@@ -284,7 +282,6 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
-        //TODO
 
         #region Alle Objekte leeren
         private void bt_clear_buecher_Click(object sender, EventArgs e)
@@ -320,12 +317,13 @@ namespace Bibo_Verwaltung
         #region Textboxfarbe
         private void tb_ISBN_TextChanged(object sender, EventArgs e)
         {
-            (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("ISBN LIKE '{0}%'", tb_ISBN.Text);
+            (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '{0}%' and ISBN LIKE '{1}%'", tb_Titel.Text, tb_ISBN.Text);
             tb_ISBN.BackColor = Color.White;
         }
 
         private void tb_Titel_TextChanged(object sender, EventArgs e)
         {
+            (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '{0}%' and ISBN LIKE '{1}%'", tb_Titel.Text, tb_ISBN.Text);
             tb_Titel.BackColor = Color.White;
         }
         private void tb_Neupreis_TextChanged(object sender, EventArgs e)
@@ -467,7 +465,13 @@ namespace Bibo_Verwaltung
                 tb_ISBN.Text = row.Cells[0].Value.ToString();
                 Buch b = new Buch(tb_ISBN.Text);
                 tb_Titel.Text = b.Titel;
-                cb_Autor.Text = b.Autor.Autorname;
+                string autortext = "";
+                foreach(string s in b.AutorListe.AutorNamen)
+                {
+                    autortext = autortext + s + ", ";
+                }
+                autortext = autortext.Substring(0, autortext.Length - 2);
+                cb_Autor.Text = autortext;
                 cb_Verlag.Text = b.Verlag.Verlagname;
                 cb_Sprache.Text = b.Sprache.Sprachename;
                 tb_Auflage.Text = b.Auflage;
@@ -475,24 +479,52 @@ namespace Bibo_Verwaltung
                 dTP_Erscheinungsdatum.Value = b.Er_datum;
                 cb_Genre.Text = b.Genre.Genrename;
                 tb_anzahl.Text = b.Anzahl.ToString();
-                if(!b.BildPfad.Equals(""))
+                if(b.Image != null)
                 {
                     try
                     {
-                        pictureBox1.ImageLocation = b.BildPfad;
-                        pictureBox1.Image = Image.FromFile(b.BildPfad);
+                        MemoryStream mem = new MemoryStream(b.Image);
+                        pictureBox1.Image = Image.FromStream(mem);
+                        string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Bilder\\" + tb_ISBN.Text + ".png";
+                        if (!File.Exists(filePath))
+                        {
+                            pictureBox1.Image.Save(filePath, ImageFormat.Png);
+                            pictureBox1.ImageLocation = filePath;
+                        }
+                        else
+                        {
+                            Delete_picture(filePath);
+                            pictureBox1.Image.Save(filePath, ImageFormat.Png);
+                            pictureBox1.ImageLocation = filePath;
+                        }
                     }
                     catch
                     {
-                        MessageBox.Show("Das Bild wurde nicht gefunden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    pictureBox1.Image = null;
-                    pictureBox1.ImageLocation = null;
+                    if (!b.BildPfad.Equals(""))
+                    {
+                        try
+                        {
+                            pictureBox1.ImageLocation = b.BildPfad;
+                            pictureBox1.Image = Image.FromFile(b.BildPfad);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Das Bild wurde nicht gefunden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        pictureBox1.Image = null;
+                        pictureBox1.ImageLocation = null;
+                    }
                 }
-                b.Autor.FillCombobox(ref cb_Autor, b.Autor.AutorID);
+
+
+                
                 b.Verlag.FillCombobox(ref cb_Verlag, b.Verlag.VerlagID);
                 b.Genre.FillCombobox(ref cb_Genre, b.Genre.GenreID);
                 b.Sprache.FillCombobox(ref cb_Sprache, b.Sprache.SpracheID);
@@ -597,6 +629,172 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
+        #region Download
+        string htmlData;
+        private string GetPicture()
+        {
+                try
+                {
+                    string location = "";
+                    string s1 = "<img";
+                    string s2 = "src=";
+                    string s3 = "width";
+                    int i1 = htmlData.IndexOf(s1) + 4;
+                    location = htmlData.Substring(i1);
+                    int i2 = location.IndexOf(s2) + 5;
+                    int i3 = location.IndexOf(s3) - 2;
+                    location = location.Substring(i2, i3 - i2);
+                    string bildURL = "http://www.buecher-nach-isbn.info/" + location;
+                    string fileURL = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Downloads\\" + tb_ISBN.Text + "_DOWNLOAD.jpg";
+                    WebClient client = new WebClient();
+                    client.DownloadFile(bildURL, fileURL);
+                    return fileURL;
+                }
+                catch
+                {
+                    MessageBox.Show("Es konnte kein Bild geladen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return "";
+                }
+            
+        }
+        private string GetTitle()
+        {
+            string title;
+            try
+            {
+                string s1 = "\"title\">";
+                string s2 = "</h1>";
+                int i1 = htmlData.IndexOf(s1) + 8;
+                int i2 = htmlData.IndexOf(s2);
+                title = htmlData.Substring(i1, i2 - i1);
+                byte[] bytes = Encoding.Default.GetBytes(title);
+                title = Encoding.UTF8.GetString(bytes);
+                return title;
+            }
+            catch
+            {
+                title = "";
+                return title;
+            }
+                
+        }
+        private string GetVerlag()
+        {
+            string verlag;
+            try
+            {
+
+                string s1 = "\"pubinf\">";
+                string s2 = "\">";
+                string s3 = "<";
+                int i1 = htmlData.IndexOf(s1) + 9;
+                verlag = htmlData.Substring(i1);
+                int i2 = verlag.IndexOf(s2) + 2;
+                verlag = verlag.Substring(i2);
+                int i3 = verlag.IndexOf(s3);
+                verlag = verlag.Substring(0, i3);
+                byte[] bytes = Encoding.Default.GetBytes(verlag);
+                verlag = Encoding.UTF8.GetString(bytes);
+                return verlag;
+            }
+            catch
+            {
+                verlag = "";
+                return verlag;
+            }
+        }
+        private string GetAutor()
+        {
+            string autor;
+            try
+            {
+                autor = htmlData;
+                string s1 = "<h2 class";
+                string s2 = "href=";
+                string s3 = ">";
+                string s4 = "<";
+                int i1 = htmlData.IndexOf(s1);
+                autor = htmlData.Substring(i1);
+                int i2 = autor.IndexOf(s2);
+                autor = autor.Substring(i2);
+                int i3 = autor.IndexOf(s3) + 1;
+                autor = autor.Substring(i3);
+                int i4 = autor.IndexOf(s4);
+                autor = autor.Substring(0, i4);
+                byte[] bytes = Encoding.Default.GetBytes(autor);
+                autor = Encoding.UTF8.GetString(bytes);
+                return autor;
+            }
+            catch
+            {
+                autor = "";
+                return autor;
+            }
+        }
+        #endregion
+
+        #region ISBN-Validierung
+        private bool ValidateISBN()
+        {
+            WebClient client = new WebClient();
+            try
+            {
+                htmlData = client.DownloadString("http://www.buecher-nach-isbn.info/" + tb_ISBN.Text);
+                if (htmlData.Contains("<h1 class=\"title\">"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+           
+            
+                
+        }
+        #endregion
+
+        #region Comboboxen
+        private void Comboboxen()
+        {
+            b.AutorListe.Autor.FillCombobox(ref cb_Autor, 0);
+            b.Verlag.FillCombobox(ref cb_Verlag, 0);
+            b.Genre.FillCombobox(ref cb_Genre, 0);
+            b.Sprache.FillCombobox(ref cb_Sprache, 0);
+        }
+        #endregion
+
+        #region Buttons
+        private void bt_picture_Click(object sender, EventArgs e)
+        {
+            string imgLocation = "";
+            DialogResult dialogResult = MessageBox.Show("Soll das Bild anhand der ISBN automatisch geladen werden?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                imgLocation = GetPicture();
+                pictureBox1.ImageLocation = imgLocation;
+            }
+            if(dialogResult == DialogResult.No)
+            {
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Filter = "Bilddateien(*.png, *.jpg, *.bmp, *.gif)|*.png; *.jpg; *.bmp; *.gif|Alle Dateien(*.*)|*.*";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    imgLocation = dialog.FileName.ToString();
+                    pictureBox1.ImageLocation = imgLocation;
+                }
+            }
+        }
+        private void bt_pic_add_Click(object sender, EventArgs e)
+        {
+            location = pictureBox1.ImageLocation;
+            b.Image = null;
+        }
         private void bt_Excel_Click(object sender, EventArgs e)
         {
             ExcelExport export = new ExcelExport();
@@ -614,133 +812,21 @@ namespace Bibo_Verwaltung
             lb_isbn_vorlage.Visible = false;
             tb_ISBN.Focus();
         }
-        string htmlData;
-        bool test = false;
-        private string getPicture()
-        {
-            if (ValidateISBN())
-            {
-                test = true;
-                try
-                {
-                    List<string> imageList = new List<string>();
-                    string imageHtmlCode = "<img";
-                    string imageSrcCode = @"src=""";
-                    int index = htmlData.IndexOf(imageHtmlCode);
-                    while (index != -1)
-                    {
-                        //Remove previous data
-                        htmlData = htmlData.Substring(index);
+        #endregion
 
-                        //Find the location of the two quotes that mark the image's location
-                        int brackedEnd = htmlData.IndexOf('>'); //make sure data will be inside img tag
-                        int start = htmlData.IndexOf(imageSrcCode) + imageSrcCode.Length;
-                        int end = htmlData.IndexOf('"', start + 1);
-
-                        //Extract the line
-                        if (end > start && start < brackedEnd)
-                        {
-                            string loc = htmlData.Substring(start, end - start);
-
-                            //Store line
-                            imageList.Add(loc);
-                        }
-
-                        //Move index to next image location
-                        if (imageHtmlCode.Length < htmlData.Length)
-                            index = htmlData.IndexOf(imageHtmlCode, imageHtmlCode.Length);
-                        else
-                            index = -1;
-                    }
-                    string bildURL = "http://www.buecher-nach-isbn.info/" + imageList[0];
-                    string fileURL = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Downloads\\" + b.ISBN + "_DOWNLOAD.jpg";
-                    WebClient client = new WebClient();
-                    client.DownloadFile(bildURL, fileURL);
-                    pictureBox1.ImageLocation = fileURL;
-                    return fileURL;
-                }
-                catch
-                {
-                    MessageBox.Show("Es konnte kein Bild geladen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return "";
-                }
-                
-            }
-            else
-            {
-                MessageBox.Show("Es konnte kein Bild geladen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                test = false;
-                return "";
-            }
-            
-        }
-        private bool ValidateISBN()
-        {
-            if(test == false)
-            {
-                WebClient client = new WebClient();
-                try
-                {
-                    htmlData = client.DownloadString("http://www.buecher-nach-isbn.info/" + tb_ISBN.Text);
-                    if (htmlData.Contains("<h1 class=\"title\">"))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return true;
-            }
-            
-                
-        }
-        private void Comboboxen()
-        {
-            b.Autor.FillCombobox(ref cb_Autor, 0);
-            b.Verlag.FillCombobox(ref cb_Verlag, 0);
-            b.Genre.FillCombobox(ref cb_Genre, 0);
-            b.Sprache.FillCombobox(ref cb_Sprache, 0);
-        }
-
-        private void bt_picture_Click(object sender, EventArgs e)
-        {
-            string imgLocation = "";
-            DialogResult dialogResult = MessageBox.Show("Soll das Bild anhand der ISBN automatisch geladen werden?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dialogResult == DialogResult.Yes)
-            {
-                imgLocation = getPicture();
-                pictureBox1.ImageLocation = imgLocation;
-            }
-            if(dialogResult == DialogResult.No)
-            {
-                OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Filter = "Bilddateien(*.png, *.jpg, *.bmp, *.gif)|*.png; *.jpg; *.bmp; *.gif|Alle Dateien(*.*)|*.*";
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    imgLocation = dialog.FileName.ToString();
-                    pictureBox1.ImageLocation = imgLocation;
-                }
-            }
-        }
-
+        #region Bilder Management
         private void Copy_picture()
         {
             string oldLocation = pictureBox1.ImageLocation;
-            string newLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\bilder\\" + tb_ISBN.Text + Path.GetExtension(oldLocation);
-            if(!File.Exists(newLocation))
+            string newLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Bilder\\" + tb_ISBN.Text +".png";
+            if(!File.Exists(newLocation) && oldLocation != newLocation)
             {
-                File.Copy(oldLocation, newLocation);
+                pictureBox1.Image.Save(newLocation, ImageFormat.Png);
                 pictureBox1.ImageLocation = newLocation;
+            }
+            else if(oldLocation == newLocation)
+            {
+
             }
             else
             {
@@ -758,11 +844,67 @@ namespace Bibo_Verwaltung
 
         }
 
-        private void bt_pic_add_Click(object sender, EventArgs e)
+        #endregion
+
+        #region Zoom
+        private void pictureBox1_MouseEnter(object sender, EventArgs e)
         {
-            location = pictureBox1.ImageLocation;
-            pictureBox1.Image = null;
-            pictureBox1.ImageLocation = null;
+            ZoomInOut(true);
+
+        }
+        private void ZoomInOut(bool zoom)
+        {
+            if(pictureBox1.Image != null)
+            {
+                pictureBox2.Image = pictureBox1.Image;
+                if (!zoom)
+                {
+                    pictureBox2.Visible = false;
+                    gb_zoom.Visible = false;
+                }
+                else
+                {
+                    pictureBox2.Visible = true;
+                    gb_zoom.Visible = true;
+                }
+            }
+
+        }
+
+        private void pictureBox1_MouseLeave(object sender, EventArgs e)
+        {
+            ZoomInOut(false);
+        }
+        #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            if (ValidateISBN())
+            {
+                if (b.Verlag.IfContains(GetVerlag()))
+                {
+                    cb_Verlag.Text = GetVerlag();
+                }
+                else
+                {
+                    cb_Verlag.Text = "NICHT" + GetVerlag();
+                }
+                tb_Titel.Text = GetTitle();
+                pictureBox1.ImageLocation = GetPicture();
+            }
+        }
+
+        private void checkbox_autor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkbox_autor.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
         }
     }
 }

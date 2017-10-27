@@ -34,6 +34,7 @@
             this.bibo_VerwaltungDataSet = new Bibo_Verwaltung.Bibo_VerwaltungDataSet();
             this.t_s_spracheTableAdapter = new Bibo_Verwaltung.Bibo_VerwaltungDataSetTableAdapters.t_s_spracheTableAdapter();
             this.gb_buch = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.lb_anzahl = new System.Windows.Forms.Label();
             this.tb_anzahl = new System.Windows.Forms.TextBox();
             this.bt_pic_delete = new System.Windows.Forms.Button();
@@ -68,15 +69,20 @@
             this.lb_Titel = new System.Windows.Forms.Label();
             this.tb_ISBN = new System.Windows.Forms.TextBox();
             this.lb_ISBN = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.Grid_Buch = new System.Windows.Forms.DataGridView();
             this.bt_Schliessen = new System.Windows.Forms.Button();
             this.bt_Excel = new System.Windows.Forms.Button();
+            this.gb_zoom = new System.Windows.Forms.GroupBox();
+            this.checkbox_autor = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).BeginInit();
             this.gb_buch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Buch)).BeginInit();
+            this.gb_zoom.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsspracheBindingSource
@@ -100,6 +106,8 @@
             // 
             // gb_buch
             // 
+            this.gb_buch.Controls.Add(this.checkbox_autor);
+            this.gb_buch.Controls.Add(this.button1);
             this.gb_buch.Controls.Add(this.lb_anzahl);
             this.gb_buch.Controls.Add(this.tb_anzahl);
             this.gb_buch.Controls.Add(this.bt_pic_delete);
@@ -143,6 +151,16 @@
             this.gb_buch.TabStop = false;
             this.gb_buch.Text = "Bücher";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(34, 486);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 50;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // lb_anzahl
             // 
             this.lb_anzahl.AutoSize = true;
@@ -183,6 +201,8 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 46;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseEnter += new System.EventHandler(this.pictureBox1_MouseEnter);
+            this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
             // 
             // bt_picture
             // 
@@ -501,6 +521,19 @@
             this.lb_ISBN.TabIndex = 1;
             this.lb_ISBN.Text = "ISBN:";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox2.Location = new System.Drawing.Point(2, 15);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(758, 507);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 50;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Visible = false;
+            // 
             // Grid_Buch
             // 
             this.Grid_Buch.AllowUserToAddRows = false;
@@ -544,11 +577,33 @@
             this.bt_Excel.UseVisualStyleBackColor = true;
             this.bt_Excel.Click += new System.EventHandler(this.bt_Excel_Click);
             // 
+            // gb_zoom
+            // 
+            this.gb_zoom.Controls.Add(this.pictureBox2);
+            this.gb_zoom.Location = new System.Drawing.Point(410, 16);
+            this.gb_zoom.Margin = new System.Windows.Forms.Padding(2);
+            this.gb_zoom.Name = "gb_zoom";
+            this.gb_zoom.Padding = new System.Windows.Forms.Padding(2, 0, 2, 2);
+            this.gb_zoom.Size = new System.Drawing.Size(762, 524);
+            this.gb_zoom.TabIndex = 51;
+            this.gb_zoom.TabStop = false;
+            // 
+            // checkbox_autor
+            // 
+            this.checkbox_autor.AutoSize = true;
+            this.checkbox_autor.Location = new System.Drawing.Point(127, 138);
+            this.checkbox_autor.Name = "checkbox_autor";
+            this.checkbox_autor.Size = new System.Drawing.Size(18, 17);
+            this.checkbox_autor.TabIndex = 51;
+            this.checkbox_autor.UseVisualStyleBackColor = true;
+            this.checkbox_autor.CheckedChanged += new System.EventHandler(this.checkbox_autor_CheckedChanged);
+            // 
             // w_s_buecher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1182, 553);
+            this.Controls.Add(this.gb_zoom);
             this.Controls.Add(this.bt_Excel);
             this.Controls.Add(this.bt_Schliessen);
             this.Controls.Add(this.Grid_Buch);
@@ -567,7 +622,9 @@
             this.gb_buch.ResumeLayout(false);
             this.gb_buch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Buch)).EndInit();
+            this.gb_zoom.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -615,5 +672,9 @@
         private System.Windows.Forms.Button bt_pic_delete;
         private System.Windows.Forms.TextBox tb_anzahl;
         private System.Windows.Forms.Label lb_anzahl;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.GroupBox gb_zoom;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox checkbox_autor;
     }
 }

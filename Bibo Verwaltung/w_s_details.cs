@@ -21,7 +21,7 @@ namespace Bibo_Verwaltung
         {
             InitializeComponent();
             b.FillGrid_Load_All(ref gv_Details);
-            b.Autor.FillCombobox(ref combo_Autor, -1);
+            b.AutorListe.Autor.FillCombobox(ref combo_Autor, -1);
             b.Verlag.FillCombobox(ref combo_Verlag, -1);
             b.Genre.FillCombobox(ref combo_Genre, -1);
             Kunden_Einblenden();

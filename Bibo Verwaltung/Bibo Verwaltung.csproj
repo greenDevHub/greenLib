@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Autor.cs" />
+    <Compile Include="AutorListe.cs" />
     <Compile Include="Barcode.cs" />
     <Compile Include="BuchID.cs" />
     <Compile Include="Einstellung.cs" />

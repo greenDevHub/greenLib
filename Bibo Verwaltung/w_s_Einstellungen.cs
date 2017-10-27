@@ -15,11 +15,15 @@ namespace Bibo_Verwaltung
     public partial class w_s_einstellungen : Form
     {
         Einstellung set = new Einstellung();
+        int originalHeight = 0;
+        float originalRowHeight = 0;
 
         public w_s_einstellungen()
         {
             InitializeComponent();
             Load();
+            originalHeight = ClientSize.Height;
+            originalRowHeight = tLP.RowStyles[3].Height;
         }
 
         private bool File_Exists()
@@ -88,12 +92,9 @@ namespace Bibo_Verwaltung
                 lb_Benutzername.Visible = false;
                 tb_Passwort.Visible = false;
                 lb_Passwort.Visible = false;
-                bt_save.Location = new Point(258, 214);
-                bt_Laden.Location = new Point(486, 214);
-                bt_Schließen.Location = new Point(258, 288);
-                button1.Location = new Point(436, 288);
-                ClientSize = new Size(764, 428);
-                groupBox1.Size = new Size(716, 381);
+                tLP.RowStyles[3].Height = 0;
+                tLP.RowStyles[4].Height = 0;
+                this.ClientSize = new System.Drawing.Size(ClientSize.Width, (originalHeight*72)/100);
             }
             else if (cb_Security.Text == "SQL Authentifizierung")
             {
@@ -101,12 +102,9 @@ namespace Bibo_Verwaltung
                 lb_Benutzername.Visible = true;
                 tb_Passwort.Visible = true;
                 lb_Passwort.Visible = true;
-                bt_save.Location = new Point(258, 337);
-                bt_Laden.Location = new Point(486, 337);
-                bt_Schließen.Location = new Point(258, 411);
-                button1.Location = new Point(436, 411);
-                ClientSize = new Size(764, 564);
-                groupBox1.Size = new Size(716, 517);
+                tLP.RowStyles[3].Height = originalRowHeight;
+                tLP.RowStyles[4].Height = originalRowHeight;
+                this.ClientSize = new System.Drawing.Size(ClientSize.Width, originalHeight);
             }
         }
 

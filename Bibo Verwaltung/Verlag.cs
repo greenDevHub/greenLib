@@ -77,10 +77,13 @@ namespace Bibo_Verwaltung
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
             adapter.Fill(dt);
-
             con.Close();
         }
-
+        public bool IfContains(string value)
+        {
+            bool contains = dt.AsEnumerable().Any(row => value == row.Field<String>("ver_name"));
+            return contains;
+        }
         public void FillCombobox(ref ComboBox cb, object value)
         {
             FillObject();

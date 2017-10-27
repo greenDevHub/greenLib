@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cb_Security = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.lb_Server = new System.Windows.Forms.Label();
@@ -43,32 +42,9 @@
             this.tb_Passwort = new System.Windows.Forms.TextBox();
             this.lb_Benutzername = new System.Windows.Forms.Label();
             this.tb_Benutzername = new System.Windows.Forms.TextBox();
-            this.groupBox1.SuspendLayout();
+            this.tLP = new System.Windows.Forms.TableLayoutPanel();
+            this.tLP.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.cb_Security);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.lb_Server);
-            this.groupBox1.Controls.Add(this.bt_Laden);
-            this.groupBox1.Controls.Add(this.bt_save);
-            this.groupBox1.Controls.Add(this.tb_Database);
-            this.groupBox1.Controls.Add(this.lb_Database);
-            this.groupBox1.Controls.Add(this.tb_Server);
-            this.groupBox1.Controls.Add(this.lb_Security);
-            this.groupBox1.Controls.Add(this.lb_Passwort);
-            this.groupBox1.Controls.Add(this.bt_Schließen);
-            this.groupBox1.Controls.Add(this.tb_Passwort);
-            this.groupBox1.Controls.Add(this.lb_Benutzername);
-            this.groupBox1.Controls.Add(this.tb_Benutzername);
-            this.groupBox1.Location = new System.Drawing.Point(5, 7);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.groupBox1.Size = new System.Drawing.Size(268, 267);
-            this.groupBox1.TabIndex = 17;
-            this.groupBox1.TabStop = false;
             // 
             // cb_Security
             // 
@@ -76,17 +52,19 @@
             this.cb_Security.Items.AddRange(new object[] {
             "Windows Authentifizierung",
             "SQL Authentifizierung"});
-            this.cb_Security.Location = new System.Drawing.Point(97, 67);
+            this.cb_Security.Location = new System.Drawing.Point(217, 72);
+            this.cb_Security.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cb_Security.Name = "cb_Security";
-            this.cb_Security.Size = new System.Drawing.Size(158, 21);
+            this.cb_Security.Size = new System.Drawing.Size(206, 24);
             this.cb_Security.TabIndex = 3;
             this.cb_Security.TextChanged += new System.EventHandler(this.Visibility);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(164, 172);
+            this.button1.Location = new System.Drawing.Point(4, 208);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 24);
+            this.button1.Size = new System.Drawing.Size(205, 27);
             this.button1.TabIndex = 15;
             this.button1.Text = "Verbindungstest";
             this.button1.UseVisualStyleBackColor = true;
@@ -95,18 +73,19 @@
             // lb_Server
             // 
             this.lb_Server.AutoSize = true;
-            this.lb_Server.Location = new System.Drawing.Point(5, 20);
-            this.lb_Server.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_Server.Location = new System.Drawing.Point(4, 4);
+            this.lb_Server.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lb_Server.Name = "lb_Server";
-            this.lb_Server.Size = new System.Drawing.Size(41, 13);
+            this.lb_Server.Size = new System.Drawing.Size(54, 17);
             this.lb_Server.TabIndex = 3;
             this.lb_Server.Text = "Server:";
             // 
             // bt_Laden
             // 
-            this.bt_Laden.Location = new System.Drawing.Point(182, 141);
+            this.bt_Laden.Location = new System.Drawing.Point(217, 174);
+            this.bt_Laden.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bt_Laden.Name = "bt_Laden";
-            this.bt_Laden.Size = new System.Drawing.Size(72, 24);
+            this.bt_Laden.Size = new System.Drawing.Size(206, 26);
             this.bt_Laden.TabIndex = 14;
             this.bt_Laden.Text = "Laden";
             this.bt_Laden.UseVisualStyleBackColor = true;
@@ -114,9 +93,10 @@
             // 
             // bt_save
             // 
-            this.bt_save.Location = new System.Drawing.Point(97, 141);
+            this.bt_save.Location = new System.Drawing.Point(4, 174);
+            this.bt_save.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bt_save.Name = "bt_save";
-            this.bt_save.Size = new System.Drawing.Size(72, 24);
+            this.bt_save.Size = new System.Drawing.Size(205, 26);
             this.bt_save.TabIndex = 6;
             this.bt_save.Text = "Speichern";
             this.bt_save.UseVisualStyleBackColor = true;
@@ -124,53 +104,56 @@
             // 
             // tb_Database
             // 
-            this.tb_Database.Location = new System.Drawing.Point(97, 42);
+            this.tb_Database.Location = new System.Drawing.Point(217, 38);
+            this.tb_Database.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_Database.Name = "tb_Database";
-            this.tb_Database.Size = new System.Drawing.Size(158, 20);
+            this.tb_Database.Size = new System.Drawing.Size(206, 22);
             this.tb_Database.TabIndex = 2;
             // 
             // lb_Database
             // 
             this.lb_Database.AutoSize = true;
-            this.lb_Database.Location = new System.Drawing.Point(5, 45);
-            this.lb_Database.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_Database.Location = new System.Drawing.Point(4, 38);
+            this.lb_Database.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lb_Database.Name = "lb_Database";
-            this.lb_Database.Size = new System.Drawing.Size(63, 13);
+            this.lb_Database.Size = new System.Drawing.Size(81, 17);
             this.lb_Database.TabIndex = 7;
             this.lb_Database.Text = "Datenbank:";
             // 
             // tb_Server
             // 
-            this.tb_Server.Location = new System.Drawing.Point(97, 18);
+            this.tb_Server.Location = new System.Drawing.Point(217, 4);
+            this.tb_Server.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_Server.Name = "tb_Server";
-            this.tb_Server.Size = new System.Drawing.Size(158, 20);
+            this.tb_Server.Size = new System.Drawing.Size(206, 22);
             this.tb_Server.TabIndex = 1;
             // 
             // lb_Security
             // 
             this.lb_Security.AutoSize = true;
-            this.lb_Security.Location = new System.Drawing.Point(5, 69);
-            this.lb_Security.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_Security.Location = new System.Drawing.Point(4, 72);
+            this.lb_Security.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lb_Security.Name = "lb_Security";
-            this.lb_Security.Size = new System.Drawing.Size(57, 13);
+            this.lb_Security.Size = new System.Drawing.Size(75, 17);
             this.lb_Security.TabIndex = 8;
             this.lb_Security.Text = "Sicherheit:";
             // 
             // lb_Passwort
             // 
             this.lb_Passwort.AutoSize = true;
-            this.lb_Passwort.Location = new System.Drawing.Point(5, 120);
-            this.lb_Passwort.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_Passwort.Location = new System.Drawing.Point(4, 140);
+            this.lb_Passwort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lb_Passwort.Name = "lb_Passwort";
-            this.lb_Passwort.Size = new System.Drawing.Size(53, 13);
+            this.lb_Passwort.Size = new System.Drawing.Size(69, 17);
             this.lb_Passwort.TabIndex = 13;
             this.lb_Passwort.Text = "Passwort:";
             // 
             // bt_Schließen
             // 
-            this.bt_Schließen.Location = new System.Drawing.Point(97, 172);
+            this.bt_Schließen.Location = new System.Drawing.Point(217, 208);
+            this.bt_Schließen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bt_Schließen.Name = "bt_Schließen";
-            this.bt_Schließen.Size = new System.Drawing.Size(61, 24);
+            this.bt_Schließen.Size = new System.Drawing.Size(206, 27);
             this.bt_Schließen.TabIndex = 7;
             this.bt_Schließen.Text = "Leeren";
             this.bt_Schließen.UseVisualStyleBackColor = true;
@@ -178,50 +161,81 @@
             // 
             // tb_Passwort
             // 
-            this.tb_Passwort.Location = new System.Drawing.Point(97, 117);
+            this.tb_Passwort.Location = new System.Drawing.Point(217, 140);
+            this.tb_Passwort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_Passwort.Name = "tb_Passwort";
-            this.tb_Passwort.Size = new System.Drawing.Size(158, 20);
+            this.tb_Passwort.Size = new System.Drawing.Size(206, 22);
             this.tb_Passwort.TabIndex = 5;
             this.tb_Passwort.UseSystemPasswordChar = true;
             // 
             // lb_Benutzername
             // 
             this.lb_Benutzername.AutoSize = true;
-            this.lb_Benutzername.Location = new System.Drawing.Point(5, 95);
-            this.lb_Benutzername.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_Benutzername.Location = new System.Drawing.Point(4, 106);
+            this.lb_Benutzername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lb_Benutzername.Name = "lb_Benutzername";
-            this.lb_Benutzername.Size = new System.Drawing.Size(78, 13);
+            this.lb_Benutzername.Size = new System.Drawing.Size(104, 17);
             this.lb_Benutzername.TabIndex = 10;
             this.lb_Benutzername.Text = "Benutzername:";
             // 
             // tb_Benutzername
             // 
-            this.tb_Benutzername.Location = new System.Drawing.Point(97, 93);
+            this.tb_Benutzername.Location = new System.Drawing.Point(217, 106);
+            this.tb_Benutzername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_Benutzername.Name = "tb_Benutzername";
-            this.tb_Benutzername.Size = new System.Drawing.Size(158, 20);
+            this.tb_Benutzername.Size = new System.Drawing.Size(206, 22);
             this.tb_Benutzername.TabIndex = 4;
+            // 
+            // tLP
+            // 
+            this.tLP.ColumnCount = 2;
+            this.tLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tLP.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tLP.Controls.Add(this.tb_Server, 1, 0);
+            this.tLP.Controls.Add(this.cb_Security, 1, 2);
+            this.tLP.Controls.Add(this.lb_Server, 0, 0);
+            this.tLP.Controls.Add(this.button1, 0, 6);
+            this.tLP.Controls.Add(this.tb_Database, 1, 1);
+            this.tLP.Controls.Add(this.bt_Laden, 1, 5);
+            this.tLP.Controls.Add(this.lb_Database, 0, 1);
+            this.tLP.Controls.Add(this.bt_save, 0, 5);
+            this.tLP.Controls.Add(this.lb_Security, 0, 2);
+            this.tLP.Controls.Add(this.tb_Benutzername, 1, 3);
+            this.tLP.Controls.Add(this.lb_Benutzername, 0, 3);
+            this.tLP.Controls.Add(this.bt_Schließen, 1, 6);
+            this.tLP.Controls.Add(this.tb_Passwort, 1, 4);
+            this.tLP.Controls.Add(this.lb_Passwort, 0, 4);
+            this.tLP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tLP.Location = new System.Drawing.Point(0, 0);
+            this.tLP.Name = "tLP";
+            this.tLP.RowCount = 7;
+            this.tLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tLP.Size = new System.Drawing.Size(427, 239);
+            this.tLP.TabIndex = 18;
             // 
             // w_s_einstellungen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(278, 278);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(427, 239);
+            this.Controls.Add(this.tLP);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "w_s_einstellungen";
             this.Text = "Einstellungen";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.tLP.ResumeLayout(false);
+            this.tLP.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox cb_Security;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lb_Server;
@@ -236,5 +250,6 @@
         private System.Windows.Forms.TextBox tb_Passwort;
         private System.Windows.Forms.Label lb_Benutzername;
         private System.Windows.Forms.TextBox tb_Benutzername;
+        private System.Windows.Forms.TableLayoutPanel tLP;
     }
 }

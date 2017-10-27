@@ -202,6 +202,49 @@ CREATE TABLE [dbo].[t_s_verlag](
 	END
 
 use Bibo_Verwaltung
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_autorListe]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_autorListe]
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_autorListe]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[t_s_autorListe](
+	[a_id] [int] IDENTITY (1,1) NOT NULL,
+	[a_0] [int] NOT NULL,
+	[a_1] [int], 
+	[a_2] [int],
+	[a_3] [int], 
+	[a_4] [int], 
+	[a_5] [int], 
+	[a_6] [int], 
+	[a_7] [int], 
+	[a_8] [int], 
+	[a_9] [int], 
+	PRIMARY KEY (a_id),
+	FOREIGN KEY (a_0)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_1)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_2)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_3)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_4)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_5)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_6)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_7)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_8)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_9)
+		REFERENCES t_s_autor (au_id))
+	Insert INTO t_s_autorListe (a_0) VALUES (1)
+	Select * from t_s_autorListe
+	END
+
+use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_zustand]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_zustand]
 GO
@@ -232,17 +275,19 @@ CREATE TABLE [dbo].[t_s_buecher](
 	[buch_verlag_id] [int] NOT NULL,
 	[buch_erscheinungsdatum] [date] NOT NULL,
 	[buch_sprache_id] [int] NOT NULL,
-	[buch_auflage] [nvarchar](128) NOT NULL,
+	[buch_auflage] [nvarchar](128),
 	[buch_neupreis] [numeric](18,2) NOT NULL,
 	[buch_bild] [nvarchar] (256),
 	[buch_anzahl] [int] NOT NULL,
+	[buch_image] [varbinary](max),
+	[buch_imageDate] [datetime],
 
 
 	PRIMARY KEY (buch_isbn),
 	FOREIGN KEY (buch_genre_id)
 		REFERENCES t_s_genre (ger_id),
 	FOREIGN KEY (buch_autor_id)
-		REFERENCES t_s_autor (au_id),
+		REFERENCES t_s_autorListe (a_id),
 	FOREIGN KEY (buch_verlag_id)
 		REFERENCES t_s_verlag (ver_id),
 	FOREIGN KEY (buch_sprache_id)
