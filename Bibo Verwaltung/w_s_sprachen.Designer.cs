@@ -60,6 +60,7 @@
             this.bt_Uebernehmen.TabIndex = 51;
             this.bt_Uebernehmen.Text = "Übernehmen";
             this.bt_Uebernehmen.UseVisualStyleBackColor = true;
+            this.bt_Uebernehmen.Click += new System.EventHandler(this.bt_Uebernehmen_Click);
             // 
             // tb_Suchen
             // 
