@@ -125,7 +125,8 @@ CREATE TABLE [dbo].[t_s_autor](
 	[au_id] [int] IDENTITY (1,1) NOT NULL,
 	[au_autor] [nvarchar] (128) NOT NULL,
 	PRIMARY KEY (au_id))
-END
+	Select * from t_s_autor
+	END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_genre]') AND type in (N'U'))
@@ -137,7 +138,8 @@ CREATE TABLE [dbo].[t_s_genre](
 	[ger_id] [int] IDENTITY (1,1) NOT NULL,
 	[ger_name] [nvarchar] (128) NOT NULL,
 	PRIMARY KEY (ger_id))
-END
+	Select * from t_s_genre
+	END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_kunden]') AND type in (N'U'))
@@ -158,7 +160,8 @@ CREATE TABLE [dbo].[t_s_kunden](
 	[kunde_mail] [nvarchar](128) NOT NULL,
 	[kunde_telefonnummer] [nvarchar](128) NOT NULL,
 	PRIMARY KEY (kunde_id))
-END
+	Select * from t_s_kunden
+	END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_sprache]') AND type in (N'U'))
@@ -170,7 +173,8 @@ CREATE TABLE [dbo].[t_s_sprache](
 	[sprach_id] [int] IDENTITY (1,1) NOT NULL,
 	[sprach_name][nvarchar] (128) NOT NULL,
 	PRIMARY KEY (sprach_id))
-END
+	Select * from t_s_sprache
+	END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_verlag]') AND type in (N'U'))
@@ -182,7 +186,50 @@ CREATE TABLE [dbo].[t_s_verlag](
 	[ver_id] [int] IDENTITY (1,1) NOT NULL,
 	[ver_name] [nvarchar] (128) NOT NULL,
 	PRIMARY KEY (ver_id))
-END
+	Select * from t_s_verlag
+	END
+
+use Bibo_Verwaltung
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_autorListe]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_autorListe]
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_autorListe]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[t_s_autorListe](
+	[a_id] [int] IDENTITY (1,1) NOT NULL,
+	[a_0] [int] NOT NULL,
+	[a_1] [int], 
+	[a_2] [int],
+	[a_3] [int], 
+	[a_4] [int], 
+	[a_5] [int], 
+	[a_6] [int], 
+	[a_7] [int], 
+	[a_8] [int], 
+	[a_9] [int], 
+	PRIMARY KEY (a_id),
+	FOREIGN KEY (a_0)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_1)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_2)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_3)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_4)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_5)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_6)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_7)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_8)
+		REFERENCES t_s_autor (au_id),
+	FOREIGN KEY (a_9)
+		REFERENCES t_s_autor (au_id))
+	Select * from t_s_autorListe
+	END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_zustand]') AND type in (N'U'))
@@ -191,11 +238,11 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_zustand]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[t_s_zustand](
-	[zu_id] [int] NOT NULL,
+	[zu_id] [int] IDENTITY (1,1) NOT NULL,
 	[zu_zustand] [nvarchar](128) NOT NULL,
-	[zu_verleihfähig] [nvarchar](16) NOT NULL,
 	PRIMARY KEY (zu_id))
-END
+	Select * from t_s_zustand
+	END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buecher]') AND type in (N'U'))
@@ -211,19 +258,26 @@ CREATE TABLE [dbo].[t_s_buecher](
 	[buch_verlag_id] [int] NOT NULL,
 	[buch_erscheinungsdatum] [date] NOT NULL,
 	[buch_sprache_id] [int] NOT NULL,
-	[buch_auflage] [nvarchar](128) NOT NULL,
+	[buch_auflage] [nvarchar](128),
 	[buch_neupreis] [numeric](18,2) NOT NULL,
+	[buch_bild] [nvarchar] (256),
+	[buch_anzahl] [int] NOT NULL,
+	[buch_image] [varbinary](max),
+	[buch_imageDate] [datetime],
+
 
 	PRIMARY KEY (buch_isbn),
 	FOREIGN KEY (buch_genre_id)
 		REFERENCES t_s_genre (ger_id),
 	FOREIGN KEY (buch_autor_id)
-		REFERENCES t_s_autor (au_id),
+		REFERENCES t_s_autorListe (a_id),
 	FOREIGN KEY (buch_verlag_id)
 		REFERENCES t_s_verlag (ver_id),
 	FOREIGN KEY (buch_sprache_id)
 		REFERENCES t_s_sprache (sprach_id))
-END
+
+	Select * from t_s_buecher
+	END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buchid]') AND type in (N'U'))
@@ -242,7 +296,9 @@ CREATE TABLE [dbo].[t_s_buchid](
 		REFERENCES t_s_zustand (zu_id),
 	FOREIGN KEY (bu_isbn)
 		REFERENCES t_s_buecher (buch_isbn))
-END
+
+	Select * from t_s_buchid
+	END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_bd_ausgeliehen]') AND type in (N'U'))
@@ -256,9 +312,12 @@ CREATE TABLE [dbo].[t_bd_ausgeliehen](
 	[aus_leihdatum] [date] NOT NULL,
 	[aus_rückgabedatum] [date] NOT NULL,
 	[aus_kundenid] [int] NOT NULL,
+	[aus_barcode] [nvarchar] (128) NOT NULL,
 	PRIMARY KEY (aus_leihnummer),
 	FOREIGN KEY (aus_buchid)
 		REFERENCES t_s_buchid (bu_id),
     FOREIGN KEY (aus_kundenid)
 	    REFERENCES t_s_kunden (kunde_id))
-END
+
+	Select * from t_bd_ausgeliehen
+	END

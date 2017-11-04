@@ -9,6 +9,8 @@ using System.Net;
 using System.IO;
 using System.Drawing.Imaging;
 using System.Text;
+using System.Linq;
+using System.Threading;
 
 namespace Bibo_Verwaltung
 {
@@ -21,6 +23,12 @@ namespace Bibo_Verwaltung
             Comboboxen();
             pictureBox2.Visible = false;
             gb_zoom.Visible = false;
+            comboBox1.Visible = false;
+            //bt_expand.FlatStyle = FlatStyle.Flat;
+            //bt_expand.FlatAppearance.BorderColor = BackColor;
+            //bt_expand.FlatAppearance.MouseOverBackColor = BackColor;
+            //bt_expand.FlatAppearance.MouseDownBackColor = BackColor;
+            comboBox1.DropDownHeight = 1;
         }
         private string location = "";
         Buch b = new Buch();
@@ -127,38 +135,164 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
+        private void UpdateBuch()
+        {
+            b.ISBN = tb_ISBN.Text;
+            b.Titel = tb_Titel.Text;
+            b.Verlag.VerlagID = cb_Verlag.SelectedValue.ToString();
+            b.Genre.GenreID = cb_Genre.SelectedValue.ToString();
+            b.Sprache.SpracheID = cb_Sprache.SelectedValue.ToString();
+            if (tb_Auflage.Text.Equals(""))
+            {
+                b.Auflage = null;
+            }
+            else
+            {
+                b.Auflage = tb_Auflage.Text;
+
+            }
+            if (tb_Neupreis.Text.Equals(""))
+            {
+                b.Neupreis = 0;
+            }
+            else
+            {
+                b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
+            }
+            b.Er_datum = dTP_Erscheinungsdatum.Value;
+            b.AutorListe.AutorListeID = b.GetAutorID(tb_ISBN.Text);
+
+            if (pictureBox1.ImageLocation == null || pictureBox1.ImageLocation.Equals(""))
+            {
+                b.BildPfad = "";
+                Delete_picture(location);
+                b.ImageDate = (DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                b.Image = null;
+            }
+            else
+            {
+                Copy_picture();
+                b.BildPfad = pictureBox1.ImageLocation;
+                b.Image = System.IO.File.ReadAllBytes(b.BildPfad);
+                b.ImageDate = DateTime.Parse(DateTime.UtcNow.ToShortTimeString());
+            }
+            b.Update_Buch();
+            b.FillGrid_Buch(ref Grid_Buch);
+        }
+        private void AddBuch()
+        {
+            b.ISBN = tb_ISBN.Text;
+            b.Titel = tb_Titel.Text;
+            b.Verlag.VerlagID = b.Verlag.GetID(cb_Verlag.Text);
+            if (tb_Auflage.Text.Equals(""))
+            {
+                b.Auflage = null;
+            }
+            else
+            {
+                b.Auflage = tb_Auflage.Text;
+
+            }
+            b.Genre.GenreID = cb_Genre.SelectedValue.ToString();
+            b.Sprache.SpracheID = cb_Sprache.SelectedValue.ToString();
+            if (tb_Neupreis.Text.Equals(""))
+            {
+                b.Neupreis = 0;
+            }
+            else
+            {
+                b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
+            }
+            b.Er_datum = dTP_Erscheinungsdatum.Value;
+            b.Anzahl = 0;
+            if (pictureBox1.ImageLocation == null || pictureBox1.ImageLocation.Equals(""))
+            {
+                b.BildPfad = "";
+                Delete_picture(location);
+                b.ImageDate = (DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                b.Image = null;
+            }
+            else
+            {
+                Copy_picture();
+                b.BildPfad = pictureBox1.ImageLocation;
+                b.Image = System.IO.File.ReadAllBytes(b.BildPfad);
+                b.ImageDate = DateTime.Parse(DateTime.UtcNow.ToShortTimeString());
+            }
+            if (ifDownloaded)
+            {
+                b.Add_Buch();
+                Form Buchid = new w_s_buchid();
+                Buchid.ShowDialog(this);
+                b.FillGrid_Buch(ref Grid_Buch);
+                Clear_All();
+            }
+            else if(!ifDownloaded && ValidateISBN())
+            {
+                b.Add_Buch();
+                Form Buchid = new w_s_buchid();
+                Buchid.ShowDialog(this);
+                b.FillGrid_Buch(ref Grid_Buch);
+                Clear_All();
+            }
+            else 
+            {
+                DialogResult dialogResult = MessageBox.Show("Die ISBN konnte nicht Verifiziert werden. Trotzdem speichern?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    b.Add_Buch();
+                    Form Buchid = new w_s_buchid();
+                    Buchid.ShowDialog(this);
+                    b.FillGrid_Buch(ref Grid_Buch);
+                    Clear_All();
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    tb_ISBN.Focus();
+                }
+            }
+        }
         #region Save/Update/Delete Buch
         private void Save_Buecher(object sender, EventArgs e)
         {
             if (rb_Update_Buch.Checked && !checkbox_autor.Checked && !tb_ISBN.Text.Equals("") && !tb_Titel.Text.Equals("") && !cb_Autor.Text.Equals("") && !cb_Verlag.Text.Equals("")
-                && !cb_Genre.Text.Equals("") && !cb_Sprache.Text.Equals("") && !tb_Auflage.Text.Equals("") && !tb_Neupreis.Text.Equals(""))
+                && !cb_Genre.Text.Equals("") && !cb_Sprache.Text.Equals(""))
             {
                 try
                 {
-                    b.ISBN = tb_ISBN.Text;
-                    b.Titel = tb_Titel.Text;
-                    b.AutorListe.AutorIDs.Add(cb_Autor.SelectedValue.ToString());
-                    b.Verlag.VerlagID = cb_Verlag.SelectedValue.ToString();
-                    b.Auflage = tb_Auflage.Text;
-                    b.Genre.GenreID = cb_Genre.SelectedValue.ToString();
-                    b.Sprache.SpracheID = cb_Sprache.SelectedValue.ToString();
-                    b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
-                    b.Er_datum = dTP_Erscheinungsdatum.Value;
-                    if(pictureBox1.ImageLocation == null || pictureBox1.ImageLocation.Equals(""))
+                    b.AutorListe.AutorIDs.Clear();
+                    b.AutorListe.AutorIDs.Add(b.AutorListe.Autor.GetID(cb_Autor.Text));
+                    UpdateBuch();
+                }
+                catch
+                {
+                    MessageBox.Show("Das Buch konnte nicht gespeichert werden!", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if(rb_Update_Buch.Checked && checkbox_autor.Checked && !tb_ISBN.Text.Equals("") && !tb_Titel.Text.Equals("") && !cb_Autor.Text.Equals("") && !cb_Verlag.Text.Equals("")
+                && !cb_Genre.Text.Equals("") && !cb_Sprache.Text.Equals(""))
+            {
+                try
+                {
+                    for(int i = 0; i < 10;)
                     {
-                        b.BildPfad = "";
-                        Delete_picture(location);
+                        try
+                        {
+                            if (b.AutorListe.AutorIDs[i] == null)
+                            {
+                            }
+                            i++;
+                        }
+                        catch
+                        {
+                            b.AutorListe.AutorIDs.Add(null);
+                            i++;
+                        }
+                        
+
                     }
-                    else
-                    {
-                        Copy_picture();
-                        b.BildPfad = pictureBox1.ImageLocation;
-                        b.Image = System.IO.File.ReadAllBytes(b.BildPfad);
-                        DateTime dt = DateTime.UtcNow;
-                        b.ImageDate = dt;
-                    }
-                    b.Update_Buch();
-                    b.FillGrid_Buch(ref Grid_Buch);
+                    UpdateBuch();
                 }
                 catch
                 {
@@ -175,6 +309,7 @@ namespace Bibo_Verwaltung
                     {
                         BuchID buchid = new BuchID();
                         buchid.DeleteWhereISBN(tb_ISBN.Text);
+                        b.AutorListe.AutorListeID = b.GetAutorID(tb_ISBN.Text);
                         b.ISBN = tb_ISBN.Text;
                         b.Delete_Buch();
                         Delete_picture(location);
@@ -193,56 +328,80 @@ namespace Bibo_Verwaltung
                 }
             }
             else if (rb_Add_Buch.Checked && !checkbox_autor.Checked && !tb_ISBN.Text.Equals("") && !tb_Titel.Text.Equals("") && !cb_Autor.Text.Equals("") && !cb_Verlag.Text.Equals("")
-                     && !cb_Genre.Text.Equals("") && !cb_Sprache.Text.Equals("") && !tb_Auflage.Text.Equals("") && !tb_Neupreis.Text.Equals(""))
+                     && !cb_Genre.Text.Equals("") && !cb_Sprache.Text.Equals(""))
             {
                 try
                 {
-                    b.ISBN = tb_ISBN.Text;
-                    b.Titel = tb_Titel.Text;
-                    b.AutorListe.AutorIDs.Add(cb_Autor.SelectedValue.ToString());
-                    b.Verlag.VerlagID = cb_Verlag.SelectedValue.ToString();
-                    b.Auflage = tb_Auflage.Text;
-                    b.Genre.GenreID = cb_Genre.SelectedValue.ToString();
-                    b.Sprache.SpracheID = cb_Sprache.SelectedValue.ToString();
-                    b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
-                    b.Er_datum = dTP_Erscheinungsdatum.Value;
-                    b.Anzahl = 0;
-                    if(pictureBox1.ImageLocation == null || pictureBox1.ImageLocation.Equals(""))
+                    if (ifDownloaded)
                     {
-                        b.BildPfad = "";
+                        if (!ifVerlagExists)
+                        {
+                            b.Verlag.Add(cb_Verlag.Text);
+                            int test = int.Parse(b.Verlag.GetID(cb_Verlag.Text));
+                            b.Verlag.FillCombobox(ref cb_Verlag, test);
+                        }
+                        if (needAutor.Count > 0)
+                        {
+                            b.AutorListe.Autor.Add(needAutor);
+                        }
+                        b.AutorListe.AutorIDs.Clear();
+                        b.AutorListe.AutorIDs.Add(b.AutorListe.Autor.GetID(cb_Autor.Text));
+                        b.AutorListe.Autor.FillCombobox(ref cb_Autor, b.AutorListe.AutorIDs[0]);
+                        //b.AutorListe.AutorIDs.Add(cb_Autor.SelectedValue.ToString());
+                        for (int i = 1; i < 10;)
+                        {
+                            b.AutorListe.AutorIDs.Add(null);
+                            i++;
+                        }
+                        AddBuch();
                     }
                     else
                     {
-                        Copy_picture();
-                        b.BildPfad = pictureBox1.ImageLocation;
-                    }
-                    if (ValidateISBN())
-                    {
-                        b.Add_Buch();
-                        Form Buchid = new w_s_buchid();
-                        Buchid.ShowDialog(this);
-                        b.FillGrid_Buch(ref Grid_Buch);
-                        Clear_All();
-                    }
-                    else
-                    {
-                        DialogResult dialogResult = MessageBox.Show("Die ISBN konnte nicht Verifiziert werden. Trotzdem speichern?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                        if(dialogResult == DialogResult.Yes)
+                        b.AutorListe.AutorIDs.Clear();
+                        b.AutorListe.AutorIDs.Add(cb_Autor.SelectedValue.ToString());
+                        for (int i = 1; i < 10;)
                         {
-                            b.Add_Buch();
-                            Form Buchid = new w_s_buchid();
-                            Buchid.ShowDialog(this);
-                            b.FillGrid_Buch(ref Grid_Buch);
-                            Clear_All();
+                            b.AutorListe.AutorIDs.Add(null);
+                            i++;
                         }
-                        else if(dialogResult == DialogResult.No)
-                        {
-                            tb_ISBN.Focus();
-                        }
+                        AddBuch();
                     }
-                    
+
                 }
-                catch (SqlException)
+                catch (SqlException exe)
+                {
+                    MessageBox.Show(exe + "  Das Buch konnte nicht hinzugefügt werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if(rb_Add_Buch.Checked && checkbox_autor.Checked && !tb_ISBN.Text.Equals("") && !tb_Titel.Text.Equals("") && !cb_Autor.Text.Equals("") && !cb_Verlag.Text.Equals("")
+                     && !cb_Genre.Text.Equals("") && !cb_Sprache.Text.Equals(""))
+            {
+                try
+                {
+                    if (ifDownloaded)
+                    {
+                        if (!ifVerlagExists)
+                        {
+                            b.Verlag.Add(cb_Verlag.Text);
+                            int test = int.Parse(b.Verlag.GetID(cb_Verlag.Text));
+                            b.Verlag.FillCombobox(ref cb_Autor, test);
+                        }
+                        if(needAutor.Count > 0)
+                        {
+                            b.AutorListe.Autor.Add(needAutor);
+                            foreach(string s in b.AutorListe.AutorNamen)
+                            {
+                                b.AutorListe.AutorIDs.Add(b.AutorListe.Autor.GetID(s));
+                            }
+                        }
+                        AddBuch();
+                    }
+                    else
+                    {
+                        AddBuch();
+                    }
+                }
+                catch
                 {
                     MessageBox.Show("Das Buch konnte nicht hinzugefügt werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -291,6 +450,7 @@ namespace Bibo_Verwaltung
 
         private void Clear_All()
         {
+            checkbox_autor.Checked = false;
             tb_ISBN.Text = "";
             tb_Titel.Text = "";
             cb_Autor.Text = "";
@@ -300,6 +460,8 @@ namespace Bibo_Verwaltung
             tb_Auflage.Text = "";
             tb_Neupreis.Text = "";
             tb_anzahl.Text = "";
+            pictureBox2.Image = null;
+            pictureBox2.ImageLocation = null;
             pictureBox1.Image = null;
             pictureBox1.ImageLocation = null;
             tb_ISBN.BackColor = Color.White;
@@ -466,6 +628,37 @@ namespace Bibo_Verwaltung
                 Buch b = new Buch(tb_ISBN.Text);
                 tb_Titel.Text = b.Titel;
                 string autortext = "";
+                if(b.AutorListe.AutorNamen.Count > 1)
+                {
+                    checkbox_autor.Checked = true;
+                    //for(int i = 0; i<10;)
+                    //{
+                        //if(b.AutorListe.AutorIDs[i] != null)
+                        //{
+                            List<int> index = new List<int>();
+                            foreach (object value in checkedListBox1.Items)
+                            {
+                                DataRowView castedItem = value as DataRowView;
+                                string newString = castedItem["au_autor"].ToString();
+                                if (b.AutorListe.AutorNamen.Contains(newString))
+                                {
+                                    int test = checkedListBox1.Items.IndexOf(value);
+                                    index.Add(test);
+                                }
+                            }
+                            foreach(int i1 in index)
+                            {
+                                checkedListBox1.SetItemChecked(i1, true);
+                            }
+
+                        //}
+                        //i++;
+                    //}
+                }
+                else
+                {
+                    checkbox_autor.Checked = false;
+                }
                 foreach(string s in b.AutorListe.AutorNamen)
                 {
                     autortext = autortext + s + ", ";
@@ -509,7 +702,6 @@ namespace Bibo_Verwaltung
                         try
                         {
                             pictureBox1.ImageLocation = b.BildPfad;
-                            pictureBox1.Image = Image.FromFile(b.BildPfad);
                         }
                         catch
                         {
@@ -599,25 +791,6 @@ namespace Bibo_Verwaltung
             {
                 cb_Sprache.BackColor = Color.White;
             }
-
-            if (tb_Auflage.Text.Equals(""))
-            {
-                tb_Auflage.BackColor = Color.Red;
-            }
-            else
-            {
-                tb_Auflage.BackColor = Color.White;
-            }
-
-            if (tb_Neupreis.Text.Equals(""))
-            {
-                tb_Neupreis.BackColor = Color.Red;
-            }
-            else
-            {
-                tb_Neupreis.BackColor = Color.White;
-            }
-
             if (dTP_Erscheinungsdatum.Text.Equals(""))
             {
                 dTP_Erscheinungsdatum.BackColor = Color.Red;
@@ -669,6 +842,7 @@ namespace Bibo_Verwaltung
                 title = htmlData.Substring(i1, i2 - i1);
                 byte[] bytes = Encoding.Default.GetBytes(title);
                 title = Encoding.UTF8.GetString(bytes);
+                title = System.Net.WebUtility.HtmlDecode(title);
                 return title;
             }
             catch
@@ -695,6 +869,7 @@ namespace Bibo_Verwaltung
                 verlag = verlag.Substring(0, i3);
                 byte[] bytes = Encoding.Default.GetBytes(verlag);
                 verlag = Encoding.UTF8.GetString(bytes);
+                verlag = System.Net.WebUtility.HtmlDecode(verlag);
                 return verlag;
             }
             catch
@@ -703,32 +878,51 @@ namespace Bibo_Verwaltung
                 return verlag;
             }
         }
-        private string GetAutor()
+        private List<string> GetAutor()
         {
+            List<string> autoren = new List<string>();
             string autor;
             try
             {
                 autor = htmlData;
                 string s1 = "<h2 class";
+                string s1end = "</h2>";
                 string s2 = "href=";
                 string s3 = ">";
                 string s4 = "<";
                 int i1 = htmlData.IndexOf(s1);
                 autor = htmlData.Substring(i1);
-                int i2 = autor.IndexOf(s2);
-                autor = autor.Substring(i2);
-                int i3 = autor.IndexOf(s3) + 1;
-                autor = autor.Substring(i3);
-                int i4 = autor.IndexOf(s4);
-                autor = autor.Substring(0, i4);
-                byte[] bytes = Encoding.Default.GetBytes(autor);
-                autor = Encoding.UTF8.GetString(bytes);
-                return autor;
+                int i2 = autor.IndexOf(s1end);
+                autor = autor.Substring(0,i2);
+                autor = autor.Substring(autor.IndexOf(s3) + 1);
+                for (int i = 0; i == 0;)
+                {
+                    try
+                    {
+                        string newautor;
+                        newautor = autor.Substring(autor.IndexOf(s3) + 1);
+                        newautor = newautor.Substring(newautor.IndexOf(s3) + 1);
+                        int i3 = newautor.IndexOf(s4);
+                        newautor = newautor.Substring(0, i3);
+                        int i6 = autor.IndexOf(newautor);
+                        autor = autor.Substring(i6);
+                        byte[] bytes = Encoding.Default.GetBytes(newautor);
+                        newautor = Encoding.UTF8.GetString(bytes);
+                        newautor = System.Net.WebUtility.HtmlDecode(newautor);
+                        autoren.Add(newautor);
+                    }
+                    catch
+                    {
+                        i++;
+                    }
+                }
+
+                
+                return autoren;
             }
             catch
             {
-                autor = "";
-                return autor;
+                return autoren;
             }
         }
         #endregion
@@ -740,6 +934,7 @@ namespace Bibo_Verwaltung
             try
             {
                 htmlData = client.DownloadString("http://www.buecher-nach-isbn.info/" + tb_ISBN.Text);
+
                 if (htmlData.Contains("<h1 class=\"title\">"))
                 {
                     return true;
@@ -749,8 +944,27 @@ namespace Bibo_Verwaltung
                     return false;
                 }
             }
-            catch
+            catch(Exception e)
             {
+                try {
+                    client.UseDefaultCredentials = true;
+                    client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                    htmlData = client.DownloadString("http://www.buecher-nach-isbn.info/" + tb_ISBN.Text);
+
+                    if (htmlData.Contains("<h1 class=\"title\">"))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+                MessageBox.Show(e.ToString());
                 return false;
             }
            
@@ -762,6 +976,7 @@ namespace Bibo_Verwaltung
         #region Comboboxen
         private void Comboboxen()
         {
+            b.AutorListe.Autor.FillList(ref checkedListBox1);
             b.AutorListe.Autor.FillCombobox(ref cb_Autor, 0);
             b.Verlag.FillCombobox(ref cb_Verlag, 0);
             b.Genre.FillCombobox(ref cb_Genre, 0);
@@ -776,6 +991,7 @@ namespace Bibo_Verwaltung
             DialogResult dialogResult = MessageBox.Show("Soll das Bild anhand der ISBN automatisch geladen werden?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
+                ValidateISBN();
                 imgLocation = GetPicture();
                 pictureBox1.ImageLocation = imgLocation;
             }
@@ -793,6 +1009,8 @@ namespace Bibo_Verwaltung
         private void bt_pic_add_Click(object sender, EventArgs e)
         {
             location = pictureBox1.ImageLocation;
+            pictureBox1.ImageLocation = null;
+            pictureBox2.ImageLocation = null;
             b.Image = null;
         }
         private void bt_Excel_Click(object sender, EventArgs e)
@@ -805,6 +1023,7 @@ namespace Bibo_Verwaltung
         private void tb_ISBN_Click(object sender, EventArgs e)
         {
             lb_isbn_vorlage.Visible = false;
+            checkedListBox1.Visible = false;
         }
 
         private void lb_isbn_vorlage_Click(object sender, EventArgs e)
@@ -837,7 +1056,7 @@ namespace Bibo_Verwaltung
 
         private void Delete_picture(string location)
         {
-            if (File.Exists(location) && location.Contains("\\Bibliothek\\bilder\\"))
+            if (File.Exists(location))
             {
                 File.Delete(location);
             }
@@ -877,34 +1096,152 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        private void button1_Click(object sender, EventArgs e)
+        List<string> needAutor = new List<string>();
+        bool ifDownloaded = false;
+        bool ifVerlagExists = false;
+
+        private void AutoLoad()
         {
-            
             if (ValidateISBN())
             {
-                if (b.Verlag.IfContains(GetVerlag()))
+                if (GetAutor().Count > 1)
                 {
-                    cb_Verlag.Text = GetVerlag();
+                    checkbox_autor.Checked = true;
                 }
                 else
                 {
-                    cb_Verlag.Text = "NICHT" + GetVerlag();
+                    checkbox_autor.Checked = false;
+                }
+                string autorstring = "";
+                foreach (string s in GetAutor())
+                {
+                    autorstring = autorstring + s + ", ";
+                    b.AutorListe.AutorNamen.Add(s);
+                    if (!b.AutorListe.Autor.IfContains(s))
+                    {
+                        needAutor.Add(s);
+                    }
+                }
+                if (!autorstring.Equals(""))
+                {
+                    cb_Autor.Text = autorstring.Substring(0, autorstring.Length - 2);
+                }
+                if (b.Verlag.IfContains(GetVerlag()))
+                {
+                    cb_Verlag.Text = GetVerlag();
+                    ifVerlagExists = true;
+                }
+                else
+                {
+                    cb_Verlag.Text = GetVerlag();
+                    ifVerlagExists = false;
                 }
                 tb_Titel.Text = GetTitle();
                 pictureBox1.ImageLocation = GetPicture();
+                ifDownloaded = true;
             }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AutoLoad();
         }
 
         private void checkbox_autor_CheckedChanged(object sender, EventArgs e)
         {
             if (checkbox_autor.Checked)
             {
-
+                comboBox1.Visible = true;
+                cb_Autor.DataSource = null;
             }
             else
             {
-
+                comboBox1.Visible = false;
+                checkedListBox1.Visible = false;
+                b.AutorListe.Autor.FillCombobox(ref cb_Autor, 0);
             }
+        }
+
+        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            List<string> checkedItems = new List<string>();
+            b.AutorListe.AutorIDs.Clear();
+            foreach (var item in checkedListBox1.CheckedItems)
+            {
+                DataRowView castedItem = item as DataRowView;
+                string autorstring = castedItem["au_autor"].ToString();
+                string idstring = castedItem["au_id"].ToString();
+                b.AutorListe.AutorIDs.Add(idstring);
+                checkedItems.Add(autorstring);
+            }
+            if (e.NewValue == CheckState.Checked)
+            {
+                DataRowView castedItem = checkedListBox1.Items[e.Index] as DataRowView;
+                string autorstring = castedItem["au_autor"].ToString();
+                checkedItems.Add(autorstring);
+                string idstring = castedItem["au_id"].ToString();
+                b.AutorListe.AutorIDs.Add(idstring);
+            }
+            if (e.NewValue == CheckState.Unchecked)
+            {
+                DataRowView castedItem = checkedListBox1.Items[e.Index] as DataRowView;
+                string autorstring = castedItem["au_autor"].ToString();
+                checkedItems.Remove(autorstring);
+                string idstring = castedItem["au_id"].ToString();
+                b.AutorListe.AutorIDs.Remove(idstring);
+            }
+            string combobox = "";
+            foreach(string s in checkedItems)
+            {
+                combobox = combobox + s + ", ";
+            }
+            if(combobox.Length > 0)
+            {
+                combobox = combobox.Substring(0, combobox.Length - 2);
+                cb_Autor.Text = combobox;
+            }
+            else
+            {
+                cb_Autor.Text = "";
+            }
+        }
+
+        private void gb_buch_Enter(object sender, EventArgs e)
+        {
+            checkedListBox1.Visible = false;
+        }
+
+        private void tb_ISBN_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                AutoLoad();
+            }
+        }
+
+        private void comboBox1_Click(object sender, EventArgs e)
+        {
+            if (checkbox_autor.Checked)
+            {
+                comboBox1.DroppedDown = false;
+                if (checkedListBox1.Visible == false)
+                {
+                    checkedListBox1.Visible = true;
+                }
+                else
+                {
+                    checkedListBox1.Visible = false;
+                }
+            }
+        }
+
+        private void tb_Titel_Click(object sender, EventArgs e)
+        {
+            checkedListBox1.Visible = false;
+        }
+
+        private void w_s_buecher_Click(object sender, EventArgs e)
+        {
+            checkedListBox1.Visible = false;
         }
     }
 }

@@ -58,6 +58,10 @@ namespace Bibo_Verwaltung
                         autorNamen.Add(a.Autorname);
                         AutorIDs.Add(a.AutorID);
                     }
+                    else
+                    {
+                        autorIDs.Add(null);
+                    }
                     i++;
                     
                 }
@@ -67,22 +71,129 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        #region FillCombobox
-        SqlDataAdapter adapter = new SqlDataAdapter();
-        DataSet ds = new DataSet();
-        DataTable dt = new DataTable();
-        SqlCommandBuilder comb = new SqlCommandBuilder();
-        private void FillObject()
+        #region Delete
+        public void Delete()
         {
-            dt.Clear();
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT * FROM [dbo].[t_s_autorListe]";
-            adapter = new SqlDataAdapter(RawCommand, con.Con);
-            adapter.Fill(ds);
-            adapter.Fill(dt);
+            string RawCommand = "DELETE FROM [dbo].[t_s_autorListe] WHERE a_id = @id";
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@id", AutorListeID);
+            cmd.ExecuteNonQuery();
             con.Close();
+        }
+        #endregion
 
+        #region Update
+        public void Update()
+        {
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            string Rawcommand = "UPDATE [dbo].[t_s_autorListe] set a_0 = @0, a_1 = @1, a_2 = @2, a_3 = @3, a_4 = @4, a_5 = @5, a_6 = @6, a_7 = @7, a_8 = @8, a_9 = @9 WHERE a_id = @id ";
+            SqlCommand cmd = new SqlCommand(Rawcommand, con.Con);
+            cmd.Parameters.AddWithValue("@id", AutorListeID);
+            cmd.Parameters.AddWithValue("@0", AutorIDs[0]);
+            for(int i = 1; i < 10;)
+            {
+                try
+                {
+                    if (AutorIDs[i].ToString() != null && !AutorIDs[i].ToString().Equals(""))
+                    {
+                        cmd.Parameters.AddWithValue("@" + i, AutorIDs[i]);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@" + i, DBNull.Value);
+                    }
+                    i++;
+                }
+                catch
+                {
+                    cmd.Parameters.AddWithValue("@" + i, DBNull.Value);
+                    i++;
+                }
+                
+                
+            }
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        #endregion
+
+        #region GetID
+        private void GetID()
+        {
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            string RawCommand = "Select a_id FROM [dbo].[t_s_autorListe] WHERE a_0 = @0 ";
+            for(int i = 1; i < 10;)
+            {
+                RawCommand = RawCommand + "AND a_"+i+" = @"+i+" or (a_"+i+" is null and @"+i+" is null) ";
+                i++;
+            }
+            List<object> args = new List<object>();
+            for(int i = 0; i < 10;)
+            {
+                try
+                {
+                    if(AutorIDs[i].ToString() != null && !AutorIDs[i].ToString().Equals(""))
+                    {
+                        args.Add(AutorIDs[i]);
+                    }
+                    else
+                    {
+                        args.Add(DBNull.Value);
+                    }
+                    i++;
+
+                }
+                catch
+                {
+                    args.Add(DBNull.Value);
+                    i++;
+                }
+            }
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, args.ToArray());
+            while (dr.Read())
+            {
+                AutorListeID = dr["a_id"].ToString();
+            }
+            dr.Close();
+            con.Close();
+        }
+        #endregion
+
+        #region Add
+        public void Add()
+        {
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            string RawCommand = "INSERT INTO [dbo].[t_s_autorListe] (a_0, a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9) VALUES (@0, @1, @2, @3, @4, @5, @6, @7, @8, @9)";
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@0", AutorIDs[0]);
+            for(int i = 1; i < 10;)
+            {
+                try
+                {
+                    if (AutorIDs[i].ToString() != null && !AutorIDs[i].ToString().Equals(""))
+                    {
+                        cmd.Parameters.AddWithValue("@" + i, AutorIDs[i]);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@" + i, DBNull.Value);
+                    }
+                    i++;
+                }
+                catch
+                {
+                    cmd.Parameters.AddWithValue("@" + i, DBNull.Value);
+                    i++;
+                }
+            }
+            cmd.ExecuteNonQuery();
+            con.Close();
+            GetID();
         }
         #endregion
     }

@@ -59,7 +59,37 @@ namespace Bibo_Verwaltung
             // Verbindung schließen 
             con.Close();
         }
-        #endregion       
+        #endregion
+
+        #region Add
+        public void Add(string verlag)
+        {
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            string RawCommand = "INSERT INTO [dbo].[t_s_verlag] (ver_name) VALUES (@0)";
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@0", verlag);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        #endregion
+
+        #region GetID
+        public string GetID(string verlag)
+        {
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return "";
+            string RawCommand = "SELECT ver_id FROM [dbo].[t_s_verlag] WHERE ver_name = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, verlag);
+            while (dr.Read())
+            {
+                VerlagID = dr["ver_id"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            return VerlagID;
+        }
+        #endregion
 
         #region Fill Object
         SqlDataAdapter adapter = new SqlDataAdapter();

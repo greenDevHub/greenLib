@@ -34,7 +34,9 @@
             this.bibo_VerwaltungDataSet = new Bibo_Verwaltung.Bibo_VerwaltungDataSet();
             this.t_s_spracheTableAdapter = new Bibo_Verwaltung.Bibo_VerwaltungDataSetTableAdapters.t_s_spracheTableAdapter();
             this.gb_buch = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.checkbox_autor = new System.Windows.Forms.CheckBox();
             this.lb_anzahl = new System.Windows.Forms.Label();
             this.tb_anzahl = new System.Windows.Forms.TextBox();
             this.bt_pic_delete = new System.Windows.Forms.Button();
@@ -69,12 +71,12 @@
             this.lb_Titel = new System.Windows.Forms.Label();
             this.tb_ISBN = new System.Windows.Forms.TextBox();
             this.lb_ISBN = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.Grid_Buch = new System.Windows.Forms.DataGridView();
             this.bt_Schliessen = new System.Windows.Forms.Button();
             this.bt_Excel = new System.Windows.Forms.Button();
             this.gb_zoom = new System.Windows.Forms.GroupBox();
-            this.checkbox_autor = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).BeginInit();
@@ -106,8 +108,9 @@
             // 
             // gb_buch
             // 
+            this.gb_buch.Controls.Add(this.comboBox1);
+            this.gb_buch.Controls.Add(this.checkedListBox1);
             this.gb_buch.Controls.Add(this.checkbox_autor);
-            this.gb_buch.Controls.Add(this.button1);
             this.gb_buch.Controls.Add(this.lb_anzahl);
             this.gb_buch.Controls.Add(this.tb_anzahl);
             this.gb_buch.Controls.Add(this.bt_pic_delete);
@@ -150,16 +153,38 @@
             this.gb_buch.TabIndex = 0;
             this.gb_buch.TabStop = false;
             this.gb_buch.Text = "Bücher";
+            this.gb_buch.Enter += new System.EventHandler(this.gb_buch_Enter);
             // 
-            // button1
+            // comboBox1
             // 
-            this.button1.Location = new System.Drawing.Point(34, 486);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 50;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.comboBox1.BackColor = System.Drawing.Color.White;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(340, 134);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.comboBox1.Size = new System.Drawing.Size(20, 24);
+            this.comboBox1.TabIndex = 53;
+            this.comboBox1.Click += new System.EventHandler(this.comboBox1_Click);
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(150, 157);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(210, 327);
+            this.checkedListBox1.TabIndex = 51;
+            this.checkedListBox1.Visible = false;
+            this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
+            // 
+            // checkbox_autor
+            // 
+            this.checkbox_autor.AutoSize = true;
+            this.checkbox_autor.Location = new System.Drawing.Point(127, 138);
+            this.checkbox_autor.Name = "checkbox_autor";
+            this.checkbox_autor.Size = new System.Drawing.Size(18, 17);
+            this.checkbox_autor.TabIndex = 51;
+            this.checkbox_autor.UseVisualStyleBackColor = true;
+            this.checkbox_autor.CheckedChanged += new System.EventHandler(this.checkbox_autor_CheckedChanged);
             // 
             // lb_anzahl
             // 
@@ -269,6 +294,8 @@
             // 
             // cb_Autor
             // 
+            this.cb_Autor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_Autor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Autor.FormattingEnabled = true;
             this.cb_Autor.Location = new System.Drawing.Point(150, 134);
             this.cb_Autor.Margin = new System.Windows.Forms.Padding(4);
@@ -361,6 +388,8 @@
             // 
             // cb_Sprache
             // 
+            this.cb_Sprache.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_Sprache.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Sprache.FormattingEnabled = true;
             this.cb_Sprache.Location = new System.Drawing.Point(150, 230);
             this.cb_Sprache.Margin = new System.Windows.Forms.Padding(4);
@@ -434,6 +463,8 @@
             // 
             // cb_Verlag
             // 
+            this.cb_Verlag.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_Verlag.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Verlag.FormattingEnabled = true;
             this.cb_Verlag.Location = new System.Drawing.Point(150, 166);
             this.cb_Verlag.Margin = new System.Windows.Forms.Padding(4);
@@ -444,6 +475,8 @@
             // 
             // cb_Genre
             // 
+            this.cb_Genre.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_Genre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Genre.FormattingEnabled = true;
             this.cb_Genre.Location = new System.Drawing.Point(150, 198);
             this.cb_Genre.Margin = new System.Windows.Forms.Padding(4);
@@ -489,6 +522,7 @@
             this.tb_Titel.Name = "tb_Titel";
             this.tb_Titel.Size = new System.Drawing.Size(210, 22);
             this.tb_Titel.TabIndex = 1;
+            this.tb_Titel.Click += new System.EventHandler(this.tb_Titel_Click);
             this.tb_Titel.TextChanged += new System.EventHandler(this.tb_Titel_TextChanged);
             // 
             // lb_Titel
@@ -510,6 +544,7 @@
             this.tb_ISBN.TabIndex = 0;
             this.tb_ISBN.Click += new System.EventHandler(this.tb_ISBN_Click);
             this.tb_ISBN.TextChanged += new System.EventHandler(this.tb_ISBN_TextChanged);
+            this.tb_ISBN.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_ISBN_KeyDown);
             // 
             // lb_ISBN
             // 
@@ -520,6 +555,16 @@
             this.lb_ISBN.Size = new System.Drawing.Size(43, 17);
             this.lb_ISBN.TabIndex = 1;
             this.lb_ISBN.Text = "ISBN:";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(375, 89);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(22, 23);
+            this.button1.TabIndex = 50;
+            this.button1.Text = "*";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox2
             // 
@@ -588,16 +633,6 @@
             this.gb_zoom.TabIndex = 51;
             this.gb_zoom.TabStop = false;
             // 
-            // checkbox_autor
-            // 
-            this.checkbox_autor.AutoSize = true;
-            this.checkbox_autor.Location = new System.Drawing.Point(127, 138);
-            this.checkbox_autor.Name = "checkbox_autor";
-            this.checkbox_autor.Size = new System.Drawing.Size(18, 17);
-            this.checkbox_autor.TabIndex = 51;
-            this.checkbox_autor.UseVisualStyleBackColor = true;
-            this.checkbox_autor.CheckedChanged += new System.EventHandler(this.checkbox_autor_CheckedChanged);
-            // 
             // w_s_buecher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -605,6 +640,7 @@
             this.ClientSize = new System.Drawing.Size(1182, 553);
             this.Controls.Add(this.gb_zoom);
             this.Controls.Add(this.bt_Excel);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.bt_Schliessen);
             this.Controls.Add(this.Grid_Buch);
             this.Controls.Add(this.gb_buch);
@@ -616,6 +652,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bücher";
             this.Activated += new System.EventHandler(this.w_s_buecher_Activated);
+            this.Click += new System.EventHandler(this.w_s_buecher_Click);
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).EndInit();
@@ -676,5 +713,7 @@
         private System.Windows.Forms.GroupBox gb_zoom;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox checkbox_autor;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

@@ -60,6 +60,46 @@ namespace Bibo_Verwaltung
             con.Close();
         }
         #endregion
+        #region Add
+        public void Add(List<string> autors)
+        {
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            for (int i = 0; i < autors.Count;)
+            {
+                string RawCommand = "INSERT INTO [dbo].[t_s_autor] (au_autor) VALUES (@0)";
+                SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+                cmd.Parameters.AddWithValue("@0", autors[i]);
+                cmd.ExecuteNonQuery();
+                i++;
+            }
+            con.Close();
+            
+        }
+        #endregion
+
+        #region GetID
+        public string GetID(string autor)
+        {
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return "";
+            string RawCommand = "SELECT au_id FROM [dbo].[t_s_autor] WHERE au_autor = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand,autor);
+            while (dr.Read())
+            {
+                AutorID = dr["au_id"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            return AutorID;
+        }
+        #endregion
+
+        public bool IfContains(string value)
+        {
+            bool contains = dt.AsEnumerable().Any(row => value == row.Field<String>("au_autor"));
+            return contains;
+        }
 
         #region Fill Object
         SqlDataAdapter adapter = new SqlDataAdapter();
@@ -87,6 +127,13 @@ namespace Bibo_Verwaltung
             cb.ValueMember = "au_id";
             cb.DisplayMember = "au_autor";
             cb.SelectedValue = value;
+        }
+        public void FillList(ref CheckedListBox clb)
+        {
+            FillObject();
+            ((ListBox)clb).DataSource = dt;
+            ((ListBox)clb).DisplayMember = "au_autor";
+            ((ListBox)clb).ValueMember = "au_id";
         }
 
         public void FillGrid(ref DataGridView grid, object value = null)

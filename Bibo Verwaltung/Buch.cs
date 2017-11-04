@@ -143,13 +143,13 @@ namespace Bibo_Verwaltung
                 Anzahl = int.Parse(dr["buch_anzahl"].ToString());
                 if(BildPfad != null && BildPfad != "" && File.Exists(BildPfad))
                 {
-                    BildDate = File.GetCreationTimeUtc(BildPfad);
+                    BildDate = DateTime.Parse(File.GetCreationTimeUtc(BildPfad).ToShortTimeString());
                 }
                 if(dr["buch_imageDate"] != null && dr["buch_imageDate"].ToString() != "")
                 {
                     ImageDate = (DateTime)dr["buch_imageDate"];
                 }
-                if (ImageDate.ToString() == BildDate.ToString() && ImageDate != null && BildDate != null && ImageDate.ToString() != "01.01.0001 00:00:00" && BildDate.ToString() != "01.01.0001 00:00:00" && BildPfad != null && BildPfad != "" && File.Exists(BildPfad))
+                if (ImageDate >= BildDate && ImageDate != null && BildDate != null && ImageDate.ToString() != "01.01.1753 00:00:00" && BildDate.ToString() != "01.01.0001 00:00:00" && BildPfad != null && BildPfad != "" && File.Exists(BildPfad))
                 {
                     Image = null;
                 }
@@ -177,26 +177,56 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
+        #region
+        public string GetAutorID(string isbn)
+        {
+            string id = "";
+            if (con.ConnectError()) return "";
+            string RawCommand = "SELECT buch_autor_id FROM [dbo].[t_s_buecher] WHERE buch_isbn = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, isbn);
+            while (dr.Read())
+            {
+                id = dr["buch_autor_id"].ToString();
+            }
+            return id;
+        }
+        #endregion
+
         #region Buch-Eigenschaften aendern
         public void Update_Buch()
         {
             //SQL-Verbindung pruefen
             if (con.ConnectError()) return;
-            string RawCommand = "UPDATE [dbo].[t_s_buecher] set buch_titel = @titel , buch_autor_id = @autor, buch_genre_id = @genre, buch_sprache_id = @sprache, buch_verlag_id = @verlag, buch_auflage = @auflage, buch_erscheinungsdatum = @er_datum, buch_neupreis = @neupreis, buch_bild = @bild, buch_anzahl = @anzahl, buch_image = @image, buch_imageDate = @imageDate WHERE buch_isbn = @isbn";
+            string RawCommand = "UPDATE [dbo].[t_s_buecher] set buch_titel = @titel , buch_genre_id = @genre, buch_sprache_id = @sprache, buch_verlag_id = @verlag, buch_auflage = @auflage, buch_erscheinungsdatum = @er_datum, buch_neupreis = @neupreis, buch_bild = @bild, buch_anzahl = @anzahl, buch_image = @image, buch_imageDate = @imageDate WHERE buch_isbn = @isbn";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-
+            AutorListe.Update();
             cmd.Parameters.AddWithValue("@titel", Titel);
-            cmd.Parameters.AddWithValue("@autor", AutorListe.AutorListeID);
             cmd.Parameters.AddWithValue("@genre", Genre.GenreID);
             cmd.Parameters.AddWithValue("@sprache", Sprache.SpracheID);
             cmd.Parameters.AddWithValue("@verlag", Verlag.VerlagID);
-            cmd.Parameters.AddWithValue("@auflage", Auflage);
+            if(Auflage == null || Auflage.Equals(""))
+            {
+                cmd.Parameters.AddWithValue("@auflage", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@auflage", Auflage);
+            }
             cmd.Parameters.AddWithValue("@er_datum", Er_datum);
+
             cmd.Parameters.AddWithValue("@neupreis", neupreis);
             cmd.Parameters.AddWithValue("@isbn", isbn);
             cmd.Parameters.AddWithValue("@bild", bildPfad);
             cmd.Parameters.AddWithValue("@anzahl", anzahl);
-            cmd.Parameters.AddWithValue("@image", image);
+            cmd.Parameters.Add("@image", SqlDbType.VarBinary, -1);
+            if(image == null)
+            {
+                cmd.Parameters["@image"].Value = DBNull.Value;
+            }
+            else
+            {
+                cmd.Parameters["@image"].Value = Image;
+            }
             cmd.Parameters.AddWithValue("@imageDate", imageDate);
             cmd.ExecuteNonQuery();
             con.Close();
@@ -210,20 +240,36 @@ namespace Bibo_Verwaltung
             if (con.ConnectError()) return;
             string RawCommand = "INSERT INTO [dbo].[t_s_buecher] (buch_isbn, buch_titel, buch_genre_id, buch_autor_id, buch_verlag_id, buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, buch_bild, buch_anzahl, buch_image, buch_imageDate) VALUES (@isbn, @titel, @genreid, @autorid, @verlagid, @erscheinungsdatum, @sprachid, @auflage, @neupreis, @bild, @anzahl, @image, @imageDate)";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-
+            AutorListe.Add();
             cmd.Parameters.AddWithValue("@isbn", ISBN);
             cmd.Parameters.AddWithValue("@titel", Titel);
             cmd.Parameters.AddWithValue("@genreid", Genre.GenreID);
             cmd.Parameters.AddWithValue("@autorid", AutorListe.AutorListeID);
             cmd.Parameters.AddWithValue("@verlagid", Verlag.VerlagID);
-            cmd.Parameters.AddWithValue("@erscheinungsdatum", Er_datum);
             cmd.Parameters.AddWithValue("@sprachid", Sprache.SpracheID);
-            cmd.Parameters.AddWithValue("@auflage", Auflage);
-            cmd.Parameters.AddWithValue("@neupreis", Neupreis);
+            cmd.Parameters.AddWithValue("@erscheinungsdatum", Er_datum);
+
+            if (Auflage == null)
+            {
+                cmd.Parameters.AddWithValue("@auflage", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@auflage", Auflage);
+            }
+            if (Neupreis.Equals(1))
+            {
+                cmd.Parameters.AddWithValue("@neupreis", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@neupreis", neupreis);
+
+            }
             cmd.Parameters.AddWithValue("@bild", BildPfad);
             cmd.Parameters.AddWithValue("@anzahl", Anzahl);
-            cmd.Parameters.AddWithValue("@image", image);
-            cmd.Parameters.AddWithValue("@imageDate", imageDate);
+            cmd.Parameters.AddWithValue("@image", Image);
+            cmd.Parameters.AddWithValue("@imageDate", ImageDate);
 
 
             cmd.ExecuteNonQuery();
@@ -241,6 +287,7 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@isbn", ISBN);
             cmd.ExecuteNonQuery();
             con.Close();
+            AutorListe.Delete();
         }
         #endregion
 
