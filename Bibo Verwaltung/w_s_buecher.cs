@@ -944,7 +944,7 @@ namespace Bibo_Verwaltung
                     return false;
                 }
             }
-            catch(Exception e)
+            catch
             {
                 try {
                     client.UseDefaultCredentials = true;
@@ -964,8 +964,6 @@ namespace Bibo_Verwaltung
                 {
                     return false;
                 }
-                MessageBox.Show(e.ToString());
-                return false;
             }
            
             
@@ -1102,7 +1100,7 @@ namespace Bibo_Verwaltung
 
         private void AutoLoad()
         {
-            if (ValidateISBN())
+            if (ValidateISBN() && !tb_ISBN.Text.Equals(""))
             {
                 if (GetAutor().Count > 1)
                 {
@@ -1139,6 +1137,14 @@ namespace Bibo_Verwaltung
                 tb_Titel.Text = GetTitle();
                 pictureBox1.ImageLocation = GetPicture();
                 ifDownloaded = true;
+            }
+            else if(tb_ISBN.Text.Equals(""))
+            {
+                MessageBox.Show("Bitte geben Sie eine ISBN ein!","Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Es konnten zu dieser ISBN keine Informationen gefunden werden. Bitte überprüfen Sie ihre Eingabe nach Fehlern!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         private void button1_Click(object sender, EventArgs e)
