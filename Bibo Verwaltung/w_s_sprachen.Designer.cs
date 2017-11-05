@@ -48,7 +48,7 @@
             this.gv_Sprachen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_Sprachen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_Sprachen.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.gv_Sprachen.Location = new System.Drawing.Point(3, 41);
+            this.gv_Sprachen.Location = new System.Drawing.Point(3, 43);
             this.gv_Sprachen.MultiSelect = false;
             this.gv_Sprachen.Name = "gv_Sprachen";
             this.gv_Sprachen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -74,7 +74,7 @@
             this.tb_Suchen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tb_Suchen.Enabled = false;
-            this.tb_Suchen.Location = new System.Drawing.Point(3, 16);
+            this.tb_Suchen.Location = new System.Drawing.Point(3, 18);
             this.tb_Suchen.Name = "tb_Suchen";
             this.tb_Suchen.Size = new System.Drawing.Size(194, 20);
             this.tb_Suchen.TabIndex = 52;
@@ -111,10 +111,10 @@
             this.tLP_Sprachen.Location = new System.Drawing.Point(12, 12);
             this.tLP_Sprachen.Name = "tLP_Sprachen";
             this.tLP_Sprachen.RowCount = 3;
-            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 13F));
+            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tLP_Sprachen.Size = new System.Drawing.Size(200, 440);
+            this.tLP_Sprachen.Size = new System.Drawing.Size(200, 442);
             this.tLP_Sprachen.TabIndex = 61;
             // 
             // w_s_sprachen

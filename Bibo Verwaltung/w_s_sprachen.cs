@@ -84,7 +84,7 @@ namespace Bibo_Verwaltung
             {
                 suchmodus = true;
                 bt_Suchen.Text = "Suchen AUS";
-                tLP_Sprachen.RowStyles[0].Height = 13;
+                tLP_Sprachen.RowStyles[0].Height = 15;
                 tLP_Sprachen.RowStyles[1].Height = 25;
                 tb_Suchen.Visible = true;
                 tb_Suchen.Enabled = true;
