@@ -1,9 +1,0 @@
-1. speichern funktioinen / speichen für alles 
-     buch +untertabellen
-     klassen genre,verlag,..... usw.. alles mit fremdschlüssel was es noch net gibt
-   prüfen ob schon da wegen updatebefehl....
-
-2. script zum korrekten anlegen der datenbank
-
-3. prüfen warum im patern keine klammern funktionieren
-   ( einzelnes löschen der klammern )

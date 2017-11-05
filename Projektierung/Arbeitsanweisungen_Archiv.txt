@@ -1,0 +1,257 @@
+Archiv für Arbeitsanweisungen für das Projekt "Bibo-Verwaltung" (GreenDev)
+
+
+
+
+-	Bild in Datenbank
+-	Mehrere Autoren Speichern (Liste)
+-	Einstellungen skalierung problem
+
+
+
+
+
+-	Exportfunktion der GridView für Excel (schön formatiert)--> Erik
+-	Bilder (auch in Datenbank) --> Justin
+-	Combobox-Fehler beheben, UI Verbessern, ISBN-Validierung --> Laurenz
+-	Rückgabeprozess optimieren, Fehler beheben, Status berücksichtigen (Zustand beschädigt), zu jeder BuchID einen Barcode erstellen --> Robert
+
+
+
+
+Arbeitsanweisung bis 23.02.2017
+
+1.	Discord Acoount anlegen
+2.	Scrum
+3.	Datenbankstruktur überarbeiten
+		Bestandstabelle entfernen
+		Büchertabelle überarbeiten
+		Soll/Ist-Bestand per Abfrage klären
+4.	Visual Studio Style Guide aufstellen
+5.	Load Methode fertig machen
+	
+
+
+
+
+Arbeitsanweisungen zum 09.03.2017
+
+	1. Buchklasse zuende machen
+	2. selbstladende Klassen für Autor, Verlag und Kunde erstellen
+
+
+
+
+Arbeitsauftrag bis 23.03.2017
+
+	1.Zahlenproblematik klären (regionsbezogen)
+	2.stabile Umwandlung von Werten 
+	3.Speichern für alles
+	4.Masken aufräumen
+	5.Bei Eingabefehler (ISBN: Buchstabe --> Fehlermeldung)
+
+
+
+
+1. speichern funktioinen / speichen für alles 
+     buch +untertabellen
+     klassen genre,verlag,..... usw.. alles mit fremdschlüssel was es noch net gibt
+   prüfen ob schon da wegen updatebefehl....
+
+2. script zum korrekten anlegen der datenbank
+
+3. prüfen warum im patern keine klammern funktionieren
+   ( einzelnes löschen der klammern )
+
+
+
+
+Arbeitsauftrag bis 18.05.2017
+
+	1. SQL-Befehle umschreiben, dass Parameter verwendet werden
+	2. Stellt bitte alle Comboboxen auf das neue Load-Verfahren wie in Sprache (Klasse) zu sehen um (fillcombobox)!
+	3. Maske "BÜcher" so gestalten, dass es eine Maske ist, wo die Bücher drin sind und nicht mehr. -Alex, 20.04.2017
+	4. Weitere einzelne Fenster für das andere Zeug (z.B. Ein Hauptfenster mit Buttons, mit denen man auf einzelne Fenster verwiesen wird.)
+
+
+
+
+
+Arbeitsauftrag bis 01.06.2017
+
+	1. Patches für die einzelnen Klassen übernehmen (siehe Sprache)
+	2. Usability (übersichtlich, simpel,...)
+	3. Datenkonsistenz (Doppelte Daten,...)
+	4. Installer erstellen/darüber informieren
+
+
+
+
+
+Arbeitsauftrag bis 15.06.2017
+
+	1. KundeID entfernen (in Bearbeiten)
+	2. Korrekter Sart des Programms (ohne Abbruch beim Verbindungsaufbau zur Datenbank)
+	3. Möglichkeit zum Initialisieren der Datenbank beim Installer (Skript schon vorhanden) 
+	   (Knopf "Initialisieren" zum Prüfen, ob Verbindung i.O. ist, falls nicht der Fall Möglichkeit zum Anlegen der Datenbank mit vorhandenem Skript)
+	4. Zentrale Ablage der Zugangsdaten (Vorschlag Datei) (Textdatei oder Direkteingabe für Zugangsdaten; Laden der Zugangsdaten aus der Datei und nicht aus dem Quellcode)
+
+
+
+
+- Einstellungen anpassen, json syntax einbinden (in Projekt) -> syntax lernen
+- Verbindungstest fertigstellen und an allen notwendigen Stellen einsetzen
+
+
+
+
+Tabelle 1: Bücher
+	-ID (Primärschlüssel)
+	-Standort in Bibliothek
+	-Zustand (Fremdschlüssel Tabelle 5)
+	-Isbn
+	-Titel 
+	-Genre (Fremdschlüssel Tabelle 6)
+	-Autor-ID (Fremdschlüssel Tabelle 7)
+	-Verlag-ID (Fremdschlüssel Tabelle 8)
+	-Sprach-ID (Fremdschlüssel Tabelle 9)
+	-Erscheinungsdatum 
+	-Aufnahmedatum
+	-Auflage
+	-Neupreis
+	-Bestand-ID (Fremdschlüssel 4)
+
+Tabelle 2: Kunden
+	-ID/Kundennummer (Primärschlüssel)
+	-Vorname
+	-Nachname
+	-Straße 
+	-Hausnummer
+	-Postleitzahl
+	-Ort
+	-Vertrauenswürdigkeit
+	-Klasse
+	-E-Mail
+	-Telefonnummer
+
+Tabelle 3: Ausgeliehen
+	-Leihnummer (Primärschlüssel)
+	-Buch ID (Fremdschlüssel Tabelle 1)
+	-Ausleihdatum
+	-Rückgabedatum
+	-Kunden ID (Fremdschlüssel Tabelle 2)
+
+Tabelle 4: Bestand
+	-Bestand-ID (Primärschlüssel)
+	-Sollbestand
+	-Istbestand
+
+Tabelle 5: Buchzustand
+	-Zustands ID (Primärschlüssel)
+	-Zustand
+	-Verleihfähig
+
+Tabelle 6: Genre
+	-Buch ID (Primärschlüssel Tabelle 1)
+	-Genre
+
+Tabelle 7: Autor
+	-Nummer/ID (Primärschlüssel)
+	-Autor
+
+
+
+
+
+To do : 
+-Datenbanken / Database
+-Programm zur Datenbankverwaltung
+-Website
+-Spiele / Games
+-Spreadsheet zeugs
+-Teamarbeit
+>>>>>>> origin/InfoAG
+>>>>>>> origin/InfoAG
+
+
+Was wir alles machen wollen:
+-interresse an web desing 
+-Projekt Schulbibliothek
+-Msql zeugs 
+-Essen Essen Essen ( also tool zum bestellen )( für Grünbach ) ( muss aber web basierend sein )  
+
+
+Der Plan : 
+- Rohling bauen ( in bezug auf daten analyse ) 
+
+Master of Github: Phi Long
+Master Structure: Cedric Groß
+Entwickler: Joshi / Max / Flo / Lukas / Justin 
+PR Zeugs : 1. Lukas / 2. Cedric 
+Qualitätsmanagement: Laurenz
+Datenbankverwaltung / Master of Database: Erik
+Mädchen für alles / Head of desaster:Jonaß
+.....
+
+
+
+
+
+
+Idee_01 
+4 Tabellen 
+Tab 1 - zugehörige id 
+ Bücher
+ -Standort in Bibliothek
+ -Zustand fremdschlüssel tab5
+ -Isbn
+ -Titel 
+ -fremdschlüssel tab 6
+ -fremdschlüssel tab 7
+ -fremdschlüssel tab 8
+ -fremdschlüssel tab 10
+ -Erscheinungsjahr
+ -Erscheinungsdatum 
+ - Datum der eingliederung
+ - Auflage
+ -Neupreis
+Tab 2- zugehörige id
+ Kunden 
+ -Straße 
+ -Postleitzahl /Ort 
+ -Hausnummer
+ -Vertrauenswürdigkeit
+ -Kundennummer/ Kunden id / Primärschlüssel
+ -Klasse
+ -Name
+ -E-mail
+ -Telefonnummer
+Tab 3- zugehörige id
+ Ausgeliehen 
+ -Abbildung der Beziehung zwischen Kunde und Buch
+ -Isbn Fremdschlüssel Tab 1 Bücher
+ -wann ausgeliehen
+ -Rückgabedatum 
+ -Kunden id / Fremdschlüssel Tab 2 Kunden
+ -Leihnummer/ Primärschlüssel
+Tab 4- zugehörige id
+ Bestand 
+ -Isbn Fremdschlüssel 
+ -Sollbestand der jeweiligen isbn
+ -Istbestand der jewiligen isbn ( sollbestand - ausgeliehen )
+ -
+Tab 5- zugehörige id
+ Zustandstabelle 
+-Bezeichnung
+-Verleihfähig
+Tab 6 -zugehörige id
+-Genre
+Tab 7- zugehörige id
+-Autor
+Tab 8- zugehörige id 
+-Verlag
+-Fremdschlüssel tab 9
+Tab 9- zugehörige id
+-Adresse
+Tab 10- zugehörige id
+-Sprache

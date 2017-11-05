@@ -1,0 +1,14 @@
+# Changelog
+All notable changes to the project 'Bibo-Verwaltung' will be documented in this file.
+
+## [Unreleased]
+
+## [1.0.0] - 2017-11-05
+### Added
+- ???
+
+### Changed
+- ???
+
+### Removed
+- ???

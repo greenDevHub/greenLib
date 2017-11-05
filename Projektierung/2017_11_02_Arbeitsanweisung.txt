@@ -1,3 +1,0 @@
--	Bild in Datenbank
--	Mehrere Autoren Speichern (Liste)
--	Einstellungen skalierung problem
