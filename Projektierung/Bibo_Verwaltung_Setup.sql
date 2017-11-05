@@ -125,7 +125,6 @@ CREATE TABLE [dbo].[t_s_autor](
 	[au_id] [int] IDENTITY (1,1) NOT NULL,
 	[au_autor] [nvarchar] (128) NOT NULL,
 	PRIMARY KEY (au_id))
-	Select * from t_s_autor
 	END
 
 use Bibo_Verwaltung
@@ -138,7 +137,6 @@ CREATE TABLE [dbo].[t_s_genre](
 	[ger_id] [int] IDENTITY (1,1) NOT NULL,
 	[ger_name] [nvarchar] (128) NOT NULL,
 	PRIMARY KEY (ger_id))
-	Select * from t_s_genre
 	END
 
 use Bibo_Verwaltung
@@ -160,7 +158,6 @@ CREATE TABLE [dbo].[t_s_kunden](
 	[kunde_mail] [nvarchar](128) NOT NULL,
 	[kunde_telefonnummer] [nvarchar](128) NOT NULL,
 	PRIMARY KEY (kunde_id))
-	Select * from t_s_kunden
 	END
 
 use Bibo_Verwaltung
@@ -173,7 +170,6 @@ CREATE TABLE [dbo].[t_s_sprache](
 	[sprach_id] [int] IDENTITY (1,1) NOT NULL,
 	[sprach_name][nvarchar] (128) NOT NULL,
 	PRIMARY KEY (sprach_id))
-	Select * from t_s_sprache
 	END
 
 use Bibo_Verwaltung
@@ -186,7 +182,6 @@ CREATE TABLE [dbo].[t_s_verlag](
 	[ver_id] [int] IDENTITY (1,1) NOT NULL,
 	[ver_name] [nvarchar] (128) NOT NULL,
 	PRIMARY KEY (ver_id))
-	Select * from t_s_verlag
 	END
 
 use Bibo_Verwaltung
@@ -228,7 +223,6 @@ CREATE TABLE [dbo].[t_s_autorListe](
 		REFERENCES t_s_autor (au_id),
 	FOREIGN KEY (a_9)
 		REFERENCES t_s_autor (au_id))
-	Select * from t_s_autorListe
 	END
 
 use Bibo_Verwaltung
@@ -241,7 +235,6 @@ CREATE TABLE [dbo].[t_s_zustand](
 	[zu_id] [int] IDENTITY (1,1) NOT NULL,
 	[zu_zustand] [nvarchar](128) NOT NULL,
 	PRIMARY KEY (zu_id))
-	Select * from t_s_zustand
 	END
 
 use Bibo_Verwaltung
@@ -275,8 +268,6 @@ CREATE TABLE [dbo].[t_s_buecher](
 		REFERENCES t_s_verlag (ver_id),
 	FOREIGN KEY (buch_sprache_id)
 		REFERENCES t_s_sprache (sprach_id))
-
-	Select * from t_s_buecher
 	END
 
 use Bibo_Verwaltung
@@ -296,8 +287,6 @@ CREATE TABLE [dbo].[t_s_buchid](
 		REFERENCES t_s_zustand (zu_id),
 	FOREIGN KEY (bu_isbn)
 		REFERENCES t_s_buecher (buch_isbn))
-
-	Select * from t_s_buchid
 	END
 
 use Bibo_Verwaltung
@@ -318,6 +307,4 @@ CREATE TABLE [dbo].[t_bd_ausgeliehen](
 		REFERENCES t_s_buchid (bu_id),
     FOREIGN KEY (aus_kundenid)
 	    REFERENCES t_s_kunden (kunde_id))
-
-	Select * from t_bd_ausgeliehen
 	END

@@ -17,20 +17,14 @@ namespace Bibo_Verwaltung
         {
             InitializeComponent();
             sprache.FillGrid(ref gv_Sprachen);
-            originalWidth = gv_Sprachen.Width;
-            originalHeight = gv_Sprachen.Height;
-            originalPointX = gv_Sprachen.Location.X;
-            originalPointY = gv_Sprachen.Location.Y;
+            tLP_Sprachen.RowStyles[0].Height = 0;
+            tLP_Sprachen.RowStyles[1].Height = 0;
         }
 
         #region globale Variablen
         Sprache sprache = new Sprache();
         bool suchmodus = false;
         bool aenderungungen = false;
-        int originalWidth = 0;
-        int originalHeight = 0;
-        int originalPointX = 0;
-        int originalPointY = 0;
         #endregion
 
         #region Schliessen-Aktion
@@ -89,10 +83,9 @@ namespace Bibo_Verwaltung
             if (suchmodus == false)
             {
                 suchmodus = true;
-                bt_Suchen.Text = "Suche AUS";
-                gv_Sprachen.Size = new Size(originalWidth, originalHeight - 26); //192,370
-                gv_Sprachen.Location = new Point(originalPointX, originalPointY + 26);
-                lb_Sprache.Visible = true;
+                bt_Suchen.Text = "Suchen AUS";
+                tLP_Sprachen.RowStyles[0].Height = 13;
+                tLP_Sprachen.RowStyles[1].Height = 25;
                 tb_Suchen.Visible = true;
                 tb_Suchen.Enabled = true;
                 tb_Suchen.Focus();
@@ -100,13 +93,12 @@ namespace Bibo_Verwaltung
             else
             {
                 suchmodus = false;
-                bt_Suchen.Text = "Suche AN";
-                lb_Sprache.Visible = false;
+                bt_Suchen.Text = "Suchen AN";
                 tb_Suchen.Visible = false;
                 tb_Suchen.Enabled = false;
                 tb_Suchen.Text = "";
-                gv_Sprachen.Size = new Size(originalWidth, originalHeight); //192,396
-                gv_Sprachen.Location = new Point(originalPointX, originalPointY);
+                tLP_Sprachen.RowStyles[0].Height = 0;
+                tLP_Sprachen.RowStyles[1].Height = 0;
             }
         }
 
@@ -126,6 +118,6 @@ namespace Bibo_Verwaltung
         {
             aenderungungen = true;
         }
-        #endregion       
+        #endregion
     }
 }
