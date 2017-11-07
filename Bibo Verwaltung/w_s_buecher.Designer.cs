@@ -583,13 +583,11 @@
             // 
             this.Grid_Buch.AllowUserToAddRows = false;
             this.Grid_Buch.AllowUserToDeleteRows = false;
-            this.Grid_Buch.AllowUserToResizeColumns = false;
+            this.Grid_Buch.AllowUserToOrderColumns = true;
             this.Grid_Buch.AllowUserToResizeRows = false;
-            this.Grid_Buch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.Grid_Buch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Grid_Buch.Location = new System.Drawing.Point(410, 16);
             this.Grid_Buch.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.Grid_Buch.MultiSelect = false;
             this.Grid_Buch.Name = "Grid_Buch";
             this.Grid_Buch.ReadOnly = true;
             this.Grid_Buch.RowHeadersVisible = false;

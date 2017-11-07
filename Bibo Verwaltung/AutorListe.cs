@@ -196,5 +196,36 @@ namespace Bibo_Verwaltung
             GetID();
         }
         #endregion
+
+        #region getNameList
+        public List<string> GetNames(string id)
+        {
+            List<string> names = new List<string>();
+            string ids = "";
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return names;
+            string RawCommand = "Select * FROM [dbo].[t_s_autorListe] WHERE a_id = @0 ";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, id);
+            while (dr.Read())
+            {
+                for(int i = 0; i < 10;)
+                {
+                    ids = dr["a_" + i].ToString();
+                    if (ids != null && !ids.Equals(""))
+                    {
+                        Autor a = new Autor(ids);
+                        names.Add(a.Autorname);
+                    }
+                    else
+                    {
+                        names.Add(null);
+                    }
+                    i++;
+                }
+            }
+            return names;
+
+        }
+        #endregion
     }
 }

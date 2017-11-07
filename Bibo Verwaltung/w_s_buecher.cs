@@ -24,10 +24,6 @@ namespace Bibo_Verwaltung
             pictureBox2.Visible = false;
             gb_zoom.Visible = false;
             comboBox1.Visible = false;
-            //bt_expand.FlatStyle = FlatStyle.Flat;
-            //bt_expand.FlatAppearance.BorderColor = BackColor;
-            //bt_expand.FlatAppearance.MouseOverBackColor = BackColor;
-            //bt_expand.FlatAppearance.MouseDownBackColor = BackColor;
             comboBox1.DropDownHeight = 1;
         }
         private string location = "";
@@ -516,6 +512,15 @@ namespace Bibo_Verwaltung
         private void cb_Autor_TextChanged(object sender, EventArgs e)
         {
             cb_Autor.BackColor = Color.White;
+            if (checkbox_autor.Checked)
+            {
+                checkedListBox1.Visible = true;
+                int index = checkedListBox1.FindString(cb_Autor.Text);
+                if(index >= 0)
+                {
+                    checkedListBox1.SelectedIndex = index;
+                }
+            }
         }
         #endregion
 
@@ -631,29 +636,21 @@ namespace Bibo_Verwaltung
                 if(b.AutorListe.AutorNamen.Count > 1)
                 {
                     checkbox_autor.Checked = true;
-                    //for(int i = 0; i<10;)
-                    //{
-                        //if(b.AutorListe.AutorIDs[i] != null)
-                        //{
-                            List<int> index = new List<int>();
-                            foreach (object value in checkedListBox1.Items)
-                            {
-                                DataRowView castedItem = value as DataRowView;
-                                string newString = castedItem["au_autor"].ToString();
-                                if (b.AutorListe.AutorNamen.Contains(newString))
-                                {
-                                    int test = checkedListBox1.Items.IndexOf(value);
-                                    index.Add(test);
-                                }
-                            }
-                            foreach(int i1 in index)
-                            {
-                                checkedListBox1.SetItemChecked(i1, true);
-                            }
-
-                        //}
-                        //i++;
-                    //}
+                    List<int> index = new List<int>();
+                    foreach (object value in checkedListBox1.Items)
+                    {
+                        DataRowView castedItem = value as DataRowView;
+                        string newString = castedItem["au_autor"].ToString();
+                        if (b.AutorListe.AutorNamen.Contains(newString))
+                        {
+                                int test = checkedListBox1.Items.IndexOf(value);
+                                index.Add(test);
+                        }
+                    }   
+                    foreach(int i1 in index)
+                    {
+                        checkedListBox1.SetItemChecked(i1, true);
+                    }
                 }
                 else
                 {
@@ -1111,6 +1108,7 @@ namespace Bibo_Verwaltung
                     checkbox_autor.Checked = false;
                 }
                 string autorstring = "";
+                needAutor.Clear();
                 foreach (string s in GetAutor())
                 {
                     autorstring = autorstring + s + ", ";
@@ -1156,11 +1154,13 @@ namespace Bibo_Verwaltung
         {
             if (checkbox_autor.Checked)
             {
+                cb_Autor.AutoCompleteMode = AutoCompleteMode.None;
                 comboBox1.Visible = true;
                 cb_Autor.DataSource = null;
             }
             else
             {
+                cb_Autor.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 comboBox1.Visible = false;
                 checkedListBox1.Visible = false;
                 b.AutorListe.Autor.FillCombobox(ref cb_Autor, 0);

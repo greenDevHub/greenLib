@@ -350,26 +350,49 @@ namespace Bibo_Verwaltung
         SQL_Verbindung con2 = new SQL_Verbindung();
         private void FillObjectBuch()
         {
+            dt2.Clear();
             if (con2.ConnectError()) return;
             string RawCommand = "SELECT buch_isbn as 'ISBN',"
                 + "buch_titel as 'Titel',"
                 + "ger_name as 'Genre',"
-                + "au_autor as 'Autor',"
+                + "a_id as 'AutorlisteID',"
                 + "ver_name as 'Verlag',"
                 + "buch_erscheinungsdatum as 'Erscheinungsdatum',"
                 + "sprach_name as 'Sprache',"
                 + "buch_auflage as 'Auflage',"
                 + "buch_neupreis as 'Neupreis', "
-                + "buch_bild as 'Bild', " 
+                + "buch_bild as 'Bild', "
                 + "buch_anzahl as 'Anzahl Exemplare' from t_s_buecher "
                 + "left join t_s_genre on buch_genre_id = ger_id "
                 + "left join t_s_autorListe on buch_autor_id = a_id "
                 + "left join t_s_verlag on buch_verlag_id = ver_id "
-                + "left join t_s_sprache on buch_sprache_id = sprach_id "
-                + "left join t_s_autor on a_0 = au_id";
+                + "left join t_s_sprache on buch_sprache_id = sprach_id";
             adapter = new SqlDataAdapter(RawCommand, con2.Con);
             adapter.Fill(ds2);
             adapter.Fill(dt2);
+            if (ds2.Tables[0].Columns.Contains("Autor"))
+            {
+                ds2.Tables[0].Columns.RemoveAt(ds2.Tables[0].Columns.IndexOf("Autor"));
+            }
+            ds2.Tables[0].Columns.Add("Autor", typeof(System.String));
+            foreach (DataRow row in ds2.Tables[0].Rows)
+            {
+                string text = "";
+                foreach(string s in AutorListe.GetNames(row["AutorlisteID"].ToString()))
+                {
+                    if(s != null && !s.Equals(""))
+                    {
+                        text = text + s + ", ";
+                    }
+                }
+                if (text.Length > 2)
+                {
+                    text = text.Substring(0, text.Length -2);
+                }
+                row["Autor"] = text;
+            }
+            ds2.Tables[0].Columns["Autor"].SetOrdinal(3);
+            
             con2.Close();
         }
         #endregion
@@ -394,6 +417,8 @@ namespace Bibo_Verwaltung
             ClearDSBuch();
             FillObjectBuch();
             grid.DataSource = ds2.Tables[0];
+            int i = ds2.Tables[0].Columns.IndexOf("AutorlisteID");
+            grid.Columns[i].Visible = false;
         }
 
         public void FillGrid_Load_All(ref DataGridView grid, object value = null)
