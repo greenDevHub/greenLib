@@ -512,9 +512,8 @@ namespace Bibo_Verwaltung
         private void cb_Autor_TextChanged(object sender, EventArgs e)
         {
             cb_Autor.BackColor = Color.White;
-            if (checkbox_autor.Checked)
+            if (checkbox_autor.Checked && checkedListBox1.Visible)
             {
-                checkedListBox1.Visible = true;
                 int index = checkedListBox1.FindString(cb_Autor.Text);
                 if(index >= 0)
                 {
@@ -1046,6 +1045,10 @@ namespace Bibo_Verwaltung
             {
                 File.Delete(newLocation);
                 Copy_picture();
+            }
+            if (oldLocation.Contains("_DOWNLOAD.jpg"))
+            {
+                File.Delete(oldLocation);
             }
         }
 

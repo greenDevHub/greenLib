@@ -418,6 +418,7 @@ namespace Bibo_Verwaltung
             FillObjectBuch();
             grid.DataSource = ds2.Tables[0];
             int i = ds2.Tables[0].Columns.IndexOf("AutorlisteID");
+            grid.Columns[ds2.Tables[0].Columns.IndexOf("Autor")].DisplayIndex = 3;
             grid.Columns[i].Visible = false;
         }
 
