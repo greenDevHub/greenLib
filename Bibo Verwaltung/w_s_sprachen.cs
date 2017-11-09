@@ -17,11 +17,13 @@ namespace Bibo_Verwaltung
         {
             InitializeComponent();
             sprache.FillGrid(ref gv_Sprachen);
+            originalHeight = tLP_Sprachen.RowStyles[0].Height;
             tLP_Sprachen.RowStyles[0].Height = 0;
             tLP_Sprachen.RowStyles[1].Height = 0;
         }
 
         #region globale Variablen
+        float originalHeight = 0;
         Sprache sprache = new Sprache();
         bool suchmodus = false;
         bool aenderungungen = false;
@@ -84,8 +86,8 @@ namespace Bibo_Verwaltung
             {
                 suchmodus = true;
                 bt_Suchen.Text = "Suchen AUS";
-                tLP_Sprachen.RowStyles[0].Height = 15;
-                tLP_Sprachen.RowStyles[1].Height = 25;
+                tLP_Sprachen.RowStyles[0].Height = originalHeight;
+                tLP_Sprachen.RowStyles[1].Height = originalHeight;
                 tb_Suchen.Visible = true;
                 tb_Suchen.Enabled = true;
                 tb_Suchen.Focus();
