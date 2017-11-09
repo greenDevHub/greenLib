@@ -52,12 +52,12 @@
             this.gv_Sprachen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_Sprachen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_Sprachen.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.gv_Sprachen.Location = new System.Drawing.Point(8, 107);
+            this.gv_Sprachen.Location = new System.Drawing.Point(8, 106);
             this.gv_Sprachen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.gv_Sprachen.MultiSelect = false;
             this.gv_Sprachen.Name = "gv_Sprachen";
             this.gv_Sprachen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_Sprachen.Size = new System.Drawing.Size(520, 1032);
+            this.gv_Sprachen.Size = new System.Drawing.Size(520, 1033);
             this.gv_Sprachen.TabIndex = 50;
             this.gv_Sprachen.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gv_Sprachen_CellBeginEdit);
             this.gv_Sprachen.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gv_Sprachen_UserDeletedRow);
@@ -78,10 +78,9 @@
             // 
             // tb_Suchen
             // 
-            this.tb_Suchen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tb_Suchen.Dock = System.Windows.Forms.DockStyle.Top;
             this.tb_Suchen.Enabled = false;
-            this.tb_Suchen.Location = new System.Drawing.Point(8, 57);
+            this.tb_Suchen.Location = new System.Drawing.Point(8, 44);
             this.tb_Suchen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.tb_Suchen.Name = "tb_Suchen";
             this.tb_Suchen.Size = new System.Drawing.Size(520, 38);
@@ -92,10 +91,11 @@
             // lb_Sprache
             // 
             this.lb_Sprache.AutoSize = true;
+            this.lb_Sprache.Dock = System.Windows.Forms.DockStyle.Top;
             this.lb_Sprache.Location = new System.Drawing.Point(8, 0);
             this.lb_Sprache.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lb_Sprache.Name = "lb_Sprache";
-            this.lb_Sprache.Size = new System.Drawing.Size(120, 32);
+            this.lb_Sprache.Size = new System.Drawing.Size(520, 32);
             this.lb_Sprache.TabIndex = 53;
             this.lb_Sprache.Text = "Suchen:";
             // 
@@ -125,10 +125,10 @@
             this.tLP_Sprachen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.tLP_Sprachen.Name = "tLP_Sprachen";
             this.tLP_Sprachen.RowCount = 4;
-            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.066593F));
-            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.066593F));
-            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.51528F));
-            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.351528F));
+            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.004001F));
+            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.006669F));
+            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.62667F));
+            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.362667F));
             this.tLP_Sprachen.Size = new System.Drawing.Size(536, 1253);
             this.tLP_Sprachen.TabIndex = 61;
             // 
