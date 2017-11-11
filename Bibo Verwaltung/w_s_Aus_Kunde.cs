@@ -67,7 +67,78 @@ namespace Bibo_Verwaltung
         {
             Form Kunden = new w_s_Kunden();
             Kunden.ShowDialog(this);
+            kunde.FillGrid(ref gv_Aus_Kunde);
         }
         #endregion
+
+        private void VornameText()
+        {
+            tb_vorname.Text = "Vorname";
+            tb_vorname.ForeColor = Color.Gray;
+        }
+        private void NachnameText()
+        {
+            tb_nachname.Text = "Nachname";
+            tb_nachname.ForeColor = Color.Gray;
+        }
+        private void VornameClear()
+        {
+            tb_vorname.Text = "";
+            tb_vorname.ForeColor = Color.Black;
+        }
+        private void NachnameClear()
+        {
+            tb_nachname.Text = "";
+            tb_nachname.ForeColor = Color.Black;
+        }
+        private void tb_vorname_TextChanged(object sender, EventArgs e)
+        {
+            (gv_Aus_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%'", tb_vorname.Text, tb_nachname.Text);
+        }
+
+        private void tb_nachname_TextChanged(object sender, EventArgs e)
+        {
+            (gv_Aus_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%'", tb_vorname.Text, tb_nachname.Text);
+        }
+
+        private void lb_nachname_Click(object sender, EventArgs e)
+        {
+            lb_nachname.Visible = false;
+            tb_nachname.Focus();
+        }
+
+        private void lb_Vorname_Click(object sender, EventArgs e)
+        {
+            lb_Vorname.Visible = false;
+            tb_vorname.Focus();
+        }
+
+        private void tb_vorname_Click(object sender, EventArgs e)
+        {
+            lb_Vorname.Visible = false;
+            tb_vorname.Focus();
+        }
+
+        private void tb_nachname_Click(object sender, EventArgs e)
+        {
+            lb_nachname.Visible = false;
+            tb_nachname.Focus();
+        }
+
+        private void tb_nachname_Leave(object sender, EventArgs e)
+        {
+            if (tb_nachname.Text.Equals(""))
+            {
+                lb_nachname.Visible = true;
+            }
+        }
+
+        private void tb_vorname_Leave(object sender, EventArgs e)
+        {
+            if (tb_vorname.Text.Equals(""))
+            {
+                lb_Vorname.Visible = true;
+            }
+        }
     }
 }

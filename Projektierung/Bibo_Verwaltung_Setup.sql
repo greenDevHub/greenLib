@@ -153,10 +153,10 @@ CREATE TABLE [dbo].[t_s_kunden](
 	[kunde_hausnummer] [nvarchar](4) NOT NULL,
 	[kunde_postleitzahl] [nvarchar](16) NOT NULL,
 	[kunde_ort] [nvarchar](128) NOT NULL,
-	[kunde_vertrauenswürdigkeit] [nvarchar](128),
-	[kunde_klasse] [nvarchar](6),
-	[kunde_mail] [nvarchar](128) NOT NULL,
-	[kunde_telefonnummer] [nvarchar](128) NOT NULL,
+	[kunde_vertrauenswürdigkeit] [nvarchar](128) NOT NULL,
+	[kunde_klasse] [nvarchar](6) NOT NULL,
+	[kunde_mail] [nvarchar](128),
+	[kunde_telefonnummer] [nvarchar](128),
 	PRIMARY KEY (kunde_id))
 	END
 
@@ -301,7 +301,6 @@ CREATE TABLE [dbo].[t_bd_ausgeliehen](
 	[aus_leihdatum] [date] NOT NULL,
 	[aus_rückgabedatum] [date] NOT NULL,
 	[aus_kundenid] [int] NOT NULL,
-	[aus_barcode] [nvarchar] (128) NOT NULL,
 	PRIMARY KEY (aus_leihnummer),
 	FOREIGN KEY (aus_buchid)
 		REFERENCES t_s_buchid (bu_id),

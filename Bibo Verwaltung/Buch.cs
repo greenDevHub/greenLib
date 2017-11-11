@@ -104,19 +104,12 @@ namespace Bibo_Verwaltung
         public Buch()
         {
             FillObjectBuch();
-            FillObject_All();
         }
-        //public Buch()
-        //{
-        //    //FillObject();
-        //    FillObjectLeihen();
-        //}
+
         public Buch(string isbn)
         {
             this.isbn = isbn;
             Load_Buch();
-            //FillObject();
-            FillObject_All();
         }
         #endregion
 
@@ -177,7 +170,7 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        #region
+        #region GetAutorlisteID
         public string GetAutorID(string isbn)
         {
             string id = "";
@@ -291,6 +284,7 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
+        #region RowCount
         private int CountRows(string isbnAktuell)
         {
             if (con.ConnectError()) return 0;
@@ -318,31 +312,9 @@ namespace Bibo_Verwaltung
             cmd.ExecuteNonQuery();
             con.Close();
         }
+        #endregion
 
         #region DataSet + DataTable fuellen (Fill Object)
-        SqlDataAdapter adapter = new SqlDataAdapter();
-        DataSet ds = new DataSet();
-        DataTable dt = new DataTable();
-        SqlCommandBuilder comb = new SqlCommandBuilder();
-        private void FillObject_All()
-        {
-            SQL_Verbindung con = new SQL_Verbindung();
-            if (con.ConnectError()) return;
-            string RawCommand = "SELECT * FROM t_s_buchid "
-                + "left join t_s_buecher on bu_isbn = buch_isbn "
-                + "left join t_s_genre on buch_genre_id = ger_id "
-                + "left join t_s_autor on buch_autor_id = au_id "
-                + "left join t_s_verlag on buch_verlag_id = ver_id "
-                + "left join t_s_sprache on buch_sprache_id = sprach_id "
-                + "left join t_s_zustand on bu_zustandsid = zu_id "
-                + "left join t_bd_ausgeliehen on aus_buchid = bu_id "
-                + "left join t_s_kunden on kunde_ID = aus_kundenid";
-            adapter = new SqlDataAdapter(RawCommand, con.Con);
-            adapter.Fill(ds);
-            adapter.Fill(dt);
-            con.Close();
-        }
-       
         SqlDataAdapter adapter2 = new SqlDataAdapter();
         DataSet ds2 = new DataSet();
         DataTable dt2 = new DataTable();
@@ -367,9 +339,9 @@ namespace Bibo_Verwaltung
                 + "left join t_s_autorListe on buch_autor_id = a_id "
                 + "left join t_s_verlag on buch_verlag_id = ver_id "
                 + "left join t_s_sprache on buch_sprache_id = sprach_id";
-            adapter = new SqlDataAdapter(RawCommand, con2.Con);
-            adapter.Fill(ds2);
-            adapter.Fill(dt2);
+            adapter2 = new SqlDataAdapter(RawCommand, con2.Con);
+            adapter2.Fill(ds2);
+            adapter2.Fill(dt2);
             if (ds2.Tables[0].Columns.Contains("Autor"))
             {
                 ds2.Tables[0].Columns.RemoveAt(ds2.Tables[0].Columns.IndexOf("Autor"));
@@ -396,10 +368,10 @@ namespace Bibo_Verwaltung
             con2.Close();
         }
         #endregion
+
         #region DataSet zuruecksetzen
         private void ClearDSBuch()
         {
-            ds.Tables[0].Rows.Clear();
             ds2.Tables[0].Rows.Clear();
         }
         #endregion
@@ -417,108 +389,11 @@ namespace Bibo_Verwaltung
             ClearDSBuch();
             FillObjectBuch();
             grid.DataSource = ds2.Tables[0];
-            int i = ds2.Tables[0].Columns.IndexOf("AutorlisteID");
             grid.Columns[ds2.Tables[0].Columns.IndexOf("Autor")].DisplayIndex = 3;
-            grid.Columns[i].Visible = false;
-        }
-
-        public void FillGrid_Load_All(ref DataGridView grid, object value = null)
-        {
-            ClearDSBuch();
-            FillObject_All();
-            grid.DataSource = ds.Tables[0];
-            grid.Columns[2].Visible = false;
-            grid.Columns[4].Visible = false;
-            grid.Columns[6].Visible = false;
-            grid.Columns[7].Visible = false;
-            grid.Columns[8].Visible = false;
-            grid.Columns[10].Visible = false;
-            grid.Columns[13].Visible = false;
-            grid.Columns[15].Visible = false;
-            grid.Columns[17].Visible = false;
-            grid.Columns[19].Visible = false;
-            grid.Columns[21].Visible = false;
-            grid.Columns[24].Visible = false;
-            grid.Columns[27].Visible = false;
-            grid.Columns[29].Visible = false;
-            grid.Columns[32].Visible = false;
-            grid.Columns[33].Visible = false;
-            grid.Columns[34].Visible = false;
-            grid.Columns[35].Visible = false;
-            grid.Columns[37].Visible = false;
-            grid.Columns[38].Visible = false;
-            grid.Columns[39].Visible = false;
-
-            grid.Columns["bu_id"].HeaderText = "Buch-ID:";
-            grid.Columns["bu_isbn"].HeaderText = "Buch-ISBN:";
-            grid.Columns["bu_aufnahmedatum"].HeaderText = "aufgenommen am:";
-            grid.Columns["zu_zustand"].HeaderText = "Zustand:";
-            grid.Columns["buch_titel"].HeaderText = "Titel:";
-            grid.Columns["buch_erscheinungsdatum"].HeaderText = "erschienen am:";
-            grid.Columns["buch_auflage"].HeaderText = "Auflage:";
-            grid.Columns["buch_neupreis"].HeaderText = "Neupreis:";
-            grid.Columns["ger_name"].HeaderText = "Genre:";
-            grid.Columns["au_autor"].HeaderText = "Autor:";
-            grid.Columns["ver_name"].HeaderText = "Verlag:";
-            grid.Columns["sprach_name"].HeaderText = "Sprache:";
-            grid.Columns["aus_leihnummer"].HeaderText = "Ausleihnummer:";
-            grid.Columns["aus_leihdatum"].HeaderText = "ausgeliehen am:";
-            grid.Columns["aus_rückgabedatum"].HeaderText = "Rückgabe am:";
-            grid.Columns["aus_barcode"].HeaderText = "Barcode:";
-            grid.Columns["kunde_vorname"].HeaderText = "Vorname:";
-            grid.Columns["kunde_nachname"].HeaderText = "Nachname:";
-            grid.Columns["kunde_vertrauenswürdigkeit"].HeaderText = "Vertrauenswürdigkeit:";
+            grid.Columns[ds2.Tables[0].Columns.IndexOf("AutorlisteID")].Visible = false;
         }
         #endregion
 
-        #region Buch ausleihen/zurueckgeben
-        public bool Pruefe_Ausgeliehen(string buch_id)
-        {
-            bool ergebnis = false;
-            if (con.ConnectError()) return false;
-            string RawCommand = "SELECT COUNT(*) FROM t_bd_ausgeliehen WHERE aus_buchid = @buch_id";
-            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-            cmd.Parameters.AddWithValue("@buch_id", buch_id);
-
-            int anzahl = Convert.ToInt16(cmd.ExecuteScalar());
- 
-            if (anzahl >= 1)
-            {
-                    ergebnis = true;
-                }
-                else
-                {
-                    ergebnis = false;
-                }
-            con.Close();
-            return ergebnis;
-        }
-
-        public void Ausleihen(int buch_id, string aus_datum, string rueck_datum, int kunde, string barcode)
-        {
-            string RawCommand = "INSERT into [dbo].[t_bd_ausgeliehen] (aus_buchid, aus_leihdatum, aus_rückgabedatum, aus_kundenid, aus_barcode) VALUES(@buchid, @ausdatum, @rückdatum, @kunde, @barcode)";
-            if (con.ConnectError()) return;
-            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-
-            cmd.Parameters.AddWithValue("@buchid", buch_id);
-            cmd.Parameters.AddWithValue("@ausdatum", aus_datum);
-            cmd.Parameters.AddWithValue("@rückdatum", rueck_datum);
-            cmd.Parameters.AddWithValue("@kunde", kunde);
-            cmd.Parameters.AddWithValue("@barcode", barcode);
-
-            cmd.ExecuteNonQuery();
-            con.Close();
-        }
-
-        public void Buch_Rueckgabe(string buch_id)
-        {
-            if (con.ConnectError()) return;
-            string RawCommand = "DELETE FROM t_bd_ausgeliehen WHERE aus_buchid = @0";
-            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-            cmd.Parameters.AddWithValue("@0", buch_id);
-            cmd.ExecuteNonQuery();
-            con.Close();
-        }
-        #endregion
+        
     }
 }

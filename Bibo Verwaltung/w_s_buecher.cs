@@ -9,8 +9,7 @@ using System.Net;
 using System.IO;
 using System.Drawing.Imaging;
 using System.Text;
-using System.Linq;
-using System.Threading;
+using System.Media;
 
 namespace Bibo_Verwaltung
 {
@@ -78,17 +77,6 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Prüfung Numeric und Isbn
-        private void tb_Neupreis_Validated(object sender, EventArgs e)
-        {
-            if (IsNumeric(tb_Neupreis.Text) == false)
-            {
-                MessageBox.Show("Bitte nur Zahlen eingeben!", "Fehler",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                tb_Neupreis.Text = "";
-            }
-
-        }
-
         private void tb_ISBN_inputOk(object sender, EventArgs e)
         {
             if (IsIsbn(tb_ISBN.Text) == false)
@@ -251,7 +239,14 @@ namespace Bibo_Verwaltung
         #region Save/Update/Delete Buch
         private void Save_Buecher(object sender, EventArgs e)
         {
-            if (rb_Update_Buch.Checked && !checkbox_autor.Checked && !tb_ISBN.Text.Equals("") && !tb_Titel.Text.Equals("") && !cb_Autor.Text.Equals("") && !cb_Verlag.Text.Equals("")
+            var t = new Timer();
+            t.Interval = 3000; // it will Tick in 3 seconds
+            t.Tick += (s, a) =>
+            {
+                rTB_1.Hide();
+                t.Stop();
+            };
+                if (rb_Update_Buch.Checked && !checkbox_autor.Checked && !tb_ISBN.Text.Equals("") && !tb_Titel.Text.Equals("") && !cb_Autor.Text.Equals("") && !cb_Verlag.Text.Equals("")
                 && !cb_Genre.Text.Equals("") && !cb_Sprache.Text.Equals(""))
             {
                 try
@@ -259,6 +254,8 @@ namespace Bibo_Verwaltung
                     b.AutorListe.AutorIDs.Clear();
                     b.AutorListe.AutorIDs.Add(b.AutorListe.Autor.GetID(cb_Autor.Text));
                     UpdateBuch();
+                    rTB_1.Visible = true;
+                    t.Start();
                 }
                 catch
                 {
@@ -289,6 +286,8 @@ namespace Bibo_Verwaltung
 
                     }
                     UpdateBuch();
+                    rTB_1.Visible = true;
+                    t.Start();
                 }
                 catch
                 {
@@ -311,6 +310,8 @@ namespace Bibo_Verwaltung
                         Delete_picture(location);
                         Clear_All();
                         b.FillGrid_Buch(ref Grid_Buch);
+                        rTB_1.Visible = true;
+                        t.Start();
                     }
                     else if (dialogResult == DialogResult.No)
                     {
@@ -343,13 +344,14 @@ namespace Bibo_Verwaltung
                         b.AutorListe.AutorIDs.Clear();
                         b.AutorListe.AutorIDs.Add(b.AutorListe.Autor.GetID(cb_Autor.Text));
                         b.AutorListe.Autor.FillCombobox(ref cb_Autor, b.AutorListe.AutorIDs[0]);
-                        //b.AutorListe.AutorIDs.Add(cb_Autor.SelectedValue.ToString());
                         for (int i = 1; i < 10;)
                         {
                             b.AutorListe.AutorIDs.Add(null);
                             i++;
                         }
                         AddBuch();
+                        rTB_1.Visible = true;
+                        t.Start();
                     }
                     else
                     {
@@ -361,6 +363,8 @@ namespace Bibo_Verwaltung
                             i++;
                         }
                         AddBuch();
+                        rTB_1.Visible = true;
+                        t.Start();
                     }
 
                 }
@@ -391,10 +395,14 @@ namespace Bibo_Verwaltung
                             }
                         }
                         AddBuch();
+                        rTB_1.Visible = true;
+                        t.Start();
                     }
                     else
                     {
                         AddBuch();
+                        rTB_1.Visible = true;
+                        t.Start();
                     }
                 }
                 catch
@@ -542,6 +550,7 @@ namespace Bibo_Verwaltung
                 bt_picture.Enabled = true;
                 bt_pic_delete.Enabled = true;
                 pictureBox1.Enabled = true;
+                rTB_1.Text = "Das Buch wurde erfolgreich hinzugefügt!";
             }
             if (rb_Update_Buch.Checked)
             {
@@ -559,6 +568,7 @@ namespace Bibo_Verwaltung
                 bt_picture.Enabled = true;
                 bt_pic_delete.Enabled = true;
                 pictureBox1.Enabled = true;
+                rTB_1.Text = "Das Buch wurde erfolgreich bearbeitet!";
             }
             if (rb_Delete_Buch.Checked)
             {
@@ -576,6 +586,7 @@ namespace Bibo_Verwaltung
                 bt_picture.Enabled = false;
                 bt_pic_delete.Enabled = false;
                 pictureBox1.Enabled = false;
+                rTB_1.Text = "Das Buch wurde erfolgreich gelöscht!";
             }
         }
         #endregion
@@ -1251,6 +1262,64 @@ namespace Bibo_Verwaltung
         private void w_s_buecher_Click(object sender, EventArgs e)
         {
             checkedListBox1.Visible = false;
+        }
+
+        private void tb_ISBN_Leave(object sender, EventArgs e)
+        {
+            if (tb_ISBN.Text.Equals(""))
+            {
+                lb_isbn_vorlage.Visible = true;
+            }
+        }
+
+        private void tb_Neupreis_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
+            {
+                SystemSounds.Beep.Play();
+                e.Handled = true;
+            }
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
+            {
+                e.Handled = true;
+            }
+
+        }
+
+        private void tb_Neupreis_Leave(object sender, EventArgs e)
+        {
+            if (tb_Neupreis.Text.Contains(","))
+            {
+                if (tb_Neupreis.Text.Substring(tb_Neupreis.Text.IndexOf(",") + 1).Length == 1)
+                {
+                    tb_Neupreis.Text = tb_Neupreis.Text + "0";
+                }
+                else if (tb_Neupreis.Text.Substring(tb_Neupreis.Text.IndexOf(",") + 1).Length == 0)
+                {
+                    tb_Neupreis.Text = tb_Neupreis.Text + "00";
+                    if (tb_Neupreis.Text.Substring(0, tb_Neupreis.Text.IndexOf(",")).Length == 0)
+                    {
+                        tb_Neupreis.Text = 0 + tb_Neupreis.Text;
+                    }
+                }
+                else if (tb_Neupreis.Text.Substring(tb_Neupreis.Text.IndexOf(",") + 1).Length > 2)
+                {
+                    tb_Neupreis.Text = tb_Neupreis.Text.Substring(0, tb_Neupreis.Text.IndexOf(",") + 3);
+                }
+            }
+            else
+            {
+                tb_Neupreis.Text = tb_Neupreis.Text + ",00";
+            }
+        }
+
+        private void tb_ISBN_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '-'))
+            {
+                SystemSounds.Beep.Play();
+                e.Handled = true;
+            }
         }
     }
 }

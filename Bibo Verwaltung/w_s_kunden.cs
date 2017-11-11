@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -31,16 +26,8 @@ namespace Bibo_Verwaltung
 
             SqlCommand cmd = new SqlCommand(strSQL, con);
             cmd.Parameters.AddWithValue("@k_id", tb_KundenID);
-
-            // Verbindung öffnen 
             con.Open();
             SqlDataReader dr = cmd.ExecuteReader();
-            // DataTable dt = new DataTable();
-            //string g = dr["kunde_vertrauenswürdigkeit"].ToString();
-
-            //string[] cbItems = { "vertrauenswürdig", "nicht vertrauenswürdig", "noch nicht bestimmt" };
-
-
             cb.ValueMember = dr["kunde_vertrauenswürdigkeit"].ToString();
             cb.DisplayMember = dr["kunde_vertrauenswürdigkeit"].ToString();
             cb.SelectedValue = dr["kunde_vertrauenswürdigkeit"].ToString();
@@ -66,9 +53,7 @@ namespace Bibo_Verwaltung
                 && !tb_Postleitzahl.Text.Equals("")
                 && !tb_Ort.Text.Equals("")
                 && !cb_Vertrauenswuerdigkeit.Text.Equals("")
-                && !tb_Klasse.Text.Equals("")
-                && !tb_Mail.Text.Equals("")
-                && !tb_Telefonnummer.Text.Equals(""))
+                && !tb_Klasse.Text.Equals(""))
             {
                 try
                 {
@@ -87,8 +72,6 @@ namespace Bibo_Verwaltung
                     k.Telefonnummer = tb_Telefonnummer.Text;
                     k.Save();
                     lb_kunde_add.Visible = true;
-                    k.ClearDS();
-                    k.FillObject1();
                     k.FillGrid(ref Grid_Kunde);
                     t.Start();
                 }
@@ -119,8 +102,6 @@ namespace Bibo_Verwaltung
                     k.Delete();
                     Clear();
                     lb_kunde_add.Visible = true;
-                    k.ClearDS();
-                    k.FillObject1();
                     k.FillGrid(ref Grid_Kunde);
                     t.Start();
                 }
@@ -138,9 +119,7 @@ namespace Bibo_Verwaltung
               && !tb_Postleitzahl.Text.Equals("")
               && !tb_Ort.Text.Equals("")
               && !cb_Vertrauenswuerdigkeit.Text.Equals("")
-              && !tb_Klasse.Text.Equals("")
-              && !tb_Mail.Text.Equals("")
-              && !tb_Telefonnummer.Text.Equals(""))
+              && !tb_Klasse.Text.Equals(""))
             {
                 try
                 {
@@ -160,8 +139,6 @@ namespace Bibo_Verwaltung
                     k.Add();
                     Clear();
                     lb_kunde_add.Visible = true;
-                    k.ClearDS();
-                    k.FillObject1();
                     k.FillGrid(ref Grid_Kunde);
                     t.Start();
 
@@ -365,24 +342,6 @@ namespace Bibo_Verwaltung
             {
                 tb_Klasse.BackColor = Color.White;
             }
-
-            if (tb_Mail.Text.Equals(""))
-            {
-                tb_Mail.BackColor = Color.Red;
-            }
-            else
-            {
-                tb_Mail.BackColor = Color.White;
-            }
-
-            if (tb_Telefonnummer.Text.Equals(""))
-            {
-                tb_Telefonnummer.BackColor = Color.Red;
-            }
-            else
-            {
-                tb_Telefonnummer.BackColor = Color.White;
-            }
         }
         #endregion
 
@@ -395,12 +354,13 @@ namespace Bibo_Verwaltung
         private void tb_Vorname_TextChanged(object sender, EventArgs e)
         {
             tb_Vorname.BackColor = Color.White;
-            (Grid_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'", tb_Vorname.Text);
+            (Grid_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%'", tb_Vorname.Text, tb_Nachname.Text);
         }
 
         private void tb_Nachname_TextChanged(object sender, EventArgs e)
         {
             tb_Nachname.BackColor = Color.White;
+            (Grid_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%'", tb_Vorname.Text, tb_Nachname.Text);
         }
 
         private void tb_Strasse_TextChanged(object sender, EventArgs e)

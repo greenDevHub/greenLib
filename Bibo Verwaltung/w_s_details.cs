@@ -20,7 +20,7 @@ namespace Bibo_Verwaltung
         public w_s_details()
         {
             InitializeComponent();
-            b.FillGrid_Load_All(ref gv_Details);
+            details.FillGrid(ref gv_Details);
             b.AutorListe.Autor.FillCombobox(ref combo_Autor, -1);
             b.Verlag.FillCombobox(ref combo_Verlag, -1);
             b.Genre.FillCombobox(ref combo_Genre, -1);
@@ -36,17 +36,51 @@ namespace Bibo_Verwaltung
         private void Buch_Suchen()
         {
             Zeige_Alle_Rows();
+            if (cb_s_ID.Checked)
+            {
 
+                for (int i = 0; i < gv_Details.RowCount; i++)
+                {
+                    string suche = tb_ID.Text;
+                    string ergebnis = gv_Details.Rows[i].Cells[details.GetColumnIndexByName(gv_Details, "Buch-ID")].Value.ToString();
+                    if (ergebnis.Contains(suche) == false)
+                    {
+                        CurrencyManager cuma = (CurrencyManager)gv_Details.BindingContext[gv_Details.DataSource];
+                        cuma.SuspendBinding();
+                        gv_Details.Rows[i].Selected = false;
+                        cuma.ResumeBinding();
+                        gv_Details.Rows[i].Visible = false;
+                    }
+                }
+            }
+            if (cb_s_ISBN.Checked)
+            {
+                for (int i = 0; i < gv_Details.RowCount; i++)
+                {
+                    string suche = tb_ISBN.Text;
+                    string ergebnis = gv_Details.Rows[i].Cells[details.GetColumnIndexByName(gv_Details, "ISBN")].Value.ToString();
+                    if (ergebnis.Contains(suche) == false)
+                    {
+                        CurrencyManager cuma = (CurrencyManager)gv_Details.BindingContext[gv_Details.DataSource];
+                        cuma.SuspendBinding();
+                        gv_Details.Rows[i].Selected = false;
+                        cuma.ResumeBinding();
+                        gv_Details.Rows[i].Visible = false;
+                    }
+                }
+            }
             if (cb_s_Titel.Checked == true)
             {
                 for (int i = 0; i < gv_Details.RowCount; i++)
                 {
                     string suche = tb_s_Titel.Text;
-                    string ergebnis = gv_Details.Rows[i].Cells[5].Value.ToString();
+                    string ergebnis = gv_Details.Rows[i].Cells[details.GetColumnIndexByName(gv_Details, "Titel")].Value.ToString();
                     if (ergebnis.Contains(suche) == false)
                     {
                         CurrencyManager cuma = (CurrencyManager)gv_Details.BindingContext[gv_Details.DataSource];
                         cuma.SuspendBinding();
+                        gv_Details.Rows[i].Selected = false;
+                        cuma.ResumeBinding();
                         gv_Details.Rows[i].Visible = false;
                     }
                 }
@@ -57,11 +91,13 @@ namespace Bibo_Verwaltung
                 for (int i = 0; i < gv_Details.RowCount; i++)
                 {
                     string suche = combo_Autor.Text;
-                    string ergebnis = gv_Details.Rows[i].Cells[16].Value.ToString();
+                    string ergebnis = gv_Details.Rows[i].Cells[details.GetColumnIndexByName(gv_Details, "Autor")].Value.ToString();
                     if (ergebnis.Contains(suche) == false)
                     {
                         CurrencyManager cuma = (CurrencyManager)gv_Details.BindingContext[gv_Details.DataSource];
                         cuma.SuspendBinding();
+                        gv_Details.Rows[i].Selected = false;
+                        cuma.ResumeBinding();
                         gv_Details.Rows[i].Visible = false;
                     }
                 }
@@ -72,11 +108,13 @@ namespace Bibo_Verwaltung
                 for (int i = 0; i < gv_Details.RowCount; i++)
                 {
                     string suche = combo_Genre.Text;
-                    string ergebnis = gv_Details.Rows[i].Cells[14].Value.ToString();
+                    string ergebnis = gv_Details.Rows[i].Cells[details.GetColumnIndexByName(gv_Details, "Genre")].Value.ToString();
                     if (ergebnis.Contains(suche) == false)
                     {
                         CurrencyManager cuma = (CurrencyManager)gv_Details.BindingContext[gv_Details.DataSource];
                         cuma.SuspendBinding();
+                        gv_Details.Rows[i].Selected = false;
+                        cuma.ResumeBinding();
                         gv_Details.Rows[i].Visible = false;
                     }
                 }
@@ -87,11 +125,45 @@ namespace Bibo_Verwaltung
                 for (int i = 0; i < gv_Details.RowCount; i++)
                 {
                     string suche = combo_Verlag.Text;
-                    string ergebnis = gv_Details.Rows[i].Cells[18].Value.ToString();
+                    string ergebnis = gv_Details.Rows[i].Cells[details.GetColumnIndexByName(gv_Details, "Verlag")].Value.ToString();
                     if (ergebnis.Contains(suche) == false)
                     {
                         CurrencyManager cuma = (CurrencyManager)gv_Details.BindingContext[gv_Details.DataSource];
                         cuma.SuspendBinding();
+                        gv_Details.Rows[i].Selected = false;
+                        cuma.ResumeBinding();
+                        gv_Details.Rows[i].Visible = false;
+                    }
+                }
+            }
+            if (cb_s_Vorname.Checked)
+            {
+                for (int i = 0; i < gv_Details.RowCount; i++)
+                {
+                    string suche = tb_vorname.Text;
+                    string ergebnis = gv_Details.Rows[i].Cells[details.GetColumnIndexByName(gv_Details, "Vorname")].Value.ToString();
+                    if (ergebnis.Contains(suche) == false)
+                    {
+                        CurrencyManager cuma = (CurrencyManager)gv_Details.BindingContext[gv_Details.DataSource];
+                        cuma.SuspendBinding();
+                        gv_Details.Rows[i].Selected = false;
+                        cuma.ResumeBinding();
+                        gv_Details.Rows[i].Visible = false;
+                    }
+                }
+            }
+            if (cb_s_Nachname.Checked)
+            {
+                for (int i = 0; i < gv_Details.RowCount; i++)
+                {
+                    string suche = tb_nachname.Text;
+                    string ergebnis = gv_Details.Rows[i].Cells[details.GetColumnIndexByName(gv_Details, "Nachname")].Value.ToString();
+                    if (ergebnis.Contains(suche) == false)
+                    {
+                        CurrencyManager cuma = (CurrencyManager)gv_Details.BindingContext[gv_Details.DataSource];
+                        cuma.SuspendBinding();
+                        gv_Details.Rows[i].Selected = false;
+                        cuma.ResumeBinding();
                         gv_Details.Rows[i].Visible = false;
                     }
                 }
@@ -119,6 +191,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
+                tb_s_Titel.Text = "";
                 tb_s_Titel.Enabled = false;
             }
         }
@@ -131,6 +204,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
+                combo_Autor.Text = "";
                 combo_Autor.Enabled = false;
             }
         }
@@ -143,6 +217,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
+                combo_Genre.Text = "";
                 combo_Genre.Enabled = false;
             }
         }
@@ -155,6 +230,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
+                combo_Verlag.Text = "";
                 combo_Verlag.Enabled = false;
             }
         }
@@ -165,24 +241,9 @@ namespace Bibo_Verwaltung
             combo_Autor.Text = "";
             combo_Genre.Text = "";
             combo_Verlag.Text = "";
-            //b.ClearDSBuch();
-            //gv_Details.DataSource = null;
-            //gv_Details.Update();
-            //gv_Details.Refresh();
-            //b.ClearDSBuch();
-            ////Buch b = new Buch();
-            ////b = new Buch();
-            //b.FillGrid(ref gv_Details);
-            //gv_Details.Update();
-            //gv_Details.Refresh();
-            //this.gv_Details.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect;
-            //this.gv_Details.Update();
-            //this.gv_Details.Refresh();
-            //this.gv_Details.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             Buch_Suchen();
         }
         #endregion
-        //TODO
 
 
         #region Gridview-Click
@@ -212,6 +273,7 @@ namespace Bibo_Verwaltung
         //}
         #endregion
 
+        //Robert fragen
         #region Ein- und Ausblenden von Verfügbarkeit und Kundeninformationen
         private void Verfuegbarkeit_Einblenden()
         {
@@ -225,7 +287,7 @@ namespace Bibo_Verwaltung
                     string vergleich = "";
                     string zustand = "beschädigt";
 
-                    if (vergleich.Equals(gv_Details.Rows[i].Cells[24].Value.ToString()) == false | zustand.Equals(gv_Details.Rows[i].Cells[22].Value.ToString()) == true)
+                    if (vergleich.Equals(gv_Details.Rows[i].Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString()) == false | zustand.Equals(gv_Details.Rows[i].Cells[details.GetColumnIndexByName(gv_Details, "Zustand")].Value.ToString()) == true)
                     {
                         CurrencyManager cuma = (CurrencyManager)gv_Details.BindingContext[gv_Details.DataSource];
                         cuma.SuspendBinding();
@@ -244,30 +306,24 @@ namespace Bibo_Verwaltung
         {
             if (cb_KundeAnz.Checked == true)
             {
-                //gv_Details.Columns[29].Visible = true;//todo
-                gv_Details.Columns[30].Visible = true;
-                gv_Details.Columns[31].Visible = true;
-                //gv_Details.Columns[32].Visible = true;
-                //gv_Details.Columns[33].Visible = true;
-                //gv_Details.Columns[34].Visible = true;
-                //gv_Details.Columns[35].Visible = true;
-                gv_Details.Columns[36].Visible = true;
-                //gv_Details.Columns[37].Visible = true;
-                //gv_Details.Columns[38].Visible = true;
-                //gv_Details.Columns[39].Visible = true;
+                gv_Details.Columns[details.GetColumnIndexByName(gv_Details,"Vorname")].Visible = true;
+                gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Nachname")].Visible = true;
+                gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Klasse")].Visible = true;
+                gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Kunden ID")].Visible = true;
+                cb_s_Nachname.Enabled = true;
+                cb_s_Vorname.Enabled = true;
+
             }
             else if (cb_KundeAnz.Checked == false)
             {
-                //gv_Details.Columns[29].Visible = false;
-                gv_Details.Columns[30].Visible = false;
-                gv_Details.Columns[31].Visible = false;
-                //gv_Details.Columns[32].Visible = false;
-                //gv_Details.Columns[33].Visible = false;
-                //gv_Details.Columns[34].Visible = false;
-                //gv_Details.Columns[35].Visible = false;
-                gv_Details.Columns[36].Visible = false;
-                //gv_Details.Columns[37].Visible = false;
-                //gv_Details.Columns[38].Visible = false;
+                gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Vorname")].Visible = false;
+                gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Nachname")].Visible = false;
+                gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Klasse")].Visible = false;
+                gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Kunden ID")].Visible = false;
+                cb_s_Vorname.Enabled = false;
+                cb_s_Nachname.Enabled = false;
+                cb_s_Vorname.Checked = false;
+                cb_s_Nachname.Checked = false;
             }
         }
 
@@ -281,7 +337,7 @@ namespace Bibo_Verwaltung
             Verfuegbarkeit_Einblenden();
         }
         #endregion 
-        //TODO
+        //Robert fragen
 
         #region Buch ausleihen
         private void Ausleihvorgang(object sender, EventArgs e)
@@ -303,53 +359,58 @@ namespace Bibo_Verwaltung
                 if (row_index >= 0 && row_index <= this.gv_Details.RowCount)
                 {
                     DataGridViewRow row = this.gv_Details.CurrentRow;
-                    try
+                    if(row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString().Equals("") || row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString() == null)
                     {
-                        string buch_id = row.Cells[0].Value.ToString();
-                        string buch_titel = row.Cells[5].Value.ToString();
-                        string buch_zustand = row.Cells[22].Value.ToString();
-
-                        using (var kunden = new w_s_Aus_Kunde())
+                        try
                         {
-                            var result = kunden.ShowDialog();
-                            if (result == DialogResult.OK)
-                            {
-                                string k_id = kunden.KundenID;
-                                string k_vmane = kunden.KundenVName;
-                                string k_nname = kunden.KundenNName;
+                            string buch_id = row.Cells[details.GetColumnIndexByName(gv_Details, "Buch-ID")].Value.ToString();
+                            string buch_titel = row.Cells[details.GetColumnIndexByName(gv_Details, "Titel")].Value.ToString();
+                            string buch_zustand = row.Cells[details.GetColumnIndexByName(gv_Details, "Zustand")].Value.ToString();
 
-                                this.tb_KundeAusleihen.Text = k_vmane + " " + k_nname;
-                                this.tb_KundenIDAusleihen.Text = k_id;
-                                tb_BuchIDAusleihen.Text = buch_id;
-                                tb_BuchAusleihen.Text = buch_titel;
-                                tb_ZustandAusleihen.Text = buch_zustand;
-                                bt_Abschliessen.Enabled = true;
-                                string date = DateTime.Today.Day.ToString() + DateTime.Today.Month.ToString() + DateTime.Today.Year.ToString();
-                                Barcode bar = new Barcode(tb_BuchIDAusleihen.Text, tb_KundenIDAusleihen.Text, date);
-                                bar.FillPictureBox(ref picBoxAusleihen);
-                                tb_BarcodeAusleihen.Text = tb_BuchIDAusleihen.Text + tb_KundenIDAusleihen.Text + date;
-                            }
-                            else
+                            using (var kunden = new w_s_Aus_Kunde())
                             {
-                                Ausleihen_Abbrechen();
+                                var result = kunden.ShowDialog();
+                                if (result == DialogResult.OK)
+                                {
+                                    string k_id = kunden.KundenID;
+                                    string k_vmane = kunden.KundenVName;
+                                    string k_nname = kunden.KundenNName;
+
+                                    this.tb_KundeAusleihen.Text = k_vmane + " " + k_nname;
+                                    this.tb_KundenIDAusleihen.Text = k_id;
+                                    tb_BuchIDAusleihen.Text = buch_id;
+                                    tb_BuchAusleihen.Text = buch_titel;
+                                    tb_ZustandAusleihen.Text = buch_zustand;
+                                    bt_Abschliessen.Enabled = true;
+                                    string date = DateTime.Today.Day.ToString() + DateTime.Today.Month.ToString() + DateTime.Today.Year.ToString();
+                                    Barcode bar = new Barcode(tb_BuchIDAusleihen.Text, tb_KundenIDAusleihen.Text, date);
+                                }
+                                else
+                                {
+                                    Ausleihen_Abbrechen(true);
+                                }
                             }
                         }
+                        catch
+                        {
+                            tb_BuchIDAusleihen.Text = "";
+                            tb_KundenIDAusleihen.Text = "";
+                            tb_BuchAusleihen.Text = "";
+                            tb_KundeAusleihen.Text = "";
+                            tb_ZustandAusleihen.Text = "";
+                            tb_verleihfaehigAusleihen.Text = "";
+                            dateTimePickerAusleihen.ResetText();
+                            bt_Abschliessen.Enabled = false;
+                            MessageBox.Show("Der Auslehvorgang konnte nicht gestartet werden!", "Error",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
-                    catch
+                    else
                     {
-                        tb_BuchIDAusleihen.Text = "";
-                        tb_KundenIDAusleihen.Text = "";
-                        tb_BuchAusleihen.Text = "";
-                        tb_KundeAusleihen.Text = "";
-                        tb_ZustandAusleihen.Text = "";
-                        tb_verleihfaehigAusleihen.Text = "";
-                        tb_BarcodeAusleihen.Text = "";
-                        dateTimePickerAusleihen.ResetText();
-                        bt_Abschliessen.Enabled = false;
-                        picBoxAusleihen.ResetText();
-                        MessageBox.Show("Der Auslehvorgang konnte nicht gestartet werden!", "Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Dieses Buch wurde bereits ausgeliehen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Ausleihen_Abbrechen(false);
                     }
+                    
                 }
             }
             else
@@ -365,13 +426,13 @@ namespace Bibo_Verwaltung
             {
                 int buch_id = Convert.ToInt32(tb_BuchIDAusleihen.Text);
 
-                if (b.Pruefe_Ausgeliehen(tb_BuchIDAusleihen.Text) == false)
+                if (details.Pruefe_Ausgeliehen(tb_BuchIDAusleihen.Text) == false)
                 {
                     string aus_datum = DateTime.Today.ToString();
                     string rück_datum = dateTimePickerAusleihen.Value.ToString();
                     int kunden_id = Convert.ToInt32(tb_KundenIDAusleihen.Text);
 
-                    b.Ausleihen(buch_id, aus_datum, rück_datum, kunden_id, tb_BarcodeAusleihen.Text);
+                    details.Ausleihen(buch_id, aus_datum, rück_datum, kunden_id);
                     //drucken
 
                     MessageBox.Show("Das Buch wurde erfolgreich an: '" + tb_KundeAusleihen.Text + "' ausgeliehen!", "Information",
@@ -382,12 +443,11 @@ namespace Bibo_Verwaltung
                     tb_KundeAusleihen.Text = "";
                     tb_ZustandAusleihen.Text = "";
                     tb_verleihfaehigAusleihen.Text = "";
-                    tb_BarcodeAusleihen.Text = "";
                     dateTimePickerAusleihen.ResetText();
-                    picBoxAusleihen.Image = null;
                     bt_Abschliessen.Enabled = false;
                     bt_Ausleihen.Enabled = true;
                     bt_AbbrechenAusleihen.Enabled = false;
+                    details.FillGrid(ref gv_Details);
                 }
                 else
                 {
@@ -399,9 +459,7 @@ namespace Bibo_Verwaltung
                     tb_KundeAusleihen.Text = "";
                     tb_ZustandAusleihen.Text = "";
                     tb_verleihfaehigAusleihen.Text = "";
-                    tb_BarcodeAusleihen.Text = "";
                     dateTimePickerAusleihen.ResetText();
-                    picBoxAusleihen.Image = null;
                     bt_Abschliessen.Enabled = false;
                     bt_Ausleihen.Enabled = true;
                     bt_AbbrechenAusleihen.Enabled = false;
@@ -424,28 +482,38 @@ namespace Bibo_Verwaltung
                 if (row_index >= 0 && row_index <= gv_Details.RowCount)
                 {
                     DataGridViewRow row = this.gv_Details.CurrentRow;
-
-                    string buch_titel = row.Cells[5].Value.ToString();
-                    string kunde = row.Cells[30].Value.ToString() + " " + row.Cells[31].Value.ToString();
-
-                    DialogResult dialogResult = MessageBox.Show("Möchten Sie das Buch: '" + buch_titel
-                        + "', ausgeliehen von: '" + kunde + "' wirklich als zurückgegeben markieren?", "Achtung",
-                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-                    if (dialogResult == DialogResult.OK)
+                    if (!row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString().Equals("") && row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString() != null)
                     {
-                        try
+                        string buch_titel = row.Cells[details.GetColumnIndexByName(gv_Details, "Titel")].Value.ToString();
+                        string kunde = row.Cells[details.GetColumnIndexByName(gv_Details, "Vorname")].Value.ToString() + " " + row.Cells[details.GetColumnIndexByName(gv_Details, "Nachname")].Value.ToString();
+
+                        DialogResult dialogResult = MessageBox.Show("Möchten Sie das Buch: '" + buch_titel
+                            + "', ausgeliehen von: '" + kunde + "' wirklich als zurückgegeben markieren?", "Achtung",
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+                        if (dialogResult == DialogResult.OK)
                         {
-                            b.Buch_Rueckgabe(tb_BuchIDAusleihen.Text);
-                            MessageBox.Show("Das Buch wurde erfolgreich zurückgeben!", "Information",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            try
+                            {
+                                details.Buch_Rueckgabe(tb_BuchIDAusleihen.Text);
+                                details.FillGrid(ref gv_Details);
+                                MessageBox.Show("Das Buch wurde erfolgreich zurückgeben!", "Information",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Es ist ein Fehler aufgetreten. Das Buch konnte nicht zurückgeben werden!", "Fehler",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
-                        catch
-                        {
-                            MessageBox.Show("Es ist ein Fehler aufgetreten. Das Buch konnte nicht zurückgeben werden!", "Fehler",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+
                     }
+                    else
+                    {
+                        MessageBox.Show("Dieses Buch wurde an niemanden ausgeliehen. Deshalb kann es nicht zurückgegeben werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                    
                 }
             }
             else
@@ -459,7 +527,7 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        private void Ausleihen_Abbrechen()
+        private void Ausleihen_Abbrechen(bool a)
         {
             tb_BuchIDAusleihen.Text = "";
             tb_KundenIDAusleihen.Text = "";
@@ -467,19 +535,20 @@ namespace Bibo_Verwaltung
             tb_KundeAusleihen.Text = "";
             tb_ZustandAusleihen.Text = "";
             tb_verleihfaehigAusleihen.Text = "";
-            tb_BarcodeAusleihen.Text = "";
             dateTimePickerAusleihen.ResetText();
-            picBoxAusleihen.Image = null;
             bt_Abschliessen.Enabled = false;
             bt_Ausleihen.Enabled = true;
             bt_AbbrechenAusleihen.Enabled = false;
-            MessageBox.Show("Der Ausleihvorgang wurde abbgebrochen!", "Information",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (a)
+            {
+                MessageBox.Show("Der Ausleihvorgang wurde abbgebrochen!", "Information",
+            MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void bt_AbbrechenAusleihen_Click(object sender, EventArgs e)
         {
-            Ausleihen_Abbrechen();
+            Ausleihen_Abbrechen(true);
         }
 
         private void tb_ZustandAusleihen_TextChanged(object sender, EventArgs e)
@@ -495,6 +564,78 @@ namespace Bibo_Verwaltung
             else
             {
                 tb_verleihfaehigAusleihen.Text = "Ja (verleihfähig)";
+            }
+        }
+
+        private void checkBox_Vorname_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_s_Vorname.Checked)
+            {
+                Kunden_Einblenden();
+                tb_vorname.Enabled = true;
+            }
+            else
+            {
+                tb_vorname.Enabled = false;
+                tb_vorname.Text = "";
+            }
+        }
+
+        private void checkBox_Nachname_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_s_Nachname.Checked)
+            {
+                tb_nachname.Enabled = true;
+            }
+            else
+            {
+                tb_nachname.Enabled = false;
+                tb_nachname.Text = "";
+            }
+        }
+
+        private void tb_nachname_TextChanged(object sender, EventArgs e)
+        {
+            Buch_Suchen();
+        }
+        private void tb_vorname_TextChanged(object sender, EventArgs e)
+        {
+            Buch_Suchen();
+        }
+
+        private void tb_ISBN_TextChanged(object sender, EventArgs e)
+        {
+            Buch_Suchen();
+        }
+
+        private void cb_s_ISBN_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_s_ISBN.Checked)
+            {
+                tb_ISBN.Enabled = true;
+            }
+            else
+            {
+                tb_ISBN.Enabled = false;
+                tb_ISBN.Text = "";
+            }
+        }
+
+        private void tb_ID_TextChanged(object sender, EventArgs e)
+        {
+            Buch_Suchen();
+        }
+
+        private void cb_s_ID_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_s_ID.Checked)
+            {
+                tb_ID.Enabled = true;
+            }
+            else
+            {
+                tb_ID.Enabled = false;
+                tb_ID.Text = "";
             }
         }
     }

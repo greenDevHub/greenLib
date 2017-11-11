@@ -21,9 +21,9 @@ namespace Bibo_Verwaltung
         public w_s_einstellungen()
         {
             InitializeComponent();
-            Load();
             originalHeight = ClientSize.Height;
             originalRowHeight = tLP.RowStyles[3].Height;
+            Load();
         }
 
         private bool File_Exists()
@@ -41,7 +41,12 @@ namespace Bibo_Verwaltung
         #region FileHandling
         private void Save(object sender, EventArgs e)
         {
-
+            set.Server = tb_Server.Text;
+            set.Security = cb_Security.Text;
+            set.Name = tb_Benutzername.Text;
+            set.Pw = tb_Passwort.Text;
+            set.Database = tb_Database.Text;
+            set.Save(true);
         }
 
         private void Load()
@@ -62,7 +67,7 @@ namespace Bibo_Verwaltung
             if (cb_Security.Text == "") cb_Security.BackColor = Color.Red;
             if (tb_Benutzername.Text == "") tb_Benutzername.BackColor = Color.Red;
             if (tb_Passwort.Text == "") tb_Passwort.BackColor = Color.Red;
-            MessageBox.Show("Bitte füllen Sie alle Felder aus");
+            MessageBox.Show("Bitte füllen Sie alle Felder aus", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         #region Buttons
@@ -92,6 +97,8 @@ namespace Bibo_Verwaltung
                 lb_Benutzername.Visible = false;
                 tb_Passwort.Visible = false;
                 lb_Passwort.Visible = false;
+                tb_Benutzername.Text = "";
+                tb_Passwort.Text = "";
                 tLP.RowStyles[3].Height = 0;
                 tLP.RowStyles[4].Height = 0;
                 this.ClientSize = new System.Drawing.Size(ClientSize.Width, (originalHeight*72)/100);
@@ -107,27 +114,22 @@ namespace Bibo_Verwaltung
                 this.ClientSize = new System.Drawing.Size(ClientSize.Width, originalHeight);
             }
         }
-
-        private void bt_Load(object sender, EventArgs e)
-        {
-            Load();
-        }
         #endregion
 
         private void button1_Click(object sender, EventArgs e)
         {
-            bool auth;
-            if (set.Security == "SQL Authentifizierung") auth = false;
-            else auth = true;
-            SQL_Verbindung con = new SQL_Verbindung(set.Server, set.Database, auth, set.Name, set.Pw);
-            if (con.ConnectError())
+            set.Server = tb_Server.Text;
+            set.Security = cb_Security.Text;
+            set.Name = tb_Benutzername.Text;
+            set.Pw = tb_Passwort.Text;
+            set.Database = tb_Database.Text;
+            set.Save(false);
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (!con.ConnectError())
             {
-                MessageBox.Show("Verbindung zum Server " + set.Server + " fehlgeschlagen");
+                MessageBox.Show("Verbindung hergestellt", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else
-            {
-                MessageBox.Show("Verbindung hergestellt");
-            }
+
         }
     }
 }

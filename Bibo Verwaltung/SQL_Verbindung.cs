@@ -14,12 +14,13 @@ namespace Bibo_Verwaltung
 {
     class SQL_Verbindung
     {
+        Einstellung set = new Einstellung();
         #region Aufbau
         public string ConnectionString;
         private static string Base_Server = "Data Source=";
-        private static string Default_Server = ".\\SQLEXPRESS";
+        //private static string Default_Server = ".\\SQLEXPRESS";
         private static string Base_Database = "Initial Catalog=";
-        private static string Default_Database = "Bibo_Verwaltung";
+        //private static string Default_Database = "Bibo_Verwaltung";
         private static string Base_Server_Integrated_Security = "Integrated Security=";
         private static string Default_Server_Integrated_Security = "sspi";
         private static string Base_Username = "User ID=";
@@ -33,25 +34,48 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Arten von Verbindungen
+        //public SQL_Verbindung()
+        //{
+        //    ConnectionString = Base_Server + Default_Server + ";" + Base_Database + Default_Database + ";"
+        //        + Base_Server_Integrated_Security + Default_Server_Integrated_Security + ";";
+        //    build = true;
+        //}
+
         public SQL_Verbindung()
         {
-            ConnectionString = Base_Server + Default_Server + ";" + Base_Database + Default_Database + ";"
-                + Base_Server_Integrated_Security + Default_Server_Integrated_Security + ";";
-            build = true;
+            try
+            {
+                if (set.Security.Equals("SQL Authentifizierung"))
+                {
+                    ConnectionString = Base_Server + set.Server.ToLower() + ";" + Base_Database + set.Database.ToLower() + ";"
+                        + Base_Server_Integrated_Security + "false;" + "Connection Timeout = 3;" + Base_Username + set.Name + ";" + Base_Password + set.Pw + ";";
+                    build = true;
+                }
+                else
+                {
+                    ConnectionString = Base_Server + set.Server.ToLower() + ";" + Base_Database + set.Database.ToLower() + ";"
+                        + Base_Server_Integrated_Security + Default_Server_Integrated_Security + "; Connection Timeout = 3";
+                    build = true;
+                }
+            }
+            catch
+            {
+                ConnectionString = "";
+            }
         }
 
-        public SQL_Verbindung(string Server)
-        {
-            ConnectionString = Base_Server + Server.ToLower() + ";" + Base_Database + Default_Database + ";"
-                + Base_Server_Integrated_Security + Default_Server_Integrated_Security + ";";
-            build = true;
-        }
-        public SQL_Verbindung(string Server, string Database)
-        {
-            ConnectionString = Base_Server + Server.ToLower() + ";" + Base_Database + Database.ToLower() + ";"
-                + Base_Server_Integrated_Security + Default_Server_Integrated_Security + ";";
-            build = true;
-        }
+        //public SQL_Verbindung(string Server)
+        //{
+        //    ConnectionString = Base_Server + Server.ToLower() + ";" + Base_Database + Default_Database + ";"
+        //        + Base_Server_Integrated_Security + Default_Server_Integrated_Security + ";";
+        //    build = true;
+        //}
+        //public SQL_Verbindung(string Server, string Database)
+        //{
+        //    ConnectionString = Base_Server + Server.ToLower() + ";" + Base_Database + Database.ToLower() + ";"
+        //        + Base_Server_Integrated_Security + Default_Server_Integrated_Security + ";";
+        //    build = true;
+        //}
 
         public SQL_Verbindung(string Server, string Database, bool Security, string Username, string Password)
         {

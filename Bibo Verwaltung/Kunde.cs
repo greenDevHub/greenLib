@@ -129,7 +129,7 @@ namespace Bibo_Verwaltung
         DataSet ds = new DataSet();
         DataTable dt = new DataTable();
         SqlCommandBuilder comb = new SqlCommandBuilder();
-        public void FillObject1()
+        private void FillObject1()
         {
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
@@ -143,12 +143,14 @@ namespace Bibo_Verwaltung
 
         }
 
-        public void ClearDS()
+        private void ClearDS()
         {
             ds.Tables[0].Rows.Clear();
         }
         public void FillGrid(ref DataGridView grid, object value = null)
         {
+            ClearDS();
+            FillObject1();
             grid.DataSource = ds.Tables[0];
         }
         #endregion

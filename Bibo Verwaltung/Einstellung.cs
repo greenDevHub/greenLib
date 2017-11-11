@@ -35,6 +35,10 @@ namespace Bibo_Verwaltung
 
         #endregion
 
+        public Einstellung()
+        {
+            Load();
+        }
         #region Methoden
         private bool File_Exists(string path)
         {
@@ -56,16 +60,26 @@ namespace Bibo_Verwaltung
             return fInfo.IsReadOnly;
         }
 
-        public void Save()
+        public void Save(bool message)
         {
             if (!IsFileReadOnly(path))
             {
                 File.WriteAllText(path, Server + "\r\n" + Database + "\r\n" + Security + "\r\n" + Name + "\r\n" + Pw);
-                MessageBox.Show("Speichern erfolgreich!");
+                if (message)
+                {
+                    MessageBox.Show("Speichern erfolgreich!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             else
             {
-                MessageBox.Show("Speichern nicht erfolgreich! Die Datei ist schreibgeschützt!");
+                if (message)
+                {
+                    MessageBox.Show("Speichern nicht erfolgreich! Die Datei ist schreibgeschützt!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Die Änderungen konnten nicht übernommen werden, da die Datei schreibgeschützt ist!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
@@ -96,7 +110,7 @@ namespace Bibo_Verwaltung
                 }
                 else if (zeilen.Skip(2).First() != "")
                 {
-                    MessageBox.Show("Unbekannte Authentifizierungsart. Windows Authentifizierung wurde ausgewählt");
+                    MessageBox.Show("Unbekannte Authentifizierungsart. Windows Authentifizierung wurde ausgewählt", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Security = "Windows Authentifizierung";
                 }
             }

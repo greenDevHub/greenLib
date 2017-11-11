@@ -30,10 +30,117 @@ namespace Bibo_Verwaltung
         }
 
         #region Load Uerbersicht
+        bool error = false;
         private void Load_Uebersicht(object sender, EventArgs e)
         {
+            if (!error)
+            {
+                UpdateForm();
+            }
+            
+        }
+        #endregion
+
+        #region Formulare aufrufen
+        private void bt_Kunden_Click(object sender, EventArgs e)
+        {
+            if (!error)
+            {
+                Form Kunden = new w_s_Kunden();
+                Kunden.ShowDialog(this);
+            }
+        }
+
+        private void bt_Genres_Click(object sender, EventArgs e)
+        {
+            if (!error)
+            {
+                Form Genres = new w_s_genres();
+                Genres.ShowDialog(this);
+            }
+
+        }
+
+        private void bt_Sprachen_Click(object sender, EventArgs e)
+        {
+            if (!error)
+            {
+                Form Sprachen = new w_s_sprachen();
+                Sprachen.ShowDialog(this);
+            }
+
+        }
+
+        private void bt_Autoren_Click(object sender, EventArgs e)
+        {
+            if (!error)
+            {
+                Form Autoren = new w_s_autoren();
+                Autoren.ShowDialog(this);
+            }
+
+        }
+
+        private void bt_Verlage_Click(object sender, EventArgs e)
+        {
+            if (!error)
+            {
+                Form Verlage = new w_s_verlage();
+                Verlage.ShowDialog(this);
+            }
+
+        }
+
+        private void bt_Buecher_Click(object sender, EventArgs e)
+        {
+            if (!error)
+            {
+                Form Buecher = new w_s_buecher();
+                Buecher.ShowDialog(this);
+            }
+
+        }
+        private void bt_Einstellungen_Click(object sender, EventArgs e)
+        {
+            Form Einstellungen = new w_s_einstellungen();
+            Einstellungen.ShowDialog(this);
+            error = false;
+
+        }
+
+        private void bt_Zustand_Click(object sender, EventArgs e)
+        {
+            if (!error)
+            {
+                Form Zustand = new w_s_zustand();
+                Zustand.ShowDialog(this);
+            }
+
+        }
+
+        private void bt_Suchen_Ausleihen_Click(object sender, EventArgs e)
+        {
+            if (!error)
+            {
+                Form Details = new w_s_details();
+                Details.ShowDialog(this);
+            }
+
+        }
+        private void UpdateForm()
+        {
             //SQL-Verbindung pruefen
-            if (con.ConnectError()) return;
+            Einstellung set = new Einstellung();
+            SQL_Verbindung con = new SQL_Verbindung();
+            string test = con.ConnectionString;
+            if (con.ConnectError())
+            {
+                error = true;
+                lb_Bestandzahl.Text = "-";
+                lb_Lagerzahl.Text = "-";
+                lb_Ausleihzahl.Text = "-";
+                return;
+            }
             string bestandSQL = "SELECT * FROM t_s_buchid";
             string ausgeliehenSQL = "SELECT * FROM t_bd_ausgeliehen";
 
@@ -67,61 +174,6 @@ namespace Bibo_Verwaltung
             lb_Lagerzahl.Text = (bestand - ausgeliehen).ToString();
 
             con.Close();
-        }
-        #endregion
-
-        #region Formulare aufrufen
-        private void bt_Kunden_Click(object sender, EventArgs e)
-        {
-            Form Kunden = new w_s_Kunden();
-            Kunden.ShowDialog(this);
-        }
-
-        private void bt_Genres_Click(object sender, EventArgs e)
-        {
-            Form Genres = new w_s_genres();
-            Genres.ShowDialog(this);
-        }
-
-        private void bt_Sprachen_Click(object sender, EventArgs e)
-        {
-            Form Sprachen = new w_s_sprachen();
-            Sprachen.ShowDialog(this);
-        }
-
-        private void bt_Autoren_Click(object sender, EventArgs e)
-        {
-            Form Autoren = new w_s_autoren();
-            Autoren.ShowDialog(this);
-        }
-
-        private void bt_Verlage_Click(object sender, EventArgs e)
-        {
-            Form Verlage = new w_s_verlage();
-            Verlage.ShowDialog(this);
-        }
-
-        private void bt_Buecher_Click(object sender, EventArgs e)
-        {
-            Form Buecher = new w_s_buecher();
-            Buecher.ShowDialog(this);
-        }
-        private void bt_Einstellungen_Click(object sender, EventArgs e)
-        {
-            Form Einstellungen = new w_s_einstellungen();
-            Einstellungen.ShowDialog(this);
-        }
-
-        private void bt_Zustand_Click(object sender, EventArgs e)
-        {
-            Form Zustand = new w_s_zustand();
-            Zustand.ShowDialog(this);
-        }
-
-        private void bt_Suchen_Ausleihen_Click(object sender, EventArgs e)
-        {
-            Form Details = new w_s_details();
-            Details.ShowDialog(this);
         }
     }
     #endregion
