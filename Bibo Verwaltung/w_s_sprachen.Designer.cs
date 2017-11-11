@@ -34,12 +34,12 @@
             this.lb_Sprache = new System.Windows.Forms.Label();
             this.bt_Suchen = new System.Windows.Forms.Button();
             this.tLP_Sprachen = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tLP_Button = new System.Windows.Forms.TableLayoutPanel();
+            this.gb_Sprachen = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Sprachen)).BeginInit();
             this.tLP_Sprachen.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.tLP_Button.SuspendLayout();
+            this.gb_Sprachen.SuspendLayout();
             this.SuspendLayout();
             // 
             // gv_Sprachen
@@ -52,12 +52,11 @@
             this.gv_Sprachen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_Sprachen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_Sprachen.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.gv_Sprachen.Location = new System.Drawing.Point(8, 106);
-            this.gv_Sprachen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.gv_Sprachen.Location = new System.Drawing.Point(3, 41);
             this.gv_Sprachen.MultiSelect = false;
             this.gv_Sprachen.Name = "gv_Sprachen";
             this.gv_Sprachen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_Sprachen.Size = new System.Drawing.Size(520, 1033);
+            this.gv_Sprachen.Size = new System.Drawing.Size(198, 421);
             this.gv_Sprachen.TabIndex = 50;
             this.gv_Sprachen.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gv_Sprachen_CellBeginEdit);
             this.gv_Sprachen.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gv_Sprachen_UserDeletedRow);
@@ -67,10 +66,9 @@
             // 
             this.bt_Uebernehmen.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.bt_Uebernehmen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bt_Uebernehmen.Location = new System.Drawing.Point(8, 7);
-            this.bt_Uebernehmen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.bt_Uebernehmen.Location = new System.Drawing.Point(3, 3);
             this.bt_Uebernehmen.Name = "bt_Uebernehmen";
-            this.bt_Uebernehmen.Size = new System.Drawing.Size(249, 87);
+            this.bt_Uebernehmen.Size = new System.Drawing.Size(115, 31);
             this.bt_Uebernehmen.TabIndex = 51;
             this.bt_Uebernehmen.Text = "Übernehmen";
             this.bt_Uebernehmen.UseVisualStyleBackColor = true;
@@ -78,12 +76,13 @@
             // 
             // tb_Suchen
             // 
-            this.tb_Suchen.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tb_Suchen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tb_Suchen.Enabled = false;
-            this.tb_Suchen.Location = new System.Drawing.Point(8, 44);
-            this.tb_Suchen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.tb_Suchen.Location = new System.Drawing.Point(3, 19);
             this.tb_Suchen.Name = "tb_Suchen";
-            this.tb_Suchen.Size = new System.Drawing.Size(520, 38);
+            this.tb_Suchen.Size = new System.Drawing.Size(198, 20);
             this.tb_Suchen.TabIndex = 52;
             this.tb_Suchen.Visible = false;
             this.tb_Suchen.TextChanged += new System.EventHandler(this.tb_Suchen_TextChanged);
@@ -92,20 +91,18 @@
             // 
             this.lb_Sprache.AutoSize = true;
             this.lb_Sprache.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lb_Sprache.Location = new System.Drawing.Point(8, 0);
-            this.lb_Sprache.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lb_Sprache.Location = new System.Drawing.Point(3, 0);
             this.lb_Sprache.Name = "lb_Sprache";
-            this.lb_Sprache.Size = new System.Drawing.Size(520, 32);
+            this.lb_Sprache.Size = new System.Drawing.Size(198, 13);
             this.lb_Sprache.TabIndex = 53;
             this.lb_Sprache.Text = "Suchen:";
             // 
             // bt_Suchen
             // 
             this.bt_Suchen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bt_Suchen.Location = new System.Drawing.Point(273, 7);
-            this.bt_Suchen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.bt_Suchen.Location = new System.Drawing.Point(124, 3);
             this.bt_Suchen.Name = "bt_Suchen";
-            this.bt_Suchen.Size = new System.Drawing.Size(249, 87);
+            this.bt_Suchen.Size = new System.Drawing.Size(71, 31);
             this.bt_Suchen.TabIndex = 54;
             this.bt_Suchen.Text = "Suchen AN";
             this.bt_Suchen.UseVisualStyleBackColor = true;
@@ -119,56 +116,54 @@
             this.tLP_Sprachen.Controls.Add(this.lb_Sprache, 0, 0);
             this.tLP_Sprachen.Controls.Add(this.tb_Suchen, 0, 1);
             this.tLP_Sprachen.Controls.Add(this.gv_Sprachen, 0, 2);
-            this.tLP_Sprachen.Controls.Add(this.tableLayoutPanel1, 0, 3);
+            this.tLP_Sprachen.Controls.Add(this.tLP_Button, 0, 3);
             this.tLP_Sprachen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tLP_Sprachen.Location = new System.Drawing.Point(3, 34);
-            this.tLP_Sprachen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.tLP_Sprachen.Location = new System.Drawing.Point(1, 14);
             this.tLP_Sprachen.Name = "tLP_Sprachen";
             this.tLP_Sprachen.RowCount = 4;
-            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.004001F));
-            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.006669F));
-            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.62667F));
-            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.362667F));
-            this.tLP_Sprachen.Size = new System.Drawing.Size(536, 1253);
+            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3F));
+            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86F));
+            this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6F));
+            this.tLP_Sprachen.Size = new System.Drawing.Size(211, 511);
             this.tLP_Sprachen.TabIndex = 61;
             // 
-            // tableLayoutPanel1
+            // tLP_Button
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.bt_Uebernehmen, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.bt_Suchen, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 1149);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(530, 101);
-            this.tableLayoutPanel1.TabIndex = 54;
+            this.tLP_Button.AutoSize = true;
+            this.tLP_Button.ColumnCount = 2;
+            this.tLP_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tLP_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tLP_Button.Controls.Add(this.bt_Uebernehmen, 0, 0);
+            this.tLP_Button.Controls.Add(this.bt_Suchen, 1, 0);
+            this.tLP_Button.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tLP_Button.Location = new System.Drawing.Point(1, 465);
+            this.tLP_Button.Margin = new System.Windows.Forms.Padding(1, 0, 1, 1);
+            this.tLP_Button.Name = "tLP_Button";
+            this.tLP_Button.RowCount = 1;
+            this.tLP_Button.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tLP_Button.Size = new System.Drawing.Size(199, 34);
+            this.tLP_Button.TabIndex = 54;
             // 
-            // groupBox1
+            // gb_Sprachen
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.tLP_Sprachen);
-            this.groupBox1.Location = new System.Drawing.Point(13, 9);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(542, 1290);
-            this.groupBox1.TabIndex = 62;
-            this.groupBox1.TabStop = false;
+            this.gb_Sprachen.Controls.Add(this.tLP_Sprachen);
+            this.gb_Sprachen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gb_Sprachen.Location = new System.Drawing.Point(0, 0);
+            this.gb_Sprachen.Margin = new System.Windows.Forms.Padding(2, 0, 2, 2);
+            this.gb_Sprachen.Name = "gb_Sprachen";
+            this.gb_Sprachen.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.gb_Sprachen.Size = new System.Drawing.Size(213, 526);
+            this.gb_Sprachen.TabIndex = 62;
+            this.gb_Sprachen.TabStop = false;
             // 
             // w_s_sprachen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(568, 1312);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(213, 526);
+            this.Controls.Add(this.gb_Sprachen);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "w_s_sprachen";
@@ -178,9 +173,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_Sprachen)).EndInit();
             this.tLP_Sprachen.ResumeLayout(false);
             this.tLP_Sprachen.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.tLP_Button.ResumeLayout(false);
+            this.gb_Sprachen.ResumeLayout(false);
+            this.gb_Sprachen.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -192,7 +187,7 @@
         private System.Windows.Forms.Label lb_Sprache;
         private System.Windows.Forms.Button bt_Suchen;
         private System.Windows.Forms.TableLayoutPanel tLP_Sprachen;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TableLayoutPanel tLP_Button;
+        private System.Windows.Forms.GroupBox gb_Sprachen;
     }
 }
