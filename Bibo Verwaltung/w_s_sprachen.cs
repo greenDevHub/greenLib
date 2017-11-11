@@ -37,7 +37,6 @@ namespace Bibo_Verwaltung
             if (aenderungungen == true)
             {
                 gv_Sprachen.EndEdit();
-                BindingContext[gv_Sprachen.DataSource].EndCurrentEdit();
                 DialogResult dr = MessageBox.Show("Sollen die Änderungen gespeichert werden?", "Warnung", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (dr == DialogResult.Yes)
                 {
