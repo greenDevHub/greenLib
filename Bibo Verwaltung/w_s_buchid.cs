@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,17 @@ namespace Bibo_Verwaltung
                 tb_isbn.Text = b.ISBN;
                 cb_zustand.Text = b.Zustand.Zustandname;
                 dTP_aufnahme.Value = b.Aufnahmedatum;
+                string code = "";
+                code = b.ID;
+                for(int i = code.Length; i < 7;)
+                {
+                    code = "0" + code;
+                    i++;
+                }
+                tb_Barcode.Text = code;
+                Zen.Barcode.CodeEan8BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.CodeEan8WithChecksum;
+                BarcodeBox.Image = barcode.Draw(tb_Barcode.Text, BarcodeBox.Height/7);
+                rb_edit.Checked = true;
 
                 b.Zustand.FillCombobox(ref cb_zustand, b.Zustand.ZustandID);
             }
@@ -56,12 +68,19 @@ namespace Bibo_Verwaltung
             {
                 try
                 {
+                    if (!b.Zustand.IfContains(cb_zustand.Text))
+                    {
+                        b.Zustand.Add(cb_zustand.Text);
+                        b.Zustand.FillCombobox(ref cb_zustand, b.Zustand.GetID(cb_zustand.Text));
+                    }
                     lb.Visible = false;
                     b.ID = tb_id.Text;
                     b.ISBN = tb_isbn.Text;
                     b.Zustand.ZustandID = cb_zustand.SelectedValue.ToString();
                     b.Aufnahmedatum = dTP_aufnahme.Value;
                     b.Add();
+                    //Barcode bar = new Barcode("3", BarcodeBox);
+                    //bar.FillPictureBox(ref BarcodeBox);
                     Clear();
                     lb.Visible = true;
                     b.ClearDS();
@@ -104,6 +123,11 @@ namespace Bibo_Verwaltung
             {
                 try
                 {
+                    if (!b.Zustand.IfContains(cb_zustand.Text))
+                    {
+                        b.Zustand.Add(cb_zustand.Text);
+                        b.Zustand.FillCombobox(ref cb_zustand, b.Zustand.GetID(cb_zustand.Text));
+                    }
                     lb.Visible = false;
                     b.ID = tb_id.Text;
                     b.ISBN = tb_isbn.Text;
@@ -287,6 +311,29 @@ namespace Bibo_Verwaltung
                 }
 
             }
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            tb_anzahl.Clear();
+            tb_id.Clear();
+            cb_zustand.Text = "";
+            dTP_aufnahme.Text = "";
+            BarcodeBox.Image = null;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //PrintDocument printDocument = new PrintDocument();
+            //printDocument.OriginAtMargins = true;
+            //printDocument.DocumentName = "Barcode";
+            //printDocument. = (Bitmap)BarcodeBox.Image;
+            //PrintDialog printDialog = new PrintDialog();
+            //printDialog.Document = printDocument;
+            //if(printDialog.ShowDialog() == DialogResult.OK)
+            //{
+            //    printDocument.Print();
+            //}
         }
     }
 }

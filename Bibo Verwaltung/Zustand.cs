@@ -105,5 +105,41 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
+
+        #region Add
+        public void Add(string zustand)
+        {
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            string RawCommand = "INSERT INTO [dbo].[t_s_zustand] (zu_zustand) VALUES (@0)";
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@0", zustand);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        #endregion
+
+        #region GetID
+        public string GetID(string zustand)
+        {
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return "";
+            string RawCommand = "SELECT zu_id FROM [dbo].[t_s_zustand] WHERE zu_zustand = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, zustand);
+            while (dr.Read())
+            {
+                ZustandID = dr["zu_id"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            return ZustandID;
+        }
+        #endregion
+
+        public bool IfContains(string value)
+        {
+            bool contains = dt.AsEnumerable().Any(row => value == row.Field<String>("zu_zustand"));
+            return contains;
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -620,9 +621,56 @@ namespace Bibo_Verwaltung
                 tb_ISBN.Text = "";
             }
         }
+        static int _checksum_ean8(String data)
+        {
+            // Test string for correct length
+            if (data.Length != 7 && data.Length != 8)
+                return -1;
+
+            // Test string for being numeric
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (data[i] < 0x30 || data[i] > 0x39)
+                    return -1;
+            }
+
+            int sum = 0;
+
+            for (int i = 6; i >= 0; i--)
+            {
+                int digit = data[i] - 0x30;
+                if ((i & 0x01) == 1)
+                    sum += digit;
+                else
+                    sum += digit * 3;
+            }
+            int mod = sum % 10;
+            return mod == 0 ? 0 : 10 - mod;
+        }
 
         private void tb_ID_TextChanged(object sender, EventArgs e)
         {
+            if(tb_ID.Text.Length == 8)
+            {
+                string seven = tb_ID.Text.Substring(0, 7);
+                string eight = tb_ID.Text.Substring(7, 1);
+                if (_checksum_ean8(seven).ToString().Equals(eight))
+                {
+                    tb_ID.Text = int.Parse(seven).ToString();
+                }
+            }
+            if (!tb_ID.Text.Equals(""))
+            {
+                try
+                {
+
+                    tb_ID.Text = int.Parse(tb_ID.Text).ToString();
+                }
+                catch
+                {
+                    tb_ID.Text = "";
+                }
+            }
             Buch_Suchen();
         }
 
@@ -636,6 +684,24 @@ namespace Bibo_Verwaltung
             {
                 tb_ID.Enabled = false;
                 tb_ID.Text = "";
+            }
+        }
+
+        private void tb_ISBN_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '-'))
+            {
+                SystemSounds.Beep.Play();
+                e.Handled = true;
+            }
+        }
+
+        private void tb_ID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                SystemSounds.Beep.Play();
+                e.Handled = true;
             }
         }
     }

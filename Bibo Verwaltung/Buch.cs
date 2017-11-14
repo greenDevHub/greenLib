@@ -261,7 +261,15 @@ namespace Bibo_Verwaltung
             }
             cmd.Parameters.AddWithValue("@bild", BildPfad);
             cmd.Parameters.AddWithValue("@anzahl", Anzahl);
-            cmd.Parameters.AddWithValue("@image", Image);
+            cmd.Parameters.Add("@image", SqlDbType.VarBinary, -1);
+            if (image == null)
+            {
+                cmd.Parameters["@image"].Value = DBNull.Value;
+            }
+            else
+            {
+                cmd.Parameters["@image"].Value = Image;
+            }
             cmd.Parameters.AddWithValue("@imageDate", ImageDate);
 
 

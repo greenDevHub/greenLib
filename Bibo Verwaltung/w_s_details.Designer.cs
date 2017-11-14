@@ -47,6 +47,10 @@
             this.tb_BuchIDAusleihen = new System.Windows.Forms.TextBox();
             this.bt_Ausleihen = new System.Windows.Forms.Button();
             this.gb_Suchen = new System.Windows.Forms.GroupBox();
+            this.cb_s_ID = new System.Windows.Forms.CheckBox();
+            this.tb_ID = new System.Windows.Forms.TextBox();
+            this.tb_ISBN = new System.Windows.Forms.TextBox();
+            this.cb_s_ISBN = new System.Windows.Forms.CheckBox();
             this.cb_s_Nachname = new System.Windows.Forms.CheckBox();
             this.cb_s_Vorname = new System.Windows.Forms.CheckBox();
             this.tb_nachname = new System.Windows.Forms.TextBox();
@@ -62,10 +66,6 @@
             this.tb_s_Titel = new System.Windows.Forms.TextBox();
             this.bt_Rueckgabe = new System.Windows.Forms.Button();
             this.bt_AbbrechenAusleihen = new System.Windows.Forms.Button();
-            this.cb_s_ISBN = new System.Windows.Forms.CheckBox();
-            this.tb_ISBN = new System.Windows.Forms.TextBox();
-            this.tb_ID = new System.Windows.Forms.TextBox();
-            this.cb_s_ID = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Details)).BeginInit();
             this.cb_Ausleihen.SuspendLayout();
             this.gb_Suchen.SuspendLayout();
@@ -312,6 +312,52 @@
             this.gb_Suchen.TabStop = false;
             this.gb_Suchen.Text = "Suchen nach:";
             // 
+            // cb_s_ID
+            // 
+            this.cb_s_ID.AutoSize = true;
+            this.cb_s_ID.Location = new System.Drawing.Point(16, 46);
+            this.cb_s_ID.Margin = new System.Windows.Forms.Padding(8);
+            this.cb_s_ID.Name = "cb_s_ID";
+            this.cb_s_ID.Size = new System.Drawing.Size(160, 36);
+            this.cb_s_ID.TabIndex = 37;
+            this.cb_s_ID.Text = "Buch ID:";
+            this.cb_s_ID.UseVisualStyleBackColor = true;
+            this.cb_s_ID.CheckedChanged += new System.EventHandler(this.cb_s_ID_CheckedChanged);
+            // 
+            // tb_ID
+            // 
+            this.tb_ID.Enabled = false;
+            this.tb_ID.Location = new System.Drawing.Point(191, 45);
+            this.tb_ID.Margin = new System.Windows.Forms.Padding(8);
+            this.tb_ID.Name = "tb_ID";
+            this.tb_ID.Size = new System.Drawing.Size(450, 38);
+            this.tb_ID.TabIndex = 36;
+            this.tb_ID.TextChanged += new System.EventHandler(this.tb_ID_TextChanged);
+            this.tb_ID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_ID_KeyPress);
+            // 
+            // tb_ISBN
+            // 
+            this.tb_ISBN.Enabled = false;
+            this.tb_ISBN.Location = new System.Drawing.Point(191, 99);
+            this.tb_ISBN.Margin = new System.Windows.Forms.Padding(8);
+            this.tb_ISBN.Name = "tb_ISBN";
+            this.tb_ISBN.Size = new System.Drawing.Size(450, 38);
+            this.tb_ISBN.TabIndex = 35;
+            this.tb_ISBN.TextChanged += new System.EventHandler(this.tb_ISBN_TextChanged);
+            this.tb_ISBN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_ISBN_KeyPress);
+            // 
+            // cb_s_ISBN
+            // 
+            this.cb_s_ISBN.AutoSize = true;
+            this.cb_s_ISBN.Location = new System.Drawing.Point(16, 100);
+            this.cb_s_ISBN.Margin = new System.Windows.Forms.Padding(8);
+            this.cb_s_ISBN.Name = "cb_s_ISBN";
+            this.cb_s_ISBN.Size = new System.Drawing.Size(126, 36);
+            this.cb_s_ISBN.TabIndex = 34;
+            this.cb_s_ISBN.Text = "ISBN:";
+            this.cb_s_ISBN.UseVisualStyleBackColor = true;
+            this.cb_s_ISBN.CheckedChanged += new System.EventHandler(this.cb_s_ISBN_CheckedChanged);
+            // 
             // cb_s_Nachname
             // 
             this.cb_s_Nachname.AutoSize = true;
@@ -489,50 +535,6 @@
             this.bt_AbbrechenAusleihen.Text = "Ausleihvorgang abbrechen";
             this.bt_AbbrechenAusleihen.UseVisualStyleBackColor = true;
             this.bt_AbbrechenAusleihen.Click += new System.EventHandler(this.bt_AbbrechenAusleihen_Click);
-            // 
-            // cb_s_ISBN
-            // 
-            this.cb_s_ISBN.AutoSize = true;
-            this.cb_s_ISBN.Location = new System.Drawing.Point(16, 100);
-            this.cb_s_ISBN.Margin = new System.Windows.Forms.Padding(8);
-            this.cb_s_ISBN.Name = "cb_s_ISBN";
-            this.cb_s_ISBN.Size = new System.Drawing.Size(126, 36);
-            this.cb_s_ISBN.TabIndex = 34;
-            this.cb_s_ISBN.Text = "ISBN:";
-            this.cb_s_ISBN.UseVisualStyleBackColor = true;
-            this.cb_s_ISBN.CheckedChanged += new System.EventHandler(this.cb_s_ISBN_CheckedChanged);
-            // 
-            // tb_ISBN
-            // 
-            this.tb_ISBN.Enabled = false;
-            this.tb_ISBN.Location = new System.Drawing.Point(191, 99);
-            this.tb_ISBN.Margin = new System.Windows.Forms.Padding(8);
-            this.tb_ISBN.Name = "tb_ISBN";
-            this.tb_ISBN.Size = new System.Drawing.Size(450, 38);
-            this.tb_ISBN.TabIndex = 35;
-            this.tb_ISBN.TextChanged += new System.EventHandler(this.tb_ISBN_TextChanged);
-            // 
-            // tb_ID
-            // 
-            this.tb_ID.Enabled = false;
-            this.tb_ID.Location = new System.Drawing.Point(191, 45);
-            this.tb_ID.Margin = new System.Windows.Forms.Padding(8);
-            this.tb_ID.Name = "tb_ID";
-            this.tb_ID.Size = new System.Drawing.Size(450, 38);
-            this.tb_ID.TabIndex = 36;
-            this.tb_ID.TextChanged += new System.EventHandler(this.tb_ID_TextChanged);
-            // 
-            // cb_s_ID
-            // 
-            this.cb_s_ID.AutoSize = true;
-            this.cb_s_ID.Location = new System.Drawing.Point(16, 46);
-            this.cb_s_ID.Margin = new System.Windows.Forms.Padding(8);
-            this.cb_s_ID.Name = "cb_s_ID";
-            this.cb_s_ID.Size = new System.Drawing.Size(160, 36);
-            this.cb_s_ID.TabIndex = 37;
-            this.cb_s_ID.Text = "Buch ID:";
-            this.cb_s_ID.UseVisualStyleBackColor = true;
-            this.cb_s_ID.CheckedChanged += new System.EventHandler(this.cb_s_ID_CheckedChanged);
             // 
             // w_s_details
             // 

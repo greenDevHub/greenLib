@@ -363,9 +363,9 @@
             this.lb_Erscheinungsdatum.Location = new System.Drawing.Point(16, 634);
             this.lb_Erscheinungsdatum.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lb_Erscheinungsdatum.Name = "lb_Erscheinungsdatum";
-            this.lb_Erscheinungsdatum.Size = new System.Drawing.Size(275, 32);
+            this.lb_Erscheinungsdatum.Size = new System.Drawing.Size(286, 32);
             this.lb_Erscheinungsdatum.TabIndex = 20;
-            this.lb_Erscheinungsdatum.Text = "Erscheinungsdatum:";
+            this.lb_Erscheinungsdatum.Text = "Erscheinungsdatum:*";
             // 
             // tb_Auflage
             // 
@@ -425,9 +425,9 @@
             this.lb_Sprache.Location = new System.Drawing.Point(16, 451);
             this.lb_Sprache.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lb_Sprache.Name = "lb_Sprache";
-            this.lb_Sprache.Size = new System.Drawing.Size(129, 32);
+            this.lb_Sprache.Size = new System.Drawing.Size(140, 32);
             this.lb_Sprache.TabIndex = 14;
-            this.lb_Sprache.Text = "Sprache:";
+            this.lb_Sprache.Text = "Sprache:*";
             // 
             // bt_Autor_s
             // 
@@ -446,9 +446,9 @@
             this.lb_Verlag.Location = new System.Drawing.Point(16, 327);
             this.lb_Verlag.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lb_Verlag.Name = "lb_Verlag";
-            this.lb_Verlag.Size = new System.Drawing.Size(106, 32);
+            this.lb_Verlag.Size = new System.Drawing.Size(117, 32);
             this.lb_Verlag.TabIndex = 10;
-            this.lb_Verlag.Text = "Verlag:";
+            this.lb_Verlag.Text = "Verlag:*";
             // 
             // lb_Autor
             // 
@@ -456,9 +456,9 @@
             this.lb_Autor.Location = new System.Drawing.Point(16, 265);
             this.lb_Autor.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lb_Autor.Name = "lb_Autor";
-            this.lb_Autor.Size = new System.Drawing.Size(91, 32);
+            this.lb_Autor.Size = new System.Drawing.Size(96, 32);
             this.lb_Autor.TabIndex = 8;
-            this.lb_Autor.Text = "Autor:";
+            this.lb_Autor.Text = "Autor:\'";
             // 
             // bt_Verlag_s
             // 
@@ -512,9 +512,9 @@
             this.lb_Genre.Location = new System.Drawing.Point(16, 389);
             this.lb_Genre.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lb_Genre.Name = "lb_Genre";
-            this.lb_Genre.Size = new System.Drawing.Size(102, 32);
+            this.lb_Genre.Size = new System.Drawing.Size(113, 32);
             this.lb_Genre.TabIndex = 5;
-            this.lb_Genre.Text = "Genre:";
+            this.lb_Genre.Text = "Genre:*";
             // 
             // tb_Neupreis
             // 
@@ -553,9 +553,9 @@
             this.lb_Titel.Location = new System.Drawing.Point(16, 207);
             this.lb_Titel.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lb_Titel.Name = "lb_Titel";
-            this.lb_Titel.Size = new System.Drawing.Size(78, 32);
+            this.lb_Titel.Size = new System.Drawing.Size(89, 32);
             this.lb_Titel.TabIndex = 3;
-            this.lb_Titel.Text = "Titel:";
+            this.lb_Titel.Text = "Titel:*";
             // 
             // tb_ISBN
             // 
@@ -576,9 +576,9 @@
             this.lb_ISBN.Location = new System.Drawing.Point(16, 149);
             this.lb_ISBN.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lb_ISBN.Name = "lb_ISBN";
-            this.lb_ISBN.Size = new System.Drawing.Size(88, 32);
+            this.lb_ISBN.Size = new System.Drawing.Size(99, 32);
             this.lb_ISBN.TabIndex = 1;
-            this.lb_ISBN.Text = "ISBN:";
+            this.lb_ISBN.Text = "ISBN:*";
             // 
             // button1
             // 

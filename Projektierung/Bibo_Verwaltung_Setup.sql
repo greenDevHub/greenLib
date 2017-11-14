@@ -154,7 +154,7 @@ CREATE TABLE [dbo].[t_s_kunden](
 	[kunde_postleitzahl] [nvarchar](16) NOT NULL,
 	[kunde_ort] [nvarchar](128) NOT NULL,
 	[kunde_vertrauenswürdigkeit] [nvarchar](128) NOT NULL,
-	[kunde_klasse] [nvarchar](6) NOT NULL,
+	[kunde_klasse] [nvarchar](16),
 	[kunde_mail] [nvarchar](128),
 	[kunde_telefonnummer] [nvarchar](128),
 	PRIMARY KEY (kunde_id))

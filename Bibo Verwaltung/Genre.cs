@@ -112,5 +112,41 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
+
+        #region Add
+        public void Add(string genre)
+        {
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            string RawCommand = "INSERT INTO [dbo].[t_s_genre] (ger_name) VALUES (@0)";
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@0", genre);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        #endregion
+
+        #region GetID
+        public string GetID(string genre)
+        {
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return "";
+            string RawCommand = "SELECT ger_id FROM [dbo].[t_s_genre] WHERE ger_name = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, genre);
+            while (dr.Read())
+            {
+                GenreID = dr["ger_id"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            return GenreID;
+        }
+        #endregion
+
+        public bool IfContains(string value)
+        {
+            bool contains = dt.AsEnumerable().Any(row => value == row.Field<String>("ger_name"));
+            return contains;
+        }
     }
 }
