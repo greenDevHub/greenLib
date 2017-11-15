@@ -22,7 +22,7 @@ namespace Bibo_Verwaltung
         {
             InitializeComponent();
             originalHeight = ClientSize.Height;
-            originalRowHeight = tLP.RowStyles[3].Height;
+            originalRowHeight = tLP_Top.RowStyles[3].Height;
             Load();
         }
 
@@ -99,8 +99,8 @@ namespace Bibo_Verwaltung
                 lb_Passwort.Visible = false;
                 tb_Benutzername.Text = "";
                 tb_Passwort.Text = "";
-                tLP.RowStyles[3].Height = 0;
-                tLP.RowStyles[4].Height = 0;
+                tLP_Top.RowStyles[3].Height = 0;
+                tLP_Top.RowStyles[4].Height = 0;
                 this.ClientSize = new System.Drawing.Size(ClientSize.Width, (originalHeight*72)/100);
             }
             else if (cb_Security.Text == "SQL Authentifizierung")
@@ -109,8 +109,8 @@ namespace Bibo_Verwaltung
                 lb_Benutzername.Visible = true;
                 tb_Passwort.Visible = true;
                 lb_Passwort.Visible = true;
-                tLP.RowStyles[3].Height = originalRowHeight;
-                tLP.RowStyles[4].Height = originalRowHeight;
+                tLP_Top.RowStyles[3].Height = originalRowHeight;
+                tLP_Top.RowStyles[4].Height = originalRowHeight;
                 this.ClientSize = new System.Drawing.Size(ClientSize.Width, originalHeight);
             }
         }
