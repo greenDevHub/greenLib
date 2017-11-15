@@ -519,9 +519,17 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                string buch_id = gv_Details.CurrentRow.Cells[0].Value.ToString();
-                tb_BuchIDAusleihen.Text = buch_id;
-                bt_Rueckgabe_Click(bt_Rueckgabe, e);
+                if(gv_Details.CurrentRow != null)
+                {
+                    string buch_id = gv_Details.CurrentRow.Cells[details.GetColumnIndexByName(gv_Details,"Buch-ID")].Value.ToString();
+                    tb_BuchIDAusleihen.Text = buch_id;
+                    bt_Rueckgabe_Click(bt_Rueckgabe, e);
+                }
+                else
+                {
+                    MessageBox.Show("Es wurde kein Buch ausgewählt!", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 //MessageBox.Show("Wählen Sie ein Buch zur Rückgabe aus!", "Information",
                 //    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
