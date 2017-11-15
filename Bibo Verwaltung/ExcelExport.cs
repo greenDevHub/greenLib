@@ -15,56 +15,62 @@ namespace Bibo_Verwaltung
         #region ExcelExport
         public void ToExcel(DataGridView dGV, string filename)
         {
-           try { 
+            try
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.Filter = "Tabellenformat(*.csv, *.xml)|*.csv; *.xml|Alle Dateien(*.*)|*.*";
+                dialog.Title = "Als Tabelle abspeichern";
+                dialog.ShowDialog();
 
-            string outputFile = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+"\\"+filename;
-                //test to see if the DataGridView has any rows
-                if (dGV.RowCount > 0)
+                //Überprüfen, ob Filename vergeben wurde
+                if (dialog.FileName != "")
                 {
-                    string value = "";
-                    DataGridViewRow dr = new DataGridViewRow();
-                    StreamWriter sw = new StreamWriter(outputFile);
-
-                    //write header rows to csv
-                    for (int i = 0; i <= dGV.Columns.Count - 1; i++)
+                    //Überprüfen, ob Rows vorhanden sind
+                    if (dGV.RowCount > 0)
                     {
-                        if (i > 0)
-                        {
-                            sw.Write(",");
-                        }
-                        sw.Write(dGV.Columns[i].HeaderText);
-                    }
-
-                    sw.WriteLine();
-
-                    //write DataGridView rows to csv
-                    for (int j = 0; j <= dGV.Rows.Count - 1; j++)
-                    {
-                        if (j > 0)
-                        {
-                            sw.WriteLine();
-                        }
-
-                        dr = dGV.Rows[j];
-
+                        string value = "";
+                        DataGridViewRow dr = new DataGridViewRow();
+                        StreamWriter sw = new StreamWriter(dialog.FileName);
+                        
+                        //Head Rows schreiben
                         for (int i = 0; i <= dGV.Columns.Count - 1; i++)
                         {
                             if (i > 0)
                             {
-                                sw.Write(",");
+                                sw.Write(";");
+                            }
+                            sw.Write(dGV.Columns[i].HeaderText);
+                        }
+
+                        sw.WriteLine();
+                        //Rows aus dGV in csv
+                        for (int j = 0; j <= dGV.Rows.Count - 1; j++)
+                        {
+                            if (j > 0)
+                            {
+                                sw.WriteLine();
                             }
 
-                            value = dr.Cells[i].Value.ToString();
-                            //replace comma's with spaces
-                            value = value.Replace(',', ' ');
-                            //replace embedded newlines with spaces
-                            value = value.Replace(Environment.NewLine, " ");
+                            dr = dGV.Rows[j];
 
-                            sw.Write(value);
+                            for (int i = 0; i <= dGV.Columns.Count - 1; i++)
+                            {
+                                if (i > 0)
+                                {
+                                    sw.Write(";");
+                                }
+
+                                value = dr.Cells[i].Value.ToString();
+                                //Replace
+                                value = value.Replace(',', ' ');
+                                value = value.Replace(Environment.NewLine, " ");
+
+                                sw.Write(value);
+                            }
                         }
+                        sw.Close();
+                        MessageBox.Show("Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    sw.Close();
-                    MessageBox.Show("Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch
