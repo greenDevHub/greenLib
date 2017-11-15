@@ -167,6 +167,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "w_s_autoren";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Autoren";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_autoren_FormClosing);
