@@ -236,6 +236,7 @@
             this.bt_save.TabIndex = 7;
             this.bt_save.Text = "Speichern";
             this.bt_save.UseVisualStyleBackColor = true;
+            this.bt_save.Click += new System.EventHandler(this.Save);
             // 
             // w_s_einstellungen
             // 
