@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -41,7 +42,8 @@ namespace Bibo_Verwaltung
                 if (dr == DialogResult.Yes)
                 {
                     try
-                    {    
+                    {
+                        Doppelte_Entfernen();  
                         sprache.SaveGrid(ref gv_Sprachen);
                     }
                     catch
@@ -60,6 +62,7 @@ namespace Bibo_Verwaltung
         {
             try
             {
+                Doppelte_Entfernen();
                 sprache.SaveGrid(ref gv_Sprachen);
                 aenderungungen = false;
             }
@@ -69,6 +72,79 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
+        //GBVBVHJHGHGVFGHVFGHV
+        //public static DataTable DistinctDataTable(this DataTable table)
+        //{
+        //    var resultTable = table.Clone();
+        //    IEnumerable<DataRow> uniqueElements = table.AsEnumerable().Distinct(DataRowComparer.Default);
+        //    foreach (var row in uniqueElements)
+        //    {
+        //        resultTable.ImportRow(row);
+        //    }
+        //    return resultTable;
+        //}
+        public DataTable RemoveDuplicateRows(DataTable dTable, string colName)
+        {
+            Hashtable hTable = new Hashtable();
+            ArrayList duplicateList = new ArrayList();
+
+            //Add list of all the unique item value to hashtable, which stores combination of key, value pair.
+            //And add duplicate item value in arraylist.
+            foreach (DataRow drow in dTable.Rows)
+            {
+                if (hTable.Contains(drow[colName]))
+                    duplicateList.Add(drow);
+                else
+                    hTable.Add(drow[colName], string.Empty);
+            }
+
+            //Removing a list of duplicate items from datatable.
+            foreach (DataRow dRow in duplicateList)
+                dTable.Rows.Remove(dRow);
+
+            //Datatable which contains unique records will be return as output.
+            return dTable;
+        }
+        private void Doppelte_Entfernen()
+        {
+            DataTable dt = RemoveDuplicateRows((gv_Sprachen.DataSource as DataTable).DefaultView.ToTable(), "sprach_name");
+            gv_Sprachen.DataSource = dt;
+
+            //for (int currentRow = 0; currentRow < gv_Sprachen.Rows.Count; currentRow++)
+            //{
+            //    var rowToCompare = gv_Sprachen.Rows[currentRow]; // Get row to compare against other rows
+
+            //    // Iterate through all rows 
+            //    //
+            //    foreach (var row in gv_Sprachen.Rows)
+            //    {
+            //        if (rowToCompare.Equals(row)) continue; // If row is the same row being compared, skip.
+
+            //        bool duplicateRow = true;
+
+            //        // Compare the value of all cells
+            //        //
+            //        //for (int cellIndex = 0; cellIndex < row.Cells.Count; cellIndex++)
+            //        //{
+            //            if ((null != rowToCompare.Cells[0].Value) &&
+            //                (!rowToCompare.Cells[0].Value.Equals(gv_Sprachen.Rows[Convert.ToUInt32(row)].Cells[0].Value)))
+            //            {
+            //                duplicateRow = false;
+            //                break;
+            //            }
+            //        //}
+
+            //        if (duplicateRow)
+            //        {
+            //            gv_Sprachen.Rows.Remove(row);
+            //        }
+            //    }
+            //}
+
+            Console.WriteLine(dt);
+            Console.WriteLine("Kall");
+            //// }
+        }
 
         #region Zeile löschen mit Ruecktaste
         private void dataGridView_KeyPress(object sender, KeyPressEventArgs e)
