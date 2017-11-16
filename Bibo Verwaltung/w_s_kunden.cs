@@ -52,8 +52,7 @@ namespace Bibo_Verwaltung
                 && !tb_Hausnummer.Text.Equals("")
                 && !tb_Postleitzahl.Text.Equals("")
                 && !tb_Ort.Text.Equals("")
-                && !cb_Vertrauenswuerdigkeit.Text.Equals("")
-                && !tb_Klasse.Text.Equals(""))
+                && !cb_Vertrauenswuerdigkeit.Text.Equals(""))
             {
                 try
                 {
@@ -118,8 +117,7 @@ namespace Bibo_Verwaltung
               && !tb_Hausnummer.Text.Equals("")
               && !tb_Postleitzahl.Text.Equals("")
               && !tb_Ort.Text.Equals("")
-              && !cb_Vertrauenswuerdigkeit.Text.Equals("")
-              && !tb_Klasse.Text.Equals(""))
+              && !cb_Vertrauenswuerdigkeit.Text.Equals(""))
             {
                 try
                 {
@@ -230,6 +228,13 @@ namespace Bibo_Verwaltung
                 tb_Klasse.Enabled = true;
                 tb_Mail.Enabled = true;
                 tb_Telefonnummer.Enabled = true;
+                lb_KundenID.Text = "Kunden-ID:*";
+                lb_Vorname.Text = "Vorname:*";
+                lb_Nachname.Text = "Nachname:*";
+                lb_Strasse.Text = "Strasse:*";
+                lb_Hausnummer.Text = "Hausnummer:*";
+                lb_Postleitzahl.Text = "Postleitzahl:*";
+                lb_Vertrauenswuerdigkeit.Text = "Vertrauenswürdigkeit:*";
 
             }
             else if (rb_Neukunde.Checked)
@@ -247,6 +252,13 @@ namespace Bibo_Verwaltung
                 tb_Klasse.Enabled = true;
                 tb_Mail.Enabled = true;
                 tb_Telefonnummer.Enabled = true;
+                lb_KundenID.Text = "Kunden-ID:";
+                lb_Vorname.Text = "Vorname:*";
+                lb_Nachname.Text = "Nachname:*";
+                lb_Strasse.Text = "Strasse:*";
+                lb_Hausnummer.Text = "Hausnummer:*";
+                lb_Postleitzahl.Text = "Postleitzahl:*";
+                lb_Vertrauenswuerdigkeit.Text = "Vertrauenswürdigkeit:*";
 
             }
             else if (rb_KundeLoeschen.Checked)
@@ -264,6 +276,13 @@ namespace Bibo_Verwaltung
                 tb_Klasse.Enabled = false;
                 tb_Mail.Enabled = false;
                 tb_Telefonnummer.Enabled = false;
+                lb_KundenID.Text = "Kunden-ID:*";
+                lb_Vorname.Text = "Vorname:";
+                lb_Nachname.Text = "Nachname:";
+                lb_Strasse.Text = "Strasse:";
+                lb_Hausnummer.Text = "Hausnummer:";
+                lb_Postleitzahl.Text = "Postleitzahl:";
+                lb_Vertrauenswuerdigkeit.Text = "Vertrauenswürdigkeit:";
             }
         }
         #endregion
@@ -332,15 +351,6 @@ namespace Bibo_Verwaltung
             else
             {
                 cb_Vertrauenswuerdigkeit.BackColor = Color.White;
-            }
-
-            if (tb_Klasse.Text.Equals(""))
-            {
-                tb_Klasse.BackColor = Color.Red;
-            }
-            else
-            {
-                tb_Klasse.BackColor = Color.White;
             }
         }
         #endregion

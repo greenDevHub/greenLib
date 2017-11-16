@@ -631,6 +631,7 @@ namespace Bibo_Verwaltung
         {
             if (rb_Add_Buch.Checked)
             {
+                
                 tb_ISBN.Enabled = true;
                 tb_Titel.Enabled = true;
                 cb_Autor.Enabled = true;
@@ -646,9 +647,29 @@ namespace Bibo_Verwaltung
                 bt_pic_delete.Enabled = true;
                 pictureBox1.Enabled = true;
                 rTB_1.Text = "Das Buch wurde erfolgreich hinzugefügt!";
+                lb_ISBN.Text = "ISBN:*";
+                lb_Titel.Text = "Titel:*";
+                lb_Autor.Text = "Autor:*";
+                lb_Verlag.Text = "Verlag:*";
+                lb_Genre.Text = "Genre:*";
+                lb_Sprache.Text = "Sprache:*";
+                lb_Erscheinungsdatum.Text = "Erscheinungsdatum:*";
+                checkbox_autor.Enabled = true;
+                if (tb_ISBN.Text.Equals(""))
+                {
+                    lb_isbn_vorlage.Visible = true;
+
+                }
+                else
+                {
+                    lb_isbn_vorlage.Visible = false;
+                }
+                button1.Enabled = true;
+
             }
             if (rb_Update_Buch.Checked)
             {
+                lb_isbn_vorlage.Visible = false;
                 tb_ISBN.Enabled = false;
                 tb_Titel.Enabled = true;
                 cb_Autor.Enabled = true;
@@ -664,6 +685,16 @@ namespace Bibo_Verwaltung
                 bt_pic_delete.Enabled = true;
                 pictureBox1.Enabled = true;
                 rTB_1.Text = "Das Buch wurde erfolgreich bearbeitet!";
+                lb_ISBN.Text = "ISBN:";
+                lb_Titel.Text = "Titel:*";
+                lb_Autor.Text = "Autor:*";
+                lb_Verlag.Text = "Verlag:*";
+                lb_Genre.Text = "Genre:*";
+                lb_Sprache.Text = "Sprache:*";
+                lb_Erscheinungsdatum.Text = "Erscheinungsdatum:*";
+                checkbox_autor.Enabled = true;
+                button1.Enabled = true;
+
             }
             if (rb_Delete_Buch.Checked)
             {
@@ -682,6 +713,24 @@ namespace Bibo_Verwaltung
                 bt_pic_delete.Enabled = false;
                 pictureBox1.Enabled = false;
                 rTB_1.Text = "Das Buch wurde erfolgreich gelöscht!";
+                lb_ISBN.Text = "ISBN:*";
+                lb_Titel.Text = "Titel:";
+                lb_Autor.Text = "Autor:";
+                lb_Verlag.Text = "Verlag:";
+                lb_Genre.Text = "Genre:";
+                lb_Sprache.Text = "Sprache:";
+                lb_Erscheinungsdatum.Text = "Erscheinungsdatum:";
+                checkbox_autor.Enabled = false;
+                button1.Enabled = false;
+                if (tb_ISBN.Text.Equals(""))
+                {
+                    lb_isbn_vorlage.Visible = true;
+
+                }
+                else
+                {
+                    lb_isbn_vorlage.Visible = false;
+                }
             }
         }
         #endregion
@@ -1334,7 +1383,7 @@ namespace Bibo_Verwaltung
 
         private void tb_ISBN_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter && !rb_Delete_Buch.Checked)
             {
                 if (Grid_Buch.Rows.Count == 0)
                 {

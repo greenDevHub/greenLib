@@ -322,18 +322,40 @@ namespace Bibo_Verwaltung
             BarcodeBox.Image = null;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
+            PrintDialog pd = new PrintDialog();
+            PrintDocument doc = new PrintDocument();
+            doc.PrintPage += Doc_PrintPage;
+            pd.Document = doc;
+            if (pd.ShowDialog() == DialogResult.OK)
+            {
+                doc.Print();
+            }
+
             //PrintDocument printDocument = new PrintDocument();
             //printDocument.OriginAtMargins = true;
             //printDocument.DocumentName = "Barcode";
-            //printDocument. = (Bitmap)BarcodeBox.Image;
+            //printDocument.P = BarcodeBox.Image;
             //PrintDialog printDialog = new PrintDialog();
             //printDialog.Document = printDocument;
-            //if(printDialog.ShowDialog() == DialogResult.OK)
+            //if (printDialog.ShowDialog() == DialogResult.OK)
             //{
             //    printDocument.Print();
             //}
+        }
+
+        private void Doc_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            Bitmap bm = new Bitmap(BarcodeBox.Width, BarcodeBox.Height);
+            BarcodeBox.DrawToBitmap(bm, new Rectangle(0, 0, BarcodeBox.Width, BarcodeBox.Height));
+            e.Graphics.DrawImage(bm, 0, 0);
+            bm.Dispose();
+        }
+
+        private void bt_close_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
