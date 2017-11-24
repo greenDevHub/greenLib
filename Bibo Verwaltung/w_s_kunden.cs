@@ -233,6 +233,7 @@ namespace Bibo_Verwaltung
                 lb_Nachname.Text = "Nachname:*";
                 lb_Strasse.Text = "Strasse:*";
                 lb_Hausnummer.Text = "Hausnummer:*";
+                lb_Ort.Text = "Wohnort:*";
                 lb_Postleitzahl.Text = "Postleitzahl:*";
                 lb_Vertrauenswuerdigkeit.Text = "Vertrauenswürdigkeit:*";
 
@@ -257,6 +258,7 @@ namespace Bibo_Verwaltung
                 lb_Nachname.Text = "Nachname:*";
                 lb_Strasse.Text = "Strasse:*";
                 lb_Hausnummer.Text = "Hausnummer:*";
+                lb_Ort.Text = "Wohnort:*";
                 lb_Postleitzahl.Text = "Postleitzahl:*";
                 lb_Vertrauenswuerdigkeit.Text = "Vertrauenswürdigkeit:*";
 
@@ -280,6 +282,7 @@ namespace Bibo_Verwaltung
                 lb_Vorname.Text = "Vorname:";
                 lb_Nachname.Text = "Nachname:";
                 lb_Strasse.Text = "Strasse:";
+                lb_Ort.Text = "Wohnort:";
                 lb_Hausnummer.Text = "Hausnummer:";
                 lb_Postleitzahl.Text = "Postleitzahl:";
                 lb_Vertrauenswuerdigkeit.Text = "Vertrauenswürdigkeit:";
@@ -461,6 +464,7 @@ namespace Bibo_Verwaltung
             {
                 DataGridViewRow row = this.Grid_Kunde.Rows[e.RowIndex];
 
+                rb_KundeBearbeiten.Checked = true;
                 tb_KundenID.Text = row.Cells["Kunden-ID"].Value.ToString();
                 Kunde k = new Kunde(tb_KundenID.Text);
                 tb_Vorname.Text = k.Vorname;

@@ -15,7 +15,6 @@ namespace Bibo_Verwaltung
     {
 
         #region Datenbank-Verbinding bereitstellen
-        SQL_Verbindung con = new SQL_Verbindung();
         #endregion
 
         public w_s_main()
