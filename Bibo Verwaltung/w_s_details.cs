@@ -37,7 +37,7 @@ namespace Bibo_Verwaltung
         private void Buch_Suchen()
         {
             Zeige_Alle_Rows();
-            if (cb_s_ID.Checked)
+            if (!tb_ID.Text.Equals(""))
             {
 
                 for (int i = 0; i < gv_Details.RowCount; i++)
@@ -54,7 +54,7 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
-            if (cb_s_ISBN.Checked)
+            if (!tb_ISBN.Text.Equals(""))
             {
                 for (int i = 0; i < gv_Details.RowCount; i++)
                 {
@@ -70,7 +70,7 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
-            if (cb_s_Titel.Checked == true)
+            if (!tb_s_Titel.Text.Equals(""))
             {
                 for (int i = 0; i < gv_Details.RowCount; i++)
                 {
@@ -87,7 +87,7 @@ namespace Bibo_Verwaltung
                 }
             }
 
-            if (cb_s_Autor.Checked == true)
+            if (!combo_Autor.Text.Equals(""))
             {
                 for (int i = 0; i < gv_Details.RowCount; i++)
                 {
@@ -104,7 +104,7 @@ namespace Bibo_Verwaltung
                 }
             }
 
-            if (cb_s_Genre.Checked == true)
+            if (!combo_Genre.Text.Equals(""))
             {
                 for (int i = 0; i < gv_Details.RowCount; i++)
                 {
@@ -121,7 +121,7 @@ namespace Bibo_Verwaltung
                 }
             }
 
-            if (cb_s_Verlag.Checked == true)
+            if (!combo_Verlag.Text.Equals(""))
             {
                 for (int i = 0; i < gv_Details.RowCount; i++)
                 {
@@ -137,7 +137,7 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
-            if (cb_s_Vorname.Checked)
+            if (!tb_vorname.Text.Equals(""))
             {
                 for (int i = 0; i < gv_Details.RowCount; i++)
                 {
@@ -153,7 +153,7 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
-            if (cb_s_Nachname.Checked)
+            if (!tb_nachname.Text.Equals(""))
             {
                 for (int i = 0; i < gv_Details.RowCount; i++)
                 {
@@ -184,57 +184,7 @@ namespace Bibo_Verwaltung
             Buch_Suchen();
         }
 
-        private void cb_s_Titel_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_s_Titel.Checked == true)
-            {
-                tb_s_Titel.Enabled = true;
-            }
-            else
-            {
-                tb_s_Titel.Text = "";
-                tb_s_Titel.Enabled = false;
-            }
-        }
-
-        private void cb_s_Autor_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_s_Autor.Checked == true)
-            {
-                combo_Autor.Enabled = true;
-            }
-            else
-            {
-                combo_Autor.Text = "";
-                combo_Autor.Enabled = false;
-            }
-        }
-
-        private void cb_s_Genre_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_s_Genre.Checked == true)
-            {
-                combo_Genre.Enabled = true;
-            }
-            else
-            {
-                combo_Genre.Text = "";
-                combo_Genre.Enabled = false;
-            }
-        }
-
-        private void cb_s_Verlag_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_s_Verlag.Checked == true)
-            {
-                combo_Verlag.Enabled = true;
-            }
-            else
-            {
-                combo_Verlag.Text = "";
-                combo_Verlag.Enabled = false;
-            }
-        }
+        
 
         private void bt_Clear_Click(object sender, EventArgs e)
         {
@@ -311,8 +261,10 @@ namespace Bibo_Verwaltung
                 gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Nachname")].Visible = true;
                 gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Klasse")].Visible = true;
                 gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Kunden ID")].Visible = true;
-                cb_s_Nachname.Enabled = true;
-                cb_s_Vorname.Enabled = true;
+                tb_nachname.Enabled = true;
+                tb_vorname.Enabled = true;
+                lb_vorname.Visible = true;
+                lb_nachname.Visible = true;
 
             }
             else if (cb_KundeAnz.Checked == false)
@@ -321,10 +273,10 @@ namespace Bibo_Verwaltung
                 gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Nachname")].Visible = false;
                 gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Klasse")].Visible = false;
                 gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Kunden ID")].Visible = false;
-                cb_s_Vorname.Enabled = false;
-                cb_s_Nachname.Enabled = false;
-                cb_s_Vorname.Checked = false;
-                cb_s_Nachname.Checked = false;
+                tb_nachname.Enabled = false;
+                tb_vorname.Enabled = false;
+                lb_vorname.Visible = false;
+                lb_nachname.Visible = false;
             }
         }
 
@@ -576,33 +528,6 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private void checkBox_Vorname_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_s_Vorname.Checked)
-            {
-                Kunden_Einblenden();
-                tb_vorname.Enabled = true;
-            }
-            else
-            {
-                tb_vorname.Enabled = false;
-                tb_vorname.Text = "";
-            }
-        }
-
-        private void checkBox_Nachname_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_s_Nachname.Checked)
-            {
-                tb_nachname.Enabled = true;
-            }
-            else
-            {
-                tb_nachname.Enabled = false;
-                tb_nachname.Text = "";
-            }
-        }
-
         private void tb_nachname_TextChanged(object sender, EventArgs e)
         {
             Buch_Suchen();
@@ -617,18 +542,6 @@ namespace Bibo_Verwaltung
             Buch_Suchen();
         }
 
-        private void cb_s_ISBN_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_s_ISBN.Checked)
-            {
-                tb_ISBN.Enabled = true;
-            }
-            else
-            {
-                tb_ISBN.Enabled = false;
-                tb_ISBN.Text = "";
-            }
-        }
         static int _checksum_ean8(String data)
         {
             // Test string for correct length
@@ -656,6 +569,9 @@ namespace Bibo_Verwaltung
             return mod == 0 ? 0 : 10 - mod;
         }
 
+
+
+        #region Events yeaaah
         private void tb_ID_TextChanged(object sender, EventArgs e)
         {
             if(tb_ID.Text.Length == 8)
@@ -681,20 +597,6 @@ namespace Bibo_Verwaltung
             }
             Buch_Suchen();
         }
-
-        private void cb_s_ID_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_s_ID.Checked)
-            {
-                tb_ID.Enabled = true;
-            }
-            else
-            {
-                tb_ID.Enabled = false;
-                tb_ID.Text = "";
-            }
-        }
-
         private void tb_ISBN_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '-'))
@@ -712,5 +614,157 @@ namespace Bibo_Verwaltung
                 e.Handled = true;
             }
         }
+        private void lb_id_Click(object sender, EventArgs e)
+        {
+            tb_ID.Focus();
+            lb_id.Visible = false;
+        }
+
+        private void lb_isbn_Click(object sender, EventArgs e)
+        {
+            tb_ISBN.Focus();
+            lb_isbn.Visible = false;
+        }
+
+        private void tb_ID_Click(object sender, EventArgs e)
+        {
+            lb_id.Visible = false;
+        }
+
+        private void tb_ISBN_Click(object sender, EventArgs e)
+        {
+            lb_isbn.Visible = false;
+        }
+
+        private void tb_ID_Leave(object sender, EventArgs e)
+        {
+            if (tb_ID.Text.Equals(""))
+            {
+                lb_id.Visible = true;
+            }
+        }
+
+        private void tb_ISBN_Leave(object sender, EventArgs e)
+        {
+            if (tb_ISBN.Text.Equals(""))
+            {
+                lb_isbn.Visible = true;
+            }
+        }
+
+        private void lb_titel_Click(object sender, EventArgs e)
+        {
+            tb_s_Titel.Focus();
+            lb_titel.Visible = false;
+        }
+
+        private void lb_autor_Click(object sender, EventArgs e)
+        {
+            combo_Autor.Focus();
+            lb_autor.Visible = false;
+        }
+
+        private void lb_verlag_Click(object sender, EventArgs e)
+        {
+            combo_Verlag.Focus();
+            lb_verlag.Visible = false;
+        }
+
+        private void lb_Genre_Click(object sender, EventArgs e)
+        {
+            combo_Genre.Focus();
+            lb_Genre.Visible = false;
+        }
+
+        private void lb_vorname_Click(object sender, EventArgs e)
+        {
+            tb_vorname.Focus();
+            lb_vorname.Visible = false;
+        }
+
+        private void lb_nachname_Click(object sender, EventArgs e)
+        {
+            tb_nachname.Focus();
+            lb_nachname.Visible = false;
+        }
+
+        private void tb_s_Titel_Click(object sender, EventArgs e)
+        {
+            lb_titel.Visible = false;
+        }
+
+        private void combo_Autor_Click(object sender, EventArgs e)
+        {
+            lb_autor.Visible = false;
+        }
+
+        private void combo_Verlag_Click(object sender, EventArgs e)
+        {
+            lb_verlag.Visible = false;
+        }
+
+        private void combo_Genre_Click(object sender, EventArgs e)
+        {
+            lb_Genre.Visible = false;
+        }
+
+        private void tb_vorname_Click(object sender, EventArgs e)
+        {
+            lb_vorname.Visible = false;
+        }
+
+        private void tb_nachname_Click(object sender, EventArgs e)
+        {
+            lb_nachname.Visible = false;
+        }
+
+        private void tb_s_Titel_Leave(object sender, EventArgs e)
+        {
+            if (tb_s_Titel.Text.Equals(""))
+            {
+                lb_titel.Visible = true;
+            }
+        }
+
+        private void combo_Autor_Leave(object sender, EventArgs e)
+        {
+            if (combo_Autor.Text.Equals(""))
+            {
+                lb_autor.Visible = true;
+            }
+        }
+
+        private void combo_Verlag_Leave(object sender, EventArgs e)
+        {
+            if (combo_Verlag.Text.Equals(""))
+            {
+                lb_verlag.Visible = true;
+            }
+        }
+
+        private void combo_Genre_Leave(object sender, EventArgs e)
+        {
+            if (combo_Genre.Text.Equals(""))
+            {
+                lb_Genre.Visible = true;
+            }
+        }
+
+        private void tb_vorname_Leave(object sender, EventArgs e)
+        {
+            if (tb_vorname.Text.Equals(""))
+            {
+                lb_vorname.Visible = true;
+            }
+        }
+
+        private void tb_nachname_Leave(object sender, EventArgs e)
+        {
+            if (tb_nachname.Text.Equals(""))
+            {
+                lb_nachname.Visible = true;
+            }
+        }
+        #endregion
     }
 }
