@@ -2,13 +2,17 @@
 - Systemanforderungen des Programms (SQL-Server, Betriebssystem...)
 - Verwendung des Programms vermitteln (langsam und ausführlich)
 - Anleitung/Dokumentation
-- Tooltips für nicht selbserklärende Sachen
-- Löschen eines verliehenen Buches verhindern/nachfragen
-- doppeltes Hinzufügen von Autoren beim automatischen Laden
-- verliehene Bücher offensichtlicher machen
-- Vergleich des Zustandes nach der Rückgabe (in einem Protokoll)
-- Verlauf ausgeliehener Bücher (neue Tabelle in Datenbank)
-- Checkboxen für die Suche in Ausleih-Form entfernen
-- mehr Information über das ausgeliehene Buch und den Kunden bei der Rückgabe (auch veränderbar)
-- Überarbeiten des Barcode-Scanner-Vorgangs (Laurenz macht das...)
-- Sparen ungefähr 1000 Euro für ordentlichen Etikettendrucker und Papier
+
+
+- Tooltips für nicht selbserklärende Sachen --> Erik
+
+- Löschen eines verliehenen Buches verhindern/nachfragen --> Laurenz
+- doppeltes Hinzufügen von Autoren beim automatischen Laden --> Laurenz
+- Überarbeiten des Barcode-Scanner-Vorgangs --> Laurenz
+
+- verliehene Bücher offensichtlicher machen --> Robert
+- Vergleich des Zustandes nach der Rückgabe (in einem Protokoll) --> Robert
+- Verlauf ausgeliehener Bücher (neue Tabelle in Datenbank) --> Robert
+- Checkboxen für die Suche in Ausleih-Form entfernen --> Robert
+- mehr Information über das ausgeliehene Buch und den Kunden bei der Rückgabe (auch veränderbar) --> Robert
+
