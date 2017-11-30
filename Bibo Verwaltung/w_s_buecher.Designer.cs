@@ -148,9 +148,9 @@
             this.gb_buch.Controls.Add(this.tb_ISBN);
             this.gb_buch.Controls.Add(this.lb_ISBN);
             this.gb_buch.Location = new System.Drawing.Point(16, 31);
-            this.gb_buch.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.gb_buch.Margin = new System.Windows.Forms.Padding(8);
             this.gb_buch.Name = "gb_buch";
-            this.gb_buch.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.gb_buch.Padding = new System.Windows.Forms.Padding(8);
             this.gb_buch.Size = new System.Drawing.Size(792, 1015);
             this.gb_buch.TabIndex = 0;
             this.gb_buch.TabStop = false;
@@ -164,7 +164,7 @@
             this.rTB_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
             this.rTB_1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.rTB_1.Location = new System.Drawing.Point(16, 880);
-            this.rTB_1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rTB_1.Margin = new System.Windows.Forms.Padding(4);
             this.rTB_1.Name = "rTB_1";
             this.rTB_1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.rTB_1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
@@ -181,7 +181,7 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.IntegralHeight = false;
             this.comboBox1.Location = new System.Drawing.Point(672, 260);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(6);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.comboBox1.Size = new System.Drawing.Size(44, 39);
@@ -192,7 +192,7 @@
             // 
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Location = new System.Drawing.Point(300, 300);
-            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(6);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(416, 565);
             this.checkedListBox1.TabIndex = 51;
@@ -203,7 +203,7 @@
             // 
             this.checkbox_autor.AutoSize = true;
             this.checkbox_autor.Location = new System.Drawing.Point(254, 267);
-            this.checkbox_autor.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.checkbox_autor.Margin = new System.Windows.Forms.Padding(6);
             this.checkbox_autor.Name = "checkbox_autor";
             this.checkbox_autor.Size = new System.Drawing.Size(34, 33);
             this.checkbox_autor.TabIndex = 51;
@@ -224,7 +224,7 @@
             // 
             this.tb_anzahl.Enabled = false;
             this.tb_anzahl.Location = new System.Drawing.Point(300, 682);
-            this.tb_anzahl.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.tb_anzahl.Margin = new System.Windows.Forms.Padding(8);
             this.tb_anzahl.Name = "tb_anzahl";
             this.tb_anzahl.Size = new System.Drawing.Size(416, 38);
             this.tb_anzahl.TabIndex = 48;
@@ -232,7 +232,7 @@
             // bt_pic_delete
             // 
             this.bt_pic_delete.Location = new System.Drawing.Point(16, 812);
-            this.bt_pic_delete.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_pic_delete.Margin = new System.Windows.Forms.Padding(8);
             this.bt_pic_delete.Name = "bt_pic_delete";
             this.bt_pic_delete.Size = new System.Drawing.Size(268, 56);
             this.bt_pic_delete.TabIndex = 47;
@@ -244,7 +244,7 @@
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(300, 740);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(8);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(418, 178);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -256,7 +256,7 @@
             // bt_picture
             // 
             this.bt_picture.Location = new System.Drawing.Point(16, 740);
-            this.bt_picture.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_picture.Margin = new System.Windows.Forms.Padding(8);
             this.bt_picture.Name = "bt_picture";
             this.bt_picture.Size = new System.Drawing.Size(268, 56);
             this.bt_picture.TabIndex = 45;
@@ -294,7 +294,7 @@
             // bt_clear_buecher
             // 
             this.bt_clear_buecher.Location = new System.Drawing.Point(528, 936);
-            this.bt_clear_buecher.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_clear_buecher.Margin = new System.Windows.Forms.Padding(8);
             this.bt_clear_buecher.Name = "bt_clear_buecher";
             this.bt_clear_buecher.Size = new System.Drawing.Size(192, 56);
             this.bt_clear_buecher.TabIndex = 15;
@@ -322,7 +322,7 @@
             this.cb_Autor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Autor.FormattingEnabled = true;
             this.cb_Autor.Location = new System.Drawing.Point(300, 260);
-            this.cb_Autor.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.cb_Autor.Margin = new System.Windows.Forms.Padding(8);
             this.cb_Autor.Name = "cb_Autor";
             this.cb_Autor.Size = new System.Drawing.Size(416, 39);
             this.cb_Autor.TabIndex = 2;
@@ -331,7 +331,7 @@
             // bt_speichern_buecher
             // 
             this.bt_speichern_buecher.Location = new System.Drawing.Point(300, 936);
-            this.bt_speichern_buecher.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_speichern_buecher.Margin = new System.Windows.Forms.Padding(8);
             this.bt_speichern_buecher.Name = "bt_speichern_buecher";
             this.bt_speichern_buecher.Size = new System.Drawing.Size(192, 56);
             this.bt_speichern_buecher.TabIndex = 14;
@@ -355,7 +355,7 @@
             // 
             this.dTP_Erscheinungsdatum.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dTP_Erscheinungsdatum.Location = new System.Drawing.Point(300, 624);
-            this.dTP_Erscheinungsdatum.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.dTP_Erscheinungsdatum.Margin = new System.Windows.Forms.Padding(8);
             this.dTP_Erscheinungsdatum.Name = "dTP_Erscheinungsdatum";
             this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(416, 38);
             this.dTP_Erscheinungsdatum.TabIndex = 12;
@@ -373,7 +373,7 @@
             // tb_Auflage
             // 
             this.tb_Auflage.Location = new System.Drawing.Point(300, 508);
-            this.tb_Auflage.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.tb_Auflage.Margin = new System.Windows.Forms.Padding(8);
             this.tb_Auflage.Name = "tb_Auflage";
             this.tb_Auflage.Size = new System.Drawing.Size(416, 38);
             this.tb_Auflage.TabIndex = 10;
@@ -402,7 +402,7 @@
             // bt_Sprache_s
             // 
             this.bt_Sprache_s.Location = new System.Drawing.Point(736, 448);
-            this.bt_Sprache_s.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_Sprache_s.Margin = new System.Windows.Forms.Padding(8);
             this.bt_Sprache_s.Name = "bt_Sprache_s";
             this.bt_Sprache_s.Size = new System.Drawing.Size(40, 39);
             this.bt_Sprache_s.TabIndex = 9;
@@ -416,7 +416,7 @@
             this.cb_Sprache.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Sprache.FormattingEnabled = true;
             this.cb_Sprache.Location = new System.Drawing.Point(300, 446);
-            this.cb_Sprache.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.cb_Sprache.Margin = new System.Windows.Forms.Padding(8);
             this.cb_Sprache.Name = "cb_Sprache";
             this.cb_Sprache.Size = new System.Drawing.Size(416, 39);
             this.cb_Sprache.TabIndex = 8;
@@ -435,7 +435,7 @@
             // bt_Autor_s
             // 
             this.bt_Autor_s.Location = new System.Drawing.Point(736, 262);
-            this.bt_Autor_s.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_Autor_s.Margin = new System.Windows.Forms.Padding(8);
             this.bt_Autor_s.Name = "bt_Autor_s";
             this.bt_Autor_s.Size = new System.Drawing.Size(40, 39);
             this.bt_Autor_s.TabIndex = 3;
@@ -466,7 +466,7 @@
             // bt_Verlag_s
             // 
             this.bt_Verlag_s.Location = new System.Drawing.Point(736, 324);
-            this.bt_Verlag_s.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_Verlag_s.Margin = new System.Windows.Forms.Padding(8);
             this.bt_Verlag_s.Name = "bt_Verlag_s";
             this.bt_Verlag_s.Size = new System.Drawing.Size(40, 39);
             this.bt_Verlag_s.TabIndex = 5;
@@ -477,7 +477,7 @@
             // bt_Genre_s
             // 
             this.bt_Genre_s.Location = new System.Drawing.Point(736, 386);
-            this.bt_Genre_s.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_Genre_s.Margin = new System.Windows.Forms.Padding(8);
             this.bt_Genre_s.Name = "bt_Genre_s";
             this.bt_Genre_s.Size = new System.Drawing.Size(40, 39);
             this.bt_Genre_s.TabIndex = 7;
@@ -491,7 +491,7 @@
             this.cb_Verlag.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Verlag.FormattingEnabled = true;
             this.cb_Verlag.Location = new System.Drawing.Point(300, 322);
-            this.cb_Verlag.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.cb_Verlag.Margin = new System.Windows.Forms.Padding(8);
             this.cb_Verlag.Name = "cb_Verlag";
             this.cb_Verlag.Size = new System.Drawing.Size(416, 39);
             this.cb_Verlag.TabIndex = 4;
@@ -503,7 +503,7 @@
             this.cb_Genre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Genre.FormattingEnabled = true;
             this.cb_Genre.Location = new System.Drawing.Point(300, 384);
-            this.cb_Genre.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.cb_Genre.Margin = new System.Windows.Forms.Padding(8);
             this.cb_Genre.Name = "cb_Genre";
             this.cb_Genre.Size = new System.Drawing.Size(416, 39);
             this.cb_Genre.TabIndex = 6;
@@ -522,7 +522,7 @@
             // tb_Neupreis
             // 
             this.tb_Neupreis.Location = new System.Drawing.Point(300, 566);
-            this.tb_Neupreis.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.tb_Neupreis.Margin = new System.Windows.Forms.Padding(8);
             this.tb_Neupreis.Name = "tb_Neupreis";
             this.tb_Neupreis.Size = new System.Drawing.Size(416, 38);
             this.tb_Neupreis.TabIndex = 11;
@@ -543,7 +543,7 @@
             // tb_Titel
             // 
             this.tb_Titel.Location = new System.Drawing.Point(300, 202);
-            this.tb_Titel.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.tb_Titel.Margin = new System.Windows.Forms.Padding(8);
             this.tb_Titel.Name = "tb_Titel";
             this.tb_Titel.Size = new System.Drawing.Size(416, 38);
             this.tb_Titel.TabIndex = 1;
@@ -563,7 +563,7 @@
             // tb_ISBN
             // 
             this.tb_ISBN.Location = new System.Drawing.Point(300, 143);
-            this.tb_ISBN.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.tb_ISBN.Margin = new System.Windows.Forms.Padding(8);
             this.tb_ISBN.Name = "tb_ISBN";
             this.tb_ISBN.Size = new System.Drawing.Size(416, 38);
             this.tb_ISBN.TabIndex = 0;
@@ -586,7 +586,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(750, 172);
-            this.button1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button1.Margin = new System.Windows.Forms.Padding(6);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(44, 45);
             this.button1.TabIndex = 50;
@@ -599,7 +599,7 @@
             this.pictureBox2.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox2.Location = new System.Drawing.Point(4, 31);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(8);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(1516, 980);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -631,7 +631,7 @@
             // 
             this.bt_Schliessen.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.bt_Schliessen.Location = new System.Drawing.Point(1644, 992);
-            this.bt_Schliessen.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_Schliessen.Margin = new System.Windows.Forms.Padding(8);
             this.bt_Schliessen.Name = "bt_Schliessen";
             this.bt_Schliessen.Size = new System.Drawing.Size(700, 54);
             this.bt_Schliessen.TabIndex = 1;
@@ -641,7 +641,7 @@
             // bt_Excel
             // 
             this.bt_Excel.Location = new System.Drawing.Point(820, 992);
-            this.bt_Excel.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_Excel.Margin = new System.Windows.Forms.Padding(8);
             this.bt_Excel.Name = "bt_Excel";
             this.bt_Excel.Size = new System.Drawing.Size(700, 54);
             this.bt_Excel.TabIndex = 1;
@@ -653,7 +653,7 @@
             // 
             this.gb_zoom.Controls.Add(this.pictureBox2);
             this.gb_zoom.Location = new System.Drawing.Point(820, 31);
-            this.gb_zoom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gb_zoom.Margin = new System.Windows.Forms.Padding(4);
             this.gb_zoom.Name = "gb_zoom";
             this.gb_zoom.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
             this.gb_zoom.Size = new System.Drawing.Size(1524, 1015);
@@ -664,6 +664,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(2364, 1071);
             this.Controls.Add(this.gb_zoom);
             this.Controls.Add(this.bt_Excel);
@@ -672,7 +673,7 @@
             this.Controls.Add(this.Grid_Buch);
             this.Controls.Add(this.gb_buch);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.Margin = new System.Windows.Forms.Padding(8);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "w_s_buecher";
