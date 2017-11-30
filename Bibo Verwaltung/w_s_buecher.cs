@@ -1172,7 +1172,7 @@ namespace Bibo_Verwaltung
         {
             ExcelExport export = new ExcelExport();
 
-            export.ToExcel(Grid_Buch, "Bibo_Buecherliste.csv");
+            export.ToExcel(Grid_Buch);
         }
 
         private void tb_ISBN_Click(object sender, EventArgs e)

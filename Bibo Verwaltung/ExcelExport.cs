@@ -13,12 +13,12 @@ namespace Bibo_Verwaltung
     class ExcelExport
     {
         #region ExcelExport
-        public void ToExcel(DataGridView dGV, string filename)
+        public void ToExcel(DataGridView dGV)
         {
             try
             {
                 SaveFileDialog dialog = new SaveFileDialog();
-                dialog.Filter = "Tabellenformat(*.csv, *.xml)|*.csv; *.xml|Alle Dateien(*.*)|*.*";
+                dialog.Filter = "CSV|*.csv";
                 dialog.Title = "Als Tabelle abspeichern";
                 dialog.ShowDialog();
 

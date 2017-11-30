@@ -485,7 +485,7 @@ namespace Bibo_Verwaltung
         {
             ExcelExport export = new ExcelExport();
 
-            export.ToExcel(Grid_Kunde, "Bibo_Kundenliste.csv");
+            export.ToExcel(Grid_Kunde);
         }
     }
 }
