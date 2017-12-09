@@ -81,7 +81,6 @@ namespace Bibo_Verwaltung
             adapter.Fill(dt);
 
             con.Close();
-
         }
         #endregion
 

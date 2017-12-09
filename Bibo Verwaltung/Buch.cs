@@ -114,6 +114,22 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Buch per ISBN laden
+        public void Load_ID(string id)
+        {
+            //SQL-Verbindung pruefen
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT bu_isbn FROM [dbo].[t_s_buchid] WHERE bu_id = @0";
+            string isbn = "";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, id);
+            // Einlesen der Datenzeilen 
+            while (dr.Read())
+            {
+                isbn = dr["bu_isbn"].ToString();
+            }
+            this.isbn = isbn;
+            Load_Buch();
+        }
+
         private void Load_Buch()
         {
             //SQL-Verbindung pruefen
@@ -134,11 +150,11 @@ namespace Bibo_Verwaltung
                 string price = dr["buch_neupreis"].ToString().Replace(".", ",");
                 BildPfad = dr["buch_bild"].ToString();
                 Anzahl = int.Parse(dr["buch_anzahl"].ToString());
-                if(BildPfad != null && BildPfad != "" && File.Exists(BildPfad))
+                if (BildPfad != null && BildPfad != "" && File.Exists(BildPfad))
                 {
                     BildDate = DateTime.Parse(File.GetCreationTimeUtc(BildPfad).ToShortTimeString());
                 }
-                if(dr["buch_imageDate"] != null && dr["buch_imageDate"].ToString() != "")
+                if (dr["buch_imageDate"] != null && dr["buch_imageDate"].ToString() != "")
                 {
                     ImageDate = (DateTime)dr["buch_imageDate"];
                 }
@@ -197,7 +213,7 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@genre", Genre.GenreID);
             cmd.Parameters.AddWithValue("@sprache", Sprache.SpracheID);
             cmd.Parameters.AddWithValue("@verlag", Verlag.VerlagID);
-            if(Auflage == null || Auflage.Equals(""))
+            if (Auflage == null || Auflage.Equals(""))
             {
                 cmd.Parameters.AddWithValue("@auflage", DBNull.Value);
             }
@@ -212,7 +228,7 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@bild", bildPfad);
             cmd.Parameters.AddWithValue("@anzahl", anzahl);
             cmd.Parameters.Add("@image", SqlDbType.VarBinary, -1);
-            if(image == null)
+            if (image == null)
             {
                 cmd.Parameters["@image"].Value = DBNull.Value;
             }
@@ -304,7 +320,7 @@ namespace Bibo_Verwaltung
                 count = (int)cmdCount.ExecuteScalar();
                 con.Close();
             }
-            
+
             return count;
 
         }
@@ -358,21 +374,21 @@ namespace Bibo_Verwaltung
             foreach (DataRow row in ds2.Tables[0].Rows)
             {
                 string text = "";
-                foreach(string s in AutorListe.GetNames(row["AutorlisteID"].ToString()))
+                foreach (string s in AutorListe.GetNames(row["AutorlisteID"].ToString()))
                 {
-                    if(s != null && !s.Equals(""))
+                    if (s != null && !s.Equals(""))
                     {
                         text = text + s + ", ";
                     }
                 }
                 if (text.Length > 2)
                 {
-                    text = text.Substring(0, text.Length -2);
+                    text = text.Substring(0, text.Length - 2);
                 }
                 row["Autor"] = text;
             }
             ds2.Tables[0].Columns["Autor"].SetOrdinal(3);
-            
+
             con2.Close();
         }
         #endregion
@@ -390,7 +406,7 @@ namespace Bibo_Verwaltung
             ClearDSBuch();
             FillObjectBuch();
             List<string> s = dt2.AsEnumerable().Select(x => x[0].ToString()).ToList();
-            foreach(string e in s)
+            foreach (string e in s)
             {
                 UpdateCount(e);
             }
@@ -402,6 +418,6 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        
+
     }
 }

@@ -429,62 +429,64 @@ namespace Bibo_Verwaltung
         #region Buch-Rückgabe
         private void bt_Rueckgabe_Click(object sender, EventArgs e)
         {
-            if (tb_BuchIDAusleihen.Text != "") //&& gv_Details.CurrentRow.Cells[29].Value.ToString() != ""
-            {
-                int row_index = gv_Details.CurrentRow.Index;
-                if (row_index >= 0 && row_index <= gv_Details.RowCount)
-                {
-                    DataGridViewRow row = this.gv_Details.CurrentRow;
-                    if (!row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString().Equals("") && row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString() != null)
-                    {
-                        string buch_titel = row.Cells[details.GetColumnIndexByName(gv_Details, "Titel")].Value.ToString();
-                        string kunde = row.Cells[details.GetColumnIndexByName(gv_Details, "Vorname")].Value.ToString() + " " + row.Cells[details.GetColumnIndexByName(gv_Details, "Nachname")].Value.ToString();
+            Form Rueckgabe = new w_s_rueckgabe();
+            Rueckgabe.ShowDialog(this);
+            //if (tb_BuchIDAusleihen.Text != "") //&& gv_Details.CurrentRow.Cells[29].Value.ToString() != ""
+            //{
+            //    int row_index = gv_Details.CurrentRow.Index;
+            //    if (row_index >= 0 && row_index <= gv_Details.RowCount)
+            //    {
+            //        DataGridViewRow row = this.gv_Details.CurrentRow;
+            //        if (!row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString().Equals("") && row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString() != null)
+            //        {
+            //            string buch_titel = row.Cells[details.GetColumnIndexByName(gv_Details, "Titel")].Value.ToString();
+            //            string kunde = row.Cells[details.GetColumnIndexByName(gv_Details, "Vorname")].Value.ToString() + " " + row.Cells[details.GetColumnIndexByName(gv_Details, "Nachname")].Value.ToString();
 
-                        DialogResult dialogResult = MessageBox.Show("Möchten Sie das Buch: '" + buch_titel
-                            + "', ausgeliehen von: '" + kunde + "' wirklich als zurückgegeben markieren?", "Achtung",
-                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            //            DialogResult dialogResult = MessageBox.Show("Möchten Sie das Buch: '" + buch_titel
+            //                + "', ausgeliehen von: '" + kunde + "' wirklich als zurückgegeben markieren?", "Achtung",
+            //                MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
-                        if (dialogResult == DialogResult.OK)
-                        {
-                            try
-                            {
-                                details.Buch_Rueckgabe(tb_BuchIDAusleihen.Text);
-                                details.FillGrid(ref gv_Details);
-                                MessageBox.Show("Das Buch wurde erfolgreich zurückgeben!", "Information",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            catch
-                            {
-                                MessageBox.Show("Es ist ein Fehler aufgetreten. Das Buch konnte nicht zurückgeben werden!", "Fehler",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
+            //            if (dialogResult == DialogResult.OK)
+            //            {
+            //                try
+            //                {
+            //                    details.Buch_Rueckgabe(tb_BuchIDAusleihen.Text);
+            //                    details.FillGrid(ref gv_Details);
+            //                    MessageBox.Show("Das Buch wurde erfolgreich zurückgeben!", "Information",
+            //                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //                }
+            //                catch
+            //                {
+            //                    MessageBox.Show("Es ist ein Fehler aufgetreten. Das Buch konnte nicht zurückgeben werden!", "Fehler",
+            //                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //                }
+            //            }
 
-                    }
-                    else
-                    {
-                        MessageBox.Show("Dieses Buch wurde an niemanden ausgeliehen. Deshalb kann es nicht zurückgegeben werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("Dieses Buch wurde an niemanden ausgeliehen. Deshalb kann es nicht zurückgegeben werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //        }
 
                     
-                }
-            }
-            else
-            {
-                if(gv_Details.CurrentRow != null)
-                {
-                    string buch_id = gv_Details.CurrentRow.Cells[details.GetColumnIndexByName(gv_Details,"Buch-ID")].Value.ToString();
-                    tb_BuchIDAusleihen.Text = buch_id;
-                    bt_Rueckgabe_Click(bt_Rueckgabe, e);
-                }
-                else
-                {
-                    MessageBox.Show("Es wurde kein Buch ausgewählt!", "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                //MessageBox.Show("Wählen Sie ein Buch zur Rückgabe aus!", "Information",
-                //    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //    }
+            //}
+            //else
+            //{
+            //    if(gv_Details.CurrentRow != null)
+            //    {
+            //        string buch_id = gv_Details.CurrentRow.Cells[details.GetColumnIndexByName(gv_Details,"Buch-ID")].Value.ToString();
+            //        tb_BuchIDAusleihen.Text = buch_id;
+            //        bt_Rueckgabe_Click(bt_Rueckgabe, e);
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Es wurde kein Buch ausgewählt!", "Error",
+            //                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //    //MessageBox.Show("Wählen Sie ein Buch zur Rückgabe aus!", "Information",
+            //    //    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
         #endregion
 

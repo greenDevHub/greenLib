@@ -150,19 +150,6 @@ namespace Bibo_Verwaltung
             con.Close();
             return ergebnis;
         }
-
-
-
-        public void Buch_Rueckgabe(string buch_id)
-        {
-            SQL_Verbindung con = new SQL_Verbindung();
-            if (con.ConnectError()) return;
-            string RawCommand = "DELETE FROM t_bd_ausgeliehen WHERE aus_buchid = @0";
-            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-            cmd.Parameters.AddWithValue("@0", buch_id);
-            cmd.ExecuteNonQuery();
-            con.Close();
-        }
         #endregion
     }
 }

@@ -94,7 +94,9 @@
     <Compile Include="Einstellung.cs" />
     <Compile Include="Details.cs" />
     <Compile Include="ExcelExport.cs" />
+    <Compile Include="Rueckgabe.cs" />
     <Compile Include="SQL_Verbindung.cs" />
+    <Compile Include="Verlauf.cs" />
     <Compile Include="w_s_Aus_Kunde.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,17 +115,17 @@
       <DependentUpon>Bibo_VerwaltungDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Buch.cs" />
-    <Compile Include="Combo_Search.cs">
+    <Compile Include="w_s_information.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Combo_Search.Designer.cs">
-      <DependentUpon>Combo_Search.cs</DependentUpon>
+    <Compile Include="w_s_information.Designer.cs">
+      <DependentUpon>w_s_information.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="w_s_rueckgabe.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="w_s_rueckgabe.Designer.cs">
+      <DependentUpon>w_s_rueckgabe.cs</DependentUpon>
     </Compile>
     <Compile Include="Genre.cs" />
     <Compile Include="w_s_barcode.cs">
@@ -204,14 +206,17 @@
       <DependentUpon>w_s_zustand.cs</DependentUpon>
     </Compile>
     <Compile Include="Zustand.cs" />
+    <EmbeddedResource Include="w_s_rueckgabe.resx">
+      <DependentUpon>w_s_rueckgabe.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="w_s_Aus_Kunde.resx">
       <DependentUpon>w_s_Aus_Kunde.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_autoren.resx">
       <DependentUpon>w_s_autoren.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Combo_Search.resx">
-      <DependentUpon>Combo_Search.cs</DependentUpon>
+    <EmbeddedResource Include="w_s_information.resx">
+      <DependentUpon>w_s_information.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_barcode.resx">
       <DependentUpon>w_s_barcode.cs</DependentUpon>
