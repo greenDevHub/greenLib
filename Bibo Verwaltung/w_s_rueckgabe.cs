@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +47,74 @@ namespace Bibo_Verwaltung
                         llb_Buch.Text = buch.Titel;
                     }
                     buch_id_global = buchid.ID;
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    if (buch.Image != null)
+                    {
+                        try
+                        {
+                            MemoryStream mem = new MemoryStream(buch.Image);
+                            pictureBox1.Image = Image.FromStream(mem);
+                            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Bilder\\" + buch.ISBN + ".png";
+                            if (!File.Exists(filePath))
+                            {
+                                pictureBox1.Image.Save(filePath, ImageFormat.Png);
+                                pictureBox1.ImageLocation = filePath;
+                            }
+                            else
+                            {
+                                Delete_picture(filePath);
+                                pictureBox1.Image.Save(filePath, ImageFormat.Png);
+                                pictureBox1.ImageLocation = filePath;
+                            }
+                        }
+                        catch
+                        {
+                        }
+                    }
+                    else
+                    {
+                        if (!buch.BildPfad.Equals(""))
+                        {
+                            try
+                            {
+                                pictureBox1.ImageLocation = buch.BildPfad;
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Das Bild wurde nicht gefunden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            pictureBox1.Image = null;
+                            pictureBox1.ImageLocation = null;
+                        }
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
                     cb_Zustand.SelectedValue = buchid.Zustand.ZustandID;
                     zu_vor_global = buchid.Zustand.Zustandname;
                     zu_nach_global = buchid.Zustand.Zustandname;
@@ -107,6 +177,15 @@ namespace Bibo_Verwaltung
             lb_rueckgabe.Text = "nicht verfügbar";
             cb_Zustand.SelectedValue = -1;
             lb_rueckgabe.ForeColor = Color.Black;
+        }
+
+        private void Delete_picture(string location)
+        {
+            if (File.Exists(location))
+            {
+                File.Delete(location);
+            }
+
         }
 
         private void llb_Buch_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
