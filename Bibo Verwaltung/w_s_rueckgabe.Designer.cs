@@ -57,7 +57,7 @@
             this.bt_Rueckgabe.Location = new System.Drawing.Point(288, 390);
             this.bt_Rueckgabe.Name = "bt_Rueckgabe";
             this.bt_Rueckgabe.Size = new System.Drawing.Size(175, 23);
-            this.bt_Rueckgabe.TabIndex = 0;
+            this.bt_Rueckgabe.TabIndex = 6;
             this.bt_Rueckgabe.Text = "Buchrückgabe abschließen";
             this.bt_Rueckgabe.UseVisualStyleBackColor = true;
             this.bt_Rueckgabe.Click += new System.EventHandler(this.bt_Rueckgabe_Click);
@@ -68,7 +68,7 @@
             this.bt_Zu_aendern.Location = new System.Drawing.Point(257, 148);
             this.bt_Zu_aendern.Name = "bt_Zu_aendern";
             this.bt_Zu_aendern.Size = new System.Drawing.Size(167, 23);
-            this.bt_Zu_aendern.TabIndex = 1;
+            this.bt_Zu_aendern.TabIndex = 5;
             this.bt_Zu_aendern.Text = "Buchzustand ändern";
             this.bt_Zu_aendern.UseVisualStyleBackColor = true;
             this.bt_Zu_aendern.Click += new System.EventHandler(this.bt_Zu_aendern_Click);
@@ -91,13 +91,14 @@
             this.gv_Verlauf.ShowEditingIcon = false;
             this.gv_Verlauf.Size = new System.Drawing.Size(457, 186);
             this.gv_Verlauf.TabIndex = 2;
+            this.gv_Verlauf.TabStop = false;
             // 
             // tb_BuchCode
             // 
             this.tb_BuchCode.Location = new System.Drawing.Point(103, 22);
             this.tb_BuchCode.Name = "tb_BuchCode";
             this.tb_BuchCode.Size = new System.Drawing.Size(148, 20);
-            this.tb_BuchCode.TabIndex = 4;
+            this.tb_BuchCode.TabIndex = 1;
             this.tb_BuchCode.TextChanged += new System.EventHandler(this.tb_BuchCode_TextChanged);
             // 
             // label1
@@ -160,7 +161,7 @@
             this.llb_Buch.Location = new System.Drawing.Point(100, 50);
             this.llb_Buch.Name = "llb_Buch";
             this.llb_Buch.Size = new System.Drawing.Size(67, 13);
-            this.llb_Buch.TabIndex = 20;
+            this.llb_Buch.TabIndex = 2;
             this.llb_Buch.TabStop = true;
             this.llb_Buch.Text = "keine Treffer";
             this.llb_Buch.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llb_Buch_LinkClicked);
@@ -181,7 +182,7 @@
             this.llb_Kunde.Location = new System.Drawing.Point(100, 75);
             this.llb_Kunde.Name = "llb_Kunde";
             this.llb_Kunde.Size = new System.Drawing.Size(76, 13);
-            this.llb_Kunde.TabIndex = 18;
+            this.llb_Kunde.TabIndex = 3;
             this.llb_Kunde.TabStop = true;
             this.llb_Kunde.Text = "nicht verleihen";
             this.llb_Kunde.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llb_Kunde_LinkClicked);
@@ -193,7 +194,7 @@
             this.cb_Zustand.Location = new System.Drawing.Point(103, 150);
             this.cb_Zustand.Name = "cb_Zustand";
             this.cb_Zustand.Size = new System.Drawing.Size(148, 21);
-            this.cb_Zustand.TabIndex = 17;
+            this.cb_Zustand.TabIndex = 4;
             // 
             // lb_l_Zustand
             // 
@@ -256,7 +257,6 @@
             this.ClientSize = new System.Drawing.Size(495, 443);
             this.Controls.Add(this.gb_Rueck);
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "w_s_rueckgabe";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

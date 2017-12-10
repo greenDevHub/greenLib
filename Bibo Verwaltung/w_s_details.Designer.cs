@@ -544,7 +544,6 @@
             this.Controls.Add(this.cb_KundeAnz);
             this.Controls.Add(this.gv_Details);
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "w_s_details";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Buch Suchen/Ausleihen";
