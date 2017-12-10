@@ -335,7 +335,7 @@ namespace Bibo_Verwaltung
                                     tb_BuchAusleihen.Text = buch_titel;
                                     tb_ZustandAusleihen.Text = buch_zustand;
                                     bt_Abschliessen.Enabled = true;
-                                    string date = DateTime.Now.ToShortDateString();
+                                    string date = DateTime.Today.Day.ToString() + DateTime.Today.Month.ToString() + DateTime.Today.Year.ToString();
                                     Barcode bar = new Barcode(tb_BuchIDAusleihen.Text, tb_KundenIDAusleihen.Text, date);
                                 }
                                 else
@@ -375,8 +375,8 @@ namespace Bibo_Verwaltung
 
         private void Ausleihen_Bestaetigen(object sender, EventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 int buch_id = Convert.ToInt32(tb_BuchIDAusleihen.Text);
 
                 if (details.Pruefe_Ausgeliehen(tb_BuchIDAusleihen.Text) == false)
@@ -417,12 +417,12 @@ namespace Bibo_Verwaltung
                     bt_Ausleihen.Enabled = true;
                     bt_AbbrechenAusleihen.Enabled = false;
                 }
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Das Buch konnte nicht ausgeliehen werden!", "Error",
-            //               MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            }
+            catch
+            {
+                MessageBox.Show("Das Buch konnte nicht ausgeliehen werden!", "Error",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
 
