@@ -155,7 +155,6 @@ namespace Bibo_Verwaltung
             picBox.Image = null;
             gv_Verlauf.DataSource = null;
             gv_Verlauf.Update();
-            tb_BuchCode.Text = "";
         }
 
         private void Delete_picture(string location)
@@ -212,6 +211,7 @@ namespace Bibo_Verwaltung
                     ruck.Buch_Rueckgabe(buch_id_global, k_id_global, zu_vor_global, zu_nach_id_global, zu_nach_global, ausgeliehen_global, ruckgabe_global);
                     MessageBox.Show("Dieses Buch wurde erfolgreich zurückgegeben!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Clear_All();
+                    tb_BuchCode.Text = "";
                 }
             }
             else

@@ -335,7 +335,7 @@ namespace Bibo_Verwaltung
                                     tb_BuchAusleihen.Text = buch_titel;
                                     tb_ZustandAusleihen.Text = buch_zustand;
                                     bt_Abschliessen.Enabled = true;
-                                    string date = DateTime.Today.Day.ToString() + DateTime.Today.Month.ToString() + DateTime.Today.Year.ToString();
+                                    string date = DateTime.Today.ToShortDateString();
                                     Barcode bar = new Barcode(tb_BuchIDAusleihen.Text, tb_KundenIDAusleihen.Text, date);
                                 }
                                 else
