@@ -32,6 +32,8 @@ namespace Bibo_Verwaltung
         {
             if (tb_BuchCode.Text != "")
             {
+                bt_Rueckgabe.Enabled = true;
+
                 try
                 {
                     BuchID buchid = new BuchID(tb_BuchCode.Text);
@@ -126,11 +128,16 @@ namespace Bibo_Verwaltung
                         lb_rueckgabe.ForeColor = Color.Red;
                         lb_rueckgabe.Text = lb_rueckgabe.Text + " (überfällig)";
                     }
+
+                    if (llb_Kunde.Text != "nicht verliehen")
+                    {
+                        bt_Zu_aendern.Enabled = true;
+                    }
                 }
                 catch
                 {
                     llb_Kunde.Enabled = false;
-                    llb_Kunde.Text = "keine Treffer";
+                    llb_Kunde.Text = "nicht verliehen";
                     lb_ausgeliehen.Text = "nicht verfügbar";
                     lb_rueckgabe.Text = "nicht verfügbar";
                     lb_rueckgabe.ForeColor = Color.Black;
@@ -139,6 +146,8 @@ namespace Bibo_Verwaltung
             else
             {
                 Clear_All();
+                bt_Rueckgabe.Enabled = false;
+                bt_Zu_aendern.Enabled = false;
             }
         }
 
@@ -147,7 +156,7 @@ namespace Bibo_Verwaltung
             llb_Buch.Enabled = false;
             llb_Buch.Text = "keine Treffer";
             llb_Kunde.Enabled = false;
-            llb_Kunde.Text = "keine Treffer";
+            llb_Kunde.Text = "nicht verliehen";
             lb_ausgeliehen.Text = "nicht verfügbar";
             lb_rueckgabe.Text = "nicht verfügbar";
             cb_Zustand.SelectedValue = -1;
@@ -179,7 +188,7 @@ namespace Bibo_Verwaltung
 
         private void bt_Rueckgabe_Click(object sender, EventArgs e)
         {
-            if (llb_Kunde.Text != "keine Treffer" && tb_BuchCode.Text != "")
+            if (llb_Kunde.Text != "keine Treffer")
             {
                 DialogResult dialogResult = MessageBox.Show("Möchten Sie das Buch: '" + llb_Buch.Text + "', ausgeliehen von: '" + llb_Kunde.Text + "' wirklich als zurückgegeben markieren?", "Achtung",
                             MessageBoxButtons.OKCancel, MessageBoxIcon.Question);

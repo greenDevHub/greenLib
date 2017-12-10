@@ -53,6 +53,7 @@
             // 
             // bt_Rueckgabe
             // 
+            this.bt_Rueckgabe.Enabled = false;
             this.bt_Rueckgabe.Location = new System.Drawing.Point(288, 390);
             this.bt_Rueckgabe.Name = "bt_Rueckgabe";
             this.bt_Rueckgabe.Size = new System.Drawing.Size(175, 23);
@@ -63,6 +64,7 @@
             // 
             // bt_Zu_aendern
             // 
+            this.bt_Zu_aendern.Enabled = false;
             this.bt_Zu_aendern.Location = new System.Drawing.Point(257, 148);
             this.bt_Zu_aendern.Name = "bt_Zu_aendern";
             this.bt_Zu_aendern.Size = new System.Drawing.Size(167, 23);
