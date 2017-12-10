@@ -34,6 +34,7 @@
             this.tb_BuchCode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.gb_Rueck = new System.Windows.Forms.GroupBox();
+            this.picBox = new System.Windows.Forms.PictureBox();
             this.lb_rueckgabe = new System.Windows.Forms.Label();
             this.lb_ausgeliehen = new System.Windows.Forms.Label();
             this.llb_Buch = new System.Windows.Forms.LinkLabel();
@@ -45,7 +46,7 @@
             this.lb_Kunde = new System.Windows.Forms.Label();
             this.lb_RueckFällig = new System.Windows.Forms.Label();
             this.lb_Verlauf = new System.Windows.Forms.Label();
-            this.picBox = new System.Windows.Forms.PictureBox();
+            this.helpProvider = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Verlauf)).BeginInit();
             this.gb_Rueck.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
@@ -54,8 +55,10 @@
             // bt_Rueckgabe
             // 
             this.bt_Rueckgabe.Enabled = false;
+            this.helpProvider.SetHelpString(this.bt_Rueckgabe, "Klicken sie auf diesen Button um die Buchrückgabe abzuschließen.");
             this.bt_Rueckgabe.Location = new System.Drawing.Point(288, 390);
             this.bt_Rueckgabe.Name = "bt_Rueckgabe";
+            this.helpProvider.SetShowHelp(this.bt_Rueckgabe, true);
             this.bt_Rueckgabe.Size = new System.Drawing.Size(175, 23);
             this.bt_Rueckgabe.TabIndex = 6;
             this.bt_Rueckgabe.Text = "Buchrückgabe abschließen";
@@ -65,8 +68,11 @@
             // bt_Zu_aendern
             // 
             this.bt_Zu_aendern.Enabled = false;
+            this.helpProvider.SetHelpString(this.bt_Zu_aendern, "Hier wird der letzte Zustand des ausgeliehen Buches angezeigt. Ändern sie diesen " +
+        "wenn sich der Zustand geändert hat.");
             this.bt_Zu_aendern.Location = new System.Drawing.Point(257, 148);
             this.bt_Zu_aendern.Name = "bt_Zu_aendern";
+            this.helpProvider.SetShowHelp(this.bt_Zu_aendern, true);
             this.bt_Zu_aendern.Size = new System.Drawing.Size(167, 23);
             this.bt_Zu_aendern.TabIndex = 5;
             this.bt_Zu_aendern.Text = "Buchzustand ändern";
@@ -81,6 +87,8 @@
             this.gv_Verlauf.AllowUserToResizeRows = false;
             this.gv_Verlauf.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_Verlauf.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.helpProvider.SetHelpString(this.gv_Verlauf, "Hier wird ihnen angezeigt, welche Kunden das aktuelle Buch früher ausgeliehen hab" +
+        "en.");
             this.gv_Verlauf.Location = new System.Drawing.Point(6, 198);
             this.gv_Verlauf.MultiSelect = false;
             this.gv_Verlauf.Name = "gv_Verlauf";
@@ -89,14 +97,18 @@
             this.gv_Verlauf.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_Verlauf.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv_Verlauf.ShowEditingIcon = false;
+            this.helpProvider.SetShowHelp(this.gv_Verlauf, true);
             this.gv_Verlauf.Size = new System.Drawing.Size(457, 186);
             this.gv_Verlauf.TabIndex = 2;
             this.gv_Verlauf.TabStop = false;
             // 
             // tb_BuchCode
             // 
+            this.helpProvider.SetHelpString(this.tb_BuchCode, "Bitte geben sie den Buchlabel-Code ein. Dieser wird bei einem Ausleihvorgang auto" +
+        "matisch generiert.");
             this.tb_BuchCode.Location = new System.Drawing.Point(103, 22);
             this.tb_BuchCode.Name = "tb_BuchCode";
+            this.helpProvider.SetShowHelp(this.tb_BuchCode, true);
             this.tb_BuchCode.Size = new System.Drawing.Size(148, 20);
             this.tb_BuchCode.TabIndex = 1;
             this.tb_BuchCode.TextChanged += new System.EventHandler(this.tb_BuchCode_TextChanged);
@@ -104,9 +116,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.helpProvider.SetHelpString(this.label1, "Bitte geben sie den Buchlabel-Code ein. Dieser wird bei einem Ausleihvorgang auto" +
+        "matisch generiert.");
             this.label1.Location = new System.Drawing.Point(6, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 13);
+            this.helpProvider.SetShowHelp(this.label1, true);
+            this.label1.Size = new System.Drawing.Size(98, 15);
             this.label1.TabIndex = 5;
             this.label1.Text = "Buchlabel-Code:";
             // 
@@ -136,21 +151,36 @@
             this.gb_Rueck.TabStop = false;
             this.gb_Rueck.Text = "Buchrückgabe:";
             // 
+            // picBox
+            // 
+            this.helpProvider.SetHelpString(this.picBox, "Hier sehen sie eine kleine Vorschau des ausgeliehenen Buches.");
+            this.picBox.Location = new System.Drawing.Point(257, 22);
+            this.picBox.Name = "picBox";
+            this.helpProvider.SetShowHelp(this.picBox, true);
+            this.picBox.Size = new System.Drawing.Size(167, 116);
+            this.picBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBox.TabIndex = 23;
+            this.picBox.TabStop = false;
+            // 
             // lb_rueckgabe
             // 
             this.lb_rueckgabe.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_rueckgabe, "Hier wird ihnen das Rückgabedatum angezeigt.");
             this.lb_rueckgabe.Location = new System.Drawing.Point(100, 125);
             this.lb_rueckgabe.Name = "lb_rueckgabe";
-            this.lb_rueckgabe.Size = new System.Drawing.Size(78, 13);
+            this.helpProvider.SetShowHelp(this.lb_rueckgabe, true);
+            this.lb_rueckgabe.Size = new System.Drawing.Size(87, 15);
             this.lb_rueckgabe.TabIndex = 22;
             this.lb_rueckgabe.Text = "nicht verfügbar";
             // 
             // lb_ausgeliehen
             // 
             this.lb_ausgeliehen.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_ausgeliehen, "Hier wird ihnen angezeigt, wie lange das aktuelle Buch schon ausgeliehen ist.");
             this.lb_ausgeliehen.Location = new System.Drawing.Point(100, 100);
             this.lb_ausgeliehen.Name = "lb_ausgeliehen";
-            this.lb_ausgeliehen.Size = new System.Drawing.Size(78, 13);
+            this.helpProvider.SetShowHelp(this.lb_ausgeliehen, true);
+            this.lb_ausgeliehen.Size = new System.Drawing.Size(87, 15);
             this.lb_ausgeliehen.TabIndex = 21;
             this.lb_ausgeliehen.Text = "nicht verfügbar";
             // 
@@ -158,9 +188,11 @@
             // 
             this.llb_Buch.AutoSize = true;
             this.llb_Buch.Enabled = false;
+            this.helpProvider.SetHelpString(this.llb_Buch, "Hier wird ihnen angezeigt, welches Buch ausgeliehen wurde.");
             this.llb_Buch.Location = new System.Drawing.Point(100, 50);
             this.llb_Buch.Name = "llb_Buch";
-            this.llb_Buch.Size = new System.Drawing.Size(67, 13);
+            this.helpProvider.SetShowHelp(this.llb_Buch, true);
+            this.llb_Buch.Size = new System.Drawing.Size(75, 15);
             this.llb_Buch.TabIndex = 2;
             this.llb_Buch.TabStop = true;
             this.llb_Buch.Text = "keine Treffer";
@@ -169,9 +201,11 @@
             // lb_Buch
             // 
             this.lb_Buch.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Buch, "Hier wird ihnen angezeigt, welches Buch ausgeliehen wurde.");
             this.lb_Buch.Location = new System.Drawing.Point(6, 50);
             this.lb_Buch.Name = "lb_Buch";
-            this.lb_Buch.Size = new System.Drawing.Size(83, 13);
+            this.helpProvider.SetShowHelp(this.lb_Buch, true);
+            this.lb_Buch.Size = new System.Drawing.Size(93, 15);
             this.lb_Buch.TabIndex = 19;
             this.lb_Buch.Text = "Buch gefunden:";
             // 
@@ -179,9 +213,11 @@
             // 
             this.llb_Kunde.AutoSize = true;
             this.llb_Kunde.Enabled = false;
+            this.helpProvider.SetHelpString(this.llb_Kunde, "Hier wird ihnen angezeigt, wer das aktuelle Buch ausgeliehen hat.");
             this.llb_Kunde.Location = new System.Drawing.Point(100, 75);
             this.llb_Kunde.Name = "llb_Kunde";
-            this.llb_Kunde.Size = new System.Drawing.Size(76, 13);
+            this.helpProvider.SetShowHelp(this.llb_Kunde, true);
+            this.llb_Kunde.Size = new System.Drawing.Size(86, 15);
             this.llb_Kunde.TabIndex = 3;
             this.llb_Kunde.TabStop = true;
             this.llb_Kunde.Text = "nicht verleihen";
@@ -191,44 +227,56 @@
             // 
             this.cb_Zustand.Enabled = false;
             this.cb_Zustand.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_Zustand, "Hier wird der letzte Zustand des ausgeliehen Buches angezeigt. Ändern sie diesen " +
+        "wenn sich der Zustand geändert hat.");
             this.cb_Zustand.Location = new System.Drawing.Point(103, 150);
             this.cb_Zustand.Name = "cb_Zustand";
+            this.helpProvider.SetShowHelp(this.cb_Zustand, true);
             this.cb_Zustand.Size = new System.Drawing.Size(148, 21);
             this.cb_Zustand.TabIndex = 4;
             // 
             // lb_l_Zustand
             // 
             this.lb_l_Zustand.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_l_Zustand, "Hier wird der letzte Zustand des ausgeliehen Buches angezeigt. Ändern sie diesen " +
+        "wenn sich der Zustand geändert hat.");
             this.lb_l_Zustand.Location = new System.Drawing.Point(6, 153);
             this.lb_l_Zustand.Name = "lb_l_Zustand";
-            this.lb_l_Zustand.Size = new System.Drawing.Size(80, 13);
+            this.helpProvider.SetShowHelp(this.lb_l_Zustand, true);
+            this.lb_l_Zustand.Size = new System.Drawing.Size(90, 15);
             this.lb_l_Zustand.TabIndex = 15;
             this.lb_l_Zustand.Text = "letzter Zustand:";
             // 
             // lb_AusgeliehenAm
             // 
             this.lb_AusgeliehenAm.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_AusgeliehenAm, "Hier wird ihnen angezeigt, wie lange das aktuelle Buch schon ausgeliehen ist.");
             this.lb_AusgeliehenAm.Location = new System.Drawing.Point(6, 100);
             this.lb_AusgeliehenAm.Name = "lb_AusgeliehenAm";
-            this.lb_AusgeliehenAm.Size = new System.Drawing.Size(86, 13);
+            this.helpProvider.SetShowHelp(this.lb_AusgeliehenAm, true);
+            this.lb_AusgeliehenAm.Size = new System.Drawing.Size(100, 15);
             this.lb_AusgeliehenAm.TabIndex = 10;
             this.lb_AusgeliehenAm.Text = "ausgeliehen seit:";
             // 
             // lb_Kunde
             // 
             this.lb_Kunde.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Kunde, "Hier wird ihnen angezeigt, wer das aktuelle Buch ausgeliehen hat.");
             this.lb_Kunde.Location = new System.Drawing.Point(6, 75);
             this.lb_Kunde.Name = "lb_Kunde";
-            this.lb_Kunde.Size = new System.Drawing.Size(88, 13);
+            this.helpProvider.SetShowHelp(this.lb_Kunde, true);
+            this.lb_Kunde.Size = new System.Drawing.Size(100, 15);
             this.lb_Kunde.TabIndex = 8;
             this.lb_Kunde.Text = "ausgeliehen von:";
             // 
             // lb_RueckFällig
             // 
             this.lb_RueckFällig.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_RueckFällig, "Hier wird ihnen das Rückgabedatum angezeigt.");
             this.lb_RueckFällig.Location = new System.Drawing.Point(6, 125);
             this.lb_RueckFällig.Name = "lb_RueckFällig";
-            this.lb_RueckFällig.Size = new System.Drawing.Size(84, 13);
+            this.helpProvider.SetShowHelp(this.lb_RueckFällig, true);
+            this.lb_RueckFällig.Size = new System.Drawing.Size(95, 15);
             this.lb_RueckFällig.TabIndex = 7;
             this.lb_RueckFällig.Text = "Rückgabe fällig:";
             // 
@@ -237,18 +285,9 @@
             this.lb_Verlauf.AutoSize = true;
             this.lb_Verlauf.Location = new System.Drawing.Point(6, 182);
             this.lb_Verlauf.Name = "lb_Verlauf";
-            this.lb_Verlauf.Size = new System.Drawing.Size(76, 13);
+            this.lb_Verlauf.Size = new System.Drawing.Size(86, 15);
             this.lb_Verlauf.TabIndex = 6;
             this.lb_Verlauf.Text = "Ausleihverlauf:";
-            // 
-            // picBox
-            // 
-            this.picBox.Location = new System.Drawing.Point(257, 22);
-            this.picBox.Name = "picBox";
-            this.picBox.Size = new System.Drawing.Size(167, 116);
-            this.picBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBox.TabIndex = 23;
-            this.picBox.TabStop = false;
             // 
             // w_s_rueckgabe
             // 
@@ -256,7 +295,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(495, 443);
             this.Controls.Add(this.gb_Rueck);
+            this.HelpButton = true;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "w_s_rueckgabe";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -289,6 +330,7 @@
         private System.Windows.Forms.Label lb_rueckgabe;
         private System.Windows.Forms.Label lb_ausgeliehen;
         private System.Windows.Forms.PictureBox picBox;
+        private System.Windows.Forms.HelpProvider helpProvider;
     }
 }
 

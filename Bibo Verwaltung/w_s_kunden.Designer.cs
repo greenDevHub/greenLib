@@ -395,7 +395,7 @@
             this.helpProvider.SetShowHelp(this.bt_Excel, true);
             this.bt_Excel.Size = new System.Drawing.Size(262, 23);
             this.bt_Excel.TabIndex = 41;
-            this.bt_Excel.Text = "Kunden in Exceltabelle speichern";
+            this.bt_Excel.Text = "Exportieren";
             this.bt_Excel.UseVisualStyleBackColor = true;
             this.bt_Excel.Click += new System.EventHandler(this.bt_Excel_Click);
             // 
@@ -419,6 +419,7 @@
             this.Grid_Kunde.AllowUserToResizeRows = false;
             this.Grid_Kunde.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.Grid_Kunde.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.helpProvider.SetHelpString(this.Grid_Kunde, "Hier werden all ihre Kunden angezeigt.");
             this.Grid_Kunde.Location = new System.Drawing.Point(300, 13);
             this.Grid_Kunde.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Grid_Kunde.MultiSelect = false;
@@ -427,6 +428,7 @@
             this.Grid_Kunde.RowHeadersVisible = false;
             this.Grid_Kunde.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.Grid_Kunde.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.helpProvider.SetShowHelp(this.Grid_Kunde, true);
             this.Grid_Kunde.Size = new System.Drawing.Size(578, 396);
             this.Grid_Kunde.TabIndex = 0;
             this.Grid_Kunde.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Kunde_CellDoubleClick);

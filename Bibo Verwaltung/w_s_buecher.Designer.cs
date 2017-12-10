@@ -163,7 +163,7 @@
             this.rTB_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
             this.rTB_1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.rTB_1.Location = new System.Drawing.Point(6, 369);
-            this.rTB_1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rTB_1.Margin = new System.Windows.Forms.Padding(2);
             this.rTB_1.Name = "rTB_1";
             this.rTB_1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.rTB_1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
@@ -201,9 +201,12 @@
             // checkbox_autor
             // 
             this.checkbox_autor.AutoSize = true;
+            this.helpProvider.SetHelpString(this.checkbox_autor, "Setzen sie einen Haken in dieses Feld, können sie mehrere Autoren zu einem Buch a" +
+        "ngeben.");
             this.checkbox_autor.Location = new System.Drawing.Point(95, 112);
             this.checkbox_autor.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.checkbox_autor.Name = "checkbox_autor";
+            this.helpProvider.SetShowHelp(this.checkbox_autor, true);
             this.checkbox_autor.Size = new System.Drawing.Size(15, 14);
             this.checkbox_autor.TabIndex = 51;
             this.checkbox_autor.UseVisualStyleBackColor = true;
@@ -212,8 +215,10 @@
             // lb_anzahl
             // 
             this.lb_anzahl.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_anzahl, "Tragen sie die Anzahl der Exemplare ihres Buches hier ein.");
             this.lb_anzahl.Location = new System.Drawing.Point(6, 289);
             this.lb_anzahl.Name = "lb_anzahl";
+            this.helpProvider.SetShowHelp(this.lb_anzahl, true);
             this.lb_anzahl.Size = new System.Drawing.Size(110, 15);
             this.lb_anzahl.TabIndex = 49;
             this.lb_anzahl.Text = "Anzahl Exemplare:";
@@ -221,8 +226,10 @@
             // tb_anzahl
             // 
             this.tb_anzahl.Enabled = false;
+            this.helpProvider.SetHelpString(this.tb_anzahl, "Tragen sie die Anzahl der Exemplare ihres Buches hier ein.");
             this.tb_anzahl.Location = new System.Drawing.Point(112, 286);
             this.tb_anzahl.Name = "tb_anzahl";
+            this.helpProvider.SetShowHelp(this.tb_anzahl, true);
             this.tb_anzahl.Size = new System.Drawing.Size(158, 20);
             this.tb_anzahl.TabIndex = 48;
             // 
@@ -241,8 +248,11 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.helpProvider.SetHelpString(this.pictureBox1, "Wenn sie mit ihrer Maus über dieses Vorschaubild ihres aktuellen Buches fahren, s" +
+        "ehen sie eine vergrößerte Darstellung.");
             this.pictureBox1.Location = new System.Drawing.Point(112, 310);
             this.pictureBox1.Name = "pictureBox1";
+            this.helpProvider.SetShowHelp(this.pictureBox1, true);
             this.pictureBox1.Size = new System.Drawing.Size(158, 76);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 46;
@@ -269,9 +279,11 @@
             this.lb_isbn_vorlage.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.lb_isbn_vorlage.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_isbn_vorlage.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.helpProvider.SetHelpString(this.lb_isbn_vorlage, "Tragen sie hier die ISBN-13 ein, um das gewünschte Buch zu laden.");
             this.lb_isbn_vorlage.Location = new System.Drawing.Point(113, 61);
             this.lb_isbn_vorlage.Margin = new System.Windows.Forms.Padding(0);
             this.lb_isbn_vorlage.Name = "lb_isbn_vorlage";
+            this.helpProvider.SetShowHelp(this.lb_isbn_vorlage, true);
             this.lb_isbn_vorlage.Size = new System.Drawing.Size(102, 15);
             this.lb_isbn_vorlage.TabIndex = 44;
             this.lb_isbn_vorlage.Text = "123-0123456789";
@@ -320,8 +332,10 @@
             this.cb_Autor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Autor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Autor.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_Autor, "Tragen sie den Autor ihres Buches hier ein.");
             this.cb_Autor.Location = new System.Drawing.Point(112, 109);
             this.cb_Autor.Name = "cb_Autor";
+            this.helpProvider.SetShowHelp(this.cb_Autor, true);
             this.cb_Autor.Size = new System.Drawing.Size(158, 21);
             this.cb_Autor.TabIndex = 2;
             this.cb_Autor.TextChanged += new System.EventHandler(this.cb_Autor_TextChanged);
@@ -352,25 +366,31 @@
             // 
             // dTP_Erscheinungsdatum
             // 
+            this.helpProvider.SetHelpString(this.dTP_Erscheinungsdatum, "Wählen sie das Erscheinungsdatum ihres Buches hier ein.");
             this.dTP_Erscheinungsdatum.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dTP_Erscheinungsdatum.Location = new System.Drawing.Point(112, 262);
             this.dTP_Erscheinungsdatum.Name = "dTP_Erscheinungsdatum";
+            this.helpProvider.SetShowHelp(this.dTP_Erscheinungsdatum, true);
             this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(158, 20);
             this.dTP_Erscheinungsdatum.TabIndex = 12;
             // 
             // lb_Erscheinungsdatum
             // 
             this.lb_Erscheinungsdatum.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Erscheinungsdatum, "Wählen sie das Erscheinungsdatum ihres Buches hier ein.");
             this.lb_Erscheinungsdatum.Location = new System.Drawing.Point(6, 266);
             this.lb_Erscheinungsdatum.Name = "lb_Erscheinungsdatum";
+            this.helpProvider.SetShowHelp(this.lb_Erscheinungsdatum, true);
             this.lb_Erscheinungsdatum.Size = new System.Drawing.Size(125, 15);
             this.lb_Erscheinungsdatum.TabIndex = 20;
             this.lb_Erscheinungsdatum.Text = "Erscheinungsdatum:*";
             // 
             // tb_Auflage
             // 
+            this.helpProvider.SetHelpString(this.tb_Auflage, "Tragen sie die Auflage ihres Buches hier ein.");
             this.tb_Auflage.Location = new System.Drawing.Point(112, 213);
             this.tb_Auflage.Name = "tb_Auflage";
+            this.helpProvider.SetShowHelp(this.tb_Auflage, true);
             this.tb_Auflage.Size = new System.Drawing.Size(158, 20);
             this.tb_Auflage.TabIndex = 10;
             this.tb_Auflage.TextChanged += new System.EventHandler(this.tb_Auflage_TextChanged);
@@ -378,8 +398,10 @@
             // lb_Auflage
             // 
             this.lb_Auflage.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Auflage, "Tragen sie die Auflage ihres Buches hier ein.");
             this.lb_Auflage.Location = new System.Drawing.Point(6, 215);
             this.lb_Auflage.Name = "lb_Auflage";
+            this.helpProvider.SetShowHelp(this.lb_Auflage, true);
             this.lb_Auflage.Size = new System.Drawing.Size(48, 15);
             this.lb_Auflage.TabIndex = 18;
             this.lb_Auflage.Text = "Auflage";
@@ -395,8 +417,10 @@
             // 
             // bt_Sprache_s
             // 
+            this.helpProvider.SetHelpString(this.bt_Sprache_s, "Klicken sie auf diesen Button, um neue Sprachen hinzuzufügen.");
             this.bt_Sprache_s.Location = new System.Drawing.Point(276, 188);
             this.bt_Sprache_s.Name = "bt_Sprache_s";
+            this.helpProvider.SetShowHelp(this.bt_Sprache_s, true);
             this.bt_Sprache_s.Size = new System.Drawing.Size(15, 16);
             this.bt_Sprache_s.TabIndex = 9;
             this.bt_Sprache_s.Text = "+";
@@ -408,8 +432,10 @@
             this.cb_Sprache.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Sprache.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Sprache.FormattingEnabled = true;
+            this.helpProvider.SetHelpKeyword(this.cb_Sprache, "Tragen sie die Sprache ihres Buches hier ein.");
             this.cb_Sprache.Location = new System.Drawing.Point(112, 187);
             this.cb_Sprache.Name = "cb_Sprache";
+            this.helpProvider.SetShowHelp(this.cb_Sprache, true);
             this.cb_Sprache.Size = new System.Drawing.Size(158, 21);
             this.cb_Sprache.TabIndex = 8;
             this.cb_Sprache.TextChanged += new System.EventHandler(this.cb_Sprache_TextChanged);
@@ -417,16 +443,20 @@
             // lb_Sprache
             // 
             this.lb_Sprache.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Sprache, "Tragen sie die Sprache ihres Buches hier ein.");
             this.lb_Sprache.Location = new System.Drawing.Point(6, 189);
             this.lb_Sprache.Name = "lb_Sprache";
+            this.helpProvider.SetShowHelp(this.lb_Sprache, true);
             this.lb_Sprache.Size = new System.Drawing.Size(61, 15);
             this.lb_Sprache.TabIndex = 14;
             this.lb_Sprache.Text = "Sprache:*";
             // 
             // bt_Autor_s
             // 
+            this.helpProvider.SetHelpString(this.bt_Autor_s, "Klicken sie auf diesen Button, um neue Autoren hinzuzufügen.");
             this.bt_Autor_s.Location = new System.Drawing.Point(276, 110);
             this.bt_Autor_s.Name = "bt_Autor_s";
+            this.helpProvider.SetShowHelp(this.bt_Autor_s, true);
             this.bt_Autor_s.Size = new System.Drawing.Size(15, 16);
             this.bt_Autor_s.TabIndex = 3;
             this.bt_Autor_s.Text = "+";
@@ -436,8 +466,10 @@
             // lb_Verlag
             // 
             this.lb_Verlag.AutoSize = true;
+            this.helpProvider.SetHelpKeyword(this.lb_Verlag, "Tragen sie den Verlag ihres Buches hier ein.");
             this.lb_Verlag.Location = new System.Drawing.Point(6, 137);
             this.lb_Verlag.Name = "lb_Verlag";
+            this.helpProvider.SetShowHelp(this.lb_Verlag, true);
             this.lb_Verlag.Size = new System.Drawing.Size(50, 15);
             this.lb_Verlag.TabIndex = 10;
             this.lb_Verlag.Text = "Verlag:*";
@@ -445,16 +477,20 @@
             // lb_Autor
             // 
             this.lb_Autor.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Autor, "Tragen sie den Autor ihres Buches hier ein.");
             this.lb_Autor.Location = new System.Drawing.Point(6, 111);
             this.lb_Autor.Name = "lb_Autor";
+            this.helpProvider.SetShowHelp(this.lb_Autor, true);
             this.lb_Autor.Size = new System.Drawing.Size(41, 15);
             this.lb_Autor.TabIndex = 8;
             this.lb_Autor.Text = "Autor:\'";
             // 
             // bt_Verlag_s
             // 
+            this.helpProvider.SetHelpString(this.bt_Verlag_s, "Klicken sie auf diesen Button, um neue Verläge hinzuzufügen.");
             this.bt_Verlag_s.Location = new System.Drawing.Point(276, 136);
             this.bt_Verlag_s.Name = "bt_Verlag_s";
+            this.helpProvider.SetShowHelp(this.bt_Verlag_s, true);
             this.bt_Verlag_s.Size = new System.Drawing.Size(15, 16);
             this.bt_Verlag_s.TabIndex = 5;
             this.bt_Verlag_s.Text = "+";
@@ -463,8 +499,10 @@
             // 
             // bt_Genre_s
             // 
+            this.helpProvider.SetHelpString(this.bt_Genre_s, "Klicken sie auf diesen Button, um neue Genres hinzuzufügen.");
             this.bt_Genre_s.Location = new System.Drawing.Point(276, 162);
             this.bt_Genre_s.Name = "bt_Genre_s";
+            this.helpProvider.SetShowHelp(this.bt_Genre_s, true);
             this.bt_Genre_s.Size = new System.Drawing.Size(15, 16);
             this.bt_Genre_s.TabIndex = 7;
             this.bt_Genre_s.Text = "+";
@@ -476,8 +514,10 @@
             this.cb_Verlag.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Verlag.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Verlag.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_Verlag, "Tragen sie den Verlag ihres Buches hier ein.");
             this.cb_Verlag.Location = new System.Drawing.Point(112, 135);
             this.cb_Verlag.Name = "cb_Verlag";
+            this.helpProvider.SetShowHelp(this.cb_Verlag, true);
             this.cb_Verlag.Size = new System.Drawing.Size(158, 21);
             this.cb_Verlag.TabIndex = 4;
             this.cb_Verlag.TextChanged += new System.EventHandler(this.cb_Verlag_TextChanged);
@@ -487,8 +527,10 @@
             this.cb_Genre.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Genre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Genre.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_Genre, "Tragen sie das Genre ihres Buches hier ein.");
             this.cb_Genre.Location = new System.Drawing.Point(112, 161);
             this.cb_Genre.Name = "cb_Genre";
+            this.helpProvider.SetShowHelp(this.cb_Genre, true);
             this.cb_Genre.Size = new System.Drawing.Size(158, 21);
             this.cb_Genre.TabIndex = 6;
             this.cb_Genre.TextChanged += new System.EventHandler(this.cb_Genre_TextChanged);
@@ -496,16 +538,20 @@
             // lb_Genre
             // 
             this.lb_Genre.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Genre, "Tragen sie das Genre ihres Buches hier ein.");
             this.lb_Genre.Location = new System.Drawing.Point(6, 163);
             this.lb_Genre.Name = "lb_Genre";
+            this.helpProvider.SetShowHelp(this.lb_Genre, true);
             this.lb_Genre.Size = new System.Drawing.Size(49, 15);
             this.lb_Genre.TabIndex = 5;
             this.lb_Genre.Text = "Genre:*";
             // 
             // tb_Neupreis
             // 
+            this.helpProvider.SetHelpString(this.tb_Neupreis, "Tragen sie den Neupreis ihres Buches hier ein.");
             this.tb_Neupreis.Location = new System.Drawing.Point(112, 237);
             this.tb_Neupreis.Name = "tb_Neupreis";
+            this.helpProvider.SetShowHelp(this.tb_Neupreis, true);
             this.tb_Neupreis.Size = new System.Drawing.Size(158, 20);
             this.tb_Neupreis.TabIndex = 11;
             this.tb_Neupreis.TextChanged += new System.EventHandler(this.tb_Neupreis_TextChanged);
@@ -515,16 +561,20 @@
             // lb_Neupreis
             // 
             this.lb_Neupreis.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Neupreis, "Tragen sie den Neupreis ihres Buches hier ein.");
             this.lb_Neupreis.Location = new System.Drawing.Point(6, 240);
             this.lb_Neupreis.Name = "lb_Neupreis";
+            this.helpProvider.SetShowHelp(this.lb_Neupreis, true);
             this.lb_Neupreis.Size = new System.Drawing.Size(60, 15);
             this.lb_Neupreis.TabIndex = 3;
             this.lb_Neupreis.Text = "Neupreis:";
             // 
             // tb_Titel
             // 
+            this.helpProvider.SetHelpString(this.tb_Titel, "Tragen sie den Titel ihres Buches hier ein.");
             this.tb_Titel.Location = new System.Drawing.Point(112, 85);
             this.tb_Titel.Name = "tb_Titel";
+            this.helpProvider.SetShowHelp(this.tb_Titel, true);
             this.tb_Titel.Size = new System.Drawing.Size(158, 20);
             this.tb_Titel.TabIndex = 1;
             this.tb_Titel.Click += new System.EventHandler(this.tb_Titel_Click);
@@ -533,8 +583,10 @@
             // lb_Titel
             // 
             this.lb_Titel.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Titel, "Tragen sie den Titel ihres Buches hier ein.");
             this.lb_Titel.Location = new System.Drawing.Point(6, 87);
             this.lb_Titel.Name = "lb_Titel";
+            this.helpProvider.SetShowHelp(this.lb_Titel, true);
             this.lb_Titel.Size = new System.Drawing.Size(38, 15);
             this.lb_Titel.TabIndex = 3;
             this.lb_Titel.Text = "Titel:*";
@@ -554,17 +606,22 @@
             // lb_ISBN
             // 
             this.lb_ISBN.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_ISBN, "Tragen sie hier die ISBN-13 ein, um das gewünschte Buch zu laden.");
             this.lb_ISBN.Location = new System.Drawing.Point(6, 62);
             this.lb_ISBN.Name = "lb_ISBN";
+            this.helpProvider.SetShowHelp(this.lb_ISBN, true);
             this.lb_ISBN.Size = new System.Drawing.Size(43, 15);
             this.lb_ISBN.TabIndex = 1;
             this.lb_ISBN.Text = "ISBN:*";
             // 
             // button1
             // 
+            this.helpProvider.SetHelpString(this.button1, "Wenn sie eine ISBN eingetragen haben, können sie auf diesen Stern klicken, um res" +
+        "tliche Buchinformationen automatisch ausfüllen zu lassen.");
             this.button1.Location = new System.Drawing.Point(281, 72);
             this.button1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.button1.Name = "button1";
+            this.helpProvider.SetShowHelp(this.button1, true);
             this.button1.Size = new System.Drawing.Size(16, 19);
             this.button1.TabIndex = 50;
             this.button1.Text = "*";
@@ -577,6 +634,7 @@
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox2.Location = new System.Drawing.Point(2, 13);
             this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(196, 85);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 50;
             this.pictureBox2.TabStop = false;
@@ -590,6 +648,7 @@
             this.Grid_Buch.AllowUserToResizeRows = false;
             this.Grid_Buch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.Grid_Buch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.helpProvider.SetHelpString(this.Grid_Buch, "In diesem Feld werden all ihre Bücher angezeigt.");
             this.Grid_Buch.Location = new System.Drawing.Point(308, 13);
             this.Grid_Buch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Grid_Buch.Name = "Grid_Buch";
@@ -597,6 +656,7 @@
             this.Grid_Buch.RowHeadersVisible = false;
             this.Grid_Buch.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.Grid_Buch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.helpProvider.SetShowHelp(this.Grid_Buch, true);
             this.Grid_Buch.Size = new System.Drawing.Size(572, 396);
             this.Grid_Buch.TabIndex = 0;
             this.Grid_Buch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Buch_CellDoubleClick);
@@ -622,7 +682,7 @@
             this.helpProvider.SetShowHelp(this.bt_Excel, true);
             this.bt_Excel.Size = new System.Drawing.Size(262, 23);
             this.bt_Excel.TabIndex = 1;
-            this.bt_Excel.Text = "Bücher in Exceltabelle speichern";
+            this.bt_Excel.Text = "Exportieren";
             this.bt_Excel.UseVisualStyleBackColor = true;
             this.bt_Excel.Click += new System.EventHandler(this.bt_Excel_Click);
             // 
@@ -630,9 +690,10 @@
             // 
             this.gb_zoom.Controls.Add(this.pictureBox2);
             this.gb_zoom.Location = new System.Drawing.Point(308, 13);
-            this.gb_zoom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gb_zoom.Margin = new System.Windows.Forms.Padding(2);
             this.gb_zoom.Name = "gb_zoom";
             this.gb_zoom.Padding = new System.Windows.Forms.Padding(2, 0, 2, 2);
+            this.gb_zoom.Size = new System.Drawing.Size(200, 100);
             this.gb_zoom.TabIndex = 51;
             this.gb_zoom.TabStop = false;
             // 
