@@ -321,7 +321,7 @@ CREATE TABLE [dbo].[t_s_buchid](
 	FOREIGN KEY (bu_isbn)
 		REFERENCES t_s_buecher (buch_isbn))
 
-	INSERT INTO t_s_buchid (bu_isbn, bu_zustandsid, bu_aufnahmedatum) VALUES ('978-3423715669', 1, '01.01.2017')
+	INSERT INTO t_s_buchid (bu_isbn, bu_zustandsid, bu_aufnahmedatum) VALUES ('978-3423715669', 2, '01.01.2017')
 	INSERT INTO t_s_buchid (bu_isbn, bu_zustandsid, bu_aufnahmedatum) VALUES ('978-3423715669', 3, '09.11.2012')
 	Select * from t_s_buchid
 	END
@@ -338,14 +338,38 @@ CREATE TABLE [dbo].[t_bd_ausgeliehen](
 	[aus_leihdatum] [date] NOT NULL,
 	[aus_rückgabedatum] [date] NOT NULL,
 	[aus_kundenid] [int] NOT NULL,
-	[aus_barcode] [nvarchar] (128) NOT NULL,
 	PRIMARY KEY (aus_leihnummer),
 	FOREIGN KEY (aus_buchid)
 		REFERENCES t_s_buchid (bu_id),
     FOREIGN KEY (aus_kundenid)
 	    REFERENCES t_s_kunden (kunde_id))
 
-	INSERT INTO t_bd_ausgeliehen (aus_buchid, aus_leihdatum, aus_rückgabedatum, aus_kundenid, aus_barcode) 
-	VALUES (1, '11.11.2016', '18.11.2016', 1,'233254')
+	INSERT INTO t_bd_ausgeliehen (aus_buchid, aus_leihdatum, aus_rückgabedatum, aus_kundenid) 
+	VALUES (1, '11.11.2016', '18.11.2016', 1)
 	Select * from t_bd_ausgeliehen
+	END
+
+	use Bibo_Verwaltung
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_verlauf]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_genre]
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_verlauf]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[t_s_verlauf](
+	[ver_id] [int] IDENTITY (1,1) NOT NULL,
+	[id_buch] [int] NOT NULL,
+	[k_id] [int] NOT NULL,
+	[zu_vor] [nvarchar] (128) NOT NULL,
+	[zu_nach] [nvarchar] (128) NOT NULL,
+	[aus_geliehen] [date] NOT NULL,
+	[aus_ruckgabe] [date] NOT NULL,
+	PRIMARY KEY (ver_id),
+	FOREIGN KEY (id_buch)
+		REFERENCES t_s_buchid (bu_id),
+    FOREIGN KEY (k_id)
+	    REFERENCES t_s_kunden (kunde_id))
+	INSERT INTO t_s_verlauf (id_buch, k_id, zu_vor, zu_nach, aus_geliehen, aus_ruckgabe) VALUES (1, 1, 'neuwertig', 'neuwertig', '01.01.2017', '29.01.2017')
+	INSERT INTO t_s_verlauf (id_buch, k_id, zu_vor, zu_nach, aus_geliehen, aus_ruckgabe) VALUES (2, 1, 'gut', 'gebraucht', '01.05.2017', '06.07.2017')
+	INSERT INTO t_s_verlauf (id_buch, k_id, zu_vor, zu_nach, aus_geliehen, aus_ruckgabe) VALUES (1, 1, 'neuwertig', 'gut', '01.03.2017', '01.10.2017')
+	Select * from t_s_verlauf
 	END
