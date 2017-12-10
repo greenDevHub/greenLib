@@ -84,6 +84,7 @@ namespace Bibo_Verwaltung
             }
             con.Close();
         }
+
         private void ClearDS()
         {
             ds.Tables[0].Clear();
@@ -97,6 +98,7 @@ namespace Bibo_Verwaltung
             grid.Columns[ds.Tables[0].Columns.IndexOf("Autor")].DisplayIndex = 3;
             grid.Columns[ds.Tables[0].Columns.IndexOf("AutorlisteID")].Visible = false;
         }
+
         public int GetColumnIndexByName(DataGridView grid, string name)
         {
             for (int i = 0; i < grid.Columns.Count; i++)
@@ -106,9 +108,7 @@ namespace Bibo_Verwaltung
                     return i;
                 }
             }
-
             return -1;
-
         }
         #endregion
 
@@ -127,6 +127,7 @@ namespace Bibo_Verwaltung
             cmd.ExecuteNonQuery();
             con.Close();
         }
+
         #region Buch ausleihen/zurueckgeben
         public bool Pruefe_Ausgeliehen(string buch_id)
         {

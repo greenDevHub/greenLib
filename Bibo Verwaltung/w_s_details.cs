@@ -86,7 +86,6 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
-
             if (!combo_Autor.Text.Equals(""))
             {
                 for (int i = 0; i < gv_Details.RowCount; i++)
@@ -103,7 +102,6 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
-
             if (!combo_Genre.Text.Equals(""))
             {
                 for (int i = 0; i < gv_Details.RowCount; i++)
@@ -120,7 +118,6 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
-
             if (!combo_Verlag.Text.Equals(""))
             {
                 for (int i = 0; i < gv_Details.RowCount; i++)
@@ -184,8 +181,6 @@ namespace Bibo_Verwaltung
             Buch_Suchen();
         }
 
-        
-
         private void bt_Clear_Click(object sender, EventArgs e)
         {
             tb_s_Titel.Text = "";
@@ -194,40 +189,56 @@ namespace Bibo_Verwaltung
             combo_Verlag.Text = "";
             Buch_Suchen();
         }
+
+        private void tb_nachname_TextChanged(object sender, EventArgs e)
+        {
+            Buch_Suchen();
+        }
+
+        private void tb_vorname_TextChanged(object sender, EventArgs e)
+        {
+            Buch_Suchen();
+        }
+
+        private void tb_ISBN_TextChanged(object sender, EventArgs e)
+        {
+            Buch_Suchen();
+        }
+
+        static int _checksum_ean8(String data)
+        {
+            // Test string for correct length
+            if (data.Length != 7 && data.Length != 8)
+                return -1;
+            // Test string for being numeric
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (data[i] < 0x30 || data[i] > 0x39)
+                    return -1;
+            }
+            int sum = 0;
+            for (int i = 6; i >= 0; i--)
+            {
+                int digit = data[i] - 0x30;
+                if ((i & 0x01) == 1)
+                    sum += digit;
+                else
+                    sum += digit * 3;
+            }
+            int mod = sum % 10;
+            return mod == 0 ? 0 : 10 - mod;
+        }
         #endregion
 
-
-        #region Gridview-Click
-        //private void Grid_Buecher_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    if (e.RowIndex >= 0)
-        //    {
-        //        DataGridViewRow row = this.gv_Details.Rows[e.RowIndex];
-
-        //        tb_BuchID.Text = row.Cells[0].Value.ToString();
-        //        tb_Buch.Text = row.Cells[5].Value.ToString();
-        //        tb_Kunde.Text = row.Cells[30].Value.ToString() + " " + row.Cells[31].Value.ToString();
-        //        tb_KID.Text = row.Cells[29].Value.ToString();
-        //        //Kunde k = new Kunde(tb_KundenID.Text);
-        //        //tb_Vorname.Text = k.Vorname;
-        //        //tb_Nachname.Text = k.Nachname;
-        //        //tb_Strasse.Text = k.Strasse;
-        //        //tb_Hausnummer.Text = k.Hausnummer;
-        //        //tb_Postleitzahl.Text = k.Postleitzahl;
-        //        //tb_Ort.Text = k.Ort;
-        //        //tb_Klasse.Text = k.Klasse;
-        //        //tb_Mail.Text = k.Mail;
-        //        //tb_Telefonnummer.Text = k.Telefonnummer;
-        //        //cb_Vertrauenswuerdigkeit.Text = k.Vertrauenswuerdigkeit;
-
-        //    }
-        //}
-        #endregion
-
-        //Robert fragen
         #region Ein- und Ausblenden von Verfügbarkeit und Kundeninformationen
         private void Verfuegbarkeit_Einblenden()
         {
+            foreach (DataGridViewRow row in gv_Details.Rows)
+                if (row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString() != "")
+                {
+                    row.DefaultCellStyle.BackColor = Color.Yellow;
+                }
+
             if (cb_Ferfügbark_Anz.Checked == true)
             {
                 cb_KundeAnz.Checked = false;
@@ -257,7 +268,7 @@ namespace Bibo_Verwaltung
         {
             if (cb_KundeAnz.Checked == true)
             {
-                gv_Details.Columns[details.GetColumnIndexByName(gv_Details,"Vorname")].Visible = true;
+                gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Vorname")].Visible = true;
                 gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Nachname")].Visible = true;
                 gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Klasse")].Visible = true;
                 gv_Details.Columns[details.GetColumnIndexByName(gv_Details, "Kunden ID")].Visible = true;
@@ -265,7 +276,6 @@ namespace Bibo_Verwaltung
                 tb_vorname.Enabled = true;
                 lb_vorname.Visible = true;
                 lb_nachname.Visible = true;
-
             }
             else if (cb_KundeAnz.Checked == false)
             {
@@ -312,7 +322,7 @@ namespace Bibo_Verwaltung
                 if (row_index >= 0 && row_index <= this.gv_Details.RowCount)
                 {
                     DataGridViewRow row = this.gv_Details.CurrentRow;
-                    if(row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString().Equals("") || row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString() == null)
+                    if (row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString().Equals("") || row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString() == null)
                     {
                         try
                         {
@@ -354,8 +364,7 @@ namespace Bibo_Verwaltung
                             tb_verleihfaehigAusleihen.Text = "";
                             dateTimePickerAusleihen.ResetText();
                             bt_Abschliessen.Enabled = false;
-                            MessageBox.Show("Der Auslehvorgang konnte nicht gestartet werden!", "Error",
-                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Der Auslehvorgang konnte nicht gestartet werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
@@ -363,13 +372,12 @@ namespace Bibo_Verwaltung
                         MessageBox.Show("Dieses Buch wurde bereits ausgeliehen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Ausleihen_Abbrechen(false);
                     }
-                    
+
                 }
             }
             else
             {
-                MessageBox.Show("Es wurde kein Buch ausgewählt!", "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Es wurde kein Buch ausgewählt!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -386,10 +394,8 @@ namespace Bibo_Verwaltung
                     int kunden_id = Convert.ToInt32(tb_KundenIDAusleihen.Text);
 
                     details.Ausleihen(buch_id, aus_datum, rück_datum, kunden_id);
-                    //drucken
 
-                    MessageBox.Show("Das Buch wurde erfolgreich an: '" + tb_KundeAusleihen.Text + "' ausgeliehen!", "Information",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Das Buch wurde erfolgreich an: '" + tb_KundeAusleihen.Text + "' ausgeliehen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     tb_BuchIDAusleihen.Text = "";
                     tb_KundenIDAusleihen.Text = "";
                     tb_BuchAusleihen.Text = "";
@@ -401,11 +407,11 @@ namespace Bibo_Verwaltung
                     bt_Ausleihen.Enabled = true;
                     bt_AbbrechenAusleihen.Enabled = false;
                     details.FillGrid(ref gv_Details);
+                    Verfuegbarkeit_Einblenden();
                 }
                 else
                 {
-                    MessageBox.Show("Das Buch wurde bereits ausgeliehen!", "Information",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Das Buch wurde bereits ausgeliehen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     tb_BuchIDAusleihen.Text = "";
                     tb_KundenIDAusleihen.Text = "";
                     tb_BuchAusleihen.Text = "";
@@ -424,71 +430,6 @@ namespace Bibo_Verwaltung
                            MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        #endregion
-
-        #region Buch-Rückgabe
-        private void bt_Rueckgabe_Click(object sender, EventArgs e)
-        {
-            Form Rueckgabe = new w_s_rueckgabe();
-            Rueckgabe.ShowDialog(this);
-            //if (tb_BuchIDAusleihen.Text != "") //&& gv_Details.CurrentRow.Cells[29].Value.ToString() != ""
-            //{
-            //    int row_index = gv_Details.CurrentRow.Index;
-            //    if (row_index >= 0 && row_index <= gv_Details.RowCount)
-            //    {
-            //        DataGridViewRow row = this.gv_Details.CurrentRow;
-            //        if (!row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString().Equals("") && row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString() != null)
-            //        {
-            //            string buch_titel = row.Cells[details.GetColumnIndexByName(gv_Details, "Titel")].Value.ToString();
-            //            string kunde = row.Cells[details.GetColumnIndexByName(gv_Details, "Vorname")].Value.ToString() + " " + row.Cells[details.GetColumnIndexByName(gv_Details, "Nachname")].Value.ToString();
-
-            //            DialogResult dialogResult = MessageBox.Show("Möchten Sie das Buch: '" + buch_titel
-            //                + "', ausgeliehen von: '" + kunde + "' wirklich als zurückgegeben markieren?", "Achtung",
-            //                MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            //            if (dialogResult == DialogResult.OK)
-            //            {
-            //                try
-            //                {
-            //                    details.Buch_Rueckgabe(tb_BuchIDAusleihen.Text);
-            //                    details.FillGrid(ref gv_Details);
-            //                    MessageBox.Show("Das Buch wurde erfolgreich zurückgeben!", "Information",
-            //                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //                }
-            //                catch
-            //                {
-            //                    MessageBox.Show("Es ist ein Fehler aufgetreten. Das Buch konnte nicht zurückgeben werden!", "Fehler",
-            //                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //                }
-            //            }
-
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("Dieses Buch wurde an niemanden ausgeliehen. Deshalb kann es nicht zurückgegeben werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //        }
-
-                    
-            //    }
-            //}
-            //else
-            //{
-            //    if(gv_Details.CurrentRow != null)
-            //    {
-            //        string buch_id = gv_Details.CurrentRow.Cells[details.GetColumnIndexByName(gv_Details,"Buch-ID")].Value.ToString();
-            //        tb_BuchIDAusleihen.Text = buch_id;
-            //        bt_Rueckgabe_Click(bt_Rueckgabe, e);
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Es wurde kein Buch ausgewählt!", "Error",
-            //                MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-            //    //MessageBox.Show("Wählen Sie ein Buch zur Rückgabe aus!", "Information",
-            //    //    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-        }
-        #endregion
 
         private void Ausleihen_Abbrechen(bool a)
         {
@@ -529,54 +470,20 @@ namespace Bibo_Verwaltung
                 tb_verleihfaehigAusleihen.Text = "Ja (verleihfähig)";
             }
         }
+        #endregion
 
-        private void tb_nachname_TextChanged(object sender, EventArgs e)
+        #region Buch-Rückgabe
+        private void bt_Rueckgabe_Click(object sender, EventArgs e)
         {
-            Buch_Suchen();
+            Form Rueckgabe = new w_s_rueckgabe();
+            Rueckgabe.ShowDialog(this);
         }
-        private void tb_vorname_TextChanged(object sender, EventArgs e)
-        {
-            Buch_Suchen();
-        }
+        #endregion
 
-        private void tb_ISBN_TextChanged(object sender, EventArgs e)
-        {
-            Buch_Suchen();
-        }
-
-        static int _checksum_ean8(String data)
-        {
-            // Test string for correct length
-            if (data.Length != 7 && data.Length != 8)
-                return -1;
-
-            // Test string for being numeric
-            for (int i = 0; i < data.Length; i++)
-            {
-                if (data[i] < 0x30 || data[i] > 0x39)
-                    return -1;
-            }
-
-            int sum = 0;
-
-            for (int i = 6; i >= 0; i--)
-            {
-                int digit = data[i] - 0x30;
-                if ((i & 0x01) == 1)
-                    sum += digit;
-                else
-                    sum += digit * 3;
-            }
-            int mod = sum % 10;
-            return mod == 0 ? 0 : 10 - mod;
-        }
-
-
-
-        #region Events yeaaah
+        #region Events für Such-Komponenten
         private void tb_ID_TextChanged(object sender, EventArgs e)
         {
-            if(tb_ID.Text.Length == 8)
+            if (tb_ID.Text.Length == 8)
             {
                 string seven = tb_ID.Text.Substring(0, 7);
                 string eight = tb_ID.Text.Substring(7, 1);
@@ -589,7 +496,6 @@ namespace Bibo_Verwaltung
             {
                 try
                 {
-
                     tb_ID.Text = int.Parse(tb_ID.Text).ToString();
                 }
                 catch
@@ -599,6 +505,7 @@ namespace Bibo_Verwaltung
             }
             Buch_Suchen();
         }
+
         private void tb_ISBN_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '-'))
@@ -616,6 +523,7 @@ namespace Bibo_Verwaltung
                 e.Handled = true;
             }
         }
+
         private void lb_id_Click(object sender, EventArgs e)
         {
             tb_ID.Focus();
@@ -768,5 +676,15 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
+
+        private void w_s_details_Activated(object sender, EventArgs e)
+        {
+            details.FillGrid(ref gv_Details);
+            foreach (DataGridViewRow row in gv_Details.Rows)
+                if (row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString() != "")
+                {
+                    row.DefaultCellStyle.BackColor = Color.Yellow;
+                }
+        }
     }
 }

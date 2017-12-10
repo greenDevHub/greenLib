@@ -121,9 +121,9 @@ namespace Bibo_Verwaltung
             dr.Close();
             // Verbindung schließen 
             con.Close();
-
         }
         #endregion
+
         #region Fill Object
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
@@ -140,13 +140,13 @@ namespace Bibo_Verwaltung
             adapter.Fill(ds);
 
             con.Close();
-
         }
 
         private void ClearDS()
         {
             ds.Tables[0].Rows.Clear();
         }
+
         public void FillGrid(ref DataGridView grid, object value = null)
         {
             ClearDS();
@@ -240,8 +240,6 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
-
-
     }
 }
 

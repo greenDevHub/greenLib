@@ -179,7 +179,7 @@ namespace Bibo_Verwaltung
 
         private void bt_Rueckgabe_Click(object sender, EventArgs e)
         {
-            if (llb_Kunde.Text != "keine Treffer")
+            if (llb_Kunde.Text != "keine Treffer" && tb_BuchCode.Text != "")
             {
                 DialogResult dialogResult = MessageBox.Show("Möchten Sie das Buch: '" + llb_Buch.Text + "', ausgeliehen von: '" + llb_Kunde.Text + "' wirklich als zurückgegeben markieren?", "Achtung",
                             MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -206,8 +206,6 @@ namespace Bibo_Verwaltung
                     Zustand zust = new Zustand();
                     zust.GetID(zu_nach_global);
                     string zu_nach_id_global = zust.ZustandID;
-                    //if (llb_Kunde.Text != "keine Treffer")
-                    //{
                     ruck.Buch_Rueckgabe(buch_id_global, k_id_global, zu_vor_global, zu_nach_id_global, zu_nach_global, ausgeliehen_global, ruckgabe_global);
                     MessageBox.Show("Dieses Buch wurde erfolgreich zurückgegeben!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Clear_All();
