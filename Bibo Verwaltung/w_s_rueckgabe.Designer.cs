@@ -45,10 +45,10 @@
             this.lb_Kunde = new System.Windows.Forms.Label();
             this.lb_RueckFällig = new System.Windows.Forms.Label();
             this.lb_Verlauf = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Verlauf)).BeginInit();
             this.gb_Rueck.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_Rueckgabe
@@ -109,7 +109,7 @@
             // 
             // gb_Rueck
             // 
-            this.gb_Rueck.Controls.Add(this.pictureBox1);
+            this.gb_Rueck.Controls.Add(this.picBox);
             this.gb_Rueck.Controls.Add(this.lb_rueckgabe);
             this.gb_Rueck.Controls.Add(this.bt_Rueckgabe);
             this.gb_Rueck.Controls.Add(this.lb_ausgeliehen);
@@ -238,14 +238,14 @@
             this.lb_Verlauf.TabIndex = 6;
             this.lb_Verlauf.Text = "Ausleihverlauf:";
             // 
-            // pictureBox1
+            // picBox
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(257, 22);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(167, 116);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 23;
-            this.pictureBox1.TabStop = false;
+            this.picBox.Location = new System.Drawing.Point(257, 22);
+            this.picBox.Name = "picBox";
+            this.picBox.Size = new System.Drawing.Size(167, 116);
+            this.picBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBox.TabIndex = 23;
+            this.picBox.TabStop = false;
             // 
             // w_s_rueckgabe
             // 
@@ -262,7 +262,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_Verlauf)).EndInit();
             this.gb_Rueck.ResumeLayout(false);
             this.gb_Rueck.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -286,7 +286,7 @@
         private System.Windows.Forms.Label lb_Buch;
         private System.Windows.Forms.Label lb_rueckgabe;
         private System.Windows.Forms.Label lb_ausgeliehen;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picBox;
     }
 }
 

@@ -48,35 +48,23 @@ namespace Bibo_Verwaltung
                     }
                     buch_id_global = buchid.ID;
 
-
-
-
-
-
-
-
-
-
-
-
-
                     if (buch.Image != null)
                     {
                         try
                         {
                             MemoryStream mem = new MemoryStream(buch.Image);
-                            pictureBox1.Image = Image.FromStream(mem);
+                            picBox.Image = Image.FromStream(mem);
                             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Bilder\\" + buch.ISBN + ".png";
                             if (!File.Exists(filePath))
                             {
-                                pictureBox1.Image.Save(filePath, ImageFormat.Png);
-                                pictureBox1.ImageLocation = filePath;
+                                picBox.Image.Save(filePath, ImageFormat.Png);
+                                picBox.ImageLocation = filePath;
                             }
                             else
                             {
                                 Delete_picture(filePath);
-                                pictureBox1.Image.Save(filePath, ImageFormat.Png);
-                                pictureBox1.ImageLocation = filePath;
+                                picBox.Image.Save(filePath, ImageFormat.Png);
+                                picBox.ImageLocation = filePath;
                             }
                         }
                         catch
@@ -89,7 +77,7 @@ namespace Bibo_Verwaltung
                         {
                             try
                             {
-                                pictureBox1.ImageLocation = buch.BildPfad;
+                                picBox.ImageLocation = buch.BildPfad;
                             }
                             catch
                             {
@@ -98,23 +86,10 @@ namespace Bibo_Verwaltung
                         }
                         else
                         {
-                            pictureBox1.Image = null;
-                            pictureBox1.ImageLocation = null;
+                            picBox.Image = null;
+                            picBox.ImageLocation = null;
                         }
                     }
-
-
-
-
-
-
-
-
-
-
-
-
-
                     cb_Zustand.SelectedValue = buchid.Zustand.ZustandID;
                     zu_vor_global = buchid.Zustand.Zustandname;
                     zu_nach_global = buchid.Zustand.Zustandname;
@@ -177,6 +152,10 @@ namespace Bibo_Verwaltung
             lb_rueckgabe.Text = "nicht verfügbar";
             cb_Zustand.SelectedValue = -1;
             lb_rueckgabe.ForeColor = Color.Black;
+            picBox.Image = null;
+            gv_Verlauf.DataSource = null;
+            gv_Verlauf.Update();
+            tb_BuchCode.Text = "";
         }
 
         private void Delete_picture(string location)
@@ -185,7 +164,6 @@ namespace Bibo_Verwaltung
             {
                 File.Delete(location);
             }
-
         }
 
         private void llb_Buch_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -202,33 +180,43 @@ namespace Bibo_Verwaltung
 
         private void bt_Rueckgabe_Click(object sender, EventArgs e)
         {
-            if (bt_Zu_aendern.Text == "Übernehmen")
-            {
-                DialogResult dr = MessageBox.Show("Möchten Sie die Zustandsänderung übernehmen?", "Achtung", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                if (dr == DialogResult.Yes)
-                {
-                    zu_nach_global = cb_Zustand.Text;
-                    cb_Zustand.Enabled = false;
-                    bt_Zu_aendern.Text = "Ändern";
-                }
-                else
-                {
-                    zu_nach_global = zu_vor_global;
-                    cb_Zustand.Enabled = false;
-                    bt_Zu_aendern.Text = "Ändern";
-                }
-            }
-            Rueckgabe ruck = new Rueckgabe();
-            Zustand zust = new Zustand();
-            zust.GetID(zu_nach_global);
-            string zu_nach_id_global = zust.ZustandID;
             if (llb_Kunde.Text != "keine Treffer")
             {
-                ruck.Buch_Rueckgabe(buch_id_global, k_id_global, zu_vor_global, zu_nach_id_global, zu_nach_global, ausgeliehen_global, ruckgabe_global);
+                DialogResult dialogResult = MessageBox.Show("Möchten Sie das Buch: '" + llb_Buch.Text + "', ausgeliehen von: '" + llb_Kunde.Text + "' wirklich als zurückgegeben markieren?", "Achtung",
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+                if (dialogResult == DialogResult.OK)
+                {
+                    if (bt_Zu_aendern.Text == "Übernehmen")
+                    {
+                        DialogResult dr = MessageBox.Show("Möchten Sie die Zustandsänderung übernehmen?", "Achtung", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                        if (dr == DialogResult.Yes)
+                        {
+                            zu_nach_global = cb_Zustand.Text;
+                            cb_Zustand.Enabled = false;
+                            bt_Zu_aendern.Text = "Ändern";
+                        }
+                        else
+                        {
+                            zu_nach_global = zu_vor_global;
+                            cb_Zustand.Enabled = false;
+                            bt_Zu_aendern.Text = "Ändern";
+                        }
+                    }
+                    Rueckgabe ruck = new Rueckgabe();
+                    Zustand zust = new Zustand();
+                    zust.GetID(zu_nach_global);
+                    string zu_nach_id_global = zust.ZustandID;
+                    //if (llb_Kunde.Text != "keine Treffer")
+                    //{
+                    ruck.Buch_Rueckgabe(buch_id_global, k_id_global, zu_vor_global, zu_nach_id_global, zu_nach_global, ausgeliehen_global, ruckgabe_global);
+                    MessageBox.Show("Dieses Buch wurde erfolgreich zurückgegeben!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Clear_All();
+                }
             }
             else
             {
-                MessageBox.Show("Dieses Buch wurde nicht verliehen. ES kann nicht zurückgegeben werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Dieses Buch wurde nicht verliehen. Es kann nicht zurückgegeben werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
