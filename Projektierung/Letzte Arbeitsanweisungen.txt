@@ -7,12 +7,10 @@
 - Tooltips für nicht selbserklärende Sachen --> Erik
 
 - Löschen eines verliehenen Buches verhindern/nachfragen --> Laurenz
-- doppeltes Hinzufügen von Autoren beim automatischen Laden --> Laurenz
-- Überarbeiten des Barcode-Scanner-Vorgangs --> Laurenz
+(- doppeltes Hinzufügen von Autoren beim automatischen Laden --> Laurenz)
 
-- verliehene Bücher offensichtlicher machen --> Robert
-- Vergleich des Zustandes nach der Rückgabe (in einem Protokoll) --> Robert
-- Verlauf ausgeliehener Bücher (neue Tabelle in Datenbank) --> Robert
-- Checkboxen für die Suche in Ausleih-Form entfernen --> Robert
-- mehr Information über das ausgeliehene Buch und den Kunden bei der Rückgabe (auch veränderbar) --> Robert
+
+- Reihenfolge der Spalten anpassen--> Robert
+- Bug bei Buchrückgabe beheben --> Robert
+
 
