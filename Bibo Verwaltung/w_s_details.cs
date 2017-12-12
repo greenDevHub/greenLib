@@ -233,12 +233,6 @@ namespace Bibo_Verwaltung
         #region Ein- und Ausblenden von Verfügbarkeit und Kundeninformationen
         private void Verfuegbarkeit_Einblenden()
         {
-            foreach (DataGridViewRow row in gv_Details.Rows)
-                if (row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString() != "")
-                {
-                    row.DefaultCellStyle.BackColor = Color.Yellow;
-                }
-
             if (cb_Ferfügbark_Anz.Checked == true)
             {
                 cb_KundeAnz.Checked = false;
@@ -679,11 +673,74 @@ namespace Bibo_Verwaltung
 
         private void w_s_details_Activated(object sender, EventArgs e)
         {
+            Markierung();
+        }
+
+        private void combo_Autor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!combo_Autor.Text.Equals(""))
+            {
+                lb_autor.Visible = false;
+            }
+            else
+            {
+                lb_autor.Visible = true;
+            }
+        }
+
+        private void combo_Genre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!combo_Genre.Text.Equals(""))
+            {
+                lb_Genre.Visible = false;
+            }
+            else
+            {
+                lb_Genre.Visible = true;
+            }
+        }
+
+        private void combo_Verlag_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!combo_Verlag.Text.Equals(""))
+            {
+                lb_verlag.Visible = false;
+            }
+            else
+            {
+                lb_verlag.Visible = true;
+            }
+        }
+
+        private void gv_Details_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Markierung()
+        {
             details.FillGrid(ref gv_Details);
             foreach (DataGridViewRow row in gv_Details.Rows)
                 if (row.Cells[details.GetColumnIndexByName(gv_Details, "Leihnummer")].Value.ToString() != "")
                 {
-                    row.DefaultCellStyle.BackColor = Color.Yellow;
+                    string date = row.Cells[details.GetColumnIndexByName(gv_Details, "Rückgabedatum")].Value.ToString();
+                    DateTime dt = new DateTime();
+                    dt = DateTime.Parse(date);
+                    dt.ToShortDateString();
+                    DateTime now = new DateTime();
+                    now = DateTime.Today;
+                    if (dt < now)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Red;
+                    }
+                    else if (dt == now)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Yellow;
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LimeGreen;
+                    }
                 }
         }
     }

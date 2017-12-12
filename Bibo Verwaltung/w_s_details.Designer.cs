@@ -68,9 +68,11 @@
             this.bt_Rueckgabe = new System.Windows.Forms.Button();
             this.bt_AbbrechenAusleihen = new System.Windows.Forms.Button();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Details)).BeginInit();
             this.cb_Ausleihen.SuspendLayout();
             this.gb_Suchen.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // gv_Details
@@ -84,25 +86,27 @@
             this.gv_Details.Cursor = System.Windows.Forms.Cursors.Default;
             this.helpProvider.SetHelpString(this.gv_Details, "In diesem Feld werden all ihre Bücher und evtl. vorhandene Ausleihvorgänge angeze" +
         "igt.");
-            this.gv_Details.Location = new System.Drawing.Point(12, 85);
+            this.gv_Details.Location = new System.Drawing.Point(12, 89);
             this.gv_Details.MultiSelect = false;
             this.gv_Details.Name = "gv_Details";
             this.gv_Details.ReadOnly = true;
+            this.gv_Details.RowHeadersWidth = 35;
             this.gv_Details.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv_Details.ShowEditingIcon = false;
             this.helpProvider.SetShowHelp(this.gv_Details, true);
-            this.gv_Details.Size = new System.Drawing.Size(1166, 277);
+            this.gv_Details.Size = new System.Drawing.Size(1000, 273);
             this.gv_Details.TabIndex = 0;
+            this.gv_Details.Paint += new System.Windows.Forms.PaintEventHandler(this.gv_Details_Paint);
             // 
             // cb_KundeAnz
             // 
             this.cb_KundeAnz.AutoSize = true;
             this.helpProvider.SetHelpString(this.cb_KundeAnz, "Setzen sie einen Haken in dieses Feld, werden ihnen im obenliegenden Feld Kundeni" +
         "nformationen bei ausgeliehenen Büchern angezeigt.");
-            this.cb_KundeAnz.Location = new System.Drawing.Point(998, 368);
+            this.cb_KundeAnz.Location = new System.Drawing.Point(831, 368);
             this.cb_KundeAnz.Name = "cb_KundeAnz";
             this.helpProvider.SetShowHelp(this.cb_KundeAnz, true);
-            this.cb_KundeAnz.Size = new System.Drawing.Size(210, 19);
+            this.cb_KundeAnz.Size = new System.Drawing.Size(181, 17);
             this.cb_KundeAnz.TabIndex = 1;
             this.cb_KundeAnz.Text = "Kundeninformationen einblenden";
             this.cb_KundeAnz.UseVisualStyleBackColor = true;
@@ -113,10 +117,10 @@
             this.cb_Ferfügbark_Anz.AutoSize = true;
             this.helpProvider.SetHelpString(this.cb_Ferfügbark_Anz, "Setzen sie einen Haken in dieses Feld, werden ihnen nur Bücher angezeigt, welche " +
         "verliehen werden können.");
-            this.cb_Ferfügbark_Anz.Location = new System.Drawing.Point(792, 368);
+            this.cb_Ferfügbark_Anz.Location = new System.Drawing.Point(624, 368);
             this.cb_Ferfügbark_Anz.Name = "cb_Ferfügbark_Anz";
             this.helpProvider.SetShowHelp(this.cb_Ferfügbark_Anz, true);
-            this.cb_Ferfügbark_Anz.Size = new System.Drawing.Size(230, 19);
+            this.cb_Ferfügbark_Anz.Size = new System.Drawing.Size(201, 17);
             this.cb_Ferfügbark_Anz.TabIndex = 2;
             this.cb_Ferfügbark_Anz.Text = "Nur verleihbereite Bücher einblenden";
             this.cb_Ferfügbark_Anz.UseVisualStyleBackColor = true;
@@ -124,13 +128,14 @@
             // 
             // dateTimePickerAusleihen
             // 
-            this.dateTimePickerAusleihen.Location = new System.Drawing.Point(129, 146);
+            this.dateTimePickerAusleihen.Location = new System.Drawing.Point(129, 126);
             this.dateTimePickerAusleihen.Name = "dateTimePickerAusleihen";
             this.dateTimePickerAusleihen.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerAusleihen.TabIndex = 3;
             // 
             // cb_Ausleihen
             // 
+            this.cb_Ausleihen.Controls.Add(this.pictureBox1);
             this.cb_Ausleihen.Controls.Add(this.lb_verleihfaehig);
             this.cb_Ausleihen.Controls.Add(this.tb_verleihfaehigAusleihen);
             this.cb_Ausleihen.Controls.Add(this.lb_Zustand);
@@ -146,7 +151,7 @@
             this.cb_Ausleihen.Controls.Add(this.dateTimePickerAusleihen);
             this.cb_Ausleihen.Location = new System.Drawing.Point(12, 397);
             this.cb_Ausleihen.Name = "cb_Ausleihen";
-            this.cb_Ausleihen.Size = new System.Drawing.Size(1166, 202);
+            this.cb_Ausleihen.Size = new System.Drawing.Size(1000, 202);
             this.cb_Ausleihen.TabIndex = 5;
             this.cb_Ausleihen.TabStop = false;
             this.cb_Ausleihen.Text = "Buch ausleihen:";
@@ -156,7 +161,7 @@
             this.lb_verleihfaehig.AutoSize = true;
             this.lb_verleihfaehig.Location = new System.Drawing.Point(6, 77);
             this.lb_verleihfaehig.Name = "lb_verleihfaehig";
-            this.lb_verleihfaehig.Size = new System.Drawing.Size(75, 15);
+            this.lb_verleihfaehig.Size = new System.Drawing.Size(65, 13);
             this.lb_verleihfaehig.TabIndex = 16;
             this.lb_verleihfaehig.Text = "Verleihfähig:";
             // 
@@ -174,7 +179,7 @@
             this.lb_Zustand.AutoSize = true;
             this.lb_Zustand.Location = new System.Drawing.Point(6, 51);
             this.lb_Zustand.Name = "lb_Zustand";
-            this.lb_Zustand.Size = new System.Drawing.Size(54, 15);
+            this.lb_Zustand.Size = new System.Drawing.Size(49, 13);
             this.lb_Zustand.TabIndex = 14;
             this.lb_Zustand.Text = "Zustand:";
             // 
@@ -202,9 +207,9 @@
             // bt_Abschliessen
             // 
             this.bt_Abschliessen.Enabled = false;
-            this.bt_Abschliessen.Location = new System.Drawing.Point(1010, 139);
+            this.bt_Abschliessen.Location = new System.Drawing.Point(147, 170);
             this.bt_Abschliessen.Name = "bt_Abschliessen";
-            this.bt_Abschliessen.Size = new System.Drawing.Size(150, 52);
+            this.bt_Abschliessen.Size = new System.Drawing.Size(182, 26);
             this.bt_Abschliessen.TabIndex = 11;
             this.bt_Abschliessen.Text = "Ausleihvorgang abschließen";
             this.bt_Abschliessen.UseVisualStyleBackColor = true;
@@ -215,7 +220,7 @@
             this.lb_Kunde.AutoSize = true;
             this.lb_Kunde.Location = new System.Drawing.Point(6, 103);
             this.lb_Kunde.Name = "lb_Kunde";
-            this.lb_Kunde.Size = new System.Drawing.Size(46, 15);
+            this.lb_Kunde.Size = new System.Drawing.Size(41, 13);
             this.lb_Kunde.TabIndex = 10;
             this.lb_Kunde.Text = "Kunde:";
             // 
@@ -231,9 +236,9 @@
             // lb_Rück
             // 
             this.lb_Rück.AutoSize = true;
-            this.lb_Rück.Location = new System.Drawing.Point(7, 149);
+            this.lb_Rück.Location = new System.Drawing.Point(7, 129);
             this.lb_Rück.Name = "lb_Rück";
-            this.lb_Rück.Size = new System.Drawing.Size(101, 15);
+            this.lb_Rück.Size = new System.Drawing.Size(89, 13);
             this.lb_Rück.TabIndex = 8;
             this.lb_Rück.Text = "Rückgabedatum:";
             // 
@@ -242,7 +247,7 @@
             this.lb_Buch.AutoSize = true;
             this.lb_Buch.Location = new System.Drawing.Point(6, 25);
             this.lb_Buch.Name = "lb_Buch";
-            this.lb_Buch.Size = new System.Drawing.Size(38, 15);
+            this.lb_Buch.Size = new System.Drawing.Size(35, 13);
             this.lb_Buch.TabIndex = 7;
             this.lb_Buch.Text = "Buch:";
             // 
@@ -302,7 +307,7 @@
             this.gb_Suchen.Location = new System.Drawing.Point(12, 11);
             this.gb_Suchen.Name = "gb_Suchen";
             this.helpProvider.SetShowHelp(this.gb_Suchen, true);
-            this.gb_Suchen.Size = new System.Drawing.Size(1166, 69);
+            this.gb_Suchen.Size = new System.Drawing.Size(1000, 72);
             this.gb_Suchen.TabIndex = 13;
             this.gb_Suchen.TabStop = false;
             this.gb_Suchen.Text = "Suchen nach:";
@@ -315,11 +320,11 @@
             this.lb_nachname.ForeColor = System.Drawing.Color.Gray;
             this.helpProvider.SetHelpString(this.lb_nachname, "Tragen sie hier den Nachnamen des gesuchten Kunden ein, welcher einen Ausleihvorg" +
         "ang getätigt hat.");
-            this.lb_nachname.Location = new System.Drawing.Point(793, 44);
+            this.lb_nachname.Location = new System.Drawing.Point(652, 48);
             this.lb_nachname.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_nachname.Name = "lb_nachname";
             this.helpProvider.SetShowHelp(this.lb_nachname, true);
-            this.lb_nachname.Size = new System.Drawing.Size(68, 15);
+            this.lb_nachname.Size = new System.Drawing.Size(59, 13);
             this.lb_nachname.TabIndex = 44;
             this.lb_nachname.Text = "Nachname";
             this.lb_nachname.Click += new System.EventHandler(this.lb_nachname_Click);
@@ -332,11 +337,11 @@
             this.lb_vorname.ForeColor = System.Drawing.Color.Gray;
             this.helpProvider.SetHelpString(this.lb_vorname, "Tragen sie hier den Vornamen des gesuchten Kunden ein, welcher einen Ausleihvorga" +
         "ng getätigt hat.");
-            this.lb_vorname.Location = new System.Drawing.Point(793, 21);
+            this.lb_vorname.Location = new System.Drawing.Point(652, 22);
             this.lb_vorname.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_vorname.Name = "lb_vorname";
             this.helpProvider.SetShowHelp(this.lb_vorname, true);
-            this.lb_vorname.Size = new System.Drawing.Size(57, 15);
+            this.lb_vorname.Size = new System.Drawing.Size(49, 13);
             this.lb_vorname.TabIndex = 43;
             this.lb_vorname.Text = "Vorname";
             this.lb_vorname.Click += new System.EventHandler(this.lb_vorname_Click);
@@ -348,11 +353,11 @@
             this.lb_verlag.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.lb_verlag.ForeColor = System.Drawing.Color.Gray;
             this.helpProvider.SetHelpString(this.lb_verlag, "Tragen sie hier den Verlag ein, um das ausgeliehene Buch zu laden.");
-            this.lb_verlag.Location = new System.Drawing.Point(538, 21);
+            this.lb_verlag.Location = new System.Drawing.Point(402, 22);
             this.lb_verlag.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_verlag.Name = "lb_verlag";
             this.helpProvider.SetShowHelp(this.lb_verlag, true);
-            this.lb_verlag.Size = new System.Drawing.Size(42, 15);
+            this.lb_verlag.Size = new System.Drawing.Size(37, 13);
             this.lb_verlag.TabIndex = 42;
             this.lb_verlag.Text = "Verlag";
             this.lb_verlag.Click += new System.EventHandler(this.lb_verlag_Click);
@@ -364,11 +369,11 @@
             this.lb_Genre.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.lb_Genre.ForeColor = System.Drawing.Color.Gray;
             this.helpProvider.SetHelpString(this.lb_Genre, "Tragen sie hier das Genre ein, um das ausgeliehene Buch zu laden.");
-            this.lb_Genre.Location = new System.Drawing.Point(538, 44);
+            this.lb_Genre.Location = new System.Drawing.Point(403, 48);
             this.lb_Genre.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_Genre.Name = "lb_Genre";
             this.helpProvider.SetShowHelp(this.lb_Genre, true);
-            this.lb_Genre.Size = new System.Drawing.Size(41, 15);
+            this.lb_Genre.Size = new System.Drawing.Size(36, 13);
             this.lb_Genre.TabIndex = 41;
             this.lb_Genre.Text = "Genre";
             this.lb_Genre.Click += new System.EventHandler(this.lb_Genre_Click);
@@ -380,11 +385,11 @@
             this.lb_autor.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.lb_autor.ForeColor = System.Drawing.Color.Gray;
             this.helpProvider.SetHelpString(this.lb_autor, "Tragen sie hier den Buchautor ein, um das ausgeliehene Buch zu laden.");
-            this.lb_autor.Location = new System.Drawing.Point(303, 44);
+            this.lb_autor.Location = new System.Drawing.Point(202, 48);
             this.lb_autor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_autor.Name = "lb_autor";
             this.helpProvider.SetShowHelp(this.lb_autor, true);
-            this.lb_autor.Size = new System.Drawing.Size(35, 15);
+            this.lb_autor.Size = new System.Drawing.Size(32, 13);
             this.lb_autor.TabIndex = 40;
             this.lb_autor.Text = "Autor";
             this.lb_autor.Click += new System.EventHandler(this.lb_autor_Click);
@@ -396,11 +401,11 @@
             this.lb_titel.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.lb_titel.ForeColor = System.Drawing.Color.Gray;
             this.helpProvider.SetHelpString(this.lb_titel, "Tragen sie hier den Buchtitel ein, um das ausgeliehene Buch zu laden.");
-            this.lb_titel.Location = new System.Drawing.Point(303, 21);
+            this.lb_titel.Location = new System.Drawing.Point(202, 22);
             this.lb_titel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_titel.Name = "lb_titel";
             this.helpProvider.SetShowHelp(this.lb_titel, true);
-            this.lb_titel.Size = new System.Drawing.Size(30, 15);
+            this.lb_titel.Size = new System.Drawing.Size(27, 13);
             this.lb_titel.TabIndex = 39;
             this.lb_titel.Text = "Titel";
             this.lb_titel.Click += new System.EventHandler(this.lb_titel_Click);
@@ -412,11 +417,11 @@
             this.lb_isbn.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.lb_isbn.ForeColor = System.Drawing.Color.Gray;
             this.helpProvider.SetHelpString(this.lb_isbn, "Tragen sie hier die ISBN-13 ein, um das ausgeliehene Buch zu laden.");
-            this.lb_isbn.Location = new System.Drawing.Point(74, 44);
+            this.lb_isbn.Location = new System.Drawing.Point(9, 48);
             this.lb_isbn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_isbn.Name = "lb_isbn";
             this.helpProvider.SetShowHelp(this.lb_isbn, true);
-            this.lb_isbn.Size = new System.Drawing.Size(35, 15);
+            this.lb_isbn.Size = new System.Drawing.Size(32, 13);
             this.lb_isbn.TabIndex = 38;
             this.lb_isbn.Text = "ISBN";
             this.lb_isbn.Click += new System.EventHandler(this.lb_isbn_Click);
@@ -428,11 +433,11 @@
             this.lb_id.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.lb_id.ForeColor = System.Drawing.Color.Gray;
             this.helpProvider.SetHelpString(this.lb_id, "Tragen sie hier die Buch-ID ein, um das gewünschte Buch zu laden.");
-            this.lb_id.Location = new System.Drawing.Point(74, 21);
+            this.lb_id.Location = new System.Drawing.Point(9, 22);
             this.lb_id.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_id.Name = "lb_id";
             this.helpProvider.SetShowHelp(this.lb_id, true);
-            this.lb_id.Size = new System.Drawing.Size(51, 15);
+            this.lb_id.Size = new System.Drawing.Size(46, 13);
             this.lb_id.TabIndex = 37;
             this.lb_id.Text = "Buch-ID";
             this.lb_id.Click += new System.EventHandler(this.lb_id_Click);
@@ -440,7 +445,7 @@
             // tb_ID
             // 
             this.helpProvider.SetHelpString(this.tb_ID, "Tragen sie hier die Buch-ID ein, um das gewünschte Buch zu laden.");
-            this.tb_ID.Location = new System.Drawing.Point(72, 19);
+            this.tb_ID.Location = new System.Drawing.Point(6, 19);
             this.tb_ID.Name = "tb_ID";
             this.helpProvider.SetShowHelp(this.tb_ID, true);
             this.tb_ID.Size = new System.Drawing.Size(171, 20);
@@ -454,7 +459,7 @@
             // 
             this.helpProvider.SetHelpKeyword(this.tb_ISBN, "");
             this.helpProvider.SetHelpString(this.tb_ISBN, "Tragen sie hier die ISBN-13 ein, um das ausgeliehene Buch zu laden.");
-            this.tb_ISBN.Location = new System.Drawing.Point(72, 41);
+            this.tb_ISBN.Location = new System.Drawing.Point(6, 45);
             this.tb_ISBN.Name = "tb_ISBN";
             this.helpProvider.SetShowHelp(this.tb_ISBN, true);
             this.tb_ISBN.Size = new System.Drawing.Size(171, 20);
@@ -469,7 +474,7 @@
             this.tb_nachname.Enabled = false;
             this.helpProvider.SetHelpString(this.tb_nachname, "Tragen sie hier den Nachnamen des gesuchten Kunden ein, welcher einen Ausleihvorg" +
         "ang getätigt hat.");
-            this.tb_nachname.Location = new System.Drawing.Point(790, 41);
+            this.tb_nachname.Location = new System.Drawing.Point(650, 45);
             this.tb_nachname.Name = "tb_nachname";
             this.helpProvider.SetShowHelp(this.tb_nachname, true);
             this.tb_nachname.Size = new System.Drawing.Size(171, 20);
@@ -483,7 +488,7 @@
             this.tb_vorname.Enabled = false;
             this.helpProvider.SetHelpString(this.tb_vorname, "Tragen sie hier den Vornamen des gesuchten Kunden ein, welcher einen Ausleihvorga" +
         "ng getätigt hat.");
-            this.tb_vorname.Location = new System.Drawing.Point(790, 19);
+            this.tb_vorname.Location = new System.Drawing.Point(650, 19);
             this.tb_vorname.Name = "tb_vorname";
             this.helpProvider.SetShowHelp(this.tb_vorname, true);
             this.tb_vorname.Size = new System.Drawing.Size(171, 20);
@@ -498,12 +503,13 @@
             this.combo_Verlag.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.combo_Verlag.FormattingEnabled = true;
             this.helpProvider.SetHelpString(this.combo_Verlag, "Tragen sie hier den Verlag ein, um das ausgeliehene Buch zu laden.");
-            this.combo_Verlag.Location = new System.Drawing.Point(536, 19);
+            this.combo_Verlag.Location = new System.Drawing.Point(400, 19);
             this.combo_Verlag.Name = "combo_Verlag";
             this.helpProvider.SetShowHelp(this.combo_Verlag, true);
             this.combo_Verlag.Size = new System.Drawing.Size(171, 21);
             this.combo_Verlag.Sorted = true;
             this.combo_Verlag.TabIndex = 29;
+            this.combo_Verlag.SelectedIndexChanged += new System.EventHandler(this.combo_Verlag_SelectedIndexChanged);
             this.combo_Verlag.TextChanged += new System.EventHandler(this.Buchsuche_ausfuehren);
             this.combo_Verlag.Click += new System.EventHandler(this.combo_Verlag_Click);
             this.combo_Verlag.Leave += new System.EventHandler(this.combo_Verlag_Leave);
@@ -514,12 +520,13 @@
             this.combo_Genre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.combo_Genre.FormattingEnabled = true;
             this.helpProvider.SetHelpString(this.combo_Genre, "Tragen sie hier das Genre ein, um das ausgeliehene Buch zu laden.");
-            this.combo_Genre.Location = new System.Drawing.Point(536, 41);
+            this.combo_Genre.Location = new System.Drawing.Point(400, 45);
             this.combo_Genre.Name = "combo_Genre";
             this.helpProvider.SetShowHelp(this.combo_Genre, true);
             this.combo_Genre.Size = new System.Drawing.Size(171, 21);
             this.combo_Genre.Sorted = true;
             this.combo_Genre.TabIndex = 28;
+            this.combo_Genre.SelectedIndexChanged += new System.EventHandler(this.combo_Genre_SelectedIndexChanged);
             this.combo_Genre.TextChanged += new System.EventHandler(this.Buchsuche_ausfuehren);
             this.combo_Genre.Click += new System.EventHandler(this.combo_Genre_Click);
             this.combo_Genre.Leave += new System.EventHandler(this.combo_Genre_Leave);
@@ -530,12 +537,13 @@
             this.combo_Autor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.combo_Autor.FormattingEnabled = true;
             this.helpProvider.SetHelpString(this.combo_Autor, "Tragen sie hier den Buchautor ein, um das ausgeliehene Buch zu laden.");
-            this.combo_Autor.Location = new System.Drawing.Point(301, 41);
+            this.combo_Autor.Location = new System.Drawing.Point(200, 45);
             this.combo_Autor.Name = "combo_Autor";
             this.helpProvider.SetShowHelp(this.combo_Autor, true);
             this.combo_Autor.Size = new System.Drawing.Size(171, 21);
             this.combo_Autor.Sorted = true;
             this.combo_Autor.TabIndex = 27;
+            this.combo_Autor.SelectedIndexChanged += new System.EventHandler(this.combo_Autor_SelectedIndexChanged);
             this.combo_Autor.TextChanged += new System.EventHandler(this.Buchsuche_ausfuehren);
             this.combo_Autor.Click += new System.EventHandler(this.combo_Autor_Click);
             this.combo_Autor.Leave += new System.EventHandler(this.combo_Autor_Leave);
@@ -543,10 +551,10 @@
             // bt_Clear
             // 
             this.helpProvider.SetHelpString(this.bt_Clear, "Leeren sie alle linksseitig liegenden Textfelder.");
-            this.bt_Clear.Location = new System.Drawing.Point(1050, 19);
+            this.bt_Clear.Location = new System.Drawing.Point(902, 19);
             this.bt_Clear.Name = "bt_Clear";
             this.helpProvider.SetShowHelp(this.bt_Clear, true);
-            this.bt_Clear.Size = new System.Drawing.Size(110, 23);
+            this.bt_Clear.Size = new System.Drawing.Size(92, 46);
             this.bt_Clear.TabIndex = 26;
             this.bt_Clear.Text = "Leeren";
             this.bt_Clear.UseVisualStyleBackColor = true;
@@ -555,7 +563,7 @@
             // tb_s_Titel
             // 
             this.helpProvider.SetHelpString(this.tb_s_Titel, "Tragen sie hier den Buchtitel ein, um das ausgeliehene Buch zu laden.");
-            this.tb_s_Titel.Location = new System.Drawing.Point(301, 19);
+            this.tb_s_Titel.Location = new System.Drawing.Point(200, 19);
             this.tb_s_Titel.Name = "tb_s_Titel";
             this.helpProvider.SetShowHelp(this.tb_s_Titel, true);
             this.tb_s_Titel.Size = new System.Drawing.Size(171, 20);
@@ -585,11 +593,19 @@
             this.bt_AbbrechenAusleihen.UseVisualStyleBackColor = true;
             this.bt_AbbrechenAusleihen.Click += new System.EventHandler(this.bt_AbbrechenAusleihen_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(335, 22);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(298, 174);
+            this.pictureBox1.TabIndex = 17;
+            this.pictureBox1.TabStop = false;
+            // 
             // w_s_details
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1186, 612);
+            this.ClientSize = new System.Drawing.Size(1024, 612);
             this.Controls.Add(this.bt_Rueckgabe);
             this.Controls.Add(this.bt_AbbrechenAusleihen);
             this.Controls.Add(this.gb_Suchen);
@@ -610,6 +626,7 @@
             this.cb_Ausleihen.PerformLayout();
             this.gb_Suchen.ResumeLayout(false);
             this.gb_Suchen.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -656,5 +673,6 @@
         private System.Windows.Forms.Label lb_autor;
         private System.Windows.Forms.Label lb_titel;
         private System.Windows.Forms.HelpProvider helpProvider;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

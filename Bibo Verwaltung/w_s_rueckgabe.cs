@@ -159,6 +159,8 @@ namespace Bibo_Verwaltung
             llb_Kunde.Text = "nicht verliehen";
             lb_ausgeliehen.Text = "nicht verfügbar";
             lb_rueckgabe.Text = "nicht verfügbar";
+            bt_Zu_aendern.Text = "Buchzustand ändern";
+            cb_Zustand.Enabled = false;
             cb_Zustand.SelectedValue = -1;
             lb_rueckgabe.ForeColor = Color.Black;
             picBox.Image = null;
@@ -188,7 +190,7 @@ namespace Bibo_Verwaltung
 
         private void bt_Rueckgabe_Click(object sender, EventArgs e)
         {
-            if (llb_Kunde.Text != "keine Treffer")
+            if (llb_Kunde.Text != "nicht verliehen" && llb_Buch.Text != "keine Treffer")
             {
                 DialogResult dialogResult = MessageBox.Show("Möchten Sie das Buch: '" + llb_Buch.Text + "', ausgeliehen von: '" + llb_Kunde.Text + "' wirklich als zurückgegeben markieren?", "Achtung",
                             MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -202,13 +204,13 @@ namespace Bibo_Verwaltung
                         {
                             zu_nach_global = cb_Zustand.Text;
                             cb_Zustand.Enabled = false;
-                            bt_Zu_aendern.Text = "Ändern";
+                            bt_Zu_aendern.Text = "Buchzustand ändern";
                         }
                         else
                         {
                             zu_nach_global = zu_vor_global;
                             cb_Zustand.Enabled = false;
-                            bt_Zu_aendern.Text = "Ändern";
+                            bt_Zu_aendern.Text = "Buchzustand ändern";
                         }
                     }
                     Rueckgabe ruck = new Rueckgabe();
@@ -238,7 +240,7 @@ namespace Bibo_Verwaltung
             {
                 zu_nach_global = cb_Zustand.Text;
                 cb_Zustand.Enabled = false;
-                bt_Zu_aendern.Text = "Ändern";
+                bt_Zu_aendern.Text = "Buchzustand ändern";
             }
         }
     }
