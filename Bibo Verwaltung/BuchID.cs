@@ -28,6 +28,9 @@ namespace Bibo_Verwaltung
 
         DateTime aufnahmedatum;
         public DateTime Aufnahmedatum { get { return aufnahmedatum; } set { aufnahmedatum = value; } }
+
+        bool activated;
+        public bool Activated { get { return activated; } set { activated = value; } }
         #endregion
 
         #region Objekt BuchID
@@ -47,7 +50,7 @@ namespace Bibo_Verwaltung
         private void Load()
         {
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT bu_id, bu_isbn, buch_titel, bu_zustandsid, isnull(bu_aufnahmedatum, '01.01.1990') as 'verified_aufnahmedatum' from t_s_buchid left join t_s_zustand on bu_zustandsid = zu_id left join t_s_buecher on bu_isbn = buch_isbn where bu_id = @0";
+            string RawCommand = "SELECT bu_id, bu_isbn, buch_titel, bu_zustandsid, isnull(bu_aufnahmedatum, '01.01.1990') as 'verified_aufnahmedatum', bu_activated from t_s_buchid left join t_s_zustand on bu_zustandsid = zu_id left join t_s_buecher on bu_isbn = buch_isbn where bu_id = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, id);
             while (dr.Read())
             {
@@ -56,6 +59,14 @@ namespace Bibo_Verwaltung
                 Titel = dr["buch_titel"].ToString();
                 Zustand = new Zustand(dr["bu_zustandsid"].ToString());
                 Aufnahmedatum = (DateTime)dr["verified_aufnahmedatum"];
+                if (dr["bu_activated"].ToString().Equals(0))
+                {
+                    Activated = false;
+                }
+                else
+                {
+                    Activated = true;
+                }
             }
             dr.Close();
             con.Close();
@@ -65,12 +76,13 @@ namespace Bibo_Verwaltung
         #region Add
         public void Add()
         {
-            string RawCommand = "Insert INTO t_s_buchid (bu_isbn, bu_zustandsid, bu_aufnahmedatum) VALUES (@isbn, @zustandsid, @aufnahmedatum)";
+            string RawCommand = "Insert INTO t_s_buchid (bu_isbn, bu_zustandsid, bu_aufnahmedatum, bu_activated) VALUES (@isbn, @zustandsid, @aufnahmedatum, @activated)";
             con.ConnectError();
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             cmd.Parameters.AddWithValue("@isbn", ISBN);
             cmd.Parameters.AddWithValue("@zustandsid", Zustand.ZustandID);
             cmd.Parameters.AddWithValue("@aufnahmedatum", Aufnahmedatum);
+            cmd.Parameters.AddWithValue("@activated", 1);
             // Verbindung öffnen
             cmd.ExecuteNonQuery();
             //Verbindung schließen
@@ -115,6 +127,34 @@ namespace Bibo_Verwaltung
             cmd.ExecuteNonQuery();
             con.Close();
         }
+
+        public void Deactivate()
+        {
+            string RawCommand = "UPDATE t_s_buchid set bu_activated = @activated WHERE bu_id = @id";
+            if (con.ConnectError()) return;
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@activated", 0);
+            cmd.Parameters.AddWithValue("@id", ID);
+            // Verbindung öffnen 
+            cmd.ExecuteNonQuery();
+            //Verbindung schließen
+            con.Close();
+            Activated = false;
+        }
+
+        public void DeactivateWhereISBN(string isbn)
+        {
+            string RawCommand = "UPDATE t_s_buchid set bu_activated = @activated WHERE bu_isbn = @isbn";
+            if (con.ConnectError()) return;
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@activated", 0);
+            cmd.Parameters.AddWithValue("@isbn", ISBN);
+            // Verbindung öffnen 
+            cmd.ExecuteNonQuery();
+            //Verbindung schließen
+            con.Close();
+            Activated = false;
+        }
         #endregion
 
         #region FillObject
@@ -126,7 +166,7 @@ namespace Bibo_Verwaltung
         public void FillObject()
         {
             if (con2.ConnectError()) return;
-            string RawCommand = "SELECT bu_id as BuchID, bu_isbn as ISBN, buch_titel as Titel, bu_aufnahmedatum as Aufnahmedatum, zu_zustand as Zustand from t_s_buchid left join t_s_zustand on bu_zustandsid = zu_id left join t_s_buecher on bu_isbn = buch_isbn where bu_isbn = @isbn";
+            string RawCommand = "SELECT bu_id as BuchID, bu_isbn as ISBN, buch_titel as Titel, bu_aufnahmedatum as Aufnahmedatum, zu_zustand as Zustand from t_s_buchid left join t_s_zustand on bu_zustandsid = zu_id left join t_s_buecher on bu_isbn = buch_isbn where bu_isbn = @isbn AND bu_activated = 1";
             //string RawCommand = "SELECT bu_id as 'BuchID', buch_isbn as 'ISBN', buch_titel as 'Titel', zu_zustand 'Zustand', zu_verleihfähig as 'Verleihbar', bu_aufnahmedatum as 'Aufnahmedatum' from t_s_buchid left join t_s_zustand on bu_zustand_id left join t_s_buecher on bu_isbn = buch_isbn";
             adapter2 = new SqlDataAdapter(RawCommand, con2.Con);
             if (ISBN == null)
@@ -156,5 +196,44 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
+        #region GetISBN
+        private string GetISBN(string isbn)
+        {
+            string id = "";
+            if (con.ConnectError()) return "";
+            string RawCommand = "SELECT bu_isbn from t_s_buchid  where bu_isbn = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, isbn);
+            while (dr.Read())
+            {
+                id = dr["bu_id"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            return id;
+        }
+        #endregion
+
+        #region
+        public bool IsAvailable()
+        {
+            if (con.ConnectError()) return false;
+            string RawCommand = "SELECT COUNT(*) FROM t_bd_ausgeliehen where aus_buchid = @buchid AND";
+            int count = 0;
+            using (SqlCommand cmdCount = new SqlCommand(RawCommand, con.Con))
+            {
+                cmdCount.Parameters.AddWithValue("@buchid", ID);
+                count = (int)cmdCount.ExecuteScalar();
+                con.Close();
+            }
+            if(count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        #endregion
     }
 }

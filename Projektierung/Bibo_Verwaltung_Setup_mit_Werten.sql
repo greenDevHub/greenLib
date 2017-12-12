@@ -281,6 +281,7 @@ CREATE TABLE [dbo].[t_s_buecher](
 	[buch_anzahl] [int] NOT NULL,
 	[buch_image] [varbinary](max),
 	[buch_imageDate] [datetime],
+	[buch_activated] [BIT] NOT NULL,
 
 
 	PRIMARY KEY (buch_isbn),
@@ -294,11 +295,11 @@ CREATE TABLE [dbo].[t_s_buecher](
 		REFERENCES t_s_sprache (sprach_id))
 
 	INSERT INTO t_s_buecher (buch_isbn, buch_titel, buch_genre_id, buch_autor_id, buch_verlag_id,
-	buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, buch_anzahl) VALUES 
-	('978-3608938289', 'Der Herr der Ringe', 3, 1, 1, '01.12.2014', 1, 'Auflage 6', 49.95, 0)
+	buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, buch_anzahl, buch_activated) VALUES 
+	('978-3608938289', 'Der Herr der Ringe', 3, 1, 1, '01.12.2014', 1, 'Auflage 6', 49.95, 0, 1)
 	INSERT INTO t_s_buecher (buch_isbn, buch_titel, buch_genre_id, buch_autor_id, buch_verlag_id, 
-	buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, buch_anzahl) VALUES
-	('978-3423715669', 'Der kleine Hobbit', 2, 1, 2, '01.11.2013', 1, 'Auflage 1', 8.95, 2)
+	buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, buch_anzahl, buch_activated) VALUES
+	('978-3423715669', 'Der kleine Hobbit', 2, 1, 2, '01.11.2013', 1, 'Auflage 1', 8.95, 2, 1)
 
 	Select * from t_s_buecher
 	END
@@ -314,6 +315,7 @@ CREATE TABLE [dbo].[t_s_buchid](
 	[bu_isbn] [nvarchar] (32) NOT NULL,
 	[bu_zustandsid] [int] NOT NULL,
 	[bu_aufnahmedatum] [date] NOT NULL,
+	[bu_activated] [BIT] NOT NULL,
 
 	PRIMARY KEY (bu_id),
 	FOREIGN KEY (bu_zustandsid)
@@ -321,8 +323,8 @@ CREATE TABLE [dbo].[t_s_buchid](
 	FOREIGN KEY (bu_isbn)
 		REFERENCES t_s_buecher (buch_isbn))
 
-	INSERT INTO t_s_buchid (bu_isbn, bu_zustandsid, bu_aufnahmedatum) VALUES ('978-3423715669', 2, '01.01.2017')
-	INSERT INTO t_s_buchid (bu_isbn, bu_zustandsid, bu_aufnahmedatum) VALUES ('978-3423715669', 3, '09.11.2012')
+	INSERT INTO t_s_buchid (bu_isbn, bu_zustandsid, bu_aufnahmedatum, bu_activated) VALUES ('978-3423715669', 2, '01.01.2017', 1)
+	INSERT INTO t_s_buchid (bu_isbn, bu_zustandsid, bu_aufnahmedatum, bu_activated) VALUES ('978-3423715669', 3, '09.11.2012', 1)
 	Select * from t_s_buchid
 	END
 
