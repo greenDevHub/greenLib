@@ -140,7 +140,7 @@ namespace Bibo_Verwaltung
                 lb_Ausleihzahl.Text = "-";
                 return;
             }
-            string bestandSQL = "SELECT * FROM t_s_buchid";
+            string bestandSQL = "SELECT * FROM t_s_buchid WHERE bu_activated = 1";
             string ausgeliehenSQL = "SELECT * FROM t_bd_ausgeliehen";
 
             //zaehlt den Buecher-Bestand

@@ -339,11 +339,14 @@ namespace Bibo_Verwaltung
                     DialogResult dialogResult = MessageBox.Show("Sämtliche zu diesem Buch gehörende Exemplare werden auch aus der Datenbank gelöscht. Fortfahren?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (dialogResult == DialogResult.Yes)
                     {
+
                         BuchID buchid = new BuchID();
-                        buchid.DeleteWhereISBN(tb_ISBN.Text);
+                        //buchid.DeleteWhereISBN(tb_ISBN.Text);
+                        buchid.DeactivateWhereISBN(tb_ISBN.Text);
                         b.AutorListe.AutorListeID = b.GetAutorID(tb_ISBN.Text);
                         b.ISBN = tb_ISBN.Text;
-                        b.Delete_Buch();
+                        b.Deactivate();
+                        //b.Delete_Buch();
                         Delete_picture(location);
                         Clear_All();
                         b.FillGrid_Buch(ref Grid_Buch);
@@ -458,6 +461,7 @@ namespace Bibo_Verwaltung
                         if(needAutor.Count > 0)
                         {
                             b.AutorListe.Autor.Add(needAutor);
+                            b.AutorListe.AutorIDs.Clear();
                             foreach(string s in b.AutorListe.AutorNamen)
                             {
                                 b.AutorListe.AutorIDs.Add(b.AutorListe.Autor.GetID(s));
@@ -1273,9 +1277,11 @@ namespace Bibo_Verwaltung
                 }
                 string autorstring = "";
                 needAutor.Clear();
+                b.AutorListe.AutorNamen.Clear();
                 foreach (string s in GetAutor())
                 {
                     autorstring = autorstring + s + ", ";
+                    
                     b.AutorListe.AutorNamen.Add(s);
                     if (!b.AutorListe.Autor.IfContains(s))
                     {

@@ -54,7 +54,7 @@ namespace Bibo_Verwaltung
                 + "left join t_s_sprache on buch_sprache_id = sprach_id "
                 + "left join t_s_zustand on bu_zustandsid = zu_id "
                 + "left join t_bd_ausgeliehen on aus_buchid = bu_id "
-                + "left join t_s_kunden on kunde_ID = aus_kundenid";
+                + "left join t_s_kunden on kunde_ID = aus_kundenid WHERE bu_activated = 1";
 
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             adapter = new SqlDataAdapter(RawCommand, con.Con);

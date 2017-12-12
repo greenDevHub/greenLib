@@ -95,6 +95,9 @@ namespace Bibo_Verwaltung
         DateTime imageDate;
         public DateTime ImageDate { get { return imageDate; } set { imageDate = value; } }
 
+        bool activated;
+        public bool Activated { get { return activated; } set { activated = value; } }
+
         #endregion
 
         #region Objekt Buch
@@ -178,6 +181,14 @@ namespace Bibo_Verwaltung
                     Neupreis = 0;
                     MessageBox.Show("Bitte nur Zahlen eingeben!");
                 }
+                if (dr["buch_activated"].ToString().Equals("1"))
+                {
+                    Activated = true;
+                }
+                else
+                {
+                    Activated = false;
+                }
             }
             // DataReader schließen 
             dr.Close();
@@ -247,7 +258,7 @@ namespace Bibo_Verwaltung
         {
             //SQL-Verbindung pruefen
             if (con.ConnectError()) return;
-            string RawCommand = "INSERT INTO [dbo].[t_s_buecher] (buch_isbn, buch_titel, buch_genre_id, buch_autor_id, buch_verlag_id, buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, buch_bild, buch_anzahl, buch_image, buch_imageDate) VALUES (@isbn, @titel, @genreid, @autorid, @verlagid, @erscheinungsdatum, @sprachid, @auflage, @neupreis, @bild, @anzahl, @image, @imageDate)";
+            string RawCommand = "INSERT INTO [dbo].[t_s_buecher] (buch_isbn, buch_titel, buch_genre_id, buch_autor_id, buch_verlag_id, buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, buch_bild, buch_anzahl, buch_image, buch_imageDate, buch_activated) VALUES (@isbn, @titel, @genreid, @autorid, @verlagid, @erscheinungsdatum, @sprachid, @auflage, @neupreis, @bild, @anzahl, @image, @imageDate, 1)";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             AutorListe.Add();
             cmd.Parameters.AddWithValue("@isbn", ISBN);
@@ -306,13 +317,23 @@ namespace Bibo_Verwaltung
             con.Close();
             AutorListe.Delete();
         }
+
+        public void Deactivate()
+        {
+            if (con.ConnectError()) return;
+            string RawCommand = "UPDATE [dbo].[t_s_buecher] set buch_activated = 0 WHERE buch_isbn = @isbn";
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@isbn", ISBN);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
         #endregion
 
         #region RowCount
         private int CountRows(string isbnAktuell)
         {
             if (con.ConnectError()) return 0;
-            string RawCommand = "SELECT COUNT(*) FROM t_s_buchid where bu_isbn = @isbn";
+            string RawCommand = "SELECT COUNT(*) FROM t_s_buchid where bu_isbn = @isbn AND bu_activated = 1";
             int count = 0;
             using (SqlCommand cmdCount = new SqlCommand(RawCommand, con.Con))
             {
@@ -362,7 +383,7 @@ namespace Bibo_Verwaltung
                 + "left join t_s_genre on buch_genre_id = ger_id "
                 + "left join t_s_autorListe on buch_autor_id = a_id "
                 + "left join t_s_verlag on buch_verlag_id = ver_id "
-                + "left join t_s_sprache on buch_sprache_id = sprach_id";
+                + "left join t_s_sprache on buch_sprache_id = sprach_id WHERE buch_activated = 1";
             adapter2 = new SqlDataAdapter(RawCommand, con2.Con);
             adapter2.Fill(ds2);
             adapter2.Fill(dt2);

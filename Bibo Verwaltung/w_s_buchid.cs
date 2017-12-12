@@ -104,7 +104,8 @@ namespace Bibo_Verwaltung
                     b.ISBN = tb_isbn.Text;
                     b.Zustand.ZustandID = cb_zustand.SelectedValue.ToString();
                     b.Aufnahmedatum = dTP_aufnahme.Value;
-                    b.Delete();
+                    //b.Delete();
+                    b.Deactivate();
                     Clear();
                     lb.Visible = true;
                     b.ClearDS();
