@@ -69,17 +69,21 @@
             // lb_Telefonnummer
             // 
             this.lb_Telefonnummer.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Telefonnummer, "Tragen sie die Telefonnummer ihres Kunden hier ein.");
             this.lb_Telefonnummer.Location = new System.Drawing.Point(6, 304);
             this.lb_Telefonnummer.Name = "lb_Telefonnummer";
+            this.helpProvider.SetShowHelp(this.lb_Telefonnummer, true);
             this.lb_Telefonnummer.Size = new System.Drawing.Size(98, 15);
             this.lb_Telefonnummer.TabIndex = 16;
             this.lb_Telefonnummer.Text = "Telefonnummer:";
             // 
             // tb_Telefonnummer
             // 
+            this.helpProvider.SetHelpString(this.tb_Telefonnummer, "Tragen sie die Telefonnummer ihres Kunden hier ein.");
             this.tb_Telefonnummer.Location = new System.Drawing.Point(116, 302);
             this.tb_Telefonnummer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_Telefonnummer.Name = "tb_Telefonnummer";
+            this.helpProvider.SetShowHelp(this.tb_Telefonnummer, true);
             this.tb_Telefonnummer.Size = new System.Drawing.Size(158, 20);
             this.tb_Telefonnummer.TabIndex = 11;
             this.tb_Telefonnummer.TextChanged += new System.EventHandler(this.tb_Telefonnummer_TextChanged);
@@ -87,26 +91,32 @@
             // lb_Mail
             // 
             this.lb_Mail.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Mail, "Tragen sie die E-Mail Adresse ihres Kunden hier ein.");
             this.lb_Mail.Location = new System.Drawing.Point(6, 278);
             this.lb_Mail.Name = "lb_Mail";
+            this.helpProvider.SetShowHelp(this.lb_Mail, true);
             this.lb_Mail.Size = new System.Drawing.Size(34, 15);
             this.lb_Mail.TabIndex = 37;
             this.lb_Mail.Text = "Mail:";
             // 
             // tb_Mail
             // 
+            this.helpProvider.SetHelpString(this.tb_Mail, "Tragen sie die E-Mail Adresse ihres Kunden hier ein.");
             this.tb_Mail.Location = new System.Drawing.Point(116, 276);
             this.tb_Mail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_Mail.Name = "tb_Mail";
+            this.helpProvider.SetShowHelp(this.tb_Mail, true);
             this.tb_Mail.Size = new System.Drawing.Size(158, 20);
             this.tb_Mail.TabIndex = 10;
             this.tb_Mail.TextChanged += new System.EventHandler(this.tb_Mail_TextChanged);
             // 
             // tb_Klasse
             // 
+            this.helpProvider.SetHelpString(this.tb_Klasse, "Tragen sie die Klasse ihres Kunden hier ein.");
             this.tb_Klasse.Location = new System.Drawing.Point(116, 250);
             this.tb_Klasse.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_Klasse.Name = "tb_Klasse";
+            this.helpProvider.SetShowHelp(this.tb_Klasse, true);
             this.tb_Klasse.Size = new System.Drawing.Size(79, 20);
             this.tb_Klasse.TabIndex = 9;
             this.tb_Klasse.TextChanged += new System.EventHandler(this.tb_Klasse_TextChanged);
@@ -114,8 +124,10 @@
             // lb_Klasse
             // 
             this.lb_Klasse.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Klasse, "Tragen sie die Klasse ihres Kunden hier ein.");
             this.lb_Klasse.Location = new System.Drawing.Point(6, 252);
             this.lb_Klasse.Name = "lb_Klasse";
+            this.helpProvider.SetShowHelp(this.lb_Klasse, true);
             this.lb_Klasse.Size = new System.Drawing.Size(47, 15);
             this.lb_Klasse.TabIndex = 34;
             this.lb_Klasse.Text = "Klasse:";
@@ -151,9 +163,11 @@
             // 
             // tb_Ort
             // 
+            this.helpProvider.SetHelpString(this.tb_Ort, "Tragen sie den  Wohnort ihres Kunden hier ein.");
             this.tb_Ort.Location = new System.Drawing.Point(116, 198);
             this.tb_Ort.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_Ort.Name = "tb_Ort";
+            this.helpProvider.SetShowHelp(this.tb_Ort, true);
             this.tb_Ort.Size = new System.Drawing.Size(158, 20);
             this.tb_Ort.TabIndex = 7;
             this.tb_Ort.TextChanged += new System.EventHandler(this.tb_Ort_TextChanged);
@@ -161,17 +175,21 @@
             // lb_Ort
             // 
             this.lb_Ort.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Ort, "Tragen sie den  Wohnort ihres Kunden hier ein.");
             this.lb_Ort.Location = new System.Drawing.Point(6, 199);
             this.lb_Ort.Name = "lb_Ort";
+            this.helpProvider.SetShowHelp(this.lb_Ort, true);
             this.lb_Ort.Size = new System.Drawing.Size(56, 15);
             this.lb_Ort.TabIndex = 31;
             this.lb_Ort.Text = "Wohnort:";
             // 
             // tb_Postleitzahl
             // 
+            this.helpProvider.SetHelpString(this.tb_Postleitzahl, "Tragen sie die Postleitzahl ihres Kunden hier ein.");
             this.tb_Postleitzahl.Location = new System.Drawing.Point(116, 172);
             this.tb_Postleitzahl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_Postleitzahl.Name = "tb_Postleitzahl";
+            this.helpProvider.SetShowHelp(this.tb_Postleitzahl, true);
             this.tb_Postleitzahl.Size = new System.Drawing.Size(79, 20);
             this.tb_Postleitzahl.TabIndex = 6;
             this.tb_Postleitzahl.TextChanged += new System.EventHandler(this.tb_Postleitzahl_TextChanged);
@@ -179,17 +197,21 @@
             // lb_Postleitzahl
             // 
             this.lb_Postleitzahl.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Postleitzahl, "Tragen sie die Postleitzahl ihres Kunden hier ein.");
             this.lb_Postleitzahl.Location = new System.Drawing.Point(6, 173);
             this.lb_Postleitzahl.Name = "lb_Postleitzahl";
+            this.helpProvider.SetShowHelp(this.lb_Postleitzahl, true);
             this.lb_Postleitzahl.Size = new System.Drawing.Size(73, 15);
             this.lb_Postleitzahl.TabIndex = 29;
             this.lb_Postleitzahl.Text = "Postleitzahl:";
             // 
             // tb_Hausnummer
             // 
+            this.helpProvider.SetHelpString(this.tb_Hausnummer, "Tragen sie die Hausnummer  ihres Kunden hier ein.");
             this.tb_Hausnummer.Location = new System.Drawing.Point(116, 146);
             this.tb_Hausnummer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_Hausnummer.Name = "tb_Hausnummer";
+            this.helpProvider.SetShowHelp(this.tb_Hausnummer, true);
             this.tb_Hausnummer.Size = new System.Drawing.Size(79, 20);
             this.tb_Hausnummer.TabIndex = 5;
             this.tb_Hausnummer.TextChanged += new System.EventHandler(this.tb_Hausnummer_TextChanged);
@@ -197,17 +219,21 @@
             // lb_Hausnummer
             // 
             this.lb_Hausnummer.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Hausnummer, "Tragen sie die Hausnummer  ihres Kunden hier ein.");
             this.lb_Hausnummer.Location = new System.Drawing.Point(6, 147);
             this.lb_Hausnummer.Name = "lb_Hausnummer";
+            this.helpProvider.SetShowHelp(this.lb_Hausnummer, true);
             this.lb_Hausnummer.Size = new System.Drawing.Size(86, 15);
             this.lb_Hausnummer.TabIndex = 27;
             this.lb_Hausnummer.Text = "Hausnummer:";
             // 
             // tb_Strasse
             // 
+            this.helpProvider.SetHelpString(this.tb_Strasse, "Tragen sie die Straße ihres Kunden hier ein.");
             this.tb_Strasse.Location = new System.Drawing.Point(116, 120);
             this.tb_Strasse.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_Strasse.Name = "tb_Strasse";
+            this.helpProvider.SetShowHelp(this.tb_Strasse, true);
             this.tb_Strasse.Size = new System.Drawing.Size(158, 20);
             this.tb_Strasse.TabIndex = 4;
             this.tb_Strasse.TextChanged += new System.EventHandler(this.tb_Strasse_TextChanged);
@@ -215,17 +241,21 @@
             // lb_Strasse
             // 
             this.lb_Strasse.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Strasse, "Tragen sie die Straße ihres Kunden hier ein.");
             this.lb_Strasse.Location = new System.Drawing.Point(6, 121);
             this.lb_Strasse.Name = "lb_Strasse";
+            this.helpProvider.SetShowHelp(this.lb_Strasse, true);
             this.lb_Strasse.Size = new System.Drawing.Size(51, 15);
             this.lb_Strasse.TabIndex = 7;
             this.lb_Strasse.Text = "Strasse:";
             // 
             // tb_Nachname
             // 
+            this.helpProvider.SetHelpString(this.tb_Nachname, "Tragen sie den Nachnamen ihres Kunden hier ein.");
             this.tb_Nachname.Location = new System.Drawing.Point(116, 94);
             this.tb_Nachname.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_Nachname.Name = "tb_Nachname";
+            this.helpProvider.SetShowHelp(this.tb_Nachname, true);
             this.tb_Nachname.Size = new System.Drawing.Size(158, 20);
             this.tb_Nachname.TabIndex = 2;
             this.tb_Nachname.TextChanged += new System.EventHandler(this.tb_Nachname_TextChanged);
@@ -233,17 +263,21 @@
             // lb_Nachname
             // 
             this.lb_Nachname.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Nachname, "Tragen sie den Nachnamen ihres Kunden hier ein.");
             this.lb_Nachname.Location = new System.Drawing.Point(6, 95);
             this.lb_Nachname.Name = "lb_Nachname";
+            this.helpProvider.SetShowHelp(this.lb_Nachname, true);
             this.lb_Nachname.Size = new System.Drawing.Size(71, 15);
             this.lb_Nachname.TabIndex = 23;
             this.lb_Nachname.Text = "Nachname:";
             // 
             // tb_Vorname
             // 
+            this.helpProvider.SetHelpString(this.tb_Vorname, "Tragen sie den Vornamen ihres Kunden hier ein.");
             this.tb_Vorname.Location = new System.Drawing.Point(116, 68);
             this.tb_Vorname.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_Vorname.Name = "tb_Vorname";
+            this.helpProvider.SetShowHelp(this.tb_Vorname, true);
             this.tb_Vorname.Size = new System.Drawing.Size(158, 20);
             this.tb_Vorname.TabIndex = 1;
             this.tb_Vorname.TextChanged += new System.EventHandler(this.tb_Vorname_TextChanged);
@@ -251,8 +285,10 @@
             // lb_Vorname
             // 
             this.lb_Vorname.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Vorname, "Tragen sie den Vornamen ihres Kunden hier ein.");
             this.lb_Vorname.Location = new System.Drawing.Point(6, 69);
             this.lb_Vorname.Name = "lb_Vorname";
+            this.helpProvider.SetShowHelp(this.lb_Vorname, true);
             this.lb_Vorname.Size = new System.Drawing.Size(60, 15);
             this.lb_Vorname.TabIndex = 21;
             this.lb_Vorname.Text = "Vorname:";
@@ -342,8 +378,10 @@
             // rb_KundeLoeschen
             // 
             this.rb_KundeLoeschen.AutoSize = true;
+            this.helpProvider.SetHelpString(this.rb_KundeLoeschen, "Klicken sie hier, um einen vorhandenen Kunden zu löschen.");
             this.rb_KundeLoeschen.Location = new System.Drawing.Point(206, 19);
             this.rb_KundeLoeschen.Name = "rb_KundeLoeschen";
+            this.helpProvider.SetShowHelp(this.rb_KundeLoeschen, true);
             this.rb_KundeLoeschen.Size = new System.Drawing.Size(78, 19);
             this.rb_KundeLoeschen.TabIndex = 0;
             this.rb_KundeLoeschen.Text = "Entfernen";
@@ -353,8 +391,10 @@
             // rb_KundeBearbeiten
             // 
             this.rb_KundeBearbeiten.AutoSize = true;
+            this.helpProvider.SetHelpString(this.rb_KundeBearbeiten, "Klicken sie hier, um einen vorhandenen Kunden zu bearbeiten.");
             this.rb_KundeBearbeiten.Location = new System.Drawing.Point(106, 19);
             this.rb_KundeBearbeiten.Name = "rb_KundeBearbeiten";
+            this.helpProvider.SetShowHelp(this.rb_KundeBearbeiten, true);
             this.rb_KundeBearbeiten.Size = new System.Drawing.Size(85, 19);
             this.rb_KundeBearbeiten.TabIndex = 0;
             this.rb_KundeBearbeiten.Text = "Bearbeiten";
@@ -365,8 +405,10 @@
             // 
             this.rb_Neukunde.AutoSize = true;
             this.rb_Neukunde.Checked = true;
+            this.helpProvider.SetHelpString(this.rb_Neukunde, "Klicken sie hier, um einen neuen Kunden hinzuzufügen.");
             this.rb_Neukunde.Location = new System.Drawing.Point(6, 19);
             this.rb_Neukunde.Name = "rb_Neukunde";
+            this.helpProvider.SetShowHelp(this.rb_Neukunde, true);
             this.rb_Neukunde.Size = new System.Drawing.Size(88, 19);
             this.rb_Neukunde.TabIndex = 0;
             this.rb_Neukunde.TabStop = true;

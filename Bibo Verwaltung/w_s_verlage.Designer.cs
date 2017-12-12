@@ -36,6 +36,7 @@
             this.tLP_Button = new System.Windows.Forms.TableLayoutPanel();
             this.bt_Uebernehmen = new System.Windows.Forms.Button();
             this.bt_Suchen = new System.Windows.Forms.Button();
+            this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.gb_Verlage.SuspendLayout();
             this.tLP_Sprachen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Verlage)).BeginInit();
@@ -78,9 +79,11 @@
             // 
             this.lb_Verlage.AutoSize = true;
             this.lb_Verlage.Dock = System.Windows.Forms.DockStyle.Top;
+            this.helpProvider.SetHelpString(this.lb_Verlage, "Suchen sie nach gespeicherten Verlage.");
             this.lb_Verlage.Location = new System.Drawing.Point(3, 0);
             this.lb_Verlage.Name = "lb_Verlage";
-            this.lb_Verlage.Size = new System.Drawing.Size(211, 13);
+            this.helpProvider.SetShowHelp(this.lb_Verlage, true);
+            this.lb_Verlage.Size = new System.Drawing.Size(211, 15);
             this.lb_Verlage.TabIndex = 53;
             this.lb_Verlage.Text = "Suchen:";
             // 
@@ -90,8 +93,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tb_Suchen.Enabled = false;
+            this.helpProvider.SetHelpString(this.tb_Suchen, "Suchen sie nach gespeicherten Verlage.");
             this.tb_Suchen.Location = new System.Drawing.Point(3, 19);
             this.tb_Suchen.Name = "tb_Suchen";
+            this.helpProvider.SetShowHelp(this.tb_Suchen, true);
             this.tb_Suchen.Size = new System.Drawing.Size(211, 20);
             this.tb_Suchen.TabIndex = 52;
             this.tb_Suchen.Visible = false;
@@ -107,10 +112,12 @@
             this.gv_Verlage.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_Verlage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_Verlage.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.helpProvider.SetHelpString(this.gv_Verlage, "Hier werden all ihre gespeicherten Verlage angezeigt.");
             this.gv_Verlage.Location = new System.Drawing.Point(3, 46);
             this.gv_Verlage.MultiSelect = false;
             this.gv_Verlage.Name = "gv_Verlage";
             this.gv_Verlage.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.helpProvider.SetShowHelp(this.gv_Verlage, true);
             this.gv_Verlage.Size = new System.Drawing.Size(211, 472);
             this.gv_Verlage.TabIndex = 50;
             this.gv_Verlage.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gv_verlage_CellBeginEdit);
@@ -138,8 +145,10 @@
             // 
             this.bt_Uebernehmen.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.bt_Uebernehmen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.helpProvider.SetHelpString(this.bt_Uebernehmen, "Klicken sie auf diesen Button, um alle Änderungen zu übernehmen.");
             this.bt_Uebernehmen.Location = new System.Drawing.Point(3, 3);
             this.bt_Uebernehmen.Name = "bt_Uebernehmen";
+            this.helpProvider.SetShowHelp(this.bt_Uebernehmen, true);
             this.bt_Uebernehmen.Size = new System.Drawing.Size(123, 28);
             this.bt_Uebernehmen.TabIndex = 51;
             this.bt_Uebernehmen.Text = "Übernehmen";
@@ -149,8 +158,10 @@
             // bt_Suchen
             // 
             this.bt_Suchen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.helpProvider.SetHelpString(this.bt_Suchen, "Klicken sie auf diesen Button, um die Suchfunktion an- bzw. auszuschalten.");
             this.bt_Suchen.Location = new System.Drawing.Point(132, 3);
             this.bt_Suchen.Name = "bt_Suchen";
+            this.helpProvider.SetShowHelp(this.bt_Suchen, true);
             this.bt_Suchen.Size = new System.Drawing.Size(80, 28);
             this.bt_Suchen.TabIndex = 54;
             this.bt_Suchen.Text = "Suchen AN";
@@ -164,6 +175,7 @@
             this.ClientSize = new System.Drawing.Size(219, 571);
             this.Controls.Add(this.gb_Verlage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "w_s_verlage";
@@ -191,5 +203,6 @@
         private System.Windows.Forms.TableLayoutPanel tLP_Button;
         private System.Windows.Forms.Button bt_Uebernehmen;
         private System.Windows.Forms.Button bt_Suchen;
+        private System.Windows.Forms.HelpProvider helpProvider;
     }
 }

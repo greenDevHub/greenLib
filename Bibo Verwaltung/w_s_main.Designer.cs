@@ -52,8 +52,8 @@
             // 
             // bt_Sprachen
             // 
-            this.helpProvider.SetHelpString(this.bt_Sprachen, "Klicken sie auf \"Sprachen\" um ihre gespeicherten Sprachen anzuzeigen, neue hinzuz" +
-        "ufügen, bestehende zu bearbeiten oder zu löschen. ");
+            this.helpProvider.SetHelpString(this.bt_Sprachen, "Klicken sie auf \"Sprachen\", um ihre gespeicherten Sprachen anzuzeigen, neue hinzu" +
+        "zufügen, bestehende zu bearbeiten oder zu löschen. ");
             this.bt_Sprachen.Location = new System.Drawing.Point(192, 111);
             this.bt_Sprachen.Name = "bt_Sprachen";
             this.helpProvider.SetShowHelp(this.bt_Sprachen, true);
@@ -65,8 +65,8 @@
             // 
             // bt_Verlage
             // 
-            this.helpProvider.SetHelpString(this.bt_Verlage, "Klicken sie auf \"Verlage\" um ihre gespeicherten Verlage anzuzeigen, neue hinzuzuf" +
-        "ügen, bestehende zu bearbeiten oder zu löschen. ");
+            this.helpProvider.SetHelpString(this.bt_Verlage, "Klicken sie auf \"Verlage\", um ihre gespeicherten Verlage anzuzeigen, neue hinzuzu" +
+        "fügen, bestehende zu bearbeiten oder zu löschen. ");
             this.bt_Verlage.Location = new System.Drawing.Point(6, 111);
             this.bt_Verlage.Name = "bt_Verlage";
             this.helpProvider.SetShowHelp(this.bt_Verlage, true);
@@ -78,8 +78,8 @@
             // 
             // bt_Genres
             // 
-            this.helpProvider.SetHelpString(this.bt_Genres, "Klicken sie auf \"Genres\" um ihre gespeicherten Genres anzuzeigen, neue hinzuzufüg" +
-        "en, bestehende zu bearbeiten oder zu löschen. ");
+            this.helpProvider.SetHelpString(this.bt_Genres, "Klicken sie auf \"Genres\", um ihre gespeicherten Genres anzuzeigen, neue hinzuzufü" +
+        "gen, bestehende zu bearbeiten oder zu löschen. ");
             this.bt_Genres.Location = new System.Drawing.Point(192, 65);
             this.bt_Genres.Name = "bt_Genres";
             this.helpProvider.SetShowHelp(this.bt_Genres, true);
@@ -91,8 +91,8 @@
             // 
             // bt_Autoren
             // 
-            this.helpProvider.SetHelpString(this.bt_Autoren, "Klicken sie auf \"Autoren\" um ihre gespeicherten Autoren anzuzeigen, neue hinzuzuf" +
-        "ügen, bestehende zu bearbeiten oder zu löschen. ");
+            this.helpProvider.SetHelpString(this.bt_Autoren, "Klicken sie auf \"Autoren\", um ihre gespeicherten Autoren anzuzeigen, neue hinzuzu" +
+        "fügen, bestehende zu bearbeiten oder zu löschen. ");
             this.bt_Autoren.Location = new System.Drawing.Point(6, 65);
             this.bt_Autoren.Name = "bt_Autoren";
             this.helpProvider.SetShowHelp(this.bt_Autoren, true);
@@ -104,8 +104,8 @@
             // 
             // bt_Kunden
             // 
-            this.helpProvider.SetHelpString(this.bt_Kunden, "Klicken sie auf \"Kunden\" um ihre gespeicherten Kunden anzuzeigen, neue hinzuzufüg" +
-        "en, bestehende zu bearbeiten oder zu löschen. ");
+            this.helpProvider.SetHelpString(this.bt_Kunden, "Klicken sie auf \"Kunden\", um ihre gespeicherten Kunden anzuzeigen, neue hinzuzufü" +
+        "gen, bestehende zu bearbeiten oder zu löschen. ");
             this.bt_Kunden.Location = new System.Drawing.Point(6, 19);
             this.bt_Kunden.Name = "bt_Kunden";
             this.helpProvider.SetShowHelp(this.bt_Kunden, true);
@@ -135,8 +135,8 @@
             // 
             // bt_Zustand
             // 
-            this.helpProvider.SetHelpString(this.bt_Zustand, "Klicken sie auf \"Zustand\" um ihre gespeicherten Zustände anzuzeigen, neue hinzuzu" +
-        "fügen, bestehende zu bearbeiten oder zu löschen. ");
+            this.helpProvider.SetHelpString(this.bt_Zustand, "Klicken sie auf \"Zustand\", um ihre gespeicherten Zustände anzuzeigen, neue hinzuz" +
+        "ufügen, bestehende zu bearbeiten oder zu löschen. ");
             this.bt_Zustand.Location = new System.Drawing.Point(6, 157);
             this.bt_Zustand.Name = "bt_Zustand";
             this.helpProvider.SetShowHelp(this.bt_Zustand, true);
@@ -148,8 +148,8 @@
             // 
             // bt_Einstellungen
             // 
-            this.helpProvider.SetHelpString(this.bt_Einstellungen, "Klicken sie auf \"Einstellungen\" um Änderungen an ihrer Datenbankverbindung vorzun" +
-        "ehmen.");
+            this.helpProvider.SetHelpString(this.bt_Einstellungen, "Klicken sie auf \"Einstellungen\", um Änderungen an ihrer Datenbankverbindung vorzu" +
+        "nehmen.");
             this.bt_Einstellungen.Location = new System.Drawing.Point(192, 157);
             this.bt_Einstellungen.Name = "bt_Einstellungen";
             this.helpProvider.SetShowHelp(this.bt_Einstellungen, true);
@@ -161,8 +161,8 @@
             // 
             // bt_Buecher
             // 
-            this.helpProvider.SetHelpString(this.bt_Buecher, "Klicken sie auf \"Bücher\" um ihre gespeicherten Bücher anzuzeigen, neue hinzuzufüg" +
-        "en, bestehende zu bearbeiten oder zu löschen. ");
+            this.helpProvider.SetHelpString(this.bt_Buecher, "Klicken sie auf \"Bücher\", um ihre gespeicherten Bücher anzuzeigen, neue hinzuzufü" +
+        "gen, bestehende zu bearbeiten oder zu löschen. ");
             this.bt_Buecher.Location = new System.Drawing.Point(192, 19);
             this.bt_Buecher.Name = "bt_Buecher";
             this.helpProvider.SetShowHelp(this.bt_Buecher, true);
@@ -181,8 +181,11 @@
             this.gb_Uebersicht.Controls.Add(this.lb_IstBestand);
             this.gb_Uebersicht.Controls.Add(this.lb_Bestandzahl);
             this.gb_Uebersicht.Controls.Add(this.lb_Bestand);
+            this.helpProvider.SetHelpString(this.gb_Uebersicht, "In der Gesamtübersicht sehen sie auf einem Blick, wie viele Bücher sich in ihrem " +
+        "Bestand bzw. Lager befindet, sowie wie viele Bücher momentan ausgeliehen sind.");
             this.gb_Uebersicht.Location = new System.Drawing.Point(10, 11);
             this.gb_Uebersicht.Name = "gb_Uebersicht";
+            this.helpProvider.SetShowHelp(this.gb_Uebersicht, true);
             this.gb_Uebersicht.Size = new System.Drawing.Size(190, 206);
             this.gb_Uebersicht.TabIndex = 1;
             this.gb_Uebersicht.TabStop = false;
@@ -214,8 +217,11 @@
             // lb_Ausgeliehen
             // 
             this.lb_Ausgeliehen.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Ausgeliehen, "In diesem Feld wird ihnen die aktuelle Anzahl von Bücheren angezeigt, welche mome" +
+        "ntan ausgeliehen sind.");
             this.lb_Ausgeliehen.Location = new System.Drawing.Point(6, 75);
             this.lb_Ausgeliehen.Name = "lb_Ausgeliehen";
+            this.helpProvider.SetShowHelp(this.lb_Ausgeliehen, true);
             this.lb_Ausgeliehen.Size = new System.Drawing.Size(120, 15);
             this.lb_Ausgeliehen.TabIndex = 2;
             this.lb_Ausgeliehen.Text = "Bücher ausgeliehen:";
@@ -232,8 +238,11 @@
             // lb_IstBestand
             // 
             this.lb_IstBestand.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_IstBestand, "In diesem Feld wird ihnen die aktuelle Anzahl von Bücheren angezeigt, welche sich" +
+        " im Lager befinden.");
             this.lb_IstBestand.Location = new System.Drawing.Point(6, 50);
             this.lb_IstBestand.Name = "lb_IstBestand";
+            this.helpProvider.SetShowHelp(this.lb_IstBestand, true);
             this.lb_IstBestand.Size = new System.Drawing.Size(101, 15);
             this.lb_IstBestand.TabIndex = 1;
             this.lb_IstBestand.Text = "Bücher im Lager:";
@@ -250,8 +259,11 @@
             // lb_Bestand
             // 
             this.lb_Bestand.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Bestand, "In diesem Feld wird ihnen die aktuelle Anzahl von Bücheren angezeigt, welche sich" +
+        " im Bestand befinden.");
             this.lb_Bestand.Location = new System.Drawing.Point(6, 25);
             this.lb_Bestand.Name = "lb_Bestand";
+            this.helpProvider.SetShowHelp(this.lb_Bestand, true);
             this.lb_Bestand.Size = new System.Drawing.Size(114, 15);
             this.lb_Bestand.TabIndex = 0;
             this.lb_Bestand.Text = "Bücher im Bestand:";

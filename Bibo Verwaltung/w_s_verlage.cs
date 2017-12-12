@@ -42,7 +42,7 @@ namespace Bibo_Verwaltung
                 {
                     try
                     {
-                        //Doppelte_Entfernen();
+                        bt_Uebernehmen.Focus();
                         verlag.SaveGrid(ref gv_Verlage);
                     }
                     catch
@@ -61,7 +61,6 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                //Doppelte_Entfernen();
                 verlag.SaveGrid(ref gv_Verlage);
                 aenderungungen = false;
             }

@@ -112,9 +112,11 @@
             // 
             // button1
             // 
+            this.helpProvider.SetHelpString(this.button1, "Klicken sie hier, um den Barcode auszudrucken.");
             this.button1.Location = new System.Drawing.Point(216, 403);
-            this.button1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.button1.Margin = new System.Windows.Forms.Padding(1);
             this.button1.Name = "button1";
+            this.helpProvider.SetShowHelp(this.button1, true);
             this.button1.Size = new System.Drawing.Size(64, 23);
             this.button1.TabIndex = 25;
             this.button1.Text = "Drucken";
@@ -124,7 +126,7 @@
             // tb_Barcode
             // 
             this.tb_Barcode.Location = new System.Drawing.Point(99, 192);
-            this.tb_Barcode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_Barcode.Margin = new System.Windows.Forms.Padding(2);
             this.tb_Barcode.Name = "tb_Barcode";
             this.tb_Barcode.Size = new System.Drawing.Size(158, 20);
             this.tb_Barcode.TabIndex = 24;

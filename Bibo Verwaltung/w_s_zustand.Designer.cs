@@ -36,6 +36,7 @@
             this.tLP_Button = new System.Windows.Forms.TableLayoutPanel();
             this.bt_Uebernehmen = new System.Windows.Forms.Button();
             this.bt_Suchen = new System.Windows.Forms.Button();
+            this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.gb_Zustand.SuspendLayout();
             this.tLP_Sprachen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Zustand)).BeginInit();
@@ -78,9 +79,11 @@
             // 
             this.lb_Zustand.AutoSize = true;
             this.lb_Zustand.Dock = System.Windows.Forms.DockStyle.Top;
+            this.helpProvider.SetHelpString(this.lb_Zustand, "Suchen sie nach gespeicherten Zustände.");
             this.lb_Zustand.Location = new System.Drawing.Point(3, 0);
             this.lb_Zustand.Name = "lb_Zustand";
-            this.lb_Zustand.Size = new System.Drawing.Size(211, 13);
+            this.helpProvider.SetShowHelp(this.lb_Zustand, true);
+            this.lb_Zustand.Size = new System.Drawing.Size(211, 15);
             this.lb_Zustand.TabIndex = 53;
             this.lb_Zustand.Text = "Suchen:";
             // 
@@ -90,8 +93,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tb_Suchen.Enabled = false;
+            this.helpProvider.SetHelpString(this.tb_Suchen, "Suchen sie nach gespeicherten Zustände.");
             this.tb_Suchen.Location = new System.Drawing.Point(3, 19);
             this.tb_Suchen.Name = "tb_Suchen";
+            this.helpProvider.SetShowHelp(this.tb_Suchen, true);
             this.tb_Suchen.Size = new System.Drawing.Size(211, 20);
             this.tb_Suchen.TabIndex = 52;
             this.tb_Suchen.Visible = false;
@@ -107,10 +112,13 @@
             this.gv_Zustand.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_Zustand.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_Zustand.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.helpProvider.SetHelpString(this.gv_Zustand, "Hier werden all ihre gespeicherten Zustände angezeigt. Um einen neuen Eintrag zu " +
+        "erstellen, klicken sie auf die unterste Zeile und schreiben ");
             this.gv_Zustand.Location = new System.Drawing.Point(3, 46);
             this.gv_Zustand.MultiSelect = false;
             this.gv_Zustand.Name = "gv_Zustand";
             this.gv_Zustand.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.helpProvider.SetShowHelp(this.gv_Zustand, true);
             this.gv_Zustand.Size = new System.Drawing.Size(211, 472);
             this.gv_Zustand.TabIndex = 50;
             this.gv_Zustand.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gv_zustand_CellBeginEdit);
@@ -138,8 +146,10 @@
             // 
             this.bt_Uebernehmen.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.bt_Uebernehmen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.helpProvider.SetHelpString(this.bt_Uebernehmen, "Klicken sie auf diesen Button, um alle Änderungen zu übernehmen.");
             this.bt_Uebernehmen.Location = new System.Drawing.Point(3, 3);
             this.bt_Uebernehmen.Name = "bt_Uebernehmen";
+            this.helpProvider.SetShowHelp(this.bt_Uebernehmen, true);
             this.bt_Uebernehmen.Size = new System.Drawing.Size(123, 28);
             this.bt_Uebernehmen.TabIndex = 51;
             this.bt_Uebernehmen.Text = "Übernehmen";
@@ -149,8 +159,10 @@
             // bt_Suchen
             // 
             this.bt_Suchen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.helpProvider.SetHelpString(this.bt_Suchen, "Klicken sie auf diesen Button, um die Suchfunktion an- bzw. auszuschalten.");
             this.bt_Suchen.Location = new System.Drawing.Point(132, 3);
             this.bt_Suchen.Name = "bt_Suchen";
+            this.helpProvider.SetShowHelp(this.bt_Suchen, true);
             this.bt_Suchen.Size = new System.Drawing.Size(80, 28);
             this.bt_Suchen.TabIndex = 54;
             this.bt_Suchen.Text = "Suchen AN";
@@ -163,6 +175,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(219, 571);
             this.Controls.Add(this.gb_Zustand);
+            this.HelpButton = true;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -191,5 +204,6 @@
         private System.Windows.Forms.TableLayoutPanel tLP_Button;
         private System.Windows.Forms.Button bt_Uebernehmen;
         private System.Windows.Forms.Button bt_Suchen;
+        private System.Windows.Forms.HelpProvider helpProvider;
     }
 }

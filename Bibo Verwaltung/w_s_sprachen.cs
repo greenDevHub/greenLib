@@ -43,7 +43,7 @@ namespace Bibo_Verwaltung
                 {
                     try
                     {
-                        Doppelte_Entfernen();  
+                        bt_Uebernehmen.Focus();  
                         sprache.SaveGrid(ref gv_Sprachen);
                     }
                     catch
@@ -62,7 +62,6 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                Doppelte_Entfernen();
                 sprache.SaveGrid(ref gv_Sprachen);
                 aenderungungen = false;
             }
@@ -72,17 +71,9 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
-        //GBVBVHJHGHGVFGHVFGHV
-        //public static DataTable DistinctDataTable(this DataTable table)
-        //{
-        //    var resultTable = table.Clone();
-        //    IEnumerable<DataRow> uniqueElements = table.AsEnumerable().Distinct(DataRowComparer.Default);
-        //    foreach (var row in uniqueElements)
-        //    {
-        //        resultTable.ImportRow(row);
-        //    }
-        //    return resultTable;
-        //}
+
+        #region Doppelte Einträge entfernen (Deaktiviert)
+        /**
         public DataTable RemoveDuplicateRows(DataTable dTable, string colName)
         {
             Hashtable hTable = new Hashtable();
@@ -145,6 +136,8 @@ namespace Bibo_Verwaltung
             Console.WriteLine("Kall");
             //// }
         }
+        **/
+        #endregion
 
         #region Zeile löschen mit Ruecktaste
         private void dataGridView_KeyPress(object sender, KeyPressEventArgs e)

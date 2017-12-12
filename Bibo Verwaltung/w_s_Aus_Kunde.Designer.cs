@@ -51,6 +51,7 @@
             this.gv_Aus_Kunde.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.gv_Aus_Kunde.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_Aus_Kunde.Cursor = System.Windows.Forms.Cursors.Default;
+            this.helpProvider.SetHelpString(this.gv_Aus_Kunde, "Verfügbare Kunden werden hier angezeigt.");
             this.gv_Aus_Kunde.Location = new System.Drawing.Point(12, 42);
             this.gv_Aus_Kunde.MultiSelect = false;
             this.gv_Aus_Kunde.Name = "gv_Aus_Kunde";
@@ -59,6 +60,7 @@
             this.gv_Aus_Kunde.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_Aus_Kunde.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv_Aus_Kunde.ShowEditingIcon = false;
+            this.helpProvider.SetShowHelp(this.gv_Aus_Kunde, true);
             this.gv_Aus_Kunde.Size = new System.Drawing.Size(637, 254);
             this.gv_Aus_Kunde.TabIndex = 0;
             // 
@@ -104,7 +106,7 @@
             this.tb_vorname.ForeColor = System.Drawing.Color.Black;
             this.helpProvider.SetHelpString(this.tb_vorname, "Tragen sie hier den Vornamen des gesuchten Kunden ein.");
             this.tb_vorname.Location = new System.Drawing.Point(86, 16);
-            this.tb_vorname.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tb_vorname.Margin = new System.Windows.Forms.Padding(1);
             this.tb_vorname.Name = "tb_vorname";
             this.helpProvider.SetShowHelp(this.tb_vorname, true);
             this.tb_vorname.Size = new System.Drawing.Size(103, 20);
@@ -116,8 +118,10 @@
             // tb_nachname
             // 
             this.tb_nachname.ForeColor = System.Drawing.Color.Black;
+            this.helpProvider.SetHelpString(this.tb_nachname, "Tragen sie hier den Nachnamen des gesuchten Kunden ein.");
             this.tb_nachname.Location = new System.Drawing.Point(190, 16);
             this.tb_nachname.Name = "tb_nachname";
+            this.helpProvider.SetShowHelp(this.tb_nachname, true);
             this.tb_nachname.Size = new System.Drawing.Size(103, 20);
             this.tb_nachname.TabIndex = 6;
             this.tb_nachname.Click += new System.EventHandler(this.tb_nachname_Click);
@@ -130,9 +134,11 @@
             this.lb_Vorname.BackColor = System.Drawing.Color.White;
             this.lb_Vorname.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.lb_Vorname.ForeColor = System.Drawing.Color.Gray;
+            this.helpProvider.SetHelpString(this.lb_Vorname, "Tragen sie hier den Vornamen des gesuchten Kunden ein.");
             this.lb_Vorname.Location = new System.Drawing.Point(87, 18);
             this.lb_Vorname.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lb_Vorname.Name = "lb_Vorname";
+            this.helpProvider.SetShowHelp(this.lb_Vorname, true);
             this.lb_Vorname.Size = new System.Drawing.Size(57, 15);
             this.lb_Vorname.TabIndex = 7;
             this.lb_Vorname.Text = "Vorname";

@@ -292,9 +292,11 @@
             // rb_Update_Buch
             // 
             this.rb_Update_Buch.AutoSize = true;
+            this.helpProvider.SetHelpString(this.rb_Update_Buch, "Klicken sie hier, um ein vorhandenes Buch zu bearbeiten.");
             this.rb_Update_Buch.Location = new System.Drawing.Point(106, 19);
             this.rb_Update_Buch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rb_Update_Buch.Name = "rb_Update_Buch";
+            this.helpProvider.SetShowHelp(this.rb_Update_Buch, true);
             this.rb_Update_Buch.Size = new System.Drawing.Size(85, 19);
             this.rb_Update_Buch.TabIndex = 43;
             this.rb_Update_Buch.Text = "Bearbeiten";
@@ -317,9 +319,11 @@
             // 
             this.rb_Add_Buch.AutoSize = true;
             this.rb_Add_Buch.Checked = true;
+            this.helpProvider.SetHelpString(this.rb_Add_Buch, "Klicken sie hier, um ein neues Buch hinzuzufügen.");
             this.rb_Add_Buch.Location = new System.Drawing.Point(6, 19);
             this.rb_Add_Buch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rb_Add_Buch.Name = "rb_Add_Buch";
+            this.helpProvider.SetShowHelp(this.rb_Add_Buch, true);
             this.rb_Add_Buch.Size = new System.Drawing.Size(88, 19);
             this.rb_Add_Buch.TabIndex = 41;
             this.rb_Add_Buch.TabStop = true;
@@ -355,9 +359,11 @@
             // rb_Delete_Buch
             // 
             this.rb_Delete_Buch.AutoSize = true;
+            this.helpProvider.SetHelpString(this.rb_Delete_Buch, "Klicken sie hier, um ein vorhandenes Buch zu löschen.");
             this.rb_Delete_Buch.Location = new System.Drawing.Point(206, 19);
             this.rb_Delete_Buch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rb_Delete_Buch.Name = "rb_Delete_Buch";
+            this.helpProvider.SetShowHelp(this.rb_Delete_Buch, true);
             this.rb_Delete_Buch.Size = new System.Drawing.Size(78, 19);
             this.rb_Delete_Buch.TabIndex = 42;
             this.rb_Delete_Buch.Text = "Entfernen";
@@ -487,7 +493,7 @@
             // 
             // bt_Verlag_s
             // 
-            this.helpProvider.SetHelpString(this.bt_Verlag_s, "Klicken sie auf diesen Button, um neue Verläge hinzuzufügen.");
+            this.helpProvider.SetHelpString(this.bt_Verlag_s, "Klicken sie auf diesen Button, um neue Verlage hinzuzufügen.");
             this.bt_Verlag_s.Location = new System.Drawing.Point(276, 136);
             this.bt_Verlag_s.Name = "bt_Verlag_s";
             this.helpProvider.SetShowHelp(this.bt_Verlag_s, true);
