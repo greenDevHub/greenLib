@@ -295,30 +295,21 @@
             this.lb_isbn_vorlage.TabIndex = 44;
             this.lb_isbn_vorlage.Text = "123-0123456789";
             this.lb_isbn_vorlage.Click += new System.EventHandler(this.lb_isbn_vorlage_Click);
-            // 
-            // rb_Update_Buch
-            // 
             this.rb_Update_Buch.AutoSize = true;
-<<<<<<< HEAD
             this.helpProvider.SetHelpString(this.rb_Update_Buch, "Klicken sie hier, um ein vorhandenes Buch zu bearbeiten.");
             this.rb_Update_Buch.Location = new System.Drawing.Point(106, 19);
             this.rb_Update_Buch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rb_Update_Buch.Name = "rb_Update_Buch";
             this.helpProvider.SetShowHelp(this.rb_Update_Buch, true);
             this.rb_Update_Buch.Size = new System.Drawing.Size(85, 19);
-=======
             this.rb_Update_Buch.Location = new System.Drawing.Point(141, 23);
             this.rb_Update_Buch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rb_Update_Buch.Name = "rb_Update_Buch";
             this.rb_Update_Buch.Size = new System.Drawing.Size(98, 21);
->>>>>>> origin/InfoAG
             this.rb_Update_Buch.TabIndex = 43;
             this.rb_Update_Buch.Text = "Bearbeiten";
             this.rb_Update_Buch.UseVisualStyleBackColor = true;
             this.rb_Update_Buch.CheckedChanged += new System.EventHandler(this.rb_Edit_CheckedChanged);
-            // 
-            // bt_clear_buecher
-            // 
             this.helpProvider.SetHelpString(this.bt_clear_buecher, "Leeren sie alle oben liegenden Textfelder.");
             this.bt_clear_buecher.Location = new System.Drawing.Point(264, 484);
             this.bt_clear_buecher.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -329,32 +320,24 @@
             this.bt_clear_buecher.Text = "Leeren";
             this.bt_clear_buecher.UseVisualStyleBackColor = true;
             this.bt_clear_buecher.Click += new System.EventHandler(this.bt_clear_buecher_Click);
-            // 
-            // rb_Add_Buch
-            // 
             this.rb_Add_Buch.AutoSize = true;
             this.rb_Add_Buch.Checked = true;
-<<<<<<< HEAD
             this.helpProvider.SetHelpString(this.rb_Add_Buch, "Klicken sie hier, um ein neues Buch hinzuzufügen.");
             this.rb_Add_Buch.Location = new System.Drawing.Point(6, 19);
             this.rb_Add_Buch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rb_Add_Buch.Name = "rb_Add_Buch";
             this.helpProvider.SetShowHelp(this.rb_Add_Buch, true);
             this.rb_Add_Buch.Size = new System.Drawing.Size(88, 19);
-=======
             this.rb_Add_Buch.Location = new System.Drawing.Point(8, 23);
             this.rb_Add_Buch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rb_Add_Buch.Name = "rb_Add_Buch";
             this.rb_Add_Buch.Size = new System.Drawing.Size(101, 21);
->>>>>>> origin/InfoAG
             this.rb_Add_Buch.TabIndex = 41;
             this.rb_Add_Buch.TabStop = true;
             this.rb_Add_Buch.Text = "Hinzufügen";
             this.rb_Add_Buch.UseVisualStyleBackColor = true;
             this.rb_Add_Buch.CheckedChanged += new System.EventHandler(this.rb_Neubuch_CheckedChanged);
-            // 
-            // cb_Autor
-            // 
+
             this.cb_Autor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Autor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Autor.FormattingEnabled = true;
@@ -383,19 +366,16 @@
             // rb_Delete_Buch
             // 
             this.rb_Delete_Buch.AutoSize = true;
-<<<<<<< HEAD
             this.helpProvider.SetHelpString(this.rb_Delete_Buch, "Klicken sie hier, um ein vorhandenes Buch zu löschen.");
             this.rb_Delete_Buch.Location = new System.Drawing.Point(206, 19);
             this.rb_Delete_Buch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rb_Delete_Buch.Name = "rb_Delete_Buch";
             this.helpProvider.SetShowHelp(this.rb_Delete_Buch, true);
             this.rb_Delete_Buch.Size = new System.Drawing.Size(78, 19);
-=======
             this.rb_Delete_Buch.Location = new System.Drawing.Point(275, 23);
             this.rb_Delete_Buch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rb_Delete_Buch.Name = "rb_Delete_Buch";
             this.rb_Delete_Buch.Size = new System.Drawing.Size(91, 21);
->>>>>>> origin/InfoAG
             this.rb_Delete_Buch.TabIndex = 42;
             this.rb_Delete_Buch.Text = "Entfernen";
             this.rb_Delete_Buch.UseVisualStyleBackColor = true;
@@ -535,14 +515,11 @@
             // 
             // bt_Verlag_s
             // 
-<<<<<<< HEAD
             this.helpProvider.SetHelpString(this.bt_Verlag_s, "Klicken sie auf diesen Button, um neue Verlage hinzuzufügen.");
             this.bt_Verlag_s.Location = new System.Drawing.Point(276, 136);
-=======
             this.helpProvider.SetHelpString(this.bt_Verlag_s, "Klicken sie auf diesen Button, um neue Verläge hinzuzufügen.");
             this.bt_Verlag_s.Location = new System.Drawing.Point(368, 167);
             this.bt_Verlag_s.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
->>>>>>> origin/InfoAG
             this.bt_Verlag_s.Name = "bt_Verlag_s";
             this.helpProvider.SetShowHelp(this.bt_Verlag_s, true);
             this.bt_Verlag_s.Size = new System.Drawing.Size(20, 20);
