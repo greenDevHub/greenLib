@@ -153,10 +153,10 @@ CREATE TABLE [dbo].[t_s_kunden](
 	[kunde_hausnummer] [nvarchar](4) NOT NULL,
 	[kunde_postleitzahl] [nvarchar](16) NOT NULL,
 	[kunde_ort] [nvarchar](128) NOT NULL,
-	[kunde_vertrauenswürdigkeit] [nvarchar](128) NOT NULL,
-	[kunde_klasse] [nvarchar](16),
-	[kunde_mail] [nvarchar](128),
-	[kunde_telefonnummer] [nvarchar](128),
+	[kunde_vertrauenswürdigkeit] [nvarchar](128),
+	[kunde_klasse] [nvarchar](6),
+	[kunde_mail] [nvarchar](128) NOT NULL,
+	[kunde_telefonnummer] [nvarchar](128) NOT NULL,
 	PRIMARY KEY (kunde_id))
 	END
 
@@ -223,6 +223,7 @@ CREATE TABLE [dbo].[t_s_autorListe](
 		REFERENCES t_s_autor (au_id),
 	FOREIGN KEY (a_9)
 		REFERENCES t_s_autor (au_id))
+	Select * from t_s_autorListe
 	END
 
 use Bibo_Verwaltung
@@ -257,6 +258,7 @@ CREATE TABLE [dbo].[t_s_buecher](
 	[buch_anzahl] [int] NOT NULL,
 	[buch_image] [varbinary](max),
 	[buch_imageDate] [datetime],
+	[buch_activated] [BIT] NOT NULL,
 
 
 	PRIMARY KEY (buch_isbn),
@@ -281,6 +283,7 @@ CREATE TABLE [dbo].[t_s_buchid](
 	[bu_isbn] [nvarchar] (32) NOT NULL,
 	[bu_zustandsid] [int] NOT NULL,
 	[bu_aufnahmedatum] [date] NOT NULL,
+	[bu_activated] [BIT] NOT NULL,
 
 	PRIMARY KEY (bu_id),
 	FOREIGN KEY (bu_zustandsid)
@@ -305,5 +308,27 @@ CREATE TABLE [dbo].[t_bd_ausgeliehen](
 	FOREIGN KEY (aus_buchid)
 		REFERENCES t_s_buchid (bu_id),
     FOREIGN KEY (aus_kundenid)
+	    REFERENCES t_s_kunden (kunde_id))
+
+	END
+
+	use Bibo_Verwaltung
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_verlauf]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_genre]
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_verlauf]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[t_s_verlauf](
+	[ver_id] [int] IDENTITY (1,1) NOT NULL,
+	[id_buch] [int] NOT NULL,
+	[k_id] [int] NOT NULL,
+	[zu_vor] [nvarchar] (128) NOT NULL,
+	[zu_nach] [nvarchar] (128) NOT NULL,
+	[aus_geliehen] [date] NOT NULL,
+	[aus_ruckgabe] [date] NOT NULL,
+	PRIMARY KEY (ver_id),
+	FOREIGN KEY (id_buch)
+		REFERENCES t_s_buchid (bu_id),
+    FOREIGN KEY (k_id)
 	    REFERENCES t_s_kunden (kunde_id))
 	END
