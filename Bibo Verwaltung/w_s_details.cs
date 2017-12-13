@@ -183,6 +183,21 @@ namespace Bibo_Verwaltung
 
         private void bt_Clear_Click(object sender, EventArgs e)
         {
+            lb_autor.Visible = true;
+            lb_id.Visible = true;
+            lb_autor.Visible = true;
+            lb_Genre.Visible = true;
+            lb_isbn.Visible = true;
+            lb_verlag.Visible = true;
+            if (cb_KundeAnz.Checked)
+            {
+                lb_vorname.Visible = true;
+                lb_nachname.Visible = true;
+            }
+            tb_vorname.Text = "";
+            tb_nachname.Text = "";
+            tb_ID.Text = "";
+            tb_ISBN.Text = "";
             tb_s_Titel.Text = "";
             combo_Autor.Text = "";
             combo_Genre.Text = "";
@@ -281,6 +296,8 @@ namespace Bibo_Verwaltung
                 tb_vorname.Enabled = false;
                 lb_vorname.Visible = false;
                 lb_nachname.Visible = false;
+                tb_vorname.Text = "";
+                tb_nachname.Text = "";
             }
         }
 
@@ -402,6 +419,7 @@ namespace Bibo_Verwaltung
                     bt_AbbrechenAusleihen.Enabled = false;
                     details.FillGrid(ref gv_Details);
                     Verfuegbarkeit_Einblenden();
+                    Markierung();
                 }
                 else
                 {
@@ -484,17 +502,6 @@ namespace Bibo_Verwaltung
                 if (_checksum_ean8(seven).ToString().Equals(eight))
                 {
                     tb_ID.Text = int.Parse(seven).ToString();
-                }
-            }
-            if (!tb_ID.Text.Equals(""))
-            {
-                try
-                {
-                    tb_ID.Text = int.Parse(tb_ID.Text).ToString();
-                }
-                catch
-                {
-                    tb_ID.Text = "";
                 }
             }
             Buch_Suchen();
@@ -742,6 +749,11 @@ namespace Bibo_Verwaltung
                         row.DefaultCellStyle.BackColor = Color.LimeGreen;
                     }
                 }
+        }
+
+        private void gv_Details_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            Markierung();
         }
     }
 }

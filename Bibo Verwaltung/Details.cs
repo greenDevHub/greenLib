@@ -95,8 +95,14 @@ namespace Bibo_Verwaltung
             ClearDS();
             FillObject();
             grid.DataSource = ds.Tables[0];
-            grid.Columns[ds.Tables[0].Columns.IndexOf("Autor")].DisplayIndex = 3;
+            grid.Columns[ds.Tables[0].Columns.IndexOf("Autor")].DisplayIndex = 8;
             grid.Columns[ds.Tables[0].Columns.IndexOf("AutorlisteID")].Visible = false;
+            grid.Columns[ds.Tables[0].Columns.IndexOf("Leihnummer")].DisplayIndex = 0;
+            grid.Columns[ds.Tables[0].Columns.IndexOf("Rückgabedatum")].DisplayIndex = 1;
+            grid.Columns[ds.Tables[0].Columns.IndexOf("Kunden ID")].DisplayIndex = 2;
+            grid.Columns[ds.Tables[0].Columns.IndexOf("Vorname")].DisplayIndex = 3;
+            grid.Columns[ds.Tables[0].Columns.IndexOf("Nachname")].DisplayIndex = 4;
+            grid.Columns[ds.Tables[0].Columns.IndexOf("Klasse")].DisplayIndex = 5;
         }
 
         public int GetColumnIndexByName(DataGridView grid, string name)

@@ -189,6 +189,7 @@ namespace Bibo_Verwaltung
             lb.Visible = false;
             tb_id.Text = "";
             cb_zustand.Text = "";
+            BarcodeBox.Image = null;
         }
         #endregion
 

@@ -27,13 +27,44 @@ namespace Bibo_Verwaltung
         string ausgeliehen_global = "";
         string ruckgabe_global = "";
 
-
+        static int _checksum_ean8(String data)
+        {
+            // Test string for correct length
+            if (data.Length != 7 && data.Length != 8)
+                return -1;
+            // Test string for being numeric
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (data[i] < 0x30 || data[i] > 0x39)
+                    return -1;
+            }
+            int sum = 0;
+            for (int i = 6; i >= 0; i--)
+            {
+                int digit = data[i] - 0x30;
+                if ((i & 0x01) == 1)
+                    sum += digit;
+                else
+                    sum += digit * 3;
+            }
+            int mod = sum % 10;
+            return mod == 0 ? 0 : 10 - mod;
+        }
         private void tb_BuchCode_TextChanged(object sender, EventArgs e)
         {
+            if (tb_BuchCode.Text.Length == 8)
+            {
+                string seven = tb_BuchCode.Text.Substring(0, 7);
+                string eight = tb_BuchCode.Text.Substring(7, 1);
+                if (_checksum_ean8(seven).ToString().Equals(eight))
+                {
+                    tb_BuchCode.Text = int.Parse(seven).ToString();
+                }
+            }
             if (tb_BuchCode.Text != "")
             {
-                bt_Rueckgabe.Enabled = true;
-
+                cb_Zustand.Text = "";
+                bt_Zu_aendern.Text = "Buchzustand ändern";
                 try
                 {
                     BuchID buchid = new BuchID(tb_BuchCode.Text);
@@ -128,15 +159,14 @@ namespace Bibo_Verwaltung
                         lb_rueckgabe.ForeColor = Color.Red;
                         lb_rueckgabe.Text = lb_rueckgabe.Text + " (überfällig)";
                     }
-
-                    if (llb_Kunde.Text != "nicht verliehen")
-                    {
-                        bt_Zu_aendern.Enabled = true;
-                    }
+                    bt_Zu_aendern.Enabled = true;
+                    bt_Rueckgabe.Enabled = true;
                 }
                 catch
                 {
+                    bt_Zu_aendern.Enabled = false;
                     llb_Kunde.Enabled = false;
+                    bt_Rueckgabe.Enabled = false;
                     llb_Kunde.Text = "nicht verliehen";
                     lb_ausgeliehen.Text = "nicht verfügbar";
                     lb_rueckgabe.Text = "nicht verfügbar";
