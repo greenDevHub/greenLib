@@ -342,16 +342,23 @@ namespace Bibo_Verwaltung
 
                         BuchID buchid = new BuchID();
                         //buchid.DeleteWhereISBN(tb_ISBN.Text);
-                        buchid.DeactivateWhereISBN(tb_ISBN.Text);
-                        b.AutorListe.AutorListeID = b.GetAutorID(tb_ISBN.Text);
-                        b.ISBN = tb_ISBN.Text;
-                        b.Deactivate();
-                        //b.Delete_Buch();
-                        Delete_picture(location);
-                        Clear_All();
-                        b.FillGrid_Buch(ref Grid_Buch);
-                        rTB_1.Visible = true;
-                        t.Start();
+                        if (buchid.IsAvailable(tb_ISBN.Text))
+                        {
+                            buchid.DeactivateWhereISBN(tb_ISBN.Text);
+                            b.AutorListe.AutorListeID = b.GetAutorID(tb_ISBN.Text);
+                            b.ISBN = tb_ISBN.Text;
+                            b.Deactivate();
+                            Delete_picture(location);
+                            Clear_All();
+                            b.FillGrid_Buch(ref Grid_Buch);
+                            rTB_1.Visible = true;
+                            t.Start();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Das Buch konnte nicht gelöscht werden, da eines der dazugehörigen Exemplare zur Zeit verliehen ist. Bitte melden Sie dieses zuerst als 'zurückgegeben', bevor Sie das Buch löschen!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        
                     }
                     else if (dialogResult == DialogResult.No)
                     {

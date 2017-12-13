@@ -105,14 +105,24 @@ namespace Bibo_Verwaltung
                     b.Zustand.ZustandID = cb_zustand.SelectedValue.ToString();
                     b.Aufnahmedatum = dTP_aufnahme.Value;
                     //b.Delete();
-                    b.Deactivate();
-                    Clear();
-                    lb.Visible = true;
-                    b.ClearDS();
-                    b.FillObject();
-                    b.FillGrid(ref grid_buchid);
-                    tb_anzahl.Text = grid_buchid.RowCount.ToString();
-                    t.Start();
+                    if (b.IsSpecificAvailable())
+                    {
+                        b.Deactivate();
+                        Clear();
+                        lb.Visible = true;
+                        b.ClearDS();
+                        b.FillObject();
+                        b.FillGrid(ref grid_buchid);
+                        tb_anzahl.Text = grid_buchid.RowCount.ToString();
+                        t.Start();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Das Exemplar konnte nicht gelöscht werden, da es sich noch im Verleih befindet. Bitte markieren Sie es zuerst als 'zurückgegeben'!", "Achtung",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    
                 }
                 catch (SqlException)
                 {
