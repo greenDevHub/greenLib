@@ -124,5 +124,19 @@ namespace Bibo_Verwaltung
             aenderungungen = true;
         }
         #endregion
+
+        private void gv_Autoren_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            string s = gv_Autoren.Rows[e.RowIndex].Cells[1].Value.ToString();
+            for (int i = 0; i < gv_Autoren.Rows.Count - 2; i++)
+            {
+                if (s == gv_Autoren.Rows[i].Cells[1].Value.ToString())
+                {
+                    MessageBox.Show("Dieser Eintrag ist bereits vorhanden!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    gv_Autoren.Rows.RemoveAt(e.RowIndex);
+                    return;
+                }
+            }
+        }
     }
 }
