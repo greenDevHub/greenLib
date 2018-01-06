@@ -48,6 +48,10 @@ namespace Bibo_Verwaltung
                 Form Kunden = new w_s_Kunden();
                 Kunden.ShowDialog(this);
             }
+            else
+            {
+                MessageBox.Show("Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void bt_Genres_Click(object sender, EventArgs e)
@@ -56,6 +60,10 @@ namespace Bibo_Verwaltung
             {
                 Form Genres = new w_s_genres();
                 Genres.ShowDialog(this);
+            }
+            else
+            {
+                MessageBox.Show("Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
@@ -67,6 +75,10 @@ namespace Bibo_Verwaltung
                 Form Sprachen = new w_s_sprachen();
                 Sprachen.ShowDialog(this);
             }
+            else
+            {
+                MessageBox.Show("Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
         }
 
@@ -76,6 +88,10 @@ namespace Bibo_Verwaltung
             {
                 Form Autoren = new w_s_autoren();
                 Autoren.ShowDialog(this);
+            }
+            else
+            {
+                MessageBox.Show("Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
@@ -87,7 +103,10 @@ namespace Bibo_Verwaltung
                 Form Verlage = new w_s_verlage();
                 Verlage.ShowDialog(this);
             }
-
+            else
+            {
+                MessageBox.Show("Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void bt_Buecher_Click(object sender, EventArgs e)
@@ -97,13 +116,17 @@ namespace Bibo_Verwaltung
                 Form Buecher = new w_s_buecher();
                 Buecher.ShowDialog(this);
             }
-
+            else
+            {
+                MessageBox.Show("Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         private void bt_Einstellungen_Click(object sender, EventArgs e)
         {
             Form Einstellungen = new w_s_einstellungen();
             Einstellungen.ShowDialog(this);
-            error = false;
+            UpdateForm();
+            //error = false;
 
         }
 
@@ -114,7 +137,10 @@ namespace Bibo_Verwaltung
                 Form Zustand = new w_s_zustand();
                 Zustand.ShowDialog(this);
             }
-
+            else
+            {
+                MessageBox.Show("Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void bt_Suchen_Ausleihen_Click(object sender, EventArgs e)
@@ -124,7 +150,10 @@ namespace Bibo_Verwaltung
                 Form Details = new w_s_details();
                 Details.ShowDialog(this);
             }
-
+            else
+            {
+                MessageBox.Show("Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         private void UpdateForm()
         {
@@ -139,6 +168,10 @@ namespace Bibo_Verwaltung
                 lb_Lagerzahl.Text = "-";
                 lb_Ausleihzahl.Text = "-";
                 return;
+            }
+            else
+            {
+                error = false;
             }
             string bestandSQL = "SELECT * FROM t_s_buchid WHERE bu_activated = 1";
             string ausgeliehenSQL = "SELECT * FROM t_bd_ausgeliehen";

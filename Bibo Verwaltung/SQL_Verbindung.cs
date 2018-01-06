@@ -105,7 +105,7 @@ namespace Bibo_Verwaltung
                 con.Open();
                 error = false;
             }
-            catch (SqlException)
+            catch
             {
                 MessageBox.Show("Die Verbindung zu dem SQL-Server konnte nicht hergestellt werden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;

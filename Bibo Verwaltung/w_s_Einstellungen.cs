@@ -129,7 +129,6 @@ namespace Bibo_Verwaltung
             {
                 MessageBox.Show("Verbindung hergestellt", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -46,7 +47,24 @@ namespace Bibo_Verwaltung
                 }
                 tb_Barcode.Text = code;
                 Zen.Barcode.CodeEan8BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.CodeEan8WithChecksum;
-                BarcodeBox.Image = barcode.Draw(tb_Barcode.Text, BarcodeBox.Height/7);
+                var barcodeImage = barcode.Draw(tb_Barcode.Text, 50,3);
+                var resultImage = new Bitmap(barcodeImage.Width, barcodeImage.Height + 20); // 20 is bottom padding, adjust to your text
+
+                using (var graphics = Graphics.FromImage(resultImage))
+                using (var font = new Font("Calibri", 10))
+                using (var brush = new SolidBrush(Color.Black))
+                using (var format = new StringFormat()
+                {
+                    Alignment = StringAlignment.Center, // Also, horizontally centered text, as in your example of the expected output
+                    LineAlignment = StringAlignment.Far
+                })
+                {
+                    graphics.Clear(Color.White);
+                    graphics.DrawImage(barcodeImage, 0, 0);
+                    graphics.DrawString(tb_Barcode.Text, font, brush, resultImage.Width / 2, resultImage.Height, format);
+                }
+
+                BarcodeBox.Image = resultImage;
                 rb_edit.Checked = true;
 
                 b.Zustand.FillCombobox(ref cb_zustand, b.Zustand.ZustandID);
@@ -78,7 +96,11 @@ namespace Bibo_Verwaltung
                     b.ISBN = tb_isbn.Text;
                     b.Zustand.ZustandID = cb_zustand.SelectedValue.ToString();
                     b.Aufnahmedatum = dTP_aufnahme.Value;
-                    b.Add();
+                    int number = int.Parse(tb_number.Text);
+                    for (int i = 0; i < number; i++)
+                    {
+                        b.Add();
+                    }
                     //Barcode bar = new Barcode("3", BarcodeBox);
                     //bar.FillPictureBox(ref BarcodeBox);
                     Clear();
@@ -190,6 +212,7 @@ namespace Bibo_Verwaltung
             tb_id.Text = "";
             cb_zustand.Text = "";
             BarcodeBox.Image = null;
+            tb_number.Text = "1";
         }
         #endregion
 
@@ -205,6 +228,7 @@ namespace Bibo_Verwaltung
                 tb_isbn.Enabled = false;
                 cb_zustand.Enabled = true;
                 dTP_aufnahme.Enabled = true;
+                tb_number.Enabled = true;
             }
             else if (rb_delete.Checked)
             {
@@ -214,6 +238,7 @@ namespace Bibo_Verwaltung
                 tb_isbn.Enabled = false;
                 cb_zustand.Enabled = false;
                 dTP_aufnahme.Enabled = false;
+                tb_number.Enabled = false;
             }
             else if (rb_edit.Checked)
             {
@@ -223,6 +248,7 @@ namespace Bibo_Verwaltung
                 tb_isbn.Enabled = false;
                 cb_zustand.Enabled = true;
                 dTP_aufnahme.Enabled = true;
+                tb_number.Enabled = false;
             }
         }
         #endregion
@@ -368,6 +394,32 @@ namespace Bibo_Verwaltung
         private void bt_close_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void tb_id_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                SystemSounds.Beep.Play();
+                e.Handled = true;
+            }
+        }
+
+        private void tb_number_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                SystemSounds.Beep.Play();
+                e.Handled = true;
+            }
+        }
+
+        private void tb_number_Leave(object sender, EventArgs e)
+        {
+            if (tb_number.Text.Equals("") || tb_number.Text.Equals("0"))
+            {
+                tb_number.Text = "1";
+            }
         }
     }
 }
