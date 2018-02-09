@@ -133,7 +133,7 @@ namespace Bibo_Verwaltung
         {
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT kunde_ID as 'Kunden-ID', kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_strasse as 'Straße', kunde_hausnummer as 'Hausnummer', kunde_postleitzahl as 'Postleitzahl', kunde_ort as 'Wohnort', kunde_vertrauenswürdigkeit as 'Vertrauenwürdigkeit', kunde_klasse as 'Klasse', kunde_mail as 'Mail', kunde_telefonnummer as 'Telefonnummer' FROM [dbo].[t_s_kunden]";
+            string RawCommand = "SELECT kunde_ID as 'Kunden-ID', kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_strasse as 'Straße', kunde_hausnummer as 'Hausnummer', kunde_postleitzahl as 'Postleitzahl', kunde_ort as 'Wohnort', kunde_vertrauenswürdigkeit as 'Vertrauenswürdigkeit', kunde_klasse as 'Klasse', kunde_mail as 'Mail', kunde_telefonnummer as 'Telefonnummer' FROM [dbo].[t_s_kunden]";
 
             // Verbindung öffnen 
             adapter = new SqlDataAdapter(RawCommand, con.Con);
@@ -168,7 +168,7 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Add
-        public void Add()
+        public void Add_Kunde()
         {
             {
                 string RawCommand = "INSERT INTO [dbo].[t_s_kunden] (kunde_vorname, kunde_nachname, kunde_ort, kunde_postleitzahl, kunde_strasse, kunde_telefonnummer, kunde_hausnummer, kunde_mail, kunde_klasse, kunde_vertrauenswürdigkeit) VALUES (@vorname, @nachname, @ort, @postleitzahl, @strasse, @telefonnummer, @hausnummer, @mail, @klasse, @vertrauenswürdigkeit)";
@@ -185,7 +185,6 @@ namespace Bibo_Verwaltung
                 cmd.Parameters.AddWithValue("@mail", Mail);
                 cmd.Parameters.AddWithValue("@klasse", Klasse);
                 cmd.Parameters.AddWithValue("@vertrauenswürdigkeit", Vertrauenswuerdigkeit);
-                cmd.Parameters.AddWithValue("@k_ID", KundenID);
 
                 // Verbindung öffnen 
                 cmd.ExecuteNonQuery();
@@ -196,7 +195,7 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Save
-        public void Save()
+        public void Save_Kunde()
         {
             {
                 string RawCommand = "UPDATE [dbo].[t_s_kunden] SET kunde_vorname = @vorname, kunde_nachname = @nachname, kunde_ort = @ort, kunde_postleitzahl = @postleitzahl, kunde_strasse = @strasse, kunde_telefonnummer = @telefonnummer, kunde_hausnummer = @hausnummer, kunde_mail = @mail, kunde_klasse = @klasse, kunde_vertrauenswürdigkeit = @vertrauenswürdigkeit WHERE kunde_ID = @k_ID";
@@ -224,7 +223,7 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Delete
-        public void Delete()
+        public void Delete_Kunde()
         {
             {
                 string RawCommand = "DELETE FROM [dbo].[t_s_kunden] WHERE kunde_id = @id";
@@ -240,6 +239,54 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
-    }
+
+        #region CSV-Dateien einlesen
+        public void LeseCSV(string path, char separator)
+        {
+           // char[] delimiters = new char[] { ';' };
+            string line;
+
+            // Read the file  @"C:\Test.csv"
+            System.IO.StreamReader file = new System.IO.StreamReader(path);
+            while ((line = file.ReadLine()) != null)
+            {
+                string[] parts = line.Split(separator);//delimiters
+                //for (int i = 0; i >= parts.Length; i++)
+                //{
+                //    System.Console.WriteLine(parts[i]);
+                //}
+                Kunde neuKunde = new Kunde();
+                neuKunde.Vorname = parts[0];
+                neuKunde.Nachname = parts[1];
+                neuKunde.Ort = parts[2];
+                neuKunde.Postleitzahl = parts[3];
+                neuKunde.Strasse = parts[4];
+                neuKunde.Hausnummer = parts[5];
+                neuKunde.Telefonnummer = parts[6];               
+                neuKunde.Mail = parts[7];
+                neuKunde.Klasse = parts[8];
+                neuKunde.Vertrauenswuerdigkeit = "";
+
+                neuKunde.Add_Kunde();
+                System.Console.WriteLine(parts);
+                //System.Console.WriteLine(parts[0]);
+                //System.Console.WriteLine(parts[1]);
+                //System.Console.WriteLine(parts[2]);
+            }
+            
+            file.Close();
+           
+            //Console.WriteLine("{0} field(s)", parts.Length);
+            //System.Console.WriteLine("There were {0} lines.", counter);
+            //// Suspend the screen.  
+            System.Console.ReadLine();
+        }
+
+        //private void LeseCSV_Zeile(separator)
+        //{
+
+        //}
+            #endregion
+        }
 }
 
