@@ -1,4 +1,3 @@
--	Schnellerfassung von vielen Exemplaren
 -	Importieren von Schülern (csv)
 -	Schuljahr Ende Datenbereinigung
 -	Lehrbücher Ausgabe/Rückgabe

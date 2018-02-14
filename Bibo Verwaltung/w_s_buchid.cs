@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Media;
@@ -27,6 +28,7 @@ namespace Bibo_Verwaltung
 
 
         #region Grid_Laden
+        Image resultImage = null;
         private void Grid_Buch_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -48,7 +50,7 @@ namespace Bibo_Verwaltung
                 tb_Barcode.Text = code;
                 Zen.Barcode.CodeEan8BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.CodeEan8WithChecksum;
                 var barcodeImage = barcode.Draw(tb_Barcode.Text, 50,3);
-                var resultImage = new Bitmap(barcodeImage.Width, barcodeImage.Height + 20); // 20 is bottom padding, adjust to your text
+                resultImage = new Bitmap(barcodeImage.Width, barcodeImage.Height + 20); // 20 is bottom padding, adjust to your text
 
                 using (var graphics = Graphics.FromImage(resultImage))
                 using (var font = new Font("Calibri", 10))
@@ -63,7 +65,8 @@ namespace Bibo_Verwaltung
                     graphics.DrawImage(barcodeImage, 0, 0);
                     graphics.DrawString(tb_Barcode.Text, font, brush, resultImage.Width / 2, resultImage.Height, format);
                 }
-
+                BarcodeBox.Height = resultImage.Height;
+                BarcodeBox.Width = resultImage.Width;
                 BarcodeBox.Image = resultImage;
                 rb_edit.Checked = true;
 
@@ -362,8 +365,13 @@ namespace Bibo_Verwaltung
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            PrintDialog pd = new PrintDialog();
+            BarcodeBox.Image.Save("C:\\Users\\Laurenz\\testbild.png");
+            //PrintDialog pd = new PrintDialog();
+            //PrintDocument doc = new PrintDocument();
+            //doc.PrintPage += Doc_PrintPage;
+            //pd.Document = doc;
             PrintDocument doc = new PrintDocument();
+            PrintDialog pd = new PrintDialog();
             doc.PrintPage += Doc_PrintPage;
             pd.Document = doc;
             if (pd.ShowDialog() == DialogResult.OK)
@@ -385,10 +393,15 @@ namespace Bibo_Verwaltung
 
         private void Doc_PrintPage(object sender, PrintPageEventArgs e)
         {
-            Bitmap bm = new Bitmap(BarcodeBox.Width, BarcodeBox.Height);
-            BarcodeBox.DrawToBitmap(bm, new Rectangle(0, 0, BarcodeBox.Width, BarcodeBox.Height));
-            e.Graphics.DrawImage(bm, 0, 0);
-            bm.Dispose();
+            //System.Drawing.Image bm = System.Drawing.Image.FromFile("C:\\Users\\Laurenz\\testbild.png");
+            ////Bitmap bm = new Bitmap(Image.FromFile("C:\\Users\\Laurenz\\testbild.png"));
+            Point loc = new Point(0, -20);
+            e.Graphics.DrawImage(resultImage, loc);
+            ////Bitmap bm = new Bitmap(BarcodeBox.Width, BarcodeBox.Height);
+            ////BarcodeBox.DrawToBitmap(bm, new Rectangle(0, 0, BarcodeBox.Width, BarcodeBox.Height));
+            ////e.Graphics.DrawImage(bm, 0, 0);
+            //////bm.Dispose();
+            ////bm.Save("C:\\Users\\Laurenz\\testbild1234.png", ImageFormat.Png);
         }
 
         private void bt_close_Click(object sender, EventArgs e)
