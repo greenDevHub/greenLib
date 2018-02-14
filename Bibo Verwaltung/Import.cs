@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -182,63 +183,20 @@ namespace Bibo_Verwaltung
 
         public void executeKundenImport()
         {
-            //foreach (DataRow row in dt.Rows)
-            //{
-            //    Kunde kunde = new Kunde();
-            //    kunde.Vorname = tb_Vorname.Text;
-            //    kunde.Nachname = tb_Nachname.Text;
-            //    kunde.Strasse = tb_Strasse.Text;
-            //    kunde.Hausnummer = tb_Hausnummer.Text;
-            //    kunde.Postleitzahl = tb_Postleitzahl.Text;
-            //    kunde.Ort = tb_Ort.Text;
-            //    kunde.Vertrauenswuerdigkeit = cb_Vertrauenswuerdigkeit.Text;
-            //    kunde.Klasse = tb_Klasse.Text;
-            //    kunde.Mail = tb_Mail.Text;
-            //    kunde.Telefonnummer = tb_Telefonnummer.Text;
-            //}
-            //MessageBox.Show("Wählen Sie die richtige Zieltabelle der Bibliotheks-Datenbank.", "Achtung", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            //string[] data = { "" };
-            //int i = 0;
-            //int j = 0;
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return;
+            using (var bulkCopy = new SqlBulkCopy(con.Con))
+            {
+                // my DataTable column names match my SQL Column names, so I simply made this loop. However if your column names don't match, just pass in which datatable name matches the SQL column name in Column Mappings
+                foreach (DataColumn col in dt.Columns)
+                {
+                    bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+                }
 
-                //foreach (DataColumn col in dt.Columns)
-                //{
-                //    foreach (DataRow row in dt.Rows)
-                //    {
-                //        //typ1 = getDataType(dt.Columns[i].Table.Rows[j].ToString());
-                //        //string ob = dt.Columns[i].Table.Rows[j].ToString();
-                //        string abc = dt.Rows[i][col].ToString();
-                //        //Type typ = dt.Columns[i].DataType;
-                //        i++;
-                //        Console.Write(abc);
-                //        Console.WriteLine(getDataType(abc));
-
-                //    }
-                //    Console.WriteLine("------------------");
-                //    i = 0;
-                //    //DataTable.
-                //    //string t = dt.Columns[i].Table.Rows[j].ToString();
-                //    //j++;
-                //    ////
-                //    //foreach (DataRow row in dt.Rows)
-                //    //{
-                //    //    string t = row[col].ToString();
-                //    //    //Console.WriteLine(t);
-                //    //    data[i] = getDataType(t).ToString();
-
-                //    //Console.WriteLine("-------------------------------------------------------------------------");
-                //    //Console.WriteLine(typ1);
-                //    //}
-                //}
-
-
-
-
-                //foreach (string s in data)
-                //{
-                //    Console.WriteLine(s);
-                //}
-
+                bulkCopy.BulkCopyTimeout = 600;
+                bulkCopy.DestinationTableName = "t_s_kunden";
+                bulkCopy.WriteToServer(dt);
+            }
         }
 
     }
