@@ -34,7 +34,7 @@ namespace Bibo_Verwaltung
         //}
         #endregion
 
-        #region Save Kunde
+        #region Save Kunde (Methoden: setKundenValues(), bt_confirm_click())
         private void setKundenValues()
         {
             kunde.KundenID = tb_KundenID.Text;
@@ -50,7 +50,7 @@ namespace Bibo_Verwaltung
             kunde.Telefonnummer = tb_Telefonnummer.Text;
         }
 
-        private void Save_Kunde(object sender, EventArgs e)
+        private void bt_confirm_click(object sender, EventArgs e)
         {
             var t = new Timer();
             t.Interval = 3000; // it will Tick in 3 seconds
@@ -73,8 +73,8 @@ namespace Bibo_Verwaltung
                     try
                     {
                         setKundenValues();
-                        kunde.Save_Kunde();
-                        Clear_Form();
+                        kunde.saveKunde();
+                        clearForm();
                         kunde.FillGrid(ref Grid_Kunde);
                         lb_kunde_add.Visible = false;
                         lb_kunde_add.Text = "Der Kunde wurde bearbeitet!";
@@ -91,7 +91,7 @@ namespace Bibo_Verwaltung
                 {
                     MessageBox.Show("Füllen Sie die markierten Felder aus, um einen Kunden zu speichern!", "Achtung",
                          MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    IsOK();
+                    setBackground_Red();
                 }
             }
 
@@ -102,8 +102,8 @@ namespace Bibo_Verwaltung
                     try
                     {
                         setKundenValues();
-                        kunde.Delete_Kunde();
-                        Clear_Form();
+                        kunde.deleteKunde();
+                        clearForm();
                         kunde.FillGrid(ref Grid_Kunde);
                         lb_kunde_add.Visible = false;
                         lb_kunde_add.Text = "Der Kunde wurde gelöscht!";
@@ -144,8 +144,8 @@ namespace Bibo_Verwaltung
                     try
                     {
                         setKundenValues();
-                        kunde.Add_Kunde();
-                        Clear_Form();
+                        kunde.addKunde();
+                        clearForm();
                         kunde.FillGrid(ref Grid_Kunde);
                         lb_kunde_add.Visible = false;
                         lb_kunde_add.Text = "Der Kunde wurde hinzugefügt!";
@@ -162,21 +162,20 @@ namespace Bibo_Verwaltung
                 {
                     MessageBox.Show("Füllen Sie alle Felder aus, um einen neuen Kunden hinzuzufügen!", "Achtung",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    IsOK();
+                    setBackground_Red();
                 }
             }
         }
         #endregion
 
-        #region Clear Kunde
-        private void bt_Clear(object sender, EventArgs e)
+        #region Clear Kunde (Methoden: bt_clear_Click(), clearForm(), setBackground_White())
+        private void bt_clear_Click(object sender, EventArgs e)
         {
-            Clear_Form();
+            clearForm();
         }
 
-        private void Clear_Form()
+        private void clearForm()
         {
-            rb_Neukunde.Checked = true;
             lb_kunde_add.Visible = false;
             tb_Vorname.Text = "";
             tb_Nachname.Text = "";
@@ -208,13 +207,13 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        #region Modus
+        #region Modus setzen (Methoden: setModus(), rb_CheckedChanged(), w_s_kunden_Activated())
         private void setModus()
         {
             if (rb_KundeBearbeiten.Checked)
             {
-                bt_save_kunde.Enabled = true;
-                bt_save_kunde.Text = "Speichern";
+                bt_confirm.Enabled = true;
+                bt_confirm.Text = "Speichern";
                 tb_KundenID.Enabled = false;
                 tb_Vorname.Enabled = true;
                 tb_Nachname.Enabled = true;
@@ -237,8 +236,8 @@ namespace Bibo_Verwaltung
             }
             else if (rb_Neukunde.Checked)
             {
-                bt_save_kunde.Text = "Hinzufügen";
-                bt_save_kunde.Enabled = true;
+                bt_confirm.Text = "Hinzufügen";
+                bt_confirm.Enabled = true;
                 tb_KundenID.Enabled = false;
                 tb_Vorname.Enabled = true;
                 tb_Nachname.Enabled = true;
@@ -261,8 +260,8 @@ namespace Bibo_Verwaltung
             }
             else if (rb_KundeLoeschen.Checked)
             {
-                bt_save_kunde.Enabled = true;
-                bt_save_kunde.Text = "Löschen";
+                bt_confirm.Enabled = true;
+                bt_confirm.Text = "Löschen";
                 tb_KundenID.Enabled = true;
                 tb_Vorname.Enabled = false;
                 tb_Nachname.Enabled = false;
@@ -309,8 +308,8 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        #region IsOK
-        private void IsOK()
+        #region Plichtfelder markieren (Methede: setBackground_Red())
+        private void setBackground_Red()
         {
             if (tb_Vorname.Text.Equals(""))
             {
@@ -377,8 +376,8 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        #region Filter
-        private void Kunden_Filter()
+        #region Filter (Methode: kundenFilter())
+        private void kundenFilter()
         {
             (Grid_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Vertrauenswürdigkeit LIKE '{6}%' AND Klasse LIKE '{7}%' AND Mail LIKE '{8}%' AND Telefonnummer LIKE '{9}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_Vertrauenswuerdigkeit.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
         }
@@ -393,61 +392,61 @@ namespace Bibo_Verwaltung
         private void tb_Vorname_TextChanged(object sender, EventArgs e)
         {
             tb_Vorname.BackColor = Color.White;
-            Kunden_Filter();
+            kundenFilter();
         }
 
         private void tb_Nachname_TextChanged(object sender, EventArgs e)
         {
             tb_Nachname.BackColor = Color.White;
-            Kunden_Filter();
+            kundenFilter();
         }
 
         private void tb_Strasse_TextChanged(object sender, EventArgs e)
         {
             tb_Strasse.BackColor = Color.White;
-            Kunden_Filter();
+            kundenFilter();
         }
 
         private void tb_Hausnummer_TextChanged(object sender, EventArgs e)
         {
             tb_Hausnummer.BackColor = Color.White;
-            Kunden_Filter();
+            kundenFilter();
         }
 
         private void tb_Postleitzahl_TextChanged(object sender, EventArgs e)
         {
             tb_Postleitzahl.BackColor = Color.White;
-            Kunden_Filter();
+            kundenFilter();
         }
 
         private void tb_Ort_TextChanged(object sender, EventArgs e)
         {
             tb_Ort.BackColor = Color.White;
-            Kunden_Filter();
+            kundenFilter();
         }
 
         private void tb_Klasse_TextChanged(object sender, EventArgs e)
         {
             tb_Klasse.BackColor = Color.White;
-            Kunden_Filter();
+            kundenFilter();
         }
 
         private void tb_Mail_TextChanged(object sender, EventArgs e)
         {
             tb_Mail.BackColor = Color.White;
-            Kunden_Filter();
+            kundenFilter();
         }
 
         private void tb_Telefonnummer_TextChanged(object sender, EventArgs e)
         {
             tb_Telefonnummer.BackColor = Color.White;
-            Kunden_Filter();
+            kundenFilter();
         }
 
         private void cb_Vertrauenswuerdigkeit_TextChanged_1(object sender, EventArgs e)
         {
             cb_Vertrauenswuerdigkeit.BackColor = Color.White;
-            Kunden_Filter();
+            kundenFilter();
         }
         #endregion
 
@@ -481,14 +480,10 @@ namespace Bibo_Verwaltung
             export.ToExcel(Grid_Kunde);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void bt_import_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = "Wählen Sie eine Datei für den Datenimport";
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                kunde.LeseCSV(openFileDialog.FileName, ';');
-            }
+            Form Import = new w_s_importDialog();
+            Import.ShowDialog(this);
         }
         #endregion
     }
