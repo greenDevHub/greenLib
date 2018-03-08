@@ -12,7 +12,7 @@ namespace Bibo_Verwaltung
 {
     class Import
     {
-        DataTable dt = new DataTable();
+        private DataTable dt = new DataTable();
 
         #region Eigenschaften
         string path;
@@ -80,7 +80,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Erschaft das Objekt Genre
         /// </summary>
-        public Import(string path, char separator, char textqualifizierer, string datfolge, char dattrenn, char zeittrenn, bool vierstelligejahre, bool fuehrendenull, char deztrenn, bool colheader)
+        public Import(string path, char separator, char textqualifizierer, string datfolge, char dattrenn, char zeittrenn, bool vierstelligejahre, bool fuehrendenull, char deztrenn, bool colheader, bool preview)
         {
             this.path = path;
             this.separator = separator;
@@ -92,17 +92,18 @@ namespace Bibo_Verwaltung
             this.fuehrendenull = fuehrendenull;
             this.deztrenn = deztrenn;
             this.colheader = colheader;
-            LeseCSV();
+            LeseCSV(preview);
         }
         #endregion
 
-        #region CSV-Dateien einlesen
+
         public void FillGridViewRows(ref DataGridView grid, object value = null)
         {
             grid.DataSource = dt;
         }
 
-        private void LeseCSV()
+        #region CSV-Dateien einlesen
+        private void LeseCSV(bool preview)
         {
             FileInfo f = new FileInfo(path);
             long filelength = f.Length;
@@ -110,92 +111,115 @@ namespace Bibo_Verwaltung
             System.IO.StreamReader file = new System.IO.StreamReader(path);
             string line = file.ReadLine();
 
-            if (filelength > 0)
+            if (preview == false)
             {
-                int i = 0;
-                string[] firstline = line.Split(separator);
-                if (colheader)
+
+                if (filelength > 0)
                 {
-                    foreach (string s in firstline)
+                    int i = 0;
+                    string[] firstline = line.Split(separator);
+                    if (colheader)
                     {
-                        dt.Columns.Add(s);
+                        foreach (string s in firstline)
+                        {
+                            dt.Columns.Add(s);
+                        }
+                    }
+                    else
+                    {
+                        foreach (string s in firstline)
+                        {
+                            dt.Columns.Add("Column" + Convert.ToString(i));
+                            i++;
+                        }
+                        dt.Rows.Add(firstline);
+                    }
+                    while ((line = file.ReadLine()) != null)
+                    {
+                        string[] parts = line.Split(separator);
+
+
+
+
+                        int curr = 0;
+                        foreach (string s in parts)
+                        {
+                            //if (s[1] == '"')
+                            //{
+                                string h = s.Replace(textqualifizierer.ToString(), "");
+                                parts[curr] = h.Trim();
+                            curr++;
+                            //}
+                        }
+
+
+
+
+
+                        dt.Rows.Add(parts);
                     }
                 }
                 else
                 {
-                    foreach (string s in firstline)
-                    {
-                        dt.Columns.Add("Column" + Convert.ToString(i));
-                        i++;
-                    }
-                }
-                while ((line = file.ReadLine()) != null)
-                {
-                    string[] parts = line.Split(separator);
-                    dt.Rows.Add(parts);
+                    MessageBox.Show("Diese Datei enthält keine Daten!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Diese Datei enthält keine Daten!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (filelength > 0)
+                {
+                    int i = 0;
+                    string[] firstline = line.Split(separator);
+                    if (colheader)
+                    {
+                        foreach (string s in firstline)
+                        {
+                            dt.Columns.Add(s);
+                        }
+                    }
+                    else
+                    {
+                        foreach (string s in firstline)
+                        {
+                            dt.Columns.Add("Column" + Convert.ToString(i));
+                            i++;
+                        }
+                        dt.Rows.Add(firstline);
+                    }
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if ((line = file.ReadLine()) != null)
+                        {
+                            string[] parts = line.Split(separator);
+                            dt.Rows.Add(parts);
+                        }
+                    }
+                }
+                file.Close();
             }
-            file.Close();
         }
         #endregion
 
-        public DataTable table()
+        public void executeImport(string target)
         {
-            return dt;
-        }
-
-        enum dataType
-        {
-            System_Boolean = 0,
-            System_Int32 = 1,
-            System_Int64 = 2,
-            System_Double = 3,
-            System_DateTime = 4,
-            System_String = 5
-        }
-
-        private dataType getDataType(string str)
-        {
-            bool boolValue;
-            Int32 intValue;
-            Int64 bigintValue;
-            double doubleValue;
-            DateTime dateValue;
-
-            // Place checks higher in if-else statement to give higher priority to type.
-
-            if (bool.TryParse(str, out boolValue))
-                return dataType.System_Boolean;
-            else if (Int32.TryParse(str, out intValue))
-                return dataType.System_Int32;
-            else if (Int64.TryParse(str, out bigintValue))
-                return dataType.System_Int64;
-            else if (double.TryParse(str, out doubleValue))
-                return dataType.System_Double;
-            else if (DateTime.TryParse(str, out dateValue))
-                return dataType.System_DateTime;
-            else return dataType.System_String;
-        }
-
-        public void executeKundenImport()
-        {
-            SQL_Verbindung con = new SQL_Verbindung();
-            if (con.ConnectError()) return;
-            using (var bulkCopy = new SqlBulkCopy(con.Con))
+            try
             {
-                // my DataTable column names match my SQL Column names, so I simply made this loop. However if your column names don't match, just pass in which datatable name matches the SQL column name in Column Mappings
-                foreach (DataColumn col in dt.Columns)
+                SQL_Verbindung con = new SQL_Verbindung();
+                if (con.ConnectError()) return;
+                using (var bulkCopy = new SqlBulkCopy(con.Con))
                 {
-                    bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+                    foreach (DataColumn col in dt.Columns)
+                    {
+                        bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+                    }
+                    bulkCopy.BulkCopyTimeout = 600;
+                    bulkCopy.DestinationTableName = target;
+                    bulkCopy.WriteToServer(dt);
                 }
-
-                bulkCopy.BulkCopyTimeout = 600;
-                bulkCopy.DestinationTableName = "t_s_kunden";
-                bulkCopy.WriteToServer(dt);
+            }
+            catch
+            {
+                MessageBox.Show("Diese Datei enthält eine inkorrekte Daten-Struktur! Die Datei kann nicht eingelesen werden.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

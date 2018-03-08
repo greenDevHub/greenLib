@@ -45,6 +45,7 @@
             this.lb_DatTrenn = new System.Windows.Forms.Label();
             this.lb_Datum = new System.Windows.Forms.Label();
             this.gb_Dateiformat = new System.Windows.Forms.GroupBox();
+            this.cb_ColHeader = new System.Windows.Forms.CheckBox();
             this.cb_TxtQuali = new System.Windows.Forms.ComboBox();
             this.cb_FeldTrenn = new System.Windows.Forms.ComboBox();
             this.lb_TxtQuali = new System.Windows.Forms.Label();
@@ -56,10 +57,9 @@
             this.lb_Anweissung2 = new System.Windows.Forms.Label();
             this.division = new System.Windows.Forms.Panel();
             this.bt_Vorschau = new System.Windows.Forms.Button();
-            this.cb_ColHeader = new System.Windows.Forms.CheckBox();
             this.gb_Ziel = new System.Windows.Forms.GroupBox();
-            this.lb_Ziel = new System.Windows.Forms.Label();
             this.cb_Ziel = new System.Windows.Forms.ComboBox();
+            this.lb_Ziel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet1)).BeginInit();
             this.gb_Formatierung.SuspendLayout();
             this.gb_Dateiformat.SuspendLayout();
@@ -243,6 +243,16 @@
             this.gb_Dateiformat.TabStop = false;
             this.gb_Dateiformat.Text = "Dateiformat";
             // 
+            // cb_ColHeader
+            // 
+            this.cb_ColHeader.AutoSize = true;
+            this.cb_ColHeader.Location = new System.Drawing.Point(9, 80);
+            this.cb_ColHeader.Name = "cb_ColHeader";
+            this.cb_ColHeader.Size = new System.Drawing.Size(166, 17);
+            this.cb_ColHeader.TabIndex = 5;
+            this.cb_ColHeader.Text = "Erste Zeile enthält Feldnamen";
+            this.cb_ColHeader.UseVisualStyleBackColor = true;
+            // 
             // cb_TxtQuali
             // 
             this.cb_TxtQuali.Font = new System.Drawing.Font("Candara", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -329,7 +339,6 @@
             // 
             // bt_Import
             // 
-            this.bt_Import.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.bt_Import.Enabled = false;
             this.bt_Import.Location = new System.Drawing.Point(436, 471);
             this.bt_Import.Name = "bt_Import";
@@ -367,17 +376,6 @@
             this.bt_Vorschau.UseVisualStyleBackColor = true;
             this.bt_Vorschau.Click += new System.EventHandler(this.bt_Vorschau_Click);
             // 
-            // cb_ColHeader
-            // 
-            this.cb_ColHeader.AutoSize = true;
-            this.cb_ColHeader.Location = new System.Drawing.Point(9, 80);
-            this.cb_ColHeader.Name = "cb_ColHeader";
-            this.cb_ColHeader.Size = new System.Drawing.Size(166, 17);
-            this.cb_ColHeader.TabIndex = 5;
-            this.cb_ColHeader.Text = "Erste Zeile enthält Feldnamen";
-            this.cb_ColHeader.UseVisualStyleBackColor = true;
-            this.cb_ColHeader.CheckedChanged += new System.EventHandler(this.cb_ColHeader_CheckedChanged);
-            // 
             // gb_Ziel
             // 
             this.gb_Ziel.Controls.Add(this.cb_Ziel);
@@ -390,15 +388,6 @@
             this.gb_Ziel.TabStop = false;
             this.gb_Ziel.Text = "Importziel";
             // 
-            // lb_Ziel
-            // 
-            this.lb_Ziel.AutoSize = true;
-            this.lb_Ziel.Location = new System.Drawing.Point(6, 28);
-            this.lb_Ziel.Name = "lb_Ziel";
-            this.lb_Ziel.Size = new System.Drawing.Size(58, 13);
-            this.lb_Ziel.TabIndex = 0;
-            this.lb_Ziel.Text = "Zieltabelle:";
-            // 
             // cb_Ziel
             // 
             this.cb_Ziel.FormattingEnabled = true;
@@ -410,6 +399,15 @@
             this.cb_Ziel.Name = "cb_Ziel";
             this.cb_Ziel.Size = new System.Drawing.Size(115, 21);
             this.cb_Ziel.TabIndex = 1;
+            // 
+            // lb_Ziel
+            // 
+            this.lb_Ziel.AutoSize = true;
+            this.lb_Ziel.Location = new System.Drawing.Point(6, 28);
+            this.lb_Ziel.Name = "lb_Ziel";
+            this.lb_Ziel.Size = new System.Drawing.Size(58, 13);
+            this.lb_Ziel.TabIndex = 0;
+            this.lb_Ziel.Text = "Zieltabelle:";
             // 
             // w_s_importDialog
             // 
