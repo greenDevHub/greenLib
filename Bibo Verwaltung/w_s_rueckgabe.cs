@@ -273,5 +273,12 @@ namespace Bibo_Verwaltung
                 bt_Zu_aendern.Text = "Buchzustand ändern";
             }
         }
+
+        private void bt_open_Click(object sender, EventArgs e)
+        {
+            Form Zustand = new w_s_zustand();
+            Zustand.ShowDialog(this);
+            zustand.FillCombobox(ref cb_Zustand, -1);
+        }
     }
 }
