@@ -434,5 +434,20 @@ namespace Bibo_Verwaltung
                 tb_number.Text = "1";
             }
         }
+
+        private void grid_buchid_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                for (int i = 0; i < grid_buchid.SelectedRows.Count; i++)
+                {
+                    b.ID = grid_buchid.SelectedRows[i].Cells[0].Value.ToString();
+                    b.Deactivate();
+                }
+                b.ClearDS();
+                b.FillObject();
+                b.FillGrid(ref grid_buchid);
+            }
+        }
     }
 }
