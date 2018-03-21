@@ -148,15 +148,30 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Object-Functions
-        private void bt_durchsuchen_Click(object sender, EventArgs e)
+        private void FileDialog()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Wählen Sie eine Datei für den Datenimport";
             openFileDialog.Filter = "Text Files|*.txt; *.csv";
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                tb_path.Text = openFileDialog.FileName;
+                if (openFileDialog.FileName.Contains(".txt") || openFileDialog.FileName.Contains(".csv"))
+                {
+                    tb_path.Text = openFileDialog.FileName;
+                }
+                else
+                {
+                    tb_path.Text = "";
+                    MessageBox.Show("Der angegebene Dateiname ist ungültig. Bitte verwenden sie nur Dateien mit der Endung \'.txt\' oder \'.csv\'!");
+                    FileDialog();
+                }
             }
+
+        }
+        private void bt_durchsuchen_Click(object sender, EventArgs e)
+        {
+            FileDialog();
+            
         }
 
         private void w_s_importDialog_Shown(object sender, EventArgs e)
