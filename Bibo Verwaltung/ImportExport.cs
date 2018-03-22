@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    class Import
+    class ImportExport
     {
         private DataTable dt = new DataTable();
 
@@ -80,7 +80,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Erschaft das Objekt Genre
         /// </summary>
-        public Import(string path, char separator, char textqualifizierer, string datfolge, char dattrenn, char zeittrenn, bool vierstelligejahre, bool fuehrendenull, char deztrenn, bool colheader, bool preview)
+        public ImportExport(string path, char separator, char textqualifizierer, string datfolge, char dattrenn, char zeittrenn, bool vierstelligejahre, bool fuehrendenull, char deztrenn, bool colheader, bool preview)
         {
             this.path = path;
             this.separator = separator;

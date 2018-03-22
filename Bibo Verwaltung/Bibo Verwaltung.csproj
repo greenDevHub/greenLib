@@ -94,7 +94,7 @@
     <Compile Include="Einstellung.cs" />
     <Compile Include="Details.cs" />
     <Compile Include="ExcelExport.cs" />
-    <Compile Include="Import.cs" />
+    <Compile Include="ImportExport.cs" />
     <Compile Include="Rueckgabe.cs" />
     <Compile Include="SQL_Verbindung.cs" />
     <Compile Include="Verlauf.cs" />
@@ -116,11 +116,11 @@
       <DependentUpon>Bibo_VerwaltungDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Buch.cs" />
-    <Compile Include="w_s_importDialog.cs">
+    <Compile Include="w_s_import_export.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_importDialog.Designer.cs">
-      <DependentUpon>w_s_importDialog.cs</DependentUpon>
+    <Compile Include="w_s_import_export.Designer.cs">
+      <DependentUpon>w_s_import_export.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_information.cs">
       <SubType>Form</SubType>
@@ -213,8 +213,8 @@
       <DependentUpon>w_s_zustand.cs</DependentUpon>
     </Compile>
     <Compile Include="Zustand.cs" />
-    <EmbeddedResource Include="w_s_importDialog.resx">
-      <DependentUpon>w_s_importDialog.cs</DependentUpon>
+    <EmbeddedResource Include="w_s_import_export.resx">
+      <DependentUpon>w_s_import_export.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_rueckgabe.resx">
       <DependentUpon>w_s_rueckgabe.cs</DependentUpon>

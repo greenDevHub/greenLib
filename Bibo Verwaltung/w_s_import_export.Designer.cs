@@ -1,6 +1,6 @@
 ﻿namespace Bibo_Verwaltung
 {
-    partial class w_s_importDialog
+    partial class w_s_import_export
     {
         /// <summary>
         /// Required designer variable.

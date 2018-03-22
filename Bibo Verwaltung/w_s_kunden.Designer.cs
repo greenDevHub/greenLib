@@ -59,14 +59,14 @@
             this.rb_KundeBearbeiten = new System.Windows.Forms.RadioButton();
             this.rb_Neukunde = new System.Windows.Forms.RadioButton();
             this.bt_confirm = new System.Windows.Forms.Button();
-            this.bt_import = new System.Windows.Forms.Button();
-            this.bt_Excel = new System.Windows.Forms.Button();
             this.bt_OK = new System.Windows.Forms.Button();
-            this.Grid_Kunde = new System.Windows.Forms.DataGridView();
+            this.gv_Kunde = new System.Windows.Forms.DataGridView();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.bt_ImEx = new System.Windows.Forms.Button();
+            this.cb_showAll = new System.Windows.Forms.CheckBox();
             this.gb_kunde.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grid_Kunde)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
             this.SuspendLayout();
             // 
             // lb_Telefonnummer
@@ -477,28 +477,6 @@
             this.bt_confirm.UseVisualStyleBackColor = true;
             this.bt_confirm.Click += new System.EventHandler(this.bt_confirm_click);
             // 
-            // bt_import
-            // 
-            this.bt_import.Location = new System.Drawing.Point(436, 415);
-            this.bt_import.Name = "bt_import";
-            this.bt_import.Size = new System.Drawing.Size(130, 23);
-            this.bt_import.TabIndex = 41;
-            this.bt_import.Text = "Importieren";
-            this.bt_import.UseVisualStyleBackColor = true;
-            this.bt_import.Click += new System.EventHandler(this.bt_import_Click);
-            // 
-            // bt_Excel
-            // 
-            this.helpProvider.SetHelpString(this.bt_Excel, "Exportieren sie ihre Kundendaten in eine Exceltabelle.");
-            this.bt_Excel.Location = new System.Drawing.Point(300, 415);
-            this.bt_Excel.Name = "bt_Excel";
-            this.helpProvider.SetShowHelp(this.bt_Excel, true);
-            this.bt_Excel.Size = new System.Drawing.Size(130, 23);
-            this.bt_Excel.TabIndex = 41;
-            this.bt_Excel.Text = "Exportieren";
-            this.bt_Excel.UseVisualStyleBackColor = true;
-            this.bt_Excel.Click += new System.EventHandler(this.bt_Excel_Click);
-            // 
             // bt_OK
             // 
             this.bt_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -511,38 +489,59 @@
             this.bt_OK.Text = "Schließen";
             this.bt_OK.UseVisualStyleBackColor = true;
             // 
-            // Grid_Kunde
+            // gv_Kunde
             // 
-            this.Grid_Kunde.AllowUserToAddRows = false;
-            this.Grid_Kunde.AllowUserToDeleteRows = false;
-            this.Grid_Kunde.AllowUserToResizeColumns = false;
-            this.Grid_Kunde.AllowUserToResizeRows = false;
-            this.Grid_Kunde.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.Grid_Kunde.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.helpProvider.SetHelpString(this.Grid_Kunde, "Hier werden all ihre Kunden angezeigt.");
-            this.Grid_Kunde.Location = new System.Drawing.Point(300, 12);
-            this.Grid_Kunde.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.Grid_Kunde.MultiSelect = false;
-            this.Grid_Kunde.Name = "Grid_Kunde";
-            this.Grid_Kunde.ReadOnly = true;
-            this.Grid_Kunde.RowHeadersVisible = false;
-            this.Grid_Kunde.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.Grid_Kunde.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.helpProvider.SetShowHelp(this.Grid_Kunde, true);
-            this.Grid_Kunde.Size = new System.Drawing.Size(578, 397);
-            this.Grid_Kunde.TabIndex = 0;
-            this.Grid_Kunde.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Kunde_CellDoubleClick);
+            this.gv_Kunde.AllowUserToAddRows = false;
+            this.gv_Kunde.AllowUserToDeleteRows = false;
+            this.gv_Kunde.AllowUserToResizeColumns = false;
+            this.gv_Kunde.AllowUserToResizeRows = false;
+            this.gv_Kunde.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_Kunde.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.helpProvider.SetHelpString(this.gv_Kunde, "Hier werden all ihre Kunden angezeigt.");
+            this.gv_Kunde.Location = new System.Drawing.Point(300, 12);
+            this.gv_Kunde.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gv_Kunde.MultiSelect = false;
+            this.gv_Kunde.Name = "gv_Kunde";
+            this.gv_Kunde.ReadOnly = true;
+            this.gv_Kunde.RowHeadersVisible = false;
+            this.gv_Kunde.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.gv_Kunde.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.helpProvider.SetShowHelp(this.gv_Kunde, true);
+            this.gv_Kunde.Size = new System.Drawing.Size(578, 397);
+            this.gv_Kunde.TabIndex = 0;
+            this.gv_Kunde.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Kunde_CellDoubleClick);
+            // 
+            // bt_ImEx
+            // 
+            this.bt_ImEx.Location = new System.Drawing.Point(300, 415);
+            this.bt_ImEx.Name = "bt_ImEx";
+            this.bt_ImEx.Size = new System.Drawing.Size(180, 23);
+            this.bt_ImEx.TabIndex = 42;
+            this.bt_ImEx.Text = "Importieren/Exportieren";
+            this.bt_ImEx.UseVisualStyleBackColor = true;
+            this.bt_ImEx.Click += new System.EventHandler(this.bt_ImEx_Click);
+            // 
+            // cb_showAll
+            // 
+            this.cb_showAll.AutoSize = true;
+            this.cb_showAll.Location = new System.Drawing.Point(640, 419);
+            this.cb_showAll.Name = "cb_showAll";
+            this.cb_showAll.Size = new System.Drawing.Size(112, 17);
+            this.cb_showAll.TabIndex = 43;
+            this.cb_showAll.Text = "Zeige alle Kunden";
+            this.cb_showAll.UseVisualStyleBackColor = true;
+            this.cb_showAll.CheckedChanged += new System.EventHandler(this.cb_showAll_CheckedChanged);
             // 
             // w_s_Kunden
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(886, 449);
-            this.Controls.Add(this.bt_import);
-            this.Controls.Add(this.bt_Excel);
+            this.Controls.Add(this.cb_showAll);
+            this.Controls.Add(this.bt_ImEx);
             this.Controls.Add(this.gb_kunde);
             this.Controls.Add(this.bt_OK);
-            this.Controls.Add(this.Grid_Kunde);
+            this.Controls.Add(this.gv_Kunde);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
             this.MaximizeBox = false;
@@ -555,8 +554,9 @@
             this.gb_kunde.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grid_Kunde)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -570,11 +570,9 @@
         private System.Windows.Forms.RadioButton rb_KundeBearbeiten;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Label lb_kunde_add;
-        private System.Windows.Forms.DataGridView Grid_Kunde;
+        private System.Windows.Forms.DataGridView gv_Kunde;
         private System.Windows.Forms.RadioButton rb_Neukunde;
-        private System.Windows.Forms.Button bt_Excel;
         private System.Windows.Forms.HelpProvider helpProvider;
-        private System.Windows.Forms.Button bt_import;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label lb_Vorname;
         private System.Windows.Forms.Label lb_Nachname;
@@ -596,5 +594,7 @@
         private System.Windows.Forms.TextBox tb_Ort;
         private System.Windows.Forms.ComboBox cb_Vertrauenswuerdigkeit;
         private System.Windows.Forms.Label lb_KundenID;
+        private System.Windows.Forms.Button bt_ImEx;
+        private System.Windows.Forms.CheckBox cb_showAll;
     }
 }

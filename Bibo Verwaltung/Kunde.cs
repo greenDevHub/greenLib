@@ -86,13 +86,13 @@ namespace Bibo_Verwaltung
         /// </summary>
         public Kunde()
         {
-            fillObject();
+            fillObject(false);
         }
         public Kunde(string kundenid)
         {
             this.kundenid = kundenid;
             loadKunde();
-            fillObject();
+            fillObject(false);
         }
         #endregion
 
@@ -129,16 +129,25 @@ namespace Bibo_Verwaltung
         DataSet ds = new DataSet();
         DataTable dt = new DataTable();
         SqlCommandBuilder comb = new SqlCommandBuilder();
-        private void fillObject()
+        private void fillObject(bool loadType)
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            string anz;
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT kunde_ID as 'Kunden-ID', kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_strasse as 'Straße', kunde_hausnummer as 'Hausnummer', kunde_postleitzahl as 'Postleitzahl', kunde_ort as 'Wohnort', kunde_vertrauenswürdigkeit as 'Vertrauenswürdigkeit', kunde_klasse as 'Klasse', kunde_mail as 'Mail', kunde_telefonnummer as 'Telefonnummer' FROM [dbo].[t_s_kunden]";
+
+            if (loadType == true)
+            {
+                anz = "100 PERCENT";
+            }
+            else
+            {
+                anz = "1000";
+            }
+
+            string RawCommand = "SELECT TOP " + anz + " kunde_ID as 'Kunden-ID', kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_strasse as 'Straße', kunde_hausnummer as 'Hausnummer', kunde_postleitzahl as 'Postleitzahl', kunde_ort as 'Wohnort', kunde_vertrauenswürdigkeit as 'Vertrauenswürdigkeit', kunde_klasse as 'Klasse', kunde_mail as 'Mail', kunde_telefonnummer as 'Telefonnummer' FROM [dbo].[t_s_kunden]";
 
             // Verbindung öffnen 
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
-
             con.Close();
         }
 
@@ -147,10 +156,10 @@ namespace Bibo_Verwaltung
             ds.Tables[0].Rows.Clear();
         }
 
-        public void FillGrid(ref DataGridView grid, object value = null)
+        public void FillGrid(bool loadAll, ref DataGridView grid, object value = null)
         {
             clearDataSource();
-            fillObject();
+            fillObject(loadAll);
             grid.DataSource = ds.Tables[0];
         }
         #endregion
@@ -165,32 +174,6 @@ namespace Bibo_Verwaltung
                 adapter.Update(changes);
             }
         }
-
-        //public void SaveImport(DataTable table)
-        //{
-        //    SQL_Verbindung con = new SQL_Verbindung();
-        //    if (con.ConnectError()) return;
-
-        //    foreach (DataRow row in table.Rows)
-        //    {
-
-        //    }
-        //    //using (SqlBulkCopy bulkCopy = new SqlBulkCopy(con.Con))
-        //    //{
-        //    //    foreach (DataColumn c in table.Columns)
-        //    //        bulkCopy.ColumnMappings.Add(c.ColumnName, c.ColumnName);
-
-        //        //    bulkCopy.DestinationTableName = "[dbo].[t_s_kunden]";//table.TableName;
-        //        //    try
-        //        //    {
-        //        //        bulkCopy.WriteToServer(table);
-        //        //    }
-        //        //    catch (Exception ex)
-        //        //    {
-        //        //        Console.WriteLine(ex.Message);
-        //        //    }
-        //}
-        //    }
         #endregion
 
         #region Add
@@ -265,54 +248,6 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
-
-        #region CSV-Dateien einlesen
-        //public void LeseCSV(string path, char separator)
-        //{
-        //   // char[] delimiters = new char[] { ';' };
-        //    string line;
-
-        //    // Read the file  @"C:\Test.csv"
-        //    System.IO.StreamReader file = new System.IO.StreamReader(path);
-        //    while ((line = file.ReadLine()) != null)
-        //    {
-        //        string[] parts = line.Split(separator);//delimiters
-        //        //for (int i = 0; i >= parts.Length; i++)
-        //        //{
-        //        //    System.Console.WriteLine(parts[i]);
-        //        //}
-        //        Kunde neuKunde = new Kunde();
-        //        neuKunde.Vorname = parts[0];
-        //        neuKunde.Nachname = parts[1];
-        //        neuKunde.Ort = parts[2];
-        //        neuKunde.Postleitzahl = parts[3];
-        //        neuKunde.Strasse = parts[4];
-        //        neuKunde.Hausnummer = parts[5];
-        //        neuKunde.Telefonnummer = parts[6];               
-        //        neuKunde.Mail = parts[7];
-        //        neuKunde.Klasse = parts[8];
-        //        neuKunde.Vertrauenswuerdigkeit = "";
-
-        //        neuKunde.Add_Kunde();
-        //        System.Console.WriteLine(parts);
-        //        //System.Console.WriteLine(parts[0]);
-        //        //System.Console.WriteLine(parts[1]);
-        //        //System.Console.WriteLine(parts[2]);
-        //    }
-            
-        //    file.Close();
-           
-        //    //Console.WriteLine("{0} field(s)", parts.Length);
-        //    //System.Console.WriteLine("There were {0} lines.", counter);
-        //    //// Suspend the screen.  
-        //    System.Console.ReadLine();
-        //}
-
-        //private void LeseCSV_Zeile(separator)
-        //{
-
-        //}
-            #endregion
-        }
+    }
 }
 

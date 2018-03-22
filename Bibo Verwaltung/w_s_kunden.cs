@@ -13,7 +13,7 @@ namespace Bibo_Verwaltung
         public w_s_Kunden()
         {
             InitializeComponent();
-            kunde.FillGrid(ref Grid_Kunde);
+            kunde.FillGrid(false, ref gv_Kunde);
         }
 
         //Sinnlos
@@ -75,7 +75,7 @@ namespace Bibo_Verwaltung
                         setKundenValues();
                         kunde.saveKunde();
                         clearForm();
-                        kunde.FillGrid(ref Grid_Kunde);
+                        kunde.FillGrid(false, ref gv_Kunde);
                         lb_kunde_add.Visible = false;
                         lb_kunde_add.Text = "Der Kunde wurde bearbeitet!";
                         lb_kunde_add.Visible = true;
@@ -104,7 +104,7 @@ namespace Bibo_Verwaltung
                         setKundenValues();
                         kunde.deleteKunde();
                         clearForm();
-                        kunde.FillGrid(ref Grid_Kunde);
+                        kunde.FillGrid(false, ref gv_Kunde);
                         lb_kunde_add.Visible = false;
                         lb_kunde_add.Text = "Der Kunde wurde gelöscht!";
                         lb_kunde_add.Visible = true;
@@ -146,7 +146,7 @@ namespace Bibo_Verwaltung
                         setKundenValues();
                         kunde.addKunde();
                         clearForm();
-                        kunde.FillGrid(ref Grid_Kunde);
+                        kunde.FillGrid(false, ref gv_Kunde);
                         lb_kunde_add.Visible = false;
                         lb_kunde_add.Text = "Der Kunde wurde hinzugefügt!";
                         lb_kunde_add.Visible = true;
@@ -379,7 +379,7 @@ namespace Bibo_Verwaltung
         #region Filter (Methode: kundenFilter())
         private void kundenFilter()
         {
-            (Grid_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Vertrauenswürdigkeit LIKE '{6}%' AND Klasse LIKE '{7}%' AND Mail LIKE '{8}%' AND Telefonnummer LIKE '{9}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_Vertrauenswuerdigkeit.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
+            (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Vertrauenswürdigkeit LIKE '{6}%' AND Klasse LIKE '{7}%' AND Mail LIKE '{8}%' AND Telefonnummer LIKE '{9}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_Vertrauenswuerdigkeit.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
         }
         #endregion
 
@@ -455,7 +455,7 @@ namespace Bibo_Verwaltung
         {
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow row = this.Grid_Kunde.Rows[e.RowIndex];
+                DataGridViewRow row = this.gv_Kunde.Rows[e.RowIndex];
                 rb_KundeBearbeiten.Checked = true;
                 tb_KundenID.Text = row.Cells["Kunden-ID"].Value.ToString();
                 Kunde clickedkunde = new Kunde(tb_KundenID.Text);
@@ -476,15 +476,33 @@ namespace Bibo_Verwaltung
         #region Export/Import
         private void bt_Excel_Click(object sender, EventArgs e)
         {
-            ExcelExport export = new ExcelExport();
-            export.ToExcel(Grid_Kunde);
+
         }
 
         private void bt_import_Click(object sender, EventArgs e)
         {
-            Form Import = new w_s_importDialog();
-            Import.ShowDialog(this);
+
         }
         #endregion
+
+        private void bt_ImEx_Click(object sender, EventArgs e)
+        {
+            Form Import = new w_s_import_export();
+            Import.ShowDialog(this);
+            //ExcelExport export = new ExcelExport();
+            //export.ToExcel(Grid_Kunde);
+        }
+
+        private void cb_showAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_showAll.Checked)
+            {
+                kunde.FillGrid(true, ref gv_Kunde);
+            }
+            else
+            {
+                kunde.FillGrid(false, ref gv_Kunde);
+            }
+        }
     }
 }

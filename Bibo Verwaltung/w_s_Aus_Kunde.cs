@@ -47,7 +47,7 @@ namespace Bibo_Verwaltung
         #region Kunden Laden
         public void Load_Kunden(object sender, EventArgs e)
         {
-            kunde.FillGrid(ref gv_Aus_Kunde);
+            kunde.FillGrid(false, ref gv_Aus_Kunde);
         }
         #endregion
 
@@ -67,7 +67,7 @@ namespace Bibo_Verwaltung
         {
             Form Kunden = new w_s_Kunden();
             Kunden.ShowDialog(this);
-            kunde.FillGrid(ref gv_Aus_Kunde);
+            kunde.FillGrid(false, ref gv_Aus_Kunde);
         }
         #endregion
 

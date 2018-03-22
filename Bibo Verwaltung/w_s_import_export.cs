@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_importDialog : Form
+    public partial class w_s_import_export : Form
     {
         DataTable data = new DataTable();
         char seperator = ';';
@@ -21,7 +21,7 @@ namespace Bibo_Verwaltung
         char dezsym = ',';
         string target = "t_s_kunden";
 
-        public w_s_importDialog()
+        public w_s_import_export()
         {
             InitializeComponent();
         }
@@ -112,7 +112,7 @@ namespace Bibo_Verwaltung
         private void createPreview()
         {
             Cursor.Current = Cursors.WaitCursor;
-            Import im = new Import(tb_path.Text, seperator, feldquali, cb_DatFolge.Text, dattrenn, zeittrenn, ch_4stelligeJahre.Checked, ch_DatNullen.Checked, dezsym, cb_ColHeader.Checked, true);
+            ImportExport im = new ImportExport(tb_path.Text, seperator, feldquali, cb_DatFolge.Text, dattrenn, zeittrenn, ch_4stelligeJahre.Checked, ch_DatNullen.Checked, dezsym, cb_ColHeader.Checked, true);
             im.FillGridViewRows(ref gv_Vorschau);
             Cursor.Current = Cursors.Default;
         }
@@ -141,7 +141,7 @@ namespace Bibo_Verwaltung
         private void executeImport()
         {
             Cursor.Current = Cursors.WaitCursor;
-            Import im = new Import(tb_path.Text, seperator, feldquali, cb_DatFolge.Text, dattrenn, zeittrenn, ch_4stelligeJahre.Checked, ch_DatNullen.Checked, dezsym, cb_ColHeader.Checked, false);
+            ImportExport im = new ImportExport(tb_path.Text, seperator, feldquali, cb_DatFolge.Text, dattrenn, zeittrenn, ch_4stelligeJahre.Checked, ch_DatNullen.Checked, dezsym, cb_ColHeader.Checked, false);
             im.executeImport(target);
             Cursor.Current = Cursors.Default;
         }
