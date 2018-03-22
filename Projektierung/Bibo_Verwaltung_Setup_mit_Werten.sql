@@ -7,11 +7,6 @@ GO
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'Bibo_Verwaltung')
 BEGIN
 CREATE DATABASE [Bibo_Verwaltung]
- CONTAINMENT = NONE
- ON  PRIMARY 
-( NAME = N'Bibo_Verwaltung', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.SQLEXPRESS\MSSQL\DATA\Bibo_Verwaltung.mdf' , SIZE = 5120KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
- LOG ON 
-( NAME = N'Bibo_Verwaltung_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.SQLEXPRESS\MSSQL\DATA\Bibo_Verwaltung_log.ldf' , SIZE = 2048KB , MAXSIZE = 10240000KB , FILEGROWTH = 102400KB )
 END
 
 GO
