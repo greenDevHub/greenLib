@@ -16,7 +16,7 @@ namespace Bibo_Verwaltung
             kunde.FillGrid(false, ref gv_Kunde);
         }
 
-        //Sinnlos
+        //Sinnlos aber nicht löschen
         #region Fill Combobox
         //public void FillCombobox(ref ComboBox cb, object value)
         //{

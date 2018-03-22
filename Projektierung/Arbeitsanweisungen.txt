@@ -1,14 +1,14 @@
+Aktuelle ToDo Liste
+
 ________________________________________________________________________________________________________________________
-|- Kundenverwaltung anpassen (Schüler, Lehrer)										|
-|- Schnellerfassung von vielen Exemplaren										|
+|- Kundenverwaltung anpassen (Schüler, Lehrer)										|									|
 |- Schuljahr Ende Datenbereinigung (Kunden, die nicht mehr an der Schule sind, nur deaktivieren)			|
 |- Lehrbücher Ausgabe/Rückgabe (automatisiert, also jedem Schüler werden die entsprechenden Bücher zugewiesen)		|
-|- Aktualisierung von Schülerdaten											|
-|- mehrere Exemplare gleichzeitig löschen										|
+|- Aktualisierung von Schülerdaten											|									|
 |- Bücher Ausleihen-Laden effektiver (nur eine bestimmte Anzahl von Büchern/Kunden beim Start laden)			|
-|- Export und Import in einem Fenster (zusätzliche Angaben für Export)							|
-|- Überprüfung der Datei/Dateienden beim Import (.png, .jpg,...)							|
+|- Export und Import in einem Fenster (zusätzliche Angaben für Export)							|							|
 |- Anleitung/Dokumentation (Windows-Help-File / Intranet-Wikis)								|
 |- Port angeben bei Server-Einstellungen										|
 |- SQL_Verbindung neue Klasse um notwendige Rechte zu geben		 						|
-|_______________________________________________________________________________________________________________________|
+|- Buchrückgabefenster Examplar deaktiviert?
+|- Buchrückgabefenster Autoren anzeigen

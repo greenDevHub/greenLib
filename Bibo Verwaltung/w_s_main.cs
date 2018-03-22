@@ -158,7 +158,6 @@ namespace Bibo_Verwaltung
         private void UpdateForm()
         {
             //SQL-Verbindung pruefen
-            Einstellung set = new Einstellung();
             SQL_Verbindung con = new SQL_Verbindung();
             string test = con.ConnectionString;
             if (con.ConnectError())
