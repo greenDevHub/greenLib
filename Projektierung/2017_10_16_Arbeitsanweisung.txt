@@ -1,4 +1,0 @@
-
--	Neue Variante des Exports (Verschiedene Export-Modi)
-
-
