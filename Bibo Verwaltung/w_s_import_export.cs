@@ -13,7 +13,7 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_import_export : Form
     {
-        DataTable data = new DataTable();
+        DataTable dataoftable = new DataTable();
         char seperator = ';';
         char feldquali = '"';
         char dattrenn = '.';
@@ -21,13 +21,31 @@ namespace Bibo_Verwaltung
         char dezsym = ',';
         string target = "t_s_kunden";
 
-        public w_s_import_export()
+        public w_s_import_export(DataTable table, bool modus)
         {
             InitializeComponent();
+            this.dataoftable = table;
+            setModus(modus);
         }
 
-        #region Main-Functions (Methods: getImportValues(), createPreview(), showPreview(), importKunden())      
-        private void getImportValues()
+        private void setModus(bool modus)
+        {
+            if (modus == true)
+            {
+                lb_anweissung.Text = "Geben Sie die Quelle der zu importierenden Daten an.";
+                gb_Ziel.Visible = true;
+                bt_Import.Text = "Importieren";
+            }
+            else
+            {
+                lb_anweissung.Text = "Geben Sie das Ziel der zu exportierenden Daten an.";
+                gb_Ziel.Visible = false;
+                bt_Import.Text = "Exportieren";
+            }
+        }
+
+        #region Main-Functions (Methods: getValues(), createPreview(), showPreview(), startImport())      
+        private void getValues()
         {
             string feldtrenn = cb_FeldTrenn.Text;
             string txtqualifier = cb_TxtQuali.Text;
@@ -112,7 +130,17 @@ namespace Bibo_Verwaltung
         private void createPreview()
         {
             Cursor.Current = Cursors.WaitCursor;
-            ImportExport im = new ImportExport(tb_path.Text, seperator, feldquali, cb_DatFolge.Text, dattrenn, zeittrenn, ch_4stelligeJahre.Checked, ch_DatNullen.Checked, dezsym, cb_ColHeader.Checked, true);
+            ImportExport im = new ImportExport();
+            im.Path = tb_path.Text;
+            im.Separator = seperator;
+            im.Textqualifizierer = feldquali;
+            im.Datumsfolge = cb_DatFolge.Text;
+            im.Datumstrennzeichen = dattrenn;
+            im.Zeittrennzeichen = zeittrenn;
+            im.Vierstelligejahre = ch_4stelligeJahre.Checked;
+            im.FuehrendeDatumsnull = ch_DatNullen.Checked;
+            im.Dezimaltrennzeichen = dezsym;
+            im.ColumnHeader = cb_ColHeader.Checked;
             im.FillGridViewRows(ref gv_Vorschau);
             Cursor.Current = Cursors.Default;
         }
@@ -121,7 +149,7 @@ namespace Bibo_Verwaltung
         {
             if (File.Exists(tb_path.Text))
             {
-                getImportValues();
+                getValues();
                 createPreview();
             }
             else
@@ -132,17 +160,22 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private void doImport()
-        {
-            getImportValues();
-            executeImport();
-        }
-
-        private void executeImport()
+        private void startImport()
         {
             Cursor.Current = Cursors.WaitCursor;
-            ImportExport im = new ImportExport(tb_path.Text, seperator, feldquali, cb_DatFolge.Text, dattrenn, zeittrenn, ch_4stelligeJahre.Checked, ch_DatNullen.Checked, dezsym, cb_ColHeader.Checked, false);
-            im.executeImport(target);
+            ImportExport im = new ImportExport();
+            im.Path = tb_path.Text;
+            im.Separator = seperator;
+            im.Textqualifizierer = feldquali;
+            im.Datumsfolge = cb_DatFolge.Text;
+            im.Datumstrennzeichen = dattrenn;
+            im.Zeittrennzeichen = zeittrenn;
+            im.Vierstelligejahre = ch_4stelligeJahre.Checked;
+            im.FuehrendeDatumsnull = ch_DatNullen.Checked;
+            im.Dezimaltrennzeichen = dezsym;
+            im.ColumnHeader = cb_ColHeader.Checked;
+            im.Zieltabelle = target;
+            im.executeImport();
             Cursor.Current = Cursors.Default;
         }
         #endregion
@@ -171,7 +204,6 @@ namespace Bibo_Verwaltung
         private void bt_durchsuchen_Click(object sender, EventArgs e)
         {
             FileDialog();
-            
         }
 
         private void w_s_importDialog_Shown(object sender, EventArgs e)
@@ -240,7 +272,8 @@ namespace Bibo_Verwaltung
         {
             //try
             //{
-                doImport();
+            getValues();
+            startImport();
             //  MessageBox.Show("Der Daten-Importvorgang wurde beendet.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //}
             //catch
@@ -250,5 +283,6 @@ namespace Bibo_Verwaltung
             //clearForm();
         }
         #endregion
+
     }
 }

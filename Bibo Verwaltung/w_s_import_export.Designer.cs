@@ -409,7 +409,7 @@
             this.lb_Ziel.TabIndex = 0;
             this.lb_Ziel.Text = "Zieltabelle:";
             // 
-            // w_s_importDialog
+            // w_s_import_export
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -428,7 +428,7 @@
             this.Controls.Add(this.bt_durchsuchen);
             this.Controls.Add(this.tb_path);
             this.Controls.Add(this.lb_anweissung);
-            this.Name = "w_s_importDialog";
+            this.Name = "w_s_import_export";
             this.Text = "w_s_importDialog";
             this.Shown += new System.EventHandler(this.w_s_importDialog_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet1)).EndInit();

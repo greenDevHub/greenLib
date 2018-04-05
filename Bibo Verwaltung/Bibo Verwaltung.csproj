@@ -94,6 +94,18 @@
     <Compile Include="Einstellung.cs" />
     <Compile Include="Details.cs" />
     <Compile Include="ExcelExport.cs" />
+    <Compile Include="w_s_selfmade_dialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_selfmade_dialog.Designer.cs">
+      <DependentUpon>w_s_selfmade_dialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="w_s_spalten_auswahl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_spalten_auswahl.Designer.cs">
+      <DependentUpon>w_s_spalten_auswahl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImportExport.cs" />
     <Compile Include="Rueckgabe.cs" />
     <Compile Include="SQL_Verbindung.cs" />
@@ -261,6 +273,12 @@
     </Compile>
     <EmbeddedResource Include="w_s_main.resx">
       <DependentUpon>w_s_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="w_s_selfmade_dialog.resx">
+      <DependentUpon>w_s_selfmade_dialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="w_s_spalten_auswahl.resx">
+      <DependentUpon>w_s_spalten_auswahl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_sprachen.resx">
       <DependentUpon>w_s_sprachen.cs</DependentUpon>

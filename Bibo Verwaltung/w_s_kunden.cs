@@ -305,6 +305,7 @@ namespace Bibo_Verwaltung
         private void w_s_kunden_Activated(object sender, EventArgs e)
         {
             setModus();
+            kunde.FillGrid(false, ref gv_Kunde);
         }
         #endregion
 
@@ -474,24 +475,27 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Export/Import
-        private void bt_Excel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_import_Click(object sender, EventArgs e)
-        {
-
-        }
-        #endregion
-
         private void bt_ImEx_Click(object sender, EventArgs e)
         {
-            Form Import = new w_s_import_export();
-            Import.ShowDialog(this);
+            Form modus = new w_s_selfmade_dialog("Modus", "Was möchten sie mit der Kundentabelle machen? Wählen Sie den Import- oder den Exportmodus.", "Importmodus", "Exportmodus");
+            modus.ShowDialog();
+            DialogResult ds = modus.DialogResult;
+            if (ds == DialogResult.Yes)
+            {
+                Form Import = new w_s_import_export((DataTable)gv_Kunde.DataSource, true);
+                Import.ShowDialog(this);
+            }
+            else if (ds == DialogResult.No)
+            {
+                Form Import = new w_s_import_export((DataTable)gv_Kunde.DataSource, false);
+                Import.ShowDialog(this);
+            }
+            else { }
+    
             //ExcelExport export = new ExcelExport();
             //export.ToExcel(Grid_Kunde);
         }
+        #endregion
 
         private void cb_showAll_CheckedChanged(object sender, EventArgs e)
         {
