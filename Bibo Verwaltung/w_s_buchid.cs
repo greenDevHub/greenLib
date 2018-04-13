@@ -447,6 +447,8 @@ namespace Bibo_Verwaltung
                 b.ClearDS();
                 b.FillObject();
                 b.FillGrid(ref grid_buchid);
+                tb_anzahl.Text = grid_buchid.RowCount.ToString();
+
             }
         }
     }

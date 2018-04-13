@@ -217,6 +217,27 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region
+        public bool IsActivated()
+        {
+            if (con.ConnectError()) return false;
+            string RawCommand = "SELECT bu_activated FROM t_s_buchid where bu_id = @0";
+            string activated = "";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, id);
+            while (dr.Read())
+            {
+                activated = dr["bu_activated"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            if (activated.Equals("True"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public bool IsSpecificAvailable()
         {
             if (con.ConnectError()) return false;

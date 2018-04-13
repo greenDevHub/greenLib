@@ -68,66 +68,74 @@ namespace Bibo_Verwaltung
                 try
                 {
                     BuchID buchid = new BuchID(tb_BuchCode.Text);
-                    Buch buch = new Buch(buchid.ISBN);
-                    llb_Buch.Enabled = true;
-                    if (buch.Titel.Length > 30)
+                    if (buchid.IsActivated())
                     {
-                        llb_Buch.Text = buch.Titel.Substring(0, 30) + "...";
-
-                    }
-                    else
-                    {
-                        llb_Buch.Text = buch.Titel;
-                    }
-                    buch_id_global = buchid.ID;
-
-                    if (buch.Image != null)
-                    {
-                        try
+                        Buch buch = new Buch(buchid.ISBN);
+                        llb_Buch.Enabled = true;
+                        if (buch.Titel.Length > 30)
                         {
-                            MemoryStream mem = new MemoryStream(buch.Image);
-                            picBox.Image = Image.FromStream(mem);
-                            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Bilder\\" + buch.ISBN + ".png";
-                            if (!File.Exists(filePath))
-                            {
-                                picBox.Image.Save(filePath, ImageFormat.Png);
-                                picBox.ImageLocation = filePath;
-                            }
-                            else
-                            {
-                                Delete_picture(filePath);
-                                picBox.Image.Save(filePath, ImageFormat.Png);
-                                picBox.ImageLocation = filePath;
-                            }
+                            llb_Buch.Text = buch.Titel.Substring(0, 30) + "...";
+
                         }
-                        catch
+                        else
                         {
+                            llb_Buch.Text = buch.Titel;
                         }
-                    }
-                    else
-                    {
-                        if (!buch.BildPfad.Equals(""))
+                        buch_id_global = buchid.ID;
+
+                        if (buch.Image != null)
                         {
                             try
                             {
-                                picBox.ImageLocation = buch.BildPfad;
+                                MemoryStream mem = new MemoryStream(buch.Image);
+                                picBox.Image = Image.FromStream(mem);
+                                string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Bilder\\" + buch.ISBN + ".png";
+                                if (!File.Exists(filePath))
+                                {
+                                    picBox.Image.Save(filePath, ImageFormat.Png);
+                                    picBox.ImageLocation = filePath;
+                                }
+                                else
+                                {
+                                    Delete_picture(filePath);
+                                    picBox.Image.Save(filePath, ImageFormat.Png);
+                                    picBox.ImageLocation = filePath;
+                                }
                             }
                             catch
                             {
-                                MessageBox.Show("Das Bild wurde nicht gefunden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                         else
                         {
-                            picBox.Image = null;
-                            picBox.ImageLocation = null;
+                            if (!buch.BildPfad.Equals(""))
+                            {
+                                try
+                                {
+                                    picBox.ImageLocation = buch.BildPfad;
+                                }
+                                catch
+                                {
+                                    MessageBox.Show("Das Bild wurde nicht gefunden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                            else
+                            {
+                                picBox.Image = null;
+                                picBox.ImageLocation = null;
+                            }
                         }
+                        cb_Zustand.SelectedValue = buchid.Zustand.ZustandID;
+                        zu_vor_global = buchid.Zustand.Zustandname;
+                        zu_nach_global = buchid.Zustand.Zustandname;
+                        Verlauf verlauf = new Verlauf(buch_id_global);
+                        verlauf.FillGrid(ref gv_Verlauf);
                     }
-                    cb_Zustand.SelectedValue = buchid.Zustand.ZustandID;
-                    zu_vor_global = buchid.Zustand.Zustandname;
-                    zu_nach_global = buchid.Zustand.Zustandname;
-                    Verlauf verlauf = new Verlauf(buch_id_global);
-                    verlauf.FillGrid(ref gv_Verlauf);
+                    else
+                    {
+                        Clear_All();
+                    }
+                    
                 }
                 catch
                 {
@@ -136,31 +144,44 @@ namespace Bibo_Verwaltung
 
                 try
                 {
-                    Rueckgabe rueck = new Rueckgabe();
-                    rueck.Load_Info(tb_BuchCode.Text);
-                    Kunde kunde = new Kunde(rueck.KID);
-                    k_id_global = kunde.KundenID;
-                    llb_Kunde.Enabled = true;
-                    string kundenname = kunde.Vorname + ", " + kunde.Nachname;
-                    if (kundenname.Length > 30)
+                    if (!llb_Buch.Text.Equals("keine Treffer"))
                     {
-                        llb_Kunde.Text = kundenname.Substring(0, 30) + "...";
+                        Rueckgabe rueck = new Rueckgabe();
+                        rueck.Load_Info(tb_BuchCode.Text);
+                        Kunde kunde = new Kunde(rueck.KID);
+                        k_id_global = kunde.KundenID;
+                        llb_Kunde.Enabled = true;
+                        string kundenname = kunde.Vorname + ", " + kunde.Nachname;
+                        if (kundenname.Length > 30)
+                        {
+                            llb_Kunde.Text = kundenname.Substring(0, 30) + "...";
+                        }
+                        else
+                        {
+                            llb_Kunde.Text = kundenname;
+                        }
+                        lb_ausgeliehen.Text = rueck.Leihdatum.Date.ToShortDateString();
+                        lb_rueckgabe.Text = rueck.Rueckgabedatum.Date.ToShortDateString();
+                        ausgeliehen_global = rueck.Leihdatum.Date.ToShortDateString();
+                        ruckgabe_global = DateTime.Now.Date.ToShortDateString();
+                        if (rueck.Rueckgabedatum.Date < DateTime.Now.Date)
+                        {
+                            lb_rueckgabe.ForeColor = Color.Red;
+                            lb_rueckgabe.Text = lb_rueckgabe.Text + " (überfällig)";
+                        }
+                        bt_Zu_aendern.Enabled = true;
+                        bt_Rueckgabe.Enabled = true;
                     }
                     else
                     {
-                        llb_Kunde.Text = kundenname;
+                        bt_Zu_aendern.Enabled = false;
+                        llb_Kunde.Enabled = false;
+                        bt_Rueckgabe.Enabled = false;
+                        llb_Kunde.Text = "nicht verliehen";
+                        lb_ausgeliehen.Text = "nicht verfügbar";
+                        lb_rueckgabe.Text = "nicht verfügbar";
+                        lb_rueckgabe.ForeColor = Color.Black;
                     }
-                    lb_ausgeliehen.Text = rueck.Leihdatum.Date.ToShortDateString();
-                    lb_rueckgabe.Text = rueck.Rueckgabedatum.Date.ToShortDateString();
-                    ausgeliehen_global = rueck.Leihdatum.Date.ToShortDateString();
-                    ruckgabe_global = DateTime.Now.Date.ToShortDateString();
-                    if (rueck.Rueckgabedatum.Date < DateTime.Now.Date)
-                    {
-                        lb_rueckgabe.ForeColor = Color.Red;
-                        lb_rueckgabe.Text = lb_rueckgabe.Text + " (überfällig)";
-                    }
-                    bt_Zu_aendern.Enabled = true;
-                    bt_Rueckgabe.Enabled = true;
                 }
                 catch
                 {
