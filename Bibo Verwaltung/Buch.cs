@@ -436,6 +436,23 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
+        public string AutorNames()
+        {
+            string text = "";
+            foreach (string s in AutorListe.GetNames(GetAutorID(ISBN).ToString()))
+            {
+                if (s != null && !s.Equals(""))
+                {
+                    text = text + s + ", ";
+                }
+            }
+            if (text.Length > 2)
+            {
+                text = text.Substring(0, text.Length - 2);
+            }
+            return text;
+        }
+
         #region DataSet zuruecksetzen
         private void ClearDSBuch()
         {

@@ -35,7 +35,7 @@ namespace Bibo_Verwaltung
                 lb_9.Text = "";
                 lb_2_1.Text = buch.ISBN;
                 lb_2_2.Text = buch.Titel;
-                lb_2_3.Text = buch.AutorListe.Autor.Autorname;
+                lb_2_3.Text = buch.AutorNames(); ;
                 lb_2_4.Text = buch.Genre.Genrename;
                 lb_2_5.Text = buch.Verlag.Verlagname;
                 lb_2_6.Text = buch.Auflage;
