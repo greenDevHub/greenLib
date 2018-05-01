@@ -254,7 +254,7 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Buch hinzufuegen
-        public void Add_Buch()
+        private void Add()
         {
             //SQL-Verbindung pruefen
             if (con.ConnectError()) return;
@@ -303,6 +303,19 @@ namespace Bibo_Verwaltung
             cmd.ExecuteNonQuery();
             con.Close();
         }
+        public void Add_Buch()
+        {
+            if (IsActivated())
+            {
+                Add();
+            }
+            else
+            {
+                Activate();
+                AutorListe.AutorListeID = GetAutorID(ISBN);
+                Update_Buch();
+            }
+        }
         #endregion
 
         #region Buch loeschen (per ISBN)
@@ -322,6 +335,15 @@ namespace Bibo_Verwaltung
         {
             if (con.ConnectError()) return;
             string RawCommand = "UPDATE [dbo].[t_s_buecher] set buch_activated = 0 WHERE buch_isbn = @isbn";
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@isbn", ISBN);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        private void Activate()
+        {
+            if (con.ConnectError()) return;
+            string RawCommand = "UPDATE [dbo].[t_s_buecher] set buch_activated = 1 WHERE buch_isbn = @isbn";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             cmd.Parameters.AddWithValue("@isbn", ISBN);
             cmd.ExecuteNonQuery();
@@ -438,6 +460,28 @@ namespace Bibo_Verwaltung
             grid.Columns[ds2.Tables[0].Columns.IndexOf("AutorlisteID")].Visible = false;
         }
         #endregion
+
+        private bool IsActivated()
+        {
+            if (con.ConnectError()) return false;
+            string RawCommand = "SELECT buch_activated FROM t_s_buecher where buch_isbn = @0";
+            string activated = "";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, ISBN);
+            while (dr.Read())
+            {
+                activated = dr["buch_activated"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            if (activated.Equals("True"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 
     }
