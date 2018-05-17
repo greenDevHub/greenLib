@@ -17,9 +17,11 @@ namespace Bibo_Verwaltung
         #region Datenbank-Verbinding bereitstellen
         #endregion
 
-        public w_s_main()
+        public w_s_main(string name)
         {
             InitializeComponent();
+            Benutzer user = new Benutzer(name);
+            this.Text = "Bibliotheksverwaltung - Angemeldet als: " + name;
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             System.IO.Directory.CreateDirectory(path + "\\Bibliothek");
             System.IO.Directory.CreateDirectory(path + "\\Bibliothek\\Bilder");

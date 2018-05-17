@@ -90,10 +90,17 @@
     <Compile Include="Autor.cs" />
     <Compile Include="AutorListe.cs" />
     <Compile Include="Barcode.cs" />
+    <Compile Include="Benutzer.cs" />
     <Compile Include="BuchID.cs" />
     <Compile Include="Einstellung.cs" />
     <Compile Include="Details.cs" />
     <Compile Include="ExcelExport.cs" />
+    <Compile Include="w_s_login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_login.designer.cs">
+      <DependentUpon>w_s_login.cs</DependentUpon>
+    </Compile>
     <Compile Include="w_s_selfmade_dialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,6 +234,9 @@
     <Compile Include="Zustand.cs" />
     <EmbeddedResource Include="w_s_import_export.resx">
       <DependentUpon>w_s_import_export.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="w_s_login.resx">
+      <DependentUpon>w_s_login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_rueckgabe.resx">
       <DependentUpon>w_s_rueckgabe.cs</DependentUpon>
