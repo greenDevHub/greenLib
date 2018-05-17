@@ -16,7 +16,7 @@ namespace Bibo_Verwaltung
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new w_s_main());
+            Application.Run(new w_s_login());
         }
     }
 }
