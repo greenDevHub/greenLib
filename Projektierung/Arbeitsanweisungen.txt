@@ -12,3 +12,22 @@ ________________________________________________________________________________
 |- SQL_Verbindung neue Klasse um notwendige Rechte zu geben		 						|
 |- Buchrückgabefenster Examplar deaktiviert?
 |- Buchrückgabefenster Autoren anzeigen
+
+
+
+        /* toDo:
+         * Grundfunktion
+         ** Login Form erstellen, als startpunkt einbinden ...
+         ** Benutzertabelle erstellen
+         ** Benutzerklasse erstellen
+         ** im Hauptfenster anzeige "angemeldet als"
+         * Erweiterte Funktion
+         ** Einstellungen in Login integrieren um Verbindung zum Programmstart anzugeben
+         ** Passwort verschlüsseln
+         ** Benutzerverwaltung Erstellen um neue Benutzer anzulegen
+         ** Programmweit angemeldeten Benutzer anzeigen
+         ** Benutzer in wichtige Prozesse einbinden: 
+         ***  Ausleihvorgang>bei welchem Mitarbeiter(Benutzer) ausgeliehen?
+         ***  Buch verwalten>welcher Benutzer hat buch zuletzt bearbeitet
+         ***  Kunde verwalten>welcher Benutzer hat Kunde zuletzt bearbeitet
+         */
