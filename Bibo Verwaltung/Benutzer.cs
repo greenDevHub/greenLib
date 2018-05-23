@@ -30,6 +30,7 @@ namespace Bibo_Verwaltung
 
         }
         public Benutzer(bool b)
+        {
             FillObject();
 
         }
