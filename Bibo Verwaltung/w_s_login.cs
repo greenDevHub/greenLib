@@ -31,6 +31,7 @@ namespace Bibo_Verwaltung
             else
             {
                 MessageBox.Show("Die Anmeldedaten sind falsch. Bitte versuchen Sie es erneut", "Falsche Daten!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tb_Passw.Clear();
             }
         }
         private void bt_Login_Click(object sender, EventArgs e)

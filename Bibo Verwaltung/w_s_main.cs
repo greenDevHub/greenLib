@@ -21,7 +21,17 @@ namespace Bibo_Verwaltung
         {
             InitializeComponent();
             Benutzer user = new Benutzer(name);
-            this.Text = "Bibliotheksverwaltung - Angemeldet als: " + name;
+            this.Text = "Bibliotheksverwaltung - Angemeldet als: " + name + " (" + user.Rechte + ")";
+            if(user.Rechteid.Equals("0") || user.Rechteid.Equals("1"))
+            {
+                bt_Benutzerverwaltung.Enabled = false;
+                bt_Einstellungen.Enabled = false;
+            }
+            else if (user.Rechteid == "2")
+            {
+                bt_Benutzerverwaltung.Enabled = true;
+                bt_Einstellungen.Enabled = true;
+            }
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             System.IO.Directory.CreateDirectory(path + "\\Bibliothek");
             System.IO.Directory.CreateDirectory(path + "\\Bibliothek\\Bilder");
@@ -207,6 +217,17 @@ namespace Bibo_Verwaltung
             lb_Lagerzahl.Text = (bestand - ausgeliehen).ToString();
 
             con.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form users = new w_s_user();
+            users.ShowDialog(this);
+        }
+
+        private void bt_logout_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
         }
     }
     #endregion

@@ -7,7 +7,8 @@ BEGIN
 CREATE TABLE [dbo].[t_s_benutzer](
 	[b_name] [nvarchar] (128) NOT NULL,
 	[b_password] [varbinary] (max) NOT NULL,
+	[b_rechte] [int] NOT NULL,
 	PRIMARY KEY (b_name))
-	Insert INTO t_s_benutzer (b_name, b_password) 
-	VALUES ('Laurenz', CAST('123' AS VARBINARY(MAX)))
+	Insert INTO t_s_benutzer (b_name, b_password, b_rechte) 
+	VALUES ('admin', CAST('admin' AS VARBINARY(MAX)), 2)
 	END
