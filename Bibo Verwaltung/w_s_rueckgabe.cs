@@ -14,8 +14,11 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_rueckgabe : Form
     {
-        public w_s_rueckgabe()
+        string name;
+        public w_s_rueckgabe(string name)
         {
+            this.name = name;
+            this.Text = "Angemeldet als: " + name;
             InitializeComponent();
             zustand.FillCombobox(ref cb_Zustand, -1);
         }
@@ -229,13 +232,13 @@ namespace Bibo_Verwaltung
 
         private void llb_Buch_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Form Info = new w_s_information(1, buch_id_global);
+            Form Info = new w_s_information(1, buch_id_global, name);
             Info.ShowDialog();
         }
 
         private void llb_Kunde_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Form Info = new w_s_information(2, k_id_global);
+            Form Info = new w_s_information(2, k_id_global, name);
             Info.ShowDialog();
         }
 

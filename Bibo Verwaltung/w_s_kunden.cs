@@ -10,9 +10,10 @@ namespace Bibo_Verwaltung
     {
         Kunde kunde = new Kunde();
 
-        public w_s_Kunden()
+        public w_s_Kunden(string name)
         {
             InitializeComponent();
+            this.Text = name;
             kunde.FillGrid(false, ref gv_Kunde);
         }
 

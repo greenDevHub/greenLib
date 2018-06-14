@@ -18,8 +18,11 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Erschaft die Form
         /// </summary>
-        public w_s_details()
+        string name;
+        public w_s_details(string name)
         {
+            this.name = name;
+            this.Text = "Angemeldet als: " + name;
             InitializeComponent();
             details.FillGrid(ref gv_Details);
             b.AutorListe.Autor.FillCombobox(ref combo_Autor, -1);
@@ -341,7 +344,7 @@ namespace Bibo_Verwaltung
                             string buch_titel = row.Cells[details.GetColumnIndexByName(gv_Details, "Titel")].Value.ToString();
                             string buch_zustand = row.Cells[details.GetColumnIndexByName(gv_Details, "Zustand")].Value.ToString();
 
-                            using (var kunden = new w_s_Aus_Kunde())
+                            using (var kunden = new w_s_Aus_Kunde(name))
                             {
                                 var result = kunden.ShowDialog();
                                 if (result == DialogResult.OK)
@@ -487,7 +490,7 @@ namespace Bibo_Verwaltung
         #region Buch-Rückgabe
         private void bt_Rueckgabe_Click(object sender, EventArgs e)
         {
-            Form Rueckgabe = new w_s_rueckgabe();
+            Form Rueckgabe = new w_s_rueckgabe(name);
             Rueckgabe.ShowDialog(this);
         }
         #endregion

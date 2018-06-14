@@ -16,9 +16,10 @@ namespace Bibo_Verwaltung
 
         #region Datenbank-Verbinding bereitstellen
         #endregion
-
+        string name;
         public w_s_main(string name)
         {
+            this.name = name;
             InitializeComponent();
             Benutzer user = new Benutzer(name);
             this.Text = "Bibliotheksverwaltung - Angemeldet als: " + name + " (" + user.Rechte + ")";
@@ -57,7 +58,7 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
-                Form Kunden = new w_s_Kunden();
+                Form Kunden = new w_s_Kunden(name);
                 Kunden.ShowDialog(this);
             }
             else
@@ -159,7 +160,7 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
-                Form Details = new w_s_details();
+                Form Details = new w_s_details(name);
                 Details.ShowDialog(this);
             }
             else
