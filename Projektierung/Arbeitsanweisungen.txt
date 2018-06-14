@@ -13,14 +13,16 @@ ________________________________________________________________________________
 |- Buchrückgabefenster Examplar deaktiviert?
 |- Buchrückgabefenster Autoren anzeigen
 
-
-
-        /* toDo:
-         * Grundfunktion
+ERLEDIGT
          ** Login Form erstellen, als startpunkt einbinden ...
          ** Benutzertabelle erstellen
          ** Benutzerklasse erstellen
          ** im Hauptfenster anzeige "angemeldet als"
+
+
+        /* toDo:
+         * Grundfunktion
+
          * Erweiterte Funktion
          ** Einstellungen in Login integrieren um Verbindung zum Programmstart anzugeben
          ** Passwort verschlüsseln
@@ -31,3 +33,12 @@ ________________________________________________________________________________
          ***  Buch verwalten>welcher Benutzer hat buch zuletzt bearbeitet
          ***  Kunde verwalten>welcher Benutzer hat Kunde zuletzt bearbeitet
          */
+
+NEU SEIT 14.06.2018
+	** Benutzerrechte selbst bestimmen können (z.B. mit Tickboxen)
+		Kunden löschen/ändern/hinzufügen
+		Bücher -""-
+		Unterfenster Zugriffsrechte? (z.B. für Buchrückgabe)
+	** Rechtekonzept auf SQl Server, sodass Anmeldung im Programm über SQL Benutzer erfolgt und so Rechte gleich klar sind
+		===> Admin (alles), Normaler Bediener (alles außer Administrative Funktionen), Bearbeiter (Ausleihen, Rückgabe, Kunden lesen, also nur lesen/schreiben von Büchern/Ausleihvorgängen),
+		Gast (nur sehen, welche Bücher da sind), Der Schülerbearbeiter (Schüler löschen/sehen/aktualisieren(nicht adden))
