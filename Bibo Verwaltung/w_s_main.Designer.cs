@@ -226,7 +226,7 @@
             this.bt_Benutzerverwaltung.TabIndex = 2;
             this.bt_Benutzerverwaltung.Text = "Benutzerverwaltung";
             this.bt_Benutzerverwaltung.UseVisualStyleBackColor = true;
-            this.bt_Benutzerverwaltung.Click += new System.EventHandler(this.button1_Click);
+            this.bt_Benutzerverwaltung.Click += new System.EventHandler(this.bt_Benutzerverwaltung_Click);
             // 
             // bt_Suchen_Ausleihen
             // 

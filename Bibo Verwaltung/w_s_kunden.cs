@@ -71,6 +71,7 @@ namespace Bibo_Verwaltung
                 && !tb_Ort.Text.Equals("")
                 && !cb_Vertrauenswuerdigkeit.Text.Equals(""))
                 {
+
                     try
                     {
                         setKundenValues();
@@ -142,6 +143,61 @@ namespace Bibo_Verwaltung
                 && !tb_Ort.Text.Equals("")
                 && !cb_Vertrauenswuerdigkeit.Text.Equals(""))
                 {
+                    string errorMessage = "Folgende Felder haben unzulässige Werte: ";
+                    bool error = false;
+                    if (!checkStrings(tb_Vorname.Text))
+                    {
+                        errorMessage += "\n - Vorname enthält Zahlen";
+                        tb_Vorname.BackColor = Color.Red;
+                        error = true;
+                    }
+                    if (!checkStrings(tb_Nachname.Text))
+                    {
+                        errorMessage += "\n - Nachname enthält Zahlen";
+                        tb_Nachname.BackColor = Color.Red;
+                        error = true;
+                    }
+                    if (!checkStrings(tb_Strasse.Text))
+                    {
+                        errorMessage += "\n - Straßenname enthält Zahlen";
+                        tb_Strasse.BackColor = Color.Red;
+                        error = true;
+                    }
+                    if (!checkNumbers(tb_Postleitzahl.Text))
+                    {
+                        errorMessage += "\n - Postleitzahl enthält nicht nur Zahlen";
+                        tb_Postleitzahl.BackColor = Color.Red;
+                        error = true;
+                    }
+                    if (!checkStrings(tb_Ort.Text))
+                    {
+                        errorMessage += "\n - Ort enhält Zahlen";
+                        tb_Ort.BackColor = Color.Red;
+                        error = true;
+                    }
+                    if (cb_Vertrauenswuerdigkeit.SelectedIndex.Equals(-1))
+                    {
+                        errorMessage += "\n - Bei der Vertrauenwürdigkeit wurden keine auswählbaren Werte angegeben";
+                        tb_Ort.BackColor = Color.Red;
+                        error = true;
+                    }
+                    if (!tb_Klasse.Text.Equals("") && !checkSpecialNumbers(tb_Klasse.Text))
+                    {
+                        errorMessage += "\n - Klasse ist nicht richtig formatiert";
+                        tb_Telefonnummer.BackColor = Color.Red;
+                        error = true;
+                    }
+                    if (!tb_Telefonnummer.Text.Equals("") && !checkSpecialNumbers(tb_Telefonnummer.Text)) 
+                    {
+                        errorMessage += "\n - Telefonnummer ist nicht richtig formatiert";
+                        tb_Telefonnummer.BackColor = Color.Red;
+                        error = true;
+                    }
+                    if (error)
+                    {
+                        MessageBox.Show(errorMessage, "Fehler!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     try
                     {
                         setKundenValues();
@@ -166,6 +222,30 @@ namespace Bibo_Verwaltung
                     setBackground_Red();
                 }
             }
+        }
+
+        private bool checkStrings(string name)
+        {
+            foreach (char c in name)
+                if (Char.IsNumber(c))
+                    return false;
+            return true;
+        }
+
+        private bool checkNumbers(string number)
+        {
+            foreach (char c in number)
+                if (!Char.IsNumber(c))
+                    return false;
+            return true;
+        }
+
+        private bool checkSpecialNumbers(string number)
+        {
+            foreach (char c in number)
+                if (!Char.IsNumber(c) && c.Equals("/"))
+                    return false;
+            return true;
         }
         #endregion
 

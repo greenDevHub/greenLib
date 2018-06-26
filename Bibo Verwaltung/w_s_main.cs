@@ -134,6 +134,7 @@ namespace Bibo_Verwaltung
                 MessageBox.Show("Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
         private void bt_Einstellungen_Click(object sender, EventArgs e)
         {
             Form Einstellungen = new w_s_einstellungen();
@@ -168,6 +169,7 @@ namespace Bibo_Verwaltung
                 MessageBox.Show("Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
         private void UpdateForm()
         {
             //SQL-Verbindung pruefen
@@ -220,7 +222,7 @@ namespace Bibo_Verwaltung
             con.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void bt_Benutzerverwaltung_Click(object sender, EventArgs e)
         {
             Form users = new w_s_user();
             users.ShowDialog(this);

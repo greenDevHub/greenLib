@@ -27,6 +27,12 @@ namespace Bibo_Verwaltung
             Benutzer user = new Benutzer(true);
             if (bt_confirm.Text.Equals("Hinzufügen"))
             {
+                if (rechte.Equals("-1"))
+                {
+                    MessageBox.Show("Du darfst bei den Rechten nur eine der auswählbaren Gruppen angeben!", "Falsche Rechte!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    cb_Rechte.Text = "";
+                    return;
+                }
                 try
                 {
                     user.Add(name, pw, rechte);
@@ -51,6 +57,12 @@ namespace Bibo_Verwaltung
             }
             else if (bt_confirm.Text.Equals("Speichern"))
             {
+                if (rechte.Equals("-1"))
+                {
+                    MessageBox.Show("Du darfst bei den Rechten nur eine der auswählbaren Gruppen angeben!", "Falsche Rechte!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    cb_Rechte.Text = "";
+                    return;
+                }
                 try
                 {
                     user.Update(name, pw, rechte);
@@ -127,6 +139,13 @@ namespace Bibo_Verwaltung
                 cb_Rechte.SelectedIndex = int.Parse(user.Rechteid);
             }
 
+        }
+
+        private void Reset(object sender, EventArgs e)
+        {
+            tb_user.Text = "";
+            tb_pw.Text = "";
+            cb_Rechte.Text = "";
         }
     }
 }

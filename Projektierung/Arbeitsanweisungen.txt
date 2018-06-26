@@ -42,3 +42,7 @@ NEU SEIT 14.06.2018
 	** Rechtekonzept auf SQl Server, sodass Anmeldung im Programm über SQL Benutzer erfolgt und so Rechte gleich klar sind
 		===> Admin (alles), Normaler Bediener (alles außer Administrative Funktionen), Bearbeiter (Ausleihen, Rückgabe, Kunden lesen, also nur lesen/schreiben von Büchern/Ausleihvorgängen),
 		Gast (nur sehen, welche Bücher da sind), Der Schülerbearbeiter (Schüler löschen/sehen/aktualisieren(nicht adden))
+
+Probleme 26.06.2018 beim neuen Aufsetzen:
+   * einige Abstürze, da die Datei Biblothek\einstellungen\Einstellungen.txt sich nicht automatisch erstellt hat
+   * keine Möglichkeit, um von dem Login-Fenster in das Einstellungs-Fenster zu kommen, ohne den Quellcode zu ändern

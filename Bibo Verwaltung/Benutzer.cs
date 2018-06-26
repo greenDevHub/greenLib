@@ -17,12 +17,12 @@ namespace Bibo_Verwaltung
         string benutzerpw;
         public string BenutzerPW { get { return benutzerpw; } set { benutzerpw = value; } }
 
-        public string Rechte { get => rechte; set => rechte = value; }
-        public string Rechteid { get => rechteid; set => rechteid = value; }
-
         string rechte;
+        public string Rechte { get { return rechte; } set { rechte = value; } }
 
         private string rechteid;
+        public string Rechteid { get { return rechteid; } set { rechteid = value; } }
+
 
         #region Constructor
         public Benutzer()
@@ -123,9 +123,6 @@ namespace Bibo_Verwaltung
             {
                 return false;
             }
-            
-
-
         }
 
         public void Add(string name, string pw, string rechte)
