@@ -13,9 +13,6 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_main : Form
     {
-
-        #region Datenbank-Verbinding bereitstellen
-        #endregion
         string name;
         public w_s_main(string name)
         {

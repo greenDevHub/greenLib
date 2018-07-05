@@ -16,8 +16,25 @@ namespace Bibo_Verwaltung
         {
             InitializeComponent();
         }
+
+        bool error = false;
+
         private void anmelden()
         {
+            SQL_Verbindung con = new SQL_Verbindung();
+            string test = con.ConnectionString;
+            if (con.ConnectError())
+            {
+                error = true;
+                Form Einstellungen = new w_s_einstellungen();
+                Einstellungen.Show();
+                return;
+            }
+            else
+            {
+                error = false;
+            }
+
             Benutzer user = new Benutzer();
             string name = tb_User.Text;
             string pw = tb_Passw.Text;

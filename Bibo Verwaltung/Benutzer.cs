@@ -64,10 +64,13 @@ namespace Bibo_Verwaltung
             con.Close();
         }
         #endregion
+
         //private string GetPW()
         //{
         //    byte[] binaryString = (byte[])pw;
         //}
+
+        #region GetRechte
         private string GetRechte(string s)
         {
             if (s.Equals("0"))
@@ -90,6 +93,9 @@ namespace Bibo_Verwaltung
                 return "unbekannt";
             }
         }
+        #endregion
+
+        #region Login
         public bool Login(string pw, string name)
         {
             SQL_Verbindung con = new SQL_Verbindung();
@@ -124,7 +130,9 @@ namespace Bibo_Verwaltung
                 return false;
             }
         }
+        #endregion
 
+        #region Add
         public void Add(string name, string pw, string rechte)
         {
             byte[] newPW = Encoding.UTF8.GetBytes(pw);
@@ -138,6 +146,9 @@ namespace Bibo_Verwaltung
             cmd.ExecuteNonQuery();
             con.Close();
         }
+        #endregion
+
+        #region Delete
         public void Delete(string name)
         {
             SQL_Verbindung con = new SQL_Verbindung();
@@ -148,6 +159,9 @@ namespace Bibo_Verwaltung
             cmd.ExecuteNonQuery();
             con.Close();
         }
+        #endregion
+
+        #region Update
         public void Update(string name, string pw, string rechte)
         {
             byte[] newPW = Encoding.UTF8.GetBytes(pw);
@@ -163,10 +177,14 @@ namespace Bibo_Verwaltung
             //Verbindung schließen
             con.Close();
         }
+        #endregion
+
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
         DataTable dt = new DataTable();
         SqlCommandBuilder comb = new SqlCommandBuilder();
+
+        #region FillObject
         private void FillObject()
         {
             //DataTable dt = new DataTable();
@@ -196,6 +214,9 @@ namespace Bibo_Verwaltung
             }
 
         }
+        #endregion
+
+        #region FillGrid
         public void FillGrid(ref DataGridView grid, object value = null)
         {
             dt.Clear();
@@ -206,5 +227,6 @@ namespace Bibo_Verwaltung
 
 
         }
+        #endregion
     }
 }

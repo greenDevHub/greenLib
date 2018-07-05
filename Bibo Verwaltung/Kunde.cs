@@ -12,6 +12,7 @@ namespace Bibo_Verwaltung
     class Kunde
     {
         SQL_Verbindung con = new SQL_Verbindung();
+
         #region Strings
         string kundenid;
         /// <summary>

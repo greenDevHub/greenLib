@@ -21,6 +21,7 @@ namespace Bibo_Verwaltung
         public w_s_einstellungen()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             originalHeight = ClientSize.Height;
             originalRowHeight = tLP_Top.RowStyles[3].Height;
             Load();

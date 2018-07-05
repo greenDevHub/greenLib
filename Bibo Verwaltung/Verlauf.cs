@@ -20,6 +20,8 @@ namespace Bibo_Verwaltung
         DataSet ds = new DataSet();
         DataTable dt = new DataTable();
         SqlCommandBuilder comb = new SqlCommandBuilder();
+
+        #region FillObject
         private void FillObject(string buchid)
         {
             dt.Clear();
@@ -35,7 +37,9 @@ namespace Bibo_Verwaltung
 
             con.Close();
         }
+        #endregion
 
+        #region Fillgrid
         public void FillGrid(ref DataGridView grid, object value = null)
         {
             grid.DataSource = ds.Tables[0];
@@ -47,5 +51,6 @@ namespace Bibo_Verwaltung
             grid.Columns["aus_geliehen"].HeaderText = "Ausleihdatum:";
             grid.Columns["aus_ruckgabe"].HeaderText = "Rückgabedatum:";
         }
+        #endregion
     }
 }
