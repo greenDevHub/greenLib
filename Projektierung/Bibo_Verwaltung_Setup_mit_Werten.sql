@@ -122,7 +122,7 @@ CREATE TABLE [dbo].[t_s_autor](
 	PRIMARY KEY (au_id))
 	INSERT into t_s_autor (au_autor) VALUES ('J.R.R. Tolkien')
 	Select * from t_s_autor
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_genre]') AND type in (N'U'))
@@ -138,7 +138,7 @@ CREATE TABLE [dbo].[t_s_genre](
 	INSERT INTO t_s_genre (ger_name) VALUES ('Roman')
 	INSERT INTO t_s_genre (ger_name) VALUES ('Fantasy')
 	Select * from t_s_genre
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_kunden]') AND type in (N'U'))
@@ -164,7 +164,7 @@ CREATE TABLE [dbo].[t_s_kunden](
 	kunde_klasse, kunde_mail, kunde_telefonnummer) VALUES ('Uwe', 'Decker', 'Gubener Str.', '75a',
 	'03711', 'Miesbach', '', '11/4', 'UweDecker@mail.com', '08024/160807')
 	Select * from t_s_kunden
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_sprache]') AND type in (N'U'))
@@ -179,7 +179,7 @@ CREATE TABLE [dbo].[t_s_sprache](
 	INSERT INTO t_s_sprache (sprach_name) VALUES ('Deutsch')
 	INSERT INTO t_s_sprache (sprach_name) VALUES ('Englisch')
 	Select * from t_s_sprache
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_verlag]') AND type in (N'U'))
@@ -194,7 +194,7 @@ CREATE TABLE [dbo].[t_s_verlag](
 	Insert INTO t_s_verlag (ver_name) VALUES ('Klett-Cotta')
 	INSERT INTO t_s_verlag (ver_name) VALUES ('dtv Verlagsgesellschaft')
 	Select * from t_s_verlag
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_autorListe]') AND type in (N'U'))
@@ -237,7 +237,7 @@ CREATE TABLE [dbo].[t_s_autorListe](
 		REFERENCES t_s_autor (au_id))
 	Insert INTO t_s_autorListe (a_0) VALUES (1)
 	Select * from t_s_autorListe
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_zustand]') AND type in (N'U'))
@@ -254,7 +254,7 @@ CREATE TABLE [dbo].[t_s_zustand](
 	INSERT INTO t_s_zustand (zu_zustand) VALUES ('gebraucht')
 	INSERT INTO t_s_zustand (zu_zustand) VALUES ('beschädigt')
 	Select * from t_s_zustand
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buecher]') AND type in (N'U'))
@@ -277,8 +277,6 @@ CREATE TABLE [dbo].[t_s_buecher](
 	[buch_image] [varbinary](max),
 	[buch_imageDate] [datetime],
 	[buch_activated] [BIT] NOT NULL,
-
-
 	PRIMARY KEY (buch_isbn),
 	FOREIGN KEY (buch_genre_id)
 		REFERENCES t_s_genre (ger_id),
@@ -295,9 +293,8 @@ CREATE TABLE [dbo].[t_s_buecher](
 	INSERT INTO t_s_buecher (buch_isbn, buch_titel, buch_genre_id, buch_autor_id, buch_verlag_id, 
 	buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, buch_anzahl, buch_activated) VALUES
 	('978-3423715669', 'Der kleine Hobbit', 2, 1, 2, '01.11.2013', 1, 'Auflage 1', 8.95, 2, 1)
-
 	Select * from t_s_buecher
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buchid]') AND type in (N'U'))
@@ -311,7 +308,6 @@ CREATE TABLE [dbo].[t_s_buchid](
 	[bu_zustandsid] [int] NOT NULL,
 	[bu_aufnahmedatum] [date] NOT NULL,
 	[bu_activated] [BIT] NOT NULL,
-
 	PRIMARY KEY (bu_id),
 	FOREIGN KEY (bu_zustandsid)
 		REFERENCES t_s_zustand (zu_id),
@@ -321,7 +317,7 @@ CREATE TABLE [dbo].[t_s_buchid](
 	INSERT INTO t_s_buchid (bu_isbn, bu_zustandsid, bu_aufnahmedatum, bu_activated) VALUES ('978-3423715669', 2, '01.01.2017', 1)
 	INSERT INTO t_s_buchid (bu_isbn, bu_zustandsid, bu_aufnahmedatum, bu_activated) VALUES ('978-3423715669', 3, '09.11.2012', 1)
 	Select * from t_s_buchid
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_bd_ausgeliehen]') AND type in (N'U'))
@@ -344,9 +340,9 @@ CREATE TABLE [dbo].[t_bd_ausgeliehen](
 	INSERT INTO t_bd_ausgeliehen (aus_buchid, aus_leihdatum, aus_rückgabedatum, aus_kundenid) 
 	VALUES (1, '11.11.2016', '18.11.2016', 1)
 	Select * from t_bd_ausgeliehen
-	END
+END
 
-	use Bibo_Verwaltung
+use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_verlauf]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_genre]
 GO
@@ -357,7 +353,7 @@ CREATE TABLE [dbo].[t_s_verlauf](
 	[id_buch] [int] NOT NULL,
 	[k_id] [int] NOT NULL,
 	[zu_vor] [nvarchar] (128) NOT NULL,
-	[zu_nach] [nvarchar] (128) NOT NULL,
+	[zu_nach] [nvarchar]	 (128) NOT NULL,
 	[aus_geliehen] [date] NOT NULL,
 	[aus_ruckgabe] [date] NOT NULL,
 	PRIMARY KEY (ver_id),
@@ -365,8 +361,26 @@ CREATE TABLE [dbo].[t_s_verlauf](
 		REFERENCES t_s_buchid (bu_id),
     FOREIGN KEY (k_id)
 	    REFERENCES t_s_kunden (kunde_id))
+
 	INSERT INTO t_s_verlauf (id_buch, k_id, zu_vor, zu_nach, aus_geliehen, aus_ruckgabe) VALUES (1, 1, 'neuwertig', 'neuwertig', '01.01.2017', '29.01.2017')
 	INSERT INTO t_s_verlauf (id_buch, k_id, zu_vor, zu_nach, aus_geliehen, aus_ruckgabe) VALUES (2, 1, 'gut', 'gebraucht', '01.05.2017', '06.07.2017')
 	INSERT INTO t_s_verlauf (id_buch, k_id, zu_vor, zu_nach, aus_geliehen, aus_ruckgabe) VALUES (1, 1, 'neuwertig', 'gut', '01.03.2017', '01.10.2017')
 	Select * from t_s_verlauf
-	END
+END
+
+use Bibo_Verwaltung
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_benutzer]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_benutzer]
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_benutzer]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[t_s_benutzer](
+	[b_name] [nvarchar] (128) NOT NULL,
+	[b_password] [varbinary] (max) NOT NULL,
+	[b_rechte] [int] NOT NULL,
+	PRIMARY KEY (b_name))
+
+	Insert INTO t_s_benutzer (b_name, b_password, b_rechte) VALUES ('Laurenz', CAST('123' AS VARBINARY(MAX)), 1)
+	Insert INTO t_s_benutzer (b_name, b_password, b_rechte) VALUES ('admin', CAST('admin' AS VARBINARY(MAX)), 2)
+	select * from t_s_benutzer
+END

@@ -120,7 +120,7 @@ CREATE TABLE [dbo].[t_s_autor](
 	[au_id] [int] IDENTITY (1,1) NOT NULL,
 	[au_autor] [nvarchar] (128) NOT NULL,
 	PRIMARY KEY (au_id))
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_genre]') AND type in (N'U'))
@@ -132,7 +132,7 @@ CREATE TABLE [dbo].[t_s_genre](
 	[ger_id] [int] IDENTITY (1,1) NOT NULL,
 	[ger_name] [nvarchar] (128) NOT NULL,
 	PRIMARY KEY (ger_id))
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_kunden]') AND type in (N'U'))
@@ -153,7 +153,7 @@ CREATE TABLE [dbo].[t_s_kunden](
 	[kunde_mail] [nvarchar](128) NOT NULL,
 	[kunde_telefonnummer] [nvarchar](128) NOT NULL,
 	PRIMARY KEY (kunde_id))
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_sprache]') AND type in (N'U'))
@@ -165,7 +165,7 @@ CREATE TABLE [dbo].[t_s_sprache](
 	[sprach_id] [int] IDENTITY (1,1) NOT NULL,
 	[sprach_name][nvarchar] (128) NOT NULL,
 	PRIMARY KEY (sprach_id))
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_verlag]') AND type in (N'U'))
@@ -177,7 +177,7 @@ CREATE TABLE [dbo].[t_s_verlag](
 	[ver_id] [int] IDENTITY (1,1) NOT NULL,
 	[ver_name] [nvarchar] (128) NOT NULL,
 	PRIMARY KEY (ver_id))
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_autorListe]') AND type in (N'U'))
@@ -218,8 +218,7 @@ CREATE TABLE [dbo].[t_s_autorListe](
 		REFERENCES t_s_autor (au_id),
 	FOREIGN KEY (a_9)
 		REFERENCES t_s_autor (au_id))
-	Select * from t_s_autorListe
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_zustand]') AND type in (N'U'))
@@ -231,7 +230,7 @@ CREATE TABLE [dbo].[t_s_zustand](
 	[zu_id] [int] IDENTITY (1,1) NOT NULL,
 	[zu_zustand] [nvarchar](128) NOT NULL,
 	PRIMARY KEY (zu_id))
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buecher]') AND type in (N'U'))
@@ -254,8 +253,6 @@ CREATE TABLE [dbo].[t_s_buecher](
 	[buch_image] [varbinary](max),
 	[buch_imageDate] [datetime],
 	[buch_activated] [BIT] NOT NULL,
-
-
 	PRIMARY KEY (buch_isbn),
 	FOREIGN KEY (buch_genre_id)
 		REFERENCES t_s_genre (ger_id),
@@ -265,7 +262,7 @@ CREATE TABLE [dbo].[t_s_buecher](
 		REFERENCES t_s_verlag (ver_id),
 	FOREIGN KEY (buch_sprache_id)
 		REFERENCES t_s_sprache (sprach_id))
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buchid]') AND type in (N'U'))
@@ -279,13 +276,12 @@ CREATE TABLE [dbo].[t_s_buchid](
 	[bu_zustandsid] [int] NOT NULL,
 	[bu_aufnahmedatum] [date] NOT NULL,
 	[bu_activated] [BIT] NOT NULL,
-
 	PRIMARY KEY (bu_id),
 	FOREIGN KEY (bu_zustandsid)
 		REFERENCES t_s_zustand (zu_id),
 	FOREIGN KEY (bu_isbn)
 		REFERENCES t_s_buecher (buch_isbn))
-	END
+END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_bd_ausgeliehen]') AND type in (N'U'))
@@ -304,10 +300,9 @@ CREATE TABLE [dbo].[t_bd_ausgeliehen](
 		REFERENCES t_s_buchid (bu_id),
     FOREIGN KEY (aus_kundenid)
 	    REFERENCES t_s_kunden (kunde_id))
+END
 
-	END
-
-	use Bibo_Verwaltung
+use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_verlauf]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_genre]
 GO
@@ -326,4 +321,17 @@ CREATE TABLE [dbo].[t_s_verlauf](
 		REFERENCES t_s_buchid (bu_id),
     FOREIGN KEY (k_id)
 	    REFERENCES t_s_kunden (kunde_id))
-	END
+END
+
+use Bibo_Verwaltung
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_benutzer]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_benutzer]
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_benutzer]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[t_s_benutzer](
+	[b_name] [nvarchar] (128) NOT NULL,
+	[b_password] [varbinary] (max) NOT NULL,
+	[b_rechte] [int] NOT NULL,
+	PRIMARY KEY (b_name))
+END
