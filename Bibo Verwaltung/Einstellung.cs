@@ -31,15 +31,15 @@ namespace Bibo_Verwaltung
         private string pw;
         public string Pw { get { return pw; } set { pw = value; } }
 
-        public string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\einstellungen\\Einstellungen.txt";
+        public string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Einstellungen\\ConnectionSettings.txt";
 
         #endregion
 
         public Einstellung()
         {
-            Load();
+            LoadSettings();
         }
-        #region Methoden
+        #region Methoden: File_Exists(), IsFileReadOnly(), SaveSettings(), LoadSettings()
         private bool File_Exists(string path)
         {
             if (File.Exists(path))
@@ -60,32 +60,31 @@ namespace Bibo_Verwaltung
             return fInfo.IsReadOnly;
         }
 
-        public void Save(bool message)
+        public void SaveSettings(bool message)
         {
             if (!IsFileReadOnly(path))
             {
                 File.WriteAllText(path, Server + "\r\n" + Database + "\r\n" + Security + "\r\n" + Name + "\r\n" + Pw);
                 if (message)
                 {
-                    MessageBox.Show("Speichern erfolgreich!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Datenbankserver-Verbindung erfolgreich gespeichert!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
             {
                 if (message)
                 {
-                    MessageBox.Show("Speichern nicht erfolgreich! Die Datei ist schreibgeschützt!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Speichern fehlgeschlagen. Die Konfigurationsdatei ist schreibgeschützt!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show("Die Änderungen konnten nicht übernommen werden, da die Datei schreibgeschützt ist!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Die Änderungen konnten nicht übernommen werden. Die Konfigurationsdatei ist schreibgeschützt!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
-        public void Load()
+        public void LoadSettings()
         {
-
             if (!File_Exists(path))
             {
                 File.WriteAllText(path, "\r\n\r\n\r\n\r\n\r\n");
@@ -112,6 +111,7 @@ namespace Bibo_Verwaltung
                 {
                     MessageBox.Show("Unbekannte Authentifizierungsart. Windows Authentifizierung wurde ausgewählt", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Security = "Windows Authentifizierung";
+                    SaveSettings(true);
                 }
             }
             #endregion

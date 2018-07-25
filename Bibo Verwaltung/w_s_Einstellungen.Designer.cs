@@ -40,9 +40,9 @@
             this.tb_Benutzername = new System.Windows.Forms.TextBox();
             this.tLP_Top = new System.Windows.Forms.TableLayoutPanel();
             this.tLP_2 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.bt_save = new System.Windows.Forms.Button();
-            this.bt_Schließen = new System.Windows.Forms.Button();
+            this.bt_Test = new System.Windows.Forms.Button();
+            this.bt_Save = new System.Windows.Forms.Button();
+            this.bt_Clear = new System.Windows.Forms.Button();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.tLP_Top.SuspendLayout();
             this.tLP_2.SuspendLayout();
@@ -51,16 +51,19 @@
             // cb_Security
             // 
             this.cb_Security.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cb_Security.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cb_Security.DisplayMember = "1";
             this.cb_Security.FormattingEnabled = true;
             this.helpProvider.SetHelpString(this.cb_Security, "Authentifizierungsvariante");
             this.cb_Security.Items.AddRange(new object[] {
             "Windows Authentifizierung",
             "SQL Authentifizierung"});
-            this.cb_Security.Location = new System.Drawing.Point(121, 86);
+            this.cb_Security.Location = new System.Drawing.Point(121, 87);
             this.cb_Security.Name = "cb_Security";
             this.helpProvider.SetShowHelp(this.cb_Security, true);
             this.cb_Security.Size = new System.Drawing.Size(260, 21);
             this.cb_Security.TabIndex = 3;
+            this.cb_Security.Text = "SQL Authentifizierung";
             this.cb_Security.TextChanged += new System.EventHandler(this.Visibility);
             // 
             // lb_Server
@@ -68,11 +71,11 @@
             this.lb_Server.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Server.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Server, "Servername ihrer Datenbank");
-            this.lb_Server.Location = new System.Drawing.Point(3, 12);
+            this.lb_Server.Location = new System.Drawing.Point(3, 13);
             this.lb_Server.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Server.Name = "lb_Server";
             this.helpProvider.SetShowHelp(this.lb_Server, true);
-            this.lb_Server.Size = new System.Drawing.Size(112, 15);
+            this.lb_Server.Size = new System.Drawing.Size(112, 13);
             this.lb_Server.TabIndex = 3;
             this.lb_Server.Text = "Server:";
             // 
@@ -91,11 +94,11 @@
             this.lb_Database.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Database.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Database, "Name ihrer Datenbank");
-            this.lb_Database.Location = new System.Drawing.Point(3, 51);
+            this.lb_Database.Location = new System.Drawing.Point(3, 52);
             this.lb_Database.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Database.Name = "lb_Database";
             this.helpProvider.SetShowHelp(this.lb_Database, true);
-            this.lb_Database.Size = new System.Drawing.Size(112, 15);
+            this.lb_Database.Size = new System.Drawing.Size(112, 13);
             this.lb_Database.TabIndex = 7;
             this.lb_Database.Text = "Datenbank:";
             // 
@@ -114,11 +117,11 @@
             this.lb_Security.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Security.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Security, "Authentifizierungsvariante");
-            this.lb_Security.Location = new System.Drawing.Point(3, 90);
+            this.lb_Security.Location = new System.Drawing.Point(3, 91);
             this.lb_Security.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Security.Name = "lb_Security";
             this.helpProvider.SetShowHelp(this.lb_Security, true);
-            this.lb_Security.Size = new System.Drawing.Size(112, 15);
+            this.lb_Security.Size = new System.Drawing.Size(112, 13);
             this.lb_Security.TabIndex = 8;
             this.lb_Security.Text = "Sicherheit:";
             // 
@@ -126,10 +129,10 @@
             // 
             this.lb_Passwort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Passwort.AutoSize = true;
-            this.lb_Passwort.Location = new System.Drawing.Point(3, 168);
+            this.lb_Passwort.Location = new System.Drawing.Point(3, 169);
             this.lb_Passwort.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Passwort.Name = "lb_Passwort";
-            this.lb_Passwort.Size = new System.Drawing.Size(112, 15);
+            this.lb_Passwort.Size = new System.Drawing.Size(112, 13);
             this.lb_Passwort.TabIndex = 13;
             this.lb_Passwort.Text = "Passwort:";
             // 
@@ -146,10 +149,10 @@
             // 
             this.lb_Benutzername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Benutzername.AutoSize = true;
-            this.lb_Benutzername.Location = new System.Drawing.Point(3, 129);
+            this.lb_Benutzername.Location = new System.Drawing.Point(3, 130);
             this.lb_Benutzername.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Benutzername.Name = "lb_Benutzername";
-            this.lb_Benutzername.Size = new System.Drawing.Size(112, 15);
+            this.lb_Benutzername.Size = new System.Drawing.Size(112, 13);
             this.lb_Benutzername.TabIndex = 10;
             this.lb_Benutzername.Text = "Benutzername:";
             // 
@@ -202,9 +205,9 @@
             this.tLP_2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tLP_2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tLP_2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tLP_2.Controls.Add(this.button1, 0, 0);
-            this.tLP_2.Controls.Add(this.bt_save, 2, 0);
-            this.tLP_2.Controls.Add(this.bt_Schließen, 1, 0);
+            this.tLP_2.Controls.Add(this.bt_Test, 0, 0);
+            this.tLP_2.Controls.Add(this.bt_Save, 2, 0);
+            this.tLP_2.Controls.Add(this.bt_Clear, 1, 0);
             this.tLP_2.Location = new System.Drawing.Point(121, 198);
             this.tLP_2.Name = "tLP_2";
             this.tLP_2.RowCount = 1;
@@ -212,50 +215,50 @@
             this.tLP_2.Size = new System.Drawing.Size(260, 35);
             this.tLP_2.TabIndex = 16;
             // 
-            // button1
+            // bt_Test
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.bt_Test.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.helpProvider.SetHelpString(this.button1, "Testen sie ihre Verbindung zu ihrer Datenbank.");
-            this.button1.Location = new System.Drawing.Point(3, 3);
-            this.button1.Name = "button1";
-            this.helpProvider.SetShowHelp(this.button1, true);
-            this.button1.Size = new System.Drawing.Size(98, 29);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Verbindungstest";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.helpProvider.SetHelpString(this.bt_Test, "Testen sie ihre Verbindung zu ihrer Datenbank.");
+            this.bt_Test.Location = new System.Drawing.Point(3, 3);
+            this.bt_Test.Name = "bt_Test";
+            this.helpProvider.SetShowHelp(this.bt_Test, true);
+            this.bt_Test.Size = new System.Drawing.Size(98, 29);
+            this.bt_Test.TabIndex = 15;
+            this.bt_Test.Text = "Verbindungstest";
+            this.bt_Test.UseVisualStyleBackColor = true;
+            this.bt_Test.Click += new System.EventHandler(this.TestConnect);
             // 
-            // bt_save
+            // bt_Save
             // 
-            this.bt_save.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.bt_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.helpProvider.SetHelpString(this.bt_save, "Speichern sie alle oben eingetragenen Daten.");
-            this.bt_save.Location = new System.Drawing.Point(185, 3);
-            this.bt_save.Name = "bt_save";
-            this.helpProvider.SetShowHelp(this.bt_save, true);
-            this.bt_save.Size = new System.Drawing.Size(72, 29);
-            this.bt_save.TabIndex = 7;
-            this.bt_save.Text = "Speichern";
-            this.bt_save.UseVisualStyleBackColor = true;
-            this.bt_save.Click += new System.EventHandler(this.Save);
+            this.helpProvider.SetHelpString(this.bt_Save, "Speichern sie alle oben eingetragenen Daten.");
+            this.bt_Save.Location = new System.Drawing.Point(185, 3);
+            this.bt_Save.Name = "bt_Save";
+            this.helpProvider.SetShowHelp(this.bt_Save, true);
+            this.bt_Save.Size = new System.Drawing.Size(72, 29);
+            this.bt_Save.TabIndex = 7;
+            this.bt_Save.Text = "Speichern";
+            this.bt_Save.UseVisualStyleBackColor = true;
+            this.bt_Save.Click += new System.EventHandler(this.SetSettings);
             // 
-            // bt_Schließen
+            // bt_Clear
             // 
-            this.bt_Schließen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.bt_Clear.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.helpProvider.SetHelpString(this.bt_Schließen, "Leeren sie alle oben liegenden Textfelder.");
-            this.bt_Schließen.Location = new System.Drawing.Point(107, 3);
-            this.bt_Schließen.Name = "bt_Schließen";
-            this.helpProvider.SetShowHelp(this.bt_Schließen, true);
-            this.bt_Schließen.Size = new System.Drawing.Size(72, 29);
-            this.bt_Schließen.TabIndex = 7;
-            this.bt_Schließen.Text = "Leeren";
-            this.bt_Schließen.UseVisualStyleBackColor = true;
-            this.bt_Schließen.Click += new System.EventHandler(this.Reset);
+            this.helpProvider.SetHelpString(this.bt_Clear, "Leeren sie alle oben liegenden Textfelder.");
+            this.bt_Clear.Location = new System.Drawing.Point(107, 3);
+            this.bt_Clear.Name = "bt_Clear";
+            this.helpProvider.SetShowHelp(this.bt_Clear, true);
+            this.bt_Clear.Size = new System.Drawing.Size(72, 29);
+            this.bt_Clear.TabIndex = 7;
+            this.bt_Clear.Text = "Leeren";
+            this.bt_Clear.UseVisualStyleBackColor = true;
+            this.bt_Clear.Click += new System.EventHandler(this.ClearAll);
             // 
             // w_s_einstellungen
             // 
@@ -291,9 +294,9 @@
         private System.Windows.Forms.TextBox tb_Benutzername;
         private System.Windows.Forms.TableLayoutPanel tLP_Top;
         private System.Windows.Forms.TableLayoutPanel tLP_2;
-        private System.Windows.Forms.Button bt_Schließen;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button bt_save;
+        private System.Windows.Forms.Button bt_Clear;
+        private System.Windows.Forms.Button bt_Test;
+        private System.Windows.Forms.Button bt_Save;
         private System.Windows.Forms.HelpProvider helpProvider;
     }
 }

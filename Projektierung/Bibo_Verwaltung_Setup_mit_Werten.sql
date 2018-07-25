@@ -1,14 +1,22 @@
-/****** Object:  Database [Bibo_Verwaltung]    Script Date: 03.11.2016 18:54:35 ******/
-IF  EXISTS (SELECT name FROM sys.databases WHERE name = N'Bibo_Verwaltung')
-DROP DATABASE [Bibo_Verwaltung]
+/****** Object:  Database [Bibo_Verwaltung]    Script Date: 23.07.2018 Robert Jehring ******/
+USE master
+
+WHILE EXISTS(select NULL from sys.databases where name='Bibo_Verwaltung')
+BEGIN
+    DECLARE @SQL varchar(max)
+    SELECT @SQL = COALESCE(@SQL,'') + 'Kill ' + Convert(varchar, SPId) + ';'
+    FROM MASTER..SysProcesses
+    WHERE DBId = DB_ID(N'Bibo_Verwaltung') AND SPId <> @@SPId
+    EXEC(@SQL)
+	IF  EXISTS (SELECT name FROM sys.databases WHERE name = N'Bibo_Verwaltung')
+	DROP DATABASE [Bibo_Verwaltung]
+END
 GO
 
-/****** Object:  Database [Bibo_Verwaltung]    Script Date: 03.11.2016 18:54:35 ******/
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'Bibo_Verwaltung')
 BEGIN
 CREATE DATABASE [Bibo_Verwaltung]
 END
-
 GO
 
 ALTER DATABASE [Bibo_Verwaltung] SET COMPATIBILITY_LEVEL = 120
@@ -47,7 +55,7 @@ GO
 ALTER DATABASE [Bibo_Verwaltung] SET CURSOR_CLOSE_ON_COMMIT OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET CURSOR_DEFAULT  GLOBAL 
+ALTER DATABASE [Bibo_Verwaltung] SET CURSOR_DEFAULT GLOBAL 
 GO
 
 ALTER DATABASE [Bibo_Verwaltung] SET CONCAT_NULL_YIELDS_NULL OFF 

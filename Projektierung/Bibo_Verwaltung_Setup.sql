@@ -1,14 +1,16 @@
-/****** Object:  Database [Bibo_Verwaltung]    Script Date: 03.11.2016 18:54:35 ******/
+/****** Object:  Database [Bibo_Verwaltung]    Script Date: 23.07.2018 Robert Jehring ******/
+use master
+ALTER DATABASE [Bibo_Verwaltung] SET single_user
+GO
+
 IF  EXISTS (SELECT name FROM sys.databases WHERE name = N'Bibo_Verwaltung')
 DROP DATABASE [Bibo_Verwaltung]
 GO
 
-/****** Object:  Database [Bibo_Verwaltung]    Script Date: 03.11.2016 18:54:35 ******/
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'Bibo_Verwaltung')
 BEGIN
 CREATE DATABASE [Bibo_Verwaltung]
 END
-
 GO
 
 ALTER DATABASE [Bibo_Verwaltung] SET COMPATIBILITY_LEVEL = 120

@@ -17,27 +17,27 @@ namespace Bibo_Verwaltung
             InitializeComponent();
         }
 
-        bool error = false;
+       // private bool error = false;
 
-        private void anmelden()
+        private void Anmelden()
         {
             SQL_Verbindung con = new SQL_Verbindung();
-            string test = con.ConnectionString;
+            //string test = con.ConnectionString;
             if (con.ConnectError())
             {
-                error = true;
+                //error = true;
                 Form Einstellungen = new w_s_einstellungen();
                 Einstellungen.Show();
                 return;
             }
-            else
-            {
-                error = false;
-            }
+            //else
+            //{
+            //    error = false;
+            //}
 
             Benutzer user = new Benutzer();
             string name = tb_User.Text;
-            string pw = tb_Passw.Text;
+            string pw = tb_Password.Text;
             if (user.Login(pw, name) == true)
             {
                 this.Hide();
@@ -47,21 +47,21 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MessageBox.Show("Die Anmeldedaten sind falsch. Bitte versuchen Sie es erneut", "Falsche Daten!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                tb_Passw.Clear();
+                MessageBox.Show("Die Anmeldedaten sind falsch. Bitte versuchen Sie es erneut!", "Falsche Daten!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tb_Password.Clear();
             }
         }
+
         private void bt_Login_Click(object sender, EventArgs e)
         {
-            anmelden();
+            Anmelden();
         }
 
-
-        private void tb_Passw_KeyDown(object sender, KeyEventArgs e)
+        private void tb_Password_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                anmelden();
+                Anmelden();
             }
         }
     }

@@ -31,7 +31,7 @@
             this.lb_User = new System.Windows.Forms.Label();
             this.lb_Passw = new System.Windows.Forms.Label();
             this.tb_User = new System.Windows.Forms.TextBox();
-            this.tb_Passw = new System.Windows.Forms.TextBox();
+            this.tb_Password = new System.Windows.Forms.TextBox();
             this.gb_Login = new System.Windows.Forms.GroupBox();
             this.bt_Login = new System.Windows.Forms.Button();
             this.gb_Login.SuspendLayout();
@@ -62,20 +62,20 @@
             this.tb_User.Size = new System.Drawing.Size(200, 20);
             this.tb_User.TabIndex = 2;
             // 
-            // tb_Passw
+            // tb_Password
             // 
-            this.tb_Passw.Location = new System.Drawing.Point(90, 77);
-            this.tb_Passw.Name = "tb_Passw";
-            this.tb_Passw.Size = new System.Drawing.Size(200, 20);
-            this.tb_Passw.TabIndex = 3;
-            this.tb_Passw.UseSystemPasswordChar = true;
-            this.tb_Passw.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_Passw_KeyDown);
+            this.tb_Password.Location = new System.Drawing.Point(90, 77);
+            this.tb_Password.Name = "tb_Password";
+            this.tb_Password.Size = new System.Drawing.Size(200, 20);
+            this.tb_Password.TabIndex = 3;
+            this.tb_Password.UseSystemPasswordChar = true;
+            this.tb_Password.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_Password_KeyDown);
             // 
             // gb_Login
             // 
             this.gb_Login.Controls.Add(this.bt_Login);
             this.gb_Login.Controls.Add(this.lb_User);
-            this.gb_Login.Controls.Add(this.tb_Passw);
+            this.gb_Login.Controls.Add(this.tb_Password);
             this.gb_Login.Controls.Add(this.lb_Passw);
             this.gb_Login.Controls.Add(this.tb_User);
             this.gb_Login.Location = new System.Drawing.Point(12, 12);
@@ -117,7 +117,7 @@
         private System.Windows.Forms.Label lb_User;
         private System.Windows.Forms.Label lb_Passw;
         private System.Windows.Forms.TextBox tb_User;
-        private System.Windows.Forms.TextBox tb_Passw;
+        private System.Windows.Forms.TextBox tb_Password;
         private System.Windows.Forms.GroupBox gb_Login;
         private System.Windows.Forms.Button bt_Login;
     }
