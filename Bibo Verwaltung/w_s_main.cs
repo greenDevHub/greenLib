@@ -229,6 +229,12 @@ namespace Bibo_Verwaltung
         {
             Application.Restart();
         }
+
+        private void bt_stats_Click(object sender, EventArgs e)
+        {
+            Form analytics = new w_s_analytics();
+            analytics.ShowDialog(this);
+        }
     }
     #endregion
 }
