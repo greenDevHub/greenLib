@@ -113,6 +113,7 @@
     </Compile>
     <Compile Include="w_s_faecher.Designer.cs">
       <DependentUpon>w_s_faecher.cs</DependentUpon>
+	</Compile>
     <Compile Include="w_s_analytics.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,6 +274,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_faecher.resx">
       <DependentUpon>w_s_faecher.cs</DependentUpon>
+	</EmbeddedResource>
     <EmbeddedResource Include="w_s_analytics.resx">
       <DependentUpon>w_s_analytics.cs</DependentUpon>
     </EmbeddedResource>
