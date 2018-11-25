@@ -15,7 +15,7 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_buecher : Form
     {
-        public w_s_buecher()
+        public w_s_buecher(bool bool1)
         {
             InitializeComponent();
             b.FillGrid_Buch(ref Grid_Buch);
@@ -24,9 +24,11 @@ namespace Bibo_Verwaltung
             gb_zoom.Visible = false;
             comboBox1.Visible = false;
             comboBox1.DropDownHeight = 1;
+            this.bool1 = bool1;
         }
         private string location = "";
         Buch b = new Buch();
+        bool bool1;
 
         #region Zeichenabfrage (IsNumeric)
         public bool IsNumeric(string s)
@@ -889,7 +891,15 @@ namespace Bibo_Verwaltung
             {
                 DataGridViewRow row = this.Grid_Buch.Rows[e.RowIndex];
                 tb_ISBN.Text = row.Cells[0].Value.ToString();
-                LoadBuch();
+                if (bool1)
+                {
+                    LoadBuch();
+                }
+                else
+                {
+                    LoadBuch();
+                    this.Hide();
+                }
             }
         }
 

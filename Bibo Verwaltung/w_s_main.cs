@@ -123,7 +123,7 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
-                Form Buecher = new w_s_buecher();
+                Form Buecher = new w_s_buecher(true);
                 Buecher.ShowDialog(this);
             }
             else
@@ -227,7 +227,20 @@ namespace Bibo_Verwaltung
 
         private void bt_logout_Click(object sender, EventArgs e)
         {
-            Application.Restart();
+            Form faecher = new w_s_faecher();
+            faecher.ShowDialog(this);
+        }
+
+        private void bt_schueler_Click(object sender, EventArgs e)
+        {
+            Form schueler = new w_s_schueler();
+            schueler.ShowDialog(this);
+        }
+
+        private void bt_bf_Click(object sender, EventArgs e)
+        {
+            Form buchfach = new w_b_buch_fach();
+            buchfach.ShowDialog(this);
         }
     }
     #endregion

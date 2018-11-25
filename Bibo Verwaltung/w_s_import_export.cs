@@ -113,18 +113,26 @@ namespace Bibo_Verwaltung
             }
 
             //Zieltabelle
-            if (zieltabelle == "Kundentabelle")
-            {
-                target = "t_s_kunden";
-            }
-            else if (zieltabelle == "Büchertabelle")
-            {
-                target = "t_s_buecher";
-            }
-            else if (zieltabelle == "Exemplartabelle")
-            {
-                target = "t_s_buchid";
-            }
+            //if (zieltabelle == "Kundentabelle")
+            //{
+            //    target = "t_s_kunden";
+            //}
+            //else if (zieltabelle == "Büchertabelle")
+            //{
+            //    target = "t_s_buecher";
+            //}
+            //else if (zieltabelle == "Exemplartabelle")
+            //{
+            //    target = "t_s_buchid";
+            //}
+            //else if(zieltabelle == "Fächertabelle")
+            //{
+            //    target = "t_s_faecher";
+            //}
+            //else if(zieltabelle == "Schülertabelle")
+            //{
+            //    target = "t_s_schueler";
+            //}
         }
 
         private void createPreview()
@@ -284,5 +292,31 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
+        private void cb_Ziel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string zieltabelle = cb_Ziel.Text;
+            if (zieltabelle == "Kundentabelle")
+            {
+                target = "t_s_kunden";
+            }
+            else if (zieltabelle == "Büchertabelle")
+            {
+                target = "t_s_buecher";
+            }
+            else if (zieltabelle == "Exemplartabelle")
+            {
+                target = "t_s_buchid";
+            }
+            else if (zieltabelle == "Fächertabelle")
+            {
+                target = "t_s_faecher";
+            }
+            else if (zieltabelle == "Schülertabelle")
+            {
+                target = "t_s_schueler";
+            }
+            ImportExport ie = new ImportExport();
+            ie.FillColGrid(ref gv_columns, ie.GetSQLColumns(target));
+        }
     }
 }

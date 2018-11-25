@@ -446,5 +446,40 @@ namespace Bibo_Verwaltung
             createExcelFile(grid);
         }
         #endregion
+
+        #region get SQL Columns
+        public List<string> GetSQLColumns(string tableName)
+        {
+            List<string> cols = new List<string>();
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return cols;
+            string RawCommand = "SELECT column_name FROM information_schema.columns WHERE table_name = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, tableName);
+            while (dr.Read())
+            {
+                cols.Add(dr["column_name"].ToString());
+            }
+            dr.Close();
+            con.Close();
+            return cols;
+        }
+        #endregion
+
+        public void FillColGrid(ref DataGridView grid, List<string> columns, object value = null)
+        {
+            DataTable table = new DataTable();
+            foreach(string s in columns)
+            {
+                table.Columns.Add(s.Substring(s.IndexOf("_")+1), typeof(System.String));
+            }
+            //for(int i = 0; i < columns.Count;)
+            //{
+            //    table.Columns.Add(columns[i], typeof(System.String));
+            //}
+           // table.Rows.Add(columns);
+            grid.DataSource = table;
+        }
+
+
     }
 }

@@ -49,6 +49,7 @@ namespace Bibo_Verwaltung
             {
                 MessageBox.Show("Die Anmeldedaten sind falsch. Bitte versuchen Sie es erneut!", "Falsche Daten!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 tb_Password.Clear();
+
             }
         }
 
@@ -62,6 +63,8 @@ namespace Bibo_Verwaltung
             if (e.KeyCode == Keys.Enter)
             {
                 Anmelden();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
         }
     }

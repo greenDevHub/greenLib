@@ -92,14 +92,37 @@
     <Compile Include="Barcode.cs" />
     <Compile Include="Benutzer.cs" />
     <Compile Include="BuchID.cs" />
+    <Compile Include="Extension\Lehrbuchausgabe\Buch_Fach.cs" />
+    <Compile Include="Extension\Lehrbuchausgabe\IsbnListe.cs" />
+    <Compile Include="Extension\Lehrbuchausgabe\w_b_buch_fach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extension\Lehrbuchausgabe\w_b_buch_fach.Designer.cs">
+      <DependentUpon>w_b_buch_fach.cs</DependentUpon>
+    </Compile>
     <Compile Include="Einstellung.cs" />
     <Compile Include="Details.cs" />
     <Compile Include="ExcelExport.cs" />
+    <Compile Include="FachListe.cs" />
+    <Compile Include="Faecher.cs" />
+    <Compile Include="Schueler.cs" />
+    <Compile Include="w_s_faecher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_faecher.Designer.cs">
+      <DependentUpon>w_s_faecher.cs</DependentUpon>
+    </Compile>
     <Compile Include="w_s_login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="w_s_login.designer.cs">
       <DependentUpon>w_s_login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="w_s_schueler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_schueler.Designer.cs">
+      <DependentUpon>w_s_schueler.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_selfmade_dialog.cs">
       <SubType>Form</SubType>
@@ -238,6 +261,12 @@
       <DependentUpon>w_s_zustand.cs</DependentUpon>
     </Compile>
     <Compile Include="Zustand.cs" />
+    <EmbeddedResource Include="Extension\Lehrbuchausgabe\w_b_buch_fach.resx">
+      <DependentUpon>w_b_buch_fach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="w_s_faecher.resx">
+      <DependentUpon>w_s_faecher.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="w_s_import_export.resx">
       <DependentUpon>w_s_import_export.cs</DependentUpon>
     </EmbeddedResource>
@@ -289,6 +318,9 @@
     </Compile>
     <EmbeddedResource Include="w_s_main.resx">
       <DependentUpon>w_s_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="w_s_schueler.resx">
+      <DependentUpon>w_s_schueler.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_selfmade_dialog.resx">
       <DependentUpon>w_s_selfmade_dialog.cs</DependentUpon>
@@ -377,6 +409,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

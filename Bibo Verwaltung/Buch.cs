@@ -109,6 +109,17 @@ namespace Bibo_Verwaltung
             FillObjectBuch();
         }
 
+        public Buch(bool noauthor)
+        {
+            FillObjectBuchShort();
+        }
+
+        public Buch(string isbn, bool noauthor)
+        {
+            this.isbn = isbn;
+            LoadShort();
+            FillObjectBuchShort();
+        }
         public Buch(string isbn)
         {
             this.isbn = isbn;
@@ -133,6 +144,23 @@ namespace Bibo_Verwaltung
             Load_Buch();
         }
 
+        private void LoadShort()
+        {
+            //SQL-Verbindung pruefen
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT buch_isbn, buch_titel FROM [dbo].[t_s_buecher] WHERE buch_isbn = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, isbn);
+            // Einlesen der Datenzeilen 
+            while (dr.Read())
+            {
+                ISBN = dr["buch_isbn"].ToString();
+                Titel = dr["buch_titel"].ToString();
+            }
+            // DataReader schließen 
+            dr.Close();
+            // Verbindung schließen 
+            con.Close();
+        }
         private void Load_Buch()
         {
             //SQL-Verbindung pruefen
@@ -307,13 +335,13 @@ namespace Bibo_Verwaltung
         {
             if (IsActivated())
             {
-                Add();
-            }
-            else
-            {
                 Activate();
                 AutorListe.AutorListeID = GetAutorID(ISBN);
                 Update_Buch();
+            }
+            else
+            {
+                Add();
             }
         }
         #endregion
@@ -434,6 +462,19 @@ namespace Bibo_Verwaltung
 
             con2.Close();
         }
+
+        private void FillObjectBuchShort()
+        {
+            dt2.Clear();
+            if (con2.ConnectError()) return;
+            string RawCommand = "SELECT buch_isbn as 'ISBN',"
+                + "buch_titel as 'Titel' from t_s_buecher "
+                + "WHERE buch_activated = 1";
+            adapter2 = new SqlDataAdapter(RawCommand, con2.Con);
+            adapter2.Fill(ds2);
+            adapter2.Fill(dt2);
+            con2.Close();
+        }
         #endregion
 
         public string AutorNames()
@@ -478,6 +519,18 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
+        #region Combobox
+        public void FillCombobox(ref ComboBox cb, object value)
+        {
+            ClearDSBuch();
+            FillObjectBuch();
+            cb.DataSource = ds2.Tables[0];
+            cb.ValueMember = "ISBN";
+            cb.DisplayMember = "Titel";
+            cb.SelectedValue = value;
+        }
+        #endregion
+
         private bool IsActivated()
         {
             if (con.ConnectError()) return false;
@@ -490,7 +543,7 @@ namespace Bibo_Verwaltung
             }
             dr.Close();
             con.Close();
-            if (activated.Equals("True"))
+            if (activated.Equals("False"))
             {
                 return true;
             }
