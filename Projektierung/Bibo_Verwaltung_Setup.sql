@@ -1,4 +1,16 @@
 /****** Object:  Database [Bibo_Verwaltung]    Script Date: 23.07.2018 Robert Jehring ******/
+USE master
+
+WHILE EXISTS(select NULL from sys.databases where name='Bibo_Verwaltung')
+BEGIN
+    DECLARE @SQL varchar(max)
+    SELECT @SQL = COALESCE(@SQL,'') + 'Kill ' + Convert(varchar, SPId) + ';'
+    FROM MASTER..SysProcesses
+    WHERE DBId = DB_ID(N'Bibo_Verwaltung') AND SPId <> @@SPId
+    EXEC(@SQL)
+	IF  EXISTS (SELECT name FROM sys.databases WHERE name = N'Bibo_Verwaltung')
+	DROP DATABASE [Bibo_Verwaltung]
+END
 use master
 ALTER DATABASE [Bibo_Verwaltung] SET single_user
 GO
@@ -336,4 +348,18 @@ CREATE TABLE [dbo].[t_s_benutzer](
 	[b_password] [varbinary] (max) NOT NULL,
 	[b_rechte] [int] NOT NULL,
 	PRIMARY KEY (b_name))
+END
+
+use Bibo_Verwaltung
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_preis]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_benutzer]
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_preis]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[t_s_preis](
+	[p_aenderung] [int] NOT NULL,
+	[b_isbn] [nvarchar] (128) NOT NULL,
+	[p_preis] [numeric](18,2) NOT NULL,
+	[p_datum] [date] NOT NULL DEFAULT(GETDATE()),
+	PRIMARY KEY (p_aenderung))
 END

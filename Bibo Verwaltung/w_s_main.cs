@@ -242,6 +242,12 @@ namespace Bibo_Verwaltung
             Form buchfach = new w_b_buch_fach();
             buchfach.ShowDialog(this);
         }
+
+        private void bt_stats_Click(object sender, EventArgs e)
+        {
+            Form analytics = new w_s_analytics();
+            analytics.ShowDialog(this);
+        }
     }
     #endregion
 }
