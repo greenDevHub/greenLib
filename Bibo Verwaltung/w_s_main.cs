@@ -239,7 +239,7 @@ namespace Bibo_Verwaltung
 
         private void bt_bf_Click(object sender, EventArgs e)
         {
-            Form buchfach = new w_b_buch_fach();
+            Form buchfach = new w_s_buch_fach();
             buchfach.ShowDialog(this);
         }
 

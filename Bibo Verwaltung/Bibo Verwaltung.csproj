@@ -107,13 +107,14 @@
     <Compile Include="ExcelExport.cs" />
     <Compile Include="FachListe.cs" />
     <Compile Include="Faecher.cs" />
+    <Compile Include="Schuelerimport.cs" />
     <Compile Include="Schueler.cs" />
     <Compile Include="w_s_faecher.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="w_s_faecher.Designer.cs">
       <DependentUpon>w_s_faecher.cs</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="w_s_analytics.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +132,12 @@
     </Compile>
     <Compile Include="w_s_schueler.Designer.cs">
       <DependentUpon>w_s_schueler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="w_s_schuelerimport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_schuelerimport.Designer.cs">
+      <DependentUpon>w_s_schuelerimport.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_selfmade_dialog.cs">
       <SubType>Form</SubType>
@@ -274,7 +281,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_faecher.resx">
       <DependentUpon>w_s_faecher.cs</DependentUpon>
-	</EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="w_s_analytics.resx">
       <DependentUpon>w_s_analytics.cs</DependentUpon>
     </EmbeddedResource>
@@ -332,6 +339,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_schueler.resx">
       <DependentUpon>w_s_schueler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="w_s_schuelerimport.resx">
+      <DependentUpon>w_s_schuelerimport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_selfmade_dialog.resx">
       <DependentUpon>w_s_selfmade_dialog.cs</DependentUpon>

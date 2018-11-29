@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_b_buch_fach : Form
+    public partial class w_s_buch_fach : Form
     {
-        public w_b_buch_fach()
+        public w_s_buch_fach()
         {
             InitializeComponent();
             bf.FillGrid(ref gv_bf);

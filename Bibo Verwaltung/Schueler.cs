@@ -65,6 +65,10 @@ namespace Bibo_Verwaltung
         {
             FillObject();
         }
+        public Schueler(bool a)
+        {
+
+        }
         public Schueler(string schuelerid)
         {
             this.schuelerid = schuelerid;
@@ -151,7 +155,7 @@ namespace Bibo_Verwaltung
 
         private void clearDataSource()
         {
-            ds.Tables[0].Rows.Clear();
+            ds.Tables[0].Clear();
         }
 
         public void FillGrid(bool loadAll, ref DataGridView grid, object value = null)
@@ -212,32 +216,51 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        //#region Save
-        //public void saveKunde()
-        //{
-        //    {
-        //        string RawCommand = "UPDATE [dbo].[t_s_schueler] SET sch_vorname = @vorname, sch_nachname = @nachname,  sch_klasse = @klasse, sch_stufe = @stufe, sch_fach1 = @1, sch_fach2 = @2, sch_fach3 = @3, sch_fach4 = @4, sch_fach5 = @5, sch_fach6 = @6, sch_fach7 = @7, sch_fach8 = @8, sch_fach9 = @9, sch_fach10 = @10, sch_fach11 = @11, sch_fach12 = @12, sch_fach13 = @13, sch_fach14 = @14, sch_fach15 = @15, sch_fach16 = @16 WHERE kunde_ID = @k_ID";
-        //        con.ConnectError();
-        //        SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+        #region Exists?
+        public bool AlreadyExists()
+        {
+            if (con.ConnectError()) return false;
+            string RawCommand = "SELECT * FROM [dbo].[t_s_schueler] WHERE sch_vorname = @0 and sch_nachname = @1 and sch_datum = @2";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, Vorname, Nachname, Gd);
+            while (dr.Read())
+            {
+                SchuelerID = dr["sch_id"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            if(SchuelerID == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        #endregion
 
-        //        cmd.Parameters.AddWithValue("@vorname", Vorname);
-        //        cmd.Parameters.AddWithValue("@nachname", Nachname);
-        //        cmd.Parameters.AddWithValue("@ort", Gd);
-        //        cmd.Parameters.AddWithValue("@stufe", Klassenstufe);
-        //        cmd.Parameters.AddWithValue("@klasse", Klasse);
-        //        for (int i = 1; i < 17; i++)
-        //        {
-        //            cmd.Parameters.AddWithValue("@" + i, fachListe[i - 1]);
-        //        }
-        //        cmd.Parameters.AddWithValue("@sch_ID", SchuelerID);
+        #region Save
+        public void Update()
+        {
+            {
+                FachListe.Update();
+                string RawCommand = "UPDATE [dbo].[t_s_schueler] SET sch_klasse = @klasse, sch_stufe = @stufe WHERE sch_vorname = @vorname and sch_nachname = @nachname and @datum = @datum";
+                con.ConnectError();
+                SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
 
-        //        // Verbindung öffnen 
-        //        cmd.ExecuteNonQuery();
-        //        //Verbindung schließen
-        //        con.Close();
-        //    }
-        //}
-        //#endregion
+                cmd.Parameters.AddWithValue("@vorname", Vorname);
+                cmd.Parameters.AddWithValue("@nachname", Nachname);
+                cmd.Parameters.AddWithValue("@datum", Gd);
+                cmd.Parameters.AddWithValue("@stufe", Klassenstufe);
+                cmd.Parameters.AddWithValue("@klasse", Klasse);
+
+                // Verbindung öffnen 
+                cmd.ExecuteNonQuery();
+                //Verbindung schließen
+                con.Close();
+            }
+        }
+        #endregion
 
         //#region Delete
         //public void deleteKunde()

@@ -51,12 +51,10 @@
             this.tb_klassenstufe = new System.Windows.Forms.TextBox();
             this.lb_KundenID = new System.Windows.Forms.Label();
             this.gv_Kunde = new System.Windows.Forms.DataGridView();
-            this.cb_showAll = new System.Windows.Forms.CheckBox();
             this.bt_ImEx = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cLB_faecher = new System.Windows.Forms.CheckedListBox();
             this.gb_kunde = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.gb_kunde.SuspendLayout();
@@ -334,17 +332,6 @@
             this.gv_Kunde.TabIndex = 45;
             this.gv_Kunde.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Kunde_CellDoubleClick);
             // 
-            // cb_showAll
-            // 
-            this.cb_showAll.AutoSize = true;
-            this.cb_showAll.Location = new System.Drawing.Point(1710, 1003);
-            this.cb_showAll.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.cb_showAll.Name = "cb_showAll";
-            this.cb_showAll.Size = new System.Drawing.Size(284, 36);
-            this.cb_showAll.TabIndex = 48;
-            this.cb_showAll.Text = "Zeige alle Kunden";
-            this.cb_showAll.UseVisualStyleBackColor = true;
-            // 
             // bt_ImEx
             // 
             this.bt_ImEx.Location = new System.Drawing.Point(803, 994);
@@ -423,28 +410,17 @@
             this.gb_kunde.TabStop = false;
             this.gb_kunde.Text = "Kunden";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1334, 1006);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 32);
-            this.label1.TabIndex = 49;
-            this.label1.Text = "label1";
-            // 
             // w_s_schueler
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2363, 1071);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.bt_OK);
-            this.Controls.Add(this.cb_showAll);
             this.Controls.Add(this.bt_ImEx);
             this.Controls.Add(this.gb_kunde);
             this.Controls.Add(this.gv_Kunde);
             this.Name = "w_s_schueler";
-            this.Text = "w_s_schueler";
+            this.Text = "Schüler";
             this.Activated += new System.EventHandler(this.w_s_schueler_Activated);
             this.Load += new System.EventHandler(this.w_s_schueler_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).EndInit();
@@ -453,7 +429,6 @@
             this.gb_kunde.ResumeLayout(false);
             this.gb_kunde.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -481,11 +456,9 @@
         private System.Windows.Forms.TextBox tb_klassenstufe;
         private System.Windows.Forms.Label lb_KundenID;
         private System.Windows.Forms.DataGridView gv_Kunde;
-        private System.Windows.Forms.CheckBox cb_showAll;
         private System.Windows.Forms.Button bt_ImEx;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox gb_kunde;
         private System.Windows.Forms.CheckedListBox cLB_faecher;
-        private System.Windows.Forms.Label label1;
     }
 }

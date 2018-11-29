@@ -1,6 +1,6 @@
 ﻿namespace Bibo_Verwaltung
 {
-    partial class w_b_buch_fach
+    partial class w_s_buch_fach
     {
         /// <summary>
         /// Required designer variable.
@@ -37,6 +37,7 @@
             this.bt_export = new System.Windows.Forms.Button();
             this.bt_close = new System.Windows.Forms.Button();
             this.gB_buchid = new System.Windows.Forms.GroupBox();
+            this.cb_1 = new System.Windows.Forms.CheckBox();
             this.tLP_1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.bt_add = new System.Windows.Forms.Button();
@@ -48,11 +49,6 @@
             this.cb_buch6 = new System.Windows.Forms.ComboBox();
             this.cb_buch7 = new System.Windows.Forms.ComboBox();
             this.cb_buch8 = new System.Windows.Forms.ComboBox();
-            this.lb = new System.Windows.Forms.Label();
-            this.rb_delete = new System.Windows.Forms.RadioButton();
-            this.rb_edit = new System.Windows.Forms.RadioButton();
-            this.rb_neu = new System.Windows.Forms.RadioButton();
-            this.gv_bf = new System.Windows.Forms.DataGridView();
             this.bt_buch1 = new System.Windows.Forms.Button();
             this.bt_buch2 = new System.Windows.Forms.Button();
             this.bt_buch3 = new System.Windows.Forms.Button();
@@ -61,7 +57,11 @@
             this.bt_buch6 = new System.Windows.Forms.Button();
             this.bt_buch7 = new System.Windows.Forms.Button();
             this.bt_buch8 = new System.Windows.Forms.Button();
-            this.cb_1 = new System.Windows.Forms.CheckBox();
+            this.lb = new System.Windows.Forms.Label();
+            this.rb_delete = new System.Windows.Forms.RadioButton();
+            this.rb_edit = new System.Windows.Forms.RadioButton();
+            this.rb_neu = new System.Windows.Forms.RadioButton();
+            this.gv_bf = new System.Windows.Forms.DataGridView();
             this.gB_buchid.SuspendLayout();
             this.tLP_1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -183,6 +183,17 @@
             this.gB_buchid.TabIndex = 24;
             this.gB_buchid.TabStop = false;
             this.gB_buchid.Text = "Bücher";
+            // 
+            // cb_1
+            // 
+            this.cb_1.AutoSize = true;
+            this.cb_1.Location = new System.Drawing.Point(0, 968);
+            this.cb_1.Name = "cb_1";
+            this.cb_1.Size = new System.Drawing.Size(558, 36);
+            this.cb_1.TabIndex = 21;
+            this.cb_1.Text = "Automatisches Ändern der Klassenstufe";
+            this.cb_1.UseVisualStyleBackColor = true;
+            this.cb_1.CheckedChanged += new System.EventHandler(this.cb_1_CheckedChanged);
             // 
             // tLP_1
             // 
@@ -373,72 +384,6 @@
             this.cb_buch8.SelectionChangeCommitted += new System.EventHandler(this.cb_selected);
             this.cb_buch8.Click += new System.EventHandler(this.comboboxClicked);
             // 
-            // lb
-            // 
-            this.lb.AutoSize = true;
-            this.lb.Location = new System.Drawing.Point(10, 469);
-            this.lb.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lb.Name = "lb";
-            this.lb.Size = new System.Drawing.Size(0, 32);
-            this.lb.TabIndex = 17;
-            // 
-            // rb_delete
-            // 
-            this.rb_delete.AutoSize = true;
-            this.rb_delete.Location = new System.Drawing.Point(550, 45);
-            this.rb_delete.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.rb_delete.Name = "rb_delete";
-            this.rb_delete.Size = new System.Drawing.Size(176, 36);
-            this.rb_delete.TabIndex = 14;
-            this.rb_delete.Text = "Entfernen";
-            this.rb_delete.UseVisualStyleBackColor = true;
-            this.rb_delete.CheckedChanged += new System.EventHandler(this.rb_delete_CheckedChanged);
-            // 
-            // rb_edit
-            // 
-            this.rb_edit.AutoSize = true;
-            this.rb_edit.Location = new System.Drawing.Point(282, 45);
-            this.rb_edit.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.rb_edit.Name = "rb_edit";
-            this.rb_edit.Size = new System.Drawing.Size(191, 36);
-            this.rb_edit.TabIndex = 13;
-            this.rb_edit.Text = "Bearbeiten";
-            this.rb_edit.UseVisualStyleBackColor = true;
-            this.rb_edit.CheckedChanged += new System.EventHandler(this.rb_edit_CheckedChanged);
-            // 
-            // rb_neu
-            // 
-            this.rb_neu.AutoSize = true;
-            this.rb_neu.Checked = true;
-            this.rb_neu.Cursor = System.Windows.Forms.Cursors.Default;
-            this.rb_neu.Location = new System.Drawing.Point(16, 45);
-            this.rb_neu.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.rb_neu.Name = "rb_neu";
-            this.rb_neu.Size = new System.Drawing.Size(197, 36);
-            this.rb_neu.TabIndex = 12;
-            this.rb_neu.TabStop = true;
-            this.rb_neu.Text = "Hinzufügen";
-            this.rb_neu.UseVisualStyleBackColor = true;
-            this.rb_neu.CheckedChanged += new System.EventHandler(this.rb_neu_CheckedChanged);
-            // 
-            // gv_bf
-            // 
-            this.gv_bf.AllowUserToAddRows = false;
-            this.gv_bf.AllowUserToDeleteRows = false;
-            this.gv_bf.AllowUserToResizeColumns = false;
-            this.gv_bf.AllowUserToResizeRows = false;
-            this.gv_bf.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.gv_bf.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_bf.Location = new System.Drawing.Point(799, 17);
-            this.gv_bf.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.gv_bf.Name = "gv_bf";
-            this.gv_bf.ReadOnly = true;
-            this.gv_bf.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.gv_bf.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_bf.Size = new System.Drawing.Size(1542, 944);
-            this.gv_bf.TabIndex = 23;
-            this.gv_bf.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_bf_CellDoubleClick);
-            // 
             // bt_buch1
             // 
             this.bt_buch1.Location = new System.Drawing.Point(432, 3);
@@ -519,18 +464,73 @@
             this.bt_buch8.UseVisualStyleBackColor = true;
             this.bt_buch8.Click += new System.EventHandler(this.bt_buch_Click);
             // 
-            // cb_1
+            // lb
             // 
-            this.cb_1.AutoSize = true;
-            this.cb_1.Location = new System.Drawing.Point(0, 968);
-            this.cb_1.Name = "cb_1";
-            this.cb_1.Size = new System.Drawing.Size(558, 36);
-            this.cb_1.TabIndex = 21;
-            this.cb_1.Text = "Automatisches Ändern der Klassenstufe";
-            this.cb_1.UseVisualStyleBackColor = true;
-            this.cb_1.CheckedChanged += new System.EventHandler(this.cb_1_CheckedChanged);
+            this.lb.AutoSize = true;
+            this.lb.Location = new System.Drawing.Point(10, 469);
+            this.lb.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lb.Name = "lb";
+            this.lb.Size = new System.Drawing.Size(0, 32);
+            this.lb.TabIndex = 17;
             // 
-            // w_b_buch_fach
+            // rb_delete
+            // 
+            this.rb_delete.AutoSize = true;
+            this.rb_delete.Location = new System.Drawing.Point(550, 45);
+            this.rb_delete.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.rb_delete.Name = "rb_delete";
+            this.rb_delete.Size = new System.Drawing.Size(176, 36);
+            this.rb_delete.TabIndex = 14;
+            this.rb_delete.Text = "Entfernen";
+            this.rb_delete.UseVisualStyleBackColor = true;
+            this.rb_delete.CheckedChanged += new System.EventHandler(this.rb_delete_CheckedChanged);
+            // 
+            // rb_edit
+            // 
+            this.rb_edit.AutoSize = true;
+            this.rb_edit.Location = new System.Drawing.Point(282, 45);
+            this.rb_edit.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.rb_edit.Name = "rb_edit";
+            this.rb_edit.Size = new System.Drawing.Size(191, 36);
+            this.rb_edit.TabIndex = 13;
+            this.rb_edit.Text = "Bearbeiten";
+            this.rb_edit.UseVisualStyleBackColor = true;
+            this.rb_edit.CheckedChanged += new System.EventHandler(this.rb_edit_CheckedChanged);
+            // 
+            // rb_neu
+            // 
+            this.rb_neu.AutoSize = true;
+            this.rb_neu.Checked = true;
+            this.rb_neu.Cursor = System.Windows.Forms.Cursors.Default;
+            this.rb_neu.Location = new System.Drawing.Point(16, 45);
+            this.rb_neu.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.rb_neu.Name = "rb_neu";
+            this.rb_neu.Size = new System.Drawing.Size(197, 36);
+            this.rb_neu.TabIndex = 12;
+            this.rb_neu.TabStop = true;
+            this.rb_neu.Text = "Hinzufügen";
+            this.rb_neu.UseVisualStyleBackColor = true;
+            this.rb_neu.CheckedChanged += new System.EventHandler(this.rb_neu_CheckedChanged);
+            // 
+            // gv_bf
+            // 
+            this.gv_bf.AllowUserToAddRows = false;
+            this.gv_bf.AllowUserToDeleteRows = false;
+            this.gv_bf.AllowUserToResizeColumns = false;
+            this.gv_bf.AllowUserToResizeRows = false;
+            this.gv_bf.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_bf.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gv_bf.Location = new System.Drawing.Point(799, 17);
+            this.gv_bf.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.gv_bf.Name = "gv_bf";
+            this.gv_bf.ReadOnly = true;
+            this.gv_bf.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.gv_bf.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gv_bf.Size = new System.Drawing.Size(1542, 944);
+            this.gv_bf.TabIndex = 23;
+            this.gv_bf.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_bf_CellDoubleClick);
+            // 
+            // w_s_buch_fach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -539,8 +539,8 @@
             this.Controls.Add(this.bt_close);
             this.Controls.Add(this.gB_buchid);
             this.Controls.Add(this.gv_bf);
-            this.Name = "w_b_buch_fach";
-            this.Text = "Buch_Fach";
+            this.Name = "w_s_buch_fach";
+            this.Text = "Bücher zu Fächern zuordnen";
             this.Load += new System.EventHandler(this.w_b_buch_fach_Load);
             this.gB_buchid.ResumeLayout(false);
             this.gB_buchid.PerformLayout();

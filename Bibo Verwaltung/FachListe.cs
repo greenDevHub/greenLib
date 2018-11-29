@@ -86,17 +86,17 @@ namespace Bibo_Verwaltung
         {
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
-            string Rawcommand = "UPDATE [dbo].[t_s_fachListe] set fl_1 = @1, fl_2 = @2, fl_3 = @3, fl_4 = @4, fl_5 = @5, fl_6 = @6, fl_7 = @7, fl_8 = @8, fl_9 = @9, fl_10 = @10, fl_11 = @11, fl_12 = @12, fl_13 = 13, fl_14 = @14, fl_15 = @15, fl_16 = @16 WHERE fl_id = @id ";
+            string Rawcommand = "UPDATE [dbo].[t_s_fachListe] set fl_fach1 = @1, fl_fach2 = @2, fl_fach3 = @3, fl_fach4 = @4, fl_fach5 = @5, fl_fach6 = @6, fl_fach7 = @7, fl_fach8 = @8, fl_fach9 = @9, fl_fach10 = @10, fl_fach11 = @11, fl_fach12 = @12, fl_fach13 = 13, fl_fach14 = @14, fl_fach15 = @15, fl_fach16 = @16 WHERE fl_id = @id ";
             SqlCommand cmd = new SqlCommand(Rawcommand, con.Con);
             cmd.Parameters.AddWithValue("@id", FachListeID);
-            cmd.Parameters.AddWithValue("@0", FachIDs[0]);
-            for (int i = 1; i < 10;)
+            //cmd.Parameters.AddWithValue("@0", FachIDs[0]);
+            for (int i = 1; i < 17;)
             {
                 try
                 {
-                    if (FachIDs[i].ToString() != null && !FachIDs[i].ToString().Equals(""))
+                    if (FachIDs[i-1].ToString() != null && !FachIDs[i-1].ToString().Equals(""))
                     {
-                        cmd.Parameters.AddWithValue("@" + i, FachIDs[i]);
+                        cmd.Parameters.AddWithValue("@" + i, FachIDs[i-1]);
                     }
                     else
                     {

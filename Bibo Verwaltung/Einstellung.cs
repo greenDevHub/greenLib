@@ -33,6 +33,9 @@ namespace Bibo_Verwaltung
 
         public string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Einstellungen\\ConnectionSettings.txt";
 
+        private string homePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Einstellungen";
+        public string HomePath { get { return homePath; } set { homePath = value; } }
+
         #endregion
 
         public Einstellung()

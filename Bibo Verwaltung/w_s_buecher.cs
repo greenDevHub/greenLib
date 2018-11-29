@@ -400,6 +400,14 @@ namespace Bibo_Verwaltung
                         {
                             b.AutorListe.Autor.Add(needAutor);
                         }
+                        else
+                        {
+                            if(b.AutorListe.Autor.GetID(cb_Autor.Text) == null)
+                            {
+                                needAutor.Add(cb_Autor.Text);
+                                b.AutorListe.Autor.Add(needAutor);
+                            }
+                        }
                         b.AutorListe.AutorIDs.Clear();
                         b.AutorListe.AutorIDs.Add(b.AutorListe.Autor.GetID(cb_Autor.Text));
                         b.AutorListe.Autor.FillCombobox(ref cb_Autor, b.AutorListe.AutorIDs[0]);

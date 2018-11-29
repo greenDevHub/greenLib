@@ -10,7 +10,7 @@ ________________________________________________________________________________
 |- Anleitung/Dokumentation (Windows-Help-File / Intranet-Wikis)								|
 |- Port angeben bei Server-Einstellungen										|
 |- SQL_Verbindung neue Klasse um notwendige Rechte zu geben		 						|
-|- Buchrückgabefenster Examplar deaktiviert?
+|- Buchrückgabefenster Exemplar deaktiviert?
 |- Buchrückgabefenster Autoren anzeigen
 
 ERLEDIGT

@@ -23,7 +23,10 @@ namespace Bibo_Verwaltung
 
         private void bt_ImEx_Click(object sender, EventArgs e)
         {
-
+            Form import = new w_s_schuelerimport(true);
+            import.Show(this);
+            gv_Kunde.DataSource = null;
+            s.FillGrid(false, ref gv_Kunde);
         }
 
         private void UpdateS()
