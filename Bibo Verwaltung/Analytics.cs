@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,17 +26,54 @@ namespace Bibo_Verwaltung
         SqlDataAdapter adapter = new SqlDataAdapter();
         SqlCommandBuilder comb = new SqlCommandBuilder();
 
+        public void Markierung(ref DataGridView grid, object value = null)
+        {
+            int i = 0;
+            foreach (DataGridViewRow row in grid.Rows)
+            {
+                if (i == 1)
+                {
+                    row.DefaultCellStyle.BackColor = Color.Blue;
+                    row.DefaultCellStyle.ForeColor = Color.White;
+                    i = 0;
+                }
+                else
+                {
+                    row.DefaultCellStyle.BackColor = Color.White;
+                    row.DefaultCellStyle.ForeColor = Color.Black;
+                    i = 1;
+                }
+            }
+        }
+
         #region MAX-Preisanstieg
         private DataSet ResultMaxPreisanstieg = new DataSet();
         /// <summary>
         /// Gibt den hoechsten Preisanstieg jedes Buchtitels zurück (in % oder als Betrag in €).
         /// </summary>
-        public void showMaxPreisanstieg(ref DataGridView grid, object value = null)
+        public void showMaxPreisanstieg(ref DataGridView grid, ref Chart chart, object value = null)
         {
             getMaxPreisanstieg();
             grid.DataSource = ResultMaxPreisanstieg.Tables[0];
-            //grid.Columns[0].Visible = false;
-            //grid.Columns["sprach_name"].HeaderText = "Bezeichnung";
+
+            chart.Series.Clear();
+            var series = new System.Windows.Forms.DataVisualization.Charting.Series
+            {
+                Name = "Preisanstiege der Buchtitel",
+                Color = System.Drawing.Color.Green,
+                IsVisibleInLegend = false,
+                IsXValueIndexed = true,
+                ChartType = SeriesChartType.Bar
+            };
+
+            chart.Series.Add(series);
+
+            chart.Series[0].XValueMember = grid.Columns[0].DataPropertyName;
+            chart.Series[0].YValueMembers = grid.Columns[1].DataPropertyName;
+
+            chart.DataSource = grid.DataSource;
+
+            chart.Invalidate();
         }
 
         private DataSet getMaxPreisanstieg()
@@ -68,8 +106,10 @@ namespace Bibo_Verwaltung
             var series = new System.Windows.Forms.DataVisualization.Charting.Series
             {
                 Name = "Preisanstieg des Buchtitels",
-                Color = System.Drawing.Color.Green,
-                IsVisibleInLegend = false,
+                Color = System.Drawing.Color.Blue,
+                BorderColor = System.Drawing.Color.Blue,
+                BorderWidth = 2,
+                IsValueShownAsLabel = true, 
                 IsXValueIndexed = true,
                 ChartType = SeriesChartType.Line
             };
@@ -78,11 +118,9 @@ namespace Bibo_Verwaltung
 
             chart.Series[0].XValueMember = grid.Columns[0].DataPropertyName;
             chart.Series[0].YValueMembers = grid.Columns[1].DataPropertyName;
+
             chart.DataSource = grid.DataSource;
-            //for (int i = 0; i < grid.RowCount; i++)
-            //{
-            //    series.Points.AddXY(grid.Columns[0].ToString(), grid.Columns[i].ToString());
-            //}
+            
             chart.Invalidate();
         }
 
@@ -91,7 +129,7 @@ namespace Bibo_Verwaltung
             ResultPreisanstieg.Clear();
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return null;
-            string RawCommand = "SELECT [p_vorher], [p_nachher] FROM [dbo].[t_s_preis] WHERE [b_isbn] = @isbn";
+            string RawCommand = "SELECT [p_datum] AS 'Datum', [p_preis] AS 'Preis in €' FROM [dbo].[t_s_preis] WHERE [b_isbn] = @isbn order by [p_datum] ASC";
             // Verbindung öffnen 
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.SelectCommand.Parameters.AddWithValue("@isbn", isbn);
@@ -199,10 +237,47 @@ namespace Bibo_Verwaltung
 
         ////}
 
-        ////public void getUsageQuote(of Book)
-        ////{
+        private DataSet ResultAbzutzung = new DataSet();
+        public void showAbzutzung(string ISBN, ref DataGridView grid, ref Chart chart, object value = null)
+        {
+            grid.DataSource = getAbnutzung(ISBN).Tables[0];
 
-        ////}
+            chart.Series.Clear();
+            var series = new System.Windows.Forms.DataVisualization.Charting.Series
+            {
+                Name = "Abnutzung des Buchtitels",
+                Color = System.Drawing.Color.Blue,
+                BorderColor = System.Drawing.Color.Blue,
+                BorderWidth = 2,
+                IsValueShownAsLabel = true,
+                IsXValueIndexed = true,
+                ChartType = SeriesChartType.Line
+            };
 
+            chart.Series.Add(series);
+
+            chart.Series[0].XValueMember = grid.Columns[0].DataPropertyName;
+            chart.Series[0].YValueMembers = grid.Columns[1].DataPropertyName;
+
+            chart.DataSource = grid.DataSource;
+
+            chart.Invalidate();
+        }
+
+        private DataSet getAbnutzung(string isbn)
+        {
+            ResultAbzutzung.Clear();
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return null;
+            string RawCommand = "SELECT [id_buch], [zu_vor], [zu_nach], [aus_geliehen], [aus_ruckgabe] FROM [dbo].[t_s_verlauf]";
+            // Verbindung öffnen 
+            adapter = new SqlDataAdapter(RawCommand, con.Con);
+            //adapter.SelectCommand.Parameters.AddWithValue("@0", table);
+            adapter.Fill(ResultAbzutzung);
+            con.Close();
+
+
+            return ResultAbzutzung;
+        }
     }
 }
