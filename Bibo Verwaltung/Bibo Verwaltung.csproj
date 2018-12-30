@@ -103,7 +103,7 @@
       <DependentUpon>w_b_buch_fach.cs</DependentUpon>
     </Compile>
     <Compile Include="Einstellung.cs" />
-    <Compile Include="Details.cs" />
+    <Compile Include="Ausleihe.cs" />
     <Compile Include="ExcelExport.cs" />
     <Compile Include="FachListe.cs" />
     <Compile Include="Faecher.cs" />
@@ -210,11 +210,11 @@
     <Compile Include="w_s_buchid.Designer.cs">
       <DependentUpon>w_s_buchid.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_details.cs">
+    <Compile Include="w_s_ausleihen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_details.Designer.cs">
-      <DependentUpon>w_s_details.cs</DependentUpon>
+    <Compile Include="w_s_ausleihen.Designer.cs">
+      <DependentUpon>w_s_ausleihen.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_einstellungen.cs">
       <SubType>Form</SubType>
@@ -312,8 +312,8 @@
     <EmbeddedResource Include="w_s_buchid.resx">
       <DependentUpon>w_s_buchid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_details.resx">
-      <DependentUpon>w_s_details.cs</DependentUpon>
+    <EmbeddedResource Include="w_s_ausleihen.resx">
+      <DependentUpon>w_s_ausleihen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_einstellungen.resx">
       <DependentUpon>w_s_einstellungen.cs</DependentUpon>

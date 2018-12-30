@@ -158,7 +158,7 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
-                Form Details = new w_s_details(name);
+                Form Details = new w_s_ausleihen(name);
                 Details.ShowDialog(this);
             }
             else

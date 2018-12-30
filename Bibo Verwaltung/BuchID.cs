@@ -177,9 +177,9 @@ namespace Bibo_Verwaltung
             {
                 System.Windows.Forms.Form f = System.Windows.Forms.Application.OpenForms["w_s_buecher"];
                 ISBN = ((w_s_buecher)f).tb_ISBN.Text;
-                
+
             }
-            adapter2.SelectCommand.Parameters.AddWithValue("@isbn",ISBN);
+            adapter2.SelectCommand.Parameters.AddWithValue("@isbn", ISBN);
             adapter2.Fill(ds2);
             adapter2.Fill(dt2);
             con2.Close();
@@ -218,6 +218,9 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region
+        /// <summary>
+        /// Prüft ein Buchexemplar auf seine Aktivierung für Kunden
+        /// </summary>
         public bool IsActivated()
         {
             if (con.ConnectError()) return false;
@@ -239,6 +242,10 @@ namespace Bibo_Verwaltung
                 return false;
             }
         }
+
+        /// <summary>
+        /// Prüft ein Buchexemplar auf seine Verfügbarkeit für Kunden
+        /// </summary>
         public bool IsSpecificAvailable()
         {
             if (con.ConnectError()) return false;
@@ -250,7 +257,7 @@ namespace Bibo_Verwaltung
                 count = (int)cmdCount.ExecuteScalar();
                 con.Close();
             }
-            if(count == 0)
+            if (count == 0)
             {
                 return true;
             }
@@ -292,7 +299,7 @@ namespace Bibo_Verwaltung
             }
             con.Close();
             int sum = 0;
-            foreach(int i in counts)
+            foreach (int i in counts)
             {
                 sum = sum + i;
             }
