@@ -31,6 +31,9 @@ namespace Bibo_Verwaltung
         public DateTime Rueckgabedatum { get { return rueckgabedatum; } set { rueckgabedatum = value; } }
         #endregion
 
+        /// <summary>
+        /// Laden der KundenID, und des Ausleih- und Rückgabedatums eines Buches
+        /// </summary>
         public void Load_Info(string exemlarID)
         {
             if (con.ConnectError()) return;
@@ -49,6 +52,9 @@ namespace Bibo_Verwaltung
             con.Close();
         }
 
+        /// <summary>
+        /// Rückgabe eines Buches
+        /// </summary>
         public void Execute_Rueckgabe(string Exemplar, string Kunde, string SollZustand, string IstZustandID, string IstZustand, string AusleihStartDatum, string AusleihEndDatum)
         {
             if (con.ConnectError()) return;

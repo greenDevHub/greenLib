@@ -16,7 +16,7 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_buchid : Form
     {
-        BuchID b = new BuchID();
+        Exemplar b = new Exemplar();
         public w_s_buchid()
         {
             InitializeComponent();
@@ -35,13 +35,13 @@ namespace Bibo_Verwaltung
             {
                 DataGridViewRow row = this.grid_buchid.Rows[e.RowIndex];
                 tb_id.Text = row.Cells["BuchID"].Value.ToString();
-                BuchID b = new BuchID(tb_id.Text);
-                tb_id.Text = b.ID;
+                Exemplar b = new Exemplar(tb_id.Text);
+                tb_id.Text = b.ExemplarID;
                 tb_isbn.Text = b.ISBN;
                 cb_zustand.Text = b.Zustand.Zustandname;
                 dTP_aufnahme.Value = b.Aufnahmedatum;
                 string code = "";
-                code = b.ID;
+                code = b.ExemplarID;
                 for(int i = code.Length; i < 7;)
                 {
                     code = "0" + code;
@@ -95,20 +95,20 @@ namespace Bibo_Verwaltung
                         b.Zustand.FillCombobox(ref cb_zustand, b.Zustand.GetID(cb_zustand.Text));
                     }
                     lb.Visible = false;
-                    b.ID = tb_id.Text;
+                    b.ExemplarID = tb_id.Text;
                     b.ISBN = tb_isbn.Text;
                     b.Zustand.ZustandID = cb_zustand.SelectedValue.ToString();
                     b.Aufnahmedatum = dTP_aufnahme.Value;
                     int number = int.Parse(tb_number.Text);
                     for (int i = 0; i < number; i++)
                     {
-                        b.Add();
+                        b.Add_Exemplar();
                     }
                     //Barcode bar = new Barcode("3", BarcodeBox);
                     //bar.FillPictureBox(ref BarcodeBox);
                     Clear();
                     lb.Visible = true;
-                    b.ClearDS();
+                    b.ClearDataSource();
                     b.FillObject();
                     b.FillGrid(ref grid_buchid);
                     tb_anzahl.Text = grid_buchid.RowCount.ToString();
@@ -125,17 +125,17 @@ namespace Bibo_Verwaltung
                 try
                 {
                     lb.Visible = false;
-                    b.ID = tb_id.Text;
+                    b.ExemplarID = tb_id.Text;
                     b.ISBN = tb_isbn.Text;
                     b.Zustand.ZustandID = cb_zustand.SelectedValue.ToString();
                     b.Aufnahmedatum = dTP_aufnahme.Value;
                     //b.Delete();
                     if (b.IsSpecificAvailable())
                     {
-                        b.Deactivate();
+                        b.Deactivate_Exemplar();
                         Clear();
                         lb.Visible = true;
-                        b.ClearDS();
+                        b.ClearDataSource();
                         b.FillObject();
                         b.FillGrid(ref grid_buchid);
                         tb_anzahl.Text = grid_buchid.RowCount.ToString();
@@ -165,14 +165,14 @@ namespace Bibo_Verwaltung
                         b.Zustand.FillCombobox(ref cb_zustand, b.Zustand.GetID(cb_zustand.Text));
                     }
                     lb.Visible = false;
-                    b.ID = tb_id.Text;
+                    b.ExemplarID = tb_id.Text;
                     b.ISBN = tb_isbn.Text;
                     b.Zustand.ZustandID = cb_zustand.SelectedValue.ToString();
                     b.Aufnahmedatum = dTP_aufnahme.Value;
-                    b.Save();
+                    b.Update_Exemplar();
                     Clear();
                     lb.Visible = true;
-                    b.ClearDS();
+                    b.ClearDataSource();
                     b.FillObject();
                     b.FillGrid(ref grid_buchid);
                     tb_anzahl.Text = grid_buchid.RowCount.ToString();
@@ -441,10 +441,10 @@ namespace Bibo_Verwaltung
             {
                 for (int i = 0; i < grid_buchid.SelectedRows.Count; i++)
                 {
-                    b.ID = grid_buchid.SelectedRows[i].Cells[0].Value.ToString();
-                    b.Deactivate();
+                    b.ExemplarID = grid_buchid.SelectedRows[i].Cells[0].Value.ToString();
+                    b.Deactivate_Exemplar();
                 }
-                b.ClearDS();
+                b.ClearDataSource();
                 b.FillObject();
                 b.FillGrid(ref grid_buchid);
                 tb_anzahl.Text = grid_buchid.RowCount.ToString();

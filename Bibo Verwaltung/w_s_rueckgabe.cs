@@ -18,9 +18,9 @@ namespace Bibo_Verwaltung
         string currentUser;
         public w_s_rueckgabe(string userName)
         {
-            this.currentUser = userName;
-            this.Text = "Angemeldet als: " + userName;
             InitializeComponent();
+            this.currentUser = userName;
+            this.Text = Text + " - Angemeldet als: " + userName;
             zustand.FillCombobox(ref cb_Zustand, -1);
         }
         #endregion
@@ -135,12 +135,12 @@ namespace Bibo_Verwaltung
         /// </summary>
         private String GetRueckgabeList()
         {
-            BuchID exemplar;
+            Exemplar exemplar;
             Buch exemplar_info;
             string resultString = "Möchten Sie ";
             if (rueckListe.Rows.Count == 1)
             {
-                exemplar = new BuchID(rueckListe.Rows[0][0].ToString());
+                exemplar = new Exemplar(rueckListe.Rows[0][0].ToString());
                 exemplar_info = new Buch(exemplar.ISBN);
                 resultString = resultString + "das Buch: " + Environment.NewLine + Environment.NewLine + exemplar_info.Titel + ", " + Environment.NewLine + Environment.NewLine;
             }
@@ -149,7 +149,7 @@ namespace Bibo_Verwaltung
                 resultString = resultString + "die Bücher: " + Environment.NewLine + Environment.NewLine;
                 foreach (DataRow row in rueckListe.Rows)
                 {
-                    exemplar = new BuchID(row[0].ToString());
+                    exemplar = new Exemplar(row[0].ToString());
                     exemplar_info = new Buch(exemplar.ISBN);
                     resultString = resultString + "-  " + TrimText(exemplar_info.Titel) + ", " + Environment.NewLine;
                 }
@@ -188,7 +188,7 @@ namespace Bibo_Verwaltung
 
                 try
                 {
-                    BuchID buch_exemplar = new BuchID(tb_BuchCode.Text);
+                    Exemplar buch_exemplar = new Exemplar(tb_BuchCode.Text);
                     buch_verfuegbar = buch_exemplar.IsSpecificAvailable();
                     if (buch_exemplar.IsActivated())
                     {
@@ -196,7 +196,7 @@ namespace Bibo_Verwaltung
                         Buch buch = new Buch(buch_exemplar.ISBN);
                         llb_BuchTitel.Enabled = true;
                         llb_BuchTitel.Text = TrimText(buch.Titel);
-                        rueckgabe_ExemplarID = buch_exemplar.ID;
+                        rueckgabe_ExemplarID = buch_exemplar.ExemplarID;
                         cb_Zustand.SelectedValue = buch_exemplar.Zustand.ZustandID;
                         zustand_AusleihStart = buch_exemplar.Zustand.Zustandname;
                         zustand_AusleihEnde = buch_exemplar.Zustand.Zustandname;

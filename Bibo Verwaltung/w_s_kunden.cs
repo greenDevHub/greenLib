@@ -10,10 +10,12 @@ namespace Bibo_Verwaltung
     {
         Kunde kunde = new Kunde();
 
-        public w_s_Kunden(string name)
+        string currentUser;
+        public w_s_Kunden(string userName)
         {
             InitializeComponent();
-            this.Text = name;
+            this.currentUser = userName;
+            this.Text = Text + " - Angemeldet als: " + userName;
             kunde.FillGrid(false, ref gv_Kunde);
         }
 
@@ -75,7 +77,7 @@ namespace Bibo_Verwaltung
                     try
                     {
                         setKundenValues();
-                        kunde.saveKunde();
+                        kunde.UpdateKunde();
                         clearForm();
                         kunde.FillGrid(false, ref gv_Kunde);
                         lb_kunde_add.Visible = false;
@@ -104,7 +106,7 @@ namespace Bibo_Verwaltung
                     try
                     {
                         setKundenValues();
-                        kunde.deleteKunde();
+                        kunde.DeleteKunde();
                         clearForm();
                         kunde.FillGrid(false, ref gv_Kunde);
                         lb_kunde_add.Visible = false;
@@ -201,7 +203,7 @@ namespace Bibo_Verwaltung
                     try
                     {
                         setKundenValues();
-                        kunde.addKunde();
+                        kunde.AddKunde();
                         clearForm();
                         kunde.FillGrid(false, ref gv_Kunde);
                         lb_kunde_add.Visible = false;

@@ -93,7 +93,8 @@
     <Compile Include="AutorListe.cs" />
     <Compile Include="Barcode.cs" />
     <Compile Include="Benutzer.cs" />
-    <Compile Include="BuchID.cs" />
+    <Compile Include="Exemplar.cs" />
+    <Compile Include="Buchsuche.cs" />
     <Compile Include="Extension\Lehrbuchausgabe\Buch_Fach.cs" />
     <Compile Include="Extension\Lehrbuchausgabe\IsbnListe.cs" />
     <Compile Include="Extension\Lehrbuchausgabe\w_b_buch_fach.cs">
@@ -109,6 +110,12 @@
     <Compile Include="Faecher.cs" />
     <Compile Include="Schuelerimport.cs" />
     <Compile Include="Schueler.cs" />
+    <Compile Include="w_s_ausleihe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_ausleihe.Designer.cs">
+      <DependentUpon>w_s_ausleihe.cs</DependentUpon>
+    </Compile>
     <Compile Include="w_s_faecher.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,11 +217,11 @@
     <Compile Include="w_s_buchid.Designer.cs">
       <DependentUpon>w_s_buchid.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_ausleihen.cs">
+    <Compile Include="w_s_buchsuche.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_ausleihen.Designer.cs">
-      <DependentUpon>w_s_ausleihen.cs</DependentUpon>
+    <Compile Include="w_s_buchsuche.Designer.cs">
+      <DependentUpon>w_s_buchsuche.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_einstellungen.cs">
       <SubType>Form</SubType>
@@ -279,6 +286,9 @@
     <EmbeddedResource Include="Extension\Lehrbuchausgabe\w_b_buch_fach.resx">
       <DependentUpon>w_b_buch_fach.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="w_s_Ausleihe.resx">
+      <DependentUpon>w_s_ausleihe.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="w_s_faecher.resx">
       <DependentUpon>w_s_faecher.cs</DependentUpon>
     </EmbeddedResource>
@@ -312,8 +322,8 @@
     <EmbeddedResource Include="w_s_buchid.resx">
       <DependentUpon>w_s_buchid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_ausleihen.resx">
-      <DependentUpon>w_s_ausleihen.cs</DependentUpon>
+    <EmbeddedResource Include="w_s_buchsuche.resx">
+      <DependentUpon>w_s_buchsuche.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_einstellungen.resx">
       <DependentUpon>w_s_einstellungen.cs</DependentUpon>

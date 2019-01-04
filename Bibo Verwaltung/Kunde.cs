@@ -12,8 +12,11 @@ namespace Bibo_Verwaltung
     class Kunde
     {
         SQL_Verbindung con = new SQL_Verbindung();
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataSet ds = new DataSet();
+        SqlCommandBuilder comb = new SqlCommandBuilder();
 
-        #region Strings
+        #region Kunden-Eigenschaften
         string kundenid;
         /// <summary>
         /// ID des Kunden
@@ -81,24 +84,30 @@ namespace Bibo_Verwaltung
         public string Vertrauenswuerdigkeit { get { return vertrauenswuerdigkeit; } set { vertrauenswuerdigkeit = value; } }
         #endregion
 
-        #region Objekt Kunde
+        #region Objekt-Constructor
         /// <summary>
         /// Erschaft das Objekt Kunde
         /// </summary>
         public Kunde()
         {
-            fillObject(false);
+            FillObject(false);
         }
+
+        /// <summary>
+        /// Erschaft einen Kunden
+        /// </summary>
         public Kunde(string kundenid)
         {
             this.kundenid = kundenid;
-            loadKunde();
-            fillObject(false);
+            LoadKunde();
+            FillObject(false);
         }
         #endregion
 
-        #region Load
-        private void loadKunde()
+        /// <summary>
+        /// Lädt alle Kundendaten und speichert diese in das Kunden-Objekt
+        /// </summary>
+        private void LoadKunde()
         {
             if (con.ConnectError()) return;
             string RawCommand = "SELECT * FROM [dbo].[t_s_kunden] WHERE  kunde_id = @0";
@@ -123,18 +132,14 @@ namespace Bibo_Verwaltung
             // Verbindung schließen 
             con.Close();
         }
-        #endregion
 
-        #region Fill Object
-        SqlDataAdapter adapter = new SqlDataAdapter();
-        DataSet ds = new DataSet();
-        DataTable dt = new DataTable();
-        SqlCommandBuilder comb = new SqlCommandBuilder();
-        private void fillObject(bool loadType)
+        /// <summary>
+        /// Füllt ein DataSet-Objekt mit den Kundendaten 
+        /// </summary>
+        private void FillObject(bool loadType)
         {
             string anz;
             if (con.ConnectError()) return;
-
             if (loadType == true)
             {
                 anz = "100 PERCENT";
@@ -143,29 +148,34 @@ namespace Bibo_Verwaltung
             {
                 anz = "1000";
             }
-
             string RawCommand = "SELECT TOP " + anz + " kunde_ID as 'Kunden-ID', kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_strasse as 'Straße', kunde_hausnummer as 'Hausnummer', kunde_postleitzahl as 'Postleitzahl', kunde_ort as 'Wohnort', kunde_vertrauenswürdigkeit as 'Vertrauenswürdigkeit', kunde_klasse as 'Klasse', kunde_mail as 'Mail', kunde_telefonnummer as 'Telefonnummer' FROM [dbo].[t_s_kunden]";
-
             // Verbindung öffnen 
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
             con.Close();
         }
 
-        private void clearDataSource()
+        /// <summary>
+        /// Entfernt den gesamten Inhalt im DataSet 
+        /// </summary>
+        private void ClearDataSource()
         {
             ds.Tables[0].Rows.Clear();
         }
 
+        /// <summary>
+        /// Füllt ein DataGridView-Objekt mit den Kundendaten 
+        /// </summary>
         public void FillGrid(bool loadAll, ref DataGridView grid, object value = null)
         {
-            clearDataSource();
-            fillObject(loadAll);
+            ClearDataSource();
+            FillObject(loadAll);
             grid.DataSource = ds.Tables[0];
         }
-        #endregion
 
-        #region Speichern Grid
+        /// <summary>
+        /// Speichert den Inhalt eines DataGridView-Objekts in die Datenbank 
+        /// </summary>
         public void SaveGrid(ref DataGridView grid)
         {
             comb = new SqlCommandBuilder(adapter);
@@ -175,16 +185,16 @@ namespace Bibo_Verwaltung
                 adapter.Update(changes);
             }
         }
-        #endregion
 
-        #region Add
-        public void addKunde()
+        /// <summary>
+        /// Fügt einen Kunden der Datenbank hinzu 
+        /// </summary>
+        public void AddKunde()
         {
             {
                 string RawCommand = "INSERT INTO [dbo].[t_s_kunden] (kunde_vorname, kunde_nachname, kunde_ort, kunde_postleitzahl, kunde_strasse, kunde_telefonnummer, kunde_hausnummer, kunde_mail, kunde_klasse, kunde_vertrauenswürdigkeit) VALUES (@vorname, @nachname, @ort, @postleitzahl, @strasse, @telefonnummer, @hausnummer, @mail, @klasse, @vertrauenswürdigkeit)";
                 con.ConnectError();
                 SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-
                 cmd.Parameters.AddWithValue("@vorname", Vorname);
                 cmd.Parameters.AddWithValue("@nachname", Nachname);
                 cmd.Parameters.AddWithValue("@ort", Ort);
@@ -195,23 +205,22 @@ namespace Bibo_Verwaltung
                 cmd.Parameters.AddWithValue("@mail", Mail);
                 cmd.Parameters.AddWithValue("@klasse", Klasse);
                 cmd.Parameters.AddWithValue("@vertrauenswürdigkeit", Vertrauenswuerdigkeit);
-
                 // Verbindung öffnen 
                 cmd.ExecuteNonQuery();
                 //Verbindung schließen
                 con.Close();
             }
         }
-        #endregion
 
-        #region Save
-        public void saveKunde()
+        /// <summary>
+        /// Aktualisiert die Kundendaten eines vorhandenen Kunden in der Datenbank 
+        /// </summary>
+        public void UpdateKunde()
         {
             {
                 string RawCommand = "UPDATE [dbo].[t_s_kunden] SET kunde_vorname = @vorname, kunde_nachname = @nachname, kunde_ort = @ort, kunde_postleitzahl = @postleitzahl, kunde_strasse = @strasse, kunde_telefonnummer = @telefonnummer, kunde_hausnummer = @hausnummer, kunde_mail = @mail, kunde_klasse = @klasse, kunde_vertrauenswürdigkeit = @vertrauenswürdigkeit WHERE kunde_ID = @k_ID";
                 con.ConnectError();
                 SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-
                 cmd.Parameters.AddWithValue("@vorname", Vorname);
                 cmd.Parameters.AddWithValue("@nachname", Nachname);
                 cmd.Parameters.AddWithValue("@ort", Ort);
@@ -223,17 +232,17 @@ namespace Bibo_Verwaltung
                 cmd.Parameters.AddWithValue("@klasse", Klasse);
                 cmd.Parameters.AddWithValue("@vertrauenswürdigkeit", Vertrauenswuerdigkeit);
                 cmd.Parameters.AddWithValue("@k_ID", KundenID);
-
                 // Verbindung öffnen 
                 cmd.ExecuteNonQuery();
                 //Verbindung schließen
                 con.Close();
             }
         }
-        #endregion
 
-        #region Delete
-        public void deleteKunde()
+        /// <summary>
+        /// Löscht einen Kunden aus der Datenbank 
+        /// </summary>
+        public void DeleteKunde()
         {
             {
                 string RawCommand = "DELETE FROM [dbo].[t_s_kunden] WHERE kunde_id = @id";
@@ -248,7 +257,6 @@ namespace Bibo_Verwaltung
                 con.Close();
             }
         }
-        #endregion
     }
 }
 

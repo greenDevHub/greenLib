@@ -342,7 +342,7 @@ namespace Bibo_Verwaltung
                     if (dialogResult == DialogResult.Yes)
                     {
 
-                        BuchID buchid = new BuchID();
+                        Exemplar buchid = new Exemplar();
                         //buchid.DeleteWhereISBN(tb_ISBN.Text);
                         if (buchid.IsAvailable(tb_ISBN.Text))
                         {

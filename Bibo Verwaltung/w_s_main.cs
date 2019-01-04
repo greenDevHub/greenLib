@@ -158,7 +158,7 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
-                Form Details = new w_s_ausleihen(name);
+                Form Details = new w_s_buchsuche(name);
                 Details.ShowDialog(this);
             }
             else

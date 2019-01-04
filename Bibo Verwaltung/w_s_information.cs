@@ -12,12 +12,11 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_information : Form
     {
-        string name;
-        public w_s_information(int modus, string id, string name)
-        {
-            this.name = name;
-            this.Text = "Angemeldet als: " + name;
+        string currentUser;
+        public w_s_information(int modus, string id, string userName)
+        {           
             InitializeComponent();
+            this.currentUser = userName;
 
             if (modus == 1)
             {
@@ -80,7 +79,7 @@ namespace Bibo_Verwaltung
             }
             else if (Text == "Kunden-Details")
             {
-                Form Kunden = new w_s_Kunden(name);
+                Form Kunden = new w_s_Kunden(currentUser);
                 Kunden.ShowDialog(this);
             }
         }
