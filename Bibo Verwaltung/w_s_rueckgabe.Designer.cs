@@ -117,6 +117,7 @@
             this.tb_BuchCode.Size = new System.Drawing.Size(148, 20);
             this.tb_BuchCode.TabIndex = 1;
             this.tb_BuchCode.TextChanged += new System.EventHandler(this.tb_BuchCode_TextChanged);
+            this.tb_BuchCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_BuchCode_KeyPress);
             // 
             // lb_BuchCode
             // 

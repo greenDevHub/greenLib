@@ -29,30 +29,30 @@
         private void InitializeComponent()
         {
             this.gb_ExemplarAusleihe = new System.Windows.Forms.GroupBox();
-            this.tb_BuchCode = new System.Windows.Forms.TextBox();
-            this.lb_BuchID = new System.Windows.Forms.Label();
-            this.bt_NeuKunde = new System.Windows.Forms.Button();
-            this.tb_listVon = new System.Windows.Forms.TextBox();
-            this.tb_listBis = new System.Windows.Forms.TextBox();
-            this.leihList_Slider = new System.Windows.Forms.HScrollBar();
-            this.lb_EintragList = new System.Windows.Forms.Label();
-            this.bt_AddBuch = new System.Windows.Forms.Button();
-            this.picBox_Buchcover = new System.Windows.Forms.PictureBox();
-            this.lb_Zustand = new System.Windows.Forms.Label();
-            this.llb_BuchTitel = new System.Windows.Forms.LinkLabel();
-            this.lb_BuchTitel = new System.Windows.Forms.Label();
-            this.lb_BuchZustand = new System.Windows.Forms.Label();
+            this.dp_RueckDatum = new System.Windows.Forms.DateTimePicker();
+            this.lb_RueckDatum = new System.Windows.Forms.Label();
             this.lb_BuchStatus = new System.Windows.Forms.Label();
             this.lb_Status = new System.Windows.Forms.Label();
+            this.lb_BuchZustand = new System.Windows.Forms.Label();
+            this.llb_BuchTitel = new System.Windows.Forms.LinkLabel();
+            this.lb_BuchTitel = new System.Windows.Forms.Label();
+            this.lb_Zustand = new System.Windows.Forms.Label();
+            this.bt_AddBuch = new System.Windows.Forms.Button();
+            this.picBox_Buchcover = new System.Windows.Forms.PictureBox();
+            this.lb_EintragList = new System.Windows.Forms.Label();
+            this.leihList_Slider = new System.Windows.Forms.HScrollBar();
+            this.tb_listBis = new System.Windows.Forms.TextBox();
+            this.tb_listVon = new System.Windows.Forms.TextBox();
+            this.lb_BuchID = new System.Windows.Forms.Label();
+            this.tb_BuchCode = new System.Windows.Forms.TextBox();
+            this.bt_NeuKunde = new System.Windows.Forms.Button();
             this.gv_Kunde = new System.Windows.Forms.DataGridView();
             this.gb_Kunde = new System.Windows.Forms.GroupBox();
-            this.lb_Anweisung = new System.Windows.Forms.Label();
-            this.lb_Suche = new System.Windows.Forms.Label();
-            this.tb_VName = new System.Windows.Forms.TextBox();
             this.tb_NName = new System.Windows.Forms.TextBox();
+            this.tb_VName = new System.Windows.Forms.TextBox();
+            this.lb_Suche = new System.Windows.Forms.Label();
+            this.lb_Anweisung = new System.Windows.Forms.Label();
             this.bt_Submit = new System.Windows.Forms.Button();
-            this.lb_RueckDatum = new System.Windows.Forms.Label();
-            this.dp_RueckDatum = new System.Windows.Forms.DateTimePicker();
             this.bt_Abbrechen = new System.Windows.Forms.Button();
             this.gb_ExemplarAusleihe.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).BeginInit();
@@ -85,74 +85,82 @@
             this.gb_ExemplarAusleihe.TabStop = false;
             this.gb_ExemplarAusleihe.Text = "Exemplar-Ausleihe";
             // 
-            // tb_BuchCode
+            // dp_RueckDatum
             // 
-            this.tb_BuchCode.Location = new System.Drawing.Point(103, 22);
-            this.tb_BuchCode.Name = "tb_BuchCode";
-            this.tb_BuchCode.Size = new System.Drawing.Size(148, 20);
-            this.tb_BuchCode.TabIndex = 0;
-            this.tb_BuchCode.TextChanged += new System.EventHandler(this.tb_BuchCode_TextChanged);
+            this.dp_RueckDatum.CustomFormat = " dd :MMMM: yyyy";
+            this.dp_RueckDatum.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dp_RueckDatum.Location = new System.Drawing.Point(103, 122);
+            this.dp_RueckDatum.Name = "dp_RueckDatum";
+            this.dp_RueckDatum.Size = new System.Drawing.Size(148, 20);
+            this.dp_RueckDatum.TabIndex = 42;
             // 
-            // lb_BuchID
+            // lb_RueckDatum
             // 
-            this.lb_BuchID.AutoSize = true;
-            this.lb_BuchID.Location = new System.Drawing.Point(12, 24);
-            this.lb_BuchID.Name = "lb_BuchID";
-            this.lb_BuchID.Size = new System.Drawing.Size(85, 13);
-            this.lb_BuchID.TabIndex = 2;
-            this.lb_BuchID.Text = "Buchlable-Code:";
+            this.lb_RueckDatum.AutoSize = true;
+            this.lb_RueckDatum.Location = new System.Drawing.Point(12, 125);
+            this.lb_RueckDatum.Name = "lb_RueckDatum";
+            this.lb_RueckDatum.Size = new System.Drawing.Size(89, 13);
+            this.lb_RueckDatum.TabIndex = 41;
+            this.lb_RueckDatum.Text = "Rückgabedatum:";
             // 
-            // bt_NeuKunde
+            // lb_BuchStatus
             // 
-            this.bt_NeuKunde.Location = new System.Drawing.Point(313, 12);
-            this.bt_NeuKunde.Name = "bt_NeuKunde";
-            this.bt_NeuKunde.Size = new System.Drawing.Size(150, 23);
-            this.bt_NeuKunde.TabIndex = 5;
-            this.bt_NeuKunde.Text = "Neuen Kunden hinzufügen";
-            this.bt_NeuKunde.UseVisualStyleBackColor = true;
-            this.bt_NeuKunde.Click += new System.EventHandler(this.bt_NeuKunde_Click);
+            this.lb_BuchStatus.AutoSize = true;
+            this.lb_BuchStatus.Enabled = false;
+            this.lb_BuchStatus.Location = new System.Drawing.Point(100, 100);
+            this.lb_BuchStatus.Name = "lb_BuchStatus";
+            this.lb_BuchStatus.Size = new System.Drawing.Size(78, 13);
+            this.lb_BuchStatus.TabIndex = 40;
+            this.lb_BuchStatus.Text = "nicht verfügbar";
             // 
-            // tb_listVon
+            // lb_Status
             // 
-            this.tb_listVon.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb_listVon.Location = new System.Drawing.Point(103, 155);
-            this.tb_listVon.Name = "tb_listVon";
-            this.tb_listVon.ReadOnly = true;
-            this.tb_listVon.Size = new System.Drawing.Size(25, 20);
-            this.tb_listVon.TabIndex = 6;
-            this.tb_listVon.Text = "-";
-            this.tb_listVon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.lb_Status.AutoSize = true;
+            this.lb_Status.Location = new System.Drawing.Point(12, 100);
+            this.lb_Status.Name = "lb_Status";
+            this.lb_Status.Size = new System.Drawing.Size(40, 13);
+            this.lb_Status.TabIndex = 39;
+            this.lb_Status.Text = "Status:";
             // 
-            // tb_listBis
+            // lb_BuchZustand
             // 
-            this.tb_listBis.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb_listBis.Location = new System.Drawing.Point(253, 155);
-            this.tb_listBis.Name = "tb_listBis";
-            this.tb_listBis.ReadOnly = true;
-            this.tb_listBis.Size = new System.Drawing.Size(25, 20);
-            this.tb_listBis.TabIndex = 7;
-            this.tb_listBis.Text = "-";
-            this.tb_listBis.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.lb_BuchZustand.AutoSize = true;
+            this.lb_BuchZustand.Enabled = false;
+            this.lb_BuchZustand.Location = new System.Drawing.Point(100, 75);
+            this.lb_BuchZustand.Name = "lb_BuchZustand";
+            this.lb_BuchZustand.Size = new System.Drawing.Size(78, 13);
+            this.lb_BuchZustand.TabIndex = 38;
+            this.lb_BuchZustand.Text = "nicht verfügbar";
             // 
-            // leihList_Slider
+            // llb_BuchTitel
             // 
-            this.leihList_Slider.LargeChange = 1;
-            this.leihList_Slider.Location = new System.Drawing.Point(131, 155);
-            this.leihList_Slider.Maximum = 0;
-            this.leihList_Slider.Name = "leihList_Slider";
-            this.leihList_Slider.Size = new System.Drawing.Size(119, 20);
-            this.leihList_Slider.TabIndex = 8;
-            this.leihList_Slider.Scroll += new System.Windows.Forms.ScrollEventHandler(this.leihList_Slider_Scroll);
+            this.llb_BuchTitel.AutoSize = true;
+            this.llb_BuchTitel.Enabled = false;
+            this.llb_BuchTitel.Location = new System.Drawing.Point(100, 50);
+            this.llb_BuchTitel.Name = "llb_BuchTitel";
+            this.llb_BuchTitel.Size = new System.Drawing.Size(67, 13);
+            this.llb_BuchTitel.TabIndex = 36;
+            this.llb_BuchTitel.TabStop = true;
+            this.llb_BuchTitel.Text = "keine Treffer";
+            this.llb_BuchTitel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llb_BuchTitel_LinkClicked);
             // 
-            // lb_EintragList
+            // lb_BuchTitel
             // 
-            this.lb_EintragList.AutoEllipsis = true;
-            this.lb_EintragList.Location = new System.Drawing.Point(12, 152);
-            this.lb_EintragList.Name = "lb_EintragList";
-            this.lb_EintragList.Size = new System.Drawing.Size(83, 26);
-            this.lb_EintragList.TabIndex = 29;
-            this.lb_EintragList.Text = "Ausleihliste -Einträge:";
-            this.lb_EintragList.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lb_BuchTitel.AutoSize = true;
+            this.lb_BuchTitel.Location = new System.Drawing.Point(12, 50);
+            this.lb_BuchTitel.Name = "lb_BuchTitel";
+            this.lb_BuchTitel.Size = new System.Drawing.Size(83, 13);
+            this.lb_BuchTitel.TabIndex = 37;
+            this.lb_BuchTitel.Text = "Buch gefunden:";
+            // 
+            // lb_Zustand
+            // 
+            this.lb_Zustand.AutoSize = true;
+            this.lb_Zustand.Location = new System.Drawing.Point(12, 75);
+            this.lb_Zustand.Name = "lb_Zustand";
+            this.lb_Zustand.Size = new System.Drawing.Size(49, 13);
+            this.lb_Zustand.TabIndex = 33;
+            this.lb_Zustand.Text = "Zustand:";
             // 
             // bt_AddBuch
             // 
@@ -176,64 +184,75 @@
             this.picBox_Buchcover.TabIndex = 31;
             this.picBox_Buchcover.TabStop = false;
             // 
-            // lb_Zustand
+            // lb_EintragList
             // 
-            this.lb_Zustand.AutoSize = true;
-            this.lb_Zustand.Location = new System.Drawing.Point(12, 75);
-            this.lb_Zustand.Name = "lb_Zustand";
-            this.lb_Zustand.Size = new System.Drawing.Size(49, 13);
-            this.lb_Zustand.TabIndex = 33;
-            this.lb_Zustand.Text = "Zustand:";
+            this.lb_EintragList.AutoEllipsis = true;
+            this.lb_EintragList.Location = new System.Drawing.Point(12, 152);
+            this.lb_EintragList.Name = "lb_EintragList";
+            this.lb_EintragList.Size = new System.Drawing.Size(83, 26);
+            this.lb_EintragList.TabIndex = 29;
+            this.lb_EintragList.Text = "Ausleihliste -Einträge:";
+            this.lb_EintragList.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // llb_BuchTitel
+            // leihList_Slider
             // 
-            this.llb_BuchTitel.AutoSize = true;
-            this.llb_BuchTitel.Enabled = false;
-            this.llb_BuchTitel.Location = new System.Drawing.Point(100, 50);
-            this.llb_BuchTitel.Name = "llb_BuchTitel";
-            this.llb_BuchTitel.Size = new System.Drawing.Size(67, 13);
-            this.llb_BuchTitel.TabIndex = 36;
-            this.llb_BuchTitel.TabStop = true;
-            this.llb_BuchTitel.Text = "keine Treffer";
-            this.llb_BuchTitel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llb_BuchTitel_LinkClicked);
+            this.leihList_Slider.LargeChange = 1;
+            this.leihList_Slider.Location = new System.Drawing.Point(131, 155);
+            this.leihList_Slider.Maximum = 0;
+            this.leihList_Slider.Name = "leihList_Slider";
+            this.leihList_Slider.Size = new System.Drawing.Size(119, 20);
+            this.leihList_Slider.TabIndex = 8;
+            this.leihList_Slider.Scroll += new System.Windows.Forms.ScrollEventHandler(this.leihList_Slider_Scroll);
             // 
-            // lb_BuchTitel
+            // tb_listBis
             // 
-            this.lb_BuchTitel.AutoSize = true;
-            this.lb_BuchTitel.Location = new System.Drawing.Point(12, 50);
-            this.lb_BuchTitel.Name = "lb_BuchTitel";
-            this.lb_BuchTitel.Size = new System.Drawing.Size(83, 13);
-            this.lb_BuchTitel.TabIndex = 37;
-            this.lb_BuchTitel.Text = "Buch gefunden:";
+            this.tb_listBis.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb_listBis.Location = new System.Drawing.Point(253, 155);
+            this.tb_listBis.Name = "tb_listBis";
+            this.tb_listBis.ReadOnly = true;
+            this.tb_listBis.Size = new System.Drawing.Size(25, 20);
+            this.tb_listBis.TabIndex = 7;
+            this.tb_listBis.Text = "-";
+            this.tb_listBis.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // lb_BuchZustand
+            // tb_listVon
             // 
-            this.lb_BuchZustand.AutoSize = true;
-            this.lb_BuchZustand.Enabled = false;
-            this.lb_BuchZustand.Location = new System.Drawing.Point(100, 75);
-            this.lb_BuchZustand.Name = "lb_BuchZustand";
-            this.lb_BuchZustand.Size = new System.Drawing.Size(78, 13);
-            this.lb_BuchZustand.TabIndex = 38;
-            this.lb_BuchZustand.Text = "nicht verfügbar";
+            this.tb_listVon.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb_listVon.Location = new System.Drawing.Point(103, 155);
+            this.tb_listVon.Name = "tb_listVon";
+            this.tb_listVon.ReadOnly = true;
+            this.tb_listVon.Size = new System.Drawing.Size(25, 20);
+            this.tb_listVon.TabIndex = 6;
+            this.tb_listVon.Text = "-";
+            this.tb_listVon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // lb_BuchStatus
+            // lb_BuchID
             // 
-            this.lb_BuchStatus.AutoSize = true;
-            this.lb_BuchStatus.Enabled = false;
-            this.lb_BuchStatus.Location = new System.Drawing.Point(100, 100);
-            this.lb_BuchStatus.Name = "lb_BuchStatus";
-            this.lb_BuchStatus.Size = new System.Drawing.Size(78, 13);
-            this.lb_BuchStatus.TabIndex = 40;
-            this.lb_BuchStatus.Text = "nicht verfügbar";
+            this.lb_BuchID.AutoSize = true;
+            this.lb_BuchID.Location = new System.Drawing.Point(12, 24);
+            this.lb_BuchID.Name = "lb_BuchID";
+            this.lb_BuchID.Size = new System.Drawing.Size(85, 13);
+            this.lb_BuchID.TabIndex = 2;
+            this.lb_BuchID.Text = "Buchlable-Code:";
             // 
-            // lb_Status
+            // tb_BuchCode
             // 
-            this.lb_Status.AutoSize = true;
-            this.lb_Status.Location = new System.Drawing.Point(12, 100);
-            this.lb_Status.Name = "lb_Status";
-            this.lb_Status.Size = new System.Drawing.Size(40, 13);
-            this.lb_Status.TabIndex = 39;
-            this.lb_Status.Text = "Status:";
+            this.tb_BuchCode.Location = new System.Drawing.Point(103, 22);
+            this.tb_BuchCode.Name = "tb_BuchCode";
+            this.tb_BuchCode.Size = new System.Drawing.Size(148, 20);
+            this.tb_BuchCode.TabIndex = 0;
+            this.tb_BuchCode.TextChanged += new System.EventHandler(this.tb_BuchCode_TextChanged);
+            this.tb_BuchCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_BuchCode_KeyPress);
+            // 
+            // bt_NeuKunde
+            // 
+            this.bt_NeuKunde.Location = new System.Drawing.Point(313, 12);
+            this.bt_NeuKunde.Name = "bt_NeuKunde";
+            this.bt_NeuKunde.Size = new System.Drawing.Size(150, 23);
+            this.bt_NeuKunde.TabIndex = 5;
+            this.bt_NeuKunde.Text = "Neuen Kunden hinzufügen";
+            this.bt_NeuKunde.UseVisualStyleBackColor = true;
+            this.bt_NeuKunde.Click += new System.EventHandler(this.bt_NeuKunde_Click);
             // 
             // gv_Kunde
             // 
@@ -270,23 +289,17 @@
             this.gb_Kunde.TabStop = false;
             this.gb_Kunde.Text = "Kunden-Informationen";
             // 
-            // lb_Anweisung
+            // tb_NName
             // 
-            this.lb_Anweisung.AutoSize = true;
-            this.lb_Anweisung.Location = new System.Drawing.Point(12, 22);
-            this.lb_Anweisung.Name = "lb_Anweisung";
-            this.lb_Anweisung.Size = new System.Drawing.Size(154, 13);
-            this.lb_Anweisung.TabIndex = 42;
-            this.lb_Anweisung.Text = "Wählen Sie einen Kunden aus:";
-            // 
-            // lb_Suche
-            // 
-            this.lb_Suche.AutoSize = true;
-            this.lb_Suche.Location = new System.Drawing.Point(12, 217);
-            this.lb_Suche.Name = "lb_Suche";
-            this.lb_Suche.Size = new System.Drawing.Size(68, 13);
-            this.lb_Suche.TabIndex = 43;
-            this.lb_Suche.Text = "Suche nach:";
+            this.tb_NName.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.tb_NName.Location = new System.Drawing.Point(192, 214);
+            this.tb_NName.Name = "tb_NName";
+            this.tb_NName.Size = new System.Drawing.Size(100, 20);
+            this.tb_NName.TabIndex = 46;
+            this.tb_NName.Text = "Nachname";
+            this.tb_NName.TextChanged += new System.EventHandler(this.tb_NName_TextChanged);
+            this.tb_NName.Enter += new System.EventHandler(this.tb_NName_Enter);
+            this.tb_NName.Leave += new System.EventHandler(this.tb_NName_Leave);
             // 
             // tb_VName
             // 
@@ -300,17 +313,23 @@
             this.tb_VName.Enter += new System.EventHandler(this.tb_VName_Enter);
             this.tb_VName.Leave += new System.EventHandler(this.tb_VName_Leave);
             // 
-            // tb_NName
+            // lb_Suche
             // 
-            this.tb_NName.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.tb_NName.Location = new System.Drawing.Point(192, 214);
-            this.tb_NName.Name = "tb_NName";
-            this.tb_NName.Size = new System.Drawing.Size(100, 20);
-            this.tb_NName.TabIndex = 46;
-            this.tb_NName.Text = "Nachname";
-            this.tb_NName.TextChanged += new System.EventHandler(this.tb_NName_TextChanged);
-            this.tb_NName.Enter += new System.EventHandler(this.tb_NName_Enter);
-            this.tb_NName.Leave += new System.EventHandler(this.tb_NName_Leave);
+            this.lb_Suche.AutoSize = true;
+            this.lb_Suche.Location = new System.Drawing.Point(12, 217);
+            this.lb_Suche.Name = "lb_Suche";
+            this.lb_Suche.Size = new System.Drawing.Size(68, 13);
+            this.lb_Suche.TabIndex = 43;
+            this.lb_Suche.Text = "Suche nach:";
+            // 
+            // lb_Anweisung
+            // 
+            this.lb_Anweisung.AutoSize = true;
+            this.lb_Anweisung.Location = new System.Drawing.Point(12, 22);
+            this.lb_Anweisung.Name = "lb_Anweisung";
+            this.lb_Anweisung.Size = new System.Drawing.Size(154, 13);
+            this.lb_Anweisung.TabIndex = 42;
+            this.lb_Anweisung.Text = "Wählen Sie einen Kunden aus:";
             // 
             // bt_Submit
             // 
@@ -321,24 +340,6 @@
             this.bt_Submit.Text = "Ausleihvorgang abschließen";
             this.bt_Submit.UseVisualStyleBackColor = true;
             this.bt_Submit.Click += new System.EventHandler(this.bt_Submit_Click);
-            // 
-            // lb_RueckDatum
-            // 
-            this.lb_RueckDatum.AutoSize = true;
-            this.lb_RueckDatum.Location = new System.Drawing.Point(12, 125);
-            this.lb_RueckDatum.Name = "lb_RueckDatum";
-            this.lb_RueckDatum.Size = new System.Drawing.Size(89, 13);
-            this.lb_RueckDatum.TabIndex = 41;
-            this.lb_RueckDatum.Text = "Rückgabedatum:";
-            // 
-            // dp_RueckDatum
-            // 
-            this.dp_RueckDatum.CustomFormat = " dd :MMMM: yyyy";
-            this.dp_RueckDatum.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dp_RueckDatum.Location = new System.Drawing.Point(103, 122);
-            this.dp_RueckDatum.Name = "dp_RueckDatum";
-            this.dp_RueckDatum.Size = new System.Drawing.Size(148, 20);
-            this.dp_RueckDatum.TabIndex = 42;
             // 
             // bt_Abbrechen
             // 

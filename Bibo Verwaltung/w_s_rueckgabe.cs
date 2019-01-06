@@ -115,6 +115,28 @@ namespace Bibo_Verwaltung
         }
 
         /// <summary>
+        /// Setzt den Auswahl-Slider anhand der Elemente der Ausleihliste
+        /// </summary>
+        private void SetSlider()
+        {
+            if (rueckListe.Rows.Count == 0)
+            {
+                rueckList_Slider.Enabled = false;
+                rueckList_Slider.Minimum = 0;
+                rueckList_Slider.Maximum = 0;
+            }
+            else
+            {
+                rueckList_Slider.Enabled = true;
+                rueckList_Slider.Minimum = 1;
+                rueckList_Slider.Maximum = rueckListe.Rows.Count;
+                rueckList_Slider.Value = rueckList_Slider.Maximum;
+            }
+            tb_listVon.Text = rueckList_Slider.Value.ToString();
+            tb_listBis.Text = rueckList_Slider.Maximum.ToString();
+        }
+
+        /// <summary>
         /// Prüft die Buchrückgabeliste auf das Vorhandensein der angegebenen Exemlar ID 
         /// </summary>
         private bool CheckRueckList(string ExemlarID)
@@ -163,6 +185,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void ShowBuchResults()
         {
+            Cursor = Cursors.WaitCursor;
             #region Buchcode parsen
             if (tb_BuchCode.Text.Length == 8)
             {
@@ -292,6 +315,7 @@ namespace Bibo_Verwaltung
             {
                 Reset_Window();
             }
+            Cursor = Cursors.Default;
         }
 
         /// <summary>
@@ -318,11 +342,7 @@ namespace Bibo_Verwaltung
                     MessageBox.Show("Die Buchrückgabe konnte nicht abgeschlossen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 rueckListe.Clear();
-                rueckList_Slider.Enabled = false;
-                rueckList_Slider.Minimum = 0;
-                rueckList_Slider.Minimum = 0;
-                tb_listVon.Text = "-";
-                tb_listBis.Text = "-";
+                SetSlider();
                 tb_BuchCode.Text = "";
                 tb_BuchCode.Focus();
             }
@@ -352,18 +372,9 @@ namespace Bibo_Verwaltung
                 relation.ItemArray = exemlarDetails;
                 rueckListe.Rows.Add(relation);
 
-                if (rueckList_Slider.Minimum == 0)
-                {
-                    rueckList_Slider.Minimum = 1;
-                    rueckList_Slider.Maximum = 1;
-                }
-                else if (rueckList_Slider.Minimum == 1)
-                {
-                    rueckList_Slider.Maximum = rueckList_Slider.Maximum + 1;
-                }
-                rueckList_Slider.Value = rueckList_Slider.Maximum;
-                tb_listVon.Text = rueckList_Slider.Value.ToString();
-                tb_listBis.Text = rueckList_Slider.Maximum.ToString();
+                SetSlider();
+                tb_BuchCode.Focus();
+                tb_BuchCode.SelectAll();
                 bt_AddBuch.Text = "-";
             }
             catch
@@ -539,6 +550,14 @@ namespace Bibo_Verwaltung
             tb_BuchCode.Text = rueckListe.Rows[rueckList_Slider.Value - 1][0].ToString();
             tb_BuchCode.Focus();
             tb_BuchCode.SelectAll();
+        }     
+
+        private void tb_BuchCode_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                AddToRueckgabeList();
+            }
         }
         #endregion
     }

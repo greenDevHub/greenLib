@@ -82,12 +82,12 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Prüft die Buchausleihliste auf das Vorhandensein der angegebenen Exemlar ID 
         /// </summary>
-        private bool CheckLeihList(string ExemlarID)
+        private bool CheckLeihList(string ExemplarID)
         {
             bool result = false;
             for (int i = 0; i <= leihListe.Rows.Count - 1; i++)
             {
-                if (leihListe.Rows[i][0].ToString() == ExemlarID)
+                if (leihListe.Rows[i][0].ToString() == ExemplarID)
                 {
                     result = true;
                 }
@@ -173,6 +173,22 @@ namespace Bibo_Verwaltung
         }
 
         /// <summary>
+        /// Gibt den Row-Index der ExemplarID in der Buchausleihliste wieder
+        /// </summary>
+        private int GetIndexInLeihliste(string ExemplarID)
+        {
+            int result = -1;
+            for (int i = 0; i <= leihListe.Rows.Count - 1; i++)
+            {
+                if (leihListe.Rows[i][0].ToString() == ExemplarID)
+                {
+                    result = i;
+                }
+            }
+            return result;
+        }
+        
+        /// <summary>
         /// Setzt das Fenster auf den Ausgangszustand zurück (alles leer)
         /// </summary>
         private void Reset_Window()
@@ -188,6 +204,7 @@ namespace Bibo_Verwaltung
             lb_BuchStatus.ForeColor = Color.Black;
             lb_BuchStatus.Text = "nicht verfügbar";
             picBox_Buchcover.Image = null;
+            dp_RueckDatum.Value = DateTime.Now.Date;
         }
 
         /// <summary>
@@ -195,6 +212,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void ShowBuchResults()
         {
+            Cursor = Cursors.WaitCursor;
             #region Buchcode parsen
             if (tb_BuchCode.Text.Length == 8)
             {
@@ -242,14 +260,14 @@ namespace Bibo_Verwaltung
                             lb_BuchStatus.Text = "nicht verfügbar (verliehen)";
                             lb_BuchStatus.ForeColor = Color.Red;
                         }
-                        //if (CheckLeihList(ausleih_ExemplarID))
-                        //{
-                        //    dp_RueckDatum.Value= leihListe.Columns[1]
-                        //}
-                        //else
-                        //{
-                        dp_RueckDatum.Value = DateTime.Now.Date;
-                        //}
+                        if (CheckLeihList(ausleihe.ExemplarID))
+                        {
+                            dp_RueckDatum.Value = Convert.ToDateTime(leihListe.Rows[GetIndexInLeihliste(ausleihe.ExemplarID)][1]);
+                        }
+                        else
+                        {
+                            dp_RueckDatum.Value = DateTime.Now.Date;
+                        }
                         ausleihe.Rueckgabedatum = dp_RueckDatum.Value;
                         #endregion
 
@@ -312,6 +330,7 @@ namespace Bibo_Verwaltung
             {
                 Reset_Window();
             }
+            Cursor = Cursors.Default;
         }
 
         /// <summary>
@@ -325,7 +344,7 @@ namespace Bibo_Verwaltung
                 string[] exemlarDetails = new string[2];
 
                 exemlarDetails[0] = ausleihe.ExemplarID;
-                exemlarDetails[1] = ausleihe.Rueckgabedatum.ToString();
+                exemlarDetails[1] = dp_RueckDatum.Value.ToString();
 
                 if (leihListe.Columns.Count != 2)
                 {
@@ -563,6 +582,14 @@ namespace Bibo_Verwaltung
             if (leihListe.Rows.Count != 0)
             {
                 Buchausgabe();
+            }
+        }
+        
+        private void tb_BuchCode_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                AddToAusleihList();
             }
         }
         #endregion
