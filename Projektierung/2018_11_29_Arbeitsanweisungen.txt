@@ -1,29 +1,29 @@
 ToDo:
 
 Pflicht
-	-	Datenbankstruktur (Zuordnungstabelle Fach-Schüler, Autorliste, ISBNListe) --> Schülerimport anpassen
-	-	Alle ensprechenden Vorgänge anpassen
-	-	Verwaltung Fächer pro Klassenstufe
-	-	Import überarbeiten (Fächer hinzufügen)
-	-	Automatisierte Lehrbuchzuordnung zu Schülern + Lehrbuchausgabe
-	-	Ausleihvorgang überarbeiten
-	-	Errors abfangen
-	-	Kunde/Schüler/Lehrer in einer Tabelle, nicht separat 
-	-	einige Abstürze, da die Datei Biblothek\einstellungen\Einstellungen.txt sich nicht automatisch erstellt hat
+	  -	Datenbankstruktur (Zuordnungstabelle Fach-Schüler, Autorliste, ISBNListe) --> Schülerimport anpassen
+	  -	Alle ensprechenden Vorgänge anpassen
+	  -	Verwaltung Fächer pro Klassenstufe
+	  -	Import überarbeiten (Fächer hinzufügen)
+	  -	Automatisierte Lehrbuchzuordnung zu Schülern + Lehrbuchausgabe
+(erledigt)-	Ausleihvorgang überarbeiten
+	  -	Errors abfangen
+	  -	Kunde/Schüler/Lehrer in einer Tabelle, nicht separat 
+	  -	einige Abstürze, da die Datei Biblothek\einstellungen\Einstellungen.txt sich nicht automatisch erstellt hat
 Optional
-	-	Statistiken
-	-	Errors spezifiziert abfangen
-	-	Port angeben bei Server-Einstellungen
-	-	Schuljahr Ende Datenbereinigung (Kunden, die nicht mehr an der Schule sind, nur deaktivieren)
-	-	Alle Import-/Exportvorgänge bündeln
-	-	Anleitung/Dokumentation (Windows-Help-File / Intranet-Wikis)
-	-	Rechteverwaltung
-	-	Nur Bücher, die nicht im Ausleihvorgang sind, sind deaktivierbar
-	-	Deaktivierte Bücher werden nicht angezeigt
-	-	Buchrückgabefenster Autoren anzeigen
-	-	Passwort verschlüsseln
-	-	Programmweit angemeldeten Benutzer anzeigen
-	-	Benutzer in wichtige Prozesse einbinden
+	  -	Statistiken
+	  -	Errors spezifiziert abfangen
+	  -	Port angeben bei Server-Einstellungen
+	  -	Schuljahr Ende Datenbereinigung (Kunden, die nicht mehr an der Schule sind, nur deaktivieren)
+	  -	Alle Import-/Exportvorgänge bündeln
+	  -	Anleitung/Dokumentation (Windows-Help-File / Intranet-Wikis)
+	  -	Rechteverwaltung
+	  -	Nur Bücher, die nicht im Ausleihvorgang sind, sind deaktivierbar
+	  -	Deaktivierte Bücher werden nicht angezeigt
+	  -	Buchrückgabefenster Autoren anzeigen
+	  -	Passwort verschlüsseln
+	  -	Programmweit angemeldeten Benutzer anzeigen
+	  -	Benutzer in wichtige Prozesse einbinden
 		-	Ausleihvorgang>bei welchem Mitarbeiter(Benutzer) ausgeliehen?
 		-	Buch verwalten>welcher Benutzer hat buch zuletzt bearbeitet
 		-	Kunde verwalten>welcher Benutzer hat Kunde zuletzt bearbeitet
