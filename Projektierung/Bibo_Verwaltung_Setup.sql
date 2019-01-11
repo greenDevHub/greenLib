@@ -193,46 +193,7 @@ CREATE TABLE [dbo].[t_s_verlag](
 	PRIMARY KEY (ver_id))
 END
 
-use Bibo_Verwaltung
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_autorListe]') AND type in (N'U'))
-DROP TABLE [dbo].[t_s_autorListe]
-GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_autorListe]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [dbo].[t_s_autorListe](
-	[a_id] [int] IDENTITY (1,1) NOT NULL,
-	[a_0] [int] NOT NULL,
-	[a_1] [int], 
-	[a_2] [int],
-	[a_3] [int], 
-	[a_4] [int], 
-	[a_5] [int], 
-	[a_6] [int], 
-	[a_7] [int], 
-	[a_8] [int], 
-	[a_9] [int], 
-	PRIMARY KEY (a_id),
-	FOREIGN KEY (a_0)
-		REFERENCES t_s_autor (au_id),
-	FOREIGN KEY (a_1)
-		REFERENCES t_s_autor (au_id),
-	FOREIGN KEY (a_2)
-		REFERENCES t_s_autor (au_id),
-	FOREIGN KEY (a_3)
-		REFERENCES t_s_autor (au_id),
-	FOREIGN KEY (a_4)
-		REFERENCES t_s_autor (au_id),
-	FOREIGN KEY (a_5)
-		REFERENCES t_s_autor (au_id),
-	FOREIGN KEY (a_6)
-		REFERENCES t_s_autor (au_id),
-	FOREIGN KEY (a_7)
-		REFERENCES t_s_autor (au_id),
-	FOREIGN KEY (a_8)
-		REFERENCES t_s_autor (au_id),
-	FOREIGN KEY (a_9)
-		REFERENCES t_s_autor (au_id))
-END
+
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_zustand]') AND type in (N'U'))
@@ -256,7 +217,6 @@ CREATE TABLE [dbo].[t_s_buecher](
 	[buch_isbn] [nvarchar](32) NOT NULL,
 	[buch_titel] [nvarchar](128) NOT NULL,
 	[buch_genre_id] [int] NOT NULL,
-	[buch_autor_id] [int] NOT NULL,
 	[buch_verlag_id] [int] NOT NULL,
 	[buch_erscheinungsdatum] [date] NOT NULL,
 	[buch_sprache_id] [int] NOT NULL,
@@ -270,12 +230,27 @@ CREATE TABLE [dbo].[t_s_buecher](
 	PRIMARY KEY (buch_isbn),
 	FOREIGN KEY (buch_genre_id)
 		REFERENCES t_s_genre (ger_id),
-	FOREIGN KEY (buch_autor_id)
-		REFERENCES t_s_autorListe (a_id),
 	FOREIGN KEY (buch_verlag_id)
 		REFERENCES t_s_verlag (ver_id),
 	FOREIGN KEY (buch_sprache_id)
 		REFERENCES t_s_sprache (sprach_id))
+END
+
+use Bibo_Verwaltung
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buch_autor]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_buch_autor]
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buch_autor]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[t_s_buch_autor](
+	[ba_id] [int] IDENTITY (1,1) NOT NULL,
+	[ba_isbn] [nvarchar](32) NOT NULL,
+	[ba_autorid] [int] NOT NULL,
+	PRIMARY KEY(ba_id),
+	FOREIGN KEY (ba_isbn)
+		REFERENCES t_s_buecher (buch_isbn),
+	FOREIGN KEY(ba_autorid)
+		REFERENCES t_s_autor (au_id))
 END
 
 use Bibo_Verwaltung
@@ -364,64 +339,6 @@ CREATE TABLE [dbo].[t_s_faecher](
 	PRIMARY KEY (f_id))
 	END
 
-use Bibo_Verwaltung
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_fachListe]') AND type in (N'U'))
-DROP TABLE [dbo].[t_s_fachListe]
-GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_fachListe]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [dbo].[t_s_fachListe](
-	[fl_id] [int] IDENTITY (1,1) NOT NULL,
-	[fl_fach1][int],
-	[fl_fach2][int],
-	[fl_fach3][int],
-	[fl_fach4][int],
-	[fl_fach5][int],
-	[fl_fach6][int],
-	[fl_fach7][int],
-	[fl_fach8][int],
-	[fl_fach9][int],
-	[fl_fach10][int],
-	[fl_fach11][int],
-	[fl_fach12][int],
-	[fl_fach13][int],
-	[fl_fach14][int],
-	[fl_fach15][int],
-	[fl_fach16][int],
-	PRIMARY KEY (fl_id),
-	FOREIGN KEY (fl_fach1)
-		REFERENCES t_s_faecher (f_id),
-	FOREIGN KEY (fl_fach2)
-		REFERENCES t_s_faecher (f_id),
-	FOREIGN KEY (fl_fach3)
-		REFERENCES t_s_faecher (f_id),
-	FOREIGN KEY (fl_fach4)
-		REFERENCES t_s_faecher (f_id),
-	FOREIGN KEY (fl_fach5)
-		REFERENCES t_s_faecher (f_id),
-	FOREIGN KEY (fl_fach6)
-		REFERENCES t_s_faecher (f_id),
-	FOREIGN KEY (fl_fach7)
-		REFERENCES t_s_faecher (f_id),
-	FOREIGN KEY (fl_fach8)
-		REFERENCES t_s_faecher (f_id),
-	FOREIGN KEY (fl_fach9)
-		REFERENCES t_s_faecher (f_id),
-	FOREIGN KEY (fl_fach10)
-		REFERENCES t_s_faecher (f_id),
-	FOREIGN KEY (fl_fach11)
-		REFERENCES t_s_faecher (f_id),
-	FOREIGN KEY (fl_fach12)
-		REFERENCES t_s_faecher (f_id),
-	FOREIGN KEY (fl_fach13)
-		REFERENCES t_s_faecher (f_id),
-	FOREIGN KEY (fl_fach14)
-		REFERENCES t_s_faecher (f_id),
-	FOREIGN KEY (fl_fach15)
-		REFERENCES t_s_faecher (f_id),
-	FOREIGN KEY (fl_fach16)
-		REFERENCES t_s_faecher (f_id))
-	END
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_schueler]') AND type in (N'U'))
@@ -436,49 +353,26 @@ CREATE TABLE [dbo].[t_s_schueler](
 	[sch_datum] [nvarchar](128) NOT NULL,
 	[sch_klasse] [nvarchar](6),
 	[sch_stufe][int] NOT NULL,
-	[sch_faecher][int] NOT NULL,
-	PRIMARY KEY(sch_id),
-	FOREIGN KEY(sch_faecher)
-		REFERENCES t_s_fachListe (fl_id)
-)
-END
-
-
+	PRIMARY KEY(sch_id))
+	END
 
 use Bibo_Verwaltung
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_isbnliste]') AND type in (N'U'))
-DROP TABLE [dbo].[t_s_isbnliste]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_fach_schueler]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_fach_schueler]
 GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_isbnliste]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_fach_schueler]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[t_s_isbnliste](
-	[bl_id] [int] IDENTITY(1,1) NOT NULL,
-	[bl_0] [nvarchar](32) NOT NULL,
-	[bl_1] [nvarchar](32),
-	[bl_2] [nvarchar](32),
-	[bl_3] [nvarchar](32),
-	[bl_4] [nvarchar](32),
-	[bl_5] [nvarchar](32),
-	[bl_6] [nvarchar](32),
-	[bl_7] [nvarchar](32),
-	PRIMARY KEY (bl_id),
-	FOREIGN KEY (bl_0)
-		REFERENCES t_s_buecher (buch_isbn),
-	FOREIGN KEY (bl_1)
-		REFERENCES t_s_buecher (buch_isbn),
-	FOREIGN KEY (bl_2)
-		REFERENCES t_s_buecher (buch_isbn),
-	FOREIGN KEY (bl_3)
-		REFERENCES t_s_buecher (buch_isbn),
-	FOREIGN KEY (bl_4)
-		REFERENCES t_s_buecher (buch_isbn),
-	FOREIGN KEY (bl_5)
-		REFERENCES t_s_buecher (buch_isbn),
-	FOREIGN KEY (bl_6)
-		REFERENCES t_s_buecher (buch_isbn),
-	FOREIGN KEY (bl_7)
-		REFERENCES t_s_buecher (buch_isbn))
+CREATE TABLE [dbo].[t_s_fach_schueler](
+	[fs_id] [int] IDENTITY (1,1) NOT NULL,
+	[fs_schuelerid] [int] NOT NULL,
+	[fs_fachid] [int] NOT NULL,
+	PRIMARY KEY(fs_id),
+	FOREIGN KEY (fs_schuelerid)
+		REFERENCES t_s_schueler (sch_id),
+	FOREIGN KEY(fs_fachid)
+		REFERENCES t_s_faecher (f_id))
 END
+
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_bd_buch_fach]') AND type in (N'U'))
@@ -489,13 +383,27 @@ BEGIN
 CREATE TABLE [dbo].[t_bd_buch_fach](
 	[bf_id] [int] IDENTITY(1,1) NOT NULL,
 	[bf_fachid] [int] NOT NULL,
-	[bf_isbnlisteid] [int] NOT NULL,
 	[bf_klassenstufe] [nvarchar](32) NOT NULL,
 	PRIMARY KEY (bf_id),
 	FOREIGN KEY (bf_fachid)
-		REFERENCES t_s_faecher (f_id),
-    FOREIGN KEY (bf_isbnlisteid)
-	    REFERENCES t_s_isbnliste (bl_id))
+		REFERENCES t_s_faecher (f_id))
+END
+
+use Bibo_Verwaltung
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_isbn_buchfach]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_isbn_buchfach]
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_isbn_buchfach]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[t_s_isbn_buchfach](
+	[ib_id] [int] IDENTITY (1,1) NOT NULL,
+	[ib_bfid] [int] NOT NULL,
+	[ib_isbn] [nvarchar](32) NOT NULL,
+	PRIMARY KEY(ib_id),
+	FOREIGN KEY (ib_bfid)
+		REFERENCES t_bd_buch_fach (bf_id),
+	FOREIGN KEY(ib_isbn)
+		REFERENCES t_s_buecher (buch_isbn))
 END
 
 use Bibo_Verwaltung

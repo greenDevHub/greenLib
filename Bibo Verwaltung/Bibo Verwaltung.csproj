@@ -90,13 +90,11 @@
   <ItemGroup>
     <Compile Include="Analytics.cs" />
     <Compile Include="Autor.cs" />
-    <Compile Include="AutorListe.cs" />
     <Compile Include="Barcode.cs" />
     <Compile Include="Benutzer.cs" />
     <Compile Include="Exemplar.cs" />
     <Compile Include="Buchsuche.cs" />
     <Compile Include="Extension\Lehrbuchausgabe\Buch_Fach.cs" />
-    <Compile Include="Extension\Lehrbuchausgabe\IsbnListe.cs" />
     <Compile Include="Extension\Lehrbuchausgabe\w_b_buch_fach.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,7 +104,6 @@
     <Compile Include="Einstellung.cs" />
     <Compile Include="Ausleihe.cs" />
     <Compile Include="ExcelExport.cs" />
-    <Compile Include="FachListe.cs" />
     <Compile Include="Faecher.cs" />
     <Compile Include="Schuelerimport.cs" />
     <Compile Include="Schueler.cs" />

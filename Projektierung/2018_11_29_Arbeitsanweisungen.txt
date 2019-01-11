@@ -1,6 +1,10 @@
 ToDo:
 
 Pflicht
+	-	Druckerproblem klären, Etikettengrößen, Drucker besorgen
+	-	Schülerdaten besorgen (wann, wer, was)
+	-	Lehrbuchausgabe bzw. -annahme am Schuljahresbeginn/-ende; Schüler muss unterschreiben?
+	-	Prozess Etikettendruck optimieren
 	-	Datenbankstruktur (Zuordnungstabelle Fach-Schüler, Autorliste, ISBNListe) --> Schülerimport anpassen
 	-	Alle ensprechenden Vorgänge anpassen
 	-	Verwaltung Fächer pro Klassenstufe
@@ -27,4 +31,8 @@ Optional
 		-	Ausleihvorgang>bei welchem Mitarbeiter(Benutzer) ausgeliehen?
 		-	Buch verwalten>welcher Benutzer hat buch zuletzt bearbeitet
 		-	Kunde verwalten>welcher Benutzer hat Kunde zuletzt bearbeitet
+
+BUGLISTE:
+	-	Autor/genres/... bearbeitung beenden ohne änderung -->Eintrag bereits vorhanden -->Löschen von Eintrag
+	-	w_s_buecher Entfernen Modus: Bild vergrößert nicht
 	

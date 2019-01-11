@@ -26,7 +26,7 @@ namespace Bibo_Verwaltung
             this.Text = Text + " - Angemeldet als: " + userName;
 
             buchsuche.FillGrid(ref gv_buchsuche);
-            buch.AutorListe.Autor.FillCombobox(ref cb_Autor, -1);
+            buch.Autor.FillCombobox(ref cb_Autor, -1);
             buch.Verlag.FillCombobox(ref cb_Verlag, -1);
             buch.Genre.FillCombobox(ref cb_Genre, -1);
             buchsuche.Hide_KundenDetails(ref gv_buchsuche);

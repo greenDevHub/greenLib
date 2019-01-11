@@ -24,40 +24,52 @@ namespace Bibo_Verwaltung
         private void bt_ImEx_Click(object sender, EventArgs e)
         {
             Form import = new w_s_schuelerimport(true);
-            import.Show(this);
-            gv_Kunde.DataSource = null;
+            import.ShowDialog(this);
             s.FillGrid(false, ref gv_Kunde);
         }
 
-        private void UpdateS()
-        {
-            
-        }
         List<string> need = new List<string>();
-        private void AddS()
+        private void AddS(string modus)
         {
-            s.Vorname = tb_Vorname.Text;
-            s.Nachname = tb_Nachname.Text;
-            s.Gd = tb_Gd.Text;
-            s.Klasse = tb_klasse.Text;
-            s.Klassenstufe = tb_klassenstufe.Text;
+            Schueler schueler = new Schueler();
+            schueler.Vorname = tb_Vorname.Text;
+            schueler.Nachname = tb_Nachname.Text;
+            schueler.Gd = tb_Gd.Text;
+            schueler.Klasse = tb_klasse.Text;
+            schueler.Klassenstufe = tb_klassenstufe.Text;
             
             foreach(var item in cLB_faecher.CheckedItems)
             {
                 DataRowView castedItem = item as DataRowView;
                 string namestring = castedItem["f_kurzform"].ToString();
                 string idstring = castedItem["f_id"].ToString();
-                //MessageBox.Show(s.FachListe.FachIDs.Count.ToString());
-                s.FachListe.FachIDs.Add(s.FachListe.Fach.GetID(namestring));
+                schueler.Faecher.Add(namestring);
             }
-            for (int i = 1; i < 17;)
+            if (modus.Equals("Update"))
             {
-                s.FachListe.FachIDs.Add(null);
-                i++;
-            }
-            s.FachListe.Add();
-            s.addKunde();
+                schueler.SchuelerID = tb_KundenID.Text;
+                schueler.Update();
 
+            }
+            else if(modus.Equals("Add"))
+            {
+                if (!schueler.AlreadyExists())
+                {
+                    schueler.addSchueler();
+                }
+                else
+                {
+                    MessageBox.Show("Dieser Schüler existiert bereits in der Datenbank. Der bestehende Datensatz wird deshalb aktualisiert.");
+                    schueler.LoadSchuelerID();
+                    schueler.Update();
+                }
+            }
+            else if (modus.Equals("Delete"))
+            {
+                schueler.SchuelerID = tb_KundenID.Text;
+                schueler.DeleteSchueler();
+            }
+            schueler.FillGrid(false, ref gv_Kunde);
         }
 
         #region Modus nach RadioButton-Auswahl 
@@ -98,7 +110,7 @@ namespace Bibo_Verwaltung
                 tb_klasse.Enabled = false;
                 tb_klassenstufe.Enabled = false;
                 cLB_faecher.Enabled = false;
-                bt_confirm.Enabled = false;
+                bt_confirm.Enabled = true;
                 bt_confirm.Text = "Löschen";
             }
         }
@@ -128,15 +140,15 @@ namespace Bibo_Verwaltung
         {
             if(bt_confirm.Text == "Löschen")
             {
-
+                AddS("Delete");
             }
             else if(bt_confirm.Text == "Speichern")
             {
-
+                AddS("Update");
             }
             else if(bt_confirm.Text == "Hinzufügen")
             {
-                AddS();
+                AddS("Add");
             }
         }
 
@@ -146,42 +158,41 @@ namespace Bibo_Verwaltung
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.gv_Kunde.Rows[e.RowIndex];
-                //tb_Vorname.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Vorname")].Value.ToString();
-                //tb_Nachname.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Nachname")].Value.ToString();
-                //tb_klasse.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Klasse")].Value.ToString();
-                //tb_klassenstufe.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Klassenstufe")].Value.ToString();
-                tb_KundenID.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Schueler-ID")].Value.ToString();
+                tb_KundenID.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "ID")].Value.ToString();
+                tb_Vorname.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Vorname")].Value.ToString();
+                tb_Nachname.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Nachname")].Value.ToString();
+                tb_Gd.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Geburtsdatum")].Value.ToString();
                 LoadSchueler();
             }
         }
         private void LoadSchueler()
         {
-            Schueler schueler = new Schueler(tb_KundenID.Text);
+            Schueler schueler = new Schueler(tb_Vorname.Text, tb_Nachname.Text, tb_Gd.Text);
             tb_Vorname.Text = schueler.Vorname;
             tb_Nachname.Text = schueler.Nachname;
             tb_klassenstufe.Text = schueler.Klassenstufe;
             tb_klasse.Text = schueler.Klasse;
             tb_Gd.Text = schueler.Gd;
-            if(schueler.FachListe.FachNamen.Count > 1)
+            if (schueler.Faecher.Count > 0)
             {
                 List<int> index = new List<int>();
-                foreach(object value in cLB_faecher.Items)
+                foreach (object value in cLB_faecher.Items)
                 {
                     DataRowView castedItem = value as DataRowView;
                     string newString = castedItem["f_kurzform"].ToString();
-                    if (schueler.FachListe.FachNamen.Contains(newString))
+                    if (schueler.Faecher.Contains(newString))
                     {
                         int test = cLB_faecher.Items.IndexOf(value);
                         index.Add(test);
                     }
                 }
-                foreach(int i1 in index)
+                foreach (int i1 in index)
                 {
                     cLB_faecher.SetItemChecked(i1, true);
                 }
             }
         }
-        private int GetColumnIndexByName(DataGridView grid, string name)
+            private int GetColumnIndexByName(DataGridView grid, string name)
         {
             for (int i = 0; i < grid.Columns.Count; i++)
             {

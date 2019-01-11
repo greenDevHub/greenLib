@@ -49,12 +49,12 @@ namespace Bibo_Verwaltung
                 if (keepSelected && c.SelectedValue != null)
                 {
                     string cbValue = c.SelectedValue.ToString();
-                    buchfach.IsbnListe.Buch.FillCombobox(ref c, 0);
+                    buchfach.Buch.FillCombobox(ref c, 0);
                     c.SelectedValue = cbValue;
                 }
                 else
                 {
-                    buchfach.IsbnListe.Buch.FillCombobox(ref c, 0);
+                    buchfach.Buch.FillCombobox(ref c, 0);
                 }
             }
         }
@@ -172,23 +172,24 @@ namespace Bibo_Verwaltung
             if (rb_neu.Checked)
             {
                 Buch_Fach bufa = new Buch_Fach();
+                bufa.IsbnListe.Clear();
                 for(int i = 0; i < 8;)
                 {
                     if (i < index+1)
                     {
-                        bufa.IsbnListe.ISBNs.Add(ComboBoxes[i].SelectedValue.ToString());
+                        bufa.IsbnListe.Add(ComboBoxes[i].SelectedValue.ToString());
                     }
-                    else
-                    {
-                        bufa.IsbnListe.ISBNs.Add("");
-                    }
+                    //else
+                    //{
+                    //    bufa.IsbnListe.Add("");
+                    //}
                     i++;
                 }
                 if(bufa.GetID(cb_fach.SelectedValue.ToString(), cb_klasse.Text) == null || bufa.GetID(cb_fach.SelectedValue.ToString(), cb_klasse.Text) == "")
                 {
                     bufa.Fach.FachID = cb_fach.SelectedValue.ToString();
                     bufa.Klassenstufe = cb_klasse.Text;
-                    bufa.Add();
+                    bufa.AddBF();
                 }
                 else
                 {
@@ -220,16 +221,18 @@ namespace Bibo_Verwaltung
                 Buch_Fach bufa = new Buch_Fach(bf.GetID(cb_fach.SelectedValue.ToString(), cb_klasse.Text));
                 //bufa.Fach.FachID = cb_fach.SelectedValue.ToString();
                 //bufa.Klassenstufe = cb_klasse.Text;
+                bufa.IsbnListe.Clear();
                 for (int i = 0; i < 8;)
                 {
                     if (i < index+1)
                     {
-                        bufa.IsbnListe.ISBNs[i] = ComboBoxes[i].SelectedValue.ToString();
+                        bufa.IsbnListe.Add(ComboBoxes[i].SelectedValue.ToString());
+                        //bufa.IsbnListe.ISBNs[i] = ComboBoxes[i].SelectedValue.ToString();
                     }
-                    else
-                    {
-                        bufa.IsbnListe.ISBNs[i] = "";
-                    }
+                    //else
+                    //{
+                    //    bufa.IsbnListe.ISBNs[i] = "";
+                    //}
                     i++;
                 }
                 //bufa.IsbnListe.IsbnListeID = bufa.GetIsbnID(bufa.GetID(bufa.Fach.FachID, bufa.Klassenstufe));
@@ -247,7 +250,7 @@ namespace Bibo_Verwaltung
                 try
                 {
                     Buch_Fach bufa = new Buch_Fach(bf.GetID(cb_fach.SelectedValue.ToString(), cb_klasse.Text));
-                    bufa.Delete();
+                    bufa.DeleteBF();
                 }
                 catch
                 {
@@ -304,13 +307,13 @@ namespace Bibo_Verwaltung
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.gv_bf.Rows[e.RowIndex];
-                string fach = row.Cells[GetColumnIndexByName(gv_bf, "Kurzform")].Value.ToString();
+                string fach = row.Cells[GetColumnIndexByName(gv_bf, "Fach")].Value.ToString();
                 cb_fach.SelectedValue = bf.Fach.GetID(fach);
                 string stufe = row.Cells[GetColumnIndexByName(gv_bf, "Klassenstufe")].Value.ToString();
                 cb_klasse.SelectedItem = stufe;
                 Buch_Fach buchfach = new Buch_Fach(bf.GetID(bf.Fach.GetID(fach), stufe));
                 int i = 0;
-                foreach(string isbn in buchfach.IsbnListe.ISBNs)
+                foreach(string isbn in buchfach.IsbnListe)
                 {
                     if(isbn != "" && isbn != null)
                     {
@@ -392,7 +395,7 @@ namespace Bibo_Verwaltung
                 ComboBox cmbBx = ComboBoxes[index];
                 string cbName = cmbBx.Name;
                 Buch_Fach buchfach = new Buch_Fach();
-                buchfach.IsbnListe.Buch.FillCombobox(ref cmbBx, 0);
+                buchfach.Buch.FillCombobox(ref cmbBx, 0);
                 //FillComboboxes(true);
                 cmbBx.SelectedValue = Buch.tb_ISBN.Text;
                 Buch.Close();

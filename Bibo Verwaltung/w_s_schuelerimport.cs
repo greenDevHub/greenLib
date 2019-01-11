@@ -380,7 +380,7 @@ namespace Bibo_Verwaltung
 
             //DataTable dt = new DataTable();
             //createNewDT(dt, usePreset);
-            foreach(DataRow row in newDT.Rows)
+            foreach (DataRow row in newDT.Rows)
             {
                 Schueler schueler = new Schueler(true);
                 schueler.Vorname = row[0].ToString();
@@ -393,72 +393,66 @@ namespace Bibo_Verwaltung
                     schueler.Klassenstufe = row[4].ToString();
                     for (int i = 5; i < 8; i++)
                     {
-                        string test = row[i].ToString();
-                        string fachid = schueler.FachListe.Fach.GetID(row[i].ToString());
-                        schueler.FachListe.FachIDs.Add(fachid);
+                        //string test = row[i].ToString();
+                        string fach = row[i].ToString();
+                        schueler.Faecher.Add(fach);
                     }
-                    schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("DE"));
-                    schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("MA"));
-                    schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("EN"));
-                    schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("MU"));
-                    schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("KU"));
-                    schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("GEO"));
-                    schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("GE"));
+                    schueler.Faecher.Add("DE");
+                    schueler.Faecher.Add("MA");
+                    schueler.Faecher.Add("EN");
+                    schueler.Faecher.Add("MU");
+                    schueler.Faecher.Add("KU");
+                    schueler.Faecher.Add("GEO");
+                    schueler.Faecher.Add("GE");
                     if (int.Parse(schueler.Klassenstufe) > 6)
                     {
-                        schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("CH"));
+                        schueler.Faecher.Add("CH");
                     }
                     if (int.Parse(schueler.Klassenstufe) > 5)
                     {
-                        schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("PH"));
+                        schueler.Faecher.Add("PH");
                     }
                     if (int.Parse(schueler.Klassenstufe) < 7)
                     {
-                        schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("TC"));
-                    }
-                    for (int i = schueler.FachListe.FachIDs.Count; i < 17; i++)
-                    {
-                        schueler.FachListe.FachIDs.Add(null);
+                        schueler.Faecher.Add("TC");
                     }
                     if (!schueler.AlreadyExists())
                     {
-                        schueler.FachListe.Add();
-                        schueler.addKunde();
+                        schueler.addSchueler();
                     }
                     else
                     {
-                        schueler.FachListe.FachListeID = schueler.GetFachID(schueler.SchuelerID);
                         schueler.Update();
                         //MessageBox.Show("Der Schüler " + schueler.Vorname + " existiert bereits.");
                     }
-                    
+
                 }
-                else if(radioButton2.Checked)
-                {
-                    //SEK2
-                    schueler.Klassenstufe = schueler.Klasse.Substring(0, schueler.Klasse.IndexOf("_"));
-                    for (int i = 4; i < newDT.Columns.Count; i++)
-                    {
-                        string fachid = schueler.FachListe.Fach.GetID(row[i].ToString());
-                        schueler.FachListe.FachIDs.Add(fachid);
-                    }
-                    for (int i = schueler.FachListe.FachIDs.Count; i < 17; i++)
-                    {
-                        schueler.FachListe.FachIDs.Add(null);
-                    }
-                    if (!schueler.AlreadyExists())
-                    {
-                        
-                        schueler.FachListe.Add();
-                        schueler.addKunde();
-                    }
-                    else
-                    {
-                        schueler.FachListe.FachListeID = schueler.GetFachID(schueler.SchuelerID);
-                        schueler.Update();
-                    }
-                }
-                
+                //////////else if (radioButton2.Checked)
+                //////////{
+                //////////    //SEK2
+                //////////    schueler.Klassenstufe = schueler.Klasse.Substring(0, schueler.Klasse.IndexOf("_"));
+                //////////    for (int i = 4; i < newDT.Columns.Count; i++)
+                //////////    {
+                //////////        string fachid = schueler.FachListe.Fach.GetID(row[i].ToString());
+                //////////        schueler.FachListe.FachIDs.Add(fachid);
+                //////////    }
+                //////////    for (int i = schueler.FachListe.FachIDs.Count; i < 17; i++)
+                //////////    {
+                //////////        schueler.FachListe.FachIDs.Add(null);
+                //////////    }
+                //////////    if (!schueler.AlreadyExists())
+                //////////    {
+
+                //////////        schueler.FachListe.Add();
+                //////////        schueler.addKunde();
+                //////////    }
+                //////////    else
+                //////////    {
+                //////////        schueler.FachListe.FachListeID = schueler.GetFachID(schueler.SchuelerID);
+                //////////        schueler.Update();
+                //////////    }
+                //////////}
+
             }
 
         }
