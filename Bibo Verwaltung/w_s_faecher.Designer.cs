@@ -30,17 +30,17 @@
         {
             this.gb_Verlage = new System.Windows.Forms.GroupBox();
             this.tLP_Sprachen = new System.Windows.Forms.TableLayoutPanel();
-            this.lb_Verlage = new System.Windows.Forms.Label();
-            this.tb_Suchen = new System.Windows.Forms.TextBox();
-            this.gv_Verlage = new System.Windows.Forms.DataGridView();
             this.tLP_Button = new System.Windows.Forms.TableLayoutPanel();
             this.bt_Uebernehmen = new System.Windows.Forms.Button();
             this.bt_Suchen = new System.Windows.Forms.Button();
             this.bt_import = new System.Windows.Forms.Button();
+            this.lb_Verlage = new System.Windows.Forms.Label();
+            this.tb_Suchen = new System.Windows.Forms.TextBox();
+            this.gv_Verlage = new System.Windows.Forms.DataGridView();
             this.gb_Verlage.SuspendLayout();
             this.tLP_Sprachen.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gv_Verlage)).BeginInit();
             this.tLP_Button.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Verlage)).BeginInit();
             this.SuspendLayout();
             // 
             // gb_Verlage
@@ -75,50 +75,6 @@
             this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6F));
             this.tLP_Sprachen.Size = new System.Drawing.Size(1202, 1439);
             this.tLP_Sprachen.TabIndex = 61;
-            // 
-            // lb_Verlage
-            // 
-            this.lb_Verlage.AutoSize = true;
-            this.lb_Verlage.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lb_Verlage.Location = new System.Drawing.Point(8, 0);
-            this.lb_Verlage.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
-            this.lb_Verlage.Name = "lb_Verlage";
-            this.lb_Verlage.Size = new System.Drawing.Size(1188, 32);
-            this.lb_Verlage.TabIndex = 53;
-            this.lb_Verlage.Text = "Suchen:";
-            // 
-            // tb_Suchen
-            // 
-            this.tb_Suchen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tb_Suchen.Enabled = false;
-            this.tb_Suchen.Location = new System.Drawing.Point(8, 50);
-            this.tb_Suchen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.tb_Suchen.Name = "tb_Suchen";
-            this.tb_Suchen.Size = new System.Drawing.Size(1188, 38);
-            this.tb_Suchen.TabIndex = 52;
-            this.tb_Suchen.Visible = false;
-            // 
-            // gv_Verlage
-            // 
-            this.gv_Verlage.AllowUserToResizeColumns = false;
-            this.gv_Verlage.AllowUserToResizeRows = false;
-            this.gv_Verlage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gv_Verlage.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gv_Verlage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_Verlage.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.gv_Verlage.Location = new System.Drawing.Point(8, 121);
-            this.gv_Verlage.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.gv_Verlage.MultiSelect = false;
-            this.gv_Verlage.Name = "gv_Verlage";
-            this.gv_Verlage.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_Verlage.Size = new System.Drawing.Size(1188, 1223);
-            this.gv_Verlage.TabIndex = 50;
-            this.gv_Verlage.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gv_Verlage_CellBeginEdit);
-            this.gv_Verlage.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gv_Verlage_UserDeletedRow);
             // 
             // tLP_Button
             // 
@@ -170,6 +126,51 @@
             this.bt_import.TabIndex = 55;
             this.bt_import.Text = "Import";
             this.bt_import.UseVisualStyleBackColor = true;
+            this.bt_import.Click += new System.EventHandler(this.bt_import_Click_1);
+            // 
+            // lb_Verlage
+            // 
+            this.lb_Verlage.AutoSize = true;
+            this.lb_Verlage.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lb_Verlage.Location = new System.Drawing.Point(8, 0);
+            this.lb_Verlage.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lb_Verlage.Name = "lb_Verlage";
+            this.lb_Verlage.Size = new System.Drawing.Size(1188, 32);
+            this.lb_Verlage.TabIndex = 53;
+            this.lb_Verlage.Text = "Suchen:";
+            // 
+            // tb_Suchen
+            // 
+            this.tb_Suchen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tb_Suchen.Enabled = false;
+            this.tb_Suchen.Location = new System.Drawing.Point(8, 50);
+            this.tb_Suchen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.tb_Suchen.Name = "tb_Suchen";
+            this.tb_Suchen.Size = new System.Drawing.Size(1188, 38);
+            this.tb_Suchen.TabIndex = 52;
+            this.tb_Suchen.Visible = false;
+            // 
+            // gv_Verlage
+            // 
+            this.gv_Verlage.AllowUserToResizeColumns = false;
+            this.gv_Verlage.AllowUserToResizeRows = false;
+            this.gv_Verlage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gv_Verlage.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gv_Verlage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gv_Verlage.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.gv_Verlage.Location = new System.Drawing.Point(8, 121);
+            this.gv_Verlage.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.gv_Verlage.MultiSelect = false;
+            this.gv_Verlage.Name = "gv_Verlage";
+            this.gv_Verlage.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gv_Verlage.Size = new System.Drawing.Size(1188, 1223);
+            this.gv_Verlage.TabIndex = 50;
+            this.gv_Verlage.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gv_Verlage_CellBeginEdit);
+            this.gv_Verlage.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gv_Verlage_UserDeletedRow);
             // 
             // w_s_faecher
             // 
@@ -184,8 +185,8 @@
             this.gb_Verlage.PerformLayout();
             this.tLP_Sprachen.ResumeLayout(false);
             this.tLP_Sprachen.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gv_Verlage)).EndInit();
             this.tLP_Button.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Verlage)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -23,7 +23,7 @@ namespace Bibo_Verwaltung
 
         private void bt_ImEx_Click(object sender, EventArgs e)
         {
-            Form import = new w_s_schuelerimport(true);
+            Form import = new w_s_schuelerimport("t_s_schueler", true);
             import.ShowDialog(this);
             s.FillGrid(false, ref gv_Kunde);
         }
@@ -150,6 +150,7 @@ namespace Bibo_Verwaltung
             {
                 AddS("Add");
             }
+            Clear();
         }
 
         private void gv_Kunde_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -223,6 +224,7 @@ namespace Bibo_Verwaltung
             tb_KundenID.Text = "";
             tb_klasse.Text = "";
             tb_klassenstufe.Text = "";
+            tb_Gd.Text = "";
         }
         private void cLB_faecher_MouseHover(object sender, EventArgs e)
         {

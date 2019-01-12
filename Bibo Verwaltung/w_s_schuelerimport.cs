@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,25 +14,24 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_schuelerimport : Form
     {
-        DataTable dataoftable = new DataTable();
         char seperator = ';';
         char feldquali = '"';
         char dattrenn = '.';
         char zeittrenn = ':';
         char dezsym = ',';
-        string target = "t_s_schueler";
+        string target = "";
+        string filename = "";
 
-        public w_s_schuelerimport(DataTable table, bool modus)
+        public w_s_schuelerimport(string target, bool modus)
         {
+            this.target = target;
             InitializeComponent();
-            this.dataoftable = table;
+            tb_lines.Text = "0";
             setModus(modus);
+            SetTarget();
+            CheckSelected();
         }
-        public w_s_schuelerimport(bool modus)
-        {
-            InitializeComponent();
-            setModus(modus);
-        }
+
 
         private void setModus(bool modus)
         {
@@ -54,9 +54,6 @@ namespace Bibo_Verwaltung
         {
             string feldtrenn = cb_FeldTrenn.Text;
             string txtqualifier = cb_TxtQuali.Text;
-            string datumstrenn = tb_DatTrenn.Text;
-            string zeittrennchar = tb_ZeitTrenn.Text;
-            string deztrenn = tb_DezSym.Text;
             //string zieltabelle = cb_Ziel.Text;
 
             //Seperator
@@ -86,58 +83,6 @@ namespace Bibo_Verwaltung
             {
                 MessageBox.Show("Der Textqualifizierer ist ungülig! Wählen Sie einen der gültigen Textqualifizierer des Auswahlmenüs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            //Datumstrennzeichen
-            if (datumstrenn.Length == 1)
-            {
-                dattrenn = Convert.ToChar(datumstrenn);
-            }
-            else
-            {
-                MessageBox.Show("Das Datumstrennzeichen ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            //Zeittrennzeichen
-            if (zeittrennchar.Length == 1)
-            {
-                zeittrenn = Convert.ToChar(zeittrennchar);
-            }
-            else
-            {
-                MessageBox.Show("Das Zeittrennzeichen ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            //Dezimalsymbol
-            if (deztrenn.Length == 1)
-            {
-                dezsym = Convert.ToChar(deztrenn);
-            }
-            else
-            {
-                MessageBox.Show("Das Dezimalsymbol ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            //Zieltabelle
-            //if (zieltabelle == "Kundentabelle")
-            //{
-            //    target = "t_s_kunden";
-            //}
-            //else if (zieltabelle == "Büchertabelle")
-            //{
-            //    target = "t_s_buecher";
-            //}
-            //else if (zieltabelle == "Exemplartabelle")
-            //{
-            //    target = "t_s_buchid";
-            //}
-            //else if(zieltabelle == "Fächertabelle")
-            //{
-            //    target = "t_s_faecher";
-            //}
-            //else if(zieltabelle == "Schülertabelle")
-            //{
-            //    target = "t_s_schueler";
-            //}
         }
 
         private void createPreview()
@@ -147,16 +92,14 @@ namespace Bibo_Verwaltung
             im.Path = tb_path.Text;
             im.Separator = seperator;
             im.Textqualifizierer = feldquali;
-            im.Datumsfolge = cb_DatFolge.Text;
             im.Datumstrennzeichen = dattrenn;
             im.Zeittrennzeichen = zeittrenn;
-            im.Vierstelligejahre = ch_4stelligeJahre.Checked;
-            im.FuehrendeDatumsnull = ch_DatNullen.Checked;
             im.Dezimaltrennzeichen = dezsym;
             im.ColumnHeader = cb_ColHeader.Checked;
             im.LineNum = 0;
             im.LineNum = int.Parse(tb_lines.Text);
             im.FillGridViewRows(ref gv_Vorschau);
+
             Cursor.Current = Cursors.Default;
         }
 
@@ -208,27 +151,29 @@ namespace Bibo_Verwaltung
         {
             cb_FeldTrenn.SelectedIndex = 1;
             cb_TxtQuali.SelectedIndex = 0;
-            cb_DatFolge.SelectedIndex = 0;
-            cb_Ziel.SelectedIndex = 0;
         }
 
         private void bt_Vorschau_Click(object sender, EventArgs e)
         {
-            showPreview();
+            try
+            {
+                showPreview();
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Der Zugriff auf die Vorlagendatei wurde behindert. Bitte schließen Sie Anwendungen, in denen Sie diese ggf. geöffnet haben oder wenden Sie sich an den Administrator.", "Zugriff verweigert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
         }
 
         private void clearForm()
         {
             tb_path.Text = "";
-            tb_DatTrenn.Text = ".";
-            tb_ZeitTrenn.Text = ":";
-            tb_DezSym.Text = ",";
-            cb_DatFolge.SelectedIndex = 0;
+            tb_lines.Text = "0";
             cb_FeldTrenn.SelectedIndex = 1;
             cb_TxtQuali.SelectedIndex = 0;
-            cb_Ziel.SelectedIndex = 0;
             gv_Vorschau.DataSource = null;
-            gb_Formatierung.Enabled = false;
             gb_Dateiformat.Enabled = false;
             lb_Anweissung2.Enabled = false;
             gb_Ziel.Enabled = false;
@@ -243,7 +188,6 @@ namespace Bibo_Verwaltung
         {
             if (tb_path.Text != "")
             {
-                gb_Formatierung.Enabled = true;
                 gb_Dateiformat.Enabled = true;
                 lb_Anweissung2.Enabled = true;
                 gb_Ziel.Enabled = true;
@@ -254,7 +198,6 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                gb_Formatierung.Enabled = false;
                 gb_Dateiformat.Enabled = false;
                 lb_Anweissung2.Enabled = false;
                 gb_Ziel.Enabled = false;
@@ -286,11 +229,8 @@ namespace Bibo_Verwaltung
             im.Path = tb_path.Text;
             im.Separator = seperator;
             im.Textqualifizierer = feldquali;
-            im.Datumsfolge = cb_DatFolge.Text;
             im.Datumstrennzeichen = dattrenn;
             im.Zeittrennzeichen = zeittrenn;
-            im.Vierstelligejahre = ch_4stelligeJahre.Checked;
-            im.FuehrendeDatumsnull = ch_DatNullen.Checked;
             im.Dezimaltrennzeichen = dezsym;
             im.LineNum = int.Parse(tb_lines.Text);
             im.ColumnHeader = cb_ColHeader.Checked;
@@ -300,32 +240,7 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        private void cb_Ziel_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string zieltabelle = cb_Ziel.Text;
-            if (zieltabelle == "Kundentabelle")
-            {
-                target = "t_s_kunden";
-            }
-            else if (zieltabelle == "Büchertabelle")
-            {
-                target = "t_s_buecher";
-            }
-            else if (zieltabelle == "Exemplartabelle")
-            {
-                target = "t_s_buchid";
-            }
-            else if (zieltabelle == "Fächertabelle")
-            {
-                target = "t_s_faecher";
-            }
-            else if (zieltabelle == "Schülertabelle")
-            {
-                target = "t_s_schueler";
-            }
-            Schuelerimport ie = new Schuelerimport();
-            //ie.FillColGrid(ref gv_columns, ie.GetSQLColumns(target));
-        }
+
         DataTable newDT = new DataTable();
         List<int> indexes = new List<int>();
         private void createNewDT(DataTable dt, bool usePreset)
@@ -357,9 +272,6 @@ namespace Bibo_Verwaltung
                     dt.Columns.Add(gv_Vorschau.Columns[i].Name);
 
                 }
-                //for (int i = 0;i< indexes.Count;i++)
-                //{
-                //}
             }
             
             foreach (DataGridViewRow row in gv_Vorschau.Rows)
@@ -377,82 +289,96 @@ namespace Bibo_Verwaltung
         }
         private void bt_accept_Click(object sender, EventArgs e)
         {
-
-            //DataTable dt = new DataTable();
-            //createNewDT(dt, usePreset);
             foreach (DataRow row in newDT.Rows)
             {
-                Schueler schueler = new Schueler(true);
-                schueler.Vorname = row[0].ToString();
-                schueler.Nachname = row[1].ToString();
-                schueler.Gd = row[2].ToString();
-                schueler.Klasse = row[3].ToString();
-                if (radioButton1.Checked)
+                if (target.Equals("t_s_schueler"))
                 {
-                    //SEK1
-                    schueler.Klassenstufe = row[4].ToString();
-                    for (int i = 5; i < 8; i++)
+                    Schueler schueler = new Schueler(true);
+                    schueler.Vorname = row[0].ToString();
+                    schueler.Nachname = row[1].ToString();
+                    schueler.Gd = row[2].ToString();
+                    schueler.Klasse = row[3].ToString();
+                    if (rb_schueler1.Checked)
                     {
-                        //string test = row[i].ToString();
-                        string fach = row[i].ToString();
-                        schueler.Faecher.Add(fach);
-                    }
-                    schueler.Faecher.Add("DE");
-                    schueler.Faecher.Add("MA");
-                    schueler.Faecher.Add("EN");
-                    schueler.Faecher.Add("MU");
-                    schueler.Faecher.Add("KU");
-                    schueler.Faecher.Add("GEO");
-                    schueler.Faecher.Add("GE");
-                    if (int.Parse(schueler.Klassenstufe) > 6)
-                    {
-                        schueler.Faecher.Add("CH");
-                    }
-                    if (int.Parse(schueler.Klassenstufe) > 5)
-                    {
-                        schueler.Faecher.Add("PH");
-                    }
-                    if (int.Parse(schueler.Klassenstufe) < 7)
-                    {
-                        schueler.Faecher.Add("TC");
-                    }
-                    if (!schueler.AlreadyExists())
-                    {
-                        schueler.addSchueler();
-                    }
-                    else
-                    {
-                        schueler.Update();
-                        //MessageBox.Show("Der Schüler " + schueler.Vorname + " existiert bereits.");
-                    }
+                        //SEK1 Import Schüler
+                        schueler.Klassenstufe = row[4].ToString();
+                        for (int i = 5; i < 8; i++)
+                        {
+                            string fach = row[i].ToString();
+                            schueler.Faecher.Add(fach);
+                        }
+                        schueler.Faecher.Add("DE");
+                        schueler.Faecher.Add("MA");
+                        schueler.Faecher.Add("EN");
+                        schueler.Faecher.Add("MU");
+                        schueler.Faecher.Add("KU");
+                        schueler.Faecher.Add("GEO");
+                        schueler.Faecher.Add("GE");
+                        if (int.Parse(schueler.Klassenstufe) > 6)
+                        {
+                            schueler.Faecher.Add("CH");
+                        }
+                        if (int.Parse(schueler.Klassenstufe) > 5)
+                        {
+                            schueler.Faecher.Add("PH");
+                        }
+                        if (int.Parse(schueler.Klassenstufe) < 7)
+                        {
+                            schueler.Faecher.Add("TC");
+                        }
+                        if (!schueler.AlreadyExists())
+                        {
+                            schueler.addSchueler();
+                        }
+                        else
+                        {
+                            schueler.Update();
+                        }
 
+                    }
+                    else if (rb_schueler2.Checked)
+                    {
+                        //SEK2 Import Schüler
+                        schueler.Klassenstufe = schueler.Klasse.Substring(0, schueler.Klasse.IndexOf("_"));
+                        for (int i = 4; i < newDT.Columns.Count; i++)
+                        {
+                            string fach = row[i].ToString();
+                            if (!fach.Equals(""))
+                            {
+                                schueler.Faecher.Add(fach);
+                            }
+                        }
+                        if (!schueler.AlreadyExists())
+                        {
+                            schueler.addSchueler();
+                        }
+                        else
+                        {
+                            schueler.LoadSchuelerID();
+                            schueler.Update();
+                        }
+                    }
                 }
-                //////////else if (radioButton2.Checked)
-                //////////{
-                //////////    //SEK2
-                //////////    schueler.Klassenstufe = schueler.Klasse.Substring(0, schueler.Klasse.IndexOf("_"));
-                //////////    for (int i = 4; i < newDT.Columns.Count; i++)
-                //////////    {
-                //////////        string fachid = schueler.FachListe.Fach.GetID(row[i].ToString());
-                //////////        schueler.FachListe.FachIDs.Add(fachid);
-                //////////    }
-                //////////    for (int i = schueler.FachListe.FachIDs.Count; i < 17; i++)
-                //////////    {
-                //////////        schueler.FachListe.FachIDs.Add(null);
-                //////////    }
-                //////////    if (!schueler.AlreadyExists())
-                //////////    {
+                else if (target.Equals("t_s_faecher"))
+                {
+                    Faecher fach = new Faecher();
+                    fach.FachKurz = row[0].ToString();
+                    fach.Fach = row[1].ToString();
+                    if (!fach.AlreadyExists())
+                    {
+                        fach.Add();
+                    }
+                }
 
-                //////////        schueler.FachListe.Add();
-                //////////        schueler.addKunde();
-                //////////    }
-                //////////    else
-                //////////    {
-                //////////        schueler.FachListe.FachListeID = schueler.GetFachID(schueler.SchuelerID);
-                //////////        schueler.Update();
-                //////////    }
-                //////////}
-
+            }
+            DialogResult result = MessageBox.Show("Die Daten wurden erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                clearForm();
+            }
+            else
+            {
+                this.Close();
             }
 
         }
@@ -470,231 +396,165 @@ namespace Bibo_Verwaltung
         private void loadProfile()
         {
             Einstellung set = new Einstellung();
-            if (radioButton1.Checked)
+            //sek1
+            string path = set.HomePath + "\\profil_" + filename + ".txt";
+            if (File.Exists(path))
             {
-                //sek1
-                string path = set.HomePath + "\\profile_SEK1.txt";
-                if (File.Exists(path))
+                removeAt.Clear();
+                indexes.Clear();
+                var lines = File.ReadAllLines(path);
+                cb_FeldTrenn.Text = lines[4];
+                cb_TxtQuali.Text = lines[7];
+                if (lines[10] == "True")
                 {
-                    removeAt.Clear();
-                    indexes.Clear();
-                    var lines = File.ReadAllLines(path);
-                    cb_FeldTrenn.Text = lines[4];
-                    cb_TxtQuali.Text = lines[7];
-                    if(lines[10] == "True")
-                    {
-                        cb_ColHeader.Checked = true;
-                    }
-                    else
-                    {
-                        cb_ColHeader.Checked = false;
-                    }
-                    tb_lines.Text = lines[13];
-                    bool first = true;
-                    for(int i = 16; i < lines.Length;)
-                    {
-                        if (!lines[i].Contains("--") && first)
-                        {
-                            removeAt.Add(int.Parse(lines[i]));
-                            i++;
-                        }
-                        else if(lines[i].Contains("--")&&first)
-                        {
-                            first = false;
-                            i = i + 2;
-                        }
-                        if(!lines[i].Contains("--") && !first)
-                        {
-                            indexes.Add(int.Parse(lines[i]));
-                            i++;
-                        }
-                        else if(lines[i].Contains("--") && !first)
-                        {
-                            i = lines.Length;
-                        }
-                    }
-                    showPreview();
-                    foreach(int i in removeAt)
-                    {
-                        gv_Vorschau.Columns.RemoveAt(i);
-                    }
-                    DataTable dt = new DataTable();
-                    createNewDT(dt, true);
-                    gv_Vorschau.DataSource = null;
-                    gv_Vorschau.DataSource = dt;
+                    cb_ColHeader.Checked = true;
                 }
                 else
                 {
-                    MessageBox.Show("Es ist noch keine Vorlage für SEK1 vorhanden. Führen Sie bitte einen entsprechenden Import manuell aus, um eine Vorlage zu erstellen.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                    cb_ColHeader.Checked = false;
                 }
+                tb_lines.Text = lines[13];
+                bool first = true;
+                for (int i = 16; i < lines.Length;)
+                {
+                    if (!lines[i].Contains("--") && first)
+                    {
+                        removeAt.Add(int.Parse(lines[i]));
+                        i++;
+                    }
+                    else if (lines[i].Contains("--") && first)
+                    {
+                        first = false;
+                        i = i + 2;
+                    }
+                    if (!lines[i].Contains("--") && !first)
+                    {
+                        indexes.Add(int.Parse(lines[i]));
+                        i++;
+                    }
+                    else if (lines[i].Contains("--") && !first)
+                    {
+                        i = lines.Length;
+                    }
+                }
+                try
+                {
+                    showPreview();
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("Der Zugriff auf die Vorlagendatei wurde behindert. Bitte schließen Sie Anwendungen, in denen Sie diese ggf. geöffnet haben oder wenden Sie sich an den Administrator.", "Zugriff verweigert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                Cursor.Current = Cursors.Default;
+                foreach (int i in removeAt)
+                {
+                    gv_Vorschau.Columns.RemoveAt(i);
+                }
+                DataTable dt = new DataTable();
+                createNewDT(dt, true);
+                gv_Vorschau.DataSource = null;
+                gv_Vorschau.DataSource = dt;
             }
             else
             {
-                //sek2
-                string path = set.HomePath + "\\profile_SEK2.txt";
-                if (File.Exists(path))
-                {
-                    removeAt.Clear();
-                    indexes.Clear();
-                    var lines = File.ReadAllLines(path);
-                    cb_FeldTrenn.Text = lines[4];
-                    cb_TxtQuali.Text = lines[7];
-                    if (lines[10] == "True")
-                    {
-                        cb_ColHeader.Checked = true;
-                    }
-                    else
-                    {
-                        cb_ColHeader.Checked = false;
-                    }
-                    tb_lines.Text = lines[13];
-                    bool first = true;
-                    for (int i = 16; i < lines.Length;)
-                    {
-                        if (!lines[i].Contains("--") && first)
-                        {
-                            removeAt.Add(int.Parse(lines[i]));
-                            i++;
-                        }
-                        else if (lines[i].Contains("--") && first)
-                        {
-                            first = false;
-                            i = i + 2;
-                        }
-                        if (!lines[i].Contains("--") && !first)
-                        {
-                            indexes.Add(int.Parse(lines[i]));
-                            i++;
-                        }
-                        else if (lines[i].Contains("--") && !first)
-                        {
-                            i = lines.Length;
-                        }
-                    }
-                    showPreview();
-                    foreach (int i in removeAt)
-                    {
-                        gv_Vorschau.Columns.RemoveAt(i);
-                    }
-                    DataTable dt = new DataTable();
-                    createNewDT(dt, true);
-                    gv_Vorschau.DataSource = null;
-                    gv_Vorschau.DataSource = dt;
-                }
-                else
-                {
-                    MessageBox.Show("Es ist noch keine Vorlage für SEK2 vorhanden. Führen Sie bitte einen entsprechenden Import manuell aus, um eine Vorlage zu erstellen.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                MessageBox.Show("Es ist noch keine Vorlage für "+ filename +" vorhanden. Führen Sie bitte einen entsprechenden Import manuell aus, um eine Vorlage zu erstellen.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             }
         }
         private void saveProfile()
         {
             Einstellung set = new Einstellung();
-            string path = set.HomePath + "\\profile";
-            if (radioButton1.Checked)
+            string path = set.HomePath + "\\profil_";
+            if (File.Exists(path + filename + ".txt"))
             {
-                if(File.Exists(path + "_SEK1.txt"))
-                {
-                    File.Delete(path + "_SEK1.txt");
-                }
-                TextWriter tw = new StreamWriter(path + "_SEK1.txt");
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("SEK1 PROFIL");
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("FELDTRENNZEICHEN:");
-                tw.WriteLine(cb_FeldTrenn.Text);
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("TEXTQUALIFIZIERER:");
-                tw.WriteLine(cb_TxtQuali.Text);
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("FELDNAMEN:");
-                if (cb_ColHeader.Checked)
-                {
-                    tw.WriteLine("True");
-                }
-                else
-                {
-                    tw.WriteLine("False");
-                }
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("ZEILEN ENTFERNEN:");
-                tw.WriteLine(tb_lines.Text);
-                tw.WriteLine("----------------------------------------------------");
-
-                tw.WriteLine("REMOVE AT:");
-                foreach (int i in removeAt)
-                {
-                    tw.WriteLine(i.ToString());
-                }
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("SORTED COLUMNS:");
-                foreach (int i in indexes)
-                {
-                    tw.WriteLine(i.ToString());
-                }
-                tw.WriteLine("----------------------------------------------------");
-                tw.Close();
+                File.Delete(path + filename + ".txt");
+            }
+            TextWriter tw = new StreamWriter(path + filename + ".txt");
+            tw.WriteLine("----------------------------------------------------");
+            tw.WriteLine(filename + " PROFIL");
+            tw.WriteLine("----------------------------------------------------");
+            tw.WriteLine("FELDTRENNZEICHEN:");
+            tw.WriteLine(cb_FeldTrenn.Text);
+            tw.WriteLine("----------------------------------------------------");
+            tw.WriteLine("TEXTQUALIFIZIERER:");
+            tw.WriteLine(cb_TxtQuali.Text);
+            tw.WriteLine("----------------------------------------------------");
+            tw.WriteLine("FELDNAMEN:");
+            if (cb_ColHeader.Checked)
+            {
+                tw.WriteLine("True");
             }
             else
             {
-                if (File.Exists(path + "_SEK2.txt"))
-                {
-                    File.Delete(path + "_SEK2.txt");
-                }
-                TextWriter tw = new StreamWriter(path + "_SEK2.txt");
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("SEK2 PROFIL");
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("FELDTRENNZEICHEN:");
-                tw.WriteLine(cb_FeldTrenn.Text);
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("TEXTQUALIFIZIERER:");
-                tw.WriteLine(cb_TxtQuali.Text);
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("FELDNAMEN:");
-                if (cb_ColHeader.Checked)
-                {
-                    tw.WriteLine("True");
-                }
-                else
-                {
-                    tw.WriteLine("False");
-                }
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("ZEILEN ENTFERNEN:");
-                tw.WriteLine(tb_lines.Text);
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("REMOVE AT:");
-                foreach (int i in removeAt)
-                {
-                    tw.WriteLine(i.ToString());
-                }
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("SORTED COLUMNS");
-                foreach (int i in indexes)
-                {
-                    tw.WriteLine(i.ToString());
-                }
-                tw.WriteLine("----------------------------------------------------");
-                tw.Close();
+                tw.WriteLine("False");
             }
+            tw.WriteLine("----------------------------------------------------");
+            tw.WriteLine("ZEILEN ENTFERNEN:");
+            tw.WriteLine(tb_lines.Text);
+            tw.WriteLine("----------------------------------------------------");
 
-
+            tw.WriteLine("REMOVE AT:");
+            foreach (int i in removeAt)
+            {
+                tw.WriteLine(i.ToString());
+            }
+            tw.WriteLine("----------------------------------------------------");
+            tw.WriteLine("SORTED COLUMNS:");
+            foreach (int i in indexes)
+            {
+                tw.WriteLine(i.ToString());
+            }
+            tw.WriteLine("----------------------------------------------------");
+            tw.Close();
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
+            CheckSelected();
+        }
+        private void SetTarget()
+        {
+            if (target.Equals("t_s_schueler"))
+            {
+                this.Text = "Schülerimport";
+                rb_schueler1.Checked = true;
+            }
+            else if (target.Equals("t_s_faecher"))
+            {
+                this.Text = "Fächerimport";
+                rb_faecher.Checked = true;
+            }
+        }
+        private void CheckSelected()
+        {
             Schuelerimport si = new Schuelerimport();
-            if (radioButton1.Checked)
+            if (rb_schueler1.Checked)
             {
                 //Sek1
-                si.FillColGrid(ref gv_columns, true);
+                filename = "SEK1";
+                si.FillColGrid(ref gv_columns, filename);
             }
-            if (radioButton2.Checked)
+            if (rb_schueler2.Checked)
             {
                 //Sek2
-                si.FillColGrid(ref gv_columns, false);
+                filename = "SEK2";
+                si.FillColGrid(ref gv_columns, filename);
+            }
+            if (rb_faecher.Checked)
+            {
+                //Fächer
+                filename = "FAECHER";
+                si.FillColGrid(ref gv_columns, filename);
+            }
+        }
+
+        private void tb_lines_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                SystemSounds.Beep.Play();
+                e.Handled = true;
             }
         }
     }
