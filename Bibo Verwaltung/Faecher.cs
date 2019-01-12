@@ -61,8 +61,8 @@ namespace Bibo_Verwaltung
         {
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return false;
-            string RawCommand = "SELECT f_id FROM [dbo].[t_s_faecher] WHERE f_kurzform = @0 and f_langform = @1";
-            SqlDataReader dr = con.ExcecuteCommand(RawCommand, FachKurz, Fach);
+            string RawCommand = "SELECT f_id FROM [dbo].[t_s_faecher] WHERE f_kurzform = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, FachKurz);
             while (dr.Read())
             {
                 FachID = dr["f_id"].ToString();
@@ -117,6 +117,8 @@ namespace Bibo_Verwaltung
         }
         public void FillGrid(ref DataGridView grid, object value = null)
         {
+            ds.Tables[0].Clear();
+            FillObject();
             grid.DataSource = ds.Tables[0];
             grid.Columns[0].Visible = false;
             grid.Columns["f_kurzform"].HeaderText = "Kurzform";

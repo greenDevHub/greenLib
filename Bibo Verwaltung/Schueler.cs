@@ -359,6 +359,12 @@ namespace Bibo_Verwaltung
             string RawCommand = "INSERT INTO [dbo].[t_s_fach_schueler] (fs_schuelerid, fs_fachid) VALUES (@schuelerid, @fachid)";
             foreach(string s in Faecher)
             {
+                Fach.FachKurz = s;
+                Fach.Fach = "";
+                if (!Fach.AlreadyExists())
+                {
+                    Fach.Add();
+                }
                 SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
                 cmd.Parameters.AddWithValue("@schuelerid", SchuelerID);
                 cmd.Parameters.AddWithValue("@fachid", Fach.GetID(s));

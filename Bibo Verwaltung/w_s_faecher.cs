@@ -61,6 +61,7 @@ namespace Bibo_Verwaltung
         {
             Form Import = new w_s_schuelerimport("t_s_faecher", true);
             Import.ShowDialog(this);
+            f.FillGrid(ref gv_Verlage);
         }
     }
 }
