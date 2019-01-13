@@ -34,13 +34,13 @@
             this.bt_Autoren = new System.Windows.Forms.Button();
             this.bt_Kunden = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_faecher = new System.Windows.Forms.Button();
             this.bt_bf = new System.Windows.Forms.Button();
             this.bt_schueler = new System.Windows.Forms.Button();
             this.bt_Zustand = new System.Windows.Forms.Button();
-            this.bt_Einstellungen = new System.Windows.Forms.Button();
             this.bt_Buecher = new System.Windows.Forms.Button();
+            this.bt_Einstellungen = new System.Windows.Forms.Button();
             this.gb_Uebersicht = new System.Windows.Forms.GroupBox();
-            this.bt_faecher = new System.Windows.Forms.Button();
             this.bt_stats = new System.Windows.Forms.Button();
             this.bt_logout = new System.Windows.Forms.Button();
             this.bt_Benutzerverwaltung = new System.Windows.Forms.Button();
@@ -52,6 +52,7 @@
             this.lb_Bestandzahl = new System.Windows.Forms.Label();
             this.lb_Bestand = new System.Windows.Forms.Label();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.bt_klassenstufe = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gb_Uebersicht.SuspendLayout();
             this.SuspendLayout();
@@ -64,7 +65,7 @@
             this.bt_Sprachen.Margin = new System.Windows.Forms.Padding(8);
             this.bt_Sprachen.Name = "bt_Sprachen";
             this.helpProvider.SetShowHelp(this.bt_Sprachen, true);
-            this.bt_Sprachen.Size = new System.Drawing.Size(480, 95);
+            this.bt_Sprachen.Size = new System.Drawing.Size(238, 95);
             this.bt_Sprachen.TabIndex = 5;
             this.bt_Sprachen.Text = "Sprachen";
             this.bt_Sprachen.UseVisualStyleBackColor = true;
@@ -133,6 +134,7 @@
             this.groupBox1.Controls.Add(this.bt_schueler);
             this.groupBox1.Controls.Add(this.bt_Zustand);
             this.groupBox1.Controls.Add(this.bt_Buecher);
+            this.groupBox1.Controls.Add(this.bt_klassenstufe);
             this.groupBox1.Controls.Add(this.bt_Sprachen);
             this.groupBox1.Controls.Add(this.bt_Verlage);
             this.groupBox1.Controls.Add(this.bt_Genres);
@@ -146,6 +148,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Verwaltung von:";
+            // 
+            // bt_faecher
+            // 
+            this.bt_faecher.Location = new System.Drawing.Point(512, 156);
+            this.bt_faecher.Margin = new System.Windows.Forms.Padding(4);
+            this.bt_faecher.Name = "bt_faecher";
+            this.bt_faecher.Size = new System.Drawing.Size(238, 95);
+            this.bt_faecher.TabIndex = 12;
+            this.bt_faecher.Text = "Fächer";
+            this.bt_faecher.UseVisualStyleBackColor = true;
+            this.bt_faecher.Click += new System.EventHandler(this.bt_logout_Click);
             // 
             // bt_bf
             // 
@@ -185,20 +198,6 @@
             this.bt_Zustand.UseVisualStyleBackColor = true;
             this.bt_Zustand.Click += new System.EventHandler(this.bt_Zustand_Click);
             // 
-            // bt_Einstellungen
-            // 
-            this.helpProvider.SetHelpString(this.bt_Einstellungen, "Klicken sie auf \"Einstellungen\", um Änderungen an ihrer Datenbankverbindung vorzu" +
-        "nehmen.");
-            this.bt_Einstellungen.Location = new System.Drawing.Point(16, 342);
-            this.bt_Einstellungen.Margin = new System.Windows.Forms.Padding(8);
-            this.bt_Einstellungen.Name = "bt_Einstellungen";
-            this.helpProvider.SetShowHelp(this.bt_Einstellungen, true);
-            this.bt_Einstellungen.Size = new System.Drawing.Size(480, 62);
-            this.bt_Einstellungen.TabIndex = 6;
-            this.bt_Einstellungen.Text = "Einstellungen";
-            this.bt_Einstellungen.UseVisualStyleBackColor = true;
-            this.bt_Einstellungen.Click += new System.EventHandler(this.bt_Einstellungen_Click);
-            // 
             // bt_Buecher
             // 
             this.helpProvider.SetHelpString(this.bt_Buecher, "Klicken sie auf \"Bücher\", um ihre gespeicherten Bücher anzuzeigen, neue hinzuzufü" +
@@ -212,6 +211,20 @@
             this.bt_Buecher.Text = "Bücher";
             this.bt_Buecher.UseVisualStyleBackColor = true;
             this.bt_Buecher.Click += new System.EventHandler(this.bt_Buecher_Click);
+            // 
+            // bt_Einstellungen
+            // 
+            this.helpProvider.SetHelpString(this.bt_Einstellungen, "Klicken sie auf \"Einstellungen\", um Änderungen an ihrer Datenbankverbindung vorzu" +
+        "nehmen.");
+            this.bt_Einstellungen.Location = new System.Drawing.Point(16, 342);
+            this.bt_Einstellungen.Margin = new System.Windows.Forms.Padding(8);
+            this.bt_Einstellungen.Name = "bt_Einstellungen";
+            this.helpProvider.SetShowHelp(this.bt_Einstellungen, true);
+            this.bt_Einstellungen.Size = new System.Drawing.Size(480, 62);
+            this.bt_Einstellungen.TabIndex = 6;
+            this.bt_Einstellungen.Text = "Einstellungen";
+            this.bt_Einstellungen.UseVisualStyleBackColor = true;
+            this.bt_Einstellungen.Click += new System.EventHandler(this.bt_Einstellungen_Click);
             // 
             // gb_Uebersicht
             // 
@@ -237,17 +250,6 @@
             this.gb_Uebersicht.TabIndex = 1;
             this.gb_Uebersicht.TabStop = false;
             this.gb_Uebersicht.Text = "Gesamtübersicht:";
-            // 
-            // bt_faecher
-            // 
-            this.bt_faecher.Location = new System.Drawing.Point(512, 156);
-            this.bt_faecher.Margin = new System.Windows.Forms.Padding(4);
-            this.bt_faecher.Name = "bt_faecher";
-            this.bt_faecher.Size = new System.Drawing.Size(238, 95);
-            this.bt_faecher.TabIndex = 12;
-            this.bt_faecher.Text = "Fächer";
-            this.bt_faecher.UseVisualStyleBackColor = true;
-            this.bt_faecher.Click += new System.EventHandler(this.bt_logout_Click);
             // 
             // bt_stats
             // 
@@ -366,6 +368,17 @@
             this.lb_Bestand.TabIndex = 0;
             this.lb_Bestand.Text = "Bücher im Bestand:";
             // 
+            // bt_klassenstufe
+            // 
+            this.bt_klassenstufe.Location = new System.Drawing.Point(754, 265);
+            this.bt_klassenstufe.Margin = new System.Windows.Forms.Padding(8);
+            this.bt_klassenstufe.Name = "bt_klassenstufe";
+            this.bt_klassenstufe.Size = new System.Drawing.Size(238, 95);
+            this.bt_klassenstufe.TabIndex = 5;
+            this.bt_klassenstufe.Text = "Klassenstufen";
+            this.bt_klassenstufe.UseVisualStyleBackColor = true;
+            this.bt_klassenstufe.Click += new System.EventHandler(this.bt_klassenstufe_Click);
+            // 
             // w_s_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -415,5 +428,6 @@
         private System.Windows.Forms.Button bt_schueler;
         private System.Windows.Forms.Button bt_bf;
         private System.Windows.Forms.Button bt_stats;
+        private System.Windows.Forms.Button bt_klassenstufe;
     }
 }

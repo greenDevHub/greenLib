@@ -419,3 +419,31 @@ CREATE TABLE [dbo].[t_s_preis](
 	[p_datum] [date] NOT NULL DEFAULT(GETDATE()),
 	PRIMARY KEY (p_aenderung))
 END
+
+use Bibo_Verwaltung
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_klassenstufe]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_klassenstufe]
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_klassenstufe]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[t_s_klassenstufe](
+	[k_stufe] [int] NOT NULL,
+	PRIMARY KEY (k_stufe))
+END
+
+use Bibo_Verwaltung
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_fach_stufe]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_fach_stufe]
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_fach_stufe]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[t_s_fach_stufe](
+	[fs_id] [int] IDENTITY(1,1) NOT NULL,
+	[fs_fachid] [int] NOT NULL,
+	[fs_stufe] [int] NOT NULL,
+	PRIMARY KEY (fs_id),
+	FOREIGN KEY (fs_fachid)
+		REFERENCES t_s_faecher (f_id),
+	FOREIGN KEY (fs_stufe)
+		REFERENCES t_s_klassenstufe (k_stufe))
+END

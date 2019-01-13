@@ -63,5 +63,15 @@ namespace Bibo_Verwaltung
             Import.ShowDialog(this);
             f.FillGrid(ref gv_Verlage);
         }
+
+        private void bt_Suchen_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void bt_Verwaltung_Click(object sender, EventArgs e)
+        {
+            Form fachstufe = new w_s_fach_stufe();
+            fachstufe.ShowDialog(this);
+        }
     }
 }

@@ -59,9 +59,12 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
-                    MessageBox.Show("Dieser Schüler existiert bereits in der Datenbank. Der bestehende Datensatz wird deshalb aktualisiert.");
-                    schueler.LoadSchuelerID();
-                    schueler.Update();
+                    DialogResult result = MessageBox.Show("Dieser Schüler ist bereits vorhanden. Soll der entsprechende Datensatz stattdessen aktualisiert werden?", "Eintrag bereits vorhanden", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        schueler.LoadSchuelerID();
+                        schueler.Update();
+                    }
                 }
             }
             else if (modus.Equals("Delete"))
@@ -193,7 +196,7 @@ namespace Bibo_Verwaltung
                 }
             }
         }
-            private int GetColumnIndexByName(DataGridView grid, string name)
+        private int GetColumnIndexByName(DataGridView grid, string name)
         {
             for (int i = 0; i < grid.Columns.Count; i++)
             {
