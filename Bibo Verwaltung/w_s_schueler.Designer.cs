@@ -274,6 +274,7 @@
             this.bt_clear.TabIndex = 14;
             this.bt_clear.Text = "Leeren";
             this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
             // tb_klasse
             // 

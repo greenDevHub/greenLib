@@ -21,6 +21,9 @@ namespace Bibo_Verwaltung
         char dezsym = ',';
         string target = "";
         string filename = "";
+        bool multiselect = false;
+        List<string> files = new List<string>();
+        List<string> filesShort = new List<string>();
 
         public w_s_schuelerimport(string target, bool modus)
         {
@@ -29,7 +32,9 @@ namespace Bibo_Verwaltung
             tb_lines.Text = "0";
             setModus(modus);
             SetTarget();
+            ImportMode();
             CheckSelected();
+            SetSlider();
         }
 
 
@@ -38,13 +43,11 @@ namespace Bibo_Verwaltung
             if (modus == true)
             {
                 lb_anweissung.Text = "Geben Sie die Quelle der zu importierenden Daten an.";
-                gb_Ziel.Visible = true;
                 bt_Import.Text = "Vorlage anwenden";
             }
             else
             {
                 lb_anweissung.Text = "Geben Sie das Ziel der zu exportierenden Daten an.";
-                gb_Ziel.Visible = false;
                 bt_Import.Text = "Exportieren";
             }
         }
@@ -85,11 +88,11 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private void createPreview()
+        private void createPreview(string file)
         {
             Cursor.Current = Cursors.WaitCursor;
             Schuelerimport im = new Schuelerimport();
-            im.Path = tb_path.Text;
+            im.Path = file;
             im.Separator = seperator;
             im.Textqualifizierer = feldquali;
             im.Datumstrennzeichen = dattrenn;
@@ -103,16 +106,17 @@ namespace Bibo_Verwaltung
             Cursor.Current = Cursors.Default;
         }
 
-        private void showPreview()
+        private void showPreview(string file)
         {
-            if (File.Exists(tb_path.Text))
+
+            if (File.Exists(file))
             {
                 getValues();
-                createPreview();
+                createPreview(file);
             }
             else
             {
-                MessageBox.Show("Der Pfad: " + tb_path.Text + " ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Der Pfad: " + files[0] + " ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 gv_Vorschau.DataSource = null;
                 tb_path.Focus();
             }
@@ -125,26 +129,61 @@ namespace Bibo_Verwaltung
         private void FileDialog()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = "Wählen Sie eine Datei für den Datenimport";
+            if (multiselect)
+            {
+                openFileDialog.Title = "Wählen Sie mehrere Dateien für den Datenimport";
+            }
+            else
+            {
+                openFileDialog.Title = "Wählen Sie eine Datei für den Datenimport";
+            }
             openFileDialog.Filter = "Text Files|*.txt; *.csv";
+            openFileDialog.Multiselect = multiselect;
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (openFileDialog.FileName.Contains(".txt") || openFileDialog.FileName.Contains(".csv"))
+                if (multiselect)
                 {
-                    tb_path.Text = openFileDialog.FileName;
+                    for(int i = 0; i < openFileDialog.FileNames.Length;i++)
+                    {
+                        if(openFileDialog.FileNames[i].Contains(".txt") || openFileDialog.FileNames[i].Contains(".csv"))
+                        {
+                            files.Add(openFileDialog.FileNames[i]);
+                            filesShort.Add(openFileDialog.SafeFileNames[i]);
+                            tb_path.Text = tb_path.Text + openFileDialog.SafeFileNames[i] + ", ";
+                        }
+                    }
+                    tb_path.Text = tb_path.Text.Substring(0, tb_path.Text.Length - 2);
                 }
                 else
                 {
-                    tb_path.Text = "";
-                    MessageBox.Show("Der angegebene Dateiname ist ungültig. Bitte verwenden sie nur Dateien mit der Endung \'.txt\' oder \'.csv\'!");
-                    FileDialog();
+                    if (openFileDialog.FileName.Contains(".txt") || openFileDialog.FileName.Contains(".csv"))
+                    {
+                        tb_path.Text = openFileDialog.SafeFileName;
+                        files.Add(openFileDialog.FileName);
+                        filesShort.Add(openFileDialog.SafeFileName);
+                    }
+                    else
+                    {
+                        tb_path.Text = "";
+                        MessageBox.Show("Der angegebene Dateiname ist ungültig. Bitte verwenden sie nur Dateien mit der Endung \'.txt\' oder \'.csv\'!");
+                        FileDialog();
+                    }
                 }
+
             }
+            SetSlider();
 
         }
         private void bt_durchsuchen_Click(object sender, EventArgs e)
         {
+            files.Clear();
+            filesShort.Clear();
             FileDialog();
+            if(tb_path.Text != "")
+            {
+                tb_aktuell.Text = files[slider_preview.Value - 1];
+
+            }
         }
 
         private void w_s_importDialog_Shown(object sender, EventArgs e)
@@ -157,7 +196,7 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                showPreview();
+                showPreview(tb_aktuell.Text);
             }
             catch (IOException)
             {
@@ -174,38 +213,35 @@ namespace Bibo_Verwaltung
             cb_FeldTrenn.SelectedIndex = 1;
             cb_TxtQuali.SelectedIndex = 0;
             gv_Vorschau.DataSource = null;
-            gb_Dateiformat.Enabled = false;
             lb_Anweissung2.Enabled = false;
-            gb_Ziel.Enabled = false;
             bt_Import.Enabled = true;
             bt_Vorschau.Enabled = false;
             gv_Vorschau.Enabled = false;
             gv_Vorschau.DataSource = null;
             lb_Vorschau.Enabled = false;
+            lb_Vorschau1.Enabled = false;
         }
 
         private void tb_path_TextChanged(object sender, EventArgs e)
         {
             if (tb_path.Text != "")
             {
-                gb_Dateiformat.Enabled = true;
                 lb_Anweissung2.Enabled = true;
-                gb_Ziel.Enabled = true;
                 bt_Import.Enabled = true;
                 bt_Vorschau.Enabled = true;
                 gv_Vorschau.Enabled = true;
                 lb_Vorschau.Enabled = true;
+                lb_Vorschau1.Enabled = true;
             }
             else
             {
-                gb_Dateiformat.Enabled = false;
                 lb_Anweissung2.Enabled = false;
-                gb_Ziel.Enabled = false;
                 bt_Import.Enabled = false;
                 bt_Vorschau.Enabled = false;
                 gv_Vorschau.Enabled = false;
                 gv_Vorschau.DataSource = null;
                 lb_Vorschau.Enabled = false;
+                lb_Vorschau1.Enabled = false;
             }
         }
         bool usePreset = false;
@@ -220,23 +256,6 @@ namespace Bibo_Verwaltung
             DataTable dt = new DataTable();
             createNewDT(dt, false);
             saveProfile();
-        }
-
-        private void startImport()
-        {
-            Cursor.Current = Cursors.WaitCursor;
-            Schuelerimport im = new Schuelerimport();
-            im.Path = tb_path.Text;
-            im.Separator = seperator;
-            im.Textqualifizierer = feldquali;
-            im.Datumstrennzeichen = dattrenn;
-            im.Zeittrennzeichen = zeittrenn;
-            im.Dezimaltrennzeichen = dezsym;
-            im.LineNum = int.Parse(tb_lines.Text);
-            im.ColumnHeader = cb_ColHeader.Checked;
-            im.Zieltabelle = "t_s_schueler";
-            im.executeImport();
-            Cursor.Current = Cursors.Default;
         }
         #endregion
 
@@ -284,93 +303,98 @@ namespace Bibo_Verwaltung
                 }
                 dt.Rows.Add(dr);
             }
-            dataGridView1.DataSource = dt;
             newDT = dt;
         }
         private void bt_accept_Click(object sender, EventArgs e)
         {
-            foreach (DataRow row in newDT.Rows)
+            foreach(string file in files)
             {
-                if (target.Equals("t_s_schueler"))
+                tb_aktuell.Text = file;
+                loadProfile();
+                foreach (DataRow row in newDT.Rows)
                 {
-                    Schueler schueler = new Schueler(true);
-                    schueler.Vorname = row[0].ToString();
-                    schueler.Nachname = row[1].ToString();
-                    schueler.Gd = row[2].ToString();
-                    schueler.Klasse = row[3].ToString();
-                    if (rb_schueler1.Checked)
+                    if (target.Equals("t_s_schueler"))
                     {
-                        //SEK1 Import Schüler
-                        schueler.Klassenstufe = row[4].ToString();
-                        for (int i = 5; i < 8; i++)
+                        Schueler schueler = new Schueler(true);
+                        schueler.Vorname = row[0].ToString();
+                        schueler.Nachname = row[1].ToString();
+                        schueler.Gd = row[2].ToString();
+                        schueler.Klasse = row[3].ToString();
+                        if (rb_schueler1.Checked)
                         {
-                            string fach = row[i].ToString();
-                            schueler.Faecher.Add(fach);
-                        }
-                        schueler.Faecher.Add("DE");
-                        schueler.Faecher.Add("MA");
-                        schueler.Faecher.Add("EN");
-                        schueler.Faecher.Add("MU");
-                        schueler.Faecher.Add("KU");
-                        schueler.Faecher.Add("GEO");
-                        schueler.Faecher.Add("GE");
-                        if (int.Parse(schueler.Klassenstufe) > 6)
-                        {
-                            schueler.Faecher.Add("CH");
-                        }
-                        if (int.Parse(schueler.Klassenstufe) > 5)
-                        {
-                            schueler.Faecher.Add("PH");
-                        }
-                        if (int.Parse(schueler.Klassenstufe) < 7)
-                        {
-                            schueler.Faecher.Add("TC");
-                        }
-                        if (!schueler.AlreadyExists())
-                        {
-                            schueler.addSchueler();
-                        }
-                        else
-                        {
-                            schueler.Update();
-                        }
-
-                    }
-                    else if (rb_schueler2.Checked)
-                    {
-                        //SEK2 Import Schüler
-                        schueler.Klassenstufe = schueler.Klasse.Substring(0, schueler.Klasse.IndexOf("_"));
-                        for (int i = 4; i < newDT.Columns.Count; i++)
-                        {
-                            string fach = row[i].ToString();
-                            if (!fach.Equals(""))
+                            //SEK1 Import Schüler
+                            schueler.Klassenstufe = row[4].ToString();
+                            for (int i = 5; i < 8; i++)
                             {
+                                string fach = row[i].ToString();
                                 schueler.Faecher.Add(fach);
                             }
-                        }
-                        if (!schueler.AlreadyExists())
-                        {
-                            schueler.addSchueler();
-                        }
-                        else
-                        {
-                            schueler.LoadSchuelerID();
-                            schueler.Update();
-                        }
-                    }
-                }
-                else if (target.Equals("t_s_faecher"))
-                {
-                    Faecher fach = new Faecher();
-                    fach.FachKurz = row[0].ToString();
-                    fach.Fach = row[1].ToString();
-                    if (!fach.AlreadyExists())
-                    {
-                        fach.Add();
-                    }
-                }
+                            schueler.Faecher.Add("DE");
+                            schueler.Faecher.Add("MA");
+                            schueler.Faecher.Add("EN");
+                            schueler.Faecher.Add("MU");
+                            schueler.Faecher.Add("KU");
+                            schueler.Faecher.Add("GEO");
+                            schueler.Faecher.Add("GE");
+                            if (int.Parse(schueler.Klassenstufe) > 6)
+                            {
+                                schueler.Faecher.Add("CH");
+                            }
+                            if (int.Parse(schueler.Klassenstufe) > 5)
+                            {
+                                schueler.Faecher.Add("PH");
+                            }
+                            if (int.Parse(schueler.Klassenstufe) < 7)
+                            {
+                                schueler.Faecher.Add("TC");
+                            }
+                            if (!schueler.AlreadyExists())
+                            {
+                                schueler.addSchueler();
+                            }
+                            else
+                            {
+                                schueler.Update();
+                            }
 
+                        }
+                        else if (rb_schueler2.Checked)
+                        {
+                            //SEK2 Import Schüler
+                            schueler.Klassenstufe = schueler.Klasse.Substring(0, schueler.Klasse.IndexOf("_"));
+                            for (int i = 4; i < newDT.Columns.Count; i++)
+                            {
+                                string fach = row[i].ToString();
+                                if (!fach.Equals(""))
+                                {
+                                    schueler.Faecher.Add(fach);
+                                }
+                            }
+                            if (!schueler.AlreadyExists())
+                            {
+                                schueler.addSchueler();
+                            }
+                            else
+                            {
+                                schueler.LoadSchuelerID();
+                                schueler.Update();
+                            }
+                        }
+                    }
+                    else if (target.Equals("t_s_faecher"))
+                    {
+                        Faecher fach = new Faecher();
+                        fach.FachKurz = row[0].ToString();
+                        fach.Fach = row[1].ToString();
+                        if (!fach.AlreadyExists())
+                        {
+                            fach.Add();
+                        }
+                    }
+
+                }
             }
+            
             DialogResult result = MessageBox.Show("Die Daten wurden erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
@@ -400,46 +424,47 @@ namespace Bibo_Verwaltung
             string path = set.HomePath + "\\profil_" + filename + ".txt";
             if (File.Exists(path))
             {
-                removeAt.Clear();
-                indexes.Clear();
-                var lines = File.ReadAllLines(path);
-                cb_FeldTrenn.Text = lines[4];
-                cb_TxtQuali.Text = lines[7];
-                if (lines[10] == "True")
-                {
-                    cb_ColHeader.Checked = true;
-                }
-                else
-                {
-                    cb_ColHeader.Checked = false;
-                }
-                tb_lines.Text = lines[13];
-                bool first = true;
-                for (int i = 16; i < lines.Length;)
-                {
-                    if (!lines[i].Contains("--") && first)
-                    {
-                        removeAt.Add(int.Parse(lines[i]));
-                        i++;
-                    }
-                    else if (lines[i].Contains("--") && first)
-                    {
-                        first = false;
-                        i = i + 2;
-                    }
-                    if (!lines[i].Contains("--") && !first)
-                    {
-                        indexes.Add(int.Parse(lines[i]));
-                        i++;
-                    }
-                    else if (lines[i].Contains("--") && !first)
-                    {
-                        i = lines.Length;
-                    }
-                }
+                
                 try
                 {
-                    showPreview();
+                    removeAt.Clear();
+                    indexes.Clear();
+                    var lines = File.ReadAllLines(path);
+                    cb_FeldTrenn.Text = lines[4];
+                    cb_TxtQuali.Text = lines[7];
+                    if (lines[10] == "True")
+                    {
+                        cb_ColHeader.Checked = true;
+                    }
+                    else
+                    {
+                        cb_ColHeader.Checked = false;
+                    }
+                    tb_lines.Text = lines[13];
+                    bool first = true;
+                    for (int i = 16; i < lines.Length;)
+                    {
+                        if (!lines[i].Contains("--") && first)
+                        {
+                            removeAt.Add(int.Parse(lines[i]));
+                            i++;
+                        }
+                        else if (lines[i].Contains("--") && first)
+                        {
+                            first = false;
+                            i = i + 2;
+                        }
+                        if (!lines[i].Contains("--") && !first)
+                        {
+                            indexes.Add(int.Parse(lines[i]));
+                            i++;
+                        }
+                        else if (lines[i].Contains("--") && !first)
+                        {
+                            i = lines.Length;
+                        }
+                    }
+                    showPreview(tb_aktuell.Text);
                 }
                 catch (IOException)
                 {
@@ -451,10 +476,17 @@ namespace Bibo_Verwaltung
                 {
                     gv_Vorschau.Columns.RemoveAt(i);
                 }
-                DataTable dt = new DataTable();
-                createNewDT(dt, true);
-                gv_Vorschau.DataSource = null;
-                gv_Vorschau.DataSource = dt;
+                try
+                {
+                    DataTable dt = new DataTable();
+                    createNewDT(dt, true);
+                    gv_Vorschau.DataSource = null;
+                    gv_Vorschau.DataSource = dt;
+                }
+                catch
+                {
+                    MessageBox.Show("Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt.", "Fehler bei Vorlage", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
@@ -556,6 +588,96 @@ namespace Bibo_Verwaltung
                 SystemSounds.Beep.Play();
                 e.Handled = true;
             }
+        }
+
+        private void rb_single_CheckedChanged(object sender, EventArgs e)
+        {
+            ImportMode();
+        }
+        private void ImportMode()
+        {
+            if (rb_single.Checked)
+            {
+                multiselect = false;
+            }
+            else if(rb_multi.Checked)
+            {
+                multiselect = true;
+            }
+        }
+
+        /// <summary>
+        /// Setzt den Auswahl-Slider anhand der Elemente der Ausleihliste
+        /// </summary>
+        private void SetSlider()
+        {
+            if (files.Count == 0)
+            {
+                slider_preview.Enabled = false;
+                slider_preview.Minimum = 0;
+                slider_preview.Maximum = 0;
+            }
+            else
+            {
+                slider_preview.Enabled = true;
+                slider_preview.Minimum = 1;
+                slider_preview.Maximum = files.Count;
+                slider_preview.Value = slider_preview.Maximum;
+            }
+            tb_min.Text = slider_preview.Value.ToString();
+            tb_max.Text = slider_preview.Maximum.ToString();
+        }
+
+        /// <summary>
+        /// Entfernt eine Datei aus der Importliste
+        /// </summary>
+        private void RemoveFromImportList()
+        {
+            files.RemoveAt(slider_preview.Value - 1);
+            filesShort.RemoveAt(slider_preview.Value - 1);
+            tb_path.Text = "";
+            foreach(string file in filesShort)
+            {
+                tb_path.Text = tb_path.Text + file + ", ";
+            }
+            if(tb_path.Text.Length == 0)
+            {
+                SetSlider();
+                tb_aktuell.Text = "";
+                tb_path.Text = "";
+            }
+            else
+            {
+                tb_path.Text = tb_path.Text.Substring(0, tb_path.Text.Length - 2);
+                SetSlider();
+                tb_aktuell.Text = files[slider_preview.Value - 1];
+            }
+
+        }
+
+        private void slider_preview_Scroll(object sender, ScrollEventArgs e)
+        {
+            tb_min.Text = slider_preview.Value.ToString();
+            tb_max.Text = slider_preview.Maximum.ToString();
+            tb_aktuell.Text = files[slider_preview.Value-1];
+            if (usePreset)
+            {
+                try
+                {
+                    loadProfile();
+                }
+                catch
+                {
+                    MessageBox.Show("Beim Laden der Vorschau ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+
+        }
+
+        private void bt_removefile_Click(object sender, EventArgs e)
+        {
+            RemoveFromImportList();
         }
     }
 }

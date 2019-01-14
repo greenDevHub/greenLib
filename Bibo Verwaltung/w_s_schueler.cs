@@ -254,5 +254,10 @@ namespace Bibo_Verwaltung
         private void w_s_schueler_Load(object sender, EventArgs e)
         {
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            Clear();
+        }
     }
 }
