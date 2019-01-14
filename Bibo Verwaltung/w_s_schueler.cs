@@ -34,7 +34,7 @@ namespace Bibo_Verwaltung
             Schueler schueler = new Schueler();
             schueler.Vorname = tb_Vorname.Text;
             schueler.Nachname = tb_Nachname.Text;
-            schueler.Gd = tb_Gd.Text;
+            schueler.Gd = dtp_gd.Value;
             schueler.Klasse = tb_klasse.Text;
             schueler.Klassenstufe = tb_klassenstufe.Text;
             
@@ -83,7 +83,7 @@ namespace Bibo_Verwaltung
                 tb_KundenID.Enabled = false;
                 tb_Vorname.Enabled = true;
                 tb_Nachname.Enabled = true;
-                tb_Gd.Enabled = true;
+                dtp_gd.Enabled = true;
                 tb_klasse.Enabled = true;
                 tb_klassenstufe.Enabled = true;
                 cLB_faecher.Enabled = true;
@@ -96,7 +96,7 @@ namespace Bibo_Verwaltung
                 tb_KundenID.Enabled = true;
                 tb_Vorname.Enabled = true;
                 tb_Nachname.Enabled = true;
-                tb_Gd.Enabled = true;
+                dtp_gd.Enabled = true;
                 tb_klasse.Enabled = true;
                 tb_klassenstufe.Enabled = true;
                 cLB_faecher.Enabled = true;
@@ -109,7 +109,7 @@ namespace Bibo_Verwaltung
                 tb_KundenID.Enabled = true;
                 tb_Vorname.Enabled = false;
                 tb_Nachname.Enabled = false;
-                tb_Gd.Enabled = false;
+                dtp_gd.Enabled = false;
                 tb_klasse.Enabled = false;
                 tb_klassenstufe.Enabled = false;
                 cLB_faecher.Enabled = false;
@@ -163,20 +163,20 @@ namespace Bibo_Verwaltung
             {
                 DataGridViewRow row = this.gv_Kunde.Rows[e.RowIndex];
                 tb_KundenID.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "ID")].Value.ToString();
-                tb_Vorname.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Vorname")].Value.ToString();
-                tb_Nachname.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Nachname")].Value.ToString();
-                tb_Gd.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Geburtsdatum")].Value.ToString();
+                //tb_Vorname.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Vorname")].Value.ToString();
+                //tb_Nachname.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Nachname")].Value.ToString();
+                //dtp_gd.Value = (DateTime)row.Cells[GetColumnIndexByName(gv_Kunde, "Geburtsdatum")].Value;
                 LoadSchueler();
             }
         }
         private void LoadSchueler()
         {
-            Schueler schueler = new Schueler(tb_Vorname.Text, tb_Nachname.Text, tb_Gd.Text);
+            Schueler schueler = new Schueler(tb_KundenID.Text);
             tb_Vorname.Text = schueler.Vorname;
             tb_Nachname.Text = schueler.Nachname;
             tb_klassenstufe.Text = schueler.Klassenstufe;
             tb_klasse.Text = schueler.Klasse;
-            tb_Gd.Text = schueler.Gd;
+            dtp_gd.Value = schueler.Gd;
             if (schueler.Faecher.Count > 0)
             {
                 List<int> index = new List<int>();
@@ -227,7 +227,7 @@ namespace Bibo_Verwaltung
             tb_KundenID.Text = "";
             tb_klasse.Text = "";
             tb_klassenstufe.Text = "";
-            tb_Gd.Text = "";
+            dtp_gd.Text = "";
         }
         private void cLB_faecher_MouseHover(object sender, EventArgs e)
         {

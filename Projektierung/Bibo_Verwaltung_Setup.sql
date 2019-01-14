@@ -350,7 +350,7 @@ CREATE TABLE [dbo].[t_s_schueler](
 	[sch_id] [int] IDENTITY (1,1) NOT NULL,
 	[sch_vorname] [nvarchar](128) NOT NULL,
 	[sch_nachname] [nvarchar](128) NOT NULL,
-	[sch_datum] [nvarchar](128) NOT NULL,
+	[sch_datum] [date] NOT NULL,
 	[sch_klasse] [nvarchar](6),
 	[sch_stufe][int] NOT NULL,
 	PRIMARY KEY(sch_id))

@@ -32,11 +32,10 @@ namespace Bibo_Verwaltung
             if (con.ConnectError()) return;
             string RawCommand = "SELECT bu_id as 'ExemplarID', bu_isbn as 'ISBN', buch_titel as 'Titel', "
                 + "zu_zustand as 'Zustand', bu_aufnahmedatum as 'Aufnahmedatum', "
-                + "ger_name as 'Genre', ver_name as 'Verlag', sprach_name as 'Sprache', a_id as 'AutorlisteID', aus_rückgabedatum as 'Rückgabedatum', aus_leihnummer as 'Leihnummer', "
+                + "ger_name as 'Genre', ver_name as 'Verlag', sprach_name as 'Sprache', aus_rückgabedatum as 'Rückgabedatum', aus_leihnummer as 'Leihnummer', "
                 + "kunde_id as 'Kunden ID', kunde_vorname as 'Vorname', kunde_Nachname as 'Nachname', kunde_klasse as 'Klasse' FROM t_s_buchid "
                 + "left join t_s_buecher on bu_isbn = buch_isbn "
                 + "left join t_s_genre on buch_genre_id = ger_id "
-                + "left join t_s_autorliste on buch_autor_id = a_id "
                 + "left join t_s_verlag on buch_verlag_id = ver_id "
                 + "left join t_s_sprache on buch_sprache_id = sprach_id "
                 + "left join t_s_zustand on bu_zustandsid = zu_id "
@@ -45,29 +44,6 @@ namespace Bibo_Verwaltung
 
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
-
-            //if (ds.Tables[0].Columns.Contains("Autor"))
-            //{
-            //    ds.Tables[0].Columns.RemoveAt(ds.Tables[0].Columns.IndexOf("Autor"));
-            //}
-            //ds.Tables[0].Columns.Add("Autor", typeof(System.String));
-            //foreach (DataRow row in ds.Tables[0].Rows)
-            //{
-            //    string text = "";
-            //    AutorListe AutorListe = new AutorListe();
-            //    foreach (string s in AutorListe.GetNames(row["AutorlisteID"].ToString()))
-            //    {
-            //        if (s != null && !s.Equals(""))
-            //        {
-            //            text = text + s + ", ";
-            //        }
-            //    }
-            //    if (text.Length > 2)
-            //    {
-            //        text = text.Substring(0, text.Length - 2);
-            //    }
-            //    row["Autor"] = text;
-            //}
             con.Close();
         }
 

@@ -100,7 +100,14 @@ namespace Bibo_Verwaltung
             im.Dezimaltrennzeichen = dezsym;
             im.ColumnHeader = cb_ColHeader.Checked;
             im.LineNum = 0;
-            im.LineNum = int.Parse(tb_lines.Text);
+            try
+            {
+                im.LineNum = int.Parse(tb_lines.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Bitte geben Sie eine gültige Zahl in das Feld 'Obere Zeilen Entfernen' ein.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             im.FillGridViewRows(ref gv_Vorschau);
 
             Cursor.Current = Cursors.Default;
@@ -318,7 +325,7 @@ namespace Bibo_Verwaltung
                         Schueler schueler = new Schueler(true);
                         schueler.Vorname = row[0].ToString();
                         schueler.Nachname = row[1].ToString();
-                        schueler.Gd = row[2].ToString();
+                        schueler.Gd = DateTime.Parse(row[2].ToString());
                         schueler.Klasse = row[3].ToString();
                         if (rb_schueler1.Checked)
                         {

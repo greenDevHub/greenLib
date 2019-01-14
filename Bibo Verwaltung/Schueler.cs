@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
 using System.Collections;
+using System.Globalization;
 
 namespace Bibo_Verwaltung
 {
@@ -33,11 +34,11 @@ namespace Bibo_Verwaltung
         /// </summary>
         public string Nachname { get { return nachname; } set { nachname = value; } }
 
-        string gd;
+        DateTime gd;
         /// <summary>
         /// Wohnort des Kunden
         /// </summary>
-        public string Gd { get { return gd; } set { gd = value; } }
+        public DateTime Gd { get { return gd; } set { gd = value; } }
 
         string klasse;
         /// <summary>
@@ -73,11 +74,9 @@ namespace Bibo_Verwaltung
         {
 
         }
-        public Schueler(string vorname, string nachname, string datum)
+        public Schueler(string id)
         {
-            this.Vorname = vorname;
-            this.Nachname = nachname;
-            this.Gd = datum;
+            this.SchuelerID = id;
             loadSchueler();
             loadFaecher();
         }
@@ -87,20 +86,15 @@ namespace Bibo_Verwaltung
         private void loadSchueler()
         {
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT * FROM [dbo].[t_s_schueler] WHERE  sch_vorname = @0 and sch_nachname = @1 and sch_datum = @2";
-            SqlDataReader dr = con.ExcecuteCommand(RawCommand, Vorname, Nachname, Gd);
-            // Einlesen der Datenzeilen und Ausgabe an der Konsole 
-            //Faecher.Clear();
+            string RawCommand = "SELECT sch_vorname, sch_nachname, sch_klasse, sch_stufe, isnull(sch_datum, '01.01.1990') as 'verified_datum' FROM [dbo].[t_s_schueler] WHERE  sch_id=@0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, SchuelerID);
             while (dr.Read())
             {
-                SchuelerID = dr["sch_ID"].ToString();
-                //Vorname = dr["sch_vorname"].ToString();
-                //Nachname = dr["sch_nachname"].ToString();
-                //Gd = dr["sch_datum"].ToString();
+                Vorname = dr["sch_vorname"].ToString();
+                Nachname = dr["sch_nachname"].ToString();
                 Klasse = dr["sch_klasse"].ToString();
                 Klassenstufe = dr["sch_stufe"].ToString();
-                //Fach = new Faecher(dr["sch_fach"].ToString());
-                //Faecher.Add(Fach.FachKurz);
+                Gd = (DateTime)dr["verified_datum"];
             }
             // DataReader schließen 
             dr.Close();
@@ -128,7 +122,7 @@ namespace Bibo_Verwaltung
         {
             if (con.ConnectError()) return;
             string RawCommand = "SELECT sch_id FROM [dbo].[t_s_schueler] WHERE sch_vorname = @0 and sch_nachname = @1 and sch_datum = @2";
-            SqlDataReader dr = con.ExcecuteCommand(RawCommand, Vorname, Nachname, Gd);
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, Vorname, Nachname, Gd.Date);
             while (dr.Read())
             {
                 SchuelerID = dr["sch_id"].ToString();
@@ -242,7 +236,7 @@ namespace Bibo_Verwaltung
                 SchuelerID = row[ds.Tables[0].Columns.IndexOf("Schüler-ID")].ToString();
                 Vorname = row[ds.Tables[0].Columns.IndexOf("Vorname")].ToString();
                 Nachname = row[ds.Tables[0].Columns.IndexOf("Nachname")].ToString();
-                Gd = row[ds.Tables[0].Columns.IndexOf("Geburtsdatum")].ToString();
+                Gd = (DateTime)row[ds.Tables[0].Columns.IndexOf("Geburtsdatum")];
                 Klasse = row[ds.Tables[0].Columns.IndexOf("Klasse")].ToString();
                 Klassenstufe = row[ds.Tables[0].Columns.IndexOf("Klassenstufe")].ToString();
                 loadFaecher();
@@ -250,7 +244,7 @@ namespace Bibo_Verwaltung
                 dataRow["ID"] = SchuelerID;
                 dataRow["Vorname"] = Vorname;
                 dataRow["Nachname"] = Nachname;
-                dataRow["Geburtsdatum"] = Gd;
+                dataRow["Geburtsdatum"] = Gd.ToShortDateString();
                 dataRow["Klasse"] = Klasse;
                 dataRow["Klassenstufe"] = Klassenstufe;
                 string fach = "";
@@ -378,7 +372,7 @@ namespace Bibo_Verwaltung
         {
             if (con.ConnectError()) return false;
             string RawCommand = "SELECT * FROM [dbo].[t_s_schueler] WHERE sch_vorname = @0 and sch_nachname = @1 and sch_datum = @2";
-            SqlDataReader dr = con.ExcecuteCommand(RawCommand, Vorname, Nachname, Gd);
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, Vorname, Nachname, Gd.Date);
             while (dr.Read())
             {
                 SchuelerID = dr["sch_id"].ToString();
