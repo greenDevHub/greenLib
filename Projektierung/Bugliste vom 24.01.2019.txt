@@ -1,0 +1,12 @@
+-Zuordnung zwischen Fächern und Klassenstufe "Leeren"
+-Fächer, Fächer-Klassenzuordnung, Klassenstufen "Suchen"
+-Suche in Schüler, wie in Bücher
+-Autor doppelt vorhanden (evtl.)
+-in Schüler Nachricht nach erfolgreichem Löschen
+-Zuordnung der Fächer bei SEK1-Import
+-bei Importfehler falsche Messagebox (Schülerimport)
+-bei Vorschau ohne Vorlage bei mehreren Dateien nur eine Datei sichtbar (Schülerimport)
+-Maske leeren bei Buchausleihe
+-nach Buchausleih aktualisieren der Bücher
+-bei wsBuchsuche die Filter visuell trennen und Ausleihen und Rückgabe bei Rechtsklick auf Bücher
+-Buchausleih und Buchrückgabe hat noch einige Fehler (mehrmals das gleiche Buch ausgeliehen)
