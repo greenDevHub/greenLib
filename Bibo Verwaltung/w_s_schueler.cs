@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -141,19 +142,27 @@ namespace Bibo_Verwaltung
 
         private void bt_confirm_Click(object sender, EventArgs e)
         {
-            if(bt_confirm.Text == "Löschen")
+            if(tb_klasse.Text != "" && tb_klassenstufe.Text != "" && tb_Nachname.Text != "" && tb_Vorname.Text != "")
             {
-                AddS("Delete");
+                if (bt_confirm.Text == "Löschen")
+                {
+                    AddS("Delete");
+                }
+                else if (bt_confirm.Text == "Speichern")
+                {
+                    AddS("Update");
+                }
+                else if (bt_confirm.Text == "Hinzufügen")
+                {
+                    AddS("Add");
+                }
+                Clear();
             }
-            else if(bt_confirm.Text == "Speichern")
+            else
             {
-                AddS("Update");
+                MessageBox.Show("Bitte überprüfen Sie ihre Angaben.", "Fehlende Angaben", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if(bt_confirm.Text == "Hinzufügen")
-            {
-                AddS("Add");
-            }
-            Clear();
+
         }
 
         private void gv_Kunde_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -258,6 +267,24 @@ namespace Bibo_Verwaltung
         private void bt_clear_Click(object sender, EventArgs e)
         {
             Clear();
+        }
+
+        private void tb_klassenstufe_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                SystemSounds.Beep.Play();
+                e.Handled = true;
+            }
+        }
+
+        private void tb_KundenID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                SystemSounds.Beep.Play();
+                e.Handled = true;
+            }
         }
     }
 }

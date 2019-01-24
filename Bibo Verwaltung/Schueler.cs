@@ -252,7 +252,14 @@ namespace Bibo_Verwaltung
                 {
                     fach = fach + s + ", ";
                 }
-                fach = fach.Substring(0, fach.Length - 2);
+                try
+                {
+                    fach = fach.Substring(0, fach.Length - 2);
+                }
+                catch
+                {
+                    fach = "";
+                }
                 dataRow["Fächer"] = fach;
                 dt.Rows.Add(dataRow);
             }

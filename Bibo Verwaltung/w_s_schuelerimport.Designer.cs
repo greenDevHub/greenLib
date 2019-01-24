@@ -33,7 +33,7 @@
             this.lb_FeldTrenn = new System.Windows.Forms.Label();
             this.bt_Vorschau = new System.Windows.Forms.Button();
             this.division = new System.Windows.Forms.Panel();
-            this.bt_Import = new System.Windows.Forms.Button();
+            this.bt_usepreset = new System.Windows.Forms.Button();
             this.rb_faecher = new System.Windows.Forms.RadioButton();
             this.rb_schueler2 = new System.Windows.Forms.RadioButton();
             this.rb_schueler1 = new System.Windows.Forms.RadioButton();
@@ -155,18 +155,18 @@
             this.division.Size = new System.Drawing.Size(1677, 0);
             this.division.TabIndex = 27;
             // 
-            // bt_Import
+            // bt_usepreset
             // 
-            this.bt_Import.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bt_Import.Enabled = false;
-            this.bt_Import.Location = new System.Drawing.Point(1428, 85);
-            this.bt_Import.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.bt_Import.Name = "bt_Import";
-            this.bt_Import.Size = new System.Drawing.Size(1404, 65);
-            this.bt_Import.TabIndex = 28;
-            this.bt_Import.Text = "Vorlage anwenden";
-            this.bt_Import.UseVisualStyleBackColor = true;
-            this.bt_Import.Click += new System.EventHandler(this.bt_Import_Click);
+            this.bt_usepreset.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bt_usepreset.Enabled = false;
+            this.bt_usepreset.Location = new System.Drawing.Point(1428, 85);
+            this.bt_usepreset.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.bt_usepreset.Name = "bt_usepreset";
+            this.bt_usepreset.Size = new System.Drawing.Size(1404, 65);
+            this.bt_usepreset.TabIndex = 28;
+            this.bt_usepreset.Text = "Vorlage anwenden";
+            this.bt_usepreset.UseVisualStyleBackColor = true;
+            this.bt_usepreset.Click += new System.EventHandler(this.bt_Import_Click);
             // 
             // rb_faecher
             // 
@@ -244,6 +244,7 @@
             // cb_TxtQuali
             // 
             this.cb_TxtQuali.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cb_TxtQuali.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_TxtQuali.Font = new System.Drawing.Font("Candara", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_TxtQuali.FormattingEnabled = true;
             this.cb_TxtQuali.Items.AddRange(new object[] {
@@ -277,6 +278,7 @@
             // cb_FeldTrenn
             // 
             this.cb_FeldTrenn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cb_FeldTrenn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_FeldTrenn.Font = new System.Drawing.Font("Candara", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_FeldTrenn.FormattingEnabled = true;
             this.cb_FeldTrenn.Items.AddRange(new object[] {
@@ -354,6 +356,7 @@
             // bt_accept
             // 
             this.bt_accept.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bt_accept.Enabled = false;
             this.bt_accept.Location = new System.Drawing.Point(4, 1477);
             this.bt_accept.Name = "bt_accept";
             this.bt_accept.Size = new System.Drawing.Size(2840, 51);
@@ -443,6 +446,7 @@
             // bt_removefile
             // 
             this.bt_removefile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bt_removefile.Enabled = false;
             this.bt_removefile.Location = new System.Drawing.Point(287, 139);
             this.bt_removefile.Name = "bt_removefile";
             this.bt_removefile.Size = new System.Drawing.Size(2266, 65);
@@ -562,7 +566,7 @@
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel8.Controls.Add(this.bt_Vorschau, 0, 0);
             this.tableLayoutPanel8.Controls.Add(this.bt_saveProfile, 0, 1);
-            this.tableLayoutPanel8.Controls.Add(this.bt_Import, 1, 1);
+            this.tableLayoutPanel8.Controls.Add(this.bt_usepreset, 1, 1);
             this.tableLayoutPanel8.Controls.Add(this.bt_Abbrechen, 1, 0);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel8.Location = new System.Drawing.Point(4, 1099);
@@ -749,7 +753,7 @@
         private System.Windows.Forms.Label lb_FeldTrenn;
         private System.Windows.Forms.Button bt_Vorschau;
         private System.Windows.Forms.Panel division;
-        private System.Windows.Forms.Button bt_Import;
+        private System.Windows.Forms.Button bt_usepreset;
         private System.Windows.Forms.DataGridView gv_columns;
         private System.Windows.Forms.Button bt_Abbrechen;
         private System.Windows.Forms.CheckBox cb_ColHeader;
