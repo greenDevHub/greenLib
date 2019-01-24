@@ -24,12 +24,12 @@ namespace Bibo_Verwaltung
             InitializeComponent();
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName;
-
-            buchsuche.FillGrid(ref gv_buchsuche);
-            buch.AutorListe.Autor.FillCombobox(ref cb_Autor, -1);
-            buch.Verlag.FillCombobox(ref cb_Verlag, -1);
-            buch.Genre.FillCombobox(ref cb_Genre, -1);
-            buchsuche.Hide_KundenDetails(ref gv_buchsuche);
+            
+            //buch.AutorListe.Autor.FillCombobox(ref cb_Autor, -1);
+            //buch.Verlag.FillCombobox(ref cb_Verlag, -1);
+            //buch.Genre.FillCombobox(ref cb_Genre, -1);
+            //buchsuche.Hide_KundenDetails(ref gv_buchsuche);
+            //buchsuche.FillGrid(ref gv_buchsuche);
         }
         #endregion
 
@@ -238,8 +238,7 @@ namespace Bibo_Verwaltung
             cb_Verlag.Text = "Verlag";
             cb_Verlag.ForeColor = Color.Gray;
             cb_Verfügbar_Anz.Checked = false;
-            buchsuche.Show_AlleExemplare(ref gv_buchsuche);
-            buchsuche.Set_StatusMark(ref gv_buchsuche);
+            buchsuche.FillGrid(ref gv_buchsuche);
         }
 
         private void cb_KundeAnz_CheckedChanged(object sender, EventArgs e)
@@ -256,14 +255,14 @@ namespace Bibo_Verwaltung
 
         private void cb_Verfügbar_Anz_CheckedChanged(object sender, EventArgs e)
         {
-            if (cb_Verfügbar_Anz.Checked == true)
-            {
-                buchsuche.Show_VerfuegbareExemplare(ref gv_buchsuche, "beschädigt");
-            }
-            else
-            {
-                buchsuche.Show_AlleExemplare(ref gv_buchsuche);
-            }
+            //if (cb_Verfügbar_Anz.Checked == true)
+            //{
+                buchsuche.Show_VerfuegbareExemplare(ref gv_buchsuche, cb_Verfügbar_Anz.Checked, "beschädigt");
+            //}
+            //else
+            //{
+            //    buchsuche.Show_AlleExemplare(ref gv_buchsuche);
+            //}
             buchsuche.Set_StatusMark(ref gv_buchsuche);
         }
 

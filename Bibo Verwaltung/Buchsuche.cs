@@ -166,19 +166,51 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Zeigt nur verfügbare Exemplare 
         /// </summary>
-        public void Show_VerfuegbareExemplare(ref DataGridView grid, string zustandName)
+        public void Show_VerfuegbareExemplare(ref DataGridView grid, bool Status, string zustandName)
         {
             try
             {
-                foreach (DataGridViewRow row in grid.Rows)
+                if (Status)
                 {
-                    string vergleich = "";
-                    if (vergleich.Equals(row.Cells["Leihnummer"].Value.ToString()) == true | zustandName.Equals(row.Cells["Zustand"].Value.ToString()) == false)
-                    {
-                        grid.Rows[row.Index].Visible = false;
-                    }
+                    (grid.DataSource as DataTable).DefaultView.RowFilter = string.Format("Leihnummer IS NULL");
                 }
-                Set_StatusMark(ref grid);
+                else
+                {
+                    (grid.DataSource as DataTable).DefaultView.RowFilter = string.Format("ISBN IS NOT NULL");
+                }
+                //ds.Tables[0].DefaultView.RowFilter = string.Format("Leihnummer LIKE '{0}%'AND Zustand LIKE '{1}%'", "", zustandName);
+                //grid.DataSource = ds.Tables[0];
+
+                //DataTable dt = (grid.DataSource as DataTable);
+                //DataTable dtClone = dt.Clone(); //just copy structure, no data
+
+
+                //for (int i = 0; i < dtClone.Columns.Count; i++)
+                //{
+                //    if (dtClone.Columns[i].DataType != typeof(string))
+                //        dtClone.Columns[i].DataType = typeof(string);
+                //}
+
+                //foreach (DataRow dr in dt.Rows)
+                //{
+                //    dtClone.ImportRow(dr);
+                //}
+
+                // dtClone.DefaultView.RowFilter = string.Format("Leihnummer LIKE '{0}%'AND Zustand LIKE '{1}%'", "", zustandName);
+                //(grid.DataSource as DataTable).DefaultView.RowFilter = string.Format("Leihnummer IS NULL AND Zustand LIKE '{0}%'", zustandName);
+                
+                //foreach (DataGridViewRow row in grid.Rows)
+                //{
+                //    string vergleich = "";
+                //    if (vergleich.Equals(row.Cells["Leihnummer"].Value.ToString()) == false | zustandName.Equals(row.Cells["Zustand"].Value.ToString()) == true)
+                //    {
+                //        CurrencyManager hideRow = (CurrencyManager)grid.BindingContext[grid.DataSource];
+                //        hideRow.SuspendBinding();
+                //        grid.Rows[row.Index].Visible = false;
+                //        hideRow.ResumeBinding();
+                //    }
+                //}
+
             }
             catch { }
         }
@@ -238,20 +270,24 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void Execute_KundenSearch(ref DataGridView grid, string vorname, string nachname, string klasse)
         {
-            if (vorname == "Vorname")
+            try
             {
-                vorname = "";
-            }
-            if (nachname == "Nachname")
-            {
-                nachname = "";
-            }
-            if (klasse == "Klasse")
-            {
-                klasse = "";
-            }
+                if (vorname == "Vorname")
+                {
+                    vorname = "";
+                }
+                if (nachname == "Nachname")
+                {
+                    nachname = "";
+                }
+                if (klasse == "Klasse")
+                {
+                    klasse = "";
+                }
             (grid.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%'AND Klasse LIKE '{2}%'", vorname, nachname, klasse);
-            Set_StatusMark(ref grid);
+                Set_StatusMark(ref grid);
+            }
+            catch { }
         }
     }
 }

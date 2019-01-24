@@ -36,17 +36,17 @@
             this.gb_BSuchen = new System.Windows.Forms.GroupBox();
             this.tb_ExemplarID = new System.Windows.Forms.TextBox();
             this.tb_ISBN = new System.Windows.Forms.TextBox();
-            this.tb_nachname = new System.Windows.Forms.TextBox();
-            this.tb_vorname = new System.Windows.Forms.TextBox();
             this.cb_Verlag = new System.Windows.Forms.ComboBox();
             this.cb_Genre = new System.Windows.Forms.ComboBox();
             this.cb_Autor = new System.Windows.Forms.ComboBox();
-            this.bt_Clear = new System.Windows.Forms.Button();
             this.tb_Titel = new System.Windows.Forms.TextBox();
+            this.tb_nachname = new System.Windows.Forms.TextBox();
+            this.tb_vorname = new System.Windows.Forms.TextBox();
+            this.bt_Clear = new System.Windows.Forms.Button();
             this.bt_Rueckgabe = new System.Windows.Forms.Button();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
-            this.gb_KSuchen = new System.Windows.Forms.GroupBox();
             this.tb_klasse = new System.Windows.Forms.TextBox();
+            this.gb_KSuchen = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_buchsuche)).BeginInit();
             this.gb_BSuchen.SuspendLayout();
             this.gb_KSuchen.SuspendLayout();
@@ -64,15 +64,16 @@
             this.helpProvider.SetHelpString(this.gv_buchsuche, "In diesem Feld werden all ihre Bücher und evtl. vorhandene Ausleihvorgänge angeze" +
         "igt.");
             this.gv_buchsuche.Location = new System.Drawing.Point(12, 89);
-            this.gv_buchsuche.MultiSelect = false;
             this.gv_buchsuche.Name = "gv_buchsuche";
             this.gv_buchsuche.ReadOnly = true;
             this.gv_buchsuche.RowHeadersWidth = 35;
+            this.gv_buchsuche.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_buchsuche.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv_buchsuche.ShowEditingIcon = false;
             this.helpProvider.SetShowHelp(this.gv_buchsuche, true);
             this.gv_buchsuche.Size = new System.Drawing.Size(960, 550);
             this.gv_buchsuche.TabIndex = 0;
+            this.gv_buchsuche.VirtualMode = true;
             this.gv_buchsuche.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_buchsuche_ColumnHeaderMouseClick);
             // 
             // cb_KundeAnz
@@ -165,36 +166,6 @@
             this.tb_ISBN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_ISBN_KeyPress);
             this.tb_ISBN.Leave += new System.EventHandler(this.tb_ISBN_Leave);
             // 
-            // tb_nachname
-            // 
-            this.tb_nachname.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.helpProvider.SetHelpString(this.tb_nachname, "Tragen sie hier den Nachnamen des gesuchten Kunden ein, welcher einen Ausleihvorg" +
-        "ang getätigt hat.");
-            this.tb_nachname.Location = new System.Drawing.Point(6, 45);
-            this.tb_nachname.Name = "tb_nachname";
-            this.helpProvider.SetShowHelp(this.tb_nachname, true);
-            this.tb_nachname.Size = new System.Drawing.Size(170, 20);
-            this.tb_nachname.TabIndex = 31;
-            this.tb_nachname.Text = "Nachname";
-            this.tb_nachname.TextChanged += new System.EventHandler(this.tb_nachname_TextChanged);
-            this.tb_nachname.Enter += new System.EventHandler(this.tb_nachname_Enter);
-            this.tb_nachname.Leave += new System.EventHandler(this.tb_nachname_Leave);
-            // 
-            // tb_vorname
-            // 
-            this.tb_vorname.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.helpProvider.SetHelpString(this.tb_vorname, "Tragen sie hier den Vornamen des gesuchten Kunden ein, welcher einen Ausleihvorga" +
-        "ng getätigt hat.");
-            this.tb_vorname.Location = new System.Drawing.Point(6, 19);
-            this.tb_vorname.Name = "tb_vorname";
-            this.helpProvider.SetShowHelp(this.tb_vorname, true);
-            this.tb_vorname.Size = new System.Drawing.Size(170, 20);
-            this.tb_vorname.TabIndex = 30;
-            this.tb_vorname.Text = "Vorname";
-            this.tb_vorname.TextChanged += new System.EventHandler(this.tb_vorname_TextChanged);
-            this.tb_vorname.Enter += new System.EventHandler(this.tb_vorname_Enter);
-            this.tb_vorname.Leave += new System.EventHandler(this.tb_vorname_Leave);
-            // 
             // cb_Verlag
             // 
             this.cb_Verlag.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
@@ -249,18 +220,6 @@
             this.cb_Autor.Enter += new System.EventHandler(this.cb_Autor_Enter);
             this.cb_Autor.Leave += new System.EventHandler(this.cb_Autor_Leave);
             // 
-            // bt_Clear
-            // 
-            this.helpProvider.SetHelpString(this.bt_Clear, "Leeren sie alle linksseitig liegenden Textfelder.");
-            this.bt_Clear.Location = new System.Drawing.Point(919, 12);
-            this.bt_Clear.Name = "bt_Clear";
-            this.helpProvider.SetShowHelp(this.bt_Clear, true);
-            this.bt_Clear.Size = new System.Drawing.Size(53, 71);
-            this.bt_Clear.TabIndex = 26;
-            this.bt_Clear.Text = "Filter löschen";
-            this.bt_Clear.UseVisualStyleBackColor = true;
-            this.bt_Clear.Click += new System.EventHandler(this.bt_Clear_Click);
-            // 
             // tb_Titel
             // 
             this.tb_Titel.ForeColor = System.Drawing.SystemColors.GrayText;
@@ -275,6 +234,48 @@
             this.tb_Titel.Enter += new System.EventHandler(this.tb_Titel_Enter);
             this.tb_Titel.Leave += new System.EventHandler(this.tb_Titel_Leave);
             // 
+            // tb_nachname
+            // 
+            this.tb_nachname.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.helpProvider.SetHelpString(this.tb_nachname, "Tragen sie hier den Nachnamen des gesuchten Kunden ein, welcher einen Ausleihvorg" +
+        "ang getätigt hat.");
+            this.tb_nachname.Location = new System.Drawing.Point(6, 45);
+            this.tb_nachname.Name = "tb_nachname";
+            this.helpProvider.SetShowHelp(this.tb_nachname, true);
+            this.tb_nachname.Size = new System.Drawing.Size(170, 20);
+            this.tb_nachname.TabIndex = 31;
+            this.tb_nachname.Text = "Nachname";
+            this.tb_nachname.TextChanged += new System.EventHandler(this.tb_nachname_TextChanged);
+            this.tb_nachname.Enter += new System.EventHandler(this.tb_nachname_Enter);
+            this.tb_nachname.Leave += new System.EventHandler(this.tb_nachname_Leave);
+            // 
+            // tb_vorname
+            // 
+            this.tb_vorname.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.helpProvider.SetHelpString(this.tb_vorname, "Tragen sie hier den Vornamen des gesuchten Kunden ein, welcher einen Ausleihvorga" +
+        "ng getätigt hat.");
+            this.tb_vorname.Location = new System.Drawing.Point(6, 19);
+            this.tb_vorname.Name = "tb_vorname";
+            this.helpProvider.SetShowHelp(this.tb_vorname, true);
+            this.tb_vorname.Size = new System.Drawing.Size(170, 20);
+            this.tb_vorname.TabIndex = 30;
+            this.tb_vorname.Text = "Vorname";
+            this.tb_vorname.TextChanged += new System.EventHandler(this.tb_vorname_TextChanged);
+            this.tb_vorname.Enter += new System.EventHandler(this.tb_vorname_Enter);
+            this.tb_vorname.Leave += new System.EventHandler(this.tb_vorname_Leave);
+            // 
+            // bt_Clear
+            // 
+            this.helpProvider.SetHelpString(this.bt_Clear, "Leeren sie alle linksseitig liegenden Textfelder.");
+            this.bt_Clear.Location = new System.Drawing.Point(919, 12);
+            this.bt_Clear.Name = "bt_Clear";
+            this.helpProvider.SetShowHelp(this.bt_Clear, true);
+            this.bt_Clear.Size = new System.Drawing.Size(53, 71);
+            this.bt_Clear.TabIndex = 26;
+            this.bt_Clear.Text = "Filter löschen";
+            this.bt_Clear.UseVisualStyleBackColor = true;
+            this.bt_Clear.Click += new System.EventHandler(this.bt_Clear_Click);
+            // 
             // bt_Rueckgabe
             // 
             this.bt_Rueckgabe.Location = new System.Drawing.Point(168, 645);
@@ -284,18 +285,6 @@
             this.bt_Rueckgabe.Text = "Buchrückgabe";
             this.bt_Rueckgabe.UseVisualStyleBackColor = true;
             this.bt_Rueckgabe.Click += new System.EventHandler(this.bt_Rueckgabe_Click);
-            // 
-            // gb_KSuchen
-            // 
-            this.gb_KSuchen.Controls.Add(this.tb_klasse);
-            this.gb_KSuchen.Controls.Add(this.tb_vorname);
-            this.gb_KSuchen.Controls.Add(this.tb_nachname);
-            this.gb_KSuchen.Location = new System.Drawing.Point(553, 12);
-            this.gb_KSuchen.Name = "gb_KSuchen";
-            this.gb_KSuchen.Size = new System.Drawing.Size(360, 71);
-            this.gb_KSuchen.TabIndex = 32;
-            this.gb_KSuchen.TabStop = false;
-            this.gb_KSuchen.Text = "Suchen nach Kundeneigenschaften:";
             // 
             // tb_klasse
             // 
@@ -311,6 +300,18 @@
             this.tb_klasse.TextChanged += new System.EventHandler(this.tb_klasse_TextChanged);
             this.tb_klasse.Enter += new System.EventHandler(this.tb_klasse_Enter);
             this.tb_klasse.Leave += new System.EventHandler(this.tb_klasse_Leave);
+            // 
+            // gb_KSuchen
+            // 
+            this.gb_KSuchen.Controls.Add(this.tb_klasse);
+            this.gb_KSuchen.Controls.Add(this.tb_vorname);
+            this.gb_KSuchen.Controls.Add(this.tb_nachname);
+            this.gb_KSuchen.Location = new System.Drawing.Point(553, 12);
+            this.gb_KSuchen.Name = "gb_KSuchen";
+            this.gb_KSuchen.Size = new System.Drawing.Size(360, 71);
+            this.gb_KSuchen.TabIndex = 32;
+            this.gb_KSuchen.TabStop = false;
+            this.gb_KSuchen.Text = "Suchen nach Kundeneigenschaften:";
             // 
             // w_s_buchsuche
             // 

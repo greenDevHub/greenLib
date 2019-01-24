@@ -115,7 +115,7 @@ namespace Bibo_Verwaltung
         }
 
         /// <summary>
-        /// Setzt den Auswahl-Slider anhand der Elemente der Ausleihliste
+        /// Setzt den Auswahl-Slider anhand der Elemente der Rückgabeliste
         /// </summary>
         private void SetSlider()
         {

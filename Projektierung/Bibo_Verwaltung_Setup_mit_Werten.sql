@@ -392,3 +392,55 @@ CREATE TABLE [dbo].[t_s_benutzer](
 	Insert INTO t_s_benutzer (b_name, b_password, b_rechte) VALUES ('admin', CAST('admin' AS VARBINARY(MAX)), 2)
 	select * from t_s_benutzer
 END
+
+use Bibo_Verwaltung
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_preis]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_benutzer]
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_preis]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[t_s_preis](
+	[p_aenderung] [int] IDENTITY (1,1) NOT NULL,
+	[b_isbn] [nvarchar] (128) NOT NULL,
+	[p_preis] [numeric](18,2) NOT NULL,
+	[p_datum] [date] NOT NULL DEFAULT(GETDATE()),
+	PRIMARY KEY (p_aenderung))
+
+    Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 49.95)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 60.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 50.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 20.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 10.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 160.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 100.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 110.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 113.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 49.95)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 60.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 50.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 20.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 10.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 160.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 100.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 110.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 113.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 49.95)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 60.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 50.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 20.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 10.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 160.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 100.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 110.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 113.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 49.95)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 60.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 50.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 20.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 10.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 160.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 100.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 110.00)
+	Insert INTO t_s_preis (b_isbn, p_preis) VALUES ('978-3423715669', 113.00)
+	select * from t_s_preis
+END
