@@ -56,9 +56,31 @@ namespace Bibo_Verwaltung
             con.Close();
         }
         #endregion
-
+        #region Exists?
+        public bool AlreadyExists()
+        {
+            SQL_Verbindung con = new SQL_Verbindung();
+            if (con.ConnectError()) return false;
+            string RawCommand = "SELECT f_id FROM [dbo].[t_s_faecher] WHERE f_kurzform = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, FachKurz);
+            while (dr.Read())
+            {
+                FachID = dr["f_id"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            if (FachID == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        #endregion
         #region Add
-        public void Add(string verlag)
+        public void Add()
         {
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
@@ -95,6 +117,8 @@ namespace Bibo_Verwaltung
         }
         public void FillGrid(ref DataGridView grid, object value = null)
         {
+            ds.Tables[0].Clear();
+            FillObject();
             grid.DataSource = ds.Tables[0];
             grid.Columns[0].Visible = false;
             grid.Columns["f_kurzform"].HeaderText = "Kurzform";

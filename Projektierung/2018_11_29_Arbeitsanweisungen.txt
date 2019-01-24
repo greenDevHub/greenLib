@@ -1,30 +1,37 @@
 ToDo:
 
 Pflicht
-	  -	Datenbankstruktur (Zuordnungstabelle Fach-Schüler, Autorliste, ISBNListe) --> Schülerimport anpassen
-	  -	Alle ensprechenden Vorgänge anpassen
-	  -	Verwaltung Fächer pro Klassenstufe
-	  -	Import überarbeiten (Fächer hinzufügen)
-	  -	Automatisierte Lehrbuchzuordnung zu Schülern + Lehrbuchausgabe
-(erledigt)-	Ausleihvorgang überarbeiten
-	  -	Errors abfangen
-	  -	Kunde/Schüler/Lehrer in einer Tabelle, nicht separat 
-	  -	einige Abstürze, da die Datei Biblothek\einstellungen\Einstellungen.txt sich nicht automatisch erstellt hat
+	-	Druckerproblem klï¿½ren, Etikettengrï¿½ï¿½en, Drucker besorgen
+	-	Schï¿½lerdaten besorgen (wann, wer, was)
+	-	Lehrbuchausgabe bzw. -annahme am Schuljahresbeginn/-ende; Schï¿½ler muss unterschreiben?
+	-	Prozess Etikettendruck optimieren
+	-	Datenbankstruktur (Zuordnungstabelle Fach-Schï¿½ler, Autorliste, ISBNListe) --> Schï¿½lerimport anpassen
+	-	Alle ensprechenden Vorgï¿½nge anpassen
+	-	Verwaltung Fï¿½cher pro Klassenstufe
+	-	Import ï¿½berarbeiten (Fï¿½cher hinzufï¿½gen)
+	-	Automatisierte Lehrbuchzuordnung zu Schï¿½lern + Lehrbuchausgabe
+	-	(erledigt) Ausleihvorgang ï¿½berarbeiten
+	-	Errors abfangen
+	-	Kunde/Schï¿½ler/Lehrer in einer Tabelle, nicht separat
+	-	einige Abstï¿½rze, da die Datei Biblothek\einstellungen\Einstellungen.txt sich nicht automatisch erstellt hat
 Optional
 	  -	Statistiken
 	  -	Errors spezifiziert abfangen
 	  -	Port angeben bei Server-Einstellungen
 	  -	Schuljahr Ende Datenbereinigung (Kunden, die nicht mehr an der Schule sind, nur deaktivieren)
-	  -	Alle Import-/Exportvorgänge bündeln
+	  -	Alle Import-/Exportvorgï¿½nge bï¿½ndeln
 	  -	Anleitung/Dokumentation (Windows-Help-File / Intranet-Wikis)
 	  -	Rechteverwaltung
-	  -	Nur Bücher, die nicht im Ausleihvorgang sind, sind deaktivierbar
-	  -	Deaktivierte Bücher werden nicht angezeigt
-	  -	Buchrückgabefenster Autoren anzeigen
-	  -	Passwort verschlüsseln
+	  -	Nur Bï¿½cher, die nicht im Ausleihvorgang sind, sind deaktivierbar
+	  -	Deaktivierte Bï¿½cher werden nicht angezeigt
+	  -	Buchrï¿½ckgabefenster Autoren anzeigen
+	  -	Passwort verschlï¿½sseln
 	  -	Programmweit angemeldeten Benutzer anzeigen
 	  -	Benutzer in wichtige Prozesse einbinden
 		-	Ausleihvorgang>bei welchem Mitarbeiter(Benutzer) ausgeliehen?
 		-	Buch verwalten>welcher Benutzer hat buch zuletzt bearbeitet
 		-	Kunde verwalten>welcher Benutzer hat Kunde zuletzt bearbeitet
-	
+
+BUGLISTE:
+	-	Autor/genres/... bearbeitung beenden ohne ï¿½nderung -->Eintrag bereits vorhanden -->Lï¿½schen von Eintrag
+	-	w_s_buecher Entfernen Modus: Bild vergrï¿½ï¿½ert nicht

@@ -57,10 +57,21 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private void bt_import_Click(object sender, EventArgs e)
+        private void bt_import_Click_1(object sender, EventArgs e)
         {
-            Form Import = new w_s_import_export((DataTable)gv_Verlage.DataSource, true);
+            Form Import = new w_s_schuelerimport("t_s_faecher", true);
             Import.ShowDialog(this);
+            f.FillGrid(ref gv_Verlage);
+        }
+
+        private void bt_Suchen_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void bt_Verwaltung_Click(object sender, EventArgs e)
+        {
+            Form fachstufe = new w_s_fach_stufe();
+            fachstufe.ShowDialog(this);
         }
     }
 }

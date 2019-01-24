@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,50 +14,57 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_schuelerimport : Form
     {
-        DataTable dataoftable = new DataTable();
         char seperator = ';';
         char feldquali = '"';
         char dattrenn = '.';
         char zeittrenn = ':';
         char dezsym = ',';
-        string target = "t_s_schueler";
+        string target = "";
+        string filename = "";
+        bool multiselect = false;
+        List<string> files = new List<string>();
+        List<string> filesShort = new List<string>();
 
-        public w_s_schuelerimport(DataTable table, bool modus)
+        public w_s_schuelerimport(string target, bool modus)
         {
+            this.target = target;
             InitializeComponent();
-            this.dataoftable = table;
+            tb_lines.Text = "0";
             setModus(modus);
-        }
-        public w_s_schuelerimport(bool modus)
-        {
-            InitializeComponent();
-            setModus(modus);
+            SetTarget();
+            ImportMode();
+            CheckSelected();
+            SetSlider();
         }
 
+        /// <summary>
+        /// Umschaltung zwischen Importieren und Exportieren
+        /// </summary>
+        /// <param name="modus"></param>
         private void setModus(bool modus)
         {
             if (modus == true)
             {
                 lb_anweissung.Text = "Geben Sie die Quelle der zu importierenden Daten an.";
-                gb_Ziel.Visible = true;
-                bt_Import.Text = "Vorlage anwenden";
+                bt_usepreset.Text = "Vorlage anwenden";
             }
             else
             {
                 lb_anweissung.Text = "Geben Sie das Ziel der zu exportierenden Daten an.";
-                gb_Ziel.Visible = false;
-                bt_Import.Text = "Exportieren";
+                bt_usepreset.Text = "Exportieren";
             }
         }
 
-        #region Main-Functions (Methods: getValues(), createPreview(), showPreview(), startImport())      
+        #region Main-Functions
+        /// <summary>
+        /// läd die entsprechenden Werte, die für das Importformat wichtig sind
+        /// </summary>
         private void getValues()
         {
+            trennError = false;
+            qualiError = false;
             string feldtrenn = cb_FeldTrenn.Text;
             string txtqualifier = cb_TxtQuali.Text;
-            string datumstrenn = tb_DatTrenn.Text;
-            string zeittrennchar = tb_ZeitTrenn.Text;
-            string deztrenn = tb_DezSym.Text;
             //string zieltabelle = cb_Ziel.Text;
 
             //Seperator
@@ -74,7 +82,8 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MessageBox.Show("Das Feldtrennzeichen ist ungülig! Wählen Sie eines der gültigen Trennzeichen des Auswahlmenüs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                trennError = true;
+                //MessageBox.Show("Das Feldtrennzeichen ist ungülig! Wählen Sie eines der gültigen Trennzeichen des Auswahlmenüs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             //Textqualifizierer
@@ -84,92 +93,75 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MessageBox.Show("Der Textqualifizierer ist ungülig! Wählen Sie einen der gültigen Textqualifizierer des Auswahlmenüs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                qualiError = true;
+                //MessageBox.Show("Der Textqualifizierer ist ungülig! Wählen Sie einen der gültigen Textqualifizierer des Auswahlmenüs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            //Datumstrennzeichen
-            if (datumstrenn.Length == 1)
-            {
-                dattrenn = Convert.ToChar(datumstrenn);
-            }
-            else
-            {
-                MessageBox.Show("Das Datumstrennzeichen ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            //Zeittrennzeichen
-            if (zeittrennchar.Length == 1)
-            {
-                zeittrenn = Convert.ToChar(zeittrennchar);
-            }
-            else
-            {
-                MessageBox.Show("Das Zeittrennzeichen ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            //Dezimalsymbol
-            if (deztrenn.Length == 1)
-            {
-                dezsym = Convert.ToChar(deztrenn);
-            }
-            else
-            {
-                MessageBox.Show("Das Dezimalsymbol ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            //Zieltabelle
-            //if (zieltabelle == "Kundentabelle")
-            //{
-            //    target = "t_s_kunden";
-            //}
-            //else if (zieltabelle == "Büchertabelle")
-            //{
-            //    target = "t_s_buecher";
-            //}
-            //else if (zieltabelle == "Exemplartabelle")
-            //{
-            //    target = "t_s_buchid";
-            //}
-            //else if(zieltabelle == "Fächertabelle")
-            //{
-            //    target = "t_s_faecher";
-            //}
-            //else if(zieltabelle == "Schülertabelle")
-            //{
-            //    target = "t_s_schueler";
-            //}
         }
-
-        private void createPreview()
+        
+        /// <summary>
+        /// Erstellt die Vorschau 
+        /// </summary>
+        /// <param name="file"></param>
+        private void createPreview(string file)
         {
             Cursor.Current = Cursors.WaitCursor;
             Schuelerimport im = new Schuelerimport();
-            im.Path = tb_path.Text;
+            im.Path = file;
             im.Separator = seperator;
             im.Textqualifizierer = feldquali;
-            im.Datumsfolge = cb_DatFolge.Text;
             im.Datumstrennzeichen = dattrenn;
             im.Zeittrennzeichen = zeittrenn;
-            im.Vierstelligejahre = ch_4stelligeJahre.Checked;
-            im.FuehrendeDatumsnull = ch_DatNullen.Checked;
             im.Dezimaltrennzeichen = dezsym;
             im.ColumnHeader = cb_ColHeader.Checked;
             im.LineNum = 0;
-            im.LineNum = int.Parse(tb_lines.Text);
+            try
+            {
+                im.LineNum = int.Parse(tb_lines.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Bitte geben Sie eine gültige Zahl in das Feld 'Obere Zeilen Entfernen' ein.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             im.FillGridViewRows(ref gv_Vorschau);
+
             Cursor.Current = Cursors.Default;
         }
 
-        private void showPreview()
+        bool trennError = false;
+        bool qualiError = false;
+        /// <summary>
+        /// Zeigt die Vorschau
+        /// </summary>
+        /// <param name="file"></param>
+        private void showPreview(string file)
         {
-            if (File.Exists(tb_path.Text))
+
+            if (File.Exists(file))
             {
                 getValues();
-                createPreview();
+                if (trennError && !qualiError)
+                {
+                    MessageBox.Show("Das Feldtrennzeichen ist ungülig! Wählen Sie eines der gültigen Trennzeichen des Auswahlmenüs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    cb_FeldTrenn.Focus();
+                }
+                else if(!trennError && qualiError)
+                {
+                    MessageBox.Show("Der Textqualifizierer ist ungülig! Wählen Sie einen der gültigen Textqualifizierer des Auswahlmenüs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    cb_TxtQuali.Focus();
+                }
+                else if(trennError && qualiError)
+                {
+                    MessageBox.Show("Der Textqualifizierer und das Feldtrennzeichen sind ungülig! Wählen Sie einen gültigen Eintrag im Auswahlmenü.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    cb_FeldTrenn.Focus();
+                }
+                else
+                {
+                    createPreview(file);
+                }
             }
             else
             {
-                MessageBox.Show("Der Pfad: " + tb_path.Text + " ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Der Pfad: " + files[0] + " ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 gv_Vorschau.DataSource = null;
                 tb_path.Focus();
             }
@@ -179,155 +171,209 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Object-Functions
+        /// <summary>
+        /// Öffnet FileDialog
+        /// </summary>
         private void FileDialog()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = "Wählen Sie eine Datei für den Datenimport";
+            if (multiselect)
+            {
+                openFileDialog.Title = "Wählen Sie mehrere Dateien für den Datenimport";
+            }
+            else
+            {
+                openFileDialog.Title = "Wählen Sie eine Datei für den Datenimport";
+            }
             openFileDialog.Filter = "Text Files|*.txt; *.csv";
+            openFileDialog.Multiselect = multiselect;
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (openFileDialog.FileName.Contains(".txt") || openFileDialog.FileName.Contains(".csv"))
+                if (multiselect)
                 {
-                    tb_path.Text = openFileDialog.FileName;
+                    for(int i = 0; i < openFileDialog.FileNames.Length;i++)
+                    {
+                        if(openFileDialog.FileNames[i].Contains(".txt") || openFileDialog.FileNames[i].Contains(".csv"))
+                        {
+                            files.Add(openFileDialog.FileNames[i]);
+                            filesShort.Add(openFileDialog.SafeFileNames[i]);
+                            tb_path.Text = tb_path.Text + openFileDialog.SafeFileNames[i] + ", ";
+                        }
+                    }
+                    tb_path.Text = tb_path.Text.Substring(0, tb_path.Text.Length - 2);
                 }
                 else
                 {
-                    tb_path.Text = "";
-                    MessageBox.Show("Der angegebene Dateiname ist ungültig. Bitte verwenden sie nur Dateien mit der Endung \'.txt\' oder \'.csv\'!");
-                    FileDialog();
+                    if (openFileDialog.FileName.Contains(".txt") || openFileDialog.FileName.Contains(".csv"))
+                    {
+                        tb_path.Text = openFileDialog.SafeFileName;
+                        files.Add(openFileDialog.FileName);
+                        filesShort.Add(openFileDialog.SafeFileName);
+                    }
+                    else
+                    {
+                        tb_path.Text = "";
+                        MessageBox.Show("Der angegebene Dateiname ist ungültig. Bitte verwenden sie nur Dateien mit der Endung \'.txt\' oder \'.csv\'!");
+                        FileDialog();
+                    }
                 }
+
             }
+            SetSlider();
 
         }
+        /// <summary>
+        /// Klick auf den FileDialog-Button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_durchsuchen_Click(object sender, EventArgs e)
         {
+            tb_path.Text = "";
+            files.Clear();
+            filesShort.Clear();
             FileDialog();
+            if(tb_path.Text != "")
+            {
+                tb_aktuell.Text = files[slider_preview.Value - 1];
+
+            }
         }
 
         private void w_s_importDialog_Shown(object sender, EventArgs e)
         {
             cb_FeldTrenn.SelectedIndex = 1;
             cb_TxtQuali.SelectedIndex = 0;
-            cb_DatFolge.SelectedIndex = 0;
-            cb_Ziel.SelectedIndex = 0;
         }
-
+        /// <summary>
+        /// Klick auf Vorschau-Button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_Vorschau_Click(object sender, EventArgs e)
         {
-            showPreview();
-        }
+            usePreset = false;
+            removeAt.Clear();
+            indexes.Clear();
+            try
+            {
+                showPreview(tb_aktuell.Text);
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Der Zugriff auf die Datei wurde behindert. Bitte schließen Sie Anwendungen, in denen Sie diese ggf. geöffnet haben oder wenden Sie sich an den Administrator.", "Zugriff verweigert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
+        }
+        /// <summary>
+        /// Leert das Formular
+        /// </summary>
         private void clearForm()
         {
             tb_path.Text = "";
-            tb_DatTrenn.Text = ".";
-            tb_ZeitTrenn.Text = ":";
-            tb_DezSym.Text = ",";
-            cb_DatFolge.SelectedIndex = 0;
+            tb_lines.Text = "0";
             cb_FeldTrenn.SelectedIndex = 1;
             cb_TxtQuali.SelectedIndex = 0;
-            cb_Ziel.SelectedIndex = 0;
             gv_Vorschau.DataSource = null;
-            gb_Formatierung.Enabled = false;
-            gb_Dateiformat.Enabled = false;
             lb_Anweissung2.Enabled = false;
-            gb_Ziel.Enabled = false;
-            bt_Import.Enabled = true;
+            bt_usepreset.Enabled = true;
             bt_Vorschau.Enabled = false;
             gv_Vorschau.Enabled = false;
             gv_Vorschau.DataSource = null;
             lb_Vorschau.Enabled = false;
+            lb_Vorschau1.Enabled = false;
         }
-
+        /// <summary>
+        /// Prüft, ob der Pfad geändert wurde und handelt dementsprechend
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tb_path_TextChanged(object sender, EventArgs e)
         {
             if (tb_path.Text != "")
             {
-                gb_Formatierung.Enabled = true;
-                gb_Dateiformat.Enabled = true;
+                usePreset = false;
+                bt_saveProfile.Enabled = true;
+                bt_removefile.Enabled = true;
+                bt_accept.Enabled = true;
                 lb_Anweissung2.Enabled = true;
-                gb_Ziel.Enabled = true;
-                bt_Import.Enabled = true;
+                bt_usepreset.Enabled = true;
                 bt_Vorschau.Enabled = true;
                 gv_Vorschau.Enabled = true;
                 lb_Vorschau.Enabled = true;
+                lb_Vorschau1.Enabled = true;
             }
             else
             {
-                gb_Formatierung.Enabled = false;
-                gb_Dateiformat.Enabled = false;
+                bt_saveProfile.Enabled = false;
+                usePreset = false;
+                bt_removefile.Enabled = false;
+                bt_accept.Enabled = false;
                 lb_Anweissung2.Enabled = false;
-                gb_Ziel.Enabled = false;
-                bt_Import.Enabled = false;
+                bt_usepreset.Enabled = false;
                 bt_Vorschau.Enabled = false;
                 gv_Vorschau.Enabled = false;
                 gv_Vorschau.DataSource = null;
                 lb_Vorschau.Enabled = false;
+                lb_Vorschau1.Enabled = false;
             }
         }
         bool usePreset = false;
+        /// <summary>
+        /// Klick auf den Button, der das Preset aktiviert
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_Import_Click(object sender, EventArgs e)
         {
-            loadProfile();
-            usePreset = true;
-        }
+            try
+            {
+                loadProfile();
+                usePreset = true;
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Equals("failed preset", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    MessageBox.Show("Der Zugriff auf die Datei wurde behindert. Bitte schließen Sie Anwendungen, in denen Sie diese ggf. geöffnet haben oder wenden Sie sich an den Administrator.", "Zugriff verweigert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (ex.Message.Equals("wrong preset", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    MessageBox.Show("Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt.", "Fehler bei Vorlage", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                }
+                else if (ex.Message.Equals("no preset", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    MessageBox.Show("Es ist noch keine Vorlage für " + filename + " vorhanden. Führen Sie bitte einen entsprechenden Import manuell aus, um eine Vorlage zu erstellen.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+        /// <summary>
+        /// Klick auf den Button, der ein neues Preset speichert
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_saveProfile_Click(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            createNewDT(dt, false);
-            saveProfile();
-        }
-
-        private void startImport()
-        {
-            Cursor.Current = Cursors.WaitCursor;
-            Schuelerimport im = new Schuelerimport();
-            im.Path = tb_path.Text;
-            im.Separator = seperator;
-            im.Textqualifizierer = feldquali;
-            im.Datumsfolge = cb_DatFolge.Text;
-            im.Datumstrennzeichen = dattrenn;
-            im.Zeittrennzeichen = zeittrenn;
-            im.Vierstelligejahre = ch_4stelligeJahre.Checked;
-            im.FuehrendeDatumsnull = ch_DatNullen.Checked;
-            im.Dezimaltrennzeichen = dezsym;
-            im.LineNum = int.Parse(tb_lines.Text);
-            im.ColumnHeader = cb_ColHeader.Checked;
-            im.Zieltabelle = "t_s_schueler";
-            im.executeImport();
-            Cursor.Current = Cursors.Default;
+            DialogResult result = MessageBox.Show("Wollen Sie ihre Änderungen an der Datenstruktur für " + filename + " wirklich in einer Vorlagedatei speichern?", "Änderungen speichern?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(result == DialogResult.Yes)
+            {
+                DataTable dt = new DataTable();
+                createNewDT(dt, false);
+                saveProfile();
+            }
         }
         #endregion
 
-        private void cb_Ziel_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string zieltabelle = cb_Ziel.Text;
-            if (zieltabelle == "Kundentabelle")
-            {
-                target = "t_s_kunden";
-            }
-            else if (zieltabelle == "Büchertabelle")
-            {
-                target = "t_s_buecher";
-            }
-            else if (zieltabelle == "Exemplartabelle")
-            {
-                target = "t_s_buchid";
-            }
-            else if (zieltabelle == "Fächertabelle")
-            {
-                target = "t_s_faecher";
-            }
-            else if (zieltabelle == "Schülertabelle")
-            {
-                target = "t_s_schueler";
-            }
-            Schuelerimport ie = new Schuelerimport();
-            //ie.FillColGrid(ref gv_columns, ie.GetSQLColumns(target));
-        }
+
         DataTable newDT = new DataTable();
         List<int> indexes = new List<int>();
+        /// <summary>
+        /// Erstellt einen neuen DataTable mit den Vorschaudaten
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="usePreset"></param>
         private void createNewDT(DataTable dt, bool usePreset)
         {
             if (!usePreset)
@@ -357,9 +403,6 @@ namespace Bibo_Verwaltung
                     dt.Columns.Add(gv_Vorschau.Columns[i].Name);
 
                 }
-                //for (int i = 0;i< indexes.Count;i++)
-                //{
-                //}
             }
             
             foreach (DataGridViewRow row in gv_Vorschau.Rows)
@@ -372,97 +415,208 @@ namespace Bibo_Verwaltung
                 }
                 dt.Rows.Add(dr);
             }
-            dataGridView1.DataSource = dt;
             newDT = dt;
         }
+        /// <summary>
+        /// Klick auf Import-Button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_accept_Click(object sender, EventArgs e)
         {
-
-            //DataTable dt = new DataTable();
-            //createNewDT(dt, usePreset);
-            foreach(DataRow row in newDT.Rows)
+            if (usePreset)
             {
-                Schueler schueler = new Schueler(true);
-                schueler.Vorname = row[0].ToString();
-                schueler.Nachname = row[1].ToString();
-                schueler.Gd = row[2].ToString();
-                schueler.Klasse = row[3].ToString();
-                if (radioButton1.Checked)
+                StartImport(true);
+            }
+            else
+            {
+                if (gv_Vorschau.Rows.Count == 0)
                 {
-                    //SEK1
-                    schueler.Klassenstufe = row[4].ToString();
-                    for (int i = 5; i < 8; i++)
+                    DialogResult result = MessageBox.Show("Soll die Vorlage für '" + filename + "' zum Importieren der Daten genutzt werden? Falls Sie dies nicht wünschen, müssen Sie die zu importierenden Daten manuell anpassen.", "Vorlage verwenden?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
                     {
-                        string test = row[i].ToString();
-                        string fachid = schueler.FachListe.Fach.GetID(row[i].ToString());
-                        schueler.FachListe.FachIDs.Add(fachid);
-                    }
-                    schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("DE"));
-                    schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("MA"));
-                    schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("EN"));
-                    schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("MU"));
-                    schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("KU"));
-                    schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("GEO"));
-                    schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("GE"));
-                    if (int.Parse(schueler.Klassenstufe) > 6)
-                    {
-                        schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("CH"));
-                    }
-                    if (int.Parse(schueler.Klassenstufe) > 5)
-                    {
-                        schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("PH"));
-                    }
-                    if (int.Parse(schueler.Klassenstufe) < 7)
-                    {
-                        schueler.FachListe.FachIDs.Add(schueler.FachListe.Fach.GetID("TC"));
-                    }
-                    for (int i = schueler.FachListe.FachIDs.Count; i < 17; i++)
-                    {
-                        schueler.FachListe.FachIDs.Add(null);
-                    }
-                    if (!schueler.AlreadyExists())
-                    {
-                        schueler.FachListe.Add();
-                        schueler.addKunde();
-                    }
-                    else
-                    {
-                        schueler.FachListe.FachListeID = schueler.GetFachID(schueler.SchuelerID);
-                        schueler.Update();
-                        //MessageBox.Show("Der Schüler " + schueler.Vorname + " existiert bereits.");
-                    }
-                    
-                }
-                else if(radioButton2.Checked)
-                {
-                    //SEK2
-                    schueler.Klassenstufe = schueler.Klasse.Substring(0, schueler.Klasse.IndexOf("_"));
-                    for (int i = 4; i < newDT.Columns.Count; i++)
-                    {
-                        string fachid = schueler.FachListe.Fach.GetID(row[i].ToString());
-                        schueler.FachListe.FachIDs.Add(fachid);
-                    }
-                    for (int i = schueler.FachListe.FachIDs.Count; i < 17; i++)
-                    {
-                        schueler.FachListe.FachIDs.Add(null);
-                    }
-                    if (!schueler.AlreadyExists())
-                    {
-                        
-                        schueler.FachListe.Add();
-                        schueler.addKunde();
-                    }
-                    else
-                    {
-                        schueler.FachListe.FachListeID = schueler.GetFachID(schueler.SchuelerID);
-                        schueler.Update();
+                        try
+                        {
+                            StartImport(true);
+                            usePreset = true;
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Es gab einen Fehler bei dem Import. Bitte versuchen Sie es erneut und passen Sie ggf. Ihre Einstellungen an.", "Import fehlgeschlagen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
-                
+                else
+                {
+                    DialogResult result = MessageBox.Show("Soll die von Ihnen angeordnete Datenstruktur für den Import von '" + filename + "' genutzt werden? Falls nicht, ändern Sie bitte diese oder laden Sie die Daten mithilfe der Vorlage.", "Importieren?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            StartImport(false);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Es gab einen Fehler bei dem Import. Bitte versuchen Sie es erneut und passen Sie ggf. Ihre Einstellungen an.", "Import fehlgeschlagen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        usePreset = false;
+                    }
+                }
+            }
+            
+        }
+        private void StartImport(bool withPreset)
+        {
+            int fileNum = 0;
+            foreach (string file in files)
+            {
+                tb_aktuell.Text = file;
+                if (withPreset)
+                {
+                    try
+                    {
+                        loadProfile();
+                        fileNum++;
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message.Equals("failed preset", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            MessageBox.Show("Der Zugriff auf die Datei wurde behindert. Bitte schließen Sie Anwendungen, in denen Sie diese ggf. geöffnet haben oder wenden Sie sich an den Administrator.", "Zugriff verweigert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else if (ex.Message.Equals("wrong preset", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            MessageBox.Show("Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt.", "Fehler bei Vorlage", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+                        else if (ex.Message.Equals("no preset", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            MessageBox.Show("Es ist noch keine Vorlage für " + filename + " vorhanden. Führen Sie bitte einen entsprechenden Import manuell aus, um eine Vorlage zu erstellen.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        continue;
+                    }
+
+                }
+                else
+                {
+                    createNewDT(newDT, withPreset);
+                }
+                foreach (DataRow row in newDT.Rows)
+                {
+                    if (target.Equals("t_s_schueler"))
+                    {
+                        Schueler schueler = new Schueler(true);
+                        schueler.Vorname = row[0].ToString();
+                        schueler.Nachname = row[1].ToString();
+                        schueler.Gd = DateTime.Parse(row[2].ToString());
+                        schueler.Klasse = row[3].ToString();
+                        if (rb_schueler1.Checked)
+                        {
+                            //SEK1 Import Schüler
+                            schueler.Klassenstufe = row[4].ToString();
+                            for (int i = 5; i < 8; i++)
+                            {
+                                string fach = row[i].ToString();
+                                schueler.Faecher.Add(fach);
+                            }
+                            schueler.Faecher.Add("DE");
+                            schueler.Faecher.Add("MA");
+                            schueler.Faecher.Add("EN");
+                            schueler.Faecher.Add("MU");
+                            schueler.Faecher.Add("KU");
+                            schueler.Faecher.Add("GEO");
+                            schueler.Faecher.Add("GE");
+                            if (int.Parse(schueler.Klassenstufe) > 6)
+                            {
+                                schueler.Faecher.Add("CH");
+                            }
+                            if (int.Parse(schueler.Klassenstufe) > 5)
+                            {
+                                schueler.Faecher.Add("PH");
+                            }
+                            if (int.Parse(schueler.Klassenstufe) < 7)
+                            {
+                                schueler.Faecher.Add("TC");
+                            }
+                            if (!schueler.AlreadyExists())
+                            {
+                                schueler.addSchueler();
+                            }
+                            else
+                            {
+                                schueler.Update();
+                            }
+
+                        }
+                        else if (rb_schueler2.Checked)
+                        {
+                            //SEK2 Import Schüler
+                            schueler.Klassenstufe = schueler.Klasse.Substring(0, schueler.Klasse.IndexOf("_"));
+                            for (int i = 4; i < newDT.Columns.Count; i++)
+                            {
+                                string fach = row[i].ToString();
+                                if (!fach.Equals(""))
+                                {
+                                    schueler.Faecher.Add(fach);
+                                }
+                            }
+                            if (!schueler.AlreadyExists())
+                            {
+                                schueler.addSchueler();
+                            }
+                            else
+                            {
+                                schueler.LoadSchuelerID();
+                                schueler.Update();
+                            }
+                        }
+                    }
+                    else if (target.Equals("t_s_faecher"))
+                    {
+                        Faecher fach = new Faecher();
+                        fach.FachKurz = row[0].ToString();
+                        fach.Fach = row[1].ToString();
+                        if (!fach.AlreadyExists())
+                        {
+                            fach.Add();
+                        }
+                    }
+
+                }
+            }
+            if(fileNum == 0)
+            {
+                DialogResult dr = MessageBox.Show("Es wurde keine der [" + files.Count + "] Dateien importiert. Möchten Sie es erneut versuchen?", "Import fehlerhaft", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    clearForm();
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
+            else
+            {
+                DialogResult dr = MessageBox.Show("Es wurden erfolgreich ["+ fileNum +" von "+files.Count +"] Dateien importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    clearForm();
+                }
+                else
+                {
+                    this.Close();
+                }
             }
 
         }
         List<int> removeAt = new List<int>();
+
+        /// <summary>
+        /// Klick im Vorschau-Grid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gv_Vorschau_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
@@ -473,73 +627,18 @@ namespace Bibo_Verwaltung
             }
             
         }
+        /// <summary>
+        /// Läd das Profil
+        /// </summary>
         private void loadProfile()
         {
             Einstellung set = new Einstellung();
-            if (radioButton1.Checked)
+            //sek1
+            string path = set.HomePath + "\\profil_" + filename + ".txt";
+            if (File.Exists(path))
             {
-                //sek1
-                string path = set.HomePath + "\\profile_SEK1.txt";
-                if (File.Exists(path))
-                {
-                    removeAt.Clear();
-                    indexes.Clear();
-                    var lines = File.ReadAllLines(path);
-                    cb_FeldTrenn.Text = lines[4];
-                    cb_TxtQuali.Text = lines[7];
-                    if(lines[10] == "True")
-                    {
-                        cb_ColHeader.Checked = true;
-                    }
-                    else
-                    {
-                        cb_ColHeader.Checked = false;
-                    }
-                    tb_lines.Text = lines[13];
-                    bool first = true;
-                    for(int i = 16; i < lines.Length;)
-                    {
-                        if (!lines[i].Contains("--") && first)
-                        {
-                            removeAt.Add(int.Parse(lines[i]));
-                            i++;
-                        }
-                        else if(lines[i].Contains("--")&&first)
-                        {
-                            first = false;
-                            i = i + 2;
-                        }
-                        if(!lines[i].Contains("--") && !first)
-                        {
-                            indexes.Add(int.Parse(lines[i]));
-                            i++;
-                        }
-                        else if(lines[i].Contains("--") && !first)
-                        {
-                            i = lines.Length;
-                        }
-                    }
-                    showPreview();
-                    foreach(int i in removeAt)
-                    {
-                        gv_Vorschau.Columns.RemoveAt(i);
-                    }
-                    DataTable dt = new DataTable();
-                    createNewDT(dt, true);
-                    gv_Vorschau.DataSource = null;
-                    gv_Vorschau.DataSource = dt;
-                }
-                else
-                {
-                    MessageBox.Show("Es ist noch keine Vorlage für SEK1 vorhanden. Führen Sie bitte einen entsprechenden Import manuell aus, um eine Vorlage zu erstellen.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                }
-            }
-            else
-            {
-                //sek2
-                string path = set.HomePath + "\\profile_SEK2.txt";
-                if (File.Exists(path))
+                
+                try
                 {
                     removeAt.Clear();
                     indexes.Clear();
@@ -578,130 +677,249 @@ namespace Bibo_Verwaltung
                             i = lines.Length;
                         }
                     }
-                    showPreview();
-                    foreach (int i in removeAt)
-                    {
-                        gv_Vorschau.Columns.RemoveAt(i);
-                    }
+                    showPreview(tb_aktuell.Text);
+                }
+                catch (IOException e)
+                {
+                    throw new Exception("failed preset", e);
+                    //MessageBox.Show("Der Zugriff auf die Vorlagendatei wurde behindert. Bitte schließen Sie Anwendungen, in denen Sie diese ggf. geöffnet haben oder wenden Sie sich an den Administrator.", "Zugriff verweigert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //return;
+                }
+                Cursor.Current = Cursors.Default;
+                foreach (int i in removeAt)
+                {
+                    gv_Vorschau.Columns.RemoveAt(i);
+                }
+                try
+                {
                     DataTable dt = new DataTable();
                     createNewDT(dt, true);
                     gv_Vorschau.DataSource = null;
                     gv_Vorschau.DataSource = dt;
                 }
-                else
+                catch(Exception e)
                 {
-                    MessageBox.Show("Es ist noch keine Vorlage für SEK2 vorhanden. Führen Sie bitte einen entsprechenden Import manuell aus, um eine Vorlage zu erstellen.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    throw new Exception("wrong preset", e);
+                    //MessageBox.Show("Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt.", "Fehler bei Vorlage", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-        }
-        private void saveProfile()
-        {
-            Einstellung set = new Einstellung();
-            string path = set.HomePath + "\\profile";
-            if (radioButton1.Checked)
-            {
-                if(File.Exists(path + "_SEK1.txt"))
-                {
-                    File.Delete(path + "_SEK1.txt");
-                }
-                TextWriter tw = new StreamWriter(path + "_SEK1.txt");
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("SEK1 PROFIL");
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("FELDTRENNZEICHEN:");
-                tw.WriteLine(cb_FeldTrenn.Text);
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("TEXTQUALIFIZIERER:");
-                tw.WriteLine(cb_TxtQuali.Text);
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("FELDNAMEN:");
-                if (cb_ColHeader.Checked)
-                {
-                    tw.WriteLine("True");
-                }
-                else
-                {
-                    tw.WriteLine("False");
-                }
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("ZEILEN ENTFERNEN:");
-                tw.WriteLine(tb_lines.Text);
-                tw.WriteLine("----------------------------------------------------");
-
-                tw.WriteLine("REMOVE AT:");
-                foreach (int i in removeAt)
-                {
-                    tw.WriteLine(i.ToString());
-                }
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("SORTED COLUMNS:");
-                foreach (int i in indexes)
-                {
-                    tw.WriteLine(i.ToString());
-                }
-                tw.WriteLine("----------------------------------------------------");
-                tw.Close();
             }
             else
             {
-                if (File.Exists(path + "_SEK2.txt"))
-                {
-                    File.Delete(path + "_SEK2.txt");
-                }
-                TextWriter tw = new StreamWriter(path + "_SEK2.txt");
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("SEK2 PROFIL");
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("FELDTRENNZEICHEN:");
-                tw.WriteLine(cb_FeldTrenn.Text);
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("TEXTQUALIFIZIERER:");
-                tw.WriteLine(cb_TxtQuali.Text);
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("FELDNAMEN:");
-                if (cb_ColHeader.Checked)
-                {
-                    tw.WriteLine("True");
-                }
-                else
-                {
-                    tw.WriteLine("False");
-                }
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("ZEILEN ENTFERNEN:");
-                tw.WriteLine(tb_lines.Text);
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("REMOVE AT:");
-                foreach (int i in removeAt)
-                {
-                    tw.WriteLine(i.ToString());
-                }
-                tw.WriteLine("----------------------------------------------------");
-                tw.WriteLine("SORTED COLUMNS");
-                foreach (int i in indexes)
-                {
-                    tw.WriteLine(i.ToString());
-                }
-                tw.WriteLine("----------------------------------------------------");
-                tw.Close();
+                throw new Exception("no preset");
+                //MessageBox.Show("Es ist noch keine Vorlage für "+ filename +" vorhanden. Führen Sie bitte einen entsprechenden Import manuell aus, um eine Vorlage zu erstellen.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             }
+        }
+        /// <summary>
+        /// Speichert das Profil
+        /// </summary>
+        private void saveProfile()
+        {
+            Einstellung set = new Einstellung();
+            string path = set.HomePath + "\\profil_";
+            if (File.Exists(path + filename + ".txt"))
+            {
+                File.Delete(path + filename + ".txt");
+            }
+            TextWriter tw = new StreamWriter(path + filename + ".txt");
+            tw.WriteLine("----------------------------------------------------");
+            tw.WriteLine(filename + " PROFIL");
+            tw.WriteLine("----------------------------------------------------");
+            tw.WriteLine("FELDTRENNZEICHEN:");
+            tw.WriteLine(cb_FeldTrenn.Text);
+            tw.WriteLine("----------------------------------------------------");
+            tw.WriteLine("TEXTQUALIFIZIERER:");
+            tw.WriteLine(cb_TxtQuali.Text);
+            tw.WriteLine("----------------------------------------------------");
+            tw.WriteLine("FELDNAMEN:");
+            if (cb_ColHeader.Checked)
+            {
+                tw.WriteLine("True");
+            }
+            else
+            {
+                tw.WriteLine("False");
+            }
+            tw.WriteLine("----------------------------------------------------");
+            tw.WriteLine("ZEILEN ENTFERNEN:");
+            tw.WriteLine(tb_lines.Text);
+            tw.WriteLine("----------------------------------------------------");
 
-
+            tw.WriteLine("REMOVE AT:");
+            foreach (int i in removeAt)
+            {
+                tw.WriteLine(i.ToString());
+            }
+            tw.WriteLine("----------------------------------------------------");
+            tw.WriteLine("SORTED COLUMNS:");
+            foreach (int i in indexes)
+            {
+                tw.WriteLine(i.ToString());
+            }
+            tw.WriteLine("----------------------------------------------------");
+            tw.Close();
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
+            CheckSelected();
+        }
+        private void SetTarget()
+        {
+            if (target.Equals("t_s_schueler"))
+            {
+                this.Text = "Schülerimport";
+                rb_schueler1.Checked = true;
+            }
+            else if (target.Equals("t_s_faecher"))
+            {
+                this.Text = "Fächerimport";
+                rb_faecher.Checked = true;
+            }
+        }
+        /// <summary>
+        /// Prüft, welches Importziel ausgewählt ist
+        /// </summary>
+        private void CheckSelected()
+        {
             Schuelerimport si = new Schuelerimport();
-            if (radioButton1.Checked)
+            if (rb_schueler1.Checked)
             {
                 //Sek1
-                si.FillColGrid(ref gv_columns, true);
+                filename = "SEK1";
+                si.FillColGrid(ref gv_columns, filename);
             }
-            if (radioButton2.Checked)
+            if (rb_schueler2.Checked)
             {
                 //Sek2
-                si.FillColGrid(ref gv_columns, false);
+                filename = "SEK2";
+                si.FillColGrid(ref gv_columns, filename);
             }
+            if (rb_faecher.Checked)
+            {
+                //Fächer
+                filename = "FAECHER";
+                si.FillColGrid(ref gv_columns, filename);
+            }
+        }
+        /// <summary>
+        /// Verhindert eine Eingabe von Buchstaben usw --> nur Zahlen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tb_lines_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                SystemSounds.Beep.Play();
+                e.Handled = true;
+            }
+        }
+        /// <summary>
+        /// Prüft den Modus (Multiselect oder Single)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void rb_single_CheckedChanged(object sender, EventArgs e)
+        {
+            tb_path.Text = "";
+            ImportMode();
+        }
+        /// <summary>
+        /// Multiselect/Single-select
+        /// </summary>
+        private void ImportMode()
+        {
+            if (rb_single.Checked)
+            {
+                multiselect = false;
+            }
+            else if(rb_multi.Checked)
+            {
+                multiselect = true;
+            }
+        }
+
+        /// <summary>
+        /// Setzt den Auswahl-Slider anhand der Elemente der Ausleihliste
+        /// </summary>
+        private void SetSlider()
+        {
+            if (files.Count == 0)
+            {
+                slider_preview.Enabled = false;
+                slider_preview.Minimum = 0;
+                slider_preview.Maximum = 0;
+            }
+            else
+            {
+                slider_preview.Enabled = true;
+                slider_preview.Minimum = 1;
+                slider_preview.Maximum = files.Count;
+                slider_preview.Value = slider_preview.Maximum;
+            }
+            tb_min.Text = slider_preview.Value.ToString();
+            tb_max.Text = slider_preview.Maximum.ToString();
+        }
+
+        /// <summary>
+        /// Entfernt eine Datei aus der Importliste
+        /// </summary>
+        private void RemoveFromImportList()
+        {
+            files.RemoveAt(slider_preview.Value - 1);
+            filesShort.RemoveAt(slider_preview.Value - 1);
+            tb_path.Text = "";
+            foreach(string file in filesShort)
+            {
+                tb_path.Text = tb_path.Text + file + ", ";
+            }
+            if(tb_path.Text.Length == 0)
+            {
+                SetSlider();
+                tb_aktuell.Text = "";
+                tb_path.Text = "";
+            }
+            else
+            {
+                tb_path.Text = tb_path.Text.Substring(0, tb_path.Text.Length - 2);
+                SetSlider();
+                tb_aktuell.Text = files[slider_preview.Value - 1];
+            }
+
+        }
+        /// <summary>
+        /// Scrollen des Sliders
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void slider_preview_Scroll(object sender, ScrollEventArgs e)
+        {
+            tb_min.Text = slider_preview.Value.ToString();
+            tb_max.Text = slider_preview.Maximum.ToString();
+            tb_aktuell.Text = files[slider_preview.Value-1];
+            if (usePreset)
+            {
+                try
+                {
+                    loadProfile();
+                }
+                catch
+                {
+                    MessageBox.Show("Beim Laden der Vorschau ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+
+        }
+        /// <summary>
+        /// Entfernt ausgewählte Datei aus Liste
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bt_removefile_Click(object sender, EventArgs e)
+        {
+            RemoveFromImportList();
         }
     }
 }

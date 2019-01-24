@@ -103,7 +103,7 @@ namespace Bibo_Verwaltung
         {
             Form Autor = new w_s_autoren();
             Autor.ShowDialog(this);
-            b.AutorListe.Autor.FillCombobox(ref cb_Autor, 0);
+            b.Autor.FillCombobox(ref cb_Autor, 0);
         }
 
         private void bt_Genre_s_Click(object sender, EventArgs e)
@@ -146,7 +146,6 @@ namespace Bibo_Verwaltung
                 b.Neupreis = Convert.ToDecimal(tb_Neupreis.Text);
             }
             b.Er_datum = dTP_Erscheinungsdatum.Value;
-            b.AutorListe.AutorListeID = b.GetAutorID(tb_ISBN.Text);
 
             if (pictureBox1.ImageLocation == null || pictureBox1.ImageLocation.Equals(""))
             {
@@ -162,7 +161,7 @@ namespace Bibo_Verwaltung
                 b.Image = System.IO.File.ReadAllBytes(b.BildPfad);
                 b.ImageDate = DateTime.Parse(DateTime.UtcNow.ToShortTimeString());
             }
-            b.Update_Buch();
+            b.UpdateBuch();
             b.FillGrid_Buch(ref Grid_Buch);
         }
         private void AddBuch()
@@ -258,12 +257,12 @@ namespace Bibo_Verwaltung
                         b.Verlag.Add(cb_Verlag.Text);
                         b.Verlag.FillCombobox(ref cb_Verlag, int.Parse(b.Verlag.GetID(cb_Verlag.Text)));
                     }
-                    if (!b.AutorListe.Autor.IfContains(cb_Autor.Text))
+                    if (!b.Autor.IfContains(cb_Autor.Text))
                     {
                         List<string> autors = new List<string>();
                         autors.Add(cb_Autor.Text);
-                        b.AutorListe.Autor.Add(autors);
-                        b.AutorListe.Autor.FillCombobox(ref cb_Autor, int.Parse(b.AutorListe.Autor.GetID(cb_Autor.Text)));
+                        b.Autor.Add(autors);
+                        b.Autor.FillCombobox(ref cb_Autor, int.Parse(b.Autor.GetID(cb_Autor.Text)));
                     }
                     if (!b.Genre.IfContains(cb_Genre.Text))
                     {
@@ -275,8 +274,8 @@ namespace Bibo_Verwaltung
                         b.Sprache.Add(cb_Sprache.Text);
                         b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetID(cb_Sprache.Text)));
                     }
-                    b.AutorListe.AutorIDs.Clear();
-                    b.AutorListe.AutorIDs.Add(b.AutorListe.Autor.GetID(cb_Autor.Text));
+                    b.Autoren.Clear();
+                    b.Autoren.Add(cb_Autor.Text);
                     UpdateBuch();
                     rTB_1.Visible = true;
                     t.Start();
@@ -292,23 +291,23 @@ namespace Bibo_Verwaltung
             {
                 try
                 {
-                    for(int i = 0; i < 10;)
-                    {
-                        try
-                        {
-                            if (b.AutorListe.AutorIDs[i] == null)
-                            {
-                            }
-                            i++;
-                        }
-                        catch
-                        {
-                            b.AutorListe.AutorIDs.Add(null);
-                            i++;
-                        }
+                    //for(int i = 0; i < 10;)
+                    //{
+                    //    try
+                    //    {
+                    //        if (b.AutorListe.AutorIDs[i] == null)
+                    //        {
+                    //        }
+                    //        i++;
+                    //    }
+                    //    catch
+                    //    {
+                    //        b.AutorListe.AutorIDs.Add(null);
+                    //        i++;
+                    //    }
                         
 
-                    }
+                    //}
                     if (!b.Verlag.IfContains(cb_Verlag.Text))
                     {
                         b.Verlag.Add(cb_Verlag.Text);
@@ -347,7 +346,6 @@ namespace Bibo_Verwaltung
                         if (buchid.IsAvailable(tb_ISBN.Text))
                         {
                             buchid.DeactivateWhereISBN(tb_ISBN.Text);
-                            b.AutorListe.AutorListeID = b.GetAutorID(tb_ISBN.Text);
                             b.ISBN = tb_ISBN.Text;
                             b.Deactivate();
                             Delete_picture(location);
@@ -398,24 +396,24 @@ namespace Bibo_Verwaltung
                         }
                         if (needAutor.Count > 0)
                         {
-                            b.AutorListe.Autor.Add(needAutor);
+                            b.Autor.Add(needAutor);
                         }
                         else
                         {
-                            if(b.AutorListe.Autor.GetID(cb_Autor.Text) == null)
+                            if(b.Autor.GetID(cb_Autor.Text) == null)
                             {
                                 needAutor.Add(cb_Autor.Text);
-                                b.AutorListe.Autor.Add(needAutor);
+                                b.Autor.Add(needAutor);
                             }
                         }
-                        b.AutorListe.AutorIDs.Clear();
-                        b.AutorListe.AutorIDs.Add(b.AutorListe.Autor.GetID(cb_Autor.Text));
-                        b.AutorListe.Autor.FillCombobox(ref cb_Autor, b.AutorListe.AutorIDs[0]);
-                        for (int i = 1; i < 10;)
-                        {
-                            b.AutorListe.AutorIDs.Add(null);
-                            i++;
-                        }
+                        b.Autoren.Clear();
+                        b.Autoren.Add(cb_Autor.Text);
+                        b.Autor.FillCombobox(ref cb_Autor, b.Autor.GetID(b.Autoren[0]));
+                        //for (int i = 1; i < 10;)
+                        //{
+                        //    b.AutorListe.AutorIDs.Add(null);
+                        //    i++;
+                        //}
                         AddBuch();
                         rTB_1.Visible = true;
                         t.Start();
@@ -427,12 +425,12 @@ namespace Bibo_Verwaltung
                             b.Verlag.Add(cb_Verlag.Text);
                             b.Verlag.FillCombobox(ref cb_Verlag, int.Parse(b.Verlag.GetID(cb_Verlag.Text)));
                         }
-                        if (!b.AutorListe.Autor.IfContains(cb_Autor.Text))
+                        if (!b.Autor.IfContains(cb_Autor.Text))
                         {
                             List <string> autors = new List<string>();
                             autors.Add(cb_Autor.Text);
-                            b.AutorListe.Autor.Add(autors);
-                            b.AutorListe.Autor.FillCombobox(ref cb_Autor, int.Parse(b.AutorListe.Autor.GetID(cb_Autor.Text)));
+                            b.Autor.Add(autors);
+                            b.Autor.FillCombobox(ref cb_Autor, int.Parse(b.Autor.GetID(cb_Autor.Text)));
                         }
                         if (!b.Genre.IfContains(cb_Genre.Text))
                         {
@@ -444,22 +442,22 @@ namespace Bibo_Verwaltung
                             b.Sprache.Add(cb_Sprache.Text);
                             b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetID(cb_Sprache.Text)));
                         }
-                        b.AutorListe.AutorIDs.Clear();
-                        b.AutorListe.AutorIDs.Add(cb_Autor.SelectedValue.ToString());
-                        for (int i = 1; i < 10;)
-                        {
-                            b.AutorListe.AutorIDs.Add(null);
-                            i++;
-                        }
+                        b.Autoren.Clear();
+                        b.Autoren.Add(cb_Autor.SelectedText.ToString());
+                        //for (int i = 1; i < 10;)
+                        //{
+                        //    b.AutorListe.AutorIDs.Add(null);
+                        //    i++;
+                        //}
                         AddBuch();
                         rTB_1.Visible = true;
                         t.Start();
                     }
 
                 }
-                catch
+                catch(Exception except)
                 {
-                    MessageBox.Show("Das Buch konnte nicht hinzugefügt werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Das Buch konnte nicht hinzugefügt werden!"+except, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else if(rb_Add_Buch.Checked && checkbox_autor.Checked && !tb_ISBN.Text.Equals("") && !tb_Titel.Text.Equals("") && !cb_Autor.Text.Equals("") && !cb_Verlag.Text.Equals("")
@@ -477,12 +475,7 @@ namespace Bibo_Verwaltung
                         }
                         if(needAutor.Count > 0)
                         {
-                            b.AutorListe.Autor.Add(needAutor);
-                            b.AutorListe.AutorIDs.Clear();
-                            foreach(string s in b.AutorListe.AutorNamen)
-                            {
-                                b.AutorListe.AutorIDs.Add(b.AutorListe.Autor.GetID(s));
-                            }
+                            b.Autor.Add(needAutor);
                         }
                         if (!b.Genre.IfContains(cb_Genre.Text))
                         {
@@ -806,7 +799,7 @@ namespace Bibo_Verwaltung
             Buch b = new Buch(tb_ISBN.Text);
             tb_Titel.Text = b.Titel;
             string autortext = "";
-            if (b.AutorListe.AutorNamen.Count > 1)
+            if (b.Autoren.Count > 1)
             {
                 checkbox_autor.Checked = true;
                 List<int> index = new List<int>();
@@ -814,7 +807,7 @@ namespace Bibo_Verwaltung
                 {
                     DataRowView castedItem = value as DataRowView;
                     string newString = castedItem["au_autor"].ToString();
-                    if (b.AutorListe.AutorNamen.Contains(newString))
+                    if (b.Autoren.Contains(newString))
                     {
                         int test = checkedListBox1.Items.IndexOf(value);
                         index.Add(test);
@@ -829,7 +822,7 @@ namespace Bibo_Verwaltung
             {
                 checkbox_autor.Checked = false;
             }
-            foreach (string s in b.AutorListe.AutorNamen)
+            foreach (string s in b.Autoren)
             {
                 autortext = autortext + s + ", ";
             }
@@ -1160,8 +1153,8 @@ namespace Bibo_Verwaltung
         #region Comboboxen
         private void Comboboxen()
         {
-            b.AutorListe.Autor.FillList(ref checkedListBox1);
-            b.AutorListe.Autor.FillCombobox(ref cb_Autor, 0);
+            b.Autor.FillList(ref checkedListBox1);
+            b.Autor.FillCombobox(ref cb_Autor, 0);
             b.Verlag.FillCombobox(ref cb_Verlag, 0);
             b.Genre.FillCombobox(ref cb_Genre, 0);
             b.Sprache.FillCombobox(ref cb_Sprache, 0);
@@ -1302,13 +1295,13 @@ namespace Bibo_Verwaltung
                 }
                 string autorstring = "";
                 needAutor.Clear();
-                b.AutorListe.AutorNamen.Clear();
+                b.Autoren.Clear();
                 foreach (string s in GetAutor())
                 {
                     autorstring = autorstring + s + ", ";
                     
-                    b.AutorListe.AutorNamen.Add(s);
-                    if (!b.AutorListe.Autor.IfContains(s))
+                    b.Autoren.Add(s);
+                    if (!b.Autor.IfContains(s))
                     {
                         needAutor.Add(s.Replace("[", "(").Replace("]", ")"));
                     }
@@ -1359,20 +1352,20 @@ namespace Bibo_Verwaltung
                 cb_Autor.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 comboBox1.Visible = false;
                 checkedListBox1.Visible = false;
-                b.AutorListe.Autor.FillCombobox(ref cb_Autor, 0);
+                b.Autor.FillCombobox(ref cb_Autor, 0);
             }
         }
 
         private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             List<string> checkedItems = new List<string>();
-            b.AutorListe.AutorIDs.Clear();
+            b.Autoren.Clear();
             foreach (var item in checkedListBox1.CheckedItems)
             {
                 DataRowView castedItem = item as DataRowView;
                 string autorstring = castedItem["au_autor"].ToString();
                 string idstring = castedItem["au_id"].ToString();
-                b.AutorListe.AutorIDs.Add(idstring);
+                b.Autoren.Add(autorstring);
                 checkedItems.Add(autorstring);
             }
             if (e.NewValue == CheckState.Checked)
@@ -1381,7 +1374,7 @@ namespace Bibo_Verwaltung
                 string autorstring = castedItem["au_autor"].ToString();
                 checkedItems.Add(autorstring);
                 string idstring = castedItem["au_id"].ToString();
-                b.AutorListe.AutorIDs.Add(idstring);
+                b.Autoren.Add(autorstring);
             }
             if (e.NewValue == CheckState.Unchecked)
             {
@@ -1389,7 +1382,7 @@ namespace Bibo_Verwaltung
                 string autorstring = castedItem["au_autor"].ToString();
                 checkedItems.Remove(autorstring);
                 string idstring = castedItem["au_id"].ToString();
-                b.AutorListe.AutorIDs.Remove(idstring);
+                b.Autoren.Remove(autorstring);
             }
             string combobox = "";
             foreach(string s in checkedItems)

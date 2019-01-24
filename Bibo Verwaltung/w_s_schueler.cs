@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,41 +24,56 @@ namespace Bibo_Verwaltung
 
         private void bt_ImEx_Click(object sender, EventArgs e)
         {
-            Form import = new w_s_schuelerimport(true);
-            import.Show(this);
-            gv_Kunde.DataSource = null;
+            Form import = new w_s_schuelerimport("t_s_schueler", true);
+            import.ShowDialog(this);
             s.FillGrid(false, ref gv_Kunde);
         }
 
-        private void UpdateS()
-        {
-            
-        }
         List<string> need = new List<string>();
-        private void AddS()
+        private void AddS(string modus)
         {
-            s.Vorname = tb_Vorname.Text;
-            s.Nachname = tb_Nachname.Text;
-            s.Gd = tb_Gd.Text;
-            s.Klasse = tb_klasse.Text;
-            s.Klassenstufe = tb_klassenstufe.Text;
+            Schueler schueler = new Schueler();
+            schueler.Vorname = tb_Vorname.Text;
+            schueler.Nachname = tb_Nachname.Text;
+            schueler.Gd = dtp_gd.Value;
+            schueler.Klasse = tb_klasse.Text;
+            schueler.Klassenstufe = tb_klassenstufe.Text;
             
             foreach(var item in cLB_faecher.CheckedItems)
             {
                 DataRowView castedItem = item as DataRowView;
                 string namestring = castedItem["f_kurzform"].ToString();
                 string idstring = castedItem["f_id"].ToString();
-                //MessageBox.Show(s.FachListe.FachIDs.Count.ToString());
-                s.FachListe.FachIDs.Add(s.FachListe.Fach.GetID(namestring));
+                schueler.Faecher.Add(namestring);
             }
-            for (int i = 1; i < 17;)
+            if (modus.Equals("Update"))
             {
-                s.FachListe.FachIDs.Add(null);
-                i++;
-            }
-            s.FachListe.Add();
-            s.addKunde();
+                schueler.SchuelerID = tb_KundenID.Text;
+                schueler.Update();
 
+            }
+            else if(modus.Equals("Add"))
+            {
+                if (!schueler.AlreadyExists())
+                {
+                    schueler.addSchueler();
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show("Dieser Schüler ist bereits vorhanden. Soll der entsprechende Datensatz stattdessen aktualisiert werden?", "Eintrag bereits vorhanden", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        schueler.LoadSchuelerID();
+                        schueler.Update();
+                    }
+                }
+            }
+            else if (modus.Equals("Delete"))
+            {
+                schueler.SchuelerID = tb_KundenID.Text;
+                schueler.DeleteSchueler();
+            }
+            schueler.FillGrid(false, ref gv_Kunde);
         }
 
         #region Modus nach RadioButton-Auswahl 
@@ -68,7 +84,7 @@ namespace Bibo_Verwaltung
                 tb_KundenID.Enabled = false;
                 tb_Vorname.Enabled = true;
                 tb_Nachname.Enabled = true;
-                tb_Gd.Enabled = true;
+                dtp_gd.Enabled = true;
                 tb_klasse.Enabled = true;
                 tb_klassenstufe.Enabled = true;
                 cLB_faecher.Enabled = true;
@@ -81,7 +97,7 @@ namespace Bibo_Verwaltung
                 tb_KundenID.Enabled = true;
                 tb_Vorname.Enabled = true;
                 tb_Nachname.Enabled = true;
-                tb_Gd.Enabled = true;
+                dtp_gd.Enabled = true;
                 tb_klasse.Enabled = true;
                 tb_klassenstufe.Enabled = true;
                 cLB_faecher.Enabled = true;
@@ -94,11 +110,11 @@ namespace Bibo_Verwaltung
                 tb_KundenID.Enabled = true;
                 tb_Vorname.Enabled = false;
                 tb_Nachname.Enabled = false;
-                tb_Gd.Enabled = false;
+                dtp_gd.Enabled = false;
                 tb_klasse.Enabled = false;
                 tb_klassenstufe.Enabled = false;
                 cLB_faecher.Enabled = false;
-                bt_confirm.Enabled = false;
+                bt_confirm.Enabled = true;
                 bt_confirm.Text = "Löschen";
             }
         }
@@ -126,18 +142,27 @@ namespace Bibo_Verwaltung
 
         private void bt_confirm_Click(object sender, EventArgs e)
         {
-            if(bt_confirm.Text == "Löschen")
+            if(tb_klasse.Text != "" && tb_klassenstufe.Text != "" && tb_Nachname.Text != "" && tb_Vorname.Text != "")
             {
+                if (bt_confirm.Text == "Löschen")
+                {
+                    AddS("Delete");
+                }
+                else if (bt_confirm.Text == "Speichern")
+                {
+                    AddS("Update");
+                }
+                else if (bt_confirm.Text == "Hinzufügen")
+                {
+                    AddS("Add");
+                }
+                Clear();
+            }
+            else
+            {
+                MessageBox.Show("Bitte überprüfen Sie ihre Angaben.", "Fehlende Angaben", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
-            }
-            else if(bt_confirm.Text == "Speichern")
-            {
-
-            }
-            else if(bt_confirm.Text == "Hinzufügen")
-            {
-                AddS();
-            }
         }
 
         private void gv_Kunde_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -146,11 +171,10 @@ namespace Bibo_Verwaltung
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.gv_Kunde.Rows[e.RowIndex];
+                tb_KundenID.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "ID")].Value.ToString();
                 //tb_Vorname.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Vorname")].Value.ToString();
                 //tb_Nachname.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Nachname")].Value.ToString();
-                //tb_klasse.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Klasse")].Value.ToString();
-                //tb_klassenstufe.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Klassenstufe")].Value.ToString();
-                tb_KundenID.Text = row.Cells[GetColumnIndexByName(gv_Kunde, "Schueler-ID")].Value.ToString();
+                //dtp_gd.Value = (DateTime)row.Cells[GetColumnIndexByName(gv_Kunde, "Geburtsdatum")].Value;
                 LoadSchueler();
             }
         }
@@ -161,21 +185,21 @@ namespace Bibo_Verwaltung
             tb_Nachname.Text = schueler.Nachname;
             tb_klassenstufe.Text = schueler.Klassenstufe;
             tb_klasse.Text = schueler.Klasse;
-            tb_Gd.Text = schueler.Gd;
-            if(schueler.FachListe.FachNamen.Count > 1)
+            dtp_gd.Value = schueler.Gd;
+            if (schueler.Faecher.Count > 0)
             {
                 List<int> index = new List<int>();
-                foreach(object value in cLB_faecher.Items)
+                foreach (object value in cLB_faecher.Items)
                 {
                     DataRowView castedItem = value as DataRowView;
                     string newString = castedItem["f_kurzform"].ToString();
-                    if (schueler.FachListe.FachNamen.Contains(newString))
+                    if (schueler.Faecher.Contains(newString))
                     {
                         int test = cLB_faecher.Items.IndexOf(value);
                         index.Add(test);
                     }
                 }
-                foreach(int i1 in index)
+                foreach (int i1 in index)
                 {
                     cLB_faecher.SetItemChecked(i1, true);
                 }
@@ -212,6 +236,7 @@ namespace Bibo_Verwaltung
             tb_KundenID.Text = "";
             tb_klasse.Text = "";
             tb_klassenstufe.Text = "";
+            dtp_gd.Text = "";
         }
         private void cLB_faecher_MouseHover(object sender, EventArgs e)
         {
@@ -237,6 +262,29 @@ namespace Bibo_Verwaltung
 
         private void w_s_schueler_Load(object sender, EventArgs e)
         {
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            Clear();
+        }
+
+        private void tb_klassenstufe_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                SystemSounds.Beep.Play();
+                e.Handled = true;
+            }
+        }
+
+        private void tb_KundenID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                SystemSounds.Beep.Play();
+                e.Handled = true;
+            }
         }
     }
 }

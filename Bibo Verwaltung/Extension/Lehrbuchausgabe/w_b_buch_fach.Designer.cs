@@ -534,7 +534,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2358, 1049);
+            this.ClientSize = new System.Drawing.Size(2355, 1049);
             this.Controls.Add(this.bt_export);
             this.Controls.Add(this.bt_close);
             this.Controls.Add(this.gB_buchid);

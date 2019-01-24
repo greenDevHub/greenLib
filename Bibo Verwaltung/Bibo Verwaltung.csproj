@@ -90,13 +90,11 @@
   <ItemGroup>
     <Compile Include="Analytics.cs" />
     <Compile Include="Autor.cs" />
-    <Compile Include="AutorListe.cs" />
     <Compile Include="Barcode.cs" />
     <Compile Include="Benutzer.cs" />
     <Compile Include="Exemplar.cs" />
     <Compile Include="Buchsuche.cs" />
     <Compile Include="Extension\Lehrbuchausgabe\Buch_Fach.cs" />
-    <Compile Include="Extension\Lehrbuchausgabe\IsbnListe.cs" />
     <Compile Include="Extension\Lehrbuchausgabe\w_b_buch_fach.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,8 +104,9 @@
     <Compile Include="Einstellung.cs" />
     <Compile Include="Ausleihe.cs" />
     <Compile Include="ExcelExport.cs" />
-    <Compile Include="FachListe.cs" />
+    <Compile Include="FachStufe.cs" />
     <Compile Include="Faecher.cs" />
+    <Compile Include="Klassenstufe.cs" />
     <Compile Include="Schuelerimport.cs" />
     <Compile Include="Schueler.cs" />
     <Compile Include="w_s_ausleihe.cs">
@@ -115,6 +114,12 @@
     </Compile>
     <Compile Include="w_s_ausleihe.Designer.cs">
       <DependentUpon>w_s_ausleihe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="w_s_fach_stufe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_fach_stufe.Designer.cs">
+      <DependentUpon>w_s_fach_stufe.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_faecher.cs">
       <SubType>Form</SubType>
@@ -127,6 +132,12 @@
     </Compile>
     <Compile Include="w_s_analytics.Designer.cs">
       <DependentUpon>w_s_analytics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="w_s_klassenstufe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_klassenstufe.Designer.cs">
+      <DependentUpon>w_s_klassenstufe.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_login.cs">
       <SubType>Form</SubType>
@@ -289,6 +300,9 @@
     <EmbeddedResource Include="w_s_Ausleihe.resx">
       <DependentUpon>w_s_ausleihe.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="w_s_fach_stufe.resx">
+      <DependentUpon>w_s_fach_stufe.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="w_s_faecher.resx">
       <DependentUpon>w_s_faecher.cs</DependentUpon>
     </EmbeddedResource>
@@ -297,6 +311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_import_export.resx">
       <DependentUpon>w_s_import_export.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="w_s_klassenstufe.resx">
+      <DependentUpon>w_s_klassenstufe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_login.resx">
       <DependentUpon>w_s_login.cs</DependentUpon>

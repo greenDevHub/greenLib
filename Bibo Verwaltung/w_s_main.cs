@@ -248,6 +248,12 @@ namespace Bibo_Verwaltung
             Form analytics = new w_s_analytics();
             analytics.ShowDialog(this);
         }
+
+        private void bt_klassenstufe_Click(object sender, EventArgs e)
+        {
+            Form stufe = new w_s_klassenstufe();
+            stufe.ShowDialog(this);
+        }
     }
     #endregion
 }

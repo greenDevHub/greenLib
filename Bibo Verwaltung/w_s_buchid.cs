@@ -34,7 +34,7 @@ namespace Bibo_Verwaltung
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.grid_buchid.Rows[e.RowIndex];
-                tb_id.Text = row.Cells["BuchID"].Value.ToString();
+                tb_id.Text = row.Cells["Exemplar"].Value.ToString();
                 Exemplar b = new Exemplar(tb_id.Text);
                 tb_id.Text = b.ExemplarID;
                 tb_isbn.Text = b.ISBN;
@@ -49,11 +49,11 @@ namespace Bibo_Verwaltung
                 }
                 tb_Barcode.Text = code;
                 Zen.Barcode.CodeEan8BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.CodeEan8WithChecksum;
-                var barcodeImage = barcode.Draw(tb_Barcode.Text, 50,3);
-                resultImage = new Bitmap(barcodeImage.Width, barcodeImage.Height + 20); // 20 is bottom padding, adjust to your text
+                var barcodeImage = barcode.Draw(tb_Barcode.Text, 200,10);
+                resultImage = new Bitmap(barcodeImage.Width, barcodeImage.Height + 75); // 20 is bottom padding, adjust to your text
 
                 using (var graphics = Graphics.FromImage(resultImage))
-                using (var font = new Font("Calibri", 10))
+                using (var font = new Font("Calibri", 20))
                 using (var brush = new SolidBrush(Color.Black))
                 using (var format = new StringFormat()
                 {

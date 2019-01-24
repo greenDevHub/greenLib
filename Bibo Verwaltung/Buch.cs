@@ -44,11 +44,14 @@ namespace Bibo_Verwaltung
         /// </summary>
         public Verlag Verlag { get { return verlag; } set { verlag = value; } }
 
-        AutorListe autorliste = new AutorListe();
+        Autor autor = new Autor();
         /// <summary>
         /// Autor eines Buches
         /// </summary>
-        public AutorListe AutorListe { get { return autorliste; } set { autorliste = value; } }
+        public Autor Autor { get { return autor; } set { autor = value; } }
+
+        List<string> autoren = new List<string>();
+        public List<string> Autoren { get { return autoren; } set { autoren = value; } }
 
         Sprache sprache = new Sprache();
         /// <summary>
@@ -123,7 +126,8 @@ namespace Bibo_Verwaltung
         public Buch(string isbn)
         {
             this.isbn = isbn;
-            Load_Buch();
+            LoadBuch();
+            LoadAutoren();
         }
         #endregion
 
@@ -141,7 +145,7 @@ namespace Bibo_Verwaltung
                 isbn = dr["bu_isbn"].ToString();
             }
             this.isbn = isbn;
-            Load_Buch();
+            LoadBuch();
         }
 
         private void LoadShort()
@@ -161,11 +165,11 @@ namespace Bibo_Verwaltung
             // Verbindung schließen 
             con.Close();
         }
-        private void Load_Buch()
+        private void LoadBuch()
         {
             //SQL-Verbindung pruefen
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' FROM [dbo].[t_s_buecher] left join [dbo].[t_s_genre] on buch_genre_id = ger_id left join [dbo].[t_s_autor] on buch_autor_id = au_id left join [dbo].[t_s_verlag] on buch_verlag_id = ver_id left join [dbo].[t_s_sprache] on buch_sprache_id = sprach_id WHERE buch_isbn = @0";
+            string RawCommand = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' FROM [dbo].[t_s_buecher] left join [dbo].[t_s_genre] on buch_genre_id = ger_id left join [dbo].[t_s_verlag] on buch_verlag_id = ver_id left join [dbo].[t_s_sprache] on buch_sprache_id = sprach_id WHERE buch_isbn = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, isbn);
             // Einlesen der Datenzeilen 
             while (dr.Read())
@@ -173,7 +177,6 @@ namespace Bibo_Verwaltung
                 ISBN = dr["buch_isbn"].ToString();
                 Titel = dr["buch_titel"].ToString();
                 Genre = new Genre(dr["buch_genre_id"].ToString());
-                AutorListe = new AutorListe(dr["buch_autor_id"].ToString());
                 Verlag = new Verlag(dr["buch_verlag_id"].ToString());
                 Er_datum = (DateTime)dr["verified_erscheinungsdatum"];
                 Sprache = new Sprache(dr["buch_sprache_id"].ToString());
@@ -223,31 +226,43 @@ namespace Bibo_Verwaltung
             // Verbindung schließen 
             con.Close();
         }
-        #endregion
-
-        #region GetAutorlisteID
-        public string GetAutorID(string isbn)
+        private void LoadAutoren()
         {
-            string id = "";
-            if (con.ConnectError()) return "";
-            string RawCommand = "SELECT buch_autor_id FROM [dbo].[t_s_buecher] WHERE buch_isbn = @0";
-            SqlDataReader dr = con.ExcecuteCommand(RawCommand, isbn);
+            Autoren.Clear();
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT * FROM [dbo].[t_s_buch_autor] WHERE  ba_isbn = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, ISBN);
             while (dr.Read())
             {
-                id = dr["buch_autor_id"].ToString();
+                Autor autor = new Autor(dr["ba_autorid"].ToString());
+                Autoren.Add(autor.Autorname);
             }
-            return id;
+            dr.Close();
         }
         #endregion
 
+        #region GetAutorlisteID
+        //public string GetAutorID(string isbn)
+        //{
+        //    string id = "";
+        //    if (con.ConnectError()) return "";
+        //    string RawCommand = "SELECT buch_autor_id FROM [dbo].[t_s_buecher] WHERE buch_isbn = @0";
+        //    SqlDataReader dr = con.ExcecuteCommand(RawCommand, isbn);
+        //    while (dr.Read())
+        //    {
+        //        id = dr["buch_autor_id"].ToString();
+        //    }
+        //    return id;
+        //}
+        #endregion
+
         #region Buch-Eigenschaften aendern
-        public void Update_Buch()
+        public void UpdateBuch()
         {
             //SQL-Verbindung pruefen
             if (con.ConnectError()) return;
             string RawCommand = "UPDATE [dbo].[t_s_buecher] set buch_titel = @titel , buch_genre_id = @genre, buch_sprache_id = @sprache, buch_verlag_id = @verlag, buch_auflage = @auflage, buch_erscheinungsdatum = @er_datum, buch_neupreis = @neupreis, buch_bild = @bild, buch_anzahl = @anzahl, buch_image = @image, buch_imageDate = @imageDate WHERE buch_isbn = @isbn";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-            AutorListe.Update();
             cmd.Parameters.AddWithValue("@titel", Titel);
             cmd.Parameters.AddWithValue("@genre", Genre.GenreID);
             cmd.Parameters.AddWithValue("@sprache", Sprache.SpracheID);
@@ -277,7 +292,30 @@ namespace Bibo_Verwaltung
             }
             cmd.Parameters.AddWithValue("@imageDate", imageDate);
             cmd.ExecuteNonQuery();
+            DeleteAutoren();
+            AddAutoren();
             con.Close();
+        }
+
+        private void AddAutoren()
+        {
+            con.ConnectError();
+            string RawCommand = "INSERT INTO [dbo].[t_s_buch_autor] (ba_isbn, ba_autorid) VALUES (@isbn, @autor)";
+            foreach (string s in Autoren)
+            {
+                SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+                cmd.Parameters.AddWithValue("@isbn", ISBN);
+                cmd.Parameters.AddWithValue("@autor", Autor.GetID(s));
+                cmd.ExecuteNonQuery();
+            }
+        }
+        private void DeleteAutoren()
+        {
+            string RawCommand = "DELETE FROM [dbo].[t_s_buch_autor] WHERE ba_isbn = @isbn";
+            con.ConnectError();
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@isbn", ISBN);
+            cmd.ExecuteNonQuery();
         }
         #endregion
 
@@ -286,13 +324,11 @@ namespace Bibo_Verwaltung
         {
             //SQL-Verbindung pruefen
             if (con.ConnectError()) return;
-            string RawCommand = "INSERT INTO [dbo].[t_s_buecher] (buch_isbn, buch_titel, buch_genre_id, buch_autor_id, buch_verlag_id, buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, buch_bild, buch_anzahl, buch_image, buch_imageDate, buch_activated) VALUES (@isbn, @titel, @genreid, @autorid, @verlagid, @erscheinungsdatum, @sprachid, @auflage, @neupreis, @bild, @anzahl, @image, @imageDate, 1)";
+            string RawCommand = "INSERT INTO [dbo].[t_s_buecher] (buch_isbn, buch_titel, buch_genre_id, buch_verlag_id, buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, buch_bild, buch_anzahl, buch_image, buch_imageDate, buch_activated) VALUES (@isbn, @titel, @genreid, @verlagid, @erscheinungsdatum, @sprachid, @auflage, @neupreis, @bild, @anzahl, @image, @imageDate, 1)";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-            AutorListe.Add();
             cmd.Parameters.AddWithValue("@isbn", ISBN);
             cmd.Parameters.AddWithValue("@titel", Titel);
             cmd.Parameters.AddWithValue("@genreid", Genre.GenreID);
-            cmd.Parameters.AddWithValue("@autorid", AutorListe.AutorListeID);
             cmd.Parameters.AddWithValue("@verlagid", Verlag.VerlagID);
             cmd.Parameters.AddWithValue("@sprachid", Sprache.SpracheID);
             cmd.Parameters.AddWithValue("@erscheinungsdatum", Er_datum);
@@ -329,6 +365,7 @@ namespace Bibo_Verwaltung
 
 
             cmd.ExecuteNonQuery();
+            AddAutoren();
             con.Close();
         }
         public void Add_Buch()
@@ -336,8 +373,7 @@ namespace Bibo_Verwaltung
             if (IsActivated())
             {
                 Activate();
-                AutorListe.AutorListeID = GetAutorID(ISBN);
-                Update_Buch();
+                UpdateBuch();
             }
             else
             {
@@ -350,13 +386,13 @@ namespace Bibo_Verwaltung
         public void Delete_Buch()
         {
             //SQL-Verbindung pruefen
+            DeleteAutoren();
             if (con.ConnectError()) return;
             string RawCommand = "DELETE FROM [dbo].[t_s_buecher] WHERE buch_isbn = @isbn";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             cmd.Parameters.AddWithValue("@isbn", ISBN);
             cmd.ExecuteNonQuery();
             con.Close();
-            AutorListe.Delete();
         }
 
         public void Deactivate()
@@ -422,7 +458,6 @@ namespace Bibo_Verwaltung
             string RawCommand = "SELECT buch_isbn as 'ISBN',"
                 + "buch_titel as 'Titel',"
                 + "ger_name as 'Genre',"
-                + "a_id as 'AutorlisteID',"
                 + "ver_name as 'Verlag',"
                 + "buch_erscheinungsdatum as 'Erscheinungsdatum',"
                 + "sprach_name as 'Sprache',"
@@ -431,34 +466,33 @@ namespace Bibo_Verwaltung
                 + "buch_bild as 'Bild', "
                 + "buch_anzahl as 'Anzahl Exemplare' from t_s_buecher "
                 + "left join t_s_genre on buch_genre_id = ger_id "
-                + "left join t_s_autorListe on buch_autor_id = a_id "
                 + "left join t_s_verlag on buch_verlag_id = ver_id "
                 + "left join t_s_sprache on buch_sprache_id = sprach_id WHERE buch_activated = 1";
             adapter2 = new SqlDataAdapter(RawCommand, con2.Con);
             adapter2.Fill(ds2);
             adapter2.Fill(dt2);
-            if (ds2.Tables[0].Columns.Contains("Autor"))
-            {
-                ds2.Tables[0].Columns.RemoveAt(ds2.Tables[0].Columns.IndexOf("Autor"));
-            }
-            ds2.Tables[0].Columns.Add("Autor", typeof(System.String));
-            foreach (DataRow row in ds2.Tables[0].Rows)
-            {
-                string text = "";
-                foreach (string s in AutorListe.GetNames(row["AutorlisteID"].ToString()))
-                {
-                    if (s != null && !s.Equals(""))
-                    {
-                        text = text + s + ", ";
-                    }
-                }
-                if (text.Length > 2)
-                {
-                    text = text.Substring(0, text.Length - 2);
-                }
-                row["Autor"] = text;
-            }
-            ds2.Tables[0].Columns["Autor"].SetOrdinal(3);
+            //if (ds2.Tables[0].Columns.Contains("Autor"))
+            //{
+            //    ds2.Tables[0].Columns.RemoveAt(ds2.Tables[0].Columns.IndexOf("Autor"));
+            //}
+            //ds2.Tables[0].Columns.Add("Autor", typeof(System.String));
+            //foreach (DataRow row in ds2.Tables[0].Rows)
+            //{
+            //    string text = "";
+            //    foreach (string s in AutorListe.GetNames(row["AutorlisteID"].ToString()))
+            //    {
+            //        if (s != null && !s.Equals(""))
+            //        {
+            //            text = text + s + ", ";
+            //        }
+            //    }
+            //    if (text.Length > 2)
+            //    {
+            //        text = text.Substring(0, text.Length - 2);
+            //    }
+            //    row["Autor"] = text;
+            //}
+            //ds2.Tables[0].Columns["Autor"].SetOrdinal(3);
 
             con2.Close();
         }
@@ -480,7 +514,7 @@ namespace Bibo_Verwaltung
         public string AutorNames()
         {
             string text = "";
-            foreach (string s in AutorListe.GetNames(GetAutorID(ISBN).ToString()))
+            foreach (string s in Autoren)
             {
                 if (s != null && !s.Equals(""))
                 {
@@ -506,16 +540,62 @@ namespace Bibo_Verwaltung
         {
             ClearDSBuch();
             FillObjectBuch();
-            List<string> s = dt2.AsEnumerable().Select(x => x[0].ToString()).ToList();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ISBN");
+            dt.Columns.Add("Titel");
+            dt.Columns.Add("Genre");
+            dt.Columns.Add("Autor");
+            dt.Columns.Add("Verlag");
+            dt.Columns.Add("Erscheinungsdatum");
+            dt.Columns.Add("Sprache");
+            dt.Columns.Add("Auflage");
+            dt.Columns.Add("Neupreis");
+            dt.Columns.Add("Bild");
+            dt.Columns.Add("Anzahl Exemplare");
+            List<string> s = ds2.Tables[0].AsEnumerable().Select(x => x[0].ToString()).ToList();
             foreach (string e in s)
             {
                 UpdateCount(e);
             }
-            ClearDSBuch();
-            FillObjectBuch();
-            grid.DataSource = ds2.Tables[0];
-            grid.Columns[ds2.Tables[0].Columns.IndexOf("Autor")].DisplayIndex = 3;
-            grid.Columns[ds2.Tables[0].Columns.IndexOf("AutorlisteID")].Visible = false;
+            foreach(DataRow row in ds2.Tables[0].Rows)
+            {
+                ISBN = row[ds2.Tables[0].Columns.IndexOf("ISBN")].ToString();
+                Titel = row[ds2.Tables[0].Columns.IndexOf("Titel")].ToString();
+                Genre.Genrename = row[ds2.Tables[0].Columns.IndexOf("Genre")].ToString();
+                Verlag.Verlagname = row[ds2.Tables[0].Columns.IndexOf("Verlag")].ToString();
+                Er_datum = DateTime.Parse(row[ds2.Tables[0].Columns.IndexOf("Erscheinungsdatum")].ToString());
+                Sprache.Sprachename = row[ds2.Tables[0].Columns.IndexOf("Sprache")].ToString();
+                Auflage = row[ds2.Tables[0].Columns.IndexOf("Auflage")].ToString();
+                Neupreis = decimal.Parse(row[ds2.Tables[0].Columns.IndexOf("Neupreis")].ToString());
+                BildPfad = row[ds2.Tables[0].Columns.IndexOf("ISBN")].ToString();
+                Anzahl = int.Parse(row[ds2.Tables[0].Columns.IndexOf("Anzahl Exemplare")].ToString());
+                LoadAutoren();
+                DataRow dataRow = dt.NewRow();
+                dataRow["ISBN"] = ISBN;
+                dataRow["Titel"] = Titel;
+                dataRow["Genre"] = Genre.Genrename;
+                dataRow["Verlag"] = Verlag.Verlagname;
+                dataRow["Erscheinungsdatum"] = Er_datum.ToString("dd.MM.yyyy");
+                dataRow["Sprache"] = Sprache.Sprachename;
+                dataRow["Auflage"] = Auflage;
+                dataRow["Neupreis"] = Neupreis;
+                dataRow["Bild"] = BildPfad;
+                dataRow["Anzahl Exemplare"] = Anzahl;
+                string autor = "";
+                foreach(string a in Autoren)
+                {
+                    autor = autor + a + ", ";
+                }
+                autor = autor.Substring(0, autor.Length - 2);
+                dataRow["Autor"] = autor;
+                dt.Rows.Add(dataRow);
+                
+            }
+            //ClearDSBuch();
+            //FillObjectBuch();
+            grid.DataSource = dt;
+            //grid.Columns[ds2.Tables[0].Columns.IndexOf("Autor")].DisplayIndex = 3;
+            //grid.Columns[ds2.Tables[0].Columns.IndexOf("AutorlisteID")].Visible = false;
         }
         #endregion
 

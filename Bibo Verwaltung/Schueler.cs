@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
+using System.Collections;
+using System.Globalization;
 
 namespace Bibo_Verwaltung
 {
@@ -32,11 +34,11 @@ namespace Bibo_Verwaltung
         /// </summary>
         public string Nachname { get { return nachname; } set { nachname = value; } }
 
-        string gd;
+        DateTime gd;
         /// <summary>
         /// Wohnort des Kunden
         /// </summary>
-        public string Gd { get { return gd; } set { gd = value; } }
+        public DateTime Gd { get { return gd; } set { gd = value; } }
 
         string klasse;
         /// <summary>
@@ -50,11 +52,14 @@ namespace Bibo_Verwaltung
         /// </summary>
         public string Klassenstufe { get { return klassenstufe; } set { klassenstufe = value; } }
 
-        FachListe fachListe = new FachListe();
+        Faecher fach = new Faecher();
         /// <summary>
         /// Strasse auf der der Kunde wohnt
         /// </summary>
-        public FachListe FachListe { get { return fachListe; } set { fachListe = value; } }
+        public Faecher Fach { get { return fach; } set { fach = value; } }
+
+        List<string> faecher = new List<string>();
+        public List<string> Faecher { get { return faecher; } set { faecher = value; } }
         #endregion
 
         #region Objekt Schueler
@@ -69,50 +74,59 @@ namespace Bibo_Verwaltung
         {
 
         }
-        public Schueler(string schuelerid)
+        public Schueler(string id)
         {
-            this.schuelerid = schuelerid;
-            load();
+            this.SchuelerID = id;
+            loadSchueler();
+            loadFaecher();
         }
         #endregion
 
         #region Load
-        private void load()
+        private void loadSchueler()
         {
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT * FROM [dbo].[t_s_schueler] WHERE  sch_id = @0";
-            SqlDataReader dr = con.ExcecuteCommand(RawCommand, schuelerid);
-            // Einlesen der Datenzeilen und Ausgabe an der Konsole 
+            string RawCommand = "SELECT sch_vorname, sch_nachname, sch_klasse, sch_stufe, isnull(sch_datum, '01.01.1990') as 'verified_datum' FROM [dbo].[t_s_schueler] WHERE  sch_id=@0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, SchuelerID);
             while (dr.Read())
             {
-                SchuelerID = dr["sch_ID"].ToString();
                 Vorname = dr["sch_vorname"].ToString();
                 Nachname = dr["sch_nachname"].ToString();
-                Gd = dr["sch_datum"].ToString();
                 Klasse = dr["sch_klasse"].ToString();
                 Klassenstufe = dr["sch_stufe"].ToString();
-                FachListe = new FachListe(dr["sch_faecher"].ToString());
-                
+                Gd = (DateTime)dr["verified_datum"];
             }
             // DataReader schließen 
             dr.Close();
             // Verbindung schließen 
             con.Close();
         }
-        #endregion
 
-        #region GetFachListeID
-        public string GetFachID(string id)
+        private void loadFaecher()
         {
-            string fachid = "";
-            if (con.ConnectError()) return "";
-            string RawCommand = "SELECT sch_faecher FROM [dbo].[t_s_schueler] WHERE sch_id = @0";
-            SqlDataReader dr = con.ExcecuteCommand(RawCommand, id);
+            Faecher.Clear();
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT * FROM [dbo].[t_s_fach_schueler] WHERE  fs_schuelerid = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, SchuelerID);
             while (dr.Read())
             {
-                fachid = dr["sch_faecher"].ToString();
+                Fach = new Faecher(dr["fs_fachid"].ToString());
+                Faecher.Add(Fach.FachKurz);
             }
-            return fachid;
+            dr.Close();
+        }
+        #endregion
+
+        #region GetSchuelerID
+        public void LoadSchuelerID()
+        {
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT sch_id FROM [dbo].[t_s_schueler] WHERE sch_vorname = @0 and sch_nachname = @1 and sch_datum = @2";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, Vorname, Nachname, Gd.Date);
+            while (dr.Read())
+            {
+                SchuelerID = dr["sch_id"].ToString();
+            }
         }
         #endregion
 
@@ -124,32 +138,33 @@ namespace Bibo_Verwaltung
         private void FillObject()
         {
             if (con.ConnectError()) return;
-            string RawCommand = "select sch_id as 'Schueler-ID', sch_vorname as 'Vorname', sch_nachname as 'Nachname', sch_klasse as 'Klasse', sch_stufe as 'Klassenstufe', fl_id as 'FachListeID' FROM [dbo].[t_s_schueler] left join t_s_fachListe on sch_faecher = fl_id";
+            //string RawCommand = "select sch_id as 'Schueler-ID', sch_vorname as 'Vorname', sch_nachname as 'Nachname',sch_datum as 'Geburtsdatum', sch_klasse as 'Klasse', sch_stufe as 'Klassenstufe', f_id as 'FachID' FROM [dbo].[t_s_schueler] left join t_s_faecher on sch_fach = f_id";
+            string RawCommand = "select sch_id as 'Schüler-ID', sch_vorname as 'Vorname', sch_nachname as 'Nachname',sch_datum as 'Geburtsdatum', sch_klasse as 'Klasse', sch_stufe as 'Klassenstufe' FROM [dbo].[t_s_schueler]";
 
             // Verbindung öffnen 
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
-            if (ds.Tables[0].Columns.Contains("Fächer"))
-            {
-                ds.Tables[0].Columns.RemoveAt(ds.Tables[0].Columns.IndexOf("Fächer"));
-            }
-            ds.Tables[0].Columns.Add("Fächer", typeof(System.String));
-            foreach(DataRow row in ds.Tables[0].Rows)
-            {
-                string text = "";
-                foreach (string s in FachListe.GetNames(row["FachListeID"].ToString()))
-                {
-                    if (s != null && !s.Equals(""))
-                    {
-                        text = text + s + ", ";
-                    }
-                }
-                if (text.Length > 2)
-                {
-                    text = text.Substring(0, text.Length - 2);
-                }
-                row["Fächer"] = text;
-            }
+            //if (ds.Tables[0].Columns.Contains("Fächer"))
+            //{
+            //    ds.Tables[0].Columns.RemoveAt(ds.Tables[0].Columns.IndexOf("Fächer"));
+            //}
+            //ds.Tables[0].Columns.Add("Fächer", typeof(System.String));
+            //foreach(DataRow row in ds.Tables[0].Rows)
+            //{
+            //    string text = "";
+            //    foreach (string s in FachListe.GetNames(row["FachListeID"].ToString()))
+            //    {
+            //        if (s != null && !s.Equals(""))
+            //        {
+            //            text = text + s + ", ";
+            //        }
+            //    }
+            //    if (text.Length > 2)
+            //    {
+            //        text = text.Substring(0, text.Length - 2);
+            //    }
+            //    row["Fächer"] = text;
+            //}
             con.Close();
         }
 
@@ -157,27 +172,135 @@ namespace Bibo_Verwaltung
         {
             ds.Tables[0].Clear();
         }
-
+        //private List<string> FachIDs(string vn, string nn, string gd)
+        //{
+        //    List<string> fachids = new List<string>();
+        //    if (con.ConnectError()) return fachids;
+        //    string RawCommand = "SELECT sch_fach FROM [dbo].[t_s_schueler] WHERE  sch_vorname = @0 and sch_nachname = @1 and sch_datum = @2";
+        //    SqlDataReader dr = con.ExcecuteCommand(RawCommand, vn, nn, gd);
+        //    while (dr.Read())
+        //    {
+        //        Fach = new Faecher(dr["sch_fach"].ToString());
+        //        fachids.Add(Fach.FachID);
+        //    }
+        //    // DataReader schließen 
+        //    dr.Close();
+        //    // Verbindung schließen 
+        //    con.Close();
+        //    return fachids;
+        //}
         public void FillGrid(bool loadAll, ref DataGridView grid, object value = null)
         {
             clearDataSource();
             FillObject();
-            
-            //for(int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            //List<string> all = new List<string>();
+            //List<string> vNames = new List<string>();
+            //List<string> nNames = new List<string>();
+            //List<string> gDatum = new List<string>();
+            //int vn = ds.Tables[0].Columns.IndexOf("Vorname");
+            //int nn = ds.Tables[0].Columns.IndexOf("Nachname");
+            //int gd = ds.Tables[0].Columns.IndexOf("Geburtsdatum");
+            //Faecher f = new Faecher();
+            //for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             //{
             //    DataRow row = ds.Tables[0].Rows[i];
-            //    for(int s = 1; s < 17; s++)
-            //    {
-            //        string name = "Fach " + s;
-            //        object cell = row[ds.Tables[0].Columns.IndexOf(name)];
-            //        string fachIDD = cell.ToString();
-            //        Faecher fach = new Faecher(cell.ToString());
-            //        row[ds.Tables[0].Columns.IndexOf(name)] = fach.Fach;
-            //    }
+            //    //vNames.Add(row[vn].ToString());
+            //    //nNames.Add(row[nn].ToString());
+            //    //gDatum.Add(row[gd].ToString());
+            //    all.Add(row[vn].ToString() + ';' + row[nn].ToString() + ';' + row[gd].ToString());
+                
             //}
-            //ds.Tables[0].Columns[ds.Tables[0].Columns.IndexOf("sch_1")] = "";
-            grid.DataSource = ds.Tables[0];
-            grid.Columns[ds.Tables[0].Columns.IndexOf("FachListeID")].Visible = false;
+            //all = all.Distinct().ToList();
+            //foreach (string s in all)
+            //{
+            //    string[] splitted = s.Split(';');
+            //    vNames.Add(splitted[0]);
+            //    nNames.Add(splitted[1]);
+            //    gDatum.Add(splitted[2]);
+            //}
+            DataTable dt = new DataTable();
+            //dt.Columns.Add(ds.Tables[0].Columns[0]);
+            //dt.Columns.Add(ds.Tables[0].Columns[1]);
+            //dt.Columns.Add(ds.Tables[0].Columns[2]);
+            //dt.Columns.Add(ds.Tables[0].Columns[3]);
+            //dt.Columns.Add(ds.Tables[0].Columns[4]);
+            dt.Columns.Add("ID");
+            dt.Columns.Add("Vorname");
+            dt.Columns.Add("Nachname");
+            dt.Columns.Add("Geburtsdatum");
+            dt.Columns.Add("Klasse");
+            dt.Columns.Add("Klassenstufe");
+            dt.Columns.Add("Fächer");
+            foreach(DataRow row in ds.Tables[0].Rows)
+            {
+                SchuelerID = row[ds.Tables[0].Columns.IndexOf("Schüler-ID")].ToString();
+                Vorname = row[ds.Tables[0].Columns.IndexOf("Vorname")].ToString();
+                Nachname = row[ds.Tables[0].Columns.IndexOf("Nachname")].ToString();
+                Gd = (DateTime)row[ds.Tables[0].Columns.IndexOf("Geburtsdatum")];
+                Klasse = row[ds.Tables[0].Columns.IndexOf("Klasse")].ToString();
+                Klassenstufe = row[ds.Tables[0].Columns.IndexOf("Klassenstufe")].ToString();
+                loadFaecher();
+                DataRow dataRow = dt.NewRow();
+                dataRow["ID"] = SchuelerID;
+                dataRow["Vorname"] = Vorname;
+                dataRow["Nachname"] = Nachname;
+                dataRow["Geburtsdatum"] = Gd.ToShortDateString();
+                dataRow["Klasse"] = Klasse;
+                dataRow["Klassenstufe"] = Klassenstufe;
+                string fach = "";
+                foreach (string s in Faecher)
+                {
+                    fach = fach + s + ", ";
+                }
+                try
+                {
+                    fach = fach.Substring(0, fach.Length - 2);
+                }
+                catch
+                {
+                    fach = "";
+                }
+                dataRow["Fächer"] = fach;
+                dt.Rows.Add(dataRow);
+            }
+            //for (int i = 0; i < vNames.Count; i++)
+            //{
+            //    DataRow dataRow = dt.NewRow();
+
+            //    Vorname = vNames[i];
+            //    Nachname = nNames[i];
+            //    Gd = gDatum[i];
+            //    //loadSchueler();
+            //    dataRow["Vorname"] = Vorname;
+            //    dataRow["Nachname"] = Nachname;
+            //    dataRow["Geburtsdatum"] = Gd;
+            //    dataRow["Klasse"] = Klasse;
+            //    dataRow["Klassenstufe"] = Klassenstufe;
+            //    string fach = "";
+            //    foreach (string s in Faecher)
+            //    {
+            //        fach = fach + s + ", ";
+            //    }
+            //    fach = fach.Substring(0, fach.Length - 2);
+            //    dataRow["Fächer"] = fach;
+            //    dt.Rows.Add(dataRow);
+
+            //}
+                //for(int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                //{
+                //    DataRow row = ds.Tables[0].Rows[i];
+                //    for(int s = 1; s < 17; s++)
+                //    {
+                //        string name = "Fach " + s;
+                //        object cell = row[ds.Tables[0].Columns.IndexOf(name)];
+                //        string fachIDD = cell.ToString();
+                //        Faecher fach = new Faecher(cell.ToString());
+                //        row[ds.Tables[0].Columns.IndexOf(name)] = fach.Fach;
+                //    }
+                //}
+                //ds.Tables[0].Columns[ds.Tables[0].Columns.IndexOf("sch_1")] = "";
+            grid.DataSource = dt;
+            //grid.Columns[ds.Tables[0].Columns.IndexOf("FachListeID")].Visible = false;
         }
         #endregion
 
@@ -194,24 +317,59 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Add
-        public void addKunde()
+        public void addSchueler()
         {
-            {
-                string RawCommand = "INSERT INTO [dbo].[t_s_schueler] (sch_vorname, sch_nachname, sch_datum, sch_klasse, sch_stufe, sch_faecher) VALUES (@vorname, @nachname,@datum, @klasse, @stufe, @fachid)";
-                con.ConnectError();
-                SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            //string RawCommand = "INSERT INTO [dbo].[t_s_schueler] (sch_vorname, sch_nachname, sch_datum, sch_klasse, sch_stufe, sch_fach) VALUES (@vorname, @nachname,@datum, @klasse, @stufe, @fachid)";
+            //con.ConnectError();
+            //foreach(string s in Faecher)
+            //{
+            //    SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
 
-                cmd.Parameters.AddWithValue("@vorname", Vorname);
-                cmd.Parameters.AddWithValue("@nachname", Nachname);
-                cmd.Parameters.AddWithValue("@datum", Gd);
-                cmd.Parameters.AddWithValue("@stufe", Klassenstufe);
-                cmd.Parameters.AddWithValue("@klasse", Klasse);
-                cmd.Parameters.AddWithValue("@fachid", FachListe.FachListeID);
+            //    cmd.Parameters.AddWithValue("@vorname", Vorname);
+            //    cmd.Parameters.AddWithValue("@nachname", Nachname);
+            //    cmd.Parameters.AddWithValue("@datum", Gd);
+            //    cmd.Parameters.AddWithValue("@stufe", Klassenstufe);
+            //    cmd.Parameters.AddWithValue("@klasse", Klasse);
+            //    cmd.Parameters.AddWithValue("@fachid", Fach.GetID(s));
+
+            //    // Verbindung öffnen 
+            //    cmd.ExecuteNonQuery();
+            //}
+            ////Verbindung schließen
+            //con.Close();
+            string RawCommand = "INSERT INTO [dbo].[t_s_schueler] (sch_vorname, sch_nachname, sch_datum, sch_klasse, sch_stufe) VALUES (@vorname, @nachname,@datum, @klasse, @stufe)";
+            con.ConnectError();
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@vorname", Vorname);
+            cmd.Parameters.AddWithValue("@nachname", Nachname);
+            cmd.Parameters.AddWithValue("@datum", Gd);
+            cmd.Parameters.AddWithValue("@stufe", Klassenstufe);
+            cmd.Parameters.AddWithValue("@klasse", Klasse);
 
                 // Verbindung öffnen 
+            cmd.ExecuteNonQuery();
+            LoadSchuelerID();
+            AddFaecher();
+            //Verbindung schließen
+            con.Close();
+
+        }
+        private void AddFaecher()
+        {
+            con.ConnectError();
+            string RawCommand = "INSERT INTO [dbo].[t_s_fach_schueler] (fs_schuelerid, fs_fachid) VALUES (@schuelerid, @fachid)";
+            foreach(string s in Faecher)
+            {
+                Fach.FachKurz = s;
+                Fach.Fach = "";
+                if (!Fach.AlreadyExists())
+                {
+                    Fach.Add();
+                }
+                SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+                cmd.Parameters.AddWithValue("@schuelerid", SchuelerID);
+                cmd.Parameters.AddWithValue("@fachid", Fach.GetID(s));
                 cmd.ExecuteNonQuery();
-                //Verbindung schließen
-                con.Close();
             }
         }
         #endregion
@@ -221,7 +379,7 @@ namespace Bibo_Verwaltung
         {
             if (con.ConnectError()) return false;
             string RawCommand = "SELECT * FROM [dbo].[t_s_schueler] WHERE sch_vorname = @0 and sch_nachname = @1 and sch_datum = @2";
-            SqlDataReader dr = con.ExcecuteCommand(RawCommand, Vorname, Nachname, Gd);
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, Vorname, Nachname, Gd.Date);
             while (dr.Read())
             {
                 SchuelerID = dr["sch_id"].ToString();
@@ -242,43 +400,57 @@ namespace Bibo_Verwaltung
         #region Save
         public void Update()
         {
-            {
-                FachListe.Update();
-                string RawCommand = "UPDATE [dbo].[t_s_schueler] SET sch_klasse = @klasse, sch_stufe = @stufe WHERE sch_vorname = @vorname and sch_nachname = @nachname and @datum = @datum";
-                con.ConnectError();
-                SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            string RawCommand = "UPDATE [dbo].[t_s_schueler] SET sch_klasse = @klasse, sch_stufe = @stufe WHERE sch_id = @id";
+            con.ConnectError();
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
 
-                cmd.Parameters.AddWithValue("@vorname", Vorname);
-                cmd.Parameters.AddWithValue("@nachname", Nachname);
-                cmd.Parameters.AddWithValue("@datum", Gd);
-                cmd.Parameters.AddWithValue("@stufe", Klassenstufe);
-                cmd.Parameters.AddWithValue("@klasse", Klasse);
+            cmd.Parameters.AddWithValue("@id", SchuelerID);
+            cmd.Parameters.AddWithValue("@stufe", Klassenstufe);
+            cmd.Parameters.AddWithValue("@klasse", Klasse);
 
-                // Verbindung öffnen 
-                cmd.ExecuteNonQuery();
-                //Verbindung schließen
-                con.Close();
-            }
+            // Verbindung öffnen 
+            cmd.ExecuteNonQuery();
+            DeleteFaecher();
+            AddFaecher();
+            //Verbindung schließen
+            con.Close();
+        }
+        private void DeleteFaecher()
+        {
+            string RawCommand = "DELETE FROM [dbo].[t_s_fach_schueler] WHERE fs_schuelerid = @id";
+            con.ConnectError();
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@id", SchuelerID);
+            cmd.ExecuteNonQuery();
         }
         #endregion
 
-        //#region Delete
-        //public void deleteKunde()
-        //{
-        //    {
-        //        string RawCommand = "DELETE FROM [dbo].[t_s_schueler] WHERE sch_id = @id";
-        //        con.ConnectError();
-        //        SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+        #region Delete
+        public void DeleteSchueler()
+        {
+            DeleteFaecher();
+            string RawCommand = "DELETE FROM [dbo].[t_s_schueler] WHERE sch_id=@id";
+            con.ConnectError();
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
 
-        //        cmd.Parameters.AddWithValue("@id", SchuelerID);
+            cmd.Parameters.AddWithValue("@id", SchuelerID);
 
-        //        // Verbindung öffnen 
-        //        cmd.ExecuteNonQuery();
-        //        //Verbindung schließen
-        //        con.Close();
-        //    }
-        //}
-        //#endregion
+            // Verbindung öffnen 
+            cmd.ExecuteNonQuery();
+            //Verbindung schließen
+            con.Close();
+            //string RawCommand = "DELETE FROM [dbo].[t_s_schueler] WHERE sch_id = @id";
+            //con.ConnectError();
+            //SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+
+            //cmd.Parameters.AddWithValue("@id", SchuelerID);
+
+            //// Verbindung öffnen 
+            //cmd.ExecuteNonQuery();
+            ////Verbindung schließen
+            //con.Close();
+        }
+        #endregion
     }
 }
 

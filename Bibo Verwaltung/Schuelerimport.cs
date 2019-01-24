@@ -119,6 +119,8 @@ namespace Bibo_Verwaltung
         {
             readCSV(false);
             
+
+
             grid.DataSource = dt;
         }
         #endregion
@@ -489,10 +491,10 @@ namespace Bibo_Verwaltung
         //   // table.Rows.Add(columns);
         //    grid.DataSource = table;
         //}
-        public void FillColGrid(ref DataGridView grid, bool sek1, object value = null)
+        public void FillColGrid(ref DataGridView grid, string target, object value = null)
         {
             DataTable table = new DataTable();
-            if (sek1)
+            if (target.Equals("SEK1"))
             {
                 table.Columns.Add("Vorname");
                 table.Columns.Add("Nachname");
@@ -503,7 +505,7 @@ namespace Bibo_Verwaltung
                 table.Columns.Add("Profil");
                 table.Columns.Add("Religionsunterricht");
             }
-            else
+            else if(target.Equals("SEK2"))
             {
                 table.Columns.Add("Vorname");
                 table.Columns.Add("Nachname");
@@ -511,11 +513,17 @@ namespace Bibo_Verwaltung
                 table.Columns.Add("Klasse");
                 table.Columns.Add("LK1");
                 table.Columns.Add("LK2");
-                for(int i = 1; i < 12; i++)
-                {
-                    table.Columns.Add("GK"+i);
-                }
+                table.Columns.Add("Grundkurse");
+                //for(int i = 1; i < 12; i++)
+                //{
+                //    table.Columns.Add("GK"+i);
+                //}
 
+            }
+            else if (target.Equals("FAECHER"))
+            {
+                table.Columns.Add("Kurzform");
+                table.Columns.Add("Langform");
             }
             //for(int i = 0; i < columns.Count;)
             //{
