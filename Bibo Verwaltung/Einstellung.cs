@@ -88,34 +88,41 @@ namespace Bibo_Verwaltung
 
         public void LoadSettings()
         {
-            if (!File_Exists(path))
+            try
             {
-                File.WriteAllText(path, "\r\n\r\n\r\n\r\n\r\n");
-            }
-            //alle Zeilen lesen
-            var zeilen = File.ReadLines(path);
-            //Zeichen in die Textboxen füllen
-            if (zeilen.Count() >= 1) Server = zeilen.First();
-            if (zeilen.Count() >= 2) Database = zeilen.Skip(1).First();
-            if (zeilen.Count() >= 4) Name = zeilen.Skip(3).First();
-            if (zeilen.Count() >= 5) Pw = zeilen.Skip(4).First();
+                if (!File_Exists(path))
+                {
+                    File.WriteAllText(path, "\r\n\r\n\r\n\r\n\r\n");
+                }
+                //alle Zeilen lesen
+                var zeilen = File.ReadLines(path);
+                //Zeichen in die Textboxen füllen
+                if (zeilen.Count() >= 1) Server = zeilen.First();
+                if (zeilen.Count() >= 2) Database = zeilen.Skip(1).First();
+                if (zeilen.Count() >= 4) Name = zeilen.Skip(3).First();
+                if (zeilen.Count() >= 5) Pw = zeilen.Skip(4).First();
 
-            if (zeilen.Count() >= 3)
+                if (zeilen.Count() >= 3)
+                {
+                    if (zeilen.Skip(2).First() == "Windows Authentifizierung")
+                    {
+                        Security = "Windows Authentifizierung";
+                    }
+                    else if (zeilen.Skip(2).First() == "SQL Authentifizierung")
+                    {
+                        Security = "SQL Authentifizierung";
+                    }
+                    else if (zeilen.Skip(2).First() != "")
+                    {
+                        MessageBox.Show("Unbekannte Authentifizierungsart. Windows Authentifizierung wurde ausgewählt", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Security = "Windows Authentifizierung";
+                        SaveSettings(true);
+                    }
+                }
+            }
+            catch (Exception)
             {
-                if (zeilen.Skip(2).First() == "Windows Authentifizierung")
-                {
-                    Security = "Windows Authentifizierung";
-                }
-                else if (zeilen.Skip(2).First() == "SQL Authentifizierung")
-                {
-                    Security = "SQL Authentifizierung";
-                }
-                else if (zeilen.Skip(2).First() != "")
-                {
-                    MessageBox.Show("Unbekannte Authentifizierungsart. Windows Authentifizierung wurde ausgewählt", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Security = "Windows Authentifizierung";
-                    SaveSettings(true);
-                }
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Einstellungen");
             }
             #endregion
         }
