@@ -119,7 +119,7 @@
             this.cb_klasse.Margin = new System.Windows.Forms.Padding(1);
             this.cb_klasse.Name = "cb_klasse";
             this.cb_klasse.Size = new System.Drawing.Size(158, 21);
-            this.cb_klasse.TabIndex = 2;
+            this.cb_klasse.TabIndex = 3;
             // 
             // lb_buch
             // 
@@ -143,7 +143,7 @@
             this.cb_buch1.Margin = new System.Windows.Forms.Padding(1);
             this.cb_buch1.Name = "cb_buch1";
             this.cb_buch1.Size = new System.Drawing.Size(158, 21);
-            this.cb_buch1.TabIndex = 2;
+            this.cb_buch1.TabIndex = 40;
             this.cb_buch1.DropDown += new System.EventHandler(this.comboboxClicked);
             this.cb_buch1.SelectedIndexChanged += new System.EventHandler(this.cb_selected);
             this.cb_buch1.Click += new System.EventHandler(this.comboboxClicked);
@@ -153,7 +153,7 @@
             this.bt_export.Location = new System.Drawing.Point(300, 410);
             this.bt_export.Name = "bt_export";
             this.bt_export.Size = new System.Drawing.Size(262, 23);
-            this.bt_export.TabIndex = 26;
+            this.bt_export.TabIndex = 61;
             this.bt_export.Text = "Exportieren";
             this.bt_export.UseVisualStyleBackColor = true;
             // 
@@ -162,7 +162,7 @@
             this.bt_close.Location = new System.Drawing.Point(615, 410);
             this.bt_close.Name = "bt_close";
             this.bt_close.Size = new System.Drawing.Size(262, 23);
-            this.bt_close.TabIndex = 25;
+            this.bt_close.TabIndex = 62;
             this.bt_close.Text = "Schließen";
             this.bt_close.UseVisualStyleBackColor = true;
             this.bt_close.MouseClick += new System.Windows.Forms.MouseEventHandler(this.bt_close_Click);
@@ -185,7 +185,7 @@
             this.gB_buchid.Name = "gB_buchid";
             this.gB_buchid.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gB_buchid.Size = new System.Drawing.Size(284, 426);
-            this.gB_buchid.TabIndex = 24;
+            this.gB_buchid.TabIndex = 0;
             this.gB_buchid.TabStop = false;
             this.gB_buchid.Text = "Bücher";
             // 
@@ -196,7 +196,7 @@
             this.cb_1.Margin = new System.Windows.Forms.Padding(1);
             this.cb_1.Name = "cb_1";
             this.cb_1.Size = new System.Drawing.Size(213, 17);
-            this.cb_1.TabIndex = 21;
+            this.cb_1.TabIndex = 60;
             this.cb_1.Text = "Automatisches Ändern der Klassenstufe";
             this.cb_1.UseVisualStyleBackColor = true;
             this.cb_1.CheckedChanged += new System.EventHandler(this.cb_1_CheckedChanged);
@@ -237,7 +237,7 @@
             this.tLP_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tLP_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tLP_1.Size = new System.Drawing.Size(184, 229);
-            this.tLP_1.TabIndex = 20;
+            this.tLP_1.TabIndex = 0;
             // 
             // tableLayoutPanel2
             // 
@@ -254,24 +254,28 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(158, 51);
-            this.tableLayoutPanel2.TabIndex = 4;
+            this.tableLayoutPanel2.TabIndex = 0;
             // 
             // bt_add
             // 
+            this.bt_add.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bt_add.Location = new System.Drawing.Point(3, 3);
+            this.bt_add.MinimumSize = new System.Drawing.Size(40, 20);
             this.bt_add.Name = "bt_add";
-            this.bt_add.Size = new System.Drawing.Size(72, 21);
-            this.bt_add.TabIndex = 16;
+            this.bt_add.Size = new System.Drawing.Size(73, 45);
+            this.bt_add.TabIndex = 50;
             this.bt_add.Text = "Hinzufügen";
             this.bt_add.UseVisualStyleBackColor = true;
             this.bt_add.Click += new System.EventHandler(this.bt_add_Click);
             // 
             // bt_clear
             // 
+            this.bt_clear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bt_clear.Location = new System.Drawing.Point(82, 3);
+            this.bt_clear.MinimumSize = new System.Drawing.Size(40, 20);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(72, 21);
-            this.bt_clear.TabIndex = 19;
+            this.bt_clear.Size = new System.Drawing.Size(73, 45);
+            this.bt_clear.TabIndex = 51;
             this.bt_clear.Text = "Leeren";
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
@@ -288,7 +292,7 @@
             this.cb_buch2.Margin = new System.Windows.Forms.Padding(1);
             this.cb_buch2.Name = "cb_buch2";
             this.cb_buch2.Size = new System.Drawing.Size(158, 21);
-            this.cb_buch2.TabIndex = 2;
+            this.cb_buch2.TabIndex = 41;
             this.cb_buch2.DropDown += new System.EventHandler(this.comboboxClicked);
             this.cb_buch2.SelectedIndexChanged += new System.EventHandler(this.cb_buch2_SelectedIndexChanged);
             this.cb_buch2.SelectionChangeCommitted += new System.EventHandler(this.cb_selected);
@@ -306,7 +310,7 @@
             this.cb_buch3.Margin = new System.Windows.Forms.Padding(1);
             this.cb_buch3.Name = "cb_buch3";
             this.cb_buch3.Size = new System.Drawing.Size(158, 21);
-            this.cb_buch3.TabIndex = 2;
+            this.cb_buch3.TabIndex = 42;
             this.cb_buch3.DropDown += new System.EventHandler(this.comboboxClicked);
             this.cb_buch3.SelectedIndexChanged += new System.EventHandler(this.cb_buch3_SelectedIndexChanged);
             this.cb_buch3.SelectionChangeCommitted += new System.EventHandler(this.cb_selected);
@@ -324,7 +328,7 @@
             this.cb_buch4.Margin = new System.Windows.Forms.Padding(1);
             this.cb_buch4.Name = "cb_buch4";
             this.cb_buch4.Size = new System.Drawing.Size(158, 21);
-            this.cb_buch4.TabIndex = 2;
+            this.cb_buch4.TabIndex = 43;
             this.cb_buch4.DropDown += new System.EventHandler(this.comboboxClicked);
             this.cb_buch4.SelectionChangeCommitted += new System.EventHandler(this.cb_selected);
             this.cb_buch4.Click += new System.EventHandler(this.comboboxClicked);
@@ -341,7 +345,7 @@
             this.cb_buch5.Margin = new System.Windows.Forms.Padding(1);
             this.cb_buch5.Name = "cb_buch5";
             this.cb_buch5.Size = new System.Drawing.Size(158, 21);
-            this.cb_buch5.TabIndex = 2;
+            this.cb_buch5.TabIndex = 44;
             this.cb_buch5.DropDown += new System.EventHandler(this.comboboxClicked);
             this.cb_buch5.SelectionChangeCommitted += new System.EventHandler(this.cb_selected);
             this.cb_buch5.Click += new System.EventHandler(this.comboboxClicked);
@@ -358,7 +362,7 @@
             this.cb_buch6.Margin = new System.Windows.Forms.Padding(1);
             this.cb_buch6.Name = "cb_buch6";
             this.cb_buch6.Size = new System.Drawing.Size(158, 21);
-            this.cb_buch6.TabIndex = 2;
+            this.cb_buch6.TabIndex = 45;
             this.cb_buch6.DropDown += new System.EventHandler(this.comboboxClicked);
             this.cb_buch6.SelectionChangeCommitted += new System.EventHandler(this.cb_selected);
             this.cb_buch6.Click += new System.EventHandler(this.comboboxClicked);
@@ -375,7 +379,7 @@
             this.cb_buch7.Margin = new System.Windows.Forms.Padding(1);
             this.cb_buch7.Name = "cb_buch7";
             this.cb_buch7.Size = new System.Drawing.Size(158, 21);
-            this.cb_buch7.TabIndex = 2;
+            this.cb_buch7.TabIndex = 46;
             this.cb_buch7.DropDown += new System.EventHandler(this.comboboxClicked);
             this.cb_buch7.SelectionChangeCommitted += new System.EventHandler(this.cb_selected);
             this.cb_buch7.Click += new System.EventHandler(this.comboboxClicked);
@@ -392,7 +396,7 @@
             this.cb_buch8.Margin = new System.Windows.Forms.Padding(1);
             this.cb_buch8.Name = "cb_buch8";
             this.cb_buch8.Size = new System.Drawing.Size(158, 21);
-            this.cb_buch8.TabIndex = 2;
+            this.cb_buch8.TabIndex = 47;
             this.cb_buch8.DropDown += new System.EventHandler(this.comboboxClicked);
             this.cb_buch8.SelectionChangeCommitted += new System.EventHandler(this.cb_selected);
             this.cb_buch8.Click += new System.EventHandler(this.comboboxClicked);
@@ -403,7 +407,8 @@
             this.bt_buch1.Margin = new System.Windows.Forms.Padding(1);
             this.bt_buch1.Name = "bt_buch1";
             this.bt_buch1.Size = new System.Drawing.Size(17, 19);
-            this.bt_buch1.TabIndex = 5;
+            this.bt_buch1.TabIndex = 0;
+            this.bt_buch1.TabStop = false;
             this.bt_buch1.Text = "-";
             this.bt_buch1.UseVisualStyleBackColor = true;
             this.bt_buch1.Click += new System.EventHandler(this.bt_buch_Click);
@@ -414,7 +419,8 @@
             this.bt_buch2.Margin = new System.Windows.Forms.Padding(1);
             this.bt_buch2.Name = "bt_buch2";
             this.bt_buch2.Size = new System.Drawing.Size(17, 19);
-            this.bt_buch2.TabIndex = 5;
+            this.bt_buch2.TabIndex = 0;
+            this.bt_buch2.TabStop = false;
             this.bt_buch2.Text = "-";
             this.bt_buch2.UseVisualStyleBackColor = true;
             this.bt_buch2.Click += new System.EventHandler(this.bt_buch_Click);
@@ -425,7 +431,8 @@
             this.bt_buch3.Margin = new System.Windows.Forms.Padding(1);
             this.bt_buch3.Name = "bt_buch3";
             this.bt_buch3.Size = new System.Drawing.Size(17, 19);
-            this.bt_buch3.TabIndex = 5;
+            this.bt_buch3.TabIndex = 0;
+            this.bt_buch3.TabStop = false;
             this.bt_buch3.Text = "-";
             this.bt_buch3.UseVisualStyleBackColor = true;
             this.bt_buch3.Click += new System.EventHandler(this.bt_buch_Click);
@@ -436,7 +443,8 @@
             this.bt_buch4.Margin = new System.Windows.Forms.Padding(1);
             this.bt_buch4.Name = "bt_buch4";
             this.bt_buch4.Size = new System.Drawing.Size(17, 19);
-            this.bt_buch4.TabIndex = 5;
+            this.bt_buch4.TabIndex = 0;
+            this.bt_buch4.TabStop = false;
             this.bt_buch4.Text = "-";
             this.bt_buch4.UseVisualStyleBackColor = true;
             this.bt_buch4.Click += new System.EventHandler(this.bt_buch_Click);
@@ -447,7 +455,8 @@
             this.bt_buch5.Margin = new System.Windows.Forms.Padding(1);
             this.bt_buch5.Name = "bt_buch5";
             this.bt_buch5.Size = new System.Drawing.Size(17, 19);
-            this.bt_buch5.TabIndex = 5;
+            this.bt_buch5.TabIndex = 0;
+            this.bt_buch5.TabStop = false;
             this.bt_buch5.Text = "-";
             this.bt_buch5.UseVisualStyleBackColor = true;
             this.bt_buch5.Click += new System.EventHandler(this.bt_buch_Click);
@@ -458,7 +467,8 @@
             this.bt_buch6.Margin = new System.Windows.Forms.Padding(1);
             this.bt_buch6.Name = "bt_buch6";
             this.bt_buch6.Size = new System.Drawing.Size(17, 19);
-            this.bt_buch6.TabIndex = 5;
+            this.bt_buch6.TabIndex = 0;
+            this.bt_buch6.TabStop = false;
             this.bt_buch6.Text = "-";
             this.bt_buch6.UseVisualStyleBackColor = true;
             this.bt_buch6.Click += new System.EventHandler(this.bt_buch_Click);
@@ -469,7 +479,8 @@
             this.bt_buch7.Margin = new System.Windows.Forms.Padding(1);
             this.bt_buch7.Name = "bt_buch7";
             this.bt_buch7.Size = new System.Drawing.Size(17, 19);
-            this.bt_buch7.TabIndex = 5;
+            this.bt_buch7.TabIndex = 0;
+            this.bt_buch7.TabStop = false;
             this.bt_buch7.Text = "-";
             this.bt_buch7.UseVisualStyleBackColor = true;
             this.bt_buch7.Click += new System.EventHandler(this.bt_buch_Click);
@@ -480,7 +491,8 @@
             this.bt_buch8.Margin = new System.Windows.Forms.Padding(1);
             this.bt_buch8.Name = "bt_buch8";
             this.bt_buch8.Size = new System.Drawing.Size(17, 19);
-            this.bt_buch8.TabIndex = 5;
+            this.bt_buch8.TabIndex = 0;
+            this.bt_buch8.TabStop = false;
             this.bt_buch8.Text = "-";
             this.bt_buch8.UseVisualStyleBackColor = true;
             this.bt_buch8.Click += new System.EventHandler(this.bt_buch_Click);
@@ -501,7 +513,8 @@
             this.rb_delete.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rb_delete.Name = "rb_delete";
             this.rb_delete.Size = new System.Drawing.Size(71, 17);
-            this.rb_delete.TabIndex = 14;
+            this.rb_delete.TabIndex = 13;
+            this.rb_delete.TabStop = true;
             this.rb_delete.Text = "Entfernen";
             this.rb_delete.UseVisualStyleBackColor = true;
             this.rb_delete.CheckedChanged += new System.EventHandler(this.rb_delete_CheckedChanged);
@@ -513,7 +526,8 @@
             this.rb_edit.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rb_edit.Name = "rb_edit";
             this.rb_edit.Size = new System.Drawing.Size(76, 17);
-            this.rb_edit.TabIndex = 13;
+            this.rb_edit.TabIndex = 12;
+            this.rb_edit.TabStop = true;
             this.rb_edit.Text = "Bearbeiten";
             this.rb_edit.UseVisualStyleBackColor = true;
             this.rb_edit.CheckedChanged += new System.EventHandler(this.rb_edit_CheckedChanged);
@@ -527,7 +541,7 @@
             this.rb_neu.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rb_neu.Name = "rb_neu";
             this.rb_neu.Size = new System.Drawing.Size(79, 17);
-            this.rb_neu.TabIndex = 12;
+            this.rb_neu.TabIndex = 11;
             this.rb_neu.TabStop = true;
             this.rb_neu.Text = "Hinzufügen";
             this.rb_neu.UseVisualStyleBackColor = true;
@@ -548,18 +562,20 @@
             this.gv_bf.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_bf.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv_bf.Size = new System.Drawing.Size(578, 396);
-            this.gv_bf.TabIndex = 23;
+            this.gv_bf.TabIndex = 0;
+            this.gv_bf.TabStop = false;
             this.gv_bf.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_bf_CellDoubleClick);
             // 
             // w_s_buch_fach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(883, 440);
+            this.ClientSize = new System.Drawing.Size(883, 438);
             this.Controls.Add(this.bt_export);
             this.Controls.Add(this.bt_close);
             this.Controls.Add(this.gB_buchid);
             this.Controls.Add(this.gv_bf);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "w_s_buch_fach";
             this.Text = "Bücher zu Fächern zuordnen";

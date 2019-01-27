@@ -102,7 +102,7 @@
             this.gb_Faecher.Margin = new System.Windows.Forms.Padding(1);
             this.gb_Faecher.Name = "gb_Faecher";
             this.gb_Faecher.Padding = new System.Windows.Forms.Padding(1);
-            this.gb_Faecher.Size = new System.Drawing.Size(267, 642);
+            this.gb_Faecher.Size = new System.Drawing.Size(238, 635);
             this.gb_Faecher.TabIndex = 67;
             this.gb_Faecher.TabStop = false;
             // 
@@ -147,7 +147,7 @@
             this.tLP_Faecher.Controls.Add(this.lb_Faecher, 0, 0);
             this.tLP_Faecher.Controls.Add(this.tb_Suchen, 0, 1);
             this.tLP_Faecher.Controls.Add(this.gv_Faecher, 0, 2);
-            this.tLP_Faecher.Location = new System.Drawing.Point(10, 15);
+            this.tLP_Faecher.Location = new System.Drawing.Point(2, 10);
             this.tLP_Faecher.Margin = new System.Windows.Forms.Padding(1);
             this.tLP_Faecher.Name = "tLP_Faecher";
             this.tLP_Faecher.RowCount = 5;
@@ -183,8 +183,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(267, 642);
+            this.ClientSize = new System.Drawing.Size(238, 635);
             this.Controls.Add(this.gb_Faecher);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "w_s_faecher";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

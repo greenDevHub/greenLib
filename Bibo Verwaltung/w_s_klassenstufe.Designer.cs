@@ -50,7 +50,7 @@
             this.gb_Klassenstufe.Margin = new System.Windows.Forms.Padding(2, 0, 2, 2);
             this.gb_Klassenstufe.Name = "gb_Klassenstufe";
             this.gb_Klassenstufe.Padding = new System.Windows.Forms.Padding(1);
-            this.gb_Klassenstufe.Size = new System.Drawing.Size(234, 482);
+            this.gb_Klassenstufe.Size = new System.Drawing.Size(248, 482);
             this.gb_Klassenstufe.TabIndex = 65;
             this.gb_Klassenstufe.TabStop = false;
             // 
@@ -71,7 +71,7 @@
             this.tLP_Klassenstufe.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tLP_Klassenstufe.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86F));
             this.tLP_Klassenstufe.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6F));
-            this.tLP_Klassenstufe.Size = new System.Drawing.Size(232, 467);
+            this.tLP_Klassenstufe.Size = new System.Drawing.Size(246, 467);
             this.tLP_Klassenstufe.TabIndex = 61;
             // 
             // lb_Klassenstufe
@@ -80,7 +80,7 @@
             this.lb_Klassenstufe.Dock = System.Windows.Forms.DockStyle.Top;
             this.lb_Klassenstufe.Location = new System.Drawing.Point(3, 0);
             this.lb_Klassenstufe.Name = "lb_Klassenstufe";
-            this.lb_Klassenstufe.Size = new System.Drawing.Size(231, 13);
+            this.lb_Klassenstufe.Size = new System.Drawing.Size(240, 13);
             this.lb_Klassenstufe.TabIndex = 53;
             this.lb_Klassenstufe.Text = "Suchen:";
             // 
@@ -92,7 +92,7 @@
             this.tb_Suchen.Enabled = false;
             this.tb_Suchen.Location = new System.Drawing.Point(3, 17);
             this.tb_Suchen.Name = "tb_Suchen";
-            this.tb_Suchen.Size = new System.Drawing.Size(231, 20);
+            this.tb_Suchen.Size = new System.Drawing.Size(240, 20);
             this.tb_Suchen.TabIndex = 52;
             this.tb_Suchen.Visible = false;
             this.tb_Suchen.TextChanged += new System.EventHandler(this.tb_Suchen_TextChanged);
@@ -111,7 +111,7 @@
             this.gv_Klassenstufe.MultiSelect = false;
             this.gv_Klassenstufe.Name = "gv_Klassenstufe";
             this.gv_Klassenstufe.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_Klassenstufe.Size = new System.Drawing.Size(231, 395);
+            this.gv_Klassenstufe.Size = new System.Drawing.Size(240, 395);
             this.gv_Klassenstufe.TabIndex = 50;
             this.gv_Klassenstufe.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridView_KeyPress);
             // 
@@ -129,7 +129,7 @@
             this.tLP_Button.Name = "tLP_Button";
             this.tLP_Button.RowCount = 1;
             this.tLP_Button.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLP_Button.Size = new System.Drawing.Size(235, 28);
+            this.tLP_Button.Size = new System.Drawing.Size(244, 28);
             this.tLP_Button.TabIndex = 54;
             // 
             // bt_Uebernehmen
@@ -138,7 +138,7 @@
             this.bt_Uebernehmen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bt_Uebernehmen.Location = new System.Drawing.Point(3, 3);
             this.bt_Uebernehmen.Name = "bt_Uebernehmen";
-            this.bt_Uebernehmen.Size = new System.Drawing.Size(135, 22);
+            this.bt_Uebernehmen.Size = new System.Drawing.Size(140, 22);
             this.bt_Uebernehmen.TabIndex = 51;
             this.bt_Uebernehmen.Text = "Übernehmen";
             this.bt_Uebernehmen.UseVisualStyleBackColor = true;
@@ -147,9 +147,9 @@
             // bt_Suchen
             // 
             this.bt_Suchen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bt_Suchen.Location = new System.Drawing.Point(144, 3);
+            this.bt_Suchen.Location = new System.Drawing.Point(149, 3);
             this.bt_Suchen.Name = "bt_Suchen";
-            this.bt_Suchen.Size = new System.Drawing.Size(88, 22);
+            this.bt_Suchen.Size = new System.Drawing.Size(92, 22);
             this.bt_Suchen.TabIndex = 54;
             this.bt_Suchen.Text = "Suchen AN";
             this.bt_Suchen.UseVisualStyleBackColor = true;
@@ -159,8 +159,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(234, 482);
+            this.ClientSize = new System.Drawing.Size(248, 482);
             this.Controls.Add(this.gb_Klassenstufe);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(1);
             this.MinimumSize = new System.Drawing.Size(235, 475);
             this.Name = "w_s_klassenstufe";

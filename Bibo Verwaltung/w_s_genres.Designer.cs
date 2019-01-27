@@ -51,7 +51,7 @@
             this.gb_Genres.Margin = new System.Windows.Forms.Padding(2, 0, 2, 2);
             this.gb_Genres.Name = "gb_Genres";
             this.gb_Genres.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
-            this.gb_Genres.Size = new System.Drawing.Size(219, 482);
+            this.gb_Genres.Size = new System.Drawing.Size(224, 482);
             this.gb_Genres.TabIndex = 64;
             this.gb_Genres.TabStop = false;
             // 
@@ -72,7 +72,7 @@
             this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86F));
             this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6F));
-            this.tLP_Sprachen.Size = new System.Drawing.Size(217, 467);
+            this.tLP_Sprachen.Size = new System.Drawing.Size(222, 467);
             this.tLP_Sprachen.TabIndex = 61;
             // 
             // lb_Genres
@@ -173,7 +173,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(219, 482);
+            this.ClientSize = new System.Drawing.Size(224, 482);
             this.Controls.Add(this.gb_Genres);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
