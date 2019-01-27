@@ -15,6 +15,7 @@ namespace Bibo_Verwaltung
         public w_s_klassenstufe()
         {
             InitializeComponent();
+            klassenstufe.FillGrid(ref gv_Klassenstufe);
             originalHeightLabel = tLP_Klassenstufe.RowStyles[0].Height;
             originalHeightText = tLP_Klassenstufe.RowStyles[1].Height;
             tLP_Klassenstufe.RowStyles[0].Height = 0;
@@ -33,12 +34,14 @@ namespace Bibo_Verwaltung
         {
             if (aenderungungen == true)
             {
+                gv_Klassenstufe.EndEdit();
                 DialogResult dr = MessageBox.Show("Sollen die Änderungen gespeichert werden?", "Warnung", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (dr == DialogResult.Yes)
                 {
                     try
                     {
                         bt_Uebernehmen.Focus();
+                        klassenstufe.SaveGrid(ref gv_Klassenstufe);
                     }
                     catch
                     {
@@ -90,6 +93,7 @@ namespace Bibo_Verwaltung
         }
         private void tb_Suchen_TextChanged(object sender, EventArgs e)
         {
+            //(gv_Klassenstufe.DataSource as DataTable).DefaultView.RowFilter = string.Format("Klassenstufe LIKE '{0}%'", tb_Suchen.Text);
         }
         #endregion
 
@@ -107,9 +111,13 @@ namespace Bibo_Verwaltung
 
         private void gv_Klassenstufen_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            string s = gv_Klassenstufe.Rows[e.RowIndex].Cells[1].Value.ToString();
+            for (int i = 0; i < gv_Klassenstufe.Rows.Count - 2; i++)
             {
+                if (s == gv_Klassenstufe.Rows[i].Cells[1].Value.ToString())
                 {
                     MessageBox.Show("Dieser Eintrag ist bereits vorhanden!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    gv_Klassenstufe.Rows.RemoveAt(e.RowIndex);
                     return;
                 }
             }
@@ -119,6 +127,7 @@ namespace Bibo_Verwaltung
         {
             try
             {
+                klassenstufe.SaveGrid(ref gv_Klassenstufe);
                 aenderungungen = false;
             }
             catch
