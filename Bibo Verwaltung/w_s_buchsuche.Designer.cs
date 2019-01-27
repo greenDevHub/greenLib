@@ -317,7 +317,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 711);
+            this.ClientSize = new System.Drawing.Size(978, 675);
             this.Controls.Add(this.gb_KSuchen);
             this.Controls.Add(this.bt_Rueckgabe);
             this.Controls.Add(this.gb_BSuchen);
@@ -326,6 +326,7 @@
             this.Controls.Add(this.cb_Verfügbar_Anz);
             this.Controls.Add(this.cb_KundeAnz);
             this.Controls.Add(this.gv_buchsuche);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
