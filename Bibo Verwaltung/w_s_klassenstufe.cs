@@ -15,7 +15,10 @@ namespace Bibo_Verwaltung
         public w_s_klassenstufe()
         {
             InitializeComponent();
-            klassenstufe.FillGrid(ref gv_Genres);
+            originalHeightLabel = tLP_Klassenstufe.RowStyles[0].Height;
+            originalHeightText = tLP_Klassenstufe.RowStyles[1].Height;
+            tLP_Klassenstufe.RowStyles[0].Height = 0;
+            tLP_Klassenstufe.RowStyles[1].Height = 0;
         }
         #region globale Variablen
         float originalHeightLabel = 0;
@@ -26,18 +29,16 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Schliessen-Aktion
-        private void w_s_genres_FormClosing(object sender, FormClosingEventArgs e)
+        private void w_s_klassenstufe_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (aenderungungen == true)
             {
-                gv_Genres.EndEdit();
                 DialogResult dr = MessageBox.Show("Sollen die Änderungen gespeichert werden?", "Warnung", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (dr == DialogResult.Yes)
                 {
                     try
                     {
                         bt_Uebernehmen.Focus();
-                        klassenstufe.SaveGrid(ref gv_Genres);
                     }
                     catch
                     {
@@ -70,8 +71,8 @@ namespace Bibo_Verwaltung
             {
                 suchmodus = true;
                 bt_Suchen.Text = "Suchen AUS";
-                tLP_Sprachen.RowStyles[0].Height = originalHeightLabel;
-                tLP_Sprachen.RowStyles[1].Height = originalHeightText;
+                tLP_Klassenstufe.RowStyles[0].Height = originalHeightLabel;
+                tLP_Klassenstufe.RowStyles[1].Height = originalHeightText;
                 tb_Suchen.Visible = true;
                 tb_Suchen.Enabled = true;
                 tb_Suchen.Focus();
@@ -83,38 +84,32 @@ namespace Bibo_Verwaltung
                 tb_Suchen.Visible = false;
                 tb_Suchen.Enabled = false;
                 tb_Suchen.Text = "";
-                tLP_Sprachen.RowStyles[0].Height = 0;
-                tLP_Sprachen.RowStyles[1].Height = 0;
+                tLP_Klassenstufe.RowStyles[0].Height = 0;
+                tLP_Klassenstufe.RowStyles[1].Height = 0;
             }
         }
-
         private void tb_Suchen_TextChanged(object sender, EventArgs e)
         {
-            (gv_Genres.DataSource as DataTable).DefaultView.RowFilter = string.Format("ger_name LIKE '{0}%'", tb_Suchen.Text);
         }
         #endregion
 
         #region Aenderungen an GridView erkennen
-        private void gv_genres_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        private void gv_klassenstufen_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             aenderungungen = true;
         }
 
-        private void gv_genres_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        private void gv_klassenstufen_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
             aenderungungen = true;
         }
         #endregion
 
-        private void gv_Genres_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void gv_Klassenstufen_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            string s = gv_Genres.Rows[e.RowIndex].Cells[1].Value.ToString();
-            for (int i = 0; i < gv_Genres.Rows.Count - 2; i++)
             {
-                if (s == gv_Genres.Rows[i].Cells[1].Value.ToString())
                 {
                     MessageBox.Show("Dieser Eintrag ist bereits vorhanden!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    gv_Genres.Rows.RemoveAt(e.RowIndex);
                     return;
                 }
             }
@@ -124,18 +119,12 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                klassenstufe.SaveGrid(ref gv_Genres);
                 aenderungungen = false;
             }
             catch
             {
                 MessageBox.Show("Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void tb_Suchen_TextChanged_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

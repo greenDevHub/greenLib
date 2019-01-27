@@ -71,9 +71,10 @@
             // lb_fach
             // 
             this.lb_fach.AutoSize = true;
-            this.lb_fach.Location = new System.Drawing.Point(12, 106);
+            this.lb_fach.Location = new System.Drawing.Point(4, 44);
+            this.lb_fach.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lb_fach.Name = "lb_fach";
-            this.lb_fach.Size = new System.Drawing.Size(78, 32);
+            this.lb_fach.Size = new System.Drawing.Size(31, 13);
             this.lb_fach.TabIndex = 1;
             this.lb_fach.Text = "Fach";
             // 
@@ -82,17 +83,19 @@
             this.cb_fach.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_fach.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_fach.FormattingEnabled = true;
-            this.cb_fach.Location = new System.Drawing.Point(264, 103);
+            this.cb_fach.Location = new System.Drawing.Point(99, 43);
+            this.cb_fach.Margin = new System.Windows.Forms.Padding(1);
             this.cb_fach.Name = "cb_fach";
-            this.cb_fach.Size = new System.Drawing.Size(414, 39);
+            this.cb_fach.Size = new System.Drawing.Size(158, 21);
             this.cb_fach.TabIndex = 2;
             // 
             // bt_klasse
             // 
             this.bt_klasse.AutoSize = true;
-            this.bt_klasse.Location = new System.Drawing.Point(12, 163);
+            this.bt_klasse.Location = new System.Drawing.Point(4, 68);
+            this.bt_klasse.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.bt_klasse.Name = "bt_klasse";
-            this.bt_klasse.Size = new System.Drawing.Size(101, 32);
+            this.bt_klasse.Size = new System.Drawing.Size(38, 13);
             this.bt_klasse.TabIndex = 1;
             this.bt_klasse.Text = "Klasse";
             // 
@@ -112,17 +115,19 @@
             "11 GK",
             "12 LK",
             "12 GK"});
-            this.cb_klasse.Location = new System.Drawing.Point(264, 163);
+            this.cb_klasse.Location = new System.Drawing.Point(99, 68);
+            this.cb_klasse.Margin = new System.Windows.Forms.Padding(1);
             this.cb_klasse.Name = "cb_klasse";
-            this.cb_klasse.Size = new System.Drawing.Size(414, 39);
+            this.cb_klasse.Size = new System.Drawing.Size(158, 21);
             this.cb_klasse.TabIndex = 2;
             // 
             // lb_buch
             // 
             this.lb_buch.AutoSize = true;
-            this.lb_buch.Location = new System.Drawing.Point(12, 226);
+            this.lb_buch.Location = new System.Drawing.Point(4, 95);
+            this.lb_buch.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lb_buch.Name = "lb_buch";
-            this.lb_buch.Size = new System.Drawing.Size(80, 32);
+            this.lb_buch.Size = new System.Drawing.Size(32, 13);
             this.lb_buch.TabIndex = 1;
             this.lb_buch.Text = "Buch";
             // 
@@ -134,9 +139,10 @@
             this.cb_buch1.DropDownWidth = 1;
             this.cb_buch1.FormattingEnabled = true;
             this.cb_buch1.IntegralHeight = false;
-            this.cb_buch1.Location = new System.Drawing.Point(3, 3);
+            this.cb_buch1.Location = new System.Drawing.Point(1, 1);
+            this.cb_buch1.Margin = new System.Windows.Forms.Padding(1);
             this.cb_buch1.Name = "cb_buch1";
-            this.cb_buch1.Size = new System.Drawing.Size(414, 39);
+            this.cb_buch1.Size = new System.Drawing.Size(158, 21);
             this.cb_buch1.TabIndex = 2;
             this.cb_buch1.DropDown += new System.EventHandler(this.comboboxClicked);
             this.cb_buch1.SelectedIndexChanged += new System.EventHandler(this.cb_selected);
@@ -144,23 +150,22 @@
             // 
             // bt_export
             // 
-            this.bt_export.Location = new System.Drawing.Point(799, 978);
-            this.bt_export.Margin = new System.Windows.Forms.Padding(8);
+            this.bt_export.Location = new System.Drawing.Point(300, 410);
             this.bt_export.Name = "bt_export";
-            this.bt_export.Size = new System.Drawing.Size(698, 54);
+            this.bt_export.Size = new System.Drawing.Size(262, 23);
             this.bt_export.TabIndex = 26;
             this.bt_export.Text = "Exportieren";
             this.bt_export.UseVisualStyleBackColor = true;
             // 
             // bt_close
             // 
-            this.bt_close.Location = new System.Drawing.Point(1641, 978);
-            this.bt_close.Margin = new System.Windows.Forms.Padding(8);
+            this.bt_close.Location = new System.Drawing.Point(615, 410);
             this.bt_close.Name = "bt_close";
-            this.bt_close.Size = new System.Drawing.Size(698, 54);
+            this.bt_close.Size = new System.Drawing.Size(262, 23);
             this.bt_close.TabIndex = 25;
             this.bt_close.Text = "Schließen";
             this.bt_close.UseVisualStyleBackColor = true;
+            this.bt_close.MouseClick += new System.Windows.Forms.MouseEventHandler(this.bt_close_Click);
             // 
             // gB_buchid
             // 
@@ -175,11 +180,11 @@
             this.gB_buchid.Controls.Add(this.rb_delete);
             this.gB_buchid.Controls.Add(this.rb_edit);
             this.gB_buchid.Controls.Add(this.rb_neu);
-            this.gB_buchid.Location = new System.Drawing.Point(15, 17);
-            this.gB_buchid.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.gB_buchid.Location = new System.Drawing.Point(6, 7);
+            this.gB_buchid.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gB_buchid.Name = "gB_buchid";
-            this.gB_buchid.Padding = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.gB_buchid.Size = new System.Drawing.Size(758, 1015);
+            this.gB_buchid.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gB_buchid.Size = new System.Drawing.Size(284, 426);
             this.gB_buchid.TabIndex = 24;
             this.gB_buchid.TabStop = false;
             this.gB_buchid.Text = "Bücher";
@@ -187,9 +192,10 @@
             // cb_1
             // 
             this.cb_1.AutoSize = true;
-            this.cb_1.Location = new System.Drawing.Point(0, 968);
+            this.cb_1.Location = new System.Drawing.Point(0, 406);
+            this.cb_1.Margin = new System.Windows.Forms.Padding(1);
             this.cb_1.Name = "cb_1";
-            this.cb_1.Size = new System.Drawing.Size(558, 36);
+            this.cb_1.Size = new System.Drawing.Size(213, 17);
             this.cb_1.TabIndex = 21;
             this.cb_1.Text = "Automatisches Ändern der Klassenstufe";
             this.cb_1.UseVisualStyleBackColor = true;
@@ -217,7 +223,8 @@
             this.tLP_1.Controls.Add(this.bt_buch6, 1, 5);
             this.tLP_1.Controls.Add(this.bt_buch7, 1, 6);
             this.tLP_1.Controls.Add(this.bt_buch8, 1, 7);
-            this.tLP_1.Location = new System.Drawing.Point(264, 226);
+            this.tLP_1.Location = new System.Drawing.Point(99, 95);
+            this.tLP_1.Margin = new System.Windows.Forms.Padding(1);
             this.tLP_1.Name = "tLP_1";
             this.tLP_1.RowCount = 9;
             this.tLP_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
@@ -229,7 +236,7 @@
             this.tLP_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tLP_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tLP_1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tLP_1.Size = new System.Drawing.Size(492, 546);
+            this.tLP_1.Size = new System.Drawing.Size(184, 229);
             this.tLP_1.TabIndex = 20;
             // 
             // tableLayoutPanel2
@@ -240,20 +247,20 @@
             this.tableLayoutPanel2.Controls.Add(this.bt_add, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.bt_clear, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 435);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(1, 177);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(1);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(423, 108);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(158, 51);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // bt_add
             // 
-            this.bt_add.Location = new System.Drawing.Point(8, 8);
-            this.bt_add.Margin = new System.Windows.Forms.Padding(8);
+            this.bt_add.Location = new System.Drawing.Point(3, 3);
             this.bt_add.Name = "bt_add";
-            this.bt_add.Size = new System.Drawing.Size(192, 51);
+            this.bt_add.Size = new System.Drawing.Size(72, 21);
             this.bt_add.TabIndex = 16;
             this.bt_add.Text = "Hinzufügen";
             this.bt_add.UseVisualStyleBackColor = true;
@@ -261,10 +268,9 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(219, 8);
-            this.bt_clear.Margin = new System.Windows.Forms.Padding(8);
+            this.bt_clear.Location = new System.Drawing.Point(82, 3);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(192, 51);
+            this.bt_clear.Size = new System.Drawing.Size(72, 21);
             this.bt_clear.TabIndex = 19;
             this.bt_clear.Text = "Leeren";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -278,9 +284,10 @@
             this.cb_buch2.DropDownWidth = 1;
             this.cb_buch2.FormattingEnabled = true;
             this.cb_buch2.IntegralHeight = false;
-            this.cb_buch2.Location = new System.Drawing.Point(3, 57);
+            this.cb_buch2.Location = new System.Drawing.Point(1, 23);
+            this.cb_buch2.Margin = new System.Windows.Forms.Padding(1);
             this.cb_buch2.Name = "cb_buch2";
-            this.cb_buch2.Size = new System.Drawing.Size(414, 39);
+            this.cb_buch2.Size = new System.Drawing.Size(158, 21);
             this.cb_buch2.TabIndex = 2;
             this.cb_buch2.DropDown += new System.EventHandler(this.comboboxClicked);
             this.cb_buch2.SelectedIndexChanged += new System.EventHandler(this.cb_buch2_SelectedIndexChanged);
@@ -295,9 +302,10 @@
             this.cb_buch3.DropDownWidth = 1;
             this.cb_buch3.FormattingEnabled = true;
             this.cb_buch3.IntegralHeight = false;
-            this.cb_buch3.Location = new System.Drawing.Point(3, 111);
+            this.cb_buch3.Location = new System.Drawing.Point(1, 45);
+            this.cb_buch3.Margin = new System.Windows.Forms.Padding(1);
             this.cb_buch3.Name = "cb_buch3";
-            this.cb_buch3.Size = new System.Drawing.Size(414, 39);
+            this.cb_buch3.Size = new System.Drawing.Size(158, 21);
             this.cb_buch3.TabIndex = 2;
             this.cb_buch3.DropDown += new System.EventHandler(this.comboboxClicked);
             this.cb_buch3.SelectedIndexChanged += new System.EventHandler(this.cb_buch3_SelectedIndexChanged);
@@ -312,9 +320,10 @@
             this.cb_buch4.DropDownWidth = 1;
             this.cb_buch4.FormattingEnabled = true;
             this.cb_buch4.IntegralHeight = false;
-            this.cb_buch4.Location = new System.Drawing.Point(3, 165);
+            this.cb_buch4.Location = new System.Drawing.Point(1, 67);
+            this.cb_buch4.Margin = new System.Windows.Forms.Padding(1);
             this.cb_buch4.Name = "cb_buch4";
-            this.cb_buch4.Size = new System.Drawing.Size(414, 39);
+            this.cb_buch4.Size = new System.Drawing.Size(158, 21);
             this.cb_buch4.TabIndex = 2;
             this.cb_buch4.DropDown += new System.EventHandler(this.comboboxClicked);
             this.cb_buch4.SelectionChangeCommitted += new System.EventHandler(this.cb_selected);
@@ -328,9 +337,10 @@
             this.cb_buch5.DropDownWidth = 1;
             this.cb_buch5.FormattingEnabled = true;
             this.cb_buch5.IntegralHeight = false;
-            this.cb_buch5.Location = new System.Drawing.Point(3, 219);
+            this.cb_buch5.Location = new System.Drawing.Point(1, 89);
+            this.cb_buch5.Margin = new System.Windows.Forms.Padding(1);
             this.cb_buch5.Name = "cb_buch5";
-            this.cb_buch5.Size = new System.Drawing.Size(414, 39);
+            this.cb_buch5.Size = new System.Drawing.Size(158, 21);
             this.cb_buch5.TabIndex = 2;
             this.cb_buch5.DropDown += new System.EventHandler(this.comboboxClicked);
             this.cb_buch5.SelectionChangeCommitted += new System.EventHandler(this.cb_selected);
@@ -344,9 +354,10 @@
             this.cb_buch6.DropDownWidth = 1;
             this.cb_buch6.FormattingEnabled = true;
             this.cb_buch6.IntegralHeight = false;
-            this.cb_buch6.Location = new System.Drawing.Point(3, 273);
+            this.cb_buch6.Location = new System.Drawing.Point(1, 111);
+            this.cb_buch6.Margin = new System.Windows.Forms.Padding(1);
             this.cb_buch6.Name = "cb_buch6";
-            this.cb_buch6.Size = new System.Drawing.Size(414, 39);
+            this.cb_buch6.Size = new System.Drawing.Size(158, 21);
             this.cb_buch6.TabIndex = 2;
             this.cb_buch6.DropDown += new System.EventHandler(this.comboboxClicked);
             this.cb_buch6.SelectionChangeCommitted += new System.EventHandler(this.cb_selected);
@@ -360,9 +371,10 @@
             this.cb_buch7.DropDownWidth = 1;
             this.cb_buch7.FormattingEnabled = true;
             this.cb_buch7.IntegralHeight = false;
-            this.cb_buch7.Location = new System.Drawing.Point(3, 327);
+            this.cb_buch7.Location = new System.Drawing.Point(1, 133);
+            this.cb_buch7.Margin = new System.Windows.Forms.Padding(1);
             this.cb_buch7.Name = "cb_buch7";
-            this.cb_buch7.Size = new System.Drawing.Size(414, 39);
+            this.cb_buch7.Size = new System.Drawing.Size(158, 21);
             this.cb_buch7.TabIndex = 2;
             this.cb_buch7.DropDown += new System.EventHandler(this.comboboxClicked);
             this.cb_buch7.SelectionChangeCommitted += new System.EventHandler(this.cb_selected);
@@ -376,9 +388,10 @@
             this.cb_buch8.DropDownWidth = 1;
             this.cb_buch8.FormattingEnabled = true;
             this.cb_buch8.IntegralHeight = false;
-            this.cb_buch8.Location = new System.Drawing.Point(3, 381);
+            this.cb_buch8.Location = new System.Drawing.Point(1, 155);
+            this.cb_buch8.Margin = new System.Windows.Forms.Padding(1);
             this.cb_buch8.Name = "cb_buch8";
-            this.cb_buch8.Size = new System.Drawing.Size(414, 39);
+            this.cb_buch8.Size = new System.Drawing.Size(158, 21);
             this.cb_buch8.TabIndex = 2;
             this.cb_buch8.DropDown += new System.EventHandler(this.comboboxClicked);
             this.cb_buch8.SelectionChangeCommitted += new System.EventHandler(this.cb_selected);
@@ -386,9 +399,10 @@
             // 
             // bt_buch1
             // 
-            this.bt_buch1.Location = new System.Drawing.Point(432, 3);
+            this.bt_buch1.Location = new System.Drawing.Point(161, 1);
+            this.bt_buch1.Margin = new System.Windows.Forms.Padding(1);
             this.bt_buch1.Name = "bt_buch1";
-            this.bt_buch1.Size = new System.Drawing.Size(45, 45);
+            this.bt_buch1.Size = new System.Drawing.Size(17, 19);
             this.bt_buch1.TabIndex = 5;
             this.bt_buch1.Text = "-";
             this.bt_buch1.UseVisualStyleBackColor = true;
@@ -396,9 +410,10 @@
             // 
             // bt_buch2
             // 
-            this.bt_buch2.Location = new System.Drawing.Point(432, 57);
+            this.bt_buch2.Location = new System.Drawing.Point(161, 23);
+            this.bt_buch2.Margin = new System.Windows.Forms.Padding(1);
             this.bt_buch2.Name = "bt_buch2";
-            this.bt_buch2.Size = new System.Drawing.Size(45, 45);
+            this.bt_buch2.Size = new System.Drawing.Size(17, 19);
             this.bt_buch2.TabIndex = 5;
             this.bt_buch2.Text = "-";
             this.bt_buch2.UseVisualStyleBackColor = true;
@@ -406,9 +421,10 @@
             // 
             // bt_buch3
             // 
-            this.bt_buch3.Location = new System.Drawing.Point(432, 111);
+            this.bt_buch3.Location = new System.Drawing.Point(161, 45);
+            this.bt_buch3.Margin = new System.Windows.Forms.Padding(1);
             this.bt_buch3.Name = "bt_buch3";
-            this.bt_buch3.Size = new System.Drawing.Size(45, 45);
+            this.bt_buch3.Size = new System.Drawing.Size(17, 19);
             this.bt_buch3.TabIndex = 5;
             this.bt_buch3.Text = "-";
             this.bt_buch3.UseVisualStyleBackColor = true;
@@ -416,9 +432,10 @@
             // 
             // bt_buch4
             // 
-            this.bt_buch4.Location = new System.Drawing.Point(432, 165);
+            this.bt_buch4.Location = new System.Drawing.Point(161, 67);
+            this.bt_buch4.Margin = new System.Windows.Forms.Padding(1);
             this.bt_buch4.Name = "bt_buch4";
-            this.bt_buch4.Size = new System.Drawing.Size(45, 45);
+            this.bt_buch4.Size = new System.Drawing.Size(17, 19);
             this.bt_buch4.TabIndex = 5;
             this.bt_buch4.Text = "-";
             this.bt_buch4.UseVisualStyleBackColor = true;
@@ -426,9 +443,10 @@
             // 
             // bt_buch5
             // 
-            this.bt_buch5.Location = new System.Drawing.Point(432, 219);
+            this.bt_buch5.Location = new System.Drawing.Point(161, 89);
+            this.bt_buch5.Margin = new System.Windows.Forms.Padding(1);
             this.bt_buch5.Name = "bt_buch5";
-            this.bt_buch5.Size = new System.Drawing.Size(45, 45);
+            this.bt_buch5.Size = new System.Drawing.Size(17, 19);
             this.bt_buch5.TabIndex = 5;
             this.bt_buch5.Text = "-";
             this.bt_buch5.UseVisualStyleBackColor = true;
@@ -436,9 +454,10 @@
             // 
             // bt_buch6
             // 
-            this.bt_buch6.Location = new System.Drawing.Point(432, 273);
+            this.bt_buch6.Location = new System.Drawing.Point(161, 111);
+            this.bt_buch6.Margin = new System.Windows.Forms.Padding(1);
             this.bt_buch6.Name = "bt_buch6";
-            this.bt_buch6.Size = new System.Drawing.Size(45, 45);
+            this.bt_buch6.Size = new System.Drawing.Size(17, 19);
             this.bt_buch6.TabIndex = 5;
             this.bt_buch6.Text = "-";
             this.bt_buch6.UseVisualStyleBackColor = true;
@@ -446,9 +465,10 @@
             // 
             // bt_buch7
             // 
-            this.bt_buch7.Location = new System.Drawing.Point(432, 327);
+            this.bt_buch7.Location = new System.Drawing.Point(161, 133);
+            this.bt_buch7.Margin = new System.Windows.Forms.Padding(1);
             this.bt_buch7.Name = "bt_buch7";
-            this.bt_buch7.Size = new System.Drawing.Size(45, 45);
+            this.bt_buch7.Size = new System.Drawing.Size(17, 19);
             this.bt_buch7.TabIndex = 5;
             this.bt_buch7.Text = "-";
             this.bt_buch7.UseVisualStyleBackColor = true;
@@ -456,9 +476,10 @@
             // 
             // bt_buch8
             // 
-            this.bt_buch8.Location = new System.Drawing.Point(432, 381);
+            this.bt_buch8.Location = new System.Drawing.Point(161, 155);
+            this.bt_buch8.Margin = new System.Windows.Forms.Padding(1);
             this.bt_buch8.Name = "bt_buch8";
-            this.bt_buch8.Size = new System.Drawing.Size(45, 45);
+            this.bt_buch8.Size = new System.Drawing.Size(17, 19);
             this.bt_buch8.TabIndex = 5;
             this.bt_buch8.Text = "-";
             this.bt_buch8.UseVisualStyleBackColor = true;
@@ -467,19 +488,19 @@
             // lb
             // 
             this.lb.AutoSize = true;
-            this.lb.Location = new System.Drawing.Point(10, 469);
-            this.lb.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lb.Location = new System.Drawing.Point(4, 197);
+            this.lb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb.Name = "lb";
-            this.lb.Size = new System.Drawing.Size(0, 32);
+            this.lb.Size = new System.Drawing.Size(0, 13);
             this.lb.TabIndex = 17;
             // 
             // rb_delete
             // 
             this.rb_delete.AutoSize = true;
-            this.rb_delete.Location = new System.Drawing.Point(550, 45);
-            this.rb_delete.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.rb_delete.Location = new System.Drawing.Point(206, 19);
+            this.rb_delete.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rb_delete.Name = "rb_delete";
-            this.rb_delete.Size = new System.Drawing.Size(176, 36);
+            this.rb_delete.Size = new System.Drawing.Size(71, 17);
             this.rb_delete.TabIndex = 14;
             this.rb_delete.Text = "Entfernen";
             this.rb_delete.UseVisualStyleBackColor = true;
@@ -488,10 +509,10 @@
             // rb_edit
             // 
             this.rb_edit.AutoSize = true;
-            this.rb_edit.Location = new System.Drawing.Point(282, 45);
-            this.rb_edit.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.rb_edit.Location = new System.Drawing.Point(106, 19);
+            this.rb_edit.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rb_edit.Name = "rb_edit";
-            this.rb_edit.Size = new System.Drawing.Size(191, 36);
+            this.rb_edit.Size = new System.Drawing.Size(76, 17);
             this.rb_edit.TabIndex = 13;
             this.rb_edit.Text = "Bearbeiten";
             this.rb_edit.UseVisualStyleBackColor = true;
@@ -502,10 +523,10 @@
             this.rb_neu.AutoSize = true;
             this.rb_neu.Checked = true;
             this.rb_neu.Cursor = System.Windows.Forms.Cursors.Default;
-            this.rb_neu.Location = new System.Drawing.Point(16, 45);
-            this.rb_neu.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.rb_neu.Location = new System.Drawing.Point(6, 19);
+            this.rb_neu.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rb_neu.Name = "rb_neu";
-            this.rb_neu.Size = new System.Drawing.Size(197, 36);
+            this.rb_neu.Size = new System.Drawing.Size(79, 17);
             this.rb_neu.TabIndex = 12;
             this.rb_neu.TabStop = true;
             this.rb_neu.Text = "Hinzufügen";
@@ -520,25 +541,26 @@
             this.gv_bf.AllowUserToResizeRows = false;
             this.gv_bf.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.gv_bf.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_bf.Location = new System.Drawing.Point(799, 17);
-            this.gv_bf.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.gv_bf.Location = new System.Drawing.Point(300, 7);
+            this.gv_bf.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gv_bf.Name = "gv_bf";
             this.gv_bf.ReadOnly = true;
             this.gv_bf.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_bf.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_bf.Size = new System.Drawing.Size(1542, 944);
+            this.gv_bf.Size = new System.Drawing.Size(578, 396);
             this.gv_bf.TabIndex = 23;
             this.gv_bf.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_bf_CellDoubleClick);
             // 
             // w_s_buch_fach
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2355, 1049);
+            this.ClientSize = new System.Drawing.Size(883, 440);
             this.Controls.Add(this.bt_export);
             this.Controls.Add(this.bt_close);
             this.Controls.Add(this.gB_buchid);
             this.Controls.Add(this.gv_bf);
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "w_s_buch_fach";
             this.Text = "Bücher zu Fächern zuordnen";
             this.Load += new System.EventHandler(this.w_b_buch_fach_Load);

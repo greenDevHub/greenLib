@@ -442,5 +442,10 @@ namespace Bibo_Verwaltung
                 isChecked = false;
             }
         }
+
+        private void bt_close_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

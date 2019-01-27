@@ -48,10 +48,10 @@
             this.gb_Genres.Controls.Add(this.tLP_Sprachen);
             this.gb_Genres.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gb_Genres.Location = new System.Drawing.Point(0, 0);
-            this.gb_Genres.Margin = new System.Windows.Forms.Padding(6, 0, 6, 4);
+            this.gb_Genres.Margin = new System.Windows.Forms.Padding(2, 0, 2, 2);
             this.gb_Genres.Name = "gb_Genres";
-            this.gb_Genres.Padding = new System.Windows.Forms.Padding(2);
-            this.gb_Genres.Size = new System.Drawing.Size(584, 1362);
+            this.gb_Genres.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.gb_Genres.Size = new System.Drawing.Size(219, 482);
             this.gb_Genres.TabIndex = 64;
             this.gb_Genres.TabStop = false;
             // 
@@ -65,15 +65,14 @@
             this.tLP_Sprachen.Controls.Add(this.gv_Genres, 0, 2);
             this.tLP_Sprachen.Controls.Add(this.tLP_Button, 0, 3);
             this.tLP_Sprachen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tLP_Sprachen.Location = new System.Drawing.Point(2, 33);
-            this.tLP_Sprachen.Margin = new System.Windows.Forms.Padding(8);
+            this.tLP_Sprachen.Location = new System.Drawing.Point(1, 14);
             this.tLP_Sprachen.Name = "tLP_Sprachen";
             this.tLP_Sprachen.RowCount = 4;
             this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3F));
             this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86F));
             this.tLP_Sprachen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6F));
-            this.tLP_Sprachen.Size = new System.Drawing.Size(580, 1327);
+            this.tLP_Sprachen.Size = new System.Drawing.Size(217, 467);
             this.tLP_Sprachen.TabIndex = 61;
             // 
             // lb_Genres
@@ -81,11 +80,10 @@
             this.lb_Genres.AutoSize = true;
             this.lb_Genres.Dock = System.Windows.Forms.DockStyle.Top;
             this.helpProvider.SetHelpString(this.lb_Genres, "Suchen sie nach gespeicherten Genres.");
-            this.lb_Genres.Location = new System.Drawing.Point(8, 0);
-            this.lb_Genres.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lb_Genres.Location = new System.Drawing.Point(3, 0);
             this.lb_Genres.Name = "lb_Genres";
             this.helpProvider.SetShowHelp(this.lb_Genres, true);
-            this.lb_Genres.Size = new System.Drawing.Size(568, 32);
+            this.lb_Genres.Size = new System.Drawing.Size(216, 13);
             this.lb_Genres.TabIndex = 53;
             this.lb_Genres.Text = "Suchen:";
             // 
@@ -96,11 +94,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tb_Suchen.Enabled = false;
             this.helpProvider.SetHelpString(this.tb_Suchen, "Suchen sie nach gespeicherten Genres.");
-            this.tb_Suchen.Location = new System.Drawing.Point(8, 47);
-            this.tb_Suchen.Margin = new System.Windows.Forms.Padding(8);
+            this.tb_Suchen.Location = new System.Drawing.Point(3, 17);
             this.tb_Suchen.Name = "tb_Suchen";
             this.helpProvider.SetShowHelp(this.tb_Suchen, true);
-            this.tb_Suchen.Size = new System.Drawing.Size(568, 38);
+            this.tb_Suchen.Size = new System.Drawing.Size(216, 20);
             this.tb_Suchen.TabIndex = 52;
             this.tb_Suchen.Visible = false;
             this.tb_Suchen.TextChanged += new System.EventHandler(this.tb_Suchen_TextChanged);
@@ -116,13 +113,12 @@
             this.gv_Genres.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_Genres.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.helpProvider.SetHelpString(this.gv_Genres, "Hier werden all ihre gespeicherten Genres angezeigt.");
-            this.gv_Genres.Location = new System.Drawing.Point(8, 113);
-            this.gv_Genres.Margin = new System.Windows.Forms.Padding(8);
+            this.gv_Genres.Location = new System.Drawing.Point(3, 40);
             this.gv_Genres.MultiSelect = false;
             this.gv_Genres.Name = "gv_Genres";
             this.gv_Genres.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.helpProvider.SetShowHelp(this.gv_Genres, true);
-            this.gv_Genres.Size = new System.Drawing.Size(568, 1125);
+            this.gv_Genres.Size = new System.Drawing.Size(216, 395);
             this.gv_Genres.TabIndex = 50;
             this.gv_Genres.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gv_genres_CellBeginEdit);
             this.gv_Genres.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Genres_CellEndEdit);
@@ -138,12 +134,12 @@
             this.tLP_Button.Controls.Add(this.bt_Uebernehmen, 0, 0);
             this.tLP_Button.Controls.Add(this.bt_Suchen, 1, 0);
             this.tLP_Button.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tLP_Button.Location = new System.Drawing.Point(2, 1246);
-            this.tLP_Button.Margin = new System.Windows.Forms.Padding(2, 0, 2, 2);
+            this.tLP_Button.Location = new System.Drawing.Point(1, 438);
+            this.tLP_Button.Margin = new System.Windows.Forms.Padding(1, 0, 1, 1);
             this.tLP_Button.Name = "tLP_Button";
             this.tLP_Button.RowCount = 1;
             this.tLP_Button.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLP_Button.Size = new System.Drawing.Size(580, 79);
+            this.tLP_Button.Size = new System.Drawing.Size(220, 28);
             this.tLP_Button.TabIndex = 54;
             // 
             // bt_Uebernehmen
@@ -151,11 +147,10 @@
             this.bt_Uebernehmen.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.bt_Uebernehmen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.bt_Uebernehmen, "Klicken sie auf diesen Button, um alle Änderungen zu übernehmen.");
-            this.bt_Uebernehmen.Location = new System.Drawing.Point(8, 8);
-            this.bt_Uebernehmen.Margin = new System.Windows.Forms.Padding(8);
+            this.bt_Uebernehmen.Location = new System.Drawing.Point(3, 3);
             this.bt_Uebernehmen.Name = "bt_Uebernehmen";
             this.helpProvider.SetShowHelp(this.bt_Uebernehmen, true);
-            this.bt_Uebernehmen.Size = new System.Drawing.Size(332, 63);
+            this.bt_Uebernehmen.Size = new System.Drawing.Size(126, 22);
             this.bt_Uebernehmen.TabIndex = 51;
             this.bt_Uebernehmen.Text = "Übernehmen";
             this.bt_Uebernehmen.UseVisualStyleBackColor = true;
@@ -165,11 +160,10 @@
             // 
             this.bt_Suchen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.bt_Suchen, "Klicken sie auf diesen Button, um die Suchfunktion an- bzw. auszuschalten.");
-            this.bt_Suchen.Location = new System.Drawing.Point(356, 8);
-            this.bt_Suchen.Margin = new System.Windows.Forms.Padding(8);
+            this.bt_Suchen.Location = new System.Drawing.Point(135, 3);
             this.bt_Suchen.Name = "bt_Suchen";
             this.helpProvider.SetShowHelp(this.bt_Suchen, true);
-            this.bt_Suchen.Size = new System.Drawing.Size(216, 63);
+            this.bt_Suchen.Size = new System.Drawing.Size(82, 22);
             this.bt_Suchen.TabIndex = 54;
             this.bt_Suchen.Text = "Suchen AN";
             this.bt_Suchen.UseVisualStyleBackColor = true;
@@ -177,13 +171,12 @@
             // 
             // w_s_genres
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 1362);
+            this.ClientSize = new System.Drawing.Size(219, 482);
             this.Controls.Add(this.gb_Genres);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
-            this.Margin = new System.Windows.Forms.Padding(8);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "w_s_genres";

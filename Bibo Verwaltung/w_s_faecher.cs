@@ -15,10 +15,19 @@ namespace Bibo_Verwaltung
         public w_s_faecher()
         {
             InitializeComponent();
-            f.FillGrid(ref gv_Verlage);
+            f.FillGrid(ref gv_Faecher);
+            originalHeightLabel = tLP_Faecher.RowStyles[0].Height;
+            originalHeightText = tLP_Faecher.RowStyles[1].Height;
+            tLP_Faecher.RowStyles[0].Height = 0;
+            tLP_Faecher.RowStyles[1].Height = 0;
         }
+        #region globale Variablen
+        float originalHeightLabel = 0;
+        float originalHeightText = 0;
         bool changes = false;
         Faecher f = new Faecher();
+        bool suchmodus = false;
+        #endregion
 
         #region Aenderungen an GridView erkennen
         private void gv_Verlage_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -36,14 +45,14 @@ namespace Bibo_Verwaltung
         {
             if (changes == true)
             {
-                gv_Verlage.EndEdit();
+                gv_Faecher.EndEdit();
                 DialogResult dr = MessageBox.Show("Sollen die Änderungen gespeichert werden?", "Warnung", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (dr == DialogResult.Yes)
                 {
                     try
                     {
                         bt_Uebernehmen.Focus();
-                        f.SaveGrid(ref gv_Verlage);
+                        f.SaveGrid(ref gv_Faecher);
                     }
                     catch
                     {
@@ -61,13 +70,40 @@ namespace Bibo_Verwaltung
         {
             Form Import = new w_s_schuelerimport("t_s_faecher", true);
             Import.ShowDialog(this);
-            f.FillGrid(ref gv_Verlage);
+            f.FillGrid(ref gv_Faecher);
         }
 
+        #region Suchen-Aktionen
         private void bt_Suchen_Click(object sender, EventArgs e)
         {
-
+            if (suchmodus == false)
+            {
+                suchmodus = true;
+                bt_Suchen.Text = "Suchen AUS";
+                tLP_Faecher.RowStyles[0].Height = originalHeightLabel;
+                tLP_Faecher.RowStyles[1].Height = originalHeightText;
+                tb_Suchen.Visible = true;
+                tb_Suchen.Enabled = true;
+                tb_Suchen.Focus();
+            }
+            else
+            {
+                suchmodus = false;
+                bt_Suchen.Text = "Suchen AN";
+                tb_Suchen.Visible = false;
+                tb_Suchen.Enabled = false;
+                tb_Suchen.Text = "";
+                tLP_Faecher.RowStyles[0].Height = 0;
+                tLP_Faecher.RowStyles[1].Height = 0;
+            }
         }
+
+        private void tb_Suchen_TextChanged(object sender, EventArgs e)
+        {
+            (gv_Faecher.DataSource as DataTable).DefaultView.RowFilter = string.Format("f_langform LIKE '{0}%'", tb_Suchen.Text);
+        }
+        #endregion
+
         private void bt_Verwaltung_Click(object sender, EventArgs e)
         {
             Form fachstufe = new w_s_fach_stufe();
