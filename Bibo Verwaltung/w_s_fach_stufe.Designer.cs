@@ -38,6 +38,9 @@
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.lb_faecher = new System.Windows.Forms.Label();
             this.lb = new System.Windows.Forms.Label();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.cLB_faecher = new System.Windows.Forms.CheckedListBox();
+            this.tb_search = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.rb_add = new System.Windows.Forms.RadioButton();
             this.rb_edit = new System.Windows.Forms.RadioButton();
@@ -45,18 +48,15 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.bt_clear = new System.Windows.Forms.Button();
             this.bt_save = new System.Windows.Forms.Button();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_search = new System.Windows.Forms.TextBox();
-            this.cLB_faecher = new System.Windows.Forms.CheckedListBox();
             this.gb.SuspendLayout();
             this.tlp1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_fs)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb
@@ -193,6 +193,39 @@
             this.lb.Size = new System.Drawing.Size(452, 32);
             this.lb.TabIndex = 37;
             // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 1;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Controls.Add(this.cLB_faecher, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.tb_search, 0, 0);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(467, 73);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 2;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.90909F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(459, 702);
+            this.tableLayoutPanel6.TabIndex = 37;
+            // 
+            // cLB_faecher
+            // 
+            this.cLB_faecher.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cLB_faecher.FormattingEnabled = true;
+            this.cLB_faecher.Location = new System.Drawing.Point(3, 66);
+            this.cLB_faecher.Name = "cLB_faecher";
+            this.cLB_faecher.Size = new System.Drawing.Size(453, 633);
+            this.cLB_faecher.TabIndex = 34;
+            // 
+            // tb_search
+            // 
+            this.tb_search.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_search.Location = new System.Drawing.Point(3, 3);
+            this.tb_search.Name = "tb_search";
+            this.tb_search.Size = new System.Drawing.Size(453, 38);
+            this.tb_search.TabIndex = 0;
+            this.tb_search.TextChanged += new System.EventHandler(this.tb_search_TextChanged);
+            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 3;
@@ -286,39 +319,6 @@
             this.bt_save.UseVisualStyleBackColor = true;
             this.bt_save.Click += new System.EventHandler(this.bt_save_Click);
             // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.ColumnCount = 1;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Controls.Add(this.cLB_faecher, 0, 1);
-            this.tableLayoutPanel6.Controls.Add(this.tb_search, 0, 0);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(467, 73);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 2;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.90909F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(459, 702);
-            this.tableLayoutPanel6.TabIndex = 37;
-            // 
-            // tb_search
-            // 
-            this.tb_search.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_search.Location = new System.Drawing.Point(3, 3);
-            this.tb_search.Name = "tb_search";
-            this.tb_search.Size = new System.Drawing.Size(453, 38);
-            this.tb_search.TabIndex = 0;
-            this.tb_search.TextChanged += new System.EventHandler(this.tb_search_TextChanged);
-            // 
-            // cLB_faecher
-            // 
-            this.cLB_faecher.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cLB_faecher.FormattingEnabled = true;
-            this.cLB_faecher.Location = new System.Drawing.Point(3, 66);
-            this.cLB_faecher.Name = "cLB_faecher";
-            this.cLB_faecher.Size = new System.Drawing.Size(453, 633);
-            this.cLB_faecher.TabIndex = 34;
-            // 
             // w_s_fach_stufe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -336,11 +336,11 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel6.PerformLayout();
             this.ResumeLayout(false);
 
         }

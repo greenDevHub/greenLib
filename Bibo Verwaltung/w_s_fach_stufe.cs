@@ -168,6 +168,7 @@ namespace Bibo_Verwaltung
         private void Clear()
         {
             ClearCLB();
+            tb_search.Clear();
             cb_stufe.SelectedIndex = -1;
         }
         private int GetColumnIndexByName(DataGridView grid, string name)

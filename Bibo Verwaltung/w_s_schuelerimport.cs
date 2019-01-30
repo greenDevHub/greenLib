@@ -514,29 +514,15 @@ namespace Bibo_Verwaltung
                         {
                             //SEK1 Import Schüler
                             schueler.Klassenstufe = row[4].ToString();
+                            FachStufe fs = new FachStufe(schueler.Klassenstufe);
                             for (int i = 5; i < 8; i++)
                             {
                                 string fach = row[i].ToString();
                                 schueler.Faecher.Add(fach);
                             }
-                            schueler.Faecher.Add("DE");
-                            schueler.Faecher.Add("MA");
-                            schueler.Faecher.Add("EN");
-                            schueler.Faecher.Add("MU");
-                            schueler.Faecher.Add("KU");
-                            schueler.Faecher.Add("GEO");
-                            schueler.Faecher.Add("GE");
-                            if (int.Parse(schueler.Klassenstufe) > 6)
+                            foreach(string fach in fs.FachListe)
                             {
-                                schueler.Faecher.Add("CH");
-                            }
-                            if (int.Parse(schueler.Klassenstufe) > 5)
-                            {
-                                schueler.Faecher.Add("PH");
-                            }
-                            if (int.Parse(schueler.Klassenstufe) < 7)
-                            {
-                                schueler.Faecher.Add("TC");
+                                schueler.Faecher.Add(fach);
                             }
                             if (!schueler.AlreadyExists())
                             {
@@ -889,15 +875,20 @@ namespace Bibo_Verwaltung
 
         }
         /// <summary>
-        /// Scrollen des Sliders
+        /// Entfernt ausgewählte Datei aus Liste
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void slider_preview_Scroll(object sender, ScrollEventArgs e)
+        private void bt_removefile_Click(object sender, EventArgs e)
+        {
+            RemoveFromImportList();
+        }
+
+        private void slider_preview_ValueChanged(object sender, EventArgs e)
         {
             tb_min.Text = slider_preview.Value.ToString();
             tb_max.Text = slider_preview.Maximum.ToString();
-            tb_aktuell.Text = files[slider_preview.Value-1];
+            tb_aktuell.Text = files[slider_preview.Value - 1];
             if (usePreset)
             {
                 try
@@ -909,17 +900,6 @@ namespace Bibo_Verwaltung
                     MessageBox.Show("Beim Laden der Vorschau ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
-
-        }
-        /// <summary>
-        /// Entfernt ausgewählte Datei aus Liste
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void bt_removefile_Click(object sender, EventArgs e)
-        {
-            RemoveFromImportList();
         }
     }
 }

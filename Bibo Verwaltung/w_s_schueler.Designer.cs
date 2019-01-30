@@ -61,10 +61,10 @@
             // lb_kunde_add
             // 
             this.lb_kunde_add.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lb_kunde_add.Location = new System.Drawing.Point(3, 443);
-            this.lb_kunde_add.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_kunde_add.Location = new System.Drawing.Point(8, 1054);
+            this.lb_kunde_add.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.lb_kunde_add.Name = "lb_kunde_add";
-            this.lb_kunde_add.Size = new System.Drawing.Size(123, 36);
+            this.lb_kunde_add.Size = new System.Drawing.Size(328, 88);
             this.lb_kunde_add.TabIndex = 40;
             this.lb_kunde_add.Text = "Der Kunde wurde erfolgreich hinzugefügt!";
             this.lb_kunde_add.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -75,10 +75,11 @@
             this.rb_KundeLoeschen.AutoSize = true;
             this.rb_KundeLoeschen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.rb_KundeLoeschen, "Klicken sie hier, um einen vorhandenen Kunden zu löschen.");
-            this.rb_KundeLoeschen.Location = new System.Drawing.Point(261, 3);
+            this.rb_KundeLoeschen.Location = new System.Drawing.Point(696, 7);
+            this.rb_KundeLoeschen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.rb_KundeLoeschen.Name = "rb_KundeLoeschen";
             this.helpProvider.SetShowHelp(this.rb_KundeLoeschen, true);
-            this.rb_KundeLoeschen.Size = new System.Drawing.Size(123, 34);
+            this.rb_KundeLoeschen.Size = new System.Drawing.Size(328, 81);
             this.rb_KundeLoeschen.TabIndex = 0;
             this.rb_KundeLoeschen.Text = "Entfernen";
             this.rb_KundeLoeschen.UseVisualStyleBackColor = true;
@@ -89,10 +90,11 @@
             this.rb_KundeBearbeiten.AutoSize = true;
             this.rb_KundeBearbeiten.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.rb_KundeBearbeiten, "Klicken sie hier, um einen vorhandenen Kunden zu bearbeiten.");
-            this.rb_KundeBearbeiten.Location = new System.Drawing.Point(132, 3);
+            this.rb_KundeBearbeiten.Location = new System.Drawing.Point(352, 7);
+            this.rb_KundeBearbeiten.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.rb_KundeBearbeiten.Name = "rb_KundeBearbeiten";
             this.helpProvider.SetShowHelp(this.rb_KundeBearbeiten, true);
-            this.rb_KundeBearbeiten.Size = new System.Drawing.Size(123, 34);
+            this.rb_KundeBearbeiten.Size = new System.Drawing.Size(328, 81);
             this.rb_KundeBearbeiten.TabIndex = 0;
             this.rb_KundeBearbeiten.Text = "Bearbeiten";
             this.rb_KundeBearbeiten.UseVisualStyleBackColor = true;
@@ -104,10 +106,11 @@
             this.rb_Neukunde.Checked = true;
             this.rb_Neukunde.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.rb_Neukunde, "Klicken sie hier, um einen neuen Kunden hinzuzufügen.");
-            this.rb_Neukunde.Location = new System.Drawing.Point(3, 3);
+            this.rb_Neukunde.Location = new System.Drawing.Point(8, 7);
+            this.rb_Neukunde.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.rb_Neukunde.Name = "rb_Neukunde";
             this.helpProvider.SetShowHelp(this.rb_Neukunde, true);
-            this.rb_Neukunde.Size = new System.Drawing.Size(123, 34);
+            this.rb_Neukunde.Size = new System.Drawing.Size(328, 81);
             this.rb_Neukunde.TabIndex = 0;
             this.rb_Neukunde.TabStop = true;
             this.rb_Neukunde.Text = "Hinzufügen";
@@ -119,11 +122,11 @@
             this.lb_Vorname.AutoSize = true;
             this.lb_Vorname.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.lb_Vorname, "Tragen sie den Vornamen ihres Kunden hier ein.");
-            this.lb_Vorname.Location = new System.Drawing.Point(3, 83);
-            this.lb_Vorname.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_Vorname.Location = new System.Drawing.Point(8, 197);
+            this.lb_Vorname.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.lb_Vorname.Name = "lb_Vorname";
             this.helpProvider.SetShowHelp(this.lb_Vorname, true);
-            this.lb_Vorname.Size = new System.Drawing.Size(123, 34);
+            this.lb_Vorname.Size = new System.Drawing.Size(328, 81);
             this.lb_Vorname.TabIndex = 21;
             this.lb_Vorname.Text = "Vorname:";
             // 
@@ -132,11 +135,11 @@
             this.lb_Nachname.AutoSize = true;
             this.lb_Nachname.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.lb_Nachname, "Tragen sie den Nachnamen ihres Kunden hier ein.");
-            this.lb_Nachname.Location = new System.Drawing.Point(3, 123);
-            this.lb_Nachname.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_Nachname.Location = new System.Drawing.Point(8, 292);
+            this.lb_Nachname.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.lb_Nachname.Name = "lb_Nachname";
             this.helpProvider.SetShowHelp(this.lb_Nachname, true);
-            this.lb_Nachname.Size = new System.Drawing.Size(123, 34);
+            this.lb_Nachname.Size = new System.Drawing.Size(328, 81);
             this.lb_Nachname.TabIndex = 23;
             this.lb_Nachname.Text = "Nachname:";
             // 
@@ -145,10 +148,11 @@
             this.tableLayoutPanel2.SetColumnSpan(this.tb_KundenID, 2);
             this.tb_KundenID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.tb_KundenID, resources.GetString("tb_KundenID.HelpString"));
-            this.tb_KundenID.Location = new System.Drawing.Point(132, 43);
+            this.tb_KundenID.Location = new System.Drawing.Point(352, 102);
+            this.tb_KundenID.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.tb_KundenID.Name = "tb_KundenID";
             this.helpProvider.SetShowHelp(this.tb_KundenID, true);
-            this.tb_KundenID.Size = new System.Drawing.Size(252, 20);
+            this.tb_KundenID.Size = new System.Drawing.Size(672, 38);
             this.tb_KundenID.TabIndex = 3;
             this.tb_KundenID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_KundenID_KeyPress);
             // 
@@ -157,11 +161,11 @@
             this.lb_Gd.AutoSize = true;
             this.lb_Gd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.lb_Gd, "Tragen sie die Straße ihres Kunden hier ein.");
-            this.lb_Gd.Location = new System.Drawing.Point(3, 163);
-            this.lb_Gd.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_Gd.Location = new System.Drawing.Point(8, 387);
+            this.lb_Gd.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.lb_Gd.Name = "lb_Gd";
             this.helpProvider.SetShowHelp(this.lb_Gd, true);
-            this.lb_Gd.Size = new System.Drawing.Size(123, 34);
+            this.lb_Gd.Size = new System.Drawing.Size(328, 81);
             this.lb_Gd.TabIndex = 7;
             this.lb_Gd.Text = "Geburtsdatum:";
             // 
@@ -170,11 +174,11 @@
             this.lb_Klasse.AutoSize = true;
             this.lb_Klasse.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.lb_Klasse, "Tragen sie die Hausnummer  ihres Kunden hier ein.");
-            this.lb_Klasse.Location = new System.Drawing.Point(3, 203);
-            this.lb_Klasse.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_Klasse.Location = new System.Drawing.Point(8, 482);
+            this.lb_Klasse.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.lb_Klasse.Name = "lb_Klasse";
             this.helpProvider.SetShowHelp(this.lb_Klasse, true);
-            this.lb_Klasse.Size = new System.Drawing.Size(123, 34);
+            this.lb_Klasse.Size = new System.Drawing.Size(328, 81);
             this.lb_Klasse.TabIndex = 27;
             this.lb_Klasse.Text = "Klasse:";
             // 
@@ -183,11 +187,11 @@
             this.lb_Klassenstufe.AutoSize = true;
             this.lb_Klassenstufe.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.lb_Klassenstufe, "Tragen sie die Postleitzahl ihres Kunden hier ein.");
-            this.lb_Klassenstufe.Location = new System.Drawing.Point(3, 243);
-            this.lb_Klassenstufe.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_Klassenstufe.Location = new System.Drawing.Point(8, 577);
+            this.lb_Klassenstufe.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.lb_Klassenstufe.Name = "lb_Klassenstufe";
             this.helpProvider.SetShowHelp(this.lb_Klassenstufe, true);
-            this.lb_Klassenstufe.Size = new System.Drawing.Size(123, 34);
+            this.lb_Klassenstufe.Size = new System.Drawing.Size(328, 81);
             this.lb_Klassenstufe.TabIndex = 29;
             this.lb_Klassenstufe.Text = "Klassenstufe:";
             // 
@@ -196,10 +200,11 @@
             this.tableLayoutPanel2.SetColumnSpan(this.tb_Nachname, 2);
             this.tb_Nachname.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.tb_Nachname, "Tragen sie den Nachnamen ihres Kunden hier ein.");
-            this.tb_Nachname.Location = new System.Drawing.Point(132, 123);
+            this.tb_Nachname.Location = new System.Drawing.Point(352, 292);
+            this.tb_Nachname.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.tb_Nachname.Name = "tb_Nachname";
             this.helpProvider.SetShowHelp(this.tb_Nachname, true);
-            this.tb_Nachname.Size = new System.Drawing.Size(252, 20);
+            this.tb_Nachname.Size = new System.Drawing.Size(672, 38);
             this.tb_Nachname.TabIndex = 2;
             // 
             // lb_1
@@ -207,11 +212,11 @@
             this.lb_1.AutoSize = true;
             this.lb_1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.lb_1, "Tragen sie den  Wohnort ihres Kunden hier ein.");
-            this.lb_1.Location = new System.Drawing.Point(3, 283);
-            this.lb_1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_1.Location = new System.Drawing.Point(8, 672);
+            this.lb_1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.lb_1.Name = "lb_1";
             this.helpProvider.SetShowHelp(this.lb_1, true);
-            this.lb_1.Size = new System.Drawing.Size(123, 74);
+            this.lb_1.Size = new System.Drawing.Size(328, 177);
             this.lb_1.TabIndex = 31;
             this.lb_1.Text = "Fächer:";
             // 
@@ -220,20 +225,22 @@
             this.tableLayoutPanel2.SetColumnSpan(this.tb_Vorname, 2);
             this.tb_Vorname.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.tb_Vorname, "Tragen sie den Vornamen ihres Kunden hier ein.");
-            this.tb_Vorname.Location = new System.Drawing.Point(132, 83);
+            this.tb_Vorname.Location = new System.Drawing.Point(352, 197);
+            this.tb_Vorname.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.tb_Vorname.Name = "tb_Vorname";
             this.helpProvider.SetShowHelp(this.tb_Vorname, true);
-            this.tb_Vorname.Size = new System.Drawing.Size(252, 20);
+            this.tb_Vorname.Size = new System.Drawing.Size(672, 38);
             this.tb_Vorname.TabIndex = 1;
             // 
             // bt_confirm
             // 
             this.bt_confirm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.bt_confirm, "Speichern sie alle oben eingetragenen Daten.");
-            this.bt_confirm.Location = new System.Drawing.Point(261, 443);
+            this.bt_confirm.Location = new System.Drawing.Point(696, 1054);
+            this.bt_confirm.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.bt_confirm.Name = "bt_confirm";
             this.helpProvider.SetShowHelp(this.bt_confirm, true);
-            this.bt_confirm.Size = new System.Drawing.Size(123, 36);
+            this.bt_confirm.Size = new System.Drawing.Size(328, 88);
             this.bt_confirm.TabIndex = 13;
             this.bt_confirm.Text = "Speichern";
             this.bt_confirm.UseVisualStyleBackColor = true;
@@ -244,10 +251,11 @@
             this.bt_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.bt_OK.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.bt_OK, "Schließen sie das akuelle Fenster.");
-            this.bt_OK.Location = new System.Drawing.Point(730, 443);
+            this.bt_OK.Location = new System.Drawing.Point(1947, 1054);
+            this.bt_OK.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.bt_OK.Name = "bt_OK";
             this.helpProvider.SetShowHelp(this.bt_OK, true);
-            this.bt_OK.Size = new System.Drawing.Size(335, 36);
+            this.bt_OK.Size = new System.Drawing.Size(893, 88);
             this.bt_OK.TabIndex = 46;
             this.bt_OK.Text = "Schließen";
             this.bt_OK.UseVisualStyleBackColor = true;
@@ -256,10 +264,11 @@
             // 
             this.bt_clear.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.bt_clear, "Leeren sie alle oben liegenden Textfelder.");
-            this.bt_clear.Location = new System.Drawing.Point(132, 443);
+            this.bt_clear.Location = new System.Drawing.Point(352, 1054);
+            this.bt_clear.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.bt_clear.Name = "bt_clear";
             this.helpProvider.SetShowHelp(this.bt_clear, true);
-            this.bt_clear.Size = new System.Drawing.Size(123, 36);
+            this.bt_clear.Size = new System.Drawing.Size(328, 88);
             this.bt_clear.TabIndex = 14;
             this.bt_clear.Text = "Leeren";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -270,10 +279,11 @@
             this.tableLayoutPanel2.SetColumnSpan(this.tb_klasse, 2);
             this.tb_klasse.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.tb_klasse, "Tragen sie die Hausnummer  ihres Kunden hier ein.");
-            this.tb_klasse.Location = new System.Drawing.Point(132, 203);
+            this.tb_klasse.Location = new System.Drawing.Point(352, 482);
+            this.tb_klasse.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.tb_klasse.Name = "tb_klasse";
             this.helpProvider.SetShowHelp(this.tb_klasse, true);
-            this.tb_klasse.Size = new System.Drawing.Size(252, 20);
+            this.tb_klasse.Size = new System.Drawing.Size(672, 38);
             this.tb_klasse.TabIndex = 5;
             // 
             // tb_klassenstufe
@@ -281,10 +291,11 @@
             this.tableLayoutPanel2.SetColumnSpan(this.tb_klassenstufe, 2);
             this.tb_klassenstufe.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.tb_klassenstufe, "Tragen sie die Postleitzahl ihres Kunden hier ein.");
-            this.tb_klassenstufe.Location = new System.Drawing.Point(132, 243);
+            this.tb_klassenstufe.Location = new System.Drawing.Point(352, 577);
+            this.tb_klassenstufe.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.tb_klassenstufe.Name = "tb_klassenstufe";
             this.helpProvider.SetShowHelp(this.tb_klassenstufe, true);
-            this.tb_klassenstufe.Size = new System.Drawing.Size(252, 20);
+            this.tb_klassenstufe.Size = new System.Drawing.Size(672, 38);
             this.tb_klassenstufe.TabIndex = 6;
             this.tb_klassenstufe.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_klassenstufe_KeyPress);
             // 
@@ -293,11 +304,11 @@
             this.lb_KundenID.AutoSize = true;
             this.lb_KundenID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.lb_KundenID, resources.GetString("lb_KundenID.HelpString"));
-            this.lb_KundenID.Location = new System.Drawing.Point(3, 43);
-            this.lb_KundenID.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_KundenID.Location = new System.Drawing.Point(8, 102);
+            this.lb_KundenID.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.lb_KundenID.Name = "lb_KundenID";
             this.helpProvider.SetShowHelp(this.lb_KundenID, true);
-            this.lb_KundenID.Size = new System.Drawing.Size(123, 34);
+            this.lb_KundenID.Size = new System.Drawing.Size(328, 81);
             this.lb_KundenID.TabIndex = 0;
             this.lb_KundenID.Text = "Kunden-ID:";
             // 
@@ -312,7 +323,8 @@
             this.tableLayoutPanel2.SetColumnSpan(this.gv_Kunde, 2);
             this.gv_Kunde.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.gv_Kunde, "Hier werden all ihre Kunden angezeigt.");
-            this.gv_Kunde.Location = new System.Drawing.Point(390, 43);
+            this.gv_Kunde.Location = new System.Drawing.Point(1040, 102);
+            this.gv_Kunde.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.gv_Kunde.MultiSelect = false;
             this.gv_Kunde.Name = "gv_Kunde";
             this.gv_Kunde.ReadOnly = true;
@@ -321,16 +333,17 @@
             this.tableLayoutPanel2.SetRowSpan(this.gv_Kunde, 8);
             this.gv_Kunde.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.helpProvider.SetShowHelp(this.gv_Kunde, true);
-            this.gv_Kunde.Size = new System.Drawing.Size(675, 394);
+            this.gv_Kunde.Size = new System.Drawing.Size(1800, 938);
             this.gv_Kunde.TabIndex = 45;
             this.gv_Kunde.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Kunde_CellDoubleClick);
             // 
             // bt_ImEx
             // 
             this.bt_ImEx.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bt_ImEx.Location = new System.Drawing.Point(390, 443);
+            this.bt_ImEx.Location = new System.Drawing.Point(1040, 1054);
+            this.bt_ImEx.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.bt_ImEx.Name = "bt_ImEx";
-            this.bt_ImEx.Size = new System.Drawing.Size(334, 36);
+            this.bt_ImEx.Size = new System.Drawing.Size(891, 88);
             this.bt_ImEx.TabIndex = 47;
             this.bt_ImEx.Text = "Importieren/Exportieren";
             this.bt_ImEx.UseVisualStyleBackColor = true;
@@ -340,9 +353,10 @@
             // 
             this.tableLayoutPanel2.SetColumnSpan(this.dtp_gd, 2);
             this.dtp_gd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtp_gd.Location = new System.Drawing.Point(132, 163);
+            this.dtp_gd.Location = new System.Drawing.Point(352, 387);
+            this.dtp_gd.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.dtp_gd.Name = "dtp_gd";
-            this.dtp_gd.Size = new System.Drawing.Size(252, 20);
+            this.dtp_gd.Size = new System.Drawing.Size(672, 38);
             this.dtp_gd.TabIndex = 48;
             // 
             // cLB_faecher
@@ -350,10 +364,11 @@
             this.tableLayoutPanel2.SetColumnSpan(this.cLB_faecher, 2);
             this.cLB_faecher.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cLB_faecher.FormattingEnabled = true;
-            this.cLB_faecher.Location = new System.Drawing.Point(132, 283);
+            this.cLB_faecher.Location = new System.Drawing.Point(352, 672);
+            this.cLB_faecher.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.cLB_faecher.Name = "cLB_faecher";
             this.tableLayoutPanel2.SetRowSpan(this.cLB_faecher, 2);
-            this.cLB_faecher.Size = new System.Drawing.Size(252, 154);
+            this.cLB_faecher.Size = new System.Drawing.Size(672, 368);
             this.cLB_faecher.TabIndex = 32;
             this.cLB_faecher.SelectedIndexChanged += new System.EventHandler(this.cLB_faecher_SelectedIndexChanged);
             this.cLB_faecher.MouseHover += new System.EventHandler(this.cLB_faecher_MouseHover);
@@ -392,7 +407,7 @@
             this.tableLayoutPanel2.Controls.Add(this.lb_KundenID, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 10;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333541F));
@@ -405,17 +420,17 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66708F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66708F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.331042F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1068, 482);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(2848, 1149);
             this.tableLayoutPanel2.TabIndex = 48;
             // 
             // w_s_schueler
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1068, 482);
+            this.ClientSize = new System.Drawing.Size(2848, 1149);
             this.Controls.Add(this.tableLayoutPanel2);
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
-            this.MinimumSize = new System.Drawing.Size(725, 475);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MinimumSize = new System.Drawing.Size(1880, 1011);
             this.Name = "w_s_schueler";
             this.Text = "Schüler";
             this.Activated += new System.EventHandler(this.w_s_schueler_Activated);

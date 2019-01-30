@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_main));
             this.bt_Sprachen = new System.Windows.Forms.Button();
             this.bt_Verlage = new System.Windows.Forms.Button();
             this.bt_Genres = new System.Windows.Forms.Button();
@@ -61,10 +62,11 @@
             // 
             this.helpProvider.SetHelpString(this.bt_Sprachen, "Klicken sie auf \"Sprachen\", um ihre gespeicherten Sprachen anzuzeigen, neue hinzu" +
         "zufügen, bestehende zu bearbeiten oder zu löschen. ");
-            this.bt_Sprachen.Location = new System.Drawing.Point(192, 111);
+            this.bt_Sprachen.Location = new System.Drawing.Point(512, 265);
+            this.bt_Sprachen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.bt_Sprachen.Name = "bt_Sprachen";
             this.helpProvider.SetShowHelp(this.bt_Sprachen, true);
-            this.bt_Sprachen.Size = new System.Drawing.Size(89, 40);
+            this.bt_Sprachen.Size = new System.Drawing.Size(237, 95);
             this.bt_Sprachen.TabIndex = 12;
             this.bt_Sprachen.Text = "Sprachen";
             this.bt_Sprachen.UseVisualStyleBackColor = true;
@@ -74,10 +76,11 @@
             // 
             this.helpProvider.SetHelpString(this.bt_Verlage, "Klicken sie auf \"Verlage\", um ihre gespeicherten Verlage anzuzeigen, neue hinzuzu" +
         "fügen, bestehende zu bearbeiten oder zu löschen. ");
-            this.bt_Verlage.Location = new System.Drawing.Point(6, 111);
+            this.bt_Verlage.Location = new System.Drawing.Point(16, 265);
+            this.bt_Verlage.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.bt_Verlage.Name = "bt_Verlage";
             this.helpProvider.SetShowHelp(this.bt_Verlage, true);
-            this.bt_Verlage.Size = new System.Drawing.Size(180, 40);
+            this.bt_Verlage.Size = new System.Drawing.Size(480, 95);
             this.bt_Verlage.TabIndex = 7;
             this.bt_Verlage.Text = "Verlage";
             this.bt_Verlage.UseVisualStyleBackColor = true;
@@ -87,10 +90,11 @@
             // 
             this.helpProvider.SetHelpString(this.bt_Genres, "Klicken sie auf \"Genres\", um ihre gespeicherten Genres anzuzeigen, neue hinzuzufü" +
         "gen, bestehende zu bearbeiten oder zu löschen. ");
-            this.bt_Genres.Location = new System.Drawing.Point(192, 157);
+            this.bt_Genres.Location = new System.Drawing.Point(512, 374);
+            this.bt_Genres.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.bt_Genres.Name = "bt_Genres";
             this.helpProvider.SetShowHelp(this.bt_Genres, true);
-            this.bt_Genres.Size = new System.Drawing.Size(180, 40);
+            this.bt_Genres.Size = new System.Drawing.Size(480, 95);
             this.bt_Genres.TabIndex = 14;
             this.bt_Genres.Text = "Genres";
             this.bt_Genres.UseVisualStyleBackColor = true;
@@ -100,10 +104,11 @@
             // 
             this.helpProvider.SetHelpString(this.bt_Autoren, "Klicken sie auf \"Autoren\", um ihre gespeicherten Autoren anzuzeigen, neue hinzuzu" +
         "fügen, bestehende zu bearbeiten oder zu löschen. ");
-            this.bt_Autoren.Location = new System.Drawing.Point(6, 65);
+            this.bt_Autoren.Location = new System.Drawing.Point(16, 155);
+            this.bt_Autoren.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.bt_Autoren.Name = "bt_Autoren";
             this.helpProvider.SetShowHelp(this.bt_Autoren, true);
-            this.bt_Autoren.Size = new System.Drawing.Size(180, 40);
+            this.bt_Autoren.Size = new System.Drawing.Size(480, 95);
             this.bt_Autoren.TabIndex = 6;
             this.bt_Autoren.Text = "Autoren";
             this.bt_Autoren.UseVisualStyleBackColor = true;
@@ -113,10 +118,11 @@
             // 
             this.helpProvider.SetHelpString(this.bt_Kunden, "Klicken sie auf \"Kunden\", um ihre gespeicherten Kunden anzuzeigen, neue hinzuzufü" +
         "gen, bestehende zu bearbeiten oder zu löschen. ");
-            this.bt_Kunden.Location = new System.Drawing.Point(6, 19);
+            this.bt_Kunden.Location = new System.Drawing.Point(16, 45);
+            this.bt_Kunden.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.bt_Kunden.Name = "bt_Kunden";
             this.helpProvider.SetShowHelp(this.bt_Kunden, true);
-            this.bt_Kunden.Size = new System.Drawing.Size(88, 40);
+            this.bt_Kunden.Size = new System.Drawing.Size(235, 95);
             this.bt_Kunden.TabIndex = 4;
             this.bt_Kunden.Text = "Kunden";
             this.bt_Kunden.UseVisualStyleBackColor = true;
@@ -135,20 +141,21 @@
             this.groupBox1.Controls.Add(this.bt_Genres);
             this.groupBox1.Controls.Add(this.bt_Autoren);
             this.groupBox1.Controls.Add(this.bt_Kunden);
-            this.groupBox1.Location = new System.Drawing.Point(204, 10);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.groupBox1.Location = new System.Drawing.Point(544, 24);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(375, 205);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.groupBox1.Size = new System.Drawing.Size(1000, 489);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Verwaltung von:";
             // 
             // bt_faecher
             // 
-            this.bt_faecher.Location = new System.Drawing.Point(192, 65);
-            this.bt_faecher.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bt_faecher.Location = new System.Drawing.Point(512, 155);
+            this.bt_faecher.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.bt_faecher.Name = "bt_faecher";
-            this.bt_faecher.Size = new System.Drawing.Size(89, 40);
+            this.bt_faecher.Size = new System.Drawing.Size(237, 95);
             this.bt_faecher.TabIndex = 10;
             this.bt_faecher.Text = "Fächer";
             this.bt_faecher.UseVisualStyleBackColor = true;
@@ -156,10 +163,10 @@
             // 
             // bt_bf
             // 
-            this.bt_bf.Location = new System.Drawing.Point(283, 65);
-            this.bt_bf.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.bt_bf.Location = new System.Drawing.Point(755, 155);
+            this.bt_bf.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.bt_bf.Name = "bt_bf";
-            this.bt_bf.Size = new System.Drawing.Size(89, 40);
+            this.bt_bf.Size = new System.Drawing.Size(237, 95);
             this.bt_bf.TabIndex = 11;
             this.bt_bf.Text = "Buch-Fach";
             this.bt_bf.UseVisualStyleBackColor = true;
@@ -169,10 +176,11 @@
             // 
             this.helpProvider.SetHelpString(this.bt_schueler, "Klicken sie auf \"Kunden\", um ihre gespeicherten Kunden anzuzeigen, neue hinzuzufü" +
         "gen, bestehende zu bearbeiten oder zu löschen. ");
-            this.bt_schueler.Location = new System.Drawing.Point(97, 19);
+            this.bt_schueler.Location = new System.Drawing.Point(259, 45);
+            this.bt_schueler.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.bt_schueler.Name = "bt_schueler";
             this.helpProvider.SetShowHelp(this.bt_schueler, true);
-            this.bt_schueler.Size = new System.Drawing.Size(89, 40);
+            this.bt_schueler.Size = new System.Drawing.Size(237, 95);
             this.bt_schueler.TabIndex = 5;
             this.bt_schueler.Text = "Schüler";
             this.bt_schueler.UseVisualStyleBackColor = true;
@@ -182,10 +190,11 @@
             // 
             this.helpProvider.SetHelpString(this.bt_Zustand, "Klicken sie auf \"Zustand\", um ihre gespeicherten Zustände anzuzeigen, neue hinzuz" +
         "ufügen, bestehende zu bearbeiten oder zu löschen. ");
-            this.bt_Zustand.Location = new System.Drawing.Point(6, 157);
+            this.bt_Zustand.Location = new System.Drawing.Point(16, 374);
+            this.bt_Zustand.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.bt_Zustand.Name = "bt_Zustand";
             this.helpProvider.SetShowHelp(this.bt_Zustand, true);
-            this.bt_Zustand.Size = new System.Drawing.Size(180, 40);
+            this.bt_Zustand.Size = new System.Drawing.Size(480, 95);
             this.bt_Zustand.TabIndex = 8;
             this.bt_Zustand.Text = "Zustand";
             this.bt_Zustand.UseVisualStyleBackColor = true;
@@ -195,10 +204,11 @@
             // 
             this.helpProvider.SetHelpString(this.bt_Buecher, "Klicken sie auf \"Bücher\", um ihre gespeicherten Bücher anzuzeigen, neue hinzuzufü" +
         "gen, bestehende zu bearbeiten oder zu löschen. ");
-            this.bt_Buecher.Location = new System.Drawing.Point(192, 19);
+            this.bt_Buecher.Location = new System.Drawing.Point(512, 45);
+            this.bt_Buecher.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.bt_Buecher.Name = "bt_Buecher";
             this.helpProvider.SetShowHelp(this.bt_Buecher, true);
-            this.bt_Buecher.Size = new System.Drawing.Size(180, 40);
+            this.bt_Buecher.Size = new System.Drawing.Size(480, 95);
             this.bt_Buecher.TabIndex = 9;
             this.bt_Buecher.Text = "Bücher";
             this.bt_Buecher.UseVisualStyleBackColor = true;
@@ -206,9 +216,10 @@
             // 
             // bt_klassenstufe
             // 
-            this.bt_klassenstufe.Location = new System.Drawing.Point(283, 111);
+            this.bt_klassenstufe.Location = new System.Drawing.Point(755, 265);
+            this.bt_klassenstufe.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.bt_klassenstufe.Name = "bt_klassenstufe";
-            this.bt_klassenstufe.Size = new System.Drawing.Size(89, 40);
+            this.bt_klassenstufe.Size = new System.Drawing.Size(237, 95);
             this.bt_klassenstufe.TabIndex = 13;
             this.bt_klassenstufe.Text = "Klassenstufen";
             this.bt_klassenstufe.UseVisualStyleBackColor = true;
@@ -218,10 +229,11 @@
             // 
             this.helpProvider.SetHelpString(this.bt_Einstellungen, "Klicken sie auf \"Einstellungen\", um Änderungen an ihrer Datenbankverbindung vorzu" +
         "nehmen.");
-            this.bt_Einstellungen.Location = new System.Drawing.Point(6, 143);
+            this.bt_Einstellungen.Location = new System.Drawing.Point(16, 341);
+            this.bt_Einstellungen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.bt_Einstellungen.Name = "bt_Einstellungen";
             this.helpProvider.SetShowHelp(this.bt_Einstellungen, true);
-            this.bt_Einstellungen.Size = new System.Drawing.Size(180, 26);
+            this.bt_Einstellungen.Size = new System.Drawing.Size(480, 62);
             this.bt_Einstellungen.TabIndex = 2;
             this.bt_Einstellungen.Text = "Einstellungen";
             this.bt_Einstellungen.UseVisualStyleBackColor = true;
@@ -242,20 +254,22 @@
             this.gb_Uebersicht.Controls.Add(this.lb_Bestand);
             this.helpProvider.SetHelpString(this.gb_Uebersicht, "In der Gesamtübersicht sehen sie auf einem Blick, wie viele Bücher sich in ihrem " +
         "Bestand bzw. Lager befindet, sowie wie viele Bücher momentan ausgeliehen sind.");
-            this.gb_Uebersicht.Location = new System.Drawing.Point(10, 10);
+            this.gb_Uebersicht.Location = new System.Drawing.Point(27, 24);
+            this.gb_Uebersicht.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.gb_Uebersicht.Name = "gb_Uebersicht";
+            this.gb_Uebersicht.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.helpProvider.SetShowHelp(this.gb_Uebersicht, true);
-            this.gb_Uebersicht.Size = new System.Drawing.Size(190, 205);
+            this.gb_Uebersicht.Size = new System.Drawing.Size(507, 489);
             this.gb_Uebersicht.TabIndex = 1;
             this.gb_Uebersicht.TabStop = false;
             this.gb_Uebersicht.Text = "Gesamtübersicht:";
             // 
             // bt_stats
             // 
-            this.bt_stats.Location = new System.Drawing.Point(41, 47);
-            this.bt_stats.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.bt_stats.Location = new System.Drawing.Point(109, 112);
+            this.bt_stats.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.bt_stats.Name = "bt_stats";
-            this.bt_stats.Size = new System.Drawing.Size(28, 17);
+            this.bt_stats.Size = new System.Drawing.Size(75, 41);
             this.bt_stats.TabIndex = 0;
             this.bt_stats.TabStop = false;
             this.bt_stats.Text = "Statistiken";
@@ -265,10 +279,10 @@
             // 
             // bt_logout
             // 
-            this.bt_logout.Location = new System.Drawing.Point(3, 68);
-            this.bt_logout.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.bt_logout.Location = new System.Drawing.Point(8, 162);
+            this.bt_logout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.bt_logout.Name = "bt_logout";
-            this.bt_logout.Size = new System.Drawing.Size(23, 15);
+            this.bt_logout.Size = new System.Drawing.Size(61, 36);
             this.bt_logout.TabIndex = 0;
             this.bt_logout.TabStop = false;
             this.bt_logout.Text = "Abmelden";
@@ -278,10 +292,10 @@
             // 
             // bt_Benutzerverwaltung
             // 
-            this.bt_Benutzerverwaltung.Location = new System.Drawing.Point(6, 174);
-            this.bt_Benutzerverwaltung.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bt_Benutzerverwaltung.Location = new System.Drawing.Point(16, 415);
+            this.bt_Benutzerverwaltung.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.bt_Benutzerverwaltung.Name = "bt_Benutzerverwaltung";
-            this.bt_Benutzerverwaltung.Size = new System.Drawing.Size(180, 26);
+            this.bt_Benutzerverwaltung.Size = new System.Drawing.Size(480, 62);
             this.bt_Benutzerverwaltung.TabIndex = 3;
             this.bt_Benutzerverwaltung.Text = "Benutzerverwaltung";
             this.bt_Benutzerverwaltung.UseVisualStyleBackColor = true;
@@ -291,11 +305,11 @@
             // 
             this.helpProvider.SetHelpString(this.bt_Suchen_Ausleihen, "Starten sie Ausleihvorgänge, Buchrückgaben oder sehen sie, von wem bestimmte Büch" +
         "er ausgeliehen wurden.");
-            this.bt_Suchen_Ausleihen.Location = new System.Drawing.Point(6, 113);
-            this.bt_Suchen_Ausleihen.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.bt_Suchen_Ausleihen.Location = new System.Drawing.Point(16, 269);
+            this.bt_Suchen_Ausleihen.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.bt_Suchen_Ausleihen.Name = "bt_Suchen_Ausleihen";
             this.helpProvider.SetShowHelp(this.bt_Suchen_Ausleihen, true);
-            this.bt_Suchen_Ausleihen.Size = new System.Drawing.Size(180, 26);
+            this.bt_Suchen_Ausleihen.Size = new System.Drawing.Size(480, 62);
             this.bt_Suchen_Ausleihen.TabIndex = 1;
             this.bt_Suchen_Ausleihen.Text = "Bücher Suchen/Ausleihen";
             this.bt_Suchen_Ausleihen.UseVisualStyleBackColor = true;
@@ -304,9 +318,10 @@
             // lb_Ausleihzahl
             // 
             this.lb_Ausleihzahl.AutoSize = true;
-            this.lb_Ausleihzahl.Location = new System.Drawing.Point(116, 75);
+            this.lb_Ausleihzahl.Location = new System.Drawing.Point(309, 179);
+            this.lb_Ausleihzahl.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lb_Ausleihzahl.Name = "lb_Ausleihzahl";
-            this.lb_Ausleihzahl.Size = new System.Drawing.Size(10, 13);
+            this.lb_Ausleihzahl.Size = new System.Drawing.Size(24, 32);
             this.lb_Ausleihzahl.TabIndex = 4;
             this.lb_Ausleihzahl.Text = "-";
             // 
@@ -315,19 +330,21 @@
             this.lb_Ausgeliehen.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Ausgeliehen, "In diesem Feld wird ihnen die aktuelle Anzahl von Bücheren angezeigt, welche mome" +
         "ntan ausgeliehen sind.");
-            this.lb_Ausgeliehen.Location = new System.Drawing.Point(6, 75);
+            this.lb_Ausgeliehen.Location = new System.Drawing.Point(16, 179);
+            this.lb_Ausgeliehen.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lb_Ausgeliehen.Name = "lb_Ausgeliehen";
             this.helpProvider.SetShowHelp(this.lb_Ausgeliehen, true);
-            this.lb_Ausgeliehen.Size = new System.Drawing.Size(104, 13);
+            this.lb_Ausgeliehen.Size = new System.Drawing.Size(276, 32);
             this.lb_Ausgeliehen.TabIndex = 2;
             this.lb_Ausgeliehen.Text = "Bücher ausgeliehen:";
             // 
             // lb_Lagerzahl
             // 
             this.lb_Lagerzahl.AutoSize = true;
-            this.lb_Lagerzahl.Location = new System.Drawing.Point(116, 49);
+            this.lb_Lagerzahl.Location = new System.Drawing.Point(309, 117);
+            this.lb_Lagerzahl.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lb_Lagerzahl.Name = "lb_Lagerzahl";
-            this.lb_Lagerzahl.Size = new System.Drawing.Size(10, 13);
+            this.lb_Lagerzahl.Size = new System.Drawing.Size(24, 32);
             this.lb_Lagerzahl.TabIndex = 3;
             this.lb_Lagerzahl.Text = "-";
             // 
@@ -336,19 +353,21 @@
             this.lb_IstBestand.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_IstBestand, "In diesem Feld wird ihnen die aktuelle Anzahl von Bücheren angezeigt, welche sich" +
         " im Lager befinden.");
-            this.lb_IstBestand.Location = new System.Drawing.Point(6, 49);
+            this.lb_IstBestand.Location = new System.Drawing.Point(16, 117);
+            this.lb_IstBestand.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lb_IstBestand.Name = "lb_IstBestand";
             this.helpProvider.SetShowHelp(this.lb_IstBestand, true);
-            this.lb_IstBestand.Size = new System.Drawing.Size(87, 13);
+            this.lb_IstBestand.Size = new System.Drawing.Size(230, 32);
             this.lb_IstBestand.TabIndex = 1;
             this.lb_IstBestand.Text = "Bücher im Lager:";
             // 
             // lb_Bestandzahl
             // 
             this.lb_Bestandzahl.AutoSize = true;
-            this.lb_Bestandzahl.Location = new System.Drawing.Point(116, 25);
+            this.lb_Bestandzahl.Location = new System.Drawing.Point(309, 60);
+            this.lb_Bestandzahl.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lb_Bestandzahl.Name = "lb_Bestandzahl";
-            this.lb_Bestandzahl.Size = new System.Drawing.Size(10, 13);
+            this.lb_Bestandzahl.Size = new System.Drawing.Size(24, 32);
             this.lb_Bestandzahl.TabIndex = 2;
             this.lb_Bestandzahl.Text = "-";
             // 
@@ -357,22 +376,25 @@
             this.lb_Bestand.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Bestand, "In diesem Feld wird ihnen die aktuelle Anzahl von Bücheren angezeigt, welche sich" +
         " im Bestand befinden.");
-            this.lb_Bestand.Location = new System.Drawing.Point(6, 25);
+            this.lb_Bestand.Location = new System.Drawing.Point(16, 60);
+            this.lb_Bestand.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lb_Bestand.Name = "lb_Bestand";
             this.helpProvider.SetShowHelp(this.lb_Bestand, true);
-            this.lb_Bestand.Size = new System.Drawing.Size(99, 13);
+            this.lb_Bestand.Size = new System.Drawing.Size(262, 32);
             this.lb_Bestand.TabIndex = 0;
             this.lb_Bestand.Text = "Bücher im Bestand:";
             // 
             // w_s_main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(586, 226);
+            this.ClientSize = new System.Drawing.Size(1563, 539);
             this.Controls.Add(this.gb_Uebersicht);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "w_s_main";
