@@ -302,6 +302,18 @@ namespace Bibo_Verwaltung
             con.Close();
         }
 
+        public void SelectLastRow(string isbn)
+        {
+            if (con.ConnectError()) return;
+            string RawCommand = "Select bu_id from t_s_buchid where bu_isbn = @0 and bu_id=(select max(bu_id) from t_s_buchid)";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, isbn);
+            while (dr.Read())
+            {
+                ExemplarID = dr["bu_id"].ToString();
+            }
+            dr.Close();
+            con.Close();
+        }
         /// <summary>
         /// Prüft ein Buchexemplar auf seinen Verleihstatus
         /// </summary>

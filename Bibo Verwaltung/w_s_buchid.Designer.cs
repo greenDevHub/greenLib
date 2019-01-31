@@ -28,13 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.grid_buchid = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ladenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.entfernenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.barcodeDruckenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gB_buchid = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.BarcodeBox = new System.Windows.Forms.PictureBox();
             this.tb_number = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.tb_Barcode = new System.Windows.Forms.TextBox();
-            this.BarcodeBox = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tb_anzahl = new System.Windows.Forms.TextBox();
             this.bt_clear = new System.Windows.Forms.Button();
@@ -55,11 +61,11 @@
             this.bt_close = new System.Windows.Forms.Button();
             this.bt_export = new System.Windows.Forms.Button();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.grid_buchid)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.gB_buchid.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BarcodeBox)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BarcodeBox)).BeginInit();
             this.SuspendLayout();
             // 
             // grid_buchid
@@ -70,6 +76,7 @@
             this.grid_buchid.AllowUserToResizeRows = false;
             this.grid_buchid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.grid_buchid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid_buchid.ContextMenuStrip = this.contextMenuStrip1;
             this.helpProvider.SetHelpString(this.grid_buchid, "Hier werden ihnen alle vorhandenen Buchexemplare angezeigt.");
             this.grid_buchid.Location = new System.Drawing.Point(800, 31);
             this.grid_buchid.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
@@ -81,7 +88,39 @@
             this.grid_buchid.Size = new System.Drawing.Size(1542, 944);
             this.grid_buchid.TabIndex = 0;
             this.grid_buchid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Buch_CellDoubleClick);
-            this.grid_buchid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid_buchid_KeyDown);
+            this.grid_buchid.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.grid_buchid_CellMouseDown);
+            this.grid_buchid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.grid_buchid_MouseDown);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ladenToolStripMenuItem,
+            this.entfernenToolStripMenuItem,
+            this.barcodeDruckenToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(320, 142);
+            // 
+            // ladenToolStripMenuItem
+            // 
+            this.ladenToolStripMenuItem.Name = "ladenToolStripMenuItem";
+            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(319, 46);
+            this.ladenToolStripMenuItem.Text = "Laden";
+            this.ladenToolStripMenuItem.Click += new System.EventHandler(this.ladenToolStripMenuItem_Click);
+            // 
+            // entfernenToolStripMenuItem
+            // 
+            this.entfernenToolStripMenuItem.Name = "entfernenToolStripMenuItem";
+            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(319, 46);
+            this.entfernenToolStripMenuItem.Text = "Entfernen";
+            this.entfernenToolStripMenuItem.Click += new System.EventHandler(this.entfernenToolStripMenuItem_Click);
+            // 
+            // barcodeDruckenToolStripMenuItem
+            // 
+            this.barcodeDruckenToolStripMenuItem.Name = "barcodeDruckenToolStripMenuItem";
+            this.barcodeDruckenToolStripMenuItem.Size = new System.Drawing.Size(319, 46);
+            this.barcodeDruckenToolStripMenuItem.Text = "Barcode drucken";
+            this.barcodeDruckenToolStripMenuItem.Click += new System.EventHandler(this.barcodeDruckenToolStripMenuItem_Click);
             // 
             // gB_buchid
             // 
@@ -116,10 +155,31 @@
             this.gB_buchid.TabStop = false;
             this.gB_buchid.Text = "Bücher";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.BarcodeBox);
+            this.groupBox1.Location = new System.Drawing.Point(256, 562);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(422, 266);
+            this.groupBox1.TabIndex = 28;
+            this.groupBox1.TabStop = false;
+            // 
+            // BarcodeBox
+            // 
+            this.BarcodeBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BarcodeBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BarcodeBox.Location = new System.Drawing.Point(3, 34);
+            this.BarcodeBox.Margin = new System.Windows.Forms.Padding(8);
+            this.BarcodeBox.Name = "BarcodeBox";
+            this.BarcodeBox.Size = new System.Drawing.Size(416, 229);
+            this.BarcodeBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.BarcodeBox.TabIndex = 23;
+            this.BarcodeBox.TabStop = false;
+            // 
             // tb_number
             // 
             this.tb_number.Location = new System.Drawing.Point(264, 339);
-            this.tb_number.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.tb_number.Margin = new System.Windows.Forms.Padding(8);
             this.tb_number.Name = "tb_number";
             this.tb_number.Size = new System.Drawing.Size(414, 38);
             this.tb_number.TabIndex = 27;
@@ -146,7 +206,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.helpProvider.SetHelpString(this.button1, "Klicken sie hier, um den Barcode auszudrucken.");
             this.button1.Location = new System.Drawing.Point(264, 833);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.helpProvider.SetShowHelp(this.button1, true);
             this.button1.Size = new System.Drawing.Size(170, 54);
@@ -164,18 +224,6 @@
             this.tb_Barcode.TabIndex = 24;
             this.tb_Barcode.Visible = false;
             // 
-            // BarcodeBox
-            // 
-            this.BarcodeBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.BarcodeBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BarcodeBox.Location = new System.Drawing.Point(3, 34);
-            this.BarcodeBox.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
-            this.BarcodeBox.Name = "BarcodeBox";
-            this.BarcodeBox.Size = new System.Drawing.Size(416, 229);
-            this.BarcodeBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.BarcodeBox.TabIndex = 23;
-            this.BarcodeBox.TabStop = false;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -192,7 +240,7 @@
             // 
             this.tb_anzahl.Enabled = false;
             this.tb_anzahl.Location = new System.Drawing.Point(264, 397);
-            this.tb_anzahl.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.tb_anzahl.Margin = new System.Windows.Forms.Padding(8);
             this.tb_anzahl.Name = "tb_anzahl";
             this.tb_anzahl.Size = new System.Drawing.Size(414, 38);
             this.tb_anzahl.TabIndex = 20;
@@ -201,7 +249,7 @@
             // 
             this.helpProvider.SetHelpString(this.bt_clear, "Leeren sie alle oben liegenden Textfelder.");
             this.bt_clear.Location = new System.Drawing.Point(488, 455);
-            this.bt_clear.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_clear.Margin = new System.Windows.Forms.Padding(8);
             this.bt_clear.Name = "bt_clear";
             this.helpProvider.SetShowHelp(this.bt_clear, true);
             this.bt_clear.Size = new System.Drawing.Size(192, 54);
@@ -236,7 +284,7 @@
             // 
             this.helpProvider.SetHelpString(this.bt_add, "Fügen sie alle oben eingetragen Daten hinzu.");
             this.bt_add.Location = new System.Drawing.Point(264, 455);
-            this.bt_add.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_add.Margin = new System.Windows.Forms.Padding(8);
             this.bt_add.Name = "bt_add";
             this.helpProvider.SetShowHelp(this.bt_add, true);
             this.bt_add.Size = new System.Drawing.Size(192, 54);
@@ -291,7 +339,7 @@
             this.cb_zustand.FormattingEnabled = true;
             this.helpProvider.SetHelpString(this.cb_zustand, "Tragen sie hier den Zustand des Buches, welches sie hinzufügen möchten, ein.");
             this.cb_zustand.Location = new System.Drawing.Point(264, 219);
-            this.cb_zustand.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.cb_zustand.Margin = new System.Windows.Forms.Padding(8);
             this.cb_zustand.Name = "cb_zustand";
             this.helpProvider.SetShowHelp(this.cb_zustand, true);
             this.cb_zustand.Size = new System.Drawing.Size(414, 39);
@@ -302,7 +350,7 @@
             // 
             this.helpProvider.SetHelpString(this.dTP_aufnahme, "Wählen sie hier das Aufnahmedatum des Buches, welches sie hinzufügen möchten.");
             this.dTP_aufnahme.Location = new System.Drawing.Point(264, 281);
-            this.dTP_aufnahme.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.dTP_aufnahme.Margin = new System.Windows.Forms.Padding(8);
             this.dTP_aufnahme.Name = "dTP_aufnahme";
             this.helpProvider.SetShowHelp(this.dTP_aufnahme, true);
             this.dTP_aufnahme.Size = new System.Drawing.Size(414, 38);
@@ -361,7 +409,7 @@
             // tb_id
             // 
             this.tb_id.Location = new System.Drawing.Point(264, 163);
-            this.tb_id.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.tb_id.Margin = new System.Windows.Forms.Padding(8);
             this.tb_id.Name = "tb_id";
             this.tb_id.Size = new System.Drawing.Size(414, 38);
             this.tb_id.TabIndex = 1;
@@ -372,7 +420,7 @@
             // 
             this.helpProvider.SetHelpString(this.tb_isbn, "Tragen sie hier die ISBN-13 ein, um das gewünschte Buch zu laden.");
             this.tb_isbn.Location = new System.Drawing.Point(264, 103);
-            this.tb_isbn.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.tb_isbn.Margin = new System.Windows.Forms.Padding(8);
             this.tb_isbn.Name = "tb_isbn";
             this.helpProvider.SetShowHelp(this.tb_isbn, true);
             this.tb_isbn.Size = new System.Drawing.Size(414, 38);
@@ -386,7 +434,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.helpProvider.SetHelpString(this.bt_close, "Schließen sie das akuelle Fenster.");
             this.bt_close.Location = new System.Drawing.Point(1642, 992);
-            this.bt_close.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_close.Margin = new System.Windows.Forms.Padding(8);
             this.bt_close.Name = "bt_close";
             this.helpProvider.SetShowHelp(this.bt_close, true);
             this.bt_close.Size = new System.Drawing.Size(698, 54);
@@ -402,22 +450,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.helpProvider.SetHelpString(this.bt_export, "Exportieren sie ihre Buchdaten in eine Exceltabelle.");
             this.bt_export.Location = new System.Drawing.Point(800, 992);
-            this.bt_export.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.bt_export.Margin = new System.Windows.Forms.Padding(8);
             this.bt_export.Name = "bt_export";
             this.helpProvider.SetShowHelp(this.bt_export, true);
             this.bt_export.Size = new System.Drawing.Size(698, 54);
             this.bt_export.TabIndex = 22;
             this.bt_export.Text = "Exportieren";
             this.bt_export.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.BarcodeBox);
-            this.groupBox1.Location = new System.Drawing.Point(256, 562);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(422, 266);
-            this.groupBox1.TabIndex = 28;
-            this.groupBox1.TabStop = false;
             // 
             // w_s_buchid
             // 
@@ -439,10 +478,11 @@
             this.Activated += new System.EventHandler(this.w_s_buchid_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_buchid_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.grid_buchid)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.gB_buchid.ResumeLayout(false);
             this.gB_buchid.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BarcodeBox)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.BarcodeBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -477,5 +517,9 @@
         private System.Windows.Forms.TextBox tb_number;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ladenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem entfernenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem barcodeDruckenToolStripMenuItem;
     }
 }

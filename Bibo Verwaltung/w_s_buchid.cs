@@ -35,49 +35,55 @@ namespace Bibo_Verwaltung
             {
                 DataGridViewRow row = this.grid_buchid.Rows[e.RowIndex];
                 tb_id.Text = row.Cells["Exemplar"].Value.ToString();
-                Exemplar b = new Exemplar(tb_id.Text);
-                tb_id.Text = b.ExemplarID;
-                tb_isbn.Text = b.ISBN;
-                cb_zustand.Text = b.Zustand.Zustandname;
-                dTP_aufnahme.Value = b.Aufnahmedatum;
-                string code = "";
-                code = b.ExemplarID;
-                for(int i = code.Length; i < 7;)
-                {
-                    code = "0" + code;
-                    i++;
-                }
-                tb_Barcode.Text = code;
-                Zen.Barcode.CodeEan8BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.CodeEan8WithChecksum;
-                var barcodeImage = barcode.Draw(tb_Barcode.Text, 200,10);
-                resultImage = new Bitmap(barcodeImage.Width, barcodeImage.Height + 75); // 20 is bottom padding, adjust to your text
-
-                using (var graphics = Graphics.FromImage(resultImage))
-                using (var font = new Font("Calibri", 20))
-                using (var brush = new SolidBrush(Color.Black))
-                using (var format = new StringFormat()
-                {
-                    Alignment = StringAlignment.Center, // Also, horizontally centered text, as in your example of the expected output
-                    LineAlignment = StringAlignment.Far
-                })
-                {
-                    graphics.Clear(Color.White);
-                    graphics.DrawImage(barcodeImage, 0, 0);
-                    graphics.DrawString(tb_Barcode.Text, font, brush, resultImage.Width / 2, resultImage.Height, format);
-                }
-                BarcodeBox.Height = resultImage.Height;
-                BarcodeBox.Width = resultImage.Width;
-                BarcodeBox.Image = resultImage;
-                rb_edit.Checked = true;
-
-                b.Zustand.FillCombobox(ref cb_zustand, b.Zustand.ZustandID);
+                LoadForm();
             }
         }
         #endregion
 
+        private void LoadForm()
+        {
+            Exemplar b = new Exemplar(tb_id.Text);
+            tb_id.Text = b.ExemplarID;
+            tb_isbn.Text = b.ISBN;
+            cb_zustand.Text = b.Zustand.Zustandname;
+            dTP_aufnahme.Value = b.Aufnahmedatum;
+            string code = "";
+            code = b.ExemplarID;
+            for (int i = code.Length; i < 7;)
+            {
+                code = "0" + code;
+                i++;
+            }
+            tb_Barcode.Text = code;
+            Zen.Barcode.CodeEan8BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.CodeEan8WithChecksum;
+            var barcodeImage = barcode.Draw(tb_Barcode.Text, 200, 10);
+            resultImage = new Bitmap(barcodeImage.Width, barcodeImage.Height + 75); // 20 is bottom padding, adjust to your text
+
+            using (var graphics = Graphics.FromImage(resultImage))
+            using (var font = new Font("Calibri", 20))
+            using (var brush = new SolidBrush(Color.Black))
+            using (var format = new StringFormat()
+            {
+                Alignment = StringAlignment.Center, // Also, horizontally centered text, as in your example of the expected output
+                LineAlignment = StringAlignment.Far
+            })
+            {
+                graphics.Clear(Color.White);
+                graphics.DrawImage(barcodeImage, 0, 0);
+                graphics.DrawString(tb_Barcode.Text, font, brush, resultImage.Width / 2, resultImage.Height, format);
+            }
+            BarcodeBox.Height = resultImage.Height;
+            BarcodeBox.Width = resultImage.Width;
+            BarcodeBox.Image = resultImage;
+            rb_edit.Checked = true;
+
+            b.Zustand.FillCombobox(ref cb_zustand, b.Zustand.ZustandID);
+        }
+        List<Image> images = new List<Image>();
         #region Save
         private void bt_Click(object sender, EventArgs e)
         {
+            List<string> idList = new List<string>();
             var t = new Timer();
             t.Interval = 3000; // it will Tick in 3 seconds
             t.Tick += (s, a) =>
@@ -100,9 +106,12 @@ namespace Bibo_Verwaltung
                     b.Zustand.ZustandID = cb_zustand.SelectedValue.ToString();
                     b.Aufnahmedatum = dTP_aufnahme.Value;
                     int number = int.Parse(tb_number.Text);
+                    idList.Clear();
                     for (int i = 0; i < number; i++)
                     {
                         b.Add_Exemplar();
+                        b.SelectLastRow(tb_isbn.Text);
+                        idList.Add(b.ExemplarID);
                     }
                     //Barcode bar = new Barcode("3", BarcodeBox);
                     //bar.FillPictureBox(ref BarcodeBox);
@@ -113,6 +122,26 @@ namespace Bibo_Verwaltung
                     b.FillGrid(ref grid_buchid);
                     tb_anzahl.Text = grid_buchid.RowCount.ToString();
                     t.Start();
+                    DialogResult result = MessageBox.Show("Möchten Sie alle eben hinzugefügten Exemplare die entsprechenden Labels drucken?", "Buchlabel drucken?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if(result == DialogResult.Yes)
+                    {
+                        images.Clear();
+                        foreach(string id in idList)
+                        {
+                            tb_id.Text = id;
+                            LoadForm();
+                            images.Add(BarcodeBox.Image);
+                        }
+                        PrintDocument doc = new PrintDocument();
+                        PrintDialog pd = new PrintDialog();
+                        doc.PrintPage += Doc_PrintMultiplePages;
+                        pd.Document = doc;
+                        if (pd.ShowDialog() == DialogResult.OK)
+                        {
+                            doc.Print();
+                        }
+
+                    }
                 }
                 catch (SqlException)
                 {
@@ -365,11 +394,6 @@ namespace Bibo_Verwaltung
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            BarcodeBox.Image.Save("C:\\Users\\Laurenz\\testbild.png");
-            //PrintDialog pd = new PrintDialog();
-            //PrintDocument doc = new PrintDocument();
-            //doc.PrintPage += Doc_PrintPage;
-            //pd.Document = doc;
             PrintDocument doc = new PrintDocument();
             PrintDialog pd = new PrintDialog();
             doc.PrintPage += Doc_PrintPage;
@@ -378,31 +402,19 @@ namespace Bibo_Verwaltung
             {
                 doc.Print();
             }
-
-            //PrintDocument printDocument = new PrintDocument();
-            //printDocument.OriginAtMargins = true;
-            //printDocument.DocumentName = "Barcode";
-            //printDocument.P = BarcodeBox.Image;
-            //PrintDialog printDialog = new PrintDialog();
-            //printDialog.Document = printDocument;
-            //if (printDialog.ShowDialog() == DialogResult.OK)
-            //{
-            //    printDocument.Print();
-            //}
         }
-
+        int pageCount = 0;
+        private void Doc_PrintMultiplePages(object sender, PrintPageEventArgs e)
+        {
+            e.Graphics.DrawImage(images[pageCount], 0, 0);
+            pageCount++;
+            e.HasMorePages = (pageCount != images.Count);
+        }
         private void Doc_PrintPage(object sender, PrintPageEventArgs e)
         {
-            //System.Drawing.Image bm = System.Drawing.Image.FromFile("C:\\Users\\Laurenz\\testbild.png");
-            ////Bitmap bm = new Bitmap(Image.FromFile("C:\\Users\\Laurenz\\testbild.png"));
+            e.HasMorePages = false;
             Point loc = new Point(0, -20);
-            e.Graphics.DrawImage(resultImage, loc);
-            ////Bitmap bm = new Bitmap(BarcodeBox.Width, BarcodeBox.Height);
-            ////BarcodeBox.DrawToBitmap(bm, new Rectangle(0, 0, BarcodeBox.Width, BarcodeBox.Height));
-            ////e.Graphics.DrawImage(bm, 0, 0);
-            //////bm.Dispose();
-            ////bm.Save("C:\\Users\\Laurenz\\testbild1234.png", ImageFormat.Png);
-        }
+            e.Graphics.DrawImage(resultImage, loc);        }
 
         private void bt_close_Click(object sender, EventArgs e)
         {
@@ -435,20 +447,91 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private void grid_buchid_KeyDown(object sender, KeyEventArgs e)
+        private void ladenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
-            {
-                for (int i = 0; i < grid_buchid.SelectedRows.Count; i++)
-                {
-                    b.ExemplarID = grid_buchid.SelectedRows[i].Cells[0].Value.ToString();
-                    b.Deactivate_Exemplar();
-                }
-                b.ClearDataSource();
-                b.FillObject();
-                b.FillGrid(ref grid_buchid);
-                tb_anzahl.Text = grid_buchid.RowCount.ToString();
+            Clear();
+            tb_id.Text = grid_buchid.SelectedRows[0].Cells["Exemplar"].Value.ToString();
+            LoadForm();
+        }
 
+        private void entfernenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < grid_buchid.SelectedRows.Count; i++)
+            {
+                b.ExemplarID = grid_buchid.SelectedRows[i].Cells[0].Value.ToString();
+                b.Deactivate_Exemplar();
+            }
+            b.ClearDataSource();
+            b.FillObject();
+            b.FillGrid(ref grid_buchid);
+            tb_anzahl.Text = grid_buchid.RowCount.ToString();
+            Clear();
+        }
+
+        private void barcodeDruckenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            images.Clear();
+            foreach (DataGridViewRow row in grid_buchid.SelectedRows)
+            {
+                tb_id.Text = row.Cells["Exemplar"].Value.ToString();
+                LoadForm();
+                images.Add(BarcodeBox.Image);
+            }
+            Clear();
+            PrintDocument doc = new PrintDocument();
+            PrintDialog pd = new PrintDialog();
+            doc.PrintPage += Doc_PrintMultiplePages;
+            pd.Document = doc;
+            if (pd.ShowDialog() == DialogResult.OK)
+            {
+                doc.Print();
+            }
+        }
+
+        private void grid_buchid_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                if (!grid_buchid.Rows[e.RowIndex].Selected)
+                {
+                    grid_buchid.ClearSelection();
+                    grid_buchid.Rows[e.RowIndex].Selected = true;
+                }
+                if(grid_buchid.SelectedRows.Count > 1)
+                {
+                    ladenToolStripMenuItem.Text = "Laden";
+                    ladenToolStripMenuItem.Enabled = false;
+                    entfernenToolStripMenuItem.Text = "Ausgewählte Exemplare entfernen (" + grid_buchid.SelectedRows.Count + ")";
+                    entfernenToolStripMenuItem.Enabled = true;
+                    barcodeDruckenToolStripMenuItem.Text = "Barcodes für ausgewählte Exemplare drucken (" + grid_buchid.SelectedRows.Count + ")";
+                    barcodeDruckenToolStripMenuItem.Enabled = true;
+                }
+                else
+                {
+                    ladenToolStripMenuItem.Text = "Laden";
+                    ladenToolStripMenuItem.Enabled = true;
+                    entfernenToolStripMenuItem.Text = "Ausgewähltes Exemplare entfernen";
+                    entfernenToolStripMenuItem.Enabled = true;
+                    barcodeDruckenToolStripMenuItem.Text = "Barcode für ausgewähltes Exemplare drucken";
+                    barcodeDruckenToolStripMenuItem.Enabled = true;
+                }
+            }
+        }
+
+        private void grid_buchid_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (!(grid_buchid.HitTest(e.X, e.Y).RowIndex >= 0))
+            {
+                grid_buchid.ClearSelection();
+                ladenToolStripMenuItem.Visible = false;
+                entfernenToolStripMenuItem.Visible = false;
+                barcodeDruckenToolStripMenuItem.Visible = false;
+            }
+            else
+            {
+                ladenToolStripMenuItem.Visible = true;
+                entfernenToolStripMenuItem.Visible = true;
+                barcodeDruckenToolStripMenuItem.Visible = true;
             }
         }
     }

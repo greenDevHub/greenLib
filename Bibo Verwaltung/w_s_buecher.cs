@@ -904,23 +904,7 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private void Grid_Buch_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            string isbnAktuell;
-            if (e.Button == MouseButtons.Right)
-            {
-                if (e.RowIndex >= 0)
-                {
-                    DataGridViewRow row = this.Grid_Buch.Rows[e.RowIndex];
-                    isbnAktuell = row.Cells[0].Value.ToString();
-                    tb_ISBN.Text = isbnAktuell;
-                    Form Buchid = new w_s_buchid();
-                    Buchid.ShowDialog(this);
-                    b.FillGrid_Buch(ref Grid_Buch);
-                    Clear_All();
-                }
-            }
-        }
+
         #endregion
 
         #region Objekt auf Inhalt pruefen und Background setzten
@@ -1505,6 +1489,96 @@ namespace Bibo_Verwaltung
             {
                 SystemSounds.Beep.Play();
                 e.Handled = true;
+            }
+        }
+
+        private void Grid_Buch_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                if (!Grid_Buch.Rows[e.RowIndex].Selected)
+                {
+                    Grid_Buch.ClearSelection();
+                    Grid_Buch.Rows[e.RowIndex].Selected = true;
+                }
+                if (Grid_Buch.SelectedRows.Count > 1)
+                {
+                    ladenToolStripMenuItem.Text = "Ausgewähltes Buch laden";
+                    ladenToolStripMenuItem.Enabled = false;
+                    entfernenToolStripMenuItem.Text = "Ausgewählte Bücher mit ihren Exemplaren entfernen (" + Grid_Buch.SelectedRows.Count + ")";
+                    entfernenToolStripMenuItem.Enabled = true;
+                    exemplareToolStripMenuItem.Text = "Alle Exemplare zu diesem Buch anzeigen";
+                    exemplareToolStripMenuItem.Enabled = false;
+                }
+                else
+                {
+                    ladenToolStripMenuItem.Text = "Ausgewähltes Buch laden";
+                    ladenToolStripMenuItem.Enabled = true;
+                    entfernenToolStripMenuItem.Text = "Ausgewähltes Buch mit seinen Exemplaren entfernen";
+                    entfernenToolStripMenuItem.Enabled = true;
+                    exemplareToolStripMenuItem.Text = "Alle Exemplare zu diesem Buch anzeigen";
+                    exemplareToolStripMenuItem.Enabled = true;
+                }
+            }
+        }
+
+        private void ladenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tb_ISBN.Text = Grid_Buch.SelectedRows[0].Cells["ISBN"].Value.ToString();
+            if (bool1)
+            {
+                LoadBuch();
+            }
+            else
+            {
+                LoadBuch();
+                this.Hide();
+            }
+        }
+
+        private void entfernenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tb_ISBN.Text = Grid_Buch.SelectedRows[0].Cells["ISBN"].Value.ToString();
+            Exemplar buchid = new Exemplar();
+            if (buchid.IsAvailable(tb_ISBN.Text))
+            {
+                buchid.DeactivateWhereISBN(tb_ISBN.Text);
+                b.ISBN = tb_ISBN.Text;
+                b.Deactivate();
+                Delete_picture(location);
+                Clear_All();
+                b.FillGrid_Buch(ref Grid_Buch);
+            }
+            else
+            {
+                MessageBox.Show("Das Buch konnte nicht gelöscht werden, da eines der dazugehörigen Exemplare zur Zeit verliehen ist. Bitte melden Sie dieses zuerst als 'zurückgegeben', bevor Sie das Buch löschen!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void exemplareToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string isbnAktuell = Grid_Buch.SelectedRows[0].Cells["ISBN"].Value.ToString();
+            tb_ISBN.Text = isbnAktuell;
+            Form Buchid = new w_s_buchid();
+            Buchid.ShowDialog(this);
+            b.FillGrid_Buch(ref Grid_Buch);
+            Clear_All();
+        }
+
+        private void Grid_Buch_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (!(Grid_Buch.HitTest(e.X, e.Y).RowIndex >=0))
+            {
+                Grid_Buch.ClearSelection();
+                ladenToolStripMenuItem.Visible = false;
+                entfernenToolStripMenuItem.Visible = false;
+                exemplareToolStripMenuItem.Visible = false;
+            }
+            else
+            {
+                ladenToolStripMenuItem.Visible = true;
+                entfernenToolStripMenuItem.Visible = true;
+                exemplareToolStripMenuItem.Visible = true;
             }
         }
     }
