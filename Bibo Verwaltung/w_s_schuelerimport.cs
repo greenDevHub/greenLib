@@ -45,12 +45,12 @@ namespace Bibo_Verwaltung
         {
             if (modus == true)
             {
-                lb_anweissung.Text = "Geben Sie die Quelle der zu importierenden Daten an.";
+                //lb_anweissung.Text = "Geben Sie die Quelle der zu importierenden Daten an.";
                 bt_usepreset.Text = "Vorlage anwenden";
             }
             else
             {
-                lb_anweissung.Text = "Geben Sie das Ziel der zu exportierenden Daten an.";
+                //lb_anweissung.Text = "Geben Sie das Ziel der zu exportierenden Daten an.";
                 bt_usepreset.Text = "Exportieren";
             }
         }
@@ -271,12 +271,12 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void clearForm()
         {
+            progressBar1.Value = 0;
             tb_path.Text = "";
             tb_lines.Text = "0";
             cb_FeldTrenn.SelectedIndex = 1;
             cb_TxtQuali.SelectedIndex = 0;
             gv_Vorschau.DataSource = null;
-            lb_Anweissung2.Enabled = false;
             bt_usepreset.Enabled = true;
             bt_Vorschau.Enabled = false;
             gv_Vorschau.Enabled = false;
@@ -297,7 +297,6 @@ namespace Bibo_Verwaltung
                 bt_saveProfile.Enabled = true;
                 bt_removefile.Enabled = true;
                 bt_accept.Enabled = true;
-                lb_Anweissung2.Enabled = true;
                 bt_usepreset.Enabled = true;
                 bt_Vorschau.Enabled = true;
                 gv_Vorschau.Enabled = true;
@@ -310,7 +309,6 @@ namespace Bibo_Verwaltung
                 usePreset = false;
                 bt_removefile.Enabled = false;
                 bt_accept.Enabled = false;
-                lb_Anweissung2.Enabled = false;
                 bt_usepreset.Enabled = false;
                 bt_Vorschau.Enabled = false;
                 gv_Vorschau.Enabled = false;
@@ -467,6 +465,8 @@ namespace Bibo_Verwaltung
         }
         private void StartImport(bool withPreset)
         {
+            progressBar1.Minimum = 0;
+            progressBar1.Maximum = 100;
             int fileNum = 0;
             foreach (string file in files)
             {
@@ -569,6 +569,7 @@ namespace Bibo_Verwaltung
                     }
 
                 }
+                progressBar1.Value = (fileNum * 100) / files.Count;
             }
             if(fileNum == 0)
             {
