@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework.Controls;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -50,13 +51,13 @@ namespace Bibo_Verwaltung
             cb.SelectedValue = value;
         }
 
-        public void FillGrid(ref DataGridView grid, object value = null)
+        public void FillGrid(ref MetroGrid grid, object value = null)
         {
             grid.DataSource = dt;
         }
         #endregion
         #region Speichern Grid
-        public void SaveGrid(ref DataGridView grid)
+        public void SaveGrid(ref MetroGrid grid)
         {
             comb = new SqlCommandBuilder(adapter);
             DataTable changes = dt.GetChanges();

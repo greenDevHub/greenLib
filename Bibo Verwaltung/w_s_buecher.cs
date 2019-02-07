@@ -13,11 +13,12 @@ using System.Media;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_buecher : Form
+    public partial class w_s_buecher : MetroFramework.Forms.MetroForm
     {
         public w_s_buecher(bool bool1)
         {
             InitializeComponent();
+            timer1.Start();
             b.FillGrid_Buch(ref Grid_Buch);
             Comboboxen();
             pictureBox2.Visible = false;
@@ -1580,6 +1581,18 @@ namespace Bibo_Verwaltung
                 entfernenToolStripMenuItem.Visible = true;
                 exemplareToolStripMenuItem.Visible = true;
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (metroProgressBar1.Value == 100)
+            {
+                timer1.Stop();
+            }
+            metroProgressBar1.Invoke((Action)delegate ()
+            {
+                metroProgressBar1.PerformStep();
+            });
         }
     }
 }

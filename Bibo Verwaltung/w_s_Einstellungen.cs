@@ -12,7 +12,7 @@ using System.IO;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_einstellungen : Form
+    public partial class w_s_einstellungen : MetroFramework.Forms.MetroForm
     {
         Einstellung set = new Einstellung();
         int originalHeight = 0;
@@ -139,7 +139,7 @@ namespace Bibo_Verwaltung
                 tb_Passwort.Text = "";
                 tLP_Top.RowStyles[3].Height = 0;
                 tLP_Top.RowStyles[4].Height = 0;
-                this.ClientSize = new System.Drawing.Size(ClientSize.Width, (originalHeight * 72) / 100);
+                //this.ClientSize = new System.Drawing.Size(ClientSize.Width, (originalHeight * 72) / 100);
             }
             else if (cb_Security.Text == "SQL Authentifizierung")
             {
@@ -149,7 +149,7 @@ namespace Bibo_Verwaltung
                 lb_Passwort.Visible = true;
                 tLP_Top.RowStyles[3].Height = originalRowHeight;
                 tLP_Top.RowStyles[4].Height = originalRowHeight;
-                this.ClientSize = new System.Drawing.Size(ClientSize.Width, originalHeight);
+                //this.ClientSize = new System.Drawing.Size(ClientSize.Width, originalHeight);
             }
         }
         #endregion
