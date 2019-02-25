@@ -95,9 +95,10 @@
     <Compile Include="Autor.cs" />
     <Compile Include="Barcode.cs" />
     <Compile Include="Benutzer.cs" />
+    <Compile Include="BuchStufe.cs" />
     <Compile Include="Exemplar.cs" />
     <Compile Include="Buchsuche.cs" />
-    <Compile Include="Extension\Lehrbuchausgabe\Buch_Fach.cs" />
+    <Compile Include="Extension\Lehrbuchausgabe\BuchFach.cs" />
     <Compile Include="Extension\Lehrbuchausgabe\w_b_buch_fach.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,7 +109,7 @@
     <Compile Include="Ausleihe.cs" />
     <Compile Include="ExcelExport.cs" />
     <Compile Include="FachStufe.cs" />
-    <Compile Include="Faecher.cs" />
+    <Compile Include="Fach.cs" />
     <Compile Include="Klassenstufe.cs" />
     <Compile Include="Schuelerimport.cs" />
     <Compile Include="Schueler.cs" />
@@ -117,6 +118,12 @@
     </Compile>
     <Compile Include="w_s_ausleihe.Designer.cs">
       <DependentUpon>w_s_ausleihe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="w_s_buch_stufe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_buch_stufe.Designer.cs">
+      <DependentUpon>w_s_buch_stufe.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_fach_stufe.cs">
       <SubType>Form</SubType>
@@ -302,6 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_Ausleihe.resx">
       <DependentUpon>w_s_ausleihe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="w_s_buch_stufe.resx">
+      <DependentUpon>w_s_buch_stufe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_fach_stufe.resx">
       <DependentUpon>w_s_fach_stufe.cs</DependentUpon>

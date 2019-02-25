@@ -1,6 +1,6 @@
 ﻿namespace Bibo_Verwaltung
 {
-    partial class w_s_fach_stufe
+    partial class w_s_buch_stufe
     {
         /// <summary>
         /// Required designer variable.
@@ -34,17 +34,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_fach_stufe));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_buch_stufe));
             this.gb_Klassenstufe = new System.Windows.Forms.GroupBox();
             this.gv_Klassenstufe = new System.Windows.Forms.DataGridView();
-            this.gb_Faecher = new System.Windows.Forms.GroupBox();
-            this.gv_Faecher = new System.Windows.Forms.DataGridView();
-            this.bt_Bearbeiten = new System.Windows.Forms.Button();
+            this.gb_Buecher = new System.Windows.Forms.GroupBox();
+            this.gv_Buecher = new System.Windows.Forms.DataGridView();
             this.btAbbrechen = new System.Windows.Forms.Button();
+            this.bt_Bearbeiten = new System.Windows.Forms.Button();
             this.gb_Klassenstufe.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Klassenstufe)).BeginInit();
-            this.gb_Faecher.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gv_Faecher)).BeginInit();
+            this.gb_Buecher.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Buecher)).BeginInit();
             this.SuspendLayout();
             // 
             // gb_Klassenstufe
@@ -53,7 +53,7 @@
             this.gb_Klassenstufe.Location = new System.Drawing.Point(12, 12);
             this.gb_Klassenstufe.Name = "gb_Klassenstufe";
             this.gb_Klassenstufe.Size = new System.Drawing.Size(198, 308);
-            this.gb_Klassenstufe.TabIndex = 1;
+            this.gb_Klassenstufe.TabIndex = 2;
             this.gb_Klassenstufe.TabStop = false;
             this.gb_Klassenstufe.Text = "Klassenstufen:";
             // 
@@ -89,30 +89,30 @@
             this.gv_Klassenstufe.TabIndex = 0;
             this.gv_Klassenstufe.SelectionChanged += new System.EventHandler(this.gv_Klassenstufe_SelectionChanged);
             // 
-            // gb_Faecher
+            // gb_Buecher
             // 
-            this.gb_Faecher.Controls.Add(this.gv_Faecher);
-            this.gb_Faecher.Location = new System.Drawing.Point(216, 12);
-            this.gb_Faecher.Name = "gb_Faecher";
-            this.gb_Faecher.Size = new System.Drawing.Size(365, 279);
-            this.gb_Faecher.TabIndex = 2;
-            this.gb_Faecher.TabStop = false;
-            this.gb_Faecher.Text = "zugeordnete Fächer:";
+            this.gb_Buecher.Controls.Add(this.gv_Buecher);
+            this.gb_Buecher.Location = new System.Drawing.Point(216, 12);
+            this.gb_Buecher.Name = "gb_Buecher";
+            this.gb_Buecher.Size = new System.Drawing.Size(365, 279);
+            this.gb_Buecher.TabIndex = 3;
+            this.gb_Buecher.TabStop = false;
+            this.gb_Buecher.Text = "zugeordnete Bücher:";
             // 
-            // gv_Faecher
+            // gv_Buecher
             // 
-            this.gv_Faecher.AllowUserToAddRows = false;
-            this.gv_Faecher.AllowUserToDeleteRows = false;
-            this.gv_Faecher.AllowUserToResizeColumns = false;
-            this.gv_Faecher.AllowUserToResizeRows = false;
+            this.gv_Buecher.AllowUserToAddRows = false;
+            this.gv_Buecher.AllowUserToDeleteRows = false;
+            this.gv_Buecher.AllowUserToResizeColumns = false;
+            this.gv_Buecher.AllowUserToResizeRows = false;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            this.gv_Faecher.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.gv_Faecher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gv_Buecher.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.gv_Buecher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -120,9 +120,9 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gv_Faecher.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.gv_Faecher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_Faecher.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gv_Buecher.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.gv_Buecher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gv_Buecher.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -130,13 +130,13 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gv_Faecher.DefaultCellStyle = dataGridViewCellStyle4;
-            this.gv_Faecher.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gv_Faecher.Enabled = false;
-            this.gv_Faecher.EnableHeadersVisualStyles = false;
-            this.gv_Faecher.Location = new System.Drawing.Point(3, 16);
-            this.gv_Faecher.Name = "gv_Faecher";
-            this.gv_Faecher.ReadOnly = true;
+            this.gv_Buecher.DefaultCellStyle = dataGridViewCellStyle4;
+            this.gv_Buecher.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gv_Buecher.Enabled = false;
+            this.gv_Buecher.EnableHeadersVisualStyles = false;
+            this.gv_Buecher.Location = new System.Drawing.Point(3, 16);
+            this.gv_Buecher.Name = "gv_Buecher";
+            this.gv_Buecher.ReadOnly = true;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -144,41 +144,31 @@
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gv_Faecher.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.gv_Faecher.RowHeadersWidth = 30;
-            this.gv_Faecher.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.gv_Buecher.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.gv_Buecher.RowHeadersWidth = 30;
+            this.gv_Buecher.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.Gray;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
-            this.gv_Faecher.RowsDefaultCellStyle = dataGridViewCellStyle6;
-            this.gv_Faecher.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.gv_Faecher.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.Gray;
-            this.gv_Faecher.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gv_Faecher.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
-            this.gv_Faecher.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            this.gv_Faecher.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            this.gv_Faecher.RowTemplate.ReadOnly = true;
-            this.gv_Faecher.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_Faecher.ShowCellErrors = false;
-            this.gv_Faecher.ShowCellToolTips = false;
-            this.gv_Faecher.ShowEditingIcon = false;
-            this.gv_Faecher.ShowRowErrors = false;
-            this.gv_Faecher.Size = new System.Drawing.Size(359, 260);
-            this.gv_Faecher.TabIndex = 1;
-            this.gv_Faecher.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Faecher_CellDoubleClick);
-            // 
-            // bt_Bearbeiten
-            // 
-            this.bt_Bearbeiten.Location = new System.Drawing.Point(219, 294);
-            this.bt_Bearbeiten.Name = "bt_Bearbeiten";
-            this.bt_Bearbeiten.Size = new System.Drawing.Size(149, 23);
-            this.bt_Bearbeiten.TabIndex = 3;
-            this.bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
-            this.bt_Bearbeiten.UseVisualStyleBackColor = true;
-            this.bt_Bearbeiten.Click += new System.EventHandler(this.bt_Bearbeiten_Click);
+            this.gv_Buecher.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.gv_Buecher.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.gv_Buecher.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.Gray;
+            this.gv_Buecher.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gv_Buecher.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.gv_Buecher.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            this.gv_Buecher.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            this.gv_Buecher.RowTemplate.ReadOnly = true;
+            this.gv_Buecher.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gv_Buecher.ShowCellErrors = false;
+            this.gv_Buecher.ShowCellToolTips = false;
+            this.gv_Buecher.ShowEditingIcon = false;
+            this.gv_Buecher.ShowRowErrors = false;
+            this.gv_Buecher.Size = new System.Drawing.Size(359, 260);
+            this.gv_Buecher.TabIndex = 1;
+            this.gv_Buecher.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Buecher_CellDoubleClick);
             // 
             // btAbbrechen
             // 
@@ -186,11 +176,21 @@
             this.btAbbrechen.Location = new System.Drawing.Point(478, 294);
             this.btAbbrechen.Name = "btAbbrechen";
             this.btAbbrechen.Size = new System.Drawing.Size(100, 23);
-            this.btAbbrechen.TabIndex = 4;
+            this.btAbbrechen.TabIndex = 6;
             this.btAbbrechen.Text = "Schließen";
             this.btAbbrechen.UseVisualStyleBackColor = true;
             // 
-            // w_s_fach_stufe
+            // bt_Bearbeiten
+            // 
+            this.bt_Bearbeiten.Location = new System.Drawing.Point(219, 294);
+            this.bt_Bearbeiten.Name = "bt_Bearbeiten";
+            this.bt_Bearbeiten.Size = new System.Drawing.Size(149, 23);
+            this.bt_Bearbeiten.TabIndex = 5;
+            this.bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
+            this.bt_Bearbeiten.UseVisualStyleBackColor = true;
+            this.bt_Bearbeiten.Click += new System.EventHandler(this.bt_Bearbeiten_Click);
+            // 
+            // w_s_buch_stufe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -198,31 +198,31 @@
             this.ClientSize = new System.Drawing.Size(594, 326);
             this.Controls.Add(this.btAbbrechen);
             this.Controls.Add(this.bt_Bearbeiten);
-            this.Controls.Add(this.gb_Faecher);
+            this.Controls.Add(this.gb_Buecher);
             this.Controls.Add(this.gb_Klassenstufe);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(1);
             this.MaximizeBox = false;
-            this.Name = "w_s_fach_stufe";
+            this.Name = "w_s_buch_stufe";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Zuordnung der Fächer zur Klassenstufe";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_fach_stufe_FormClosing);
+            this.Text = "Zuordnung der Bücher zur Klassenstufe";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_buch_stufe_FormClosing);
             this.gb_Klassenstufe.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Klassenstufe)).EndInit();
-            this.gb_Faecher.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gv_Faecher)).EndInit();
+            this.gb_Buecher.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Buecher)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
         private System.Windows.Forms.GroupBox gb_Klassenstufe;
         private System.Windows.Forms.DataGridView gv_Klassenstufe;
-        private System.Windows.Forms.GroupBox gb_Faecher;
-        private System.Windows.Forms.DataGridView gv_Faecher;
-        private System.Windows.Forms.Button bt_Bearbeiten;
+        private System.Windows.Forms.GroupBox gb_Buecher;
+        private System.Windows.Forms.DataGridView gv_Buecher;
         private System.Windows.Forms.Button btAbbrechen;
+        private System.Windows.Forms.Button bt_Bearbeiten;
     }
 }

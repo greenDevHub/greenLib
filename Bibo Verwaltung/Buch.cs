@@ -501,9 +501,7 @@ namespace Bibo_Verwaltung
         {
             dt2.Clear();
             if (con2.ConnectError()) return;
-            string RawCommand = "SELECT buch_isbn as 'ISBN',"
-                + "buch_titel as 'Titel' from t_s_buecher "
-                + "WHERE buch_activated = 1";
+            string RawCommand = "SELECT buch_isbn as 'ISBN', buch_titel as 'Titel' from t_s_buecher WHERE buch_activated = 1";
             adapter2 = new SqlDataAdapter(RawCommand, con2.Con);
             adapter2.Fill(ds2);
             adapter2.Fill(dt2);
@@ -528,12 +526,12 @@ namespace Bibo_Verwaltung
             return text;
         }
 
-        #region DataSet zuruecksetzen
+
         private void ClearDSBuch()
         {
             ds2.Tables[0].Rows.Clear();
         }
-        #endregion
+
 
         #region DataGridView fuellen
         public void FillGrid_Buch(ref DataGridView grid, object value = null)
@@ -596,6 +594,16 @@ namespace Bibo_Verwaltung
             grid.DataSource = dt;
             //grid.Columns[ds2.Tables[0].Columns.IndexOf("Autor")].DisplayIndex = 3;
             //grid.Columns[ds2.Tables[0].Columns.IndexOf("AutorlisteID")].Visible = false;
+        }
+
+        /// <summary>
+        /// Füllt ein DataGridView-Objekt mit den Buchdaten 
+        /// </summary>
+        public void FillGrid_Short(ref DataGridView grid, object value = null)
+        {
+            ClearDSBuch();
+            FillObjectBuchShort();
+            grid.DataSource = ds2.Tables[0];
         }
         #endregion
 

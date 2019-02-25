@@ -21,7 +21,7 @@ namespace Bibo_Verwaltung
             InitializeComponent();
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName;
-            kunde.FillGrid(true, ref gv_Kunde);
+            kunde.FillGrid(ref gv_Kunde);
         }
 
         public w_s_ausleihe(string userName, string[] list)
@@ -29,7 +29,7 @@ namespace Bibo_Verwaltung
             InitializeComponent();
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName;
-            kunde.FillGrid(true, ref gv_Kunde);
+            kunde.FillGrid(ref gv_Kunde);
             FillAusleihListe(list);
         }
         #endregion
@@ -126,7 +126,7 @@ namespace Bibo_Verwaltung
                 MessageBox.Show("Beim Laden der Liste in die Buchausleihliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
         /// <summary>
         /// Baut einen Dialogstring abhängig von der Buchausleih-Anzahl
         /// </summary>
@@ -187,7 +187,7 @@ namespace Bibo_Verwaltung
             }
             return result;
         }
-        
+
         /// <summary>
         /// Setzt das Fenster auf den Ausgangszustand zurück (alles leer)
         /// </summary>
@@ -197,7 +197,7 @@ namespace Bibo_Verwaltung
             llb_BuchTitel.Text = "keine Treffer";
             tb_VName.Text = "Vorname";
             tb_NName.Text = "Nachname";
-            kunde.FillGrid(true, ref gv_Kunde);
+            kunde.FillGrid(ref gv_Kunde);
             lb_BuchZustand.Enabled = false;
             lb_BuchZustand.Text = "nicht verfügbar";
             lb_BuchStatus.Enabled = false;
@@ -505,7 +505,7 @@ namespace Bibo_Verwaltung
         {
             Form Kunden = new w_s_Kunden(currentUser);
             Kunden.ShowDialog(this);
-            kunde.FillGrid(true, ref gv_Kunde);
+            kunde.FillGrid(ref gv_Kunde);
         }
 
         private void tb_VName_TextChanged(object sender, EventArgs e)
@@ -564,27 +564,35 @@ namespace Bibo_Verwaltung
 
         private void bt_Submit_Click(object sender, EventArgs e)
         {
-            ausleihe.KID = gv_Kunde.CurrentRow.Cells["Kunden-ID"].Value.ToString();
-            tb_VName.Text = gv_Kunde.CurrentRow.Cells["Vorname"].Value.ToString();
-            tb_NName.Text = gv_Kunde.CurrentRow.Cells["Nachname"].Value.ToString();
+            if (gv_Kunde.CurrentRow != null)
+            {
+                ausleihe.KID = gv_Kunde.CurrentRow.Cells["Kunden-ID"].Value.ToString();
+                tb_VName.Text = gv_Kunde.CurrentRow.Cells["Vorname"].Value.ToString();
+                tb_NName.Text = gv_Kunde.CurrentRow.Cells["Nachname"].Value.ToString();
 
-            if (leihListe.Rows.Count == 0)
-            {
-                if (buch_verfuegbar)
+                if (leihListe.Rows.Count == 0)
                 {
-                    AddToAusleihList();
+                    if (buch_verfuegbar)
+                    {
+                        AddToAusleihList();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Dieses Buch wurde verliehen. Es kann nicht zur Buchausleihliste hinzugefügt werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
-                else
+                if (leihListe.Rows.Count != 0)
                 {
-                    MessageBox.Show("Dieses Buch wurde verliehen. Es kann nicht zur Buchausleihliste hinzugefügt werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Buchausgabe();
                 }
+
             }
-            if (leihListe.Rows.Count != 0)
+            else
             {
-                Buchausgabe();
+                MessageBox.Show("Bitte wählen Sie einen Kunden aus! ", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        
+
         private void tb_BuchCode_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)13)

@@ -1,4 +1,4 @@
-/****** Object:  Database [Bibo_Verwaltung]    Script Date: 23.07.2018 Robert Jehring ******/
+/****** Object:  Database [Bibo_Verwaltung]    Script Date: 08.02.2019 Robert Jehring ******/
 USE master
 
 WHILE EXISTS(select NULL from sys.databases where name='Bibo_Verwaltung')
@@ -11,12 +11,6 @@ BEGIN
 	IF  EXISTS (SELECT name FROM sys.databases WHERE name = N'Bibo_Verwaltung')
 	DROP DATABASE [Bibo_Verwaltung]
 END
-use master
-ALTER DATABASE [Bibo_Verwaltung] SET single_user
-GO
-
-IF  EXISTS (SELECT name FROM sys.databases WHERE name = N'Bibo_Verwaltung')
-DROP DATABASE [Bibo_Verwaltung]
 GO
 
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'Bibo_Verwaltung')
@@ -158,14 +152,14 @@ CREATE TABLE [dbo].[t_s_kunden](
 	[kunde_ID] [int] IDENTITY (1,1) NOT NULL,
 	[kunde_vorname] [nvarchar](128) NOT NULL,
 	[kunde_nachname] [nvarchar](128) NOT NULL,
-	[kunde_strasse] [nvarchar](128) NOT NULL,
-	[kunde_hausnummer] [nvarchar](4) NOT NULL,
-	[kunde_postleitzahl] [nvarchar](16) NOT NULL,
-	[kunde_ort] [nvarchar](128) NOT NULL,
-	[kunde_vertrauenswürdigkeit] [nvarchar](128),
-	[kunde_klasse] [nvarchar](6),
-	[kunde_mail] [nvarchar](128) NOT NULL,
-	[kunde_telefonnummer] [nvarchar](128) NOT NULL,
+	[kunde_strasse] [nvarchar](128),
+	[kunde_hausnummer] [nvarchar](4),
+	[kunde_postleitzahl] [nvarchar](16),
+	[kunde_ort] [nvarchar](128),
+	[kunde_klassenstufe] [nvarchar](5),
+	[kunde_mail] [nvarchar](128),
+	[kunde_telefonnummer] [nvarchar](128),
+	[kunde_activated] [BIT] NOT NULL,
 	PRIMARY KEY (kunde_id))
 END
 
@@ -192,8 +186,6 @@ CREATE TABLE [dbo].[t_s_verlag](
 	[ver_name] [nvarchar] (128) NOT NULL,
 	PRIMARY KEY (ver_id))
 END
-
-
 
 use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_zustand]') AND type in (N'U'))
@@ -337,73 +329,70 @@ CREATE TABLE [dbo].[t_s_faecher](
 	[f_kurzform] [nvarchar](128),
 	[f_langform] [nvarchar](256)
 	PRIMARY KEY (f_id))
-	END
-
-
-use Bibo_Verwaltung
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_schueler]') AND type in (N'U'))
-DROP TABLE [dbo].[t_s_schueler]
-GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_schueler]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [dbo].[t_s_schueler](
-	[sch_id] [int] IDENTITY (1,1) NOT NULL,
-	[sch_vorname] [nvarchar](128) NOT NULL,
-	[sch_nachname] [nvarchar](128) NOT NULL,
-	[sch_datum] [date] NOT NULL,
-	[sch_klasse] [nvarchar](6),
-	[sch_stufe][int] NOT NULL,
-	PRIMARY KEY(sch_id))
-	END
+END
 
 use Bibo_Verwaltung
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_fach_schueler]') AND type in (N'U'))
-DROP TABLE [dbo].[t_s_fach_schueler]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_fach_kunde]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_fach_kunde]
 GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_fach_schueler]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_fach_kunde]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[t_s_fach_schueler](
+CREATE TABLE [dbo].[t_s_fach_kunde](
 	[fs_id] [int] IDENTITY (1,1) NOT NULL,
-	[fs_schuelerid] [int] NOT NULL,
+	[fs_kundenid] [int] NOT NULL,
 	[fs_fachid] [int] NOT NULL,
 	PRIMARY KEY(fs_id),
-	FOREIGN KEY (fs_schuelerid)
-		REFERENCES t_s_schueler (sch_id),
+	FOREIGN KEY (fs_kundenid)
+		REFERENCES t_s_kunden (kunde_ID),
 	FOREIGN KEY(fs_fachid)
 		REFERENCES t_s_faecher (f_id))
 END
 
-
 use Bibo_Verwaltung
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_bd_buch_fach]') AND type in (N'U'))
-DROP TABLE [dbo].[t_bd_buch_fach]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_fach_stufe]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_fach_stufe]
 GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_bd_buch_fach]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_fach_stufe]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[t_bd_buch_fach](
+CREATE TABLE [dbo].[t_s_fach_stufe](
 	[bf_id] [int] IDENTITY(1,1) NOT NULL,
 	[bf_fachid] [int] NOT NULL,
-	[bf_klassenstufe] [nvarchar](32) NOT NULL,
+	[bf_klassenstufe] [nvarchar](5) NOT NULL,
 	PRIMARY KEY (bf_id),
 	FOREIGN KEY (bf_fachid)
 		REFERENCES t_s_faecher (f_id))
 END
 
 use Bibo_Verwaltung
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_isbn_buchfach]') AND type in (N'U'))
-DROP TABLE [dbo].[t_s_isbn_buchfach]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buch_stufe]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_buch_stufe]
 GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_isbn_buchfach]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buch_stufe]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[t_s_isbn_buchfach](
-	[ib_id] [int] IDENTITY (1,1) NOT NULL,
-	[ib_bfid] [int] NOT NULL,
-	[ib_isbn] [nvarchar](32) NOT NULL,
-	PRIMARY KEY(ib_id),
-	FOREIGN KEY (ib_bfid)
-		REFERENCES t_bd_buch_fach (bf_id),
-	FOREIGN KEY(ib_isbn)
+CREATE TABLE [dbo].[t_s_buch_stufe](
+	[bs_id] [int] IDENTITY(1,1) NOT NULL,
+	[bs_isbn] [nvarchar] (32) NOT NULL,
+	[bs_klassenstufe] [nvarchar](5) NOT NULL,
+	PRIMARY KEY (bs_id),
+	FOREIGN KEY (bs_isbn)
 		REFERENCES t_s_buecher (buch_isbn))
+END
+
+use Bibo_Verwaltung
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buch_fach]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_buch_fach]
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buch_fach]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[t_s_buch_fach](
+	[bf_id] [int] IDENTITY (1,1) NOT NULL,
+	[bf_isbn] [nvarchar](32) NOT NULL,
+	[bf_fachid] [int] NOT NULL,
+	PRIMARY KEY(bf_id),
+	FOREIGN KEY (bf_isbn)
+		REFERENCES t_s_buecher (buch_isbn),
+	FOREIGN KEY(bf_fachid)
+		REFERENCES t_s_faecher (f_id))
 END
 
 use Bibo_Verwaltung
@@ -418,32 +407,4 @@ CREATE TABLE [dbo].[t_s_preis](
 	[p_preis] [numeric](18,2) NOT NULL,
 	[p_datum] [date] NOT NULL DEFAULT(GETDATE()),
 	PRIMARY KEY (p_aenderung))
-END
-
-use Bibo_Verwaltung
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_klassenstufe]') AND type in (N'U'))
-DROP TABLE [dbo].[t_s_klassenstufe]
-GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_klassenstufe]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [dbo].[t_s_klassenstufe](
-	[k_stufe] [int] NOT NULL,
-	PRIMARY KEY (k_stufe))
-END
-
-use Bibo_Verwaltung
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_fach_stufe]') AND type in (N'U'))
-DROP TABLE [dbo].[t_s_fach_stufe]
-GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_fach_stufe]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [dbo].[t_s_fach_stufe](
-	[fs_id] [int] IDENTITY(1,1) NOT NULL,
-	[fs_fachid] [int] NOT NULL,
-	[fs_stufe] [int] NOT NULL,
-	PRIMARY KEY (fs_id),
-	FOREIGN KEY (fs_fachid)
-		REFERENCES t_s_faecher (f_id),
-	FOREIGN KEY (fs_stufe)
-		REFERENCES t_s_klassenstufe (k_stufe))
 END

@@ -12,9 +12,13 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_user : Form
     {
-        public w_s_user()
+        string currentUser;
+
+        public w_s_user(string userName)
         {
             InitializeComponent();
+            this.currentUser = userName;
+            this.Text = Text + " - Angemeldet als: " + userName;
             Benutzer user = new Benutzer();
             user.FillGrid(ref gv_Benutzer);
         }

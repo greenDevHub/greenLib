@@ -42,7 +42,6 @@
             this.tb_Nachname = new System.Windows.Forms.TextBox();
             this.lb_Ort = new System.Windows.Forms.Label();
             this.tb_Vorname = new System.Windows.Forms.TextBox();
-            this.lb_Vertrauenswuerdigkeit = new System.Windows.Forms.Label();
             this.tb_Strasse = new System.Windows.Forms.TextBox();
             this.lb_Klasse = new System.Windows.Forms.Label();
             this.tb_Mail = new System.Windows.Forms.TextBox();
@@ -51,7 +50,6 @@
             this.tb_Klasse = new System.Windows.Forms.TextBox();
             this.tb_Postleitzahl = new System.Windows.Forms.TextBox();
             this.tb_Ort = new System.Windows.Forms.TextBox();
-            this.cb_Vertrauenswuerdigkeit = new System.Windows.Forms.ComboBox();
             this.lb_KundenID = new System.Windows.Forms.Label();
             this.lb_kunde_add = new System.Windows.Forms.Label();
             this.bt_clear = new System.Windows.Forms.Button();
@@ -63,7 +61,6 @@
             this.gv_Kunde = new System.Windows.Forms.DataGridView();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.bt_ImEx = new System.Windows.Forms.Button();
-            this.cb_showAll = new System.Windows.Forms.CheckBox();
             this.gb_kunde.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
@@ -124,7 +121,6 @@
             this.tableLayoutPanel1.Controls.Add(this.tb_Nachname, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.lb_Ort, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.tb_Vorname, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lb_Vertrauenswuerdigkeit, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.tb_Strasse, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.lb_Klasse, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.tb_Mail, 1, 9);
@@ -134,7 +130,6 @@
             this.tableLayoutPanel1.Controls.Add(this.tb_Klasse, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.tb_Postleitzahl, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.tb_Ort, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.cb_Vertrauenswuerdigkeit, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.lb_KundenID, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(7, 42);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -260,19 +255,6 @@
             this.tb_Vorname.TabIndex = 1;
             this.tb_Vorname.TextChanged += new System.EventHandler(this.tb_Vorname_TextChanged);
             // 
-            // lb_Vertrauenswuerdigkeit
-            // 
-            this.lb_Vertrauenswuerdigkeit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lb_Vertrauenswuerdigkeit.AutoSize = true;
-            this.helpProvider.SetHelpString(this.lb_Vertrauenswuerdigkeit, "Legen sie fest, wie vertrauenswürdig ein Kunde im Bezug auf die Buchrückgabe ist." +
-        "");
-            this.lb_Vertrauenswuerdigkeit.Location = new System.Drawing.Point(3, 218);
-            this.lb_Vertrauenswuerdigkeit.Name = "lb_Vertrauenswuerdigkeit";
-            this.helpProvider.SetShowHelp(this.lb_Vertrauenswuerdigkeit, true);
-            this.lb_Vertrauenswuerdigkeit.Size = new System.Drawing.Size(113, 13);
-            this.lb_Vertrauenswuerdigkeit.TabIndex = 33;
-            this.lb_Vertrauenswuerdigkeit.Text = "Vertrauenswürdigkeit:";
-            // 
             // tb_Strasse
             // 
             this.tb_Strasse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -368,24 +350,6 @@
             this.tb_Ort.Size = new System.Drawing.Size(143, 20);
             this.tb_Ort.TabIndex = 7;
             this.tb_Ort.TextChanged += new System.EventHandler(this.tb_Ort_TextChanged);
-            // 
-            // cb_Vertrauenswuerdigkeit
-            // 
-            this.cb_Vertrauenswuerdigkeit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cb_Vertrauenswuerdigkeit.FormattingEnabled = true;
-            this.helpProvider.SetHelpString(this.cb_Vertrauenswuerdigkeit, "Legen sie fest, wie vertrauenswürdig ein Kunde im Bezug auf die Buchrückgabe ist." +
-        "");
-            this.cb_Vertrauenswuerdigkeit.Items.AddRange(new object[] {
-            "vertrauenswürdig",
-            "nicht vertrauenswürdig",
-            "noch nicht bestimmt"});
-            this.cb_Vertrauenswuerdigkeit.Location = new System.Drawing.Point(123, 215);
-            this.cb_Vertrauenswuerdigkeit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cb_Vertrauenswuerdigkeit.Name = "cb_Vertrauenswuerdigkeit";
-            this.helpProvider.SetShowHelp(this.cb_Vertrauenswuerdigkeit, true);
-            this.cb_Vertrauenswuerdigkeit.Size = new System.Drawing.Size(143, 21);
-            this.cb_Vertrauenswuerdigkeit.TabIndex = 8;
-            this.cb_Vertrauenswuerdigkeit.TextChanged += new System.EventHandler(this.cb_Vertrauenswuerdigkeit_TextChanged_1);
             // 
             // lb_KundenID
             // 
@@ -521,23 +485,11 @@
             this.bt_ImEx.UseVisualStyleBackColor = true;
             this.bt_ImEx.Click += new System.EventHandler(this.bt_ImEx_Click);
             // 
-            // cb_showAll
-            // 
-            this.cb_showAll.AutoSize = true;
-            this.cb_showAll.Location = new System.Drawing.Point(640, 419);
-            this.cb_showAll.Name = "cb_showAll";
-            this.cb_showAll.Size = new System.Drawing.Size(112, 17);
-            this.cb_showAll.TabIndex = 43;
-            this.cb_showAll.Text = "Zeige alle Kunden";
-            this.cb_showAll.UseVisualStyleBackColor = true;
-            this.cb_showAll.CheckedChanged += new System.EventHandler(this.cb_showAll_CheckedChanged);
-            // 
             // w_s_Kunden
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(886, 449);
-            this.Controls.Add(this.cb_showAll);
             this.Controls.Add(this.bt_ImEx);
             this.Controls.Add(this.gb_kunde);
             this.Controls.Add(this.bt_OK);
@@ -556,7 +508,6 @@
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -583,7 +534,6 @@
         private System.Windows.Forms.TextBox tb_Nachname;
         private System.Windows.Forms.Label lb_Ort;
         private System.Windows.Forms.TextBox tb_Vorname;
-        private System.Windows.Forms.Label lb_Vertrauenswuerdigkeit;
         private System.Windows.Forms.TextBox tb_Strasse;
         private System.Windows.Forms.Label lb_Klasse;
         private System.Windows.Forms.TextBox tb_Mail;
@@ -592,9 +542,7 @@
         private System.Windows.Forms.TextBox tb_Klasse;
         private System.Windows.Forms.TextBox tb_Postleitzahl;
         private System.Windows.Forms.TextBox tb_Ort;
-        private System.Windows.Forms.ComboBox cb_Vertrauenswuerdigkeit;
         private System.Windows.Forms.Label lb_KundenID;
         private System.Windows.Forms.Button bt_ImEx;
-        private System.Windows.Forms.CheckBox cb_showAll;
     }
 }

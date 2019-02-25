@@ -12,24 +12,25 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_faecher : Form
     {
-        public w_s_faecher()
+        string currentUser;
+        float originalHeightLabel = 0;
+        float originalHeightText = 0;
+        bool changes = false;
+        Fach f = new Fach();
+        bool suchmodus = false;
+
+        public w_s_faecher(string userName)
         {
             InitializeComponent();
+            this.currentUser = userName;
             f.FillGrid(ref gv_Faecher);
             originalHeightLabel = tLP_Faecher.RowStyles[0].Height;
             originalHeightText = tLP_Faecher.RowStyles[1].Height;
             tLP_Faecher.RowStyles[0].Height = 0;
             tLP_Faecher.RowStyles[1].Height = 0;
         }
-        #region globale Variablen
-        float originalHeightLabel = 0;
-        float originalHeightText = 0;
-        bool changes = false;
-        Faecher f = new Faecher();
-        bool suchmodus = false;
-        #endregion
 
-        #region Aenderungen an GridView erkennen
+        #region Componenten-Aktionen
         private void gv_Verlage_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             changes = true;
@@ -39,7 +40,6 @@ namespace Bibo_Verwaltung
         {
             changes = true;
         }
-        #endregion
 
         private void w_s_faecher_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -73,7 +73,6 @@ namespace Bibo_Verwaltung
             f.FillGrid(ref gv_Faecher);
         }
 
-        #region Suchen-Aktionen
         private void bt_Suchen_Click(object sender, EventArgs e)
         {
             if (suchmodus == false)
@@ -100,14 +99,14 @@ namespace Bibo_Verwaltung
 
         private void tb_Suchen_TextChanged(object sender, EventArgs e)
         {
-            (gv_Faecher.DataSource as DataTable).DefaultView.RowFilter = string.Format("f_langform LIKE '{0}%'", tb_Suchen.Text);
+            (gv_Faecher.DataSource as DataTable).DefaultView.RowFilter = string.Format("Langbezeichnung LIKE '{0}%'", tb_Suchen.Text);
         }
-        #endregion
 
         private void bt_Verwaltung_Click(object sender, EventArgs e)
         {
-            Form fachstufe = new w_s_fach_stufe();
+            Form fachstufe = new w_s_fach_stufe(currentUser);
             fachstufe.ShowDialog(this);
         }
+        #endregion
     }
 }

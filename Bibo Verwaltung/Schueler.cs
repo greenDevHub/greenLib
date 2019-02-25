@@ -52,11 +52,11 @@ namespace Bibo_Verwaltung
         /// </summary>
         public string Klassenstufe { get { return klassenstufe; } set { klassenstufe = value; } }
 
-        Faecher fach = new Faecher();
+        Fach fach = new Fach();
         /// <summary>
         /// Strasse auf der der Kunde wohnt
         /// </summary>
-        public Faecher Fach { get { return fach; } set { fach = value; } }
+        public Fach Fach { get { return fach; } set { fach = value; } }
 
         List<string> faecher = new List<string>();
         public List<string> Faecher { get { return faecher; } set { faecher = value; } }
@@ -110,7 +110,7 @@ namespace Bibo_Verwaltung
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, SchuelerID);
             while (dr.Read())
             {
-                Fach = new Faecher(dr["fs_fachid"].ToString());
+                Fach = new Fach(dr["fs_fachid"].ToString());
                 Faecher.Add(Fach.FachKurz);
             }
             dr.Close();
@@ -361,14 +361,14 @@ namespace Bibo_Verwaltung
             foreach(string s in Faecher)
             {
                 Fach.FachKurz = s;
-                Fach.Fach = "";
-                if (!Fach.AlreadyExists())
+                Fach.FachLang = "";
+                if (!Fach.FachExists())
                 {
-                    Fach.Add();
+                    Fach.AddFach();
                 }
                 SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
                 cmd.Parameters.AddWithValue("@schuelerid", SchuelerID);
-                cmd.Parameters.AddWithValue("@fachid", Fach.GetID(s));
+                cmd.Parameters.AddWithValue("@fachid", Fach.GetIDByShortform(s));
                 cmd.ExecuteNonQuery();
             }
         }

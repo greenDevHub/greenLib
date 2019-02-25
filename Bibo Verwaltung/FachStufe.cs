@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,177 +12,151 @@ namespace Bibo_Verwaltung
 {
     class FachStufe
     {
-        #region Constructor
+        Fach faecher = new Fach();
+        SQL_Verbindung con = new SQL_Verbindung();
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataSet ds = new DataSet();
+        SqlCommandBuilder comb = new SqlCommandBuilder();
+
+        #region Eigenschaften des Objekts
         string zuordnungid;
         public string ZuordnungID { get { return zuordnungid; } set { zuordnungid = value; } }
 
-        Faecher fach = new Faecher();
-        public Faecher Fach { get { return fach; } set { fach = value; } }
+        Fach fach = new Fach();
+        public Fach Fach { get { return fach; } set { fach = value; } }
 
         List<string> fachListe = new List<string>();
         public List<string> FachListe { get { return fachListe; } set { fachListe = value; } }
 
         Klassenstufe klassenstufe = new Klassenstufe();
         public Klassenstufe Klassenstufe { get { return klassenstufe; } set { klassenstufe = value; } }
+        #endregion
 
+        #region Constructor
+        /// <summary>
+        /// Erschaft das Objekt FachStufe
+        /// </summary>
         public FachStufe()
         {
 
         }
+        /// <summary>
+        /// Erschaft das Objekt FachStufe
+        /// </summary>
         public FachStufe(string stufe)
         {
             this.Klassenstufe.Stufe = stufe;
-            Load();
+            //Load();
         }
         #endregion
 
-        #region Methoden
-
-        #region Load
-        private void Load()
-        {
-            SQL_Verbindung con = new SQL_Verbindung();
-            if (con.ConnectError()) return;
-            string RawCommand = "Select * FROM [dbo].[t_s_fach_stufe] WHERE fs_stufe = @0";
-            SqlDataReader dr = con.ExcecuteCommand(RawCommand, Klassenstufe.Stufe);
-            fachListe.Clear();
-            while (dr.Read())
-            {
-                //ZuordnungID = dr["fs_id"].ToString();
-                Fach = new Faecher(dr["fs_fachid"].ToString());
-                fachListe.Add(Fach.FachKurz);
-                //Klassenstufe = new Klassenstufe(dr["fs_stufe"].ToString());
-            }
-            dr.Close();
-            con.Close();
-        }
-        #endregion
-
-        #region Add
-        public void Add()
-        {
-            SQL_Verbindung con = new SQL_Verbindung();
-            if (con.ConnectError()) return;
-            string RawCommand = "INSERT INTO [dbo].[t_s_fach_stufe] (fs_fachid, fs_stufe) VALUES (@fachid, @klassenstufe)";
-            foreach(string s in FachListe)
-            {
-                SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-                cmd.Parameters.AddWithValue("@fachid", Fach.GetID(s));
-                cmd.Parameters.AddWithValue("@klassenstufe", Klassenstufe.Stufe);
-                cmd.ExecuteNonQuery();
-            }
-
-            con.Close();
-        }
-        #endregion
-
-        #region Update
-        public void Update()
-        {
-            Delete();
-            Add();
-        }
-        #endregion
-
-        #region Delete
-        public void Delete()
-        {
-            SQL_Verbindung con = new SQL_Verbindung();
-            string RawCommand = "DELETE FROM [dbo].[t_s_fach_stufe] WHERE fs_stufe=@stufe";
-            con.ConnectError();
-            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-
-            cmd.Parameters.AddWithValue("@stufe", Klassenstufe.Stufe);
-
-            // Verbindung öffnen 
-            cmd.ExecuteNonQuery();
-            //Verbindung schließen
-            con.Close();
-        }
-        #endregion
-
-        #region Fill Object
-        SqlDataAdapter adapter = new SqlDataAdapter();
-        DataTable dt = new DataTable();
-        SqlCommandBuilder comb = new SqlCommandBuilder();
+        /// <summary>
+        /// Füllt ein DataSet-Objekt mit den Fach-Klassenstufen-Zuordnungsdatendaten 
+        /// </summary>
         private void FillObject()
         {
-            dt.Clear();
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT fs_id as 'ID', fs_fachid as 'Kurzform', f_kurzform as 'Fach', k_stufe as 'Klassenstufe' FROM [dbo].[t_s_fach_stufe] left join [dbo].[t_s_faecher] on fs_fachid = f_id left join [dbo].[t_s_klassenstufe] on fs_stufe = k_stufe";
+            string RawCommand = "SELECT bf_fachid, bf_klassenstufe, f_kurzform as 'Kurzbezeichnung', f_langform as 'Langbezeichnung' FROM [dbo].[t_s_fach_stufe] left join [dbo].[t_s_faecher] on f_id = bf_fachid order by f_kurzform";//@id";
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             adapter = new SqlDataAdapter(RawCommand, con.Con);
-            adapter.Fill(dt);
+            adapter.Fill(ds);
             con.Close();
-        }
-        #endregion
 
-        #region DataSet zuruecksetzen
-        private void ClearDS()
-        {
-            dt.Clear();
-        }
-        #endregion
 
-        #region FillGrid
-        public void FillGrid(ref DataGridView grid, object value = null)
+            //dt.Clear();
+            //SQL_Verbindung con = new SQL_Verbindung();
+            //if (con.ConnectError()) return;
+            //string RawCommand = "SELECT fs_id as 'ID', fs_fachid as 'Kurzform', f_kurzform as 'Fach', k_stufe as 'Klassenstufe' FROM [dbo].[t_s_fach_stufe] left join [dbo].[t_s_faecher] on fs_fachid = f_id left join [dbo].[t_s_klassenstufe] on fs_stufe = k_stufe";
+            //adapter = new SqlDataAdapter(RawCommand, con.Con);
+            //adapter.Fill(dt);
+            //con.Close();
+        }
+
+        /// <summary>
+        /// Entfernt den gesamten Inhalt im DataSet 
+        /// </summary>
+        private void ClearDataSource()
         {
-            ClearDS();
-            FillObject();
-            DataTable data = new DataTable();
-            //data.Columns.Add("ID");
-            data.Columns.Add("Klassenstufe");
-            data.Columns.Add("Fach");
-            foreach (DataRow row in dt.Rows)
+            try
             {
-                //ZuordnungID = row[dt.Columns.IndexOf("ID")].ToString();
-                Klassenstufe.Stufe = row[dt.Columns.IndexOf("Klassenstufe")].ToString();
-                DataRow dataRow = data.NewRow();
-                //dataRow["ID"] = ZuordnungID;
-                dataRow["Klassenstufe"] = Klassenstufe.Stufe;
-                dataRow["Fach"] = Fach.FachKurz;
-                Load();
-                string fach = "";
-                foreach (string s in fachListe)
+                ds.Tables[0].Rows.Clear();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Markiert die zugeordneten Fächer
+        /// </summary>
+        private void Set_Mark(ref DataGridView gridFaecher, string stufe, object value = null)
+        {
+            try
+            {
+                for (int j = 0; j <= gridFaecher.Rows.Count - 1; j++)
                 {
-                    fach = fach + s + ", ";
+                    DataGridViewRow row = gridFaecher.Rows[j];
+
+                    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                    {
+                        if (row.Cells["ID"].Value.ToString() == ds.Tables[0].Rows[i]["bf_fachid"].ToString())
+                        {
+                            if (ds.Tables[0].Rows[i]["bf_klassenstufe"].ToString() == stufe)
+                            {
+                                row.Cells["Kurzbezeichnung"].Value = "*" + row.Cells["Kurzbezeichnung"].Value.ToString();
+                                row.DefaultCellStyle.BackColor = Color.Yellow;
+                                row.DefaultCellStyle.ForeColor = Color.Black;
+                            }
+                        }
+                    }
                 }
-                fach = fach.Substring(0, fach.Length - 2);
-                dataRow["Fach"] = fach;
-                data.Rows.Add(dataRow);
-
             }
-            //data = dtEmp.DefaultView.ToTable(true);
-            DataTable distinctTable = data.DefaultView.ToTable(true);
-            grid.DataSource = distinctTable;
-
+            catch { }
         }
-        #endregion
 
-        #region Exists?
-        public bool AlreadyExists()
+        /// <summary>
+        /// Füllt ein DataGridView-Objekt mit den Fachdaten 
+        /// </summary>
+        public void Show_AllFaecher(ref DataGridView Faecher, string Stufe, object value = null)
         {
-            SQL_Verbindung con = new SQL_Verbindung();
-            if (con.ConnectError()) return false;
-            string RawCommand = "SELECT * FROM [dbo].[t_s_fach_stufe] WHERE fs_stufe = @0";
-            SqlDataReader dr = con.ExcecuteCommand(RawCommand, Klassenstufe.Stufe);
-            while (dr.Read())
-            {
-                ZuordnungID = dr["fs_id"].ToString();
-            }
-            dr.Close();
-            con.Close();
-            if (ZuordnungID == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            ClearDataSource();
+            FillObject();
+            faecher.FillGrid(ref Faecher);
+            Set_Mark(ref Faecher, Stufe);
         }
-        #endregion
 
-        #endregion
+        /// <summary>
+        /// Füllt ein DataGridView-Objekt mit den Fach-Klassenstufen-Zuordnungsdatendaten  
+        /// </summary>
+        public void Show_StufenFaecher(ref DataGridView grid, string stufe, object value = null)
+        {
+            ClearDataSource();
+            FillObject();
+            ds.Tables[0].DefaultView.RowFilter = string.Format("bf_klassenstufe LIKE '{0}'", stufe);
+            grid.DataSource = ds.Tables[0];
+            grid.Columns["bf_fachid"].Visible = false;
+            grid.Columns["bf_klassenstufe"].Visible = false;
+        }
+
+        /// <summary>
+        /// Überschreibt und speichert die Zuordnungsdatendaten einer Klassenstufe mit vorhandenen Fächern in der Datenbank 
+        /// </summary>
+        public void Save_Zuordnung(DataTable zuordnung, string stufe)
+        {
+            if (con.ConnectError()) return;
+            string RawCommand1 = "DELETE FROM [dbo].[t_s_fach_stufe] WHERE bf_klassenstufe = @stufe";
+            con.ConnectError();
+            SqlCommand cmd1 = new SqlCommand(RawCommand1, con.Con);
+            cmd1.Parameters.AddWithValue("@stufe", stufe);
+            cmd1.ExecuteNonQuery();
+
+            string RawCommand2 = "INSERT INTO [dbo].[t_s_fach_stufe] (bf_fachid, bf_klassenstufe) VALUES (@fachid, @klassenstufe)";
+            foreach (DataRow row in zuordnung.Rows)
+            {
+                SqlCommand cmd2 = new SqlCommand(RawCommand2, con.Con);
+                cmd2.Parameters.AddWithValue("@fachid", row[0].ToString());
+                cmd2.Parameters.AddWithValue("@klassenstufe", stufe);
+                cmd2.ExecuteNonQuery();
+            }
+            con.Close();
+        }
     }
 }

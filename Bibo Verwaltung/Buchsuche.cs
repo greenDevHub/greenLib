@@ -19,7 +19,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public Buchsuche()
         {
-            FillObject();
+
         }
         #endregion
 
@@ -27,21 +27,21 @@ namespace Bibo_Verwaltung
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
         SqlCommandBuilder comb = new SqlCommandBuilder();
+
+        DateTime dt = new DateTime();
+        DateTime now = new DateTime();
+
+        Autor buchautor = new Autor();
+        Verlag buchverlag = new Verlag();
+        Genre buchgenre = new Genre();
+
+        /// <summary>
+        /// Füllt das DataSet 
+        /// </summary>
         private void FillObject()
         {
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT bu_id as 'ExemplarID', bu_isbn as 'ISBN', buch_titel as 'Titel', "
-                + "zu_zustand as 'Zustand', bu_aufnahmedatum as 'Aufnahmedatum', "
-                + "ger_name as 'Genre', ver_name as 'Verlag', sprach_name as 'Sprache', aus_rückgabedatum as 'Rückgabedatum', aus_leihnummer as 'Leihnummer', "
-                + "kunde_id as 'Kunden ID', kunde_vorname as 'Vorname', kunde_Nachname as 'Nachname', kunde_klasse as 'Klasse' FROM t_s_buchid "
-                + "left join t_s_buecher on bu_isbn = buch_isbn "
-                + "left join t_s_genre on buch_genre_id = ger_id "
-                + "left join t_s_verlag on buch_verlag_id = ver_id "
-                + "left join t_s_sprache on buch_sprache_id = sprach_id "
-                + "left join t_s_zustand on bu_zustandsid = zu_id "
-                + "left join t_bd_ausgeliehen on aus_buchid = bu_id "
-                + "left join t_s_kunden on kunde_ID = aus_kundenid WHERE bu_activated = 1";
-
+            string RawCommand = "SELECT bu_isbn as 'ISBN', aus_rückgabedatum as 'Rückgabedatum', buch_titel as 'Titel', CONVERT(nvarchar, bu_id) as 'ExemplarID', kunde_id as 'Kunden ID', kunde_vorname as 'Vorname', kunde_Nachname as 'Nachname', kunde_klassenstufe as 'Klassenstufe', ger_name as 'Genre', ver_name as 'Verlag', sprach_name as 'Sprache', zu_zustand as 'Zustand', aus_leihnummer as 'Leihnummer' FROM t_s_buchid left join t_s_buecher on bu_isbn = buch_isbn left join t_s_genre on buch_genre_id = ger_id left join t_s_verlag on buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id left join t_s_zustand on bu_zustandsid = zu_id left join t_bd_ausgeliehen on aus_buchid = bu_id left join t_s_kunden on kunde_ID = aus_kundenid WHERE bu_activated = 1";
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
             con.Close();
@@ -52,8 +52,17 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void ClearDataSource()
         {
-            ds.Tables[0].Rows.Clear();
+            try
+            {
+                ds.Tables[0].Rows.Clear();
+            }
+            catch { }
         }
+
+        //public void ClearObject()
+        //{
+        //    ClearDataSource();
+        //}
 
         /// <summary>
         /// Füllt ein DataGridView-Objekt mit den Buchdaten 
@@ -63,15 +72,9 @@ namespace Bibo_Verwaltung
             ClearDataSource();
             FillObject();
             grid.DataSource = ds.Tables[0];
-            Set_StatusMark(ref grid);
             grid.Columns["Kunden ID"].Visible = false;
             grid.Columns["Leihnummer"].Visible = false;
-            grid.Columns[ds.Tables[0].Columns.IndexOf("ISBN")].DisplayIndex = 0;
-            grid.Columns[ds.Tables[0].Columns.IndexOf("Rückgabedatum")].DisplayIndex = 1;
-            grid.Columns[ds.Tables[0].Columns.IndexOf("Titel")].DisplayIndex = 2;
-            grid.Columns[ds.Tables[0].Columns.IndexOf("Vorname")].DisplayIndex = 3;
-            grid.Columns[ds.Tables[0].Columns.IndexOf("Nachname")].DisplayIndex = 4;
-            grid.Columns[ds.Tables[0].Columns.IndexOf("Klasse")].DisplayIndex = 5;
+            Hide_KundenDetails(ref grid);
         }
 
         /// <summary>
@@ -81,15 +84,17 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                foreach (DataGridViewRow row in grid.Rows)
-                    if (row.Cells["Leihnummer"].Value.ToString() != "")
+                now = DateTime.Today;
+
+                for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                {
+                    DataGridViewRow row = grid.Rows[i];
+
+                    if (ds.Tables[0].Rows[i]["Leihnummer"].ToString() != "")
                     {
-                        string date = row.Cells["Rückgabedatum"].Value.ToString();
-                        DateTime dt = new DateTime();
-                        dt = DateTime.Parse(date);
+                        dt = DateTime.Parse(ds.Tables[0].Rows[i]["Rückgabedatum"].ToString());
                         dt.ToShortDateString();
-                        DateTime now = new DateTime();
-                        now = DateTime.Today;
+
                         if (dt < now)
                         {
                             row.DefaultCellStyle.BackColor = Color.Red;
@@ -103,8 +108,80 @@ namespace Bibo_Verwaltung
                             row.DefaultCellStyle.BackColor = Color.LimeGreen;
                         }
                     }
+                }
             }
             catch { }
+
+
+
+
+
+            //try
+            //{
+
+            //    now = DateTime.Today;
+            //    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+            //    {
+            //        //foreach (DataGridViewRow row in grid.Rows) { 
+            //        //grid.Rows[i].DefaultCellStyle.BackColor = Color.White;
+
+            //        if (ds.Tables[0].Rows[i]["Leihnummer"].ToString() != "")
+            //        //if (row.Cells["Leihnummer"].Value.ToString() != "")
+            //        {
+
+            //            //dt = DateTime.Parse(date);
+            //            dt = DateTime.Parse(ds.Tables[0].Rows[i]["Rückgabedatum"].ToString());
+            //            //dt = DateTime.Parse(row.Cells["Rückgabedatum"].Value.ToString());
+            //            dt.ToShortDateString();
+
+
+            //            if (dt < now)
+            //            {
+            //                grid.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+            //                //row.DefaultCellStyle.BackColor = Color.Red;
+            //            }
+            //            else if (dt == now)
+            //            {
+            //                grid.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
+            //                //grid.RowsDefaultCellStyle.BackColor = Color.Yellow;
+            //                //row.DefaultCellStyle.BackColor = Color.Yellow;
+            //            }
+            //            else
+            //            {
+            //                grid.Rows[i].DefaultCellStyle.BackColor = Color.LimeGreen;
+            //                //row.DefaultCellStyle.BackColor = Color.LimeGreen;
+            //            }
+            //        }
+            //        else
+            //        {
+            //            grid.Rows[i].DefaultCellStyle.BackColor = Color.White;
+            //        }
+            //    }
+            //    //grid.Refresh();
+            //}
+            //catch { }
+        }
+
+        /// <summary>
+        /// Füllt die ComboBoxen Autor, Verlag und Genre
+        /// </summary>
+        public void FillComboBoxes(ref ComboBox autor, ref ComboBox verlag, ref ComboBox genre)
+        {
+            buchautor.FillCombobox(ref autor, -1);
+            buchverlag.FillCombobox(ref verlag, -1);
+            buchgenre.FillCombobox(ref genre, -1);
+            if (autor.Text == "")
+            {
+                autor.Text = "Autor";
+            }
+            if (verlag.Text == "")
+            {
+                verlag.Text = "Verlag";
+            }
+            if (genre.Text == "")
+            {
+                genre.Text = "Genre";
+            }
         }
 
         /// <summary>
@@ -116,9 +193,8 @@ namespace Bibo_Verwaltung
             {
                 grid.Columns["Vorname"].Visible = true;
                 grid.Columns["Nachname"].Visible = true;
-                grid.Columns["Klasse"].Visible = true;
+                grid.Columns["Klassenstufe"].Visible = true;
                 grid.Columns["Kunden ID"].Visible = false;
-                Set_StatusMark(ref grid);
             }
             catch { }
         }
@@ -130,11 +206,10 @@ namespace Bibo_Verwaltung
         {
             try
             {
+                grid.Columns["Kunden ID"].Visible = false;
                 grid.Columns["Vorname"].Visible = false;
                 grid.Columns["Nachname"].Visible = false;
-                grid.Columns["Klasse"].Visible = false;
-                grid.Columns["Kunden ID"].Visible = false;
-                Set_StatusMark(ref grid);
+                grid.Columns["Klassenstufe"].Visible = false;
             }
             catch { }
         }
@@ -142,51 +217,12 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Zeigt nur verfügbare Exemplare 
         /// </summary>
-        public void Show_VerfuegbareExemplare(ref DataGridView grid, bool Status, string zustandName)
+        public void Show_VerfuegbareExemplare(ref DataGridView grid)
         {
             try
             {
-                if (Status)
-                {
-                    (grid.DataSource as DataTable).DefaultView.RowFilter = string.Format("Leihnummer IS NULL");
-                }
-                else
-                {
-                    (grid.DataSource as DataTable).DefaultView.RowFilter = string.Format("ISBN IS NOT NULL");
-                }
-                //ds.Tables[0].DefaultView.RowFilter = string.Format("Leihnummer LIKE '{0}%'AND Zustand LIKE '{1}%'", "", zustandName);
-                //grid.DataSource = ds.Tables[0];
-
-                //DataTable dt = (grid.DataSource as DataTable);
-                //DataTable dtClone = dt.Clone(); //just copy structure, no data
-
-
-                //for (int i = 0; i < dtClone.Columns.Count; i++)
-                //{
-                //    if (dtClone.Columns[i].DataType != typeof(string))
-                //        dtClone.Columns[i].DataType = typeof(string);
-                //}
-
-                //foreach (DataRow dr in dt.Rows)
-                //{
-                //    dtClone.ImportRow(dr);
-                //}
-
-                // dtClone.DefaultView.RowFilter = string.Format("Leihnummer LIKE '{0}%'AND Zustand LIKE '{1}%'", "", zustandName);
-                //(grid.DataSource as DataTable).DefaultView.RowFilter = string.Format("Leihnummer IS NULL AND Zustand LIKE '{0}%'", zustandName);
-                
-                //foreach (DataGridViewRow row in grid.Rows)
-                //{
-                //    string vergleich = "";
-                //    if (vergleich.Equals(row.Cells["Leihnummer"].Value.ToString()) == false | zustandName.Equals(row.Cells["Zustand"].Value.ToString()) == true)
-                //    {
-                //        CurrencyManager hideRow = (CurrencyManager)grid.BindingContext[grid.DataSource];
-                //        hideRow.SuspendBinding();
-                //        grid.Rows[row.Index].Visible = false;
-                //        hideRow.ResumeBinding();
-                //    }
-                //}
-
+                ds.Tables[0].DefaultView.RowFilter = string.Format("Leihnummer IS NULL");
+                grid.Refresh();
             }
             catch { }
         }
@@ -198,10 +234,8 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                foreach (DataGridViewRow row in grid.Rows)
-                {
-                    grid.Rows[row.Index].Visible = true;
-                }
+                ds.Tables[0].DefaultView.RowFilter = string.Format("ExemplarID IS NOT NULL");
+                grid.Refresh();
             }
             catch { }
         }
@@ -211,40 +245,43 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void Execute_BuchSearch(ref DataGridView grid, string ExemplarID, string ISBN, string Titel, string Autor, string Verlag, string Genre)
         {
-            if (ExemplarID == "ExemplarID")
+            try
             {
-                ExemplarID = "0";
+                if (ExemplarID == "ExemplarID")
+                {
+                    ExemplarID = "";
+                }
+                if (ISBN == "ISBN")
+                {
+                    ISBN = "";
+                }
+                if (Titel == "Titel")
+                {
+                    Titel = "";
+                }
+                if (Autor == "Autor")
+                {
+                    Autor = "";
+                }
+                if (Verlag == "Verlag")
+                {
+                    Verlag = "";
+                }
+                if (Genre == "Genre")
+                {
+                    Genre = "";
+                }
+                //ds.Tables[0].DefaultView.RowFilter = string.Format("ExemplarID LIKE '{0}%' AND ISBN LIKE '{1}%' AND Titel LIKE '{2}%' AND Verlag LIKE '{3}%' AND Genre LIKE '{4}%' AND Autor LIKE '{5}%'", ExemplarID, ISBN, Titel, Verlag, Genre, Autor);
+                ds.Tables[0].DefaultView.RowFilter = string.Format("ExemplarID LIKE '{0}%' AND ISBN LIKE '{1}%' AND Titel LIKE '{2}%' AND Verlag LIKE '{3}%' AND Genre LIKE '{4}%'", ExemplarID, ISBN, Titel, Verlag, Genre);
+                grid.Refresh();
             }
-            if (ISBN == "ISBN")
-            {
-                ISBN = "";
-            }
-            if (Titel == "Titel")
-            {
-                Titel = "";
-            }
-            if (Autor == "Autor")
-            {
-                Autor = "";
-            }
-            if (Verlag == "Verlag")
-            {
-                Verlag = "0";
-            }
-            if (Genre == "Genre")
-            {
-                Genre = "0";
-            }
-            //(grid.DataSource as DataTable).DefaultView.RowFilter = string.Format("ExemplarID LIKE '{0}%'AND ISBN LIKE '{1}%'AND Titel LIKE '{2}%'AND Verlag LIKE '{3}%'AND Genre LIKE '{4}%'", Convert.ToInt32(ExemplarID), ISBN, Titel, Verlag, Genre);
-
-            //(grid.DataSource as DataTable).DefaultView.RowFilter = string.Format("ExemplarID LIKE '{0}%'AND ISBN LIKE '{1}%'AND Titel LIKE '{2}%'AND Autor LIKE '{3}%'AND Verlag LIKE '{4}%'AND Genre LIKE '{5}%'", Convert.ToInt32(ExemplarID), ISBN, Titel, Autor, Verlag, Genre);
-            Set_StatusMark(ref grid);
+            catch { }
         }
 
         /// <summary>
         /// Sucht einen Kunden
         /// </summary>
-        public void Execute_KundenSearch(ref DataGridView grid, string vorname, string nachname, string klasse)
+        public void Execute_KundenSearch(ref DataGridView grid, string vorname, string nachname, string klassenstufe)
         {
             try
             {
@@ -256,12 +293,12 @@ namespace Bibo_Verwaltung
                 {
                     nachname = "";
                 }
-                if (klasse == "Klasse")
+                if (klassenstufe == "Klassenstufe")
                 {
-                    klasse = "";
+                    klassenstufe = "";
                 }
-            (grid.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%'AND Klasse LIKE '{2}%'", vorname, nachname, klasse);
-                Set_StatusMark(ref grid);
+                ds.Tables[0].DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%' AND Nachname LIKE '{1}%' AND Klassenstufe LIKE '{2}%'", vorname, nachname, klassenstufe);
+                grid.Refresh();
             }
             catch { }
         }

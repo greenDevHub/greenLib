@@ -12,54 +12,401 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_buch_fach : Form
     {
-        public w_s_buch_fach()
+        BuchFach bf = new BuchFach();
+        Fach faecher = new Fach();
+        private DataTable buecherListe = new DataTable();
+        private bool aenderungungen = false;
+        string currentUser;
+
+        public w_s_buch_fach(string userName)
         {
             InitializeComponent();
-            bf.FillGrid(ref gv_bf);
-            bf.Fach.FillCombobox(ref cb_fach, 0);
+            this.currentUser = userName;
+            this.Text = Text + " - Angemeldet als: " + userName;
+            faecher.FillGrid(ref gv_Faecher);
 
-            foreach (var pb in tLP_1.Controls.OfType<ComboBox>())
-            {
-                ComboBoxes.Add(pb);
-            }
-            foreach(var bt in tLP_1.Controls.OfType<Button>())
-            {
-                Buttons.Add(bt);
-            }
-            for (int i = 1; i < 8;)
-            {
-                ComboBoxes[i].Visible = false;
-                Buttons[i].Visible = false;
-                i++;
-            }
-            ctr1 = tLP_1.GetControlFromPosition(0, 8);
-            tLP_1.SetRow(ctr1, 1);
-            FillComboboxes(false);
-            Clear();
-           
+
+            //bf.FillGrid(ref gv_bf);
+            //bf.Fach.FillCombobox(ref cb_fach, 0);
+
+            //foreach (var pb in tLP_1.Controls.OfType<ComboBox>())
+            //{
+            //    ComboBoxes.Add(pb);
+            //}
+            //foreach(var bt in tLP_1.Controls.OfType<Button>())
+            //{
+            //    Buttons.Add(bt);
+            //}
+            //for (int i = 1; i < 8;)
+            //{
+            //    ComboBoxes[i].Visible = false;
+            //    Buttons[i].Visible = false;
+            //    i++;
+            //}
+            //ctr1 = tLP_1.GetControlFromPosition(0, 8);
+            //tLP_1.SetRow(ctr1, 1);
+            //FillComboboxes(false);
+            //Clear();
+
 
         }
+
+        #region Fenster-Methoden
+        /// <summary>
+        /// Lädt die Zuordnungsübersicht für das gewählte Fach
+        /// </summary>
+        private void LoadBuecher()
+        {
+            try
+            {
+                buecherListe.Rows.Clear();
+                if (gv_Faecher.CurrentRow != null)
+                {
+                    bf.Show_FachBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString());
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Beim Laden der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Fügt alle vorhandenen Zuordnungen zur Zuornungs-Liste hinzu
+        /// </summary>
+        private void FillBuecherList()
+        {
+            try
+            {
+                buecherListe.Rows.Clear();
+                for (int i = 0; i <= gv_Buecher.Rows.Count - 1; i++)
+                {
+                    DataGridViewRow row = gv_Buecher.Rows[i];
+                    string fach = row.Cells["ISBN"].Value.ToString();
+
+                    if (fach.Contains("*"))
+                    {
+                        DataRow relation;
+                        string[] buchDetails = new string[1];
+
+                        buchDetails[0] = row.Cells["ISBN"].Value.ToString().Replace("*", "");
+
+                        if (buecherListe.Columns.Count != 1)
+                        {
+                            buecherListe.Columns.Add();
+                        }
+                        relation = buecherListe.NewRow();
+                        relation.ItemArray = buchDetails;
+                        buecherListe.Rows.Add(relation);
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Beim Anzeigen der bisher zugeordneten Bücher ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Fügt einen Eintrag zur Zuornungs-Liste hinzu
+        /// </summary>
+        private void AddToBuecherList()
+        {
+            try
+            {
+                DataGridViewRow row = gv_Buecher.CurrentRow;
+                DataRow relation;
+                string[] buchDetails = new string[1];
+
+                buchDetails[0] = row.Cells["ISBN"].Value.ToString();
+
+                if (buecherListe.Columns.Count != 1)
+                {
+                    buecherListe.Columns.Add();
+                }
+                relation = buecherListe.NewRow();
+                relation.ItemArray = buchDetails;
+                buecherListe.Rows.Add(relation);
+
+                row.Cells["ISBN"].Value = "*" + row.Cells["ISBN"].Value.ToString();
+                row.DefaultCellStyle.BackColor = Color.Yellow;
+                row.DefaultCellStyle.ForeColor = Color.Black;
+            }
+            catch
+            {
+                MessageBox.Show("Beim Hinzufügen dieses Buches zur Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Entfernt einen Eintrag aus der Zuornungs-Liste
+        /// </summary>
+        private void RemoveFromBuecherList()
+        {
+            try
+            {
+                DataGridViewRow gridrow = gv_Buecher.CurrentRow;
+                for (int i = buecherListe.Rows.Count - 1; i >= 0; i--)
+                {
+                    DataRow row = buecherListe.Rows[i];
+                    if (row[0].ToString() == gridrow.Cells["ISBN"].Value.ToString().Replace("*", ""))
+                    {
+                        row.Delete();
+                    }
+                }
+                buecherListe.AcceptChanges();
+
+                gridrow.Cells["ISBN"].Value = gridrow.Cells["ISBN"].Value.ToString().Replace("*", "");
+                gridrow.DefaultCellStyle.BackColor = Color.Gray;
+                gridrow.DefaultCellStyle.ForeColor = Color.White;
+            }
+            catch
+            {
+                MessageBox.Show("Beim Entfernen dieses Buches aus der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Speichert die Zuordnungsdatendaten eines Faches mit vorhandenen Büchern in der Datenbank 
+        /// </summary>
+        private void SaveZuordnungen()
+        {
+            if (gv_Faecher.CurrentRow != null)
+            {
+                if (aenderungungen == true)
+                {
+                    DialogResult dr = MessageBox.Show("Sollen die Änderungen gespeichert werden?", "Warnung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (dr == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            bf.Save_Zuordnung(buecherListe, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString());
+                            aenderungungen = false;
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
+
+
+
+
+        #region Componenten-Aktionen
+        private void bt_Bearbeiten_Click(object sender, EventArgs e)
+        {
+            if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
+            {
+                if (gv_Faecher.CurrentRow != null)
+                {
+                    gv_Buecher.Enabled = true;
+                    gv_Faecher.Enabled = false;
+                    bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString());
+                    FillBuecherList();
+                    bt_Bearbeiten.Text = "Übernehmen";
+                }
+            }
+            else
+            {
+                gv_Buecher.Enabled = false;
+                gv_Faecher.Enabled = true;
+                SaveZuordnungen();
+                bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
+                LoadBuecher();
+            }
+        }
+
+        private void gv_Faecher_SelectionChanged(object sender, EventArgs e)
+        {
+            LoadBuecher();
+        }
+
+        private void gv_Buecher_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = gv_Buecher.CurrentRow;
+            string fach = row.Cells["ISBN"].Value.ToString();
+            if (!fach.Contains("*"))
+            {
+                AddToBuecherList();
+                aenderungungen = true;
+            }
+            else
+            {
+                RemoveFromBuecherList();
+                aenderungungen = true;
+            }
+        }
+
+        private void w_s_buch_fach_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveZuordnungen();
+        }
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         bool isChecked = false;
         private void FillComboboxes(bool keepSelected)
         {
             foreach (ComboBox cb in ComboBoxes)
             {
                 ComboBox c = cb;
-                Buch_Fach buchfach = new Buch_Fach();
+                BuchFach buchfach = new BuchFach();
                 if (keepSelected && c.SelectedValue != null)
                 {
                     string cbValue = c.SelectedValue.ToString();
-                    buchfach.Buch.FillCombobox(ref c, 0);
+                    //buchfach.Buch.FillCombobox(ref c, 0);
                     c.SelectedValue = cbValue;
                 }
                 else
                 {
-                    buchfach.Buch.FillCombobox(ref c, 0);
+                   // buchfach.Buch.FillCombobox(ref c, 0);
                 }
             }
         }
         Control ctr1 = new Control();
-        Buch_Fach bf = new Buch_Fach();
+        BuchFach bf_alt = new BuchFach();
         int index = 0;
         List<ComboBox> ComboBoxes = new List<ComboBox>();
         List<Button> Buttons = new List<Button>();
@@ -171,30 +518,30 @@ namespace Bibo_Verwaltung
             }
             if (rb_neu.Checked)
             {
-                Buch_Fach bufa = new Buch_Fach();
-                bufa.IsbnListe.Clear();
-                for(int i = 0; i < 8;)
-                {
-                    if (i < index+1)
-                    {
-                        bufa.IsbnListe.Add(ComboBoxes[i].SelectedValue.ToString());
-                    }
-                    //else
-                    //{
-                    //    bufa.IsbnListe.Add("");
-                    //}
-                    i++;
-                }
-                if(bufa.GetID(cb_fach.SelectedValue.ToString(), cb_klasse.Text) == null || bufa.GetID(cb_fach.SelectedValue.ToString(), cb_klasse.Text) == "")
-                {
-                    bufa.Fach.FachID = cb_fach.SelectedValue.ToString();
-                    bufa.Klassenstufe = cb_klasse.Text;
-                    bufa.AddBF();
-                }
-                else
-                {
-                    MessageBox.Show("Ein Eintrag zu dem gewählten Fach und der gewählten Klassenstufe ist bereits vorhanden. Bitte löschen Sie diesen Eintrag bevor Sie einen neuen anlegen oder bearbeiten Sie den bereits vorhandenen Eintrag.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                //BuchFach bufa = new BuchFach();
+                //bufa.IsbnListe.Clear();
+                //for(int i = 0; i < 8;)
+                //{
+                //    if (i < index+1)
+                //    {
+                //        bufa.IsbnListe.Add(ComboBoxes[i].SelectedValue.ToString());
+                //    }
+                //    //else
+                //    //{
+                //    //    bufa.IsbnListe.Add("");
+                //    //}
+                //    i++;
+                //}
+                //if(bufa.GetID(cb_fach.SelectedValue.ToString(), cb_klasse.Text) == null || bufa.GetID(cb_fach.SelectedValue.ToString(), cb_klasse.Text) == "")
+                //{
+                //    bufa.Fach.FachID = cb_fach.SelectedValue.ToString();
+                //    bufa.Klassenstufe = cb_klasse.Text;
+                //    bufa.AddBF();
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Ein Eintrag zu dem gewählten Fach und der gewählten Klassenstufe ist bereits vorhanden. Bitte löschen Sie diesen Eintrag bevor Sie einen neuen anlegen oder bearbeiten Sie den bereits vorhandenen Eintrag.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //}
                 
                 
                 if (isChecked)
@@ -218,23 +565,23 @@ namespace Bibo_Verwaltung
             }
             else if (rb_edit.Checked)
             {
-                Buch_Fach bufa = new Buch_Fach(bf.GetID(cb_fach.SelectedValue.ToString(), cb_klasse.Text));
+                BuchFach bufa = new BuchFach(bf.GetID(cb_fach.SelectedValue.ToString(), cb_klasse.Text));
                 //bufa.Fach.FachID = cb_fach.SelectedValue.ToString();
                 //bufa.Klassenstufe = cb_klasse.Text;
-                bufa.IsbnListe.Clear();
-                for (int i = 0; i < 8;)
-                {
-                    if (i < index+1)
-                    {
-                        bufa.IsbnListe.Add(ComboBoxes[i].SelectedValue.ToString());
-                        //bufa.IsbnListe.ISBNs[i] = ComboBoxes[i].SelectedValue.ToString();
-                    }
-                    //else
-                    //{
-                    //    bufa.IsbnListe.ISBNs[i] = "";
-                    //}
-                    i++;
-                }
+                //bufa.IsbnListe.Clear();
+                //for (int i = 0; i < 8;)
+                //{
+                //    if (i < index+1)
+                //    {
+                //        bufa.IsbnListe.Add(ComboBoxes[i].SelectedValue.ToString());
+                //        //bufa.IsbnListe.ISBNs[i] = ComboBoxes[i].SelectedValue.ToString();
+                //    }
+                //    //else
+                //    //{
+                //    //    bufa.IsbnListe.ISBNs[i] = "";
+                //    //}
+                //    i++;
+                //}
                 //bufa.IsbnListe.IsbnListeID = bufa.GetIsbnID(bufa.GetID(bufa.Fach.FachID, bufa.Klassenstufe));
                 try
                 {
@@ -249,7 +596,7 @@ namespace Bibo_Verwaltung
             {
                 try
                 {
-                    Buch_Fach bufa = new Buch_Fach(bf.GetID(cb_fach.SelectedValue.ToString(), cb_klasse.Text));
+                    BuchFach bufa = new BuchFach(bf.GetID(cb_fach.SelectedValue.ToString(), cb_klasse.Text));
                     bufa.DeleteBF();
                 }
                 catch
@@ -260,7 +607,6 @@ namespace Bibo_Verwaltung
             bf.FillGrid(ref gv_bf);
         }
 
-        #region Modus
         private void Modus()
         {
             if (rb_neu.Checked)
@@ -279,7 +625,6 @@ namespace Bibo_Verwaltung
                 bt_add.Text = "Speichern";
             }
         }
-        #endregion
 
         private void rb_neu_CheckedChanged(object sender, EventArgs e)
         {
@@ -306,35 +651,35 @@ namespace Bibo_Verwaltung
             Clear();
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow row = this.gv_bf.Rows[e.RowIndex];
-                string fach = row.Cells[GetColumnIndexByName(gv_bf, "Fach")].Value.ToString();
-                cb_fach.SelectedValue = bf.Fach.GetID(fach);
-                string stufe = row.Cells[GetColumnIndexByName(gv_bf, "Klassenstufe")].Value.ToString();
-                cb_klasse.SelectedItem = stufe;
-                Buch_Fach buchfach = new Buch_Fach(bf.GetID(bf.Fach.GetID(fach), stufe));
-                int i = 0;
-                foreach(string isbn in buchfach.IsbnListe)
-                {
-                    if(isbn != "" && isbn != null)
-                    {
-                        ComboBoxes[i].SelectedValue = isbn;
-                        try
-                        {
-                            if (i < 8)
-                            {
-                                i++;
-                                ComboBoxes[i].Visible = true;
-                                Buttons[i].Visible = true;
-                                tLP_1.SetRow(ctr1, i + 1);
-                            }
-                        }
-                        catch (System.ArgumentOutOfRangeException)
-                        {
+                //DataGridViewRow row = this.gv_bf.Rows[e.RowIndex];
+                //string fach = row.Cells[GetColumnIndexByName(gv_bf, "Fach")].Value.ToString();
+                //cb_fach.SelectedValue = bf.Fach.GetIDByShortform(fach);
+                //string stufe = row.Cells[GetColumnIndexByName(gv_bf, "Klassenstufe")].Value.ToString();
+                //cb_klasse.SelectedItem = stufe;
+                //BuchFach buchfach = new BuchFach(bf.GetID(bf.Fach.GetIDByShortform(fach), stufe));
+                //int i = 0;
+                //foreach(string isbn in buchfach.IsbnListe)
+                //{
+                //    if(isbn != "" && isbn != null)
+                //    {
+                //        ComboBoxes[i].SelectedValue = isbn;
+                //        try
+                //        {
+                //            if (i < 8)
+                //            {
+                //                i++;
+                //                ComboBoxes[i].Visible = true;
+                //                Buttons[i].Visible = true;
+                //                tLP_1.SetRow(ctr1, i + 1);
+                //            }
+                //        }
+                //        catch (System.ArgumentOutOfRangeException)
+                //        {
 
-                        }
+                //        }
                         
-                    }
-                }
+                //    }
+                //}
             }
             else
             {
@@ -394,8 +739,8 @@ namespace Bibo_Verwaltung
 
                 ComboBox cmbBx = ComboBoxes[index];
                 string cbName = cmbBx.Name;
-                Buch_Fach buchfach = new Buch_Fach();
-                buchfach.Buch.FillCombobox(ref cmbBx, 0);
+                BuchFach buchfach = new BuchFach();
+                //buchfach.Buch.FillCombobox(ref cmbBx, 0); //Robert
                 //FillComboboxes(true);
                 cmbBx.SelectedValue = Buch.tb_ISBN.Text;
                 Buch.Close();
@@ -447,5 +792,7 @@ namespace Bibo_Verwaltung
         {
             Close();
         }
+
+        
     }
 }

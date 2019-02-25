@@ -14,12 +14,12 @@ namespace Bibo_Verwaltung
     public partial class w_s_schueler : Form
     {
         Schueler s = new Schueler();
-        Faecher faecher = new Faecher();
+        Fach faecher = new Fach();
         public w_s_schueler()
         {
             InitializeComponent();
             s.FillGrid(false, ref gv_Kunde);
-            faecher.FillList(ref cLB_faecher);
+            //faecher.FillList(ref cLB_faecher);
         }
 
         private void bt_ImEx_Click(object sender, EventArgs e)
@@ -249,7 +249,7 @@ namespace Bibo_Verwaltung
             Point point = cLB_faecher.PointToClient(Cursor.Position);
             int index = cLB_faecher.IndexFromPoint(point) +1;
 
-            fullName = faecher.GetFullName((index).ToString());
+            fullName = faecher.GetLongformByID((index).ToString());
             toolTip1.SetToolTip(cLB_faecher, fullName);
 
 

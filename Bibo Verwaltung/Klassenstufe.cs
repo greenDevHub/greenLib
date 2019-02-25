@@ -28,26 +28,26 @@ namespace Bibo_Verwaltung
         SqlCommandBuilder comb = new SqlCommandBuilder();
         private void FillObject()
         {
-            dt.Clear();
-            SQL_Verbindung con = new SQL_Verbindung();
-            if (con.ConnectError()) return;
-            string RawCommand = "SELECT k_stufe as 'Klassenstufe' FROM [dbo].[t_s_klassenstufe]";
+            //dt.Clear();
+            //SQL_Verbindung con = new SQL_Verbindung();
+            //if (con.ConnectError()) return;
+            //string RawCommand = "SELECT k_stufe as 'Klassenstufe' FROM [dbo].[t_s_klassenstufe]";
 
-            // Verbindung öffnen 
-            adapter = new SqlDataAdapter(RawCommand, con.Con);
-            adapter.Fill(dt);
+            //// Verbindung öffnen 
+            //adapter = new SqlDataAdapter(RawCommand, con.Con);
+            //adapter.Fill(dt);
 
-            con.Close();
+            //con.Close();
 
         }
 
         public void FillCombobox(ref ComboBox cb, object value)
         {
-            FillObject();
-            cb.DataSource = dt;
-            cb.ValueMember = "Klassenstufe";
-            cb.DisplayMember = "Klassenstufe";
-            cb.SelectedValue = value;
+            //FillObject();
+            //cb.DataSource = dt;
+            //cb.ValueMember = "Klassenstufe";
+            //cb.DisplayMember = "Klassenstufe";
+            //cb.SelectedValue = value;
         }
 
         public void FillGrid(ref DataGridView grid, object value = null)

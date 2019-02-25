@@ -10,20 +10,20 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_fach_stufe : Form
+    public partial class w_s_buch_stufe : Form
     {
-        FachStufe fs = new FachStufe();
-        private DataTable faecherListe = new DataTable();
+        BuchStufe bs = new BuchStufe();
+        private DataTable buecherListe = new DataTable();
         private bool aenderungungen = false;
         string currentUser;
 
-        public w_s_fach_stufe(string userName)
+        public w_s_buch_stufe(string userName)
         {
             InitializeComponent();
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName;
             IniKlassenstufen();
-            LoadFaecher();
+            LoadBuecher();
         }
 
         #region Fenster-Methoden
@@ -47,18 +47,18 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Lädt die Zuordnungsübersicht für die gewählte Klassenstufe
         /// </summary>
-        private void LoadFaecher()
+        private void LoadBuecher()
         {
             try
             {
-                faecherListe.Rows.Clear();
+                buecherListe.Rows.Clear();
                 if (gv_Klassenstufe.CurrentRow != null)
                 {
-                    fs.Show_StufenFaecher(ref gv_Faecher, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                    bs.Show_StufenBuecher(ref gv_Buecher, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
                 }
                 else
                 {
-                    fs.Show_StufenFaecher(ref gv_Faecher, "1");
+                    bs.Show_StufenBuecher(ref gv_Buecher, "1");
                 }
             }
             catch
@@ -74,96 +74,96 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                faecherListe.Rows.Clear();
-                for (int i = 0; i <= gv_Faecher.Rows.Count - 1; i++)
+                buecherListe.Rows.Clear();
+                for (int i = 0; i <= gv_Buecher.Rows.Count - 1; i++)
                 {
-                    DataGridViewRow row = gv_Faecher.Rows[i];
-                    string fach = row.Cells["Kurzbezeichnung"].Value.ToString();
+                    DataGridViewRow row = gv_Buecher.Rows[i];
+                    string fach = row.Cells["ISBN"].Value.ToString();
 
                     if (fach.Contains("*"))
                     {
                         DataRow relation;
-                        string[] fachDetails = new string[1];
+                        string[] buchDetails = new string[1];
 
-                        fachDetails[0] = row.Cells["ID"].Value.ToString();
+                        buchDetails[0] = row.Cells["ISBN"].Value.ToString().Replace("*","");
 
-                        if (faecherListe.Columns.Count != 1)
+                        if (buecherListe.Columns.Count != 1)
                         {
-                            faecherListe.Columns.Add();
+                            buecherListe.Columns.Add();
                         }
-                        relation = faecherListe.NewRow();
-                        relation.ItemArray = fachDetails;
-                        faecherListe.Rows.Add(relation);
+                        relation = buecherListe.NewRow();
+                        relation.ItemArray = buchDetails;
+                        buecherListe.Rows.Add(relation);
                     }
                 }
             }
             catch
             {
-                MessageBox.Show("Beim Anzeigen der bisher zugeordneten Fächer ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Beim Anzeigen der bisher zugeordneten Bücher ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         /// <summary>
         /// Fügt einen Eintrag zur Zuornungs-Liste hinzu
         /// </summary>
-        private void AddToFaecherList()
+        private void AddToBuecherList()
         {
             try
             {
-                DataGridViewRow row = gv_Faecher.CurrentRow;
+                DataGridViewRow row = gv_Buecher.CurrentRow;
                 DataRow relation;
-                string[] exemlarDetails = new string[1];
+                string[] buchDetails = new string[1];
 
-                exemlarDetails[0] = row.Cells["ID"].Value.ToString();
+                buchDetails[0] = row.Cells["ISBN"].Value.ToString();
 
-                if (faecherListe.Columns.Count != 1)
+                if (buecherListe.Columns.Count != 1)
                 {
-                    faecherListe.Columns.Add();
+                    buecherListe.Columns.Add();
                 }
-                relation = faecherListe.NewRow();
-                relation.ItemArray = exemlarDetails;
-                faecherListe.Rows.Add(relation);
+                relation = buecherListe.NewRow();
+                relation.ItemArray = buchDetails;
+                buecherListe.Rows.Add(relation);
 
-                row.Cells["Kurzbezeichnung"].Value = "*" + row.Cells["Kurzbezeichnung"].Value.ToString();
+                row.Cells["ISBN"].Value = "*" + row.Cells["ISBN"].Value.ToString();
                 row.DefaultCellStyle.BackColor = Color.Yellow;
                 row.DefaultCellStyle.ForeColor = Color.Black;
             }
             catch
             {
-                MessageBox.Show("Beim Hinzufügen dieses Faches zur Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Beim Hinzufügen dieses Buches zur Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         /// <summary>
         /// Entfernt einen Eintrag aus der Zuornungs-Liste
         /// </summary>
-        private void RemoveFromFaecherList()
+        private void RemoveFromBuecherList()
         {
             try
             {
-                DataGridViewRow gridrow = gv_Faecher.CurrentRow;
-                for (int i = faecherListe.Rows.Count - 1; i >= 0; i--)
+                DataGridViewRow gridrow = gv_Buecher.CurrentRow;
+                for (int i = buecherListe.Rows.Count - 1; i >= 0; i--)
                 {
-                    DataRow row = faecherListe.Rows[i];
-                    if (row[0].ToString() == gridrow.Cells["ID"].Value.ToString())
+                    DataRow row = buecherListe.Rows[i];
+                    if (row[0].ToString() == gridrow.Cells["ISBN"].Value.ToString().Replace("*", ""))
                     {
                         row.Delete();
                     }
                 }
-                faecherListe.AcceptChanges();
+                buecherListe.AcceptChanges();
 
-                gridrow.Cells["Kurzbezeichnung"].Value = gridrow.Cells["Kurzbezeichnung"].Value.ToString().Substring(1);
+                gridrow.Cells["ISBN"].Value = gridrow.Cells["ISBN"].Value.ToString().Substring(1);
                 gridrow.DefaultCellStyle.BackColor = Color.Gray;
                 gridrow.DefaultCellStyle.ForeColor = Color.White;
             }
             catch
             {
-                MessageBox.Show("Beim Entfernen dieses Faches aus der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Beim Entfernen dieses Buches aus der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         /// <summary>
-        /// Speichert die Zuordnungsdatendaten einer Klassenstufe mit vorhandenen Fächern in der Datenbank 
+        /// Speichert die Zuordnungsdatendaten einer Klassenstufe mit vorhandenen Büchern in der Datenbank 
         /// </summary>
         private void SaveZuordnungen()
         {
@@ -176,7 +176,7 @@ namespace Bibo_Verwaltung
                     {
                         try
                         {
-                            fs.Save_Zuordnung(faecherListe, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                            bs.Save_Zuordnung(buecherListe, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
                             aenderungungen = false;
                         }
                         catch
@@ -188,7 +188,7 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
-        
+
         #region Componenten-Aktionen
         private void bt_Bearbeiten_Click(object sender, EventArgs e)
         {
@@ -196,45 +196,45 @@ namespace Bibo_Verwaltung
             {
                 if (gv_Klassenstufe.CurrentRow != null)
                 {
-                    gv_Faecher.Enabled = true;
+                    gv_Buecher.Enabled = true;
                     gv_Klassenstufe.Enabled = false;
-                    fs.Show_AllFaecher(ref gv_Faecher, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                    bs.Show_AllBuecher(ref gv_Buecher, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());                 
                     FillFaecherList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
             }
             else
             {
-                gv_Faecher.Enabled = false;
+                gv_Buecher.Enabled = false;
                 gv_Klassenstufe.Enabled = true;
                 SaveZuordnungen();
                 bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
-                LoadFaecher();             
+                LoadBuecher();
             }
         }
 
         private void gv_Klassenstufe_SelectionChanged(object sender, EventArgs e)
         {
-            LoadFaecher();
+            LoadBuecher();
         }
 
-        private void gv_Faecher_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void gv_Buecher_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow row = gv_Faecher.CurrentRow;
-            string fach = row.Cells["Kurzbezeichnung"].Value.ToString();
+            DataGridViewRow row = gv_Buecher.CurrentRow;
+            string fach = row.Cells["ISBN"].Value.ToString();
             if (!fach.Contains("*"))
             {
-                AddToFaecherList();
+                AddToBuecherList();
                 aenderungungen = true;
             }
             else
             {
-                RemoveFromFaecherList();
+                RemoveFromBuecherList();
                 aenderungungen = true;
             }
         }
 
-        private void w_s_fach_stufe_FormClosing(object sender, FormClosingEventArgs e)
+        private void w_s_buch_stufe_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveZuordnungen();
         }

@@ -71,17 +71,17 @@ namespace Bibo_Verwaltung
         /// </summary>
         public string Mail { get { return mail; } set { mail = value; } }
 
-        string klasse;
+        string klassenstufe;
         /// <summary>
         /// Klasse des Kunden
         /// </summary>
-        public string Klasse { get { return klasse; } set { klasse = value; } }
+        public string Klassenstufe { get { return klassenstufe; } set { klassenstufe = value; } }
 
-        string vertrauenswuerdigkeit;
+        bool activated;
         /// <summary>
-        /// Vertrauenswürdigkeit des Kunden
+        /// Status des Kunden
         /// </summary>
-        public string Vertrauenswuerdigkeit { get { return vertrauenswuerdigkeit; } set { vertrauenswuerdigkeit = value; } }
+        public bool Activated { get { return activated; } set { activated = value; } }
         #endregion
 
         #region Objekt-Constructor
@@ -90,7 +90,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public Kunde()
         {
-            FillObject(false);
+            FillObject();
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Bibo_Verwaltung
         {
             this.kundenid = kundenid;
             LoadKunde();
-            FillObject(false);
+            FillObject();
         }
         #endregion
 
@@ -124,8 +124,15 @@ namespace Bibo_Verwaltung
                 Telefonnummer = dr["kunde_telefonnummer"].ToString();
                 Hausnummer = dr["kunde_hausnummer"].ToString();
                 Mail = dr["kunde_mail"].ToString();
-                Klasse = dr["kunde_klasse"].ToString();
-                Vertrauenswuerdigkeit = dr["kunde_vertrauenswürdigkeit"].ToString();
+                Klassenstufe = dr["kunde_klassenstufe"].ToString();
+                if (dr["kunde_activated"].ToString().Equals("1"))
+                {
+                    Activated = true;
+                }
+                else
+                {
+                    Activated = false;
+                }
             }
             // DataReader schließen 
             dr.Close();
@@ -136,23 +143,18 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt ein DataSet-Objekt mit den Kundendaten 
         /// </summary>
-        private void FillObject(bool loadType)
+        private void FillObject()
         {
-            string anz;
-            if (con.ConnectError()) return;
-            if (loadType == true)
+            try
             {
-                anz = "100 PERCENT";
+                if (con.ConnectError()) return;
+                string RawCommand = "SELECT kunde_ID as 'Kunden-ID', kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_strasse as 'Straße', kunde_hausnummer as 'Hausnummer', kunde_postleitzahl as 'Postleitzahl', kunde_ort as 'Wohnort', kunde_klassenstufe as 'Klassenstufe', kunde_mail as 'Mail', kunde_telefonnummer as 'Telefonnummer' FROM [dbo].[t_s_kunden] WHERE kunde_activated = 1";
+                // Verbindung öffnen 
+                adapter = new SqlDataAdapter(RawCommand, con.Con);
+                adapter.Fill(ds);
+                con.Close();
             }
-            else
-            {
-                anz = "1000";
-            }
-            string RawCommand = "SELECT TOP " + anz + " kunde_ID as 'Kunden-ID', kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_strasse as 'Straße', kunde_hausnummer as 'Hausnummer', kunde_postleitzahl as 'Postleitzahl', kunde_ort as 'Wohnort', kunde_vertrauenswürdigkeit as 'Vertrauenswürdigkeit', kunde_klasse as 'Klasse', kunde_mail as 'Mail', kunde_telefonnummer as 'Telefonnummer' FROM [dbo].[t_s_kunden]";
-            // Verbindung öffnen 
-            adapter = new SqlDataAdapter(RawCommand, con.Con);
-            adapter.Fill(ds);
-            con.Close();
+            catch { }
         }
 
         /// <summary>
@@ -160,16 +162,20 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void ClearDataSource()
         {
-            ds.Tables[0].Rows.Clear();
+            try
+            {
+                ds.Tables[0].Rows.Clear();
+            }
+            catch { }
         }
 
         /// <summary>
         /// Füllt ein DataGridView-Objekt mit den Kundendaten 
         /// </summary>
-        public void FillGrid(bool loadAll, ref DataGridView grid, object value = null)
+        public void FillGrid(ref DataGridView grid, object value = null)
         {
             ClearDataSource();
-            FillObject(loadAll);
+            FillObject();
             grid.DataSource = ds.Tables[0];
         }
 
@@ -192,7 +198,7 @@ namespace Bibo_Verwaltung
         public void AddKunde()
         {
             {
-                string RawCommand = "INSERT INTO [dbo].[t_s_kunden] (kunde_vorname, kunde_nachname, kunde_ort, kunde_postleitzahl, kunde_strasse, kunde_telefonnummer, kunde_hausnummer, kunde_mail, kunde_klasse, kunde_vertrauenswürdigkeit) VALUES (@vorname, @nachname, @ort, @postleitzahl, @strasse, @telefonnummer, @hausnummer, @mail, @klasse, @vertrauenswürdigkeit)";
+                string RawCommand = "INSERT INTO [dbo].[t_s_kunden] (kunde_vorname, kunde_nachname, kunde_ort, kunde_postleitzahl, kunde_strasse, kunde_telefonnummer, kunde_hausnummer, kunde_mail, kunde_klassenstufe, kunde_activated) VALUES (@vorname, @nachname, @ort, @postleitzahl, @strasse, @telefonnummer, @hausnummer, @mail, @klasse, 1)";
                 con.ConnectError();
                 SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
                 cmd.Parameters.AddWithValue("@vorname", Vorname);
@@ -203,8 +209,7 @@ namespace Bibo_Verwaltung
                 cmd.Parameters.AddWithValue("@telefonnummer", Telefonnummer);
                 cmd.Parameters.AddWithValue("@hausnummer", Hausnummer);
                 cmd.Parameters.AddWithValue("@mail", Mail);
-                cmd.Parameters.AddWithValue("@klasse", Klasse);
-                cmd.Parameters.AddWithValue("@vertrauenswürdigkeit", Vertrauenswuerdigkeit);
+                cmd.Parameters.AddWithValue("@klasse", Klassenstufe);
                 // Verbindung öffnen 
                 cmd.ExecuteNonQuery();
                 //Verbindung schließen
@@ -218,7 +223,7 @@ namespace Bibo_Verwaltung
         public void UpdateKunde()
         {
             {
-                string RawCommand = "UPDATE [dbo].[t_s_kunden] SET kunde_vorname = @vorname, kunde_nachname = @nachname, kunde_ort = @ort, kunde_postleitzahl = @postleitzahl, kunde_strasse = @strasse, kunde_telefonnummer = @telefonnummer, kunde_hausnummer = @hausnummer, kunde_mail = @mail, kunde_klasse = @klasse, kunde_vertrauenswürdigkeit = @vertrauenswürdigkeit WHERE kunde_ID = @k_ID";
+                string RawCommand = "UPDATE [dbo].[t_s_kunden] SET kunde_vorname = @vorname, kunde_nachname = @nachname, kunde_ort = @ort, kunde_postleitzahl = @postleitzahl, kunde_strasse = @strasse, kunde_telefonnummer = @telefonnummer, kunde_hausnummer = @hausnummer, kunde_mail = @mail, kunde_klassenstufe = @klasse WHERE kunde_ID = @k_ID";
                 con.ConnectError();
                 SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
                 cmd.Parameters.AddWithValue("@vorname", Vorname);
@@ -229,8 +234,7 @@ namespace Bibo_Verwaltung
                 cmd.Parameters.AddWithValue("@telefonnummer", Telefonnummer);
                 cmd.Parameters.AddWithValue("@hausnummer", Hausnummer);
                 cmd.Parameters.AddWithValue("@mail", Mail);
-                cmd.Parameters.AddWithValue("@klasse", Klasse);
-                cmd.Parameters.AddWithValue("@vertrauenswürdigkeit", Vertrauenswuerdigkeit);
+                cmd.Parameters.AddWithValue("@klasse", Klassenstufe);
                 cmd.Parameters.AddWithValue("@k_ID", KundenID);
                 // Verbindung öffnen 
                 cmd.ExecuteNonQuery();
@@ -240,23 +244,49 @@ namespace Bibo_Verwaltung
         }
 
         /// <summary>
+        /// Deaktiviert einen Kunden in der Datenbank 
+        /// </summary>
+        public void Deactivate()
+        {
+            if (con.ConnectError()) return;
+            string RawCommand = "UPDATE [dbo].[t_s_kunden] set kunde_activated = 0 WHERE kunde_ID = @k_ID";
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@k_ID", KundenID);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
+        /// <summary>
+        /// Aktiviert einen Kunden in der Datenbank 
+        /// </summary>
+        private void Activate()
+        {
+            if (con.ConnectError()) return;
+            string RawCommand = "UPDATE [dbo].[t_s_kunden] set kunde_activated = 0 WHERE kunde_ID = @k_ID";
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@k_ID", KundenID);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
+        /// <summary>
         /// Löscht einen Kunden aus der Datenbank 
         /// </summary>
-        public void DeleteKunde()
-        {
-            {
-                string RawCommand = "DELETE FROM [dbo].[t_s_kunden] WHERE kunde_id = @id";
-                con.ConnectError();
-                SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+        //public void DeleteKunde()
+        //{
+        //    {
+        //        string RawCommand = "DELETE FROM [dbo].[t_s_kunden] WHERE kunde_id = @id";
+        //        con.ConnectError();
+        //        SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
 
-                cmd.Parameters.AddWithValue("@id", KundenID);
+        //        cmd.Parameters.AddWithValue("@id", KundenID);
 
-                // Verbindung öffnen 
-                cmd.ExecuteNonQuery();
-                //Verbindung schließen
-                con.Close();
-            }
-        }
+        //        // Verbindung öffnen 
+        //        cmd.ExecuteNonQuery();
+        //        //Verbindung schließen
+        //        con.Close();
+        //    }
+        //}
     }
 }
 
