@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.ComponentModel;
 using System.IO;
+using MetroFramework.Controls;
 
 namespace Bibo_Verwaltung
 {
@@ -534,7 +535,7 @@ namespace Bibo_Verwaltung
 
 
         #region DataGridView fuellen
-        public void FillGrid_Buch(ref DataGridView grid, object value = null)
+        public void FillGrid_Buch(ref MetroGrid grid, object value = null)
         {
             ClearDSBuch();
             FillObjectBuch();

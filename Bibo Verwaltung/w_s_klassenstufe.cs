@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_klassenstufe : Form
+    public partial class w_s_klassenstufe : MetroFramework.Forms.MetroForm
     {
         public w_s_klassenstufe()
         {
@@ -134,6 +134,11 @@ namespace Bibo_Verwaltung
             {
                 MessageBox.Show("Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void bt_Suchen_Click(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

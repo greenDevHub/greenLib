@@ -28,300 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_main));
-            this.bt_Sprachen = new System.Windows.Forms.Button();
-            this.bt_Verlage = new System.Windows.Forms.Button();
-            this.bt_Genres = new System.Windows.Forms.Button();
-            this.bt_Autoren = new System.Windows.Forms.Button();
-            this.bt_Kunden = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.bt_faecher = new System.Windows.Forms.Button();
-            this.bt_bf = new System.Windows.Forms.Button();
-            this.bt_schueler = new System.Windows.Forms.Button();
-            this.bt_Zustand = new System.Windows.Forms.Button();
-            this.bt_Buecher = new System.Windows.Forms.Button();
-            this.bt_klassenstufe = new System.Windows.Forms.Button();
-            this.bt_Einstellungen = new System.Windows.Forms.Button();
-            this.gb_Uebersicht = new System.Windows.Forms.GroupBox();
-            this.bt_stats = new System.Windows.Forms.Button();
-            this.bt_logout = new System.Windows.Forms.Button();
-            this.bt_Benutzerverwaltung = new System.Windows.Forms.Button();
-            this.bt_Suchen_Ausleihen = new System.Windows.Forms.Button();
-            this.lb_Ausleihzahl = new System.Windows.Forms.Label();
-            this.lb_Ausgeliehen = new System.Windows.Forms.Label();
-            this.lb_Lagerzahl = new System.Windows.Forms.Label();
-            this.lb_IstBestand = new System.Windows.Forms.Label();
-            this.lb_Bestandzahl = new System.Windows.Forms.Label();
-            this.lb_Bestand = new System.Windows.Forms.Label();
+            this.lb_Ausleihzahl = new MetroFramework.Controls.MetroLabel();
+            this.lb_Ausgeliehen = new MetroFramework.Controls.MetroLabel();
+            this.lb_Lagerzahl = new MetroFramework.Controls.MetroLabel();
+            this.lb_IstBestand = new MetroFramework.Controls.MetroLabel();
+            this.lb_Bestandzahl = new MetroFramework.Controls.MetroLabel();
+            this.lb_Bestand = new MetroFramework.Controls.MetroLabel();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
-            this.groupBox1.SuspendLayout();
-            this.gb_Uebersicht.SuspendLayout();
+            this.mT_Kunden = new MetroFramework.Controls.MetroTile();
+            this.mT_Schüler = new MetroFramework.Controls.MetroTile();
+            this.mt_Autor = new MetroFramework.Controls.MetroTile();
+            this.mT_Verlage = new MetroFramework.Controls.MetroTile();
+            this.mT_Zustand = new MetroFramework.Controls.MetroTile();
+            this.mT_Sprachen = new MetroFramework.Controls.MetroTile();
+            this.mT_Faecher = new MetroFramework.Controls.MetroTile();
+            this.mT_Buecher = new MetroFramework.Controls.MetroTile();
+            this.mT_buchzuordnung = new MetroFramework.Controls.MetroTile();
+            this.mT_Genres = new MetroFramework.Controls.MetroTile();
+            this.mT_Klassenstufen = new MetroFramework.Controls.MetroTile();
+            this.mT_ausleihen = new MetroFramework.Controls.MetroTile();
+            this.mT_Einstellungen = new MetroFramework.Controls.MetroTile();
+            this.mT_Benutzerverwaltung = new MetroFramework.Controls.MetroTile();
+            this.mT_Abmelden = new MetroFramework.Controls.MetroTile();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.mT_Statistik = new MetroFramework.Controls.MetroTile();
+            this.image = new MetroFramework.Controls.MetroLink();
+            this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // bt_Sprachen
-            // 
-            this.helpProvider.SetHelpString(this.bt_Sprachen, "Klicken sie auf \"Sprachen\", um ihre gespeicherten Sprachen anzuzeigen, neue hinzu" +
-        "zufügen, bestehende zu bearbeiten oder zu löschen. ");
-            this.bt_Sprachen.Location = new System.Drawing.Point(512, 265);
-            this.bt_Sprachen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.bt_Sprachen.Name = "bt_Sprachen";
-            this.helpProvider.SetShowHelp(this.bt_Sprachen, true);
-            this.bt_Sprachen.Size = new System.Drawing.Size(237, 95);
-            this.bt_Sprachen.TabIndex = 12;
-            this.bt_Sprachen.Text = "Sprachen";
-            this.bt_Sprachen.UseVisualStyleBackColor = true;
-            this.bt_Sprachen.Click += new System.EventHandler(this.bt_Sprachen_Click);
-            // 
-            // bt_Verlage
-            // 
-            this.helpProvider.SetHelpString(this.bt_Verlage, "Klicken sie auf \"Verlage\", um ihre gespeicherten Verlage anzuzeigen, neue hinzuzu" +
-        "fügen, bestehende zu bearbeiten oder zu löschen. ");
-            this.bt_Verlage.Location = new System.Drawing.Point(16, 265);
-            this.bt_Verlage.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.bt_Verlage.Name = "bt_Verlage";
-            this.helpProvider.SetShowHelp(this.bt_Verlage, true);
-            this.bt_Verlage.Size = new System.Drawing.Size(480, 95);
-            this.bt_Verlage.TabIndex = 7;
-            this.bt_Verlage.Text = "Verlage";
-            this.bt_Verlage.UseVisualStyleBackColor = true;
-            this.bt_Verlage.Click += new System.EventHandler(this.bt_Verlage_Click);
-            // 
-            // bt_Genres
-            // 
-            this.helpProvider.SetHelpString(this.bt_Genres, "Klicken sie auf \"Genres\", um ihre gespeicherten Genres anzuzeigen, neue hinzuzufü" +
-        "gen, bestehende zu bearbeiten oder zu löschen. ");
-            this.bt_Genres.Location = new System.Drawing.Point(512, 374);
-            this.bt_Genres.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.bt_Genres.Name = "bt_Genres";
-            this.helpProvider.SetShowHelp(this.bt_Genres, true);
-            this.bt_Genres.Size = new System.Drawing.Size(480, 95);
-            this.bt_Genres.TabIndex = 14;
-            this.bt_Genres.Text = "Genres";
-            this.bt_Genres.UseVisualStyleBackColor = true;
-            this.bt_Genres.Click += new System.EventHandler(this.bt_Genres_Click);
-            // 
-            // bt_Autoren
-            // 
-            this.helpProvider.SetHelpString(this.bt_Autoren, "Klicken sie auf \"Autoren\", um ihre gespeicherten Autoren anzuzeigen, neue hinzuzu" +
-        "fügen, bestehende zu bearbeiten oder zu löschen. ");
-            this.bt_Autoren.Location = new System.Drawing.Point(16, 155);
-            this.bt_Autoren.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.bt_Autoren.Name = "bt_Autoren";
-            this.helpProvider.SetShowHelp(this.bt_Autoren, true);
-            this.bt_Autoren.Size = new System.Drawing.Size(480, 95);
-            this.bt_Autoren.TabIndex = 6;
-            this.bt_Autoren.Text = "Autoren";
-            this.bt_Autoren.UseVisualStyleBackColor = true;
-            this.bt_Autoren.Click += new System.EventHandler(this.bt_Autoren_Click);
-            // 
-            // bt_Kunden
-            // 
-            this.helpProvider.SetHelpString(this.bt_Kunden, "Klicken sie auf \"Kunden\", um ihre gespeicherten Kunden anzuzeigen, neue hinzuzufü" +
-        "gen, bestehende zu bearbeiten oder zu löschen. ");
-            this.bt_Kunden.Location = new System.Drawing.Point(16, 45);
-            this.bt_Kunden.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.bt_Kunden.Name = "bt_Kunden";
-            this.helpProvider.SetShowHelp(this.bt_Kunden, true);
-            this.bt_Kunden.Size = new System.Drawing.Size(235, 95);
-            this.bt_Kunden.TabIndex = 4;
-            this.bt_Kunden.Text = "Kunden";
-            this.bt_Kunden.UseVisualStyleBackColor = true;
-            this.bt_Kunden.Click += new System.EventHandler(this.bt_Kunden_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.bt_faecher);
-            this.groupBox1.Controls.Add(this.bt_bf);
-            this.groupBox1.Controls.Add(this.bt_schueler);
-            this.groupBox1.Controls.Add(this.bt_Zustand);
-            this.groupBox1.Controls.Add(this.bt_Buecher);
-            this.groupBox1.Controls.Add(this.bt_klassenstufe);
-            this.groupBox1.Controls.Add(this.bt_Sprachen);
-            this.groupBox1.Controls.Add(this.bt_Verlage);
-            this.groupBox1.Controls.Add(this.bt_Genres);
-            this.groupBox1.Controls.Add(this.bt_Autoren);
-            this.groupBox1.Controls.Add(this.bt_Kunden);
-            this.groupBox1.Location = new System.Drawing.Point(544, 24);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.groupBox1.Size = new System.Drawing.Size(1000, 489);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Verwaltung von:";
-            // 
-            // bt_faecher
-            // 
-            this.bt_faecher.Location = new System.Drawing.Point(512, 155);
-            this.bt_faecher.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.bt_faecher.Name = "bt_faecher";
-            this.bt_faecher.Size = new System.Drawing.Size(237, 95);
-            this.bt_faecher.TabIndex = 10;
-            this.bt_faecher.Text = "Fächer";
-            this.bt_faecher.UseVisualStyleBackColor = true;
-            this.bt_faecher.Click += new System.EventHandler(this.bt_logout_Click);
-            // 
-            // bt_bf
-            // 
-            this.bt_bf.Location = new System.Drawing.Point(755, 155);
-            this.bt_bf.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.bt_bf.Name = "bt_bf";
-            this.bt_bf.Size = new System.Drawing.Size(237, 95);
-            this.bt_bf.TabIndex = 11;
-            this.bt_bf.Text = "Buch-Fach";
-            this.bt_bf.UseVisualStyleBackColor = true;
-            this.bt_bf.Click += new System.EventHandler(this.bt_bf_Click);
-            // 
-            // bt_schueler
-            // 
-            this.helpProvider.SetHelpString(this.bt_schueler, "Klicken sie auf \"Kunden\", um ihre gespeicherten Kunden anzuzeigen, neue hinzuzufü" +
-        "gen, bestehende zu bearbeiten oder zu löschen. ");
-            this.bt_schueler.Location = new System.Drawing.Point(259, 45);
-            this.bt_schueler.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.bt_schueler.Name = "bt_schueler";
-            this.helpProvider.SetShowHelp(this.bt_schueler, true);
-            this.bt_schueler.Size = new System.Drawing.Size(237, 95);
-            this.bt_schueler.TabIndex = 5;
-            this.bt_schueler.Text = "Schüler";
-            this.bt_schueler.UseVisualStyleBackColor = true;
-            this.bt_schueler.Click += new System.EventHandler(this.bt_schueler_Click);
-            // 
-            // bt_Zustand
-            // 
-            this.helpProvider.SetHelpString(this.bt_Zustand, "Klicken sie auf \"Zustand\", um ihre gespeicherten Zustände anzuzeigen, neue hinzuz" +
-        "ufügen, bestehende zu bearbeiten oder zu löschen. ");
-            this.bt_Zustand.Location = new System.Drawing.Point(16, 374);
-            this.bt_Zustand.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.bt_Zustand.Name = "bt_Zustand";
-            this.helpProvider.SetShowHelp(this.bt_Zustand, true);
-            this.bt_Zustand.Size = new System.Drawing.Size(480, 95);
-            this.bt_Zustand.TabIndex = 8;
-            this.bt_Zustand.Text = "Zustand";
-            this.bt_Zustand.UseVisualStyleBackColor = true;
-            this.bt_Zustand.Click += new System.EventHandler(this.bt_Zustand_Click);
-            // 
-            // bt_Buecher
-            // 
-            this.helpProvider.SetHelpString(this.bt_Buecher, "Klicken sie auf \"Bücher\", um ihre gespeicherten Bücher anzuzeigen, neue hinzuzufü" +
-        "gen, bestehende zu bearbeiten oder zu löschen. ");
-            this.bt_Buecher.Location = new System.Drawing.Point(512, 45);
-            this.bt_Buecher.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.bt_Buecher.Name = "bt_Buecher";
-            this.helpProvider.SetShowHelp(this.bt_Buecher, true);
-            this.bt_Buecher.Size = new System.Drawing.Size(480, 95);
-            this.bt_Buecher.TabIndex = 9;
-            this.bt_Buecher.Text = "Bücher";
-            this.bt_Buecher.UseVisualStyleBackColor = true;
-            this.bt_Buecher.Click += new System.EventHandler(this.bt_Buecher_Click);
-            // 
-            // bt_klassenstufe
-            // 
-            this.bt_klassenstufe.Location = new System.Drawing.Point(755, 265);
-            this.bt_klassenstufe.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.bt_klassenstufe.Name = "bt_klassenstufe";
-            this.bt_klassenstufe.Size = new System.Drawing.Size(237, 95);
-            this.bt_klassenstufe.TabIndex = 13;
-            this.bt_klassenstufe.Text = "Klassenstufen";
-            this.bt_klassenstufe.UseVisualStyleBackColor = true;
-            this.bt_klassenstufe.Click += new System.EventHandler(this.bt_klassenstufe_Click);
-            // 
-            // bt_Einstellungen
-            // 
-            this.helpProvider.SetHelpString(this.bt_Einstellungen, "Klicken sie auf \"Einstellungen\", um Änderungen an ihrer Datenbankverbindung vorzu" +
-        "nehmen.");
-            this.bt_Einstellungen.Location = new System.Drawing.Point(16, 341);
-            this.bt_Einstellungen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.bt_Einstellungen.Name = "bt_Einstellungen";
-            this.helpProvider.SetShowHelp(this.bt_Einstellungen, true);
-            this.bt_Einstellungen.Size = new System.Drawing.Size(480, 62);
-            this.bt_Einstellungen.TabIndex = 2;
-            this.bt_Einstellungen.Text = "Einstellungen";
-            this.bt_Einstellungen.UseVisualStyleBackColor = true;
-            this.bt_Einstellungen.Click += new System.EventHandler(this.bt_Einstellungen_Click);
-            // 
-            // gb_Uebersicht
-            // 
-            this.gb_Uebersicht.Controls.Add(this.bt_stats);
-            this.gb_Uebersicht.Controls.Add(this.bt_logout);
-            this.gb_Uebersicht.Controls.Add(this.bt_Einstellungen);
-            this.gb_Uebersicht.Controls.Add(this.bt_Benutzerverwaltung);
-            this.gb_Uebersicht.Controls.Add(this.bt_Suchen_Ausleihen);
-            this.gb_Uebersicht.Controls.Add(this.lb_Ausleihzahl);
-            this.gb_Uebersicht.Controls.Add(this.lb_Ausgeliehen);
-            this.gb_Uebersicht.Controls.Add(this.lb_Lagerzahl);
-            this.gb_Uebersicht.Controls.Add(this.lb_IstBestand);
-            this.gb_Uebersicht.Controls.Add(this.lb_Bestandzahl);
-            this.gb_Uebersicht.Controls.Add(this.lb_Bestand);
-            this.helpProvider.SetHelpString(this.gb_Uebersicht, "In der Gesamtübersicht sehen sie auf einem Blick, wie viele Bücher sich in ihrem " +
-        "Bestand bzw. Lager befindet, sowie wie viele Bücher momentan ausgeliehen sind.");
-            this.gb_Uebersicht.Location = new System.Drawing.Point(27, 24);
-            this.gb_Uebersicht.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.gb_Uebersicht.Name = "gb_Uebersicht";
-            this.gb_Uebersicht.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.helpProvider.SetShowHelp(this.gb_Uebersicht, true);
-            this.gb_Uebersicht.Size = new System.Drawing.Size(507, 489);
-            this.gb_Uebersicht.TabIndex = 1;
-            this.gb_Uebersicht.TabStop = false;
-            this.gb_Uebersicht.Text = "Gesamtübersicht:";
-            // 
-            // bt_stats
-            // 
-            this.bt_stats.Location = new System.Drawing.Point(109, 112);
-            this.bt_stats.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.bt_stats.Name = "bt_stats";
-            this.bt_stats.Size = new System.Drawing.Size(75, 41);
-            this.bt_stats.TabIndex = 0;
-            this.bt_stats.TabStop = false;
-            this.bt_stats.Text = "Statistiken";
-            this.bt_stats.UseVisualStyleBackColor = true;
-            this.bt_stats.Visible = false;
-            this.bt_stats.Click += new System.EventHandler(this.bt_stats_Click);
-            // 
-            // bt_logout
-            // 
-            this.bt_logout.Location = new System.Drawing.Point(8, 162);
-            this.bt_logout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.bt_logout.Name = "bt_logout";
-            this.bt_logout.Size = new System.Drawing.Size(61, 36);
-            this.bt_logout.TabIndex = 0;
-            this.bt_logout.TabStop = false;
-            this.bt_logout.Text = "Abmelden";
-            this.bt_logout.UseVisualStyleBackColor = true;
-            this.bt_logout.Visible = false;
-            this.bt_logout.Click += new System.EventHandler(this.bt_logout_Click);
-            // 
-            // bt_Benutzerverwaltung
-            // 
-            this.bt_Benutzerverwaltung.Location = new System.Drawing.Point(16, 415);
-            this.bt_Benutzerverwaltung.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.bt_Benutzerverwaltung.Name = "bt_Benutzerverwaltung";
-            this.bt_Benutzerverwaltung.Size = new System.Drawing.Size(480, 62);
-            this.bt_Benutzerverwaltung.TabIndex = 3;
-            this.bt_Benutzerverwaltung.Text = "Benutzerverwaltung";
-            this.bt_Benutzerverwaltung.UseVisualStyleBackColor = true;
-            this.bt_Benutzerverwaltung.Click += new System.EventHandler(this.bt_Benutzerverwaltung_Click);
-            // 
-            // bt_Suchen_Ausleihen
-            // 
-            this.helpProvider.SetHelpString(this.bt_Suchen_Ausleihen, "Starten sie Ausleihvorgänge, Buchrückgaben oder sehen sie, von wem bestimmte Büch" +
-        "er ausgeliehen wurden.");
-            this.bt_Suchen_Ausleihen.Location = new System.Drawing.Point(16, 269);
-            this.bt_Suchen_Ausleihen.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-            this.bt_Suchen_Ausleihen.Name = "bt_Suchen_Ausleihen";
-            this.helpProvider.SetShowHelp(this.bt_Suchen_Ausleihen, true);
-            this.bt_Suchen_Ausleihen.Size = new System.Drawing.Size(480, 62);
-            this.bt_Suchen_Ausleihen.TabIndex = 1;
-            this.bt_Suchen_Ausleihen.Text = "Bücher Suchen/Ausleihen";
-            this.bt_Suchen_Ausleihen.UseVisualStyleBackColor = true;
-            this.bt_Suchen_Ausleihen.Click += new System.EventHandler(this.bt_Suchen_Ausleihen_Click);
             // 
             // lb_Ausleihzahl
             // 
             this.lb_Ausleihzahl.AutoSize = true;
-            this.lb_Ausleihzahl.Location = new System.Drawing.Point(309, 179);
-            this.lb_Ausleihzahl.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lb_Ausleihzahl.Location = new System.Drawing.Point(201, 60);
+            this.lb_Ausleihzahl.Margin = new System.Windows.Forms.Padding(4);
             this.lb_Ausleihzahl.Name = "lb_Ausleihzahl";
-            this.lb_Ausleihzahl.Size = new System.Drawing.Size(24, 32);
+            this.lb_Ausleihzahl.Size = new System.Drawing.Size(15, 20);
             this.lb_Ausleihzahl.TabIndex = 4;
             this.lb_Ausleihzahl.Text = "-";
             // 
@@ -330,21 +75,21 @@
             this.lb_Ausgeliehen.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Ausgeliehen, "In diesem Feld wird ihnen die aktuelle Anzahl von Bücheren angezeigt, welche mome" +
         "ntan ausgeliehen sind.");
-            this.lb_Ausgeliehen.Location = new System.Drawing.Point(16, 179);
-            this.lb_Ausgeliehen.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lb_Ausgeliehen.Location = new System.Drawing.Point(4, 60);
+            this.lb_Ausgeliehen.Margin = new System.Windows.Forms.Padding(4);
             this.lb_Ausgeliehen.Name = "lb_Ausgeliehen";
             this.helpProvider.SetShowHelp(this.lb_Ausgeliehen, true);
-            this.lb_Ausgeliehen.Size = new System.Drawing.Size(276, 32);
+            this.lb_Ausgeliehen.Size = new System.Drawing.Size(135, 20);
             this.lb_Ausgeliehen.TabIndex = 2;
             this.lb_Ausgeliehen.Text = "Bücher ausgeliehen:";
             // 
             // lb_Lagerzahl
             // 
             this.lb_Lagerzahl.AutoSize = true;
-            this.lb_Lagerzahl.Location = new System.Drawing.Point(309, 117);
-            this.lb_Lagerzahl.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lb_Lagerzahl.Location = new System.Drawing.Point(201, 32);
+            this.lb_Lagerzahl.Margin = new System.Windows.Forms.Padding(4);
             this.lb_Lagerzahl.Name = "lb_Lagerzahl";
-            this.lb_Lagerzahl.Size = new System.Drawing.Size(24, 32);
+            this.lb_Lagerzahl.Size = new System.Drawing.Size(15, 20);
             this.lb_Lagerzahl.TabIndex = 3;
             this.lb_Lagerzahl.Text = "-";
             // 
@@ -353,21 +98,21 @@
             this.lb_IstBestand.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_IstBestand, "In diesem Feld wird ihnen die aktuelle Anzahl von Bücheren angezeigt, welche sich" +
         " im Lager befinden.");
-            this.lb_IstBestand.Location = new System.Drawing.Point(16, 117);
-            this.lb_IstBestand.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lb_IstBestand.Location = new System.Drawing.Point(4, 32);
+            this.lb_IstBestand.Margin = new System.Windows.Forms.Padding(4);
             this.lb_IstBestand.Name = "lb_IstBestand";
             this.helpProvider.SetShowHelp(this.lb_IstBestand, true);
-            this.lb_IstBestand.Size = new System.Drawing.Size(230, 32);
+            this.lb_IstBestand.Size = new System.Drawing.Size(115, 20);
             this.lb_IstBestand.TabIndex = 1;
             this.lb_IstBestand.Text = "Bücher im Lager:";
             // 
             // lb_Bestandzahl
             // 
             this.lb_Bestandzahl.AutoSize = true;
-            this.lb_Bestandzahl.Location = new System.Drawing.Point(309, 60);
-            this.lb_Bestandzahl.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lb_Bestandzahl.Location = new System.Drawing.Point(201, 4);
+            this.lb_Bestandzahl.Margin = new System.Windows.Forms.Padding(4);
             this.lb_Bestandzahl.Name = "lb_Bestandzahl";
-            this.lb_Bestandzahl.Size = new System.Drawing.Size(24, 32);
+            this.lb_Bestandzahl.Size = new System.Drawing.Size(15, 20);
             this.lb_Bestandzahl.TabIndex = 2;
             this.lb_Bestandzahl.Text = "-";
             // 
@@ -376,64 +121,330 @@
             this.lb_Bestand.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Bestand, "In diesem Feld wird ihnen die aktuelle Anzahl von Bücheren angezeigt, welche sich" +
         " im Bestand befinden.");
-            this.lb_Bestand.Location = new System.Drawing.Point(16, 60);
-            this.lb_Bestand.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lb_Bestand.Location = new System.Drawing.Point(4, 4);
+            this.lb_Bestand.Margin = new System.Windows.Forms.Padding(4);
             this.lb_Bestand.Name = "lb_Bestand";
             this.helpProvider.SetShowHelp(this.lb_Bestand, true);
-            this.lb_Bestand.Size = new System.Drawing.Size(262, 32);
+            this.lb_Bestand.Size = new System.Drawing.Size(128, 20);
             this.lb_Bestand.TabIndex = 0;
             this.lb_Bestand.Text = "Bücher im Bestand:";
             // 
+            // mT_Kunden
+            // 
+            this.mT_Kunden.ActiveControl = null;
+            this.mT_Kunden.Location = new System.Drawing.Point(843, 69);
+            this.mT_Kunden.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mT_Kunden.Name = "mT_Kunden";
+            this.mT_Kunden.Size = new System.Drawing.Size(197, 59);
+            this.mT_Kunden.Style = MetroFramework.MetroColorStyle.Teal;
+            this.mT_Kunden.TabIndex = 2;
+            this.mT_Kunden.Text = "Kunden";
+            this.mT_Kunden.UseSelectable = true;
+            this.mT_Kunden.Click += new System.EventHandler(this.bt_Kunden_Click);
+            // 
+            // mT_Schüler
+            // 
+            this.mT_Schüler.ActiveControl = null;
+            this.mT_Schüler.Location = new System.Drawing.Point(843, 134);
+            this.mT_Schüler.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mT_Schüler.Name = "mT_Schüler";
+            this.mT_Schüler.Size = new System.Drawing.Size(197, 59);
+            this.mT_Schüler.Style = MetroFramework.MetroColorStyle.Teal;
+            this.mT_Schüler.TabIndex = 3;
+            this.mT_Schüler.Text = "Schüler";
+            this.mT_Schüler.UseSelectable = true;
+            this.mT_Schüler.Click += new System.EventHandler(this.bt_schueler_Click);
+            // 
+            // mt_Autor
+            // 
+            this.mt_Autor.ActiveControl = null;
+            this.mt_Autor.Location = new System.Drawing.Point(435, 134);
+            this.mt_Autor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mt_Autor.Name = "mt_Autor";
+            this.mt_Autor.Size = new System.Drawing.Size(197, 59);
+            this.mt_Autor.TabIndex = 3;
+            this.mt_Autor.Text = "Autoren";
+            this.mt_Autor.UseSelectable = true;
+            this.mt_Autor.Click += new System.EventHandler(this.bt_Autoren_Click);
+            // 
+            // mT_Verlage
+            // 
+            this.mT_Verlage.ActiveControl = null;
+            this.mT_Verlage.Location = new System.Drawing.Point(435, 199);
+            this.mT_Verlage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mT_Verlage.Name = "mT_Verlage";
+            this.mT_Verlage.Size = new System.Drawing.Size(197, 59);
+            this.mT_Verlage.TabIndex = 3;
+            this.mT_Verlage.Text = "Verlage";
+            this.mT_Verlage.UseSelectable = true;
+            this.mT_Verlage.Click += new System.EventHandler(this.bt_Verlage_Click);
+            // 
+            // mT_Zustand
+            // 
+            this.mT_Zustand.ActiveControl = null;
+            this.mT_Zustand.Location = new System.Drawing.Point(637, 263);
+            this.mT_Zustand.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mT_Zustand.Name = "mT_Zustand";
+            this.mT_Zustand.Size = new System.Drawing.Size(197, 59);
+            this.mT_Zustand.TabIndex = 3;
+            this.mT_Zustand.Text = "Zustand";
+            this.mT_Zustand.UseSelectable = true;
+            this.mT_Zustand.Click += new System.EventHandler(this.bt_Zustand_Click);
+            // 
+            // mT_Sprachen
+            // 
+            this.mT_Sprachen.ActiveControl = null;
+            this.mT_Sprachen.Location = new System.Drawing.Point(435, 263);
+            this.mT_Sprachen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mT_Sprachen.Name = "mT_Sprachen";
+            this.mT_Sprachen.Size = new System.Drawing.Size(197, 59);
+            this.mT_Sprachen.TabIndex = 3;
+            this.mT_Sprachen.Text = "Sprachen";
+            this.mT_Sprachen.UseSelectable = true;
+            this.mT_Sprachen.Click += new System.EventHandler(this.bt_Sprachen_Click);
+            // 
+            // mT_Faecher
+            // 
+            this.mT_Faecher.ActiveControl = null;
+            this.mT_Faecher.Location = new System.Drawing.Point(843, 263);
+            this.mT_Faecher.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mT_Faecher.Name = "mT_Faecher";
+            this.mT_Faecher.Size = new System.Drawing.Size(197, 59);
+            this.mT_Faecher.Style = MetroFramework.MetroColorStyle.Teal;
+            this.mT_Faecher.TabIndex = 3;
+            this.mT_Faecher.Text = "Fächer";
+            this.mT_Faecher.UseSelectable = true;
+            this.mT_Faecher.Click += new System.EventHandler(this.bt_logout_Click);
+            // 
+            // mT_Buecher
+            // 
+            this.mT_Buecher.ActiveControl = null;
+            this.mT_Buecher.Location = new System.Drawing.Point(435, 69);
+            this.mT_Buecher.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mT_Buecher.Name = "mT_Buecher";
+            this.mT_Buecher.Size = new System.Drawing.Size(403, 59);
+            this.mT_Buecher.TabIndex = 3;
+            this.mT_Buecher.Text = "Bücher";
+            this.mT_Buecher.UseSelectable = true;
+            this.mT_Buecher.Click += new System.EventHandler(this.bt_Buecher_Click);
+            // 
+            // mT_buchzuordnung
+            // 
+            this.mT_buchzuordnung.ActiveControl = null;
+            this.mT_buchzuordnung.Location = new System.Drawing.Point(639, 134);
+            this.mT_buchzuordnung.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mT_buchzuordnung.Name = "mT_buchzuordnung";
+            this.mT_buchzuordnung.Size = new System.Drawing.Size(197, 59);
+            this.mT_buchzuordnung.TabIndex = 3;
+            this.mT_buchzuordnung.Text = "Bücherzuordnung";
+            this.mT_buchzuordnung.UseSelectable = true;
+            this.mT_buchzuordnung.Click += new System.EventHandler(this.bt_bf_Click);
+            // 
+            // mT_Genres
+            // 
+            this.mT_Genres.ActiveControl = null;
+            this.mT_Genres.Location = new System.Drawing.Point(639, 199);
+            this.mT_Genres.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mT_Genres.Name = "mT_Genres";
+            this.mT_Genres.Size = new System.Drawing.Size(197, 59);
+            this.mT_Genres.TabIndex = 3;
+            this.mT_Genres.Text = "Genres";
+            this.mT_Genres.UseSelectable = true;
+            this.mT_Genres.Click += new System.EventHandler(this.bt_Genres_Click);
+            // 
+            // mT_Klassenstufen
+            // 
+            this.mT_Klassenstufen.ActiveControl = null;
+            this.mT_Klassenstufen.Location = new System.Drawing.Point(843, 199);
+            this.mT_Klassenstufen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mT_Klassenstufen.Name = "mT_Klassenstufen";
+            this.mT_Klassenstufen.Size = new System.Drawing.Size(197, 59);
+            this.mT_Klassenstufen.Style = MetroFramework.MetroColorStyle.Teal;
+            this.mT_Klassenstufen.TabIndex = 3;
+            this.mT_Klassenstufen.Text = "Klassenstufen";
+            this.mT_Klassenstufen.UseSelectable = true;
+            this.mT_Klassenstufen.Click += new System.EventHandler(this.bt_klassenstufe_Click);
+            // 
+            // mT_ausleihen
+            // 
+            this.mT_ausleihen.ActiveControl = null;
+            this.mT_ausleihen.Location = new System.Drawing.Point(25, 199);
+            this.mT_ausleihen.Margin = new System.Windows.Forms.Padding(4);
+            this.mT_ausleihen.Name = "mT_ausleihen";
+            this.mT_ausleihen.Size = new System.Drawing.Size(403, 123);
+            this.mT_ausleihen.Style = MetroFramework.MetroColorStyle.Lime;
+            this.mT_ausleihen.TabIndex = 3;
+            this.mT_ausleihen.Text = "Bücher ausleihen oder zurückgeben";
+            this.mT_ausleihen.UseSelectable = true;
+            this.mT_ausleihen.Click += new System.EventHandler(this.bt_Suchen_Ausleihen_Click);
+            // 
+            // mT_Einstellungen
+            // 
+            this.mT_Einstellungen.ActiveControl = null;
+            this.mT_Einstellungen.Location = new System.Drawing.Point(229, 329);
+            this.mT_Einstellungen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mT_Einstellungen.Name = "mT_Einstellungen";
+            this.mT_Einstellungen.Size = new System.Drawing.Size(197, 59);
+            this.mT_Einstellungen.Style = MetroFramework.MetroColorStyle.Silver;
+            this.mT_Einstellungen.TabIndex = 3;
+            this.mT_Einstellungen.Text = "Einstellungen";
+            this.mT_Einstellungen.UseSelectable = true;
+            this.mT_Einstellungen.Click += new System.EventHandler(this.bt_Einstellungen_Click);
+            // 
+            // mT_Benutzerverwaltung
+            // 
+            this.mT_Benutzerverwaltung.ActiveControl = null;
+            this.mT_Benutzerverwaltung.Location = new System.Drawing.Point(843, 329);
+            this.mT_Benutzerverwaltung.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mT_Benutzerverwaltung.Name = "mT_Benutzerverwaltung";
+            this.mT_Benutzerverwaltung.Size = new System.Drawing.Size(197, 59);
+            this.mT_Benutzerverwaltung.Style = MetroFramework.MetroColorStyle.Teal;
+            this.mT_Benutzerverwaltung.TabIndex = 3;
+            this.mT_Benutzerverwaltung.Text = "Benutzerverwaltung";
+            this.mT_Benutzerverwaltung.UseSelectable = true;
+            this.mT_Benutzerverwaltung.Click += new System.EventHandler(this.bt_Benutzerverwaltung_Click);
+            // 
+            // mT_Abmelden
+            // 
+            this.mT_Abmelden.ActiveControl = null;
+            this.mT_Abmelden.Location = new System.Drawing.Point(27, 329);
+            this.mT_Abmelden.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mT_Abmelden.Name = "mT_Abmelden";
+            this.mT_Abmelden.Size = new System.Drawing.Size(197, 59);
+            this.mT_Abmelden.Style = MetroFramework.MetroColorStyle.Silver;
+            this.mT_Abmelden.TabIndex = 6;
+            this.mT_Abmelden.Text = "Abmelden";
+            this.mT_Abmelden.UseSelectable = true;
+            this.mT_Abmelden.Click += new System.EventHandler(this.mT_Abmelden_Click);
+            // 
+            // metroPanel1
+            // 
+            this.metroPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.metroPanel1.Controls.Add(this.lb_Ausleihzahl);
+            this.metroPanel1.Controls.Add(this.lb_Lagerzahl);
+            this.metroPanel1.Controls.Add(this.lb_Ausgeliehen);
+            this.metroPanel1.Controls.Add(this.lb_Bestand);
+            this.metroPanel1.Controls.Add(this.lb_IstBestand);
+            this.metroPanel1.Controls.Add(this.lb_Bestandzahl);
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(27, 69);
+            this.metroPanel1.Margin = new System.Windows.Forms.Padding(16, 4, 4, 4);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(402, 124);
+            this.metroPanel1.TabIndex = 4;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 11;
+            // 
+            // mT_Statistik
+            // 
+            this.mT_Statistik.ActiveControl = null;
+            this.mT_Statistik.Location = new System.Drawing.Point(435, 329);
+            this.mT_Statistik.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mT_Statistik.Name = "mT_Statistik";
+            this.mT_Statistik.Size = new System.Drawing.Size(197, 59);
+            this.mT_Statistik.Style = MetroFramework.MetroColorStyle.Green;
+            this.mT_Statistik.TabIndex = 7;
+            this.mT_Statistik.Text = "Statistik";
+            this.mT_Statistik.UseSelectable = true;
+            this.mT_Statistik.Click += new System.EventHandler(this.bt_stats_Click);
+            // 
+            // image
+            // 
+            this.image.Image = global::Bibo_Verwaltung.Properties.Resources.icon;
+            this.image.ImageSize = 32;
+            this.image.Location = new System.Drawing.Point(20, 22);
+            this.image.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.image.Name = "image";
+            this.image.Size = new System.Drawing.Size(36, 34);
+            this.image.TabIndex = 8;
+            this.image.UseSelectable = true;
+            // 
+            // metroProgressBar1
+            // 
+            this.metroProgressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroProgressBar1.Location = new System.Drawing.Point(0, 0);
+            this.metroProgressBar1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.metroProgressBar1.Name = "metroProgressBar1";
+            this.metroProgressBar1.Size = new System.Drawing.Size(1071, 5);
+            this.metroProgressBar1.Step = 1;
+            this.metroProgressBar1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroProgressBar1.TabIndex = 9;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // w_s_main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1563, 539);
-            this.Controls.Add(this.gb_Uebersicht);
-            this.Controls.Add(this.groupBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(1071, 406);
+            this.Controls.Add(this.metroProgressBar1);
+            this.Controls.Add(this.image);
+            this.Controls.Add(this.mT_Statistik);
+            this.Controls.Add(this.mT_Abmelden);
+            this.Controls.Add(this.metroPanel1);
+            this.Controls.Add(this.mT_Buecher);
+            this.Controls.Add(this.mT_Faecher);
+            this.Controls.Add(this.mT_Klassenstufen);
+            this.Controls.Add(this.mT_Einstellungen);
+            this.Controls.Add(this.mT_ausleihen);
+            this.Controls.Add(this.mT_Benutzerverwaltung);
+            this.Controls.Add(this.mT_Genres);
+            this.Controls.Add(this.mT_buchzuordnung);
+            this.Controls.Add(this.mT_Sprachen);
+            this.Controls.Add(this.mT_Zustand);
+            this.Controls.Add(this.mT_Verlage);
+            this.Controls.Add(this.mt_Autor);
+            this.Controls.Add(this.mT_Schüler);
+            this.Controls.Add(this.mT_Kunden);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "w_s_main";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Bibliotheksverwaltung";
+            this.Padding = new System.Windows.Forms.Padding(11, 74, 11, 10);
+            this.Resizable = false;
+            this.Text = "     Bibliotheksverwaltung";
             this.Activated += new System.EventHandler(this.Load_Uebersicht);
-            this.groupBox1.ResumeLayout(false);
-            this.gb_Uebersicht.ResumeLayout(false);
-            this.gb_Uebersicht.PerformLayout();
+            this.metroPanel1.ResumeLayout(false);
+            this.metroPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button bt_Sprachen;
-        private System.Windows.Forms.Button bt_Verlage;
-        private System.Windows.Forms.Button bt_Genres;
-        private System.Windows.Forms.Button bt_Autoren;
-        private System.Windows.Forms.Button bt_Kunden;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button bt_Buecher;
-        private System.Windows.Forms.GroupBox gb_Uebersicht;
-        private System.Windows.Forms.Label lb_Ausleihzahl;
-        private System.Windows.Forms.Label lb_Ausgeliehen;
-        private System.Windows.Forms.Label lb_Lagerzahl;
-        private System.Windows.Forms.Label lb_IstBestand;
-        private System.Windows.Forms.Label lb_Bestandzahl;
-        private System.Windows.Forms.Label lb_Bestand;
-        private System.Windows.Forms.Button bt_Einstellungen;
-        private System.Windows.Forms.Button bt_Suchen_Ausleihen;
-        private System.Windows.Forms.Button bt_Zustand;
+        private MetroFramework.Controls.MetroLabel lb_Ausleihzahl;
+        private MetroFramework.Controls.MetroLabel lb_Ausgeliehen;
+        private MetroFramework.Controls.MetroLabel lb_Lagerzahl;
+        private MetroFramework.Controls.MetroLabel lb_IstBestand;
+        private MetroFramework.Controls.MetroLabel lb_Bestandzahl;
+        private MetroFramework.Controls.MetroLabel lb_Bestand;
         private System.Windows.Forms.HelpProvider helpProvider;
-        private System.Windows.Forms.Button bt_Benutzerverwaltung;
-        private System.Windows.Forms.Button bt_logout;
-        private System.Windows.Forms.Button bt_faecher;
-        private System.Windows.Forms.Button bt_schueler;
-        private System.Windows.Forms.Button bt_bf;
-        private System.Windows.Forms.Button bt_stats;
-        private System.Windows.Forms.Button bt_klassenstufe;
+        private MetroFramework.Controls.MetroTile mT_Kunden;
+        private MetroFramework.Controls.MetroTile mT_Schüler;
+        private MetroFramework.Controls.MetroTile mt_Autor;
+        private MetroFramework.Controls.MetroTile mT_Verlage;
+        private MetroFramework.Controls.MetroTile mT_Zustand;
+        private MetroFramework.Controls.MetroTile mT_Sprachen;
+        private MetroFramework.Controls.MetroTile mT_Faecher;
+        private MetroFramework.Controls.MetroTile mT_Buecher;
+        private MetroFramework.Controls.MetroTile mT_buchzuordnung;
+        private MetroFramework.Controls.MetroTile mT_Genres;
+        private MetroFramework.Controls.MetroTile mT_Klassenstufen;
+        private MetroFramework.Controls.MetroTile mT_ausleihen;
+        private MetroFramework.Controls.MetroTile mT_Einstellungen;
+        private MetroFramework.Controls.MetroTile mT_Benutzerverwaltung;
+        private MetroFramework.Controls.MetroTile mT_Abmelden;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
+        private MetroFramework.Controls.MetroTile mT_Statistik;
+        private MetroFramework.Controls.MetroLink image;
+        private MetroFramework.Controls.MetroProgressBar metroProgressBar1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

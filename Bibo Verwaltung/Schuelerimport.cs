@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework.Controls;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -115,7 +116,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Erschafft eine Vorschau von 10 Datensätzen der Importdaten und stellt diese in einer GridView dar.
         /// </summary>
-        public void FillGridViewRows(ref DataGridView grid, object value = null)
+        public void FillGridViewRows(ref MetroGrid grid, object value = null)
         {
             readCSV(false);
             
@@ -491,7 +492,7 @@ namespace Bibo_Verwaltung
         //   // table.Rows.Add(columns);
         //    grid.DataSource = table;
         //}
-        public void FillColGrid(ref DataGridView grid, string target, object value = null)
+        public void FillColGrid(ref MetroGrid grid, string target, object value = null)
         {
             DataTable table = new DataTable();
             if (target.Equals("SEK1"))

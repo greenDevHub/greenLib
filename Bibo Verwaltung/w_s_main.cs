@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_main : Form
+    public partial class w_s_main : MetroFramework.Forms.MetroForm
     {
         string name;
         public w_s_main(string name)
@@ -19,16 +19,16 @@ namespace Bibo_Verwaltung
             this.name = name;
             InitializeComponent();
             Benutzer user = new Benutzer(name);
-            this.Text = "Bibliotheksverwaltung - Angemeldet als: " + name + " (" + user.Rechte + ")";
-            if(user.Rechteid.Equals("0") || user.Rechteid.Equals("1"))
+            this.Text = "     Bibliotheksverwaltung - Angemeldet als: " + name + " (" + user.Rechte + ")";
+            if (user.Rechteid.Equals("0") || user.Rechteid.Equals("1"))
             {
-                bt_Benutzerverwaltung.Enabled = false;
-                bt_Einstellungen.Enabled = false;
+                mT_Benutzerverwaltung.Enabled = false;
+                mT_Einstellungen.Enabled = false;
             }
             else if (user.Rechteid == "2")
             {
-                bt_Benutzerverwaltung.Enabled = true;
-                bt_Einstellungen.Enabled = true;
+                mT_Benutzerverwaltung.Enabled = true;
+                mT_Einstellungen.Enabled = true;
             }
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             System.IO.Directory.CreateDirectory(path + "\\Bibliothek");
@@ -166,9 +166,10 @@ namespace Bibo_Verwaltung
                 MessageBox.Show("Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
         private void UpdateForm()
         {
+            metroProgressBar1.Value = 0;
+            timer1.Start();
             //SQL-Verbindung pruefen
             SQL_Verbindung con = new SQL_Verbindung();
             string test = con.ConnectionString;
@@ -217,6 +218,7 @@ namespace Bibo_Verwaltung
             lb_Lagerzahl.Text = (bestand - ausgeliehen).ToString();
 
             con.Close();
+
         }
 
         private void bt_Benutzerverwaltung_Click(object sender, EventArgs e)
@@ -253,6 +255,23 @@ namespace Bibo_Verwaltung
         {
             Form stufe = new w_s_klassenstufe();
             stufe.ShowDialog(this);
+        }
+
+        private void mT_Abmelden_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (metroProgressBar1.Value == 100)
+            {
+                timer1.Stop();
+            }
+            metroProgressBar1.Invoke((Action)delegate ()
+            {
+                metroProgressBar1.PerformStep();
+            });
         }
     }
     #endregion

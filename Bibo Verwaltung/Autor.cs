@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
+using MetroFramework.Controls;
 
 namespace Bibo_Verwaltung
 {
@@ -120,7 +121,7 @@ namespace Bibo_Verwaltung
 
             con.Close();
         }
-        public void FillCombobox(ref ComboBox cb, object value)
+        public void FillCombobox(ref MetroComboBox cb, object value)
         {
             FillObject();
             cb.DataSource = dt;

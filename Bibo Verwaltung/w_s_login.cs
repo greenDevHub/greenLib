@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,17 +11,23 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_login : Form
+    public partial class w_s_login : MetroFramework.Forms.MetroForm
     {
         public w_s_login()
         {
             InitializeComponent();
+            tb_User.Focus();
+            timer1.Start();
         }
 
        // private bool error = false;
 
         private void Anmelden()
         {
+            //this.Hide();
+            //Form Main = new w_s_main("test");
+            //Main.Closed += (s, args) => this.Close();
+            //Main.Show();
             SQL_Verbindung con = new SQL_Verbindung();
             //string test = con.ConnectionString;
             if (con.ConnectError())
@@ -47,7 +54,8 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MessageBox.Show("Die Anmeldedaten sind falsch. Bitte versuchen Sie es erneut!", "Falsche Daten!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Die Anmeldedaten sind falsch. Bitte versuchen Sie es erneut!", "Falsche Daten!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Die Anmeldedaten sind falsch. Bitte versuchen Sie es erneut!", "Fehler!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 tb_Password.Clear();
 
             }
@@ -56,6 +64,7 @@ namespace Bibo_Verwaltung
         private void bt_Login_Click(object sender, EventArgs e)
         {
             Anmelden();
+            timer1.Stop();
         }
 
         private void tb_Password_KeyDown(object sender, KeyEventArgs e)
@@ -66,6 +75,18 @@ namespace Bibo_Verwaltung
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //if(metroProgressBar1.Value == 100)
+            //{
+            //    metroProgressBar1.Value = 0;
+            //}
+            //metroProgressBar1.Invoke((Action)delegate ()
+            //{
+            //    metroProgressBar1.PerformStep();
+            //});
         }
     }
 }
