@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework.Controls;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -167,9 +168,9 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void FillComboBoxes(ref ComboBox autor, ref ComboBox verlag, ref ComboBox genre)
         {
-            buchautor.FillCombobox(ref autor, -1);
-            buchverlag.FillCombobox(ref verlag, -1);
-            buchgenre.FillCombobox(ref genre, -1);
+            //buchautor.FillCombobox(ref autor, -1);
+            //buchverlag.FillCombobox(ref verlag, -1);
+            //buchgenre.FillCombobox(ref genre, -1);
             if (autor.Text == "")
             {
                 autor.Text = "Autor";

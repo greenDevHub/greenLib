@@ -201,5 +201,29 @@ namespace Bibo_Verwaltung
             con.Close();
             return FachLang;
         }
+
+        /// <summary>
+        /// Prüft ob die Kurzbezeichnung des Faches in der DB vorhanden ist 
+        /// </summary>
+        public bool AlreadyExists()
+        {
+            if (con.ConnectError()) return false;
+            string RawCommand = "SELECT f_id FROM [dbo].[t_s_faecher] WHERE f_kurzform = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, FachKurz);
+            while (dr.Read())
+            {
+                FachID = dr["f_id"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            if (FachID == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

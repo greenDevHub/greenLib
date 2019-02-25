@@ -13,13 +13,13 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_main : MetroFramework.Forms.MetroForm
     {
-        string name;
-        public w_s_main(string name)
+        string currentUser;
+        public w_s_main(string userName)
         {
-            this.name = name;
+            this.currentUser = userName;
             InitializeComponent();
-            Benutzer user = new Benutzer(name);
-            this.Text = "     Bibliotheksverwaltung - Angemeldet als: " + name + " (" + user.Rechte + ")";
+            Benutzer user = new Benutzer(userName);
+            this.Text = "     Bibliotheksverwaltung - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             if (user.Rechteid.Equals("0") || user.Rechteid.Equals("1"))
             {
                 mT_Benutzerverwaltung.Enabled = false;
@@ -55,7 +55,7 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
-                Form Kunden = new w_s_Kunden(name);
+                Form Kunden = new w_s_Kunden(currentUser);
                 Kunden.ShowDialog(this);
             }
             else
@@ -158,7 +158,7 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
-                Form Details = new w_s_buchsuche(name);
+                Form Details = new w_s_buchsuche(currentUser);
                 Details.ShowDialog(this);
             }
             else
@@ -223,13 +223,13 @@ namespace Bibo_Verwaltung
 
         private void bt_Benutzerverwaltung_Click(object sender, EventArgs e)
         {
-            Form users = new w_s_user();
+            Form users = new w_s_user(currentUser);
             users.ShowDialog(this);
         }
 
         private void bt_logout_Click(object sender, EventArgs e)
         {
-            Form faecher = new w_s_faecher();
+            Form faecher = new w_s_faecher(currentUser);
             faecher.ShowDialog(this);
         }
 
@@ -241,7 +241,7 @@ namespace Bibo_Verwaltung
 
         private void bt_bf_Click(object sender, EventArgs e)
         {
-            Form buchfach = new w_s_buch_fach();
+            Form buchfach = new w_s_buch_fach(currentUser);
             buchfach.ShowDialog(this);
         }
 

@@ -564,12 +564,12 @@ namespace Bibo_Verwaltung
                 }
                 else if (target.Equals("t_s_faecher"))
                 {
-                    Faecher fach = new Faecher();
+                    Fach fach = new Fach();
                     fach.FachKurz = row[0].ToString();
-                    fach.Fach = row[1].ToString();
+                    fach.FachLang = row[1].ToString();
                     if (!fach.AlreadyExists())
                     {
-                        fach.Add();
+                        fach.AddFach();
                     }
                 }
 
