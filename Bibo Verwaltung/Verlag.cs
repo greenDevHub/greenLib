@@ -115,7 +115,7 @@ namespace Bibo_Verwaltung
             bool contains = dt.AsEnumerable().Any(row => value == row.Field<String>("ver_name"));
             return contains;
         }
-        public void FillCombobox(ref MetroComboBox cb, object value)
+        public void FillCombobox(ref AdvancedComboBox cb, object value)
         {
             FillObject();
             cb.DataSource = dt;

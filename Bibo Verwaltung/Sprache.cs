@@ -82,7 +82,7 @@ namespace Bibo_Verwaltung
             con.Close();
         }
 
-        public void FillCombobox(ref MetroComboBox cb, object value)
+        public void FillCombobox(ref AdvancedComboBox cb, object value)
         {
             FillObject();
             cb.DataSource = dt;

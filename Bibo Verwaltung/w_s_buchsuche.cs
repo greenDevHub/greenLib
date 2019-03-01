@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_buchsuche : Form
+    public partial class w_s_buchsuche : MetroFramework.Forms.MetroForm
     {
         #region Objekt Constructor
         /// <summary>
@@ -64,17 +64,17 @@ namespace Bibo_Verwaltung
         #region Componenten-Aktionen
         private void bt_Clear_Click(object sender, EventArgs e)
         {
-            tb_vorname.Text = "Vorname";
+            //tb_vorname.Text = "Vorname";
             tb_vorname.ForeColor = Color.Gray;
-            tb_nachname.Text = "Nachname";
+            //tb_nachname.Text = "Nachname";
             tb_nachname.ForeColor = Color.Gray;
-            tb_klasse.Text = "Klassenstufe";
+            //tb_klasse.Text = "Klassenstufe";
             tb_klasse.ForeColor = Color.Gray;
-            tb_ExemplarID.Text = "ExemplarID";
+            //tb_ExemplarID.Text = "ExemplarID";
             tb_ExemplarID.ForeColor = Color.Gray;
-            tb_ISBN.Text = "ISBN";
+            //tb_ISBN.Text = "ISBN";
             tb_ISBN.ForeColor = Color.Gray;
-            tb_Titel.Text = "Titel";
+            //tb_Titel.Text = "Titel";
             tb_Titel.ForeColor = Color.Gray;
             cb_Autor.SelectedIndex = -1;
             cb_Autor.Text = "Autor";
@@ -167,71 +167,71 @@ namespace Bibo_Verwaltung
 
         private void tb_ExemplarID_Enter(object sender, EventArgs e)
         {
-            if (tb_ExemplarID.Text == "ExemplarID")
-            {
-                tb_ExemplarID.Text = "";
-            }
-            tb_ExemplarID.ForeColor = Color.Black;
+            //    if (tb_ExemplarID.Text == "ExemplarID")
+            //    {
+            //        tb_ExemplarID.Text = "";
+            //    }
+            //    tb_ExemplarID.ForeColor = Color.Black;
         }
 
         private void tb_ExemplarID_Leave(object sender, EventArgs e)
         {
-            if (tb_ExemplarID.Text == "")
-            {
-                tb_ExemplarID.Text = "ExemplarID";
-                tb_ExemplarID.ForeColor = Color.Gray;
-            }
-            else
-            {
-                tb_ExemplarID.ForeColor = Color.Black;
-            }
+            //    if (tb_ExemplarID.Text == "")
+            //    {
+            //        tb_ExemplarID.Text = "ExemplarID";
+            //        tb_ExemplarID.ForeColor = Color.Gray;
+            //    }
+            //    else
+            //    {
+            //        tb_ExemplarID.ForeColor = Color.Black;
+            //    }
         }
 
         private void tb_ISBN_Enter(object sender, EventArgs e)
         {
-            if (tb_ISBN.Text == "ISBN")
-            {
-                tb_ISBN.Text = "";
-            }
-            tb_ISBN.ForeColor = Color.Black;
+            //    if (tb_ISBN.Text == "ISBN")
+            //    {
+            //        tb_ISBN.Text = "";
+            //    }
+            //    tb_ISBN.ForeColor = Color.Black;
         }
 
-        private void tb_ISBN_Leave(object sender, EventArgs e)
+    private void tb_ISBN_Leave(object sender, EventArgs e)
         {
-            if (tb_ISBN.Text == "")
-            {
-                tb_ISBN.Text = "ISBN";
-                tb_ISBN.ForeColor = Color.Gray;
-            }
-            else
-            {
-                tb_ISBN.ForeColor = Color.Black;
-            }
+            //    if (tb_ISBN.Text == "")
+            //    {
+            //        tb_ISBN.Text = "ISBN";
+            //        tb_ISBN.ForeColor = Color.Gray;
+            //    }
+            //    else
+            //    {
+            //        tb_ISBN.ForeColor = Color.Black;
+            //    }
         }
 
         private void tb_Titel_Enter(object sender, EventArgs e)
         {
-            if (tb_Titel.Text == "Titel")
-            {
-                tb_Titel.Text = "";
-            }
-            tb_Titel.ForeColor = Color.Black;
+            //    if (tb_Titel.Text == "Titel")
+            //    {
+            //        tb_Titel.Text = "";
+            //    }
+            //    tb_Titel.ForeColor = Color.Black;
         }
 
-        private void tb_Titel_Leave(object sender, EventArgs e)
+    private void tb_Titel_Leave(object sender, EventArgs e)
         {
-            if (tb_Titel.Text == "")
-            {
-                tb_Titel.Text = "Titel";
-                tb_Titel.ForeColor = Color.Gray;
-            }
-            else
-            {
-                tb_Titel.ForeColor = Color.Black;
-            }
+            //    if (tb_Titel.Text == "")
+            //    {
+            //        tb_Titel.Text = "Titel";
+            //        tb_Titel.ForeColor = Color.Gray;
+            //    }
+            //    else
+            //    {
+            //        tb_Titel.ForeColor = Color.Black;
+            //    }
         }
 
-        private void cb_Autor_Enter(object sender, EventArgs e)
+    private void cb_Autor_Enter(object sender, EventArgs e)
         {
             if (cb_Autor.Text == "Autor")
             {
@@ -344,68 +344,68 @@ namespace Bibo_Verwaltung
 
         private void tb_vorname_Enter(object sender, EventArgs e)
         {
-            if (tb_vorname.Text == "Vorname")
-            {
-                tb_vorname.Text = "";
-            }
-            tb_vorname.ForeColor = Color.Black;
+            //if (tb_vorname.Text == "Vorname")
+            //{
+            //    tb_vorname.Text = "";
+            //}
+            //tb_vorname.ForeColor = Color.Black;
         }
 
         private void tb_vorname_Leave(object sender, EventArgs e)
         {
-            if (tb_vorname.Text == "")
-            {
-                tb_vorname.Text = "Vorname";
-                tb_vorname.ForeColor = Color.Gray;
-            }
-            else
-            {
-                tb_vorname.ForeColor = Color.Black;
-            }
+            //if (tb_vorname.Text == "")
+            //{
+            //    tb_vorname.Text = "Vorname";
+            //    tb_vorname.ForeColor = Color.Gray;
+            //}
+            //else
+            //{
+            //    tb_vorname.ForeColor = Color.Black;
+            //}
         }
 
         private void tb_nachname_Enter(object sender, EventArgs e)
         {
-            if (tb_nachname.Text == "Nachname")
-            {
-                tb_nachname.Text = "";
-            }
-            tb_nachname.ForeColor = Color.Black;
+            //if (tb_nachname.Text == "Nachname")
+            //{
+            //    tb_nachname.Text = "";
+            //}
+            //tb_nachname.ForeColor = Color.Black;
         }
 
         private void tb_nachname_Leave(object sender, EventArgs e)
         {
-            if (tb_nachname.Text == "")
-            {
-                tb_nachname.Text = "Nachname";
-                tb_nachname.ForeColor = Color.Gray;
-            }
-            else
-            {
-                tb_nachname.ForeColor = Color.Black;
-            }
+            //if (tb_nachname.Text == "")
+            //{
+            //    tb_nachname.Text = "Nachname";
+            //    tb_nachname.ForeColor = Color.Gray;
+            //}
+            //else
+            //{
+            //    tb_nachname.ForeColor = Color.Black;
+            //}
         }
 
         private void tb_klasse_Enter(object sender, EventArgs e)
         {
-            if (tb_klasse.Text == "Klassenstufe")
-            {
-                tb_klasse.Text = "";
-            }
-            tb_klasse.ForeColor = Color.Black;
+            //if (tb_klasse.Text == "Klassenstufe")
+            //{
+            //    tb_klasse.Text = "";
+            //}
+            //tb_klasse.ForeColor = Color.Black;
         }
 
         private void tb_klasse_Leave(object sender, EventArgs e)
         {
-            if (tb_klasse.Text == "")
-            {
-                tb_klasse.Text = "Klassenstufe";
-                tb_klasse.ForeColor = Color.Gray;
-            }
-            else
-            {
-                tb_klasse.ForeColor = Color.Black;
-            }
+            //if (tb_klasse.Text == "")
+            //{
+            //    tb_klasse.Text = "Klassenstufe";
+            //    tb_klasse.ForeColor = Color.Gray;
+            //}
+            //else
+            //{
+            //    tb_klasse.ForeColor = Color.Black;
+            //}
         }
         #endregion
 

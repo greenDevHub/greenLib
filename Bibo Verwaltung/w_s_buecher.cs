@@ -472,7 +472,7 @@ namespace Bibo_Verwaltung
                         {
                             b.Verlag.Add(cb_Verlag.Text);
                             int test = int.Parse(b.Verlag.GetID(cb_Verlag.Text));
-                            b.Verlag.FillCombobox(ref cb_Autor, test);
+                            b.Verlag.FillCombobox(ref cb_Verlag, test);
                         }
                         if(needAutor.Count > 0)
                         {
@@ -670,21 +670,11 @@ namespace Bibo_Verwaltung
                 lb_Sprache.Text = "Sprache:*";
                 lb_Erscheinungsdatum.Text = "Erscheinungsdatum:*";
                 checkbox_autor.Enabled = true;
-                if (tb_ISBN.Text.Equals(""))
-                {
-                    lb_isbn_vorlage.Visible = true;
-
-                }
-                else
-                {
-                    lb_isbn_vorlage.Visible = false;
-                }
                 button1.Enabled = true;
 
             }
             if (rb_Update_Buch.Checked)
             {
-                lb_isbn_vorlage.Visible = false;
                 tb_ISBN.Enabled = false;
                 tb_Titel.Enabled = true;
                 cb_Autor.Enabled = true;
@@ -737,15 +727,6 @@ namespace Bibo_Verwaltung
                 lb_Erscheinungsdatum.Text = "Erscheinungsdatum:";
                 checkbox_autor.Enabled = false;
                 button1.Enabled = false;
-                if (tb_ISBN.Text.Equals(""))
-                {
-                    lb_isbn_vorlage.Visible = true;
-
-                }
-                else
-                {
-                    lb_isbn_vorlage.Visible = false;
-                }
             }
         }
         #endregion
@@ -884,7 +865,6 @@ namespace Bibo_Verwaltung
             b.Verlag.FillCombobox(ref cb_Verlag, b.Verlag.VerlagID);
             b.Genre.FillCombobox(ref cb_Genre, b.Genre.GenreID);
             b.Sprache.FillCombobox(ref cb_Sprache, b.Sprache.SpracheID);
-            lb_isbn_vorlage.Visible = false;
             rb_Update_Buch.Focus();
         }
         private void Grid_Buch_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -1184,13 +1164,11 @@ namespace Bibo_Verwaltung
 
         private void tb_ISBN_Click(object sender, EventArgs e)
         {
-            lb_isbn_vorlage.Visible = false;
             checkedListBox1.Visible = false;
         }
 
         private void lb_isbn_vorlage_Click(object sender, EventArgs e)
         {
-            lb_isbn_vorlage.Visible = false;
             tb_ISBN.Focus();
         }
         #endregion
@@ -1331,6 +1309,7 @@ namespace Bibo_Verwaltung
                 cb_Autor.AutoCompleteMode = AutoCompleteMode.None;
                 comboBox1.Visible = true;
                 cb_Autor.DataSource = null;
+                cb_Autor.Enabled = false;
             }
             else
             {
@@ -1338,6 +1317,7 @@ namespace Bibo_Verwaltung
                 comboBox1.Visible = false;
                 checkedListBox1.Visible = false;
                 b.Autor.FillCombobox(ref cb_Autor, 0);
+                cb_Autor.Enabled = true;
             }
         }
 
@@ -1431,14 +1411,6 @@ namespace Bibo_Verwaltung
             checkedListBox1.Visible = false;
         }
 
-        private void tb_ISBN_Leave(object sender, EventArgs e)
-        {
-            if (tb_ISBN.Text.Equals(""))
-            {
-                lb_isbn_vorlage.Visible = true;
-            }
-        }
-
         private void tb_Neupreis_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
@@ -1446,7 +1418,7 @@ namespace Bibo_Verwaltung
                 SystemSounds.Beep.Play();
                 e.Handled = true;
             }
-            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
+            if ((e.KeyChar == ',') && ((sender as MetroFramework.Controls.MetroTextBox).Text.IndexOf(',') > -1))
             {
                 e.Handled = true;
             }

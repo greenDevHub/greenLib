@@ -101,6 +101,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdvancedCheckedListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AdvancedComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Analytics.cs" />
     <Compile Include="Autor.cs" />
     <Compile Include="Barcode.cs" />

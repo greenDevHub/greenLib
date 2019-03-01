@@ -68,7 +68,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt ein DataGridView-Objekt mit den Buchdaten 
         /// </summary>
-        public void FillGrid(ref DataGridView grid, object value = null)
+        public void FillGrid(ref MetroGrid grid, object value = null)
         {
             ClearDataSource();
             FillObject();
@@ -81,7 +81,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Setzt die Farbe eines DataGridView-Rows anhand der Rückgabestatus 
         /// </summary>
-        public void Set_StatusMark(ref DataGridView grid)
+        public void Set_StatusMark(ref MetroGrid grid)
         {
             try
             {
@@ -166,11 +166,11 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt die ComboBoxen Autor, Verlag und Genre
         /// </summary>
-        public void FillComboBoxes(ref ComboBox autor, ref ComboBox verlag, ref ComboBox genre)
+        public void FillComboBoxes(ref AdvancedComboBox autor, ref AdvancedComboBox verlag, ref AdvancedComboBox genre)
         {
-            //buchautor.FillCombobox(ref autor, -1);
-            //buchverlag.FillCombobox(ref verlag, -1);
-            //buchgenre.FillCombobox(ref genre, -1);
+            buchautor.FillCombobox(ref autor, -1);
+            buchverlag.FillCombobox(ref verlag, -1);
+            buchgenre.FillCombobox(ref genre, -1);
             if (autor.Text == "")
             {
                 autor.Text = "Autor";
@@ -188,7 +188,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Blendet die Kundeninformationen ein 
         /// </summary>
-        public void Show_KundenDetails(ref DataGridView grid)
+        public void Show_KundenDetails(ref MetroGrid grid)
         {
             try
             {
@@ -203,7 +203,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Blendet die Kundeninformationen aus 
         /// </summary>
-        public void Hide_KundenDetails(ref DataGridView grid)
+        public void Hide_KundenDetails(ref MetroGrid grid)
         {
             try
             {
@@ -218,7 +218,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Zeigt nur verfügbare Exemplare 
         /// </summary>
-        public void Show_VerfuegbareExemplare(ref DataGridView grid)
+        public void Show_VerfuegbareExemplare(ref MetroGrid grid)
         {
             try
             {
@@ -231,7 +231,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Zeigt alle Exemplare 
         /// </summary>
-        public void Show_AlleExemplare(ref DataGridView grid)
+        public void Show_AlleExemplare(ref MetroGrid grid)
         {
             try
             {
@@ -244,7 +244,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Sucht ein Buch zur Auswahl
         /// </summary>
-        public void Execute_BuchSearch(ref DataGridView grid, string ExemplarID, string ISBN, string Titel, string Autor, string Verlag, string Genre)
+        public void Execute_BuchSearch(ref MetroGrid grid, string ExemplarID, string ISBN, string Titel, string Autor, string Verlag, string Genre)
         {
             try
             {
@@ -282,7 +282,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Sucht einen Kunden
         /// </summary>
-        public void Execute_KundenSearch(ref DataGridView grid, string vorname, string nachname, string klassenstufe)
+        public void Execute_KundenSearch(ref MetroGrid grid, string vorname, string nachname, string klassenstufe)
         {
             try
             {

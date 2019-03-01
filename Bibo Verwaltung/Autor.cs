@@ -121,7 +121,7 @@ namespace Bibo_Verwaltung
 
             con.Close();
         }
-        public void FillCombobox(ref MetroComboBox cb, object value)
+        public void FillCombobox(ref AdvancedComboBox cb, object value)
         {
             FillObject();
             cb.DataSource = dt;
@@ -129,7 +129,7 @@ namespace Bibo_Verwaltung
             cb.DisplayMember = "au_autor";
             cb.SelectedValue = value;
         }
-        public void FillList(ref CheckedListBox clb)
+        public void FillList(ref AdvancedCheckedListBox clb)
         {
             FillObject();
             ((ListBox)clb).DataSource = dt;

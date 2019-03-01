@@ -28,27 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_buchsuche));
-            this.gv_buchsuche = new System.Windows.Forms.DataGridView();
-            this.cb_KundeAnz = new System.Windows.Forms.CheckBox();
-            this.cb_Verfügbar_Anz = new System.Windows.Forms.CheckBox();
-            this.bt_Ausleihen = new System.Windows.Forms.Button();
-            this.gb_BSuchen = new System.Windows.Forms.GroupBox();
-            this.tb_ExemplarID = new System.Windows.Forms.TextBox();
-            this.tb_ISBN = new System.Windows.Forms.TextBox();
-            this.cb_Verlag = new System.Windows.Forms.ComboBox();
-            this.cb_Genre = new System.Windows.Forms.ComboBox();
-            this.cb_Autor = new System.Windows.Forms.ComboBox();
-            this.tb_Titel = new System.Windows.Forms.TextBox();
-            this.tb_nachname = new System.Windows.Forms.TextBox();
-            this.tb_vorname = new System.Windows.Forms.TextBox();
-            this.bt_Clear = new System.Windows.Forms.Button();
+            this.gv_buchsuche = new MetroFramework.Controls.MetroGrid();
+            this.cb_KundeAnz = new MetroFramework.Controls.MetroCheckBox();
+            this.cb_Verfügbar_Anz = new MetroFramework.Controls.MetroCheckBox();
+            this.bt_Ausleihen = new MetroFramework.Controls.MetroButton();
+            this.tb_ExemplarID = new MetroFramework.Controls.MetroTextBox();
+            this.tb_ISBN = new MetroFramework.Controls.MetroTextBox();
+            this.tb_Titel = new MetroFramework.Controls.MetroTextBox();
+            this.tb_nachname = new MetroFramework.Controls.MetroTextBox();
+            this.tb_vorname = new MetroFramework.Controls.MetroTextBox();
+            this.bt_Clear = new MetroFramework.Controls.MetroButton();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
-            this.tb_klasse = new System.Windows.Forms.TextBox();
-            this.gb_KSuchen = new System.Windows.Forms.GroupBox();
+            this.tb_klasse = new MetroFramework.Controls.MetroTextBox();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.cb_Verlag = new Bibo_Verwaltung.AdvancedComboBox();
+            this.cb_Genre = new Bibo_Verwaltung.AdvancedComboBox();
+            this.cb_Autor = new Bibo_Verwaltung.AdvancedComboBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.gv_buchsuche)).BeginInit();
-            this.gb_BSuchen.SuspendLayout();
-            this.gb_KSuchen.SuspendLayout();
+            this.metroPanel1.SuspendLayout();
+            this.metroPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // gv_buchsuche
@@ -58,19 +63,53 @@
             this.gv_buchsuche.AllowUserToResizeColumns = false;
             this.gv_buchsuche.AllowUserToResizeRows = false;
             this.gv_buchsuche.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_buchsuche.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gv_buchsuche.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gv_buchsuche.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.gv_buchsuche.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(188)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(219)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gv_buchsuche.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gv_buchsuche.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_buchsuche.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gv_buchsuche.Cursor = System.Windows.Forms.Cursors.Arrow;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(219)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gv_buchsuche.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gv_buchsuche.EnableHeadersVisualStyles = false;
+            this.gv_buchsuche.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.gv_buchsuche.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.helpProvider.SetHelpString(this.gv_buchsuche, "In diesem Feld werden all ihre Bücher und evtl. vorhandene Ausleihvorgänge angeze" +
         "igt.");
-            this.gv_buchsuche.Location = new System.Drawing.Point(218, 12);
+            this.gv_buchsuche.Location = new System.Drawing.Point(318, 78);
+            this.gv_buchsuche.Margin = new System.Windows.Forms.Padding(4);
             this.gv_buchsuche.Name = "gv_buchsuche";
             this.gv_buchsuche.ReadOnly = true;
+            this.gv_buchsuche.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(188)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(219)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gv_buchsuche.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gv_buchsuche.RowHeadersWidth = 35;
             this.gv_buchsuche.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_buchsuche.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv_buchsuche.ShowEditingIcon = false;
             this.helpProvider.SetShowHelp(this.gv_buchsuche, true);
-            this.gv_buchsuche.Size = new System.Drawing.Size(748, 450);
+            this.gv_buchsuche.Size = new System.Drawing.Size(999, 532);
+            this.gv_buchsuche.Style = MetroFramework.MetroColorStyle.Lime;
             this.gv_buchsuche.TabIndex = 0;
             this.gv_buchsuche.VirtualMode = true;
             this.gv_buchsuche.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_buchsuche_ColumnHeaderMouseClick);
@@ -78,104 +117,365 @@
             // cb_KundeAnz
             // 
             this.cb_KundeAnz.AutoSize = true;
+            this.cb_KundeAnz.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.cb_KundeAnz.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.helpProvider.SetHelpString(this.cb_KundeAnz, "Setzen sie einen Haken in dieses Feld, werden ihnen im obenliegenden Feld Kundeni" +
         "nformationen bei ausgeliehenen Büchern angezeigt.");
-            this.cb_KundeAnz.Location = new System.Drawing.Point(12, 327);
+            this.cb_KundeAnz.Location = new System.Drawing.Point(24, 517);
+            this.cb_KundeAnz.Margin = new System.Windows.Forms.Padding(4);
             this.cb_KundeAnz.Name = "cb_KundeAnz";
             this.helpProvider.SetShowHelp(this.cb_KundeAnz, true);
-            this.cb_KundeAnz.Size = new System.Drawing.Size(181, 17);
+            this.cb_KundeAnz.Size = new System.Drawing.Size(233, 20);
+            this.cb_KundeAnz.Style = MetroFramework.MetroColorStyle.Lime;
             this.cb_KundeAnz.TabIndex = 1;
             this.cb_KundeAnz.Text = "Kundeninformationen einblenden";
-            this.cb_KundeAnz.UseVisualStyleBackColor = true;
+            this.cb_KundeAnz.UseSelectable = true;
             this.cb_KundeAnz.CheckedChanged += new System.EventHandler(this.cb_KundeAnz_CheckedChanged);
             // 
             // cb_Verfügbar_Anz
             // 
             this.cb_Verfügbar_Anz.AutoSize = true;
+            this.cb_Verfügbar_Anz.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.cb_Verfügbar_Anz.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.helpProvider.SetHelpString(this.cb_Verfügbar_Anz, "Setzen sie einen Haken in dieses Feld, werden ihnen nur Bücher angezeigt, welche " +
         "verliehen werden können.");
-            this.cb_Verfügbar_Anz.Location = new System.Drawing.Point(12, 304);
+            this.cb_Verfügbar_Anz.Location = new System.Drawing.Point(24, 492);
+            this.cb_Verfügbar_Anz.Margin = new System.Windows.Forms.Padding(4);
             this.cb_Verfügbar_Anz.Name = "cb_Verfügbar_Anz";
             this.helpProvider.SetShowHelp(this.cb_Verfügbar_Anz, true);
-            this.cb_Verfügbar_Anz.Size = new System.Drawing.Size(201, 17);
+            this.cb_Verfügbar_Anz.Size = new System.Drawing.Size(261, 20);
+            this.cb_Verfügbar_Anz.Style = MetroFramework.MetroColorStyle.Lime;
             this.cb_Verfügbar_Anz.TabIndex = 2;
             this.cb_Verfügbar_Anz.Text = "Nur verleihbereite Bücher einblenden";
-            this.cb_Verfügbar_Anz.UseVisualStyleBackColor = true;
+            this.cb_Verfügbar_Anz.UseSelectable = true;
             this.cb_Verfügbar_Anz.CheckedChanged += new System.EventHandler(this.cb_Verfügbar_Anz_CheckedChanged);
             // 
             // bt_Ausleihen
             // 
+            this.bt_Ausleihen.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_Ausleihen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Ausleihen, "Klicken sie auf diesen Button, nachdem sie ein Buch im obenliegenden Feld makiert" +
         " haben, um dieses gewählte Buch auszuleihen.");
-            this.bt_Ausleihen.Location = new System.Drawing.Point(12, 439);
+            this.bt_Ausleihen.Location = new System.Drawing.Point(23, 542);
+            this.bt_Ausleihen.Margin = new System.Windows.Forms.Padding(4);
             this.bt_Ausleihen.Name = "bt_Ausleihen";
             this.helpProvider.SetShowHelp(this.bt_Ausleihen, true);
-            this.bt_Ausleihen.Size = new System.Drawing.Size(150, 23);
+            this.bt_Ausleihen.Size = new System.Drawing.Size(200, 30);
+            this.bt_Ausleihen.Style = MetroFramework.MetroColorStyle.Lime;
             this.bt_Ausleihen.TabIndex = 11;
             this.bt_Ausleihen.Text = "Ausleihvorgang starten";
-            this.bt_Ausleihen.UseVisualStyleBackColor = true;
+            this.bt_Ausleihen.UseSelectable = true;
             this.bt_Ausleihen.Click += new System.EventHandler(this.Ausleihvorgang);
-            // 
-            // gb_BSuchen
-            // 
-            this.gb_BSuchen.Controls.Add(this.tb_ExemplarID);
-            this.gb_BSuchen.Controls.Add(this.tb_ISBN);
-            this.gb_BSuchen.Controls.Add(this.cb_Verlag);
-            this.gb_BSuchen.Controls.Add(this.cb_Genre);
-            this.gb_BSuchen.Controls.Add(this.cb_Autor);
-            this.gb_BSuchen.Controls.Add(this.tb_Titel);
-            this.helpProvider.SetHelpString(this.gb_BSuchen, resources.GetString("gb_BSuchen.HelpString"));
-            this.gb_BSuchen.Location = new System.Drawing.Point(12, 12);
-            this.gb_BSuchen.Name = "gb_BSuchen";
-            this.helpProvider.SetShowHelp(this.gb_BSuchen, true);
-            this.gb_BSuchen.Size = new System.Drawing.Size(200, 180);
-            this.gb_BSuchen.TabIndex = 13;
-            this.gb_BSuchen.TabStop = false;
-            this.gb_BSuchen.Text = "Suchen nach Bucheigenschaften:";
             // 
             // tb_ExemplarID
             // 
+            // 
+            // 
+            // 
+            this.tb_ExemplarID.CustomButton.Image = null;
+            this.tb_ExemplarID.CustomButton.Location = new System.Drawing.Point(221, 2);
+            this.tb_ExemplarID.CustomButton.Name = "";
+            this.tb_ExemplarID.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.tb_ExemplarID.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_ExemplarID.CustomButton.TabIndex = 1;
+            this.tb_ExemplarID.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_ExemplarID.CustomButton.UseSelectable = true;
+            this.tb_ExemplarID.CustomButton.Visible = false;
+            this.tb_ExemplarID.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.tb_ExemplarID.ForeColor = System.Drawing.SystemColors.GrayText;
             this.helpProvider.SetHelpString(this.tb_ExemplarID, "Tragen sie hier die Buch-ID ein, um das gewünschte Buch zu laden.");
-            this.tb_ExemplarID.Location = new System.Drawing.Point(6, 19);
+            this.tb_ExemplarID.Lines = new string[0];
+            this.tb_ExemplarID.Location = new System.Drawing.Point(4, 4);
+            this.tb_ExemplarID.Margin = new System.Windows.Forms.Padding(4);
+            this.tb_ExemplarID.MaxLength = 32767;
             this.tb_ExemplarID.Name = "tb_ExemplarID";
+            this.tb_ExemplarID.PasswordChar = '\0';
+            this.tb_ExemplarID.PromptText = "ExemplarID";
+            this.tb_ExemplarID.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_ExemplarID.SelectedText = "";
+            this.tb_ExemplarID.SelectionLength = 0;
+            this.tb_ExemplarID.SelectionStart = 0;
+            this.tb_ExemplarID.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_ExemplarID, true);
-            this.tb_ExemplarID.Size = new System.Drawing.Size(188, 20);
+            this.tb_ExemplarID.Size = new System.Drawing.Size(249, 30);
+            this.tb_ExemplarID.Style = MetroFramework.MetroColorStyle.Lime;
             this.tb_ExemplarID.TabIndex = 36;
-            this.tb_ExemplarID.Text = "ExemplarID";
-            this.tb_ExemplarID.Click += new System.EventHandler(this.tb_ExemplarID_Click);
+            this.tb_ExemplarID.UseSelectable = true;
+            this.tb_ExemplarID.WaterMark = "ExemplarID";
+            this.tb_ExemplarID.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_ExemplarID.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_ExemplarID.TextChanged += new System.EventHandler(this.tb_ExemplarID_TextChanged);
+            this.tb_ExemplarID.Click += new System.EventHandler(this.tb_ExemplarID_Click);
             this.tb_ExemplarID.Enter += new System.EventHandler(this.tb_ExemplarID_Enter);
             this.tb_ExemplarID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_ExemplarID_KeyPress);
             this.tb_ExemplarID.Leave += new System.EventHandler(this.tb_ExemplarID_Leave);
             // 
             // tb_ISBN
             // 
+            // 
+            // 
+            // 
+            this.tb_ISBN.CustomButton.Image = null;
+            this.tb_ISBN.CustomButton.Location = new System.Drawing.Point(221, 2);
+            this.tb_ISBN.CustomButton.Name = "";
+            this.tb_ISBN.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.tb_ISBN.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_ISBN.CustomButton.TabIndex = 1;
+            this.tb_ISBN.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_ISBN.CustomButton.UseSelectable = true;
+            this.tb_ISBN.CustomButton.Visible = false;
+            this.tb_ISBN.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.tb_ISBN.ForeColor = System.Drawing.SystemColors.GrayText;
             this.helpProvider.SetHelpKeyword(this.tb_ISBN, "");
             this.helpProvider.SetHelpString(this.tb_ISBN, "Tragen sie hier die ISBN-13 ein, um das ausgeliehene Buch zu laden.");
-            this.tb_ISBN.Location = new System.Drawing.Point(6, 45);
+            this.tb_ISBN.Lines = new string[0];
+            this.tb_ISBN.Location = new System.Drawing.Point(4, 42);
+            this.tb_ISBN.Margin = new System.Windows.Forms.Padding(4);
+            this.tb_ISBN.MaxLength = 32767;
             this.tb_ISBN.Name = "tb_ISBN";
+            this.tb_ISBN.PasswordChar = '\0';
+            this.tb_ISBN.PromptText = "ISBN";
+            this.tb_ISBN.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_ISBN.SelectedText = "";
+            this.tb_ISBN.SelectionLength = 0;
+            this.tb_ISBN.SelectionStart = 0;
+            this.tb_ISBN.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_ISBN, true);
-            this.tb_ISBN.Size = new System.Drawing.Size(188, 20);
+            this.tb_ISBN.Size = new System.Drawing.Size(249, 30);
+            this.tb_ISBN.Style = MetroFramework.MetroColorStyle.Lime;
             this.tb_ISBN.TabIndex = 35;
-            this.tb_ISBN.Text = "ISBN";
+            this.tb_ISBN.UseSelectable = true;
+            this.tb_ISBN.WaterMark = "ISBN";
+            this.tb_ISBN.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_ISBN.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_ISBN.TextChanged += new System.EventHandler(this.tb_ISBN_TextChanged);
             this.tb_ISBN.Enter += new System.EventHandler(this.tb_ISBN_Enter);
             this.tb_ISBN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_ISBN_KeyPress);
             this.tb_ISBN.Leave += new System.EventHandler(this.tb_ISBN_Leave);
             // 
+            // tb_Titel
+            // 
+            // 
+            // 
+            // 
+            this.tb_Titel.CustomButton.Image = null;
+            this.tb_Titel.CustomButton.Location = new System.Drawing.Point(221, 2);
+            this.tb_Titel.CustomButton.Name = "";
+            this.tb_Titel.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.tb_Titel.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_Titel.CustomButton.TabIndex = 1;
+            this.tb_Titel.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_Titel.CustomButton.UseSelectable = true;
+            this.tb_Titel.CustomButton.Visible = false;
+            this.tb_Titel.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.tb_Titel.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.helpProvider.SetHelpString(this.tb_Titel, "Tragen sie hier den Buchtitel ein, um das ausgeliehene Buch zu laden.");
+            this.tb_Titel.Lines = new string[0];
+            this.tb_Titel.Location = new System.Drawing.Point(4, 80);
+            this.tb_Titel.Margin = new System.Windows.Forms.Padding(4);
+            this.tb_Titel.MaxLength = 32767;
+            this.tb_Titel.Name = "tb_Titel";
+            this.tb_Titel.PasswordChar = '\0';
+            this.tb_Titel.PromptText = "Titel";
+            this.tb_Titel.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_Titel.SelectedText = "";
+            this.tb_Titel.SelectionLength = 0;
+            this.tb_Titel.SelectionStart = 0;
+            this.tb_Titel.ShortcutsEnabled = true;
+            this.helpProvider.SetShowHelp(this.tb_Titel, true);
+            this.tb_Titel.Size = new System.Drawing.Size(249, 30);
+            this.tb_Titel.Style = MetroFramework.MetroColorStyle.Lime;
+            this.tb_Titel.TabIndex = 17;
+            this.tb_Titel.UseSelectable = true;
+            this.tb_Titel.WaterMark = "Titel";
+            this.tb_Titel.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_Titel.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_Titel.TextChanged += new System.EventHandler(this.tb_Titel_TextChanged);
+            this.tb_Titel.Enter += new System.EventHandler(this.tb_Titel_Enter);
+            this.tb_Titel.Leave += new System.EventHandler(this.tb_Titel_Leave);
+            // 
+            // tb_nachname
+            // 
+            // 
+            // 
+            // 
+            this.tb_nachname.CustomButton.Image = null;
+            this.tb_nachname.CustomButton.Location = new System.Drawing.Point(221, 2);
+            this.tb_nachname.CustomButton.Name = "";
+            this.tb_nachname.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.tb_nachname.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_nachname.CustomButton.TabIndex = 1;
+            this.tb_nachname.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_nachname.CustomButton.UseSelectable = true;
+            this.tb_nachname.CustomButton.Visible = false;
+            this.tb_nachname.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.tb_nachname.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.helpProvider.SetHelpString(this.tb_nachname, "Tragen sie hier den Nachnamen des gesuchten Kunden ein, welcher einen Ausleihvorg" +
+        "ang getätigt hat.");
+            this.tb_nachname.Lines = new string[0];
+            this.tb_nachname.Location = new System.Drawing.Point(4, 42);
+            this.tb_nachname.Margin = new System.Windows.Forms.Padding(4);
+            this.tb_nachname.MaxLength = 32767;
+            this.tb_nachname.Name = "tb_nachname";
+            this.tb_nachname.PasswordChar = '\0';
+            this.tb_nachname.PromptText = "Nachname";
+            this.tb_nachname.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_nachname.SelectedText = "";
+            this.tb_nachname.SelectionLength = 0;
+            this.tb_nachname.SelectionStart = 0;
+            this.tb_nachname.ShortcutsEnabled = true;
+            this.helpProvider.SetShowHelp(this.tb_nachname, true);
+            this.tb_nachname.Size = new System.Drawing.Size(249, 30);
+            this.tb_nachname.Style = MetroFramework.MetroColorStyle.Lime;
+            this.tb_nachname.TabIndex = 31;
+            this.tb_nachname.UseSelectable = true;
+            this.tb_nachname.WaterMark = "Nachname";
+            this.tb_nachname.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_nachname.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_nachname.TextChanged += new System.EventHandler(this.tb_nachname_TextChanged);
+            this.tb_nachname.Enter += new System.EventHandler(this.tb_nachname_Enter);
+            this.tb_nachname.Leave += new System.EventHandler(this.tb_nachname_Leave);
+            // 
+            // tb_vorname
+            // 
+            // 
+            // 
+            // 
+            this.tb_vorname.CustomButton.Image = null;
+            this.tb_vorname.CustomButton.Location = new System.Drawing.Point(221, 2);
+            this.tb_vorname.CustomButton.Name = "";
+            this.tb_vorname.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.tb_vorname.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_vorname.CustomButton.TabIndex = 1;
+            this.tb_vorname.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_vorname.CustomButton.UseSelectable = true;
+            this.tb_vorname.CustomButton.Visible = false;
+            this.tb_vorname.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.tb_vorname.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.helpProvider.SetHelpString(this.tb_vorname, "Tragen sie hier den Vornamen des gesuchten Kunden ein, welcher einen Ausleihvorga" +
+        "ng getätigt hat.");
+            this.tb_vorname.Lines = new string[0];
+            this.tb_vorname.Location = new System.Drawing.Point(4, 4);
+            this.tb_vorname.Margin = new System.Windows.Forms.Padding(4);
+            this.tb_vorname.MaxLength = 32767;
+            this.tb_vorname.Name = "tb_vorname";
+            this.tb_vorname.PasswordChar = '\0';
+            this.tb_vorname.PromptText = "Vorname";
+            this.tb_vorname.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_vorname.SelectedText = "";
+            this.tb_vorname.SelectionLength = 0;
+            this.tb_vorname.SelectionStart = 0;
+            this.tb_vorname.ShortcutsEnabled = true;
+            this.helpProvider.SetShowHelp(this.tb_vorname, true);
+            this.tb_vorname.Size = new System.Drawing.Size(249, 30);
+            this.tb_vorname.Style = MetroFramework.MetroColorStyle.Lime;
+            this.tb_vorname.TabIndex = 30;
+            this.tb_vorname.UseSelectable = true;
+            this.tb_vorname.WaterMark = "Vorname";
+            this.tb_vorname.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_vorname.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_vorname.TextChanged += new System.EventHandler(this.tb_vorname_TextChanged);
+            this.tb_vorname.Enter += new System.EventHandler(this.tb_vorname_Enter);
+            this.tb_vorname.Leave += new System.EventHandler(this.tb_vorname_Leave);
+            // 
+            // bt_Clear
+            // 
+            this.bt_Clear.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_Clear.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.helpProvider.SetHelpString(this.bt_Clear, "Leeren sie alle linksseitig liegenden Textfelder.");
+            this.bt_Clear.Location = new System.Drawing.Point(23, 580);
+            this.bt_Clear.Margin = new System.Windows.Forms.Padding(4);
+            this.bt_Clear.Name = "bt_Clear";
+            this.helpProvider.SetShowHelp(this.bt_Clear, true);
+            this.bt_Clear.Size = new System.Drawing.Size(200, 30);
+            this.bt_Clear.Style = MetroFramework.MetroColorStyle.Lime;
+            this.bt_Clear.TabIndex = 26;
+            this.bt_Clear.Text = "Filter löschen";
+            this.bt_Clear.UseSelectable = true;
+            this.bt_Clear.Click += new System.EventHandler(this.bt_Clear_Click);
+            // 
+            // tb_klasse
+            // 
+            // 
+            // 
+            // 
+            this.tb_klasse.CustomButton.Image = null;
+            this.tb_klasse.CustomButton.Location = new System.Drawing.Point(221, 2);
+            this.tb_klasse.CustomButton.Name = "";
+            this.tb_klasse.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.tb_klasse.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_klasse.CustomButton.TabIndex = 1;
+            this.tb_klasse.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_klasse.CustomButton.UseSelectable = true;
+            this.tb_klasse.CustomButton.Visible = false;
+            this.tb_klasse.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.tb_klasse.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.helpProvider.SetHelpString(this.tb_klasse, "Tragen sie hier den Vornamen des gesuchten Kunden ein, welcher einen Ausleihvorga" +
+        "ng getätigt hat.");
+            this.tb_klasse.Lines = new string[0];
+            this.tb_klasse.Location = new System.Drawing.Point(4, 80);
+            this.tb_klasse.Margin = new System.Windows.Forms.Padding(4);
+            this.tb_klasse.MaxLength = 32767;
+            this.tb_klasse.Name = "tb_klasse";
+            this.tb_klasse.PasswordChar = '\0';
+            this.tb_klasse.PromptText = "Klassenstufe";
+            this.tb_klasse.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_klasse.SelectedText = "";
+            this.tb_klasse.SelectionLength = 0;
+            this.tb_klasse.SelectionStart = 0;
+            this.tb_klasse.ShortcutsEnabled = true;
+            this.helpProvider.SetShowHelp(this.tb_klasse, true);
+            this.tb_klasse.Size = new System.Drawing.Size(249, 30);
+            this.tb_klasse.Style = MetroFramework.MetroColorStyle.Lime;
+            this.tb_klasse.TabIndex = 32;
+            this.tb_klasse.UseSelectable = true;
+            this.tb_klasse.WaterMark = "Klassenstufe";
+            this.tb_klasse.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_klasse.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_klasse.TextChanged += new System.EventHandler(this.tb_klasse_TextChanged);
+            this.tb_klasse.Enter += new System.EventHandler(this.tb_klasse_Enter);
+            this.tb_klasse.Leave += new System.EventHandler(this.tb_klasse_Leave);
+            // 
+            // metroPanel1
+            // 
+            this.metroPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.metroPanel1.Controls.Add(this.cb_Verlag);
+            this.metroPanel1.Controls.Add(this.cb_Genre);
+            this.metroPanel1.Controls.Add(this.tb_ExemplarID);
+            this.metroPanel1.Controls.Add(this.cb_Autor);
+            this.metroPanel1.Controls.Add(this.tb_ISBN);
+            this.metroPanel1.Controls.Add(this.tb_Titel);
+            this.helpProvider.SetHelpString(this.metroPanel1, resources.GetString("metroPanel1.HelpString"));
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(23, 102);
+            this.metroPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.metroPanel1.Name = "metroPanel1";
+            this.helpProvider.SetShowHelp(this.metroPanel1, true);
+            this.metroPanel1.Size = new System.Drawing.Size(288, 233);
+            this.metroPanel1.Style = MetroFramework.MetroColorStyle.Lime;
+            this.metroPanel1.TabIndex = 37;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
             // cb_Verlag
             // 
             this.cb_Verlag.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Verlag.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Verlag.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cb_Verlag.Font = new System.Drawing.Font("Segoe UI", 8.5F);
             this.cb_Verlag.ForeColor = System.Drawing.SystemColors.GrayText;
             this.cb_Verlag.FormattingEnabled = true;
             this.helpProvider.SetHelpString(this.cb_Verlag, "Tragen sie hier den Verlag ein, um das ausgeliehene Buch zu laden.");
-            this.cb_Verlag.Location = new System.Drawing.Point(6, 124);
+            this.cb_Verlag.HighlightColor = System.Drawing.Color.YellowGreen;
+            this.cb_Verlag.ItemHeight = 24;
+            this.cb_Verlag.Location = new System.Drawing.Point(4, 156);
+            this.cb_Verlag.Margin = new System.Windows.Forms.Padding(4);
             this.cb_Verlag.Name = "cb_Verlag";
             this.helpProvider.SetShowHelp(this.cb_Verlag, true);
-            this.cb_Verlag.Size = new System.Drawing.Size(188, 21);
+            this.cb_Verlag.Size = new System.Drawing.Size(249, 30);
             this.cb_Verlag.Sorted = true;
             this.cb_Verlag.TabIndex = 29;
             this.cb_Verlag.Text = "Verlag";
@@ -187,13 +487,18 @@
             // 
             this.cb_Genre.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Genre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Genre.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cb_Genre.Font = new System.Drawing.Font("Segoe UI", 8.5F);
             this.cb_Genre.ForeColor = System.Drawing.SystemColors.GrayText;
             this.cb_Genre.FormattingEnabled = true;
             this.helpProvider.SetHelpString(this.cb_Genre, "Tragen sie hier das Genre ein, um das ausgeliehene Buch zu laden.");
-            this.cb_Genre.Location = new System.Drawing.Point(6, 150);
+            this.cb_Genre.HighlightColor = System.Drawing.Color.YellowGreen;
+            this.cb_Genre.ItemHeight = 24;
+            this.cb_Genre.Location = new System.Drawing.Point(4, 194);
+            this.cb_Genre.Margin = new System.Windows.Forms.Padding(4);
             this.cb_Genre.Name = "cb_Genre";
             this.helpProvider.SetShowHelp(this.cb_Genre, true);
-            this.cb_Genre.Size = new System.Drawing.Size(188, 21);
+            this.cb_Genre.Size = new System.Drawing.Size(249, 30);
             this.cb_Genre.Sorted = true;
             this.cb_Genre.TabIndex = 28;
             this.cb_Genre.Text = "Genre";
@@ -205,13 +510,18 @@
             // 
             this.cb_Autor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Autor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Autor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cb_Autor.Font = new System.Drawing.Font("Segoe UI", 8.5F);
             this.cb_Autor.ForeColor = System.Drawing.SystemColors.GrayText;
             this.cb_Autor.FormattingEnabled = true;
             this.helpProvider.SetHelpString(this.cb_Autor, "Tragen sie hier den Buchautor ein, um das ausgeliehene Buch zu laden.");
-            this.cb_Autor.Location = new System.Drawing.Point(6, 97);
+            this.cb_Autor.HighlightColor = System.Drawing.Color.YellowGreen;
+            this.cb_Autor.ItemHeight = 24;
+            this.cb_Autor.Location = new System.Drawing.Point(4, 118);
+            this.cb_Autor.Margin = new System.Windows.Forms.Padding(4);
             this.cb_Autor.Name = "cb_Autor";
             this.helpProvider.SetShowHelp(this.cb_Autor, true);
-            this.cb_Autor.Size = new System.Drawing.Size(188, 21);
+            this.cb_Autor.Size = new System.Drawing.Size(249, 30);
             this.cb_Autor.Sorted = true;
             this.cb_Autor.TabIndex = 27;
             this.cb_Autor.Text = "Autor";
@@ -219,116 +529,80 @@
             this.cb_Autor.Enter += new System.EventHandler(this.cb_Autor_Enter);
             this.cb_Autor.Leave += new System.EventHandler(this.cb_Autor_Leave);
             // 
-            // tb_Titel
+            // metroLabel1
             // 
-            this.tb_Titel.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.helpProvider.SetHelpString(this.tb_Titel, "Tragen sie hier den Buchtitel ein, um das ausgeliehene Buch zu laden.");
-            this.tb_Titel.Location = new System.Drawing.Point(6, 71);
-            this.tb_Titel.Name = "tb_Titel";
-            this.helpProvider.SetShowHelp(this.tb_Titel, true);
-            this.tb_Titel.Size = new System.Drawing.Size(188, 20);
-            this.tb_Titel.TabIndex = 17;
-            this.tb_Titel.Text = "Titel";
-            this.tb_Titel.TextChanged += new System.EventHandler(this.tb_Titel_TextChanged);
-            this.tb_Titel.Enter += new System.EventHandler(this.tb_Titel_Enter);
-            this.tb_Titel.Leave += new System.EventHandler(this.tb_Titel_Leave);
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.helpProvider.SetHelpString(this.metroLabel1, resources.GetString("metroLabel1.HelpString"));
+            this.metroLabel1.Location = new System.Drawing.Point(23, 78);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 0);
+            this.metroLabel1.Name = "metroLabel1";
+            this.helpProvider.SetShowHelp(this.metroLabel1, true);
+            this.metroLabel1.Size = new System.Drawing.Size(222, 20);
+            this.metroLabel1.Style = MetroFramework.MetroColorStyle.Lime;
+            this.metroLabel1.TabIndex = 38;
+            this.metroLabel1.Text = "Suchen nach Bucheigenschaften:";
             // 
-            // tb_nachname
+            // metroPanel2
             // 
-            this.tb_nachname.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.helpProvider.SetHelpString(this.tb_nachname, "Tragen sie hier den Nachnamen des gesuchten Kunden ein, welcher einen Ausleihvorg" +
-        "ang getätigt hat.");
-            this.tb_nachname.Location = new System.Drawing.Point(6, 45);
-            this.tb_nachname.Name = "tb_nachname";
-            this.helpProvider.SetShowHelp(this.tb_nachname, true);
-            this.tb_nachname.Size = new System.Drawing.Size(188, 20);
-            this.tb_nachname.TabIndex = 31;
-            this.tb_nachname.Text = "Nachname";
-            this.tb_nachname.TextChanged += new System.EventHandler(this.tb_nachname_TextChanged);
-            this.tb_nachname.Enter += new System.EventHandler(this.tb_nachname_Enter);
-            this.tb_nachname.Leave += new System.EventHandler(this.tb_nachname_Leave);
+            this.metroPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.metroPanel2.Controls.Add(this.tb_klasse);
+            this.metroPanel2.Controls.Add(this.tb_nachname);
+            this.metroPanel2.Controls.Add(this.tb_vorname);
+            this.metroPanel2.HorizontalScrollbarBarColor = true;
+            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.HorizontalScrollbarSize = 10;
+            this.metroPanel2.Location = new System.Drawing.Point(23, 367);
+            this.metroPanel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.metroPanel2.Name = "metroPanel2";
+            this.metroPanel2.Size = new System.Drawing.Size(284, 117);
+            this.metroPanel2.Style = MetroFramework.MetroColorStyle.Lime;
+            this.metroPanel2.TabIndex = 39;
+            this.metroPanel2.VerticalScrollbarBarColor = true;
+            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.VerticalScrollbarSize = 10;
             // 
-            // tb_vorname
+            // metroLabel2
             // 
-            this.tb_vorname.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.helpProvider.SetHelpString(this.tb_vorname, "Tragen sie hier den Vornamen des gesuchten Kunden ein, welcher einen Ausleihvorga" +
-        "ng getätigt hat.");
-            this.tb_vorname.Location = new System.Drawing.Point(6, 19);
-            this.tb_vorname.Name = "tb_vorname";
-            this.helpProvider.SetShowHelp(this.tb_vorname, true);
-            this.tb_vorname.Size = new System.Drawing.Size(188, 20);
-            this.tb_vorname.TabIndex = 30;
-            this.tb_vorname.Text = "Vorname";
-            this.tb_vorname.TextChanged += new System.EventHandler(this.tb_vorname_TextChanged);
-            this.tb_vorname.Enter += new System.EventHandler(this.tb_vorname_Enter);
-            this.tb_vorname.Leave += new System.EventHandler(this.tb_vorname_Leave);
-            // 
-            // bt_Clear
-            // 
-            this.helpProvider.SetHelpString(this.bt_Clear, "Leeren sie alle linksseitig liegenden Textfelder.");
-            this.bt_Clear.Location = new System.Drawing.Point(12, 350);
-            this.bt_Clear.Name = "bt_Clear";
-            this.helpProvider.SetShowHelp(this.bt_Clear, true);
-            this.bt_Clear.Size = new System.Drawing.Size(100, 21);
-            this.bt_Clear.TabIndex = 26;
-            this.bt_Clear.Text = "Filter löschen";
-            this.bt_Clear.UseVisualStyleBackColor = true;
-            this.bt_Clear.Click += new System.EventHandler(this.bt_Clear_Click);
-            // 
-            // tb_klasse
-            // 
-            this.tb_klasse.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.helpProvider.SetHelpString(this.tb_klasse, "Tragen sie hier den Vornamen des gesuchten Kunden ein, welcher einen Ausleihvorga" +
-        "ng getätigt hat.");
-            this.tb_klasse.Location = new System.Drawing.Point(6, 71);
-            this.tb_klasse.Name = "tb_klasse";
-            this.helpProvider.SetShowHelp(this.tb_klasse, true);
-            this.tb_klasse.Size = new System.Drawing.Size(188, 20);
-            this.tb_klasse.TabIndex = 32;
-            this.tb_klasse.Text = "Klassenstufe";
-            this.tb_klasse.TextChanged += new System.EventHandler(this.tb_klasse_TextChanged);
-            this.tb_klasse.Enter += new System.EventHandler(this.tb_klasse_Enter);
-            this.tb_klasse.Leave += new System.EventHandler(this.tb_klasse_Leave);
-            // 
-            // gb_KSuchen
-            // 
-            this.gb_KSuchen.Controls.Add(this.tb_klasse);
-            this.gb_KSuchen.Controls.Add(this.tb_vorname);
-            this.gb_KSuchen.Controls.Add(this.tb_nachname);
-            this.gb_KSuchen.Location = new System.Drawing.Point(12, 198);
-            this.gb_KSuchen.Name = "gb_KSuchen";
-            this.gb_KSuchen.Size = new System.Drawing.Size(200, 100);
-            this.gb_KSuchen.TabIndex = 32;
-            this.gb_KSuchen.TabStop = false;
-            this.gb_KSuchen.Text = "Suchen nach Kundeneigenschaften:";
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel2.Location = new System.Drawing.Point(23, 343);
+            this.metroLabel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 0);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(240, 20);
+            this.metroLabel2.Style = MetroFramework.MetroColorStyle.Lime;
+            this.metroLabel2.TabIndex = 38;
+            this.metroLabel2.Text = "Suchen nach Kundeneigenschaften:";
             // 
             // w_s_buchsuche
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(978, 471);
-            this.Controls.Add(this.gb_KSuchen);
-            this.Controls.Add(this.gb_BSuchen);
+            this.ClientSize = new System.Drawing.Size(1343, 631);
+            this.Controls.Add(this.metroPanel2);
+            this.Controls.Add(this.metroLabel2);
+            this.Controls.Add(this.metroLabel1);
+            this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.bt_Clear);
             this.Controls.Add(this.bt_Ausleihen);
             this.Controls.Add(this.cb_Verfügbar_Anz);
             this.Controls.Add(this.cb_KundeAnz);
             this.Controls.Add(this.gv_buchsuche);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "w_s_buchsuche";
+            this.Padding = new System.Windows.Forms.Padding(20, 74, 20, 20);
+            this.Resizable = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Style = MetroFramework.MetroColorStyle.Lime;
             this.Text = "Buchübersicht";
             this.Activated += new System.EventHandler(this.w_s_buchsuche_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.gv_buchsuche)).EndInit();
-            this.gb_BSuchen.ResumeLayout(false);
-            this.gb_BSuchen.PerformLayout();
-            this.gb_KSuchen.ResumeLayout(false);
-            this.gb_KSuchen.PerformLayout();
+            this.metroPanel1.ResumeLayout(false);
+            this.metroPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -336,22 +610,24 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView gv_buchsuche;
-        private System.Windows.Forms.CheckBox cb_KundeAnz;
-        private System.Windows.Forms.CheckBox cb_Verfügbar_Anz;
-        private System.Windows.Forms.Button bt_Ausleihen;
-        private System.Windows.Forms.GroupBox gb_BSuchen;
-        private System.Windows.Forms.TextBox tb_Titel;
-        private System.Windows.Forms.Button bt_Clear;
-        private System.Windows.Forms.ComboBox cb_Genre;
-        private System.Windows.Forms.ComboBox cb_Autor;
-        private System.Windows.Forms.ComboBox cb_Verlag;
-        private System.Windows.Forms.TextBox tb_nachname;
-        private System.Windows.Forms.TextBox tb_vorname;
-        private System.Windows.Forms.TextBox tb_ISBN;
-        private System.Windows.Forms.TextBox tb_ExemplarID;
+        private MetroFramework.Controls.MetroGrid gv_buchsuche;
+        private MetroFramework.Controls.MetroCheckBox cb_KundeAnz;
+        private MetroFramework.Controls.MetroCheckBox cb_Verfügbar_Anz;
+        private MetroFramework.Controls.MetroButton bt_Ausleihen;
+        private MetroFramework.Controls.MetroTextBox tb_Titel;
+        private MetroFramework.Controls.MetroButton bt_Clear;
+        private AdvancedComboBox cb_Genre;
+        private AdvancedComboBox cb_Autor;
+        private AdvancedComboBox cb_Verlag;
+        private MetroFramework.Controls.MetroTextBox tb_nachname;
+        private MetroFramework.Controls.MetroTextBox tb_vorname;
+        private MetroFramework.Controls.MetroTextBox tb_ISBN;
+        private MetroFramework.Controls.MetroTextBox tb_ExemplarID;
         private System.Windows.Forms.HelpProvider helpProvider;
-        private System.Windows.Forms.GroupBox gb_KSuchen;
-        private System.Windows.Forms.TextBox tb_klasse;
+        private MetroFramework.Controls.MetroTextBox tb_klasse;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroPanel metroPanel2;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
     }
 }
