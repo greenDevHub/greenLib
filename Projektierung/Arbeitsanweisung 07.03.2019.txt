@@ -1,0 +1,10 @@
+-CSV einlesen, Dateiformatänderung
+-ts_fach_kunde Kennzeichen für Leistungskurs/Grundkurs
+-Standardfontgröße für Comboboxen
+
+Formulare die neue GUI benötigen:
+-Buchrückgabe - w_s_rueckgabe
+-Kundenverwaltung - w_s_kunden
+-Benutzerverwaltung - w_s_user
+-Autor,Genres,Fächer,Verlage,Zustände,Sprachen - w_s_autoren,w_s_genres,w_s_faecher,w_s_verlage,w_s_zustand,w_s_sprachen
+-Zuordnungen
