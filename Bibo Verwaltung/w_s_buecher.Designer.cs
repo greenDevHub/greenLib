@@ -300,7 +300,7 @@
             this.lb_Neupreis_Euro.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Neupreis_Euro.MinimumSize = new System.Drawing.Size(22, 24);
             this.lb_Neupreis_Euro.Name = "lb_Neupreis_Euro";
-            this.lb_Neupreis_Euro.Size = new System.Drawing.Size(16, 19);
+            this.lb_Neupreis_Euro.Size = new System.Drawing.Size(22, 24);
             this.lb_Neupreis_Euro.TabIndex = 1;
             this.lb_Neupreis_Euro.Text = "€";
             this.lb_Neupreis_Euro.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

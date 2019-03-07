@@ -273,6 +273,45 @@ namespace Bibo_Verwaltung
                 metroProgressBar1.PerformStep();
             });
         }
+
+        private void mT_fachbuch_Click(object sender, EventArgs e)
+        {
+            Form buchFach = new w_s_buch_fach(currentUser);
+            buchFach.ShowDialog(this);
+        }
+
+        private void mT_klassenstufebuch_Click(object sender, EventArgs e)
+        {
+            Form buchStufe = new w_s_buch_stufe(currentUser);
+            buchStufe.ShowDialog(this);
+        }
+
+        private void mT_klassenstufefach_Click(object sender, EventArgs e)
+        {
+            Form fachStufe = new w_s_fach_stufe(currentUser);
+            fachStufe.ShowDialog(this);
+        }
+
+        private void mT_ausgabe_Click(object sender, EventArgs e)
+        {
+            Form ausleihe = new w_s_ausleihe(currentUser);
+            ausleihe.ShowDialog(this);
+        }
+
+        private void mT_rueckgabe_Click(object sender, EventArgs e)
+        {
+            Form rueckgabe = new w_s_rueckgabe(currentUser);
+            rueckgabe.ShowDialog(this);
+        }
+        int counter = 0;
+        private void image_Click(object sender, EventArgs e)
+        {
+            counter++;
+            if(counter >= 10)
+            {
+                MessageBox.Show("Herzlichen GLückwunsch! Sie haben Langeweile!");
+            }
+        }
     }
     #endregion
 }

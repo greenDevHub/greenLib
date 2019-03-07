@@ -139,7 +139,7 @@
             this.lb_Vorname.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lb_Vorname.Name = "lb_Vorname";
             this.helpProvider.SetShowHelp(this.lb_Vorname, true);
-            this.lb_Vorname.Size = new System.Drawing.Size(57, 15);
+            this.lb_Vorname.Size = new System.Drawing.Size(49, 13);
             this.lb_Vorname.TabIndex = 7;
             this.lb_Vorname.Text = "Vorname";
             this.lb_Vorname.Click += new System.EventHandler(this.lb_Vorname_Click);
@@ -155,7 +155,7 @@
             this.lb_nachname.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lb_nachname.Name = "lb_nachname";
             this.helpProvider.SetShowHelp(this.lb_nachname, true);
-            this.lb_nachname.Size = new System.Drawing.Size(68, 15);
+            this.lb_nachname.Size = new System.Drawing.Size(59, 13);
             this.lb_nachname.TabIndex = 8;
             this.lb_nachname.Text = "Nachname";
             this.lb_nachname.Click += new System.EventHandler(this.lb_nachname_Click);
@@ -166,7 +166,7 @@
             this.label1.Location = new System.Drawing.Point(10, 18);
             this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 15);
+            this.label1.Size = new System.Drawing.Size(68, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Suche nach:";
             // 
