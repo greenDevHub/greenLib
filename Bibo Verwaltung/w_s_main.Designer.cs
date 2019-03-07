@@ -63,10 +63,10 @@
             // lb_Ausleihzahl
             // 
             this.lb_Ausleihzahl.AutoSize = true;
-            this.lb_Ausleihzahl.Location = new System.Drawing.Point(201, 60);
-            this.lb_Ausleihzahl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lb_Ausleihzahl.Location = new System.Drawing.Point(161, 48);
+            this.lb_Ausleihzahl.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_Ausleihzahl.Name = "lb_Ausleihzahl";
-            this.lb_Ausleihzahl.Size = new System.Drawing.Size(15, 20);
+            this.lb_Ausleihzahl.Size = new System.Drawing.Size(15, 19);
             this.lb_Ausleihzahl.TabIndex = 4;
             this.lb_Ausleihzahl.Text = "-";
             // 
@@ -75,21 +75,21 @@
             this.lb_Ausgeliehen.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Ausgeliehen, "In diesem Feld wird ihnen die aktuelle Anzahl von Bücheren angezeigt, welche mome" +
         "ntan ausgeliehen sind.");
-            this.lb_Ausgeliehen.Location = new System.Drawing.Point(4, 60);
-            this.lb_Ausgeliehen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lb_Ausgeliehen.Location = new System.Drawing.Point(3, 48);
+            this.lb_Ausgeliehen.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_Ausgeliehen.Name = "lb_Ausgeliehen";
             this.helpProvider.SetShowHelp(this.lb_Ausgeliehen, true);
-            this.lb_Ausgeliehen.Size = new System.Drawing.Size(135, 20);
+            this.lb_Ausgeliehen.Size = new System.Drawing.Size(124, 19);
             this.lb_Ausgeliehen.TabIndex = 2;
             this.lb_Ausgeliehen.Text = "Bücher ausgeliehen:";
             // 
             // lb_Lagerzahl
             // 
             this.lb_Lagerzahl.AutoSize = true;
-            this.lb_Lagerzahl.Location = new System.Drawing.Point(201, 32);
-            this.lb_Lagerzahl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lb_Lagerzahl.Location = new System.Drawing.Point(161, 26);
+            this.lb_Lagerzahl.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_Lagerzahl.Name = "lb_Lagerzahl";
-            this.lb_Lagerzahl.Size = new System.Drawing.Size(15, 20);
+            this.lb_Lagerzahl.Size = new System.Drawing.Size(15, 19);
             this.lb_Lagerzahl.TabIndex = 3;
             this.lb_Lagerzahl.Text = "-";
             // 
@@ -98,21 +98,21 @@
             this.lb_IstBestand.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_IstBestand, "In diesem Feld wird ihnen die aktuelle Anzahl von Bücheren angezeigt, welche sich" +
         " im Lager befinden.");
-            this.lb_IstBestand.Location = new System.Drawing.Point(4, 32);
-            this.lb_IstBestand.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lb_IstBestand.Location = new System.Drawing.Point(3, 26);
+            this.lb_IstBestand.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_IstBestand.Name = "lb_IstBestand";
             this.helpProvider.SetShowHelp(this.lb_IstBestand, true);
-            this.lb_IstBestand.Size = new System.Drawing.Size(115, 20);
+            this.lb_IstBestand.Size = new System.Drawing.Size(109, 19);
             this.lb_IstBestand.TabIndex = 1;
             this.lb_IstBestand.Text = "Bücher im Lager:";
             // 
             // lb_Bestandzahl
             // 
             this.lb_Bestandzahl.AutoSize = true;
-            this.lb_Bestandzahl.Location = new System.Drawing.Point(201, 4);
-            this.lb_Bestandzahl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lb_Bestandzahl.Location = new System.Drawing.Point(161, 3);
+            this.lb_Bestandzahl.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_Bestandzahl.Name = "lb_Bestandzahl";
-            this.lb_Bestandzahl.Size = new System.Drawing.Size(15, 20);
+            this.lb_Bestandzahl.Size = new System.Drawing.Size(15, 19);
             this.lb_Bestandzahl.TabIndex = 2;
             this.lb_Bestandzahl.Text = "-";
             // 
@@ -121,21 +121,21 @@
             this.lb_Bestand.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Bestand, "In diesem Feld wird ihnen die aktuelle Anzahl von Bücheren angezeigt, welche sich" +
         " im Bestand befinden.");
-            this.lb_Bestand.Location = new System.Drawing.Point(4, 4);
-            this.lb_Bestand.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lb_Bestand.Location = new System.Drawing.Point(3, 3);
+            this.lb_Bestand.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_Bestand.Name = "lb_Bestand";
             this.helpProvider.SetShowHelp(this.lb_Bestand, true);
-            this.lb_Bestand.Size = new System.Drawing.Size(128, 20);
+            this.lb_Bestand.Size = new System.Drawing.Size(121, 19);
             this.lb_Bestand.TabIndex = 0;
             this.lb_Bestand.Text = "Bücher im Bestand:";
             // 
             // mT_Kunden
             // 
             this.mT_Kunden.ActiveControl = null;
-            this.mT_Kunden.Location = new System.Drawing.Point(840, 79);
-            this.mT_Kunden.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.mT_Kunden.Location = new System.Drawing.Point(672, 63);
+            this.mT_Kunden.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mT_Kunden.Name = "mT_Kunden";
-            this.mT_Kunden.Size = new System.Drawing.Size(196, 57);
+            this.mT_Kunden.Size = new System.Drawing.Size(157, 46);
             this.mT_Kunden.Style = MetroFramework.MetroColorStyle.Teal;
             this.mT_Kunden.TabIndex = 2;
             this.mT_Kunden.Text = "Kunden";
@@ -145,10 +145,10 @@
             // mT_Schüler
             // 
             this.mT_Schüler.ActiveControl = null;
-            this.mT_Schüler.Location = new System.Drawing.Point(840, 146);
-            this.mT_Schüler.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.mT_Schüler.Location = new System.Drawing.Point(672, 117);
+            this.mT_Schüler.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mT_Schüler.Name = "mT_Schüler";
-            this.mT_Schüler.Size = new System.Drawing.Size(196, 57);
+            this.mT_Schüler.Size = new System.Drawing.Size(157, 46);
             this.mT_Schüler.Style = MetroFramework.MetroColorStyle.Teal;
             this.mT_Schüler.TabIndex = 3;
             this.mT_Schüler.Text = "Schüler";
@@ -158,10 +158,10 @@
             // mt_Autor
             // 
             this.mt_Autor.ActiveControl = null;
-            this.mt_Autor.Location = new System.Drawing.Point(428, 146);
-            this.mt_Autor.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.mt_Autor.Location = new System.Drawing.Point(342, 117);
+            this.mt_Autor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mt_Autor.Name = "mt_Autor";
-            this.mt_Autor.Size = new System.Drawing.Size(196, 57);
+            this.mt_Autor.Size = new System.Drawing.Size(157, 46);
             this.mt_Autor.TabIndex = 3;
             this.mt_Autor.Text = "Autoren";
             this.mt_Autor.UseSelectable = true;
@@ -170,10 +170,10 @@
             // mT_Verlage
             // 
             this.mT_Verlage.ActiveControl = null;
-            this.mT_Verlage.Location = new System.Drawing.Point(428, 213);
-            this.mT_Verlage.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.mT_Verlage.Location = new System.Drawing.Point(342, 170);
+            this.mT_Verlage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mT_Verlage.Name = "mT_Verlage";
-            this.mT_Verlage.Size = new System.Drawing.Size(196, 57);
+            this.mT_Verlage.Size = new System.Drawing.Size(157, 46);
             this.mT_Verlage.TabIndex = 3;
             this.mT_Verlage.Text = "Verlage";
             this.mT_Verlage.UseSelectable = true;
@@ -182,10 +182,10 @@
             // mT_Zustand
             // 
             this.mT_Zustand.ActiveControl = null;
-            this.mT_Zustand.Location = new System.Drawing.Point(634, 280);
-            this.mT_Zustand.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.mT_Zustand.Location = new System.Drawing.Point(507, 224);
+            this.mT_Zustand.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mT_Zustand.Name = "mT_Zustand";
-            this.mT_Zustand.Size = new System.Drawing.Size(196, 57);
+            this.mT_Zustand.Size = new System.Drawing.Size(157, 46);
             this.mT_Zustand.TabIndex = 3;
             this.mT_Zustand.Text = "Zustand";
             this.mT_Zustand.UseSelectable = true;
@@ -194,10 +194,10 @@
             // mT_Sprachen
             // 
             this.mT_Sprachen.ActiveControl = null;
-            this.mT_Sprachen.Location = new System.Drawing.Point(428, 280);
-            this.mT_Sprachen.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.mT_Sprachen.Location = new System.Drawing.Point(342, 224);
+            this.mT_Sprachen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mT_Sprachen.Name = "mT_Sprachen";
-            this.mT_Sprachen.Size = new System.Drawing.Size(196, 57);
+            this.mT_Sprachen.Size = new System.Drawing.Size(157, 46);
             this.mT_Sprachen.TabIndex = 3;
             this.mT_Sprachen.Text = "Sprachen";
             this.mT_Sprachen.UseSelectable = true;
@@ -206,10 +206,10 @@
             // mT_Faecher
             // 
             this.mT_Faecher.ActiveControl = null;
-            this.mT_Faecher.Location = new System.Drawing.Point(840, 280);
-            this.mT_Faecher.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.mT_Faecher.Location = new System.Drawing.Point(672, 224);
+            this.mT_Faecher.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mT_Faecher.Name = "mT_Faecher";
-            this.mT_Faecher.Size = new System.Drawing.Size(196, 57);
+            this.mT_Faecher.Size = new System.Drawing.Size(157, 46);
             this.mT_Faecher.Style = MetroFramework.MetroColorStyle.Teal;
             this.mT_Faecher.TabIndex = 3;
             this.mT_Faecher.Text = "Fächer";
@@ -219,10 +219,10 @@
             // mT_Buecher
             // 
             this.mT_Buecher.ActiveControl = null;
-            this.mT_Buecher.Location = new System.Drawing.Point(428, 79);
-            this.mT_Buecher.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.mT_Buecher.Location = new System.Drawing.Point(342, 63);
+            this.mT_Buecher.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mT_Buecher.Name = "mT_Buecher";
-            this.mT_Buecher.Size = new System.Drawing.Size(402, 57);
+            this.mT_Buecher.Size = new System.Drawing.Size(322, 46);
             this.mT_Buecher.TabIndex = 3;
             this.mT_Buecher.Text = "Bücher";
             this.mT_Buecher.UseSelectable = true;
@@ -231,10 +231,10 @@
             // mT_buchzuordnung
             // 
             this.mT_buchzuordnung.ActiveControl = null;
-            this.mT_buchzuordnung.Location = new System.Drawing.Point(634, 146);
-            this.mT_buchzuordnung.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.mT_buchzuordnung.Location = new System.Drawing.Point(507, 117);
+            this.mT_buchzuordnung.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mT_buchzuordnung.Name = "mT_buchzuordnung";
-            this.mT_buchzuordnung.Size = new System.Drawing.Size(196, 57);
+            this.mT_buchzuordnung.Size = new System.Drawing.Size(157, 46);
             this.mT_buchzuordnung.TabIndex = 3;
             this.mT_buchzuordnung.Text = "Bücherzuordnung";
             this.mT_buchzuordnung.UseSelectable = true;
@@ -243,10 +243,10 @@
             // mT_Genres
             // 
             this.mT_Genres.ActiveControl = null;
-            this.mT_Genres.Location = new System.Drawing.Point(634, 213);
-            this.mT_Genres.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.mT_Genres.Location = new System.Drawing.Point(507, 170);
+            this.mT_Genres.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mT_Genres.Name = "mT_Genres";
-            this.mT_Genres.Size = new System.Drawing.Size(196, 57);
+            this.mT_Genres.Size = new System.Drawing.Size(157, 46);
             this.mT_Genres.TabIndex = 3;
             this.mT_Genres.Text = "Genres";
             this.mT_Genres.UseSelectable = true;
@@ -255,10 +255,10 @@
             // mT_Klassenstufen
             // 
             this.mT_Klassenstufen.ActiveControl = null;
-            this.mT_Klassenstufen.Location = new System.Drawing.Point(840, 213);
-            this.mT_Klassenstufen.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.mT_Klassenstufen.Location = new System.Drawing.Point(672, 170);
+            this.mT_Klassenstufen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mT_Klassenstufen.Name = "mT_Klassenstufen";
-            this.mT_Klassenstufen.Size = new System.Drawing.Size(196, 57);
+            this.mT_Klassenstufen.Size = new System.Drawing.Size(157, 46);
             this.mT_Klassenstufen.Style = MetroFramework.MetroColorStyle.Teal;
             this.mT_Klassenstufen.TabIndex = 3;
             this.mT_Klassenstufen.Text = "Klassenstufen";
@@ -268,10 +268,10 @@
             // mT_ausleihen
             // 
             this.mT_ausleihen.ActiveControl = null;
-            this.mT_ausleihen.Location = new System.Drawing.Point(16, 213);
-            this.mT_ausleihen.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.mT_ausleihen.Location = new System.Drawing.Point(13, 170);
+            this.mT_ausleihen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mT_ausleihen.Name = "mT_ausleihen";
-            this.mT_ausleihen.Size = new System.Drawing.Size(402, 124);
+            this.mT_ausleihen.Size = new System.Drawing.Size(322, 99);
             this.mT_ausleihen.Style = MetroFramework.MetroColorStyle.Lime;
             this.mT_ausleihen.TabIndex = 3;
             this.mT_ausleihen.Text = "Bücher ausleihen oder zurückgeben";
@@ -281,10 +281,10 @@
             // mT_Einstellungen
             // 
             this.mT_Einstellungen.ActiveControl = null;
-            this.mT_Einstellungen.Location = new System.Drawing.Point(222, 347);
-            this.mT_Einstellungen.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.mT_Einstellungen.Location = new System.Drawing.Point(178, 278);
+            this.mT_Einstellungen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mT_Einstellungen.Name = "mT_Einstellungen";
-            this.mT_Einstellungen.Size = new System.Drawing.Size(196, 58);
+            this.mT_Einstellungen.Size = new System.Drawing.Size(157, 46);
             this.mT_Einstellungen.Style = MetroFramework.MetroColorStyle.Silver;
             this.mT_Einstellungen.TabIndex = 3;
             this.mT_Einstellungen.Text = "Einstellungen";
@@ -294,10 +294,10 @@
             // mT_Benutzerverwaltung
             // 
             this.mT_Benutzerverwaltung.ActiveControl = null;
-            this.mT_Benutzerverwaltung.Location = new System.Drawing.Point(840, 347);
-            this.mT_Benutzerverwaltung.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.mT_Benutzerverwaltung.Location = new System.Drawing.Point(672, 278);
+            this.mT_Benutzerverwaltung.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mT_Benutzerverwaltung.Name = "mT_Benutzerverwaltung";
-            this.mT_Benutzerverwaltung.Size = new System.Drawing.Size(196, 57);
+            this.mT_Benutzerverwaltung.Size = new System.Drawing.Size(157, 46);
             this.mT_Benutzerverwaltung.Style = MetroFramework.MetroColorStyle.Teal;
             this.mT_Benutzerverwaltung.TabIndex = 3;
             this.mT_Benutzerverwaltung.Text = "Benutzerverwaltung";
@@ -307,10 +307,10 @@
             // mT_Abmelden
             // 
             this.mT_Abmelden.ActiveControl = null;
-            this.mT_Abmelden.Location = new System.Drawing.Point(16, 347);
-            this.mT_Abmelden.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.mT_Abmelden.Location = new System.Drawing.Point(13, 278);
+            this.mT_Abmelden.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mT_Abmelden.Name = "mT_Abmelden";
-            this.mT_Abmelden.Size = new System.Drawing.Size(196, 58);
+            this.mT_Abmelden.Size = new System.Drawing.Size(157, 46);
             this.mT_Abmelden.Style = MetroFramework.MetroColorStyle.Silver;
             this.mT_Abmelden.TabIndex = 6;
             this.mT_Abmelden.Text = "Abmelden";
@@ -328,23 +328,23 @@
             this.metroPanel1.Controls.Add(this.lb_Bestandzahl);
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(16, 79);
-            this.metroPanel1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.metroPanel1.HorizontalScrollbarSize = 8;
+            this.metroPanel1.Location = new System.Drawing.Point(13, 63);
+            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(402, 124);
+            this.metroPanel1.Size = new System.Drawing.Size(322, 100);
             this.metroPanel1.TabIndex = 4;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 11;
+            this.metroPanel1.VerticalScrollbarSize = 9;
             // 
             // mT_Statistik
             // 
             this.mT_Statistik.ActiveControl = null;
-            this.mT_Statistik.Location = new System.Drawing.Point(428, 347);
-            this.mT_Statistik.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.mT_Statistik.Location = new System.Drawing.Point(342, 278);
+            this.mT_Statistik.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mT_Statistik.Name = "mT_Statistik";
-            this.mT_Statistik.Size = new System.Drawing.Size(196, 57);
+            this.mT_Statistik.Size = new System.Drawing.Size(157, 46);
             this.mT_Statistik.Style = MetroFramework.MetroColorStyle.Green;
             this.mT_Statistik.TabIndex = 7;
             this.mT_Statistik.Text = "Statistik";
@@ -355,10 +355,10 @@
             // 
             this.image.Image = global::Bibo_Verwaltung.Properties.Resources.icon;
             this.image.ImageSize = 32;
-            this.image.Location = new System.Drawing.Point(14, 21);
+            this.image.Location = new System.Drawing.Point(10, 21);
             this.image.Margin = new System.Windows.Forms.Padding(2);
             this.image.Name = "image";
-            this.image.Size = new System.Drawing.Size(36, 34);
+            this.image.Size = new System.Drawing.Size(32, 32);
             this.image.TabIndex = 8;
             this.image.UseSelectable = true;
             // 
@@ -369,7 +369,7 @@
             this.metroProgressBar1.Location = new System.Drawing.Point(0, 0);
             this.metroProgressBar1.Margin = new System.Windows.Forms.Padding(2);
             this.metroProgressBar1.Name = "metroProgressBar1";
-            this.metroProgressBar1.Size = new System.Drawing.Size(1054, 5);
+            this.metroProgressBar1.Size = new System.Drawing.Size(843, 5);
             this.metroProgressBar1.Step = 1;
             this.metroProgressBar1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroProgressBar1.TabIndex = 9;
@@ -381,9 +381,8 @@
             // 
             // w_s_main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1054, 418);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(843, 334);
             this.Controls.Add(this.metroProgressBar1);
             this.Controls.Add(this.image);
             this.Controls.Add(this.mT_Statistik);
@@ -405,10 +404,9 @@
             this.Controls.Add(this.mT_Kunden);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "w_s_main";
-            this.Padding = new System.Windows.Forms.Padding(11, 75, 11, 10);
+            this.Padding = new System.Windows.Forms.Padding(9, 60, 9, 8);
             this.Resizable = false;
             this.Text = "     Bibliotheksverwaltung";
             this.Activated += new System.EventHandler(this.Load_Uebersicht);

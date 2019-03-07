@@ -532,23 +532,23 @@ namespace Bibo_Verwaltung
  
         private void bt_ImEx_Click(object sender, EventArgs e)
         {
-            Form modus = new w_s_selfmade_dialog("Modus", "Was möchten sie mit der Kundentabelle machen? Wählen Sie den Import- oder den Exportmodus.", "Importmodus", "Exportmodus");
-            modus.ShowDialog();
-            DialogResult ds = modus.DialogResult;
-            if (ds == DialogResult.Yes)
-            {
-                Form Import = new w_s_import_export((DataTable)gv_Kunde.DataSource, true);
-                Import.ShowDialog(this);
-            }
-            else if (ds == DialogResult.No)
-            {
-                Form Import = new w_s_import_export((DataTable)gv_Kunde.DataSource, false);
-                Import.ShowDialog(this);
-            }
-            else { }
-
-            //ExcelExport export = new ExcelExport();
-            //export.ToExcel(Grid_Kunde);
+            Form import = new w_s_schuelerimport("t_s_schueler", true);
+            import.ShowDialog(this);
+            kunde.FillGrid(ref gv_Kunde);
+            //Form modus = new w_s_selfmade_dialog("Modus", "Was möchten sie mit der Kundentabelle machen? Wählen Sie den Import- oder den Exportmodus.", "Importmodus", "Exportmodus");
+            //modus.ShowDialog();
+            //DialogResult ds = modus.DialogResult;
+            //if (ds == DialogResult.Yes)
+            //{
+            //    Form Import = new w_s_import_export((DataTable)gv_Kunde.DataSource, true);
+            //    Import.ShowDialog(this);
+            //}
+            //else if (ds == DialogResult.No)
+            //{
+            //    Form Import = new w_s_import_export((DataTable)gv_Kunde.DataSource, false);
+            //    Import.ShowDialog(this);
+            //}
+            //else { }
         }
         #endregion
 
