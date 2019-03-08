@@ -50,7 +50,7 @@
             this.rb_delete = new System.Windows.Forms.RadioButton();
             this.rb_edit = new System.Windows.Forms.RadioButton();
             this.rb_neu = new System.Windows.Forms.RadioButton();
-            this.cb_zustand = new System.Windows.Forms.ComboBox();
+            this.cb_zustand = new AdvancedComboBox();
             this.dTP_aufnahme = new System.Windows.Forms.DateTimePicker();
             this.lb_aufnahme = new System.Windows.Forms.Label();
             this.lb_zustand = new System.Windows.Forms.Label();
@@ -498,7 +498,7 @@
         private System.Windows.Forms.TextBox tb_id;
         private System.Windows.Forms.TextBox tb_isbn;
         private System.Windows.Forms.DateTimePicker dTP_aufnahme;
-        private System.Windows.Forms.ComboBox cb_zustand;
+        private AdvancedComboBox cb_zustand;
         private System.Windows.Forms.RadioButton rb_delete;
         private System.Windows.Forms.RadioButton rb_edit;
         private System.Windows.Forms.RadioButton rb_neu;

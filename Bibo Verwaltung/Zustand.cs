@@ -56,7 +56,7 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Fill Object
-        public void FillCombobox(ref ComboBox cb, object value)
+        public void FillCombobox(ref AdvancedComboBox cb, object value)
         {
             FillObject();
             cb.DataSource = dt;

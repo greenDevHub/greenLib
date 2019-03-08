@@ -29,346 +29,502 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_Kunden));
-            this.lb_Telefonnummer = new System.Windows.Forms.Label();
-            this.tb_Telefonnummer = new System.Windows.Forms.TextBox();
-            this.gb_kunde = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lb_Vorname = new System.Windows.Forms.Label();
-            this.lb_Nachname = new System.Windows.Forms.Label();
-            this.tb_KundenID = new System.Windows.Forms.TextBox();
-            this.lb_Strasse = new System.Windows.Forms.Label();
-            this.lb_Hausnummer = new System.Windows.Forms.Label();
-            this.lb_Postleitzahl = new System.Windows.Forms.Label();
-            this.tb_Nachname = new System.Windows.Forms.TextBox();
-            this.lb_Ort = new System.Windows.Forms.Label();
-            this.tb_Vorname = new System.Windows.Forms.TextBox();
-            this.tb_Strasse = new System.Windows.Forms.TextBox();
-            this.lb_Klasse = new System.Windows.Forms.Label();
-            this.tb_Mail = new System.Windows.Forms.TextBox();
-            this.lb_Mail = new System.Windows.Forms.Label();
-            this.tb_Hausnummer = new System.Windows.Forms.TextBox();
-            this.tb_Klasse = new System.Windows.Forms.TextBox();
-            this.tb_Postleitzahl = new System.Windows.Forms.TextBox();
-            this.tb_Ort = new System.Windows.Forms.TextBox();
-            this.lb_KundenID = new System.Windows.Forms.Label();
-            this.lb_kunde_add = new System.Windows.Forms.Label();
-            this.bt_clear = new System.Windows.Forms.Button();
-            this.rb_KundeLoeschen = new System.Windows.Forms.RadioButton();
-            this.rb_KundeBearbeiten = new System.Windows.Forms.RadioButton();
-            this.rb_Neukunde = new System.Windows.Forms.RadioButton();
-            this.bt_confirm = new System.Windows.Forms.Button();
-            this.bt_OK = new System.Windows.Forms.Button();
-            this.gv_Kunde = new System.Windows.Forms.DataGridView();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.lb_Telefonnummer = new MetroFramework.Controls.MetroLabel();
+            this.tb_Telefonnummer = new MetroFramework.Controls.MetroTextBox();
+            this.lb_Vorname = new MetroFramework.Controls.MetroLabel();
+            this.lb_Nachname = new MetroFramework.Controls.MetroLabel();
+            this.tb_KundenID = new MetroFramework.Controls.MetroTextBox();
+            this.lb_Strasse = new MetroFramework.Controls.MetroLabel();
+            this.lb_Hausnummer = new MetroFramework.Controls.MetroLabel();
+            this.lb_Postleitzahl = new MetroFramework.Controls.MetroLabel();
+            this.tb_Nachname = new MetroFramework.Controls.MetroTextBox();
+            this.lb_Ort = new MetroFramework.Controls.MetroLabel();
+            this.tb_Vorname = new MetroFramework.Controls.MetroTextBox();
+            this.tb_Strasse = new MetroFramework.Controls.MetroTextBox();
+            this.lb_Klasse = new MetroFramework.Controls.MetroLabel();
+            this.tb_Mail = new MetroFramework.Controls.MetroTextBox();
+            this.lb_Mail = new MetroFramework.Controls.MetroLabel();
+            this.tb_Hausnummer = new MetroFramework.Controls.MetroTextBox();
+            this.tb_Klasse = new MetroFramework.Controls.MetroTextBox();
+            this.tb_Postleitzahl = new MetroFramework.Controls.MetroTextBox();
+            this.tb_Ort = new MetroFramework.Controls.MetroTextBox();
+            this.lb_KundenID = new MetroFramework.Controls.MetroLabel();
+            this.lb_kunde_add = new MetroFramework.Controls.MetroLabel();
+            this.bt_clear = new MetroFramework.Controls.MetroButton();
+            this.rb_KundeLoeschen = new MetroFramework.Controls.MetroRadioButton();
+            this.rb_KundeBearbeiten = new MetroFramework.Controls.MetroRadioButton();
+            this.rb_Neukunde = new MetroFramework.Controls.MetroRadioButton();
+            this.bt_confirm = new MetroFramework.Controls.MetroButton();
+            this.bt_OK = new MetroFramework.Controls.MetroButton();
+            this.gv_Kunde = new MetroFramework.Controls.MetroGrid();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
-            this.bt_ImEx = new System.Windows.Forms.Button();
-            this.gb_kunde.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.bt_ImEx = new MetroFramework.Controls.MetroButton();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.lb_geburtsdatum = new MetroFramework.Controls.MetroLabel();
+            this.dTP_gd = new MetroFramework.Controls.MetroDateTime();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
+            this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lb_Telefonnummer
             // 
-            this.lb_Telefonnummer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Telefonnummer.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Telefonnummer, "Tragen sie die Telefonnummer ihres Kunden hier ein.");
-            this.lb_Telefonnummer.Location = new System.Drawing.Point(3, 309);
+            this.lb_Telefonnummer.Location = new System.Drawing.Point(3, 308);
+            this.lb_Telefonnummer.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Telefonnummer.Name = "lb_Telefonnummer";
             this.helpProvider.SetShowHelp(this.lb_Telefonnummer, true);
-            this.lb_Telefonnummer.Size = new System.Drawing.Size(113, 13);
+            this.lb_Telefonnummer.Size = new System.Drawing.Size(104, 19);
             this.lb_Telefonnummer.TabIndex = 16;
             this.lb_Telefonnummer.Text = "Telefonnummer:";
             // 
             // tb_Telefonnummer
             // 
-            this.tb_Telefonnummer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.tb_Telefonnummer.CustomButton.Image = null;
+            this.tb_Telefonnummer.CustomButton.Location = new System.Drawing.Point(174, 2);
+            this.tb_Telefonnummer.CustomButton.Name = "";
+            this.tb_Telefonnummer.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_Telefonnummer.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_Telefonnummer.CustomButton.TabIndex = 1;
+            this.tb_Telefonnummer.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_Telefonnummer.CustomButton.UseSelectable = true;
+            this.tb_Telefonnummer.CustomButton.Visible = false;
             this.helpProvider.SetHelpString(this.tb_Telefonnummer, "Tragen sie die Telefonnummer ihres Kunden hier ein.");
-            this.tb_Telefonnummer.Location = new System.Drawing.Point(123, 305);
-            this.tb_Telefonnummer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tb_Telefonnummer.Lines = new string[0];
+            this.tb_Telefonnummer.Location = new System.Drawing.Point(113, 308);
+            this.tb_Telefonnummer.MaxLength = 32767;
             this.tb_Telefonnummer.Name = "tb_Telefonnummer";
+            this.tb_Telefonnummer.PasswordChar = '\0';
+            this.tb_Telefonnummer.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_Telefonnummer.SelectedText = "";
+            this.tb_Telefonnummer.SelectionLength = 0;
+            this.tb_Telefonnummer.SelectionStart = 0;
+            this.tb_Telefonnummer.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Telefonnummer, true);
-            this.tb_Telefonnummer.Size = new System.Drawing.Size(143, 20);
+            this.tb_Telefonnummer.Size = new System.Drawing.Size(196, 24);
             this.tb_Telefonnummer.TabIndex = 11;
+            this.tb_Telefonnummer.UseSelectable = true;
+            this.tb_Telefonnummer.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_Telefonnummer.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Telefonnummer.TextChanged += new System.EventHandler(this.tb_Telefonnummer_TextChanged);
-            // 
-            // gb_kunde
-            // 
-            this.gb_kunde.Controls.Add(this.tableLayoutPanel1);
-            this.gb_kunde.Controls.Add(this.lb_kunde_add);
-            this.gb_kunde.Controls.Add(this.bt_clear);
-            this.gb_kunde.Controls.Add(this.rb_KundeLoeschen);
-            this.gb_kunde.Controls.Add(this.rb_KundeBearbeiten);
-            this.gb_kunde.Controls.Add(this.rb_Neukunde);
-            this.gb_kunde.Controls.Add(this.bt_confirm);
-            this.gb_kunde.Location = new System.Drawing.Point(6, 6);
-            this.gb_kunde.Name = "gb_kunde";
-            this.gb_kunde.Size = new System.Drawing.Size(288, 434);
-            this.gb_kunde.TabIndex = 0;
-            this.gb_kunde.TabStop = false;
-            this.gb_kunde.Text = "Kunden";
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.44444F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.55556F));
-            this.tableLayoutPanel1.Controls.Add(this.lb_Vorname, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lb_Nachname, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tb_KundenID, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lb_Strasse, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lb_Hausnummer, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.tb_Telefonnummer, 1, 10);
-            this.tableLayoutPanel1.Controls.Add(this.lb_Postleitzahl, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.tb_Nachname, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lb_Ort, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.tb_Vorname, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tb_Strasse, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lb_Klasse, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.tb_Mail, 1, 9);
-            this.tableLayoutPanel1.Controls.Add(this.lb_Mail, 0, 9);
-            this.tableLayoutPanel1.Controls.Add(this.tb_Hausnummer, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.lb_Telefonnummer, 0, 10);
-            this.tableLayoutPanel1.Controls.Add(this.tb_Klasse, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.tb_Postleitzahl, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.tb_Ort, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.lb_KundenID, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(7, 42);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 11;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(270, 331);
-            this.tableLayoutPanel1.TabIndex = 42;
             // 
             // lb_Vorname
             // 
-            this.lb_Vorname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Vorname.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Vorname, "Tragen sie den Vornamen ihres Kunden hier ein.");
-            this.lb_Vorname.Location = new System.Drawing.Point(3, 38);
+            this.lb_Vorname.Location = new System.Drawing.Point(3, 33);
+            this.lb_Vorname.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Vorname.Name = "lb_Vorname";
             this.helpProvider.SetShowHelp(this.lb_Vorname, true);
-            this.lb_Vorname.Size = new System.Drawing.Size(113, 13);
+            this.lb_Vorname.Size = new System.Drawing.Size(65, 19);
             this.lb_Vorname.TabIndex = 21;
             this.lb_Vorname.Text = "Vorname:";
             // 
             // lb_Nachname
             // 
-            this.lb_Nachname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Nachname.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Nachname, "Tragen sie den Nachnamen ihres Kunden hier ein.");
-            this.lb_Nachname.Location = new System.Drawing.Point(3, 68);
+            this.lb_Nachname.Location = new System.Drawing.Point(3, 63);
+            this.lb_Nachname.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Nachname.Name = "lb_Nachname";
             this.helpProvider.SetShowHelp(this.lb_Nachname, true);
-            this.lb_Nachname.Size = new System.Drawing.Size(113, 13);
+            this.lb_Nachname.Size = new System.Drawing.Size(75, 19);
             this.lb_Nachname.TabIndex = 23;
             this.lb_Nachname.Text = "Nachname:";
             // 
             // tb_KundenID
             // 
+            // 
+            // 
+            // 
+            this.tb_KundenID.CustomButton.Image = null;
+            this.tb_KundenID.CustomButton.Location = new System.Drawing.Point(174, 2);
+            this.tb_KundenID.CustomButton.Name = "";
+            this.tb_KundenID.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_KundenID.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_KundenID.CustomButton.TabIndex = 1;
+            this.tb_KundenID.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_KundenID.CustomButton.UseSelectable = true;
+            this.tb_KundenID.CustomButton.Visible = false;
             this.helpProvider.SetHelpString(this.tb_KundenID, resources.GetString("tb_KundenID.HelpString"));
-            this.tb_KundenID.Location = new System.Drawing.Point(123, 5);
-            this.tb_KundenID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tb_KundenID.Lines = new string[0];
+            this.tb_KundenID.Location = new System.Drawing.Point(113, 3);
+            this.tb_KundenID.MaxLength = 32767;
             this.tb_KundenID.Name = "tb_KundenID";
+            this.tb_KundenID.PasswordChar = '\0';
+            this.tb_KundenID.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_KundenID.SelectedText = "";
+            this.tb_KundenID.SelectionLength = 0;
+            this.tb_KundenID.SelectionStart = 0;
+            this.tb_KundenID.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_KundenID, true);
-            this.tb_KundenID.Size = new System.Drawing.Size(143, 20);
+            this.tb_KundenID.Size = new System.Drawing.Size(196, 24);
             this.tb_KundenID.TabIndex = 3;
+            this.tb_KundenID.UseSelectable = true;
+            this.tb_KundenID.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_KundenID.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_KundenID.TextChanged += new System.EventHandler(this.tb_KundenID_TextChanged);
             // 
             // lb_Strasse
             // 
-            this.lb_Strasse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Strasse.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Strasse, "Tragen sie die Straße ihres Kunden hier ein.");
-            this.lb_Strasse.Location = new System.Drawing.Point(3, 98);
+            this.lb_Strasse.Location = new System.Drawing.Point(3, 128);
+            this.lb_Strasse.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Strasse.Name = "lb_Strasse";
             this.helpProvider.SetShowHelp(this.lb_Strasse, true);
-            this.lb_Strasse.Size = new System.Drawing.Size(113, 13);
+            this.lb_Strasse.Size = new System.Drawing.Size(52, 19);
             this.lb_Strasse.TabIndex = 7;
             this.lb_Strasse.Text = "Strasse:";
             // 
             // lb_Hausnummer
             // 
-            this.lb_Hausnummer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Hausnummer.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Hausnummer, "Tragen sie die Hausnummer  ihres Kunden hier ein.");
-            this.lb_Hausnummer.Location = new System.Drawing.Point(3, 128);
+            this.lb_Hausnummer.Location = new System.Drawing.Point(3, 158);
+            this.lb_Hausnummer.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Hausnummer.Name = "lb_Hausnummer";
             this.helpProvider.SetShowHelp(this.lb_Hausnummer, true);
-            this.lb_Hausnummer.Size = new System.Drawing.Size(113, 13);
+            this.lb_Hausnummer.Size = new System.Drawing.Size(91, 19);
             this.lb_Hausnummer.TabIndex = 27;
             this.lb_Hausnummer.Text = "Hausnummer:";
             // 
             // lb_Postleitzahl
             // 
-            this.lb_Postleitzahl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Postleitzahl.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Postleitzahl, "Tragen sie die Postleitzahl ihres Kunden hier ein.");
-            this.lb_Postleitzahl.Location = new System.Drawing.Point(3, 158);
+            this.lb_Postleitzahl.Location = new System.Drawing.Point(3, 188);
+            this.lb_Postleitzahl.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Postleitzahl.Name = "lb_Postleitzahl";
             this.helpProvider.SetShowHelp(this.lb_Postleitzahl, true);
-            this.lb_Postleitzahl.Size = new System.Drawing.Size(113, 13);
+            this.lb_Postleitzahl.Size = new System.Drawing.Size(76, 19);
             this.lb_Postleitzahl.TabIndex = 29;
             this.lb_Postleitzahl.Text = "Postleitzahl:";
             // 
             // tb_Nachname
             // 
-            this.tb_Nachname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.tb_Nachname.CustomButton.Image = null;
+            this.tb_Nachname.CustomButton.Location = new System.Drawing.Point(174, 2);
+            this.tb_Nachname.CustomButton.Name = "";
+            this.tb_Nachname.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_Nachname.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_Nachname.CustomButton.TabIndex = 1;
+            this.tb_Nachname.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_Nachname.CustomButton.UseSelectable = true;
+            this.tb_Nachname.CustomButton.Visible = false;
             this.helpProvider.SetHelpString(this.tb_Nachname, "Tragen sie den Nachnamen ihres Kunden hier ein.");
-            this.tb_Nachname.Location = new System.Drawing.Point(123, 65);
-            this.tb_Nachname.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tb_Nachname.Lines = new string[0];
+            this.tb_Nachname.Location = new System.Drawing.Point(113, 63);
+            this.tb_Nachname.MaxLength = 32767;
             this.tb_Nachname.Name = "tb_Nachname";
+            this.tb_Nachname.PasswordChar = '\0';
+            this.tb_Nachname.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_Nachname.SelectedText = "";
+            this.tb_Nachname.SelectionLength = 0;
+            this.tb_Nachname.SelectionStart = 0;
+            this.tb_Nachname.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Nachname, true);
-            this.tb_Nachname.Size = new System.Drawing.Size(143, 20);
+            this.tb_Nachname.Size = new System.Drawing.Size(196, 24);
             this.tb_Nachname.TabIndex = 2;
+            this.tb_Nachname.UseSelectable = true;
+            this.tb_Nachname.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_Nachname.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Nachname.TextChanged += new System.EventHandler(this.tb_Nachname_TextChanged);
             // 
             // lb_Ort
             // 
-            this.lb_Ort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Ort.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Ort, "Tragen sie den  Wohnort ihres Kunden hier ein.");
-            this.lb_Ort.Location = new System.Drawing.Point(3, 188);
+            this.lb_Ort.Location = new System.Drawing.Point(3, 218);
+            this.lb_Ort.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Ort.Name = "lb_Ort";
             this.helpProvider.SetShowHelp(this.lb_Ort, true);
-            this.lb_Ort.Size = new System.Drawing.Size(113, 13);
+            this.lb_Ort.Size = new System.Drawing.Size(64, 19);
             this.lb_Ort.TabIndex = 31;
             this.lb_Ort.Text = "Wohnort:";
             // 
             // tb_Vorname
             // 
-            this.tb_Vorname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.tb_Vorname.CustomButton.Image = null;
+            this.tb_Vorname.CustomButton.Location = new System.Drawing.Point(174, 2);
+            this.tb_Vorname.CustomButton.Name = "";
+            this.tb_Vorname.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_Vorname.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_Vorname.CustomButton.TabIndex = 1;
+            this.tb_Vorname.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_Vorname.CustomButton.UseSelectable = true;
+            this.tb_Vorname.CustomButton.Visible = false;
             this.helpProvider.SetHelpString(this.tb_Vorname, "Tragen sie den Vornamen ihres Kunden hier ein.");
-            this.tb_Vorname.Location = new System.Drawing.Point(123, 35);
-            this.tb_Vorname.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tb_Vorname.Lines = new string[0];
+            this.tb_Vorname.Location = new System.Drawing.Point(113, 33);
+            this.tb_Vorname.MaxLength = 32767;
             this.tb_Vorname.Name = "tb_Vorname";
+            this.tb_Vorname.PasswordChar = '\0';
+            this.tb_Vorname.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_Vorname.SelectedText = "";
+            this.tb_Vorname.SelectionLength = 0;
+            this.tb_Vorname.SelectionStart = 0;
+            this.tb_Vorname.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Vorname, true);
-            this.tb_Vorname.Size = new System.Drawing.Size(143, 20);
+            this.tb_Vorname.Size = new System.Drawing.Size(196, 24);
             this.tb_Vorname.TabIndex = 1;
+            this.tb_Vorname.UseSelectable = true;
+            this.tb_Vorname.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_Vorname.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Vorname.TextChanged += new System.EventHandler(this.tb_Vorname_TextChanged);
             // 
             // tb_Strasse
             // 
-            this.tb_Strasse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.tb_Strasse.CustomButton.Image = null;
+            this.tb_Strasse.CustomButton.Location = new System.Drawing.Point(174, 2);
+            this.tb_Strasse.CustomButton.Name = "";
+            this.tb_Strasse.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_Strasse.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_Strasse.CustomButton.TabIndex = 1;
+            this.tb_Strasse.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_Strasse.CustomButton.UseSelectable = true;
+            this.tb_Strasse.CustomButton.Visible = false;
             this.helpProvider.SetHelpString(this.tb_Strasse, "Tragen sie die Straße ihres Kunden hier ein.");
-            this.tb_Strasse.Location = new System.Drawing.Point(123, 95);
-            this.tb_Strasse.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tb_Strasse.Lines = new string[0];
+            this.tb_Strasse.Location = new System.Drawing.Point(113, 128);
+            this.tb_Strasse.MaxLength = 32767;
             this.tb_Strasse.Name = "tb_Strasse";
+            this.tb_Strasse.PasswordChar = '\0';
+            this.tb_Strasse.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_Strasse.SelectedText = "";
+            this.tb_Strasse.SelectionLength = 0;
+            this.tb_Strasse.SelectionStart = 0;
+            this.tb_Strasse.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Strasse, true);
-            this.tb_Strasse.Size = new System.Drawing.Size(143, 20);
+            this.tb_Strasse.Size = new System.Drawing.Size(196, 24);
             this.tb_Strasse.TabIndex = 4;
+            this.tb_Strasse.UseSelectable = true;
+            this.tb_Strasse.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_Strasse.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Strasse.TextChanged += new System.EventHandler(this.tb_Strasse_TextChanged);
             // 
             // lb_Klasse
             // 
-            this.lb_Klasse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Klasse.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Klasse, "Tragen sie die Klasse ihres Kunden hier ein.");
             this.lb_Klasse.Location = new System.Drawing.Point(3, 248);
+            this.lb_Klasse.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Klasse.Name = "lb_Klasse";
             this.helpProvider.SetShowHelp(this.lb_Klasse, true);
-            this.lb_Klasse.Size = new System.Drawing.Size(113, 13);
+            this.lb_Klasse.Size = new System.Drawing.Size(46, 19);
             this.lb_Klasse.TabIndex = 34;
             this.lb_Klasse.Text = "Klasse:";
             // 
             // tb_Mail
             // 
-            this.tb_Mail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.tb_Mail.CustomButton.Image = null;
+            this.tb_Mail.CustomButton.Location = new System.Drawing.Point(174, 2);
+            this.tb_Mail.CustomButton.Name = "";
+            this.tb_Mail.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_Mail.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_Mail.CustomButton.TabIndex = 1;
+            this.tb_Mail.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_Mail.CustomButton.UseSelectable = true;
+            this.tb_Mail.CustomButton.Visible = false;
             this.helpProvider.SetHelpString(this.tb_Mail, "Tragen sie die E-Mail Adresse ihres Kunden hier ein.");
-            this.tb_Mail.Location = new System.Drawing.Point(123, 275);
-            this.tb_Mail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tb_Mail.Lines = new string[0];
+            this.tb_Mail.Location = new System.Drawing.Point(113, 278);
+            this.tb_Mail.MaxLength = 32767;
             this.tb_Mail.Name = "tb_Mail";
+            this.tb_Mail.PasswordChar = '\0';
+            this.tb_Mail.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_Mail.SelectedText = "";
+            this.tb_Mail.SelectionLength = 0;
+            this.tb_Mail.SelectionStart = 0;
+            this.tb_Mail.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Mail, true);
-            this.tb_Mail.Size = new System.Drawing.Size(143, 20);
+            this.tb_Mail.Size = new System.Drawing.Size(196, 24);
             this.tb_Mail.TabIndex = 10;
+            this.tb_Mail.UseSelectable = true;
+            this.tb_Mail.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_Mail.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Mail.TextChanged += new System.EventHandler(this.tb_Mail_TextChanged);
             // 
             // lb_Mail
             // 
-            this.lb_Mail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Mail.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_Mail, "Tragen sie die E-Mail Adresse ihres Kunden hier ein.");
             this.lb_Mail.Location = new System.Drawing.Point(3, 278);
+            this.lb_Mail.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Mail.Name = "lb_Mail";
             this.helpProvider.SetShowHelp(this.lb_Mail, true);
-            this.lb_Mail.Size = new System.Drawing.Size(113, 13);
+            this.lb_Mail.Size = new System.Drawing.Size(37, 19);
             this.lb_Mail.TabIndex = 37;
             this.lb_Mail.Text = "Mail:";
             // 
             // tb_Hausnummer
             // 
-            this.tb_Hausnummer.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            // 
+            // 
+            // 
+            this.tb_Hausnummer.CustomButton.Image = null;
+            this.tb_Hausnummer.CustomButton.Location = new System.Drawing.Point(174, 2);
+            this.tb_Hausnummer.CustomButton.Name = "";
+            this.tb_Hausnummer.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_Hausnummer.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_Hausnummer.CustomButton.TabIndex = 1;
+            this.tb_Hausnummer.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_Hausnummer.CustomButton.UseSelectable = true;
+            this.tb_Hausnummer.CustomButton.Visible = false;
             this.helpProvider.SetHelpString(this.tb_Hausnummer, "Tragen sie die Hausnummer  ihres Kunden hier ein.");
-            this.tb_Hausnummer.Location = new System.Drawing.Point(123, 125);
-            this.tb_Hausnummer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tb_Hausnummer.Lines = new string[0];
+            this.tb_Hausnummer.Location = new System.Drawing.Point(113, 158);
+            this.tb_Hausnummer.MaxLength = 32767;
             this.tb_Hausnummer.Name = "tb_Hausnummer";
+            this.tb_Hausnummer.PasswordChar = '\0';
+            this.tb_Hausnummer.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_Hausnummer.SelectedText = "";
+            this.tb_Hausnummer.SelectionLength = 0;
+            this.tb_Hausnummer.SelectionStart = 0;
+            this.tb_Hausnummer.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Hausnummer, true);
-            this.tb_Hausnummer.Size = new System.Drawing.Size(79, 20);
+            this.tb_Hausnummer.Size = new System.Drawing.Size(196, 24);
             this.tb_Hausnummer.TabIndex = 5;
+            this.tb_Hausnummer.UseSelectable = true;
+            this.tb_Hausnummer.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_Hausnummer.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Hausnummer.TextChanged += new System.EventHandler(this.tb_Hausnummer_TextChanged);
             // 
             // tb_Klasse
             // 
-            this.tb_Klasse.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            // 
+            // 
+            // 
+            this.tb_Klasse.CustomButton.Image = null;
+            this.tb_Klasse.CustomButton.Location = new System.Drawing.Point(174, 2);
+            this.tb_Klasse.CustomButton.Name = "";
+            this.tb_Klasse.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_Klasse.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_Klasse.CustomButton.TabIndex = 1;
+            this.tb_Klasse.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_Klasse.CustomButton.UseSelectable = true;
+            this.tb_Klasse.CustomButton.Visible = false;
             this.helpProvider.SetHelpString(this.tb_Klasse, "Tragen sie die Klasse ihres Kunden hier ein.");
-            this.tb_Klasse.Location = new System.Drawing.Point(123, 245);
-            this.tb_Klasse.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tb_Klasse.Lines = new string[0];
+            this.tb_Klasse.Location = new System.Drawing.Point(113, 248);
+            this.tb_Klasse.MaxLength = 32767;
             this.tb_Klasse.Name = "tb_Klasse";
+            this.tb_Klasse.PasswordChar = '\0';
+            this.tb_Klasse.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_Klasse.SelectedText = "";
+            this.tb_Klasse.SelectionLength = 0;
+            this.tb_Klasse.SelectionStart = 0;
+            this.tb_Klasse.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Klasse, true);
-            this.tb_Klasse.Size = new System.Drawing.Size(79, 20);
+            this.tb_Klasse.Size = new System.Drawing.Size(196, 24);
             this.tb_Klasse.TabIndex = 9;
+            this.tb_Klasse.UseSelectable = true;
+            this.tb_Klasse.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_Klasse.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Klasse.TextChanged += new System.EventHandler(this.tb_Klasse_TextChanged);
             // 
             // tb_Postleitzahl
             // 
-            this.tb_Postleitzahl.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            // 
+            // 
+            // 
+            this.tb_Postleitzahl.CustomButton.Image = null;
+            this.tb_Postleitzahl.CustomButton.Location = new System.Drawing.Point(174, 2);
+            this.tb_Postleitzahl.CustomButton.Name = "";
+            this.tb_Postleitzahl.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_Postleitzahl.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_Postleitzahl.CustomButton.TabIndex = 1;
+            this.tb_Postleitzahl.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_Postleitzahl.CustomButton.UseSelectable = true;
+            this.tb_Postleitzahl.CustomButton.Visible = false;
             this.helpProvider.SetHelpString(this.tb_Postleitzahl, "Tragen sie die Postleitzahl ihres Kunden hier ein.");
-            this.tb_Postleitzahl.Location = new System.Drawing.Point(123, 155);
-            this.tb_Postleitzahl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tb_Postleitzahl.Lines = new string[0];
+            this.tb_Postleitzahl.Location = new System.Drawing.Point(113, 188);
+            this.tb_Postleitzahl.MaxLength = 32767;
             this.tb_Postleitzahl.Name = "tb_Postleitzahl";
+            this.tb_Postleitzahl.PasswordChar = '\0';
+            this.tb_Postleitzahl.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_Postleitzahl.SelectedText = "";
+            this.tb_Postleitzahl.SelectionLength = 0;
+            this.tb_Postleitzahl.SelectionStart = 0;
+            this.tb_Postleitzahl.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Postleitzahl, true);
-            this.tb_Postleitzahl.Size = new System.Drawing.Size(79, 20);
+            this.tb_Postleitzahl.Size = new System.Drawing.Size(196, 24);
             this.tb_Postleitzahl.TabIndex = 6;
+            this.tb_Postleitzahl.UseSelectable = true;
+            this.tb_Postleitzahl.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_Postleitzahl.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Postleitzahl.TextChanged += new System.EventHandler(this.tb_Postleitzahl_TextChanged);
             // 
             // tb_Ort
             // 
-            this.tb_Ort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.tb_Ort.CustomButton.Image = null;
+            this.tb_Ort.CustomButton.Location = new System.Drawing.Point(174, 2);
+            this.tb_Ort.CustomButton.Name = "";
+            this.tb_Ort.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_Ort.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_Ort.CustomButton.TabIndex = 1;
+            this.tb_Ort.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_Ort.CustomButton.UseSelectable = true;
+            this.tb_Ort.CustomButton.Visible = false;
             this.helpProvider.SetHelpString(this.tb_Ort, "Tragen sie den  Wohnort ihres Kunden hier ein.");
-            this.tb_Ort.Location = new System.Drawing.Point(123, 185);
-            this.tb_Ort.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tb_Ort.Lines = new string[0];
+            this.tb_Ort.Location = new System.Drawing.Point(113, 218);
+            this.tb_Ort.MaxLength = 32767;
             this.tb_Ort.Name = "tb_Ort";
+            this.tb_Ort.PasswordChar = '\0';
+            this.tb_Ort.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_Ort.SelectedText = "";
+            this.tb_Ort.SelectionLength = 0;
+            this.tb_Ort.SelectionStart = 0;
+            this.tb_Ort.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Ort, true);
-            this.tb_Ort.Size = new System.Drawing.Size(143, 20);
+            this.tb_Ort.Size = new System.Drawing.Size(196, 24);
             this.tb_Ort.TabIndex = 7;
+            this.tb_Ort.UseSelectable = true;
+            this.tb_Ort.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_Ort.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Ort.TextChanged += new System.EventHandler(this.tb_Ort_TextChanged);
             // 
             // lb_KundenID
             // 
-            this.lb_KundenID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_KundenID.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_KundenID, resources.GetString("lb_KundenID.HelpString"));
-            this.lb_KundenID.Location = new System.Drawing.Point(3, 8);
+            this.lb_KundenID.Location = new System.Drawing.Point(3, 3);
+            this.lb_KundenID.Margin = new System.Windows.Forms.Padding(3);
             this.lb_KundenID.Name = "lb_KundenID";
             this.helpProvider.SetShowHelp(this.lb_KundenID, true);
-            this.lb_KundenID.Size = new System.Drawing.Size(113, 13);
+            this.lb_KundenID.Size = new System.Drawing.Size(73, 19);
             this.lb_KundenID.TabIndex = 0;
             this.lb_KundenID.Text = "Kunden-ID:";
             // 
             // lb_kunde_add
             // 
-            this.lb_kunde_add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lb_kunde_add.Location = new System.Drawing.Point(7, 409);
+            this.lb_kunde_add.Location = new System.Drawing.Point(3, 368);
+            this.lb_kunde_add.Margin = new System.Windows.Forms.Padding(3);
             this.lb_kunde_add.Name = "lb_kunde_add";
-            this.lb_kunde_add.Size = new System.Drawing.Size(270, 13);
+            this.lb_kunde_add.Size = new System.Drawing.Size(270, 24);
             this.lb_kunde_add.TabIndex = 40;
             this.lb_kunde_add.Text = "Der Kunde wurde erfolgreich hinzugefügt!";
             this.lb_kunde_add.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -376,82 +532,92 @@
             // 
             // bt_clear
             // 
+            this.bt_clear.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_clear.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_clear, "Leeren sie alle oben liegenden Textfelder.");
-            this.bt_clear.Location = new System.Drawing.Point(39, 380);
-            this.bt_clear.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bt_clear.Location = new System.Drawing.Point(3, 338);
             this.bt_clear.Name = "bt_clear";
             this.helpProvider.SetShowHelp(this.bt_clear, true);
-            this.bt_clear.Size = new System.Drawing.Size(90, 24);
+            this.bt_clear.Size = new System.Drawing.Size(150, 24);
             this.bt_clear.TabIndex = 14;
             this.bt_clear.Text = "Leeren";
-            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.UseSelectable = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
             // rb_KundeLoeschen
             // 
             this.rb_KundeLoeschen.AutoSize = true;
+            this.rb_KundeLoeschen.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rb_KundeLoeschen.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.helpProvider.SetHelpString(this.rb_KundeLoeschen, "Klicken sie hier, um einen vorhandenen Kunden zu löschen.");
-            this.rb_KundeLoeschen.Location = new System.Drawing.Point(211, 19);
+            this.rb_KundeLoeschen.Location = new System.Drawing.Point(213, 63);
             this.rb_KundeLoeschen.Name = "rb_KundeLoeschen";
             this.helpProvider.SetShowHelp(this.rb_KundeLoeschen, true);
-            this.rb_KundeLoeschen.Size = new System.Drawing.Size(71, 17);
+            this.rb_KundeLoeschen.Size = new System.Drawing.Size(80, 19);
             this.rb_KundeLoeschen.TabIndex = 0;
             this.rb_KundeLoeschen.Text = "Entfernen";
-            this.rb_KundeLoeschen.UseVisualStyleBackColor = true;
+            this.rb_KundeLoeschen.UseSelectable = true;
             this.rb_KundeLoeschen.CheckedChanged += new System.EventHandler(this.rb_KundeLoeschen_CheckedChanged);
             // 
             // rb_KundeBearbeiten
             // 
             this.rb_KundeBearbeiten.AutoSize = true;
+            this.rb_KundeBearbeiten.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rb_KundeBearbeiten.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.helpProvider.SetHelpString(this.rb_KundeBearbeiten, "Klicken sie hier, um einen vorhandenen Kunden zu bearbeiten.");
-            this.rb_KundeBearbeiten.Location = new System.Drawing.Point(114, 19);
+            this.rb_KundeBearbeiten.Location = new System.Drawing.Point(119, 63);
             this.rb_KundeBearbeiten.Name = "rb_KundeBearbeiten";
             this.helpProvider.SetShowHelp(this.rb_KundeBearbeiten, true);
-            this.rb_KundeBearbeiten.Size = new System.Drawing.Size(76, 17);
+            this.rb_KundeBearbeiten.Size = new System.Drawing.Size(88, 19);
             this.rb_KundeBearbeiten.TabIndex = 0;
             this.rb_KundeBearbeiten.Text = "Bearbeiten";
-            this.rb_KundeBearbeiten.UseVisualStyleBackColor = true;
+            this.rb_KundeBearbeiten.UseSelectable = true;
             this.rb_KundeBearbeiten.CheckedChanged += new System.EventHandler(this.rb_KundeBearbeiten_CheckedChanged);
             // 
             // rb_Neukunde
             // 
             this.rb_Neukunde.AutoSize = true;
             this.rb_Neukunde.Checked = true;
+            this.rb_Neukunde.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rb_Neukunde.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.helpProvider.SetHelpString(this.rb_Neukunde, "Klicken sie hier, um einen neuen Kunden hinzuzufügen.");
-            this.rb_Neukunde.Location = new System.Drawing.Point(13, 19);
+            this.rb_Neukunde.Location = new System.Drawing.Point(23, 63);
             this.rb_Neukunde.Name = "rb_Neukunde";
             this.helpProvider.SetShowHelp(this.rb_Neukunde, true);
-            this.rb_Neukunde.Size = new System.Drawing.Size(79, 17);
+            this.rb_Neukunde.Size = new System.Drawing.Size(90, 19);
             this.rb_Neukunde.TabIndex = 0;
             this.rb_Neukunde.TabStop = true;
             this.rb_Neukunde.Text = "Hinzufügen";
-            this.rb_Neukunde.UseVisualStyleBackColor = true;
+            this.rb_Neukunde.UseSelectable = true;
             this.rb_Neukunde.CheckedChanged += new System.EventHandler(this.rb_Neukunde_CheckedChanged);
             // 
             // bt_confirm
             // 
+            this.bt_confirm.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_confirm.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_confirm, "Speichern sie alle oben eingetragenen Daten.");
-            this.bt_confirm.Location = new System.Drawing.Point(137, 380);
-            this.bt_confirm.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bt_confirm.Location = new System.Drawing.Point(159, 338);
             this.bt_confirm.Name = "bt_confirm";
             this.helpProvider.SetShowHelp(this.bt_confirm, true);
-            this.bt_confirm.Size = new System.Drawing.Size(140, 24);
+            this.bt_confirm.Size = new System.Drawing.Size(150, 24);
             this.bt_confirm.TabIndex = 13;
             this.bt_confirm.Text = "Speichern";
-            this.bt_confirm.UseVisualStyleBackColor = true;
+            this.bt_confirm.UseSelectable = true;
             this.bt_confirm.Click += new System.EventHandler(this.bt_confirm_click);
             // 
             // bt_OK
             // 
             this.bt_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.bt_OK.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_OK.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_OK, "Schließen sie das akuelle Fenster.");
-            this.bt_OK.Location = new System.Drawing.Point(758, 415);
+            this.bt_OK.Location = new System.Drawing.Point(895, 464);
             this.bt_OK.Name = "bt_OK";
             this.helpProvider.SetShowHelp(this.bt_OK, true);
-            this.bt_OK.Size = new System.Drawing.Size(120, 23);
+            this.bt_OK.Size = new System.Drawing.Size(150, 24);
             this.bt_OK.TabIndex = 15;
             this.bt_OK.Text = "Schließen";
-            this.bt_OK.UseVisualStyleBackColor = true;
+            this.bt_OK.UseSelectable = true;
             // 
             // gv_Kunde
             // 
@@ -460,89 +626,182 @@
             this.gv_Kunde.AllowUserToResizeColumns = false;
             this.gv_Kunde.AllowUserToResizeRows = false;
             this.gv_Kunde.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_Kunde.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gv_Kunde.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gv_Kunde.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.gv_Kunde.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gv_Kunde.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.gv_Kunde.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gv_Kunde.DefaultCellStyle = dataGridViewCellStyle17;
+            this.gv_Kunde.EnableHeadersVisualStyles = false;
+            this.gv_Kunde.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.gv_Kunde.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.helpProvider.SetHelpString(this.gv_Kunde, "Hier werden all ihre Kunden angezeigt.");
-            this.gv_Kunde.Location = new System.Drawing.Point(300, 12);
-            this.gv_Kunde.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.gv_Kunde.Location = new System.Drawing.Point(342, 88);
             this.gv_Kunde.MultiSelect = false;
             this.gv_Kunde.Name = "gv_Kunde";
             this.gv_Kunde.ReadOnly = true;
+            this.gv_Kunde.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gv_Kunde.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.gv_Kunde.RowHeadersVisible = false;
             this.gv_Kunde.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_Kunde.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.helpProvider.SetShowHelp(this.gv_Kunde, true);
-            this.gv_Kunde.Size = new System.Drawing.Size(578, 397);
+            this.gv_Kunde.Size = new System.Drawing.Size(703, 370);
             this.gv_Kunde.TabIndex = 0;
             this.gv_Kunde.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Kunde_CellDoubleClick);
             // 
             // bt_ImEx
             // 
-            this.bt_ImEx.Location = new System.Drawing.Point(300, 415);
+            this.bt_ImEx.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_ImEx.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.bt_ImEx.Location = new System.Drawing.Point(342, 464);
             this.bt_ImEx.Name = "bt_ImEx";
-            this.bt_ImEx.Size = new System.Drawing.Size(180, 23);
+            this.bt_ImEx.Size = new System.Drawing.Size(150, 24);
             this.bt_ImEx.TabIndex = 42;
             this.bt_ImEx.Text = "Importieren/Exportieren";
-            this.bt_ImEx.UseVisualStyleBackColor = true;
+            this.bt_ImEx.UseSelectable = true;
             this.bt_ImEx.Click += new System.EventHandler(this.bt_ImEx_Click);
+            // 
+            // metroPanel1
+            // 
+            this.metroPanel1.Controls.Add(this.dTP_gd);
+            this.metroPanel1.Controls.Add(this.lb_geburtsdatum);
+            this.metroPanel1.Controls.Add(this.lb_kunde_add);
+            this.metroPanel1.Controls.Add(this.lb_Telefonnummer);
+            this.metroPanel1.Controls.Add(this.bt_confirm);
+            this.metroPanel1.Controls.Add(this.bt_clear);
+            this.metroPanel1.Controls.Add(this.tb_Telefonnummer);
+            this.metroPanel1.Controls.Add(this.lb_Klasse);
+            this.metroPanel1.Controls.Add(this.tb_Mail);
+            this.metroPanel1.Controls.Add(this.lb_Mail);
+            this.metroPanel1.Controls.Add(this.lb_Hausnummer);
+            this.metroPanel1.Controls.Add(this.tb_Klasse);
+            this.metroPanel1.Controls.Add(this.lb_Ort);
+            this.metroPanel1.Controls.Add(this.lb_Postleitzahl);
+            this.metroPanel1.Controls.Add(this.lb_Strasse);
+            this.metroPanel1.Controls.Add(this.lb_Nachname);
+            this.metroPanel1.Controls.Add(this.lb_Vorname);
+            this.metroPanel1.Controls.Add(this.tb_KundenID);
+            this.metroPanel1.Controls.Add(this.lb_KundenID);
+            this.metroPanel1.Controls.Add(this.tb_Vorname);
+            this.metroPanel1.Controls.Add(this.tb_Nachname);
+            this.metroPanel1.Controls.Add(this.tb_Strasse);
+            this.metroPanel1.Controls.Add(this.tb_Hausnummer);
+            this.metroPanel1.Controls.Add(this.tb_Postleitzahl);
+            this.metroPanel1.Controls.Add(this.tb_Ort);
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(23, 88);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(313, 400);
+            this.metroPanel1.TabIndex = 43;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // lb_geburtsdatum
+            // 
+            this.lb_geburtsdatum.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_geburtsdatum, "Tragen sie den Nachnamen ihres Kunden hier ein.");
+            this.lb_geburtsdatum.Location = new System.Drawing.Point(3, 93);
+            this.lb_geburtsdatum.Margin = new System.Windows.Forms.Padding(3);
+            this.lb_geburtsdatum.Name = "lb_geburtsdatum";
+            this.helpProvider.SetShowHelp(this.lb_geburtsdatum, true);
+            this.lb_geburtsdatum.Size = new System.Drawing.Size(96, 19);
+            this.lb_geburtsdatum.TabIndex = 41;
+            this.lb_geburtsdatum.Text = "Geburtsdatum:";
+            // 
+            // dTP_gd
+            // 
+            this.dTP_gd.Location = new System.Drawing.Point(113, 93);
+            this.dTP_gd.MaximumSize = new System.Drawing.Size(500, 24);
+            this.dTP_gd.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dTP_gd.Name = "dTP_gd";
+            this.dTP_gd.Size = new System.Drawing.Size(196, 29);
+            this.dTP_gd.TabIndex = 42;
             // 
             // w_s_Kunden
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 449);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(1074, 498);
+            this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.bt_ImEx);
-            this.Controls.Add(this.gb_kunde);
             this.Controls.Add(this.bt_OK);
+            this.Controls.Add(this.rb_KundeLoeschen);
             this.Controls.Add(this.gv_Kunde);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Controls.Add(this.rb_KundeBearbeiten);
+            this.Controls.Add(this.rb_Neukunde);
             this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "w_s_Kunden";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Resizable = false;
             this.Text = "Kunden";
             this.Activated += new System.EventHandler(this.w_s_kunden_Activated);
-            this.gb_kunde.ResumeLayout(false);
-            this.gb_kunde.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).EndInit();
+            this.metroPanel1.ResumeLayout(false);
+            this.metroPanel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label lb_Telefonnummer;
-        private System.Windows.Forms.TextBox tb_Telefonnummer;
-        private System.Windows.Forms.GroupBox gb_kunde;
-        private System.Windows.Forms.Button bt_OK;
-        private System.Windows.Forms.Button bt_confirm;
-        private System.Windows.Forms.RadioButton rb_KundeLoeschen;
-        private System.Windows.Forms.RadioButton rb_KundeBearbeiten;
-        private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.Label lb_kunde_add;
-        private System.Windows.Forms.DataGridView gv_Kunde;
-        private System.Windows.Forms.RadioButton rb_Neukunde;
+        private MetroFramework.Controls.MetroLabel lb_Telefonnummer;
+        private MetroFramework.Controls.MetroTextBox tb_Telefonnummer;
+        private MetroFramework.Controls.MetroButton bt_OK;
+        private MetroFramework.Controls.MetroButton bt_confirm;
+        private MetroFramework.Controls.MetroRadioButton rb_KundeLoeschen;
+        private MetroFramework.Controls.MetroRadioButton rb_KundeBearbeiten;
+        private MetroFramework.Controls.MetroButton bt_clear;
+        private MetroFramework.Controls.MetroLabel lb_kunde_add;
+        private MetroFramework.Controls.MetroGrid gv_Kunde;
+        private MetroFramework.Controls.MetroRadioButton rb_Neukunde;
         private System.Windows.Forms.HelpProvider helpProvider;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label lb_Vorname;
-        private System.Windows.Forms.Label lb_Nachname;
-        private System.Windows.Forms.TextBox tb_KundenID;
-        private System.Windows.Forms.Label lb_Strasse;
-        private System.Windows.Forms.Label lb_Hausnummer;
-        private System.Windows.Forms.Label lb_Postleitzahl;
-        private System.Windows.Forms.TextBox tb_Nachname;
-        private System.Windows.Forms.Label lb_Ort;
-        private System.Windows.Forms.TextBox tb_Vorname;
-        private System.Windows.Forms.TextBox tb_Strasse;
-        private System.Windows.Forms.Label lb_Klasse;
-        private System.Windows.Forms.TextBox tb_Mail;
-        private System.Windows.Forms.Label lb_Mail;
-        private System.Windows.Forms.TextBox tb_Hausnummer;
-        private System.Windows.Forms.TextBox tb_Klasse;
-        private System.Windows.Forms.TextBox tb_Postleitzahl;
-        private System.Windows.Forms.TextBox tb_Ort;
-        private System.Windows.Forms.Label lb_KundenID;
-        private System.Windows.Forms.Button bt_ImEx;
+        private MetroFramework.Controls.MetroLabel lb_Vorname;
+        private MetroFramework.Controls.MetroLabel lb_Nachname;
+        private MetroFramework.Controls.MetroTextBox tb_KundenID;
+        private MetroFramework.Controls.MetroLabel lb_Strasse;
+        private MetroFramework.Controls.MetroLabel lb_Hausnummer;
+        private MetroFramework.Controls.MetroLabel lb_Postleitzahl;
+        private MetroFramework.Controls.MetroTextBox tb_Nachname;
+        private MetroFramework.Controls.MetroLabel lb_Ort;
+        private MetroFramework.Controls.MetroTextBox tb_Vorname;
+        private MetroFramework.Controls.MetroTextBox tb_Strasse;
+        private MetroFramework.Controls.MetroLabel lb_Klasse;
+        private MetroFramework.Controls.MetroTextBox tb_Mail;
+        private MetroFramework.Controls.MetroLabel lb_Mail;
+        private MetroFramework.Controls.MetroTextBox tb_Hausnummer;
+        private MetroFramework.Controls.MetroTextBox tb_Klasse;
+        private MetroFramework.Controls.MetroTextBox tb_Postleitzahl;
+        private MetroFramework.Controls.MetroTextBox tb_Ort;
+        private MetroFramework.Controls.MetroLabel lb_KundenID;
+        private MetroFramework.Controls.MetroButton bt_ImEx;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
+        private MetroFramework.Controls.MetroDateTime dTP_gd;
+        private MetroFramework.Controls.MetroLabel lb_geburtsdatum;
     }
 }

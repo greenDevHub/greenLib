@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -6,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_Kunden : Form
+    public partial class w_s_Kunden : MetroFramework.Forms.MetroForm
     {
         Kunde kunde = new Kunde();
 
@@ -28,6 +29,7 @@ namespace Bibo_Verwaltung
             kunde.KundenID = tb_KundenID.Text;
             kunde.Vorname = tb_Vorname.Text;
             kunde.Nachname = tb_Nachname.Text;
+            kunde.Gd = dTP_gd.Value.Date;
             kunde.Strasse = tb_Strasse.Text;
             kunde.Hausnummer = tb_Hausnummer.Text;
             kunde.Postleitzahl = tb_Postleitzahl.Text;
@@ -75,6 +77,7 @@ namespace Bibo_Verwaltung
             lb_kunde_add.Visible = false;
             tb_Vorname.Text = "";
             tb_Nachname.Text = "";
+            dTP_gd.Text = "";
             tb_Strasse.Text = "";
             tb_Hausnummer.Text = "";
             tb_Postleitzahl.Text = "";
@@ -241,7 +244,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void KundenFilter()
         {
-            (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klassenstufe LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
+            (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
         }
         #endregion
 
@@ -259,11 +262,7 @@ namespace Bibo_Verwaltung
             if (rb_KundeBearbeiten.Checked)
             {
                 if (!tb_Vorname.Text.Equals("")
-                && !tb_Nachname.Text.Equals("")
-                && !tb_Strasse.Text.Equals("")
-                && !tb_Hausnummer.Text.Equals("")
-                && !tb_Postleitzahl.Text.Equals("")
-                && !tb_Ort.Text.Equals(""))
+                && !tb_Nachname.Text.Equals(""))
                 {
                     try
                     {
@@ -329,11 +328,7 @@ namespace Bibo_Verwaltung
             if (rb_Neukunde.Checked)
             {
                 if (!tb_Vorname.Text.Equals("")
-                && !tb_Nachname.Text.Equals("")
-                && !tb_Strasse.Text.Equals("")
-                && !tb_Hausnummer.Text.Equals("")
-                && !tb_Postleitzahl.Text.Equals("")
-                && !tb_Ort.Text.Equals(""))
+                && !tb_Nachname.Text.Equals(""))
                 {
                     string errorMessage = "Folgende Felder haben unzulässige Werte: ";
                     bool error = false;
@@ -387,13 +382,30 @@ namespace Bibo_Verwaltung
                     try
                     {
                         SetKundenValues();
-                        kunde.AddKunde();
-                        ClearForm();
-                        kunde.FillGrid(ref gv_Kunde);
-                        lb_kunde_add.Visible = false;
-                        lb_kunde_add.Text = "Der Kunde wurde hinzugefügt!";
-                        lb_kunde_add.Visible = true;
-                        t.Start();
+                        if (kunde.AlreadyExists() && kunde.Activated)
+                        {
+                            object[] args = new object[] { kunde.Vorname, kunde.Nachname, kunde.Gd.ToShortDateString() };
+                            string message = String.Format("Es existiert bereits ein Eintrag zu dem Kunden '{0} {1} ({2})'. Bitte überprüfen Sie ihre Angaben!", args);
+                            MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        else
+                        {
+                            if (!kunde.Activated)
+                            {
+                                kunde.Activate();
+                                kunde.UpdateKunde();
+                            }
+                            else
+                            {
+                                kunde.AddKunde();
+                            }
+                            ClearForm();
+                            kunde.FillGrid(ref gv_Kunde);
+                            lb_kunde_add.Visible = false;
+                            lb_kunde_add.Text = "Der Kunde wurde hinzugefügt!";
+                            lb_kunde_add.Visible = true;
+                            t.Start();
+                        }
                     }
                     catch (SqlException)
                     {
@@ -507,6 +519,7 @@ namespace Bibo_Verwaltung
                 //tb_KundenID.Text = row.Cells["Kunden-ID"].Value.ToString();
 
                 kunde = new Kunde(row.Cells["Kunden-ID"].Value.ToString());
+                tb_KundenID.Text = kunde.KundenID;
                 tb_Vorname.Text = kunde.Vorname;
                 tb_Nachname.Text = kunde.Nachname;
                 tb_Strasse.Text = kunde.Strasse;

@@ -40,7 +40,7 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Fillgrid
-        public void FillGrid(ref DataGridView grid, object value = null)
+        public void FillGrid(ref MetroFramework.Controls.MetroGrid grid, object value = null)
         {
             grid.DataSource = ds.Tables[0];
             grid.Columns[0].Visible = false;

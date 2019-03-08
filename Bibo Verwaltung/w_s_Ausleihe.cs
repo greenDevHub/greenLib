@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_ausleihe : Form
+    public partial class w_s_ausleihe : MetroFramework.Forms.MetroForm
     {
         #region Constructor
         string currentUser;

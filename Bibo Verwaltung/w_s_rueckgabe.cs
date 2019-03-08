@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_rueckgabe : Form
+    public partial class w_s_rueckgabe : MetroFramework.Forms.MetroForm
     {
         #region Constructor
         string currentUser;
@@ -185,7 +185,6 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void ShowBuchResults()
         {
-            Cursor = Cursors.WaitCursor;
             #region Buchcode parsen
             if (tb_BuchCode.Text.Length == 8)
             {
@@ -425,13 +424,13 @@ namespace Bibo_Verwaltung
             ShowBuchResults();
         }
 
-        private void llb_Buch_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void llb_Buch_LinkClicked(object sender, EventArgs e)
         {
             Form Info = new w_s_information(1, rueckgabe_ExemplarID, currentUser);
             Info.ShowDialog();
         }
 
-        private void llb_Kunde_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void llb_Kunde_LinkClicked(object sender, EventArgs e)
         {
             Form Info = new w_s_information(2, kunde.KundenID, currentUser);
             Info.ShowDialog();
