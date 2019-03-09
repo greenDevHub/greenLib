@@ -180,6 +180,10 @@ namespace Bibo_Verwaltung
                     LeistungskursListe.Add(Fach.FachKurz);
                 }
             }
+            for(int i = LeistungskursListe.Count; i < 2; i++)
+            {
+                LeistungskursListe.Add("");
+            }
             dr.Close();
         }
         /// <summary>
@@ -417,6 +421,8 @@ namespace Bibo_Verwaltung
                 cmd.Parameters.AddWithValue("@k_ID", KundenID);
                 // Verbindung öffnen 
                 cmd.ExecuteNonQuery();
+                DeleteFaecher();
+                AddFaecher();
                 //Verbindung schließen
                 con.Close();
             }

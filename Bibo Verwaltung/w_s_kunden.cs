@@ -41,12 +41,12 @@ namespace Bibo_Verwaltung
             kunde.Telefonnummer = tb_Telefonnummer.Text;
             kunde.Faecher.Clear();
             kunde.LeistungskursListe.Clear();
-            for(int i = 0; i<gv_result.Rows.Count; i++)
+            for (int i = 0; i < gv_result.Rows.Count; i++)
             {
                 DataGridViewRow row = gv_result.Rows[i];
-                if(row.Cells["Kurzbezeichnung"].Value != null)
+                if (row.Cells["Kurzbezeichnung"].Value != null)
                 {
-                    if(row.Cells["Kurzbezeichnung"].Value.ToString() != "")
+                    if (row.Cells["Kurzbezeichnung"].Value.ToString() != "")
                     {
                         if (row.DefaultCellStyle.BackColor == Color.Yellow)
                         {
@@ -58,11 +58,11 @@ namespace Bibo_Verwaltung
                             kunde.Faecher.Add(row.Cells["Kurzbezeichnung"].Value.ToString());
                         }
                     }
-                    
+
                 }
 
             }
-            for(int i = kunde.LeistungskursListe.Count; i < 2; i++)
+            for (int i = kunde.LeistungskursListe.Count; i < 2; i++)
             {
                 kunde.LeistungskursListe.Add("");
             }
@@ -147,8 +147,9 @@ namespace Bibo_Verwaltung
                 bt_confirm.Enabled = true;
                 bt_confirm.Text = "Speichern";
                 tb_KundenID.Enabled = false;
-                tb_Vorname.Enabled = true;
-                tb_Nachname.Enabled = true;
+                tb_Vorname.Enabled = false;
+                tb_Nachname.Enabled = false;
+                dTP_gd.Enabled = false;
                 tb_Strasse.Enabled = true;
                 tb_Hausnummer.Enabled = true;
                 tb_Postleitzahl.Enabled = true;
@@ -159,10 +160,11 @@ namespace Bibo_Verwaltung
                 lb_KundenID.Text = "Kunden-ID:*";
                 lb_Vorname.Text = "Vorname:*";
                 lb_Nachname.Text = "Nachname:*";
-                lb_Strasse.Text = "Strasse:*";
-                lb_Hausnummer.Text = "Hausnummer:*";
-                lb_Ort.Text = "Wohnort:*";
-                lb_Postleitzahl.Text = "Postleitzahl:*";
+                lb_geburtsdatum.Text = "Geburtsdatum:*";
+                lb_Strasse.Text = "Strasse:";
+                lb_Hausnummer.Text = "Hausnummer:";
+                lb_Ort.Text = "Wohnort:";
+                lb_Postleitzahl.Text = "Postleitzahl:";
             }
             else if (rb_Neukunde.Checked)
             {
@@ -171,6 +173,7 @@ namespace Bibo_Verwaltung
                 tb_KundenID.Enabled = false;
                 tb_Vorname.Enabled = true;
                 tb_Nachname.Enabled = true;
+                dTP_gd.Enabled = true;
                 tb_Strasse.Enabled = true;
                 tb_Hausnummer.Enabled = true;
                 tb_Postleitzahl.Enabled = true;
@@ -181,10 +184,11 @@ namespace Bibo_Verwaltung
                 lb_KundenID.Text = "Kunden-ID:";
                 lb_Vorname.Text = "Vorname:*";
                 lb_Nachname.Text = "Nachname:*";
-                lb_Strasse.Text = "Strasse:*";
-                lb_Hausnummer.Text = "Hausnummer:*";
-                lb_Ort.Text = "Wohnort:*";
-                lb_Postleitzahl.Text = "Postleitzahl:*";
+                lb_geburtsdatum.Text = "Geburtsdatum:*";
+                lb_Strasse.Text = "Strasse:";
+                lb_Hausnummer.Text = "Hausnummer:";
+                lb_Ort.Text = "Wohnort:";
+                lb_Postleitzahl.Text = "Postleitzahl:";
             }
             else if (rb_KundeLoeschen.Checked)
             {
@@ -194,6 +198,7 @@ namespace Bibo_Verwaltung
                 tb_Vorname.Enabled = false;
                 tb_Nachname.Enabled = false;
                 tb_Strasse.Enabled = false;
+                dTP_gd.Enabled = false;
                 tb_Hausnummer.Enabled = false;
                 tb_Postleitzahl.Enabled = false;
                 tb_Ort.Enabled = false;
@@ -203,6 +208,7 @@ namespace Bibo_Verwaltung
                 lb_KundenID.Text = "Kunden-ID:*";
                 lb_Vorname.Text = "Vorname:";
                 lb_Nachname.Text = "Nachname:";
+                lb_geburtsdatum.Text = "Geburtsdatum:";
                 lb_Strasse.Text = "Strasse:";
                 lb_Ort.Text = "Wohnort:";
                 lb_Hausnummer.Text = "Hausnummer:";
@@ -269,7 +275,7 @@ namespace Bibo_Verwaltung
                 tb_Ort.BackColor = Color.White;
             }
         }
-        
+
         /// <summary>
         /// Sucht nach Kunden in einer GridView
         /// </summary>
@@ -326,7 +332,7 @@ namespace Bibo_Verwaltung
                 {
                     try
                     {
-                        SetKundenValues();
+                        kunde.KundenID = tb_KundenID.Text;
                         kunde.Deactivate();
                         ClearForm();
                         kunde.FillGrid(ref gv_Kunde);
@@ -413,27 +419,63 @@ namespace Bibo_Verwaltung
                     try
                     {
                         SetKundenValues();
-                        if (kunde.AlreadyExists() && kunde.Activated)
+                        if(kunde.Faecher.Count >1 && kunde.Klasse.Equals(""))
                         {
-                            object[] args = new object[] { kunde.Vorname, kunde.Nachname, kunde.Gd.ToShortDateString() };
-                            string message = String.Format("Es existiert bereits ein Eintrag zu dem Kunden '{0} {1} ({2})'. Bitte überprüfen Sie ihre Angaben!", args);
-                            MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MetroMessageBox.Show(this, "Sie haben zwar Fächer ausgewählt, aber keine Klasse. Bitte geben Sie auch die Klasse des Schülers an!", "Klasse fehlt", MessageBoxButtons.OK,MessageBoxIcon.Warning);
                         }
-                        else if(kunde.AlreadyExists() && !kunde.Activated)
+                        else if(kunde.Faecher.Count.Equals(0) && !kunde.Klasse.Equals(""))
                         {
-                            kunde.Activate();
-                            kunde.UpdateKunde();
+                            DialogResult dr = MetroMessageBox.Show(this, "Sie haben zwar eine Klasse ausgewählt, aber keine Fächer. Möchten Sie auch die Fächer angeben?", "Fächer fehlen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if(dr == DialogResult.No)
+                            {
+                                if (kunde.AlreadyExists() && kunde.Activated)
+                                {
+                                    object[] args = new object[] { kunde.Vorname, kunde.Nachname, kunde.Gd.ToShortDateString() };
+                                    string message = String.Format("Es existiert bereits ein Eintrag zu dem Kunden '{0} {1} ({2})'. Bitte überprüfen Sie ihre Angaben!", args);
+                                    MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
+                                else if (kunde.AlreadyExists() && !kunde.Activated)
+                                {
+                                    kunde.Activate();
+                                    kunde.UpdateKunde();
+                                }
+                                else
+                                {
+                                    kunde.AddKunde();
+                                    ClearForm();
+                                    kunde.FillGrid(ref gv_Kunde);
+                                    lb_kunde_add.Visible = false;
+                                    lb_kunde_add.Text = "Der Kunde wurde hinzugefügt!";
+                                    lb_kunde_add.Visible = true;
+                                    t.Start();
+                                }
+                            }
                         }
                         else
                         {
-                            kunde.AddKunde();
-                            ClearForm();
-                            kunde.FillGrid(ref gv_Kunde);
-                            lb_kunde_add.Visible = false;
-                            lb_kunde_add.Text = "Der Kunde wurde hinzugefügt!";
-                            lb_kunde_add.Visible = true;
-                            t.Start();
+                            if (kunde.AlreadyExists() && kunde.Activated)
+                            {
+                                object[] args = new object[] { kunde.Vorname, kunde.Nachname, kunde.Gd.ToShortDateString() };
+                                string message = String.Format("Es existiert bereits ein Eintrag zu dem Kunden '{0} {1} ({2})'. Bitte überprüfen Sie ihre Angaben!", args);
+                                MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                            else if (kunde.AlreadyExists() && !kunde.Activated)
+                            {
+                                kunde.Activate();
+                                kunde.UpdateKunde();
+                            }
+                            else
+                            {
+                                kunde.AddKunde();
+                                ClearForm();
+                                kunde.FillGrid(ref gv_Kunde);
+                                lb_kunde_add.Visible = false;
+                                lb_kunde_add.Text = "Der Kunde wurde hinzugefügt!";
+                                lb_kunde_add.Visible = true;
+                                t.Start();
+                            }
                         }
+                        
                     }
                     catch (SqlException ex)
                     {
@@ -478,7 +520,7 @@ namespace Bibo_Verwaltung
             SetModus();
             kunde.FillGrid(ref gv_Kunde);
         }
-   
+
         private void tb_KundenID_TextChanged(object sender, EventArgs e)
         {
             tb_KundenID.BackColor = Color.White;
@@ -537,7 +579,7 @@ namespace Bibo_Verwaltung
             tb_Telefonnummer.BackColor = Color.White;
             KundenFilter();
         }
-        
+
         private void Grid_Kunde_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -545,46 +587,47 @@ namespace Bibo_Verwaltung
                 ClearForm();
                 DataGridViewRow row = this.gv_Kunde.Rows[e.RowIndex];
                 rb_KundeBearbeiten.Checked = true;
+                LoadKunde(row.Cells["Kunden-ID"].Value.ToString());
                 //tb_KundenID.Text = row.Cells["Kunden-ID"].Value.ToString();
 
-                kunde = new Kunde(row.Cells["Kunden-ID"].Value.ToString());
-                tb_KundenID.Text = kunde.KundenID;
-                tb_Vorname.Text = kunde.Vorname;
-                tb_Nachname.Text = kunde.Nachname;
-                dTP_gd.Value = kunde.Gd;
-                tb_Strasse.Text = kunde.Strasse;
-                tb_Hausnummer.Text = kunde.Hausnummer;
-                tb_Postleitzahl.Text = kunde.Postleitzahl;
-                tb_Ort.Text = kunde.Ort;
-                tb_Klasse.Text = kunde.Klasse;
-                tb_Mail.Text = kunde.Mail;
-                tb_Telefonnummer.Text = kunde.Telefonnummer;
-                if(kunde.Faecher.Count > 0)
-                {
-                    string fachIndex = "";
-                    List<int> index = new List<int>();
-                    foreach(string fach in kunde.Faecher)
-                    {
-                        fachIndex = kunde.Fach.GetIDByShortform(fach);
-                        kunde.Fach = new Fach(fachIndex);
-                        index.Add(int.Parse(fachIndex));
-                        if(fach.Equals(kunde.LeistungskursListe[0]) || fach.Equals(kunde.LeistungskursListe[1]))
-                        {
-                            gv_result.Rows.Add("*" + kunde.Fach.FachKurz, kunde.Fach.FachID);
-                            gv_result.Rows[gv_result.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Yellow;
-                        }
-                        else
-                        {
-                            gv_result.Rows.Add(kunde.Fach.FachKurz, kunde.Fach.FachID);
-                        }
-                    }
-                }
+                
             }
         }
 
-        private void LoadKunde()
+        private void LoadKunde(string kundenid)
         {
-            
+            kunde = new Kunde(kundenid);
+            tb_KundenID.Text = kunde.KundenID;
+            tb_Vorname.Text = kunde.Vorname;
+            tb_Nachname.Text = kunde.Nachname;
+            dTP_gd.Value = kunde.Gd;
+            tb_Strasse.Text = kunde.Strasse;
+            tb_Hausnummer.Text = kunde.Hausnummer;
+            tb_Postleitzahl.Text = kunde.Postleitzahl;
+            tb_Ort.Text = kunde.Ort;
+            tb_Klasse.Text = kunde.Klasse;
+            tb_Mail.Text = kunde.Mail;
+            tb_Telefonnummer.Text = kunde.Telefonnummer;
+            if (kunde.Faecher.Count > 0)
+            {
+                string fachIndex = "";
+                List<int> index = new List<int>();
+                foreach (string fach in kunde.Faecher)
+                {
+                    fachIndex = kunde.Fach.GetIDByShortform(fach);
+                    kunde.Fach = new Fach(fachIndex);
+                    index.Add(int.Parse(fachIndex));
+                    if (fach.Equals(kunde.LeistungskursListe[0]) || fach.Equals(kunde.LeistungskursListe[1]))
+                    {
+                        gv_result.Rows.Add("*" + kunde.Fach.FachKurz, kunde.Fach.FachID);
+                        gv_result.Rows[gv_result.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Yellow;
+                    }
+                    else
+                    {
+                        gv_result.Rows.Add(kunde.Fach.FachKurz, kunde.Fach.FachID);
+                    }
+                }
+            }
         }
 
         private void bt_ImEx_Click(object sender, EventArgs e)
@@ -613,7 +656,7 @@ namespace Bibo_Verwaltung
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.gv_faecher.Rows[e.RowIndex];
-                if(row.Cells["Kurzbezeichnung"].Value.ToString() != "")
+                if (row.Cells["Kurzbezeichnung"].Value.ToString() != "")
                 {
                     kunde.Fach = new Fach(row.Cells["ID"].Value.ToString());
                     CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[gv_faecher.DataSource];
@@ -633,16 +676,16 @@ namespace Bibo_Verwaltung
                 if (row.Cells["Kurzbezeichnung"].Value != null && !row.Cells["Kurzbezeichnung"].Value.Equals(""))
                 {
                     kunde.Fach = new Fach(row.Cells["ID"].Value.ToString());
-                    if(row.DefaultCellStyle.BackColor == Color.Yellow)
+                    if (row.DefaultCellStyle.BackColor == Color.Yellow)
                     {
                         kunde.Leistungskurse--;
                     }
                     gv_result.Rows.RemoveAt(e.RowIndex);
-                    
-                    for(int i = 0; i<gv_faecher.Rows.Count;i++)
+
+                    for (int i = 0; i < gv_faecher.Rows.Count; i++)
                     {
                         DataGridViewRow gvRow = gv_faecher.Rows[i];
-                        if(gvRow.Cells["ID"].Value.ToString() == kunde.Fach.FachID)
+                        if (gvRow.Cells["ID"].Value.ToString() == kunde.Fach.FachID)
                         {
                             CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[gv_faecher.DataSource];
                             currencyManager1.SuspendBinding();
@@ -658,12 +701,12 @@ namespace Bibo_Verwaltung
 
         private void leistungskursAuswählenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-            if(leistungskursAuswählenToolStripMenuItem.Text == "als Leistungskurs markieren")
+
+            if (leistungskursAuswählenToolStripMenuItem.Text == "als Leistungskurs markieren")
             {
                 if (kunde.Leistungskurse >= 2)
                 {
-                    MetroMessageBox.Show(this,"Sie haben bereits beide Leistungskurse vergeben. Bitte markieren Sie zunächst einen dieser als Grundkurs.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MetroMessageBox.Show(this, "Sie haben bereits beide Leistungskurse vergeben. Bitte markieren Sie zunächst einen dieser als Grundkurs.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
@@ -671,7 +714,7 @@ namespace Bibo_Verwaltung
                     gv_result.SelectedRows[0].DefaultCellStyle.BackColor = Color.Yellow;
                     kunde.Leistungskurse++;
                 }
-                
+
             }
             else
             {
@@ -679,7 +722,7 @@ namespace Bibo_Verwaltung
                 gv_result.SelectedRows[0].DefaultCellStyle.BackColor = Color.White;
                 kunde.Leistungskurse--;
             }
-            
+
 
         }
 
@@ -692,13 +735,86 @@ namespace Bibo_Verwaltung
                     gv_result.ClearSelection();
                     gv_result.Rows[e.RowIndex].Selected = true;
                 }
-                if(gv_result.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Yellow)
+                if (gv_result.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Yellow)
                 {
                     leistungskursAuswählenToolStripMenuItem.Text = "als Grundkurs markieren";
                 }
                 else
                 {
                     leistungskursAuswählenToolStripMenuItem.Text = "als Leistungskurs markieren";
+                }
+            }
+        }
+
+        private void rb_alles_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_alles.Checked)
+            {
+                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
+            }
+            else if (rb_schueler.Checked)
+            {
+                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%' AND Klasse NOT LIKE '{9}'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, "");
+            }
+            else if (rb_andere.Checked)
+            {
+                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%' AND Klasse LIKE '{9}'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, "");
+            }
+        }
+
+        private void kundeBearbeitenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rb_KundeBearbeiten.Checked = true;
+            LoadKunde(gv_Kunde.SelectedRows[0].Cells["Kunden-ID"].Value.ToString());
+        }
+
+        private void kundeEntfernenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int errors = 0;
+            int rows = 0;
+            foreach (DataGridViewRow row in gv_Kunde.SelectedRows)
+            {
+                rows++;
+                try
+                {
+                    kunde.KundenID = row.Cells["Kunden-ID"].Value.ToString();
+                    kunde.Deactivate();
+                    ClearForm();
+                    kunde.FillGrid(ref gv_Kunde);
+                }
+                catch (SqlException)
+                {
+                    errors++;
+                }
+            }
+            if (errors > 0)
+            {
+                MetroMessageBox.Show(this, String.Format("Es wurden '{0}' von '{1}' Kunden gelöscht.", errors, rows), "Fehler beim Löschvorgang", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void gv_Kunde_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                if (!gv_Kunde.Rows[e.RowIndex].Selected)
+                {
+                    gv_Kunde.ClearSelection();
+                    gv_Kunde.Rows[e.RowIndex].Selected = true;
+                }
+                if (gv_Kunde.SelectedRows.Count > 1)
+                {
+                    kundeBearbeitenToolStripMenuItem.Text = "Ausgewählten Kunden bearbeiten";
+                    kundeBearbeitenToolStripMenuItem.Enabled = false;
+                    kundeEntfernenToolStripMenuItem.Text = "Ausgewählte Kunden entfernen (" + gv_Kunde.SelectedRows.Count + ")";
+                    kundeEntfernenToolStripMenuItem.Enabled = true;
+                }
+                else
+                {
+                    kundeBearbeitenToolStripMenuItem.Text = "Ausgewählten Kunden bearbeiten";
+                    kundeBearbeitenToolStripMenuItem.Enabled = true;
+                    kundeEntfernenToolStripMenuItem.Text = "Ausgewählten Kunden entfernen";
+                    kundeEntfernenToolStripMenuItem.Enabled = true;
                 }
             }
         }

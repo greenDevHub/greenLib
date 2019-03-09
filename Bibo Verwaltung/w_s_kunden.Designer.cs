@@ -79,11 +79,21 @@
             this.leistungskursAuswählenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gv_faecher = new MetroFramework.Controls.MetroGrid();
             this.dTP_gd = new MetroFramework.Controls.MetroDateTime();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.rb_alles = new MetroFramework.Controls.MetroRadioButton();
+            this.rb_schueler = new MetroFramework.Controls.MetroRadioButton();
+            this.rb_andere = new MetroFramework.Controls.MetroRadioButton();
+            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
+            this.cm_kunde = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.kundeBearbeitenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kundeEntfernenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_result)).BeginInit();
             this.cm_result.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_faecher)).BeginInit();
+            this.metroPanel2.SuspendLayout();
+            this.cm_kunde.SuspendLayout();
             this.SuspendLayout();
             // 
             // lb_Telefonnummer
@@ -558,7 +568,7 @@
             // 
             // lb_kunde_add
             // 
-            this.lb_kunde_add.Location = new System.Drawing.Point(3, 564);
+            this.lb_kunde_add.Location = new System.Drawing.Point(3, 534);
             this.lb_kunde_add.Margin = new System.Windows.Forms.Padding(3);
             this.lb_kunde_add.Name = "lb_kunde_add";
             this.lb_kunde_add.Size = new System.Drawing.Size(306, 24);
@@ -573,7 +583,7 @@
             this.bt_clear.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_clear.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_clear, "Leeren sie alle oben liegenden Textfelder.");
-            this.bt_clear.Location = new System.Drawing.Point(3, 534);
+            this.bt_clear.Location = new System.Drawing.Point(3, 564);
             this.bt_clear.Name = "bt_clear";
             this.helpProvider.SetShowHelp(this.bt_clear, true);
             this.bt_clear.Size = new System.Drawing.Size(150, 24);
@@ -638,7 +648,7 @@
             this.bt_confirm.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_confirm.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_confirm, "Speichern sie alle oben eingetragenen Daten.");
-            this.bt_confirm.Location = new System.Drawing.Point(159, 534);
+            this.bt_confirm.Location = new System.Drawing.Point(160, 564);
             this.bt_confirm.Name = "bt_confirm";
             this.helpProvider.SetShowHelp(this.bt_confirm, true);
             this.bt_confirm.Size = new System.Drawing.Size(150, 24);
@@ -654,7 +664,7 @@
             this.bt_OK.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_OK.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_OK, "Schließen sie das akuelle Fenster.");
-            this.bt_OK.Location = new System.Drawing.Point(895, 622);
+            this.bt_OK.Location = new System.Drawing.Point(895, 652);
             this.bt_OK.Name = "bt_OK";
             this.helpProvider.SetShowHelp(this.bt_OK, true);
             this.bt_OK.Size = new System.Drawing.Size(150, 24);
@@ -683,6 +693,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gv_Kunde.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gv_Kunde.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gv_Kunde.ContextMenuStrip = this.cm_kunde;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -695,8 +706,7 @@
             this.gv_Kunde.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_Kunde.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.helpProvider.SetHelpString(this.gv_Kunde, "Hier werden all ihre Kunden angezeigt.");
-            this.gv_Kunde.Location = new System.Drawing.Point(342, 88);
-            this.gv_Kunde.MultiSelect = false;
+            this.gv_Kunde.Location = new System.Drawing.Point(338, 118);
             this.gv_Kunde.Name = "gv_Kunde";
             this.gv_Kunde.ReadOnly = true;
             this.gv_Kunde.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -716,6 +726,7 @@
             this.gv_Kunde.Style = MetroFramework.MetroColorStyle.Teal;
             this.gv_Kunde.TabIndex = 0;
             this.gv_Kunde.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Kunde_CellDoubleClick);
+            this.gv_Kunde.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_Kunde_CellMouseDown);
             // 
             // lb_geburtsdatum
             // 
@@ -747,7 +758,7 @@
             // 
             this.bt_ImEx.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_ImEx.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_ImEx.Location = new System.Drawing.Point(338, 622);
+            this.bt_ImEx.Location = new System.Drawing.Point(739, 652);
             this.bt_ImEx.Name = "bt_ImEx";
             this.bt_ImEx.Size = new System.Drawing.Size(150, 24);
             this.bt_ImEx.Style = MetroFramework.MetroColorStyle.Teal;
@@ -847,7 +858,7 @@
             this.gv_result.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.gv_result.RowHeadersVisible = false;
             this.gv_result.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.gv_result.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.gv_result.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.gv_result.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv_result.Size = new System.Drawing.Size(108, 168);
             this.gv_result.Style = MetroFramework.MetroColorStyle.Teal;
@@ -926,6 +937,7 @@
             this.gv_faecher.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.gv_faecher.RowHeadersVisible = false;
             this.gv_faecher.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.gv_faecher.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.gv_faecher.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv_faecher.Size = new System.Drawing.Size(192, 168);
             this.gv_faecher.Style = MetroFramework.MetroColorStyle.Teal;
@@ -942,10 +954,108 @@
             this.dTP_gd.Style = MetroFramework.MetroColorStyle.Teal;
             this.dTP_gd.TabIndex = 42;
             // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(3, 9);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(42, 19);
+            this.metroLabel1.Style = MetroFramework.MetroColorStyle.Teal;
+            this.metroLabel1.TabIndex = 0;
+            this.metroLabel1.Text = "Filter:";
+            // 
+            // rb_alles
+            // 
+            this.rb_alles.AutoSize = true;
+            this.rb_alles.Checked = true;
+            this.rb_alles.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rb_alles.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
+            this.rb_alles.Location = new System.Drawing.Point(51, 9);
+            this.rb_alles.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
+            this.rb_alles.Name = "rb_alles";
+            this.rb_alles.Size = new System.Drawing.Size(108, 19);
+            this.rb_alles.Style = MetroFramework.MetroColorStyle.Teal;
+            this.rb_alles.TabIndex = 45;
+            this.rb_alles.TabStop = true;
+            this.rb_alles.Text = "Alles anzeigen";
+            this.rb_alles.UseSelectable = true;
+            this.rb_alles.CheckedChanged += new System.EventHandler(this.rb_alles_CheckedChanged);
+            // 
+            // rb_schueler
+            // 
+            this.rb_schueler.AutoSize = true;
+            this.rb_schueler.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rb_schueler.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
+            this.rb_schueler.Location = new System.Drawing.Point(170, 9);
+            this.rb_schueler.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
+            this.rb_schueler.Name = "rb_schueler";
+            this.rb_schueler.Size = new System.Drawing.Size(146, 19);
+            this.rb_schueler.Style = MetroFramework.MetroColorStyle.Teal;
+            this.rb_schueler.TabIndex = 45;
+            this.rb_schueler.Text = "nur Schüler anzeigen";
+            this.rb_schueler.UseSelectable = true;
+            this.rb_schueler.CheckedChanged += new System.EventHandler(this.rb_alles_CheckedChanged);
+            // 
+            // rb_andere
+            // 
+            this.rb_andere.AutoSize = true;
+            this.rb_andere.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rb_andere.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
+            this.rb_andere.Location = new System.Drawing.Point(327, 9);
+            this.rb_andere.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
+            this.rb_andere.Name = "rb_andere";
+            this.rb_andere.Size = new System.Drawing.Size(161, 19);
+            this.rb_andere.Style = MetroFramework.MetroColorStyle.Teal;
+            this.rb_andere.TabIndex = 45;
+            this.rb_andere.Text = "alle Schüler ausblenden";
+            this.rb_andere.UseSelectable = true;
+            this.rb_andere.CheckedChanged += new System.EventHandler(this.rb_alles_CheckedChanged);
+            // 
+            // metroPanel2
+            // 
+            this.metroPanel2.Controls.Add(this.rb_schueler);
+            this.metroPanel2.Controls.Add(this.rb_andere);
+            this.metroPanel2.Controls.Add(this.metroLabel1);
+            this.metroPanel2.Controls.Add(this.rb_alles);
+            this.metroPanel2.HorizontalScrollbarBarColor = true;
+            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.HorizontalScrollbarSize = 10;
+            this.metroPanel2.Location = new System.Drawing.Point(342, 54);
+            this.metroPanel2.Name = "metroPanel2";
+            this.metroPanel2.Size = new System.Drawing.Size(703, 28);
+            this.metroPanel2.TabIndex = 46;
+            this.metroPanel2.VerticalScrollbarBarColor = true;
+            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.VerticalScrollbarSize = 10;
+            // 
+            // cm_kunde
+            // 
+            this.cm_kunde.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.kundeBearbeitenToolStripMenuItem,
+            this.kundeEntfernenToolStripMenuItem});
+            this.cm_kunde.Name = "cm_kunde";
+            this.cm_kunde.Size = new System.Drawing.Size(168, 48);
+            // 
+            // kundeBearbeitenToolStripMenuItem
+            // 
+            this.kundeBearbeitenToolStripMenuItem.Name = "kundeBearbeitenToolStripMenuItem";
+            this.kundeBearbeitenToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.kundeBearbeitenToolStripMenuItem.Text = "Kunde bearbeiten";
+            this.kundeBearbeitenToolStripMenuItem.Click += new System.EventHandler(this.kundeBearbeitenToolStripMenuItem_Click);
+            // 
+            // kundeEntfernenToolStripMenuItem
+            // 
+            this.kundeEntfernenToolStripMenuItem.Name = "kundeEntfernenToolStripMenuItem";
+            this.kundeEntfernenToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.kundeEntfernenToolStripMenuItem.Text = "Kunde entfernen";
+            this.kundeEntfernenToolStripMenuItem.Click += new System.EventHandler(this.kundeEntfernenToolStripMenuItem_Click);
+            // 
             // w_s_Kunden
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1074, 696);
+            this.ClientSize = new System.Drawing.Size(1062, 694);
+            this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.bt_ImEx);
             this.Controls.Add(this.bt_OK);
@@ -967,6 +1077,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_result)).EndInit();
             this.cm_result.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gv_faecher)).EndInit();
+            this.metroPanel2.ResumeLayout(false);
+            this.metroPanel2.PerformLayout();
+            this.cm_kunde.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1013,5 +1126,13 @@
         private MetroFramework.Controls.MetroContextMenu cm_result;
         private System.Windows.Forms.ToolStripMenuItem leistungskursAuswählenToolStripMenuItem;
         private MetroFramework.Controls.MetroLabel lb_faecher;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroRadioButton rb_alles;
+        private MetroFramework.Controls.MetroRadioButton rb_schueler;
+        private MetroFramework.Controls.MetroRadioButton rb_andere;
+        private MetroFramework.Controls.MetroPanel metroPanel2;
+        private MetroFramework.Controls.MetroContextMenu cm_kunde;
+        private System.Windows.Forms.ToolStripMenuItem kundeBearbeitenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kundeEntfernenToolStripMenuItem;
     }
 }
