@@ -36,9 +36,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_fach_stufe));
             this.gb_Klassenstufe = new System.Windows.Forms.GroupBox();
-            this.gv_Klassenstufe = new System.Windows.Forms.DataGridView();
+            this.gv_Klassenstufe = new MetroFramework.Controls.MetroGrid();
             this.gb_Faecher = new System.Windows.Forms.GroupBox();
-            this.gv_Faecher = new System.Windows.Forms.DataGridView();
+            this.gv_Faecher = new MetroFramework.Controls.MetroGrid();
             this.bt_Bearbeiten = new System.Windows.Forms.Button();
             this.btAbbrechen = new System.Windows.Forms.Button();
             this.gb_Klassenstufe.SuspendLayout();
@@ -219,9 +219,9 @@
 
         #endregion
         private System.Windows.Forms.GroupBox gb_Klassenstufe;
-        private System.Windows.Forms.DataGridView gv_Klassenstufe;
+        private MetroFramework.Controls.MetroGrid gv_Klassenstufe;
         private System.Windows.Forms.GroupBox gb_Faecher;
-        private System.Windows.Forms.DataGridView gv_Faecher;
+        private MetroFramework.Controls.MetroGrid gv_Faecher;
         private System.Windows.Forms.Button bt_Bearbeiten;
         private System.Windows.Forms.Button btAbbrechen;
     }

@@ -219,11 +219,6 @@ namespace Bibo_Verwaltung
             //    gDatum.Add(splitted[2]);
             //}
             DataTable dt = new DataTable();
-            //dt.Columns.Add(ds.Tables[0].Columns[0]);
-            //dt.Columns.Add(ds.Tables[0].Columns[1]);
-            //dt.Columns.Add(ds.Tables[0].Columns[2]);
-            //dt.Columns.Add(ds.Tables[0].Columns[3]);
-            //dt.Columns.Add(ds.Tables[0].Columns[4]);
             dt.Columns.Add("ID");
             dt.Columns.Add("Vorname");
             dt.Columns.Add("Nachname");

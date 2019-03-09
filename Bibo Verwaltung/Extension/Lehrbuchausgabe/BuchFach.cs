@@ -73,7 +73,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Markiert die zugeordneten Bücher
         /// </summary>
-        private void Set_Mark(ref DataGridView gridBuecher, string fachID, object value = null)
+        private void Set_Mark(ref MetroFramework.Controls.MetroGrid gridBuecher, string fachID, object value = null)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt ein DataGridView-Objekt mit den Buchdaten 
         /// </summary>
-        public void Show_AllBuecher(ref DataGridView gridBuecher, string fachID, object value = null)
+        public void Show_AllBuecher(ref MetroFramework.Controls.MetroGrid gridBuecher, string fachID, object value = null)
         {
             ClearDataSource();
             FillObject();
@@ -112,7 +112,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt ein DataGridView-Objekt mit den Fach-Bücher-Zuordnungsdatendaten  
         /// </summary>
-        public void Show_FachBuecher(ref DataGridView grid, string fachID, object value = null)
+        public void Show_FachBuecher(ref MetroFramework.Controls.MetroGrid grid, string fachID, object value = null)
         {
             ClearDataSource();
             FillObject();
@@ -421,7 +421,7 @@ namespace Bibo_Verwaltung
             dt.Clear();
         }
  
-        public void FillGrid(ref DataGridView grid, object value = null)
+        public void FillGrid(ref MetroFramework.Controls.MetroGrid grid, object value = null)
         {
             //ClearDS();
             //FillObject();

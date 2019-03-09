@@ -342,6 +342,7 @@ CREATE TABLE [dbo].[t_s_fach_kunde](
 	[fs_id] [int] IDENTITY (1,1) NOT NULL,
 	[fs_kundenid] [int] NOT NULL,
 	[fs_fachid] [int] NOT NULL,
+	[fs_lk] [BIT] NOT NULL,
 	PRIMARY KEY(fs_id),
 	FOREIGN KEY (fs_kundenid)
 		REFERENCES t_s_kunden (kunde_ID),

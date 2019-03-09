@@ -87,7 +87,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Markiert die zugeordneten Fächer
         /// </summary>
-        private void Set_Mark(ref DataGridView gridFaecher, string stufe, object value = null)
+        private void Set_Mark(ref MetroFramework.Controls.MetroGrid gridFaecher, string stufe, object value = null)
         {
             try
             {
@@ -115,7 +115,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt ein DataGridView-Objekt mit den Fachdaten 
         /// </summary>
-        public void Show_AllFaecher(ref DataGridView Faecher, string Stufe, object value = null)
+        public void Show_AllFaecher(ref MetroFramework.Controls.MetroGrid Faecher, string Stufe, object value = null)
         {
             ClearDataSource();
             FillObject();
@@ -126,7 +126,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt ein DataGridView-Objekt mit den Fach-Klassenstufen-Zuordnungsdatendaten  
         /// </summary>
-        public void Show_StufenFaecher(ref DataGridView grid, string stufe, object value = null)
+        public void Show_StufenFaecher(ref MetroFramework.Controls.MetroGrid grid, string stufe, object value = null)
         {
             ClearDataSource();
             FillObject();

@@ -62,7 +62,7 @@
             // 
             this.lb_kunde_add.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lb_kunde_add.Location = new System.Drawing.Point(3, 410);
-            this.lb_kunde_add.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_kunde_add.Margin = new System.Windows.Forms.Padding(3);
             this.lb_kunde_add.Name = "lb_kunde_add";
             this.lb_kunde_add.Size = new System.Drawing.Size(81, 32);
             this.lb_kunde_add.TabIndex = 40;
@@ -120,7 +120,7 @@
             this.lb_Vorname.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.lb_Vorname, "Tragen sie den Vornamen ihres Kunden hier ein.");
             this.lb_Vorname.Location = new System.Drawing.Point(3, 77);
-            this.lb_Vorname.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_Vorname.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Vorname.Name = "lb_Vorname";
             this.helpProvider.SetShowHelp(this.lb_Vorname, true);
             this.lb_Vorname.Size = new System.Drawing.Size(81, 31);
@@ -133,7 +133,7 @@
             this.lb_Nachname.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.lb_Nachname, "Tragen sie den Nachnamen ihres Kunden hier ein.");
             this.lb_Nachname.Location = new System.Drawing.Point(3, 114);
-            this.lb_Nachname.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_Nachname.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Nachname.Name = "lb_Nachname";
             this.helpProvider.SetShowHelp(this.lb_Nachname, true);
             this.lb_Nachname.Size = new System.Drawing.Size(81, 31);
@@ -158,7 +158,7 @@
             this.lb_Gd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.lb_Gd, "Tragen sie die Straße ihres Kunden hier ein.");
             this.lb_Gd.Location = new System.Drawing.Point(3, 151);
-            this.lb_Gd.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_Gd.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Gd.Name = "lb_Gd";
             this.helpProvider.SetShowHelp(this.lb_Gd, true);
             this.lb_Gd.Size = new System.Drawing.Size(81, 31);
@@ -171,7 +171,7 @@
             this.lb_Klasse.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.lb_Klasse, "Tragen sie die Hausnummer  ihres Kunden hier ein.");
             this.lb_Klasse.Location = new System.Drawing.Point(3, 188);
-            this.lb_Klasse.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_Klasse.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Klasse.Name = "lb_Klasse";
             this.helpProvider.SetShowHelp(this.lb_Klasse, true);
             this.lb_Klasse.Size = new System.Drawing.Size(81, 31);
@@ -184,7 +184,7 @@
             this.lb_Klassenstufe.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.lb_Klassenstufe, "Tragen sie die Postleitzahl ihres Kunden hier ein.");
             this.lb_Klassenstufe.Location = new System.Drawing.Point(3, 225);
-            this.lb_Klassenstufe.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_Klassenstufe.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Klassenstufe.Name = "lb_Klassenstufe";
             this.helpProvider.SetShowHelp(this.lb_Klassenstufe, true);
             this.lb_Klassenstufe.Size = new System.Drawing.Size(81, 31);
@@ -208,7 +208,7 @@
             this.lb_1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.lb_1, "Tragen sie den  Wohnort ihres Kunden hier ein.");
             this.lb_1.Location = new System.Drawing.Point(3, 262);
-            this.lb_1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_1.Margin = new System.Windows.Forms.Padding(3);
             this.lb_1.Name = "lb_1";
             this.helpProvider.SetShowHelp(this.lb_1, true);
             this.lb_1.Size = new System.Drawing.Size(81, 68);
@@ -294,7 +294,7 @@
             this.lb_KundenID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.lb_KundenID, resources.GetString("lb_KundenID.HelpString"));
             this.lb_KundenID.Location = new System.Drawing.Point(3, 40);
-            this.lb_KundenID.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lb_KundenID.Margin = new System.Windows.Forms.Padding(3);
             this.lb_KundenID.Name = "lb_KundenID";
             this.helpProvider.SetShowHelp(this.lb_KundenID, true);
             this.lb_KundenID.Size = new System.Drawing.Size(81, 31);
@@ -392,7 +392,7 @@
             this.tableLayoutPanel2.Controls.Add(this.lb_KundenID, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(1);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 10;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333541F));
@@ -414,7 +414,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(722, 445);
             this.Controls.Add(this.tableLayoutPanel2);
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.MinimumSize = new System.Drawing.Size(715, 447);
             this.Name = "w_s_schueler";
             this.Text = "Schüler";

@@ -82,7 +82,23 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Klasse des Kunden
         /// </summary>
-        public string Klassenstufe { get { return klassenstufe; } set { klassenstufe = value; } }
+        public string Klasse { get { return klassenstufe; } set { klassenstufe = value; } }
+
+        int leistungskurse;
+        /// <summary>
+        /// Anzahl Leistungskurse (max 2)
+        /// </summary>
+        public int Leistungskurse { get { return leistungskurse; } set { leistungskurse = value; } }
+        List<string> leistungskursListe = new List<string>();
+        public List<string> LeistungskursListe { get { return leistungskursListe; } set { leistungskursListe = value; } }
+
+        Fach fach = new Fach();
+        /// <summary>
+        /// Fach
+        /// </summary>
+        public Fach Fach { get { return fach; } set { fach = value; } }
+        List<string> faecher = new List<string>();
+        public List<string> Faecher { get { return faecher; } set { faecher = value; } }
 
         bool activated;
         /// <summary>
@@ -107,6 +123,7 @@ namespace Bibo_Verwaltung
         {
             this.kundenid = kundenid;
             LoadKunde();
+            LoadFaecher();
             FillObject();
         }
         #endregion
@@ -132,7 +149,7 @@ namespace Bibo_Verwaltung
                 Telefonnummer = dr["kunde_telefonnummer"].ToString();
                 Hausnummer = dr["kunde_hausnummer"].ToString();
                 Mail = dr["kunde_mail"].ToString();
-                Klassenstufe = dr["kunde_klasse"].ToString();
+                Klasse = dr["kunde_klasse"].ToString();
                 if (dr["kunde_activated"].ToString().Equals("1"))
                 {
                     Activated = true;
@@ -147,7 +164,24 @@ namespace Bibo_Verwaltung
             // Verbindung schließen 
             con.Close();
         }
-
+        private void LoadFaecher()
+        {
+            Faecher.Clear();
+            LeistungskursListe.Clear();
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT * FROM [dbo].[t_s_fach_kunde] WHERE  fs_kundenid = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, KundenID);
+            while (dr.Read())
+            {
+                Fach = new Fach(dr["fs_fachid"].ToString());
+                Faecher.Add(Fach.FachKurz);
+                if (dr["fs_lk"].ToString() == "True")
+                {
+                    LeistungskursListe.Add(Fach.FachKurz);
+                }
+            }
+            dr.Close();
+        }
         /// <summary>
         /// Füllt ein DataSet-Objekt mit den Kundendaten 
         /// </summary>
@@ -184,21 +218,66 @@ namespace Bibo_Verwaltung
         {
             ClearDataSource();
             FillObject();
-            grid.DataSource = ds.Tables[0];
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Kunden-ID");
+            dt.Columns.Add("Vorname");
+            dt.Columns.Add("Nachname");
+            dt.Columns.Add("Geburtsdatum");
+            dt.Columns.Add("Straße");
+            dt.Columns.Add("Hausnummer");
+            dt.Columns.Add("Postleitzahl");
+            dt.Columns.Add("Wohnort");
+            dt.Columns.Add("Klasse");
+            dt.Columns.Add("Mail");
+            dt.Columns.Add("Telefonnummer");
+            dt.Columns.Add("Fächer");
+
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                KundenID = row[ds.Tables[0].Columns.IndexOf("Kunden-ID")].ToString();
+                Vorname = row[ds.Tables[0].Columns.IndexOf("Vorname")].ToString();
+                Nachname = row[ds.Tables[0].Columns.IndexOf("Nachname")].ToString();
+                Gd = (DateTime)row[ds.Tables[0].Columns.IndexOf("Geburtsdatum")];
+                Strasse = row[ds.Tables[0].Columns.IndexOf("Straße")].ToString();
+                Hausnummer = row[ds.Tables[0].Columns.IndexOf("Hausnummer")].ToString();
+                Postleitzahl = row[ds.Tables[0].Columns.IndexOf("Postleitzahl")].ToString();
+                Ort = row[ds.Tables[0].Columns.IndexOf("Wohnort")].ToString();
+                Klasse = row[ds.Tables[0].Columns.IndexOf("Klasse")].ToString();
+                Mail = row[ds.Tables[0].Columns.IndexOf("Mail")].ToString();
+                Telefonnummer = row[ds.Tables[0].Columns.IndexOf("Telefonnummer")].ToString();
+                LoadFaecher();
+                DataRow dataRow = dt.NewRow();
+                dataRow["Kunden-ID"] = KundenID;
+                dataRow["Vorname"] = Vorname;
+                dataRow["Nachname"] = Nachname;
+                dataRow["Geburtsdatum"] = Gd.ToShortDateString();
+                dataRow["Straße"] = Strasse;
+                dataRow["Hausnummer"] = Hausnummer;
+                dataRow["Postleitzahl"] = Postleitzahl;
+                dataRow["Wohnort"] = Ort;
+                dataRow["Klasse"] =Klasse;
+                dataRow["Mail"] = Mail;
+                dataRow["Telefonnummer"] = Telefonnummer;
+                string fach = "";
+                foreach (string s in Faecher)
+                {
+                    fach = fach + s + ", ";
+                }
+                try
+                {
+                    fach = fach.Substring(0, fach.Length - 2);
+                }
+                catch
+                {
+                    fach = "";
+                }
+                dataRow["Fächer"] = fach;
+                dt.Rows.Add(dataRow);
+            }
+            grid.DataSource = dt;
         }
 
-        /// <summary>
-        /// Speichert den Inhalt eines DataGridView-Objekts in die Datenbank 
-        /// </summary>
-        public void SaveGrid(ref DataGridView grid)
-        {
-            comb = new SqlCommandBuilder(adapter);
-            DataSet changes = ds.GetChanges();
-            if (changes != null)
-            {
-                adapter.Update(changes);
-            }
-        }
+
         /// <summary>
         /// Prüft, ob ein Kunde bereits existiert
         /// </summary>
@@ -224,6 +303,19 @@ namespace Bibo_Verwaltung
             }
         }
         /// <summary>
+        /// Lädt die KundenID
+        /// </summary>
+        public void LoadKundenID()
+        {
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT kunde_id FROM [dbo].[t_s_kunden] WHERE kunde_vorname = @0 and kunde_nachname = @1 and kunde_geburtsdatum = @2";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, Vorname, Nachname, Gd.Date);
+            while (dr.Read())
+            {
+                KundenID = dr["kunde_id"].ToString();
+            }
+        }
+        /// <summary>
         /// Fügt einen Kunden der Datenbank hinzu 
         /// </summary>
         public void AddKunde()
@@ -241,11 +333,68 @@ namespace Bibo_Verwaltung
                 cmd.Parameters.AddWithValue("@telefonnummer", Telefonnummer);
                 cmd.Parameters.AddWithValue("@hausnummer", Hausnummer);
                 cmd.Parameters.AddWithValue("@mail", Mail);
-                cmd.Parameters.AddWithValue("@klasse", Klassenstufe);
+                cmd.Parameters.AddWithValue("@klasse", Klasse);
                 // Verbindung öffnen 
                 cmd.ExecuteNonQuery();
+                LoadKundenID();
+                AddFaecher();
                 //Verbindung schließen
                 con.Close();
+            }
+        }
+        /// <summary>
+        /// Fügt die Fachzuweisung hinzu
+        /// </summary>
+        private void AddFaecher()
+        {
+            con.ConnectError();
+            string RawCommand = "INSERT INTO [dbo].[t_s_fach_kunde] (fs_kundenid, fs_fachid, fs_lk) VALUES (@schuelerid, @fachid, @lk)";
+            foreach (string s in Faecher)
+            {
+                Fach.FachKurz = s;
+                Fach.FachLang = "";
+                if (!Fach.FachExists())
+                {
+                    Fach.AddFach();
+                }
+                SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+                cmd.Parameters.AddWithValue("@schuelerid", KundenID);
+                cmd.Parameters.AddWithValue("@fachid", Fach.GetIDByShortform(s));
+                if (leistungskursListe[0] == s || leistungskursListe[1] == s)
+                {
+                    cmd.Parameters.AddWithValue("@lk", true);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@lk", false);
+                }
+                //if(leistungskursListe.Count == 1)
+                //{
+                //    if (leistungskursListe[0] == s)
+                //    {
+                //        cmd.Parameters.AddWithValue("@lk", 1);
+                //    }
+                //    else
+                //    {
+                //        cmd.Parameters.AddWithValue("@lk", 0);
+                //    }
+                //}
+                //else if (leistungskursListe.Count == 2)
+                //{
+                //    if (leistungskursListe[0] == s || leistungskursListe[1] == s)
+                //    {
+                //        cmd.Parameters.AddWithValue("@lk", 1);
+                //    }
+                //    else
+                //    {
+                //        cmd.Parameters.AddWithValue("@lk", false);
+                //    }
+                //}
+                //else
+                //{
+                //    cmd.Parameters.AddWithValue("@lk", 0);
+                //}
+                cmd.ExecuteNonQuery();
             }
         }
 
@@ -264,7 +413,7 @@ namespace Bibo_Verwaltung
                 cmd.Parameters.AddWithValue("@telefonnummer", Telefonnummer);
                 cmd.Parameters.AddWithValue("@hausnummer", Hausnummer);
                 cmd.Parameters.AddWithValue("@mail", Mail);
-                cmd.Parameters.AddWithValue("@klasse", Klassenstufe);
+                cmd.Parameters.AddWithValue("@klasse", Klasse);
                 cmd.Parameters.AddWithValue("@k_ID", KundenID);
                 // Verbindung öffnen 
                 cmd.ExecuteNonQuery();
@@ -282,10 +431,21 @@ namespace Bibo_Verwaltung
             string RawCommand = "UPDATE [dbo].[t_s_kunden] set kunde_activated = 0 WHERE kunde_ID = @k_ID";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             cmd.Parameters.AddWithValue("@k_ID", KundenID);
+            DeleteFaecher();
             cmd.ExecuteNonQuery();
             con.Close();
         }
-
+        /// <summary>
+        /// Löscht die zugewiesenen Fächer
+        /// </summary>
+        private void DeleteFaecher()
+        {
+            string RawCommand = "DELETE FROM [dbo].[t_s_fach_kunde] WHERE fs_kundenid = @id";
+            con.ConnectError();
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@id", KundenID);
+            cmd.ExecuteNonQuery();
+        }
         /// <summary>
         /// Aktiviert einen Kunden in der Datenbank 
         /// </summary>

@@ -600,7 +600,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt ein DataGridView-Objekt mit den Buchdaten 
         /// </summary>
-        public void FillGrid_Short(ref DataGridView grid, object value = null)
+        public void FillGrid_Short(ref MetroGrid grid, object value = null)
         {
             ClearDSBuch();
             FillObjectBuchShort();

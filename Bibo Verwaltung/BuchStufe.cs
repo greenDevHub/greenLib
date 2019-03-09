@@ -78,7 +78,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Markiert die zugeordneten Bücher
         /// </summary>
-        private void Set_Mark(ref DataGridView gridBuecher, string stufe, object value = null)
+        private void Set_Mark(ref MetroFramework.Controls.MetroGrid gridBuecher, string stufe, object value = null)
         {
             try
             {
@@ -106,7 +106,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt ein DataGridView-Objekt mit den Buchdaten 
         /// </summary>
-        public void Show_AllBuecher(ref DataGridView Buecher, string Stufe, object value = null)
+        public void Show_AllBuecher(ref MetroFramework.Controls.MetroGrid Buecher, string Stufe, object value = null)
         {
             ClearDataSource();
             FillObject();
@@ -117,7 +117,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt ein DataGridView-Objekt mit den Buch-Klassenstufen-Zuordnungsdatendaten  
         /// </summary>
-        public void Show_StufenBuecher(ref DataGridView grid, string stufe, object value = null)
+        public void Show_StufenBuecher(ref MetroFramework.Controls.MetroGrid grid, string stufe, object value = null)
         {
             ClearDataSource();
             FillObject();

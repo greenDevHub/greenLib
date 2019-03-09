@@ -60,7 +60,7 @@ namespace Bibo_Verwaltung
                 lb_2_3.Text = kunde.Strasse + kunde.Hausnummer;
                 lb_2_4.Text = kunde.Postleitzahl;
                 lb_2_5.Text = kunde.Ort;
-                lb_2_6.Text=kunde.Klassenstufe;
+                lb_2_6.Text=kunde.Klasse;
                 lb_2_7.Text = kunde.Mail;
                 lb_2_8.Text = kunde.Telefonnummer;
             }

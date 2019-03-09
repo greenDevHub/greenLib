@@ -134,7 +134,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt ein DataGridView-Objekt mit den Fachdaten 
         /// </summary>
-        public void FillGrid(ref DataGridView grid, object value = null)
+        public void FillGrid(ref MetroFramework.Controls.MetroGrid grid, object value = null)
         {
             ds.Tables[0].Clear();
             FillObject();
@@ -145,20 +145,20 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt ein ComboBox-Objekt mit den Fachdaten 
         /// </summary>
-        public void FillCombobox(ref ComboBox cb, object value)
+        public void FillCombobox(ref AdvancedComboBox cb, object value)
         {
             ds.Tables[0].Clear();
             FillObject();
             cb.DataSource = ds.Tables[0];
-            cb.ValueMember = "f_id";
-            cb.DisplayMember = "f_kurzform";
+            cb.ValueMember = "ID";
+            cb.DisplayMember = "Kurzbezeichnung";
             cb.SelectedValue = value;
         }
 
         /// <summary>
         /// Speichert ein DataGridView-Objekt in die Datenbank 
         /// </summary>
-        public void SaveGrid(ref DataGridView grid)
+        public void SaveGrid(ref MetroFramework.Controls.MetroGrid grid)
         {
             comb = new SqlCommandBuilder(adapter);
             DataSet changes = ds.GetChanges();

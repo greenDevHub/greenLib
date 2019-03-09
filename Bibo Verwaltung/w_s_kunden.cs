@@ -1,5 +1,6 @@
 ﻿using MetroFramework;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -18,6 +19,7 @@ namespace Bibo_Verwaltung
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName;
             kunde.FillGrid(ref gv_Kunde);
+            kunde.Fach.FillGrid(ref gv_faecher);
         }
 
         #region Fenster-Methoden
@@ -34,9 +36,36 @@ namespace Bibo_Verwaltung
             kunde.Hausnummer = tb_Hausnummer.Text;
             kunde.Postleitzahl = tb_Postleitzahl.Text;
             kunde.Ort = tb_Ort.Text;
-            kunde.Klassenstufe = tb_Klasse.Text;
+            kunde.Klasse = tb_Klasse.Text;
             kunde.Mail = tb_Mail.Text;
             kunde.Telefonnummer = tb_Telefonnummer.Text;
+            kunde.Faecher.Clear();
+            kunde.LeistungskursListe.Clear();
+            for(int i = 0; i<gv_result.Rows.Count; i++)
+            {
+                DataGridViewRow row = gv_result.Rows[i];
+                if(row.Cells["Kurzbezeichnung"].Value != null)
+                {
+                    if(row.Cells["Kurzbezeichnung"].Value.ToString() != "")
+                    {
+                        if (row.DefaultCellStyle.BackColor == Color.Yellow)
+                        {
+                            kunde.Faecher.Add(row.Cells["Kurzbezeichnung"].Value.ToString().Substring(1));
+                            kunde.LeistungskursListe.Add(row.Cells["Kurzbezeichnung"].Value.ToString().Substring(1));
+                        }
+                        else
+                        {
+                            kunde.Faecher.Add(row.Cells["Kurzbezeichnung"].Value.ToString());
+                        }
+                    }
+                    
+                }
+
+            }
+            for(int i = kunde.LeistungskursListe.Count; i < 2; i++)
+            {
+                kunde.LeistungskursListe.Add("");
+            }
         }
 
         /// <summary>
@@ -86,6 +115,8 @@ namespace Bibo_Verwaltung
             tb_Mail.Text = "";
             tb_Telefonnummer.Text = "";
             tb_KundenID.Text = "";
+            kunde.Fach.FillGrid(ref gv_faecher);
+            gv_result.Rows.Clear();
             SetBackground_White();
         }
 
@@ -388,17 +419,14 @@ namespace Bibo_Verwaltung
                             string message = String.Format("Es existiert bereits ein Eintrag zu dem Kunden '{0} {1} ({2})'. Bitte überprüfen Sie ihre Angaben!", args);
                             MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
+                        else if(kunde.AlreadyExists() && !kunde.Activated)
+                        {
+                            kunde.Activate();
+                            kunde.UpdateKunde();
+                        }
                         else
                         {
-                            if (!kunde.Activated)
-                            {
-                                kunde.Activate();
-                                kunde.UpdateKunde();
-                            }
-                            else
-                            {
-                                kunde.AddKunde();
-                            }
+                            kunde.AddKunde();
                             ClearForm();
                             kunde.FillGrid(ref gv_Kunde);
                             lb_kunde_add.Visible = false;
@@ -407,9 +435,9 @@ namespace Bibo_Verwaltung
                             t.Start();
                         }
                     }
-                    catch (SqlException)
+                    catch (SqlException ex)
                     {
-                        MessageBox.Show("Der Kunde konnte nicht hinzugefügt werden!", "Error",
+                        MessageBox.Show(ex.Message + "Der Kunde konnte nicht hinzugefügt werden!", "Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -514,6 +542,7 @@ namespace Bibo_Verwaltung
         {
             if (e.RowIndex >= 0)
             {
+                ClearForm();
                 DataGridViewRow row = this.gv_Kunde.Rows[e.RowIndex];
                 rb_KundeBearbeiten.Checked = true;
                 //tb_KundenID.Text = row.Cells["Kunden-ID"].Value.ToString();
@@ -522,27 +551,42 @@ namespace Bibo_Verwaltung
                 tb_KundenID.Text = kunde.KundenID;
                 tb_Vorname.Text = kunde.Vorname;
                 tb_Nachname.Text = kunde.Nachname;
+                dTP_gd.Value = kunde.Gd;
                 tb_Strasse.Text = kunde.Strasse;
                 tb_Hausnummer.Text = kunde.Hausnummer;
                 tb_Postleitzahl.Text = kunde.Postleitzahl;
                 tb_Ort.Text = kunde.Ort;
-                tb_Klasse.Text = kunde.Klassenstufe;
+                tb_Klasse.Text = kunde.Klasse;
                 tb_Mail.Text = kunde.Mail;
                 tb_Telefonnummer.Text = kunde.Telefonnummer;
-
-                //Kunde clickedkunde = new Kunde(tb_KundenID.Text);
-                //tb_Vorname.Text = clickedkunde.Vorname;
-                //tb_Nachname.Text = clickedkunde.Nachname;
-                //tb_Strasse.Text = clickedkunde.Strasse;
-                //tb_Hausnummer.Text = clickedkunde.Hausnummer;
-                //tb_Postleitzahl.Text = clickedkunde.Postleitzahl;
-                //tb_Ort.Text = clickedkunde.Ort;
-                //tb_Klasse.Text = clickedkunde.Klassenstufe;
-                //tb_Mail.Text = clickedkunde.Mail;
-                //tb_Telefonnummer.Text = clickedkunde.Telefonnummer;
+                if(kunde.Faecher.Count > 0)
+                {
+                    string fachIndex = "";
+                    List<int> index = new List<int>();
+                    foreach(string fach in kunde.Faecher)
+                    {
+                        fachIndex = kunde.Fach.GetIDByShortform(fach);
+                        kunde.Fach = new Fach(fachIndex);
+                        index.Add(int.Parse(fachIndex));
+                        if(fach.Equals(kunde.LeistungskursListe[0]) || fach.Equals(kunde.LeistungskursListe[1]))
+                        {
+                            gv_result.Rows.Add("*" + kunde.Fach.FachKurz, kunde.Fach.FachID);
+                            gv_result.Rows[gv_result.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Yellow;
+                        }
+                        else
+                        {
+                            gv_result.Rows.Add(kunde.Fach.FachKurz, kunde.Fach.FachID);
+                        }
+                    }
+                }
             }
         }
- 
+
+        private void LoadKunde()
+        {
+            
+        }
+
         private void bt_ImEx_Click(object sender, EventArgs e)
         {
             Form import = new w_s_schuelerimport("t_s_schueler", true);
@@ -564,6 +608,99 @@ namespace Bibo_Verwaltung
             //else { }
         }
         #endregion
+        private void gv_faecher_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.gv_faecher.Rows[e.RowIndex];
+                if(row.Cells["Kurzbezeichnung"].Value.ToString() != "")
+                {
+                    kunde.Fach = new Fach(row.Cells["ID"].Value.ToString());
+                    CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[gv_faecher.DataSource];
+                    currencyManager1.SuspendBinding();
+                    gv_faecher.Rows[e.RowIndex].Visible = false;
+                    currencyManager1.ResumeBinding();
+                    gv_result.Rows.Add(kunde.Fach.FachKurz, kunde.Fach.FachID);
+                }
+            }
+        }
 
+        private void gv_result_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.gv_result.Rows[e.RowIndex];
+                if (row.Cells["Kurzbezeichnung"].Value != null && !row.Cells["Kurzbezeichnung"].Value.Equals(""))
+                {
+                    kunde.Fach = new Fach(row.Cells["ID"].Value.ToString());
+                    if(row.DefaultCellStyle.BackColor == Color.Yellow)
+                    {
+                        kunde.Leistungskurse--;
+                    }
+                    gv_result.Rows.RemoveAt(e.RowIndex);
+                    
+                    for(int i = 0; i<gv_faecher.Rows.Count;i++)
+                    {
+                        DataGridViewRow gvRow = gv_faecher.Rows[i];
+                        if(gvRow.Cells["ID"].Value.ToString() == kunde.Fach.FachID)
+                        {
+                            CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[gv_faecher.DataSource];
+                            currencyManager1.SuspendBinding();
+                            gv_faecher.Rows[i].Visible = true;
+                            currencyManager1.ResumeBinding();
+                            i = gv_faecher.Rows.Count;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        private void leistungskursAuswählenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            if(leistungskursAuswählenToolStripMenuItem.Text == "als Leistungskurs markieren")
+            {
+                if (kunde.Leistungskurse >= 2)
+                {
+                    MetroMessageBox.Show(this,"Sie haben bereits beide Leistungskurse vergeben. Bitte markieren Sie zunächst einen dieser als Grundkurs.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    gv_result.SelectedRows[0].Cells["Kurzbezeichnung"].Value = "*" + gv_result.SelectedRows[0].Cells["Kurzbezeichnung"].Value.ToString();
+                    gv_result.SelectedRows[0].DefaultCellStyle.BackColor = Color.Yellow;
+                    kunde.Leistungskurse++;
+                }
+                
+            }
+            else
+            {
+                gv_result.SelectedRows[0].Cells["Kurzbezeichnung"].Value = gv_result.SelectedRows[0].Cells["Kurzbezeichnung"].Value.ToString().Substring(1);
+                gv_result.SelectedRows[0].DefaultCellStyle.BackColor = Color.White;
+                kunde.Leistungskurse--;
+            }
+            
+
+        }
+
+        private void gv_result_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                if (!gv_result.Rows[e.RowIndex].Selected)
+                {
+                    gv_result.ClearSelection();
+                    gv_result.Rows[e.RowIndex].Selected = true;
+                }
+                if(gv_result.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Yellow)
+                {
+                    leistungskursAuswählenToolStripMenuItem.Text = "als Grundkurs markieren";
+                }
+                else
+                {
+                    leistungskursAuswählenToolStripMenuItem.Text = "als Leistungskurs markieren";
+                }
+            }
+        }
     }
 }

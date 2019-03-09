@@ -31,13 +31,13 @@
             this.bt_Uebernehmen = new System.Windows.Forms.Button();
             this.bt_Suchen = new System.Windows.Forms.Button();
             this.bt_import = new System.Windows.Forms.Button();
-            this.gv_Faecher = new System.Windows.Forms.DataGridView();
+            this.gv_Faecher = new MetroFramework.Controls.MetroGrid();
             this.gb_Faecher = new System.Windows.Forms.GroupBox();
-            this.bt_verwaltung = new System.Windows.Forms.Button();
-            this.tb_Suchen = new System.Windows.Forms.TextBox();
-            this.lb_Faecher = new System.Windows.Forms.Label();
             this.tLP_Faecher = new System.Windows.Forms.TableLayoutPanel();
             this.tLP_Buttons = new System.Windows.Forms.TableLayoutPanel();
+            this.bt_verwaltung = new System.Windows.Forms.Button();
+            this.lb_Faecher = new System.Windows.Forms.Label();
+            this.tb_Suchen = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Faecher)).BeginInit();
             this.gb_Faecher.SuspendLayout();
             this.tLP_Faecher.SuspendLayout();
@@ -106,38 +106,6 @@
             this.gb_Faecher.TabIndex = 67;
             this.gb_Faecher.TabStop = false;
             // 
-            // bt_verwaltung
-            // 
-            this.bt_verwaltung.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bt_verwaltung.Location = new System.Drawing.Point(3, 591);
-            this.bt_verwaltung.Name = "bt_verwaltung";
-            this.bt_verwaltung.Size = new System.Drawing.Size(228, 28);
-            this.bt_verwaltung.TabIndex = 54;
-            this.bt_verwaltung.Text = "Fächer zu Klassenstufen zuordnen";
-            this.bt_verwaltung.UseVisualStyleBackColor = true;
-            this.bt_verwaltung.Click += new System.EventHandler(this.bt_Verwaltung_Click);
-            // 
-            // tb_Suchen
-            // 
-            this.tb_Suchen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_Suchen.Enabled = false;
-            this.tb_Suchen.Location = new System.Drawing.Point(3, 19);
-            this.tb_Suchen.Name = "tb_Suchen";
-            this.tb_Suchen.Size = new System.Drawing.Size(228, 20);
-            this.tb_Suchen.TabIndex = 52;
-            this.tb_Suchen.Visible = false;
-            this.tb_Suchen.TextChanged += new System.EventHandler(this.tb_Suchen_TextChanged);
-            // 
-            // lb_Faecher
-            // 
-            this.lb_Faecher.AutoSize = true;
-            this.lb_Faecher.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lb_Faecher.Location = new System.Drawing.Point(3, 0);
-            this.lb_Faecher.Name = "lb_Faecher";
-            this.lb_Faecher.Size = new System.Drawing.Size(228, 16);
-            this.lb_Faecher.TabIndex = 54;
-            this.lb_Faecher.Text = "Suchen:";
-            // 
             // tLP_Faecher
             // 
             this.tLP_Faecher.ColumnCount = 1;
@@ -175,9 +143,41 @@
             this.tLP_Buttons.Name = "tLP_Buttons";
             this.tLP_Buttons.RowCount = 1;
             this.tLP_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2.733119F));
-            this.tLP_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tLP_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
             this.tLP_Buttons.Size = new System.Drawing.Size(232, 43);
             this.tLP_Buttons.TabIndex = 56;
+            // 
+            // bt_verwaltung
+            // 
+            this.bt_verwaltung.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bt_verwaltung.Location = new System.Drawing.Point(3, 591);
+            this.bt_verwaltung.Name = "bt_verwaltung";
+            this.bt_verwaltung.Size = new System.Drawing.Size(228, 28);
+            this.bt_verwaltung.TabIndex = 54;
+            this.bt_verwaltung.Text = "Fächer zu Klassenstufen zuordnen";
+            this.bt_verwaltung.UseVisualStyleBackColor = true;
+            this.bt_verwaltung.Click += new System.EventHandler(this.bt_Verwaltung_Click);
+            // 
+            // lb_Faecher
+            // 
+            this.lb_Faecher.AutoSize = true;
+            this.lb_Faecher.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lb_Faecher.Location = new System.Drawing.Point(3, 0);
+            this.lb_Faecher.Name = "lb_Faecher";
+            this.lb_Faecher.Size = new System.Drawing.Size(228, 16);
+            this.lb_Faecher.TabIndex = 54;
+            this.lb_Faecher.Text = "Suchen:";
+            // 
+            // tb_Suchen
+            // 
+            this.tb_Suchen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_Suchen.Enabled = false;
+            this.tb_Suchen.Location = new System.Drawing.Point(3, 19);
+            this.tb_Suchen.Name = "tb_Suchen";
+            this.tb_Suchen.Size = new System.Drawing.Size(228, 20);
+            this.tb_Suchen.TabIndex = 52;
+            this.tb_Suchen.Visible = false;
+            this.tb_Suchen.TextChanged += new System.EventHandler(this.tb_Suchen_TextChanged);
             // 
             // w_s_faecher
             // 
@@ -201,7 +201,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView gv_Faecher;
+        private MetroFramework.Controls.MetroGrid gv_Faecher;
         private System.Windows.Forms.Button bt_Uebernehmen;
         private System.Windows.Forms.Button bt_Suchen;
         private System.Windows.Forms.Button bt_import;
