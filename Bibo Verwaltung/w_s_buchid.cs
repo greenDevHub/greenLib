@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +15,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_buchid : Form
+    public partial class w_s_buchid : MetroFramework.Forms.MetroForm
     {
         Exemplar b = new Exemplar();
         public w_s_buchid()
@@ -122,7 +123,7 @@ namespace Bibo_Verwaltung
                     b.FillGrid(ref grid_buchid);
                     tb_anzahl.Text = grid_buchid.RowCount.ToString();
                     t.Start();
-                    DialogResult result = MessageBox.Show("Möchten Sie alle eben hinzugefügten Exemplare die entsprechenden Labels drucken?", "Buchlabel drucken?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult result = MetroMessageBox.Show(this,"Möchten Sie alle eben hinzugefügten Exemplare die entsprechenden Labels drucken?", "Buchlabel drucken?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if(result == DialogResult.Yes)
                     {
                         images.Clear();
@@ -145,7 +146,7 @@ namespace Bibo_Verwaltung
                 }
                 catch (SqlException)
                 {
-                    MessageBox.Show("Das Buch konnte nicht hinzugefügt werden!", "Error",
+                    MetroMessageBox.Show(this,"Das Buch konnte nicht hinzugefügt werden!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -172,7 +173,7 @@ namespace Bibo_Verwaltung
                     }
                     else
                     {
-                        MessageBox.Show("Das Exemplar konnte nicht gelöscht werden, da es sich noch im Verleih befindet. Bitte markieren Sie es zuerst als 'zurückgegeben'!", "Achtung",
+                        MetroMessageBox.Show(this,"Das Exemplar konnte nicht gelöscht werden, da es sich noch im Verleih befindet. Bitte markieren Sie es zuerst als 'zurückgegeben'!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
 
@@ -180,7 +181,7 @@ namespace Bibo_Verwaltung
                 }
                 catch (SqlException)
                 {
-                    MessageBox.Show("Das Buch konnte nicht gelöscht werden!", "Error",
+                    MetroMessageBox.Show(this,"Das Buch konnte nicht gelöscht werden!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -209,25 +210,25 @@ namespace Bibo_Verwaltung
                 }
                 catch (SqlException)
                 {
-                    MessageBox.Show("Das Buch konnte nicht bearbeitet werden!", "Error",
+                    MetroMessageBox.Show(this,"Das Buch konnte nicht bearbeitet werden!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else if (rb_edit.Checked)
             {
-                MessageBox.Show("Füllen Sie alle Felder aus, um ein Buch zu bearbeiten!", "Achtung",
+                MetroMessageBox.Show(this,"Füllen Sie alle Felder aus, um ein Buch zu bearbeiten!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 IsOK();
             }
             else if (rb_neu.Checked)
             {
-                MessageBox.Show("Füllen Sie alle Felder aus, um ein neues Buch hinzuzufügen!", "Achtung",
+                MetroMessageBox.Show(this,"Füllen Sie alle Felder aus, um ein neues Buch hinzuzufügen!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 IsOK();
             }
             else if (rb_delete.Checked)
             {
-                MessageBox.Show("Füllen Sie alle Felder aus, um ein Buch zu löschen!", "Achtung",
+                MetroMessageBox.Show(this,"Füllen Sie alle Felder aus, um ein Buch zu löschen!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 if (tb_id.Text.Equals(""))
                 {
@@ -370,7 +371,7 @@ namespace Bibo_Verwaltung
         {
             if(grid_buchid.RowCount == 0)
             {
-                if (MessageBox.Show("Sie haben für dieses Buch kein Exemplar hinzugefügt. Wollen Sie das Fenster wirklich schließen?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (MetroMessageBox.Show(this,"Sie haben für dieses Buch kein Exemplar hinzugefügt. Wollen Sie das Fenster wirklich schließen?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     e.Cancel = false;
                 }
@@ -385,7 +386,7 @@ namespace Bibo_Verwaltung
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
-            tb_anzahl.Clear();
+            tb_number.Clear();
             tb_id.Clear();
             cb_zustand.Text = "";
             dTP_aufnahme.Text = "";

@@ -209,7 +209,9 @@ namespace Bibo_Verwaltung
             {
                 b.Add_Buch();
                 Form Buchid = new w_s_buchid();
+                this.Hide();
                 Buchid.ShowDialog(this);
+                this.Show();
                 b.FillGrid_Buch(ref Grid_Buch);
                 Clear_All();
             }
@@ -217,7 +219,9 @@ namespace Bibo_Verwaltung
             {
                 b.Add_Buch();
                 Form Buchid = new w_s_buchid();
+                this.Hide();
                 Buchid.ShowDialog(this);
+                this.Show();
                 b.FillGrid_Buch(ref Grid_Buch);
                 Clear_All();
             }
@@ -228,7 +232,9 @@ namespace Bibo_Verwaltung
                 {
                     b.Add_Buch();
                     Form Buchid = new w_s_buchid();
+                    this.Hide();
                     Buchid.ShowDialog(this);
+                    this.Show();
                     b.FillGrid_Buch(ref Grid_Buch);
                     Clear_All();
                 }
@@ -1533,7 +1539,9 @@ namespace Bibo_Verwaltung
             string isbnAktuell = Grid_Buch.SelectedRows[0].Cells["ISBN"].Value.ToString();
             tb_ISBN.Text = isbnAktuell;
             Form Buchid = new w_s_buchid();
+            this.Hide();
             Buchid.ShowDialog(this);
+            this.Show();
             b.FillGrid_Buch(ref Grid_Buch);
             Clear_All();
         }

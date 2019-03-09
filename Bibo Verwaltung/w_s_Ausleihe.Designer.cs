@@ -38,7 +38,7 @@
             this.llb_BuchTitel = new MetroFramework.Controls.MetroLink();
             this.bt_AddBuch = new MetroFramework.Controls.MetroButton();
             this.picBox_Buchcover = new System.Windows.Forms.PictureBox();
-            this.leihList_Slider = new MetroFramework.Controls.MetroScrollBar();
+            this.leihList_Slider = new System.Windows.Forms.HScrollBar();
             this.tb_listBis = new MetroFramework.Controls.MetroTextBox();
             this.tb_listVon = new MetroFramework.Controls.MetroTextBox();
             this.tb_BuchCode = new MetroFramework.Controls.MetroTextBox();
@@ -132,17 +132,10 @@
             // 
             // leihList_Slider
             // 
-            this.leihList_Slider.LargeChange = 10;
-            this.leihList_Slider.Location = new System.Drawing.Point(169, 147);
-            this.leihList_Slider.Maximum = 100;
-            this.leihList_Slider.Minimum = 0;
-            this.leihList_Slider.MouseWheelBarPartitions = 10;
+            this.leihList_Slider.Location = new System.Drawing.Point(166, 147);
             this.leihList_Slider.Name = "leihList_Slider";
-            this.leihList_Slider.Orientation = MetroFramework.Controls.MetroScrollOrientation.Horizontal;
-            this.leihList_Slider.ScrollbarSize = 24;
-            this.leihList_Slider.Size = new System.Drawing.Size(150, 24);
+            this.leihList_Slider.Size = new System.Drawing.Size(156, 24);
             this.leihList_Slider.TabIndex = 8;
-            this.leihList_Slider.UseSelectable = true;
             this.leihList_Slider.Scroll += new System.Windows.Forms.ScrollEventHandler(this.leihList_Slider_Scroll);
             // 
             // tb_listBis
@@ -585,7 +578,7 @@
         }
 
         #endregion
-        private MetroFramework.Controls.MetroScrollBar leihList_Slider;
+        private System.Windows.Forms.HScrollBar leihList_Slider;
         private MetroFramework.Controls.MetroTextBox tb_listBis;
         private MetroFramework.Controls.MetroTextBox tb_listVon;
         private MetroFramework.Controls.MetroButton bt_NeuKunde;

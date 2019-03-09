@@ -40,6 +40,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -111,6 +112,7 @@
     <Compile Include="Autor.cs" />
     <Compile Include="Barcode.cs" />
     <Compile Include="Benutzer.cs" />
+    <Compile Include="BitmapFilter.cs" />
     <Compile Include="BuchStufe.cs" />
     <Compile Include="Exemplar.cs" />
     <Compile Include="Buchsuche.cs" />
@@ -134,6 +136,10 @@
     </Compile>
     <Compile Include="Schuelerimport.cs" />
     <Compile Include="Schueler.cs" />
+    <Compile Include="Screenshot.cs" />
+    <Compile Include="TransparentPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="w_s_ausleihe.cs">
       <SubType>Form</SubType>
     </Compile>

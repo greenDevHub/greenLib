@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_user : Form
+    public partial class w_s_user : MetroFramework.Forms.MetroForm
     {
         string currentUser;
 
@@ -33,7 +34,7 @@ namespace Bibo_Verwaltung
             {
                 if (rechte.Equals("-1"))
                 {
-                    MessageBox.Show("Du darfst bei den Rechten nur eine der auswählbaren Gruppen angeben!", "Falsche Rechte!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this,"Du darfst bei den Rechten nur eine der auswählbaren Gruppen angeben!", "Falsche Rechte!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     cb_Rechte.Text = "";
                     return;
                 }
@@ -44,7 +45,7 @@ namespace Bibo_Verwaltung
                 }
                 catch
                 {
-                    MessageBox.Show("Der angegebene Name ist bereits vorhanden. Bitte wählen Sie einen anderen.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this,"Der angegebene Name ist bereits vorhanden. Bitte wählen Sie einen anderen.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else if (bt_confirm.Text.Equals("Löschen"))
@@ -56,14 +57,14 @@ namespace Bibo_Verwaltung
                 }
                 catch
                 {
-                    MessageBox.Show("Beim Löschen des gewählten Nutzers ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this,"Beim Löschen des gewählten Nutzers ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else if (bt_confirm.Text.Equals("Speichern"))
             {
                 if (rechte.Equals("-1"))
                 {
-                    MessageBox.Show("Du darfst bei den Rechten nur eine der auswählbaren Gruppen angeben!", "Falsche Rechte!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this,"Du darfst bei den Rechten nur eine der auswählbaren Gruppen angeben!", "Falsche Rechte!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     cb_Rechte.Text = "";
                     return;
                 }
@@ -74,7 +75,7 @@ namespace Bibo_Verwaltung
                 }
                 catch
                 {
-                    MessageBox.Show("Beim Übernehmen der Änderungen ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this,"Beim Übernehmen der Änderungen ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             

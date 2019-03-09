@@ -136,6 +136,7 @@
             this.rTB_1.CustomButton.UseWaitCursor = true;
             this.rTB_1.CustomButton.Visible = false;
             this.rTB_1.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.rTB_1.FontWeight = MetroFramework.MetroTextBoxWeight.Light;
             this.rTB_1.Lines = new string[] {
         "Das Buch wurde erfolgreich hinzugefügt!"};
             this.rTB_1.Location = new System.Drawing.Point(3, 396);
@@ -368,7 +369,7 @@
             this.tb_anzahl.TabIndex = 48;
             this.tb_anzahl.UseSelectable = true;
             this.tb_anzahl.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.tb_anzahl.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_anzahl.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
             // 
             // dTP_Erscheinungsdatum
             // 
@@ -416,7 +417,7 @@
             this.tb_Auflage.TabIndex = 10;
             this.tb_Auflage.UseSelectable = true;
             this.tb_Auflage.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.tb_Auflage.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_Auflage.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
             this.tb_Auflage.TextChanged += new System.EventHandler(this.tb_Auflage_TextChanged);
             // 
             // lb_Sprache
@@ -465,7 +466,7 @@
             this.tb_Neupreis.TabIndex = 11;
             this.tb_Neupreis.UseSelectable = true;
             this.tb_Neupreis.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.tb_Neupreis.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_Neupreis.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
             this.tb_Neupreis.TextChanged += new System.EventHandler(this.tb_Neupreis_TextChanged);
             this.tb_Neupreis.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_Neupreis_KeyPress);
             this.tb_Neupreis.Leave += new System.EventHandler(this.tb_Neupreis_Leave);
@@ -473,8 +474,9 @@
             // comboBox1
             // 
             this.comboBox1.BackColor = System.Drawing.Color.White;
+            this.comboBox1.DataRowView = true;
             this.comboBox1.DropDownHeight = 1;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.HighlightColor = System.Drawing.Color.Gray;
             this.comboBox1.IntegralHeight = false;
@@ -654,7 +656,7 @@
             this.tb_Titel.TabIndex = 1;
             this.tb_Titel.UseSelectable = true;
             this.tb_Titel.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.tb_Titel.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_Titel.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
             this.tb_Titel.TextChanged += new System.EventHandler(this.tb_Titel_TextChanged);
             this.tb_Titel.Click += new System.EventHandler(this.tb_Titel_Click);
             // 
@@ -704,7 +706,7 @@
             this.tb_ISBN.UseSelectable = true;
             this.tb_ISBN.WaterMark = "123-0123456789";
             this.tb_ISBN.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.tb_ISBN.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_ISBN.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
             this.tb_ISBN.TextChanged += new System.EventHandler(this.tb_ISBN_TextChanged);
             this.tb_ISBN.Click += new System.EventHandler(this.tb_ISBN_Click);
             this.tb_ISBN.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_ISBN_KeyDown);
@@ -746,7 +748,7 @@
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(640, 446);
+            this.pictureBox2.Size = new System.Drawing.Size(676, 446);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 50;
             this.pictureBox2.TabStop = false;
@@ -765,7 +767,7 @@
             this.Grid_Buch.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
@@ -775,7 +777,7 @@
             this.Grid_Buch.ContextMenuStrip = this.contextMenuStrip1;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
@@ -801,7 +803,7 @@
             this.Grid_Buch.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.Grid_Buch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.helpProvider.SetShowHelp(this.Grid_Buch, true);
-            this.Grid_Buch.Size = new System.Drawing.Size(640, 446);
+            this.Grid_Buch.Size = new System.Drawing.Size(676, 446);
             this.Grid_Buch.TabIndex = 0;
             this.Grid_Buch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Buch_CellDoubleClick);
             this.Grid_Buch.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Grid_Buch_CellMouseDown);
@@ -844,7 +846,7 @@
             this.bt_Schliessen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Schliessen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Schliessen, "Schließen sie das akuelle Fenster.");
-            this.bt_Schliessen.Location = new System.Drawing.Point(791, 504);
+            this.bt_Schliessen.Location = new System.Drawing.Point(827, 504);
             this.bt_Schliessen.MaximumSize = new System.Drawing.Size(375, 24);
             this.bt_Schliessen.MinimumSize = new System.Drawing.Size(262, 24);
             this.bt_Schliessen.Name = "bt_Schliessen";
@@ -878,7 +880,7 @@
             this.gb_zoom.HorizontalScrollbarSize = 8;
             this.gb_zoom.Location = new System.Drawing.Point(413, 52);
             this.gb_zoom.Name = "gb_zoom";
-            this.gb_zoom.Size = new System.Drawing.Size(640, 446);
+            this.gb_zoom.Size = new System.Drawing.Size(676, 446);
             this.gb_zoom.TabIndex = 51;
             this.gb_zoom.VerticalScrollbarBarColor = true;
             this.gb_zoom.VerticalScrollbarHighlightOnWheel = false;
@@ -888,8 +890,9 @@
             // 
             this.cb_Autor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Autor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Autor.DataRowView = true;
             this.cb_Autor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cb_Autor.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.cb_Autor.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.cb_Autor.ForeColor = System.Drawing.Color.Black;
             this.cb_Autor.FormattingEnabled = true;
             this.helpProvider.SetHelpString(this.cb_Autor, "Tragen sie den Autor ihres Buches hier ein.");
@@ -906,8 +909,9 @@
             // 
             this.cb_Verlag.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Verlag.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Verlag.DataRowView = true;
             this.cb_Verlag.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cb_Verlag.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.cb_Verlag.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.cb_Verlag.ForeColor = System.Drawing.Color.Black;
             this.cb_Verlag.FormattingEnabled = true;
             this.helpProvider.SetHelpString(this.cb_Verlag, "Tragen sie den Verlag ihres Buches hier ein.");
@@ -924,8 +928,9 @@
             // 
             this.cb_Genre.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Genre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Genre.DataRowView = true;
             this.cb_Genre.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cb_Genre.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.cb_Genre.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.cb_Genre.ForeColor = System.Drawing.Color.Black;
             this.cb_Genre.FormattingEnabled = true;
             this.helpProvider.SetHelpString(this.cb_Genre, "Tragen sie das Genre ihres Buches hier ein.");
@@ -942,8 +947,9 @@
             // 
             this.cb_Sprache.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Sprache.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Sprache.DataRowView = true;
             this.cb_Sprache.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cb_Sprache.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.cb_Sprache.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.cb_Sprache.ForeColor = System.Drawing.Color.Black;
             this.cb_Sprache.FormattingEnabled = true;
             this.helpProvider.SetHelpKeyword(this.cb_Sprache, "Tragen sie die Sprache ihres Buches hier ein.");
@@ -1032,14 +1038,14 @@
             this.metroProgressBar1.Location = new System.Drawing.Point(0, 0);
             this.metroProgressBar1.Margin = new System.Windows.Forms.Padding(2);
             this.metroProgressBar1.Name = "metroProgressBar1";
-            this.metroProgressBar1.Size = new System.Drawing.Size(1076, 5);
+            this.metroProgressBar1.Size = new System.Drawing.Size(1100, 5);
             this.metroProgressBar1.TabIndex = 53;
             // 
             // w_s_buecher
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1076, 546);
+            this.ClientSize = new System.Drawing.Size(1100, 550);
             this.Controls.Add(this.metroProgressBar1);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.gb_zoom);
@@ -1052,6 +1058,7 @@
             this.Name = "w_s_buecher";
             this.Padding = new System.Windows.Forms.Padding(8, 60, 8, 8);
             this.Resizable = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Bücher";
             this.Activated += new System.EventHandler(this.w_s_buecher_Activated);
             this.Click += new System.EventHandler(this.w_s_buecher_Click);

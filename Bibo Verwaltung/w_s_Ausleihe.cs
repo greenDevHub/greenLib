@@ -212,7 +212,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void ShowBuchResults()
         {
-            Cursor = Cursors.WaitCursor;
+            //Cursor = Cursors.WaitCursor;
             #region Buchcode parsen
             if (tb_BuchCode.Text.Length == 8)
             {

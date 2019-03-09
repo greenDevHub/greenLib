@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_faecher : Form
+    public partial class w_s_faecher : MetroFramework.Forms.MetroForm
     {
         string currentUser;
         float originalHeightLabel = 0;
@@ -77,6 +77,7 @@ namespace Bibo_Verwaltung
         {
             if (suchmodus == false)
             {
+                lb_Faecher.Visible = true;
                 suchmodus = true;
                 bt_Suchen.Text = "Suchen AUS";
                 tLP_Faecher.RowStyles[0].Height = originalHeightLabel;
@@ -87,6 +88,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
+                lb_Faecher.Visible = false;
                 suchmodus = false;
                 bt_Suchen.Text = "Suchen AN";
                 tb_Suchen.Visible = false;

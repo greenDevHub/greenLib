@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework.Controls;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -217,7 +218,7 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region FillGrid
-        public void FillGrid(ref DataGridView grid, object value = null)
+        public void FillGrid(ref MetroGrid grid, object value = null)
         {
             dt.Clear();
             FillObject();

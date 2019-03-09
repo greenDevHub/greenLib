@@ -57,10 +57,18 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.mT_ausgabe = new MetroFramework.Controls.MetroTile();
             this.mT_rueckgabe = new MetroFramework.Controls.MetroTile();
+            this.panel = new MetroFramework.Controls.MetroPanel();
+            this.bt_zu = new MetroFramework.Controls.MetroTile();
+            this.panel1 = new Bibo_Verwaltung.TransparentPanel();
+            this.metroTile1 = new MetroFramework.Controls.MetroTile();
+            this.mT_klassenstufebuch = new MetroFramework.Controls.MetroTile();
             this.mT_fachbuch = new MetroFramework.Controls.MetroTile();
             this.mT_klassenstufefach = new MetroFramework.Controls.MetroTile();
-            this.mT_klassenstufebuch = new MetroFramework.Controls.MetroTile();
+            this.transparentPanel1 = new Bibo_Verwaltung.TransparentPanel();
             this.metroPanel1.SuspendLayout();
+            this.panel.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.transparentPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lb_Ausleihzahl
@@ -135,7 +143,7 @@
             // mT_Kunden
             // 
             this.mT_Kunden.ActiveControl = null;
-            this.mT_Kunden.Location = new System.Drawing.Point(672, 63);
+            this.mT_Kunden.Location = new System.Drawing.Point(663, 4);
             this.mT_Kunden.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Kunden.Name = "mT_Kunden";
             this.mT_Kunden.Size = new System.Drawing.Size(157, 46);
@@ -148,7 +156,7 @@
             // mt_Autor
             // 
             this.mt_Autor.ActiveControl = null;
-            this.mt_Autor.Location = new System.Drawing.Point(342, 117);
+            this.mt_Autor.Location = new System.Drawing.Point(333, 58);
             this.mt_Autor.Margin = new System.Windows.Forms.Padding(4);
             this.mt_Autor.Name = "mt_Autor";
             this.mt_Autor.Size = new System.Drawing.Size(157, 46);
@@ -160,7 +168,7 @@
             // mT_Verlage
             // 
             this.mT_Verlage.ActiveControl = null;
-            this.mT_Verlage.Location = new System.Drawing.Point(342, 170);
+            this.mT_Verlage.Location = new System.Drawing.Point(333, 111);
             this.mT_Verlage.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Verlage.Name = "mT_Verlage";
             this.mT_Verlage.Size = new System.Drawing.Size(157, 46);
@@ -172,7 +180,7 @@
             // mT_Zustand
             // 
             this.mT_Zustand.ActiveControl = null;
-            this.mT_Zustand.Location = new System.Drawing.Point(507, 171);
+            this.mT_Zustand.Location = new System.Drawing.Point(498, 111);
             this.mT_Zustand.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Zustand.Name = "mT_Zustand";
             this.mT_Zustand.Size = new System.Drawing.Size(157, 46);
@@ -184,7 +192,7 @@
             // mT_Sprachen
             // 
             this.mT_Sprachen.ActiveControl = null;
-            this.mT_Sprachen.Location = new System.Drawing.Point(342, 224);
+            this.mT_Sprachen.Location = new System.Drawing.Point(333, 165);
             this.mT_Sprachen.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Sprachen.Name = "mT_Sprachen";
             this.mT_Sprachen.Size = new System.Drawing.Size(157, 46);
@@ -196,7 +204,7 @@
             // mT_Faecher
             // 
             this.mT_Faecher.ActiveControl = null;
-            this.mT_Faecher.Location = new System.Drawing.Point(672, 224);
+            this.mT_Faecher.Location = new System.Drawing.Point(663, 165);
             this.mT_Faecher.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Faecher.Name = "mT_Faecher";
             this.mT_Faecher.Size = new System.Drawing.Size(157, 46);
@@ -209,7 +217,7 @@
             // mT_Buecher
             // 
             this.mT_Buecher.ActiveControl = null;
-            this.mT_Buecher.Location = new System.Drawing.Point(342, 63);
+            this.mT_Buecher.Location = new System.Drawing.Point(333, 4);
             this.mT_Buecher.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Buecher.Name = "mT_Buecher";
             this.mT_Buecher.Size = new System.Drawing.Size(322, 46);
@@ -221,7 +229,7 @@
             // mT_Genres
             // 
             this.mT_Genres.ActiveControl = null;
-            this.mT_Genres.Location = new System.Drawing.Point(507, 117);
+            this.mT_Genres.Location = new System.Drawing.Point(498, 58);
             this.mT_Genres.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Genres.Name = "mT_Genres";
             this.mT_Genres.Size = new System.Drawing.Size(157, 46);
@@ -233,7 +241,7 @@
             // mT_Klassenstufen
             // 
             this.mT_Klassenstufen.ActiveControl = null;
-            this.mT_Klassenstufen.Location = new System.Drawing.Point(672, 170);
+            this.mT_Klassenstufen.Location = new System.Drawing.Point(663, 111);
             this.mT_Klassenstufen.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Klassenstufen.Name = "mT_Klassenstufen";
             this.mT_Klassenstufen.Size = new System.Drawing.Size(157, 46);
@@ -246,10 +254,10 @@
             // mT_ausleihen
             // 
             this.mT_ausleihen.ActiveControl = null;
-            this.mT_ausleihen.Location = new System.Drawing.Point(13, 170);
+            this.mT_ausleihen.Location = new System.Drawing.Point(4, 111);
             this.mT_ausleihen.Margin = new System.Windows.Forms.Padding(4);
             this.mT_ausleihen.Name = "mT_ausleihen";
-            this.mT_ausleihen.Size = new System.Drawing.Size(322, 99);
+            this.mT_ausleihen.Size = new System.Drawing.Size(322, 101);
             this.mT_ausleihen.Style = MetroFramework.MetroColorStyle.Lime;
             this.mT_ausleihen.TabIndex = 3;
             this.mT_ausleihen.Text = "Buchübersicht";
@@ -259,7 +267,7 @@
             // mT_Einstellungen
             // 
             this.mT_Einstellungen.ActiveControl = null;
-            this.mT_Einstellungen.Location = new System.Drawing.Point(507, 332);
+            this.mT_Einstellungen.Location = new System.Drawing.Point(498, 219);
             this.mT_Einstellungen.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Einstellungen.Name = "mT_Einstellungen";
             this.mT_Einstellungen.Size = new System.Drawing.Size(157, 46);
@@ -272,7 +280,7 @@
             // mT_Benutzerverwaltung
             // 
             this.mT_Benutzerverwaltung.ActiveControl = null;
-            this.mT_Benutzerverwaltung.Location = new System.Drawing.Point(672, 117);
+            this.mT_Benutzerverwaltung.Location = new System.Drawing.Point(663, 58);
             this.mT_Benutzerverwaltung.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Benutzerverwaltung.Name = "mT_Benutzerverwaltung";
             this.mT_Benutzerverwaltung.Size = new System.Drawing.Size(157, 46);
@@ -285,7 +293,7 @@
             // mT_Abmelden
             // 
             this.mT_Abmelden.ActiveControl = null;
-            this.mT_Abmelden.Location = new System.Drawing.Point(672, 332);
+            this.mT_Abmelden.Location = new System.Drawing.Point(663, 219);
             this.mT_Abmelden.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Abmelden.Name = "mT_Abmelden";
             this.mT_Abmelden.Size = new System.Drawing.Size(157, 46);
@@ -306,20 +314,20 @@
             this.metroPanel1.Controls.Add(this.lb_Bestandzahl);
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 8;
-            this.metroPanel1.Location = new System.Drawing.Point(13, 63);
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(4, 4);
             this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(322, 100);
             this.metroPanel1.TabIndex = 4;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 9;
+            this.metroPanel1.VerticalScrollbarSize = 10;
             // 
             // mT_Statistik
             // 
             this.mT_Statistik.ActiveControl = null;
-            this.mT_Statistik.Location = new System.Drawing.Point(672, 278);
+            this.mT_Statistik.Location = new System.Drawing.Point(333, 219);
             this.mT_Statistik.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Statistik.Name = "mT_Statistik";
             this.mT_Statistik.Size = new System.Drawing.Size(157, 46);
@@ -348,7 +356,7 @@
             this.metroProgressBar1.Location = new System.Drawing.Point(0, 0);
             this.metroProgressBar1.Margin = new System.Windows.Forms.Padding(2);
             this.metroProgressBar1.Name = "metroProgressBar1";
-            this.metroProgressBar1.Size = new System.Drawing.Size(843, 5);
+            this.metroProgressBar1.Size = new System.Drawing.Size(847, 5);
             this.metroProgressBar1.Step = 1;
             this.metroProgressBar1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroProgressBar1.TabIndex = 9;
@@ -361,9 +369,10 @@
             // mT_ausgabe
             // 
             this.mT_ausgabe.ActiveControl = null;
-            this.mT_ausgabe.Location = new System.Drawing.Point(13, 276);
+            this.mT_ausgabe.Location = new System.Drawing.Point(4, 219);
             this.mT_ausgabe.Name = "mT_ausgabe";
             this.mT_ausgabe.Size = new System.Drawing.Size(157, 46);
+            this.mT_ausgabe.Style = MetroFramework.MetroColorStyle.Lime;
             this.mT_ausgabe.TabIndex = 10;
             this.mT_ausgabe.Text = "Buchausgabe";
             this.mT_ausgabe.UseSelectable = true;
@@ -372,20 +381,106 @@
             // mT_rueckgabe
             // 
             this.mT_rueckgabe.ActiveControl = null;
-            this.mT_rueckgabe.Location = new System.Drawing.Point(178, 276);
+            this.mT_rueckgabe.Location = new System.Drawing.Point(169, 219);
             this.mT_rueckgabe.Name = "mT_rueckgabe";
             this.mT_rueckgabe.Size = new System.Drawing.Size(157, 46);
+            this.mT_rueckgabe.Style = MetroFramework.MetroColorStyle.Lime;
             this.mT_rueckgabe.TabIndex = 11;
             this.mT_rueckgabe.Text = "Buchrückgabe";
             this.mT_rueckgabe.UseSelectable = true;
             this.mT_rueckgabe.Click += new System.EventHandler(this.mT_rueckgabe_Click);
             // 
+            // panel
+            // 
+            this.panel.Controls.Add(this.bt_zu);
+            this.panel.Controls.Add(this.metroPanel1);
+            this.panel.Controls.Add(this.mT_Kunden);
+            this.panel.Controls.Add(this.mt_Autor);
+            this.panel.Controls.Add(this.mT_Verlage);
+            this.panel.Controls.Add(this.mT_rueckgabe);
+            this.panel.Controls.Add(this.mT_Zustand);
+            this.panel.Controls.Add(this.mT_ausgabe);
+            this.panel.Controls.Add(this.mT_Sprachen);
+            this.panel.Controls.Add(this.mT_Genres);
+            this.panel.Controls.Add(this.mT_Benutzerverwaltung);
+            this.panel.Controls.Add(this.mT_Statistik);
+            this.panel.Controls.Add(this.mT_ausleihen);
+            this.panel.Controls.Add(this.mT_Abmelden);
+            this.panel.Controls.Add(this.mT_Einstellungen);
+            this.panel.Controls.Add(this.mT_Klassenstufen);
+            this.panel.Controls.Add(this.mT_Buecher);
+            this.panel.Controls.Add(this.mT_Faecher);
+            this.panel.HorizontalScrollbarBarColor = true;
+            this.panel.HorizontalScrollbarHighlightOnWheel = false;
+            this.panel.HorizontalScrollbarSize = 10;
+            this.panel.Location = new System.Drawing.Point(10, 63);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(830, 274);
+            this.panel.TabIndex = 16;
+            this.panel.VerticalScrollbarBarColor = true;
+            this.panel.VerticalScrollbarHighlightOnWheel = false;
+            this.panel.VerticalScrollbarSize = 10;
+            // 
+            // bt_zu
+            // 
+            this.bt_zu.ActiveControl = null;
+            this.bt_zu.Location = new System.Drawing.Point(498, 165);
+            this.bt_zu.Margin = new System.Windows.Forms.Padding(4);
+            this.bt_zu.Name = "bt_zu";
+            this.bt_zu.Size = new System.Drawing.Size(157, 46);
+            this.bt_zu.Style = MetroFramework.MetroColorStyle.Blue;
+            this.bt_zu.TabIndex = 17;
+            this.bt_zu.Text = "Zuordnungen";
+            this.bt_zu.UseSelectable = true;
+            this.bt_zu.Click += new System.EventHandler(this.bt_zu_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Controls.Add(this.transparentPanel1);
+            this.panel1.ForeColor = System.Drawing.Color.Transparent;
+            this.panel1.Location = new System.Drawing.Point(0, 21);
+            this.panel1.Name = "panel1";
+            this.panel1.Opacity = 25;
+            this.panel1.Size = new System.Drawing.Size(847, 325);
+            this.panel1.TabIndex = 17;
+            this.panel1.Visible = false;
+            this.panel1.Click += new System.EventHandler(this.metroTile1_Click);
+            // 
+            // metroTile1
+            // 
+            this.metroTile1.ActiveControl = null;
+            this.metroTile1.Location = new System.Drawing.Point(169, 61);
+            this.metroTile1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 8);
+            this.metroTile1.Name = "metroTile1";
+            this.metroTile1.Size = new System.Drawing.Size(158, 46);
+            this.metroTile1.Style = MetroFramework.MetroColorStyle.Brown;
+            this.metroTile1.TabIndex = 15;
+            this.metroTile1.Text = "Zurück";
+            this.metroTile1.UseSelectable = true;
+            this.metroTile1.Click += new System.EventHandler(this.metroTile1_Click);
+            // 
+            // mT_klassenstufebuch
+            // 
+            this.mT_klassenstufebuch.ActiveControl = null;
+            this.mT_klassenstufebuch.Location = new System.Drawing.Point(8, 8);
+            this.mT_klassenstufebuch.Margin = new System.Windows.Forms.Padding(8, 8, 3, 3);
+            this.mT_klassenstufebuch.Name = "mT_klassenstufebuch";
+            this.mT_klassenstufebuch.Size = new System.Drawing.Size(157, 46);
+            this.mT_klassenstufebuch.Style = MetroFramework.MetroColorStyle.Orange;
+            this.mT_klassenstufebuch.TabIndex = 14;
+            this.mT_klassenstufebuch.Text = "Klassenstufe - Bücher";
+            this.mT_klassenstufebuch.UseSelectable = true;
+            this.mT_klassenstufebuch.Click += new System.EventHandler(this.mT_klassenstufebuch_Click);
+            // 
             // mT_fachbuch
             // 
             this.mT_fachbuch.ActiveControl = null;
-            this.mT_fachbuch.Location = new System.Drawing.Point(342, 276);
+            this.mT_fachbuch.Location = new System.Drawing.Point(169, 8);
+            this.mT_fachbuch.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
             this.mT_fachbuch.Name = "mT_fachbuch";
-            this.mT_fachbuch.Size = new System.Drawing.Size(157, 46);
+            this.mT_fachbuch.Size = new System.Drawing.Size(158, 46);
+            this.mT_fachbuch.Style = MetroFramework.MetroColorStyle.Orange;
             this.mT_fachbuch.TabIndex = 12;
             this.mT_fachbuch.Text = "Fächer - Bücher";
             this.mT_fachbuch.UseSelectable = true;
@@ -394,51 +489,38 @@
             // mT_klassenstufefach
             // 
             this.mT_klassenstufefach.ActiveControl = null;
-            this.mT_klassenstufefach.Location = new System.Drawing.Point(507, 276);
+            this.mT_klassenstufefach.Location = new System.Drawing.Point(334, 8);
+            this.mT_klassenstufefach.Margin = new System.Windows.Forms.Padding(3, 8, 8, 3);
             this.mT_klassenstufefach.Name = "mT_klassenstufefach";
             this.mT_klassenstufefach.Size = new System.Drawing.Size(157, 46);
+            this.mT_klassenstufefach.Style = MetroFramework.MetroColorStyle.Orange;
             this.mT_klassenstufefach.TabIndex = 13;
             this.mT_klassenstufefach.Text = "Klassenstufe - Fächer";
             this.mT_klassenstufefach.UseSelectable = true;
             this.mT_klassenstufefach.Click += new System.EventHandler(this.mT_klassenstufefach_Click);
             // 
-            // mT_klassenstufebuch
+            // transparentPanel1
             // 
-            this.mT_klassenstufebuch.ActiveControl = null;
-            this.mT_klassenstufebuch.Location = new System.Drawing.Point(507, 224);
-            this.mT_klassenstufebuch.Name = "mT_klassenstufebuch";
-            this.mT_klassenstufebuch.Size = new System.Drawing.Size(157, 46);
-            this.mT_klassenstufebuch.TabIndex = 14;
-            this.mT_klassenstufebuch.Text = "Klassenstufe - Bücher";
-            this.mT_klassenstufebuch.UseSelectable = true;
-            this.mT_klassenstufebuch.Click += new System.EventHandler(this.mT_klassenstufebuch_Click);
+            this.transparentPanel1.BackColor = System.Drawing.Color.DimGray;
+            this.transparentPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.transparentPanel1.Controls.Add(this.mT_klassenstufebuch);
+            this.transparentPanel1.Controls.Add(this.metroTile1);
+            this.transparentPanel1.Controls.Add(this.mT_klassenstufefach);
+            this.transparentPanel1.Controls.Add(this.mT_fachbuch);
+            this.transparentPanel1.ForeColor = System.Drawing.Color.Transparent;
+            this.transparentPanel1.Location = new System.Drawing.Point(173, 91);
+            this.transparentPanel1.Name = "transparentPanel1";
+            this.transparentPanel1.Size = new System.Drawing.Size(499, 116);
+            this.transparentPanel1.TabIndex = 16;
             // 
             // w_s_main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(843, 403);
-            this.Controls.Add(this.mT_klassenstufebuch);
-            this.Controls.Add(this.mT_klassenstufefach);
-            this.Controls.Add(this.mT_fachbuch);
-            this.Controls.Add(this.mT_rueckgabe);
-            this.Controls.Add(this.mT_ausgabe);
+            this.ClientSize = new System.Drawing.Size(847, 344);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel);
             this.Controls.Add(this.metroProgressBar1);
             this.Controls.Add(this.image);
-            this.Controls.Add(this.mT_Statistik);
-            this.Controls.Add(this.mT_Abmelden);
-            this.Controls.Add(this.metroPanel1);
-            this.Controls.Add(this.mT_Buecher);
-            this.Controls.Add(this.mT_Faecher);
-            this.Controls.Add(this.mT_Klassenstufen);
-            this.Controls.Add(this.mT_Einstellungen);
-            this.Controls.Add(this.mT_ausleihen);
-            this.Controls.Add(this.mT_Benutzerverwaltung);
-            this.Controls.Add(this.mT_Genres);
-            this.Controls.Add(this.mT_Sprachen);
-            this.Controls.Add(this.mT_Zustand);
-            this.Controls.Add(this.mT_Verlage);
-            this.Controls.Add(this.mt_Autor);
-            this.Controls.Add(this.mT_Kunden);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -449,6 +531,9 @@
             this.Activated += new System.EventHandler(this.Load_Uebersicht);
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
+            this.panel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.transparentPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -474,7 +559,6 @@
         private MetroFramework.Controls.MetroTile mT_Einstellungen;
         private MetroFramework.Controls.MetroTile mT_Benutzerverwaltung;
         private MetroFramework.Controls.MetroTile mT_Abmelden;
-        private MetroFramework.Controls.MetroPanel metroPanel1;
         private MetroFramework.Controls.MetroTile mT_Statistik;
         private MetroFramework.Controls.MetroLink image;
         private MetroFramework.Controls.MetroProgressBar metroProgressBar1;
@@ -484,5 +568,11 @@
         private MetroFramework.Controls.MetroTile mT_fachbuch;
         private MetroFramework.Controls.MetroTile mT_klassenstufefach;
         private MetroFramework.Controls.MetroTile mT_klassenstufebuch;
+        private MetroFramework.Controls.MetroPanel panel;
+        private MetroFramework.Controls.MetroTile bt_zu;
+        private TransparentPanel panel1;
+        private MetroFramework.Controls.MetroTile metroTile1;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
+        private TransparentPanel transparentPanel1;
     }
 }

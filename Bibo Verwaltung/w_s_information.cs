@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_information : Form
+    public partial class w_s_information : MetroFramework.Forms.MetroForm
     {
         string currentUser;
         public w_s_information(int modus, string id, string userName)

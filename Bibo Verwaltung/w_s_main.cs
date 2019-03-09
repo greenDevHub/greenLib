@@ -14,10 +14,22 @@ namespace Bibo_Verwaltung
     public partial class w_s_main : MetroFramework.Forms.MetroForm
     {
         string currentUser;
+        private PictureBox pb;
+        //private Panel panel2;
         public w_s_main(string userName)
         {
             this.currentUser = userName;
             InitializeComponent();
+            //panel2 = new Panel();
+            //this.Controls.Add(panel2);
+            //panel2.Size = this.Size;
+            //panel2.Location = this.Location;
+            pb = new PictureBox();
+            this.Controls.Add(pb);
+            //panel2.Controls.Add(pb);
+            pb.Location = new Point(0,22);
+            pb.Size = this.Size;
+            pb.Visible = false;
             Benutzer user = new Benutzer(userName);
             this.Text = "     Bibliotheksverwaltung - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             if (user.Rechteid.Equals("0") || user.Rechteid.Equals("1"))
@@ -37,7 +49,41 @@ namespace Bibo_Verwaltung
             System.IO.Directory.CreateDirectory(path + "\\Bibliothek\\Downloads");
 
         }
+        private void Blur()
+        {
+            Bitmap bmp = Screenshot.TakeSnapshot(this);
+            pb.Visible = true;
+            Rectangle section = new Rectangle(new Point(0, 22), new Size(bmp.Width, bmp.Height));
 
+            Bitmap CroppedImage = CropImage(bmp, section);
+            BitmapFilter.GaussianBlur(CroppedImage, 1);
+            BitmapFilter.GaussianBlur(CroppedImage, 1);
+            BitmapFilter.GaussianBlur(CroppedImage, 1);
+            BitmapFilter.GaussianBlur(CroppedImage, 1);
+            pb.Image = CroppedImage;
+            pb.BringToFront();
+
+        }
+
+        private void UnBlur()
+        {
+            pb.Image = null;
+            pb.Visible = false;
+            pb.SendToBack();
+        }
+        public Bitmap CropImage(Bitmap source, Rectangle section)
+        {
+            // An empty bitmap which will hold the cropped image
+            Bitmap bmp = new Bitmap(section.Width, section.Height);
+
+            Graphics g = Graphics.FromImage(bmp);
+
+            // Draw the given area (section) of the source image
+            // at location 0,0 on the empty bitmap (bmp)
+            g.DrawImage(source, 0, 0, section, GraphicsUnit.Pixel);
+
+            return bmp;
+        }
         #region Load Uerbersicht
         bool error = false;
         private void Load_Uebersicht(object sender, EventArgs e)
@@ -55,8 +101,10 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
+                Blur();
                 Form Kunden = new w_s_Kunden(currentUser);
                 Kunden.ShowDialog(this);
+                UnBlur();
             }
             else
             {
@@ -68,8 +116,10 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
+                Blur();
                 Form Genres = new w_s_genres();
                 Genres.ShowDialog(this);
+                UnBlur();
             }
             else
             {
@@ -82,8 +132,10 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
+                Blur();
                 Form Sprachen = new w_s_sprachen();
                 Sprachen.ShowDialog(this);
+                UnBlur();
             }
             else
             {
@@ -96,8 +148,10 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
+                Blur();
                 Form Autoren = new w_s_autoren();
                 Autoren.ShowDialog(this);
+                UnBlur();
             }
             else
             {
@@ -110,8 +164,10 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
+                Blur();
                 Form Verlage = new w_s_verlage();
                 Verlage.ShowDialog(this);
+                UnBlur();
             }
             else
             {
@@ -123,8 +179,10 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
+                Blur();
                 Form Buecher = new w_s_buecher(true);
                 Buecher.ShowDialog(this);
+                UnBlur();
             }
             else
             {
@@ -134,8 +192,10 @@ namespace Bibo_Verwaltung
 
         private void bt_Einstellungen_Click(object sender, EventArgs e)
         {
+            Blur();
             Form Einstellungen = new w_s_einstellungen();
             Einstellungen.ShowDialog(this);
+            UnBlur();
             UpdateForm();
             //error = false;
 
@@ -145,8 +205,10 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
+                Blur();
                 Form Zustand = new w_s_zustand();
                 Zustand.ShowDialog(this);
+                UnBlur();
             }
             else
             {
@@ -158,8 +220,10 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
+                Blur();
                 Form Details = new w_s_buchsuche(currentUser);
                 Details.ShowDialog(this);
+                UnBlur();
             }
             else
             {
@@ -223,8 +287,10 @@ namespace Bibo_Verwaltung
 
         private void bt_Benutzerverwaltung_Click(object sender, EventArgs e)
         {
+            Blur();
             Form users = new w_s_user(currentUser);
             users.ShowDialog(this);
+            UnBlur();
         }
 
         private void bt_logout_Click(object sender, EventArgs e)
@@ -235,8 +301,10 @@ namespace Bibo_Verwaltung
 
         private void bt_schueler_Click(object sender, EventArgs e)
         {
+            Blur();
             Form schueler = new w_s_schueler();
             schueler.ShowDialog(this);
+            UnBlur();
         }
 
         private void bt_bf_Click(object sender, EventArgs e)
@@ -247,8 +315,10 @@ namespace Bibo_Verwaltung
 
         private void bt_stats_Click(object sender, EventArgs e)
         {
+            Blur();
             Form analytics = new w_s_analytics();
             analytics.ShowDialog(this);
+            UnBlur();
         }
 
         private void bt_klassenstufe_Click(object sender, EventArgs e)
@@ -294,14 +364,18 @@ namespace Bibo_Verwaltung
 
         private void mT_ausgabe_Click(object sender, EventArgs e)
         {
+            Blur();
             Form ausleihe = new w_s_ausleihe(currentUser);
             ausleihe.ShowDialog(this);
+            UnBlur();
         }
 
         private void mT_rueckgabe_Click(object sender, EventArgs e)
         {
+            Blur();
             Form rueckgabe = new w_s_rueckgabe(currentUser);
             rueckgabe.ShowDialog(this);
+            UnBlur();
         }
         int counter = 0;
         private void image_Click(object sender, EventArgs e)
@@ -311,6 +385,20 @@ namespace Bibo_Verwaltung
             {
                 MessageBox.Show("Herzlichen GLückwunsch! Sie haben Langeweile!");
             }
+        }
+
+        private void bt_zu_Click(object sender, EventArgs e)
+        {
+            Blur();
+            panel1.BringToFront();
+            panel1.BackColor = Color.Transparent;
+            panel1.Visible = true;
+        }
+
+        private void metroTile1_Click(object sender, EventArgs e)
+        {
+            UnBlur();
+            panel1.Visible = false;
         }
     }
     #endregion

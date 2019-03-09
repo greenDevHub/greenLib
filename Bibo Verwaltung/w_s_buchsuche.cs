@@ -64,17 +64,17 @@ namespace Bibo_Verwaltung
         #region Componenten-Aktionen
         private void bt_Clear_Click(object sender, EventArgs e)
         {
-            //tb_vorname.Text = "Vorname";
+            tb_vorname.Text = "";
             tb_vorname.ForeColor = Color.Gray;
-            //tb_nachname.Text = "Nachname";
+            tb_nachname.Text = "";
             tb_nachname.ForeColor = Color.Gray;
-            //tb_klasse.Text = "Klassenstufe";
+            tb_klasse.Text = "";
             tb_klasse.ForeColor = Color.Gray;
-            //tb_ExemplarID.Text = "ExemplarID";
+            tb_ExemplarID.Text = "";
             tb_ExemplarID.ForeColor = Color.Gray;
-            //tb_ISBN.Text = "ISBN";
+            tb_ISBN.Text = "";
             tb_ISBN.ForeColor = Color.Gray;
-            //tb_Titel.Text = "Titel";
+            tb_Titel.Text = "";
             tb_Titel.ForeColor = Color.Gray;
             cb_Autor.SelectedIndex = -1;
             cb_Autor.Text = "Autor";

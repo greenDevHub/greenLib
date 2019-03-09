@@ -40,7 +40,7 @@
             this.tb_listBis = new MetroFramework.Controls.MetroTextBox();
             this.lb_listVon = new MetroFramework.Controls.MetroLabel();
             this.tb_listVon = new MetroFramework.Controls.MetroTextBox();
-            this.rueckList_Slider = new MetroFramework.Controls.MetroScrollBar();
+            this.rueckList_Slider = new System.Windows.Forms.HScrollBar();
             this.bt_AddBuch = new MetroFramework.Controls.MetroButton();
             this.bt_open = new MetroFramework.Controls.MetroButton();
             this.picBox_Buchcover = new System.Windows.Forms.PictureBox();
@@ -283,14 +283,10 @@
             this.rueckList_Slider.Location = new System.Drawing.Point(209, 445);
             this.rueckList_Slider.Maximum = 100;
             this.rueckList_Slider.Minimum = 0;
-            this.rueckList_Slider.MouseWheelBarPartitions = 10;
             this.rueckList_Slider.Name = "rueckList_Slider";
-            this.rueckList_Slider.Orientation = MetroFramework.Controls.MetroScrollOrientation.Horizontal;
-            this.rueckList_Slider.ScrollbarSize = 24;
             this.helpProvider.SetShowHelp(this.rueckList_Slider, true);
             this.rueckList_Slider.Size = new System.Drawing.Size(120, 24);
             this.rueckList_Slider.TabIndex = 8;
-            this.rueckList_Slider.UseSelectable = true;
             this.rueckList_Slider.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar);
             // 
             // bt_AddBuch
@@ -534,7 +530,7 @@
         private System.Windows.Forms.HelpProvider helpProvider;
         private MetroFramework.Controls.MetroButton bt_open;
         private MetroFramework.Controls.MetroButton bt_AddBuch;
-        private MetroFramework.Controls.MetroScrollBar rueckList_Slider;
+        private System.Windows.Forms.HScrollBar rueckList_Slider;
         private MetroFramework.Controls.MetroTextBox tb_listBis;
         private MetroFramework.Controls.MetroLabel lb_listVon;
         private MetroFramework.Controls.MetroTextBox tb_listVon;

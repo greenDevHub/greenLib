@@ -13,12 +13,15 @@ namespace Bibo_Verwaltung
     {
         new public System.Windows.Forms.DrawMode DrawMode { get; set; }
         public Color HighlightColor { get; set; }
+        public bool DataRowView { get; set; }
 
         public AdvancedComboBox()
         {
             base.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.HighlightColor = Color.Gray;
             this.DrawItem += new DrawItemEventHandler(AdvancedComboBox_DrawItem);
+            this.DataRowView = true;
+            this.Font = new Font("Segoe UI", 10.5f);
         }
 
         void AdvancedComboBox_DrawItem(object sender, DrawItemEventArgs e)
@@ -34,9 +37,19 @@ namespace Bibo_Verwaltung
                 e.Graphics.FillRectangle(new SolidBrush(combo.BackColor),
                                          e.Bounds);
 
-            e.Graphics.DrawString(((DataRowView)combo.Items[e.Index])[1].ToString(), e.Font,
-                                  new SolidBrush(combo.ForeColor),
-                                  new Point(e.Bounds.X, e.Bounds.Y));
+            if (DataRowView == true)
+            {
+                e.Graphics.DrawString(((DataRowView)combo.Items[e.Index])[1].ToString(), e.Font,
+                      new SolidBrush(combo.ForeColor),
+                      new Point(e.Bounds.X, e.Bounds.Y));
+            }
+            else
+            {
+                e.Graphics.DrawString((combo.Items[e.Index]).ToString(), e.Font,
+                      new SolidBrush(combo.ForeColor),
+                      new Point(e.Bounds.X, e.Bounds.Y));
+            }
+
 
             e.DrawFocusRectangle();
         }

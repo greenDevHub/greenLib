@@ -28,155 +28,160 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gb_user = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lb_rechte = new System.Windows.Forms.Label();
-            this.lb_pw = new System.Windows.Forms.Label();
-            this.bt_clear = new System.Windows.Forms.Button();
-            this.tb_user = new System.Windows.Forms.TextBox();
-            this.tb_pw = new System.Windows.Forms.TextBox();
-            this.lb_user = new System.Windows.Forms.Label();
-            this.cb_Rechte = new System.Windows.Forms.ComboBox();
-            this.bt_confirm = new System.Windows.Forms.Button();
-            this.lb_Benutzer_add = new System.Windows.Forms.Label();
-            this.rb_KundeLoeschen = new System.Windows.Forms.RadioButton();
-            this.rb_KundeBearbeiten = new System.Windows.Forms.RadioButton();
-            this.rb_Neukunde = new System.Windows.Forms.RadioButton();
-            this.gv_Benutzer = new System.Windows.Forms.DataGridView();
-            this.bt_OK = new System.Windows.Forms.Button();
-            this.gb_user.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_user));
+            this.lb_rechte = new MetroFramework.Controls.MetroLabel();
+            this.lb_pw = new MetroFramework.Controls.MetroLabel();
+            this.bt_clear = new MetroFramework.Controls.MetroButton();
+            this.tb_user = new MetroFramework.Controls.MetroTextBox();
+            this.tb_pw = new MetroFramework.Controls.MetroTextBox();
+            this.lb_user = new MetroFramework.Controls.MetroLabel();
+            this.bt_confirm = new MetroFramework.Controls.MetroButton();
+            this.lb_Benutzer_add = new MetroFramework.Controls.MetroLabel();
+            this.rb_KundeLoeschen = new MetroFramework.Controls.MetroRadioButton();
+            this.rb_KundeBearbeiten = new MetroFramework.Controls.MetroRadioButton();
+            this.rb_Neukunde = new MetroFramework.Controls.MetroRadioButton();
+            this.gv_Benutzer = new MetroFramework.Controls.MetroGrid();
+            this.bt_OK = new MetroFramework.Controls.MetroButton();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.cb_Rechte = new Bibo_Verwaltung.AdvancedComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Benutzer)).BeginInit();
+            this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // gb_user
-            // 
-            this.gb_user.Controls.Add(this.tableLayoutPanel1);
-            this.gb_user.Controls.Add(this.lb_Benutzer_add);
-            this.gb_user.Controls.Add(this.rb_KundeLoeschen);
-            this.gb_user.Controls.Add(this.rb_KundeBearbeiten);
-            this.gb_user.Controls.Add(this.rb_Neukunde);
-            this.gb_user.Location = new System.Drawing.Point(12, 12);
-            this.gb_user.Name = "gb_user";
-            this.gb_user.Size = new System.Drawing.Size(288, 249);
-            this.gb_user.TabIndex = 16;
-            this.gb_user.TabStop = false;
-            this.gb_user.Text = "Benutzer";
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
-            this.tableLayoutPanel1.Controls.Add(this.lb_rechte, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lb_pw, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.bt_clear, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.tb_user, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tb_pw, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lb_user, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.cb_Rechte, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.bt_confirm, 1, 3);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 42);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(270, 170);
-            this.tableLayoutPanel1.TabIndex = 42;
             // 
             // lb_rechte
             // 
-            this.lb_rechte.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_rechte.AutoSize = true;
-            this.lb_rechte.Location = new System.Drawing.Point(3, 98);
+            this.lb_rechte.Location = new System.Drawing.Point(3, 95);
+            this.lb_rechte.Margin = new System.Windows.Forms.Padding(3);
             this.lb_rechte.Name = "lb_rechte";
-            this.lb_rechte.Size = new System.Drawing.Size(88, 13);
+            this.lb_rechte.Size = new System.Drawing.Size(51, 19);
+            this.lb_rechte.Style = MetroFramework.MetroColorStyle.Teal;
             this.lb_rechte.TabIndex = 43;
             this.lb_rechte.Text = "Rechte:";
             // 
             // lb_pw
             // 
-            this.lb_pw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_pw.AutoSize = true;
-            this.lb_pw.Location = new System.Drawing.Point(3, 56);
+            this.lb_pw.Location = new System.Drawing.Point(3, 65);
+            this.lb_pw.Margin = new System.Windows.Forms.Padding(3);
             this.lb_pw.Name = "lb_pw";
-            this.lb_pw.Size = new System.Drawing.Size(88, 13);
+            this.lb_pw.Size = new System.Drawing.Size(63, 19);
+            this.lb_pw.Style = MetroFramework.MetroColorStyle.Teal;
             this.lb_pw.TabIndex = 21;
             this.lb_pw.Text = "Passwort:";
             // 
             // bt_clear
             // 
-            this.bt_clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.bt_clear.Location = new System.Drawing.Point(4, 136);
-            this.bt_clear.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bt_clear.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_clear.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.bt_clear.Location = new System.Drawing.Point(3, 158);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(86, 24);
+            this.bt_clear.Size = new System.Drawing.Size(96, 24);
+            this.bt_clear.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_clear.TabIndex = 14;
             this.bt_clear.Text = "Leeren";
-            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.UseSelectable = true;
+            this.bt_clear.Click += new System.EventHandler(this.Reset);
             // 
             // tb_user
             // 
-            this.tb_user.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tb_user.Location = new System.Drawing.Point(98, 11);
-            this.tb_user.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            // 
+            // 
+            // 
+            this.tb_user.CustomButton.Image = null;
+            this.tb_user.CustomButton.Location = new System.Drawing.Point(155, 2);
+            this.tb_user.CustomButton.Name = "";
+            this.tb_user.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_user.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_user.CustomButton.TabIndex = 1;
+            this.tb_user.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_user.CustomButton.UseSelectable = true;
+            this.tb_user.CustomButton.Visible = false;
+            this.tb_user.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.tb_user.Lines = new string[0];
+            this.tb_user.Location = new System.Drawing.Point(105, 35);
+            this.tb_user.MaxLength = 32767;
             this.tb_user.Name = "tb_user";
-            this.tb_user.Size = new System.Drawing.Size(168, 20);
+            this.tb_user.PasswordChar = '\0';
+            this.tb_user.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_user.SelectedText = "";
+            this.tb_user.SelectionLength = 0;
+            this.tb_user.SelectionStart = 0;
+            this.tb_user.ShortcutsEnabled = true;
+            this.tb_user.Size = new System.Drawing.Size(177, 24);
+            this.tb_user.Style = MetroFramework.MetroColorStyle.Teal;
             this.tb_user.TabIndex = 3;
+            this.tb_user.UseSelectable = true;
+            this.tb_user.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_user.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // tb_pw
             // 
-            this.tb_pw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tb_pw.Location = new System.Drawing.Point(98, 53);
-            this.tb_pw.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            // 
+            // 
+            // 
+            this.tb_pw.CustomButton.Image = null;
+            this.tb_pw.CustomButton.Location = new System.Drawing.Point(155, 2);
+            this.tb_pw.CustomButton.Name = "";
+            this.tb_pw.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_pw.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_pw.CustomButton.TabIndex = 1;
+            this.tb_pw.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_pw.CustomButton.UseSelectable = true;
+            this.tb_pw.CustomButton.Visible = false;
+            this.tb_pw.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.tb_pw.Lines = new string[0];
+            this.tb_pw.Location = new System.Drawing.Point(105, 65);
+            this.tb_pw.MaxLength = 32767;
             this.tb_pw.Name = "tb_pw";
-            this.tb_pw.Size = new System.Drawing.Size(168, 20);
+            this.tb_pw.PasswordChar = '●';
+            this.tb_pw.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_pw.SelectedText = "";
+            this.tb_pw.SelectionLength = 0;
+            this.tb_pw.SelectionStart = 0;
+            this.tb_pw.ShortcutsEnabled = true;
+            this.tb_pw.Size = new System.Drawing.Size(177, 24);
+            this.tb_pw.Style = MetroFramework.MetroColorStyle.Teal;
             this.tb_pw.TabIndex = 1;
+            this.tb_pw.UseSelectable = true;
             this.tb_pw.UseSystemPasswordChar = true;
+            this.tb_pw.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_pw.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // lb_user
             // 
-            this.lb_user.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_user.AutoSize = true;
-            this.lb_user.Location = new System.Drawing.Point(3, 14);
+            this.lb_user.Location = new System.Drawing.Point(3, 35);
+            this.lb_user.Margin = new System.Windows.Forms.Padding(3);
             this.lb_user.Name = "lb_user";
-            this.lb_user.Size = new System.Drawing.Size(88, 13);
+            this.lb_user.Size = new System.Drawing.Size(96, 19);
+            this.lb_user.Style = MetroFramework.MetroColorStyle.Teal;
             this.lb_user.TabIndex = 0;
             this.lb_user.Text = "Benutzername:";
             // 
-            // cb_Rechte
-            // 
-            this.cb_Rechte.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cb_Rechte.FormattingEnabled = true;
-            this.cb_Rechte.Items.AddRange(new object[] {
-            "Gast",
-            "Benutzer",
-            "Admin"});
-            this.cb_Rechte.Location = new System.Drawing.Point(97, 94);
-            this.cb_Rechte.Name = "cb_Rechte";
-            this.cb_Rechte.Size = new System.Drawing.Size(170, 21);
-            this.cb_Rechte.TabIndex = 44;
-            // 
             // bt_confirm
             // 
-            this.bt_confirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.bt_confirm.Location = new System.Drawing.Point(98, 136);
-            this.bt_confirm.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bt_confirm.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_confirm.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.bt_confirm.Location = new System.Drawing.Point(105, 158);
             this.bt_confirm.Name = "bt_confirm";
-            this.bt_confirm.Size = new System.Drawing.Size(168, 24);
+            this.bt_confirm.Size = new System.Drawing.Size(177, 24);
+            this.bt_confirm.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_confirm.TabIndex = 13;
             this.bt_confirm.Text = "Hinzufügen";
-            this.bt_confirm.UseVisualStyleBackColor = true;
+            this.bt_confirm.UseSelectable = true;
             this.bt_confirm.Click += new System.EventHandler(this.bt_confirm_Click);
             // 
             // lb_Benutzer_add
             // 
-            this.lb_Benutzer_add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lb_Benutzer_add.Location = new System.Drawing.Point(4, 224);
+            this.lb_Benutzer_add.Location = new System.Drawing.Point(3, 125);
+            this.lb_Benutzer_add.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Benutzer_add.Name = "lb_Benutzer_add";
-            this.lb_Benutzer_add.Size = new System.Drawing.Size(270, 13);
+            this.lb_Benutzer_add.Size = new System.Drawing.Size(279, 24);
+            this.lb_Benutzer_add.Style = MetroFramework.MetroColorStyle.Teal;
             this.lb_Benutzer_add.TabIndex = 40;
             this.lb_Benutzer_add.Text = "Der Benutzer wurde erfolgreich hinzugefügt!";
             this.lb_Benutzer_add.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -185,36 +190,48 @@
             // rb_KundeLoeschen
             // 
             this.rb_KundeLoeschen.AutoSize = true;
-            this.rb_KundeLoeschen.Location = new System.Drawing.Point(212, 19);
+            this.rb_KundeLoeschen.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rb_KundeLoeschen.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
+            this.rb_KundeLoeschen.Location = new System.Drawing.Point(202, 3);
+            this.rb_KundeLoeschen.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
             this.rb_KundeLoeschen.Name = "rb_KundeLoeschen";
-            this.rb_KundeLoeschen.Size = new System.Drawing.Size(71, 17);
+            this.rb_KundeLoeschen.Size = new System.Drawing.Size(80, 19);
+            this.rb_KundeLoeschen.Style = MetroFramework.MetroColorStyle.Teal;
             this.rb_KundeLoeschen.TabIndex = 0;
             this.rb_KundeLoeschen.Text = "Entfernen";
-            this.rb_KundeLoeschen.UseVisualStyleBackColor = true;
+            this.rb_KundeLoeschen.UseSelectable = true;
             this.rb_KundeLoeschen.CheckedChanged += new System.EventHandler(this.rb_KundeLoeschen_CheckedChanged);
             // 
             // rb_KundeBearbeiten
             // 
             this.rb_KundeBearbeiten.AutoSize = true;
-            this.rb_KundeBearbeiten.Location = new System.Drawing.Point(114, 19);
+            this.rb_KundeBearbeiten.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rb_KundeBearbeiten.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
+            this.rb_KundeBearbeiten.Location = new System.Drawing.Point(103, 3);
+            this.rb_KundeBearbeiten.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
             this.rb_KundeBearbeiten.Name = "rb_KundeBearbeiten";
-            this.rb_KundeBearbeiten.Size = new System.Drawing.Size(76, 17);
+            this.rb_KundeBearbeiten.Size = new System.Drawing.Size(88, 19);
+            this.rb_KundeBearbeiten.Style = MetroFramework.MetroColorStyle.Teal;
             this.rb_KundeBearbeiten.TabIndex = 0;
             this.rb_KundeBearbeiten.Text = "Bearbeiten";
-            this.rb_KundeBearbeiten.UseVisualStyleBackColor = true;
+            this.rb_KundeBearbeiten.UseSelectable = true;
             this.rb_KundeBearbeiten.CheckedChanged += new System.EventHandler(this.rb_KundeBearbeiten_CheckedChanged);
             // 
             // rb_Neukunde
             // 
             this.rb_Neukunde.AutoSize = true;
             this.rb_Neukunde.Checked = true;
-            this.rb_Neukunde.Location = new System.Drawing.Point(14, 19);
+            this.rb_Neukunde.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rb_Neukunde.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
+            this.rb_Neukunde.Location = new System.Drawing.Point(2, 3);
+            this.rb_Neukunde.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
             this.rb_Neukunde.Name = "rb_Neukunde";
-            this.rb_Neukunde.Size = new System.Drawing.Size(79, 17);
+            this.rb_Neukunde.Size = new System.Drawing.Size(90, 19);
+            this.rb_Neukunde.Style = MetroFramework.MetroColorStyle.Teal;
             this.rb_Neukunde.TabIndex = 0;
             this.rb_Neukunde.TabStop = true;
             this.rb_Neukunde.Text = "Hinzufügen";
-            this.rb_Neukunde.UseVisualStyleBackColor = true;
+            this.rb_Neukunde.UseSelectable = true;
             this.rb_Neukunde.CheckedChanged += new System.EventHandler(this.rb_Neukunde_CheckedChanged);
             // 
             // gv_Benutzer
@@ -224,66 +241,142 @@
             this.gv_Benutzer.AllowUserToResizeColumns = false;
             this.gv_Benutzer.AllowUserToResizeRows = false;
             this.gv_Benutzer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_Benutzer.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gv_Benutzer.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gv_Benutzer.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.gv_Benutzer.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gv_Benutzer.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gv_Benutzer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_Benutzer.Location = new System.Drawing.Point(310, 19);
-            this.gv_Benutzer.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gv_Benutzer.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gv_Benutzer.EnableHeadersVisualStyles = false;
+            this.gv_Benutzer.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.gv_Benutzer.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gv_Benutzer.Location = new System.Drawing.Point(322, 63);
             this.gv_Benutzer.MultiSelect = false;
             this.gv_Benutzer.Name = "gv_Benutzer";
             this.gv_Benutzer.ReadOnly = true;
+            this.gv_Benutzer.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gv_Benutzer.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gv_Benutzer.RowHeadersVisible = false;
             this.gv_Benutzer.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_Benutzer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_Benutzer.Size = new System.Drawing.Size(525, 210);
+            this.gv_Benutzer.Size = new System.Drawing.Size(372, 152);
+            this.gv_Benutzer.Style = MetroFramework.MetroColorStyle.Teal;
             this.gv_Benutzer.TabIndex = 17;
             this.gv_Benutzer.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Benutzer_CellDoubleClick);
             // 
             // bt_OK
             // 
             this.bt_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.bt_OK.Location = new System.Drawing.Point(716, 238);
+            this.bt_OK.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_OK.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.bt_OK.Location = new System.Drawing.Point(594, 221);
             this.bt_OK.Name = "bt_OK";
-            this.bt_OK.Size = new System.Drawing.Size(120, 23);
+            this.bt_OK.Size = new System.Drawing.Size(100, 24);
+            this.bt_OK.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_OK.TabIndex = 18;
             this.bt_OK.Text = "Schließen";
-            this.bt_OK.UseVisualStyleBackColor = true;
+            this.bt_OK.UseSelectable = true;
+            // 
+            // metroPanel1
+            // 
+            this.metroPanel1.Controls.Add(this.lb_Benutzer_add);
+            this.metroPanel1.Controls.Add(this.bt_confirm);
+            this.metroPanel1.Controls.Add(this.rb_Neukunde);
+            this.metroPanel1.Controls.Add(this.bt_clear);
+            this.metroPanel1.Controls.Add(this.lb_user);
+            this.metroPanel1.Controls.Add(this.lb_rechte);
+            this.metroPanel1.Controls.Add(this.rb_KundeBearbeiten);
+            this.metroPanel1.Controls.Add(this.lb_pw);
+            this.metroPanel1.Controls.Add(this.tb_user);
+            this.metroPanel1.Controls.Add(this.tb_pw);
+            this.metroPanel1.Controls.Add(this.rb_KundeLoeschen);
+            this.metroPanel1.Controls.Add(this.cb_Rechte);
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(23, 63);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(293, 185);
+            this.metroPanel1.Style = MetroFramework.MetroColorStyle.Teal;
+            this.metroPanel1.TabIndex = 45;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // cb_Rechte
+            // 
+            this.cb_Rechte.DataRowView = false;
+            this.cb_Rechte.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_Rechte.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.cb_Rechte.FormattingEnabled = true;
+            this.cb_Rechte.HighlightColor = System.Drawing.Color.Teal;
+            this.cb_Rechte.ItemHeight = 18;
+            this.cb_Rechte.Items.AddRange(new object[] {
+            "Gast",
+            "Benutzer",
+            "Admin"});
+            this.cb_Rechte.Location = new System.Drawing.Point(105, 95);
+            this.cb_Rechte.Name = "cb_Rechte";
+            this.cb_Rechte.Size = new System.Drawing.Size(177, 24);
+            this.cb_Rechte.TabIndex = 44;
             // 
             // w_s_user
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(845, 269);
-            this.Controls.Add(this.gb_user);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(713, 264);
+            this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.gv_Benutzer);
             this.Controls.Add(this.bt_OK);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "w_s_user";
+            this.Resizable = false;
+            this.Style = MetroFramework.MetroColorStyle.Teal;
             this.Text = "Benutzerverwaltung";
-            this.gb_user.ResumeLayout(false);
-            this.gb_user.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Benutzer)).EndInit();
+            this.metroPanel1.ResumeLayout(false);
+            this.metroPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox gb_user;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label lb_pw;
-        private System.Windows.Forms.TextBox tb_user;
-        private System.Windows.Forms.TextBox tb_pw;
-        private System.Windows.Forms.Label lb_user;
-        private System.Windows.Forms.Label lb_Benutzer_add;
-        private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.RadioButton rb_KundeLoeschen;
-        private System.Windows.Forms.RadioButton rb_KundeBearbeiten;
-        private System.Windows.Forms.RadioButton rb_Neukunde;
-        private System.Windows.Forms.Button bt_confirm;
-        private System.Windows.Forms.DataGridView gv_Benutzer;
-        private System.Windows.Forms.Button bt_OK;
-        private System.Windows.Forms.Label lb_rechte;
-        private System.Windows.Forms.ComboBox cb_Rechte;
+        private MetroFramework.Controls.MetroLabel lb_pw;
+        private MetroFramework.Controls.MetroTextBox tb_user;
+        private MetroFramework.Controls.MetroTextBox tb_pw;
+        private MetroFramework.Controls.MetroLabel lb_user;
+        private MetroFramework.Controls.MetroLabel lb_Benutzer_add;
+        private MetroFramework.Controls.MetroButton bt_clear;
+        private MetroFramework.Controls.MetroRadioButton rb_KundeLoeschen;
+        private MetroFramework.Controls.MetroRadioButton rb_KundeBearbeiten;
+        private MetroFramework.Controls.MetroRadioButton rb_Neukunde;
+        private MetroFramework.Controls.MetroButton bt_confirm;
+        private MetroFramework.Controls.MetroGrid gv_Benutzer;
+        private MetroFramework.Controls.MetroButton bt_OK;
+        private MetroFramework.Controls.MetroLabel lb_rechte;
+        private AdvancedComboBox cb_Rechte;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
     }
 }
