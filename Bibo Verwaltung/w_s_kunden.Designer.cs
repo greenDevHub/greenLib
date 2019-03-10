@@ -59,7 +59,7 @@
             this.tb_Postleitzahl = new MetroFramework.Controls.MetroTextBox();
             this.tb_Ort = new MetroFramework.Controls.MetroTextBox();
             this.lb_KundenID = new MetroFramework.Controls.MetroLabel();
-            this.lb_kunde_add = new MetroFramework.Controls.MetroLabel();
+            this.lb_kunde_add = new MetroFramework.Controls.MetroTextBox();
             this.bt_clear = new MetroFramework.Controls.MetroButton();
             this.rb_KundeLoeschen = new MetroFramework.Controls.MetroRadioButton();
             this.rb_KundeBearbeiten = new MetroFramework.Controls.MetroRadioButton();
@@ -67,6 +67,9 @@
             this.bt_confirm = new MetroFramework.Controls.MetroButton();
             this.bt_OK = new MetroFramework.Controls.MetroButton();
             this.gv_Kunde = new MetroFramework.Controls.MetroGrid();
+            this.cm_kunde = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.kundeBearbeitenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kundeEntfernenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.lb_geburtsdatum = new MetroFramework.Controls.MetroLabel();
             this.lb_faecher = new MetroFramework.Controls.MetroLabel();
@@ -84,16 +87,13 @@
             this.rb_schueler = new MetroFramework.Controls.MetroRadioButton();
             this.rb_andere = new MetroFramework.Controls.MetroRadioButton();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
-            this.cm_kunde = new MetroFramework.Controls.MetroContextMenu(this.components);
-            this.kundeBearbeitenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.kundeEntfernenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
+            this.cm_kunde.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_result)).BeginInit();
             this.cm_result.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_faecher)).BeginInit();
             this.metroPanel2.SuspendLayout();
-            this.cm_kunde.SuspendLayout();
             this.SuspendLayout();
             // 
             // lb_Telefonnummer
@@ -568,22 +568,46 @@
             // 
             // lb_kunde_add
             // 
-            this.lb_kunde_add.Location = new System.Drawing.Point(3, 534);
-            this.lb_kunde_add.Margin = new System.Windows.Forms.Padding(3);
+            // 
+            // 
+            // 
+            this.lb_kunde_add.CustomButton.Image = null;
+            this.lb_kunde_add.CustomButton.Location = new System.Drawing.Point(285, 2);
+            this.lb_kunde_add.CustomButton.Name = "";
+            this.lb_kunde_add.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.lb_kunde_add.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.lb_kunde_add.CustomButton.TabIndex = 1;
+            this.lb_kunde_add.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.lb_kunde_add.CustomButton.UseSelectable = true;
+            this.lb_kunde_add.CustomButton.Visible = false;
+            this.lb_kunde_add.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.lb_kunde_add.Lines = new string[] {
+        "Der Kunde wurde erfolgreich hinzugefügt!"};
+            this.lb_kunde_add.Location = new System.Drawing.Point(3, 612);
+            this.lb_kunde_add.MaxLength = 32767;
+            this.lb_kunde_add.Multiline = true;
             this.lb_kunde_add.Name = "lb_kunde_add";
-            this.lb_kunde_add.Size = new System.Drawing.Size(306, 24);
+            this.lb_kunde_add.PasswordChar = '\0';
+            this.lb_kunde_add.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.lb_kunde_add.SelectedText = "";
+            this.lb_kunde_add.SelectionLength = 0;
+            this.lb_kunde_add.SelectionStart = 0;
+            this.lb_kunde_add.ShortcutsEnabled = true;
+            this.lb_kunde_add.Size = new System.Drawing.Size(307, 24);
             this.lb_kunde_add.Style = MetroFramework.MetroColorStyle.Teal;
             this.lb_kunde_add.TabIndex = 40;
             this.lb_kunde_add.Text = "Der Kunde wurde erfolgreich hinzugefügt!";
-            this.lb_kunde_add.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lb_kunde_add.UseSelectable = true;
             this.lb_kunde_add.Visible = false;
+            this.lb_kunde_add.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.lb_kunde_add.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // bt_clear
             // 
             this.bt_clear.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_clear.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_clear, "Leeren sie alle oben liegenden Textfelder.");
-            this.bt_clear.Location = new System.Drawing.Point(3, 564);
+            this.bt_clear.Location = new System.Drawing.Point(3, 582);
             this.bt_clear.Name = "bt_clear";
             this.helpProvider.SetShowHelp(this.bt_clear, true);
             this.bt_clear.Size = new System.Drawing.Size(150, 24);
@@ -648,7 +672,7 @@
             this.bt_confirm.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_confirm.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_confirm, "Speichern sie alle oben eingetragenen Daten.");
-            this.bt_confirm.Location = new System.Drawing.Point(160, 564);
+            this.bt_confirm.Location = new System.Drawing.Point(160, 582);
             this.bt_confirm.Name = "bt_confirm";
             this.helpProvider.SetShowHelp(this.bt_confirm, true);
             this.bt_confirm.Size = new System.Drawing.Size(150, 24);
@@ -664,10 +688,10 @@
             this.bt_OK.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_OK.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_OK, "Schließen sie das akuelle Fenster.");
-            this.bt_OK.Location = new System.Drawing.Point(895, 652);
+            this.bt_OK.Location = new System.Drawing.Point(828, 703);
             this.bt_OK.Name = "bt_OK";
             this.helpProvider.SetShowHelp(this.bt_OK, true);
-            this.bt_OK.Size = new System.Drawing.Size(150, 24);
+            this.bt_OK.Size = new System.Drawing.Size(349, 24);
             this.bt_OK.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_OK.TabIndex = 15;
             this.bt_OK.Text = "Schließen";
@@ -706,7 +730,7 @@
             this.gv_Kunde.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_Kunde.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.helpProvider.SetHelpString(this.gv_Kunde, "Hier werden all ihre Kunden angezeigt.");
-            this.gv_Kunde.Location = new System.Drawing.Point(338, 118);
+            this.gv_Kunde.Location = new System.Drawing.Point(342, 125);
             this.gv_Kunde.Name = "gv_Kunde";
             this.gv_Kunde.ReadOnly = true;
             this.gv_Kunde.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -722,11 +746,33 @@
             this.gv_Kunde.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_Kunde.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.helpProvider.SetShowHelp(this.gv_Kunde, true);
-            this.gv_Kunde.Size = new System.Drawing.Size(703, 528);
+            this.gv_Kunde.Size = new System.Drawing.Size(835, 572);
             this.gv_Kunde.Style = MetroFramework.MetroColorStyle.Teal;
             this.gv_Kunde.TabIndex = 0;
             this.gv_Kunde.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Kunde_CellDoubleClick);
             this.gv_Kunde.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_Kunde_CellMouseDown);
+            // 
+            // cm_kunde
+            // 
+            this.cm_kunde.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.kundeBearbeitenToolStripMenuItem,
+            this.kundeEntfernenToolStripMenuItem});
+            this.cm_kunde.Name = "cm_kunde";
+            this.cm_kunde.Size = new System.Drawing.Size(168, 48);
+            // 
+            // kundeBearbeitenToolStripMenuItem
+            // 
+            this.kundeBearbeitenToolStripMenuItem.Name = "kundeBearbeitenToolStripMenuItem";
+            this.kundeBearbeitenToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.kundeBearbeitenToolStripMenuItem.Text = "Kunde bearbeiten";
+            this.kundeBearbeitenToolStripMenuItem.Click += new System.EventHandler(this.kundeBearbeitenToolStripMenuItem_Click);
+            // 
+            // kundeEntfernenToolStripMenuItem
+            // 
+            this.kundeEntfernenToolStripMenuItem.Name = "kundeEntfernenToolStripMenuItem";
+            this.kundeEntfernenToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.kundeEntfernenToolStripMenuItem.Text = "Kunde entfernen";
+            this.kundeEntfernenToolStripMenuItem.Click += new System.EventHandler(this.kundeEntfernenToolStripMenuItem_Click);
             // 
             // lb_geburtsdatum
             // 
@@ -758,12 +804,12 @@
             // 
             this.bt_ImEx.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_ImEx.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_ImEx.Location = new System.Drawing.Point(739, 652);
+            this.bt_ImEx.Location = new System.Drawing.Point(473, 703);
             this.bt_ImEx.Name = "bt_ImEx";
-            this.bt_ImEx.Size = new System.Drawing.Size(150, 24);
+            this.bt_ImEx.Size = new System.Drawing.Size(349, 24);
             this.bt_ImEx.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_ImEx.TabIndex = 42;
-            this.bt_ImEx.Text = "Importieren/Exportieren";
+            this.bt_ImEx.Text = "Importieren";
             this.bt_ImEx.UseSelectable = true;
             this.bt_ImEx.Click += new System.EventHandler(this.bt_ImEx_Click);
             // 
@@ -802,7 +848,7 @@
             this.metroPanel1.HorizontalScrollbarSize = 10;
             this.metroPanel1.Location = new System.Drawing.Point(23, 88);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(313, 597);
+            this.metroPanel1.Size = new System.Drawing.Size(313, 639);
             this.metroPanel1.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroPanel1.TabIndex = 43;
             this.metroPanel1.VerticalScrollbarBarColor = true;
@@ -815,13 +861,14 @@
             this.gv_result.AllowUserToDeleteRows = false;
             this.gv_result.AllowUserToResizeColumns = false;
             this.gv_result.AllowUserToResizeRows = false;
+            this.gv_result.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_result.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_result.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv_result.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.gv_result.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
@@ -834,7 +881,7 @@
             this.gv_result.ContextMenuStrip = this.cm_result;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
@@ -843,7 +890,7 @@
             this.gv_result.EnableHeadersVisualStyles = false;
             this.gv_result.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_result.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_result.Location = new System.Drawing.Point(201, 360);
+            this.gv_result.Location = new System.Drawing.Point(160, 360);
             this.gv_result.MultiSelect = false;
             this.gv_result.Name = "gv_result";
             this.gv_result.ReadOnly = true;
@@ -858,9 +905,11 @@
             this.gv_result.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.gv_result.RowHeadersVisible = false;
             this.gv_result.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.gv_result.RowTemplate.DividerHeight = 1;
+            this.gv_result.RowTemplate.Height = 24;
             this.gv_result.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.gv_result.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_result.Size = new System.Drawing.Size(108, 168);
+            this.gv_result.Size = new System.Drawing.Size(150, 216);
             this.gv_result.Style = MetroFramework.MetroColorStyle.Teal;
             this.gv_result.TabIndex = 47;
             this.gv_result.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_result_CellDoubleClick);
@@ -904,7 +953,7 @@
             this.gv_faecher.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
@@ -913,7 +962,7 @@
             this.gv_faecher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
@@ -937,9 +986,11 @@
             this.gv_faecher.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.gv_faecher.RowHeadersVisible = false;
             this.gv_faecher.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.gv_faecher.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.gv_faecher.RowTemplate.DividerHeight = 1;
+            this.gv_faecher.RowTemplate.Height = 24;
+            this.gv_faecher.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.gv_faecher.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_faecher.Size = new System.Drawing.Size(192, 168);
+            this.gv_faecher.Size = new System.Drawing.Size(150, 216);
             this.gv_faecher.Style = MetroFramework.MetroColorStyle.Teal;
             this.gv_faecher.TabIndex = 47;
             this.gv_faecher.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_faecher_CellDoubleClick);
@@ -957,7 +1008,7 @@
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(3, 9);
+            this.metroLabel1.Location = new System.Drawing.Point(342, 63);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(42, 19);
@@ -971,8 +1022,8 @@
             this.rb_alles.Checked = true;
             this.rb_alles.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_alles.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.rb_alles.Location = new System.Drawing.Point(51, 9);
-            this.rb_alles.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
+            this.rb_alles.Location = new System.Drawing.Point(3, 3);
+            this.rb_alles.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_alles.Name = "rb_alles";
             this.rb_alles.Size = new System.Drawing.Size(108, 19);
             this.rb_alles.Style = MetroFramework.MetroColorStyle.Teal;
@@ -987,8 +1038,8 @@
             this.rb_schueler.AutoSize = true;
             this.rb_schueler.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_schueler.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.rb_schueler.Location = new System.Drawing.Point(170, 9);
-            this.rb_schueler.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
+            this.rb_schueler.Location = new System.Drawing.Point(146, 3);
+            this.rb_schueler.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_schueler.Name = "rb_schueler";
             this.rb_schueler.Size = new System.Drawing.Size(146, 19);
             this.rb_schueler.Style = MetroFramework.MetroColorStyle.Teal;
@@ -1002,8 +1053,8 @@
             this.rb_andere.AutoSize = true;
             this.rb_andere.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_andere.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.rb_andere.Location = new System.Drawing.Point(327, 9);
-            this.rb_andere.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
+            this.rb_andere.Location = new System.Drawing.Point(327, 3);
+            this.rb_andere.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_andere.Name = "rb_andere";
             this.rb_andere.Size = new System.Drawing.Size(161, 19);
             this.rb_andere.Style = MetroFramework.MetroColorStyle.Teal;
@@ -1014,49 +1065,28 @@
             // 
             // metroPanel2
             // 
+            this.metroPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.metroPanel2.Controls.Add(this.rb_schueler);
             this.metroPanel2.Controls.Add(this.rb_andere);
-            this.metroPanel2.Controls.Add(this.metroLabel1);
             this.metroPanel2.Controls.Add(this.rb_alles);
             this.metroPanel2.HorizontalScrollbarBarColor = true;
             this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel2.HorizontalScrollbarSize = 10;
-            this.metroPanel2.Location = new System.Drawing.Point(342, 54);
+            this.metroPanel2.Location = new System.Drawing.Point(342, 88);
             this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(703, 28);
+            this.metroPanel2.Size = new System.Drawing.Size(835, 31);
             this.metroPanel2.TabIndex = 46;
             this.metroPanel2.VerticalScrollbarBarColor = true;
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
             // 
-            // cm_kunde
-            // 
-            this.cm_kunde.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.kundeBearbeitenToolStripMenuItem,
-            this.kundeEntfernenToolStripMenuItem});
-            this.cm_kunde.Name = "cm_kunde";
-            this.cm_kunde.Size = new System.Drawing.Size(168, 48);
-            // 
-            // kundeBearbeitenToolStripMenuItem
-            // 
-            this.kundeBearbeitenToolStripMenuItem.Name = "kundeBearbeitenToolStripMenuItem";
-            this.kundeBearbeitenToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.kundeBearbeitenToolStripMenuItem.Text = "Kunde bearbeiten";
-            this.kundeBearbeitenToolStripMenuItem.Click += new System.EventHandler(this.kundeBearbeitenToolStripMenuItem_Click);
-            // 
-            // kundeEntfernenToolStripMenuItem
-            // 
-            this.kundeEntfernenToolStripMenuItem.Name = "kundeEntfernenToolStripMenuItem";
-            this.kundeEntfernenToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.kundeEntfernenToolStripMenuItem.Text = "Kunde entfernen";
-            this.kundeEntfernenToolStripMenuItem.Click += new System.EventHandler(this.kundeEntfernenToolStripMenuItem_Click);
-            // 
             // w_s_Kunden
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1062, 694);
+            this.ClientSize = new System.Drawing.Size(1200, 750);
             this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.metroPanel1);
+            this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.bt_ImEx);
             this.Controls.Add(this.bt_OK);
             this.Controls.Add(this.rb_KundeLoeschen);
@@ -1072,6 +1102,7 @@
             this.Text = "Kunden";
             this.Activated += new System.EventHandler(this.w_s_kunden_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).EndInit();
+            this.cm_kunde.ResumeLayout(false);
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_result)).EndInit();
@@ -1079,7 +1110,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_faecher)).EndInit();
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel2.PerformLayout();
-            this.cm_kunde.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1093,7 +1123,7 @@
         private MetroFramework.Controls.MetroRadioButton rb_KundeLoeschen;
         private MetroFramework.Controls.MetroRadioButton rb_KundeBearbeiten;
         private MetroFramework.Controls.MetroButton bt_clear;
-        private MetroFramework.Controls.MetroLabel lb_kunde_add;
+        private MetroFramework.Controls.MetroTextBox lb_kunde_add;
         private MetroFramework.Controls.MetroGrid gv_Kunde;
         private MetroFramework.Controls.MetroRadioButton rb_Neukunde;
         private System.Windows.Forms.HelpProvider helpProvider;

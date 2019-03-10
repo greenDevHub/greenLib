@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_einstellungen));
             this.cb_Security = new Bibo_Verwaltung.AdvancedComboBox();
             this.lb_Server = new MetroFramework.Controls.MetroLabel();
             this.tb_Database = new MetroFramework.Controls.MetroTextBox();
@@ -410,11 +411,12 @@
             this.Controls.Add(this.metroLink1);
             this.Controls.Add(this.tLP_Top);
             this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(1);
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(450, 244);
             this.Name = "w_s_einstellungen";
             this.Resizable = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Silver;
             this.Text = "      Einstellungen";

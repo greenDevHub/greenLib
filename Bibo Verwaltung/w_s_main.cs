@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +32,7 @@ namespace Bibo_Verwaltung
             pb.Location = new Point(0,22);
             pb.Size = this.Size;
             pb.Visible = false;
+            pb.SizeMode = PictureBoxSizeMode.StretchImage;
             Benutzer user = new Benutzer(userName);
             this.Text = "     Bibliotheksverwaltung - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             if (user.Rechteid.Equals("0") || user.Rechteid.Equals("1"))
@@ -49,17 +52,32 @@ namespace Bibo_Verwaltung
             System.IO.Directory.CreateDirectory(path + "\\Bibliothek\\Downloads");
 
         }
-        private void Blur()
+        private void Blur(int size)
         {
+            //var currentDPI = (int)Registry.GetValue("HKEY_CURRENT_USER\\Control Panel\\Desktop", "LogPixels", 96);
+            //double scale = 96 / (float)currentDPI+1;
             Bitmap bmp = Screenshot.TakeSnapshot(this);
+            //Rectangle oldBounds = this.Bounds;
+            //Rectangle bounds = new Rectangle((int)((float)oldBounds.Left * scale), (int)((float)oldBounds.Top * scale), (int)((float)oldBounds.Width * scale), (int)((float)oldBounds.Height * scale));
+
+
+            //using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
+            //{
+            //    using (Graphics g = Graphics.FromImage(bitmap))
+            //    {
+            //        g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
+            //    }
+            //    bitmap.Save("C:\\Users\\Laurenz\\Documents\\Bibliothek\\test.jpg", ImageFormat.Jpeg);
+            //}
+            //Bitmap bmp = new Bitmap("C:\\Users\\Laurenz\\Documents\\Bibliothek\\test.jpg");
             pb.Visible = true;
             Rectangle section = new Rectangle(new Point(0, 22), new Size(bmp.Width, bmp.Height));
 
             Bitmap CroppedImage = CropImage(bmp, section);
-            BitmapFilter.GaussianBlur(CroppedImage, 1);
-            BitmapFilter.GaussianBlur(CroppedImage, 1);
-            BitmapFilter.GaussianBlur(CroppedImage, 1);
-            BitmapFilter.GaussianBlur(CroppedImage, 1);
+            for(int i = 0; i < size; i++)
+            {
+                BitmapFilter.GaussianBlur(CroppedImage, 1);
+            }
             pb.Image = CroppedImage;
             pb.BringToFront();
 
@@ -101,10 +119,10 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
-                Blur();
+                this.Hide();
                 Form Kunden = new w_s_Kunden(currentUser);
                 Kunden.ShowDialog(this);
-                UnBlur();
+                this.Show();
             }
             else
             {
@@ -116,10 +134,10 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
-                Blur();
+                this.Hide();
                 Form Genres = new w_s_genres();
                 Genres.ShowDialog(this);
-                UnBlur();
+                this.Show();
             }
             else
             {
@@ -132,10 +150,10 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
-                Blur();
+                this.Hide();
                 Form Sprachen = new w_s_sprachen();
                 Sprachen.ShowDialog(this);
-                UnBlur();
+                this.Show();
             }
             else
             {
@@ -148,10 +166,10 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
-                Blur();
+                this.Hide();
                 Form Autoren = new w_s_autoren();
                 Autoren.ShowDialog(this);
-                UnBlur();
+                this.Show();
             }
             else
             {
@@ -164,10 +182,10 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
-                Blur();
+                this.Hide();
                 Form Verlage = new w_s_verlage();
                 Verlage.ShowDialog(this);
-                UnBlur();
+                this.Show();
             }
             else
             {
@@ -179,10 +197,10 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
-                Blur();
+                this.Hide();
                 Form Buecher = new w_s_buecher(true);
                 Buecher.ShowDialog(this);
-                UnBlur();
+                this.Show();
             }
             else
             {
@@ -192,10 +210,10 @@ namespace Bibo_Verwaltung
 
         private void bt_Einstellungen_Click(object sender, EventArgs e)
         {
-            Blur();
+            this.Hide();
             Form Einstellungen = new w_s_einstellungen();
             Einstellungen.ShowDialog(this);
-            UnBlur();
+            this.Show();
             UpdateForm();
             //error = false;
 
@@ -205,10 +223,10 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
-                Blur();
+                this.Hide();
                 Form Zustand = new w_s_zustand();
                 Zustand.ShowDialog(this);
-                UnBlur();
+                this.Show();
             }
             else
             {
@@ -220,10 +238,10 @@ namespace Bibo_Verwaltung
         {
             if (!error)
             {
-                Blur();
+                this.Hide();
                 Form Details = new w_s_buchsuche(currentUser);
                 Details.ShowDialog(this);
-                UnBlur();
+                this.Show();
             }
             else
             {
@@ -287,44 +305,48 @@ namespace Bibo_Verwaltung
 
         private void bt_Benutzerverwaltung_Click(object sender, EventArgs e)
         {
-            Blur();
+            this.Hide();
             Form users = new w_s_user(currentUser);
             users.ShowDialog(this);
-            UnBlur();
+            this.Show();
         }
 
         private void bt_logout_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Form faecher = new w_s_faecher(currentUser);
             faecher.ShowDialog(this);
+            this.Show();
         }
 
         private void bt_schueler_Click(object sender, EventArgs e)
         {
-            Blur();
+            this.Hide();
             Form schueler = new w_s_schueler();
             schueler.ShowDialog(this);
-            UnBlur();
+            this.Show();
         }
 
         private void bt_bf_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Form buchfach = new w_s_buch_fach(currentUser);
             buchfach.ShowDialog(this);
+            this.Show();
         }
 
         private void bt_stats_Click(object sender, EventArgs e)
         {
-            Blur();
             Form analytics = new w_s_analytics();
             analytics.ShowDialog(this);
-            UnBlur();
         }
 
         private void bt_klassenstufe_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Form stufe = new w_s_klassenstufe();
             stufe.ShowDialog(this);
+            this.Show();
         }
 
         private void mT_Abmelden_Click(object sender, EventArgs e)
@@ -346,36 +368,46 @@ namespace Bibo_Verwaltung
 
         private void mT_fachbuch_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Form buchFach = new w_s_buch_fach(currentUser);
             buchFach.ShowDialog(this);
+            this.Show();
+            HidePanel();
+            
         }
 
         private void mT_klassenstufebuch_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Form buchStufe = new w_s_buch_stufe(currentUser);
             buchStufe.ShowDialog(this);
+            this.Show();
+            HidePanel();
         }
 
         private void mT_klassenstufefach_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Form fachStufe = new w_s_fach_stufe(currentUser);
             fachStufe.ShowDialog(this);
+            this.Show();
+            HidePanel();
         }
 
         private void mT_ausgabe_Click(object sender, EventArgs e)
         {
-            Blur();
+            this.Hide();
             Form ausleihe = new w_s_ausleihe(currentUser);
             ausleihe.ShowDialog(this);
-            UnBlur();
+            this.Show();
         }
 
         private void mT_rueckgabe_Click(object sender, EventArgs e)
         {
-            Blur();
+            this.Hide();
             Form rueckgabe = new w_s_rueckgabe(currentUser);
             rueckgabe.ShowDialog(this);
-            UnBlur();
+            this.Show();
         }
         int counter = 0;
         private void image_Click(object sender, EventArgs e)
@@ -389,13 +421,18 @@ namespace Bibo_Verwaltung
 
         private void bt_zu_Click(object sender, EventArgs e)
         {
-            Blur();
+            Blur(10);
             panel1.BringToFront();
             panel1.BackColor = Color.Transparent;
             panel1.Visible = true;
         }
 
         private void metroTile1_Click(object sender, EventArgs e)
+        {
+            HidePanel();
+        }
+
+        private void HidePanel()
         {
             UnBlur();
             panel1.Visible = false;

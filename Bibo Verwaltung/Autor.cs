@@ -137,7 +137,7 @@ namespace Bibo_Verwaltung
             ((ListBox)clb).ValueMember = "au_id";
         }
 
-        public void FillGrid(ref DataGridView grid, object value = null)
+        public void FillGrid(ref MetroGrid grid, object value = null)
         {
             grid.DataSource = ds.Tables[0];
             grid.Columns[0].Visible = false;
@@ -146,7 +146,7 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Speichern Grid
-        public void SaveGrid(ref DataGridView grid)
+        public void SaveGrid(ref MetroGrid grid)
         {
             comb = new SqlCommandBuilder(adapter);
             DataSet changes = ds.GetChanges();

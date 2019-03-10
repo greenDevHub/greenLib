@@ -1574,5 +1574,10 @@ namespace Bibo_Verwaltung
                 metroProgressBar1.PerformStep();
             });
         }
+
+        private void bt_Schliessen_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

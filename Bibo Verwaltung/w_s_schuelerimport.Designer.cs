@@ -48,7 +48,6 @@
             this.rb_schueler2 = new MetroFramework.Controls.MetroRadioButton();
             this.rb_schueler1 = new MetroFramework.Controls.MetroRadioButton();
             this.gv_columns = new MetroFramework.Controls.MetroGrid();
-            this.bt_Abbrechen = new MetroFramework.Controls.MetroButton();
             this.cb_ColHeader = new MetroFramework.Controls.MetroCheckBox();
             this.cb_TxtQuali = new MetroFramework.Controls.MetroComboBox();
             this.label1 = new MetroFramework.Controls.MetroLabel();
@@ -87,6 +86,7 @@
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel5 = new MetroFramework.Controls.MetroPanel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.bt_Schliessen = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Vorschau)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_columns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet1)).BeginInit();
@@ -180,7 +180,7 @@
             this.bt_Vorschau.Enabled = false;
             this.bt_Vorschau.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Vorschau.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_Vorschau.Location = new System.Drawing.Point(81, 146);
+            this.bt_Vorschau.Location = new System.Drawing.Point(381, 192);
             this.bt_Vorschau.MaximumSize = new System.Drawing.Size(188, 24);
             this.bt_Vorschau.MinimumSize = new System.Drawing.Size(160, 24);
             this.bt_Vorschau.Name = "bt_Vorschau";
@@ -196,7 +196,7 @@
             this.bt_usepreset.Enabled = false;
             this.bt_usepreset.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_usepreset.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_usepreset.Location = new System.Drawing.Point(81, 176);
+            this.bt_usepreset.Location = new System.Drawing.Point(187, 192);
             this.bt_usepreset.MaximumSize = new System.Drawing.Size(188, 24);
             this.bt_usepreset.MinimumSize = new System.Drawing.Size(160, 24);
             this.bt_usepreset.Name = "bt_usepreset";
@@ -213,7 +213,7 @@
             this.rb_faecher.AutoSize = true;
             this.rb_faecher.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_faecher.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.rb_faecher.Location = new System.Drawing.Point(331, 8);
+            this.rb_faecher.Location = new System.Drawing.Point(466, 8);
             this.rb_faecher.Margin = new System.Windows.Forms.Padding(3, 3, 16, 3);
             this.rb_faecher.MinimumSize = new System.Drawing.Size(54, 16);
             this.rb_faecher.Name = "rb_faecher";
@@ -230,7 +230,7 @@
             this.rb_schueler2.AutoSize = true;
             this.rb_schueler2.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_schueler2.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.rb_schueler2.Location = new System.Drawing.Point(157, 8);
+            this.rb_schueler2.Location = new System.Drawing.Point(225, 8);
             this.rb_schueler2.Margin = new System.Windows.Forms.Padding(3, 3, 16, 3);
             this.rb_schueler2.MinimumSize = new System.Drawing.Size(100, 16);
             this.rb_schueler2.Name = "rb_schueler2";
@@ -307,24 +307,9 @@
             this.gv_columns.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_columns.RowTemplate.Height = 40;
             this.gv_columns.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_columns.Size = new System.Drawing.Size(787, 29);
+            this.gv_columns.Size = new System.Drawing.Size(1070, 29);
             this.gv_columns.Style = MetroFramework.MetroColorStyle.Teal;
             this.gv_columns.TabIndex = 31;
-            // 
-            // bt_Abbrechen
-            // 
-            this.bt_Abbrechen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bt_Abbrechen.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.bt_Abbrechen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_Abbrechen.Location = new System.Drawing.Point(680, 176);
-            this.bt_Abbrechen.MaximumSize = new System.Drawing.Size(188, 24);
-            this.bt_Abbrechen.MinimumSize = new System.Drawing.Size(160, 24);
-            this.bt_Abbrechen.Name = "bt_Abbrechen";
-            this.bt_Abbrechen.Size = new System.Drawing.Size(188, 24);
-            this.bt_Abbrechen.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_Abbrechen.TabIndex = 29;
-            this.bt_Abbrechen.Text = "Abbrechen";
-            this.bt_Abbrechen.UseSelectable = true;
             // 
             // cb_ColHeader
             // 
@@ -359,7 +344,7 @@
             this.cb_TxtQuali.MaximumSize = new System.Drawing.Size(401, 0);
             this.cb_TxtQuali.MinimumSize = new System.Drawing.Size(161, 0);
             this.cb_TxtQuali.Name = "cb_TxtQuali";
-            this.cb_TxtQuali.Size = new System.Drawing.Size(251, 29);
+            this.cb_TxtQuali.Size = new System.Drawing.Size(390, 29);
             this.cb_TxtQuali.Style = MetroFramework.MetroColorStyle.Teal;
             this.cb_TxtQuali.TabIndex = 4;
             this.cb_TxtQuali.UseSelectable = true;
@@ -384,7 +369,7 @@
             // 
             // 
             this.tb_lines.CustomButton.Image = null;
-            this.tb_lines.CustomButton.Location = new System.Drawing.Point(229, 2);
+            this.tb_lines.CustomButton.Location = new System.Drawing.Point(368, 2);
             this.tb_lines.CustomButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tb_lines.CustomButton.Name = "";
             this.tb_lines.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -406,7 +391,7 @@
             this.tb_lines.SelectionLength = 0;
             this.tb_lines.SelectionStart = 0;
             this.tb_lines.ShortcutsEnabled = true;
-            this.tb_lines.Size = new System.Drawing.Size(251, 24);
+            this.tb_lines.Size = new System.Drawing.Size(390, 24);
             this.tb_lines.Style = MetroFramework.MetroColorStyle.Teal;
             this.tb_lines.TabIndex = 6;
             this.tb_lines.UseSelectable = true;
@@ -430,7 +415,7 @@
             this.cb_FeldTrenn.MaximumSize = new System.Drawing.Size(401, 0);
             this.cb_FeldTrenn.MinimumSize = new System.Drawing.Size(161, 0);
             this.cb_FeldTrenn.Name = "cb_FeldTrenn";
-            this.cb_FeldTrenn.Size = new System.Drawing.Size(251, 29);
+            this.cb_FeldTrenn.Size = new System.Drawing.Size(390, 29);
             this.cb_FeldTrenn.Style = MetroFramework.MetroColorStyle.Teal;
             this.cb_FeldTrenn.TabIndex = 3;
             this.cb_FeldTrenn.UseSelectable = true;
@@ -458,11 +443,11 @@
             this.bt_durchsuchen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.bt_durchsuchen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_durchsuchen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_durchsuchen.Location = new System.Drawing.Point(84, 58);
-            this.bt_durchsuchen.MaximumSize = new System.Drawing.Size(400, 24);
+            this.bt_durchsuchen.Location = new System.Drawing.Point(102, 58);
+            this.bt_durchsuchen.MaximumSize = new System.Drawing.Size(600, 24);
             this.bt_durchsuchen.MinimumSize = new System.Drawing.Size(297, 24);
             this.bt_durchsuchen.Name = "bt_durchsuchen";
-            this.bt_durchsuchen.Size = new System.Drawing.Size(361, 24);
+            this.bt_durchsuchen.Size = new System.Drawing.Size(493, 24);
             this.bt_durchsuchen.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_durchsuchen.TabIndex = 18;
             this.bt_durchsuchen.Text = "Durchsuchen";
@@ -478,7 +463,7 @@
             // 
             // 
             this.tb_path.CustomButton.Image = null;
-            this.tb_path.CustomButton.Location = new System.Drawing.Point(339, 2);
+            this.tb_path.CustomButton.Location = new System.Drawing.Point(471, 2);
             this.tb_path.CustomButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tb_path.CustomButton.Name = "";
             this.tb_path.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -490,8 +475,8 @@
             this.tb_path.Enabled = false;
             this.tb_path.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.tb_path.Lines = new string[0];
-            this.tb_path.Location = new System.Drawing.Point(84, 28);
-            this.tb_path.MaximumSize = new System.Drawing.Size(400, 24);
+            this.tb_path.Location = new System.Drawing.Point(102, 28);
+            this.tb_path.MaximumSize = new System.Drawing.Size(600, 24);
             this.tb_path.MaxLength = 32767;
             this.tb_path.MinimumSize = new System.Drawing.Size(297, 24);
             this.tb_path.Name = "tb_path";
@@ -501,7 +486,7 @@
             this.tb_path.SelectionLength = 0;
             this.tb_path.SelectionStart = 0;
             this.tb_path.ShortcutsEnabled = true;
-            this.tb_path.Size = new System.Drawing.Size(361, 24);
+            this.tb_path.Size = new System.Drawing.Size(493, 24);
             this.tb_path.Style = MetroFramework.MetroColorStyle.Teal;
             this.tb_path.TabIndex = 17;
             this.tb_path.UseSelectable = true;
@@ -519,7 +504,7 @@
             this.bt_accept.Enabled = false;
             this.bt_accept.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_accept.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_accept.Location = new System.Drawing.Point(486, 176);
+            this.bt_accept.Location = new System.Drawing.Point(963, 192);
             this.bt_accept.MaximumSize = new System.Drawing.Size(188, 24);
             this.bt_accept.MinimumSize = new System.Drawing.Size(160, 24);
             this.bt_accept.Name = "bt_accept";
@@ -534,7 +519,7 @@
             // 
             this.bt_saveProfile.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_saveProfile.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_saveProfile.Location = new System.Drawing.Point(275, 176);
+            this.bt_saveProfile.Location = new System.Drawing.Point(575, 192);
             this.bt_saveProfile.MaximumSize = new System.Drawing.Size(188, 24);
             this.bt_saveProfile.MinimumSize = new System.Drawing.Size(160, 24);
             this.bt_saveProfile.Name = "bt_saveProfile";
@@ -554,7 +539,7 @@
             this.rb_single.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_single.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.rb_single.Location = new System.Drawing.Point(102, 3);
-            this.rb_single.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
+            this.rb_single.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_single.MinimumSize = new System.Drawing.Size(128, 16);
             this.rb_single.Name = "rb_single";
             this.rb_single.Size = new System.Drawing.Size(146, 19);
@@ -572,8 +557,8 @@
             this.rb_multi.AutoSize = true;
             this.rb_multi.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_multi.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.rb_multi.Location = new System.Drawing.Point(259, 3);
-            this.rb_multi.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
+            this.rb_multi.Location = new System.Drawing.Point(283, 3);
+            this.rb_multi.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_multi.MinimumSize = new System.Drawing.Size(160, 16);
             this.rb_multi.Name = "rb_multi";
             this.rb_multi.Size = new System.Drawing.Size(186, 19);
@@ -589,16 +574,16 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.slider_preview.Enabled = false;
             this.slider_preview.LargeChange = 1;
-            this.slider_preview.Location = new System.Drawing.Point(54, 3);
+            this.slider_preview.Location = new System.Drawing.Point(57, 3);
             this.slider_preview.Maximum = 2;
-            this.slider_preview.MaximumSize = new System.Drawing.Size(346, 24);
+            this.slider_preview.MaximumSize = new System.Drawing.Size(500, 24);
             this.slider_preview.Minimum = 1;
             this.slider_preview.MinimumSize = new System.Drawing.Size(160, 24);
             this.slider_preview.MouseWheelBarPartitions = 10;
             this.slider_preview.Name = "slider_preview";
             this.slider_preview.Orientation = MetroFramework.Controls.MetroScrollOrientation.Horizontal;
             this.slider_preview.ScrollbarSize = 24;
-            this.slider_preview.Size = new System.Drawing.Size(338, 24);
+            this.slider_preview.Size = new System.Drawing.Size(484, 24);
             this.slider_preview.Style = MetroFramework.MetroColorStyle.Teal;
             this.slider_preview.TabIndex = 35;
             this.slider_preview.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -661,7 +646,7 @@
             this.tb_max.Enabled = false;
             this.tb_max.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.tb_max.Lines = new string[0];
-            this.tb_max.Location = new System.Drawing.Point(417, 3);
+            this.tb_max.Location = new System.Drawing.Point(567, 3);
             this.tb_max.MaximumSize = new System.Drawing.Size(41, 24);
             this.tb_max.MaxLength = 32767;
             this.tb_max.MinimumSize = new System.Drawing.Size(28, 24);
@@ -688,7 +673,7 @@
             // 
             // 
             this.tb_aktuell.CustomButton.Image = null;
-            this.tb_aktuell.CustomButton.Location = new System.Drawing.Point(420, 2);
+            this.tb_aktuell.CustomButton.Location = new System.Drawing.Point(570, 2);
             this.tb_aktuell.CustomButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tb_aktuell.CustomButton.Name = "";
             this.tb_aktuell.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -700,7 +685,7 @@
             this.tb_aktuell.Enabled = false;
             this.tb_aktuell.Lines = new string[0];
             this.tb_aktuell.Location = new System.Drawing.Point(3, 32);
-            this.tb_aktuell.MaximumSize = new System.Drawing.Size(560, 24);
+            this.tb_aktuell.MaximumSize = new System.Drawing.Size(600, 24);
             this.tb_aktuell.MaxLength = 32767;
             this.tb_aktuell.Name = "tb_aktuell";
             this.tb_aktuell.PasswordChar = '\0';
@@ -709,7 +694,7 @@
             this.tb_aktuell.SelectionLength = 0;
             this.tb_aktuell.SelectionStart = 0;
             this.tb_aktuell.ShortcutsEnabled = true;
-            this.tb_aktuell.Size = new System.Drawing.Size(442, 24);
+            this.tb_aktuell.Size = new System.Drawing.Size(592, 24);
             this.tb_aktuell.Style = MetroFramework.MetroColorStyle.Teal;
             this.tb_aktuell.TabIndex = 37;
             this.tb_aktuell.UseSelectable = true;
@@ -725,9 +710,9 @@
             this.bt_removefile.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_removefile.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.bt_removefile.Location = new System.Drawing.Point(3, 62);
-            this.bt_removefile.MaximumSize = new System.Drawing.Size(560, 24);
+            this.bt_removefile.MaximumSize = new System.Drawing.Size(600, 24);
             this.bt_removefile.Name = "bt_removefile";
-            this.bt_removefile.Size = new System.Drawing.Size(442, 24);
+            this.bt_removefile.Size = new System.Drawing.Size(592, 24);
             this.bt_removefile.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_removefile.TabIndex = 38;
             this.bt_removefile.Text = "Datei entfernen";
@@ -822,7 +807,7 @@
             this.metroGrid_Vorschau.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.metroGrid_Vorschau.RowTemplate.Height = 24;
             this.metroGrid_Vorschau.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.metroGrid_Vorschau.Size = new System.Drawing.Size(787, 102);
+            this.metroGrid_Vorschau.Size = new System.Drawing.Size(1070, 148);
             this.metroGrid_Vorschau.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroGrid_Vorschau.TabIndex = 51;
             this.metroGrid_Vorschau.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -832,10 +817,10 @@
             // 
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.Location = new System.Drawing.Point(4, 0);
+            this.progressBar1.Location = new System.Drawing.Point(0, 0);
             this.progressBar1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(924, 5);
+            this.progressBar1.Size = new System.Drawing.Size(1200, 5);
             this.progressBar1.Step = 1;
             this.progressBar1.Style = MetroFramework.MetroColorStyle.Teal;
             this.progressBar1.TabIndex = 43;
@@ -859,7 +844,7 @@
             this.metroPanel1.Location = new System.Drawing.Point(22, 82);
             this.metroPanel1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(456, 93);
+            this.metroPanel1.Size = new System.Drawing.Size(600, 93);
             this.metroPanel1.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroPanel1.TabIndex = 51;
             this.metroPanel1.VerticalScrollbarBarColor = true;
@@ -894,7 +879,7 @@
             this.metroPanel2.Location = new System.Drawing.Point(22, 203);
             this.metroPanel2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(456, 95);
+            this.metroPanel2.Size = new System.Drawing.Size(600, 95);
             this.metroPanel2.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroPanel2.TabIndex = 53;
             this.metroPanel2.VerticalScrollbarBarColor = true;
@@ -906,7 +891,7 @@
             this.bt_left.Enabled = false;
             this.bt_left.Image = global::Bibo_Verwaltung.Properties.Resources.Arrow_Left;
             this.bt_left.ImageSize = 30;
-            this.bt_left.Location = new System.Drawing.Point(34, 3);
+            this.bt_left.Location = new System.Drawing.Point(37, 3);
             this.bt_left.MaximumSize = new System.Drawing.Size(14, 24);
             this.bt_left.MinimumSize = new System.Drawing.Size(14, 24);
             this.bt_left.Name = "bt_left";
@@ -922,7 +907,7 @@
             this.bt_right.Enabled = false;
             this.bt_right.Image = global::Bibo_Verwaltung.Properties.Resources.Arrow_Right;
             this.bt_right.ImageSize = 30;
-            this.bt_right.Location = new System.Drawing.Point(398, 3);
+            this.bt_right.Location = new System.Drawing.Point(547, 3);
             this.bt_right.MaximumSize = new System.Drawing.Size(14, 24);
             this.bt_right.MinimumSize = new System.Drawing.Size(14, 24);
             this.bt_right.Name = "bt_right";
@@ -968,14 +953,13 @@
             this.metroPanel3.Controls.Add(this.bt_Vorschau);
             this.metroPanel3.Controls.Add(this.lb_Vorschau1);
             this.metroPanel3.Controls.Add(this.bt_usepreset);
-            this.metroPanel3.Controls.Add(this.bt_Abbrechen);
             this.metroPanel3.HorizontalScrollbarBarColor = true;
             this.metroPanel3.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel3.HorizontalScrollbarSize = 8;
             this.metroPanel3.Location = new System.Drawing.Point(22, 326);
             this.metroPanel3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.metroPanel3.Name = "metroPanel3";
-            this.metroPanel3.Size = new System.Drawing.Size(873, 212);
+            this.metroPanel3.Size = new System.Drawing.Size(1156, 221);
             this.metroPanel3.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroPanel3.TabIndex = 56;
             this.metroPanel3.VerticalScrollbarBarColor = true;
@@ -987,7 +971,7 @@
             this.bt_importSingle.Enabled = false;
             this.bt_importSingle.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_importSingle.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_importSingle.Location = new System.Drawing.Point(486, 146);
+            this.bt_importSingle.Location = new System.Drawing.Point(769, 192);
             this.bt_importSingle.MaximumSize = new System.Drawing.Size(188, 24);
             this.bt_importSingle.MinimumSize = new System.Drawing.Size(160, 24);
             this.bt_importSingle.Name = "bt_importSingle";
@@ -1002,7 +986,7 @@
             // 
             this.metroLabel4.AutoSize = true;
             this.metroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel4.Location = new System.Drawing.Point(482, 60);
+            this.metroLabel4.Location = new System.Drawing.Point(626, 60);
             this.metroLabel4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.metroLabel4.Name = "metroLabel4";
             this.metroLabel4.Size = new System.Drawing.Size(165, 19);
@@ -1019,10 +1003,10 @@
             this.metroPanel4.HorizontalScrollbarBarColor = true;
             this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel4.HorizontalScrollbarSize = 8;
-            this.metroPanel4.Location = new System.Drawing.Point(482, 82);
+            this.metroPanel4.Location = new System.Drawing.Point(626, 82);
             this.metroPanel4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.metroPanel4.Name = "metroPanel4";
-            this.metroPanel4.Size = new System.Drawing.Size(413, 39);
+            this.metroPanel4.Size = new System.Drawing.Size(548, 39);
             this.metroPanel4.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroPanel4.TabIndex = 58;
             this.metroPanel4.VerticalScrollbarBarColor = true;
@@ -1033,7 +1017,7 @@
             // 
             this.metroLabel5.AutoSize = true;
             this.metroLabel5.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel5.Location = new System.Drawing.Point(482, 127);
+            this.metroLabel5.Location = new System.Drawing.Point(623, 127);
             this.metroLabel5.Margin = new System.Windows.Forms.Padding(2, 3, 2, 0);
             this.metroLabel5.Name = "metroLabel5";
             this.metroLabel5.Size = new System.Drawing.Size(201, 19);
@@ -1054,10 +1038,10 @@
             this.metroPanel5.HorizontalScrollbarBarColor = true;
             this.metroPanel5.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel5.HorizontalScrollbarSize = 8;
-            this.metroPanel5.Location = new System.Drawing.Point(482, 149);
+            this.metroPanel5.Location = new System.Drawing.Point(626, 149);
             this.metroPanel5.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.metroPanel5.Name = "metroPanel5";
-            this.metroPanel5.Size = new System.Drawing.Size(413, 149);
+            this.metroPanel5.Size = new System.Drawing.Size(552, 149);
             this.metroPanel5.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroPanel5.TabIndex = 60;
             this.metroPanel5.VerticalScrollbarBarColor = true;
@@ -1069,10 +1053,26 @@
             this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // bt_Schliessen
+            // 
+            this.bt_Schliessen.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.bt_Schliessen.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_Schliessen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.bt_Schliessen.Location = new System.Drawing.Point(829, 553);
+            this.bt_Schliessen.MaximumSize = new System.Drawing.Size(375, 24);
+            this.bt_Schliessen.MinimumSize = new System.Drawing.Size(262, 24);
+            this.bt_Schliessen.Name = "bt_Schliessen";
+            this.bt_Schliessen.Size = new System.Drawing.Size(349, 24);
+            this.bt_Schliessen.TabIndex = 61;
+            this.bt_Schliessen.Text = "Schließen";
+            this.bt_Schliessen.UseSelectable = true;
+            this.bt_Schliessen.Click += new System.EventHandler(this.bt_Schliessen_Click);
+            // 
             // w_s_schuelerimport
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(928, 558);
+            this.ClientSize = new System.Drawing.Size(1200, 600);
+            this.Controls.Add(this.bt_Schliessen);
             this.Controls.Add(this.metroPanel5);
             this.Controls.Add(this.metroLabel5);
             this.Controls.Add(this.metroPanel4);
@@ -1090,7 +1090,6 @@
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(888, 520);
             this.Name = "w_s_schuelerimport";
-            this.Padding = new System.Windows.Forms.Padding(20, 60, 16, 16);
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Teal;
             this.Text = "Import von Schülern";
@@ -1119,7 +1118,6 @@
         private MetroFramework.Controls.MetroButton bt_Vorschau;
         private MetroFramework.Controls.MetroButton bt_usepreset;
         private MetroFramework.Controls.MetroGrid gv_columns;
-        private MetroFramework.Controls.MetroButton bt_Abbrechen;
         private MetroFramework.Controls.MetroCheckBox cb_ColHeader;
         private MetroFramework.Controls.MetroComboBox cb_TxtQuali;
         private MetroFramework.Controls.MetroComboBox cb_FeldTrenn;
@@ -1161,5 +1159,6 @@
         private MetroFramework.Controls.MetroPanel metroPanel5;
         private System.Windows.Forms.Timer timer1;
         private MetroFramework.Controls.MetroButton bt_importSingle;
+        private MetroFramework.Controls.MetroButton bt_Schliessen;
     }
 }

@@ -1148,5 +1148,10 @@ namespace Bibo_Verwaltung
                 }
             }
         }
+
+        private void bt_Schliessen_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

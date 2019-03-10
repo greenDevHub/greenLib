@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_verlage : Form
+    public partial class w_s_verlage : MetroFramework.Forms.MetroForm
     {
         public w_s_verlage()
         {

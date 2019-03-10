@@ -84,6 +84,7 @@
             this.cb_Verlag = new Bibo_Verwaltung.AdvancedComboBox();
             this.cb_Genre = new Bibo_Verwaltung.AdvancedComboBox();
             this.cb_Sprache = new Bibo_Verwaltung.AdvancedComboBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.checkedListBox1 = new Bibo_Verwaltung.AdvancedCheckedListBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -125,10 +126,10 @@
             // 
             // 
             this.rTB_1.CustomButton.Image = null;
-            this.rTB_1.CustomButton.Location = new System.Drawing.Point(74, 1);
+            this.rTB_1.CustomButton.Location = new System.Drawing.Point(122, 2);
             this.rTB_1.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.rTB_1.CustomButton.Name = "";
-            this.rTB_1.CustomButton.Size = new System.Drawing.Size(63, 63);
+            this.rTB_1.CustomButton.Size = new System.Drawing.Size(49, 49);
             this.rTB_1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.rTB_1.CustomButton.TabIndex = 1;
             this.rTB_1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -139,7 +140,7 @@
             this.rTB_1.FontWeight = MetroFramework.MetroTextBoxWeight.Light;
             this.rTB_1.Lines = new string[] {
         "Das Buch wurde erfolgreich hinzugefügt!"};
-            this.rTB_1.Location = new System.Drawing.Point(3, 396);
+            this.rTB_1.Location = new System.Drawing.Point(3, 457);
             this.rTB_1.MaxLength = 1000;
             this.rTB_1.Multiline = true;
             this.rTB_1.Name = "rTB_1";
@@ -150,7 +151,7 @@
             this.rTB_1.SelectionLength = 0;
             this.rTB_1.SelectionStart = 0;
             this.rTB_1.ShortcutsEnabled = true;
-            this.rTB_1.Size = new System.Drawing.Size(138, 65);
+            this.rTB_1.Size = new System.Drawing.Size(174, 54);
             this.rTB_1.TabIndex = 54;
             this.rTB_1.Text = "Das Buch wurde erfolgreich hinzugefügt!";
             this.rTB_1.UseSelectable = true;
@@ -166,7 +167,7 @@
             this.checkbox_autor.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.helpProvider.SetHelpString(this.checkbox_autor, "Setzen sie einen Haken in dieses Feld, können sie mehrere Autoren zu einem Buch a" +
         "ngeben.");
-            this.checkbox_autor.Location = new System.Drawing.Point(119, 88);
+            this.checkbox_autor.Location = new System.Drawing.Point(155, 88);
             this.checkbox_autor.MinimumSize = new System.Drawing.Size(22, 24);
             this.checkbox_autor.Name = "checkbox_autor";
             this.helpProvider.SetShowHelp(this.checkbox_autor, true);
@@ -180,12 +181,12 @@
             this.bt_clear_buecher.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_clear_buecher.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_clear_buecher, "Leeren sie alle oben liegenden Textfelder.");
-            this.bt_clear_buecher.Location = new System.Drawing.Point(253, 437);
+            this.bt_clear_buecher.Location = new System.Drawing.Point(301, 487);
             this.bt_clear_buecher.MaximumSize = new System.Drawing.Size(225, 24);
             this.bt_clear_buecher.MinimumSize = new System.Drawing.Size(75, 24);
             this.bt_clear_buecher.Name = "bt_clear_buecher";
             this.helpProvider.SetShowHelp(this.bt_clear_buecher, true);
-            this.bt_clear_buecher.Size = new System.Drawing.Size(96, 24);
+            this.bt_clear_buecher.Size = new System.Drawing.Size(112, 24);
             this.bt_clear_buecher.Style = MetroFramework.MetroColorStyle.Blue;
             this.bt_clear_buecher.TabIndex = 15;
             this.bt_clear_buecher.Text = "Leeren";
@@ -197,12 +198,12 @@
             this.bt_speichern_buecher.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_speichern_buecher.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_speichern_buecher, "Speichern sie alle oben eingetragenen Daten.");
-            this.bt_speichern_buecher.Location = new System.Drawing.Point(147, 437);
+            this.bt_speichern_buecher.Location = new System.Drawing.Point(183, 487);
             this.bt_speichern_buecher.MaximumSize = new System.Drawing.Size(225, 24);
             this.bt_speichern_buecher.MinimumSize = new System.Drawing.Size(75, 24);
             this.bt_speichern_buecher.Name = "bt_speichern_buecher";
             this.helpProvider.SetShowHelp(this.bt_speichern_buecher, true);
-            this.bt_speichern_buecher.Size = new System.Drawing.Size(96, 24);
+            this.bt_speichern_buecher.Size = new System.Drawing.Size(112, 24);
             this.bt_speichern_buecher.Style = MetroFramework.MetroColorStyle.Blue;
             this.bt_speichern_buecher.TabIndex = 14;
             this.bt_speichern_buecher.Text = "Speichern";
@@ -226,12 +227,12 @@
             this.bt_pic_delete.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_pic_delete.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_pic_delete, "Entfernen sie ein Bild zu ihrem Buch.");
-            this.bt_pic_delete.Location = new System.Drawing.Point(3, 365);
+            this.bt_pic_delete.Location = new System.Drawing.Point(301, 457);
             this.bt_pic_delete.MaximumSize = new System.Drawing.Size(225, 24);
             this.bt_pic_delete.MinimumSize = new System.Drawing.Size(98, 24);
             this.bt_pic_delete.Name = "bt_pic_delete";
             this.helpProvider.SetShowHelp(this.bt_pic_delete, true);
-            this.bt_pic_delete.Size = new System.Drawing.Size(138, 24);
+            this.bt_pic_delete.Size = new System.Drawing.Size(112, 24);
             this.bt_pic_delete.Style = MetroFramework.MetroColorStyle.Blue;
             this.bt_pic_delete.TabIndex = 47;
             this.bt_pic_delete.Text = "Bild entfernen";
@@ -243,10 +244,10 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.helpProvider.SetHelpString(this.pictureBox1, "Wenn sie mit ihrer Maus über dieses Vorschaubild ihres aktuellen Buches fahren, s" +
         "ehen sie eine vergrößerte Darstellung.");
-            this.pictureBox1.Location = new System.Drawing.Point(147, 335);
+            this.pictureBox1.Location = new System.Drawing.Point(183, 335);
             this.pictureBox1.Name = "pictureBox1";
             this.helpProvider.SetShowHelp(this.pictureBox1, true);
-            this.pictureBox1.Size = new System.Drawing.Size(202, 96);
+            this.pictureBox1.Size = new System.Drawing.Size(230, 116);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 46;
             this.pictureBox1.TabStop = false;
@@ -258,12 +259,12 @@
             this.bt_picture.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_picture.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_picture, "Laden sie ein Bild zu ihrem Buch hoch.");
-            this.bt_picture.Location = new System.Drawing.Point(3, 335);
+            this.bt_picture.Location = new System.Drawing.Point(183, 457);
             this.bt_picture.MaximumSize = new System.Drawing.Size(225, 24);
             this.bt_picture.MinimumSize = new System.Drawing.Size(98, 24);
             this.bt_picture.Name = "bt_picture";
             this.helpProvider.SetShowHelp(this.bt_picture, true);
-            this.bt_picture.Size = new System.Drawing.Size(138, 24);
+            this.bt_picture.Size = new System.Drawing.Size(112, 24);
             this.bt_picture.Style = MetroFramework.MetroColorStyle.Blue;
             this.bt_picture.TabIndex = 45;
             this.bt_picture.Text = "Bild auswählen";
@@ -297,7 +298,7 @@
             // lb_Neupreis_Euro
             // 
             this.lb_Neupreis_Euro.AutoSize = true;
-            this.lb_Neupreis_Euro.Location = new System.Drawing.Point(355, 208);
+            this.lb_Neupreis_Euro.Location = new System.Drawing.Point(419, 208);
             this.lb_Neupreis_Euro.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Neupreis_Euro.MinimumSize = new System.Drawing.Size(22, 24);
             this.lb_Neupreis_Euro.Name = "lb_Neupreis_Euro";
@@ -311,7 +312,7 @@
             this.bt_Sprache_s.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Sprache_s.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Sprache_s, "Klicken sie auf diesen Button, um neue Sprachen hinzuzufügen.");
-            this.bt_Sprache_s.Location = new System.Drawing.Point(355, 178);
+            this.bt_Sprache_s.Location = new System.Drawing.Point(419, 178);
             this.bt_Sprache_s.MaximumSize = new System.Drawing.Size(22, 24);
             this.bt_Sprache_s.MinimumSize = new System.Drawing.Size(22, 24);
             this.bt_Sprache_s.Name = "bt_Sprache_s";
@@ -340,7 +341,7 @@
             // 
             // 
             this.tb_anzahl.CustomButton.Image = null;
-            this.tb_anzahl.CustomButton.Location = new System.Drawing.Point(180, 2);
+            this.tb_anzahl.CustomButton.Location = new System.Drawing.Point(208, 2);
             this.tb_anzahl.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.tb_anzahl.CustomButton.Name = "";
             this.tb_anzahl.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -353,7 +354,7 @@
             this.tb_anzahl.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.helpProvider.SetHelpString(this.tb_anzahl, "Tragen sie die Anzahl der Exemplare ihres Buches hier ein.");
             this.tb_anzahl.Lines = new string[0];
-            this.tb_anzahl.Location = new System.Drawing.Point(147, 304);
+            this.tb_anzahl.Location = new System.Drawing.Point(183, 304);
             this.tb_anzahl.MaximumSize = new System.Drawing.Size(375, 24);
             this.tb_anzahl.MaxLength = 32767;
             this.tb_anzahl.MinimumSize = new System.Drawing.Size(150, 24);
@@ -365,7 +366,7 @@
             this.tb_anzahl.SelectionStart = 0;
             this.tb_anzahl.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_anzahl, true);
-            this.tb_anzahl.Size = new System.Drawing.Size(202, 24);
+            this.tb_anzahl.Size = new System.Drawing.Size(230, 24);
             this.tb_anzahl.TabIndex = 48;
             this.tb_anzahl.UseSelectable = true;
             this.tb_anzahl.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -375,12 +376,12 @@
             // 
             this.helpProvider.SetHelpString(this.dTP_Erscheinungsdatum, "Wählen sie das Erscheinungsdatum ihres Buches hier ein.");
             this.dTP_Erscheinungsdatum.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dTP_Erscheinungsdatum.Location = new System.Drawing.Point(147, 268);
+            this.dTP_Erscheinungsdatum.Location = new System.Drawing.Point(183, 268);
             this.dTP_Erscheinungsdatum.MaximumSize = new System.Drawing.Size(376, 30);
             this.dTP_Erscheinungsdatum.MinimumSize = new System.Drawing.Size(0, 29);
             this.dTP_Erscheinungsdatum.Name = "dTP_Erscheinungsdatum";
             this.helpProvider.SetShowHelp(this.dTP_Erscheinungsdatum, true);
-            this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(202, 29);
+            this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(230, 29);
             this.dTP_Erscheinungsdatum.TabIndex = 12;
             // 
             // tb_Auflage
@@ -389,7 +390,7 @@
             // 
             // 
             this.tb_Auflage.CustomButton.Image = null;
-            this.tb_Auflage.CustomButton.Location = new System.Drawing.Point(180, 2);
+            this.tb_Auflage.CustomButton.Location = new System.Drawing.Point(208, 2);
             this.tb_Auflage.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.tb_Auflage.CustomButton.Name = "";
             this.tb_Auflage.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -401,7 +402,7 @@
             this.tb_Auflage.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.helpProvider.SetHelpString(this.tb_Auflage, "Tragen sie die Auflage ihres Buches hier ein.");
             this.tb_Auflage.Lines = new string[0];
-            this.tb_Auflage.Location = new System.Drawing.Point(147, 208);
+            this.tb_Auflage.Location = new System.Drawing.Point(183, 208);
             this.tb_Auflage.MaximumSize = new System.Drawing.Size(375, 24);
             this.tb_Auflage.MaxLength = 32767;
             this.tb_Auflage.MinimumSize = new System.Drawing.Size(150, 24);
@@ -413,7 +414,7 @@
             this.tb_Auflage.SelectionStart = 0;
             this.tb_Auflage.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Auflage, true);
-            this.tb_Auflage.Size = new System.Drawing.Size(202, 24);
+            this.tb_Auflage.Size = new System.Drawing.Size(230, 24);
             this.tb_Auflage.TabIndex = 10;
             this.tb_Auflage.UseSelectable = true;
             this.tb_Auflage.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -438,7 +439,7 @@
             // 
             // 
             this.tb_Neupreis.CustomButton.Image = null;
-            this.tb_Neupreis.CustomButton.Location = new System.Drawing.Point(180, 2);
+            this.tb_Neupreis.CustomButton.Location = new System.Drawing.Point(208, 2);
             this.tb_Neupreis.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.tb_Neupreis.CustomButton.Name = "";
             this.tb_Neupreis.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -450,7 +451,7 @@
             this.tb_Neupreis.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.helpProvider.SetHelpString(this.tb_Neupreis, "Tragen sie den Neupreis ihres Buches hier ein.");
             this.tb_Neupreis.Lines = new string[0];
-            this.tb_Neupreis.Location = new System.Drawing.Point(147, 238);
+            this.tb_Neupreis.Location = new System.Drawing.Point(183, 238);
             this.tb_Neupreis.MaximumSize = new System.Drawing.Size(375, 24);
             this.tb_Neupreis.MaxLength = 32767;
             this.tb_Neupreis.MinimumSize = new System.Drawing.Size(150, 24);
@@ -462,7 +463,7 @@
             this.tb_Neupreis.SelectionStart = 0;
             this.tb_Neupreis.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Neupreis, true);
-            this.tb_Neupreis.Size = new System.Drawing.Size(202, 24);
+            this.tb_Neupreis.Size = new System.Drawing.Size(230, 24);
             this.tb_Neupreis.TabIndex = 11;
             this.tb_Neupreis.UseSelectable = true;
             this.tb_Neupreis.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -481,7 +482,7 @@
             this.comboBox1.HighlightColor = System.Drawing.Color.Gray;
             this.comboBox1.IntegralHeight = false;
             this.comboBox1.ItemHeight = 18;
-            this.comboBox1.Location = new System.Drawing.Point(331, 88);
+            this.comboBox1.Location = new System.Drawing.Point(395, 88);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.comboBox1.Size = new System.Drawing.Size(18, 24);
@@ -494,8 +495,8 @@
             this.rb_Update_Buch.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_Update_Buch.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.helpProvider.SetHelpString(this.rb_Update_Buch, "Klicken sie hier, um ein vorhandenes Buch zu bearbeiten.");
-            this.rb_Update_Buch.Location = new System.Drawing.Point(112, 3);
-            this.rb_Update_Buch.Margin = new System.Windows.Forms.Padding(3, 3, 16, 3);
+            this.rb_Update_Buch.Location = new System.Drawing.Point(128, 3);
+            this.rb_Update_Buch.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_Update_Buch.Name = "rb_Update_Buch";
             this.helpProvider.SetShowHelp(this.rb_Update_Buch, true);
             this.rb_Update_Buch.Size = new System.Drawing.Size(88, 19);
@@ -512,7 +513,7 @@
             this.rb_Add_Buch.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.helpProvider.SetHelpString(this.rb_Add_Buch, "Klicken sie hier, um ein neues Buch hinzuzufügen.");
             this.rb_Add_Buch.Location = new System.Drawing.Point(3, 3);
-            this.rb_Add_Buch.Margin = new System.Windows.Forms.Padding(3, 3, 16, 3);
+            this.rb_Add_Buch.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_Add_Buch.Name = "rb_Add_Buch";
             this.helpProvider.SetShowHelp(this.rb_Add_Buch, true);
             this.rb_Add_Buch.Size = new System.Drawing.Size(90, 19);
@@ -528,8 +529,8 @@
             this.rb_Delete_Buch.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_Delete_Buch.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.helpProvider.SetHelpString(this.rb_Delete_Buch, "Klicken sie hier, um ein vorhandenes Buch zu löschen.");
-            this.rb_Delete_Buch.Location = new System.Drawing.Point(219, 3);
-            this.rb_Delete_Buch.Margin = new System.Windows.Forms.Padding(3, 3, 16, 3);
+            this.rb_Delete_Buch.Location = new System.Drawing.Point(251, 3);
+            this.rb_Delete_Buch.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_Delete_Buch.Name = "rb_Delete_Buch";
             this.helpProvider.SetShowHelp(this.rb_Delete_Buch, true);
             this.rb_Delete_Buch.Size = new System.Drawing.Size(80, 19);
@@ -543,7 +544,7 @@
             this.bt_Autor_s.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Autor_s.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Autor_s, "Klicken sie auf diesen Button, um neue Autoren hinzuzufügen.");
-            this.bt_Autor_s.Location = new System.Drawing.Point(355, 88);
+            this.bt_Autor_s.Location = new System.Drawing.Point(419, 88);
             this.bt_Autor_s.MaximumSize = new System.Drawing.Size(22, 24);
             this.bt_Autor_s.MinimumSize = new System.Drawing.Size(22, 24);
             this.bt_Autor_s.Name = "bt_Autor_s";
@@ -583,7 +584,7 @@
             this.bt_Verlag_s.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Verlag_s.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Verlag_s, "Klicken sie auf diesen Button, um neue Verläge hinzuzufügen.");
-            this.bt_Verlag_s.Location = new System.Drawing.Point(355, 118);
+            this.bt_Verlag_s.Location = new System.Drawing.Point(419, 118);
             this.bt_Verlag_s.MaximumSize = new System.Drawing.Size(22, 24);
             this.bt_Verlag_s.MinimumSize = new System.Drawing.Size(22, 24);
             this.bt_Verlag_s.Name = "bt_Verlag_s";
@@ -599,7 +600,7 @@
             this.bt_Genre_s.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Genre_s.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Genre_s, "Klicken sie auf diesen Button, um neue Genres hinzuzufügen.");
-            this.bt_Genre_s.Location = new System.Drawing.Point(355, 148);
+            this.bt_Genre_s.Location = new System.Drawing.Point(419, 148);
             this.bt_Genre_s.MaximumSize = new System.Drawing.Size(22, 24);
             this.bt_Genre_s.MinimumSize = new System.Drawing.Size(22, 24);
             this.bt_Genre_s.Name = "bt_Genre_s";
@@ -628,7 +629,7 @@
             // 
             // 
             this.tb_Titel.CustomButton.Image = null;
-            this.tb_Titel.CustomButton.Location = new System.Drawing.Point(180, 2);
+            this.tb_Titel.CustomButton.Location = new System.Drawing.Point(208, 2);
             this.tb_Titel.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.tb_Titel.CustomButton.Name = "";
             this.tb_Titel.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -640,7 +641,7 @@
             this.tb_Titel.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.helpProvider.SetHelpString(this.tb_Titel, "Tragen sie den Titel ihres Buches hier ein.");
             this.tb_Titel.Lines = new string[0];
-            this.tb_Titel.Location = new System.Drawing.Point(147, 58);
+            this.tb_Titel.Location = new System.Drawing.Point(183, 58);
             this.tb_Titel.MaximumSize = new System.Drawing.Size(375, 24);
             this.tb_Titel.MaxLength = 32767;
             this.tb_Titel.MinimumSize = new System.Drawing.Size(150, 24);
@@ -652,7 +653,7 @@
             this.tb_Titel.SelectionStart = 0;
             this.tb_Titel.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Titel, true);
-            this.tb_Titel.Size = new System.Drawing.Size(202, 24);
+            this.tb_Titel.Size = new System.Drawing.Size(230, 24);
             this.tb_Titel.TabIndex = 1;
             this.tb_Titel.UseSelectable = true;
             this.tb_Titel.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -678,7 +679,7 @@
             // 
             // 
             this.tb_ISBN.CustomButton.Image = null;
-            this.tb_ISBN.CustomButton.Location = new System.Drawing.Point(180, 2);
+            this.tb_ISBN.CustomButton.Location = new System.Drawing.Point(208, 2);
             this.tb_ISBN.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.tb_ISBN.CustomButton.Name = "";
             this.tb_ISBN.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -689,7 +690,7 @@
             this.tb_ISBN.CustomButton.Visible = false;
             this.tb_ISBN.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.tb_ISBN.Lines = new string[0];
-            this.tb_ISBN.Location = new System.Drawing.Point(147, 28);
+            this.tb_ISBN.Location = new System.Drawing.Point(183, 28);
             this.tb_ISBN.MaximumSize = new System.Drawing.Size(375, 24);
             this.tb_ISBN.MaxLength = 32767;
             this.tb_ISBN.MinimumSize = new System.Drawing.Size(150, 24);
@@ -701,7 +702,7 @@
             this.tb_ISBN.SelectionLength = 0;
             this.tb_ISBN.SelectionStart = 0;
             this.tb_ISBN.ShortcutsEnabled = true;
-            this.tb_ISBN.Size = new System.Drawing.Size(202, 24);
+            this.tb_ISBN.Size = new System.Drawing.Size(230, 24);
             this.tb_ISBN.TabIndex = 0;
             this.tb_ISBN.UseSelectable = true;
             this.tb_ISBN.WaterMark = "123-0123456789";
@@ -730,7 +731,7 @@
             this.button1.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.button1, "Wenn sie eine ISBN eingetragen haben, können sie auf diesen Stern klicken, um res" +
         "tliche Buchinformationen automatisch ausfüllen zu lassen.");
-            this.button1.Location = new System.Drawing.Point(355, 28);
+            this.button1.Location = new System.Drawing.Point(419, 28);
             this.button1.MaximumSize = new System.Drawing.Size(22, 24);
             this.button1.MinimumSize = new System.Drawing.Size(22, 24);
             this.button1.Name = "button1";
@@ -748,7 +749,7 @@
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(676, 446);
+            this.pictureBox2.Size = new System.Drawing.Size(704, 484);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 50;
             this.pictureBox2.TabStop = false;
@@ -787,7 +788,7 @@
             this.Grid_Buch.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.Grid_Buch.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.helpProvider.SetHelpString(this.Grid_Buch, "In diesem Feld werden all ihre Bücher angezeigt.");
-            this.Grid_Buch.Location = new System.Drawing.Point(413, 52);
+            this.Grid_Buch.Location = new System.Drawing.Point(473, 63);
             this.Grid_Buch.Name = "Grid_Buch";
             this.Grid_Buch.ReadOnly = true;
             this.Grid_Buch.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -801,9 +802,11 @@
             this.Grid_Buch.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.Grid_Buch.RowHeadersVisible = false;
             this.Grid_Buch.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.Grid_Buch.RowTemplate.DividerHeight = 1;
+            this.Grid_Buch.RowTemplate.Height = 24;
             this.Grid_Buch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.helpProvider.SetShowHelp(this.Grid_Buch, true);
-            this.Grid_Buch.Size = new System.Drawing.Size(676, 446);
+            this.Grid_Buch.Size = new System.Drawing.Size(704, 484);
             this.Grid_Buch.TabIndex = 0;
             this.Grid_Buch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Buch_CellDoubleClick);
             this.Grid_Buch.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Grid_Buch_CellMouseDown);
@@ -846,27 +849,28 @@
             this.bt_Schliessen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Schliessen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Schliessen, "Schließen sie das akuelle Fenster.");
-            this.bt_Schliessen.Location = new System.Drawing.Point(827, 504);
+            this.bt_Schliessen.Location = new System.Drawing.Point(828, 553);
             this.bt_Schliessen.MaximumSize = new System.Drawing.Size(375, 24);
             this.bt_Schliessen.MinimumSize = new System.Drawing.Size(262, 24);
             this.bt_Schliessen.Name = "bt_Schliessen";
             this.helpProvider.SetShowHelp(this.bt_Schliessen, true);
-            this.bt_Schliessen.Size = new System.Drawing.Size(262, 24);
+            this.bt_Schliessen.Size = new System.Drawing.Size(349, 24);
             this.bt_Schliessen.TabIndex = 1;
             this.bt_Schliessen.Text = "Schließen";
             this.bt_Schliessen.UseSelectable = true;
+            this.bt_Schliessen.Click += new System.EventHandler(this.bt_Schliessen_Click);
             // 
             // bt_Excel
             // 
             this.bt_Excel.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Excel.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Excel, "Exportieren sie ihre Bücherdaten in eine Exceltabelle.");
-            this.bt_Excel.Location = new System.Drawing.Point(413, 504);
+            this.bt_Excel.Location = new System.Drawing.Point(473, 553);
             this.bt_Excel.MaximumSize = new System.Drawing.Size(375, 24);
             this.bt_Excel.MinimumSize = new System.Drawing.Size(262, 24);
             this.bt_Excel.Name = "bt_Excel";
             this.helpProvider.SetShowHelp(this.bt_Excel, true);
-            this.bt_Excel.Size = new System.Drawing.Size(262, 24);
+            this.bt_Excel.Size = new System.Drawing.Size(349, 24);
             this.bt_Excel.TabIndex = 1;
             this.bt_Excel.Text = "Exportieren";
             this.bt_Excel.UseSelectable = true;
@@ -878,9 +882,9 @@
             this.gb_zoom.HorizontalScrollbarBarColor = true;
             this.gb_zoom.HorizontalScrollbarHighlightOnWheel = false;
             this.gb_zoom.HorizontalScrollbarSize = 8;
-            this.gb_zoom.Location = new System.Drawing.Point(413, 52);
+            this.gb_zoom.Location = new System.Drawing.Point(473, 63);
             this.gb_zoom.Name = "gb_zoom";
-            this.gb_zoom.Size = new System.Drawing.Size(676, 446);
+            this.gb_zoom.Size = new System.Drawing.Size(704, 484);
             this.gb_zoom.TabIndex = 51;
             this.gb_zoom.VerticalScrollbarBarColor = true;
             this.gb_zoom.VerticalScrollbarHighlightOnWheel = false;
@@ -898,10 +902,10 @@
             this.helpProvider.SetHelpString(this.cb_Autor, "Tragen sie den Autor ihres Buches hier ein.");
             this.cb_Autor.HighlightColor = System.Drawing.Color.DeepSkyBlue;
             this.cb_Autor.ItemHeight = 18;
-            this.cb_Autor.Location = new System.Drawing.Point(147, 88);
+            this.cb_Autor.Location = new System.Drawing.Point(183, 88);
             this.cb_Autor.Name = "cb_Autor";
             this.helpProvider.SetShowHelp(this.cb_Autor, true);
-            this.cb_Autor.Size = new System.Drawing.Size(202, 24);
+            this.cb_Autor.Size = new System.Drawing.Size(230, 24);
             this.cb_Autor.TabIndex = 2;
             this.cb_Autor.TextChanged += new System.EventHandler(this.cb_Autor_TextChanged);
             // 
@@ -917,10 +921,10 @@
             this.helpProvider.SetHelpString(this.cb_Verlag, "Tragen sie den Verlag ihres Buches hier ein.");
             this.cb_Verlag.HighlightColor = System.Drawing.Color.DeepSkyBlue;
             this.cb_Verlag.ItemHeight = 18;
-            this.cb_Verlag.Location = new System.Drawing.Point(147, 118);
+            this.cb_Verlag.Location = new System.Drawing.Point(183, 118);
             this.cb_Verlag.Name = "cb_Verlag";
             this.helpProvider.SetShowHelp(this.cb_Verlag, true);
-            this.cb_Verlag.Size = new System.Drawing.Size(202, 24);
+            this.cb_Verlag.Size = new System.Drawing.Size(230, 24);
             this.cb_Verlag.TabIndex = 4;
             this.cb_Verlag.TextChanged += new System.EventHandler(this.cb_Verlag_TextChanged);
             // 
@@ -936,10 +940,10 @@
             this.helpProvider.SetHelpString(this.cb_Genre, "Tragen sie das Genre ihres Buches hier ein.");
             this.cb_Genre.HighlightColor = System.Drawing.Color.DeepSkyBlue;
             this.cb_Genre.ItemHeight = 18;
-            this.cb_Genre.Location = new System.Drawing.Point(147, 148);
+            this.cb_Genre.Location = new System.Drawing.Point(183, 148);
             this.cb_Genre.Name = "cb_Genre";
             this.helpProvider.SetShowHelp(this.cb_Genre, true);
-            this.cb_Genre.Size = new System.Drawing.Size(202, 24);
+            this.cb_Genre.Size = new System.Drawing.Size(230, 24);
             this.cb_Genre.TabIndex = 6;
             this.cb_Genre.TextChanged += new System.EventHandler(this.cb_Genre_TextChanged);
             // 
@@ -955,15 +959,28 @@
             this.helpProvider.SetHelpKeyword(this.cb_Sprache, "Tragen sie die Sprache ihres Buches hier ein.");
             this.cb_Sprache.HighlightColor = System.Drawing.Color.DeepSkyBlue;
             this.cb_Sprache.ItemHeight = 18;
-            this.cb_Sprache.Location = new System.Drawing.Point(147, 178);
+            this.cb_Sprache.Location = new System.Drawing.Point(183, 178);
             this.cb_Sprache.Name = "cb_Sprache";
             this.helpProvider.SetShowHelp(this.cb_Sprache, true);
-            this.cb_Sprache.Size = new System.Drawing.Size(202, 24);
+            this.cb_Sprache.Size = new System.Drawing.Size(230, 24);
             this.cb_Sprache.TabIndex = 8;
             this.cb_Sprache.TextChanged += new System.EventHandler(this.cb_Sprache_TextChanged);
             // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.helpProvider.SetHelpString(this.metroLabel1, "Tragen sie die Anzahl der Exemplare ihres Buches hier ein.");
+            this.metroLabel1.Location = new System.Drawing.Point(3, 335);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
+            this.metroLabel1.Name = "metroLabel1";
+            this.helpProvider.SetShowHelp(this.metroLabel1, true);
+            this.metroLabel1.Size = new System.Drawing.Size(34, 19);
+            this.metroLabel1.TabIndex = 55;
+            this.metroLabel1.Text = "Bild:";
+            // 
             // metroPanel1
             // 
+            this.metroPanel1.Controls.Add(this.metroLabel1);
             this.metroPanel1.Controls.Add(this.checkedListBox1);
             this.metroPanel1.Controls.Add(this.checkbox_autor);
             this.metroPanel1.Controls.Add(this.rTB_1);
@@ -1005,9 +1022,9 @@
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 8;
-            this.metroPanel1.Location = new System.Drawing.Point(20, 52);
+            this.metroPanel1.Location = new System.Drawing.Point(23, 63);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(387, 476);
+            this.metroPanel1.Size = new System.Drawing.Size(444, 514);
             this.metroPanel1.TabIndex = 52;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
@@ -1018,10 +1035,10 @@
             this.checkedListBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.HighlightColor = System.Drawing.Color.Green;
-            this.checkedListBox1.Location = new System.Drawing.Point(147, 111);
+            this.checkedListBox1.Location = new System.Drawing.Point(183, 111);
             this.checkedListBox1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(202, 94);
+            this.checkedListBox1.Size = new System.Drawing.Size(230, 94);
             this.checkedListBox1.TabIndex = 51;
             this.checkedListBox1.Visible = false;
             this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
@@ -1033,19 +1050,17 @@
             // 
             // metroProgressBar1
             // 
-            this.metroProgressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.metroProgressBar1.Location = new System.Drawing.Point(0, 0);
             this.metroProgressBar1.Margin = new System.Windows.Forms.Padding(2);
             this.metroProgressBar1.Name = "metroProgressBar1";
-            this.metroProgressBar1.Size = new System.Drawing.Size(1100, 5);
+            this.metroProgressBar1.Size = new System.Drawing.Size(1200, 5);
             this.metroProgressBar1.TabIndex = 53;
             // 
             // w_s_buecher
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1100, 550);
+            this.ClientSize = new System.Drawing.Size(1200, 600);
             this.Controls.Add(this.metroProgressBar1);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.gb_zoom);
@@ -1056,7 +1071,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "w_s_buecher";
-            this.Padding = new System.Windows.Forms.Padding(8, 60, 8, 8);
             this.Resizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Bücher";
@@ -1132,5 +1146,6 @@
         private MetroFramework.Controls.MetroPanel metroPanel1;
         private System.Windows.Forms.Timer timer1;
         private MetroFramework.Controls.MetroProgressBar metroProgressBar1;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
     }
 }
