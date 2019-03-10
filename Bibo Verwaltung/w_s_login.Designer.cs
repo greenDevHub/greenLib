@@ -67,6 +67,7 @@
             this.tb_User.ShortcutsEnabled = true;
             this.tb_User.ShowClearButton = true;
             this.tb_User.Size = new System.Drawing.Size(224, 24);
+            this.tb_User.Style = MetroFramework.MetroColorStyle.Black;
             this.tb_User.TabIndex = 2;
             this.tb_User.Theme = MetroFramework.MetroThemeStyle.Light;
             this.tb_User.UseSelectable = true;
@@ -102,6 +103,7 @@
             this.tb_Password.ShortcutsEnabled = true;
             this.tb_Password.ShowClearButton = true;
             this.tb_Password.Size = new System.Drawing.Size(224, 24);
+            this.tb_Password.Style = MetroFramework.MetroColorStyle.Black;
             this.tb_Password.TabIndex = 3;
             this.tb_Password.UseSelectable = true;
             this.tb_Password.UseSystemPasswordChar = true;
@@ -117,6 +119,7 @@
             this.bt_Login.Location = new System.Drawing.Point(23, 120);
             this.bt_Login.Name = "bt_Login";
             this.bt_Login.Size = new System.Drawing.Size(224, 24);
+            this.bt_Login.Style = MetroFramework.MetroColorStyle.Black;
             this.bt_Login.TabIndex = 4;
             this.bt_Login.Text = "Login";
             this.bt_Login.UseSelectable = true;
@@ -127,9 +130,10 @@
             this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Login;
             this.metroLink1.ImageSize = 32;
             this.metroLink1.Location = new System.Drawing.Point(23, 25);
-            this.metroLink1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.metroLink1.Margin = new System.Windows.Forms.Padding(2);
             this.metroLink1.Name = "metroLink1";
             this.metroLink1.Size = new System.Drawing.Size(22, 24);
+            this.metroLink1.Style = MetroFramework.MetroColorStyle.Black;
             this.metroLink1.TabIndex = 5;
             this.metroLink1.UseSelectable = true;
             // 
@@ -143,12 +147,12 @@
             this.metroProgressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.metroProgressBar1.Location = new System.Drawing.Point(0, 0);
-            this.metroProgressBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.metroProgressBar1.Margin = new System.Windows.Forms.Padding(2);
             this.metroProgressBar1.Name = "metroProgressBar1";
             this.metroProgressBar1.ProgressBarStyle = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.metroProgressBar1.Size = new System.Drawing.Size(270, 5);
             this.metroProgressBar1.Step = 1;
-            this.metroProgressBar1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroProgressBar1.Style = MetroFramework.MetroColorStyle.Black;
             this.metroProgressBar1.TabIndex = 6;
             // 
             // w_s_login
@@ -165,6 +169,7 @@
             this.MaximizeBox = false;
             this.Name = "w_s_login";
             this.Resizable = false;
+            this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "     Login";
             this.ResumeLayout(false);
 
