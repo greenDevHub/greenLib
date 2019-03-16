@@ -24,9 +24,21 @@ namespace Bibo_Verwaltung
         string target = "";
         string filename = "";
         bool multiselect = false;
+        /// <summary>
+        /// Anzahl der Dateien insgesamt
+        /// </summary>
+        int filesTotal = 0;
+        /// <summary>
+        /// Anzahl der fertigen Dateien
+        /// </summary>
+        int filesDone = 0;
+        /// <summary>
+        /// Nummer der aktuellen Datei
+        /// </summary>
+        int fileNum = 0;
         List<string> files = new List<string>();
         List<string> filesShort = new List<string>();
-
+        int errors = 0;
         public w_s_schuelerimport(string target, bool modus)
         {
             this.target = target;
@@ -495,7 +507,14 @@ namespace Bibo_Verwaltung
             }
             
         }
-
+        /// <summary>
+        /// Inhalt der Error-Nachricht
+        /// </summary>
+        string errorMessage = "";
+        /// <summary>
+        /// Alle aufgetretene Errors
+        /// </summary>
+        List<string> errorMessages = new List<string>();
         /// <summary>
         /// Führt den Import aus
         /// </summary>
@@ -509,22 +528,36 @@ namespace Bibo_Verwaltung
                 try
                 {
                     loadProfile();
+                    filesDone++;
                 }
                 catch (Exception ex)
                 {
                     if (ex.Message.Equals("failed preset", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        MetroMessageBox.Show(this,"Der Zugriff auf die Datei wurde behindert. Bitte schließen Sie Anwendungen, in denen Sie diese ggf. geöffnet haben oder wenden Sie sich an den Administrator.", "Zugriff verweigert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        errors++;
+                        errorMessage = String.Format("Der Zugriff auf die Datei wurde behindert. Bitte schließen Sie Anwendungen, in denen Sie diese ggf. geöffnet haben oder wenden Sie sich an den Administrator (Datei '{0}' von '{1}').", fileNum, filesTotal);
+                        //MetroMessageBox.Show(this,errorMessage, "Zugriff verweigert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else if (ex.Message.Equals("wrong preset", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        MetroMessageBox.Show(this,"Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt.", "Fehler bei Vorlage", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        errors++;
+                        errorMessage = String.Format("Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt (Datei '{0}' von '{1}').", fileNum, filesTotal);
+                        //MetroMessageBox.Show(this,errorMessage, "Fehler bei Vorlage", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     }
                     else if (ex.Message.Equals("no preset", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        MetroMessageBox.Show(this,"Es ist noch keine Vorlage für " + filename + " vorhanden. Führen Sie bitte einen entsprechenden Import manuell aus, um eine Vorlage zu erstellen.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        errorMessage = String.Format("Es ist noch keine Vorlage für " + filename + " vorhanden. Führen Sie bitte einen entsprechenden Import manuell aus, um eine Vorlage zu erstellen (Datei '{0}' von '{1}').", fileNum, filesTotal);
+                        errors++;
+                        //MetroMessageBox.Show(this,errorMessage, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                    else
+                    {
+                        errors++;
+                        errorMessage = String.Format("Fehler bei der Anwendung der Vorlage (Datei '{0}' von '{1}').", fileNum, filesTotal);
+                        //MetroMessageBox.Show(this, errorMessage, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    errorMessages.Add(errorMessage);
                 }
 
             }
@@ -532,98 +565,104 @@ namespace Bibo_Verwaltung
             {
                 createNewDT(newDT, usePreset);
             }
-            foreach (DataRow row in newDT.Rows)
+            if(errors == 0)
             {
-                if (target.Equals("t_s_schueler"))
+                foreach (DataRow row in newDT.Rows)
                 {
-                    Kunde k = new Kunde();
-                    k.Vorname = row[0].ToString();
-                    k.Nachname = row[1].ToString();
-                    k.Gd = DateTime.Parse(row[2].ToString());
-                    k.Klasse = row[3].ToString();
-                    k.Hausnummer = "";
-                    k.Ort = "";
-                    k.Postleitzahl = "";
-                    k.Strasse = "";
-                    k.Mail = "";
-                    k.Telefonnummer = "";
-                    if (rb_schueler1.Checked)
+                    if (target.Equals("t_s_schueler"))
                     {
-                        //SEK1 Import Schüler
-                        FachStufe fs = new FachStufe(k.Klasse.Substring(0,k.Klasse.Length-2));
-                        for (int i = 4; i < 7; i++)
+                        Kunde k = new Kunde();
+                        k.Vorname = row[0].ToString();
+                        k.Nachname = row[1].ToString();
+                        k.Gd = DateTime.Parse(row[2].ToString());
+                        k.Klasse = row[3].ToString();
+                        k.Hausnummer = "";
+                        k.Ort = "";
+                        k.Postleitzahl = "";
+                        k.Strasse = "";
+                        k.Mail = "";
+                        k.Telefonnummer = "";
+                        if (rb_schueler1.Checked)
                         {
-                            string fach = row[i].ToString();
-                            k.Faecher.Add(fach);
-                        }
-                        foreach (string fach in fs.FachListe)
-                        {
-                            k.Faecher.Add(fach);
-                        }
-                        for(int i = 0; i < 2; i++)
-                        {
-                            k.LeistungskursListe.Add("");
-                        }
-                        if (!k.AlreadyExists())
-                        {
-                            k.AddKunde();
-                        }
-                        else
-                        {
-                            k.Activate();
-                            k.UpdateKunde();
-                        }
-
-                    }
-                    else if (rb_schueler2.Checked)
-                    {
-                        //SEK2 Import Schüler
-                        for (int i = 4; i < newDT.Columns.Count; i++)
-                        {
-                            string fach = row[i].ToString();
-                            if (!fach.Equals(""))
+                            //SEK1 Import Schüler
+                            string klassenstufe = k.Klasse.Substring(0, k.Klasse.Length - 2);
+                            FachStufe fs = new FachStufe(klassenstufe);
+                            for (int i = 4; i < 7; i++)
+                            {
+                                string fach = row[i].ToString();
+                                k.Faecher.Add(fach);
+                            }
+                            foreach (string fach in fs.FachListe)
                             {
                                 k.Faecher.Add(fach);
                             }
-                            if (k.LeistungskursListe.Count < 2)
+                            for (int i = 0; i < 2; i++)
                             {
-                                k.LeistungskursListe.Add(fach);
+                                k.LeistungskursListe.Add("");
+                            }
+                            if (!k.AlreadyExists())
+                            {
+                                k.AddKunde();
+                            }
+                            else
+                            {
+                                k.Activate();
+                                k.UpdateKunde();
+                            }
+
+                        }
+                        else if (rb_schueler2.Checked)
+                        {
+                            //SEK2 Import Schüler
+                            for (int i = 4; i < newDT.Columns.Count; i++)
+                            {
+                                string fach = row[i].ToString();
+                                if (!fach.Equals(""))
+                                {
+                                    k.Faecher.Add(fach);
+                                }
+                                if (k.LeistungskursListe.Count < 2)
+                                {
+                                    k.LeistungskursListe.Add(fach);
+                                }
+                            }
+                            if (!k.AlreadyExists())
+                            {
+                                k.AddKunde();
+                            }
+                            else
+                            {
+                                k.Activate();
+                                k.LoadKundenID();
+                                k.UpdateKunde();
                             }
                         }
-                        if (!k.AlreadyExists())
-                        {
-                            k.AddKunde();
-                        }
-                        else
-                        {
-                            k.Activate();
-                            k.LoadKundenID();
-                            k.UpdateKunde();
-                        }
                     }
-                }
-                else if (target.Equals("t_s_faecher"))
-                {
-                    Fach fach = new Fach();
-                    fach.FachKurz = row[0].ToString();
-                    fach.FachLang = row[1].ToString();
-                    if (!fach.AlreadyExists())
+                    else if (target.Equals("t_s_faecher"))
                     {
-                        fach.AddFach();
+                        Fach fach = new Fach();
+                        fach.FachKurz = row[0].ToString();
+                        fach.FachLang = row[1].ToString();
+                        if (!fach.AlreadyExists())
+                        {
+                            fach.AddFach();
+                        }
                     }
-                }
 
+                }
             }
+            
         }
         /// <summary>
         /// Foreach-Schleife
         /// </summary>
-        private void ForeachImport(ref int fileNum)
+        private void ForeachImport()
         {
+            fileNum = 0;
             foreach(string file in files)
             {
-                DoImport(file);
                 fileNum++;
+                DoImport(file);
             }
             //List<Task> tasks = new List<Task>();
             //foreach (string file in files)
@@ -643,156 +682,109 @@ namespace Bibo_Verwaltung
         /// <param name="singleImport"></param>
         private void StartImport(bool withPreset, bool singleImport)
         {
+            errors = 0;
+            errorMessage = "";
+            errorMessages.Clear();
             progressBar1.Minimum = 0;
             progressBar1.Maximum = 100;
             progressBar1.Value = 0;
-            int fileNum = 0;
+            errors = 0;
+            filesTotal = files.Count;
+            filesDone = 0;
             usePreset = withPreset;
             if (!singleImport)
             {
-                ForeachImport(ref fileNum);
+                ForeachImport();
             }
             else
             {
                 string file = files[slider_preview.Value - 1];
-                tb_aktuell.Text = file;
-                if (withPreset)
-                {
-                    try
-                    {
-                        loadProfile();
-                        fileNum++;
-                    }
-                    catch (Exception ex)
-                    {
-                        if (ex.Message.Equals("failed preset", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            MetroMessageBox.Show(this,"Der Zugriff auf die Datei wurde behindert. Bitte schließen Sie Anwendungen, in denen Sie diese ggf. geöffnet haben oder wenden Sie sich an den Administrator.", "Zugriff verweigert", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        else if (ex.Message.Equals("wrong preset", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            MetroMessageBox.Show(this,"Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt.", "Fehler bei Vorlage", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        }
-                        else if (ex.Message.Equals("no preset", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            MetroMessageBox.Show(this,"Es ist noch keine Vorlage für " + filename + " vorhanden. Führen Sie bitte einen entsprechenden Import manuell aus, um eine Vorlage zu erstellen.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-
-                }
-                else
-                {
-                    createNewDT(newDT, withPreset);
-                }
-                ForeachImport(ref fileNum);
-                //foreach (DataRow row in newDT.Rows)
-                //{
-                //    if (target.Equals("t_s_schueler"))
-                //    {
-                //        Kunde kunde = new Kunde();
-                //        kunde.Vorname = row[0].ToString();
-                //        kunde.Nachname = row[1].ToString();
-                //        kunde.Gd = DateTime.Parse(row[2].ToString());
-                //        kunde.Klasse = row[3].ToString();
-                //        kunde.Hausnummer = "";
-                //        kunde.Ort = "";
-                //        kunde.Postleitzahl = "";
-                //        kunde.Strasse = "";
-                //        kunde.Mail = "";
-                //        kunde.Telefonnummer = "";
-                //        if (rb_schueler1.Checked)
-                //        {
-                //            //SEK1 Import Schüler
-                //            FachStufe fs = new FachStufe(kunde.Klasse.Substring(0,kunde.Klasse.Length-2));
-                //            for (int i = 4; i < 7; i++)
-                //            {
-                //                string fach = row[i].ToString();
-                //                kunde.Faecher.Add(fach);
-                //            }
-                //            for(int i = 0; i < 2; i++)
-                //            {
-                //                kunde.LeistungskursListe.Add("");
-                //            }
-                //            foreach (string fach in fs.FachListe)
-                //            {
-                //                kunde.Faecher.Add(fach);
-                //            }
-                //            if (!kunde.AlreadyExists())
-                //            {
-                //                kunde.AddKunde();
-                //            }
-                //            else
-                //            {
-                //                kunde.UpdateKunde();
-                //            }
-
-                //        }
-                //        else if (rb_schueler2.Checked)
-                //        {
-                //            //SEK2 Import Schüler
-                //            for (int i = 4; i < newDT.Columns.Count; i++)
-                //            {
-                //                string fach = row[i].ToString();
-                //                if (!fach.Equals(""))
-                //                {
-                //                    if (kunde.LeistungskursListe.Count < 2)
-                //                    {
-                //                        kunde.LeistungskursListe.Add(fach);
-                //                    }
-                //                    kunde.Faecher.Add(fach);
-                //                }
-                //            }
-                //            if (!kunde.AlreadyExists())
-                //            {
-                //                kunde.AddKunde();
-                //            }
-                //            else
-                //            {
-                //                kunde.LoadKundenID();
-                //                kunde.UpdateKunde();
-                //            }
-                //        }
-                //    }
-                //    else if (target.Equals("t_s_faecher"))
-                //    {
-                //        Fach fach = new Fach();
-                //        fach.FachKurz = row[0].ToString();
-                //        fach.FachLang = row[1].ToString();
-                //        if (!fach.FachExists())
-                //        {
-                //            fach.AddFach();
-                //        }
-                //    }
-
-                //}
-                progressBar1.Value = (fileNum * 100) / files.Count;
+                ForeachImport();
+                progressBar1.Value = (filesDone * 100) / files.Count;
             }
-            
-            if(fileNum == 0)
+
+            if (errorMessages.Count > 0)
             {
-                DialogResult dr = MetroMessageBox.Show(this,"Die Datei wurde nicht importiert. Möchten Sie es erneut versuchen?", "Import fehlerhaft", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dr == DialogResult.Yes)
+                DialogResult result = MetroMessageBox.Show(this, String.Format("Es wurden '{0}' von '{1}' Dateien importiert und es sind '{2}' Fehler aufgetreten. Möchten Sie diese einsehen?",filesDone,filesTotal,errors), "Fehler beim Importvorgang.", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (result == DialogResult.Yes)
                 {
-                    clearForm();
-                }
-                else
-                {
-                    this.Close();
+                    for (int i = 0; i < errorMessages.Count; i++)
+                    {
+                        DialogResult dr = MetroMessageBox.Show(this, errorMessages[i] + " Wählen Sie 'Ja' für den nächsten Fehler oder 'Nein' zum Beenden.", String.Format("Fehler '{0}' von '{1}'", i+1, errorMessages.Count.ToString()), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                        if (dr == DialogResult.Yes)
+                        {
+
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
                 }
             }
             else
             {
-                DialogResult dr = MetroMessageBox.Show(this,"Die Datei wurde erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dr == DialogResult.Yes)
+                if(filesDone == 1)
                 {
-                    RemoveFromImportList();
+                    DialogResult dr = MetroMessageBox.Show(this, "Die Datei wurde erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dr == DialogResult.Yes)
+                    {
+                        RemoveFromImportList();
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
                 }
-                else
+                else if(filesDone > 1)
                 {
-                    this.Close();
+                    DialogResult dr = MetroMessageBox.Show(this, "Die Dateien wurden erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dr == DialogResult.Yes)
+                    {
+                        clearForm();
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
                 }
             }
+            //else if(filesTotal == 1 && filesDone == 0)
+            //{
+            //    DialogResult dr = MetroMessageBox.Show(this,"Die Datei wurde nicht importiert. Möchten Sie es erneut versuchen?", "Import fehlerhaft", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            //    if (dr == DialogResult.Yes)
+            //    {
+            //        clearForm();
+            //    }
+            //    else
+            //    {
+            //        this.Close();
+            //    }
+            //}
+            //else if(filesTotal > 1 && filesDone < filesTotal)
+            //{
+            //    DialogResult dr = MetroMessageBox.Show(this, String.Format("Es wurden '{0}' von '{1}' Dateien importiert. Möchten Sie es erneut versuchen?",filesDone.ToString(),filesTotal.ToString()), "Import fehlerhaft", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            //    if (dr == DialogResult.Yes)
+            //    {
+            //        clearForm();
+            //    }
+            //    else
+            //    {
+            //        this.Close();
+            //    }
+            //}
+            //else
+            //{
+            //    DialogResult dr = MetroMessageBox.Show(this,"Die Datei wurde erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //    if (dr == DialogResult.Yes)
+            //    {
+            //        RemoveFromImportList();
+            //    }
+            //    else
+            //    {
+            //        this.Close();
+            //    }
+            //}
 
         }
         List<int> removeAt = new List<int>();
@@ -961,6 +953,7 @@ namespace Bibo_Verwaltung
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             CheckSelected();
+            usePreset = false;
         }
         private void SetTarget()
         {

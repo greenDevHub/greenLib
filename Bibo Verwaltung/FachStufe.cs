@@ -46,10 +46,26 @@ namespace Bibo_Verwaltung
         public FachStufe(string stufe)
         {
             this.Klassenstufe.Stufe = stufe;
-            //Load();
+            Load();
         }
         #endregion
 
+        private void Load()
+        {
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT * FROM [dbo].[t_s_fach_stufe] WHERE  bf_klassenstufe = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, Klassenstufe.Stufe);
+            // Einlesen der Datenzeilen und Ausgabe an der Konsole 
+            while (dr.Read())
+            {
+                Fach = new Fach(dr["bf_fachid"].ToString());
+                FachListe.Add(Fach.FachKurz);
+            }
+            // DataReader schließen 
+            dr.Close();
+            // Verbindung schließen 
+            con.Close();
+        }
         /// <summary>
         /// Füllt ein DataSet-Objekt mit den Fach-Klassenstufen-Zuordnungsdatendaten 
         /// </summary>
