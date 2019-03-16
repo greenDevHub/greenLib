@@ -475,6 +475,7 @@
             // comboBox1
             // 
             this.comboBox1.BackColor = System.Drawing.Color.White;
+            this.comboBox1.BorderColor = System.Drawing.Color.Gray;
             this.comboBox1.DataRowView = true;
             this.comboBox1.DropDownHeight = 1;
             this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 10.5F);
@@ -894,6 +895,7 @@
             // 
             this.cb_Autor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Autor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Autor.BorderColor = System.Drawing.Color.Gray;
             this.cb_Autor.DataRowView = true;
             this.cb_Autor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cb_Autor.Font = new System.Drawing.Font("Segoe UI", 10.5F);
@@ -913,6 +915,7 @@
             // 
             this.cb_Verlag.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Verlag.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Verlag.BorderColor = System.Drawing.Color.Gray;
             this.cb_Verlag.DataRowView = true;
             this.cb_Verlag.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cb_Verlag.Font = new System.Drawing.Font("Segoe UI", 10.5F);
@@ -932,6 +935,7 @@
             // 
             this.cb_Genre.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Genre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Genre.BorderColor = System.Drawing.Color.Gray;
             this.cb_Genre.DataRowView = true;
             this.cb_Genre.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cb_Genre.Font = new System.Drawing.Font("Segoe UI", 10.5F);
@@ -951,6 +955,7 @@
             // 
             this.cb_Sprache.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Sprache.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Sprache.BorderColor = System.Drawing.Color.Gray;
             this.cb_Sprache.DataRowView = true;
             this.cb_Sprache.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cb_Sprache.Font = new System.Drawing.Font("Segoe UI", 10.5F);

@@ -34,10 +34,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_verlage));
             this.tLP_Sprachen = new System.Windows.Forms.TableLayoutPanel();
             this.lb_Verlage = new MetroFramework.Controls.MetroLabel();
+            this.bt_Suchen = new MetroFramework.Controls.MetroButton();
             this.tb_Suchen = new MetroFramework.Controls.MetroTextBox();
             this.gv_Verlage = new MetroFramework.Controls.MetroGrid();
             this.bt_Uebernehmen = new MetroFramework.Controls.MetroButton();
-            this.bt_Suchen = new MetroFramework.Controls.MetroButton();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.tLP_Sprachen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Verlage)).BeginInit();
@@ -75,6 +75,23 @@
             this.lb_Verlage.Size = new System.Drawing.Size(298, 19);
             this.lb_Verlage.TabIndex = 53;
             this.lb_Verlage.Text = "Suchen:";
+            // 
+            // bt_Suchen
+            // 
+            this.bt_Suchen.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bt_Suchen.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_Suchen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.helpProvider.SetHelpString(this.bt_Suchen, "Klicken sie auf diesen Button, um die Suchfunktion an- bzw. auszuschalten.");
+            this.bt_Suchen.Location = new System.Drawing.Point(155, 587);
+            this.bt_Suchen.MaximumSize = new System.Drawing.Size(200, 24);
+            this.bt_Suchen.MinimumSize = new System.Drawing.Size(100, 24);
+            this.bt_Suchen.Name = "bt_Suchen";
+            this.helpProvider.SetShowHelp(this.bt_Suchen, true);
+            this.bt_Suchen.Size = new System.Drawing.Size(146, 24);
+            this.bt_Suchen.TabIndex = 54;
+            this.bt_Suchen.Text = "Suchen AN";
+            this.bt_Suchen.UseSelectable = true;
+            this.bt_Suchen.Click += new System.EventHandler(this.bt_Suchen_Click);
             // 
             // tb_Suchen
             // 
@@ -191,23 +208,6 @@
             this.bt_Uebernehmen.UseSelectable = true;
             this.bt_Uebernehmen.Click += new System.EventHandler(this.bt_Uebernehmen_Click);
             // 
-            // bt_Suchen
-            // 
-            this.bt_Suchen.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bt_Suchen.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.bt_Suchen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.helpProvider.SetHelpString(this.bt_Suchen, "Klicken sie auf diesen Button, um die Suchfunktion an- bzw. auszuschalten.");
-            this.bt_Suchen.Location = new System.Drawing.Point(155, 587);
-            this.bt_Suchen.MaximumSize = new System.Drawing.Size(200, 24);
-            this.bt_Suchen.MinimumSize = new System.Drawing.Size(100, 24);
-            this.bt_Suchen.Name = "bt_Suchen";
-            this.helpProvider.SetShowHelp(this.bt_Suchen, true);
-            this.bt_Suchen.Size = new System.Drawing.Size(146, 24);
-            this.bt_Suchen.TabIndex = 54;
-            this.bt_Suchen.Text = "Suchen AN";
-            this.bt_Suchen.UseSelectable = true;
-            this.bt_Suchen.Click += new System.EventHandler(this.bt_Suchen_Click);
-            // 
             // w_s_verlage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -216,10 +216,8 @@
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "w_s_verlage";
             this.Resizable = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Verlage";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_verlage_FormClosing);

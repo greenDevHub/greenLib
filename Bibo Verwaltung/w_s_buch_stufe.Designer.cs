@@ -39,6 +39,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_buch_stufe));
             this.gv_Klassenstufe = new MetroFramework.Controls.MetroGrid();
+            this.Klassenstufen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gv_Buecher = new MetroFramework.Controls.MetroGrid();
             this.btAbbrechen = new MetroFramework.Controls.MetroButton();
             this.bt_Bearbeiten = new MetroFramework.Controls.MetroButton();
@@ -46,7 +47,6 @@
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.Klassenstufen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bt_back = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Klassenstufe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Buecher)).BeginInit();
@@ -124,6 +124,12 @@
             this.gv_Klassenstufe.Style = MetroFramework.MetroColorStyle.Orange;
             this.gv_Klassenstufe.TabIndex = 0;
             this.gv_Klassenstufe.SelectionChanged += new System.EventHandler(this.gv_Klassenstufe_SelectionChanged);
+            // 
+            // Klassenstufen
+            // 
+            this.Klassenstufen.HeaderText = "Klassenstufen";
+            this.Klassenstufen.Name = "Klassenstufen";
+            this.Klassenstufen.ReadOnly = true;
             // 
             // gv_Buecher
             // 
@@ -270,12 +276,6 @@
             this.panel2.Size = new System.Drawing.Size(619, 365);
             this.panel2.TabIndex = 72;
             // 
-            // Klassenstufen
-            // 
-            this.Klassenstufen.HeaderText = "Klassenstufen";
-            this.Klassenstufen.Name = "Klassenstufen";
-            this.Klassenstufen.ReadOnly = true;
-            // 
             // bt_back
             // 
             this.bt_back.Enabled = false;
@@ -307,7 +307,6 @@
             this.MaximizeBox = false;
             this.Name = "w_s_buch_stufe";
             this.Resizable = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Orange;
             this.Text = "Zuordnung der Bücher zu einer Klassenstufe";

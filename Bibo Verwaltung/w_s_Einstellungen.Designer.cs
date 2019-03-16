@@ -416,7 +416,6 @@
             this.MaximizeBox = false;
             this.Name = "w_s_einstellungen";
             this.Resizable = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Silver;
             this.Text = "      Einstellungen";

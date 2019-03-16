@@ -279,10 +279,7 @@
             // 
             this.rueckList_Slider.Enabled = false;
             this.helpProvider.SetHelpString(this.rueckList_Slider, "Hier können Sie die sich in der Buchrückgabeliste befindlichen Bücher ansehen.");
-            this.rueckList_Slider.LargeChange = 10;
             this.rueckList_Slider.Location = new System.Drawing.Point(209, 445);
-            this.rueckList_Slider.Maximum = 100;
-            this.rueckList_Slider.Minimum = 0;
             this.rueckList_Slider.Name = "rueckList_Slider";
             this.helpProvider.SetShowHelp(this.rueckList_Slider, true);
             this.rueckList_Slider.Size = new System.Drawing.Size(120, 24);
@@ -395,7 +392,9 @@
             // 
             // cb_Zustand
             // 
+            this.cb_Zustand.DataRowView = true;
             this.cb_Zustand.Enabled = false;
+            this.cb_Zustand.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.cb_Zustand.FormattingEnabled = true;
             this.helpProvider.SetHelpString(this.cb_Zustand, "Hier wird der letzte Zustand des ausgeliehen Buches angezeigt. Ändern sie diesen " +
         "wenn sich der Zustand geändert hat.");
@@ -498,7 +497,6 @@
             this.MaximizeBox = false;
             this.Name = "w_s_rueckgabe";
             this.Resizable = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Buchrückgabe";
             ((System.ComponentModel.ISupportInitialize)(this.gv_Verlauf)).EndInit();

@@ -45,24 +45,24 @@
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.tb_klasse = new MetroFramework.Controls.MetroTextBox();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.cb_Verlag = new Bibo_Verwaltung.AdvancedComboBox();
-            this.cb_Genre = new Bibo_Verwaltung.AdvancedComboBox();
-            this.cb_Autor = new Bibo_Verwaltung.AdvancedComboBox();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
-            this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
-            this.bt_Schliessen = new MetroFramework.Controls.MetroButton();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.lb_ISBN = new MetroFramework.Controls.MetroLabel();
             this.lb_Titel = new MetroFramework.Controls.MetroLabel();
             this.lb_Genre = new MetroFramework.Controls.MetroLabel();
             this.lb_Verlag = new MetroFramework.Controls.MetroLabel();
             this.lb_Autor = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.cb_Verlag = new Bibo_Verwaltung.AdvancedComboBox();
+            this.cb_Genre = new Bibo_Verwaltung.AdvancedComboBox();
+            this.cb_Autor = new Bibo_Verwaltung.AdvancedComboBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.bt_Schliessen = new MetroFramework.Controls.MetroButton();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
+            this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
             ((System.ComponentModel.ISupportInitialize)(this.gv_buchsuche)).BeginInit();
             this.metroPanel1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
@@ -479,6 +479,78 @@
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 8;
             // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.helpProvider.SetHelpKeyword(this.metroLabel3, "Tragen sie den Verlag ihres Buches hier ein.");
+            this.metroLabel3.Location = new System.Drawing.Point(3, 153);
+            this.metroLabel3.Margin = new System.Windows.Forms.Padding(3);
+            this.metroLabel3.Name = "metroLabel3";
+            this.helpProvider.SetShowHelp(this.metroLabel3, true);
+            this.metroLabel3.Size = new System.Drawing.Size(47, 19);
+            this.metroLabel3.TabIndex = 42;
+            this.metroLabel3.Text = "Genre:";
+            // 
+            // lb_ISBN
+            // 
+            this.lb_ISBN.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_ISBN, "Tragen sie hier die ISBN-13 ein, um das gewünschte Buch zu laden.");
+            this.lb_ISBN.Location = new System.Drawing.Point(3, 3);
+            this.lb_ISBN.Margin = new System.Windows.Forms.Padding(3);
+            this.lb_ISBN.Name = "lb_ISBN";
+            this.helpProvider.SetShowHelp(this.lb_ISBN, true);
+            this.lb_ISBN.Size = new System.Drawing.Size(84, 19);
+            this.lb_ISBN.TabIndex = 37;
+            this.lb_ISBN.Text = "Exemplar-ID:";
+            // 
+            // lb_Titel
+            // 
+            this.lb_Titel.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Titel, "Tragen sie den Titel ihres Buches hier ein.");
+            this.lb_Titel.Location = new System.Drawing.Point(3, 33);
+            this.lb_Titel.Margin = new System.Windows.Forms.Padding(3);
+            this.lb_Titel.Name = "lb_Titel";
+            this.helpProvider.SetShowHelp(this.lb_Titel, true);
+            this.lb_Titel.Size = new System.Drawing.Size(40, 19);
+            this.lb_Titel.TabIndex = 38;
+            this.lb_Titel.Text = "ISBN:";
+            // 
+            // lb_Genre
+            // 
+            this.lb_Genre.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Genre, "Tragen sie das Genre ihres Buches hier ein.");
+            this.lb_Genre.Location = new System.Drawing.Point(3, 93);
+            this.lb_Genre.Margin = new System.Windows.Forms.Padding(3);
+            this.lb_Genre.Name = "lb_Genre";
+            this.helpProvider.SetShowHelp(this.lb_Genre, true);
+            this.lb_Genre.Size = new System.Drawing.Size(42, 19);
+            this.lb_Genre.TabIndex = 39;
+            this.lb_Genre.Text = "Autor";
+            // 
+            // lb_Verlag
+            // 
+            this.lb_Verlag.AutoSize = true;
+            this.helpProvider.SetHelpKeyword(this.lb_Verlag, "Tragen sie den Verlag ihres Buches hier ein.");
+            this.lb_Verlag.Location = new System.Drawing.Point(3, 123);
+            this.lb_Verlag.Margin = new System.Windows.Forms.Padding(3);
+            this.lb_Verlag.Name = "lb_Verlag";
+            this.helpProvider.SetShowHelp(this.lb_Verlag, true);
+            this.lb_Verlag.Size = new System.Drawing.Size(49, 19);
+            this.lb_Verlag.TabIndex = 41;
+            this.lb_Verlag.Text = "Verlag:";
+            // 
+            // lb_Autor
+            // 
+            this.lb_Autor.AutoSize = true;
+            this.helpProvider.SetHelpString(this.lb_Autor, "Tragen sie den Autor ihres Buches hier ein.");
+            this.lb_Autor.Location = new System.Drawing.Point(3, 63);
+            this.lb_Autor.Margin = new System.Windows.Forms.Padding(3);
+            this.lb_Autor.Name = "lb_Autor";
+            this.helpProvider.SetShowHelp(this.lb_Autor, true);
+            this.lb_Autor.Size = new System.Drawing.Size(36, 19);
+            this.lb_Autor.TabIndex = 40;
+            this.lb_Autor.Text = "Titel:";
+            // 
             // cb_Verlag
             // 
             this.cb_Verlag.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
@@ -562,6 +634,58 @@
             this.metroLabel1.TabIndex = 38;
             this.metroLabel1.Text = "Suchen nach Bucheigenschaften:";
             // 
+            // bt_Schliessen
+            // 
+            this.bt_Schliessen.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.bt_Schliessen.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_Schliessen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.helpProvider.SetHelpString(this.bt_Schliessen, "Schließen sie das akuelle Fenster.");
+            this.bt_Schliessen.Location = new System.Drawing.Point(828, 553);
+            this.bt_Schliessen.MaximumSize = new System.Drawing.Size(375, 24);
+            this.bt_Schliessen.MinimumSize = new System.Drawing.Size(262, 24);
+            this.bt_Schliessen.Name = "bt_Schliessen";
+            this.helpProvider.SetShowHelp(this.bt_Schliessen, true);
+            this.bt_Schliessen.Size = new System.Drawing.Size(349, 24);
+            this.bt_Schliessen.TabIndex = 43;
+            this.bt_Schliessen.Text = "Schließen";
+            this.bt_Schliessen.UseSelectable = true;
+            // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.helpProvider.SetHelpString(this.metroLabel4, "Tragen sie hier die ISBN-13 ein, um das gewünschte Buch zu laden.");
+            this.metroLabel4.Location = new System.Drawing.Point(3, 3);
+            this.metroLabel4.Margin = new System.Windows.Forms.Padding(3);
+            this.metroLabel4.Name = "metroLabel4";
+            this.helpProvider.SetShowHelp(this.metroLabel4, true);
+            this.metroLabel4.Size = new System.Drawing.Size(65, 19);
+            this.metroLabel4.TabIndex = 41;
+            this.metroLabel4.Text = "Vorname:";
+            // 
+            // metroLabel5
+            // 
+            this.metroLabel5.AutoSize = true;
+            this.helpProvider.SetHelpString(this.metroLabel5, "Tragen sie den Titel ihres Buches hier ein.");
+            this.metroLabel5.Location = new System.Drawing.Point(3, 33);
+            this.metroLabel5.Margin = new System.Windows.Forms.Padding(3);
+            this.metroLabel5.Name = "metroLabel5";
+            this.helpProvider.SetShowHelp(this.metroLabel5, true);
+            this.metroLabel5.Size = new System.Drawing.Size(75, 19);
+            this.metroLabel5.TabIndex = 42;
+            this.metroLabel5.Text = "Nachname:";
+            // 
+            // metroLabel6
+            // 
+            this.metroLabel6.AutoSize = true;
+            this.helpProvider.SetHelpString(this.metroLabel6, "Tragen sie den Autor ihres Buches hier ein.");
+            this.metroLabel6.Location = new System.Drawing.Point(3, 63);
+            this.metroLabel6.Margin = new System.Windows.Forms.Padding(3);
+            this.metroLabel6.Name = "metroLabel6";
+            this.helpProvider.SetShowHelp(this.metroLabel6, true);
+            this.metroLabel6.Size = new System.Drawing.Size(80, 19);
+            this.metroLabel6.TabIndex = 43;
+            this.metroLabel6.Text = "Klassenstufe:";
+            // 
             // metroPanel2
             // 
             this.metroPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -631,130 +755,6 @@
             this.metroPanel4.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel4.VerticalScrollbarSize = 10;
             // 
-            // bt_Schliessen
-            // 
-            this.bt_Schliessen.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.bt_Schliessen.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.bt_Schliessen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.helpProvider.SetHelpString(this.bt_Schliessen, "Schließen sie das akuelle Fenster.");
-            this.bt_Schliessen.Location = new System.Drawing.Point(828, 553);
-            this.bt_Schliessen.MaximumSize = new System.Drawing.Size(375, 24);
-            this.bt_Schliessen.MinimumSize = new System.Drawing.Size(262, 24);
-            this.bt_Schliessen.Name = "bt_Schliessen";
-            this.helpProvider.SetShowHelp(this.bt_Schliessen, true);
-            this.bt_Schliessen.Size = new System.Drawing.Size(349, 24);
-            this.bt_Schliessen.TabIndex = 43;
-            this.bt_Schliessen.Text = "Schließen";
-            this.bt_Schliessen.UseSelectable = true;
-            // 
-            // lb_ISBN
-            // 
-            this.lb_ISBN.AutoSize = true;
-            this.helpProvider.SetHelpString(this.lb_ISBN, "Tragen sie hier die ISBN-13 ein, um das gewünschte Buch zu laden.");
-            this.lb_ISBN.Location = new System.Drawing.Point(3, 3);
-            this.lb_ISBN.Margin = new System.Windows.Forms.Padding(3);
-            this.lb_ISBN.Name = "lb_ISBN";
-            this.helpProvider.SetShowHelp(this.lb_ISBN, true);
-            this.lb_ISBN.Size = new System.Drawing.Size(84, 19);
-            this.lb_ISBN.TabIndex = 37;
-            this.lb_ISBN.Text = "Exemplar-ID:";
-            // 
-            // lb_Titel
-            // 
-            this.lb_Titel.AutoSize = true;
-            this.helpProvider.SetHelpString(this.lb_Titel, "Tragen sie den Titel ihres Buches hier ein.");
-            this.lb_Titel.Location = new System.Drawing.Point(3, 33);
-            this.lb_Titel.Margin = new System.Windows.Forms.Padding(3);
-            this.lb_Titel.Name = "lb_Titel";
-            this.helpProvider.SetShowHelp(this.lb_Titel, true);
-            this.lb_Titel.Size = new System.Drawing.Size(40, 19);
-            this.lb_Titel.TabIndex = 38;
-            this.lb_Titel.Text = "ISBN:";
-            // 
-            // lb_Genre
-            // 
-            this.lb_Genre.AutoSize = true;
-            this.helpProvider.SetHelpString(this.lb_Genre, "Tragen sie das Genre ihres Buches hier ein.");
-            this.lb_Genre.Location = new System.Drawing.Point(3, 93);
-            this.lb_Genre.Margin = new System.Windows.Forms.Padding(3);
-            this.lb_Genre.Name = "lb_Genre";
-            this.helpProvider.SetShowHelp(this.lb_Genre, true);
-            this.lb_Genre.Size = new System.Drawing.Size(42, 19);
-            this.lb_Genre.TabIndex = 39;
-            this.lb_Genre.Text = "Autor";
-            // 
-            // lb_Verlag
-            // 
-            this.lb_Verlag.AutoSize = true;
-            this.helpProvider.SetHelpKeyword(this.lb_Verlag, "Tragen sie den Verlag ihres Buches hier ein.");
-            this.lb_Verlag.Location = new System.Drawing.Point(3, 123);
-            this.lb_Verlag.Margin = new System.Windows.Forms.Padding(3);
-            this.lb_Verlag.Name = "lb_Verlag";
-            this.helpProvider.SetShowHelp(this.lb_Verlag, true);
-            this.lb_Verlag.Size = new System.Drawing.Size(49, 19);
-            this.lb_Verlag.TabIndex = 41;
-            this.lb_Verlag.Text = "Verlag:";
-            // 
-            // lb_Autor
-            // 
-            this.lb_Autor.AutoSize = true;
-            this.helpProvider.SetHelpString(this.lb_Autor, "Tragen sie den Autor ihres Buches hier ein.");
-            this.lb_Autor.Location = new System.Drawing.Point(3, 63);
-            this.lb_Autor.Margin = new System.Windows.Forms.Padding(3);
-            this.lb_Autor.Name = "lb_Autor";
-            this.helpProvider.SetShowHelp(this.lb_Autor, true);
-            this.lb_Autor.Size = new System.Drawing.Size(36, 19);
-            this.lb_Autor.TabIndex = 40;
-            this.lb_Autor.Text = "Titel:";
-            // 
-            // metroLabel3
-            // 
-            this.metroLabel3.AutoSize = true;
-            this.helpProvider.SetHelpKeyword(this.metroLabel3, "Tragen sie den Verlag ihres Buches hier ein.");
-            this.metroLabel3.Location = new System.Drawing.Point(3, 153);
-            this.metroLabel3.Margin = new System.Windows.Forms.Padding(3);
-            this.metroLabel3.Name = "metroLabel3";
-            this.helpProvider.SetShowHelp(this.metroLabel3, true);
-            this.metroLabel3.Size = new System.Drawing.Size(47, 19);
-            this.metroLabel3.TabIndex = 42;
-            this.metroLabel3.Text = "Genre:";
-            // 
-            // metroLabel4
-            // 
-            this.metroLabel4.AutoSize = true;
-            this.helpProvider.SetHelpString(this.metroLabel4, "Tragen sie hier die ISBN-13 ein, um das gewünschte Buch zu laden.");
-            this.metroLabel4.Location = new System.Drawing.Point(3, 3);
-            this.metroLabel4.Margin = new System.Windows.Forms.Padding(3);
-            this.metroLabel4.Name = "metroLabel4";
-            this.helpProvider.SetShowHelp(this.metroLabel4, true);
-            this.metroLabel4.Size = new System.Drawing.Size(65, 19);
-            this.metroLabel4.TabIndex = 41;
-            this.metroLabel4.Text = "Vorname:";
-            // 
-            // metroLabel5
-            // 
-            this.metroLabel5.AutoSize = true;
-            this.helpProvider.SetHelpString(this.metroLabel5, "Tragen sie den Titel ihres Buches hier ein.");
-            this.metroLabel5.Location = new System.Drawing.Point(3, 33);
-            this.metroLabel5.Margin = new System.Windows.Forms.Padding(3);
-            this.metroLabel5.Name = "metroLabel5";
-            this.helpProvider.SetShowHelp(this.metroLabel5, true);
-            this.metroLabel5.Size = new System.Drawing.Size(75, 19);
-            this.metroLabel5.TabIndex = 42;
-            this.metroLabel5.Text = "Nachname:";
-            // 
-            // metroLabel6
-            // 
-            this.metroLabel6.AutoSize = true;
-            this.helpProvider.SetHelpString(this.metroLabel6, "Tragen sie den Autor ihres Buches hier ein.");
-            this.metroLabel6.Location = new System.Drawing.Point(3, 63);
-            this.metroLabel6.Margin = new System.Windows.Forms.Padding(3);
-            this.metroLabel6.Name = "metroLabel6";
-            this.helpProvider.SetShowHelp(this.metroLabel6, true);
-            this.metroLabel6.Size = new System.Drawing.Size(80, 19);
-            this.metroLabel6.TabIndex = 43;
-            this.metroLabel6.Text = "Klassenstufe:";
-            // 
             // w_s_buchsuche
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -767,7 +767,6 @@
             this.MaximizeBox = false;
             this.Name = "w_s_buchsuche";
             this.Resizable = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Lime;
             this.Text = "Buchübersicht";

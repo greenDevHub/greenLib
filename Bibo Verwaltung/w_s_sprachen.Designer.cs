@@ -33,10 +33,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_sprachen));
             this.tLP_Sprachen = new System.Windows.Forms.TableLayoutPanel();
-            this.lb_Sprachen = new MetroFramework.Controls.MetroLabel();
-            this.gv_Sprachen = new MetroFramework.Controls.MetroGrid();
             this.bt_Uebernehmen = new MetroFramework.Controls.MetroButton();
+            this.lb_Sprachen = new MetroFramework.Controls.MetroLabel();
             this.bt_Suchen = new MetroFramework.Controls.MetroButton();
+            this.gv_Sprachen = new MetroFramework.Controls.MetroGrid();
             this.tb_Suchen = new MetroFramework.Controls.MetroTextBox();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.tLP_Sprachen.SuspendLayout();
@@ -63,6 +63,24 @@
             this.tLP_Sprachen.Size = new System.Drawing.Size(304, 614);
             this.tLP_Sprachen.TabIndex = 61;
             // 
+            // bt_Uebernehmen
+            // 
+            this.bt_Uebernehmen.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.bt_Uebernehmen.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bt_Uebernehmen.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_Uebernehmen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.helpProvider.SetHelpString(this.bt_Uebernehmen, "Klicken sie auf diesen Button, um alle Änderungen zu übernehmen.");
+            this.bt_Uebernehmen.Location = new System.Drawing.Point(3, 587);
+            this.bt_Uebernehmen.MaximumSize = new System.Drawing.Size(200, 24);
+            this.bt_Uebernehmen.MinimumSize = new System.Drawing.Size(50, 24);
+            this.bt_Uebernehmen.Name = "bt_Uebernehmen";
+            this.helpProvider.SetShowHelp(this.bt_Uebernehmen, true);
+            this.bt_Uebernehmen.Size = new System.Drawing.Size(146, 24);
+            this.bt_Uebernehmen.TabIndex = 51;
+            this.bt_Uebernehmen.Text = "Übernehmen";
+            this.bt_Uebernehmen.UseSelectable = true;
+            this.bt_Uebernehmen.Click += new System.EventHandler(this.bt_Uebernehmen_Click);
+            // 
             // lb_Sprachen
             // 
             this.lb_Sprachen.AutoSize = true;
@@ -75,6 +93,23 @@
             this.lb_Sprachen.Size = new System.Drawing.Size(298, 19);
             this.lb_Sprachen.TabIndex = 53;
             this.lb_Sprachen.Text = "Suchen:";
+            // 
+            // bt_Suchen
+            // 
+            this.bt_Suchen.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bt_Suchen.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_Suchen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.helpProvider.SetHelpString(this.bt_Suchen, "Klicken sie auf diesen Button, um die Suchfunktion an- bzw. auszuschalten.");
+            this.bt_Suchen.Location = new System.Drawing.Point(155, 587);
+            this.bt_Suchen.MaximumSize = new System.Drawing.Size(200, 24);
+            this.bt_Suchen.MinimumSize = new System.Drawing.Size(50, 24);
+            this.bt_Suchen.Name = "bt_Suchen";
+            this.helpProvider.SetShowHelp(this.bt_Suchen, true);
+            this.bt_Suchen.Size = new System.Drawing.Size(146, 24);
+            this.bt_Suchen.TabIndex = 54;
+            this.bt_Suchen.Text = "Suchen AN";
+            this.bt_Suchen.UseSelectable = true;
+            this.bt_Suchen.Click += new System.EventHandler(this.bt_Suchen_Click);
             // 
             // gv_Sprachen
             // 
@@ -132,41 +167,6 @@
             this.gv_Sprachen.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gv_Sprachen_UserDeletedRow);
             this.gv_Sprachen.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridView_KeyPress);
             // 
-            // bt_Uebernehmen
-            // 
-            this.bt_Uebernehmen.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.bt_Uebernehmen.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bt_Uebernehmen.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.bt_Uebernehmen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.helpProvider.SetHelpString(this.bt_Uebernehmen, "Klicken sie auf diesen Button, um alle Änderungen zu übernehmen.");
-            this.bt_Uebernehmen.Location = new System.Drawing.Point(3, 587);
-            this.bt_Uebernehmen.MaximumSize = new System.Drawing.Size(200, 24);
-            this.bt_Uebernehmen.MinimumSize = new System.Drawing.Size(50, 24);
-            this.bt_Uebernehmen.Name = "bt_Uebernehmen";
-            this.helpProvider.SetShowHelp(this.bt_Uebernehmen, true);
-            this.bt_Uebernehmen.Size = new System.Drawing.Size(146, 24);
-            this.bt_Uebernehmen.TabIndex = 51;
-            this.bt_Uebernehmen.Text = "Übernehmen";
-            this.bt_Uebernehmen.UseSelectable = true;
-            this.bt_Uebernehmen.Click += new System.EventHandler(this.bt_Uebernehmen_Click);
-            // 
-            // bt_Suchen
-            // 
-            this.bt_Suchen.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bt_Suchen.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.bt_Suchen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.helpProvider.SetHelpString(this.bt_Suchen, "Klicken sie auf diesen Button, um die Suchfunktion an- bzw. auszuschalten.");
-            this.bt_Suchen.Location = new System.Drawing.Point(155, 587);
-            this.bt_Suchen.MaximumSize = new System.Drawing.Size(200, 24);
-            this.bt_Suchen.MinimumSize = new System.Drawing.Size(50, 24);
-            this.bt_Suchen.Name = "bt_Suchen";
-            this.helpProvider.SetShowHelp(this.bt_Suchen, true);
-            this.bt_Suchen.Size = new System.Drawing.Size(146, 24);
-            this.bt_Suchen.TabIndex = 54;
-            this.bt_Suchen.Text = "Suchen AN";
-            this.bt_Suchen.UseSelectable = true;
-            this.bt_Suchen.Click += new System.EventHandler(this.bt_Suchen_Click);
-            // 
             // tb_Suchen
             // 
             this.tLP_Sprachen.SetColumnSpan(this.tb_Suchen, 2);
@@ -216,7 +216,6 @@
             this.MaximizeBox = false;
             this.Name = "w_s_sprachen";
             this.Resizable = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Sprachen";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_sprachen_FormClosing);

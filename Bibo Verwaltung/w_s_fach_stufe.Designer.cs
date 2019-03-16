@@ -314,7 +314,6 @@
             this.MaximizeBox = false;
             this.Name = "w_s_fach_stufe";
             this.Resizable = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Orange;
             this.Text = "Zuordnung der Fächer zu einer Klassenstufe";

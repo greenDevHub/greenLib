@@ -34,10 +34,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_genres));
             this.tLP_Sprachen = new System.Windows.Forms.TableLayoutPanel();
             this.lb_Genres = new MetroFramework.Controls.MetroLabel();
-            this.gv_Genres = new MetroFramework.Controls.MetroGrid();
-            this.bt_Uebernehmen = new MetroFramework.Controls.MetroButton();
-            this.bt_Suchen = new MetroFramework.Controls.MetroButton();
             this.tb_Suchen = new MetroFramework.Controls.MetroTextBox();
+            this.bt_Uebernehmen = new MetroFramework.Controls.MetroButton();
+            this.gv_Genres = new MetroFramework.Controls.MetroGrid();
+            this.bt_Suchen = new MetroFramework.Controls.MetroButton();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.tLP_Sprachen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Genres)).BeginInit();
@@ -75,6 +75,63 @@
             this.lb_Genres.Size = new System.Drawing.Size(298, 19);
             this.lb_Genres.TabIndex = 53;
             this.lb_Genres.Text = "Suchen:";
+            // 
+            // tb_Suchen
+            // 
+            this.tLP_Sprachen.SetColumnSpan(this.tb_Suchen, 2);
+            // 
+            // 
+            // 
+            this.tb_Suchen.CustomButton.Image = null;
+            this.tb_Suchen.CustomButton.Location = new System.Drawing.Point(276, 2);
+            this.tb_Suchen.CustomButton.Name = "";
+            this.tb_Suchen.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_Suchen.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_Suchen.CustomButton.TabIndex = 1;
+            this.tb_Suchen.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_Suchen.CustomButton.UseSelectable = true;
+            this.tb_Suchen.CustomButton.Visible = false;
+            this.tb_Suchen.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tb_Suchen.Enabled = false;
+            this.helpProvider.SetHelpString(this.tb_Suchen, "Suchen sie nach gespeicherten Genres.");
+            this.tb_Suchen.Lines = new string[0];
+            this.tb_Suchen.Location = new System.Drawing.Point(3, 33);
+            this.tb_Suchen.MaximumSize = new System.Drawing.Size(500, 24);
+            this.tb_Suchen.MaxLength = 32767;
+            this.tb_Suchen.MinimumSize = new System.Drawing.Size(100, 24);
+            this.tb_Suchen.Name = "tb_Suchen";
+            this.tb_Suchen.PasswordChar = '\0';
+            this.tb_Suchen.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_Suchen.SelectedText = "";
+            this.tb_Suchen.SelectionLength = 0;
+            this.tb_Suchen.SelectionStart = 0;
+            this.tb_Suchen.ShortcutsEnabled = true;
+            this.helpProvider.SetShowHelp(this.tb_Suchen, true);
+            this.tb_Suchen.Size = new System.Drawing.Size(298, 24);
+            this.tb_Suchen.TabIndex = 52;
+            this.tb_Suchen.UseSelectable = true;
+            this.tb_Suchen.Visible = false;
+            this.tb_Suchen.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_Suchen.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_Suchen.TextChanged += new System.EventHandler(this.tb_Suchen_TextChanged);
+            // 
+            // bt_Uebernehmen
+            // 
+            this.bt_Uebernehmen.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.bt_Uebernehmen.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bt_Uebernehmen.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_Uebernehmen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.helpProvider.SetHelpString(this.bt_Uebernehmen, "Klicken sie auf diesen Button, um alle Änderungen zu übernehmen.");
+            this.bt_Uebernehmen.Location = new System.Drawing.Point(3, 587);
+            this.bt_Uebernehmen.MaximumSize = new System.Drawing.Size(200, 24);
+            this.bt_Uebernehmen.MinimumSize = new System.Drawing.Size(50, 24);
+            this.bt_Uebernehmen.Name = "bt_Uebernehmen";
+            this.helpProvider.SetShowHelp(this.bt_Uebernehmen, true);
+            this.bt_Uebernehmen.Size = new System.Drawing.Size(146, 24);
+            this.bt_Uebernehmen.TabIndex = 51;
+            this.bt_Uebernehmen.Text = "Übernehmen";
+            this.bt_Uebernehmen.UseSelectable = true;
+            this.bt_Uebernehmen.Click += new System.EventHandler(this.bt_Uebernehmen_Click);
             // 
             // gv_Genres
             // 
@@ -132,24 +189,6 @@
             this.gv_Genres.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gv_genres_UserDeletedRow);
             this.gv_Genres.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridView_KeyPress);
             // 
-            // bt_Uebernehmen
-            // 
-            this.bt_Uebernehmen.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.bt_Uebernehmen.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bt_Uebernehmen.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.bt_Uebernehmen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.helpProvider.SetHelpString(this.bt_Uebernehmen, "Klicken sie auf diesen Button, um alle Änderungen zu übernehmen.");
-            this.bt_Uebernehmen.Location = new System.Drawing.Point(3, 587);
-            this.bt_Uebernehmen.MaximumSize = new System.Drawing.Size(200, 24);
-            this.bt_Uebernehmen.MinimumSize = new System.Drawing.Size(50, 24);
-            this.bt_Uebernehmen.Name = "bt_Uebernehmen";
-            this.helpProvider.SetShowHelp(this.bt_Uebernehmen, true);
-            this.bt_Uebernehmen.Size = new System.Drawing.Size(146, 24);
-            this.bt_Uebernehmen.TabIndex = 51;
-            this.bt_Uebernehmen.Text = "Übernehmen";
-            this.bt_Uebernehmen.UseSelectable = true;
-            this.bt_Uebernehmen.Click += new System.EventHandler(this.bt_Uebernehmen_Click);
-            // 
             // bt_Suchen
             // 
             this.bt_Suchen.Dock = System.Windows.Forms.DockStyle.Top;
@@ -167,45 +206,6 @@
             this.bt_Suchen.UseSelectable = true;
             this.bt_Suchen.Click += new System.EventHandler(this.bt_Suchen_Click);
             // 
-            // tb_Suchen
-            // 
-            this.tLP_Sprachen.SetColumnSpan(this.tb_Suchen, 2);
-            // 
-            // 
-            // 
-            this.tb_Suchen.CustomButton.Image = null;
-            this.tb_Suchen.CustomButton.Location = new System.Drawing.Point(276, 2);
-            this.tb_Suchen.CustomButton.Name = "";
-            this.tb_Suchen.CustomButton.Size = new System.Drawing.Size(19, 19);
-            this.tb_Suchen.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.tb_Suchen.CustomButton.TabIndex = 1;
-            this.tb_Suchen.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.tb_Suchen.CustomButton.UseSelectable = true;
-            this.tb_Suchen.CustomButton.Visible = false;
-            this.tb_Suchen.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tb_Suchen.Enabled = false;
-            this.helpProvider.SetHelpString(this.tb_Suchen, "Suchen sie nach gespeicherten Genres.");
-            this.tb_Suchen.Lines = new string[0];
-            this.tb_Suchen.Location = new System.Drawing.Point(3, 33);
-            this.tb_Suchen.MaximumSize = new System.Drawing.Size(500, 24);
-            this.tb_Suchen.MaxLength = 32767;
-            this.tb_Suchen.MinimumSize = new System.Drawing.Size(100, 24);
-            this.tb_Suchen.Name = "tb_Suchen";
-            this.tb_Suchen.PasswordChar = '\0';
-            this.tb_Suchen.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.tb_Suchen.SelectedText = "";
-            this.tb_Suchen.SelectionLength = 0;
-            this.tb_Suchen.SelectionStart = 0;
-            this.tb_Suchen.ShortcutsEnabled = true;
-            this.helpProvider.SetShowHelp(this.tb_Suchen, true);
-            this.tb_Suchen.Size = new System.Drawing.Size(298, 24);
-            this.tb_Suchen.TabIndex = 52;
-            this.tb_Suchen.UseSelectable = true;
-            this.tb_Suchen.Visible = false;
-            this.tb_Suchen.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.tb_Suchen.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.tb_Suchen.TextChanged += new System.EventHandler(this.tb_Suchen_TextChanged);
-            // 
             // w_s_genres
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -216,7 +216,6 @@
             this.MaximizeBox = false;
             this.Name = "w_s_genres";
             this.Resizable = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Genres";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_genres_FormClosing);
