@@ -621,6 +621,7 @@ namespace Bibo_Verwaltung
                     {
                         gv_result.Rows.Add("*" + kunde.Fach.FachKurz, kunde.Fach.FachID);
                         gv_result.Rows[gv_result.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Yellow;
+                        kunde.Leistungskurse++;
                     }
                     else
                     {
@@ -774,6 +775,11 @@ namespace Bibo_Verwaltung
         {
             int errors = 0;
             int rows = 0;
+            //List<DataGridViewRow> gridRows = new List<DataGridViewRow>();
+            //foreach(DataGridViewRow row in gv_Kunde.SelectedRows)
+            //{
+            //    gridRows.Add(row);
+            //}
             foreach (DataGridViewRow row in gv_Kunde.SelectedRows)
             {
                 rows++;
@@ -782,13 +788,13 @@ namespace Bibo_Verwaltung
                     kunde.KundenID = row.Cells["Kunden-ID"].Value.ToString();
                     kunde.Deactivate();
                     ClearForm();
-                    kunde.FillGrid(ref gv_Kunde);
                 }
                 catch (SqlException)
                 {
                     errors++;
                 }
             }
+            kunde.FillGrid(ref gv_Kunde);
             if (errors > 0)
             {
                 MetroMessageBox.Show(this, String.Format("Es wurden '{0}' von '{1}' Kunden gelöscht.", errors, rows), "Fehler beim Löschvorgang", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -255,7 +255,6 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
-
         #region Ziel-Schema ermitteln
         SqlDataAdapter adapter = new SqlDataAdapter();
         private DataTable schema = new DataTable();
@@ -385,81 +384,83 @@ namespace Bibo_Verwaltung
             }
         }
 
-        //TODO
-        #region ExcelExport
-        private void createExcelFile(DataGridView grid)
-        {
-            try
-            {
-                SaveFileDialog dialog = new SaveFileDialog();
-                dialog.Filter = "CSV|*.csv";
-                dialog.Title = "Als Tabelle abspeichern";
-                dialog.ShowDialog();
+        ////TODO
+        //private void createExcelFile(DataGridView grid)
+        //{
+        //    try
+        //    {
+        //        SaveFileDialog dialog = new SaveFileDialog();
+        //        dialog.Filter = "CSV|*.csv";
+        //        dialog.Title = "Als Tabelle abspeichern";
+        //        dialog.ShowDialog();
 
-                //Überprüfen, ob Filename vergeben wurde
-                if (dialog.FileName != "")
-                {
-                    //Überprüfen, ob Rows vorhanden sind
-                    if (grid.RowCount > 0)
-                    {
-                        string value = "";
-                        DataGridViewRow dr = new DataGridViewRow();
-                        StreamWriter sw = new StreamWriter(dialog.FileName);
+        //        //Überprüfen, ob Filename vergeben wurde
+        //        if (dialog.FileName != "")
+        //        {
+        //            //Überprüfen, ob Rows vorhanden sind
+        //            if (grid.RowCount > 0)
+        //            {
+        //                string value = "";
+        //                DataGridViewRow dr = new DataGridViewRow();
+        //                StreamWriter sw = new StreamWriter(dialog.FileName);
 
-                        //Head Rows schreiben
-                        for (int i = 0; i <= grid.Columns.Count - 1; i++)
-                        {
-                            if (i > 0)
-                            {
-                                sw.Write(";");
-                            }
-                            sw.Write(grid.Columns[i].HeaderText);
-                        }
+        //                //Head Rows schreiben
+        //                for (int i = 0; i <= grid.Columns.Count - 1; i++)
+        //                {
+        //                    if (i > 0)
+        //                    {
+        //                        sw.Write(";");
+        //                    }
+        //                    sw.Write(grid.Columns[i].HeaderText);
+        //                }
 
-                        sw.WriteLine();
-                        //Rows aus grid in csv
-                        for (int j = 0; j <= grid.Rows.Count - 1; j++)
-                        {
-                            if (j > 0)
-                            {
-                                sw.WriteLine();
-                            }
+        //                sw.WriteLine();
+        //                //Rows aus grid in csv
+        //                for (int j = 0; j <= grid.Rows.Count - 1; j++)
+        //                {
+        //                    if (j > 0)
+        //                    {
+        //                        sw.WriteLine();
+        //                    }
 
-                            dr = grid.Rows[j];
+        //                    dr = grid.Rows[j];
 
-                            for (int i = 0; i <= grid.Columns.Count - 1; i++)
-                            {
-                                if (i > 0)
-                                {
-                                    sw.Write(";");
-                                }
+        //                    for (int i = 0; i <= grid.Columns.Count - 1; i++)
+        //                    {
+        //                        if (i > 0)
+        //                        {
+        //                            sw.Write(";");
+        //                        }
 
-                                value = dr.Cells[i].Value.ToString();
-                                //Replace
-                                value = value.Replace(',', ' ');
-                                value = value.Replace(Environment.NewLine, " ");
+        //                        value = dr.Cells[i].Value.ToString();
+        //                        //Replace
+        //                        value = value.Replace(',', ' ');
+        //                        value = value.Replace(Environment.NewLine, " ");
 
-                                sw.Write(value);
-                            }
-                        }
-                        sw.Close();
-                        MessageBox.Show("Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Beim Exportvorgang ist ein unbekannter Fehler aufgetreten!", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
+        //                        sw.Write(value);
+        //                    }
+        //                }
+        //                sw.Close();
+        //                MessageBox.Show("Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //            }
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        MessageBox.Show("Beim Exportvorgang ist ein unbekannter Fehler aufgetreten!", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //    }
+        //}
 
-        public void executeExport(ref DataGridView grid)
-        {
-            createExcelFile(grid);
-        }
-        #endregion
+        //public void executeExport(ref DataGridView grid)
+        //{
+        //    createExcelFile(grid);
+        //}
 
-        #region get SQL Columns
+        /// <summary>
+        /// Ruft die Spaltennamen aus der Datenbank ab, wird aktuell nicht verwendet
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
         public List<string> GetSQLColumns(string tableName)
         {
             List<string> cols = new List<string>();
@@ -476,22 +477,13 @@ namespace Bibo_Verwaltung
             con.Close();
             return cols;
         }
-        #endregion
 
-        //public void FillColGrid(ref DataGridView grid, List<string> columns, object value = null)
-        //{
-        //    DataTable table = new DataTable();
-        //    foreach(string s in columns)
-        //    {
-        //        table.Columns.Add(s.Substring(s.IndexOf("_")+1), typeof(System.String));
-        //    }
-        //    //for(int i = 0; i < columns.Count;)
-        //    //{
-        //    //    table.Columns.Add(columns[i], typeof(System.String));
-        //    //}
-        //   // table.Rows.Add(columns);
-        //    grid.DataSource = table;
-        //}
+        /// <summary>
+        /// Füllt das Gridview zum Vergleich der benötigten und der in der .csv vorhandenen Daten
+        /// </summary>
+        /// <param name="grid"></param>
+        /// <param name="target"></param>
+        /// <param name="value"></param>
         public void FillColGrid(ref MetroGrid grid, string target, object value = null)
         {
             DataTable table = new DataTable();
@@ -501,7 +493,6 @@ namespace Bibo_Verwaltung
                 table.Columns.Add("Nachname");
                 table.Columns.Add("Geburtsdatum");
                 table.Columns.Add("Klasse");
-                table.Columns.Add("Klassenstufe");
                 table.Columns.Add("FS2");
                 table.Columns.Add("Profil");
                 table.Columns.Add("Religionsunterricht");
@@ -515,10 +506,6 @@ namespace Bibo_Verwaltung
                 table.Columns.Add("LK1");
                 table.Columns.Add("LK2");
                 table.Columns.Add("Grundkurse");
-                //for(int i = 1; i < 12; i++)
-                //{
-                //    table.Columns.Add("GK"+i);
-                //}
 
             }
             else if (target.Equals("FAECHER"))
@@ -526,11 +513,6 @@ namespace Bibo_Verwaltung
                 table.Columns.Add("Kurzform");
                 table.Columns.Add("Langform");
             }
-            //for(int i = 0; i < columns.Count;)
-            //{
-            //    table.Columns.Add(columns[i], typeof(System.String));
-            //}
-            // table.Rows.Add(columns);
             grid.DataSource = table;
         }
 
