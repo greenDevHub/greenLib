@@ -34,41 +34,41 @@ namespace Bibo_Verwaltung
         /// </summary>
         public char Textqualifizierer { get { return textqualifizierer; } set { textqualifizierer = value; } }
 
-        string datfolge;
-        /// <summary>
-        /// Datumsfolge der Import/Export-Datei
-        /// </summary>
-        public string Datumsfolge { get { return datfolge; } set { datfolge = value; } }
+        //string datfolge;
+        ///// <summary>
+        ///// Datumsfolge der Import/Export-Datei
+        ///// </summary>
+        //public string Datumsfolge { get { return datfolge; } set { datfolge = value; } }
 
-        char dattrenn;
-        /// <summary>
-        /// Datumstrennzeichen der Import/Export-Datei
-        /// </summary>
-        public char Datumstrennzeichen { get { return dattrenn; } set { dattrenn = value; } }
+        //char dattrenn;
+        ///// <summary>
+        ///// Datumstrennzeichen der Import/Export-Datei
+        ///// </summary>
+        //public char Datumstrennzeichen { get { return dattrenn; } set { dattrenn = value; } }
 
-        char zeittrenn;
-        /// <summary>
-        /// Zeittrennzeichen der Import/Export-Datei
-        /// </summary>
-        public char Zeittrennzeichen { get { return zeittrenn; } set { zeittrenn = value; } }
+        //char zeittrenn;
+        ///// <summary>
+        ///// Zeittrennzeichen der Import/Export-Datei
+        ///// </summary>
+        //public char Zeittrennzeichen { get { return zeittrenn; } set { zeittrenn = value; } }
 
-        bool vierstelligejahre;
-        /// <summary>
-        /// Vierstelligejahre der Import/Export-Datei
-        /// </summary>
-        public bool Vierstelligejahre { get { return vierstelligejahre; } set { vierstelligejahre = value; } }
+        //bool vierstelligejahre;
+        ///// <summary>
+        ///// Vierstelligejahre der Import/Export-Datei
+        ///// </summary>
+        //public bool Vierstelligejahre { get { return vierstelligejahre; } set { vierstelligejahre = value; } }
 
-        bool fuehrendenull;
-        /// <summary>
-        /// FuehrendeDatumsnull der Import/Export-Datei
-        /// </summary>
-        public bool FuehrendeDatumsnull { get { return fuehrendenull; } set { fuehrendenull = value; } }
+        //bool fuehrendenull;
+        ///// <summary>
+        ///// FuehrendeDatumsnull der Import/Export-Datei
+        ///// </summary>
+        //public bool FuehrendeDatumsnull { get { return fuehrendenull; } set { fuehrendenull = value; } }
 
-        char deztrenn;
-        /// <summary>
-        /// Dezimaltrennzeichen der Import/Export-Datei
-        /// </summary>
-        public char Dezimaltrennzeichen { get { return deztrenn; } set { deztrenn = value; } }
+        //char deztrenn;
+        ///// <summary>
+        ///// Dezimaltrennzeichen der Import/Export-Datei
+        ///// </summary>
+        //public char Dezimaltrennzeichen { get { return deztrenn; } set { deztrenn = value; } }
 
         bool colheader;
         /// <summary>
@@ -90,20 +90,20 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Erschafft ein Objekt zum importieren/exportieren von CSV-Dateien.
         /// </summary>
-        public Schuelerimport(string path, char separator, char textqualifizierer, string datfolge, char dattrenn, char zeittrenn, bool vierstelligejahre, bool fuehrendenull, char deztrenn, bool colheader, bool preview)
-        {
-            this.path = path;
-            this.separator = separator;
-            this.textqualifizierer = textqualifizierer;
-            this.datfolge = datfolge;
-            this.dattrenn = dattrenn;
-            this.zeittrenn = zeittrenn;
-            this.vierstelligejahre = vierstelligejahre;
-            this.fuehrendenull = fuehrendenull;
-            this.deztrenn = deztrenn;
-            this.colheader = colheader;
-            readCSV(preview);
-        }
+        //public Schuelerimport(string path, char separator, char textqualifizierer, string datfolge, char dattrenn, char zeittrenn, bool vierstelligejahre, bool fuehrendenull, char deztrenn, bool colheader, bool preview)
+        //{
+        //    //this.path = path;
+        //    //this.separator = separator;
+        //    //this.textqualifizierer = textqualifizierer;
+        //    //this.datfolge = datfolge;
+        //    //this.dattrenn = dattrenn;
+        //    //this.zeittrenn = zeittrenn;
+        //    //this.vierstelligejahre = vierstelligejahre;
+        //    //this.fuehrendenull = fuehrendenull;
+        //    //this.deztrenn = deztrenn;
+        //    //this.colheader = colheader;
+        //    //readCSV(preview);
+        //}
         /// <summary>
         /// Erschafft ein Objekt zum importieren/exportieren von CSV-Dateien.
         /// </summary>
@@ -118,11 +118,15 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void FillGridViewRows(ref MetroGrid grid, object value = null)
         {
+            //grid.DataSource = null;
+            dt.Clear();
             readCSV(false);
-            
-
-
             grid.DataSource = dt;
+        }
+        public void FillDataTable(ref DataTable dt)
+        {
+            readCSV(false);
+            dt = this.dt;
         }
         #endregion
         //TODO
@@ -132,6 +136,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void readCSV(bool preview)
         {
+            dt.Reset();
             FileInfo f = new FileInfo(path);
             long filelength = f.Length;
 
@@ -190,11 +195,13 @@ namespace Bibo_Verwaltung
                     }
                     if (errorcount > 0)
                     {
+                        throw new Exception("Problem bei Zeile "+errorcount);
                         MessageBox.Show("Es konnten " + errorcount + " Zeile(n) aufgund eines Formatieringsproblems nicht gelesen werden. Bitte überprüfen Sie die Anzahl der Trennzeichen jeder Zeile und versuchen Sie es erneut!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
+                    throw new Exception("Keine Daten");
                     MessageBox.Show("Diese Datei enthält keine Daten!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }

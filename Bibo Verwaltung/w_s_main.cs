@@ -54,11 +54,18 @@ namespace Bibo_Verwaltung
         }
         private void Blur(int size)
         {
+            int curDPI = 0;
+
+            using (Graphics g = this.CreateGraphics())
+            {
+                curDPI = (int)g.DpiX;
+            }
             //var currentDPI = (int)Registry.GetValue("HKEY_CURRENT_USER\\Control Panel\\Desktop", "LogPixels", 96);
-            //double scale = 96 / (float)currentDPI+1;
+            //double scale = 96 / (float)currentDPI + 1;
+            double scale = 1 + (curDPI/ 96);
             Bitmap bmp = Screenshot.TakeSnapshot(this);
-            //Rectangle oldBounds = this.Bounds;
-            //Rectangle bounds = new Rectangle((int)((float)oldBounds.Left * scale), (int)((float)oldBounds.Top * scale), (int)((float)oldBounds.Width * scale), (int)((float)oldBounds.Height * scale));
+            Rectangle oldBounds = this.Bounds;
+            Rectangle bounds = new Rectangle((int)((float)oldBounds.Left * scale), (int)((float)oldBounds.Top * scale), (int)((float)oldBounds.Width * scale), (int)((float)oldBounds.Height * scale));
 
 
             //using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))

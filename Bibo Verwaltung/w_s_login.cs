@@ -77,16 +77,16 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            //if(metroProgressBar1.Value == 100)
-            //{
-            //    metroProgressBar1.Value = 0;
-            //}
-            //metroProgressBar1.Invoke((Action)delegate ()
-            //{
-            //    metroProgressBar1.PerformStep();
-            //});
-        }
+        //private void timer1_Tick(object sender, EventArgs e)
+        //{
+        //    //if (metroProgressBar1.Value == 100)
+        //    //{
+        //    //    metroProgressBar1.Value = 0;
+        //    //}
+        //    //metroProgressBar1.Invoke((Action)delegate ()
+        //    //{
+        //    //    metroProgressBar1.PerformStep();
+        //    //});
+        //}
     }
 }

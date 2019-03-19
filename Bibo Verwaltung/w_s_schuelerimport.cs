@@ -10,6 +10,7 @@ using System.Linq;
 using System.Media;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -36,6 +37,7 @@ namespace Bibo_Verwaltung
         /// Nummer der aktuellen Datei
         /// </summary>
         int fileNum = 0;
+        Schuelerimport schuelerImport = new Schuelerimport();
         List<string> files = new List<string>();
         List<string> filesShort = new List<string>();
         int errors = 0;
@@ -51,7 +53,6 @@ namespace Bibo_Verwaltung
             SetSlider();
             timer1.Start();
         }
-
         /// <summary>
         /// Umschaltung zwischen Importieren und Exportieren
         /// </summary>
@@ -74,8 +75,9 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// läd die entsprechenden Werte, die für das Importformat wichtig sind
         /// </summary>
-        private void getValues()
+        private void getValuesFromControls()
         {
+            
             trennError = false;
             qualiError = false;
             string feldtrenn = cb_FeldTrenn.Text;
@@ -111,78 +113,183 @@ namespace Bibo_Verwaltung
                 qualiError = true;
                 //MetroMessageBox.Show(this,"Der Textqualifizierer ist ungülig! Wählen Sie einen der gültigen Textqualifizierer des Auswahlmenüs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            schuelerImport.Separator = seperator;
+            schuelerImport.Textqualifizierer = feldquali;
+            schuelerImport.ColumnHeader = cb_ColHeader.Checked;
+            schuelerImport.LineNum = int.Parse(tb_lines.Text);
+            schuelerImport.Path = tb_aktuell.Text;
         }
-        
-        /// <summary>
-        /// Erstellt die Vorschau 
-        /// </summary>
-        /// <param name="file"></param>
-        private void createPreview(string file)
+        private void getValuesFromPreset()
         {
-            Cursor.Current = Cursors.WaitCursor;
-            Schuelerimport im = new Schuelerimport();
-            im.Path = file;
-            im.Separator = seperator;
-            im.Textqualifizierer = feldquali;
-            im.Datumstrennzeichen = dattrenn;
-            im.Zeittrennzeichen = zeittrenn;
-            im.Dezimaltrennzeichen = dezsym;
-            im.ColumnHeader = cb_ColHeader.Checked;
-            im.LineNum = 0;
-            try
+            Einstellung set = new Einstellung();
+            //sek1
+            string path = set.HomePath + "\\profil_" + filename + ".txt";
+            if (File.Exists(path))
             {
-                im.LineNum = int.Parse(tb_lines.Text);
-            }
-            catch
-            {
-                MetroMessageBox.Show(this,"Bitte geben Sie eine gültige Zahl in das Feld 'Obere Zeilen Entfernen' ein.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            im.FillGridViewRows(ref metroGrid_Vorschau);
-            metroGrid_Vorschau.SelectionMode = DataGridViewSelectionMode.CellSelect;
-
-            Cursor.Current = Cursors.Default;
-        }
-
-        bool trennError = false;
-        bool qualiError = false;
-
-        /// <summary>
-        /// Zeigt die Vorschau
-        /// </summary>
-        /// <param name="file"></param>
-        private void showPreview(string file)
-        {
-
-            if (File.Exists(file))
-            {
-                getValues();
-                if (trennError && !qualiError)
+                try
                 {
-                    MetroMessageBox.Show(this,"Das Feldtrennzeichen ist ungülig! Wählen Sie eines der gültigen Trennzeichen des Auswahlmenüs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    cb_FeldTrenn.Focus();
+                    removeAt.Clear();
+                    indexes.Clear();
+                    var lines = File.ReadAllLines(path);
+                    schuelerImport.Separator = lines[4][0];
+                    //cb_FeldTrenn.Text = lines[4];
+                    schuelerImport.Textqualifizierer = lines[7][0];
+                    //cb_TxtQuali.Text = lines[7];
+                    if (lines[10] == "True")
+                    {
+                        schuelerImport.ColumnHeader = true;
+                        //cb_ColHeader.Checked = true;
+                    }
+                    else
+                    {
+                        schuelerImport.ColumnHeader = false;
+                        //cb_ColHeader.Checked = false;
+                    }
+                    schuelerImport.LineNum = int.Parse(lines[13]);
+                    //tb_lines.Text = lines[13];
+                    bool first = true;
+                    for (int i = 16; i < lines.Length;)
+                    {
+                        if (!lines[i].Contains("--") && first)
+                        {
+                            removeAt.Add(int.Parse(lines[i]));
+                            i++;
+                        }
+                        else if (lines[i].Contains("--") && first)
+                        {
+                            first = false;
+                            i = i + 2;
+                        }
+                        if (!lines[i].Contains("--") && !first)
+                        {
+                            indexes.Add(int.Parse(lines[i]));
+                            i++;
+                        }
+                        else if (lines[i].Contains("--") && !first)
+                        {
+                            i = lines.Length;
+                        }
+                    }
+                    usePreset = true;
                 }
-                else if(!trennError && qualiError)
+                catch (IOException e)
                 {
-                    MetroMessageBox.Show(this,"Der Textqualifizierer ist ungülig! Wählen Sie einen der gültigen Textqualifizierer des Auswahlmenüs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    cb_TxtQuali.Focus();
-                }
-                else if(trennError && qualiError)
-                {
-                    MetroMessageBox.Show(this,"Der Textqualifizierer und das Feldtrennzeichen sind ungülig! Wählen Sie einen gültigen Eintrag im Auswahlmenü.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    cb_FeldTrenn.Focus();
-                }
-                else
-                {
-                    createPreview(file);
+                    throw new Exception("failed preset", e);
                 }
             }
             else
             {
-                MetroMessageBox.Show(this,"Der Pfad: " + files[0] + " ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw new Exception("no preset");
+
+            }
+        }
+
+        /// <summary>
+        /// Dieser DataTable wird mit den Vorschaudaten gefüllt, ohne Controls zu beeinträchtigen
+        /// </summary>
+        ////////////////////////////DataTable previewDT = new DataTable();
+
+        /// <summary>
+        /// Lädt DataTable (ohne Zugriff auf Controls) 
+        /// </summary>
+        /// <param name="file"></param>
+        private void fillPreviewDT(string file, ref DataTable privateDataTable, ref DataTable sortedDataTable)
+        {
+            Schuelerimport si = new Schuelerimport();
+            privateDataTable.Reset();
+            si.Path = file;
+            si.Textqualifizierer = schuelerImport.Textqualifizierer;
+            si.Separator = schuelerImport.Separator;
+            si.LineNum = schuelerImport.LineNum;
+            si.ColumnHeader = schuelerImport.ColumnHeader;
+            //try
+            //{
+                si.FillDataTable(ref privateDataTable);
+
+            //}
+            //catch(Exception ex)
+            //{
+            //    if (ex.Message.Contains("Problem bei Zeile"))
+            //    {
+            //        int errorcount = int.Parse(ex.Message.Substring(18));
+            //        MetroMessageBox.Show(this, String.Format("Es konnten '{0}' Zeilen aufgrund eines Formatierungsproblems nicht gelesen werden. Eventuell liegen Probleme in der Struktur der Quelldatei vor.", errorcount), "Fehler beim Einlesen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //    else if (ex.Message.Equals("Keine Daten", StringComparison.InvariantCultureIgnoreCase))
+            //    {
+            //        MetroMessageBox.Show(this, "Diese Datei enthält keine Daten!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //}
+            foreach (int i in removeAt)
+            {
+                privateDataTable.Columns.RemoveAt(i);
+            }
+            try
+            {
+                sortedDataTable.Reset();
+                if (usePreset)
+                {
+                    createDataTable(ref sortedDataTable, privateDataTable);
+                }
+                else
+                {
+                    createDataTableWithControls(ref sortedDataTable);
+                }
+            }
+            catch
+            {
+                throw new Exception("wrong preset");
+            }
+        }
+
+        /// <summary>
+        /// Zeigt Vorschau mit Zugriff auf Controls
+        /// </summary>
+        /// <param name="file"></param>
+        private void showPreviewControls(string file)
+        {
+            if (File.Exists(file))
+            {
+                getValuesFromControls();
+                if (trennError && !qualiError)
+                {
+                    MetroMessageBox.Show(this, "Das Feldtrennzeichen ist ungülig! Wählen Sie eines der gültigen Trennzeichen des Auswahlmenüs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    cb_FeldTrenn.Focus();
+                }
+                else if (!trennError && qualiError)
+                {
+                    MetroMessageBox.Show(this, "Der Textqualifizierer ist ungülig! Wählen Sie einen der gültigen Textqualifizierer des Auswahlmenüs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    cb_TxtQuali.Focus();
+                }
+                else if (trennError && qualiError)
+                {
+                    MetroMessageBox.Show(this, "Der Textqualifizierer und das Feldtrennzeichen sind ungülig! Wählen Sie einen gültigen Eintrag im Auswahlmenü.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    cb_FeldTrenn.Focus();
+                }
+                else
+                {
+                    Schuelerimport im = new Schuelerimport();
+                    im.Path = schuelerImport.Path;
+                    im.Separator = schuelerImport.Separator;
+                    im.Textqualifizierer = schuelerImport.Textqualifizierer;
+                    im.ColumnHeader = schuelerImport.ColumnHeader;
+                    im.LineNum = schuelerImport.LineNum;
+                    im.FillGridViewRows(ref metroGrid_Vorschau);
+                    metroGrid_Vorschau.SelectionMode = DataGridViewSelectionMode.CellSelect;
+                    //fillPreviewDT(file);
+                    //metroGrid_Vorschau.DataSource = null;
+                    //metroGrid_Vorschau.DataSource = newDT;
+                }
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "Der Pfad: " + files[0] + " ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 metroGrid_Vorschau.DataSource = null;
                 tb_path.Focus();
             }
         }
+
+        bool trennError = false;
+        bool qualiError = false;
 
         
         #endregion
@@ -277,7 +384,7 @@ namespace Bibo_Verwaltung
             try
             {
                 //Vorschau ohne Vorlage
-                showPreview(tb_aktuell.Text);
+                showPreviewControls(tb_aktuell.Text);
             }
             catch (IOException)
             {
@@ -363,12 +470,31 @@ namespace Bibo_Verwaltung
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void bt_Import_Click(object sender, EventArgs e)
+        private void bt_usePreset_Click(object sender, EventArgs e)
         {
             try
             {
-                loadProfile();
-                usePreset = true;
+                DataTable privateDT = new DataTable();
+                DataTable sortedDT = new DataTable();
+                getValuesFromPreset();
+                Schuelerimport im = new Schuelerimport();
+                im.Path = tb_aktuell.Text;
+                im.Separator = schuelerImport.Separator;
+                cb_FeldTrenn.Text = schuelerImport.Separator.ToString();
+                im.Textqualifizierer = schuelerImport.Textqualifizierer;
+                cb_TxtQuali.Text = schuelerImport.Textqualifizierer.ToString();
+                im.ColumnHeader = schuelerImport.ColumnHeader;
+                cb_ColHeader.Checked = schuelerImport.ColumnHeader;
+                im.LineNum = schuelerImport.LineNum;
+                tb_lines.Text = schuelerImport.LineNum.ToString();
+                //im.FillGridViewRows(ref metroGrid_Vorschau);
+                //metroGrid_Vorschau.SelectionMode = DataGridViewSelectionMode.CellSelect;
+                fillPreviewDT(tb_aktuell.Text, ref privateDT, ref sortedDT);
+                metroGrid_Vorschau.DataSource = null;
+                metroGrid_Vorschau.DataSource = sortedDT;
+                metroGrid_Vorschau.Sort(metroGrid_Vorschau.Columns[0], ListSortDirection.Descending);
+                metroGrid_Vorschau.Sort(metroGrid_Vorschau.Columns[0], ListSortDirection.Ascending);
+                int test = metroGrid_Vorschau.Rows.Count;
             }
             catch (Exception ex)
             {
@@ -376,14 +502,22 @@ namespace Bibo_Verwaltung
                 {
                     MetroMessageBox.Show(this,"Der Zugriff auf die Datei wurde behindert. Bitte schließen Sie Anwendungen, in denen Sie diese ggf. geöffnet haben oder wenden Sie sich an den Administrator.", "Zugriff verweigert", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else if (ex.Message.Equals("wrong preset", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    MetroMessageBox.Show(this,"Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt.", "Fehler bei Vorlage", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                }
                 else if (ex.Message.Equals("no preset", StringComparison.InvariantCultureIgnoreCase))
                 {
                     MetroMessageBox.Show(this,"Es ist noch keine Vorlage für " + filename + " vorhanden. Führen Sie bitte einen entsprechenden Import manuell aus, um eine Vorlage zu erstellen.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (ex.Message.Contains("Problem bei Zeile"))
+                {
+                    int errorcount = int.Parse(ex.Message.Substring(18));
+                    MetroMessageBox.Show(this, String.Format("Es konnten '{0}' Zeilen aufgrund eines Formatierungsproblems nicht gelesen werden. Eventuell liegen Probleme in der Struktur der Quelldatei vor.", errorcount), "Fehler beim Einlesen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (ex.Message.Equals("Keine Daten", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    MetroMessageBox.Show(this, "Diese Datei enthält keine Daten!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
@@ -396,56 +530,70 @@ namespace Bibo_Verwaltung
         /// <param name="e"></param>
         private void bt_saveProfile_Click(object sender, EventArgs e)
         {
+            DataTable newDT = new DataTable();
             DialogResult result = MetroMessageBox.Show(this,"Wollen Sie ihre Änderungen an der Datenstruktur für " + filename + " wirklich in einer Vorlagedatei speichern?", "Änderungen speichern?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if(result == DialogResult.Yes)
             {
-                DataTable dt = new DataTable();
-                createNewDT(dt, false);
+                //DataTable dt = new DataTable();
+                newDT.Reset();
+                //createNewDT(dt, false);
+                createDataTableWithControls(ref newDT);
                 saveProfile();
+                MetroMessageBox.Show(this, "Die Vorlage wurde erfolgreich gespeichert!", "Speichern erfolgreich!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 usePreset = true;
             }
         }
         #endregion
 
 
-        DataTable newDT = new DataTable();
+
         List<int> indexes = new List<int>();
         /// <summary>
-        /// Erstellt einen neuen DataTable mit den Vorschaudaten
+        /// Erstellt DataTable nach Preset ohne Zugriff auf Controls
         /// </summary>
         /// <param name="dt"></param>
-        /// <param name="usePreset"></param>
-        private void createNewDT(DataTable dt, bool usePreset)
+        private void createDataTable(ref DataTable dt, DataTable previewDataTable)
         {
-            if (!usePreset)
+            foreach(int i in indexes)
             {
-                int y = 0;
-                for (int i = 0; i < metroGrid_Vorschau.Columns.Count;)
-                {
-                    int test = metroGrid_Vorschau.Columns[i].DisplayIndex;
-                    if (test == y)
-                    {
-                        dt.Columns.Add(metroGrid_Vorschau.Columns[i].Name);
-                        indexes.Add(i);
-                        y++;
-                        i = 0;
-                    }
-                    else
-                    {
-                        i++;
-                    }
-
-                }
+                dt.Columns.Add(previewDataTable.Columns[i].ColumnName);
             }
-            else
+            foreach(DataRow row in previewDataTable.Rows)
             {
-                foreach(int i in indexes)
+                DataRow dr = dt.NewRow();
+                for(int i = 0; i < previewDataTable.Columns.Count; i++)
+                {
+                    dr[i] = row[indexes[i]];
+                }
+                dt.Rows.Add(dr);
+            }
+        }
+
+        /// <summary>
+        /// Erstellt DataTable mit Zugriff auf Controls, ohne Preset
+        /// </summary>
+        /// <param name="dt"></param>
+        private void createDataTableWithControls(ref DataTable dt)
+        {
+            indexes.Clear();
+            dt.Reset();
+            int y = 0;
+            for (int i = 0; i < metroGrid_Vorschau.Columns.Count;)
+            {
+                int test = metroGrid_Vorschau.Columns[i].DisplayIndex;
+                if (test == y)
                 {
                     dt.Columns.Add(metroGrid_Vorschau.Columns[i].Name);
-
+                    indexes.Add(i);
+                    y++;
+                    i = 0;
                 }
+                else
+                {
+                    i++;
+                }
+
             }
-            
             foreach (DataGridViewRow row in metroGrid_Vorschau.Rows)
             {
                 DataRow dr = dt.NewRow();
@@ -456,65 +604,68 @@ namespace Bibo_Verwaltung
                 }
                 dt.Rows.Add(dr);
             }
-            newDT = dt;
         }
 
         /// <summary>
-        /// Klick auf Import-Alles-Button
+        /// Erstellt einen neuen DataTable mit den Vorschaudaten
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void bt_accept_Click(object sender, EventArgs e)
-        {
-            if (usePreset)
-            {
-                StartImport(true, false);
-            }
-            else
-            {
-                if (metroGrid_Vorschau.Rows.Count == 0)
-                {
-                    DialogResult result = MetroMessageBox.Show(this,"Soll die Vorlage für '" + filename + "' zum Importieren der Daten genutzt werden? Falls Sie dies nicht wünschen, müssen Sie die zu importierenden Daten manuell anpassen.", "Vorlage verwenden?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (result == DialogResult.Yes)
-                    {
-                        try
-                        {
-                            StartImport(true, false);
-                            usePreset = true;
-                        }
-                        catch
-                        {
-                            MetroMessageBox.Show(this,"Es gab einen Fehler bei dem Import. Bitte versuchen Sie es erneut und passen Sie ggf. Ihre Einstellungen an.", "Import fehlgeschlagen", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-                else
-                {
-                    DialogResult result = MetroMessageBox.Show(this,"Soll die von Ihnen angeordnete Datenstruktur für den Import von '" + filename + "' genutzt werden? Falls nicht, ändern Sie bitte diese oder laden Sie die Daten mithilfe der Vorlage.", "Importieren?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (result == DialogResult.Yes)
-                    {
-                        try
-                        {
-                            StartImport(false, false);
-                        }
-                        catch
-                        {
-                            MetroMessageBox.Show(this,"Es gab einen Fehler bei dem Import. Bitte versuchen Sie es erneut und passen Sie ggf. Ihre Einstellungen an.", "Import fehlgeschlagen", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        usePreset = false;
-                    }
-                }
-            }
+        /// <param name="dt"></param>
+        /// <param name="usePreset"></param>
+        //private void createNewDT(DataTable dt, bool usePreset)
+        //{
+        //    if (!usePreset)
+        //    {
+        //        int y = 0;
+        //        for (int i = 0; i < metroGrid_Vorschau.Columns.Count;)
+        //        {
+        //            int test = metroGrid_Vorschau.Columns[i].DisplayIndex;
+        //            if (test == y)
+        //            {
+        //                dt.Columns.Add(metroGrid_Vorschau.Columns[i].Name);
+        //                indexes.Add(i);
+        //                y++;
+        //                i = 0;
+        //            }
+        //            else
+        //            {
+        //                i++;
+        //            }
+
+        //        }
+        //    }
+        //    else
+        //    {
+        //        foreach(int i in indexes)
+        //        {
+        //            dt.Columns.Add(metroGrid_Vorschau.Columns[i].Name);
+
+        //        }
+        //    }
             
-        }
+        //    foreach (DataGridViewRow row in metroGrid_Vorschau.Rows)
+        //    {
+        //        DataRow dr = dt.NewRow();
+        //        for (int i = 0; i < row.Cells.Count; i++)
+        //        {
+        //            DataGridViewCell cell = row.Cells[indexes[i]];
+        //            dr[i] = cell.Value;
+        //        }
+        //        dt.Rows.Add(dr);
+        //    }
+        //    newDT = dt;
+        //}
+
+
         /// <summary>
         /// Inhalt der Error-Nachricht
         /// </summary>
         string errorMessage = "";
+
         /// <summary>
         /// Alle aufgetretene Errors
         /// </summary>
         List<string> errorMessages = new List<string>();
+
         /// <summary>
         /// Führt den Import aus
         /// </summary>
@@ -522,52 +673,48 @@ namespace Bibo_Verwaltung
         /// <param name="withPreset"></param>
         private void DoImport(string file)
         {
-            tb_aktuell.Text = file;
-            if (usePreset)
+            DataTable privateDT = new DataTable();
+            DataTable sortedDT = new DataTable();
+            bool errorHappened = false;
+            try
             {
-                try
-                {
-                    loadProfile();
-                    filesDone++;
-                }
-                catch (Exception ex)
-                {
-                    if (ex.Message.Equals("failed preset", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        errors++;
-                        errorMessage = String.Format("Der Zugriff auf die Datei wurde behindert. Bitte schließen Sie Anwendungen, in denen Sie diese ggf. geöffnet haben oder wenden Sie sich an den Administrator (Datei '{0}' von '{1}').", fileNum, filesTotal);
-                        //MetroMessageBox.Show(this,errorMessage, "Zugriff verweigert", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else if (ex.Message.Equals("wrong preset", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        errors++;
-                        errorMessage = String.Format("Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt (Datei '{0}' von '{1}').", fileNum, filesTotal);
-                        //MetroMessageBox.Show(this,errorMessage, "Fehler bei Vorlage", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    }
-                    else if (ex.Message.Equals("no preset", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        errorMessage = String.Format("Es ist noch keine Vorlage für " + filename + " vorhanden. Führen Sie bitte einen entsprechenden Import manuell aus, um eine Vorlage zu erstellen (Datei '{0}' von '{1}').", fileNum, filesTotal);
-                        errors++;
-                        //MetroMessageBox.Show(this,errorMessage, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        errors++;
-                        errorMessage = String.Format("Fehler bei der Anwendung der Vorlage (Datei '{0}' von '{1}').", fileNum, filesTotal);
-                        //MetroMessageBox.Show(this, errorMessage, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    errorMessages.Add(errorMessage);
-                }
-
+                sortedDT.Reset();
+                privateDT.Reset();
+                fillPreviewDT(file, ref privateDT, ref sortedDT);
             }
-            else
+            catch(Exception ex)
             {
-                createNewDT(newDT, usePreset);
+                if(ex.Message.Equals("wrong preset", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    errorHappened = true;
+                    errors++;
+                    errorMessage = String.Format("Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt. \n(Datei '{0}' von '{1}', Bezeichnung: '{2}').\n", fileNum, filesTotal,file);
+                }
+                else if (ex.Message.Contains("Problem bei Zeile"))
+                {
+                    errorHappened = true;
+                    errors++;
+                    int errorcount = int.Parse(ex.Message.Substring(18));
+                    errorMessage = String.Format("Es konnten '{0}' Zeilen aufgrund eines Formatierungsproblems nicht gelesen werden. Eventuell liegen Probleme in der Struktur der Quelldatei vor. \n(Datei '{1}' von '{2}', Bezeichnung: '{3}').\n", errorcount, fileNum, filesTotal, file);
+                }
+                else if (ex.Message.Equals("Keine Daten", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    errorHappened = true;
+                    errors++;
+                    errorMessage = String.Format("Die Datei enthält keine Daten! \n(Datei '{0}' von '{1}', Bezeichnung: '{2}').\n", fileNum, filesTotal, file);
+                }
+                else
+                {
+                    errorHappened = true;
+                    errors++;
+                    errorMessage = String.Format("Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt. \n(Datei '{0}' von '{1}', Bezeichnung: '{2}').\n",fileNum, filesTotal, file);
+
+                }
+                errorMessages.Add(errorMessage);
             }
-            if(errors == 0)
+            if(errorHappened == false)
             {
-                foreach (DataRow row in newDT.Rows)
+                foreach (DataRow row in sortedDT.Rows)
                 {
                     if (target.Equals("t_s_schueler"))
                     {
@@ -614,7 +761,7 @@ namespace Bibo_Verwaltung
                         else if (rb_schueler2.Checked)
                         {
                             //SEK2 Import Schüler
-                            for (int i = 4; i < newDT.Columns.Count; i++)
+                            for (int i = 4; i < sortedDT.Columns.Count; i++)
                             {
                                 string fach = row[i].ToString();
                                 if (!fach.Equals(""))
@@ -650,29 +797,41 @@ namespace Bibo_Verwaltung
                     }
 
                 }
+                filesDone++;
             }
-            
+
+
         }
         /// <summary>
         /// Foreach-Schleife
         /// </summary>
         private void ForeachImport()
         {
-            fileNum = 0;
-            foreach(string file in files)
-            {
-                fileNum++;
-                DoImport(file);
-            }
-            //List<Task> tasks = new List<Task>();
+            fileNum = 1;
             //foreach (string file in files)
             //{
-            //    tasks.Add(Task.Run(()=> DoImport(file)));
             //    fileNum++;
+            //    DoImport(file);
+            //    progressBar1.PerformStep();
             //}
-            //Task.WaitAll(tasks.ToArray());
-            //foreach (Task task in tasks) task.Dispose();
-            //tasks.Clear();
+            //System.Timers.Timer timer = new System.Timers.Timer(100);
+            //timer.Enabled = true;
+            //timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
+            //timer.Start();
+            List<Task> tasks = new List<Task>();
+            foreach (string file in files)
+            {
+                tasks.Add(Task.Run(() => 
+                {
+                    DoImport(file);
+                    fileNum++;
+                }));
+
+            }
+            Task.WaitAll(tasks.ToArray());
+            foreach (Task task in tasks) task.Dispose();
+            tasks.Clear();
+            //timer.Stop();
         }
 
         /// <summary>
@@ -682,35 +841,86 @@ namespace Bibo_Verwaltung
         /// <param name="singleImport"></param>
         private void StartImport(bool withPreset, bool singleImport)
         {
+            string file = "";
             errors = 0;
             errorMessage = "";
             errorMessages.Clear();
-            progressBar1.Minimum = 0;
-            progressBar1.Maximum = 100;
-            progressBar1.Value = 0;
             errors = 0;
             filesTotal = files.Count;
             filesDone = 0;
-            usePreset = withPreset;
-            if (!singleImport)
+            progressBar1.Minimum = 0;
+            progressBar1.Maximum = filesTotal;
+            progressBar1.Value = 0;
+            progressBar1.Step = 1;
+            if (singleImport)
             {
-                ForeachImport();
+                file = files[slider_preview.Value - 1];
             }
-            else
+            try
             {
-                string file = files[slider_preview.Value - 1];
-                ForeachImport();
-                progressBar1.Value = (filesDone * 100) / files.Count;
+                if (usePreset)
+                {
+                    try
+                    {
+                        getValuesFromPreset();
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message.Equals("failed preset", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            throw new Exception("failed preset");
+                        }
+                        else if (ex.Message.Equals("no preset", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            throw new Exception("no preset");
+                        }
+                        else
+                        {
+                            throw new Exception("else");
+                        }
+                    }
+                }
+                else
+                {
+                    getValuesFromControls();
+                }
+                fileNum = 0;
+                if (!singleImport) ForeachImport();
+                else
+                {
+                    fileNum++;
+                    DoImport(file);
+                }
+                //progressBar1.Value = (filesDone * 100) / files.Count;
             }
-
+            catch (Exception ex)
+            {
+                if(ex.Message.Equals("no preset", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    errorMessage = "Es ist noch keine entsprechende Vorlage vorhanden. Führen Sie bitte einen entsprechenden Import manuell aus, um eine Vorlage zu erstellen.\n";
+                    errors++;
+                }
+                else if(ex.Message.Equals("failed preset", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    errorMessage = "Der Zugriff auf die Datei wurde behindert. Bitte schließen Sie Anwendungen, in denen Sie diese ggf. geöffnet haben oder wenden Sie sich an den Administrator.\n";
+                    errors++;
+                }
+                else
+                {
+                    errorMessage = "Es ist ein Fehler beim Laden der Vorlagedatei aufgetreten.\n";
+                    errors++;
+                }
+                errorMessages.Add(errorMessage);
+            }
             if (errorMessages.Count > 0)
             {
+                usePreset = false;
                 DialogResult result = MetroMessageBox.Show(this, String.Format("Es wurden '{0}' von '{1}' Dateien importiert und es sind '{2}' Fehler aufgetreten. Möchten Sie diese einsehen?",filesDone,filesTotal,errors), "Fehler beim Importvorgang.", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                 if (result == DialogResult.Yes)
                 {
                     for (int i = 0; i < errorMessages.Count; i++)
                     {
-                        DialogResult dr = MetroMessageBox.Show(this, errorMessages[i] + " Wählen Sie 'Ja' für den nächsten Fehler oder 'Nein' zum Beenden.", String.Format("Fehler '{0}' von '{1}'", i+1, errorMessages.Count.ToString()), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                        DialogResult dr = MetroMessageBox.Show(this, errorMessages[i] + "Wählen Sie 'Ja' für den nächsten Fehler oder 'Nein' zum Beenden.", String.Format("Fehler '{0}' von '{1}'", i+1, errorMessages.Count.ToString()), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                         if (dr == DialogResult.Yes)
                         {
 
@@ -726,15 +936,16 @@ namespace Bibo_Verwaltung
             {
                 if(filesDone == 1)
                 {
-                    DialogResult dr = MetroMessageBox.Show(this, "Die Datei wurde erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (dr == DialogResult.Yes)
-                    {
-                        RemoveFromImportList();
-                    }
-                    else
-                    {
-                        this.Close();
-                    }
+                        DialogResult dr = MetroMessageBox.Show(this, "Die Datei wurde erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dr == DialogResult.Yes)
+                        {
+                            RemoveFromImportList();
+                        }
+                        else
+                        {
+                            this.Close();
+                        }
+                    
                 }
                 else if(filesDone > 1)
                 {
@@ -749,43 +960,6 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
-            //else if(filesTotal == 1 && filesDone == 0)
-            //{
-            //    DialogResult dr = MetroMessageBox.Show(this,"Die Datei wurde nicht importiert. Möchten Sie es erneut versuchen?", "Import fehlerhaft", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-            //    if (dr == DialogResult.Yes)
-            //    {
-            //        clearForm();
-            //    }
-            //    else
-            //    {
-            //        this.Close();
-            //    }
-            //}
-            //else if(filesTotal > 1 && filesDone < filesTotal)
-            //{
-            //    DialogResult dr = MetroMessageBox.Show(this, String.Format("Es wurden '{0}' von '{1}' Dateien importiert. Möchten Sie es erneut versuchen?",filesDone.ToString(),filesTotal.ToString()), "Import fehlerhaft", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-            //    if (dr == DialogResult.Yes)
-            //    {
-            //        clearForm();
-            //    }
-            //    else
-            //    {
-            //        this.Close();
-            //    }
-            //}
-            //else
-            //{
-            //    DialogResult dr = MetroMessageBox.Show(this,"Die Datei wurde erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //    if (dr == DialogResult.Yes)
-            //    {
-            //        RemoveFromImportList();
-            //    }
-            //    else
-            //    {
-            //        this.Close();
-            //    }
-            //}
-
         }
         List<int> removeAt = new List<int>();
 
@@ -811,92 +985,12 @@ namespace Bibo_Verwaltung
             }
             
         }
-
-        //TODO
         /// <summary>
         /// Läd das Profil
         /// </summary>
-        private void loadProfile()
+        private void testestest()
         {
-            Einstellung set = new Einstellung();
-            //sek1
-            string path = set.HomePath + "\\profil_" + filename + ".txt";
-            if (File.Exists(path))
-            {
-                
-                try
-                {
-                    Schuelerimport si = new Schuelerimport();
-                    removeAt.Clear();
-                    indexes.Clear();
-                    var lines = File.ReadAllLines(path);
-                    //si.Separator = lines[4][0];
-                    cb_FeldTrenn.Text = lines[4];
-                    //si.Textqualifizierer = lines[7][0];
-                    cb_TxtQuali.Text = lines[7];
-                    if (lines[10] == "True")
-                    {
-                        //si.ColumnHeader = true;
-                        cb_ColHeader.Checked = true;
-                    }
-                    else
-                    {
-                        //si.ColumnHeader = false;
-                        cb_ColHeader.Checked = false;
-                    }
-                    //si.LineNum = int.Parse(lines[13]);
-                    tb_lines.Text = lines[13];
-                    bool first = true;
-                    for (int i = 16; i < lines.Length;)
-                    {
-                        if (!lines[i].Contains("--") && first)
-                        {
-                            removeAt.Add(int.Parse(lines[i]));
-                            i++;
-                        }
-                        else if (lines[i].Contains("--") && first)
-                        {
-                            first = false;
-                            i = i + 2;
-                        }
-                        if (!lines[i].Contains("--") && !first)
-                        {
-                            indexes.Add(int.Parse(lines[i]));
-                            i++;
-                        }
-                        else if (lines[i].Contains("--") && !first)
-                        {
-                            i = lines.Length;
-                        }
-                    }
-                    showPreview(tb_aktuell.Text);
-                }
-                catch (IOException e)
-                {
-                    throw new Exception("failed preset", e);
-                }
-                Cursor.Current = Cursors.Default;
-                foreach (int i in removeAt)
-                {
-                    metroGrid_Vorschau.Columns.RemoveAt(i);
-                }
-                try
-                {
-                    DataTable dt = new DataTable();
-                    createNewDT(dt, true);
-                    metroGrid_Vorschau.DataSource = null;
-                    metroGrid_Vorschau.DataSource = dt;
-                }
-                catch(Exception e)
-                {
-                    throw new Exception("wrong preset", e);
-                }
-            }
-            else
-            {
-                throw new Exception("no preset");
-
-            }
+            
         }
 
         /// <summary>
@@ -959,13 +1053,19 @@ namespace Bibo_Verwaltung
         {
             if (target.Equals("t_s_schueler"))
             {
-                this.Text = "Schülerimport";
+                this.Text = "Import von Schülern";
                 rb_schueler1.Checked = true;
+                rb_faecher.Enabled = false;
+                rb_schueler1.Enabled = true;
+                rb_schueler2.Enabled = true;
             }
             else if (target.Equals("t_s_faecher"))
             {
-                this.Text = "Fächerimport";
+                this.Text = "Import von Fächern";
                 rb_faecher.Checked = true;
+                rb_faecher.Enabled = true;
+                rb_schueler1.Enabled = false;
+                rb_schueler2.Enabled = false;
             }
         }
         /// <summary>
@@ -1036,10 +1136,13 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void SetSlider()
         {
+            slider_preview.SmallChange = 1;
+            slider_preview.LargeChange = 1;
             if (files.Count == 0)
             {
                 slider_preview.Minimum = 0;
                 slider_preview.Maximum = 0;
+                slider_preview.Value = 0;
                 bt_right.Enabled = false;
                 bt_left.Enabled = false;
                 tb_min.Text = "-";
@@ -1103,31 +1206,19 @@ namespace Bibo_Verwaltung
             RemoveFromImportList();
         }
 
-        //private void slider_preview_ValueChanged(object sender, EventArgs e)
-        //{
-        //    tb_min.Text = slider_preview.Value.ToString();
-        //    tb_max.Text = slider_preview.Maximum.ToString();
-        //    tb_aktuell.Text = files[slider_preview.Value - 1];
-        //    if (usePreset)
-        //    {
-        //        try
-        //        {
-        //            loadProfile();
-        //        }
-        //        catch
-        //        {
-        //            MetroMessageBox.Show(this,"Beim Laden der Vorschau ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //    }
-        //}
-
-        private void bt_close_Click(object sender, EventArgs e)
+        private void scrollbar_ValueChanged(object sender, EventArgs e)
         {
-            this.Close();
+            if (slider_preview.Value != 0)
+            {
+
+                slider_preview_ValueChanged();
+            }
         }
 
-        private void slider_preview_ValueChanged(object sender, int newValue)
+        private void slider_preview_ValueChanged()
         {
+            DataTable previewDT = new DataTable();
+            DataTable sortedDT = new DataTable();
             tb_min.Text = slider_preview.Value.ToString();
             tb_max.Text = slider_preview.Maximum.ToString();
             tb_aktuell.Text = files[slider_preview.Value - 1];
@@ -1135,12 +1226,36 @@ namespace Bibo_Verwaltung
             {
                 try
                 {
-                    loadProfile();
+                    fillPreviewDT(tb_aktuell.Text,ref previewDT,ref sortedDT);
+                    metroGrid_Vorschau.DataSource = sortedDT;
+                    metroGrid_Vorschau.Sort(metroGrid_Vorschau.Columns[0], ListSortDirection.Descending);
+                    metroGrid_Vorschau.Sort(metroGrid_Vorschau.Columns[0], ListSortDirection.Ascending);
                 }
-                catch
+                catch(Exception ex)
                 {
-                    MetroMessageBox.Show(this,"Beim Laden der Vorschau ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (ex.Message.Equals("failed preset", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        MetroMessageBox.Show(this, "Der Zugriff auf die Datei wurde behindert. Bitte schließen Sie Anwendungen, in denen Sie diese ggf. geöffnet haben oder wenden Sie sich an den Administrator.", "Zugriff verweigert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (ex.Message.Equals("no preset", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        MetroMessageBox.Show(this, "Es ist noch keine Vorlage für " + filename + " vorhanden. Führen Sie bitte einen entsprechenden Import manuell aus, um eine Vorlage zu erstellen.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else if (ex.Message.Contains("Problem bei Zeile"))
+                    {
+                        int errorcount = int.Parse(ex.Message.Substring(18));
+                        MetroMessageBox.Show(this, String.Format("Es konnten '{0}' Zeilen aufgrund eines Formatierungsproblems nicht gelesen werden. Eventuell liegen Probleme in der Struktur der Quelldatei vor.", errorcount), "Fehler beim Einlesen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (ex.Message.Equals("Keine Daten", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        MetroMessageBox.Show(this, "Diese Datei enthält keine Daten!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MetroMessageBox.Show(this, "Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
+
             }
         }
 
@@ -1177,52 +1292,96 @@ namespace Bibo_Verwaltung
             });
         }
 
-        private void bt_importSingle_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Startet Importvorgang, fragt nach Verwendung der Vorlage
+        /// </summary>
+        /// <param name="singleimport"></param>
+        private void ImportButtonClick(bool singleimport)
         {
             if (usePreset)
             {
-                StartImport(true, true);
+                StartImport(usePreset, singleimport);
             }
             else
             {
                 if (metroGrid_Vorschau.Rows.Count == 0)
                 {
-                    DialogResult result = MetroMessageBox.Show(this,"Soll die Vorlage für '" + filename + "' zum Importieren der Daten genutzt werden? Falls Sie dies nicht wünschen, müssen Sie die zu importierenden Daten manuell anpassen.", "Vorlage verwenden?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult result = MetroMessageBox.Show(this, "Soll die Vorlage für '" + filename + "' zum Importieren der Daten genutzt werden? Falls Sie dies nicht wünschen, müssen Sie die zu importierenden Daten manuell anpassen.", "Vorlage verwenden?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
                         try
                         {
-                            StartImport(true, true);
                             usePreset = true;
+                            StartImport(usePreset, singleimport);
                         }
                         catch
                         {
-                            MetroMessageBox.Show(this,"Es gab einen Fehler bei dem Import. Bitte versuchen Sie es erneut und passen Sie ggf. Ihre Einstellungen an.", "Import fehlgeschlagen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MetroMessageBox.Show(this, "Es gab einen Fehler bei dem Import. Bitte versuchen Sie es erneut und passen Sie ggf. Ihre Einstellungen an.", "Import fehlgeschlagen", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
                 else
                 {
-                    DialogResult result = MetroMessageBox.Show(this,"Soll die von Ihnen angeordnete Datenstruktur für den Import von '" + filename + "' genutzt werden? Falls nicht, ändern Sie bitte diese oder laden Sie die Daten mithilfe der Vorlage.", "Importieren?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult result = MetroMessageBox.Show(this, "Soll die von Ihnen angeordnete Datenstruktur für den Import von '" + filename + "' genutzt werden? Falls nicht, ändern Sie bitte diese oder laden Sie die Daten mithilfe der Vorlage.", "Importieren?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
                         try
                         {
-                            StartImport(false, true);
+                            usePreset = false;
+                            StartImport(usePreset, singleimport);
                         }
                         catch
                         {
-                            MetroMessageBox.Show(this,"Es gab einen Fehler bei dem Import. Bitte versuchen Sie es erneut und passen Sie ggf. Ihre Einstellungen an.", "Import fehlgeschlagen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MetroMessageBox.Show(this, "Es gab einen Fehler bei dem Import. Bitte versuchen Sie es erneut und passen Sie ggf. Ihre Einstellungen an.", "Import fehlgeschlagen", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-                        usePreset = false;
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// Klick auf Single-Import Button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bt_importSingle_Click(object sender, EventArgs e)
+        {
+            ImportButtonClick(true);
+        }
+
+        /// <summary>
+        /// Klick auf Import-Alles-Button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bt_accept_Click(object sender, EventArgs e)
+        {
+            ImportButtonClick(false);
+
+        }
+
         private void bt_Schliessen_Click(object sender, EventArgs e)
         {
-            this.Close();
+            //this.Close();
+        }
+
+        private void timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            progressBar1.Invoke((Action)delegate ()
+            {
+                progressBar1.Value = filesDone;
+            });
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            tb_aktuell.Text = "";
+            tb_path.Text = "";
+            tb_lines.Text = "0";
+            cb_ColHeader.Checked = false;
+            cb_FeldTrenn.Text = "";
+            cb_TxtQuali.Text = "";
+            metroGrid_Vorschau.DataSource = null;
         }
     }
 }
