@@ -808,29 +808,29 @@ namespace Bibo_Verwaltung
         private void ForeachImport()
         {
             fileNum = 1;
-            //foreach (string file in files)
-            //{
-            //    fileNum++;
-            //    DoImport(file);
-            //    progressBar1.PerformStep();
-            //}
+            foreach (string file in files)
+            {
+                fileNum++;
+                DoImport(file);
+                progressBar1.PerformStep();
+            }
             //System.Timers.Timer timer = new System.Timers.Timer(100);
             //timer.Enabled = true;
             //timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             //timer.Start();
-            List<Task> tasks = new List<Task>();
-            foreach (string file in files)
-            {
-                tasks.Add(Task.Run(() => 
-                {
-                    DoImport(file);
-                    fileNum++;
-                }));
+            ////List<Task> tasks = new List<Task>();
+            ////foreach (string file in files)
+            ////{
+            ////    tasks.Add(Task.Run(() => 
+            ////    {
+            ////        DoImport(file);
+            ////        fileNum++;
+            ////    }));
 
-            }
-            Task.WaitAll(tasks.ToArray());
-            foreach (Task task in tasks) task.Dispose();
-            tasks.Clear();
+            ////}
+            ////Task.WaitAll(tasks.ToArray());
+            ////foreach (Task task in tasks) task.Dispose();
+            ////tasks.Clear();
             //timer.Stop();
         }
 
@@ -1362,7 +1362,8 @@ namespace Bibo_Verwaltung
 
         private void bt_Schliessen_Click(object sender, EventArgs e)
         {
-            //this.Close();
+            timer1.Stop();
+            this.Close();
         }
 
         private void timer_Elapsed(object sender, ElapsedEventArgs e)

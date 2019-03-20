@@ -87,6 +87,7 @@
             this.rb_schueler = new MetroFramework.Controls.MetroRadioButton();
             this.rb_andere = new MetroFramework.Controls.MetroRadioButton();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
+            this.bt_cleanup = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
             this.cm_kunde.SuspendLayout();
             this.metroPanel1.SuspendLayout();
@@ -688,10 +689,10 @@
             this.bt_OK.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_OK.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_OK, "Schließen sie das akuelle Fenster.");
-            this.bt_OK.Location = new System.Drawing.Point(828, 703);
+            this.bt_OK.Location = new System.Drawing.Point(914, 703);
             this.bt_OK.Name = "bt_OK";
             this.helpProvider.SetShowHelp(this.bt_OK, true);
-            this.bt_OK.Size = new System.Drawing.Size(349, 24);
+            this.bt_OK.Size = new System.Drawing.Size(263, 24);
             this.bt_OK.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_OK.TabIndex = 15;
             this.bt_OK.Text = "Schließen";
@@ -804,9 +805,9 @@
             // 
             this.bt_ImEx.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_ImEx.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_ImEx.Location = new System.Drawing.Point(473, 703);
+            this.bt_ImEx.Location = new System.Drawing.Point(629, 703);
             this.bt_ImEx.Name = "bt_ImEx";
-            this.bt_ImEx.Size = new System.Drawing.Size(349, 24);
+            this.bt_ImEx.Size = new System.Drawing.Size(263, 24);
             this.bt_ImEx.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_ImEx.TabIndex = 42;
             this.bt_ImEx.Text = "Importieren";
@@ -1080,6 +1081,19 @@
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
             // 
+            // bt_cleanup
+            // 
+            this.bt_cleanup.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_cleanup.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.bt_cleanup.Location = new System.Drawing.Point(342, 703);
+            this.bt_cleanup.Name = "bt_cleanup";
+            this.bt_cleanup.Size = new System.Drawing.Size(263, 24);
+            this.bt_cleanup.Style = MetroFramework.MetroColorStyle.Teal;
+            this.bt_cleanup.TabIndex = 42;
+            this.bt_cleanup.Text = "Schülerdaten-Cleanup";
+            this.bt_cleanup.UseSelectable = true;
+            this.bt_cleanup.Click += new System.EventHandler(this.bt_cleanup_Click);
+            // 
             // w_s_Kunden
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1087,6 +1101,7 @@
             this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.metroLabel1);
+            this.Controls.Add(this.bt_cleanup);
             this.Controls.Add(this.bt_ImEx);
             this.Controls.Add(this.bt_OK);
             this.Controls.Add(this.rb_KundeLoeschen);
@@ -1164,5 +1179,6 @@
         private MetroFramework.Controls.MetroContextMenu cm_kunde;
         private System.Windows.Forms.ToolStripMenuItem kundeBearbeitenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kundeEntfernenToolStripMenuItem;
+        private MetroFramework.Controls.MetroButton bt_cleanup;
     }
 }

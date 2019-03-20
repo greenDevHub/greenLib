@@ -333,13 +333,21 @@ namespace Bibo_Verwaltung
                     try
                     {
                         kunde.KundenID = tb_KundenID.Text;
-                        kunde.Deactivate();
-                        ClearForm();
-                        kunde.FillGrid(ref gv_Kunde);
-                        lb_kunde_add.Visible = false;
-                        lb_kunde_add.Text = "Der Kunde wurde gelöscht!";
-                        lb_kunde_add.Visible = true;
-                        t.Start();
+                        if (!kunde.Ausgeliehen())
+                        {
+                            kunde.Deactivate();
+                            ClearForm();
+                            kunde.FillGrid(ref gv_Kunde);
+                            lb_kunde_add.Visible = false;
+                            lb_kunde_add.Text = "Der Kunde wurde gelöscht!";
+                            lb_kunde_add.Visible = true;
+                            t.Start();
+                        }
+                        else
+                        {
+                            MetroMessageBox.Show(this, "Der Kunde konnte nicht entfernt werden, da er noch in einem Ausleihvorgang involviert ist. Bitte markieren Sie zuerst alle Bücher als 'zurückgegeben', damit der Datensatz entfernt werden kann.", "Löschen nicht möglich", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+
                     }
                     catch (SqlException)
                     {
@@ -774,6 +782,7 @@ namespace Bibo_Verwaltung
         private void kundeEntfernenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int errors = 0;
+            List<string> errorMessages = new List<string>();
             int rows = 0;
             //List<DataGridViewRow> gridRows = new List<DataGridViewRow>();
             //foreach(DataGridViewRow row in gv_Kunde.SelectedRows)
@@ -786,18 +795,39 @@ namespace Bibo_Verwaltung
                 try
                 {
                     kunde.KundenID = row.Cells["Kunden-ID"].Value.ToString();
-                    kunde.Deactivate();
+                    if (!kunde.Ausgeliehen())
+                    {
+                        kunde.Deactivate();
+                    }
+                    else
+                    {
+                        errors++;
+                        errorMessages.Add(String.Format("Der Kunde '{0}, {1}' konnte nicht entfernt werden, da er noch in einem Ausleihvorgang involviert ist. Bitte markieren Sie zuerst alle Bücher als 'zurückgegeben', damit der Datensatz entfernt werden kann.",row.Cells["Nachname"].Value,row.Cells["Vorname"].Value));
+                        //MetroMessageBox.Show(this, "Der Kunde konnte nicht entfernt werden, da er noch in einem Ausleihvorgang involviert ist. Bitte markieren Sie zuerst alle Bücher als 'zurückgegeben', damit der Datensatz entfernt werden kann.", "Löschen nicht möglich", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                     ClearForm();
                 }
                 catch (SqlException)
                 {
+                    errorMessages.Add(String.Format("Der Kunde '{0}, {1}'konnte aufgrund eines Problemes mit der Datenbank nicht entfernt werden.", row.Cells["Nachname"].Value, row.Cells["Vorname"].Value));
                     errors++;
                 }
             }
             kunde.FillGrid(ref gv_Kunde);
             if (errors > 0)
             {
-                MetroMessageBox.Show(this, String.Format("Es wurden '{0}' von '{1}' Kunden gelöscht.", errors, rows), "Fehler beim Löschvorgang", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult dr = MetroMessageBox.Show(this, String.Format("Es wurden '{0}' von '{1}' Kunden gelöscht. \n\nMöchten Sie die Fehler einsehen?", rows-errors, rows), "Fehler beim Löschvorgang", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if(dr == DialogResult.Yes)
+                {
+                    for(int i = 0; i<errorMessages.Count;i++)
+                    {
+                        DialogResult result = MetroMessageBox.Show(this, errorMessages[i] + "\n\nWählen Sie 'Ja' für den nächsten Fehler oder 'Nein' zum Beenden.",String.Format("Fehler '{0}' von '{1}'",i+1,errorMessages.Count),MessageBoxButtons.YesNo,MessageBoxIcon.Error);
+                        if(result == DialogResult.No)
+                        {
+                            i = errorMessages.Count;
+                        }
+                    }
+                }
             }
         }
 
@@ -823,6 +853,36 @@ namespace Bibo_Verwaltung
                     kundeBearbeitenToolStripMenuItem.Enabled = true;
                     kundeEntfernenToolStripMenuItem.Text = "Ausgewählten Kunden entfernen";
                     kundeEntfernenToolStripMenuItem.Enabled = true;
+                }
+            }
+        }
+
+        private void bt_cleanup_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MetroMessageBox.Show(this, "Bitte verwenden Sie diese Funktion nur zu Beginn/Ende des Schuljahres bzw. bevor Sie aktualisierte Schülerdaten für alle Schüler importieren möchten. Dieser Vorgang wird sämtliche Datensätze der Schüler deaktivieren. \n\nSoll fortgefahren werden? \n\nHinweis: Schüler, die in einem aktiven Ausleihvorgang involviert sind, sind davon nicht betroffen.", "Fortfahren?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(dr == DialogResult.Yes)
+            {
+                DialogResult dialogResult = MetroMessageBox.Show(this, "Dieser Vorgang wird sämtliche Datensätze der Schüler deaktivieren. Dies kann nicht rückgängig gemacht werden. \n\nSoll fortgefahren werden?", "Achtung!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(dialogResult == DialogResult.Yes)
+                {
+                    try
+                    {
+                        kunde.DeactivateAllSchueler();
+                        kunde.FillGrid(ref gv_Kunde);
+                        DialogResult drFinished = MetroMessageBox.Show(this, "Die Datenbank wurde erfolgreich von allen Schülern bereinigt. Wollen Sie zum Import wechseln?", "Vorgang erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if(drFinished == DialogResult.Yes)
+                        {
+                            Form import = new w_s_schuelerimport("t_s_schueler", true);
+                            this.Hide();
+                            import.ShowDialog(this);
+                            this.Show();
+                            kunde.FillGrid(ref gv_Kunde);
+                        }
+                    }
+                    catch
+                    {
+                        MetroMessageBox.Show(this, "Bei dem Vorgang ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }

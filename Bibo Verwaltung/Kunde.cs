@@ -464,7 +464,36 @@ namespace Bibo_Verwaltung
             cmd.ExecuteNonQuery();
             con.Close();
         }
-
+        public void DeactivateAllSchueler()
+        {
+            if (con.ConnectError()) return;
+            string RawCommand = "UPDATE t_s_kunden set kunde_activated = 0, kunde_klasse = '0' from t_s_kunden left join t_bd_ausgeliehen on kunde_ID=aus_kundenid WHERE kunde_klasse !='' and aus_leihnummer is NULL";
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            DeleteFaecher();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        public bool Ausgeliehen()
+        {
+            string leihnummer = "";
+            if (con.ConnectError()) return true;
+            string RawCommand = "SELECT aus_leihnummer from t_bd_ausgeliehen WHERE aus_kundenid = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, KundenID);
+            while (dr.Read())
+            {
+                leihnummer = dr["aus_leihnummer"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            if (leihnummer == null || leihnummer == "")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         /// <summary>
         /// Löscht einen Kunden aus der Datenbank 
         /// </summary>
