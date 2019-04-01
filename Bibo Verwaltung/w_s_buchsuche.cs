@@ -24,16 +24,11 @@ namespace Bibo_Verwaltung
             InitializeComponent();
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName;
-
-            //buch.AutorListe.Autor.FillCombobox(ref cb_Autor, -1);
-            //buch.Verlag.FillCombobox(ref cb_Verlag, -1);
-            //buch.Genre.FillCombobox(ref cb_Genre, -1);
-            //buchsuche.Hide_KundenDetails(ref gv_buchsuche);
-            //buchsuche.FillGrid(ref gv_buchsuche);
         }
         #endregion
 
         Buchsuche buchsuche = new Buchsuche();
+        string[] leih;
 
         #region Fenster-Methoden
         static int _checksum_ean8(String data)
@@ -64,18 +59,12 @@ namespace Bibo_Verwaltung
         #region Componenten-Aktionen
         private void bt_Clear_Click(object sender, EventArgs e)
         {
-            tb_vorname.Text = "";
-            tb_vorname.ForeColor = Color.Gray;
-            tb_nachname.Text = "";
-            tb_nachname.ForeColor = Color.Gray;
-            tb_klasse.Text = "";
-            tb_klasse.ForeColor = Color.Gray;
             tb_ExemplarID.Text = "";
-            tb_ExemplarID.ForeColor = Color.Gray;
             tb_ISBN.Text = "";
-            tb_ISBN.ForeColor = Color.Gray;
             tb_Titel.Text = "";
-            tb_Titel.ForeColor = Color.Gray;
+            tb_VName.Text = "";
+            tb_NName.Text = "";
+            tb_Klasse.Text = "";
             cb_Autor.SelectedIndex = -1;
             cb_Autor.Text = "Autor";
             cb_Autor.ForeColor = Color.Gray;
@@ -86,7 +75,9 @@ namespace Bibo_Verwaltung
             cb_Verlag.Text = "Verlag";
             cb_Verlag.ForeColor = Color.Gray;
             cb_Verfügbar_Anz.Checked = false;
+            rb_Default.Checked = true;
             buchsuche.Show_AlleExemplare(ref gv_buchsuche);
+            buchsuche.Set_StatusMark(ref gv_buchsuche);
         }
 
         private void cb_KundeAnz_CheckedChanged(object sender, EventArgs e)
@@ -111,26 +102,13 @@ namespace Bibo_Verwaltung
             {
                 buchsuche.Show_AlleExemplare(ref gv_buchsuche);
                 buchsuche.Set_StatusMark(ref gv_buchsuche);
-            }         
+            }
         }
 
         private void Ausleihvorgang(object sender, EventArgs e)
         {
             Form Ausleihe = new w_s_ausleihe(currentUser);
             Ausleihe.ShowDialog(this);
-        }
-
-        private void tb_ExemplarID_Click(object sender, EventArgs e)
-        {
-            if (tb_ExemplarID.Text.Length == 8)
-            {
-                string seven = tb_ExemplarID.Text.Substring(0, 7);
-                string eight = tb_ExemplarID.Text.Substring(7, 1);
-                if (_checksum_ean8(seven).ToString().Equals(eight))
-                {
-                    tb_ExemplarID.Text = int.Parse(seven).ToString();
-                }
-            }
         }
 
         private void tb_ISBN_KeyPress(object sender, KeyPressEventArgs e)
@@ -155,7 +133,7 @@ namespace Bibo_Verwaltung
         {
             //Procesdialog start
             buchsuche.FillComboBoxes(ref cb_Autor, ref cb_Verlag, ref cb_Genre);
-            buchsuche.FillGrid(ref gv_buchsuche);           
+            buchsuche.FillGrid(ref gv_buchsuche);
             buchsuche.Hide_KundenDetails(ref gv_buchsuche);
             buchsuche.Set_StatusMark(ref gv_buchsuche);
         }
@@ -165,73 +143,7 @@ namespace Bibo_Verwaltung
             buchsuche.Set_StatusMark(ref gv_buchsuche);
         }
 
-        private void tb_ExemplarID_Enter(object sender, EventArgs e)
-        {
-            //    if (tb_ExemplarID.Text == "ExemplarID")
-            //    {
-            //        tb_ExemplarID.Text = "";
-            //    }
-            //    tb_ExemplarID.ForeColor = Color.Black;
-        }
-
-        private void tb_ExemplarID_Leave(object sender, EventArgs e)
-        {
-            //    if (tb_ExemplarID.Text == "")
-            //    {
-            //        tb_ExemplarID.Text = "ExemplarID";
-            //        tb_ExemplarID.ForeColor = Color.Gray;
-            //    }
-            //    else
-            //    {
-            //        tb_ExemplarID.ForeColor = Color.Black;
-            //    }
-        }
-
-        private void tb_ISBN_Enter(object sender, EventArgs e)
-        {
-            //    if (tb_ISBN.Text == "ISBN")
-            //    {
-            //        tb_ISBN.Text = "";
-            //    }
-            //    tb_ISBN.ForeColor = Color.Black;
-        }
-
-    private void tb_ISBN_Leave(object sender, EventArgs e)
-        {
-            //    if (tb_ISBN.Text == "")
-            //    {
-            //        tb_ISBN.Text = "ISBN";
-            //        tb_ISBN.ForeColor = Color.Gray;
-            //    }
-            //    else
-            //    {
-            //        tb_ISBN.ForeColor = Color.Black;
-            //    }
-        }
-
-        private void tb_Titel_Enter(object sender, EventArgs e)
-        {
-            //    if (tb_Titel.Text == "Titel")
-            //    {
-            //        tb_Titel.Text = "";
-            //    }
-            //    tb_Titel.ForeColor = Color.Black;
-        }
-
-    private void tb_Titel_Leave(object sender, EventArgs e)
-        {
-            //    if (tb_Titel.Text == "")
-            //    {
-            //        tb_Titel.Text = "Titel";
-            //        tb_Titel.ForeColor = Color.Gray;
-            //    }
-            //    else
-            //    {
-            //        tb_Titel.ForeColor = Color.Black;
-            //    }
-        }
-
-    private void cb_Autor_Enter(object sender, EventArgs e)
+        private void cb_Autor_Enter(object sender, EventArgs e)
         {
             if (cb_Autor.Text == "Autor")
             {
@@ -329,89 +241,88 @@ namespace Bibo_Verwaltung
 
         private void tb_nachname_TextChanged(object sender, EventArgs e)
         {
-            buchsuche.Execute_KundenSearch(ref gv_buchsuche, tb_vorname.Text, tb_nachname.Text, tb_klasse.Text);
+            buchsuche.Execute_KundenSearch(ref gv_buchsuche, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
         }
 
         private void tb_vorname_TextChanged(object sender, EventArgs e)
         {
-            buchsuche.Execute_KundenSearch(ref gv_buchsuche, tb_vorname.Text, tb_nachname.Text, tb_klasse.Text);
+            buchsuche.Execute_KundenSearch(ref gv_buchsuche, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
         }
 
         private void tb_klasse_TextChanged(object sender, EventArgs e)
         {
-            buchsuche.Execute_KundenSearch(ref gv_buchsuche, tb_vorname.Text, tb_nachname.Text, tb_klasse.Text);
+            buchsuche.Execute_KundenSearch(ref gv_buchsuche, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
         }
 
-        private void tb_vorname_Enter(object sender, EventArgs e)
+        //TODO
+        private void addToLeihList_Click(object sender, EventArgs e)
         {
-            //if (tb_vorname.Text == "Vorname")
-            //{
-            //    tb_vorname.Text = "";
-            //}
-            //tb_vorname.ForeColor = Color.Black;
+
         }
 
-        private void tb_vorname_Leave(object sender, EventArgs e)
+        private void removeFromLeihList_Click(object sender, EventArgs e)
         {
-            //if (tb_vorname.Text == "")
-            //{
-            //    tb_vorname.Text = "Vorname";
-            //    tb_vorname.ForeColor = Color.Gray;
-            //}
-            //else
-            //{
-            //    tb_vorname.ForeColor = Color.Black;
-            //}
+
         }
 
-        private void tb_nachname_Enter(object sender, EventArgs e)
+        private void ausleihen_Click(object sender, EventArgs e)
         {
-            //if (tb_nachname.Text == "Nachname")
-            //{
-            //    tb_nachname.Text = "";
-            //}
-            //tb_nachname.ForeColor = Color.Black;
+            leih = new string[1];
+            leih[0]= gv_buchsuche.SelectedRows[0].Cells["ExemplarID"].Value.ToString();
         }
 
-        private void tb_nachname_Leave(object sender, EventArgs e)
+        private void gv_buchsuche_MouseDown(object sender, MouseEventArgs e)
         {
-            //if (tb_nachname.Text == "")
-            //{
-            //    tb_nachname.Text = "Nachname";
-            //    tb_nachname.ForeColor = Color.Gray;
-            //}
-            //else
-            //{
-            //    tb_nachname.ForeColor = Color.Black;
-            //}
+            if (!(gv_buchsuche.HitTest(e.X, e.Y).RowIndex >= 0))
+            {
+                gv_buchsuche.ClearSelection();
+                addToLeihList.Visible = false;
+                removeFromLeihList.Visible = false;
+                ausleihen.Visible = false;
+            }
+            else
+            {
+                addToLeihList.Visible = true;
+                removeFromLeihList.Visible = true;
+                ausleihen.Visible = true;
+            }
         }
 
-        private void tb_klasse_Enter(object sender, EventArgs e)
+        private void gv_buchsuche_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //if (tb_klasse.Text == "Klassenstufe")
-            //{
-            //    tb_klasse.Text = "";
-            //}
-            //tb_klasse.ForeColor = Color.Black;
+            if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                if (!gv_buchsuche.Rows[e.RowIndex].Selected)
+                {
+                    gv_buchsuche.ClearSelection();
+                    gv_buchsuche.Rows[e.RowIndex].Selected = true;
+                }         
+                    addToLeihList.Enabled = true;
+                    removeFromLeihList.Enabled = true;
+                    ausleihen.Enabled = true;            
+            }
         }
 
-        private void tb_klasse_Leave(object sender, EventArgs e)
+        private void rb_Default_CheckedChanged(object sender, EventArgs e)
         {
-            //if (tb_klasse.Text == "")
-            //{
-            //    tb_klasse.Text = "Klassenstufe";
-            //    tb_klasse.ForeColor = Color.Gray;
-            //}
-            //else
-            //{
-            //    tb_klasse.ForeColor = Color.Black;
-            //}
-        }
+            if (rb_GREENonly.Checked)
+            {
+                buchsuche.Show_GreenExemplare(ref gv_buchsuche);
+            }
+            else if (rb_YELLOWonly.Checked)
+            {
+                buchsuche.Show_YellowExemplare(ref gv_buchsuche);
+            }
+            else if (rb_REDonly.Checked)
+            {
+                buchsuche.Show_RedExemplare(ref gv_buchsuche);
+            }
+            else
+            {
+                buchsuche.Show_AlleExemplare(ref gv_buchsuche);
+                buchsuche.Set_StatusMark(ref gv_buchsuche);
+            }
+        } 
         #endregion
-
-        //private void w_s_buchsuche_FormClosing(object sender, FormClosingEventArgs e)
-        //{
-        //    buchsuche.ClearObject();
-        //}
     }
 }

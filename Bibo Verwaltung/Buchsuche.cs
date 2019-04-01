@@ -16,7 +16,7 @@ namespace Bibo_Verwaltung
 
         #region Objekt Constructor
         /// <summary>
-        /// Erschaft das Objekt Sprache
+        /// Erschaft das Objekt Buchsuche
         /// </summary>
         public Buchsuche()
         {
@@ -59,11 +59,6 @@ namespace Bibo_Verwaltung
             }
             catch { }
         }
-
-        //public void ClearObject()
-        //{
-        //    ClearDataSource();
-        //}
 
         /// <summary>
         /// Füllt ein DataGridView-Objekt mit den Buchdaten 
@@ -111,56 +106,7 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
-            catch { }
-
-
-
-
-
-            //try
-            //{
-
-            //    now = DateTime.Today;
-            //    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
-            //    {
-            //        //foreach (DataGridViewRow row in grid.Rows) { 
-            //        //grid.Rows[i].DefaultCellStyle.BackColor = Color.White;
-
-            //        if (ds.Tables[0].Rows[i]["Leihnummer"].ToString() != "")
-            //        //if (row.Cells["Leihnummer"].Value.ToString() != "")
-            //        {
-
-            //            //dt = DateTime.Parse(date);
-            //            dt = DateTime.Parse(ds.Tables[0].Rows[i]["Rückgabedatum"].ToString());
-            //            //dt = DateTime.Parse(row.Cells["Rückgabedatum"].Value.ToString());
-            //            dt.ToShortDateString();
-
-
-            //            if (dt < now)
-            //            {
-            //                grid.Rows[i].DefaultCellStyle.BackColor = Color.Red;
-            //                //row.DefaultCellStyle.BackColor = Color.Red;
-            //            }
-            //            else if (dt == now)
-            //            {
-            //                grid.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
-            //                //grid.RowsDefaultCellStyle.BackColor = Color.Yellow;
-            //                //row.DefaultCellStyle.BackColor = Color.Yellow;
-            //            }
-            //            else
-            //            {
-            //                grid.Rows[i].DefaultCellStyle.BackColor = Color.LimeGreen;
-            //                //row.DefaultCellStyle.BackColor = Color.LimeGreen;
-            //            }
-            //        }
-            //        else
-            //        {
-            //            grid.Rows[i].DefaultCellStyle.BackColor = Color.White;
-            //        }
-            //    }
-            //    //grid.Refresh();
-            //}
-            //catch { }
+            catch { }    
         }
 
         /// <summary>
@@ -194,7 +140,7 @@ namespace Bibo_Verwaltung
             {
                 grid.Columns["Vorname"].Visible = true;
                 grid.Columns["Nachname"].Visible = true;
-                grid.Columns["Klassenstufe"].Visible = true;
+                grid.Columns["Klasse"].Visible = true;
                 grid.Columns["Kunden ID"].Visible = false;
             }
             catch { }
@@ -210,7 +156,46 @@ namespace Bibo_Verwaltung
                 grid.Columns["Kunden ID"].Visible = false;
                 grid.Columns["Vorname"].Visible = false;
                 grid.Columns["Nachname"].Visible = false;
-                grid.Columns["Klassenstufe"].Visible = false;
+                grid.Columns["Klasse"].Visible = false;
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Zeigt nur nicht überfällige Exemplare 
+        /// </summary>
+        public void Show_GreenExemplare(ref MetroGrid grid)
+        {
+            try
+            {
+                ds.Tables[0].DefaultView.RowFilter = string.Format("Rückgabedatum > '{0}'", DateTime.Now.Date.ToShortDateString());
+                grid.Refresh();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Zeigt nur überfällige Exemplare 
+        /// </summary>
+        public void Show_RedExemplare(ref MetroGrid grid)
+        {
+            try
+            {
+                ds.Tables[0].DefaultView.RowFilter = string.Format("Rückgabedatum < '{0}'", DateTime.Now.Date.ToShortDateString());
+                grid.Refresh();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Zeigt nur heute überfällige Exemplare 
+        /// </summary>
+        public void Show_YellowExemplare(ref MetroGrid grid)
+        {
+            try
+            {
+                ds.Tables[0].DefaultView.RowFilter = string.Format("Rückgabedatum = '{0}'", DateTime.Now.Date.ToShortDateString());
+                grid.Refresh();
             }
             catch { }
         }
@@ -282,7 +267,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Sucht einen Kunden
         /// </summary>
-        public void Execute_KundenSearch(ref MetroGrid grid, string vorname, string nachname, string klassenstufe)
+        public void Execute_KundenSearch(ref MetroGrid grid, string vorname, string nachname, string klasse)
         {
             try
             {
@@ -294,11 +279,11 @@ namespace Bibo_Verwaltung
                 {
                     nachname = "";
                 }
-                if (klassenstufe == "Klassenstufe")
+                if (klasse == "Klassenstufe")
                 {
-                    klassenstufe = "";
+                    klasse = "";
                 }
-                ds.Tables[0].DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%' AND Nachname LIKE '{1}%' AND Klassenstufe LIKE '{2}%'", vorname, nachname, klassenstufe);
+                ds.Tables[0].DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%' AND Nachname LIKE '{1}%' AND Klasse LIKE '{2}%'", vorname, nachname, klasse);
                 grid.Refresh();
             }
             catch { }
