@@ -39,18 +39,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_buch_stufe));
             this.gv_Klassenstufe = new MetroFramework.Controls.MetroGrid();
-            this.Klassenstufen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gv_Buecher = new MetroFramework.Controls.MetroGrid();
             this.btAbbrechen = new MetroFramework.Controls.MetroButton();
             this.bt_Bearbeiten = new MetroFramework.Controls.MetroButton();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pl_Klassenstufe = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.bt_back = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Klassenstufe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Buecher)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.pl_Klassenstufe.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,8 +73,6 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gv_Klassenstufe.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gv_Klassenstufe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_Klassenstufe.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Klassenstufen});
             this.gv_Klassenstufe.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -85,7 +82,6 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gv_Klassenstufe.DefaultCellStyle = dataGridViewCellStyle2;
-            this.gv_Klassenstufe.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gv_Klassenstufe.EnableHeadersVisualStyles = false;
             this.gv_Klassenstufe.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_Klassenstufe.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -102,6 +98,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gv_Klassenstufe.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.gv_Klassenstufe.RowHeadersWidth = 30;
             this.gv_Klassenstufe.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Bold);
@@ -120,16 +117,10 @@
             this.gv_Klassenstufe.ShowCellToolTips = false;
             this.gv_Klassenstufe.ShowEditingIcon = false;
             this.gv_Klassenstufe.ShowRowErrors = false;
-            this.gv_Klassenstufe.Size = new System.Drawing.Size(329, 365);
+            this.gv_Klassenstufe.Size = new System.Drawing.Size(200, 347);
             this.gv_Klassenstufe.Style = MetroFramework.MetroColorStyle.Orange;
             this.gv_Klassenstufe.TabIndex = 0;
             this.gv_Klassenstufe.SelectionChanged += new System.EventHandler(this.gv_Klassenstufe_SelectionChanged);
-            // 
-            // Klassenstufen
-            // 
-            this.Klassenstufen.HeaderText = "Klassenstufen";
-            this.Klassenstufen.Name = "Klassenstufen";
-            this.Klassenstufen.ReadOnly = true;
             // 
             // gv_Buecher
             // 
@@ -260,13 +251,13 @@
             this.metroLabel2.TabIndex = 70;
             this.metroLabel2.Text = "zugeordnete Bücher:";
             // 
-            // panel1
+            // pl_Klassenstufe
             // 
-            this.panel1.Controls.Add(this.gv_Klassenstufe);
-            this.panel1.Location = new System.Drawing.Point(23, 82);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(329, 365);
-            this.panel1.TabIndex = 71;
+            this.pl_Klassenstufe.Controls.Add(this.gv_Klassenstufe);
+            this.pl_Klassenstufe.Location = new System.Drawing.Point(23, 82);
+            this.pl_Klassenstufe.Name = "pl_Klassenstufe";
+            this.pl_Klassenstufe.Size = new System.Drawing.Size(215, 350);
+            this.pl_Klassenstufe.TabIndex = 71;
             // 
             // panel2
             // 
@@ -298,7 +289,7 @@
             this.ClientSize = new System.Drawing.Size(1000, 500);
             this.Controls.Add(this.bt_back);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pl_Klassenstufe);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.btAbbrechen);
@@ -313,7 +304,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_buch_stufe_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Klassenstufe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Buecher)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.pl_Klassenstufe.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -327,9 +318,8 @@
         private MetroFramework.Controls.MetroButton bt_Bearbeiten;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroLabel metroLabel2;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pl_Klassenstufe;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Klassenstufen;
         private MetroFramework.Controls.MetroButton bt_back;
     }
 }

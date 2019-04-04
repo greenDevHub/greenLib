@@ -269,6 +269,10 @@ namespace Bibo_Verwaltung
         {
             leih = new string[1];
             leih[0]= gv_buchsuche.SelectedRows[0].Cells["ExemplarID"].Value.ToString();
+            this.Hide();
+            Form Ausleihe = new w_s_ausleihe(currentUser, leih);
+            Ausleihe.ShowDialog(this);
+            this.Show();
         }
 
         private void gv_buchsuche_MouseDown(object sender, MouseEventArgs e)

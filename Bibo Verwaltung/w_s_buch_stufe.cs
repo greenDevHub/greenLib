@@ -35,7 +35,8 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                gv_Klassenstufe.Columns.Add("Klassenstufe", "");
+                gv_Klassenstufe.Columns.Add("Klassenstufe", "Klassenstufen");
+                gv_Klassenstufe.Columns["Klassenstufe"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 for (int i = 1; i <= 13; i++)
                 {
                     gv_Klassenstufe.Rows.Add("Klassenstufe " + i.ToString());
@@ -240,8 +241,7 @@ namespace Bibo_Verwaltung
         private void w_s_buch_stufe_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveZuordnungen();
-        }
-        #endregion
+        }     
 
         private void bt_back_Click(object sender, EventArgs e)
         {
@@ -250,6 +250,7 @@ namespace Bibo_Verwaltung
             gv_Klassenstufe.Enabled = true;
             bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
             LoadBuecher();
-        }
+        } 
+        #endregion
     }
 }
