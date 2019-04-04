@@ -58,7 +58,6 @@
             this.metroTile1 = new MetroFramework.Controls.MetroTile();
             this.mT_klassenstufefach = new MetroFramework.Controls.MetroTile();
             this.mT_fachbuch = new MetroFramework.Controls.MetroTile();
-            this.metroPanel1.SuspendLayout();
             this.panel.SuspendLayout();
             this.pl_unschaerfe.SuspendLayout();
             this.transparentPanel1.SuspendLayout();
