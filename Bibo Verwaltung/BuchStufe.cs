@@ -18,35 +18,12 @@ namespace Bibo_Verwaltung
         DataSet ds = new DataSet();
         SqlCommandBuilder comb = new SqlCommandBuilder();
 
-        //#region Eigenschaften des Objekts
-        //string zuordnungid;
-        //public string ZuordnungID { get { return zuordnungid; } set { zuordnungid = value; } }
-
-        //Fach fach = new Fach();
-        //public Fach Fach { get { return fach; } set { fach = value; } }
-
-        //List<string> fachListe = new List<string>();
-        //public List<string> FachListe { get { return fachListe; } set { fachListe = value; } }
-
-        //Klassenstufe klassenstufe = new Klassenstufe();
-        //public Klassenstufe Klassenstufe { get { return klassenstufe; } set { klassenstufe = value; } }
-        //#endregion
-
         #region Constructor
         /// <summary>
         /// Erschaft das Objekt BuchStufe
         /// </summary>
         public BuchStufe()
         {
-
-        }
-        /// <summary>
-        /// Erschaft das Objekt BuchStufe
-        /// </summary>
-        public BuchStufe(string stufe)
-        {
-            //this.Klassenstufe.Stufe = stufe;
-            //Load();
         }
         #endregion
 

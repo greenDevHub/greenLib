@@ -25,31 +25,6 @@ namespace Bibo_Verwaltung
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName;
             faecher.FillGrid(ref gv_Faecher);
-
-
-            //bf.FillGrid(ref gv_bf);
-            //bf.Fach.FillCombobox(ref cb_fach, 0);
-
-            //foreach (var pb in tLP_1.Controls.OfType<ComboBox>())
-            //{
-            //    ComboBoxes.Add(pb);
-            //}
-            //foreach(var bt in tLP_1.Controls.OfType<Button>())
-            //{
-            //    Buttons.Add(bt);
-            //}
-            //for (int i = 1; i < 8;)
-            //{
-            //    ComboBoxes[i].Visible = false;
-            //    Buttons[i].Visible = false;
-            //    i++;
-            //}
-            //ctr1 = tLP_1.GetControlFromPosition(0, 8);
-            //tLP_1.SetRow(ctr1, 1);
-            //FillComboboxes(false);
-            //Clear();
-
-
         }
 
         #region Fenster-Methoden
@@ -194,10 +169,6 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-
-
-
-
         #region Componenten-Aktionen
         private void bt_Bearbeiten_Click(object sender, EventArgs e)
         {
@@ -249,9 +220,7 @@ namespace Bibo_Verwaltung
         {
             SaveZuordnungen();
         }
-        #endregion
-
-
+        
         private void bt_close_Click(object sender, EventArgs e)
         {
             Close();
@@ -265,5 +234,6 @@ namespace Bibo_Verwaltung
             bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
             LoadBuecher();
         }
+        #endregion
     }
 }

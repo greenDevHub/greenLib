@@ -250,7 +250,12 @@ namespace Bibo_Verwaltung
             gv_Klassenstufe.Enabled = true;
             bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
             LoadBuecher();
-        } 
+        }
+        
+        private void btAbbrechen_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
         #endregion
     }
 }

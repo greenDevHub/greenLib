@@ -405,6 +405,7 @@ namespace Bibo_Verwaltung
             if (counter >= 10)
             {
                 MetroMessageBox.Show(this, "Herzlichen GLückwunsch! Sie haben Langeweile!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                counter = 0;
             }
         }
         #endregion
