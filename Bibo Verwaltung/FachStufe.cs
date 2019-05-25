@@ -46,46 +46,38 @@ namespace Bibo_Verwaltung
         public FachStufe(string stufe)
         {
             this.Klassenstufe.Stufe = stufe;
-            Load();
+            LoadZuornung();
         }
         #endregion
 
-        private void Load()
+        /// <summary>
+        /// Füllt ein Listen-Objekt mit den Fach-Klassenstufen-Zuordnungsdatendaten einer Klassenstufe
+        /// </summary>
+        private void LoadZuornung()
         {
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT * FROM [dbo].[t_s_fach_stufe] WHERE  bf_klassenstufe = @0";
+            string RawCommand = "SELECT * FROM [dbo].[t_s_fach_stufe] WHERE bf_klassenstufe = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, Klassenstufe.Stufe);
-            // Einlesen der Datenzeilen und Ausgabe an der Konsole 
             while (dr.Read())
             {
                 Fach = new Fach(dr["bf_fachid"].ToString());
                 FachListe.Add(Fach.FachKurz);
             }
-            // DataReader schließen 
             dr.Close();
-            // Verbindung schließen 
             con.Close();
         }
+
         /// <summary>
         /// Füllt ein DataSet-Objekt mit den Fach-Klassenstufen-Zuordnungsdatendaten 
         /// </summary>
         private void FillObject()
         {
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT bf_fachid, bf_klassenstufe, f_kurzform as 'Kurzbezeichnung', f_langform as 'Langbezeichnung' FROM [dbo].[t_s_fach_stufe] left join [dbo].[t_s_faecher] on f_id = bf_fachid order by f_kurzform";//@id";
+            string RawCommand = "SELECT bf_fachid, bf_klassenstufe, f_kurzform as 'Kurzbezeichnung', f_langform as 'Langbezeichnung' FROM [dbo].[t_s_fach_stufe] left join [dbo].[t_s_faecher] on f_id = bf_fachid order by f_kurzform";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
             con.Close();
-
-
-            //dt.Clear();
-            //SQL_Verbindung con = new SQL_Verbindung();
-            //if (con.ConnectError()) return;
-            //string RawCommand = "SELECT fs_id as 'ID', fs_fachid as 'Kurzform', f_kurzform as 'Fach', k_stufe as 'Klassenstufe' FROM [dbo].[t_s_fach_stufe] left join [dbo].[t_s_faecher] on fs_fachid = f_id left join [dbo].[t_s_klassenstufe] on fs_stufe = k_stufe";
-            //adapter = new SqlDataAdapter(RawCommand, con.Con);
-            //adapter.Fill(dt);
-            //con.Close();
         }
 
         /// <summary>

@@ -136,7 +136,7 @@ namespace Bibo_Verwaltung
                     LeihListe.Columns.Add();
                 }
 
-                for (int i = 0; i <= inputList.Length; i++)
+                for (int i = 0; i <= inputList.Length-1; i++)
                 {
                     exemlarDetails[0] = inputList[i];
                     exemlarDetails[1] = DateTime.Now.Date.ToShortDateString();
