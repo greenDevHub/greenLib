@@ -1,9 +1,11 @@
 ﻿using MetroFramework;
+using MetroFramework.Controls;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -18,8 +20,8 @@ namespace Bibo_Verwaltung
             InitializeComponent();
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName;
-            kunde.FillGrid(ref gv_Kunde);
-            kunde.Fach.FillGrid(ref gv_faecher);
+            //kunde.FillGrid(ref gv_Kunde);
+            //kunde.Fach.FillGrid(ref gv_faecher);
         }
 
         #region Fenster-Methoden
@@ -288,7 +290,7 @@ namespace Bibo_Verwaltung
         #region Componenten-Aktionen
         private void bt_confirm_click(object sender, EventArgs e)
         {
-            var t = new Timer();
+            System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
             t.Interval = 3000; // it will Tick in 3 seconds
             t.Tick += (s, a) =>
             {
@@ -526,7 +528,10 @@ namespace Bibo_Verwaltung
         private void w_s_kunden_Activated(object sender, EventArgs e)
         {
             SetModus();
-            kunde.FillGrid(ref gv_Kunde);
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
         }
 
         private void tb_KundenID_TextChanged(object sender, EventArgs e)
@@ -645,7 +650,11 @@ namespace Bibo_Verwaltung
             this.Hide();
             import.ShowDialog(this);
             this.Show();
-            kunde.FillGrid(ref gv_Kunde);
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
+            /////////////////////////////////////////////////kunde.FillGrid(ref gv_Kunde);
             //Form modus = new w_s_selfmade_dialog("Modus", "Was möchten sie mit der Kundentabelle machen? Wählen Sie den Import- oder den Exportmodus.", "Importmodus", "Exportmodus");
             //modus.ShowDialog();
             //DialogResult ds = modus.DialogResult;
@@ -876,7 +885,11 @@ namespace Bibo_Verwaltung
                             this.Hide();
                             import.ShowDialog(this);
                             this.Show();
-                            kunde.FillGrid(ref gv_Kunde);
+                            if (!backgroundWorker1.IsBusy)
+                            {
+                                backgroundWorker1.RunWorkerAsync();
+                            }
+                            /////////////////////////////////////////////kunde.FillGrid(ref gv_Kunde);
                         }
                     }
                     catch
@@ -885,6 +898,33 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
+        }
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            BeginInvoke((Action)delegate ()
+            {
+
+                metroProgressSpinner1.Visible = true;
+                metroProgressSpinner2.Visible = true;
+                gv_faecher.Visible = false;
+                gv_Kunde.Visible = false;
+            });
+            MetroGrid mgKunde = new MetroGrid();
+            kunde.FillGrid(ref mgKunde);
+            DataTable dtFach = new DataTable();
+            kunde.Fach.FillDT(ref dtFach);
+            var dtKunde = mgKunde.DataSource;
+            //Thread.Sleep(50);
+            BeginInvoke((Action)delegate(){
+
+                gv_Kunde.DataSource = dtKunde;
+                gv_faecher.DataSource = dtFach;
+                gv_faecher.Columns["ID"].Visible = false;
+                metroProgressSpinner1.Visible = false;
+                metroProgressSpinner2.Visible = false;
+                gv_faecher.Visible = true;
+                gv_Kunde.Visible = true;
+            });
         }
     }
 }

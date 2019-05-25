@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Media;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
@@ -808,32 +809,39 @@ namespace Bibo_Verwaltung
         private void ForeachImport()
         {
             fileNum = 1;
-            foreach (string file in files)
-            {
-                fileNum++;
-                DoImport(file);
-                progressBar1.PerformStep();
-            }
-            //System.Timers.Timer timer = new System.Timers.Timer(100);
-            //timer.Enabled = true;
-            //timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
+            //List<Task> tasks = new List<Task>();
+            //System.Timers.Timer timer = new System.Timers.Timer();
+            //timer.Interval = 10;
+            //timer.Elapsed += timer_Elapsed;
             //timer.Start();
-            ////List<Task> tasks = new List<Task>();
-            ////foreach (string file in files)
-            ////{
-            ////    tasks.Add(Task.Run(() => 
-            ////    {
-            ////        DoImport(file);
-            ////        fileNum++;
-            ////    }));
 
-            ////}
-            ////Task.WaitAll(tasks.ToArray());
-            ////foreach (Task task in tasks) task.Dispose();
-            ////tasks.Clear();
+            progressBar1.Value = 0;
+            foreach(string file in files)
+            {
+                    DoImport(file);
+                    fileNum++;
+                    progressBar1.Value = filesDone;
+                
+                //Console.WriteLine($"Processing {fileNum} on thread {Thread.CurrentThread.ManagedThreadId}");
+                //metroLabel6.Invoke((Action)delegate ()
+                //{
+                //    metroLabel6.Text = fileNum.ToString();
+                //});
+            };
+            //foreach (string file in files)
+            //{
+            //    tasks.Add(Task.Run(() =>
+            //    {
+            //        DoImport(file);
+            //        fileNum++;
+            //    }));
+
+            //}
+            //Task.WaitAll(tasks.ToArray());
+            //foreach (Task task in tasks) task.Dispose();
+            //tasks.Clear();
             //timer.Stop();
         }
-
         /// <summary>
         /// Startet den Importvorgang
         /// </summary>
@@ -885,7 +893,10 @@ namespace Bibo_Verwaltung
                     getValuesFromControls();
                 }
                 fileNum = 0;
-                if (!singleImport) ForeachImport();
+                if (!singleImport)
+                {
+                    ForeachImport();
+                }
                 else
                 {
                     fileNum++;

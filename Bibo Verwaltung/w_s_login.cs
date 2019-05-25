@@ -1,5 +1,6 @@
 ﻿using MetroFramework;
 using System;
+using ScreenSize;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Bibo_Verwaltung
 {
@@ -16,11 +18,12 @@ namespace Bibo_Verwaltung
         public w_s_login()
         {
             InitializeComponent();
-            tb_User.Focus();
             timer1.Start();
+            tb_Password.Focus();
+            tb_User.Focus();
         }
 
-       // private bool error = false;
+        // private bool error = false;
 
         private void Anmelden()
         {

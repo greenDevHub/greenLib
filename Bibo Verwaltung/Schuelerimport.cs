@@ -139,7 +139,7 @@ namespace Bibo_Verwaltung
             dt.Reset();
             FileInfo f = new FileInfo(path);
             long filelength = f.Length;
-
+            
             System.IO.StreamReader file = new System.IO.StreamReader(path, System.Text.Encoding.Default);
             string line = file.ReadLine();
             for(int i = 0; i < LineNum;)

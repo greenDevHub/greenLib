@@ -36,13 +36,34 @@ namespace Bibo_Verwaltung
         private string homePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Einstellungen";
         public string HomePath { get { return homePath; } set { homePath = value; } }
 
+        public double scale;
+        public double Scale { get { return scale; } set { scale = value; } }
         #endregion
 
         public Einstellung()
         {
             LoadSettings();
+            LoadScale();
         }
         #region Methoden: File_Exists(), IsFileReadOnly(), SaveSettings(), LoadSettings()
+        private void LoadScale()
+        {
+            try
+            {
+                if (!File_Exists(homePath+"\\Scale.txt"))
+                {
+                    File.WriteAllText(homePath + "\\Scale.txt", "100");
+                }
+                //alle Zeilen lesen
+                scale = float.Parse(File.ReadAllText(homePath + "\\Scale.txt"));
+                
+            }
+            catch
+            {
+                
+            }
+
+        }
         private bool File_Exists(string path)
         {
             if (File.Exists(path))

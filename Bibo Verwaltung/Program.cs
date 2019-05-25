@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace Bibo_Verwaltung
         [STAThread]
         static void Main()
         {
+            Process.Start(@"C:\Users\Laurenz\Documents\GitHub\GameDev\Bibo Verwaltung\bin\Debug\ScreenSize.exe");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new w_s_login());
