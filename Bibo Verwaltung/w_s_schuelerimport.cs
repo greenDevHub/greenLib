@@ -387,10 +387,33 @@ namespace Bibo_Verwaltung
                 //Vorschau ohne Vorlage
                 showPreviewControls(tb_aktuell.Text);
             }
-            catch (IOException)
+            catch (Exception ex)
             {
-                MetroMessageBox.Show(this,"Der Zugriff auf die Datei wurde behindert. Bitte schließen Sie Anwendungen, in denen Sie diese ggf. geöffnet haben oder wenden Sie sich an den Administrator.", "Zugriff verweigert", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (ex.Message.Equals("failed preset", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    MetroMessageBox.Show(this, "Der Zugriff auf die Datei wurde behindert. Bitte schließen Sie Anwendungen, in denen Sie diese ggf. geöffnet haben oder wenden Sie sich an den Administrator.", "Zugriff verweigert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (ex.Message.Equals("no preset", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    MetroMessageBox.Show(this, "Es ist noch keine Vorlage für " + filename + " vorhanden. Führen Sie bitte einen entsprechenden Import manuell aus, um eine Vorlage zu erstellen.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (ex.Message.Contains("Problem bei Zeile"))
+                {
+                    int errorcount = int.Parse(ex.Message.Substring(18));
+                    MetroMessageBox.Show(this, String.Format("Es konnten '{0}' Zeilen aufgrund eines Formatierungsproblems nicht gelesen werden. Eventuell liegen Probleme in der Struktur der Quelldatei vor.", errorcount), "Fehler beim Einlesen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (ex.Message.Equals("Keine Daten", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    MetroMessageBox.Show(this, "Diese Datei enthält keine Daten!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (ex.Message.Equals("Fehler bei Datei", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    MetroMessageBox.Show(this, "Fehler beim Lesen der Datei. Eventuell haben Sie eine zu große Zeilenanzahl zum überspringen angegeben.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
 
         }
@@ -515,6 +538,10 @@ namespace Bibo_Verwaltung
                 else if (ex.Message.Equals("Keine Daten", StringComparison.InvariantCultureIgnoreCase))
                 {
                     MetroMessageBox.Show(this, "Diese Datei enthält keine Daten!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if(ex.Message.Equals("Fehler bei Datei", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    MetroMessageBox.Show(this, "Fehler beim Lesen der Datei. Eventuell haben Sie eine zu große Zeilenanzahl zum überspringen angegeben.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
@@ -703,6 +730,12 @@ namespace Bibo_Verwaltung
                     errorHappened = true;
                     errors++;
                     errorMessage = String.Format("Die Datei enthält keine Daten! \n(Datei '{0}' von '{1}', Bezeichnung: '{2}').\n", fileNum, filesTotal, file);
+                }
+                else if (ex.Message.Equals("Fehler bei Datei", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    errorHappened = true;
+                    errors++;
+                    MetroMessageBox.Show(this, "Fehler beim Lesen der Datei. Eventuell haben Sie eine zu große Zeilenanzahl zum überspringen angegeben.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
@@ -1260,6 +1293,10 @@ namespace Bibo_Verwaltung
                     else if (ex.Message.Equals("Keine Daten", StringComparison.InvariantCultureIgnoreCase))
                     {
                         MetroMessageBox.Show(this, "Diese Datei enthält keine Daten!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (ex.Message.Equals("Fehler bei Datei", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        MetroMessageBox.Show(this, "Fehler beim Lesen der Datei. Eventuell haben Sie eine zu große Zeilenanzahl zum überspringen angegeben.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                     {

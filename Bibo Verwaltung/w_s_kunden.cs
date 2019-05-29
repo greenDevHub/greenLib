@@ -634,11 +634,21 @@ namespace Bibo_Verwaltung
                     {
                         gv_result.Rows.Add("*" + kunde.Fach.FachKurz, kunde.Fach.FachID);
                         gv_result.Rows[gv_result.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Yellow;
-                        kunde.Leistungskurse++;
+                                                kunde.Leistungskurse++;
                     }
                     else
                     {
                         gv_result.Rows.Add(kunde.Fach.FachKurz, kunde.Fach.FachID);
+                    }
+                    for (int i = 0; i < gv_faecher.Rows.Count;i++)
+                    {
+                        DataGridViewRow row = gv_faecher.Rows[i];
+                        if (row.Cells["ID"].Value.ToString().Equals(fachIndex))
+                        {
+                            row.DefaultCellStyle.BackColor = Color.Yellow;
+                            row.DefaultCellStyle.SelectionBackColor = Color.Gold;
+                            i = gv_faecher.Rows.Count;
+                        }
                     }
                 }
             }
@@ -676,15 +686,35 @@ namespace Bibo_Verwaltung
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.gv_faecher.Rows[e.RowIndex];
-                if (row.Cells["Kurzbezeichnung"].Value.ToString() != "")
+                if(gv_faecher.Rows[e.RowIndex].DefaultCellStyle.BackColor != Color.Yellow)
                 {
-                    kunde.Fach = new Fach(row.Cells["ID"].Value.ToString());
-                    CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[gv_faecher.DataSource];
-                    currencyManager1.SuspendBinding();
-                    gv_faecher.Rows[e.RowIndex].Visible = false;
-                    currencyManager1.ResumeBinding();
-                    gv_result.Rows.Add(kunde.Fach.FachKurz, kunde.Fach.FachID);
+                    if (row.Cells["Kurzbezeichnung"].Value.ToString() != "")
+                    {
+                        kunde.Fach = new Fach(row.Cells["ID"].Value.ToString());
+                        //CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[gv_faecher.DataSource];
+                        //currencyManager1.SuspendBinding();
+                        //gv_faecher.Rows[e.RowIndex].Visible = false;
+                        row.DefaultCellStyle.BackColor = Color.Yellow;
+                        row.DefaultCellStyle.SelectionBackColor = Color.Gold;
+                        //currencyManager1.ResumeBinding();
+                        gv_result.Rows.Add(kunde.Fach.FachKurz, kunde.Fach.FachID);
+                    }
                 }
+                else
+                {
+                    row.DefaultCellStyle.BackColor = Color.White;
+                    row.DefaultCellStyle.SelectionBackColor = gv_result.DefaultCellStyle.SelectionBackColor;
+                    for(int i = 0; i < gv_result.Rows.Count; i++)
+                    {
+                        DataGridViewRow gvRow = gv_result.Rows[i];
+                        if (gvRow.Cells["ID"].Value.ToString() == row.Cells["ID"].Value.ToString())
+                        {
+                            gv_result.Rows.RemoveAt(i);
+                            i = gv_result.Rows.Count;
+                        }
+                    }
+                }
+                
             }
         }
 
@@ -707,10 +737,12 @@ namespace Bibo_Verwaltung
                         DataGridViewRow gvRow = gv_faecher.Rows[i];
                         if (gvRow.Cells["ID"].Value.ToString() == kunde.Fach.FachID)
                         {
-                            CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[gv_faecher.DataSource];
-                            currencyManager1.SuspendBinding();
-                            gv_faecher.Rows[i].Visible = true;
-                            currencyManager1.ResumeBinding();
+                            //CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[gv_faecher.DataSource];
+                            //currencyManager1.SuspendBinding();
+                            //gv_faecher.Rows[i].Visible = true;
+                            gvRow.DefaultCellStyle.BackColor = Color.White;
+                            gvRow.DefaultCellStyle.SelectionBackColor = gv_result.DefaultCellStyle.SelectionBackColor;
+                            //currencyManager1.ResumeBinding();
                             i = gv_faecher.Rows.Count;
                         }
                     }
@@ -901,9 +933,17 @@ namespace Bibo_Verwaltung
         }
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
+            List<string> selectedFachIDs = new List<string>();
             BeginInvoke((Action)delegate ()
             {
-
+                for(int i = 0; i < gv_faecher.Rows.Count; i++)
+                {
+                    DataGridViewRow row = gv_faecher.Rows[i];
+                    if(row.DefaultCellStyle.BackColor == Color.Yellow)
+                    {
+                        selectedFachIDs.Add(row.Cells["ID"].ToString());
+                    }
+                }
                 metroProgressSpinner1.Visible = true;
                 metroProgressSpinner2.Visible = true;
                 gv_faecher.Visible = false;
@@ -915,16 +955,38 @@ namespace Bibo_Verwaltung
             kunde.Fach.FillDT(ref dtFach);
             var dtKunde = mgKunde.DataSource;
             //Thread.Sleep(50);
-            BeginInvoke((Action)delegate(){
+            try
+            {
+                BeginInvoke((Action)delegate () {
 
-                gv_Kunde.DataSource = dtKunde;
-                gv_faecher.DataSource = dtFach;
-                gv_faecher.Columns["ID"].Visible = false;
-                metroProgressSpinner1.Visible = false;
-                metroProgressSpinner2.Visible = false;
-                gv_faecher.Visible = true;
-                gv_Kunde.Visible = true;
-            });
+                    gv_Kunde.DataSource = dtKunde;
+                    gv_faecher.DataSource = dtFach;
+                    gv_faecher.Columns["ID"].Visible = false;
+                    foreach (string s in selectedFachIDs)
+                    {
+                        for (int i = 0; i < gv_faecher.Rows.Count; i++)
+                        {
+                            DataGridViewRow row = gv_faecher.Rows[i];
+                            if (row.Cells["ID"].ToString().Equals(s))
+                            {
+                                row.DefaultCellStyle.BackColor = Color.Yellow;
+                                row.DefaultCellStyle.SelectionBackColor = Color.Gold;
+                                i = gv_faecher.Rows.Count;
+                            }
+                        }
+                    }
+
+                    metroProgressSpinner1.Visible = false;
+                    metroProgressSpinner2.Visible = false;
+                    gv_faecher.Visible = true;
+                    gv_Kunde.Visible = true;
+                });
+            }
+            catch
+            {
+
+            }
+            
         }
     }
 }
