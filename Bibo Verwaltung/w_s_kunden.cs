@@ -20,6 +20,38 @@ namespace Bibo_Verwaltung
             InitializeComponent();
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName;
+            if (userName.Contains("(Gast)"))
+            {
+                bt_confirm.Enabled = false;
+                gv_Kunde.Enabled = false;
+                bt_cleanup.Enabled = false;
+                metroPanel2.Enabled = false;
+                bt_ImEx.Enabled = false;
+                MetroPanel hidePanel = new MetroPanel();
+                this.Controls.Add(hidePanel);
+                Point punkt = gv_Kunde.FindForm().PointToClient(gv_Kunde.Parent.PointToScreen(gv_Kunde.Location));
+                hidePanel.Location = new Point(punkt.X,punkt.Y+25);
+                hidePanel.Size = gv_Kunde.Size;
+                hidePanel.Height = hidePanel.Height - 25;
+                hidePanel.BringToFront();
+                hidePanel.Enabled = false;
+            }
+            else if (userName.Contains("(Benutzer)"))
+            {
+                bt_confirm.Enabled = true;
+                gv_Kunde.Enabled = true;
+                bt_cleanup.Enabled = false;
+                metroPanel2.Enabled = true;
+                bt_ImEx.Enabled = true;
+            }
+            else if (userName.Contains("(Admin)"))
+            {
+                bt_confirm.Enabled = true;
+                gv_Kunde.Enabled = true;
+                bt_cleanup.Enabled = true;
+                metroPanel2.Enabled = true;
+                bt_ImEx.Enabled = true;
+            }
             //kunde.FillGrid(ref gv_Kunde);
             //kunde.Fach.FillGrid(ref gv_faecher);
         }
@@ -146,7 +178,6 @@ namespace Bibo_Verwaltung
         {
             if (rb_KundeBearbeiten.Checked)
             {
-                bt_confirm.Enabled = true;
                 bt_confirm.Text = "Speichern";
                 tb_KundenID.Enabled = false;
                 tb_Vorname.Enabled = false;
@@ -171,7 +202,6 @@ namespace Bibo_Verwaltung
             else if (rb_Neukunde.Checked)
             {
                 bt_confirm.Text = "Hinzufügen";
-                bt_confirm.Enabled = true;
                 tb_KundenID.Enabled = false;
                 tb_Vorname.Enabled = true;
                 tb_Nachname.Enabled = true;
@@ -194,7 +224,6 @@ namespace Bibo_Verwaltung
             }
             else if (rb_KundeLoeschen.Checked)
             {
-                bt_confirm.Enabled = true;
                 bt_confirm.Text = "Löschen";
                 tb_KundenID.Enabled = true;
                 tb_Vorname.Enabled = false;
@@ -656,7 +685,7 @@ namespace Bibo_Verwaltung
 
         private void bt_ImEx_Click(object sender, EventArgs e)
         {
-            Form import = new w_s_schuelerimport("t_s_schueler", true);
+            Form import = new w_s_schuelerimport("t_s_schueler", true, currentUser);
             this.Hide();
             import.ShowDialog(this);
             this.Show();
@@ -913,7 +942,7 @@ namespace Bibo_Verwaltung
                         DialogResult drFinished = MetroMessageBox.Show(this, "Die Datenbank wurde erfolgreich von allen Schülern bereinigt. Wollen Sie zum Import wechseln?", "Vorgang erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if(drFinished == DialogResult.Yes)
                         {
-                            Form import = new w_s_schuelerimport("t_s_schueler", true);
+                            Form import = new w_s_schuelerimport("t_s_schueler", true, currentUser);
                             this.Hide();
                             import.ShowDialog(this);
                             this.Show();

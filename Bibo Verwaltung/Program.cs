@@ -27,6 +27,7 @@ namespace Bibo_Verwaltung
         static void Main()
         {
             //Process.Start(@"C:\Users\Laurenz\Documents\GitHub\GameDev\Bibo Verwaltung\bin\Debug\ScreenSize.exe");
+            Process.Start("ScreenSize.exe");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new w_s_login());

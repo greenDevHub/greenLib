@@ -24,7 +24,6 @@ namespace Bibo_Verwaltung
         #region Constructor
         public w_s_main(string userName)
         {
-            this.currentUser = userName;
             InitializeComponent();
             timer.Start();
             picBox = new PictureBox();
@@ -35,6 +34,7 @@ namespace Bibo_Verwaltung
             picBox.SizeMode = PictureBoxSizeMode.StretchImage;
             Benutzer user = new Benutzer(userName);
             this.Text = "     Bibliotheksverwaltung - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+            this.currentUser = userName + " (" + user.Rechte + ")";
             if (user.Rechteid.Equals("0") || user.Rechteid.Equals("1"))
             {
                 mT_Benutzerverwaltung.Enabled = false;

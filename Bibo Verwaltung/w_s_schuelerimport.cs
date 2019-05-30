@@ -18,6 +18,7 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_schuelerimport : MetroFramework.Forms.MetroForm
     {
+        string currentUser;
         char seperator = ';';
         char feldquali = '"';
         char dattrenn = '.';
@@ -42,8 +43,9 @@ namespace Bibo_Verwaltung
         List<string> files = new List<string>();
         List<string> filesShort = new List<string>();
         int errors = 0;
-        public w_s_schuelerimport(string target, bool modus)
+        public w_s_schuelerimport(string target, bool modus, string userName)
         {
+            this.currentUser = userName;
             this.target = target;
             InitializeComponent();
             tb_lines.Text = "0";
@@ -52,6 +54,7 @@ namespace Bibo_Verwaltung
             ImportMode();
             CheckSelected();
             SetSlider();
+            this.Text = Text + " - Angemeldet als: " + userName;
             timer1.Start();
         }
         /// <summary>
