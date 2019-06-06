@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,7 +39,7 @@ namespace Bibo_Verwaltung
             if (aenderungungen == true)
             {
                 gv_Sprachen.EndEdit();
-                DialogResult dr = MessageBox.Show("Sollen die Änderungen gespeichert werden?", "Warnung", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                DialogResult dr = MetroMessageBox.Show(this,"Sollen die Änderungen gespeichert werden?", "Warnung", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (dr == DialogResult.Yes)
                 {
                     try
@@ -48,7 +49,7 @@ namespace Bibo_Verwaltung
                     }
                     catch
                     {
-                        MessageBox.Show("Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MetroMessageBox.Show(this,"Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else if (dr == DialogResult.Cancel)
@@ -67,7 +68,7 @@ namespace Bibo_Verwaltung
             }
             catch
             {
-                MessageBox.Show("Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this,"Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -199,7 +200,7 @@ namespace Bibo_Verwaltung
             {
                 if (s == gv_Sprachen.Rows[i].Cells[1].Value.ToString())
                 {
-                    MessageBox.Show("Dieser Eintrag ist bereits vorhanden!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MetroMessageBox.Show(this,"Dieser Eintrag ist bereits vorhanden!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     gv_Sprachen.Rows.RemoveAt(e.RowIndex);
                     return;
                 }

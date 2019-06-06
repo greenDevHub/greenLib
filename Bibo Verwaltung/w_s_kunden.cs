@@ -70,7 +70,7 @@ namespace Bibo_Verwaltung
             kunde.Hausnummer = tb_Hausnummer.Text;
             kunde.Postleitzahl = tb_Postleitzahl.Text;
             kunde.Ort = tb_Ort.Text;
-            kunde.Klasse = tb_Klasse.Text;
+            kunde.Klasse.Klassename = tb_Klasse.Text;
             kunde.Mail = tb_Mail.Text;
             kunde.Telefonnummer = tb_Telefonnummer.Text;
             kunde.Faecher.Clear();
@@ -345,13 +345,13 @@ namespace Bibo_Verwaltung
                     }
                     catch (SqlException)
                     {
-                        MessageBox.Show("Der Kunde konnte nicht gespeichert werden!", "Error",
+                        MetroMessageBox.Show(this,"Der Kunde konnte nicht gespeichert werden!", "Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Füllen Sie die markierten Felder aus, um einen Kunden zu speichern!", "Achtung",
+                    MetroMessageBox.Show(this,"Füllen Sie die markierten Felder aus, um einen Kunden zu speichern!", "Achtung",
                          MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     SetBackground_Red();
                 }
@@ -382,13 +382,13 @@ namespace Bibo_Verwaltung
                     }
                     catch (SqlException)
                     {
-                        MessageBox.Show("Der Kunde konnte nicht gelöscht werden!", "Error",
+                        MetroMessageBox.Show(this,"Der Kunde konnte nicht gelöscht werden!", "Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Füllen Sie das markierte Felder aus, um einen Kunden zu löschen!", "Achtung",
+                    MetroMessageBox.Show(this,"Füllen Sie das markierte Felder aus, um einen Kunden zu löschen!", "Achtung",
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     if (tb_KundenID.Text.Equals(""))
                     {
@@ -452,7 +452,7 @@ namespace Bibo_Verwaltung
                     }
                     if (error)
                     {
-                        MessageBox.Show(errorMessage, "Fehler!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MetroMessageBox.Show(this,errorMessage, "Fehler!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     try
@@ -518,13 +518,13 @@ namespace Bibo_Verwaltung
                     }
                     catch (SqlException ex)
                     {
-                        MessageBox.Show(ex.Message + "Der Kunde konnte nicht hinzugefügt werden!", "Error",
+                        MetroMessageBox.Show(this,ex.Message + "Der Kunde konnte nicht hinzugefügt werden!", "Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Füllen Sie alle Felder aus, um einen neuen Kunden hinzuzufügen!", "Achtung",
+                    MetroMessageBox.Show(this,"Füllen Sie alle Felder aus, um einen neuen Kunden hinzuzufügen!", "Achtung",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     SetBackground_Red();
                 }
@@ -647,7 +647,7 @@ namespace Bibo_Verwaltung
             tb_Hausnummer.Text = kunde.Hausnummer;
             tb_Postleitzahl.Text = kunde.Postleitzahl;
             tb_Ort.Text = kunde.Ort;
-            tb_Klasse.Text = kunde.Klasse;
+            tb_Klasse.Text = kunde.Klasse.Klassename;
             tb_Mail.Text = kunde.Mail;
             tb_Telefonnummer.Text = kunde.Telefonnummer;
             if (kunde.Faecher.Count > 0)

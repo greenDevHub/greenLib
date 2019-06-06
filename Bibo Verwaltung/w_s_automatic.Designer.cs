@@ -63,9 +63,10 @@
             // 
             // lb_Jahr
             // 
-            this.lb_Jahr.Location = new System.Drawing.Point(204, 83);
+            this.lb_Jahr.Location = new System.Drawing.Point(272, 102);
+            this.lb_Jahr.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_Jahr.Name = "lb_Jahr";
-            this.lb_Jahr.Size = new System.Drawing.Size(109, 24);
+            this.lb_Jahr.Size = new System.Drawing.Size(145, 30);
             this.lb_Jahr.Style = MetroFramework.MetroColorStyle.Yellow;
             this.lb_Jahr.TabIndex = 1;
             this.lb_Jahr.Text = "für das Schuljahr:";
@@ -104,7 +105,8 @@
             this.gv_Schueler.EnableHeadersVisualStyles = false;
             this.gv_Schueler.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_Schueler.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_Schueler.Location = new System.Drawing.Point(23, 137);
+            this.gv_Schueler.Location = new System.Drawing.Point(31, 169);
+            this.gv_Schueler.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gv_Schueler.MultiSelect = false;
             this.gv_Schueler.Name = "gv_Schueler";
             this.gv_Schueler.ReadOnly = true;
@@ -124,7 +126,7 @@
             this.gv_Schueler.ShowCellToolTips = false;
             this.gv_Schueler.ShowEditingIcon = false;
             this.gv_Schueler.ShowRowErrors = false;
-            this.gv_Schueler.Size = new System.Drawing.Size(300, 336);
+            this.gv_Schueler.Size = new System.Drawing.Size(400, 414);
             this.gv_Schueler.Style = MetroFramework.MetroColorStyle.Yellow;
             this.gv_Schueler.TabIndex = 5;
             this.gv_Schueler.CurrentCellChanged += new System.EventHandler(this.gv_Schueler_SelectionChanged);
@@ -160,7 +162,8 @@
             this.gv_suggested.EnableHeadersVisualStyles = false;
             this.gv_suggested.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_suggested.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_suggested.Location = new System.Drawing.Point(329, 137);
+            this.gv_suggested.Location = new System.Drawing.Point(439, 169);
+            this.gv_suggested.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gv_suggested.MultiSelect = false;
             this.gv_suggested.Name = "gv_suggested";
             this.gv_suggested.ReadOnly = true;
@@ -180,7 +183,7 @@
             this.gv_suggested.ShowCellToolTips = false;
             this.gv_suggested.ShowEditingIcon = false;
             this.gv_suggested.ShowRowErrors = false;
-            this.gv_suggested.Size = new System.Drawing.Size(275, 336);
+            this.gv_suggested.Size = new System.Drawing.Size(367, 414);
             this.gv_suggested.Style = MetroFramework.MetroColorStyle.Yellow;
             this.gv_suggested.TabIndex = 6;
             // 
@@ -216,7 +219,8 @@
             this.gv_selected.EnableHeadersVisualStyles = false;
             this.gv_selected.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_selected.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_selected.Location = new System.Drawing.Point(610, 195);
+            this.gv_selected.Location = new System.Drawing.Point(813, 240);
+            this.gv_selected.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gv_selected.MultiSelect = false;
             this.gv_selected.Name = "gv_selected";
             this.gv_selected.ReadOnly = true;
@@ -236,16 +240,17 @@
             this.gv_selected.ShowCellToolTips = false;
             this.gv_selected.ShowEditingIcon = false;
             this.gv_selected.ShowRowErrors = false;
-            this.gv_selected.Size = new System.Drawing.Size(275, 278);
+            this.gv_selected.Size = new System.Drawing.Size(367, 342);
             this.gv_selected.Style = MetroFramework.MetroColorStyle.Yellow;
             this.gv_selected.TabIndex = 7;
             // 
             // lb_Anweisung1
             // 
             this.lb_Anweisung1.AutoSize = true;
-            this.lb_Anweisung1.Location = new System.Drawing.Point(23, 57);
+            this.lb_Anweisung1.Location = new System.Drawing.Point(31, 70);
+            this.lb_Anweisung1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_Anweisung1.Name = "lb_Anweisung1";
-            this.lb_Anweisung1.Size = new System.Drawing.Size(784, 19);
+            this.lb_Anweisung1.Size = new System.Drawing.Size(834, 20);
             this.lb_Anweisung1.TabIndex = 8;
             this.lb_Anweisung1.Text = "Wählen Sie den Ausgabemodus und das Datum der Buchrückgabe am Ende des Schuljahre" +
     "s für die automatisierte Lehrbuchausgabe:";
@@ -254,9 +259,10 @@
             // lb_Schueler
             // 
             this.lb_Schueler.AutoSize = true;
-            this.lb_Schueler.Location = new System.Drawing.Point(23, 115);
+            this.lb_Schueler.Location = new System.Drawing.Point(31, 142);
+            this.lb_Schueler.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_Schueler.Name = "lb_Schueler";
-            this.lb_Schueler.Size = new System.Drawing.Size(76, 19);
+            this.lb_Schueler.Size = new System.Drawing.Size(82, 20);
             this.lb_Schueler.Style = MetroFramework.MetroColorStyle.Yellow;
             this.lb_Schueler.TabIndex = 12;
             this.lb_Schueler.Text = "Schülerliste:";
@@ -264,9 +270,10 @@
             // lb_suggested
             // 
             this.lb_suggested.AutoSize = true;
-            this.lb_suggested.Location = new System.Drawing.Point(329, 115);
+            this.lb_suggested.Location = new System.Drawing.Point(439, 142);
+            this.lb_suggested.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_suggested.Name = "lb_suggested";
-            this.lb_suggested.Size = new System.Drawing.Size(148, 19);
+            this.lb_suggested.Size = new System.Drawing.Size(160, 20);
             this.lb_suggested.Style = MetroFramework.MetroColorStyle.Yellow;
             this.lb_suggested.TabIndex = 13;
             this.lb_suggested.Text = "vorgeschlagene Bücher:";
@@ -274,9 +281,10 @@
             // lb_selected
             // 
             this.lb_selected.AutoSize = true;
-            this.lb_selected.Location = new System.Drawing.Point(610, 173);
+            this.lb_selected.Location = new System.Drawing.Point(813, 213);
+            this.lb_selected.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_selected.Name = "lb_selected";
-            this.lb_selected.Size = new System.Drawing.Size(128, 19);
+            this.lb_selected.Size = new System.Drawing.Size(138, 20);
             this.lb_selected.Style = MetroFramework.MetroColorStyle.Yellow;
             this.lb_selected.TabIndex = 14;
             this.lb_selected.Text = "ausgewählte Bücher:";
@@ -286,9 +294,10 @@
             this.bt_next.DisplayFocus = true;
             this.bt_next.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_next.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_next.Location = new System.Drawing.Point(193, 479);
+            this.bt_next.Location = new System.Drawing.Point(257, 590);
+            this.bt_next.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bt_next.Name = "bt_next";
-            this.bt_next.Size = new System.Drawing.Size(120, 23);
+            this.bt_next.Size = new System.Drawing.Size(160, 28);
             this.bt_next.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_next.TabIndex = 7;
             this.bt_next.Text = "nächster Schüler";
@@ -300,9 +309,10 @@
             this.bt_bestaetigen.DisplayFocus = true;
             this.bt_bestaetigen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_bestaetigen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_bestaetigen.Location = new System.Drawing.Point(741, 82);
+            this.bt_bestaetigen.Location = new System.Drawing.Point(988, 101);
+            this.bt_bestaetigen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bt_bestaetigen.Name = "bt_bestaetigen";
-            this.bt_bestaetigen.Size = new System.Drawing.Size(144, 24);
+            this.bt_bestaetigen.Size = new System.Drawing.Size(192, 30);
             this.bt_bestaetigen.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_bestaetigen.TabIndex = 4;
             this.bt_bestaetigen.Text = "Schüler laden";
@@ -315,9 +325,10 @@
             this.bt_abschließen.Enabled = false;
             this.bt_abschließen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_abschließen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_abschließen.Location = new System.Drawing.Point(710, 479);
+            this.bt_abschließen.Location = new System.Drawing.Point(947, 590);
+            this.bt_abschließen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bt_abschließen.Name = "bt_abschließen";
-            this.bt_abschließen.Size = new System.Drawing.Size(175, 23);
+            this.bt_abschließen.Size = new System.Drawing.Size(233, 28);
             this.bt_abschließen.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_abschließen.TabIndex = 8;
             this.bt_abschließen.Text = "Ausleihvorgang starten";
@@ -329,9 +340,10 @@
             this.bt_back.DisplayFocus = true;
             this.bt_back.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_back.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_back.Location = new System.Drawing.Point(23, 479);
+            this.bt_back.Location = new System.Drawing.Point(31, 590);
+            this.bt_back.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bt_back.Name = "bt_back";
-            this.bt_back.Size = new System.Drawing.Size(120, 23);
+            this.bt_back.Size = new System.Drawing.Size(160, 28);
             this.bt_back.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_back.TabIndex = 6;
             this.bt_back.Text = "vorheriger Schüler";
@@ -344,9 +356,10 @@
             // 
             // 
             this.tb_ExemplarID.CustomButton.Image = null;
-            this.tb_ExemplarID.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_ExemplarID.CustomButton.Location = new System.Drawing.Point(273, 2);
+            this.tb_ExemplarID.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_ExemplarID.CustomButton.Name = "";
-            this.tb_ExemplarID.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_ExemplarID.CustomButton.Size = new System.Drawing.Size(33, 31);
             this.tb_ExemplarID.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.tb_ExemplarID.CustomButton.TabIndex = 1;
             this.tb_ExemplarID.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -355,7 +368,8 @@
             this.tb_ExemplarID.Enabled = false;
             this.tb_ExemplarID.ForeColor = System.Drawing.SystemColors.GrayText;
             this.tb_ExemplarID.Lines = new string[0];
-            this.tb_ExemplarID.Location = new System.Drawing.Point(710, 137);
+            this.tb_ExemplarID.Location = new System.Drawing.Point(947, 169);
+            this.tb_ExemplarID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_ExemplarID.MaxLength = 32767;
             this.tb_ExemplarID.Name = "tb_ExemplarID";
             this.tb_ExemplarID.PasswordChar = '\0';
@@ -365,7 +379,7 @@
             this.tb_ExemplarID.SelectionLength = 0;
             this.tb_ExemplarID.SelectionStart = 0;
             this.tb_ExemplarID.ShortcutsEnabled = true;
-            this.tb_ExemplarID.Size = new System.Drawing.Size(175, 24);
+            this.tb_ExemplarID.Size = new System.Drawing.Size(233, 30);
             this.tb_ExemplarID.Style = MetroFramework.MetroColorStyle.Yellow;
             this.tb_ExemplarID.TabIndex = 5;
             this.tb_ExemplarID.UseSelectable = true;
@@ -376,9 +390,10 @@
             // 
             // lb_ExID
             // 
-            this.lb_ExID.Location = new System.Drawing.Point(610, 137);
+            this.lb_ExID.Location = new System.Drawing.Point(813, 169);
+            this.lb_ExID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_ExID.Name = "lb_ExID";
-            this.lb_ExID.Size = new System.Drawing.Size(94, 24);
+            this.lb_ExID.Size = new System.Drawing.Size(125, 30);
             this.lb_ExID.Style = MetroFramework.MetroColorStyle.Yellow;
             this.lb_ExID.TabIndex = 22;
             this.lb_ExID.Text = "Exemplar ID:";
@@ -386,9 +401,10 @@
             // 
             // lb_Klasse
             // 
-            this.lb_Klasse.Location = new System.Drawing.Point(504, 82);
+            this.lb_Klasse.Location = new System.Drawing.Point(672, 101);
+            this.lb_Klasse.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_Klasse.Name = "lb_Klasse";
-            this.lb_Klasse.Size = new System.Drawing.Size(50, 24);
+            this.lb_Klasse.Size = new System.Drawing.Size(67, 30);
             this.lb_Klasse.Style = MetroFramework.MetroColorStyle.Yellow;
             this.lb_Klasse.TabIndex = 23;
             this.lb_Klasse.Text = "Klasse:";
@@ -398,10 +414,11 @@
             // 
             this.dp_RueckDatum.CustomFormat = " dd : MMMM : yyyy";
             this.dp_RueckDatum.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dp_RueckDatum.Location = new System.Drawing.Point(319, 79);
-            this.dp_RueckDatum.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dp_RueckDatum.Location = new System.Drawing.Point(425, 97);
+            this.dp_RueckDatum.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dp_RueckDatum.MinimumSize = new System.Drawing.Size(0, 30);
             this.dp_RueckDatum.Name = "dp_RueckDatum";
-            this.dp_RueckDatum.Size = new System.Drawing.Size(179, 29);
+            this.dp_RueckDatum.Size = new System.Drawing.Size(237, 30);
             this.dp_RueckDatum.TabIndex = 2;
             this.dp_RueckDatum.ValueChanged += new System.EventHandler(this.dp_RueckDatum_ValueChanged);
             // 
@@ -415,11 +432,12 @@
             this.a_cb_Klasse.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.a_cb_Klasse.ForeColor = System.Drawing.SystemColors.GrayText;
             this.a_cb_Klasse.FormattingEnabled = true;
-            this.a_cb_Klasse.HighlightColor = System.Drawing.Color.Yellow;
+            this.a_cb_Klasse.HighlightColor = System.Drawing.Color.Gold;
             this.a_cb_Klasse.ItemHeight = 18;
-            this.a_cb_Klasse.Location = new System.Drawing.Point(560, 82);
+            this.a_cb_Klasse.Location = new System.Drawing.Point(747, 101);
+            this.a_cb_Klasse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.a_cb_Klasse.Name = "a_cb_Klasse";
-            this.a_cb_Klasse.Size = new System.Drawing.Size(175, 24);
+            this.a_cb_Klasse.Size = new System.Drawing.Size(232, 24);
             this.a_cb_Klasse.Sorted = true;
             this.a_cb_Klasse.TabIndex = 3;
             this.a_cb_Klasse.Text = "Klasse";
@@ -434,14 +452,15 @@
             this.a_cb_Modus.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.a_cb_Modus.ForeColor = System.Drawing.SystemColors.GrayText;
             this.a_cb_Modus.FormattingEnabled = true;
-            this.a_cb_Modus.HighlightColor = System.Drawing.Color.Yellow;
+            this.a_cb_Modus.HighlightColor = System.Drawing.Color.Gold;
             this.a_cb_Modus.ItemHeight = 18;
             this.a_cb_Modus.Items.AddRange(new object[] {
             "Ausgabe nach Klasse",
             "Ausgabe nach Klassenstufe"});
-            this.a_cb_Modus.Location = new System.Drawing.Point(23, 82);
+            this.a_cb_Modus.Location = new System.Drawing.Point(31, 101);
+            this.a_cb_Modus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.a_cb_Modus.Name = "a_cb_Modus";
-            this.a_cb_Modus.Size = new System.Drawing.Size(175, 24);
+            this.a_cb_Modus.Size = new System.Drawing.Size(232, 24);
             this.a_cb_Modus.Sorted = true;
             this.a_cb_Modus.TabIndex = 1;
             this.a_cb_Modus.Text = "Modus";
@@ -449,9 +468,9 @@
             // 
             // w_s_automatic
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(908, 525);
+            this.ClientSize = new System.Drawing.Size(1211, 646);
             this.Controls.Add(this.a_cb_Klasse);
             this.Controls.Add(this.dp_RueckDatum);
             this.Controls.Add(this.lb_Klasse);
@@ -471,8 +490,10 @@
             this.Controls.Add(this.gv_Schueler);
             this.Controls.Add(this.lb_Jahr);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "w_s_automatic";
+            this.Padding = new System.Windows.Forms.Padding(27, 74, 27, 25);
             this.Resizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Yellow;

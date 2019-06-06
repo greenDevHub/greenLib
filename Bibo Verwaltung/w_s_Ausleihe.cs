@@ -176,7 +176,7 @@ namespace Bibo_Verwaltung
                         //    //    }
                         //    //    catch
                         //    //    {
-                        //    //        MessageBox.Show("Das Buchcover wurde nicht gefunden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //    //        MetroMessageBox.Show(this,"Das Buchcover wurde nicht gefunden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         //    //    }
                         //    //}
                         //    //else

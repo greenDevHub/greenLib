@@ -55,7 +55,6 @@
             this.tb_Auflage = new MetroFramework.Controls.MetroTextBox();
             this.lb_Sprache = new MetroFramework.Controls.MetroLabel();
             this.tb_Neupreis = new MetroFramework.Controls.MetroTextBox();
-            this.comboBox1 = new Bibo_Verwaltung.AdvancedComboBox();
             this.rb_Update_Buch = new MetroFramework.Controls.MetroRadioButton();
             this.rb_Add_Buch = new MetroFramework.Controls.MetroRadioButton();
             this.rb_Delete_Buch = new MetroFramework.Controls.MetroRadioButton();
@@ -80,15 +79,16 @@
             this.bt_Excel = new MetroFramework.Controls.MetroButton();
             this.gb_zoom = new MetroFramework.Controls.MetroPanel();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
+            this.checkedListBox1 = new Bibo_Verwaltung.AdvancedCheckedListBox();
+            this.comboBox1 = new Bibo_Verwaltung.AdvancedComboBox();
             this.cb_Autor = new Bibo_Verwaltung.AdvancedComboBox();
             this.cb_Verlag = new Bibo_Verwaltung.AdvancedComboBox();
             this.cb_Genre = new Bibo_Verwaltung.AdvancedComboBox();
             this.cb_Sprache = new Bibo_Verwaltung.AdvancedComboBox();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.checkedListBox1 = new Bibo_Verwaltung.AdvancedCheckedListBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).BeginInit();
@@ -218,7 +218,7 @@
             this.lb_anzahl.Margin = new System.Windows.Forms.Padding(3);
             this.lb_anzahl.Name = "lb_anzahl";
             this.helpProvider.SetShowHelp(this.lb_anzahl, true);
-            this.lb_anzahl.Size = new System.Drawing.Size(117, 19);
+            this.lb_anzahl.Size = new System.Drawing.Size(123, 20);
             this.lb_anzahl.TabIndex = 49;
             this.lb_anzahl.Text = "Anzahl Exemplare:";
             // 
@@ -279,7 +279,7 @@
             this.lb_Erscheinungsdatum.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Erscheinungsdatum.Name = "lb_Erscheinungsdatum";
             this.helpProvider.SetShowHelp(this.lb_Erscheinungsdatum, true);
-            this.lb_Erscheinungsdatum.Size = new System.Drawing.Size(130, 19);
+            this.lb_Erscheinungsdatum.Size = new System.Drawing.Size(140, 20);
             this.lb_Erscheinungsdatum.TabIndex = 20;
             this.lb_Erscheinungsdatum.Text = "Erscheinungsdatum:*";
             // 
@@ -291,14 +291,14 @@
             this.lb_Auflage.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Auflage.Name = "lb_Auflage";
             this.helpProvider.SetShowHelp(this.lb_Auflage, true);
-            this.lb_Auflage.Size = new System.Drawing.Size(54, 19);
+            this.lb_Auflage.Size = new System.Drawing.Size(56, 20);
             this.lb_Auflage.TabIndex = 18;
             this.lb_Auflage.Text = "Auflage";
             // 
             // lb_Neupreis_Euro
             // 
             this.lb_Neupreis_Euro.AutoSize = true;
-            this.lb_Neupreis_Euro.Location = new System.Drawing.Point(419, 208);
+            this.lb_Neupreis_Euro.Location = new System.Drawing.Point(419, 238);
             this.lb_Neupreis_Euro.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Neupreis_Euro.MinimumSize = new System.Drawing.Size(22, 24);
             this.lb_Neupreis_Euro.Name = "lb_Neupreis_Euro";
@@ -331,7 +331,7 @@
             this.lb_Neupreis.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Neupreis.Name = "lb_Neupreis";
             this.helpProvider.SetShowHelp(this.lb_Neupreis, true);
-            this.lb_Neupreis.Size = new System.Drawing.Size(64, 19);
+            this.lb_Neupreis.Size = new System.Drawing.Size(69, 20);
             this.lb_Neupreis.TabIndex = 3;
             this.lb_Neupreis.Text = "Neupreis:";
             // 
@@ -378,10 +378,10 @@
             this.dTP_Erscheinungsdatum.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dTP_Erscheinungsdatum.Location = new System.Drawing.Point(183, 268);
             this.dTP_Erscheinungsdatum.MaximumSize = new System.Drawing.Size(376, 30);
-            this.dTP_Erscheinungsdatum.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dTP_Erscheinungsdatum.MinimumSize = new System.Drawing.Size(0, 30);
             this.dTP_Erscheinungsdatum.Name = "dTP_Erscheinungsdatum";
             this.helpProvider.SetShowHelp(this.dTP_Erscheinungsdatum, true);
-            this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(230, 29);
+            this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(230, 30);
             this.dTP_Erscheinungsdatum.TabIndex = 12;
             // 
             // tb_Auflage
@@ -429,7 +429,7 @@
             this.lb_Sprache.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Sprache.Name = "lb_Sprache";
             this.helpProvider.SetShowHelp(this.lb_Sprache, true);
-            this.lb_Sprache.Size = new System.Drawing.Size(65, 19);
+            this.lb_Sprache.Size = new System.Drawing.Size(68, 20);
             this.lb_Sprache.TabIndex = 14;
             this.lb_Sprache.Text = "Sprache:*";
             // 
@@ -472,24 +472,6 @@
             this.tb_Neupreis.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_Neupreis_KeyPress);
             this.tb_Neupreis.Leave += new System.EventHandler(this.tb_Neupreis_Leave);
             // 
-            // comboBox1
-            // 
-            this.comboBox1.BackColor = System.Drawing.Color.White;
-            this.comboBox1.BorderColor = System.Drawing.Color.Gray;
-            this.comboBox1.DataRowView = true;
-            this.comboBox1.DropDownHeight = 1;
-            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.HighlightColor = System.Drawing.Color.Gray;
-            this.comboBox1.IntegralHeight = false;
-            this.comboBox1.ItemHeight = 18;
-            this.comboBox1.Location = new System.Drawing.Point(395, 88);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.comboBox1.Size = new System.Drawing.Size(18, 24);
-            this.comboBox1.TabIndex = 53;
-            this.comboBox1.Click += new System.EventHandler(this.comboBox1_Click);
-            // 
             // rb_Update_Buch
             // 
             this.rb_Update_Buch.AutoSize = true;
@@ -500,7 +482,7 @@
             this.rb_Update_Buch.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_Update_Buch.Name = "rb_Update_Buch";
             this.helpProvider.SetShowHelp(this.rb_Update_Buch, true);
-            this.rb_Update_Buch.Size = new System.Drawing.Size(88, 19);
+            this.rb_Update_Buch.Size = new System.Drawing.Size(92, 20);
             this.rb_Update_Buch.TabIndex = 43;
             this.rb_Update_Buch.Text = "Bearbeiten";
             this.rb_Update_Buch.UseSelectable = true;
@@ -517,7 +499,7 @@
             this.rb_Add_Buch.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_Add_Buch.Name = "rb_Add_Buch";
             this.helpProvider.SetShowHelp(this.rb_Add_Buch, true);
-            this.rb_Add_Buch.Size = new System.Drawing.Size(90, 19);
+            this.rb_Add_Buch.Size = new System.Drawing.Size(97, 20);
             this.rb_Add_Buch.TabIndex = 41;
             this.rb_Add_Buch.TabStop = true;
             this.rb_Add_Buch.Text = "Hinzufügen";
@@ -534,7 +516,7 @@
             this.rb_Delete_Buch.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_Delete_Buch.Name = "rb_Delete_Buch";
             this.helpProvider.SetShowHelp(this.rb_Delete_Buch, true);
-            this.rb_Delete_Buch.Size = new System.Drawing.Size(80, 19);
+            this.rb_Delete_Buch.Size = new System.Drawing.Size(86, 20);
             this.rb_Delete_Buch.TabIndex = 42;
             this.rb_Delete_Buch.Text = "Entfernen";
             this.rb_Delete_Buch.UseSelectable = true;
@@ -564,7 +546,7 @@
             this.lb_Verlag.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Verlag.Name = "lb_Verlag";
             this.helpProvider.SetShowHelp(this.lb_Verlag, true);
-            this.lb_Verlag.Size = new System.Drawing.Size(55, 19);
+            this.lb_Verlag.Size = new System.Drawing.Size(57, 20);
             this.lb_Verlag.TabIndex = 10;
             this.lb_Verlag.Text = "Verlag:*";
             // 
@@ -576,7 +558,7 @@
             this.lb_Autor.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Autor.Name = "lb_Autor";
             this.helpProvider.SetShowHelp(this.lb_Autor, true);
-            this.lb_Autor.Size = new System.Drawing.Size(49, 19);
+            this.lb_Autor.Size = new System.Drawing.Size(50, 20);
             this.lb_Autor.TabIndex = 8;
             this.lb_Autor.Text = "Autor:\'";
             // 
@@ -620,7 +602,7 @@
             this.lb_Genre.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Genre.Name = "lb_Genre";
             this.helpProvider.SetShowHelp(this.lb_Genre, true);
-            this.lb_Genre.Size = new System.Drawing.Size(53, 19);
+            this.lb_Genre.Size = new System.Drawing.Size(57, 20);
             this.lb_Genre.TabIndex = 5;
             this.lb_Genre.Text = "Genre:*";
             // 
@@ -670,7 +652,7 @@
             this.lb_Titel.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Titel.Name = "lb_Titel";
             this.helpProvider.SetShowHelp(this.lb_Titel, true);
-            this.lb_Titel.Size = new System.Drawing.Size(42, 19);
+            this.lb_Titel.Size = new System.Drawing.Size(44, 20);
             this.lb_Titel.TabIndex = 3;
             this.lb_Titel.Text = "Titel:*";
             // 
@@ -722,7 +704,7 @@
             this.lb_ISBN.Margin = new System.Windows.Forms.Padding(3);
             this.lb_ISBN.Name = "lb_ISBN";
             this.helpProvider.SetShowHelp(this.lb_ISBN, true);
-            this.lb_ISBN.Size = new System.Drawing.Size(46, 19);
+            this.lb_ISBN.Size = new System.Drawing.Size(47, 20);
             this.lb_ISBN.TabIndex = 1;
             this.lb_ISBN.Text = "ISBN:*";
             // 
@@ -821,26 +803,26 @@
             this.entfernenToolStripMenuItem,
             this.exemplareToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(129, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 76);
             // 
             // ladenToolStripMenuItem
             // 
             this.ladenToolStripMenuItem.Name = "ladenToolStripMenuItem";
-            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.ladenToolStripMenuItem.Text = "Laden";
             this.ladenToolStripMenuItem.Click += new System.EventHandler(this.ladenToolStripMenuItem_Click);
             // 
             // entfernenToolStripMenuItem
             // 
             this.entfernenToolStripMenuItem.Name = "entfernenToolStripMenuItem";
-            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.entfernenToolStripMenuItem.Text = "Entfernen";
             this.entfernenToolStripMenuItem.Click += new System.EventHandler(this.entfernenToolStripMenuItem_Click);
             // 
             // exemplareToolStripMenuItem
             // 
             this.exemplareToolStripMenuItem.Name = "exemplareToolStripMenuItem";
-            this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.exemplareToolStripMenuItem.Text = "Exemplare";
             this.exemplareToolStripMenuItem.Click += new System.EventHandler(this.exemplareToolStripMenuItem_Click);
             // 
@@ -890,6 +872,114 @@
             this.gb_zoom.VerticalScrollbarBarColor = true;
             this.gb_zoom.VerticalScrollbarHighlightOnWheel = false;
             this.gb_zoom.VerticalScrollbarSize = 8;
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.helpProvider.SetHelpString(this.metroLabel1, "Tragen sie die Anzahl der Exemplare ihres Buches hier ein.");
+            this.metroLabel1.Location = new System.Drawing.Point(3, 335);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
+            this.metroLabel1.Name = "metroLabel1";
+            this.helpProvider.SetShowHelp(this.metroLabel1, true);
+            this.metroLabel1.Size = new System.Drawing.Size(34, 20);
+            this.metroLabel1.TabIndex = 55;
+            this.metroLabel1.Text = "Bild:";
+            // 
+            // metroPanel1
+            // 
+            this.metroPanel1.Controls.Add(this.metroLabel1);
+            this.metroPanel1.Controls.Add(this.checkedListBox1);
+            this.metroPanel1.Controls.Add(this.checkbox_autor);
+            this.metroPanel1.Controls.Add(this.rTB_1);
+            this.metroPanel1.Controls.Add(this.bt_clear_buecher);
+            this.metroPanel1.Controls.Add(this.bt_speichern_buecher);
+            this.metroPanel1.Controls.Add(this.lb_anzahl);
+            this.metroPanel1.Controls.Add(this.pictureBox1);
+            this.metroPanel1.Controls.Add(this.bt_pic_delete);
+            this.metroPanel1.Controls.Add(this.bt_picture);
+            this.metroPanel1.Controls.Add(this.comboBox1);
+            this.metroPanel1.Controls.Add(this.tb_anzahl);
+            this.metroPanel1.Controls.Add(this.rb_Add_Buch);
+            this.metroPanel1.Controls.Add(this.rb_Update_Buch);
+            this.metroPanel1.Controls.Add(this.rb_Delete_Buch);
+            this.metroPanel1.Controls.Add(this.button1);
+            this.metroPanel1.Controls.Add(this.lb_Erscheinungsdatum);
+            this.metroPanel1.Controls.Add(this.lb_ISBN);
+            this.metroPanel1.Controls.Add(this.lb_Neupreis);
+            this.metroPanel1.Controls.Add(this.lb_Auflage);
+            this.metroPanel1.Controls.Add(this.tb_ISBN);
+            this.metroPanel1.Controls.Add(this.lb_Neupreis_Euro);
+            this.metroPanel1.Controls.Add(this.dTP_Erscheinungsdatum);
+            this.metroPanel1.Controls.Add(this.bt_Sprache_s);
+            this.metroPanel1.Controls.Add(this.tb_Titel);
+            this.metroPanel1.Controls.Add(this.lb_Sprache);
+            this.metroPanel1.Controls.Add(this.cb_Autor);
+            this.metroPanel1.Controls.Add(this.tb_Auflage);
+            this.metroPanel1.Controls.Add(this.lb_Titel);
+            this.metroPanel1.Controls.Add(this.cb_Verlag);
+            this.metroPanel1.Controls.Add(this.cb_Genre);
+            this.metroPanel1.Controls.Add(this.tb_Neupreis);
+            this.metroPanel1.Controls.Add(this.bt_Autor_s);
+            this.metroPanel1.Controls.Add(this.cb_Sprache);
+            this.metroPanel1.Controls.Add(this.bt_Verlag_s);
+            this.metroPanel1.Controls.Add(this.bt_Genre_s);
+            this.metroPanel1.Controls.Add(this.lb_Genre);
+            this.metroPanel1.Controls.Add(this.lb_Verlag);
+            this.metroPanel1.Controls.Add(this.lb_Autor);
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 8;
+            this.metroPanel1.Location = new System.Drawing.Point(23, 63);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(444, 514);
+            this.metroPanel1.TabIndex = 52;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 8;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // metroProgressBar1
+            // 
+            this.metroProgressBar1.Location = new System.Drawing.Point(0, 0);
+            this.metroProgressBar1.Margin = new System.Windows.Forms.Padding(2);
+            this.metroProgressBar1.Name = "metroProgressBar1";
+            this.metroProgressBar1.Size = new System.Drawing.Size(1200, 5);
+            this.metroProgressBar1.TabIndex = 53;
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.HighlightColor = System.Drawing.Color.Green;
+            this.checkedListBox1.Location = new System.Drawing.Point(183, 111);
+            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(230, 94);
+            this.checkedListBox1.TabIndex = 51;
+            this.checkedListBox1.Visible = false;
+            this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.BackColor = System.Drawing.Color.White;
+            this.comboBox1.BorderColor = System.Drawing.Color.Gray;
+            this.comboBox1.DataRowView = true;
+            this.comboBox1.DropDownHeight = 1;
+            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.HighlightColor = System.Drawing.Color.Gray;
+            this.comboBox1.IntegralHeight = false;
+            this.comboBox1.ItemHeight = 18;
+            this.comboBox1.Location = new System.Drawing.Point(395, 88);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.comboBox1.Size = new System.Drawing.Size(18, 24);
+            this.comboBox1.TabIndex = 53;
+            this.comboBox1.Click += new System.EventHandler(this.comboBox1_Click);
             // 
             // cb_Autor
             // 
@@ -970,96 +1060,6 @@
             this.cb_Sprache.Size = new System.Drawing.Size(230, 24);
             this.cb_Sprache.TabIndex = 8;
             this.cb_Sprache.TextChanged += new System.EventHandler(this.cb_Sprache_TextChanged);
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.helpProvider.SetHelpString(this.metroLabel1, "Tragen sie die Anzahl der Exemplare ihres Buches hier ein.");
-            this.metroLabel1.Location = new System.Drawing.Point(3, 335);
-            this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
-            this.metroLabel1.Name = "metroLabel1";
-            this.helpProvider.SetShowHelp(this.metroLabel1, true);
-            this.metroLabel1.Size = new System.Drawing.Size(34, 19);
-            this.metroLabel1.TabIndex = 55;
-            this.metroLabel1.Text = "Bild:";
-            // 
-            // metroPanel1
-            // 
-            this.metroPanel1.Controls.Add(this.metroLabel1);
-            this.metroPanel1.Controls.Add(this.checkedListBox1);
-            this.metroPanel1.Controls.Add(this.checkbox_autor);
-            this.metroPanel1.Controls.Add(this.rTB_1);
-            this.metroPanel1.Controls.Add(this.bt_clear_buecher);
-            this.metroPanel1.Controls.Add(this.bt_speichern_buecher);
-            this.metroPanel1.Controls.Add(this.lb_anzahl);
-            this.metroPanel1.Controls.Add(this.pictureBox1);
-            this.metroPanel1.Controls.Add(this.bt_pic_delete);
-            this.metroPanel1.Controls.Add(this.bt_picture);
-            this.metroPanel1.Controls.Add(this.comboBox1);
-            this.metroPanel1.Controls.Add(this.tb_anzahl);
-            this.metroPanel1.Controls.Add(this.rb_Add_Buch);
-            this.metroPanel1.Controls.Add(this.rb_Update_Buch);
-            this.metroPanel1.Controls.Add(this.rb_Delete_Buch);
-            this.metroPanel1.Controls.Add(this.button1);
-            this.metroPanel1.Controls.Add(this.lb_Erscheinungsdatum);
-            this.metroPanel1.Controls.Add(this.lb_ISBN);
-            this.metroPanel1.Controls.Add(this.lb_Neupreis);
-            this.metroPanel1.Controls.Add(this.lb_Auflage);
-            this.metroPanel1.Controls.Add(this.tb_ISBN);
-            this.metroPanel1.Controls.Add(this.lb_Neupreis_Euro);
-            this.metroPanel1.Controls.Add(this.dTP_Erscheinungsdatum);
-            this.metroPanel1.Controls.Add(this.bt_Sprache_s);
-            this.metroPanel1.Controls.Add(this.tb_Titel);
-            this.metroPanel1.Controls.Add(this.lb_Sprache);
-            this.metroPanel1.Controls.Add(this.cb_Autor);
-            this.metroPanel1.Controls.Add(this.tb_Auflage);
-            this.metroPanel1.Controls.Add(this.lb_Titel);
-            this.metroPanel1.Controls.Add(this.cb_Verlag);
-            this.metroPanel1.Controls.Add(this.cb_Genre);
-            this.metroPanel1.Controls.Add(this.tb_Neupreis);
-            this.metroPanel1.Controls.Add(this.bt_Autor_s);
-            this.metroPanel1.Controls.Add(this.cb_Sprache);
-            this.metroPanel1.Controls.Add(this.bt_Verlag_s);
-            this.metroPanel1.Controls.Add(this.bt_Genre_s);
-            this.metroPanel1.Controls.Add(this.lb_Genre);
-            this.metroPanel1.Controls.Add(this.lb_Verlag);
-            this.metroPanel1.Controls.Add(this.lb_Autor);
-            this.metroPanel1.HorizontalScrollbarBarColor = true;
-            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 8;
-            this.metroPanel1.Location = new System.Drawing.Point(23, 63);
-            this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(444, 514);
-            this.metroPanel1.TabIndex = 52;
-            this.metroPanel1.VerticalScrollbarBarColor = true;
-            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 8;
-            // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.HighlightColor = System.Drawing.Color.Green;
-            this.checkedListBox1.Location = new System.Drawing.Point(183, 111);
-            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(230, 94);
-            this.checkedListBox1.TabIndex = 51;
-            this.checkedListBox1.Visible = false;
-            this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 1;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // metroProgressBar1
-            // 
-            this.metroProgressBar1.Location = new System.Drawing.Point(0, 0);
-            this.metroProgressBar1.Margin = new System.Windows.Forms.Padding(2);
-            this.metroProgressBar1.Name = "metroProgressBar1";
-            this.metroProgressBar1.Size = new System.Drawing.Size(1200, 5);
-            this.metroProgressBar1.TabIndex = 53;
             // 
             // w_s_buecher
             // 

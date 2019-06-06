@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
+using MetroFramework;
 
 namespace Bibo_Verwaltung
 {
@@ -50,7 +51,7 @@ namespace Bibo_Verwaltung
             cmd = new SqlCommand(sqlQuery, con);
             cmd.Parameters.Add(new SqlParameter("@images", images));
             con.Close();
-            MessageBox.Show("Bild erfolgreich gespeichert");
+            MetroMessageBox.Show(this,"Bild erfolgreich gespeichert");
         }
     }
 }

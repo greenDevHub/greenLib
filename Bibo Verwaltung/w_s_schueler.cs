@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -60,7 +61,7 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
-                    DialogResult result = MessageBox.Show("Dieser Schüler ist bereits vorhanden. Soll der entsprechende Datensatz stattdessen aktualisiert werden?", "Eintrag bereits vorhanden", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult result = MetroMessageBox.Show(this,"Dieser Schüler ist bereits vorhanden. Soll der entsprechende Datensatz stattdessen aktualisiert werden?", "Eintrag bereits vorhanden", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
                         schueler.LoadSchuelerID();
@@ -160,7 +161,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MessageBox.Show("Bitte überprüfen Sie ihre Angaben.", "Fehlende Angaben", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MetroMessageBox.Show(this,"Bitte überprüfen Sie ihre Angaben.", "Fehlende Angaben", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
         }

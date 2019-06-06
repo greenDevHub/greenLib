@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -69,7 +70,8 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MessageBox.Show("Das Feldtrennzeichen ist ungülig! Wählen Sie eines der gültigen Trennzeichen des Auswahlmenüs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                MetroMessageBox.Show(this,"Das Feldtrennzeichen ist ungülig! Wählen Sie eines der gültigen Trennzeichen des Auswahlmenüs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             //Textqualifizierer
@@ -79,7 +81,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MessageBox.Show("Der Textqualifizierer ist ungülig! Wählen Sie einen der gültigen Textqualifizierer des Auswahlmenüs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this,"Der Textqualifizierer ist ungülig! Wählen Sie einen der gültigen Textqualifizierer des Auswahlmenüs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             //Datumstrennzeichen
@@ -89,7 +91,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MessageBox.Show("Das Datumstrennzeichen ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this,"Das Datumstrennzeichen ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             //Zeittrennzeichen
@@ -99,7 +101,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MessageBox.Show("Das Zeittrennzeichen ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this,"Das Zeittrennzeichen ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             //Dezimalsymbol
@@ -109,7 +111,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MessageBox.Show("Das Dezimalsymbol ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this,"Das Dezimalsymbol ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             //Zieltabelle
@@ -162,7 +164,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MessageBox.Show("Der Pfad: " + tb_path.Text + " ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this,"Der Pfad: " + tb_path.Text + " ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 gv_Vorschau.DataSource = null;
                 tb_path.Focus();
             }
@@ -203,7 +205,7 @@ namespace Bibo_Verwaltung
                 else
                 {
                     tb_path.Text = "";
-                    MessageBox.Show("Der angegebene Dateiname ist ungültig. Bitte verwenden sie nur Dateien mit der Endung \'.txt\' oder \'.csv\'!");
+                    MetroMessageBox.Show(this,"Der angegebene Dateiname ist ungültig. Bitte verwenden sie nur Dateien mit der Endung \'.txt\' oder \'.csv\'!");
                     FileDialog();
                 }
             }
@@ -282,11 +284,11 @@ namespace Bibo_Verwaltung
             //{
             getValues();
             startImport();
-            //  MessageBox.Show("Der Daten-Importvorgang wurde beendet.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //  MetroMessageBox.Show(this,"Der Daten-Importvorgang wurde beendet.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //}
             //catch
             //{
-            //    MessageBox.Show("Der Daten-Import ist fehlgeschlagen!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    MetroMessageBox.Show(this,"Der Daten-Import ist fehlgeschlagen!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             //}
             //clearForm();
         }

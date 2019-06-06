@@ -204,20 +204,17 @@ namespace Bibo_Verwaltung
                             if (errorcount > 0)
                             {
                                 throw new Exception("Problem bei Zeile " + errorcount);
-                                MessageBox.Show("Es konnten " + errorcount + " Zeile(n) aufgund eines Formatieringsproblems nicht gelesen werden. Bitte überprüfen Sie die Anzahl der Trennzeichen jeder Zeile und versuchen Sie es erneut!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                         catch(System.NullReferenceException)
                         {
                             throw new Exception("Fehler bei Datei");
-                            MessageBox.Show("Eventuell haben Sie zu viele Zeilen angegeben, die entfernt werden sollen...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
 
                     }
                     else
                     {
                         throw new Exception("Keine Daten");
-                        MessageBox.Show("Diese Datei enthält keine Daten!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -470,13 +467,13 @@ namespace Bibo_Verwaltung
         //                    }
         //                }
         //                sw.Close();
-        //                MessageBox.Show("Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //                MetroMessageBox.Show(this,"Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
         //            }
         //        }
         //    }
         //    catch
         //    {
-        //        MessageBox.Show("Beim Exportvorgang ist ein unbekannter Fehler aufgetreten!", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        MetroMessageBox.Show(this,"Beim Exportvorgang ist ein unbekannter Fehler aufgetreten!", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         //    }
         //}
 

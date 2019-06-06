@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -289,7 +290,7 @@ namespace Bibo_Verwaltung
                                 }
                                 catch
                                 {
-                                    MessageBox.Show("Das Buchcover wurde nicht gefunden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MetroMessageBox.Show(this,"Das Buchcover wurde nicht gefunden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }
                             else
@@ -322,7 +323,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void Buchrueckgabe()
         {
-            DialogResult dialogResult = MessageBox.Show(GetRueckgabeList() + "ausgeliehen von: '" + TrimText(kunde.Vorname + " " + kunde.Nachname) + "' wirklich als zurückgegeben markieren?", "Achtung",
+            DialogResult dialogResult = MetroMessageBox.Show(this,GetRueckgabeList() + "ausgeliehen von: '" + TrimText(kunde.Vorname + " " + kunde.Nachname) + "' wirklich als zurückgegeben markieren?", "Achtung",
                             MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.OK)
             {
@@ -334,11 +335,11 @@ namespace Bibo_Verwaltung
                         rueckgabe.Execute_Rueckgabe(row[0].ToString(), rueckgabe.KID, row[1].ToString(), zustand.GetID(row[1].ToString()), row[2].ToString(), rueckgabe.Leihdatum.ToShortDateString(), DateTime.Now.Date.ToShortDateString());
                         //rueckgabe.Save_Transaction(); In Bearbeitung!!!
                     }
-                    MessageBox.Show("Die Buchrückgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MetroMessageBox.Show(this,"Die Buchrückgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch
                 {
-                    MessageBox.Show("Die Buchrückgabe konnte nicht abgeschlossen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this,"Die Buchrückgabe konnte nicht abgeschlossen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 rueckListe.Clear();
                 SetSlider();
@@ -378,7 +379,7 @@ namespace Bibo_Verwaltung
             }
             catch
             {
-                MessageBox.Show("Beim Hinzufügen dieses Buches zur Buchrückgabeliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this,"Beim Hinzufügen dieses Buches zur Buchrückgabeliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -413,7 +414,7 @@ namespace Bibo_Verwaltung
             }
             catch
             {
-                MessageBox.Show("Beim Entfernen dieses Buches von der Buchrückgabeliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this,"Beim Entfernen dieses Buches von der Buchrückgabeliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -444,7 +445,7 @@ namespace Bibo_Verwaltung
                 {
                     if (bt_Zu_aendern.Text == "Übernehmen")
                     {
-                        DialogResult dr = MessageBox.Show("Möchten Sie die Zustandsänderung übernehmen?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        DialogResult dr = MetroMessageBox.Show(this,"Möchten Sie die Zustandsänderung übernehmen?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (dr == DialogResult.Yes)
                         {
                             zustand_AusleihEnde = cb_Zustand.Text;
@@ -462,7 +463,7 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
-                    MessageBox.Show("Dieses Buch wurde nicht verliehen. Es kann nicht zur Buchrückgabeliste hinzugefügt werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MetroMessageBox.Show(this,"Dieses Buch wurde nicht verliehen. Es kann nicht zur Buchrückgabeliste hinzugefügt werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             if (rueckListe.Rows.Count != 0)
@@ -503,7 +504,7 @@ namespace Bibo_Verwaltung
                     {
                         if (bt_Zu_aendern.Text == "Übernehmen")
                         {
-                            DialogResult dr = MessageBox.Show("Möchten Sie die Zustandsänderung übernehmen?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            DialogResult dr = MetroMessageBox.Show(this,"Möchten Sie die Zustandsänderung übernehmen?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                             if (dr == DialogResult.Yes)
                             {
                                 zustand_AusleihEnde = cb_Zustand.Text;
@@ -526,7 +527,7 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
-                    MessageBox.Show("Dieses Buch wurde nicht verliehen. Es kann nicht zur Buchrückgabeliste hinzugefügt werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MetroMessageBox.Show(this,"Dieses Buch wurde nicht verliehen. Es kann nicht zur Buchrückgabeliste hinzugefügt werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 tb_BuchCode.Focus();
                 tb_BuchCode.SelectAll();

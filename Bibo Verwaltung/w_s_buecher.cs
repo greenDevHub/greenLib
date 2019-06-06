@@ -10,6 +10,7 @@ using System.IO;
 using System.Drawing.Imaging;
 using System.Text;
 using System.Media;
+using MetroFramework;
 
 namespace Bibo_Verwaltung
 {
@@ -84,7 +85,7 @@ namespace Bibo_Verwaltung
         {
             if (IsIsbn(tb_ISBN.Text) == false)
             {
-                MessageBox.Show("Bitte keine Buchstaben eingeben!", "Achtung",
+                MetroMessageBox.Show(this,"Bitte keine Buchstaben eingeben!", "Achtung",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 //nicht erlaubte Zeichen entfernen
                 tb_ISBN.Text = ToIsbn(tb_ISBN.Text);
@@ -227,7 +228,7 @@ namespace Bibo_Verwaltung
             }
             else 
             {
-                DialogResult dialogResult = MessageBox.Show("Die ISBN konnte nicht Verifiziert werden. Trotzdem speichern?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                DialogResult dialogResult = MetroMessageBox.Show(this,"Die ISBN konnte nicht Verifiziert werden. Trotzdem speichern?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                 if (dialogResult == DialogResult.Yes)
                 {
                     b.Add_Buch();
@@ -289,7 +290,7 @@ namespace Bibo_Verwaltung
                 }
                 catch
                 {
-                    MessageBox.Show("Das Buch konnte nicht gespeichert werden!", "Error",
+                    MetroMessageBox.Show(this,"Das Buch konnte nicht gespeichert werden!", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -336,7 +337,7 @@ namespace Bibo_Verwaltung
                 }
                 catch
                 {
-                    MessageBox.Show("Das Buch konnte nicht gespeichert werden!", "Error",
+                    MetroMessageBox.Show(this,"Das Buch konnte nicht gespeichert werden!", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -344,7 +345,7 @@ namespace Bibo_Verwaltung
             {
                 try
                 {
-                    DialogResult dialogResult = MessageBox.Show("Sämtliche zu diesem Buch gehörende Exemplare werden auch aus der Datenbank gelöscht. Fortfahren?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    DialogResult dialogResult = MetroMessageBox.Show(this,"Sämtliche zu diesem Buch gehörende Exemplare werden auch aus der Datenbank gelöscht. Fortfahren?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (dialogResult == DialogResult.Yes)
                     {
 
@@ -363,19 +364,19 @@ namespace Bibo_Verwaltung
                         }
                         else
                         {
-                            MessageBox.Show("Das Buch konnte nicht gelöscht werden, da eines der dazugehörigen Exemplare zur Zeit verliehen ist. Bitte melden Sie dieses zuerst als 'zurückgegeben', bevor Sie das Buch löschen!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MetroMessageBox.Show(this,"Das Buch konnte nicht gelöscht werden, da eines der dazugehörigen Exemplare zur Zeit verliehen ist. Bitte melden Sie dieses zuerst als 'zurückgegeben', bevor Sie das Buch löschen!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                         
                     }
                     else if (dialogResult == DialogResult.No)
                     {
-                        MessageBox.Show("Der Löschvorgang wurde abgebrochen!","Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MetroMessageBox.Show(this,"Der Löschvorgang wurde abgebrochen!","Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     
                 }
                 catch (SqlException)
                 {
-                    MessageBox.Show("Das Buch konnte nicht gelöscht werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this,"Das Buch konnte nicht gelöscht werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else if (rb_Add_Buch.Checked && !checkbox_autor.Checked && !tb_ISBN.Text.Equals("") && !tb_Titel.Text.Equals("") && !cb_Autor.Text.Equals("") && !cb_Verlag.Text.Equals("")
@@ -462,9 +463,9 @@ namespace Bibo_Verwaltung
                     }
 
                 }
-                catch(Exception except)
+                catch
                 {
-                    MessageBox.Show("Das Buch konnte nicht hinzugefügt werden!"+except, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this,"Das Buch konnte nicht hinzugefügt werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else if(rb_Add_Buch.Checked && checkbox_autor.Checked && !tb_ISBN.Text.Equals("") && !tb_Titel.Text.Equals("") && !cb_Autor.Text.Equals("") && !cb_Verlag.Text.Equals("")
@@ -522,18 +523,18 @@ namespace Bibo_Verwaltung
                 }
                 catch
                 {
-                    MessageBox.Show("Das Buch konnte nicht hinzugefügt werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this,"Das Buch konnte nicht hinzugefügt werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else if (rb_Update_Buch.Checked)
             {
-                MessageBox.Show("Füllen Sie die markierten Felder aus, um ein Buch zu speichern!", "Achtung",
+                MetroMessageBox.Show(this,"Füllen Sie die markierten Felder aus, um ein Buch zu speichern!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 IsOK();
             }
             else if (rb_Delete_Buch.Checked)
             {
-                MessageBox.Show("Füllen Sie die markierten Felder aus, um ein Buch zu löschen!", "Achtung",
+                MetroMessageBox.Show(this,"Füllen Sie die markierten Felder aus, um ein Buch zu löschen!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 if (tb_ISBN.Text.Equals(""))
                 {
@@ -546,7 +547,7 @@ namespace Bibo_Verwaltung
             }
             else if (rb_Add_Buch.Checked)
             {
-                MessageBox.Show("Füllen Sie die markierten Felder aus, um ein Buch hinzuzufügen!", "Achtung",
+                MetroMessageBox.Show(this,"Füllen Sie die markierten Felder aus, um ein Buch hinzuzufügen!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 if (tb_ISBN.Text.Equals(""))
                 {
@@ -856,7 +857,7 @@ namespace Bibo_Verwaltung
                     }
                     catch
                     {
-                        MessageBox.Show("Das Bild wurde nicht gefunden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MetroMessageBox.Show(this,"Das Bild wurde nicht gefunden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -975,7 +976,7 @@ namespace Bibo_Verwaltung
                 }
                 catch
                 {
-                    MessageBox.Show("Es konnte kein Bild geladen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this,"Es konnte kein Bild geladen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return "";
                 }
             
@@ -1136,7 +1137,7 @@ namespace Bibo_Verwaltung
         private void bt_picture_Click(object sender, EventArgs e)
         {
             string imgLocation = "";
-            DialogResult dialogResult = MessageBox.Show("Soll das Bild anhand der ISBN automatisch geladen werden?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = MetroMessageBox.Show(this,"Soll das Bild anhand der ISBN automatisch geladen werden?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
                 ValidateISBN();
@@ -1292,15 +1293,15 @@ namespace Bibo_Verwaltung
                 tb_Titel.Text = GetTitle().Replace("[", "(").Replace("]", ")");
                 pictureBox1.ImageLocation = GetPicture();
                 ifDownloaded = true;
-                MessageBox.Show("Das Buch \"" + tb_Titel.Text + "\" wurde erfolgreich geladen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MetroMessageBox.Show(this,"Das Buch \"" + tb_Titel.Text + "\" wurde erfolgreich geladen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if(tb_ISBN.Text.Equals(""))
             {
-                MessageBox.Show("Bitte geben Sie eine ISBN ein!","Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MetroMessageBox.Show(this,"Bitte geben Sie eine ISBN ein!","Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                MessageBox.Show("Es konnten zu dieser ISBN keine Informationen gefunden werden. Bitte überprüfen Sie ihre Eingabe nach Fehlern!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MetroMessageBox.Show(this,"Es konnten zu dieser ISBN keine Informationen gefunden werden. Bitte überprüfen Sie ihre Eingabe nach Fehlern!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -1530,7 +1531,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MessageBox.Show("Das Buch konnte nicht gelöscht werden, da eines der dazugehörigen Exemplare zur Zeit verliehen ist. Bitte melden Sie dieses zuerst als 'zurückgegeben', bevor Sie das Buch löschen!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MetroMessageBox.Show(this,"Das Buch konnte nicht gelöscht werden, da eines der dazugehörigen Exemplare zur Zeit verliehen ist. Bitte melden Sie dieses zuerst als 'zurückgegeben', bevor Sie das Buch löschen!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

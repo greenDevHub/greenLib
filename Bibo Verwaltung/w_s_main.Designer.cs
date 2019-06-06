@@ -345,14 +345,13 @@
             // bt_AutoAusgabe
             // 
             this.bt_AutoAusgabe.ActiveControl = null;
-            this.bt_AutoAusgabe.BackColor = System.Drawing.Color.OliveDrab;
+            this.bt_AutoAusgabe.BackColor = System.Drawing.Color.Gold;
             this.bt_AutoAusgabe.Location = new System.Drawing.Point(6, 167);
             this.bt_AutoAusgabe.Name = "bt_AutoAusgabe";
             this.bt_AutoAusgabe.Size = new System.Drawing.Size(319, 46);
-            this.bt_AutoAusgabe.Style = MetroFramework.MetroColorStyle.Lime;
+            this.bt_AutoAusgabe.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_AutoAusgabe.TabIndex = 18;
             this.bt_AutoAusgabe.Text = "Automatische Buchausgabe";
-            this.bt_AutoAusgabe.UseCustomBackColor = true;
             this.bt_AutoAusgabe.UseSelectable = true;
             this.bt_AutoAusgabe.Click += new System.EventHandler(this.bt_AutoAusgabe_Click);
             // 

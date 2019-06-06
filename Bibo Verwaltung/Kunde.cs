@@ -78,11 +78,11 @@ namespace Bibo_Verwaltung
         /// </summary>
         public string Mail { get { return mail; } set { mail = value; } }
 
-        string klassenstufe;
+        Klasse klasse = new Klasse();
         /// <summary>
         /// Klasse des Kunden
         /// </summary>
-        public string Klasse { get { return klassenstufe; } set { klassenstufe = value; } }
+        public Klasse Klasse { get { return klasse; } set { klasse = value; } }
 
         int leistungskurse;
         /// <summary>
@@ -149,7 +149,7 @@ namespace Bibo_Verwaltung
                 Telefonnummer = dr["kunde_telefonnummer"].ToString();
                 Hausnummer = dr["kunde_hausnummer"].ToString();
                 Mail = dr["kunde_mail"].ToString();
-                Klasse = dr["kunde_klasse"].ToString();
+                Klasse.Klassename = Klasse.GetName(dr["kunde_klasse"].ToString());
                 if (dr["kunde_activated"].ToString().Equals("1"))
                 {
                     Activated = true;
@@ -197,7 +197,7 @@ namespace Bibo_Verwaltung
             try
             {
                 if (con.ConnectError()) return;
-                string RawCommand = "SELECT kunde_ID as 'Kunden-ID', kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_geburtsdatum as 'Geburtsdatum', kunde_strasse as 'Straße', kunde_hausnummer as 'Hausnummer', kunde_postleitzahl as 'Postleitzahl', kunde_ort as 'Wohnort', kunde_klasse as 'Klasse', kunde_mail as 'Mail', kunde_telefonnummer as 'Telefonnummer' FROM [dbo].[t_s_kunden] WHERE kunde_activated = 1";
+                string RawCommand = "SELECT kunde_ID as 'Kunden-ID', kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_geburtsdatum as 'Geburtsdatum', kunde_strasse as 'Straße', kunde_hausnummer as 'Hausnummer', kunde_postleitzahl as 'Postleitzahl', kunde_ort as 'Wohnort', k_bezeichnung as 'Klasse', kunde_mail as 'Mail', kunde_telefonnummer as 'Telefonnummer' FROM [dbo].[t_s_kunden] left join t_s_klassen on k_id=kunde_klasse WHERE kunde_activated = 1";
                 // Verbindung öffnen 
                 adapter = new SqlDataAdapter(RawCommand, con.Con);
                 adapter.Fill(ds);
@@ -249,7 +249,7 @@ namespace Bibo_Verwaltung
                 Hausnummer = row[ds.Tables[0].Columns.IndexOf("Hausnummer")].ToString();
                 Postleitzahl = row[ds.Tables[0].Columns.IndexOf("Postleitzahl")].ToString();
                 Ort = row[ds.Tables[0].Columns.IndexOf("Wohnort")].ToString();
-                Klasse = row[ds.Tables[0].Columns.IndexOf("Klasse")].ToString();
+                Klasse.Klassename = row[ds.Tables[0].Columns.IndexOf("Klasse")].ToString();
                 Mail = row[ds.Tables[0].Columns.IndexOf("Mail")].ToString();
                 Telefonnummer = row[ds.Tables[0].Columns.IndexOf("Telefonnummer")].ToString();
                 LoadFaecher();
@@ -262,7 +262,7 @@ namespace Bibo_Verwaltung
                 dataRow["Hausnummer"] = Hausnummer;
                 dataRow["Postleitzahl"] = Postleitzahl;
                 dataRow["Wohnort"] = Ort;
-                dataRow["Klasse"] = Klasse;
+                dataRow["Klasse"] = Klasse.Klassename;
                 dataRow["Mail"] = Mail;
                 dataRow["Telefonnummer"] = Telefonnummer;
                 string fach = "";
@@ -331,7 +331,9 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void AddKunde()
         {
+
             {
+                Klasse.AddKlasse(Klasse.Klassename);
                 string RawCommand = "INSERT INTO [dbo].[t_s_kunden] (kunde_vorname, kunde_nachname, kunde_geburtsdatum, kunde_ort, kunde_postleitzahl, kunde_strasse, kunde_telefonnummer, kunde_hausnummer, kunde_mail, kunde_klasse, kunde_activated) VALUES (@vorname, @nachname, @gd, @ort, @postleitzahl, @strasse, @telefonnummer, @hausnummer, @mail, @klasse, 1)";
                 con.ConnectError();
                 SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
@@ -344,7 +346,7 @@ namespace Bibo_Verwaltung
                 cmd.Parameters.AddWithValue("@telefonnummer", Telefonnummer);
                 cmd.Parameters.AddWithValue("@hausnummer", Hausnummer);
                 cmd.Parameters.AddWithValue("@mail", Mail);
-                cmd.Parameters.AddWithValue("@klasse", Klasse);
+                cmd.Parameters.AddWithValue("@klasse", Klasse.GetID(Klasse.Klassename));
                 // Verbindung öffnen 
                 cmd.ExecuteNonQuery();
                 GetKundenID();
@@ -399,7 +401,7 @@ namespace Bibo_Verwaltung
                 cmd.Parameters.AddWithValue("@telefonnummer", Telefonnummer);
                 cmd.Parameters.AddWithValue("@hausnummer", Hausnummer);
                 cmd.Parameters.AddWithValue("@mail", Mail);
-                cmd.Parameters.AddWithValue("@klasse", Klasse);
+                cmd.Parameters.AddWithValue("@klasse", Klasse.GetID(Klasse.Klassename));
                 cmd.Parameters.AddWithValue("@k_ID", KundenID);
                 // Verbindung öffnen 
                 cmd.ExecuteNonQuery();

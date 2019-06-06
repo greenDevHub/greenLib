@@ -759,7 +759,7 @@ namespace Bibo_Verwaltung
                         k.Vorname = row[0].ToString();
                         k.Nachname = row[1].ToString();
                         k.Gd = DateTime.Parse(row[2].ToString());
-                        k.Klasse = row[3].ToString();
+                        k.Klasse.Klassename = row[3].ToString();
                         k.Hausnummer = "";
                         k.Ort = "";
                         k.Postleitzahl = "";
@@ -769,7 +769,7 @@ namespace Bibo_Verwaltung
                         if (rb_schueler1.Checked)
                         {
                             //SEK1 Import Schüler
-                            string klassenstufe = k.Klasse.Substring(0, k.Klasse.Length - 2);
+                            string klassenstufe = k.Klasse.Klassename.Substring(0, k.Klasse.Klassename.Length - 2);
                             FachStufe fs = new FachStufe(klassenstufe);
                             for (int i = 4; i < 7; i++)
                             {

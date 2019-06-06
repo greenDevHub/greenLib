@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using MetroFramework;
 
 namespace Bibo_Verwaltung
 {
@@ -83,7 +84,7 @@ namespace Bibo_Verwaltung
                 if (tb_Benutzername.Text == "") { tb_Benutzername.BackColor = Color.Red; error = true; }
                 if (tb_Passwort.Text == "") { tb_Passwort.BackColor = Color.Red; error = true; }
             }
-            if (error) { MessageBox.Show("Bitte füllen Sie alle Felder aus!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+            if (error) { MetroMessageBox.Show(this,"Bitte füllen Sie alle Felder aus!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
             return error;
         }
 
@@ -120,7 +121,7 @@ namespace Bibo_Verwaltung
             SQL_Verbindung con = new SQL_Verbindung();
             if (!con.ConnectError())
             {
-                MessageBox.Show("Verbindung konnte erfolgreich hergestellt werden!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MetroMessageBox.Show(this,"Verbindung konnte erfolgreich hergestellt werden!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 bt_Save.Focus();
             }
         }
