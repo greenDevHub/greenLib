@@ -128,6 +128,7 @@
     <Compile Include="ExcelExport.cs" />
     <Compile Include="FachStufe.cs" />
     <Compile Include="Fach.cs" />
+    <Compile Include="Klasse.cs" />
     <Compile Include="Klassenstufe.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -145,6 +146,12 @@
     </Compile>
     <Compile Include="w_s_ausleihe.Designer.cs">
       <DependentUpon>w_s_ausleihe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="w_s_automatic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_automatic.Designer.cs">
+      <DependentUpon>w_s_automatic.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_buch_stufe.cs">
       <SubType>Form</SubType>
@@ -170,11 +177,11 @@
     <Compile Include="w_s_analytics.Designer.cs">
       <DependentUpon>w_s_analytics.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_klassenstufe.cs">
+    <Compile Include="w_s_klasse_stufe.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_klassenstufe.Designer.cs">
-      <DependentUpon>w_s_klassenstufe.cs</DependentUpon>
+    <Compile Include="w_s_klasse_stufe.Designer.cs">
+      <DependentUpon>w_s_klasse_stufe.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_login.cs">
       <SubType>Form</SubType>
@@ -337,6 +344,9 @@
     <EmbeddedResource Include="w_s_Ausleihe.resx">
       <DependentUpon>w_s_ausleihe.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="w_s_automatic.resx">
+      <DependentUpon>w_s_automatic.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="w_s_buch_stufe.resx">
       <DependentUpon>w_s_buch_stufe.cs</DependentUpon>
     </EmbeddedResource>
@@ -352,8 +362,8 @@
     <EmbeddedResource Include="w_s_import_export.resx">
       <DependentUpon>w_s_import_export.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_klassenstufe.resx">
-      <DependentUpon>w_s_klassenstufe.cs</DependentUpon>
+    <EmbeddedResource Include="w_s_klasse_stufe.resx">
+      <DependentUpon>w_s_klasse_stufe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_login.resx">
       <DependentUpon>w_s_login.cs</DependentUpon>

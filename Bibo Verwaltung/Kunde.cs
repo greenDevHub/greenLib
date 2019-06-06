@@ -164,6 +164,7 @@ namespace Bibo_Verwaltung
             // Verbindung schließen 
             con.Close();
         }
+
         private void LoadFaecher()
         {
             Faecher.Clear();
@@ -180,12 +181,14 @@ namespace Bibo_Verwaltung
                     LeistungskursListe.Add(Fach.FachKurz);
                 }
             }
-            for(int i = LeistungskursListe.Count; i < 2; i++)
+            for (int i = LeistungskursListe.Count; i < 2; i++)
             {
                 LeistungskursListe.Add("");
             }
             dr.Close();
+            con.Close();
         }
+
         /// <summary>
         /// Füllt ein DataSet-Objekt mit den Kundendaten 
         /// </summary>
@@ -259,7 +262,7 @@ namespace Bibo_Verwaltung
                 dataRow["Hausnummer"] = Hausnummer;
                 dataRow["Postleitzahl"] = Postleitzahl;
                 dataRow["Wohnort"] = Ort;
-                dataRow["Klasse"] =Klasse;
+                dataRow["Klasse"] = Klasse;
                 dataRow["Mail"] = Mail;
                 dataRow["Telefonnummer"] = Telefonnummer;
                 string fach = "";
@@ -269,7 +272,10 @@ namespace Bibo_Verwaltung
                 }
                 try
                 {
-                    fach = fach.Substring(0, fach.Length - 2);
+                    if (fach.Length >= 2)
+                    {
+                        fach = fach.Substring(0, fach.Length - 2);
+                    }
                 }
                 catch
                 {
@@ -280,7 +286,6 @@ namespace Bibo_Verwaltung
             }
             grid.DataSource = dt;
         }
-
 
         /// <summary>
         /// Prüft, ob ein Kunde bereits existiert
@@ -306,10 +311,11 @@ namespace Bibo_Verwaltung
                 return true;
             }
         }
+
         /// <summary>
         /// Lädt die KundenID
         /// </summary>
-        public void LoadKundenID()
+        public void GetKundenID()
         {
             if (con.ConnectError()) return;
             string RawCommand = "SELECT kunde_id FROM [dbo].[t_s_kunden] WHERE kunde_vorname = @0 and kunde_nachname = @1 and kunde_geburtsdatum = @2";
@@ -319,6 +325,7 @@ namespace Bibo_Verwaltung
                 KundenID = dr["kunde_id"].ToString();
             }
         }
+
         /// <summary>
         /// Fügt einen Kunden der Datenbank hinzu 
         /// </summary>
@@ -340,16 +347,17 @@ namespace Bibo_Verwaltung
                 cmd.Parameters.AddWithValue("@klasse", Klasse);
                 // Verbindung öffnen 
                 cmd.ExecuteNonQuery();
-                LoadKundenID();
-                AddFaecher();
+                GetKundenID();
+                AddFaecherToKunde();
                 //Verbindung schließen
                 con.Close();
             }
         }
+
         /// <summary>
         /// Fügt die Fachzuweisung hinzu
         /// </summary>
-        private void AddFaecher()
+        private void AddFaecherToKunde()
         {
             con.ConnectError();
             string RawCommand = "INSERT INTO [dbo].[t_s_fach_kunde] (fs_kundenid, fs_fachid, fs_lk) VALUES (@schuelerid, @fachid, @lk)";
@@ -372,32 +380,6 @@ namespace Bibo_Verwaltung
                 {
                     cmd.Parameters.AddWithValue("@lk", false);
                 }
-                //if(leistungskursListe.Count == 1)
-                //{
-                //    if (leistungskursListe[0] == s)
-                //    {
-                //        cmd.Parameters.AddWithValue("@lk", 1);
-                //    }
-                //    else
-                //    {
-                //        cmd.Parameters.AddWithValue("@lk", 0);
-                //    }
-                //}
-                //else if (leistungskursListe.Count == 2)
-                //{
-                //    if (leistungskursListe[0] == s || leistungskursListe[1] == s)
-                //    {
-                //        cmd.Parameters.AddWithValue("@lk", 1);
-                //    }
-                //    else
-                //    {
-                //        cmd.Parameters.AddWithValue("@lk", false);
-                //    }
-                //}
-                //else
-                //{
-                //    cmd.Parameters.AddWithValue("@lk", 0);
-                //}
                 cmd.ExecuteNonQuery();
             }
         }
@@ -421,8 +403,8 @@ namespace Bibo_Verwaltung
                 cmd.Parameters.AddWithValue("@k_ID", KundenID);
                 // Verbindung öffnen 
                 cmd.ExecuteNonQuery();
-                DeleteFaecher();
-                AddFaecher();
+                DeleteFaecherFromKunde();
+                AddFaecherToKunde();
                 //Verbindung schließen
                 con.Close();
             }
@@ -431,20 +413,21 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Deaktiviert einen Kunden in der Datenbank 
         /// </summary>
-        public void Deactivate()
+        public void DeactivateKunde()
         {
             if (con.ConnectError()) return;
             string RawCommand = "UPDATE [dbo].[t_s_kunden] set kunde_activated = 0 WHERE kunde_ID = @k_ID";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             cmd.Parameters.AddWithValue("@k_ID", KundenID);
-            DeleteFaecher();
+            DeleteFaecherFromKunde();
             cmd.ExecuteNonQuery();
             con.Close();
         }
+
         /// <summary>
         /// Löscht die zugewiesenen Fächer
         /// </summary>
-        private void DeleteFaecher()
+        private void DeleteFaecherFromKunde()
         {
             string RawCommand = "DELETE FROM [dbo].[t_s_fach_kunde] WHERE fs_kundenid = @id";
             con.ConnectError();
@@ -452,10 +435,11 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@id", KundenID);
             cmd.ExecuteNonQuery();
         }
+
         /// <summary>
         /// Aktiviert einen Kunden in der Datenbank 
         /// </summary>
-        public void Activate()
+        public void ActivateKunde()
         {
             if (con.ConnectError()) return;
             string RawCommand = "UPDATE [dbo].[t_s_kunden] set kunde_activated = 1 WHERE kunde_ID = @k_ID";
@@ -464,15 +448,20 @@ namespace Bibo_Verwaltung
             cmd.ExecuteNonQuery();
             con.Close();
         }
+
         public void DeactivateAllSchueler()
         {
             if (con.ConnectError()) return;
             string RawCommand = "UPDATE t_s_kunden set kunde_activated = 0, kunde_klasse = '0' from t_s_kunden left join t_bd_ausgeliehen on kunde_ID=aus_kundenid WHERE kunde_klasse !='' and aus_leihnummer is NULL";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-            DeleteFaecher();
+            DeleteFaecherFromKunde();
             cmd.ExecuteNonQuery();
             con.Close();
         }
+
+        /// <summary>
+        /// Prüft ob ein Kunde etwas ausgeliehen hat 
+        /// </summary>
         public bool Ausgeliehen()
         {
             string leihnummer = "";
@@ -494,24 +483,62 @@ namespace Bibo_Verwaltung
                 return true;
             }
         }
+
+
         /// <summary>
-        /// Löscht einen Kunden aus der Datenbank 
+        /// Füllt ein DataSet-Objekt mit den Kundendaten 
         /// </summary>
-        //public void DeleteKunde()
-        //{
-        //    {
-        //        string RawCommand = "DELETE FROM [dbo].[t_s_kunden] WHERE kunde_id = @id";
-        //        con.ConnectError();
-        //        SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+        private void FillKundenListe(bool showKlasse, int klasse)
+        {
+            try
+            {
+                if (!ds.Tables.Contains("KundenListe"))
+                {
+                    ds.Tables.Add("KundenListe");
+                }
 
-        //        cmd.Parameters.AddWithValue("@id", KundenID);
+                ds.Tables["KundenListe"].Rows.Clear();
 
-        //        // Verbindung öffnen 
-        //        cmd.ExecuteNonQuery();
-        //        //Verbindung schließen
-        //        con.Close();
-        //    }
-        //}
+                if (con.ConnectError()) return;
+
+                if (!showKlasse)
+                {
+                    //nach klasse selectieren
+                    string RawCommand = "SELECT kunde_ID, kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_klasse, k_bezeichnung as 'Klasse', ks_klassenstufe as 'Klassenstufe' FROM [dbo].[t_s_kunden] left join [dbo].[t_s_klassen] on k_id = kunde_klasse left join [dbo].[t_s_klasse_stufe] on ks_klasse = kunde_klasse WHERE kunde_activated = 1 AND kunde_klasse = @klasse order by Klasse";
+                    adapter = new SqlDataAdapter(RawCommand, con.Con);
+                    adapter.SelectCommand.Parameters.AddWithValue("@klasse", klasse);
+                    adapter.Fill(ds.Tables["KundenListe"]);
+                }
+                else
+                {
+                    string RawCommand = "SELECT kunde_ID, kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_klasse, k_bezeichnung as 'Klasse', ks_klassenstufe as 'Klassenstufe' FROM [dbo].[t_s_kunden] left join [dbo].[t_s_klassen] on k_id = kunde_klasse left join [dbo].[t_s_klasse_stufe] on ks_klasse = kunde_klasse WHERE kunde_activated = 1 order by Klasse";
+                    adapter = new SqlDataAdapter(RawCommand, con.Con);
+                    adapter.Fill(ds.Tables["KundenListe"]);
+                }
+                con.Close();
+            }
+            catch { }
+        }
+
+        public void GetKundenList(ref MetroGrid grid, bool showKlasse, int klasse, object value = null)
+        {
+            FillKundenListe(showKlasse, klasse);
+            grid.DataSource = ds.Tables["KundenListe"];
+            grid.Columns["kunde_ID"].Visible = false;
+            grid.Columns["kunde_klasse"].Visible = false;
+            grid.Columns["Klassenstufe"].Visible = false;
+
+            grid.Columns["Vorname"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            grid.Columns["Nachname"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            if (!showKlasse)
+            {
+                grid.Columns["Klasse"].Visible = false;
+            }
+            else
+            {
+                grid.Columns["Klasse"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+        }
     }
 }
 

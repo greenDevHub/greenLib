@@ -51,6 +51,7 @@
             this.mT_ausgabe = new MetroFramework.Controls.MetroTile();
             this.mT_rueckgabe = new MetroFramework.Controls.MetroTile();
             this.panel = new MetroFramework.Controls.MetroPanel();
+            this.bt_AutoAusgabe = new MetroFramework.Controls.MetroTile();
             this.bt_zu = new MetroFramework.Controls.MetroTile();
             this.pl_unschaerfe = new Bibo_Verwaltung.TransparentPanel();
             this.transparentPanel1 = new Bibo_Verwaltung.TransparentPanel();
@@ -312,6 +313,7 @@
             // 
             // panel
             // 
+            this.panel.Controls.Add(this.bt_AutoAusgabe);
             this.panel.Controls.Add(this.bt_zu);
             this.panel.Controls.Add(this.mT_Benutzerverwaltung);
             this.panel.Controls.Add(this.mT_Kunden);
@@ -339,6 +341,20 @@
             this.panel.VerticalScrollbarBarColor = true;
             this.panel.VerticalScrollbarHighlightOnWheel = false;
             this.panel.VerticalScrollbarSize = 10;
+            // 
+            // bt_AutoAusgabe
+            // 
+            this.bt_AutoAusgabe.ActiveControl = null;
+            this.bt_AutoAusgabe.BackColor = System.Drawing.Color.OliveDrab;
+            this.bt_AutoAusgabe.Location = new System.Drawing.Point(6, 167);
+            this.bt_AutoAusgabe.Name = "bt_AutoAusgabe";
+            this.bt_AutoAusgabe.Size = new System.Drawing.Size(319, 46);
+            this.bt_AutoAusgabe.Style = MetroFramework.MetroColorStyle.Lime;
+            this.bt_AutoAusgabe.TabIndex = 18;
+            this.bt_AutoAusgabe.Text = "Automatische Buchausgabe";
+            this.bt_AutoAusgabe.UseCustomBackColor = true;
+            this.bt_AutoAusgabe.UseSelectable = true;
+            this.bt_AutoAusgabe.Click += new System.EventHandler(this.bt_AutoAusgabe_Click);
             // 
             // bt_zu
             // 
@@ -484,5 +500,6 @@
         private TransparentPanel pl_unschaerfe;
         private MetroFramework.Controls.MetroTile metroTile1;
         private TransparentPanel transparentPanel1;
+        private MetroFramework.Controls.MetroTile bt_AutoAusgabe;
     }
 }

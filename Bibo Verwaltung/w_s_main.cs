@@ -292,7 +292,7 @@ namespace Bibo_Verwaltung
             if (!connected)
             {
                 this.Hide();
-                Form stufe = new w_s_klassenstufe();
+                Form stufe = new w_s_klasse_stufe(currentUser);
                 stufe.ShowDialog(this);
                 this.Show();
             }
@@ -430,6 +430,21 @@ namespace Bibo_Verwaltung
             //    connected = connection.ConnectError();
             //}
             //catch { }
+        }
+
+        private void bt_AutoAusgabe_Click(object sender, EventArgs e)
+        {
+            if (!connected)
+            {
+                this.Hide();
+                Form autoausleihe = new w_s_automatic(currentUser);
+                autoausleihe.ShowDialog(this);
+                this.Show();
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
     #endregion

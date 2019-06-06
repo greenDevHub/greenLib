@@ -753,7 +753,7 @@ namespace Bibo_Verwaltung
                             }
                             else
                             {
-                                k.Activate();
+                                k.ActivateKunde();
                                 k.UpdateKunde();
                             }
 
@@ -779,8 +779,8 @@ namespace Bibo_Verwaltung
                             }
                             else
                             {
-                                k.Activate();
-                                k.LoadKundenID();
+                                k.ActivateKunde();
+                                k.GetKundenID();
                                 k.UpdateKunde();
                             }
                         }

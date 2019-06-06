@@ -40,7 +40,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public Exemplar()
         {
-            FillObject();
+            //FillObject();
         }
         /// <summary>
         /// Erschaft ein Exemplar-Objekt
@@ -186,17 +186,17 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt ein DataSet-Objekt mit den Exemplardaten 
         /// </summary>      
-        public void FillObject()
+        private void FillObject()
         {
             if (con.ConnectError()) return;
             string RawCommand = "SELECT bu_id as Exemplar, bu_isbn as ISBN, buch_titel as Titel, bu_aufnahmedatum as Aufnahmedatum, zu_zustand as Zustand from t_s_buchid left join t_s_zustand on bu_zustandsid = zu_id left join t_s_buecher on bu_isbn = buch_isbn where bu_isbn = @isbn AND bu_activated = 1";
             //string RawCommand = "SELECT bu_id as 'BuchID', buch_isbn as 'ISBN', buch_titel as 'Titel', zu_zustand 'Zustand', zu_verleihfähig as 'Verleihbar', bu_aufnahmedatum as 'Aufnahmedatum' from t_s_buchid left join t_s_zustand on bu_zustand_id left join t_s_buecher on bu_isbn = buch_isbn";
             adapter2 = new SqlDataAdapter(RawCommand, con.Con);
-            if (ISBN == null)
-            {
-                System.Windows.Forms.Form f = System.Windows.Forms.Application.OpenForms["w_s_buecher"];
-                ISBN = ((w_s_buecher)f).tb_ISBN.Text;
-            }
+            //if (ISBN == null)
+            //{
+            //    System.Windows.Forms.Form f = System.Windows.Forms.Application.OpenForms["w_s_buecher"];
+            //    ISBN = ((w_s_buecher)f).tb_ISBN.Text;
+            //}
             adapter2.SelectCommand.Parameters.AddWithValue("@isbn", ISBN);
             adapter2.Fill(ds);
             con.Close();
@@ -207,13 +207,15 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void FillGrid(ref MetroGrid grid, object value = null)
         {
+            ClearDataSource();
+            FillObject();
             grid.DataSource = ds.Tables[0];
         }
 
         /// <summary>
         /// Entfernt den gesamten Inhalt im DataSet 
         /// </summary>
-        public void ClearDataSource()
+        private void ClearDataSource()
         {
             ds.Tables[0].Rows.Clear();
         }
@@ -221,11 +223,11 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Lädt die Exemplar ID anhand der ISBN 
         /// </summary>
-        private string GetISBN(string isbn)
+        public string GetID(string isbn)
         {
             string id = "";
             if (con.ConnectError()) return "";
-            string RawCommand = "SELECT bu_isbn from t_s_buchid  where bu_isbn = @0";
+            string RawCommand = "SELECT bu_id from t_s_buchid where bu_isbn = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, isbn);
             while (dr.Read())
             {
@@ -234,6 +236,24 @@ namespace Bibo_Verwaltung
             dr.Close();
             con.Close();
             return id;
+        }
+
+        /// <summary>
+        /// Lädt die Exemplar Titel anhand der ID 
+        /// </summary>
+        public string GetTitel(string exemplarID)
+        {
+            string titel = "";
+            if (con.ConnectError()) return "";
+            string RawCommand = "SELECT buch_titel as 'Titel' FROM t_s_buchid left join t_s_buecher on bu_isbn = buch_isbn WHERE bu_id = @0 GROUP BY buch_titel ";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, exemplarID);
+            while (dr.Read())
+            {
+                titel = dr["Titel"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            return titel;
         }
 
         /// <summary>

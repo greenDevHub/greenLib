@@ -118,8 +118,6 @@ namespace Bibo_Verwaltung
                     //bar.FillPictureBox(ref BarcodeBox);
                     Clear();
                     lb.Visible = true;
-                    b.ClearDataSource();
-                    b.FillObject();
                     b.FillGrid(ref grid_buchid);
                     tb_anzahl.Text = grid_buchid.RowCount.ToString();
                     t.Start();
@@ -165,8 +163,6 @@ namespace Bibo_Verwaltung
                         b.Deactivate_Exemplar();
                         Clear();
                         lb.Visible = true;
-                        b.ClearDataSource();
-                        b.FillObject();
                         b.FillGrid(ref grid_buchid);
                         tb_anzahl.Text = grid_buchid.RowCount.ToString();
                         t.Start();
@@ -202,8 +198,6 @@ namespace Bibo_Verwaltung
                     b.Update_Exemplar();
                     Clear();
                     lb.Visible = true;
-                    b.ClearDataSource();
-                    b.FillObject();
                     b.FillGrid(ref grid_buchid);
                     tb_anzahl.Text = grid_buchid.RowCount.ToString();
                     t.Start();
@@ -462,8 +456,6 @@ namespace Bibo_Verwaltung
                 b.ExemplarID = grid_buchid.SelectedRows[i].Cells[0].Value.ToString();
                 b.Deactivate_Exemplar();
             }
-            b.ClearDataSource();
-            b.FillObject();
             b.FillGrid(ref grid_buchid);
             tb_anzahl.Text = grid_buchid.RowCount.ToString();
             Clear();

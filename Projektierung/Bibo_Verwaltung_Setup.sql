@@ -143,6 +143,18 @@ CREATE TABLE [dbo].[t_s_genre](
 END
 
 use Bibo_Verwaltung
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_klassen]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_klassen]
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_klassen]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[t_s_klassen](
+	[k_id][int] IDENTITY(1,1) NOT NULL,
+	[k_bezeichnung] [nvarchar](128),
+	PRIMARY KEY (k_id))
+END
+
+use Bibo_Verwaltung
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_kunden]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_kunden]
 GO
@@ -157,11 +169,13 @@ CREATE TABLE [dbo].[t_s_kunden](
 	[kunde_hausnummer] [nvarchar](4),
 	[kunde_postleitzahl] [nvarchar](16),
 	[kunde_ort] [nvarchar](128),
-	[kunde_klasse] [nvarchar](5),
+	[kunde_klasse] [int],
 	[kunde_mail] [nvarchar](128),
 	[kunde_telefonnummer] [nvarchar](128),
 	[kunde_activated] [BIT] NOT NULL,
-	PRIMARY KEY (kunde_id))
+	PRIMARY KEY (kunde_id),
+	FOREIGN KEY (kunde_klasse)
+		REFERENCES t_s_klassen (k_id))
 END
 
 use Bibo_Verwaltung
@@ -378,6 +392,21 @@ CREATE TABLE [dbo].[t_s_buch_stufe](
 	PRIMARY KEY (bs_id),
 	FOREIGN KEY (bs_isbn)
 		REFERENCES t_s_buecher (buch_isbn))
+END
+
+use Bibo_Verwaltung
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_klasse_stufe]') AND type in (N'U'))
+DROP TABLE [dbo].[t_s_klasse_stufe]
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_klasse_stufe]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[t_s_klasse_stufe](
+	[ks_id] [int] IDENTITY(1,1) NOT NULL,
+	[ks_klasse] [int] NOT NULL,
+	[ks_klassenstufe] [nvarchar](5) NOT NULL,
+	PRIMARY KEY (ks_id),
+	FOREIGN KEY (ks_klasse)
+		REFERENCES t_s_klassen (k_id))
 END
 
 use Bibo_Verwaltung

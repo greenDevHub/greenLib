@@ -1,4 +1,5 @@
 ﻿using MetroFramework;
+using MetroFramework.Controls;
 using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +18,8 @@ namespace Bibo_Verwaltung
     class Ausleihe
     {
         SQL_Verbindung con = new SQL_Verbindung();
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataSet ds = new DataSet();
 
         #region Ausleihe Eigenschaften
         string kid;
@@ -47,60 +51,6 @@ namespace Bibo_Verwaltung
         /// Status des Exemplars
         /// </summary>
         public bool Verfuegbar { get { return verfuegbar; } set { verfuegbar = value; } }
-        #endregion
-
-        #region Fill Object
-        ////SqlDataAdapter adapter = new SqlDataAdapter();
-        ////DataSet ds = new DataSet();
-        ////DataTable dt = new DataTable();
-        ////SqlCommandBuilder comb = new SqlCommandBuilder();
-        ////private void FillObject()
-        ////{
-        ////    SQL_Verbindung con = new SQL_Verbindung();
-        ////    if (con.ConnectError()) return;
-        ////    string RawCommand = "SELECT bu_id as 'Buch-ID', bu_isbn as 'ISBN', buch_titel as 'Titel', "
-        ////        + "zu_zustand as 'Zustand', bu_aufnahmedatum as 'Aufnahmedatum', "
-        ////        + "ger_name as 'Genre', ver_name as 'Verlag', sprach_name as 'Sprache', a_id as 'AutorlisteID', aus_rückgabedatum as 'Rückgabedatum', aus_leihnummer as 'Leihnummer', "
-        ////        + "kunde_id as 'Kunden ID', kunde_vorname as 'Vorname', kunde_Nachname as 'Nachname', kunde_klasse as 'Klasse' FROM t_s_buchid "
-        ////        + "left join t_s_buecher on bu_isbn = buch_isbn "
-        ////        + "left join t_s_genre on buch_genre_id = ger_id "
-        ////        + "left join t_s_autorliste on buch_autor_id = a_id "
-        ////        + "left join t_s_verlag on buch_verlag_id = ver_id "
-        ////        + "left join t_s_sprache on buch_sprache_id = sprach_id "
-        ////        + "left join t_s_zustand on bu_zustandsid = zu_id "
-        ////        + "left join t_bd_ausgeliehen on aus_buchid = bu_id "
-        ////        + "left join t_s_kunden on kunde_ID = aus_kundenid WHERE bu_activated = 1";
-
-        ////    SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-        ////    adapter = new SqlDataAdapter(RawCommand, con.Con);
-        ////    adapter.Fill(ds);
-        ////    adapter.Fill(dt);
-        ////    if (ds.Tables[0].Columns.Contains("Autor"))
-        ////    {
-        ////        ds.Tables[0].Columns.RemoveAt(ds.Tables[0].Columns.IndexOf("Autor"));
-        ////    }
-        ////    ds.Tables[0].Columns.Add("Autor", typeof(System.String));
-        ////    foreach (DataRow row in ds.Tables[0].Rows)
-        ////    {
-        ////        string text = "";
-        ////        AutorListe AutorListe = new AutorListe();
-        ////        foreach (string s in AutorListe.GetNames(row["AutorlisteID"].ToString()))
-        ////        {
-        ////            if (s != null && !s.Equals(""))
-        ////            {
-        ////                text = text + s + ", ";
-        ////            }
-        ////        }
-        ////        if (text.Length > 2)
-        ////        {
-        ////            text = text.Substring(0, text.Length - 2);
-        ////        }
-        ////        row["Autor"] = text;
-        ////    }
-        ////    con.Close();
-        ////}
-
-
         #endregion
 
         /// <summary>
@@ -136,7 +86,7 @@ namespace Bibo_Verwaltung
                     LeihListe.Columns.Add();
                 }
 
-                for (int i = 0; i <= inputList.Length-1; i++)
+                for (int i = 0; i <= inputList.Length - 1; i++)
                 {
                     exemlarDetails[0] = inputList[i];
                     exemlarDetails[1] = DateTime.Now.Date.ToShortDateString();
@@ -378,6 +328,218 @@ namespace Bibo_Verwaltung
 
             cmd.ExecuteNonQuery();
             con.Close();
+        }
+
+
+
+
+
+
+        //Auto_Ausleihen
+
+        /// <summary>
+        /// Sucht die Klassenstufe des Schülers
+        /// </summary>
+        private String GetKlassenstufe()
+        {
+            string Klasse = "";
+            string Klassenstufe = "";
+            if (con.ConnectError()) return "";
+            string RawCommand1 = "SELECT kunde_klasse FROM [dbo].t_s_kunden WHERE kunde_ID = @0";
+            SqlDataReader dr1 = con.ExcecuteCommand(RawCommand1, KID);
+            while (dr1.Read())
+            {
+                if (dr1.HasRows)
+                {
+                    Klasse = dr1["kunde_klasse"].ToString();
+                }
+                else
+                {
+                    Klasse = "";
+                }
+            }
+            dr1.Close();
+            con.Close();
+
+            if (Klasse != "")
+            {
+                if (con.ConnectError()) return "";
+                string RawCommand2 = "SELECT ks_klassenstufe FROM [dbo].t_s_klasse_stufe WHERE ks_klasse = @0";
+                SqlDataReader dr2 = con.ExcecuteCommand(RawCommand2, Klasse);
+                while (dr2.Read())
+                {
+                    if (dr2.HasRows)
+                    {
+                        Klassenstufe = dr2["ks_klassenstufe"].ToString();
+                    }
+                    else
+                    {
+                        Klassenstufe = "";
+                    }
+                }
+                dr2.Close();
+                con.Close();
+            }
+            return Klassenstufe;
+        }
+
+        private void PrintTable(DataTable table)
+        {
+            foreach (DataRow row in table.Rows)
+            {
+                foreach (DataColumn column in table.Columns)
+                {
+                    Console.Write(row[column]);
+                    Console.Write(" | ");
+                }
+                Console.WriteLine(";");
+                Console.WriteLine("####################################################################################################");
+            }
+            Console.WriteLine("END");
+        }
+
+        /// <summary>
+        /// Sucht die Fächer des Schülers
+        /// </summary>
+        private void GetFaecher()
+        {
+            try
+            {
+                if (!ds.Tables.Contains("FaecherListe"))
+                {
+                    ds.Tables.Add("FaecherListe");
+                }
+                ds.Tables["FaecherListe"].Rows.Clear();
+
+                if (con.ConnectError()) return;
+                string RawCommand = "SELECT fs_fachid FROM [dbo].[t_s_fach_kunde] WHERE fs_kundenid = @0";
+                adapter = new SqlDataAdapter(RawCommand, con.Con);
+                adapter.SelectCommand.Parameters.AddWithValue("@0", KID);
+                adapter.Fill(ds.Tables["FaecherListe"]);
+                con.Close();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Schlägt Bücher zur Schulbuchausgabe vor
+        /// </summary>
+        private void SuggestBuecher(string Klassenstufe)
+        {
+            try
+            {
+                GetFaecher();
+
+                if (!ds.Tables.Contains("BuecherListe"))
+                {
+                    ds.Tables.Add("BuecherListe");
+                }
+                ds.Tables["BuecherListe"].Rows.Clear();
+
+                if (con.ConnectError()) return;
+                string RawCommand = "SELECT bf_isbn as 'ISBN', buch_titel as 'Titel', f_kurzform as 'Fach', bf_fachid FROM [dbo].[t_s_buch_fach] left join t_s_buecher on buch_isbn = bf_isbn left join t_s_faecher on f_id = bf_fachid left join t_s_buch_stufe on bs_isbn = bf_isbn WHERE bf_fachid = @0 AND bs_klassenstufe = @1";
+                for (int i = 0; i < ds.Tables["FaecherListe"].Rows.Count; i++)
+                {
+                    adapter = new SqlDataAdapter(RawCommand, con.Con);
+                    adapter.SelectCommand.Parameters.AddWithValue("@0", ds.Tables["FaecherListe"].Rows[i][0]);
+                    adapter.SelectCommand.Parameters.AddWithValue("@1", Klassenstufe);
+                    adapter.Fill(ds.Tables["BuecherListe"]);
+                    con.Close();
+                }
+                con.Close();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Entfernt den gesamten Inhalt im DataSet 
+        /// </summary>
+        private void ClearDataSource()
+        {
+            try
+            {
+                ds.Tables[0].Rows.Clear();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Füllt ein DataGridView-Objekt mit den Schulbüchern 
+        /// </summary>
+        public void FillSuggestGrid(ref MetroFramework.Controls.MetroGrid grid, string KundenID, object value = null)
+        {
+            KID = KundenID;
+            string stufe = GetKlassenstufe();
+            SuggestBuecher(stufe);
+            grid.DataSource = ds.Tables["BuecherListe"];
+            grid.Columns["bf_fachid"].Visible = false;
+        }
+
+        public String GetSchuljahr()
+        {
+            string htmlData = "";
+            WebClient client = new WebClient();
+            try
+            {
+                htmlData = client.DownloadString("https://www.schulferien.org/Schulferien_nach_Ferien/Sommerferien/2019/sommerferien_2019.html");
+                //while (htmlData.Contains(">"))
+                //{
+                //    if (htmlData[1] == '<') {
+                htmlData.Remove(1, htmlData.IndexOf('B'));
+                //    }
+                //}
+            }
+            catch { }
+            return htmlData;
+
+            ///// <summary>
+            ///// Füllt das DataSet 
+            ///// </summary>
+            //private void FillSchuelerGrid()
+            //{
+            //    if (con.ConnectError()) return;
+            //    string RawCommand = "";
+            //    adapter = new SqlDataAdapter(RawCommand, con.Con);
+            //    adapter.Fill(ds);
+            //    con.Close();
+            //}
+
+            ///// <summary>
+            ///// Entfernt den gesamten Inhalt im DataSet 
+            ///// </summary>
+            //private void ClearSchuelerDataSource()
+            //{
+            //    try
+            //    {
+            //        ds.Tables[0].Rows.Clear();
+            //    }
+            //    catch { }
+            //}
+
+            //public void Load_Schueler(ref MetroGrid grid)
+            //{
+            //    ClearSchuelerDataSource();
+            //    FillSchuelerGrid();
+            //    grid.DataSource = ds.Tables[0];
+            //    //grid.Columns["Kunden ID"].Visible = false;
+            //    //grid.Columns["Leihnummer"].Visible = false;
+            //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
     }
 }

@@ -335,7 +335,7 @@ namespace Bibo_Verwaltung
                         kunde.KundenID = tb_KundenID.Text;
                         if (!kunde.Ausgeliehen())
                         {
-                            kunde.Deactivate();
+                            kunde.DeactivateKunde();
                             ClearForm();
                             kunde.FillGrid(ref gv_Kunde);
                             lb_kunde_add.Visible = false;
@@ -444,7 +444,7 @@ namespace Bibo_Verwaltung
                                 }
                                 else if (kunde.AlreadyExists() && !kunde.Activated)
                                 {
-                                    kunde.Activate();
+                                    kunde.ActivateKunde();
                                     kunde.UpdateKunde();
                                 }
                                 else
@@ -469,7 +469,7 @@ namespace Bibo_Verwaltung
                             }
                             else if (kunde.AlreadyExists() && !kunde.Activated)
                             {
-                                kunde.Activate();
+                                kunde.ActivateKunde();
                                 kunde.UpdateKunde();
                             }
                             else
@@ -797,7 +797,7 @@ namespace Bibo_Verwaltung
                     kunde.KundenID = row.Cells["Kunden-ID"].Value.ToString();
                     if (!kunde.Ausgeliehen())
                     {
-                        kunde.Deactivate();
+                        kunde.DeactivateKunde();
                     }
                     else
                     {
