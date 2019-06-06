@@ -4,10 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bibo Verwaltung", "Bibo Verwaltung.csproj", "{C144EE33-6B1C-4D1F-876E-895F2F35D6A7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{361179B6-418A-42B0-A81D-74A59ADB2045} = {361179B6-418A-42B0-A81D-74A59ADB2045}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{030A1736-F9FB-48B7-A593-844DCFEB6243}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenSize", "..\..\..\Visual Studio 2017\Projects\ScreenSize\ScreenSize\ScreenSize.csproj", "{361179B6-418A-42B0-A81D-74A59ADB2045}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenSize", "..\ScreenSize\ScreenSize\ScreenSize.csproj", "{361179B6-418A-42B0-A81D-74A59ADB2045}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

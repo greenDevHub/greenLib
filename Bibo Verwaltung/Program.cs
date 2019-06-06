@@ -26,7 +26,6 @@ namespace Bibo_Verwaltung
         [STAThread]
         static void Main()
         {
-            //Process.Start(@"C:\Users\Laurenz\Documents\GitHub\GameDev\Bibo Verwaltung\bin\Debug\ScreenSize.exe");
             Process.Start("ScreenSize.exe");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

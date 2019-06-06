@@ -52,7 +52,7 @@ namespace Bibo_Verwaltung
             {
                 if (!File_Exists(homePath+"\\Scale.txt"))
                 {
-                    File.WriteAllText(homePath + "\\Scale.txt", "100");
+                    File.WriteAllText(homePath + "\\Scale.txt", "1,00");
                 }
                 //alle Zeilen lesen
                 scale = float.Parse(File.ReadAllText(homePath + "\\Scale.txt"));
