@@ -52,6 +52,7 @@
             // 
             // cb_Security
             // 
+            this.cb_Security.BorderColor = System.Drawing.Color.Gray;
             this.cb_Security.DataRowView = false;
             this.cb_Security.DisplayMember = "1";
             this.cb_Security.Dock = System.Windows.Forms.DockStyle.Top;

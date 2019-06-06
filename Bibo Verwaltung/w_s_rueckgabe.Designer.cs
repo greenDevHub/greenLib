@@ -337,6 +337,7 @@
             this.lb_AusleihEnde.Size = new System.Drawing.Size(97, 19);
             this.lb_AusleihEnde.TabIndex = 22;
             this.lb_AusleihEnde.Text = "nicht verfügbar";
+            this.lb_AusleihEnde.UseCustomForeColor = true;
             // 
             // lb_AusleihStart
             // 
@@ -349,6 +350,7 @@
             this.lb_AusleihStart.Size = new System.Drawing.Size(97, 19);
             this.lb_AusleihStart.TabIndex = 21;
             this.lb_AusleihStart.Text = "nicht verfügbar";
+            this.lb_AusleihStart.UseCustomForeColor = true;
             // 
             // llb_BuchTitel
             // 
@@ -392,6 +394,7 @@
             // 
             // cb_Zustand
             // 
+            this.cb_Zustand.BorderColor = System.Drawing.Color.Gray;
             this.cb_Zustand.DataRowView = true;
             this.cb_Zustand.Enabled = false;
             this.cb_Zustand.Font = new System.Drawing.Font("Segoe UI", 10.5F);

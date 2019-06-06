@@ -139,127 +139,149 @@ namespace Bibo_Verwaltung
             dt.Reset();
             FileInfo f = new FileInfo(path);
             long filelength = f.Length;
-
-            System.IO.StreamReader file = new System.IO.StreamReader(path, System.Text.Encoding.Default);
-            string line = file.ReadLine();
-            for(int i = 0; i < LineNum;)
+            try
             {
-                line = file.ReadLine();
-                i++;
-            }
-
-            if (preview == false)
-            {
-                if (filelength > 1)
+                System.IO.StreamReader file = new System.IO.StreamReader(path, System.Text.Encoding.Default);
+                string line = file.ReadLine();
+                for (int i = 0; i < LineNum;)
                 {
-                    //erste Zeile (Colheader)
-                    int i = 0;
-                    string[] firstline = line.Split(separator);
-                    if (colheader)
+                    line = file.ReadLine();
+                    i++;
+                }
+
+                if (preview == false)
+                {
+                    if (filelength > 1)
                     {
-                        foreach (string s in firstline)
+                        //erste Zeile (Colheader)
+                        int i = 0;
+                        string[] firstline;
+                        try
                         {
-                            dt.Columns.Add(s);
+                            firstline = line.Split(separator);
+                            for (int number = 0; number < firstline.Length; number++)
+                            {
+                                firstline[number] = firstline[number].Replace(textqualifizierer.ToString(), "");
+                            }
+                            if (colheader)
+                            {
+                                foreach (string s in firstline)
+                                {
+                                    dt.Columns.Add(s);
+                                }
+                            }
+                            else
+                            {
+                                foreach (string s in firstline)
+                                {
+                                    dt.Columns.Add("Column" + Convert.ToString(i));
+                                    i++;
+                                }
+                                dt.Rows.Add(firstline);
+                            }
+                            //Zeilen in Datei 
+                            int errorcount = 0;
+                            while ((line = file.ReadLine()) != null)
+                            {
+                                string[] parts = line.Split(separator);
+                                int curr = 0;
+
+                                try
+                                {
+                                    foreach (string s in parts)
+                                    {
+                                        string value = s.Replace(textqualifizierer.ToString(), "");
+                                        parts[curr] = value.Trim();
+                                        curr++;
+                                    }
+                                    dt.Rows.Add(parts);
+                                }
+                                catch
+                                {
+                                    errorcount++;
+                                }
+                            }
+                            if (errorcount > 0)
+                            {
+                                throw new Exception("Problem bei Zeile " + errorcount);
+                                MessageBox.Show("Es konnten " + errorcount + " Zeile(n) aufgund eines Formatieringsproblems nicht gelesen werden. Bitte überprüfen Sie die Anzahl der Trennzeichen jeder Zeile und versuchen Sie es erneut!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
+                        catch(System.NullReferenceException)
+                        {
+                            throw new Exception("Fehler bei Datei");
+                            MessageBox.Show("Eventuell haben Sie zu viele Zeilen angegeben, die entfernt werden sollen...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
                     }
                     else
                     {
-                        foreach (string s in firstline)
-                        {
-                            dt.Columns.Add("Column" + Convert.ToString(i));
-                            i++;
-                        }
-                        dt.Rows.Add(firstline);
-                    }
-                    //Zeilen in Datei 
-                    int errorcount = 0;
-                    while ((line = file.ReadLine()) != null)
-                    {
-                        string[] parts = line.Split(separator);
-                        int curr = 0;
-
-                        try
-                        {
-                            foreach (string s in parts)
-                            {
-                                string value = s.Replace(textqualifizierer.ToString(), "");
-                                parts[curr] = value.Trim();
-                                curr++;
-                            }
-                            dt.Rows.Add(parts);
-                        }
-                        catch
-                        {
-                            errorcount++;
-                        }
-                    }
-                    if (errorcount > 0)
-                    {
-                        throw new Exception("Problem bei Zeile "+errorcount);
-                        MessageBox.Show("Es konnten " + errorcount + " Zeile(n) aufgund eines Formatieringsproblems nicht gelesen werden. Bitte überprüfen Sie die Anzahl der Trennzeichen jeder Zeile und versuchen Sie es erneut!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        throw new Exception("Keine Daten");
+                        MessageBox.Show("Diese Datei enthält keine Daten!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    throw new Exception("Keine Daten");
-                    MessageBox.Show("Diese Datei enthält keine Daten!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                if (filelength > 0)
-                {
-                    //erste Zeile (Colheader)
-                    int i = 0;
-                    string[] firstline = line.Split(separator);
-                    if (colheader)
+                    if (filelength > 0)
                     {
-                        foreach (string s in firstline)
+                        //erste Zeile (Colheader)
+                        int i = 0;
+                        string[] firstline = line.Split(separator);
+                        if (colheader)
                         {
-                            dt.Columns.Add(s);
+                            foreach (string s in firstline)
+                            {
+                                dt.Columns.Add(s);
+                            }
                         }
-                    }
-                    else
-                    {
-                        foreach (string s in firstline)
+                        else
                         {
-                            dt.Columns.Add("Column" + Convert.ToString(i));
-                            i++;
+                            foreach (string s in firstline)
+                            {
+                                dt.Columns.Add("Column" + Convert.ToString(i));
+                                i++;
+                            }
+                            dt.Rows.Add(firstline);
                         }
-                        dt.Rows.Add(firstline);
-                    }
-                    //Zeilen in Datei
-                    int errorcount = 0;
-                    for (int j = 0; j < 9; j++)
-                    {
-                        if ((line = file.ReadLine()) != null)
+                        //Zeilen in Datei
+                        int errorcount = 0;
+                        for (int j = 0; j < 9; j++)
                         {
-                            string[] parts = line.Split(separator);
-                            int curr = 0;
+                            if ((line = file.ReadLine()) != null)
+                            {
+                                string[] parts = line.Split(separator);
+                                int curr = 0;
 
-                            try
-                            {
-                                foreach (string s in parts)
+                                try
                                 {
-                                    string value = s.Replace(textqualifizierer.ToString(), "");
-                                    parts[curr] = value.Trim();
-                                    curr++;
+                                    foreach (string s in parts)
+                                    {
+                                        string value = s.Replace(textqualifizierer.ToString(), "");
+                                        parts[curr] = value.Trim();
+                                        curr++;
+                                    }
+                                    dt.Rows.Add(parts);
                                 }
-                                dt.Rows.Add(parts);
-                            }
-                            catch
-                            {
-                                errorcount++;
+                                catch
+                                {
+                                    errorcount++;
+                                }
                             }
                         }
+                        if (errorcount > 0)
+                        {
+                            MessageBox.Show("Es konnten " + errorcount + " Zeile(n) aufgund eines Formatieringsproblems nicht gelesen werden. Bitte überprüfen Sie die Anzahl der Trennzeichen jeder Zeile und versuchen Sie es erneut!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
-                    if (errorcount > 0)
-                    {
-                        MessageBox.Show("Es konnten " + errorcount + " Zeile(n) aufgund eines Formatieringsproblems nicht gelesen werden. Bitte überprüfen Sie die Anzahl der Trennzeichen jeder Zeile und versuchen Sie es erneut!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    file.Close();
                 }
-                file.Close();
             }
+            catch(IOException)
+            {
+                throw new Exception("failed preset");
+            }
+            
+            
         }
         #endregion
         #region Ziel-Schema ermitteln

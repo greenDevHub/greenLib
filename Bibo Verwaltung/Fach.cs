@@ -141,7 +141,12 @@ namespace Bibo_Verwaltung
             grid.DataSource = ds.Tables[0];
             grid.Columns["ID"].Visible = false;
         }
-
+        public void FillDT(ref DataTable dt, object value = null)
+        {
+            ds.Tables[0].Clear();
+            FillObject();
+            dt = ds.Tables[0];
+        }
         /// <summary>
         /// Füllt ein ComboBox-Objekt mit den Fachdaten 
         /// </summary>

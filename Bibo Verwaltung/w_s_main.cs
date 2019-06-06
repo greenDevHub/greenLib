@@ -24,7 +24,6 @@ namespace Bibo_Verwaltung
         #region Constructor
         public w_s_main(string userName)
         {
-            this.currentUser = userName;
             InitializeComponent();
             timer.Start();
             picBox = new PictureBox();
@@ -35,6 +34,7 @@ namespace Bibo_Verwaltung
             picBox.SizeMode = PictureBoxSizeMode.StretchImage;
             Benutzer user = new Benutzer(userName);
             this.Text = "     Bibliotheksverwaltung - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+            this.currentUser = userName + " (" + user.Rechte + ")";
             if (user.Rechteid.Equals("0") || user.Rechteid.Equals("1"))
             {
                 mT_Benutzerverwaltung.Enabled = false;
@@ -58,25 +58,41 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void Blur(int size)
         {
-            int curDPI = 0;
-
-            using (Graphics g = this.CreateGraphics())
-            {
-                curDPI = (int)g.DpiX;
-            }
-            double scale = 1 + (curDPI / 96);
-            Bitmap bmp = Screenshot.TakeSnapshot(this);
+            Einstellung set = new Einstellung();
+            double scale = set.Scale;
             Rectangle oldBounds = this.Bounds;
             Rectangle bounds = new Rectangle((int)((float)oldBounds.Left * scale), (int)((float)oldBounds.Top * scale), (int)((float)oldBounds.Width * scale), (int)((float)oldBounds.Height * scale));
+            Bitmap bmp = new Bitmap(bounds.Width, bounds.Height, PixelFormat.Format32bppArgb);
+            Graphics g = Graphics.FromImage(bmp);
+            g.CopyFromScreen(bounds.Left, bounds.Top + ((int)((float)22 * scale)), 0, 0, bmp.Size, CopyPixelOperation.SourceCopy);
+            g.Dispose();
             picBox.Visible = true;
-            Rectangle section = new Rectangle(new Point(0, 22), new Size(bmp.Width, bmp.Height));
-            Bitmap CroppedImage = CropImage(bmp, section);
             for (int i = 0; i < size; i++)
             {
-                BitmapFilter.GaussianBlur(CroppedImage, 1);
+                BitmapFilter.GaussianBlur(bmp, 1);
             }
-            picBox.Image = CroppedImage;
+            picBox.Image = bmp;
+            picBox.SizeMode = PictureBoxSizeMode.Zoom;
             picBox.BringToFront();
+            //int curDPI = 0;
+
+            //using (Graphics g = this.CreateGraphics())
+            //{
+            //    curDPI = (int)g.DpiX;
+            //}
+            //double scale = 1 + (curDPI / 96);
+            //Bitmap bmp = Screenshot.TakeSnapshot(this);
+            //Rectangle oldBounds = this.Bounds;
+            //Rectangle bounds = new Rectangle((int)((float)oldBounds.Left * scale), (int)((float)oldBounds.Top * scale), (int)((float)oldBounds.Width * scale), (int)((float)oldBounds.Height * scale));
+            //picBox.Visible = true;
+            //Rectangle section = new Rectangle(new Point(0, 22), new Size(bmp.Width, bmp.Height));
+            //Bitmap CroppedImage = CropImage(bmp, section);
+            //for (int i = 0; i < size; i++)
+            //{
+            //    BitmapFilter.GaussianBlur(CroppedImage, 1);
+            //}
+            //picBox.Image = CroppedImage;
+            //picBox.BringToFront();
         }
 
         /// <summary>
