@@ -12,6 +12,8 @@ using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using bpac;
+using System.IO;
 
 namespace Bibo_Verwaltung
 {
@@ -57,8 +59,8 @@ namespace Bibo_Verwaltung
             }
             tb_Barcode.Text = code;
             Zen.Barcode.CodeEan8BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.CodeEan8WithChecksum;
-            var barcodeImage = barcode.Draw(tb_Barcode.Text, 200, 10);
-            resultImage = new Bitmap(barcodeImage.Width, barcodeImage.Height + 75); // 20 is bottom padding, adjust to your text
+            var barcodeImage = barcode.Draw(tb_Barcode.Text, 70, 5);
+            resultImage = new Bitmap(barcodeImage.Width, barcodeImage.Height + 30); // 20 is bottom padding, adjust to your text
 
             using (var graphics = Graphics.FromImage(resultImage))
             using (var font = new Font("Calibri", 20))
@@ -124,21 +126,24 @@ namespace Bibo_Verwaltung
                     DialogResult result = MetroMessageBox.Show(this,"Möchten Sie alle eben hinzugefügten Exemplare die entsprechenden Labels drucken?", "Buchlabel drucken?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if(result == DialogResult.Yes)
                     {
-                        images.Clear();
+                        List<string> barcodes = new List<string>();
+                        //images.Clear();
                         foreach(string id in idList)
                         {
                             tb_id.Text = id;
                             LoadForm();
-                            images.Add(BarcodeBox.Image);
+                            barcodes.Add(tb_Barcode.Text);
+                            //images.Add(BarcodeBox.Image);
                         }
-                        PrintDocument doc = new PrintDocument();
-                        PrintDialog pd = new PrintDialog();
-                        doc.PrintPage += Doc_PrintMultiplePages;
-                        pd.Document = doc;
-                        if (pd.ShowDialog() == DialogResult.OK)
-                        {
-                            doc.Print();
-                        }
+                        PrintMultipleBarcodes(barcodes);
+                        //PrintDocument doc = new PrintDocument();
+                        //PrintDialog pd = new PrintDialog();
+                        //doc.PrintPage += Doc_PrintMultiplePages;
+                        //pd.Document = doc;
+                        //if (pd.ShowDialog() == DialogResult.OK)
+                        //{
+                        //    doc.Print();
+                        //}
 
                     }
                 }
@@ -389,14 +394,17 @@ namespace Bibo_Verwaltung
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            PrintDocument doc = new PrintDocument();
-            PrintDialog pd = new PrintDialog();
-            doc.PrintPage += Doc_PrintPage;
-            pd.Document = doc;
-            if (pd.ShowDialog() == DialogResult.OK)
-            {
-                doc.Print();
-            }
+            List<string> barcodes = new List<string>();
+            barcodes.Add(tb_Barcode.Text);
+            PrintMultipleBarcodes(barcodes);
+            //PrintDocument doc = new PrintDocument();
+            //PrintDialog pd = new PrintDialog();
+            //doc.PrintPage += Doc_PrintPage;
+            //pd.Document = doc;
+            //if (pd.ShowDialog() == DialogResult.OK)
+            //{
+            //    doc.Print();
+            //}
         }
         int pageCount = 0;
         private void Doc_PrintMultiplePages(object sender, PrintPageEventArgs e)
@@ -463,22 +471,26 @@ namespace Bibo_Verwaltung
 
         private void barcodeDruckenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            images.Clear();
+            List<string> barcodes = new List<string>();
+            //images.Clear();
             foreach (DataGridViewRow row in grid_buchid.SelectedRows)
             {
                 tb_id.Text = row.Cells["Exemplar"].Value.ToString();
                 LoadForm();
-                images.Add(BarcodeBox.Image);
+                barcodes.Add(tb_Barcode.Text);
+                //images.Add(BarcodeBox.Image);
+
             }
             Clear();
-            PrintDocument doc = new PrintDocument();
-            PrintDialog pd = new PrintDialog();
-            doc.PrintPage += Doc_PrintMultiplePages;
-            pd.Document = doc;
-            if (pd.ShowDialog() == DialogResult.OK)
-            {
-                doc.Print();
-            }
+            PrintMultipleBarcodes(barcodes);
+            //PrintDocument doc = new PrintDocument();
+            //PrintDialog pd = new PrintDialog();
+            //doc.PrintPage += Doc_PrintMultiplePages;
+            //pd.Document = doc;
+            //if (pd.ShowDialog() == DialogResult.OK)
+            //{
+            //    doc.Print();
+            //}
         }
 
         private void grid_buchid_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -527,5 +539,86 @@ namespace Bibo_Verwaltung
                 barcodeDruckenToolStripMenuItem.Visible = true;
             }
         }
+        void HandlePrinted(int status, object value)
+        {
+            Console.WriteLine("Printed event called");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string strFilePath = @"C:\Users\Laurenz\Documents\GitHub\GameDev\Bibo Verwaltung\bin\Debug\BarcodePreset.lbx";
+            File.WriteAllBytes(strFilePath, Properties.Resources.BarcodePreset);
+        }
+        private void PrintMultipleBarcodes(List<string> barcodeList)
+        {
+            try
+            {
+                IPrinter printer = new Printer();
+                object[] x = printer.GetInstalledPrinters();
+                string name = x[0].ToString();
+                bool test = printer.IsPrinterOnline(name);
+                if (test)
+                {
+                    string strFilePath = @"BarcodePreset.lbx";
+                    File.WriteAllBytes(strFilePath, Properties.Resources.BarcodePreset);
+                    IDocument doc = new Document();
+                    doc.Open(strFilePath);
+                    int barcodeIndex = doc.GetBarcodeIndex("Barcode");
+                    doc.SetPrinter(printer.Name, true);
+                    foreach (string barcodeData in barcodeList)
+                    {
+                        doc.SetBarcodeData(barcodeIndex, barcodeData);
+                        doc.StartPrint("", PrintOptionConstants.bpoDefault);
+                        doc.PrintOut(1, PrintOptionConstants.bpoDefault);
+                        doc.EndPrint();
+
+                    }
+                    doc.Close();
+                    File.Delete(strFilePath);
+                    MetroMessageBox.Show(this, String.Format("Es wurden erfolgreich '{0}' Barcodes gedruckt.", barcodeList.Count),"Drucken erfolgreich!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Es gab einen Fehler bei der Kommunikation mit dem Drucker!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch
+            {
+                MetroMessageBox.Show(this, "Es gab einen Fehler bei der Kommunikation mit dem Drucker!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        //private void PrintBarcode(string barcodeData)
+        //{
+        //    //try
+        //    //{
+        //    //    IPrinter printer = new Printer();
+        //    //    object[] x = printer.GetInstalledPrinters();
+        //    //    string name = x[0].ToString();
+        //    //    bool test = printer.IsPrinterOnline(name);
+        //    //    if (test)
+        //    //    {
+        //    //        string strFilePath = @"C:\Users\Laurenz\Documents\Eigene Etiketten\BarcodeData.lbx";
+        //    //        IDocument doc = new Document();
+        //    //        doc.Open(strFilePath);
+        //    //        int barcodeIndex = doc.GetBarcodeIndex("Barcode");
+        //    //        doc.SetBarcodeData(barcodeIndex, barcodeData);
+        //    //        doc.SetPrinter(printer.Name, true);
+        //    //        doc.StartPrint("", PrintOptionConstants.bpoDefault);
+        //    //        doc.PrintOut(1, PrintOptionConstants.bpoDefault);
+        //    //        doc.EndPrint();
+        //    //        doc.Close();
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        MetroMessageBox.Show(this, "Es gab einen Fehler bei der Kommunikation mit dem Drucker!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    //    }
+        //    //}
+        //    //catch
+        //    //{
+        //    //    MetroMessageBox.Show(this, "Es gab einen Fehler bei der Kommunikation mit dem Drucker!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    //}
+
+
+        //}
     }
 }
