@@ -679,7 +679,6 @@
             this.tb_ISBN.MinimumSize = new System.Drawing.Size(150, 24);
             this.tb_ISBN.Name = "tb_ISBN";
             this.tb_ISBN.PasswordChar = '\0';
-            this.tb_ISBN.PromptText = "123-0123456789";
             this.tb_ISBN.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_ISBN.SelectedText = "";
             this.tb_ISBN.SelectionLength = 0;

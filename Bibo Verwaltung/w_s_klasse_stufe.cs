@@ -156,8 +156,8 @@ namespace Bibo_Verwaltung
                 klassenListe.AcceptChanges();
 
                 gridrow.Cells["Klasse"].Value = gridrow.Cells["Klasse"].Value.ToString().Substring(1);
-                gridrow.DefaultCellStyle.BackColor = Color.White;
-                gridrow.DefaultCellStyle.ForeColor = Color.DimGray;
+                gridrow.DefaultCellStyle.BackColor = default;
+                gridrow.DefaultCellStyle.ForeColor = default;
             }
             catch
             {

@@ -330,12 +330,7 @@ namespace Bibo_Verwaltung
             con.Close();
         }
 
-
-
-
-
-
-        //Auto_Ausleihen
+        //################################## speziell für Auto_Ausleihen ##################################
 
         /// <summary>
         /// Sucht die Klassenstufe des Schülers
@@ -381,21 +376,6 @@ namespace Bibo_Verwaltung
                 con.Close();
             }
             return Klassenstufe;
-        }
-
-        private void PrintTable(DataTable table)
-        {
-            foreach (DataRow row in table.Rows)
-            {
-                foreach (DataColumn column in table.Columns)
-                {
-                    Console.Write(row[column]);
-                    Console.Write(" | ");
-                }
-                Console.WriteLine(";");
-                Console.WriteLine("####################################################################################################");
-            }
-            Console.WriteLine("END");
         }
 
         /// <summary>
@@ -473,73 +453,6 @@ namespace Bibo_Verwaltung
             SuggestBuecher(stufe);
             grid.DataSource = ds.Tables["BuecherListe"];
             grid.Columns["bf_fachid"].Visible = false;
-        }
-
-        public String GetSchuljahr()
-        {
-            string htmlData = "";
-            WebClient client = new WebClient();
-            try
-            {
-                htmlData = client.DownloadString("https://www.schulferien.org/Schulferien_nach_Ferien/Sommerferien/2019/sommerferien_2019.html");
-                //while (htmlData.Contains(">"))
-                //{
-                //    if (htmlData[1] == '<') {
-                htmlData.Remove(1, htmlData.IndexOf('B'));
-                //    }
-                //}
-            }
-            catch { }
-            return htmlData;
-
-            ///// <summary>
-            ///// Füllt das DataSet 
-            ///// </summary>
-            //private void FillSchuelerGrid()
-            //{
-            //    if (con.ConnectError()) return;
-            //    string RawCommand = "";
-            //    adapter = new SqlDataAdapter(RawCommand, con.Con);
-            //    adapter.Fill(ds);
-            //    con.Close();
-            //}
-
-            ///// <summary>
-            ///// Entfernt den gesamten Inhalt im DataSet 
-            ///// </summary>
-            //private void ClearSchuelerDataSource()
-            //{
-            //    try
-            //    {
-            //        ds.Tables[0].Rows.Clear();
-            //    }
-            //    catch { }
-            //}
-
-            //public void Load_Schueler(ref MetroGrid grid)
-            //{
-            //    ClearSchuelerDataSource();
-            //    FillSchuelerGrid();
-            //    grid.DataSource = ds.Tables[0];
-            //    //grid.Columns["Kunden ID"].Visible = false;
-            //    //grid.Columns["Leihnummer"].Visible = false;
-            //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
     }
 }
