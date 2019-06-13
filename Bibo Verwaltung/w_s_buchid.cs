@@ -546,8 +546,6 @@ namespace Bibo_Verwaltung
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string strFilePath = @"C:\Users\Laurenz\Documents\GitHub\GameDev\Bibo Verwaltung\bin\Debug\BarcodePreset.lbx";
-            File.WriteAllBytes(strFilePath, Properties.Resources.BarcodePreset);
         }
         private void PrintMultipleBarcodes(List<string> barcodeList)
         {
@@ -565,14 +563,14 @@ namespace Bibo_Verwaltung
                     doc.Open(strFilePath);
                     int barcodeIndex = doc.GetBarcodeIndex("Barcode");
                     doc.SetPrinter(printer.Name, true);
+                    doc.StartPrint("", PrintOptionConstants.bpoDefault);
                     foreach (string barcodeData in barcodeList)
                     {
                         doc.SetBarcodeData(barcodeIndex, barcodeData);
-                        doc.StartPrint("", PrintOptionConstants.bpoDefault);
                         doc.PrintOut(1, PrintOptionConstants.bpoDefault);
-                        doc.EndPrint();
 
                     }
+                    doc.EndPrint();
                     doc.Close();
                     File.Delete(strFilePath);
                     MetroMessageBox.Show(this, String.Format("Es wurden erfolgreich '{0}' Barcodes gedruckt.", barcodeList.Count),"Drucken erfolgreich!", MessageBoxButtons.OK, MessageBoxIcon.Information);

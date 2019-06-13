@@ -1,0 +1,13 @@
+datetime Zeile 761 w_s_schuelerimport datetime format englisch problem
+fächer: erste zeile enthält feldnamen, Faecher.csv
+Fächer usw nac hallem suchen
+Fächer manuell hinzufügen doppelter eintrag
+bei schülerimport fächer automatisch hinzufügen, wenn noch nicht in datenbank
+bei kundenfenster fächerspalte sehr klein
+automat. import: wenn ein buch fehlt meldung; wenn buch schon drin ist solls net nochmal hinzugefügt werden (gleiches buch, aber unterschiedliches exemplar)
+
+Datenbank mehr zeichen erlauben! Buchtitel
+exemplar: bool wurde gedruckt
+von buchebene aus drucken -->etappenweise, nächste 50 exemplare drucken
+ISBN Eingabe leerzeichen raushauen
+Buchebene schnell neue exemplare hinzufügen
