@@ -351,7 +351,7 @@
             this.bt_AutoAusgabe.Size = new System.Drawing.Size(319, 46);
             this.bt_AutoAusgabe.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_AutoAusgabe.TabIndex = 18;
-            this.bt_AutoAusgabe.Text = "Automatische Buchausgabe";
+            this.bt_AutoAusgabe.Text = "Automatische Lehrbuchverwaltung";
             this.bt_AutoAusgabe.UseSelectable = true;
             this.bt_AutoAusgabe.Click += new System.EventHandler(this.bt_AutoAusgabe_Click);
             // 
