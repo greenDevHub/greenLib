@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -132,10 +133,14 @@ namespace Bibo_Verwaltung
         private void w_s_buchsuche_Activated(object sender, EventArgs e)
         {
             //Procesdialog start
-            buchsuche.FillComboBoxes(ref cb_Autor, ref cb_Verlag, ref cb_Genre);
-            buchsuche.FillGrid(ref gv_buchsuche);
-            buchsuche.Hide_KundenDetails(ref gv_buchsuche);
-            buchsuche.Set_StatusMark(ref gv_buchsuche);
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
+            //buchsuche.FillComboBoxes(ref cb_Autor, ref cb_Verlag, ref cb_Genre);
+            //buchsuche.FillGrid(ref gv_buchsuche);
+            //buchsuche.Hide_KundenDetails(ref gv_buchsuche);
+            //buchsuche.Set_StatusMark(ref gv_buchsuche);
         }
 
         private void gv_buchsuche_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -326,7 +331,75 @@ namespace Bibo_Verwaltung
                 buchsuche.Show_AlleExemplare(ref gv_buchsuche);
                 buchsuche.Set_StatusMark(ref gv_buchsuche);
             }
-        } 
+        }
         #endregion
+
+        private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BeginInvoke((Action)delegate ()
+            {
+                metroProgressSpinner1.Visible = true;
+                metroProgressSpinner2.Visible = true;
+                gv_buchsuche.Visible = false;
+                cb_Autor.Visible = false;
+                cb_Genre.Visible = false;
+                cb_Verlag.Visible = false;
+            });
+            MetroGrid mgBuSu = new MetroGrid();
+            AdvancedComboBox cbAutor = new AdvancedComboBox();
+            AdvancedComboBox cbVerlag = new AdvancedComboBox();
+            AdvancedComboBox cbGenre = new AdvancedComboBox();
+            List<int> RedBlack = new List<int>();
+            List<int> YellowBlack = new List<int>();
+            List<int>LimeBlack= new List<int>();
+            buchsuche.FillComboBoxes(ref cbAutor, ref cbVerlag, ref cbGenre);
+            buchsuche.FillGrid(ref mgBuSu);
+            buchsuche.Set_StatusMarkNew(ref mgBuSu, ref RedBlack, ref YellowBlack, ref LimeBlack);
+            var dtBuSu = mgBuSu.DataSource;
+            try
+            {
+                BeginInvoke((Action)delegate
+                {
+                    gv_buchsuche.DataSource = dtBuSu;
+                    gv_buchsuche.Columns["Kunden ID"].Visible = false;
+                    gv_buchsuche.Columns["Leihnummer"].Visible = false;
+                    gv_buchsuche.Columns["Kunden ID"].Visible = false;
+                    gv_buchsuche.Columns["Vorname"].Visible = false;
+                    gv_buchsuche.Columns["Nachname"].Visible = false;
+                    gv_buchsuche.Columns["Klasse"].Visible = false;
+                    foreach(int i in RedBlack)
+                    {
+                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Black;
+                    }
+                    foreach (int i in YellowBlack)
+                    {
+                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
+                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Black;
+                    }
+                    foreach (int i in LimeBlack)
+                    {
+                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.LimeGreen;
+                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Black;
+                    }
+                    cb_Autor.DataSource = cbAutor.DataSource;
+                    cb_Autor.ValueMember = "au_id";
+                    cb_Autor.DisplayMember = "au_autor";
+                    cb_Verlag.DataSource = cbVerlag.DataSource;
+                    cb_Verlag.ValueMember = "ver_id";
+                    cb_Verlag.DisplayMember = "ver_name";
+                    cb_Genre.DataSource = cbGenre.DataSource;
+                    cb_Genre.ValueMember = "ger_id";
+                    cb_Genre.DisplayMember = "ger_name";
+                    metroProgressSpinner1.Visible = false;
+                    metroProgressSpinner2.Visible = false;
+                    gv_buchsuche.Visible = true;
+                    cb_Autor.Visible = true;
+                    cb_Genre.Visible = true;
+                    cb_Verlag.Visible = true;
+                });
+            }
+            catch { }
+        }
     }
 }

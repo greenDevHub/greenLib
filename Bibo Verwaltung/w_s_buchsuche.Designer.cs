@@ -56,9 +56,6 @@
             this.lb_Autor = new MetroFramework.Controls.MetroLabel();
             this.lb_Verlag = new MetroFramework.Controls.MetroLabel();
             this.lb_Titel = new MetroFramework.Controls.MetroLabel();
-            this.cb_Verlag = new Bibo_Verwaltung.AdvancedComboBox();
-            this.cb_Genre = new Bibo_Verwaltung.AdvancedComboBox();
-            this.cb_Autor = new Bibo_Verwaltung.AdvancedComboBox();
             this.lbBuchProp = new MetroFramework.Controls.MetroLabel();
             this.bt_Schliessen = new MetroFramework.Controls.MetroButton();
             this.lb_VName = new MetroFramework.Controls.MetroLabel();
@@ -67,11 +64,17 @@
             this.gb_Kunden = new MetroFramework.Controls.MetroPanel();
             this.lb_KundenProp = new MetroFramework.Controls.MetroLabel();
             this.gb_GridView = new MetroFramework.Controls.MetroPanel();
+            this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.gb_Suche = new MetroFramework.Controls.MetroPanel();
             this.rb_Default = new MetroFramework.Controls.MetroRadioButton();
             this.rb_GREENonly = new MetroFramework.Controls.MetroRadioButton();
             this.rb_YELLOWonly = new MetroFramework.Controls.MetroRadioButton();
             this.rb_REDonly = new MetroFramework.Controls.MetroRadioButton();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.cb_Verlag = new Bibo_Verwaltung.AdvancedComboBox();
+            this.cb_Genre = new Bibo_Verwaltung.AdvancedComboBox();
+            this.cb_Autor = new Bibo_Verwaltung.AdvancedComboBox();
+            this.metroProgressSpinner2 = new MetroFramework.Controls.MetroProgressSpinner();
             ((System.ComponentModel.ISupportInitialize)(this.gv_buchsuche)).BeginInit();
             this.CM_Ausleihen.SuspendLayout();
             this.metroPanel1.SuspendLayout();
@@ -146,12 +149,13 @@
             // 
             // CM_Ausleihen
             // 
+            this.CM_Ausleihen.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.CM_Ausleihen.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addToLeihList,
             this.removeFromLeihList,
             this.ausleihen});
             this.CM_Ausleihen.Name = "ContextMenu";
-            this.CM_Ausleihen.Size = new System.Drawing.Size(281, 92);
+            this.CM_Ausleihen.Size = new System.Drawing.Size(281, 70);
             this.CM_Ausleihen.Style = MetroFramework.MetroColorStyle.Lime;
             // 
             // addToLeihList
@@ -248,6 +252,7 @@
             this.tb_ExemplarID.MaxLength = 32767;
             this.tb_ExemplarID.Name = "tb_ExemplarID";
             this.tb_ExemplarID.PasswordChar = '\0';
+            this.tb_ExemplarID.PromptText = "Exemplar ID";
             this.tb_ExemplarID.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_ExemplarID.SelectedText = "";
             this.tb_ExemplarID.SelectionLength = 0;
@@ -288,6 +293,7 @@
             this.tb_ISBN.MaxLength = 32767;
             this.tb_ISBN.Name = "tb_ISBN";
             this.tb_ISBN.PasswordChar = '\0';
+            this.tb_ISBN.PromptText = "ISBN";
             this.tb_ISBN.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_ISBN.SelectedText = "";
             this.tb_ISBN.SelectionLength = 0;
@@ -327,6 +333,7 @@
             this.tb_Titel.MaxLength = 32767;
             this.tb_Titel.Name = "tb_Titel";
             this.tb_Titel.PasswordChar = '\0';
+            this.tb_Titel.PromptText = "Titel";
             this.tb_Titel.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Titel.SelectedText = "";
             this.tb_Titel.SelectionLength = 0;
@@ -366,6 +373,7 @@
             this.tb_NName.MaxLength = 32767;
             this.tb_NName.Name = "tb_NName";
             this.tb_NName.PasswordChar = '\0';
+            this.tb_NName.PromptText = "Nachname";
             this.tb_NName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_NName.SelectedText = "";
             this.tb_NName.SelectionLength = 0;
@@ -405,6 +413,7 @@
             this.tb_VName.MaxLength = 32767;
             this.tb_VName.Name = "tb_VName";
             this.tb_VName.PasswordChar = '\0';
+            this.tb_VName.PromptText = "Vorname";
             this.tb_VName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_VName.SelectedText = "";
             this.tb_VName.SelectionLength = 0;
@@ -459,6 +468,7 @@
             this.tb_Klasse.MaxLength = 32767;
             this.tb_Klasse.Name = "tb_Klasse";
             this.tb_Klasse.PasswordChar = '\0';
+            this.tb_Klasse.PromptText = "Klassenstufe";
             this.tb_Klasse.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Klasse.SelectedText = "";
             this.tb_Klasse.SelectionLength = 0;
@@ -476,6 +486,7 @@
             // 
             // metroPanel1
             // 
+            this.metroPanel1.Controls.Add(this.metroProgressSpinner2);
             this.metroPanel1.Controls.Add(this.lb_Genre);
             this.metroPanel1.Controls.Add(this.lb_Exemplar);
             this.metroPanel1.Controls.Add(this.lb_ISBN);
@@ -507,7 +518,7 @@
             // 
             this.helpProvider.SetHelpKeyword(this.lb_Genre, "Tragen sie den Verlag ihres Buches hier ein.");
             this.lb_Genre.Location = new System.Drawing.Point(3, 153);
-            this.lb_Genre.Margin = new System.Windows.Forms.Padding(3);
+            this.lb_Genre.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_Genre.Name = "lb_Genre";
             this.helpProvider.SetShowHelp(this.lb_Genre, true);
             this.lb_Genre.Size = new System.Drawing.Size(84, 24);
@@ -519,7 +530,7 @@
             // 
             this.helpProvider.SetHelpString(this.lb_Exemplar, "Tragen sie hier die ISBN-13 ein, um das gewünschte Buch zu laden.");
             this.lb_Exemplar.Location = new System.Drawing.Point(3, 3);
-            this.lb_Exemplar.Margin = new System.Windows.Forms.Padding(3);
+            this.lb_Exemplar.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_Exemplar.Name = "lb_Exemplar";
             this.helpProvider.SetShowHelp(this.lb_Exemplar, true);
             this.lb_Exemplar.Size = new System.Drawing.Size(84, 24);
@@ -531,7 +542,7 @@
             // 
             this.helpProvider.SetHelpString(this.lb_ISBN, "Tragen sie den Titel ihres Buches hier ein.");
             this.lb_ISBN.Location = new System.Drawing.Point(3, 33);
-            this.lb_ISBN.Margin = new System.Windows.Forms.Padding(3);
+            this.lb_ISBN.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_ISBN.Name = "lb_ISBN";
             this.helpProvider.SetShowHelp(this.lb_ISBN, true);
             this.lb_ISBN.Size = new System.Drawing.Size(84, 24);
@@ -543,7 +554,7 @@
             // 
             this.helpProvider.SetHelpString(this.lb_Autor, "Tragen sie das Genre ihres Buches hier ein.");
             this.lb_Autor.Location = new System.Drawing.Point(3, 93);
-            this.lb_Autor.Margin = new System.Windows.Forms.Padding(3);
+            this.lb_Autor.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_Autor.Name = "lb_Autor";
             this.helpProvider.SetShowHelp(this.lb_Autor, true);
             this.lb_Autor.Size = new System.Drawing.Size(84, 24);
@@ -555,7 +566,7 @@
             // 
             this.helpProvider.SetHelpKeyword(this.lb_Verlag, "Tragen sie den Verlag ihres Buches hier ein.");
             this.lb_Verlag.Location = new System.Drawing.Point(3, 123);
-            this.lb_Verlag.Margin = new System.Windows.Forms.Padding(3);
+            this.lb_Verlag.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_Verlag.Name = "lb_Verlag";
             this.helpProvider.SetShowHelp(this.lb_Verlag, true);
             this.lb_Verlag.Size = new System.Drawing.Size(84, 24);
@@ -567,85 +578,13 @@
             // 
             this.helpProvider.SetHelpString(this.lb_Titel, "Tragen sie den Autor ihres Buches hier ein.");
             this.lb_Titel.Location = new System.Drawing.Point(3, 63);
-            this.lb_Titel.Margin = new System.Windows.Forms.Padding(3);
+            this.lb_Titel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_Titel.Name = "lb_Titel";
             this.helpProvider.SetShowHelp(this.lb_Titel, true);
             this.lb_Titel.Size = new System.Drawing.Size(84, 24);
             this.lb_Titel.TabIndex = 40;
             this.lb_Titel.Text = "Titel:";
             this.lb_Titel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // cb_Verlag
-            // 
-            this.cb_Verlag.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cb_Verlag.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cb_Verlag.BorderColor = System.Drawing.Color.Gray;
-            this.cb_Verlag.DataRowView = true;
-            this.cb_Verlag.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cb_Verlag.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.cb_Verlag.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.cb_Verlag.FormattingEnabled = true;
-            this.helpProvider.SetHelpString(this.cb_Verlag, "Tragen sie hier den Verlag ein, um das ausgeliehene Buch zu laden.");
-            this.cb_Verlag.HighlightColor = System.Drawing.Color.YellowGreen;
-            this.cb_Verlag.ItemHeight = 18;
-            this.cb_Verlag.Location = new System.Drawing.Point(93, 123);
-            this.cb_Verlag.Name = "cb_Verlag";
-            this.helpProvider.SetShowHelp(this.cb_Verlag, true);
-            this.cb_Verlag.Size = new System.Drawing.Size(175, 24);
-            this.cb_Verlag.Sorted = true;
-            this.cb_Verlag.TabIndex = 4;
-            this.cb_Verlag.Text = "Verlag";
-            this.cb_Verlag.TextChanged += new System.EventHandler(this.cb_Verlag_TextChanged);
-            this.cb_Verlag.Enter += new System.EventHandler(this.cb_Verlag_Enter);
-            this.cb_Verlag.Leave += new System.EventHandler(this.cb_Verlag_Leave);
-            // 
-            // cb_Genre
-            // 
-            this.cb_Genre.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cb_Genre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cb_Genre.BorderColor = System.Drawing.Color.Gray;
-            this.cb_Genre.DataRowView = true;
-            this.cb_Genre.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cb_Genre.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.cb_Genre.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.cb_Genre.FormattingEnabled = true;
-            this.helpProvider.SetHelpString(this.cb_Genre, "Tragen sie hier das Genre ein, um das ausgeliehene Buch zu laden.");
-            this.cb_Genre.HighlightColor = System.Drawing.Color.YellowGreen;
-            this.cb_Genre.ItemHeight = 18;
-            this.cb_Genre.Location = new System.Drawing.Point(93, 153);
-            this.cb_Genre.Name = "cb_Genre";
-            this.helpProvider.SetShowHelp(this.cb_Genre, true);
-            this.cb_Genre.Size = new System.Drawing.Size(175, 24);
-            this.cb_Genre.Sorted = true;
-            this.cb_Genre.TabIndex = 5;
-            this.cb_Genre.Text = "Genre";
-            this.cb_Genre.TextChanged += new System.EventHandler(this.cb_Genre_TextChanged);
-            this.cb_Genre.Enter += new System.EventHandler(this.cb_Genre_Enter);
-            this.cb_Genre.Leave += new System.EventHandler(this.cb_Genre_Leave);
-            // 
-            // cb_Autor
-            // 
-            this.cb_Autor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cb_Autor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cb_Autor.BorderColor = System.Drawing.Color.Gray;
-            this.cb_Autor.DataRowView = true;
-            this.cb_Autor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cb_Autor.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.cb_Autor.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.cb_Autor.FormattingEnabled = true;
-            this.helpProvider.SetHelpString(this.cb_Autor, "Tragen sie hier den Buchautor ein, um das ausgeliehene Buch zu laden.");
-            this.cb_Autor.HighlightColor = System.Drawing.Color.YellowGreen;
-            this.cb_Autor.ItemHeight = 18;
-            this.cb_Autor.Location = new System.Drawing.Point(93, 93);
-            this.cb_Autor.Name = "cb_Autor";
-            this.helpProvider.SetShowHelp(this.cb_Autor, true);
-            this.cb_Autor.Size = new System.Drawing.Size(175, 24);
-            this.cb_Autor.Sorted = true;
-            this.cb_Autor.TabIndex = 3;
-            this.cb_Autor.Text = "Autor";
-            this.cb_Autor.TextChanged += new System.EventHandler(this.cb_Autor_TextChanged);
-            this.cb_Autor.Enter += new System.EventHandler(this.cb_Autor_Enter);
-            this.cb_Autor.Leave += new System.EventHandler(this.cb_Autor_Leave);
             // 
             // lbBuchProp
             // 
@@ -681,7 +620,7 @@
             // 
             this.helpProvider.SetHelpString(this.lb_VName, "Tragen sie hier die ISBN-13 ein, um das gewünschte Buch zu laden.");
             this.lb_VName.Location = new System.Drawing.Point(3, 3);
-            this.lb_VName.Margin = new System.Windows.Forms.Padding(3);
+            this.lb_VName.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_VName.Name = "lb_VName";
             this.helpProvider.SetShowHelp(this.lb_VName, true);
             this.lb_VName.Size = new System.Drawing.Size(65, 24);
@@ -693,7 +632,7 @@
             // 
             this.helpProvider.SetHelpString(this.lb_NName, "Tragen sie den Titel ihres Buches hier ein.");
             this.lb_NName.Location = new System.Drawing.Point(3, 33);
-            this.lb_NName.Margin = new System.Windows.Forms.Padding(3);
+            this.lb_NName.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_NName.Name = "lb_NName";
             this.helpProvider.SetShowHelp(this.lb_NName, true);
             this.lb_NName.Size = new System.Drawing.Size(75, 24);
@@ -705,7 +644,7 @@
             // 
             this.helpProvider.SetHelpString(this.lb_Klasse, "Tragen sie den Autor ihres Buches hier ein.");
             this.lb_Klasse.Location = new System.Drawing.Point(3, 63);
-            this.lb_Klasse.Margin = new System.Windows.Forms.Padding(3);
+            this.lb_Klasse.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.lb_Klasse.Name = "lb_Klasse";
             this.helpProvider.SetShowHelp(this.lb_Klasse, true);
             this.lb_Klasse.Size = new System.Drawing.Size(80, 24);
@@ -748,6 +687,7 @@
             // 
             // gb_GridView
             // 
+            this.gb_GridView.Controls.Add(this.metroProgressSpinner1);
             this.gb_GridView.Controls.Add(this.gv_buchsuche);
             this.gb_GridView.HorizontalScrollbarBarColor = true;
             this.gb_GridView.HorizontalScrollbarHighlightOnWheel = false;
@@ -759,6 +699,18 @@
             this.gb_GridView.VerticalScrollbarBarColor = true;
             this.gb_GridView.VerticalScrollbarHighlightOnWheel = false;
             this.gb_GridView.VerticalScrollbarSize = 10;
+            // 
+            // metroProgressSpinner1
+            // 
+            this.metroProgressSpinner1.Location = new System.Drawing.Point(209, 0);
+            this.metroProgressSpinner1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.metroProgressSpinner1.Maximum = 100;
+            this.metroProgressSpinner1.MaximumSize = new System.Drawing.Size(447, 484);
+            this.metroProgressSpinner1.Name = "metroProgressSpinner1";
+            this.metroProgressSpinner1.Size = new System.Drawing.Size(447, 484);
+            this.metroProgressSpinner1.Style = MetroFramework.MetroColorStyle.Lime;
+            this.metroProgressSpinner1.TabIndex = 2;
+            this.metroProgressSpinner1.UseSelectable = true;
             // 
             // gb_Suche
             // 
@@ -839,6 +791,94 @@
             this.rb_REDonly.UseSelectable = true;
             this.rb_REDonly.CheckedChanged += new System.EventHandler(this.rb_Default_CheckedChanged);
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
+            // 
+            // cb_Verlag
+            // 
+            this.cb_Verlag.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_Verlag.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Verlag.BorderColor = System.Drawing.Color.Gray;
+            this.cb_Verlag.DataRowView = true;
+            this.cb_Verlag.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cb_Verlag.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.cb_Verlag.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.cb_Verlag.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_Verlag, "Tragen sie hier den Verlag ein, um das ausgeliehene Buch zu laden.");
+            this.cb_Verlag.HighlightColor = System.Drawing.Color.YellowGreen;
+            this.cb_Verlag.ItemHeight = 18;
+            this.cb_Verlag.Location = new System.Drawing.Point(93, 123);
+            this.cb_Verlag.Name = "cb_Verlag";
+            this.helpProvider.SetShowHelp(this.cb_Verlag, true);
+            this.cb_Verlag.Size = new System.Drawing.Size(175, 24);
+            this.cb_Verlag.Sorted = true;
+            this.cb_Verlag.TabIndex = 4;
+            this.cb_Verlag.Text = "Verlag";
+            this.cb_Verlag.TextChanged += new System.EventHandler(this.cb_Verlag_TextChanged);
+            this.cb_Verlag.Enter += new System.EventHandler(this.cb_Verlag_Enter);
+            this.cb_Verlag.Leave += new System.EventHandler(this.cb_Verlag_Leave);
+            // 
+            // cb_Genre
+            // 
+            this.cb_Genre.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_Genre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Genre.BorderColor = System.Drawing.Color.Gray;
+            this.cb_Genre.DataRowView = true;
+            this.cb_Genre.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cb_Genre.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.cb_Genre.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.cb_Genre.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_Genre, "Tragen sie hier das Genre ein, um das ausgeliehene Buch zu laden.");
+            this.cb_Genre.HighlightColor = System.Drawing.Color.YellowGreen;
+            this.cb_Genre.ItemHeight = 18;
+            this.cb_Genre.Location = new System.Drawing.Point(93, 153);
+            this.cb_Genre.Name = "cb_Genre";
+            this.helpProvider.SetShowHelp(this.cb_Genre, true);
+            this.cb_Genre.Size = new System.Drawing.Size(175, 24);
+            this.cb_Genre.Sorted = true;
+            this.cb_Genre.TabIndex = 5;
+            this.cb_Genre.Text = "Genre";
+            this.cb_Genre.TextChanged += new System.EventHandler(this.cb_Genre_TextChanged);
+            this.cb_Genre.Enter += new System.EventHandler(this.cb_Genre_Enter);
+            this.cb_Genre.Leave += new System.EventHandler(this.cb_Genre_Leave);
+            // 
+            // cb_Autor
+            // 
+            this.cb_Autor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_Autor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Autor.BorderColor = System.Drawing.Color.Gray;
+            this.cb_Autor.DataRowView = true;
+            this.cb_Autor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cb_Autor.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.cb_Autor.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.cb_Autor.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_Autor, "Tragen sie hier den Buchautor ein, um das ausgeliehene Buch zu laden.");
+            this.cb_Autor.HighlightColor = System.Drawing.Color.YellowGreen;
+            this.cb_Autor.ItemHeight = 18;
+            this.cb_Autor.Location = new System.Drawing.Point(93, 93);
+            this.cb_Autor.Name = "cb_Autor";
+            this.helpProvider.SetShowHelp(this.cb_Autor, true);
+            this.cb_Autor.Size = new System.Drawing.Size(175, 24);
+            this.cb_Autor.Sorted = true;
+            this.cb_Autor.TabIndex = 3;
+            this.cb_Autor.Text = "Autor";
+            this.cb_Autor.TextChanged += new System.EventHandler(this.cb_Autor_TextChanged);
+            this.cb_Autor.Enter += new System.EventHandler(this.cb_Autor_Enter);
+            this.cb_Autor.Leave += new System.EventHandler(this.cb_Autor_Leave);
+            // 
+            // metroProgressSpinner2
+            // 
+            this.metroProgressSpinner2.Location = new System.Drawing.Point(132, 93);
+            this.metroProgressSpinner2.Margin = new System.Windows.Forms.Padding(2);
+            this.metroProgressSpinner2.Maximum = 100;
+            this.metroProgressSpinner2.MaximumSize = new System.Drawing.Size(447, 484);
+            this.metroProgressSpinner2.Name = "metroProgressSpinner2";
+            this.metroProgressSpinner2.Size = new System.Drawing.Size(84, 84);
+            this.metroProgressSpinner2.Style = MetroFramework.MetroColorStyle.Lime;
+            this.metroProgressSpinner2.TabIndex = 2;
+            this.metroProgressSpinner2.UseSelectable = true;
+            // 
             // w_s_buchsuche
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -911,5 +951,8 @@
         private MetroFramework.Controls.MetroRadioButton rb_GREENonly;
         private MetroFramework.Controls.MetroRadioButton rb_YELLOWonly;
         private MetroFramework.Controls.MetroRadioButton rb_REDonly;
+        private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner2;
     }
 }

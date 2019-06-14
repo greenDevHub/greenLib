@@ -754,8 +754,8 @@ namespace Bibo_Verwaltung
                         Kunde k = new Kunde();
                         k.Vorname = row[0].ToString();
                         k.Nachname = row[1].ToString();
-                        k.Gd = DateTime.Now; //nur HotFix
-                        //k.Gd = DateTime.Parse(row[2].ToString()); //funktioniert 
+                        //k.Gd = DateTime.Now; //nur HotFix
+                        k.Gd = DateTime.Parse(row[2].ToString()); //funktioniert 
                         k.Klasse.Klassename = row[3].ToString();
                         k.Hausnummer = "";
                         k.Ort = "";
