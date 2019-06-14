@@ -746,7 +746,7 @@ namespace Bibo_Verwaltung
                 
             }
         }
-
+        
         private void gv_result_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
