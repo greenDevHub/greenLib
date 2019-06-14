@@ -62,7 +62,7 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
             this.gv_Klassen.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.gv_Klassen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_Klassen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_Klassen.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_Klassen.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv_Klassen.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;

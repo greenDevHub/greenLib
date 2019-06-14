@@ -29,10 +29,6 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-
-
-
-
         /// <summary>
         /// Füllt ein DataSet-Objekt mit den Klassenstufen-Klasse-Zuordnungsdatendaten 
         /// </summary>
@@ -40,7 +36,6 @@ namespace Bibo_Verwaltung
         {
             if (con.ConnectError()) return;
             string RawCommand = "SELECT ks_klassenstufe as 'Klassenstufe', ks_klasse, k_bezeichnung as 'Klasse' FROM [dbo].[t_s_klasse_stufe] left join [dbo].[t_s_klassen] on k_id = ks_klasse order by ks_klasse";
-            //SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
             con.Close();
@@ -107,6 +102,7 @@ namespace Bibo_Verwaltung
             ds.Tables[0].DefaultView.RowFilter = string.Format("Klassenstufe LIKE '{0}'", stufe);
             grid.DataSource = ds.Tables[0];
             grid.Columns["Klassenstufe"].Visible = false;
+            grid.Columns["ks_klasse"].Visible = false;
         }
 
         /// <summary>
@@ -131,70 +127,5 @@ namespace Bibo_Verwaltung
             }
             con.Close();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //#region Methoden
-        //#region Fill Object
-        //SqlDataAdapter adapter = new SqlDataAdapter();
-        //DataTable dt = new DataTable();
-        //SqlCommandBuilder comb = new SqlCommandBuilder();
-        //private void FillObject()
-        //{
-        //    //dt.Clear();
-        //    //SQL_Verbindung con = new SQL_Verbindung();
-        //    //if (con.ConnectError()) return;
-        //    //string RawCommand = "SELECT k_stufe as 'Klassenstufe' FROM [dbo].[t_s_klassenstufe]";
-
-        //    //// Verbindung öffnen 
-        //    //adapter = new SqlDataAdapter(RawCommand, con.Con);
-        //    //adapter.Fill(dt);
-
-        //    //con.Close();
-
-        //}
-
-        //public void FillCombobox(ref ComboBox cb, object value)
-        //{
-        //    //FillObject();
-        //    //cb.DataSource = dt;
-        //    //cb.ValueMember = "Klassenstufe";
-        //    //cb.DisplayMember = "Klassenstufe";
-        //    //cb.SelectedValue = value;
-        //}
-
-        //public void FillGrid(ref MetroGrid grid, object value = null)
-        //{
-        //    grid.DataSource = dt;
-        //}
-        //#endregion
-        //#region Speichern Grid
-        //public void SaveGrid(ref MetroGrid grid)
-        //{
-        //    comb = new SqlCommandBuilder(adapter);
-        //    DataTable changes = dt.GetChanges();
-        //    if (changes != null)
-        //    {
-        //        adapter.Update(changes);
-        //    }
-        //}
-        //#endregion
-        //#endregion
     }
 }
