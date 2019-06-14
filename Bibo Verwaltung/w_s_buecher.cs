@@ -279,8 +279,8 @@ namespace Bibo_Verwaltung
                     }
                     if (!b.Sprache.IfContains(cb_Sprache.Text))
                     {
-                        b.Sprache.Add(cb_Sprache.Text);
-                        b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetID(cb_Sprache.Text)));
+                        b.Sprache.AddSprache(cb_Sprache.Text);
+                        b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetSprachID(cb_Sprache.Text)));
                     }
                     b.Autoren.Clear();
                     b.Autoren.Add(cb_Autor.Text);
@@ -328,8 +328,8 @@ namespace Bibo_Verwaltung
                     }
                     if (!b.Sprache.IfContains(cb_Sprache.Text))
                     {
-                        b.Sprache.Add(cb_Sprache.Text);
-                        b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetID(cb_Sprache.Text)));
+                        b.Sprache.AddSprache(cb_Sprache.Text);
+                        b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetSprachID(cb_Sprache.Text)));
                     }
                     UpdateBuch();
                     rTB_1.Visible = true;
@@ -399,8 +399,8 @@ namespace Bibo_Verwaltung
                         }
                         if (!b.Sprache.IfContains(cb_Sprache.Text))
                         {
-                            b.Sprache.Add(cb_Sprache.Text);
-                            b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetID(cb_Sprache.Text)));
+                            b.Sprache.AddSprache(cb_Sprache.Text);
+                            b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetSprachID(cb_Sprache.Text)));
                         }
                         if (needAutor.Count > 0)
                         {
@@ -447,8 +447,8 @@ namespace Bibo_Verwaltung
                         }
                         if (!b.Sprache.IfContains(cb_Sprache.Text))
                         {
-                            b.Sprache.Add(cb_Sprache.Text);
-                            b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetID(cb_Sprache.Text)));
+                            b.Sprache.AddSprache(cb_Sprache.Text);
+                            b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetSprachID(cb_Sprache.Text)));
                         }
                         b.Autoren.Clear();
                         b.Autoren.Add(cb_Autor.SelectedText.ToString());
@@ -492,8 +492,8 @@ namespace Bibo_Verwaltung
                         }
                         if (!b.Sprache.IfContains(cb_Sprache.Text))
                         {
-                            b.Sprache.Add(cb_Sprache.Text);
-                            b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetID(cb_Sprache.Text)));
+                            b.Sprache.AddSprache(cb_Sprache.Text);
+                            b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetSprachID(cb_Sprache.Text)));
                         }
                         AddBuch();
                         rTB_1.Visible = true;
@@ -513,8 +513,8 @@ namespace Bibo_Verwaltung
                         }
                         if (!b.Sprache.IfContains(cb_Sprache.Text))
                         {
-                            b.Sprache.Add(cb_Sprache.Text);
-                            b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetID(cb_Sprache.Text)));
+                            b.Sprache.AddSprache(cb_Sprache.Text);
+                            b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetSprachID(cb_Sprache.Text)));
                         }
                         AddBuch();
                         rTB_1.Visible = true;

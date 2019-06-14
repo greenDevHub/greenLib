@@ -41,7 +41,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Exemplar-Code-Parser
         /// </summary>
-        static int _checksum_ean8(String data)
+        static int ParseBuchcode(String data)
         {
             // Test string for correct length
             if (data.Length != 7 && data.Length != 8)
@@ -104,6 +104,8 @@ namespace Bibo_Verwaltung
             dp_RueckDatum.Enabled = true;
             bt_back.Enabled = false;
             bt_next.Enabled = false;
+            gv_suggested.Enabled = false;
+            gv_selected.Enabled = false;
             bt_abschließen.Enabled = false;
             gv_suggested.DataSource = null;
             gv_Schueler.DataSource = null;
@@ -117,6 +119,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void LastSchueler()
         {
+            IsComplete(ref gv_Schueler);
             if (gv_Schueler.CurrentRow.Index >= 1)
             {
                 gv_Schueler.CurrentCell = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index - 1].Cells[1];
@@ -137,11 +140,28 @@ namespace Bibo_Verwaltung
         }
 
         /// <summary>
+        /// Prüft ob alle Schüler der aktuellen Auswahl ihnre Schulbücher erfolgreich erhalten haben
+        /// </summary>
+        private bool IsComplete(ref MetroFramework.Controls.MetroGrid grid)
+        {
+            bool result = true;
+            for (int i = 0; i < grid.Rows.Count; i++)
+            {
+                if (grid.Rows[i].DefaultCellStyle.BackColor != Color.LimeGreen)
+                {
+                    result = false;
+                    return result;
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
         /// Wählt den nächsten Schüler in der Schüler-Gridview aus
         /// </summary>
         private void NextSchueler()
         {
-            if (gv_Schueler.CurrentRow.Index == gv_Schueler.Rows.Count - 1)
+            if (IsComplete(ref gv_Schueler))
             {
                 DialogResult dialogResult = MetroMessageBox.Show(this, "Sie sind am Ende der Schülerliste angekommen. Möchten Sie die Lehrbuch-Ausgabe abschließen?", "Warnung",
                         MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
@@ -154,7 +174,7 @@ namespace Bibo_Verwaltung
                     gv_Schueler.ClearSelection();
                 }
             }
-            else if (gv_Schueler.CurrentRow.Index < gv_Schueler.Rows.Count - 1)
+            if (gv_Schueler.CurrentRow.Index < gv_Schueler.Rows.Count - 1)
             {
                 if (gv_Schueler.Rows.Count > 1)
                 {
@@ -199,9 +219,17 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void SelectExemplar()
         {
-            autoausleihe.AddToAusleihList();
             try
             {
+                for (int i = 0; i < selectedBuecher.Rows.Count; i++)
+                {
+                    if (selectedBuecher.Rows[i]["Titel"].ToString() == new Exemplar().GetTitel(autoausleihe.LeihListe.Rows[autoausleihe.GetIndexInLeihliste()][0].ToString()))
+                    {
+                        i = 0;
+                        UnSelectExemplar();
+                    }
+                }
+                autoausleihe.AddToAusleihList();
                 DataRow relation;
                 string[] exemlarDetails = new string[2];
                 exemlarDetails[0] = autoausleihe.ExemplarID;
@@ -209,7 +237,7 @@ namespace Bibo_Verwaltung
                 relation = selectedBuecher.NewRow();
                 relation.ItemArray = exemlarDetails;
                 selectedBuecher.Rows.Add(relation);
-            }
+             }
             catch { }
         }
 
@@ -247,6 +275,8 @@ namespace Bibo_Verwaltung
                     a_cb_Klasse.Enabled = false;
                     bt_back.Enabled = true;
                     bt_next.Enabled = true;
+                    gv_suggested.Enabled = true;
+                    gv_selected.Enabled = true;
                     bt_abschließen.Enabled = true;
                     if (a_cb_Modus.SelectedIndex == 0)
                     {
@@ -292,30 +322,43 @@ namespace Bibo_Verwaltung
 
         private void bt_abschließen_Click(object sender, EventArgs e)
         {
-            autoausleihe.KID = gv_Schueler.CurrentRow.Cells["kunde_ID"].Value.ToString();
-            kunden = new Kunde(autoausleihe.KID);
-            DialogResult dialogResult = MetroMessageBox.Show(this, autoausleihe.GetAusleihList() + "an: '" + autoausleihe.TrimText(kunden.Vorname + " " + kunden.Nachname, 30) + "' wirklich ausleihen?", "Achtung",
-                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            if (dialogResult == DialogResult.OK)
+            if (autoausleihe.LeihListe.Rows.Count != 0)
             {
-                DataGridViewRow Kundenrow = gv_Schueler.CurrentRow;
-                try
+                autoausleihe.KID = gv_Schueler.CurrentRow.Cells["kunde_ID"].Value.ToString();
+                kunden = new Kunde(autoausleihe.KID);
+                DialogResult dialogResult = MetroMessageBox.Show(this, autoausleihe.GetAusleihList() + "an: '" + autoausleihe.TrimText(kunden.Vorname + " " + kunden.Nachname, 30) + "' wirklich ausleihen?", "Achtung",
+                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.OK)
                 {
-                    foreach (DataRow row in autoausleihe.LeihListe.Rows)
+                    DataGridViewRow Kundenrow = gv_Schueler.CurrentRow;
+                    try
                     {
-                        autoausleihe.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(), row[1].ToString(), Convert.ToInt32(kunden.KundenID));
+                        foreach (DataRow row in autoausleihe.LeihListe.Rows)
+                        {
+                            autoausleihe.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(), row[1].ToString(), Convert.ToInt32(kunden.KundenID));
+                        }
+                        MetroMessageBox.Show(this, "Die Buchausgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (IsComplete(ref gv_suggested))
+                        {
+                            Kundenrow.DefaultCellStyle.BackColor = Color.LimeGreen;
+                            Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                        }
                     }
-                    MetroMessageBox.Show(this, "Die Buchausgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Kundenrow.DefaultCellStyle.BackColor = Color.LimeGreen;
-                    Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                    catch
+                    {
+                        MetroMessageBox.Show(this, "Die Buchausgabe konnte nicht abgeschlossen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        if (IsComplete(ref gv_suggested))
+                        {
+                            Kundenrow.DefaultCellStyle.BackColor = Color.Red;
+                            Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                        }
+                    }
+                    NextSchueler();
                 }
-                catch
-                {
-                    MetroMessageBox.Show(this, "Die Buchausgabe konnte nicht abgeschlossen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Kundenrow.DefaultCellStyle.BackColor = Color.Red;
-                    Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
-                }
-                NextSchueler();
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "Es befinden sich keine Bücher in der Ausleihliste!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -328,7 +371,7 @@ namespace Bibo_Verwaltung
                 {
                     string seven = tb_ExemplarID.Text.Substring(0, 7);
                     string eight = tb_ExemplarID.Text.Substring(7, 1);
-                    if (_checksum_ean8(seven).ToString().Equals(eight))
+                    if (ParseBuchcode(seven).ToString().Equals(eight))
                     {
                         tb_ExemplarID.Text = int.Parse(seven).ToString();
                     }

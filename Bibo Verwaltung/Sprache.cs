@@ -37,53 +37,66 @@ namespace Bibo_Verwaltung
         public Sprache(string spracheid)
         {
             this.spracheid = spracheid;
-            Load();
+            LoadSprache();
             FillObject();
         }
         #endregion
 
-        #region Load
-        private void Load()
+        /// <summary>
+        /// Lädt die Spachdaten einer Sprache
+        /// </summary>
+        private void LoadSprache()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
             string RawCommand = "SELECT * FROM [dbo].[t_s_sprache] WHERE sprach_id = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, spracheid);
-            // Einlesen der Datenzeilen 
             while (dr.Read())
             {
                 SpracheID = dr["sprach_id"].ToString();
                 Sprachename = dr["sprach_name"].ToString();
             }
-            // DataReader schließen 
             dr.Close();
-            // Verbindung schließen 
             con.Close();
         }
-        #endregion
 
-        #region Fill Object
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
         DataTable dt = new DataTable();
         SqlCommandBuilder comb = new SqlCommandBuilder();
+        SQL_Verbindung con = new SQL_Verbindung();
+
+        /// <summary>
+        /// Füllt ein DataSet mit Sprachdaten 
+        /// </summary>
         private void FillObject()
         {
-            dt.Clear();
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
             string RawCommand = "SELECT * FROM [dbo].[t_s_sprache]";
-
-            // Verbindung öffnen 
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
             adapter.Fill(dt);
-
             con.Close();
         }
 
+        /// <summary>
+        /// Entfernt den gesamten Inhalt im DataSet 
+        /// </summary>
+        private void ClearDataSource()
+        {
+            try
+            {
+                ds.Tables[0].Rows.Clear();
+                dt.Clear();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Füllt eine ComoBox mit Sprachdaten 
+        /// </summary>
         public void FillCombobox(ref AdvancedComboBox cb, object value)
         {
+            ClearDataSource();
             FillObject();
             cb.DataSource = dt;
             cb.ValueMember = "sprach_id";
@@ -91,15 +104,21 @@ namespace Bibo_Verwaltung
             cb.SelectedValue = value;
         }
 
+        /// <summary>
+        /// Füllt ein DataGridView-Objekt mit Sprachdaten 
+        /// </summary>
         public void FillGrid(ref MetroGrid grid, object value = null)
         {
+            ClearDataSource();
+            FillObject();
             grid.DataSource = ds.Tables[0];
             grid.Columns[0].Visible = false;
             grid.Columns["sprach_name"].HeaderText = "Bezeichnung";
         }
-        #endregion
 
-        #region Speichern Grid
+        /// <summary>
+        /// Speichert die Daten aus einen DataGridView-Objekt in die Datenbank 
+        /// </summary>
         public void SaveGrid(ref MetroGrid grid)
         {
             comb = new SqlCommandBuilder(adapter);
@@ -109,11 +128,12 @@ namespace Bibo_Verwaltung
                 adapter.Update(changes);
             }
         }
-        #endregion
-        #region Add
-        public void Add(string sprache)
+
+        /// <summary>
+        /// Fügt eine Sprache der Datenbank hinzu 
+        /// </summary>
+        public void AddSprache(string sprache)
         {
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
             string RawCommand = "INSERT INTO [dbo].[t_s_sprache] (sprach_name) VALUES (@0)";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
@@ -121,12 +141,12 @@ namespace Bibo_Verwaltung
             cmd.ExecuteNonQuery();
             con.Close();
         }
-        #endregion
 
-        #region GetID
-        public string GetID(string sprache)
+        /// <summary>
+        /// Gibt die ID einer Sprache zurück
+        /// </summary>
+        public string GetSprachID(string sprache)
         {
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return "";
             string RawCommand = "SELECT sprach_id FROM [dbo].[t_s_sprache] WHERE sprach_name = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, sprache);
@@ -138,7 +158,6 @@ namespace Bibo_Verwaltung
             con.Close();
             return SpracheID;
         }
-        #endregion
 
         public bool IfContains(string value)
         {
