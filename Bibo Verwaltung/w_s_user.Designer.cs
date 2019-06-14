@@ -81,10 +81,10 @@
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(96, 24);
             this.bt_clear.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_clear.TabIndex = 14;
+            this.bt_clear.TabIndex = 6;
             this.bt_clear.Text = "Leeren";
             this.bt_clear.UseSelectable = true;
-            this.bt_clear.Click += new System.EventHandler(this.Reset);
+            this.bt_clear.Click += new System.EventHandler(this.ClearForm);
             // 
             // tb_user
             // 
@@ -106,6 +106,7 @@
             this.tb_user.MaxLength = 32767;
             this.tb_user.Name = "tb_user";
             this.tb_user.PasswordChar = '\0';
+            this.tb_user.PromptText = "Benutzername";
             this.tb_user.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_user.SelectedText = "";
             this.tb_user.SelectionLength = 0;
@@ -115,6 +116,7 @@
             this.tb_user.Style = MetroFramework.MetroColorStyle.Teal;
             this.tb_user.TabIndex = 3;
             this.tb_user.UseSelectable = true;
+            this.tb_user.WaterMark = "Benutzername";
             this.tb_user.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_user.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
@@ -138,6 +140,7 @@
             this.tb_pw.MaxLength = 32767;
             this.tb_pw.Name = "tb_pw";
             this.tb_pw.PasswordChar = '●';
+            this.tb_pw.PromptText = "Passwort";
             this.tb_pw.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_pw.SelectedText = "";
             this.tb_pw.SelectionLength = 0;
@@ -145,9 +148,10 @@
             this.tb_pw.ShortcutsEnabled = true;
             this.tb_pw.Size = new System.Drawing.Size(175, 24);
             this.tb_pw.Style = MetroFramework.MetroColorStyle.Teal;
-            this.tb_pw.TabIndex = 1;
+            this.tb_pw.TabIndex = 4;
             this.tb_pw.UseSelectable = true;
             this.tb_pw.UseSystemPasswordChar = true;
+            this.tb_pw.WaterMark = "Passwort";
             this.tb_pw.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_pw.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
@@ -170,7 +174,7 @@
             this.bt_confirm.Name = "bt_confirm";
             this.bt_confirm.Size = new System.Drawing.Size(175, 24);
             this.bt_confirm.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_confirm.TabIndex = 13;
+            this.bt_confirm.TabIndex = 7;
             this.bt_confirm.Text = "Hinzufügen";
             this.bt_confirm.UseSelectable = true;
             this.bt_confirm.Click += new System.EventHandler(this.bt_confirm_Click);
@@ -197,7 +201,7 @@
             this.rb_KundeLoeschen.Name = "rb_KundeLoeschen";
             this.rb_KundeLoeschen.Size = new System.Drawing.Size(80, 19);
             this.rb_KundeLoeschen.Style = MetroFramework.MetroColorStyle.Teal;
-            this.rb_KundeLoeschen.TabIndex = 0;
+            this.rb_KundeLoeschen.TabIndex = 2;
             this.rb_KundeLoeschen.Text = "Entfernen";
             this.rb_KundeLoeschen.UseSelectable = true;
             this.rb_KundeLoeschen.CheckedChanged += new System.EventHandler(this.rb_KundeLoeschen_CheckedChanged);
@@ -212,7 +216,7 @@
             this.rb_KundeBearbeiten.Name = "rb_KundeBearbeiten";
             this.rb_KundeBearbeiten.Size = new System.Drawing.Size(88, 19);
             this.rb_KundeBearbeiten.Style = MetroFramework.MetroColorStyle.Teal;
-            this.rb_KundeBearbeiten.TabIndex = 0;
+            this.rb_KundeBearbeiten.TabIndex = 1;
             this.rb_KundeBearbeiten.Text = "Bearbeiten";
             this.rb_KundeBearbeiten.UseSelectable = true;
             this.rb_KundeBearbeiten.CheckedChanged += new System.EventHandler(this.rb_KundeBearbeiten_CheckedChanged);
@@ -295,7 +299,7 @@
             this.bt_OK.Name = "bt_OK";
             this.bt_OK.Size = new System.Drawing.Size(100, 24);
             this.bt_OK.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_OK.TabIndex = 18;
+            this.bt_OK.TabIndex = 8;
             this.bt_OK.Text = "Schließen";
             this.bt_OK.UseSelectable = true;
             // 
@@ -341,7 +345,7 @@
             this.cb_Rechte.Location = new System.Drawing.Point(105, 88);
             this.cb_Rechte.Name = "cb_Rechte";
             this.cb_Rechte.Size = new System.Drawing.Size(175, 24);
-            this.cb_Rechte.TabIndex = 44;
+            this.cb_Rechte.TabIndex = 5;
             // 
             // w_s_user
             // 

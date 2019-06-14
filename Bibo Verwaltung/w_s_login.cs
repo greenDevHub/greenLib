@@ -47,7 +47,7 @@ namespace Bibo_Verwaltung
             Benutzer user = new Benutzer();
             string name = tb_User.Text;
             string pw = tb_Password.Text;
-            if (user.Login(pw, name) == true)
+            if (user.LoginUser(pw, name) == true)
             {
                 this.Hide();
                 Form Main = new w_s_main(name);

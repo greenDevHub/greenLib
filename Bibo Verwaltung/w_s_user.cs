@@ -13,75 +13,24 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_user : MetroFramework.Forms.MetroForm
     {
+        #region Constructor
         string currentUser;
-
         public w_s_user(string userName)
         {
             InitializeComponent();
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName;
-            Benutzer user = new Benutzer();
             user.FillGrid(ref gv_Benutzer);
         }
+        #endregion
 
-        private void bt_confirm_Click(object sender, EventArgs e)
-        {
-            string name = tb_user.Text;
-            string pw = tb_pw.Text;
-            string rechte = cb_Rechte.SelectedIndex.ToString();
-            Benutzer user = new Benutzer(true);
-            if (bt_confirm.Text.Equals("Hinzufügen"))
-            {
-                if (rechte.Equals("-1"))
-                {
-                    MetroMessageBox.Show(this,"Du darfst bei den Rechten nur eine der auswählbaren Gruppen angeben!", "Falsche Rechte!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    cb_Rechte.Text = "";
-                    return;
-                }
-                try
-                {
-                    user.Add(name, pw, rechte);
-                    user.FillGrid(ref gv_Benutzer);
-                }
-                catch
-                {
-                    MetroMessageBox.Show(this,"Der angegebene Name ist bereits vorhanden. Bitte wählen Sie einen anderen.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else if (bt_confirm.Text.Equals("Löschen"))
-            {
-                try
-                {
-                    user.Delete(name);
-                    user.FillGrid(ref gv_Benutzer);
-                }
-                catch
-                {
-                    MetroMessageBox.Show(this,"Beim Löschen des gewählten Nutzers ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else if (bt_confirm.Text.Equals("Speichern"))
-            {
-                if (rechte.Equals("-1"))
-                {
-                    MetroMessageBox.Show(this,"Du darfst bei den Rechten nur eine der auswählbaren Gruppen angeben!", "Falsche Rechte!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    cb_Rechte.Text = "";
-                    return;
-                }
-                try
-                {
-                    user.Update(name, pw, rechte);
-                    user.FillGrid(ref gv_Benutzer);
-                }
-                catch
-                {
-                    MetroMessageBox.Show(this,"Beim Übernehmen der Änderungen ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            
-        }
+        Benutzer user = new Benutzer();
 
-        private void Modus()
+        #region Fenster-Methoden
+        /// <summary>
+        /// Setzt den aktuellen Modus anhand der RadioButton-Auswahl
+        /// </summary>
+        private void SetModus()
         {
             if (rb_Neukunde.Checked)
             {
@@ -118,19 +67,88 @@ namespace Bibo_Verwaltung
             }
         }
 
+        /// <summary>
+        /// Setzt die Form auf den Ausgangszustand zurück
+        /// </summary>
+        private void ClearForm(object sender, EventArgs e)
+        {
+            tb_user.Text = "";
+            tb_pw.Text = "";
+            cb_Rechte.Text = "";
+            user.FillGrid(ref gv_Benutzer);
+        }
+        #endregion
+
+        #region Componenten-Aktionen
+        private void bt_confirm_Click(object sender, EventArgs e)
+        {
+            string name = tb_user.Text;
+            string pw = tb_pw.Text;
+            string rechte = cb_Rechte.SelectedIndex.ToString();
+            Benutzer aUser = new Benutzer(true);
+            if (bt_confirm.Text.Equals("Hinzufügen"))
+            {
+                if (rechte.Equals("-1"))
+                {
+                    MetroMessageBox.Show(this, "Sie dürfen bei den Rechten nur eine der auswählbaren Gruppen angeben!", "Falsche Rechte!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    cb_Rechte.Text = "";
+                    return;
+                }
+                try
+                {
+                    aUser.AddUser(name, pw, rechte);
+                    aUser.FillGrid(ref gv_Benutzer);
+                }
+                catch
+                {
+                    MetroMessageBox.Show(this, "Der angegebene Name ist bereits vorhanden. Bitte wählen Sie einen anderen.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (bt_confirm.Text.Equals("Löschen"))
+            {
+                try
+                {
+                    aUser.DeleteUser(name);
+                    aUser.FillGrid(ref gv_Benutzer);
+                }
+                catch
+                {
+                    MetroMessageBox.Show(this, "Beim Löschen des gewählten Nutzers ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (bt_confirm.Text.Equals("Speichern"))
+            {
+                if (rechte.Equals("-1"))
+                {
+                    MetroMessageBox.Show(this, "Sie dürfen bei den Rechten nur eine der auswählbaren Gruppen angeben!", "Falsche Rechte!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    cb_Rechte.Text = "";
+                    return;
+                }
+                try
+                {
+                    aUser.UpdateUser(name, pw, rechte);
+                    aUser.FillGrid(ref gv_Benutzer);
+                }
+                catch
+                {
+                    MetroMessageBox.Show(this, "Beim Übernehmen der Änderungen ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         private void rb_Neukunde_CheckedChanged(object sender, EventArgs e)
         {
-            Modus();
+            SetModus();
         }
 
         private void rb_KundeLoeschen_CheckedChanged(object sender, EventArgs e)
         {
-            Modus();
+            SetModus();
         }
 
         private void rb_KundeBearbeiten_CheckedChanged(object sender, EventArgs e)
         {
-            Modus();
+            SetModus();
         }
 
         private void gv_Benutzer_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -142,15 +160,9 @@ namespace Bibo_Verwaltung
                 Benutzer user = new Benutzer(tb_user.Text);
                 tb_pw.Text = "Passwort123456";
                 cb_Rechte.SelectedIndex = int.Parse(user.Rechteid);
+                rb_KundeBearbeiten.Checked = true;
             }
-
         }
-
-        private void Reset(object sender, EventArgs e)
-        {
-            tb_user.Text = "";
-            tb_pw.Text = "";
-            cb_Rechte.Text = "";
-        }
+        #endregion
     }
 }
