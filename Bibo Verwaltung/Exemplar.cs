@@ -32,6 +32,9 @@ namespace Bibo_Verwaltung
 
         bool activated;
         public bool Activated { get { return activated; } set { activated = value; } }
+
+        bool printed;
+        public bool Printed { get { return printed; }set { printed = value; } }
         #endregion
 
         #region Objekt-Constructor
@@ -64,7 +67,7 @@ namespace Bibo_Verwaltung
         private void Load_ExemplarData()
         {
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT bu_id, bu_isbn, buch_titel, bu_zustandsid, isnull(bu_aufnahmedatum, '01.01.1990') as 'verified_aufnahmedatum', bu_activated from t_s_buchid left join t_s_zustand on bu_zustandsid = zu_id left join t_s_buecher on bu_isbn = buch_isbn where bu_id = @0";
+            string RawCommand = "SELECT bu_id, bu_isbn, buch_titel, bu_zustandsid, isnull(bu_aufnahmedatum, '01.01.1990') as 'verified_aufnahmedatum', bu_activated, bu_printed from t_s_buchid left join t_s_zustand on bu_zustandsid = zu_id left join t_s_buecher on bu_isbn = buch_isbn where bu_id = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, exemplarID);
             liste.Clear();
             while (dr.Read())
@@ -82,6 +85,14 @@ namespace Bibo_Verwaltung
                 {
                     Activated = true;
                 }
+                if (dr["bu_printed"].ToString().Equals(0))
+                {
+                    Printed = false;
+                }
+                else
+                {
+                    Printed = true;
+                }
             }
             dr.Close();
             con.Close();
@@ -92,13 +103,14 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void Add_Exemplar()
         {
-            string RawCommand = "Insert INTO t_s_buchid (bu_isbn, bu_zustandsid, bu_aufnahmedatum, bu_activated) VALUES (@isbn, @zustandsid, @aufnahmedatum, @activated)";
+            string RawCommand = "Insert INTO t_s_buchid (bu_isbn, bu_zustandsid, bu_aufnahmedatum, bu_activated,bu_printed) VALUES (@isbn, @zustandsid, @aufnahmedatum, @activated, @printed)";
             con.ConnectError();
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             cmd.Parameters.AddWithValue("@isbn", ISBN);
             cmd.Parameters.AddWithValue("@zustandsid", Zustand.ZustandID);
             cmd.Parameters.AddWithValue("@aufnahmedatum", Aufnahmedatum);
             cmd.Parameters.AddWithValue("@activated", 1);
+            cmd.Parameters.AddWithValue("@printed", 0);
             // Verbindung öffnen
             cmd.ExecuteNonQuery();
             //Verbindung schließen
@@ -175,7 +187,7 @@ namespace Bibo_Verwaltung
             if (con.ConnectError()) return;
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             cmd.Parameters.AddWithValue("@activated", 0);
-            cmd.Parameters.AddWithValue("@isbn", ISBN);
+            cmd.Parameters.AddWithValue("@isbn", isbn);
             // Verbindung öffnen 
             cmd.ExecuteNonQuery();
             //Verbindung schließen
@@ -376,6 +388,51 @@ namespace Bibo_Verwaltung
             {
                 return false;
             }
+        }
+        /// <summary>
+        /// Legt den Printed-Bool auf true fest 
+        /// </summary>
+        public void Print(string id)
+        {
+            string RawCommand = "UPDATE t_s_buchid set bu_printed = @printed WHERE bu_id = @id";
+            if (con.ConnectError()) return;
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.Parameters.AddWithValue("@printed", 1);
+            cmd.Parameters.AddWithValue("@id", id);
+            // Verbindung öffnen 
+            cmd.ExecuteNonQuery();
+            //Verbindung schließen
+            con.Close();
+            printed = true;
+        }
+        public int PrintedCount(string isbn)
+        {
+            if (con.ConnectError()) return 0;
+            string RawCommand = "SELECT COUNT(*) FROM t_s_buchid where bu_isbn = @isbn and bu_printed = 1";
+            int count = 0;
+            using (SqlCommand cmdCount = new SqlCommand(RawCommand, con.Con))
+            {
+                cmdCount.Parameters.AddWithValue("@isbn", isbn);
+                count = (int)cmdCount.ExecuteScalar();
+                con.Close();
+            }
+            return count;
+        }
+
+        public List<string>UnprintedList(string isbn)
+        {
+            List<string> unprintedList = new List<string>();
+            unprintedList.Clear();
+            if (con.ConnectError()) return unprintedList;
+            string RawCommand = "SELECT bu_id FROM t_s_buchid where bu_isbn = @0 and bu_printed = 0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, isbn);
+            while (dr.Read())
+            {
+                unprintedList.Add(dr["bu_id"].ToString());
+            }
+            dr.Close();
+            con.Close();
+            return unprintedList;
         }
     }
 }

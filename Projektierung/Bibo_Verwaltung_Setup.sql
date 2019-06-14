@@ -222,7 +222,7 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_
 BEGIN
 CREATE TABLE [dbo].[t_s_buecher](
 	[buch_isbn] [nvarchar](32) NOT NULL,
-	[buch_titel] [nvarchar](128) NOT NULL,
+	[buch_titel] [nvarchar](1048) NOT NULL,
 	[buch_genre_id] [int] NOT NULL,
 	[buch_verlag_id] [int] NOT NULL,
 	[buch_erscheinungsdatum] [date] NOT NULL,
@@ -272,6 +272,7 @@ CREATE TABLE [dbo].[t_s_buchid](
 	[bu_zustandsid] [int] NOT NULL,
 	[bu_aufnahmedatum] [date] NOT NULL,
 	[bu_activated] [BIT] NOT NULL,
+	[bu_printed] [BIT] NOT NULL,
 	PRIMARY KEY (bu_id),
 	FOREIGN KEY (bu_zustandsid)
 		REFERENCES t_s_zustand (zu_id),

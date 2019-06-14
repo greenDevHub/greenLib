@@ -138,7 +138,7 @@ namespace Bibo_Verwaltung
 
         public bool IfContains(string value)
         {
-            bool contains = dt.AsEnumerable().Any(row => value == row.Field<String>("zu_zustand"));
+            bool contains = dt.AsEnumerable().Any(row => value.Equals(row.Field<String>("zu_zustand"), StringComparison.InvariantCultureIgnoreCase));
             return contains;
         }
     }

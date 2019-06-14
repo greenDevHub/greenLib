@@ -149,7 +149,7 @@ namespace Bibo_Verwaltung
                 }
                 catch (SqlException)
                 {
-                    MetroMessageBox.Show(this,"Das Buch konnte nicht hinzugefügt werden!", "Error",
+                    MetroMessageBox.Show(this,"Das Exemplar konnte nicht hinzugefügt werden!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -562,13 +562,18 @@ namespace Bibo_Verwaltung
                     IDocument doc = new Document();
                     doc.Open(strFilePath);
                     int barcodeIndex = doc.GetBarcodeIndex("Barcode");
+                    IObjects ob = doc.Objects;
+                    int anzahlObs = ob.Count;
+                    int textInd = doc.GetTextIndex("Titel");
+                    int textIndex = barcodeIndex+1;
                     doc.SetPrinter(printer.Name, true);
                     doc.StartPrint("", PrintOptionConstants.bpoDefault);
                     foreach (string barcodeData in barcodeList)
                     {
                         doc.SetBarcodeData(barcodeIndex, barcodeData);
+                        doc.Objects[textIndex].Text=b.GetTitel(barcodeData.TrimStart('0'));
                         doc.PrintOut(1, PrintOptionConstants.bpoDefault);
-
+                        b.Print(barcodeData.TrimStart('0'));
                     }
                     doc.EndPrint();
                     doc.Close();

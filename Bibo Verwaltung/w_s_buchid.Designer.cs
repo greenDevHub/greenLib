@@ -63,10 +63,9 @@
             this.bt_close = new MetroFramework.Controls.MetroButton();
             this.bt_export = new MetroFramework.Controls.MetroButton();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.cb_zustand = new Bibo_Verwaltung.AdvancedComboBox();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.cb_zustand = new Bibo_Verwaltung.AdvancedComboBox();
-            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grid_buchid)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -595,9 +594,26 @@
             this.bt_export.Text = "Exportieren";
             this.bt_export.UseSelectable = true;
             // 
+            // cb_zustand
+            // 
+            this.cb_zustand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_zustand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_zustand.BorderColor = System.Drawing.Color.Gray;
+            this.cb_zustand.DataRowView = true;
+            this.cb_zustand.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.cb_zustand.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_zustand, "Tragen sie hier den Zustand des Buches, welches sie hinzufügen möchten, ein.");
+            this.cb_zustand.HighlightColor = System.Drawing.Color.DeepSkyBlue;
+            this.cb_zustand.ItemHeight = 18;
+            this.cb_zustand.Location = new System.Drawing.Point(183, 88);
+            this.cb_zustand.Name = "cb_zustand";
+            this.helpProvider.SetShowHelp(this.cb_zustand, true);
+            this.cb_zustand.Size = new System.Drawing.Size(228, 24);
+            this.cb_zustand.TabIndex = 11;
+            this.cb_zustand.TextChanged += new System.EventHandler(this.cb_zustand_TextChanged);
+            // 
             // metroPanel1
             // 
-            this.metroPanel1.Controls.Add(this.button2);
             this.metroPanel1.Controls.Add(this.lb);
             this.metroPanel1.Controls.Add(this.button1);
             this.metroPanel1.Controls.Add(this.groupBox1);
@@ -641,34 +657,6 @@
             this.metroLabel1.Size = new System.Drawing.Size(63, 20);
             this.metroLabel1.TabIndex = 26;
             this.metroLabel1.Text = "Barcode:";
-            // 
-            // cb_zustand
-            // 
-            this.cb_zustand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cb_zustand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cb_zustand.BorderColor = System.Drawing.Color.Gray;
-            this.cb_zustand.DataRowView = true;
-            this.cb_zustand.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.cb_zustand.FormattingEnabled = true;
-            this.helpProvider.SetHelpString(this.cb_zustand, "Tragen sie hier den Zustand des Buches, welches sie hinzufügen möchten, ein.");
-            this.cb_zustand.HighlightColor = System.Drawing.Color.DeepSkyBlue;
-            this.cb_zustand.ItemHeight = 18;
-            this.cb_zustand.Location = new System.Drawing.Point(183, 88);
-            this.cb_zustand.Name = "cb_zustand";
-            this.helpProvider.SetShowHelp(this.cb_zustand, true);
-            this.cb_zustand.Size = new System.Drawing.Size(228, 24);
-            this.cb_zustand.TabIndex = 11;
-            this.cb_zustand.TextChanged += new System.EventHandler(this.cb_zustand_TextChanged);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(128, 431);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 29;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // w_s_buchid
             // 
@@ -733,6 +721,5 @@
         private System.Windows.Forms.ToolStripMenuItem barcodeDruckenToolStripMenuItem;
         private MetroFramework.Controls.MetroPanel metroPanel1;
         private MetroFramework.Controls.MetroLabel metroLabel1;
-        private System.Windows.Forms.Button button2;
     }
 }
