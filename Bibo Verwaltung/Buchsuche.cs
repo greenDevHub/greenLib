@@ -94,14 +94,17 @@ namespace Bibo_Verwaltung
                         if (dt < now)
                         {
                             row.DefaultCellStyle.BackColor = Color.Red;
+                            row.DefaultCellStyle.ForeColor = Color.Black;
                         }
                         else if (dt == now)
                         {
                             row.DefaultCellStyle.BackColor = Color.Yellow;
+                            row.DefaultCellStyle.ForeColor = Color.Black;
                         }
                         else
                         {
                             row.DefaultCellStyle.BackColor = Color.LimeGreen;
+                            row.DefaultCellStyle.ForeColor = Color.Black;
                         }
                     }
                 }

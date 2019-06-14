@@ -391,7 +391,6 @@
             this.tb_NName.MaxLength = 32767;
             this.tb_NName.Name = "tb_NName";
             this.tb_NName.PasswordChar = '\0';
-            this.tb_NName.PromptText = "Nachname";
             this.tb_NName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_NName.SelectedText = "";
             this.tb_NName.SelectionLength = 0;
@@ -425,7 +424,6 @@
             this.tb_VName.MaxLength = 32767;
             this.tb_VName.Name = "tb_VName";
             this.tb_VName.PasswordChar = '\0';
-            this.tb_VName.PromptText = "Vorname";
             this.tb_VName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_VName.SelectedText = "";
             this.tb_VName.SelectionLength = 0;

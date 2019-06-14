@@ -137,7 +137,6 @@ namespace Bibo_Verwaltung
                         {
                             lb_BuchStatus.Text = "nicht verfügbar (verliehen)";
                             lb_BuchStatus.ForeColor = Color.Red;
-                            //ausleihe.KID = ;
                         }
 
                         ausleihe.ShowBuchCover(ref picBox_Buchcover);

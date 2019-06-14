@@ -32,16 +32,16 @@ namespace Bibo_Verwaltung
         public string KundenNName { get { return kundenname; } set { kundenname = value; } }
         #endregion
 
-        #region Objekt Constructor
+        #region Constructor
+        string currentUser;
         /// <summary>
         /// Erschaft die Form
         /// </summary>
-        string name;
-        public w_s_Aus_Kunde(string name)
+        public w_s_Aus_Kunde(string userName)
         {
-            this.Text = "Angemeldet als: " + name;
-            this.Name = name;
             InitializeComponent();
+            this.currentUser = userName;
+            this.Text = Text + " - Angemeldet als: " + userName;
         }
         #endregion
 
@@ -68,7 +68,7 @@ namespace Bibo_Verwaltung
         #region Neuer Kunde
         private void bt_NeuKunde_Click(object sender, EventArgs e)
         {
-            Form Kunden = new w_s_Kunden(name);
+            Form Kunden = new w_s_Kunden(currentUser);
             Kunden.ShowDialog(this);
             //kunde.FillGrid(ref gv_Aus_Kunde);
         }

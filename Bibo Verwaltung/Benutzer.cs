@@ -28,30 +28,31 @@ namespace Bibo_Verwaltung
         #region Constructor
         public Benutzer()
         {
-
         }
         public Benutzer(bool b)
         {
             FillObject();
-
         }
         public Benutzer(string name)
         {
             this.benutzername = name;
-            Load();
+            LoadUser();
             FillObject();
         }
-
         #endregion
 
-        #region Load
-        private void Load()
+        SQL_Verbindung con = new SQL_Verbindung();
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataSet ds = new DataSet();
+
+        /// <summary>
+        /// Lädt die Daten eines Benutzers
+        /// </summary>
+        private void LoadUser()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
             string RawCommand = "SELECT * FROM [dbo].[t_s_benutzer] WHERE b_name = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, benutzername);
-            // Einlesen der Datenzeilen und Ausgabe an der Konsole 
             while (dr.Read())
             {
                 BenutzerName = dr["b_name"].ToString();
@@ -59,61 +60,51 @@ namespace Bibo_Verwaltung
                 Rechteid = dr["b_rechte"].ToString();
                 Rechte = GetRechte(rechteid);
             }
-            // DataReader schließen 
             dr.Close();
-            // Verbindung schließen 
             con.Close();
         }
-        #endregion
 
-        //private string GetPW()
-        //{
-        //    byte[] binaryString = (byte[])pw;
-        //}
-
-        #region GetRechte
-        private string GetRechte(string s)
+        /// <summary>
+        /// Gibt die Rechte eines Benutzers zurück (in Worten)
+        /// </summary>
+        private string GetRechte(string rechteID)
         {
-            if (s.Equals("0"))
+            if (rechteID.Equals("0"))
             {
-                s = "Gast";
-                return s;
+                rechteID = "Gast";
+                return rechteID;
             }
-            else if (s.Equals("1"))
+            else if (rechteID.Equals("1"))
             {
-                s = "Benutzer";
-                return s;
+                rechteID = "Benutzer";
+                return rechteID;
             }
-            else if (s.Equals("2"))
+            else if (rechteID.Equals("2"))
             {
-                s = "Admin";
-                return s;
+                rechteID = "Admin";
+                return rechteID;
             }
             else
             {
                 return "unbekannt";
             }
         }
-        #endregion
 
-        #region Login
-        public bool Login(string pw, string name)
+        /// <summary>
+        /// Prüft die Anmeldedaten und meldet einen Benutzer an
+        /// </summary>
+        public bool LoginUser(string pw, string name)
         {
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return false;
             string RawCommand = "SELECT * FROM [dbo].[t_s_benutzer] WHERE b_name = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, name);
-            // Einlesen der Datenzeilen und Ausgabe an der Konsole 
             while (dr.Read())
             {
                 benutzername = dr["b_name"].ToString();
                 byte[] binaryString = (byte[])dr["b_password"];
                 benutzerpw = Encoding.UTF8.GetString(binaryString);
-                //benutzerpw = dr["b_password"].ToString();
             }
-            // DataReader schließen 
             dr.Close();
-            // Verbindung schließen 
             con.Close();
             if(BenutzerName != null && !BenutzerName.Equals(""))
             {
@@ -131,13 +122,13 @@ namespace Bibo_Verwaltung
                 return false;
             }
         }
-        #endregion
 
-        #region Add
-        public void Add(string name, string pw, string rechte)
+        /// <summary>
+        /// Fügt einen Benutzer der Datenbank hinzu
+        /// </summary>
+        public void AddUser(string name, string pw, string rechte)
         {
             byte[] newPW = Encoding.UTF8.GetBytes(pw);
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
             string RawCommand = "INSERT INTO [dbo].[t_s_benutzer] (b_name, b_password, b_rechte) VALUES (@0, @1, @2)";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
@@ -147,12 +138,12 @@ namespace Bibo_Verwaltung
             cmd.ExecuteNonQuery();
             con.Close();
         }
-        #endregion
 
-        #region Delete
-        public void Delete(string name)
+        /// <summary>
+        /// Entfernt einen Benutzer aus der Datenbank
+        /// </summary>
+        public void DeleteUser(string name)
         {
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
             string RawCommand = "DELETE FROM [dbo].[t_s_benutzer] WHERE b_name = @name";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
@@ -160,74 +151,66 @@ namespace Bibo_Verwaltung
             cmd.ExecuteNonQuery();
             con.Close();
         }
-        #endregion
 
-        #region Update
-        public void Update(string name, string pw, string rechte)
+        /// <summary>
+        /// Aktualisiert einen Benutzer in der Datenbank
+        /// </summary>
+        public void UpdateUser(string name, string pw, string rechte)
         {
             byte[] newPW = Encoding.UTF8.GetBytes(pw);
-            SQL_Verbindung con = new SQL_Verbindung();
             string RawCommand = "UPDATE t_s_benutzer set b_password = @pw, b_rechte = @rechteid WHERE b_name = @name";
             if (con.ConnectError()) return;
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             cmd.Parameters.AddWithValue("@pw", newPW);
             cmd.Parameters.AddWithValue("@rechteid", rechte);
             cmd.Parameters.AddWithValue("@name", name);
-            // Verbindung öffnen 
             cmd.ExecuteNonQuery();
-            //Verbindung schließen
             con.Close();
         }
-        #endregion
 
-        SqlDataAdapter adapter = new SqlDataAdapter();
-        DataSet ds = new DataSet();
-        DataTable dt = new DataTable();
-        SqlCommandBuilder comb = new SqlCommandBuilder();
-
-        #region FillObject
+        /// <summary>
+        /// Füllt ein DataSet mit Benutzerdaten
+        /// </summary>
         private void FillObject()
         {
-            //DataTable dt = new DataTable();
-            //dt.Clear();
-            //dt.Columns.Add("Name");
-            //dt.Columns.Add("Rechte");
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
             string RawCommand = "SELECT b_name as 'Name', b_rechte as 'RechteID' FROM [dbo].[t_s_benutzer]";
-
-            // Verbindung öffnen 
-            dt.Reset();
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
-            adapter.Fill(dt);
             con.Close();
-            dt.Columns.Add("Rechte");
-            foreach(DataRow dr in dt.Rows)
+            if (!ds.Tables[0].Columns.Contains("Rechte"))
             {
-                string s = "";
-                s = dr["RechteID"].ToString();
-                dr["Rechte"] = GetRechte(s);
-                //DataRow row = dt.NewRow();
-                //row["Name"] = dr["b_name"];
-                //row["Rechte"] = s;
-                //dt.Rows.Add(row);
+                ds.Tables[0].Columns.Add("Rechte");
             }
-
+                foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                string rechteID = "";
+                rechteID = dr["RechteID"].ToString();
+                dr["Rechte"] = GetRechte(rechteID);
+            }
         }
-        #endregion
 
-        #region FillGrid
+        /// <summary>
+        /// Entfernt den gesamten Inhalt im DataSet 
+        /// </summary>
+        private void ClearDataSource()
+        {
+            try
+            {
+                ds.Tables[0].Rows.Clear();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Füllt ein DataGridView-Objekt mit Benutzerdaten
+        /// </summary>
         public void FillGrid(ref MetroGrid grid, object value = null)
         {
-            dt.Clear();
+            ClearDataSource();
             FillObject();
-            grid.DataSource = dt;
-            //rid.Columns["b_name"].HeaderText = "Name";
+            grid.DataSource = ds.Tables[0];
             grid.Columns["RechteID"].Visible = false;
-
-
         }
-        #endregion
     }
 }
