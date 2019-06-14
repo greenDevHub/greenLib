@@ -11,6 +11,7 @@ using System.Drawing.Imaging;
 using System.Text;
 using System.Media;
 using MetroFramework;
+using bpac;
 
 namespace Bibo_Verwaltung
 {
@@ -206,30 +207,36 @@ namespace Bibo_Verwaltung
                 b.Image = System.IO.File.ReadAllBytes(b.BildPfad);
                 b.ImageDate = DateTime.Parse(DateTime.UtcNow.ToShortTimeString());
             }
-            if (ifDownloaded)
+            if (!tb_neu.Text.Equals(""))
             {
-                b.Add_Buch();
-                Form Buchid = new w_s_buchid();
-                this.Hide();
-                Buchid.ShowDialog(this);
-                this.Show();
-                b.FillGrid_Buch(ref Grid_Buch);
-                Clear_All();
+                int neuExemplar = 0;
+                try
+                {
+                    neuExemplar = int.Parse(tb_neu.Text);
+                    b.Add_Buch();
+                    Exemplar exemplar = new Exemplar();
+                    if (!exemplar.Zustand.IfContains("neu"))
+                    {
+                        exemplar.Zustand.Add("neu");
+                    }
+                    exemplar.ISBN = b.ISBN;
+                    exemplar.Aufnahmedatum = DateTime.UtcNow.Date;
+                    exemplar.Zustand.ZustandID = exemplar.Zustand.GetID("neu");
+                    for (int i = 0; i < neuExemplar; i++)
+                    {
+                        exemplar.Add_Exemplar();
+                    }
+                    b.FillGrid_Buch(ref Grid_Buch);
+                    Clear_All();
+                }
+                catch
+                {
+                    MetroMessageBox.Show(this, "Es gab einen Fehler bei dem Hinzufügen der neuen Exemplare!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else if(!ifDownloaded && ValidateISBN())
+            else
             {
-                b.Add_Buch();
-                Form Buchid = new w_s_buchid();
-                this.Hide();
-                Buchid.ShowDialog(this);
-                this.Show();
-                b.FillGrid_Buch(ref Grid_Buch);
-                Clear_All();
-            }
-            else 
-            {
-                DialogResult dialogResult = MetroMessageBox.Show(this,"Die ISBN konnte nicht Verifiziert werden. Trotzdem speichern?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                if (dialogResult == DialogResult.Yes)
+                if (ifDownloaded)
                 {
                     b.Add_Buch();
                     Form Buchid = new w_s_buchid();
@@ -239,11 +246,36 @@ namespace Bibo_Verwaltung
                     b.FillGrid_Buch(ref Grid_Buch);
                     Clear_All();
                 }
-                else if (dialogResult == DialogResult.No)
+                else if (!ifDownloaded && ValidateISBN())
                 {
-                    tb_ISBN.Focus();
+                    b.Add_Buch();
+                    Form Buchid = new w_s_buchid();
+                    this.Hide();
+                    Buchid.ShowDialog(this);
+                    this.Show();
+                    b.FillGrid_Buch(ref Grid_Buch);
+                    Clear_All();
+                }
+                else
+                {
+                    DialogResult dialogResult = MetroMessageBox.Show(this, "Die ISBN konnte nicht Verifiziert werden. Trotzdem speichern?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        b.Add_Buch();
+                        Form Buchid = new w_s_buchid();
+                        this.Hide();
+                        Buchid.ShowDialog(this);
+                        this.Show();
+                        b.FillGrid_Buch(ref Grid_Buch);
+                        Clear_All();
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        tb_ISBN.Focus();
+                    }
                 }
             }
+
         }
         #region Save/Update/Delete Buch
         private void Save_Buecher(object sender, EventArgs e)
@@ -571,6 +603,9 @@ namespace Bibo_Verwaltung
 
         private void Clear_All()
         {
+            tb_barcodePrinted.Text = "";
+            tb_barcodeAdd.Text = "";
+            tb_neu.Text = "";
             checkbox_autor.Checked = false;
             tb_ISBN.Text = "";
             tb_Titel.Text = "";
@@ -600,6 +635,7 @@ namespace Bibo_Verwaltung
         #region Textboxfarbe
         private void tb_ISBN_TextChanged(object sender, EventArgs e)
         {
+            tb_ISBN.Text = tb_ISBN.Text.Replace(" ", "");
             (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '{0}%' and ISBN LIKE '{1}%'", tb_Titel.Text, tb_ISBN.Text);
             tb_ISBN.BackColor = Color.White;
         }
@@ -653,7 +689,9 @@ namespace Bibo_Verwaltung
         {
             if (rb_Add_Buch.Checked)
             {
-                
+                bt_print.Enabled = false;
+                tb_barcodeAdd.Enabled = false;
+                tb_neu.Enabled = true;
                 tb_ISBN.Enabled = true;
                 tb_Titel.Enabled = true;
                 cb_Autor.Enabled = true;
@@ -682,6 +720,9 @@ namespace Bibo_Verwaltung
             }
             if (rb_Update_Buch.Checked)
             {
+                bt_print.Enabled = true;
+                tb_barcodeAdd.Enabled = true;
+                tb_neu.Enabled = false;
                 tb_ISBN.Enabled = false;
                 tb_Titel.Enabled = true;
                 cb_Autor.Enabled = true;
@@ -710,6 +751,9 @@ namespace Bibo_Verwaltung
             }
             if (rb_Delete_Buch.Checked)
             {
+                bt_print.Enabled = false;
+                tb_barcodeAdd.Enabled = false;
+                tb_neu.Enabled = false;
                 tb_ISBN.Enabled = true;
                 tb_Titel.Enabled = false;
                 cb_Autor.Enabled = false;
@@ -872,7 +916,10 @@ namespace Bibo_Verwaltung
             b.Verlag.FillCombobox(ref cb_Verlag, b.Verlag.VerlagID);
             b.Genre.FillCombobox(ref cb_Genre, b.Genre.GenreID);
             b.Sprache.FillCombobox(ref cb_Sprache, b.Sprache.SpracheID);
+            Exemplar ex = new Exemplar();
+            tb_barcodePrinted.Text = ex.PrintedCount(tb_ISBN.Text).ToString();
             rb_Update_Buch.Focus();
+
         }
         private void Grid_Buch_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -1579,6 +1626,107 @@ namespace Bibo_Verwaltung
         private void bt_Schliessen_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void tb_ISBN_Leave(object sender, EventArgs e)
+        {
+            tb_ISBN.Text = tb_ISBN.Text.Replace(" ", "");
+        }
+
+        private void PrintBarcodes(List<string> barcodeList)
+        {
+            try
+            {
+                IPrinter printer = new Printer();
+                object[] x = printer.GetInstalledPrinters();
+                string name = x[0].ToString();
+                bool test = printer.IsPrinterOnline(name);
+                if (test)
+                {
+                    string strFilePath = @"BarcodePreset.lbx";
+                    File.WriteAllBytes(strFilePath, Properties.Resources.BarcodePreset);
+                    IDocument doc = new Document();
+                    doc.Open(strFilePath);
+                    int barcodeIndex = doc.GetBarcodeIndex("Barcode");
+                    IObjects ob = doc.Objects;
+                    int anzahlObs = ob.Count;
+                    int textInd = doc.GetTextIndex("Titel");
+                    int textIndex = barcodeIndex + 1;
+                    doc.SetPrinter(printer.Name, true);
+                    doc.StartPrint("", PrintOptionConstants.bpoDefault);
+                    Exemplar ex = new Exemplar();
+                    foreach (string barcodeData in barcodeList)
+                    {
+                        doc.SetBarcodeData(barcodeIndex, barcodeData);
+                        doc.Objects[textIndex].Text = ex.GetTitel(barcodeData.TrimStart('0'));
+                        doc.PrintOut(1, PrintOptionConstants.bpoDefault);
+                        ex.Print(barcodeData.TrimStart('0'));
+                    }
+                    doc.EndPrint();
+                    doc.Close();
+                    File.Delete(strFilePath);
+                    MetroMessageBox.Show(this, String.Format("Es wurden erfolgreich '{0}' Barcodes gedruckt.", barcodeList.Count), "Drucken erfolgreich!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Es gab einen Fehler bei der Kommunikation mit dem Drucker!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch
+            {
+                MetroMessageBox.Show(this, "Es gab einen Fehler bei der Kommunikation mit dem Drucker!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void bt_print_Click(object sender, EventArgs e)
+        {
+            if (!tb_barcodeAdd.Text.Equals("") && !tb_ISBN.Text.Equals(""))
+            {
+                List<string> notPrintedID = new List<string>();
+                List<string> newPrintedID = new List<string>();
+                Exemplar ex = new Exemplar();
+                notPrintedID = ex.UnprintedList(tb_ISBN.Text);
+                int printNumber = int.Parse(tb_barcodeAdd.Text);
+                if (printNumber > notPrintedID.Count)
+                {
+                    printNumber = notPrintedID.Count;
+                    tb_barcodeAdd.Text = printNumber.ToString();
+                }
+                if(notPrintedID.Count > 0)
+                {
+                    for(int i = 0; i < printNumber;i++)
+                    {
+                        string code = "";
+                        code = notPrintedID[i];
+                        for (int codeInt = code.Length; codeInt < 7;codeInt++)
+                        {
+                            code = "0" + code;
+                        }
+                        newPrintedID.Add(code);
+                    }
+                    PrintBarcodes(newPrintedID);
+                    b.FillGrid_Buch(ref Grid_Buch);
+                    Clear_All();
+                }
+            }
+        }
+
+        private void tb_neu_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                SystemSounds.Beep.Play();
+                e.Handled = true;
+            }
+        }
+
+        private void tb_barcodeAdd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                SystemSounds.Beep.Play();
+                e.Handled = true;
+            }
         }
     }
 }
