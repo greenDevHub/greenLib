@@ -130,10 +130,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                this.Hide();
                 Form Kunden = new w_s_Kunden(currentUser);
                 Kunden.ShowDialog(this);
-                this.Show();
             }
             else
             {
@@ -145,10 +143,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                this.Hide();
                 Form Genres = new w_s_genres();
                 Genres.ShowDialog(this);
-                this.Show();
             }
             else
             {
@@ -161,10 +157,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                this.Hide();
                 Form Sprachen = new w_s_sprachen();
                 Sprachen.ShowDialog(this);
-                this.Show();
             }
             else
             {
@@ -177,10 +171,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                this.Hide();
                 Form Autoren = new w_s_autoren();
                 Autoren.ShowDialog(this);
-                this.Show();
             }
             else
             {
@@ -193,10 +185,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                this.Hide();
                 Form Verlage = new w_s_verlage();
                 Verlage.ShowDialog(this);
-                this.Show();
             }
             else
             {
@@ -208,10 +198,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                this.Hide();
                 Form Buecher = new w_s_buecher(true);
                 Buecher.ShowDialog(this);
-                this.Show();
             }
             else
             {
@@ -221,20 +209,16 @@ namespace Bibo_Verwaltung
 
         private void bt_Einstellungen_Click(object sender, EventArgs e)
         {
-            this.Hide();
             Form Einstellungen = new w_s_einstellungen();
             Einstellungen.ShowDialog(this);
-            this.Show();
         }
 
         private void bt_Zustand_Click(object sender, EventArgs e)
         {
             if (!connected)
             {
-                this.Hide();
                 Form Zustand = new w_s_zustand();
                 Zustand.ShowDialog(this);
-                this.Show();
             }
             else
             {
@@ -246,10 +230,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                this.Hide();
                 Form Details = new w_s_buchsuche(currentUser);
                 Details.ShowDialog(this);
-                this.Show();
             }
             else
             {
@@ -261,10 +243,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                this.Hide();
                 Form users = new w_s_user(currentUser);
                 users.ShowDialog(this);
-                this.Show();
             }
             else
             {
@@ -276,10 +256,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                this.Hide();
                 Form faecher = new w_s_faecher(currentUser);
                 faecher.ShowDialog(this);
-                this.Show();
             }
             else
             {
@@ -291,11 +269,9 @@ namespace Bibo_Verwaltung
         {
             //if (!error)
             //{
-            MetroMessageBox.Show(this, "Derzeit nicht verfügbar!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //this.Hide();
+            MetroMessageBox.Show(this, "In dieser Version nicht verfügbar!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //Form analytics = new w_s_analytics();
             //analytics.ShowDialog(this);
-            //this.Show();
             //}
             //else
             //{
@@ -307,10 +283,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                this.Hide();
                 Form stufe = new w_s_klasse_stufe(currentUser);
                 stufe.ShowDialog(this);
-                this.Show();
             }
             else
             {
@@ -339,10 +313,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                this.Hide();
                 Form buchFach = new w_s_buch_fach(currentUser);
                 buchFach.ShowDialog(this);
-                this.Show();
                 HidePanel();
             }
             else
@@ -355,10 +327,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                this.Hide();
                 Form buchStufe = new w_s_buch_stufe(currentUser);
                 buchStufe.ShowDialog(this);
-                this.Show();
                 HidePanel();
             }
             else
@@ -371,10 +341,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                this.Hide();
                 Form fachStufe = new w_s_fach_stufe(currentUser);
                 fachStufe.ShowDialog(this);
-                this.Show();
                 HidePanel();
             }
             else
@@ -387,10 +355,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                this.Hide();
                 Form ausleihe = new w_s_ausleihe(currentUser);
                 ausleihe.ShowDialog(this);
-                this.Show();
             }
             else
             {
@@ -402,10 +368,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                this.Hide();
                 Form rueckgabe = new w_s_rueckgabe(currentUser);
                 rueckgabe.ShowDialog(this);
-                this.Show();
             }
             else
             {
@@ -452,10 +416,19 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                this.Hide();
-                Form autoausleihe = new w_s_automatic(currentUser);
-                autoausleihe.ShowDialog(this);
-                this.Show();
+                Form custom = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Ausleih- oder den Rückgabe-Modus!", "Ausleih-Modus", "Rückgabe-Modus");
+                custom.ShowDialog(this);
+                if (custom.DialogResult == DialogResult.Yes)
+                {
+                    Form autoausleihe = new w_s_automatic(currentUser);
+                    autoausleihe.ShowDialog(this);
+                }
+                else if (custom.DialogResult == DialogResult.No)
+                {
+                    //Form autoruechgabe = new w_s_autorueck(currentUser);
+                    //autoruechgabe.ShowDialog(this);
+                }
+                else { }
             }
             else
             {
