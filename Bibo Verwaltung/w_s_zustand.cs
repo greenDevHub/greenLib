@@ -130,7 +130,7 @@ namespace Bibo_Verwaltung
             string s = gv_Zustand.Rows[e.RowIndex].Cells[1].Value.ToString();
             for (int i = 0; i < gv_Zustand.Rows.Count - 2; i++)
             {
-                if (s == gv_Zustand.Rows[i].Cells[1].Value.ToString())
+                if (s.Equals(gv_Zustand.Rows[i].Cells[1].Value.ToString(), StringComparison.InvariantCultureIgnoreCase))
                 {
                     MetroMessageBox.Show(this,"Dieser Eintrag ist bereits vorhanden!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     gv_Zustand.Rows.RemoveAt(e.RowIndex);

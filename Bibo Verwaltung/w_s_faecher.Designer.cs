@@ -144,6 +144,7 @@
             this.gv_Faecher.Style = MetroFramework.MetroColorStyle.Teal;
             this.gv_Faecher.TabIndex = 50;
             this.gv_Faecher.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gv_Verlage_CellBeginEdit);
+            this.gv_Faecher.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Faecher_CellEndEdit);
             this.gv_Faecher.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gv_Verlage_UserDeletedRow);
             // 
             // tLP_Faecher
