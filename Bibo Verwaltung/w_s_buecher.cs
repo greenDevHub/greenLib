@@ -1709,7 +1709,11 @@ namespace Bibo_Verwaltung
                         newPrintedID.Add(code);
                     }
                     PrintBarcodes(newPrintedID);
-                    b.FillGrid_Buch(ref Grid_Buch);
+                    //b.FillGrid_Buch(ref Grid_Buch);
+                    if (!backgroundWorker1.IsBusy)
+                    {
+                        backgroundWorker1.RunWorkerAsync();
+                    }
                     Clear_All();
                 }
             }

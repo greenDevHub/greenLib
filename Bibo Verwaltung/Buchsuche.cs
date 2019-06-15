@@ -86,9 +86,10 @@ namespace Bibo_Verwaltung
                 {
                     DataGridViewRow row = grid.Rows[i];
 
-                    if (ds.Tables[0].Rows[i]["Leihnummer"].ToString() != "")
+                    if (row.Cells["Leihnummer"].Value.ToString() != "")
                     {
-                        dt = DateTime.Parse(ds.Tables[0].Rows[i]["Rückgabedatum"].ToString());
+                        string s = row.Cells["Rückgabedatum"].Value.ToString();
+                        dt = DateTime.Parse(s);
                         dt.ToShortDateString();
 
                         if (dt < now)
@@ -119,7 +120,9 @@ namespace Bibo_Verwaltung
 
                 for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
                 {
-                    DataGridViewRow row = grid.Rows[i];
+                    //DataTable dataTable = new DataTable();
+                    //dataTable = (DataTable)grid.DataSource;
+                    //DataRow row = dataTable.Rows[i];
 
                     if (ds.Tables[0].Rows[i]["Leihnummer"].ToString() != "")
                     {

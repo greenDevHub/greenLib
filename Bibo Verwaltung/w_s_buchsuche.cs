@@ -149,6 +149,7 @@ namespace Bibo_Verwaltung
         private void gv_buchsuche_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             buchsuche.Set_StatusMark(ref gv_buchsuche);
+
         }
 
         private void cb_Autor_Enter(object sender, EventArgs e)
@@ -339,36 +340,36 @@ namespace Bibo_Verwaltung
 
         private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            BeginInvoke((Action)delegate ()
-            {
-                metroProgressSpinner1.Visible = true;
-                metroProgressSpinner2.Visible = true;
-                gv_buchsuche.DataSource = null;
-                cb_Autor.DataSource = null;
-                cb_Genre.DataSource = null;
-                cb_Verlag.DataSource = null;
-                gv_buchsuche.Visible = false;
-                cb_Autor.Visible = false;
-                cb_Genre.Visible = false;
-                cb_Verlag.Visible = false;
-            });
-            MetroGrid mgBuSu = new MetroGrid();
-            AdvancedComboBox cbAutor = new AdvancedComboBox();
-            AdvancedComboBox cbVerlag = new AdvancedComboBox();
-            AdvancedComboBox cbGenre = new AdvancedComboBox();
-            List<int> RedBlack = new List<int>();
-            List<int> YellowBlack = new List<int>();
-            List<int> LimeBlack = new List<int>();
-            buchsuche.FillComboBoxes(ref cbAutor, ref cbVerlag, ref cbGenre);
-            buchsuche.FillGrid(ref mgBuSu);
-            buchsuche.Set_StatusMarkNew(ref mgBuSu, ref RedBlack, ref YellowBlack, ref LimeBlack);
-            var dtBuSu = mgBuSu.DataSource;
-            while (loaded == false)
-            {
-
-            }
             try
             {
+                BeginInvoke((Action)delegate ()
+                {
+                    metroProgressSpinner1.Visible = true;
+                    metroProgressSpinner2.Visible = true;
+                    gv_buchsuche.DataSource = null;
+                    cb_Autor.DataSource = null;
+                    cb_Genre.DataSource = null;
+                    cb_Verlag.DataSource = null;
+                    gv_buchsuche.Visible = false;
+                    cb_Autor.Visible = false;
+                    cb_Genre.Visible = false;
+                    cb_Verlag.Visible = false;
+                });
+                MetroGrid mgBuSu = new MetroGrid();
+                AdvancedComboBox cbAutor = new AdvancedComboBox();
+                AdvancedComboBox cbVerlag = new AdvancedComboBox();
+                AdvancedComboBox cbGenre = new AdvancedComboBox();
+                List<int> RedBlack = new List<int>();
+                List<int> YellowBlack = new List<int>();
+                List<int> LimeBlack = new List<int>();
+                buchsuche.FillComboBoxes(ref cbAutor, ref cbVerlag, ref cbGenre);
+                buchsuche.FillGrid(ref mgBuSu);
+                buchsuche.Set_StatusMarkNew(ref mgBuSu, ref RedBlack, ref YellowBlack, ref LimeBlack);
+                var dtBuSu = mgBuSu.DataSource;
+                while (loaded == false)
+                {
+
+                }
                 BeginInvoke((Action)delegate
                 {
                     gv_buchsuche.DataSource = dtBuSu;
@@ -378,21 +379,7 @@ namespace Bibo_Verwaltung
                     gv_buchsuche.Columns["Vorname"].Visible = false;
                     gv_buchsuche.Columns["Nachname"].Visible = false;
                     gv_buchsuche.Columns["Klasse"].Visible = false;
-                    foreach (int i in RedBlack)
-                    {
-                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Red;
-                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Black;
-                    }
-                    foreach (int i in YellowBlack)
-                    {
-                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
-                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Black;
-                    }
-                    foreach (int i in LimeBlack)
-                    {
-                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.LimeGreen;
-                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Black;
-                    }
+
                     cb_Autor.DataSource = cbAutor.DataSource;
                     cb_Autor.ValueMember = "au_id";
                     cb_Autor.DisplayMember = "au_autor";
@@ -423,6 +410,25 @@ namespace Bibo_Verwaltung
                     cb_Autor.Visible = true;
                     cb_Genre.Visible = true;
                     cb_Verlag.Visible = true;
+                    //buchsuche.FillGrid(ref gv_buchsuche);
+                    //buchsuche.Set_StatusMark(ref gv_buchsuche);
+
+                    foreach (int i in RedBlack)
+                    {
+                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                        gv_buchsuche.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                    foreach (int i in YellowBlack)
+                    {
+                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
+                        gv_buchsuche.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                    foreach (int i in LimeBlack)
+                    {
+                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.LimeGreen;
+                        gv_buchsuche.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                    gv_buchsuche.Refresh();
                 });
             }
             catch { }
