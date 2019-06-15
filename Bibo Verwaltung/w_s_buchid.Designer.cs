@@ -66,6 +66,9 @@
             this.cb_zustand = new Bibo_Verwaltung.AdvancedComboBox();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.grid_buchid)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -118,6 +121,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.grid_buchid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.grid_buchid.RowHeadersWidth = 51;
             this.grid_buchid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grid_buchid.RowTemplate.DividerHeight = 1;
             this.grid_buchid.RowTemplate.Height = 24;
@@ -658,10 +662,30 @@
             this.metroLabel1.TabIndex = 26;
             this.metroLabel1.Text = "Barcode:";
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
+            // 
+            // metroProgressSpinner1
+            // 
+            this.metroProgressSpinner1.Location = new System.Drawing.Point(574, 63);
+            this.metroProgressSpinner1.Maximum = 100;
+            this.metroProgressSpinner1.Name = "metroProgressSpinner1";
+            this.metroProgressSpinner1.Size = new System.Drawing.Size(484, 484);
+            this.metroProgressSpinner1.TabIndex = 24;
+            this.metroProgressSpinner1.UseSelectable = true;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
+            // 
             // w_s_buchid
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1200, 600);
+            this.Controls.Add(this.metroProgressSpinner1);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.bt_export);
             this.Controls.Add(this.bt_close);
@@ -721,5 +745,8 @@
         private System.Windows.Forms.ToolStripMenuItem barcodeDruckenToolStripMenuItem;
         private MetroFramework.Controls.MetroPanel metroPanel1;
         private MetroFramework.Controls.MetroLabel metroLabel1;
+        private System.Windows.Forms.Timer timer1;
+        private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

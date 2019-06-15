@@ -754,8 +754,8 @@ namespace Bibo_Verwaltung
                         Kunde k = new Kunde();
                         k.Vorname = row[0].ToString();
                         k.Nachname = row[1].ToString();
-                        k.Gd = DateTime.Now; //nur HotFix
-                        //k.Gd = DateTime.Parse(row[2].ToString()); //funktioniert 
+                        //k.Gd = DateTime.Now; //nur HotFix
+                        k.Gd = DateTime.Parse(row[2].ToString()); //funktioniert 
                         k.Klasse.Klassename = row[3].ToString();
                         k.Hausnummer = "";
                         k.Ort = "";
@@ -771,7 +771,17 @@ namespace Bibo_Verwaltung
                             for (int i = 4; i < 7; i++)
                             {
                                 string fach = row[i].ToString();
-                                k.Faecher.Add(fach);
+                                if(!fach.Equals(""))
+                                {
+                                    k.Fach.FachKurz = fach;
+                                    k.Fach.FachLang = "";
+                                    if (k.Fach.AlreadyExists())
+                                    {
+                                        k.Fach.AddFach();
+                                    }
+                                    k.Faecher.Add(fach);
+                                }
+
                             }
                             foreach (string fach in fs.FachListe)
                             {
@@ -799,6 +809,12 @@ namespace Bibo_Verwaltung
                                 string fach = row[i].ToString();
                                 if (!fach.Equals(""))
                                 {
+                                    k.Fach.FachKurz = fach;
+                                    k.Fach.FachLang = "";
+                                    if (k.Fach.AlreadyExists())
+                                    {
+                                        k.Fach.AddFach();
+                                    }
                                     k.Faecher.Add(fach);
                                 }
                                 if (k.LeistungskursListe.Count < 2)

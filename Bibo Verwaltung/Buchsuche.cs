@@ -68,8 +68,8 @@ namespace Bibo_Verwaltung
             ClearDataSource();
             FillObject();
             grid.DataSource = ds.Tables[0];
-            grid.Columns["Kunden ID"].Visible = false;
-            grid.Columns["Leihnummer"].Visible = false;
+            //grid.Columns["Kunden ID"].Visible = false;
+            //grid.Columns["Leihnummer"].Visible = false;
             Hide_KundenDetails(ref grid);
         }
 
@@ -86,9 +86,10 @@ namespace Bibo_Verwaltung
                 {
                     DataGridViewRow row = grid.Rows[i];
 
-                    if (ds.Tables[0].Rows[i]["Leihnummer"].ToString() != "")
+                    if (row.Cells["Leihnummer"].Value.ToString() != "")
                     {
-                        dt = DateTime.Parse(ds.Tables[0].Rows[i]["Rückgabedatum"].ToString());
+                        string s = row.Cells["Rückgabedatum"].Value.ToString();
+                        dt = DateTime.Parse(s);
                         dt.ToShortDateString();
 
                         if (dt < now)
@@ -110,6 +111,46 @@ namespace Bibo_Verwaltung
                 }
             }
             catch { }    
+        }
+        public void Set_StatusMarkNew(ref MetroGrid grid, ref List<int> BackRedForeBlack, ref List<int> BackYellowForeBlack, ref List<int> BackLimeForeBlack)
+        {
+            try
+            {
+                now = DateTime.Today;
+
+                for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                {
+                    //DataTable dataTable = new DataTable();
+                    //dataTable = (DataTable)grid.DataSource;
+                    //DataRow row = dataTable.Rows[i];
+
+                    if (ds.Tables[0].Rows[i]["Leihnummer"].ToString() != "")
+                    {
+                        dt = DateTime.Parse(ds.Tables[0].Rows[i]["Rückgabedatum"].ToString());
+                        dt.ToShortDateString();
+
+                        if (dt < now)
+                        {
+                            BackRedForeBlack.Add(i);
+                            //row.DefaultCellStyle.BackColor = Color.Red;
+                            //row.DefaultCellStyle.ForeColor = Color.Black;
+                        }
+                        else if (dt == now)
+                        {
+                            BackYellowForeBlack.Add(i);
+                            //row.DefaultCellStyle.BackColor = Color.Yellow;
+                            //row.DefaultCellStyle.ForeColor = Color.Black;
+                        }
+                        else
+                        {
+                            BackLimeForeBlack.Add(i);
+                            //row.DefaultCellStyle.BackColor = Color.LimeGreen;
+                            //row.DefaultCellStyle.ForeColor = Color.Black;
+                        }
+                    }
+                }
+            }
+            catch { }
         }
 
         /// <summary>

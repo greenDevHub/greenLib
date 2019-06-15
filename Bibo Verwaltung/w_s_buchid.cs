@@ -14,19 +14,21 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using bpac;
 using System.IO;
+using MetroFramework.Controls;
 
 namespace Bibo_Verwaltung
 {
     public partial class w_s_buchid : MetroFramework.Forms.MetroForm
     {
         Exemplar b = new Exemplar();
+        bool loaded = false;
         public w_s_buchid()
         {
             InitializeComponent();
-            b.FillGrid(ref grid_buchid);
+            //b.FillGrid(ref grid_buchid);
             tb_isbn.Text = b.ISBN;
             b.Zustand.FillCombobox(ref cb_zustand, 0);
-            tb_anzahl.Text = grid_buchid.RowCount.ToString();
+            //tb_anzahl.Text = grid_buchid.RowCount.ToString();
         }
 
 
@@ -329,6 +331,10 @@ namespace Bibo_Verwaltung
         }
         private void w_s_buchid_Activated(object sender, EventArgs e)
         {
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
             b.Zustand.FillCombobox(ref cb_zustand, 1);
             cb_zustand.Text = "";
             Modus();
@@ -589,6 +595,34 @@ namespace Bibo_Verwaltung
             {
                 MetroMessageBox.Show(this, "Es gab einen Fehler bei der Kommunikation mit dem Drucker!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            loaded = true;
+        }
+
+        private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BeginInvoke((Action)delegate ()
+            {
+                metroProgressSpinner1.Visible = true;
+                grid_buchid.Visible = false;
+            });
+            MetroGrid mgExemplar = new MetroGrid();
+            b.FillGrid(ref mgExemplar);
+            var dtExemplar = mgExemplar.DataSource;
+            while(loaded == false)
+            {
+
+            }
+            BeginInvoke((Action)delegate ()
+            {
+                grid_buchid.DataSource = dtExemplar;
+                tb_anzahl.Text = grid_buchid.RowCount.ToString();
+                metroProgressSpinner1.Visible = false;
+                grid_buchid.Visible = true;
+            });
         }
         //private void PrintBarcode(string barcodeData)
         //{

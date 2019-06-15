@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +20,7 @@ namespace Bibo_Verwaltung
         /// Erschaft die Form
         /// </summary>
         string currentUser;
+        bool loaded = false;
         public w_s_buchsuche(string userName)
         {
             InitializeComponent();
@@ -96,12 +98,14 @@ namespace Bibo_Verwaltung
         {
             if (cb_Verfügbar_Anz.Checked == true)
             {
-                buchsuche.Show_VerfuegbareExemplare(ref gv_buchsuche);
+                (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = string.Format("Leihnummer IS NULL");
+                //buchsuche.Show_VerfuegbareExemplare(ref gv_buchsuche);
             }
             else
             {
-                buchsuche.Show_AlleExemplare(ref gv_buchsuche);
-                buchsuche.Set_StatusMark(ref gv_buchsuche);
+                (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = string.Format("ExemplarID IS NOT NULL");
+                //buchsuche.Show_AlleExemplare(ref gv_buchsuche);
+                //buchsuche.Set_StatusMark(ref gv_buchsuche);
             }
         }
 
@@ -132,15 +136,20 @@ namespace Bibo_Verwaltung
         private void w_s_buchsuche_Activated(object sender, EventArgs e)
         {
             //Procesdialog start
-            buchsuche.FillComboBoxes(ref cb_Autor, ref cb_Verlag, ref cb_Genre);
-            buchsuche.FillGrid(ref gv_buchsuche);
-            buchsuche.Hide_KundenDetails(ref gv_buchsuche);
-            buchsuche.Set_StatusMark(ref gv_buchsuche);
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
+            //buchsuche.FillComboBoxes(ref cb_Autor, ref cb_Verlag, ref cb_Genre);
+            //buchsuche.FillGrid(ref gv_buchsuche);
+            //buchsuche.Hide_KundenDetails(ref gv_buchsuche);
+            //buchsuche.Set_StatusMark(ref gv_buchsuche);
         }
 
         private void gv_buchsuche_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             buchsuche.Set_StatusMark(ref gv_buchsuche);
+
         }
 
         private void cb_Autor_Enter(object sender, EventArgs e)
@@ -326,7 +335,109 @@ namespace Bibo_Verwaltung
                 buchsuche.Show_AlleExemplare(ref gv_buchsuche);
                 buchsuche.Set_StatusMark(ref gv_buchsuche);
             }
-        } 
+        }
         #endregion
+
+        private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                BeginInvoke((Action)delegate ()
+                {
+                    metroProgressSpinner1.Visible = true;
+                    metroProgressSpinner2.Visible = true;
+                    gv_buchsuche.DataSource = null;
+                    cb_Autor.DataSource = null;
+                    cb_Genre.DataSource = null;
+                    cb_Verlag.DataSource = null;
+                    gv_buchsuche.Visible = false;
+                    cb_Autor.Visible = false;
+                    cb_Genre.Visible = false;
+                    cb_Verlag.Visible = false;
+                });
+                MetroGrid mgBuSu = new MetroGrid();
+                AdvancedComboBox cbAutor = new AdvancedComboBox();
+                AdvancedComboBox cbVerlag = new AdvancedComboBox();
+                AdvancedComboBox cbGenre = new AdvancedComboBox();
+                List<int> RedBlack = new List<int>();
+                List<int> YellowBlack = new List<int>();
+                List<int> LimeBlack = new List<int>();
+                buchsuche.FillComboBoxes(ref cbAutor, ref cbVerlag, ref cbGenre);
+                buchsuche.FillGrid(ref mgBuSu);
+                buchsuche.Set_StatusMarkNew(ref mgBuSu, ref RedBlack, ref YellowBlack, ref LimeBlack);
+                var dtBuSu = mgBuSu.DataSource;
+                while (loaded == false)
+                {
+
+                }
+                BeginInvoke((Action)delegate
+                {
+                    gv_buchsuche.DataSource = dtBuSu;
+                    gv_buchsuche.Columns["Kunden ID"].Visible = false;
+                    gv_buchsuche.Columns["Leihnummer"].Visible = false;
+                    gv_buchsuche.Columns["Kunden ID"].Visible = false;
+                    gv_buchsuche.Columns["Vorname"].Visible = false;
+                    gv_buchsuche.Columns["Nachname"].Visible = false;
+                    gv_buchsuche.Columns["Klasse"].Visible = false;
+
+                    cb_Autor.DataSource = cbAutor.DataSource;
+                    cb_Autor.ValueMember = "au_id";
+                    cb_Autor.DisplayMember = "au_autor";
+                    cb_Autor.SelectedIndex = -1;
+                    cb_Verlag.DataSource = cbVerlag.DataSource;
+                    cb_Verlag.ValueMember = "ver_id";
+                    cb_Verlag.DisplayMember = "ver_name";
+                    cb_Verlag.SelectedIndex = -1;
+                    cb_Genre.DataSource = cbGenre.DataSource;
+                    cb_Genre.ValueMember = "ger_id";
+                    cb_Genre.DisplayMember = "ger_name";
+                    cb_Genre.SelectedIndex = -1;
+                    if (cb_Autor.Text == "")
+                    {
+                        cb_Autor.Text = "Autor";
+                    }
+                    if (cb_Verlag.Text == "")
+                    {
+                        cb_Verlag.Text = "Verlag";
+                    }
+                    if (cb_Genre.Text == "")
+                    {
+                        cb_Genre.Text = "Genre";
+                    }
+                    metroProgressSpinner1.Visible = false;
+                    metroProgressSpinner2.Visible = false;
+                    gv_buchsuche.Visible = true;
+                    cb_Autor.Visible = true;
+                    cb_Genre.Visible = true;
+                    cb_Verlag.Visible = true;
+                    //buchsuche.FillGrid(ref gv_buchsuche);
+                    //buchsuche.Set_StatusMark(ref gv_buchsuche);
+
+                    foreach (int i in RedBlack)
+                    {
+                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                        gv_buchsuche.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                    foreach (int i in YellowBlack)
+                    {
+                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
+                        gv_buchsuche.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                    foreach (int i in LimeBlack)
+                    {
+                        gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.LimeGreen;
+                        gv_buchsuche.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                    gv_buchsuche.Refresh();
+                });
+            }
+            catch { }
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            loaded = true;
+            timer1.Stop();
+        }
     }
 }

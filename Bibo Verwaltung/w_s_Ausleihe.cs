@@ -232,7 +232,7 @@ namespace Bibo_Verwaltung
                 {
                     foreach (DataRow row in ausleihe.LeihListe.Rows)
                     {
-                        ausleihe.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(), row[1].ToString(), Convert.ToInt32(kunde.KundenID));
+                        ausleihe.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(),dp_RueckDatum.Value.ToShortDateString(), Convert.ToInt32(kunde.KundenID));
                         //ausleihe.Save_Transaction(); In Bearbeitung!!!
                     }
                     MetroMessageBox.Show(this, "Die Buchausgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -251,7 +251,11 @@ namespace Bibo_Verwaltung
         #region Componenten-Aktionen
         private void tb_BuchCode_TextChanged(object sender, EventArgs e)
         {
-            ShowBuchResults();
+            if(valueChanged == true)
+            {
+                ShowBuchResults();
+
+            }
         }
 
         private void bt_AddBuch_Click(object sender, EventArgs e)
@@ -271,6 +275,14 @@ namespace Bibo_Verwaltung
                         {
                             ausleihe.RemoveFromAusleihList();
                             bt_AddBuch.Text = "+";
+                            //if (ausleihe.LeihListe.Rows.Count > 0)
+                            //{
+                            //    tb_BuchCode.Text = ausleihe.LeihListe.Rows[leihList_Slider.Value - 1][0].ToString();
+                            //}
+                            //else
+                            //{
+                            //    tb_BuchCode.Text = "";
+                            //}
                         }
                     }
                     else
@@ -342,29 +354,39 @@ namespace Bibo_Verwaltung
         {
             if (e.KeyChar == (char)13)
             {
-                if (tb_BuchCode.Text != "")
+                ShowBuchResults();
+                if(llb_BuchTitel.Text.Equals("keine Treffer"))
                 {
-                    if (ausleihe.Verfuegbar)
+                    MetroMessageBox.Show(this, "Der eingegebene Buchcode ist nicht vorhanden! ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    if (tb_BuchCode.Text != "")
                     {
-                        if (!ausleihe.CheckLeihList())
+                        if (ausleihe.Verfuegbar)
                         {
-                            ausleihe.AddToAusleihList();
-                            bt_AddBuch.Text = "-";
+                            if (!ausleihe.CheckLeihList())
+                            {
+                                ausleihe.AddToAusleihList();
+                                bt_AddBuch.Text = "-";
+                            }
+                            else
+                            {
+                                ausleihe.RemoveFromAusleihList();
+                                bt_AddBuch.Text = "+";
+                            }
                         }
                         else
                         {
-                            ausleihe.RemoveFromAusleihList();
-                            bt_AddBuch.Text = "+";
+                            MetroMessageBox.Show(this, "Dieses Buch wurde verliehen. Es kann nicht zur Buchausleihliste hinzugefügt werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
+                        ausleihe.SetSlider(ref leihList_Slider, ref tb_listVon, ref tb_listBis);
+                        tb_BuchCode.Focus();
+                        tb_BuchCode.SelectAll();
+                        valueChanged = false;
                     }
-                    else
-                    {
-                        MetroMessageBox.Show(this, "Dieses Buch wurde verliehen. Es kann nicht zur Buchausleihliste hinzugefügt werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    ausleihe.SetSlider(ref leihList_Slider, ref tb_listVon, ref tb_listBis);
-                    tb_BuchCode.Focus();
-                    tb_BuchCode.SelectAll();
                 }
+                
             }
         }
 
@@ -378,9 +400,10 @@ namespace Bibo_Verwaltung
         {
             MetroMessageBox.Show(this, ausleihe.GetListInfo(), "Information", MessageBoxButtons.OK, MessageBoxIcon.Information, (150 + ausleihe.LeihListe.Rows.Count * 15));
         }
-
+        bool valueChanged = false;
         private void leihList_Slider_ValueChanged(object sender, EventArgs e)
         {
+            valueChanged = true;
             tb_listVon.Text = leihList_Slider.Value.ToString();
             tb_listBis.Text = leihList_Slider.Maximum.ToString();
             if (ausleihe.LeihListe.Rows.Count > 0)
@@ -405,5 +428,32 @@ namespace Bibo_Verwaltung
             SearchKunde(tb_VName.Text, tb_NName.Text);
         }
         #endregion
+
+        private void W_s_ausleihe_Shown(object sender, EventArgs e)
+        {
+            tb_BuchCode.Focus();
+        }
+
+        private void Tb_BuchCode_Enter(object sender, EventArgs e)
+        {
+            valueChanged = false;
+        }
+
+        private void Tb_listBis_TextChanged(object sender, EventArgs e)
+        {
+            valueChanged = true;
+            tb_listVon.Text = leihList_Slider.Value.ToString();
+            tb_listBis.Text = leihList_Slider.Maximum.ToString();
+            if (ausleihe.LeihListe.Rows.Count > 0)
+            {
+                tb_BuchCode.Text = ausleihe.LeihListe.Rows[leihList_Slider.Value - 1][0].ToString();
+            }
+            else
+            {
+                tb_BuchCode.Text = "";
+            }
+            tb_BuchCode.Focus();
+            tb_BuchCode.SelectAll();
+        }
     }
 }

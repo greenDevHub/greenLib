@@ -111,5 +111,19 @@ namespace Bibo_Verwaltung
             fachstufe.ShowDialog(this);
         }
         #endregion
+
+        private void Gv_Faecher_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            string s = gv_Faecher.Rows[e.RowIndex].Cells[1].Value.ToString();
+            for (int i = 0; i < gv_Faecher.Rows.Count - 2; i++)
+            {
+                if (s.Equals(gv_Faecher.Rows[i].Cells[1].Value.ToString(),StringComparison.InvariantCultureIgnoreCase))
+                {
+                    MetroMessageBox.Show(this, "Dieser Eintrag ist bereits vorhanden!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    gv_Faecher.Rows.RemoveAt(e.RowIndex);
+                    return;
+                }
+            }
+        }
     }
 }
