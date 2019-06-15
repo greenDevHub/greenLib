@@ -20,16 +20,19 @@ namespace Bibo_Verwaltung
         SQL_Verbindung con = new SQL_Verbindung();
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
 
         /// <summary>
         /// Füllt das DataSet 
         /// </summary>
         private void FillObject()
         {
+            dt.Clear();
             if (con.ConnectError()) return;
             string RawCommand = "SELECT k_id as 'KlassenID', k_bezeichnung as 'Klasse' from t_s_klassen";
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
+            adapter.Fill(dt);
             con.Close();
         }
 
@@ -92,7 +95,7 @@ namespace Bibo_Verwaltung
         {
             ClearDataSource();
             FillObject();
-            cb.DataSource = ds.Tables[0];
+            cb.DataSource = dt;
             cb.ValueMember = "KlassenID";
             cb.DisplayMember = "Klasse";
             cb.SelectedValue = value;

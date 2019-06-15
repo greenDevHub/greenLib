@@ -175,6 +175,12 @@
     <Compile Include="w_s_automatic.Designer.cs">
       <DependentUpon>w_s_automatic.cs</DependentUpon>
     </Compile>
+    <Compile Include="w_s_autorueck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_autorueck.Designer.cs">
+      <DependentUpon>w_s_autorueck.cs</DependentUpon>
+    </Compile>
     <Compile Include="w_s_buch_stufe.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -368,6 +374,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_automatic.resx">
       <DependentUpon>w_s_automatic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="w_s_autorueck.resx">
+      <DependentUpon>w_s_autorueck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_buch_stufe.resx">
       <DependentUpon>w_s_buch_stufe.cs</DependentUpon>

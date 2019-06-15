@@ -425,8 +425,8 @@ namespace Bibo_Verwaltung
                 }
                 else if (custom.DialogResult == DialogResult.No)
                 {
-                    //Form autoruechgabe = new w_s_autorueck(currentUser);
-                    //autoruechgabe.ShowDialog(this);
+                    Form autoruechgabe = new w_s_autorueck(currentUser);
+                    autoruechgabe.ShowDialog(this);
                 }
                 else { }
             }
