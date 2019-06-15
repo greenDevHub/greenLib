@@ -16,6 +16,7 @@ namespace Bibo_Verwaltung
 
         #region Constructor
         string currentUser;
+        bool loaded = false;
         public w_s_Kunden(string userName)
         {
             InitializeComponent();
@@ -389,6 +390,8 @@ namespace Bibo_Verwaltung
                         kunde.UpdateKunde();
                         ClearForm();
                         kunde.FillGrid(ref gv_Kunde);
+                        gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
+                        gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
                         lb_kunde_add.Visible = false;
                         lb_kunde_add.Text = "Der Kunde wurde bearbeitet!";
                         lb_kunde_add.Visible = true;
@@ -529,6 +532,9 @@ namespace Bibo_Verwaltung
                                     kunde.AddKunde();
                                     ClearForm();
                                     kunde.FillGrid(ref gv_Kunde);
+                                    gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
+                                    gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
+
                                     lb_kunde_add.Visible = false;
                                     lb_kunde_add.Text = "Der Kunde wurde hinzugefügt!";
                                     lb_kunde_add.Visible = true;
@@ -554,6 +560,8 @@ namespace Bibo_Verwaltung
                                 kunde.AddKunde();
                                 ClearForm();
                                 kunde.FillGrid(ref gv_Kunde);
+                                gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
+                                gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
                                 lb_kunde_add.Visible = false;
                                 lb_kunde_add.Text = "Der Kunde wurde hinzugefügt!";
                                 lb_kunde_add.Visible = true;
@@ -849,7 +857,11 @@ namespace Bibo_Verwaltung
                     errors++;
                 }
             }
-            kunde.FillGrid(ref gv_Kunde);
+            //kunde.FillGrid(ref gv_Kunde);
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
             if (errors > 0)
             {
                 DialogResult dr = MetroMessageBox.Show(this, String.Format("Es wurden '{0}' von '{1}' Kunden gelöscht. \n\nMöchten Sie die Fehler einsehen?", rows - errors, rows), "Fehler beim Löschvorgang", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
@@ -904,7 +916,11 @@ namespace Bibo_Verwaltung
                     try
                     {
                         kunde.DeactivateAllSchueler();
-                        kunde.FillGrid(ref gv_Kunde);
+                        //kunde.FillGrid(ref gv_Kunde);
+                        if (!backgroundWorker1.IsBusy)
+                        {
+                            backgroundWorker1.RunWorkerAsync();
+                        }
                         DialogResult drFinished = MetroMessageBox.Show(this, "Die Datenbank wurde erfolgreich von allen Schülern bereinigt. Wollen Sie zum Import wechseln?", "Vorgang erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (drFinished == DialogResult.Yes)
                         {
@@ -949,12 +965,16 @@ namespace Bibo_Verwaltung
             DataTable dtFach = new DataTable();
             kunde.Fach.FillDT(ref dtFach);
             var dtKunde = mgKunde.DataSource;
-            //Thread.Sleep(50);
+            while(loaded == false)
+            {
+
+            }
             try
             {
                 BeginInvoke((Action)delegate ()
                 {
                     gv_Kunde.DataSource = dtKunde;
+                    gv_Kunde.Columns["Fächer"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
                     gv_faecher.DataSource = dtFach;
                     gv_faecher.Columns["ID"].Visible = false;
                     foreach (string s in selectedFachIDs)
@@ -979,5 +999,16 @@ namespace Bibo_Verwaltung
             catch { }
         }
         #endregion
+
+        private void BackgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
+            gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            loaded = true;
+        }
     }
 }

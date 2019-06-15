@@ -78,24 +78,27 @@
             this.bt_Schliessen = new MetroFramework.Controls.MetroButton();
             this.bt_Excel = new MetroFramework.Controls.MetroButton();
             this.gb_zoom = new MetroFramework.Controls.MetroPanel();
+            this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.bt_print = new MetroFramework.Controls.MetroButton();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.tb_barcodePrinted = new MetroFramework.Controls.MetroTextBox();
+            this.tb_barcodeAdd = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.tb_neu = new MetroFramework.Controls.MetroTextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.tb_barcodePrinted = new MetroFramework.Controls.MetroTextBox();
-            this.tb_barcodeAdd = new MetroFramework.Controls.MetroTextBox();
-            this.bt_print = new MetroFramework.Controls.MetroButton();
-            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.checkedListBox1 = new Bibo_Verwaltung.AdvancedCheckedListBox();
             this.comboBox1 = new Bibo_Verwaltung.AdvancedComboBox();
             this.cb_Autor = new Bibo_Verwaltung.AdvancedComboBox();
             this.cb_Verlag = new Bibo_Verwaltung.AdvancedComboBox();
             this.cb_Genre = new Bibo_Verwaltung.AdvancedComboBox();
             this.cb_Sprache = new Bibo_Verwaltung.AdvancedComboBox();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).BeginInit();
@@ -687,6 +690,7 @@
             this.tb_ISBN.MinimumSize = new System.Drawing.Size(150, 24);
             this.tb_ISBN.Name = "tb_ISBN";
             this.tb_ISBN.PasswordChar = '\0';
+            this.tb_ISBN.PromptText = "123-0123456789";
             this.tb_ISBN.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_ISBN.SelectedText = "";
             this.tb_ISBN.SelectionLength = 0;
@@ -791,6 +795,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.Grid_Buch.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.Grid_Buch.RowHeadersVisible = false;
+            this.Grid_Buch.RowHeadersWidth = 51;
             this.Grid_Buch.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.Grid_Buch.RowTemplate.DividerHeight = 1;
             this.Grid_Buch.RowTemplate.Height = 24;
@@ -880,6 +885,15 @@
             this.gb_zoom.VerticalScrollbarHighlightOnWheel = false;
             this.gb_zoom.VerticalScrollbarSize = 8;
             // 
+            // metroProgressSpinner1
+            // 
+            this.metroProgressSpinner1.Location = new System.Drawing.Point(580, 63);
+            this.metroProgressSpinner1.Maximum = 100;
+            this.metroProgressSpinner1.Name = "metroProgressSpinner1";
+            this.metroProgressSpinner1.Size = new System.Drawing.Size(485, 484);
+            this.metroProgressSpinner1.TabIndex = 51;
+            this.metroProgressSpinner1.UseSelectable = true;
+            // 
             // metroPanel1
             // 
             this.metroPanel1.Controls.Add(this.metroPanel2);
@@ -934,74 +948,24 @@
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 8;
             // 
-            // tb_neu
+            // metroPanel2
             // 
-            // 
-            // 
-            // 
-            this.tb_neu.CustomButton.Image = null;
-            this.tb_neu.CustomButton.Location = new System.Drawing.Point(90, 2);
-            this.tb_neu.CustomButton.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_neu.CustomButton.Name = "";
-            this.tb_neu.CustomButton.Size = new System.Drawing.Size(19, 19);
-            this.tb_neu.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.tb_neu.CustomButton.TabIndex = 1;
-            this.tb_neu.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.tb_neu.CustomButton.UseSelectable = true;
-            this.tb_neu.CustomButton.Visible = false;
-            this.tb_neu.Enabled = false;
-            this.tb_neu.FontSize = MetroFramework.MetroTextBoxSize.Medium;
-            this.tb_neu.Lines = new string[0];
-            this.tb_neu.Location = new System.Drawing.Point(183, 304);
-            this.tb_neu.MaximumSize = new System.Drawing.Size(375, 24);
-            this.tb_neu.MaxLength = 32767;
-            this.tb_neu.MinimumSize = new System.Drawing.Size(50, 24);
-            this.tb_neu.Name = "tb_neu";
-            this.tb_neu.PasswordChar = '\0';
-            this.tb_neu.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.tb_neu.SelectedText = "";
-            this.tb_neu.SelectionLength = 0;
-            this.tb_neu.SelectionStart = 0;
-            this.tb_neu.ShortcutsEnabled = false;
-            this.tb_neu.Size = new System.Drawing.Size(112, 24);
-            this.tb_neu.TabIndex = 48;
-            this.tb_neu.UseSelectable = true;
-            this.tb_neu.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.tb_neu.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.tb_neu.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_neu_KeyPress);
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 1;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // metroProgressBar1
-            // 
-            this.metroProgressBar1.Location = new System.Drawing.Point(0, 0);
-            this.metroProgressBar1.Margin = new System.Windows.Forms.Padding(2);
-            this.metroProgressBar1.Name = "metroProgressBar1";
-            this.metroProgressBar1.Size = new System.Drawing.Size(1200, 5);
-            this.metroProgressBar1.TabIndex = 53;
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(3, 304);
-            this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(151, 20);
-            this.metroLabel1.TabIndex = 49;
-            this.metroLabel1.Text = "Exemplare hinzufügen:";
-            // 
-            // metroLabel2
-            // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(3, 3);
-            this.metroLabel2.Margin = new System.Windows.Forms.Padding(3);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(128, 20);
-            this.metroLabel2.TabIndex = 49;
-            this.metroLabel2.Text = "Barcodes gedruckt:";
+            this.metroPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.metroPanel2.Controls.Add(this.metroLabel3);
+            this.metroPanel2.Controls.Add(this.bt_print);
+            this.metroPanel2.Controls.Add(this.metroLabel2);
+            this.metroPanel2.Controls.Add(this.tb_barcodePrinted);
+            this.metroPanel2.Controls.Add(this.tb_barcodeAdd);
+            this.metroPanel2.HorizontalScrollbarBarColor = true;
+            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.HorizontalScrollbarSize = 10;
+            this.metroPanel2.Location = new System.Drawing.Point(0, 424);
+            this.metroPanel2.Name = "metroPanel2";
+            this.metroPanel2.Size = new System.Drawing.Size(421, 60);
+            this.metroPanel2.TabIndex = 54;
+            this.metroPanel2.VerticalScrollbarBarColor = true;
+            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.VerticalScrollbarSize = 10;
             // 
             // metroLabel3
             // 
@@ -1012,6 +976,29 @@
             this.metroLabel3.Size = new System.Drawing.Size(163, 20);
             this.metroLabel3.TabIndex = 55;
             this.metroLabel3.Text = "Neue Barcodes drucken:";
+            // 
+            // bt_print
+            // 
+            this.bt_print.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_print.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.bt_print.Location = new System.Drawing.Point(300, 3);
+            this.bt_print.Name = "bt_print";
+            this.bt_print.Size = new System.Drawing.Size(112, 24);
+            this.bt_print.Style = MetroFramework.MetroColorStyle.Blue;
+            this.bt_print.TabIndex = 56;
+            this.bt_print.Text = "Drucken";
+            this.bt_print.UseSelectable = true;
+            this.bt_print.Click += new System.EventHandler(this.bt_print_Click);
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(3, 3);
+            this.metroLabel2.Margin = new System.Windows.Forms.Padding(3);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(128, 20);
+            this.metroLabel2.TabIndex = 49;
+            this.metroLabel2.Text = "Barcodes gedruckt:";
             // 
             // tb_barcodePrinted
             // 
@@ -1086,37 +1073,68 @@
             this.tb_barcodeAdd.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
             this.tb_barcodeAdd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_barcodeAdd_KeyPress);
             // 
-            // bt_print
+            // metroLabel1
             // 
-            this.bt_print.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.bt_print.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_print.Location = new System.Drawing.Point(300, 3);
-            this.bt_print.Name = "bt_print";
-            this.bt_print.Size = new System.Drawing.Size(112, 24);
-            this.bt_print.Style = MetroFramework.MetroColorStyle.Blue;
-            this.bt_print.TabIndex = 56;
-            this.bt_print.Text = "Drucken";
-            this.bt_print.UseSelectable = true;
-            this.bt_print.Click += new System.EventHandler(this.bt_print_Click);
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(3, 304);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(151, 20);
+            this.metroLabel1.TabIndex = 49;
+            this.metroLabel1.Text = "Exemplare hinzufügen:";
             // 
-            // metroPanel2
+            // tb_neu
             // 
-            this.metroPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.metroPanel2.Controls.Add(this.metroLabel3);
-            this.metroPanel2.Controls.Add(this.bt_print);
-            this.metroPanel2.Controls.Add(this.metroLabel2);
-            this.metroPanel2.Controls.Add(this.tb_barcodePrinted);
-            this.metroPanel2.Controls.Add(this.tb_barcodeAdd);
-            this.metroPanel2.HorizontalScrollbarBarColor = true;
-            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel2.HorizontalScrollbarSize = 10;
-            this.metroPanel2.Location = new System.Drawing.Point(0, 424);
-            this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(421, 60);
-            this.metroPanel2.TabIndex = 54;
-            this.metroPanel2.VerticalScrollbarBarColor = true;
-            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel2.VerticalScrollbarSize = 10;
+            // 
+            // 
+            // 
+            this.tb_neu.CustomButton.Image = null;
+            this.tb_neu.CustomButton.Location = new System.Drawing.Point(90, 2);
+            this.tb_neu.CustomButton.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_neu.CustomButton.Name = "";
+            this.tb_neu.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_neu.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_neu.CustomButton.TabIndex = 1;
+            this.tb_neu.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_neu.CustomButton.UseSelectable = true;
+            this.tb_neu.CustomButton.Visible = false;
+            this.tb_neu.Enabled = false;
+            this.tb_neu.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.tb_neu.Lines = new string[0];
+            this.tb_neu.Location = new System.Drawing.Point(183, 304);
+            this.tb_neu.MaximumSize = new System.Drawing.Size(375, 24);
+            this.tb_neu.MaxLength = 32767;
+            this.tb_neu.MinimumSize = new System.Drawing.Size(50, 24);
+            this.tb_neu.Name = "tb_neu";
+            this.tb_neu.PasswordChar = '\0';
+            this.tb_neu.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_neu.SelectedText = "";
+            this.tb_neu.SelectionLength = 0;
+            this.tb_neu.SelectionStart = 0;
+            this.tb_neu.ShortcutsEnabled = false;
+            this.tb_neu.Size = new System.Drawing.Size(112, 24);
+            this.tb_neu.TabIndex = 48;
+            this.tb_neu.UseSelectable = true;
+            this.tb_neu.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_neu.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.tb_neu.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_neu_KeyPress);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // metroProgressBar1
+            // 
+            this.metroProgressBar1.Location = new System.Drawing.Point(0, 0);
+            this.metroProgressBar1.Margin = new System.Windows.Forms.Padding(2);
+            this.metroProgressBar1.Name = "metroProgressBar1";
+            this.metroProgressBar1.Size = new System.Drawing.Size(1200, 5);
+            this.metroProgressBar1.TabIndex = 53;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
             // 
             // checkedListBox1
             // 
@@ -1229,6 +1247,12 @@
             this.cb_Sprache.TabIndex = 8;
             this.cb_Sprache.TextChanged += new System.EventHandler(this.cb_Sprache_TextChanged);
             // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 1000;
+            this.timer2.Tick += new System.EventHandler(this.Timer2_Tick);
+            // 
             // w_s_buecher
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1239,6 +1263,7 @@
             this.Controls.Add(this.gb_zoom);
             this.Controls.Add(this.bt_Excel);
             this.Controls.Add(this.bt_Schliessen);
+            this.Controls.Add(this.metroProgressSpinner1);
             this.Controls.Add(this.Grid_Buch);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1329,5 +1354,8 @@
         private MetroFramework.Controls.MetroTextBox tb_barcodeAdd;
         private MetroFramework.Controls.MetroPanel metroPanel2;
         private MetroFramework.Controls.MetroButton bt_print;
+        private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Timer timer2;
     }
 }

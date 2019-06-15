@@ -20,6 +20,7 @@ namespace Bibo_Verwaltung
         /// Erschaft die Form
         /// </summary>
         string currentUser;
+        bool loaded = false;
         public w_s_buchsuche(string userName)
         {
             InitializeComponent();
@@ -97,12 +98,14 @@ namespace Bibo_Verwaltung
         {
             if (cb_Verfügbar_Anz.Checked == true)
             {
-                buchsuche.Show_VerfuegbareExemplare(ref gv_buchsuche);
+                (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = string.Format("Leihnummer IS NULL");
+                //buchsuche.Show_VerfuegbareExemplare(ref gv_buchsuche);
             }
             else
             {
-                buchsuche.Show_AlleExemplare(ref gv_buchsuche);
-                buchsuche.Set_StatusMark(ref gv_buchsuche);
+                (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = string.Format("ExemplarID IS NOT NULL");
+                //buchsuche.Show_AlleExemplare(ref gv_buchsuche);
+                //buchsuche.Set_StatusMark(ref gv_buchsuche);
             }
         }
 
@@ -340,6 +343,10 @@ namespace Bibo_Verwaltung
             {
                 metroProgressSpinner1.Visible = true;
                 metroProgressSpinner2.Visible = true;
+                gv_buchsuche.DataSource = null;
+                cb_Autor.DataSource = null;
+                cb_Genre.DataSource = null;
+                cb_Verlag.DataSource = null;
                 gv_buchsuche.Visible = false;
                 cb_Autor.Visible = false;
                 cb_Genre.Visible = false;
@@ -351,11 +358,15 @@ namespace Bibo_Verwaltung
             AdvancedComboBox cbGenre = new AdvancedComboBox();
             List<int> RedBlack = new List<int>();
             List<int> YellowBlack = new List<int>();
-            List<int>LimeBlack= new List<int>();
+            List<int> LimeBlack = new List<int>();
             buchsuche.FillComboBoxes(ref cbAutor, ref cbVerlag, ref cbGenre);
             buchsuche.FillGrid(ref mgBuSu);
             buchsuche.Set_StatusMarkNew(ref mgBuSu, ref RedBlack, ref YellowBlack, ref LimeBlack);
             var dtBuSu = mgBuSu.DataSource;
+            while (loaded == false)
+            {
+
+            }
             try
             {
                 BeginInvoke((Action)delegate
@@ -367,7 +378,7 @@ namespace Bibo_Verwaltung
                     gv_buchsuche.Columns["Vorname"].Visible = false;
                     gv_buchsuche.Columns["Nachname"].Visible = false;
                     gv_buchsuche.Columns["Klasse"].Visible = false;
-                    foreach(int i in RedBlack)
+                    foreach (int i in RedBlack)
                     {
                         gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Red;
                         gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Black;
@@ -385,12 +396,27 @@ namespace Bibo_Verwaltung
                     cb_Autor.DataSource = cbAutor.DataSource;
                     cb_Autor.ValueMember = "au_id";
                     cb_Autor.DisplayMember = "au_autor";
+                    cb_Autor.SelectedIndex = -1;
                     cb_Verlag.DataSource = cbVerlag.DataSource;
                     cb_Verlag.ValueMember = "ver_id";
                     cb_Verlag.DisplayMember = "ver_name";
+                    cb_Verlag.SelectedIndex = -1;
                     cb_Genre.DataSource = cbGenre.DataSource;
                     cb_Genre.ValueMember = "ger_id";
                     cb_Genre.DisplayMember = "ger_name";
+                    cb_Genre.SelectedIndex = -1;
+                    if (cb_Autor.Text == "")
+                    {
+                        cb_Autor.Text = "Autor";
+                    }
+                    if (cb_Verlag.Text == "")
+                    {
+                        cb_Verlag.Text = "Verlag";
+                    }
+                    if (cb_Genre.Text == "")
+                    {
+                        cb_Genre.Text = "Genre";
+                    }
                     metroProgressSpinner1.Visible = false;
                     metroProgressSpinner2.Visible = false;
                     gv_buchsuche.Visible = true;
@@ -400,6 +426,12 @@ namespace Bibo_Verwaltung
                 });
             }
             catch { }
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            loaded = true;
+            timer1.Stop();
         }
     }
 }

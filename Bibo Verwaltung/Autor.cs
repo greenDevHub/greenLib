@@ -82,17 +82,18 @@ namespace Bibo_Verwaltung
         #region GetID
         public string GetID(string autor)
         {
+            string id = "";
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return "";
             string RawCommand = "SELECT au_id FROM [dbo].[t_s_autor] WHERE au_autor = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand,autor);
             while (dr.Read())
             {
-                AutorID = dr["au_id"].ToString();
+                id = dr["au_id"].ToString();
             }
             dr.Close();
             con.Close();
-            return AutorID;
+            return id;
         }
         #endregion
 

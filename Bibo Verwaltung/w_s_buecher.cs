@@ -12,6 +12,7 @@ using System.Text;
 using System.Media;
 using MetroFramework;
 using bpac;
+using MetroFramework.Controls;
 
 namespace Bibo_Verwaltung
 {
@@ -21,7 +22,7 @@ namespace Bibo_Verwaltung
         {
             InitializeComponent();
             timer1.Start();
-            b.FillGrid_Buch(ref Grid_Buch);
+            //b.FillGrid_Buch(ref Grid_Buch);
             Comboboxen();
             pictureBox2.Visible = false;
             gb_zoom.Visible = false;
@@ -29,6 +30,7 @@ namespace Bibo_Verwaltung
             comboBox1.DropDownHeight = 1;
             this.bool1 = bool1;
         }
+        bool loaded = false;
         private string location = "";
         Buch b = new Buch();
         bool bool1;
@@ -240,9 +242,7 @@ namespace Bibo_Verwaltung
                 {
                     b.Add_Buch();
                     Form Buchid = new w_s_buchid();
-                    this.Hide();
                     Buchid.ShowDialog(this);
-                    this.Show();
                     b.FillGrid_Buch(ref Grid_Buch);
                     Clear_All();
                 }
@@ -250,9 +250,7 @@ namespace Bibo_Verwaltung
                 {
                     b.Add_Buch();
                     Form Buchid = new w_s_buchid();
-                    this.Hide();
                     Buchid.ShowDialog(this);
-                    this.Show();
                     b.FillGrid_Buch(ref Grid_Buch);
                     Clear_All();
                 }
@@ -263,9 +261,7 @@ namespace Bibo_Verwaltung
                     {
                         b.Add_Buch();
                         Form Buchid = new w_s_buchid();
-                        this.Hide();
                         Buchid.ShowDialog(this);
-                        this.Show();
                         b.FillGrid_Buch(ref Grid_Buch);
                         Clear_All();
                     }
@@ -440,7 +436,7 @@ namespace Bibo_Verwaltung
                         }
                         else
                         {
-                            if(b.Autor.GetID(cb_Autor.Text) == null)
+                            if(b.Autor.GetID(cb_Autor.Text) == "" || b.Autor.GetID(cb_Autor.Text) == null)
                             {
                                 needAutor.Add(cb_Autor.Text);
                                 b.Autor.Add(needAutor);
@@ -591,6 +587,7 @@ namespace Bibo_Verwaltung
                 }
                 IsOK();
             }
+            tb_ISBN.Focus();
         }
         #endregion
 
@@ -725,7 +722,7 @@ namespace Bibo_Verwaltung
                 tb_neu.Enabled = false;
                 tb_ISBN.Enabled = false;
                 tb_Titel.Enabled = true;
-                cb_Autor.Enabled = true;
+                cb_Autor.Enabled = !checkbox_autor.Checked;
                 cb_Verlag.Enabled = true;
                 cb_Sprache.Enabled = true;
                 cb_Genre.Enabled = true;
@@ -821,6 +818,10 @@ namespace Bibo_Verwaltung
         private void w_s_buecher_Activated(object sender, EventArgs e)
         {
             Modus();
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
         }
         #endregion
 
@@ -1443,6 +1444,7 @@ namespace Bibo_Verwaltung
         {
             if (checkbox_autor.Checked)
             {
+                cb_Autor.Enabled = false;
                 comboBox1.DroppedDown = false;
                 if (checkedListBox1.Visible == false)
                 {
@@ -1587,10 +1589,12 @@ namespace Bibo_Verwaltung
             string isbnAktuell = Grid_Buch.SelectedRows[0].Cells["ISBN"].Value.ToString();
             tb_ISBN.Text = isbnAktuell;
             Form Buchid = new w_s_buchid();
-            this.Hide();
             Buchid.ShowDialog(this);
-            this.Show();
-            b.FillGrid_Buch(ref Grid_Buch);
+            //b.FillGrid_Buch(ref Grid_Buch);
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
             Clear_All();
         }
 
@@ -1727,6 +1731,42 @@ namespace Bibo_Verwaltung
                 SystemSounds.Beep.Play();
                 e.Handled = true;
             }
+        }
+
+        private void BackgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+                BeginInvoke((Action)delegate ()
+                {
+                    metroProgressSpinner1.Visible = true;
+                    Grid_Buch.Visible = false;
+                    metroProgressSpinner1.BringToFront();
+                });
+                MetroGrid mgBuch = new MetroGrid();
+                b.FillGrid_Buch(ref mgBuch);
+                var dtBuch = mgBuch.DataSource;
+                while(loaded == false)
+                {
+
+                }
+                BeginInvoke((Action)delegate ()
+                {
+                    Grid_Buch.DataSource = dtBuch;
+                    metroProgressSpinner1.Visible = false;
+                    Grid_Buch.Visible = true;
+                });
+            }
+            catch
+            {
+
+            }
+
+        }
+
+        private void Timer2_Tick(object sender, EventArgs e)
+        {
+            loaded = true;
         }
     }
 }
