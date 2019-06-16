@@ -242,6 +242,7 @@ namespace Bibo_Verwaltung
                     MetroMessageBox.Show(this, "Die Buchausgabe konnte nicht abgeschlossen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 ausleihe.SetSlider(ref leihList_Slider, ref tb_listVon, ref tb_listBis);
+                valueChanged = true;
                 tb_BuchCode.Text = "";
                 tb_BuchCode.Focus();
             }
@@ -337,6 +338,7 @@ namespace Bibo_Verwaltung
                     if (ausleihe.LeihListe.Rows.Count != 0)
                     {
                         Buchausgabe();
+                        
                     }
                 }
                 else

@@ -99,13 +99,14 @@ namespace Bibo_Verwaltung
             if (cb_Verfügbar_Anz.Checked == true)
             {
                 (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = string.Format("Leihnummer IS NULL");
+                
                 //buchsuche.Show_VerfuegbareExemplare(ref gv_buchsuche);
             }
             else
             {
                 (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = string.Format("ExemplarID IS NOT NULL");
                 //buchsuche.Show_AlleExemplare(ref gv_buchsuche);
-                //buchsuche.Set_StatusMark(ref gv_buchsuche);
+                buchsuche.Set_StatusMark(ref gv_buchsuche);
             }
         }
 
