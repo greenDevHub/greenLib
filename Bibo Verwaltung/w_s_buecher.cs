@@ -479,7 +479,8 @@ namespace Bibo_Verwaltung
                             b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetSprachID(cb_Sprache.Text)));
                         }
                         b.Autoren.Clear();
-                        b.Autoren.Add(cb_Autor.SelectedText.ToString());
+                        //b.Autoren.Add(cb_Autor.SelectedText.ToString());
+                        b.Autoren.Add(cb_Autor.Text);
                         //for (int i = 1; i < 10;)
                         //{
                         //    b.AutorListe.AutorIDs.Add(null);
