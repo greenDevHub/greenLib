@@ -36,7 +36,7 @@ namespace Bibo_Verwaltung
             {
                 //error = true;
                 Form Einstellungen = new w_s_einstellungen();
-                Einstellungen.Show();
+                Einstellungen.ShowDialog(this);
                 return;
             }
             //else

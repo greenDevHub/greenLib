@@ -39,7 +39,6 @@
             this.mT_Faecher = new MetroFramework.Controls.MetroTile();
             this.mT_Buecher = new MetroFramework.Controls.MetroTile();
             this.mT_Genres = new MetroFramework.Controls.MetroTile();
-            this.mT_Klassenstufen = new MetroFramework.Controls.MetroTile();
             this.mT_ausleihen = new MetroFramework.Controls.MetroTile();
             this.mT_Einstellungen = new MetroFramework.Controls.MetroTile();
             this.mT_Benutzerverwaltung = new MetroFramework.Controls.MetroTile();
@@ -59,6 +58,7 @@
             this.metroTile1 = new MetroFramework.Controls.MetroTile();
             this.mT_klassenstufefach = new MetroFramework.Controls.MetroTile();
             this.mT_fachbuch = new MetroFramework.Controls.MetroTile();
+            this.mT_Klassenstufen = new MetroFramework.Controls.MetroTile();
             this.panel.SuspendLayout();
             this.pl_unschaerfe.SuspendLayout();
             this.transparentPanel1.SuspendLayout();
@@ -109,7 +109,7 @@
             // 
             this.mT_Zustand.ActiveControl = null;
             this.mT_Zustand.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(132)))), ((int)(((byte)(173)))));
-            this.mT_Zustand.Location = new System.Drawing.Point(498, 113);
+            this.mT_Zustand.Location = new System.Drawing.Point(498, 221);
             this.mT_Zustand.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Zustand.Name = "mT_Zustand";
             this.mT_Zustand.Size = new System.Drawing.Size(157, 46);
@@ -137,7 +137,7 @@
             // 
             this.mT_Faecher.ActiveControl = null;
             this.mT_Faecher.BackColor = System.Drawing.Color.CadetBlue;
-            this.mT_Faecher.Location = new System.Drawing.Point(663, 167);
+            this.mT_Faecher.Location = new System.Drawing.Point(498, 112);
             this.mT_Faecher.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Faecher.Name = "mT_Faecher";
             this.mT_Faecher.Size = new System.Drawing.Size(157, 46);
@@ -173,21 +173,6 @@
             this.mT_Genres.UseCustomBackColor = true;
             this.mT_Genres.UseSelectable = true;
             this.mT_Genres.Click += new System.EventHandler(this.bt_Genres_Click);
-            // 
-            // mT_Klassenstufen
-            // 
-            this.mT_Klassenstufen.ActiveControl = null;
-            this.mT_Klassenstufen.BackColor = System.Drawing.Color.CadetBlue;
-            this.mT_Klassenstufen.Location = new System.Drawing.Point(663, 113);
-            this.mT_Klassenstufen.Margin = new System.Windows.Forms.Padding(4);
-            this.mT_Klassenstufen.Name = "mT_Klassenstufen";
-            this.mT_Klassenstufen.Size = new System.Drawing.Size(157, 46);
-            this.mT_Klassenstufen.Style = MetroFramework.MetroColorStyle.Teal;
-            this.mT_Klassenstufen.TabIndex = 3;
-            this.mT_Klassenstufen.Text = "Klassenstufen";
-            this.mT_Klassenstufen.UseCustomBackColor = true;
-            this.mT_Klassenstufen.UseSelectable = true;
-            this.mT_Klassenstufen.Click += new System.EventHandler(this.bt_Klassenstufe_Click);
             // 
             // mT_ausleihen
             // 
@@ -290,10 +275,9 @@
             this.mT_ausgabe.Location = new System.Drawing.Point(6, 112);
             this.mT_ausgabe.Name = "mT_ausgabe";
             this.mT_ausgabe.Size = new System.Drawing.Size(157, 46);
-            this.mT_ausgabe.Style = MetroFramework.MetroColorStyle.Lime;
+            this.mT_ausgabe.Style = MetroFramework.MetroColorStyle.Green;
             this.mT_ausgabe.TabIndex = 10;
             this.mT_ausgabe.Text = "Buchausgabe";
-            this.mT_ausgabe.UseCustomBackColor = true;
             this.mT_ausgabe.UseSelectable = true;
             this.mT_ausgabe.Click += new System.EventHandler(this.mT_Ausgabe_Click);
             // 
@@ -304,10 +288,9 @@
             this.mT_rueckgabe.Location = new System.Drawing.Point(169, 112);
             this.mT_rueckgabe.Name = "mT_rueckgabe";
             this.mT_rueckgabe.Size = new System.Drawing.Size(157, 46);
-            this.mT_rueckgabe.Style = MetroFramework.MetroColorStyle.Lime;
+            this.mT_rueckgabe.Style = MetroFramework.MetroColorStyle.Green;
             this.mT_rueckgabe.TabIndex = 11;
             this.mT_rueckgabe.Text = "Buchrückgabe";
-            this.mT_rueckgabe.UseCustomBackColor = true;
             this.mT_rueckgabe.UseSelectable = true;
             this.mT_rueckgabe.Click += new System.EventHandler(this.mT_Rueckgabe_Click);
             // 
@@ -328,7 +311,6 @@
             this.panel.Controls.Add(this.mT_ausleihen);
             this.panel.Controls.Add(this.mT_Abmelden);
             this.panel.Controls.Add(this.mT_Einstellungen);
-            this.panel.Controls.Add(this.mT_Klassenstufen);
             this.panel.Controls.Add(this.mT_Buecher);
             this.panel.Controls.Add(this.mT_Faecher);
             this.panel.HorizontalScrollbarBarColor = true;
@@ -358,7 +340,7 @@
             // bt_zu
             // 
             this.bt_zu.ActiveControl = null;
-            this.bt_zu.Location = new System.Drawing.Point(498, 221);
+            this.bt_zu.Location = new System.Drawing.Point(663, 167);
             this.bt_zu.Margin = new System.Windows.Forms.Padding(4);
             this.bt_zu.Name = "bt_zu";
             this.bt_zu.Size = new System.Drawing.Size(157, 46);
@@ -389,10 +371,11 @@
             this.transparentPanel1.Controls.Add(this.metroTile1);
             this.transparentPanel1.Controls.Add(this.mT_klassenstufefach);
             this.transparentPanel1.Controls.Add(this.mT_fachbuch);
+            this.transparentPanel1.Controls.Add(this.mT_Klassenstufen);
             this.transparentPanel1.ForeColor = System.Drawing.Color.Transparent;
-            this.transparentPanel1.Location = new System.Drawing.Point(173, 91);
+            this.transparentPanel1.Location = new System.Drawing.Point(173, 92);
             this.transparentPanel1.Name = "transparentPanel1";
-            this.transparentPanel1.Size = new System.Drawing.Size(499, 116);
+            this.transparentPanel1.Size = new System.Drawing.Size(499, 171);
             this.transparentPanel1.TabIndex = 16;
             // 
             // mT_klassenstufebuch
@@ -411,7 +394,7 @@
             // metroTile1
             // 
             this.metroTile1.ActiveControl = null;
-            this.metroTile1.Location = new System.Drawing.Point(169, 61);
+            this.metroTile1.Location = new System.Drawing.Point(168, 114);
             this.metroTile1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 8);
             this.metroTile1.Name = "metroTile1";
             this.metroTile1.Size = new System.Drawing.Size(158, 46);
@@ -446,6 +429,20 @@
             this.mT_fachbuch.Text = "Fächer - Bücher";
             this.mT_fachbuch.UseSelectable = true;
             this.mT_fachbuch.Click += new System.EventHandler(this.mT_FachBuch_Click);
+            // 
+            // mT_Klassenstufen
+            // 
+            this.mT_Klassenstufen.ActiveControl = null;
+            this.mT_Klassenstufen.BackColor = System.Drawing.Color.OrangeRed;
+            this.mT_Klassenstufen.Location = new System.Drawing.Point(169, 61);
+            this.mT_Klassenstufen.Margin = new System.Windows.Forms.Padding(4);
+            this.mT_Klassenstufen.Name = "mT_Klassenstufen";
+            this.mT_Klassenstufen.Size = new System.Drawing.Size(157, 46);
+            this.mT_Klassenstufen.Style = MetroFramework.MetroColorStyle.Orange;
+            this.mT_Klassenstufen.TabIndex = 3;
+            this.mT_Klassenstufen.Text = "Klassenstufen";
+            this.mT_Klassenstufen.UseSelectable = true;
+            this.mT_Klassenstufen.Click += new System.EventHandler(this.bt_Klassenstufe_Click);
             // 
             // w_s_main
             // 
