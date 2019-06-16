@@ -454,7 +454,7 @@ namespace Bibo_Verwaltung
         public void DeactivateAllSchueler()
         {
             if (con.ConnectError()) return;
-            string RawCommand = "UPDATE t_s_kunden set kunde_activated = 0, kunde_klasse = '0' from t_s_kunden left join t_bd_ausgeliehen on kunde_ID=aus_kundenid WHERE kunde_klasse !='' and aus_leihnummer is NULL";
+            string RawCommand = "UPDATE t_s_kunden set kunde_activated = 0, kunde_klasse = null from t_s_kunden left join t_bd_ausgeliehen on kunde_ID=aus_kundenid WHERE kunde_klasse !='' and aus_leihnummer is NULL";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             DeleteFaecherFromKunde();
             cmd.ExecuteNonQuery();

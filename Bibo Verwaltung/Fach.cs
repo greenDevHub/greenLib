@@ -212,21 +212,23 @@ namespace Bibo_Verwaltung
         /// </summary>
         public bool AlreadyExists()
         {
+            string id = "";
             if (con.ConnectError()) return false;
             string RawCommand = "SELECT f_id FROM [dbo].[t_s_faecher] WHERE f_kurzform = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, FachKurz);
             while (dr.Read())
             {
-                FachID = dr["f_id"].ToString();
+                id = dr["f_id"].ToString();
             }
             dr.Close();
             con.Close();
-            if (FachID == null)
+            if (id == "")
             {
                 return false;
             }
             else
             {
+                FachID = id;
                 return true;
             }
         }

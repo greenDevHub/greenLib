@@ -775,7 +775,7 @@ namespace Bibo_Verwaltung
                                 {
                                     k.Fach.FachKurz = fach;
                                     k.Fach.FachLang = "";
-                                    if (k.Fach.AlreadyExists())
+                                    if (!k.Fach.AlreadyExists())
                                     {
                                         k.Fach.AddFach();
                                     }
@@ -811,7 +811,7 @@ namespace Bibo_Verwaltung
                                 {
                                     k.Fach.FachKurz = fach;
                                     k.Fach.FachLang = "";
-                                    if (k.Fach.AlreadyExists())
+                                    if (!k.Fach.AlreadyExists())
                                     {
                                         k.Fach.AddFach();
                                     }
