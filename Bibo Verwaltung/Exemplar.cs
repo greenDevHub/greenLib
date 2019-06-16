@@ -204,11 +204,11 @@ namespace Bibo_Verwaltung
             string RawCommand = "SELECT bu_id as Exemplar, bu_isbn as ISBN, buch_titel as Titel, bu_aufnahmedatum as Aufnahmedatum, zu_zustand as Zustand from t_s_buchid left join t_s_zustand on bu_zustandsid = zu_id left join t_s_buecher on bu_isbn = buch_isbn where bu_isbn = @isbn AND bu_activated = 1";
             //string RawCommand = "SELECT bu_id as 'BuchID', buch_isbn as 'ISBN', buch_titel as 'Titel', zu_zustand 'Zustand', zu_verleihfähig as 'Verleihbar', bu_aufnahmedatum as 'Aufnahmedatum' from t_s_buchid left join t_s_zustand on bu_zustand_id left join t_s_buecher on bu_isbn = buch_isbn";
             adapter2 = new SqlDataAdapter(RawCommand, con.Con);
-            if (ISBN == null)
-            {
-                System.Windows.Forms.Form f = System.Windows.Forms.Application.OpenForms["w_s_buecher"];
-                ISBN = ((w_s_buecher)f).tb_ISBN.Text;
-            }
+            //if (ISBN == null)
+            //{
+            //    System.Windows.Forms.Form f = System.Windows.Forms.Application.OpenForms["w_s_buecher"];
+            //    ISBN = ((w_s_buecher)f).tb_ISBN.Text;
+            //}
             adapter2.SelectCommand.Parameters.AddWithValue("@isbn", ISBN);
             adapter2.Fill(ds);
             con.Close();

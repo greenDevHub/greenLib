@@ -24,6 +24,22 @@ namespace Bibo_Verwaltung
             this.Text = Text + " - Angemeldet als: " + userName;
             zustand.FillCombobox(ref cb_Zustand, -1);
         }
+
+        public w_s_rueckgabe(string userName, string[] list)
+        {
+            InitializeComponent();
+            this.currentUser = userName;
+            this.Text = Text + " - Angemeldet als: " + userName;
+            zustand.FillCombobox(ref cb_Zustand, -1);
+            foreach(string s in list)
+            {
+                tb_BuchCode.Text = s;
+                EnterBuch();
+            }
+
+            //rueckgabe.FillRueckListe(list);
+            //rueckgabe.SetSlider(ref rueckList_Slider, ref tb_listVon, ref tb_listBis);
+        }
         #endregion
 
         Rueckgabe rueckgabe = new Rueckgabe();
@@ -450,6 +466,27 @@ namespace Bibo_Verwaltung
             tb_listVon.Text = rueckList_Slider.Value.ToString();
             tb_listBis.Text = rueckList_Slider.Maximum.ToString();
             tb_BuchCode.Text = rueckgabe.RueckListe.Rows[rueckList_Slider.Value - 1][0].ToString();
+            tb_BuchCode.Focus();
+            tb_BuchCode.SelectAll();
+        }
+
+        private void W_s_rueckgabe_Shown(object sender, EventArgs e)
+        {
+            tb_BuchCode.Focus();
+        }
+
+        private void Tb_listBis_TextChanged(object sender, EventArgs e)
+        {
+            tb_listVon.Text = rueckList_Slider.Value.ToString();
+            tb_listBis.Text = rueckList_Slider.Maximum.ToString();
+            if (rueckgabe.RueckListe.Rows.Count > 0)
+            {
+                tb_BuchCode.Text = rueckgabe.RueckListe.Rows[rueckList_Slider.Value - 1][0].ToString();
+            }
+            else
+            {
+                tb_BuchCode.Text = "";
+            }
             tb_BuchCode.Focus();
             tb_BuchCode.SelectAll();
         }

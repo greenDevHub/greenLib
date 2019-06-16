@@ -233,9 +233,11 @@ namespace Bibo_Verwaltung
                     foreach (DataRow row in ausleihe.LeihListe.Rows)
                     {
                         ausleihe.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(),dp_RueckDatum.Value.ToShortDateString(), Convert.ToInt32(kunde.KundenID));
+                        
                         //ausleihe.Save_Transaction(); In Bearbeitung!!!
                     }
                     MetroMessageBox.Show(this, "Die Buchausgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ausleihe.ClearLeihList();
                 }
                 catch
                 {

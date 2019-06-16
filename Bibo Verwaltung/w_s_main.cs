@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,6 +51,11 @@ namespace Bibo_Verwaltung
             System.IO.Directory.CreateDirectory(path + "\\Bibliothek\\Bilder");
             System.IO.Directory.CreateDirectory(path + "\\Bibliothek\\Einstellungen");
             System.IO.Directory.CreateDirectory(path + "\\Bibliothek\\Downloads");
+            string strFilePath = path+"\\Bibliothek\\Einstellungen\\BarcodePreset.lbx";
+            if (!File.Exists(strFilePath))
+            {
+                File.WriteAllBytes(strFilePath, Properties.Resources.BarcodePreset);
+            }
         }
         #endregion
 

@@ -67,15 +67,21 @@ namespace Bibo_Verwaltung
             }
         }
 
+        private void Clear()
+        {
+            tb_user.Text = "";
+            tb_pw.Text = "";
+            cb_Rechte.Text = "";
+            cb_Rechte.SelectedIndex = -1;
+            user.FillGrid(ref gv_Benutzer);
+        }
+
         /// <summary>
         /// Setzt die Form auf den Ausgangszustand zurück
         /// </summary>
         private void ClearForm(object sender, EventArgs e)
         {
-            tb_user.Text = "";
-            tb_pw.Text = "";
-            cb_Rechte.Text = "";
-            user.FillGrid(ref gv_Benutzer);
+            Clear();
         }
         #endregion
 
@@ -97,7 +103,7 @@ namespace Bibo_Verwaltung
                 try
                 {
                     aUser.AddUser(name, pw, rechte);
-                    aUser.FillGrid(ref gv_Benutzer);
+                    Clear();
                 }
                 catch
                 {
@@ -109,7 +115,7 @@ namespace Bibo_Verwaltung
                 try
                 {
                     aUser.DeleteUser(name);
-                    aUser.FillGrid(ref gv_Benutzer);
+                    Clear();
                 }
                 catch
                 {
@@ -126,8 +132,17 @@ namespace Bibo_Verwaltung
                 }
                 try
                 {
-                    aUser.UpdateUser(name, pw, rechte);
-                    aUser.FillGrid(ref gv_Benutzer);
+                    if(tb_pw.Text == "Passwort123456" || tb_pw.Text == "")
+                    {
+                        MetroMessageBox.Show(this, "Bitte geben Sie ein gültiges Passwort ein!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        tb_pw.Clear();
+                    }
+                    else
+                    {
+                        aUser.UpdateUser(name, pw, rechte);
+                        Clear();
+                    }
+                    
                 }
                 catch
                 {

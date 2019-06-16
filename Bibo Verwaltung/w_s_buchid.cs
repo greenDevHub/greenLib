@@ -22,10 +22,13 @@ namespace Bibo_Verwaltung
     {
         Exemplar b = new Exemplar();
         bool loaded = false;
-        public w_s_buchid()
+        string isbn = "";
+        public w_s_buchid(string isbn)
         {
             InitializeComponent();
             //b.FillGrid(ref grid_buchid);
+            this.isbn = isbn;
+            b.ISBN = isbn;
             tb_isbn.Text = b.ISBN;
             b.Zustand.FillCombobox(ref cb_zustand, 0);
             //tb_anzahl.Text = grid_buchid.RowCount.ToString();
@@ -563,8 +566,8 @@ namespace Bibo_Verwaltung
                 bool test = printer.IsPrinterOnline(name);
                 if (test)
                 {
-                    string strFilePath = @"BarcodePreset.lbx";
-                    File.WriteAllBytes(strFilePath, Properties.Resources.BarcodePreset);
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    string strFilePath = path + "\\Bibliothek\\Einstellungen\\BarcodePreset.lbx";
                     IDocument doc = new Document();
                     doc.Open(strFilePath);
                     int barcodeIndex = doc.GetBarcodeIndex("Barcode");
@@ -583,7 +586,6 @@ namespace Bibo_Verwaltung
                     }
                     doc.EndPrint();
                     doc.Close();
-                    File.Delete(strFilePath);
                     MetroMessageBox.Show(this, String.Format("Es wurden erfolgreich '{0}' Barcodes gedruckt.", barcodeList.Count),"Drucken erfolgreich!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else

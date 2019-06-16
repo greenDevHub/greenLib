@@ -470,6 +470,7 @@
             this.tb_listBis.UseSelectable = true;
             this.tb_listBis.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_listBis.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_listBis.TextChanged += new System.EventHandler(this.Tb_listBis_TextChanged);
             // 
             // tb_listVon
             // 
@@ -569,6 +570,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "Buchrückgabe";
+            this.Shown += new System.EventHandler(this.W_s_rueckgabe_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Verlauf)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).EndInit();
             this.metroPanel1.ResumeLayout(false);
