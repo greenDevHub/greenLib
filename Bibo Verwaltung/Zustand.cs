@@ -57,6 +57,19 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Fill Object
+        public DataGridViewComboBoxColumn FillDataGridViewComboBox()
+        {
+            DataGridViewComboBoxColumn cb = new DataGridViewComboBoxColumn();
+            FillObject();
+            cb.HeaderText = "Zustand";
+            cb.Name = "cb";
+            cb.DataSource = dt;
+            cb.ValueMember = "zu_id";
+            cb.DisplayMember = "zu_zustand";
+            //cb.SelectedValue = value;
+            return cb;
+        }
+
         public void FillCombobox(ref AdvancedComboBox cb, object value)
         {
             FillObject();

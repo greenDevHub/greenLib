@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework.Controls;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -84,6 +85,58 @@ namespace Bibo_Verwaltung
             }
             dr.Close();
             con.Close();
+        }
+
+        /// <summary>
+        /// Gibt den Row-Index der ExemplarID in der Buchausleihliste wieder
+        /// </summary>
+        public int GetIndexInRueckliste()
+        {
+            int result = -1;
+            for (int i = 0; i <= RueckListe.Rows.Count - 1; i++)
+            {
+                if (RueckListe.Rows[i][0].ToString() == ExemplarID)
+                {
+                    result = i;
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Füllt das DataSet 
+        /// </summary>
+        private void FillObject()
+        {
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT buch_titel as 'Titel', aus_leihdatum as 'Leihdatum', aus_rückgabedatum as 'Rückgabedatum', aus_buchid FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid left join t_s_buecher on buch_isbn = bu_isbn WHERE aus_kundenid = @0";
+            adapter = new SqlDataAdapter(RawCommand, con.Con);
+            adapter.SelectCommand.Parameters.AddWithValue("@0", KID);
+            adapter.Fill(ds);
+            con.Close();
+        }
+
+        /// <summary>
+        /// Entfernt den gesamten Inhalt im DataSet 
+        /// </summary>
+        private void ClearDataSource()
+        {
+            try
+            {
+                ds.Tables[0].Rows.Clear();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Füllt ein DataGridView-Objekt mit den Klassendaten 
+        /// </summary>
+        public void FillGrid(ref MetroGrid grid, object value = null)
+        {
+            ClearDataSource();
+            FillObject();
+            grid.DataSource = ds.Tables[0];
+            grid.Columns["aus_buchid"].Visible = false;
         }
 
         /// <summary>
