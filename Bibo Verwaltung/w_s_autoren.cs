@@ -44,7 +44,7 @@ namespace Bibo_Verwaltung
                     try
                     {
                         //Doppelte_Entfernen();
-                        autor.SaveGrid(ref gv_Autoren);
+                        autor.SaveGrid();
                     }
                     catch
                     {
@@ -63,7 +63,7 @@ namespace Bibo_Verwaltung
             try
             {
                 //Doppelte_Entfernen();
-                autor.SaveGrid(ref gv_Autoren);
+                autor.SaveGrid();
                 aenderungungen = false;
             }
             catch

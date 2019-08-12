@@ -346,9 +346,9 @@
             // 
             // 
             this.tb_ExemplarID.CustomButton.Image = null;
-            this.tb_ExemplarID.CustomButton.Location = new System.Drawing.Point(115, 2);
+            this.tb_ExemplarID.CustomButton.Location = new System.Drawing.Point(153, 2);
             this.tb_ExemplarID.CustomButton.Name = "";
-            this.tb_ExemplarID.CustomButton.Size = new System.Drawing.Size(14, 15);
+            this.tb_ExemplarID.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.tb_ExemplarID.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.tb_ExemplarID.CustomButton.TabIndex = 1;
             this.tb_ExemplarID.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -404,7 +404,7 @@
             this.dp_RueckDatum.Location = new System.Drawing.Point(319, 79);
             this.dp_RueckDatum.MinimumSize = new System.Drawing.Size(0, 29);
             this.dp_RueckDatum.Name = "dp_RueckDatum";
-            this.dp_RueckDatum.Size = new System.Drawing.Size(179, 30);
+            this.dp_RueckDatum.Size = new System.Drawing.Size(179, 29);
             this.dp_RueckDatum.TabIndex = 2;
             this.dp_RueckDatum.ValueChanged += new System.EventHandler(this.dp_RueckDatum_ValueChanged);
             // 
@@ -478,6 +478,7 @@
             this.MaximizeBox = false;
             this.Name = "w_s_automatic";
             this.Resizable = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Yellow;
             this.Text = "Automatische Lehrbuchausgabe";

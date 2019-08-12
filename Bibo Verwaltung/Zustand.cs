@@ -12,6 +12,12 @@ namespace Bibo_Verwaltung
 {
     class Zustand
     {
+        SQL_Verbindung con = new SQL_Verbindung();
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
+        SqlCommandBuilder comb = new SqlCommandBuilder();
+
         #region Zustand Eigenschaften
         string zustandid;
         /// <summary>
@@ -33,30 +39,27 @@ namespace Bibo_Verwaltung
         public Zustand(string zustandid)
         {
             this.zustandid = zustandid;
-            Load();
+            LoadZustand();
             FillObject();
         }
-        #region Load
-        public void Load()
+
+        /// <summary>
+        /// Lädt die Zustandsdaten eines Buchzustandes
+        /// </summary>
+        public void LoadZustand()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
             string RawCommand = "SELECT * FROM [dbo].[t_s_zustand] WHERE zu_id = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, zustandid);
-            // Einlesen der Datenzeilen 
             while (dr.Read())
             {
                 ZustandID = dr["zu_id"].ToString();
                 Zustandname = dr["zu_zustand"].ToString();
             }
-            // DataReader schließen 
             dr.Close();
-            // Verbindung schließen 
             con.Close();
         }
-        #endregion
 
-        #region Fill Object
         public DataGridViewComboBoxColumn FillDataGridViewComboBox()
         {
             DataGridViewComboBoxColumn cb = new DataGridViewComboBoxColumn();
@@ -70,44 +73,76 @@ namespace Bibo_Verwaltung
             return cb;
         }
 
+        /// <summary>
+        /// Entfernt den gesamten Inhalt im DataSet 
+        /// </summary>
+        private void ClearDataSource()
+        {
+            try
+            {
+                ds.Tables[0].Rows.Clear();
+                dt.Clear();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Füllt eine ComoBox mit Zustandsdaten 
+        /// </summary>
         public void FillCombobox(ref AdvancedComboBox cb, object value)
         {
+            ClearDataSource();
             FillObject();
             cb.DataSource = dt;
             cb.ValueMember = "zu_id";
             cb.DisplayMember = "zu_zustand";
             cb.SelectedValue = value;
         }
-        SqlDataAdapter adapter = new SqlDataAdapter();
-        DataSet ds = new DataSet();
-        DataTable dt = new DataTable();
-        SqlCommandBuilder comb = new SqlCommandBuilder();
+
+        /// <summary>
+        /// Füllt ein DataSet mit Zustandsdaten 
+        /// </summary>
         private void FillObject()
         {
-            dt.Clear();
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
             string RawCommand = "SELECT * FROM [dbo].[t_s_zustand]";
-
-            // Verbindung öffnen 
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
             adapter.Fill(dt);
-
             con.Close();
         }
-        #endregion
 
-        #region FillGrid
+        /// <summary>
+        /// Füllt ein DataGridView-Objekt mit Zustandsdaten 
+        /// </summary>
         public void FillGrid(ref MetroGrid grid, object value = null)
         {
+            ClearDataSource();
+            FillObject();
             grid.DataSource = ds.Tables[0];
             grid.Columns[0].Visible = false;
             grid.Columns["zu_zustand"].HeaderText = "Zustand";
         }
-        #endregion
 
-        #region Speichern Grid
+        /// <summary>
+        /// Prüft die Daten aus einen DataGridView-Objekt auf Veränderungen 
+        /// </summary>
+        public bool GetChangesGrid(ref MetroGrid grid)
+        {
+            DataSet changes = ds.GetChanges();
+            if (changes != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Speichert die Daten aus einen DataGridView-Objekt in die Datenbank 
+        /// </summary>
         public void SaveGrid(ref MetroGrid grid)
         {
             comb = new SqlCommandBuilder(adapter);
@@ -117,12 +152,12 @@ namespace Bibo_Verwaltung
                 adapter.Update(changes);
             }
         }
-        #endregion
 
-        #region Add
-        public void Add(string zustand)
+        /// <summary>
+        /// Fügt einen Buchzustand der Datenbank hinzu 
+        /// </summary>
+        public void AddZustand(string zustand)
         {
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
             string RawCommand = "INSERT INTO [dbo].[t_s_zustand] (zu_zustand) VALUES (@0)";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
@@ -130,12 +165,12 @@ namespace Bibo_Verwaltung
             cmd.ExecuteNonQuery();
             con.Close();
         }
-        #endregion
 
-        #region GetID
-        public string GetID(string zustand)
+        /// <summary>
+        /// Gibt die ID eines Buchzustandes zurück
+        /// </summary>
+        public string GetZustandsID(string zustand)
         {
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return "";
             string RawCommand = "SELECT zu_id FROM [dbo].[t_s_zustand] WHERE zu_zustand = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, zustand);
@@ -147,7 +182,6 @@ namespace Bibo_Verwaltung
             con.Close();
             return ZustandID;
         }
-        #endregion
 
         public bool IfContains(string value)
         {

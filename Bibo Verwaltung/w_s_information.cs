@@ -17,14 +17,13 @@ namespace Bibo_Verwaltung
         {           
             InitializeComponent();
             this.currentUser = userName;
-
             if (modus == 1)
             {
                 Text = "Buch-Details";
                 bt_Verwaltung.Text = "Bücherverwaltung";
                 tLP_Information.RowStyles[8].Height = 0;
                 Buch buch = new Buch();
-                buch.Load_ID(id);
+                buch.LoadBuchByID(id);
                 lb_1.Text = "Buch-ISBN:";
                 lb_2.Text = "Buchtitel:";
                 lb_3.Text = "Autor:";

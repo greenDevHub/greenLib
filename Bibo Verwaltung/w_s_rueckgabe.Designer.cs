@@ -432,7 +432,7 @@
             this.rueckList_Slider.TabIndex = 44;
             this.rueckList_Slider.TabStop = true;
             this.rueckList_Slider.Scroll += new System.Windows.Forms.ScrollEventHandler(this.RueckList_Slider_Scroll);
-            this.rueckList_Slider.ValueChanged += new System.EventHandler(this.LeihList_Slider_ValueChanged);
+            this.rueckList_Slider.ValueChanged += new System.EventHandler(this.RueckList_Slider_ValueChanged);
             // 
             // tb_listBis
             // 
@@ -525,7 +525,7 @@
             this.lb_Exemplar.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lb_Exemplar.Location = new System.Drawing.Point(23, 60);
             this.lb_Exemplar.Name = "lb_Exemplar";
-            this.lb_Exemplar.Size = new System.Drawing.Size(174, 20);
+            this.lb_Exemplar.Size = new System.Drawing.Size(160, 19);
             this.lb_Exemplar.TabIndex = 51;
             this.lb_Exemplar.Text = "Exemplar-Informationen:";
             // 
@@ -535,7 +535,7 @@
             this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.metroLabel1.Location = new System.Drawing.Point(23, 327);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(105, 20);
+            this.metroLabel1.Size = new System.Drawing.Size(97, 19);
             this.metroLabel1.TabIndex = 52;
             this.metroLabel1.Text = "Ausleihverlauf:";
             // 
@@ -567,6 +567,7 @@
             this.MaximizeBox = false;
             this.Name = "w_s_rueckgabe";
             this.Resizable = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "Buchrückgabe";

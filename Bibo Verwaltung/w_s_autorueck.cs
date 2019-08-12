@@ -342,7 +342,7 @@ namespace Bibo_Verwaltung
                         foreach (DataRow row in autorueckgabe.RueckListe.Rows)
                         {
                             autorueckgabe.Load_Info(row[0].ToString());
-                            autorueckgabe.Execute_Rueckgabe(row[0].ToString(), autorueckgabe.KID, row[1].ToString(), zustand.GetID(row[2].ToString()), row[2].ToString(), autorueckgabe.Leihdatum.ToShortDateString(), DateTime.Now.Date.ToShortDateString());
+                            autorueckgabe.Execute_Rueckgabe(row[0].ToString(), autorueckgabe.KID, row[1].ToString(), zustand.GetZustandsID(row[2].ToString()), row[2].ToString(), autorueckgabe.Leihdatum.ToShortDateString(), DateTime.Now.Date.ToShortDateString());
                         }
                         MetroMessageBox.Show(this, "Die Buchrückgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         if (IsComplete(ref gv_suggested))

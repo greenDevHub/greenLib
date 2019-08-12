@@ -72,7 +72,7 @@
             this.dp_RueckDatum.CustomFormat = " dd : MMMM : yyyy";
             this.dp_RueckDatum.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dp_RueckDatum.Location = new System.Drawing.Point(116, 118);
-            this.dp_RueckDatum.MinimumSize = new System.Drawing.Size(0, 30);
+            this.dp_RueckDatum.MinimumSize = new System.Drawing.Size(0, 29);
             this.dp_RueckDatum.Name = "dp_RueckDatum";
             this.dp_RueckDatum.Size = new System.Drawing.Size(179, 30);
             this.dp_RueckDatum.Style = MetroFramework.MetroColorStyle.Green;
@@ -255,7 +255,6 @@
             this.tb_BuchCode.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_BuchCode.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_BuchCode.TextChanged += new System.EventHandler(this.tb_BuchCode_TextChanged);
-            this.tb_BuchCode.Enter += new System.EventHandler(this.Tb_BuchCode_Enter);
             this.tb_BuchCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_BuchCode_KeyPress);
             // 
             // lb_RueckDatum
@@ -310,7 +309,7 @@
             this.lb_BuchID.Location = new System.Drawing.Point(3, 3);
             this.lb_BuchID.Margin = new System.Windows.Forms.Padding(3);
             this.lb_BuchID.Name = "lb_BuchID";
-            this.lb_BuchID.Size = new System.Drawing.Size(111, 20);
+            this.lb_BuchID.Size = new System.Drawing.Size(106, 19);
             this.lb_BuchID.TabIndex = 2;
             this.lb_BuchID.Text = "Buchlable-Code:";
             // 
@@ -401,7 +400,6 @@
             this.tb_NName.MaxLength = 32767;
             this.tb_NName.Name = "tb_NName";
             this.tb_NName.PasswordChar = '\0';
-            this.tb_NName.PromptText = "Nachname";
             this.tb_NName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_NName.SelectedText = "";
             this.tb_NName.SelectionLength = 0;
@@ -436,7 +434,6 @@
             this.tb_VName.MaxLength = 32767;
             this.tb_VName.Name = "tb_VName";
             this.tb_VName.PasswordChar = '\0';
-            this.tb_VName.PromptText = "Vorname";
             this.tb_VName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_VName.SelectedText = "";
             this.tb_VName.SelectionLength = 0;
@@ -466,7 +463,7 @@
             this.lb_Anweisung.Location = new System.Drawing.Point(3, 3);
             this.lb_Anweisung.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Anweisung.Name = "lb_Anweisung";
-            this.lb_Anweisung.Size = new System.Drawing.Size(196, 20);
+            this.lb_Anweisung.Size = new System.Drawing.Size(181, 19);
             this.lb_Anweisung.TabIndex = 42;
             this.lb_Anweisung.Text = "Wählen Sie einen Kunden aus:";
             // 
@@ -542,7 +539,7 @@
             this.lb_Exemplar.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.lb_Exemplar.Location = new System.Drawing.Point(23, 60);
             this.lb_Exemplar.Name = "lb_Exemplar";
-            this.lb_Exemplar.Size = new System.Drawing.Size(174, 20);
+            this.lb_Exemplar.Size = new System.Drawing.Size(160, 19);
             this.lb_Exemplar.TabIndex = 50;
             this.lb_Exemplar.Text = "Exemplar-Informationen:";
             // 
@@ -572,7 +569,7 @@
             this.lb_Kunden.Location = new System.Drawing.Point(23, 295);
             this.lb_Kunden.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.lb_Kunden.Name = "lb_Kunden";
-            this.lb_Kunden.Size = new System.Drawing.Size(162, 20);
+            this.lb_Kunden.Size = new System.Drawing.Size(152, 19);
             this.lb_Kunden.TabIndex = 52;
             this.lb_Kunden.Text = "Kunden-Informationen:";
             // 
@@ -593,6 +590,7 @@
             this.MaximizeBox = false;
             this.Name = "w_s_ausleihe";
             this.Resizable = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "Buchausleihe";

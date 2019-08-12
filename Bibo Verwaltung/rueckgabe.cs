@@ -190,22 +190,6 @@ namespace Bibo_Verwaltung
             }
         }
 
-        ///// <summary>
-        ///// Gibt den Row-Index der ExemplarID in der Buchrückgabeliste wieder
-        ///// </summary>
-        //public int GetIndexInRueckliste()
-        //{
-        //    int result = -1;
-        //    for (int i = 0; i <= RueckListe.Rows.Count - 1; i++)
-        //    {
-        //        if (RueckListe.Rows[i][0].ToString() == ExemplarID)
-        //        {
-        //            result = i;
-        //        }
-        //    }
-        //    return result;
-        //}
-
         /// <summary>
         /// Baut einen Dialogstring abhängig von der Buchrückgabe-Anzahl
         /// </summary>

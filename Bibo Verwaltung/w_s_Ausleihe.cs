@@ -20,19 +20,57 @@ namespace Bibo_Verwaltung
         public w_s_ausleihe(string userName)
         {
             InitializeComponent();
+            Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName;
-            kunde.FillGrid(ref gv_Kunde);
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+            if (user.Rechteid.Equals("0"))
+            {
+                bt_AddBuch.Enabled = false;
+                dp_RueckDatum.Enabled = false;
+                bt_NeuKunde.Enabled = false;
+                tb_VName.Enabled = false;
+                tb_NName.Enabled = false;
+                bt_Submit.Enabled = false;
+            }
+            else
+            {
+                bt_AddBuch.Enabled = true;
+                dp_RueckDatum.Enabled = true;
+                bt_NeuKunde.Enabled = true;
+                tb_VName.Enabled = true;
+                tb_NName.Enabled = true;
+                bt_Submit.Enabled = true;
+                kunde.FillGrid(ref gv_Kunde);
+            }
         }
 
         public w_s_ausleihe(string userName, string[] list)
         {
             InitializeComponent();
+            Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName;
-            kunde.FillGrid(ref gv_Kunde);
-            ausleihe.FillAusleihListe(list);
-            ausleihe.SetSlider(ref leihList_Slider, ref tb_listVon, ref tb_listBis);
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+            if (user.Rechteid.Equals("0"))
+            {
+                bt_AddBuch.Enabled = false;
+                dp_RueckDatum.Enabled = false;
+                bt_NeuKunde.Enabled = false;
+                tb_VName.Enabled = false;
+                tb_NName.Enabled = false;
+                bt_Submit.Enabled = false;
+            }
+            else
+            {
+                bt_AddBuch.Enabled = true;
+                dp_RueckDatum.Enabled = true;
+                bt_NeuKunde.Enabled = true;
+                tb_VName.Enabled = true;
+                tb_NName.Enabled = true;
+                bt_Submit.Enabled = true;
+                kunde.FillGrid(ref gv_Kunde);
+                ausleihe.FillAusleihListe(list);
+                ausleihe.SetSlider(ref leihList_Slider, ref tb_listVon, ref tb_listBis);
+            }
         }
         #endregion
 
@@ -72,17 +110,33 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void Reset_Window()
         {
-            llb_BuchTitel.Enabled = false;
-            llb_BuchTitel.Text = "keine Treffer";
-            kunde.FillGrid(ref gv_Kunde);
-            lb_BuchZustand.Enabled = false;
-            lb_BuchZustand.Text = "nicht verfügbar";
-            lb_BuchStatus.Enabled = false;
-            lb_BuchStatus.ForeColor = Color.Black;
-            lb_BuchStatus.Text = "nicht verfügbar";
-            picBox_Buchcover.Image = null;
-            dp_RueckDatum.Value = DateTime.Now.Date;
-            tb_BuchCode.Focus();
+            if (new Benutzer(currentUser).Rechteid.Equals("0"))
+            {
+                llb_BuchTitel.Enabled = false;
+                llb_BuchTitel.Text = "keine Treffer";
+                lb_BuchZustand.Enabled = false;
+                lb_BuchZustand.Text = "nicht verfügbar";
+                lb_BuchStatus.Enabled = false;
+                lb_BuchStatus.ForeColor = Color.Black;
+                lb_BuchStatus.Text = "nicht verfügbar";
+                picBox_Buchcover.Image = null;
+                dp_RueckDatum.Value = DateTime.Now.Date;
+                tb_BuchCode.Focus();
+            }
+            else
+            {
+                llb_BuchTitel.Enabled = false;
+                llb_BuchTitel.Text = "keine Treffer";
+                kunde.FillGrid(ref gv_Kunde);
+                lb_BuchZustand.Enabled = false;
+                lb_BuchZustand.Text = "nicht verfügbar";
+                lb_BuchStatus.Enabled = false;
+                lb_BuchStatus.ForeColor = Color.Black;
+                lb_BuchStatus.Text = "nicht verfügbar";
+                picBox_Buchcover.Image = null;
+                dp_RueckDatum.Value = DateTime.Now.Date;
+                tb_BuchCode.Focus();
+            }
         }
 
         /// <summary>
@@ -121,7 +175,6 @@ namespace Bibo_Verwaltung
                             bt_AddBuch.Text = "+";
                         }
                         ausleihe.Verfuegbar = buch_exemplar.IsSpecificAvailable();
-
                         llb_BuchTitel.Enabled = true;
                         llb_BuchTitel.Text = ausleihe.TrimText(buch_exemplar.Titel, 30);
                         lb_BuchZustand.Enabled = true;
@@ -138,7 +191,6 @@ namespace Bibo_Verwaltung
                             lb_BuchStatus.Text = "nicht verfügbar (verliehen)";
                             lb_BuchStatus.ForeColor = Color.Red;
                         }
-
                         ausleihe.ShowBuchCover(ref picBox_Buchcover);
                         #region Buchcover anzeigen
                         //Buch buchCover = new Buch(buch_exemplar.ISBN);
@@ -232,8 +284,7 @@ namespace Bibo_Verwaltung
                 {
                     foreach (DataRow row in ausleihe.LeihListe.Rows)
                     {
-                        ausleihe.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(),dp_RueckDatum.Value.ToShortDateString(), Convert.ToInt32(kunde.KundenID));
-                        
+                        ausleihe.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(),dp_RueckDatum.Value.ToShortDateString(), Convert.ToInt32(kunde.KundenID));                    
                         //ausleihe.Save_Transaction(); In Bearbeitung!!!
                     }
                     MetroMessageBox.Show(this, "Die Buchausgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -244,7 +295,6 @@ namespace Bibo_Verwaltung
                     MetroMessageBox.Show(this, "Die Buchausgabe konnte nicht abgeschlossen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 ausleihe.SetSlider(ref leihList_Slider, ref tb_listVon, ref tb_listBis);
-                valueChanged = true;
                 tb_BuchCode.Text = "";
                 tb_BuchCode.Focus();
             }
@@ -254,11 +304,7 @@ namespace Bibo_Verwaltung
         #region Componenten-Aktionen
         private void tb_BuchCode_TextChanged(object sender, EventArgs e)
         {
-            if(valueChanged == true)
-            {
                 ShowBuchResults();
-
-            }
         }
 
         private void bt_AddBuch_Click(object sender, EventArgs e)
@@ -339,8 +385,7 @@ namespace Bibo_Verwaltung
                     }
                     if (ausleihe.LeihListe.Rows.Count != 0)
                     {
-                        Buchausgabe();
-                        
+                        Buchausgabe();                   
                     }
                 }
                 else
@@ -356,41 +401,42 @@ namespace Bibo_Verwaltung
 
         private void tb_BuchCode_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)13)
+            if (!new Benutzer(currentUser).Rechteid.Equals("0"))
             {
-                ShowBuchResults();
-                if(llb_BuchTitel.Text.Equals("keine Treffer"))
+                if (e.KeyChar == (char)13)
                 {
-                    MetroMessageBox.Show(this, "Der eingegebene Buchcode ist nicht vorhanden! ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    if (tb_BuchCode.Text != "")
+                    ShowBuchResults();
+                    if (llb_BuchTitel.Text.Equals("keine Treffer"))
                     {
-                        if (ausleihe.Verfuegbar)
+                        MetroMessageBox.Show(this, "Der eingegebene Buchcode ist nicht vorhanden! ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        if (tb_BuchCode.Text != "")
                         {
-                            if (!ausleihe.CheckLeihList())
+                            if (ausleihe.Verfuegbar)
                             {
-                                ausleihe.AddToAusleihList();
-                                bt_AddBuch.Text = "-";
+                                if (!ausleihe.CheckLeihList())
+                                {
+                                    ausleihe.AddToAusleihList();
+                                    bt_AddBuch.Text = "-";
+                                }
+                                else
+                                {
+                                    ausleihe.RemoveFromAusleihList();
+                                    bt_AddBuch.Text = "+";
+                                }
                             }
                             else
                             {
-                                ausleihe.RemoveFromAusleihList();
-                                bt_AddBuch.Text = "+";
+                                MetroMessageBox.Show(this, "Dieses Buch wurde verliehen. Es kann nicht zur Buchausleihliste hinzugefügt werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
+                            ausleihe.SetSlider(ref leihList_Slider, ref tb_listVon, ref tb_listBis);
+                            tb_BuchCode.Focus();
+                            tb_BuchCode.SelectAll();
                         }
-                        else
-                        {
-                            MetroMessageBox.Show(this, "Dieses Buch wurde verliehen. Es kann nicht zur Buchausleihliste hinzugefügt werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        ausleihe.SetSlider(ref leihList_Slider, ref tb_listVon, ref tb_listBis);
-                        tb_BuchCode.Focus();
-                        tb_BuchCode.SelectAll();
-                        valueChanged = false;
                     }
                 }
-                
             }
         }
 
@@ -404,10 +450,9 @@ namespace Bibo_Verwaltung
         {
             MetroMessageBox.Show(this, ausleihe.GetListInfo(), "Information", MessageBoxButtons.OK, MessageBoxIcon.Information, (150 + ausleihe.LeihListe.Rows.Count * 15));
         }
-        bool valueChanged = false;
+
         private void leihList_Slider_ValueChanged(object sender, EventArgs e)
         {
-            valueChanged = true;
             tb_listVon.Text = leihList_Slider.Value.ToString();
             tb_listBis.Text = leihList_Slider.Maximum.ToString();
             if (ausleihe.LeihListe.Rows.Count > 0)
@@ -430,22 +475,15 @@ namespace Bibo_Verwaltung
         private void tb_NName_TextChanged(object sender, EventArgs e)
         {
             SearchKunde(tb_VName.Text, tb_NName.Text);
-        }
-        #endregion
+        }    
 
         private void W_s_ausleihe_Shown(object sender, EventArgs e)
         {
             tb_BuchCode.Focus();
         }
 
-        private void Tb_BuchCode_Enter(object sender, EventArgs e)
-        {
-            valueChanged = false;
-        }
-
         private void Tb_listBis_TextChanged(object sender, EventArgs e)
         {
-            valueChanged = true;
             tb_listVon.Text = leihList_Slider.Value.ToString();
             tb_listBis.Text = leihList_Slider.Maximum.ToString();
             if (ausleihe.LeihListe.Rows.Count > 0)
@@ -459,5 +497,6 @@ namespace Bibo_Verwaltung
             tb_BuchCode.Focus();
             tb_BuchCode.SelectAll();
         }
+        #endregion
     }
 }

@@ -35,7 +35,7 @@ namespace Bibo_Verwaltung
             picBox.SizeMode = PictureBoxSizeMode.StretchImage;
             Benutzer user = new Benutzer(userName);
             this.Text = "     Bibliotheksverwaltung - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-            this.currentUser = userName + " (" + user.Rechte + ")";
+            this.currentUser = userName;
             if (user.Rechteid.Equals("0") || user.Rechteid.Equals("1"))
             {
                 mT_Benutzerverwaltung.Enabled = false;
@@ -149,50 +149,47 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form Genres = new w_s_genres();
-                Genres.ShowDialog(this);
+                Form manage = new w_s_manage(currentUser, "Genre");
+                manage.ShowDialog(this);
             }
             else
             {
                 MetroMessageBox.Show(this, "Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
         }
 
         private void bt_Sprachen_Click(object sender, EventArgs e)
         {
             if (!connected)
             {
-                Form Sprachen = new w_s_sprachen();
-                Sprachen.ShowDialog(this);
+                Form manage = new w_s_manage(currentUser, "Sprache");
+                manage.ShowDialog(this);
             }
             else
             {
                 MetroMessageBox.Show(this, "Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
         }
 
         private void bt_Autoren_Click(object sender, EventArgs e)
         {
             if (!connected)
             {
-                Form Autoren = new w_s_autoren();
-                Autoren.ShowDialog(this);
+                Form manage = new w_s_manage(currentUser, "Autor");
+                manage.ShowDialog(this);
             }
             else
             {
                 MetroMessageBox.Show(this, "Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
         }
 
         private void bt_Verlage_Click(object sender, EventArgs e)
         {
             if (!connected)
             {
-                Form Verlage = new w_s_verlage();
-                Verlage.ShowDialog(this);
+                Form manage = new w_s_manage(currentUser, "Verlag");
+                manage.ShowDialog(this);
             }
             else
             {
@@ -223,8 +220,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form Zustand = new w_s_zustand();
-                Zustand.ShowDialog(this);
+                Form manage = new w_s_manage(currentUser, "Zustand");
+                manage.ShowDialog(this);
             }
             else
             {
@@ -262,8 +259,8 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form faecher = new w_s_faecher(currentUser);
-                faecher.ShowDialog(this);
+                Form manage = new w_s_manage(currentUser, "Fach");
+                manage.ShowDialog(this);
             }
             else
             {

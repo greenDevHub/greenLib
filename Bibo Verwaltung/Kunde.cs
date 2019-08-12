@@ -159,9 +159,7 @@ namespace Bibo_Verwaltung
                     Activated = false;
                 }
             }
-            // DataReader schließen 
             dr.Close();
-            // Verbindung schließen 
             con.Close();
         }
 
@@ -290,7 +288,6 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Prüft, ob ein Kunde bereits existiert
         /// </summary>
-        /// <returns></returns>
         public bool AlreadyExists()
         {
             if (con.ConnectError()) return false;
@@ -347,11 +344,9 @@ namespace Bibo_Verwaltung
                 cmd.Parameters.AddWithValue("@hausnummer", Hausnummer);
                 cmd.Parameters.AddWithValue("@mail", Mail);
                 cmd.Parameters.AddWithValue("@klasse", Klasse.GetID(Klasse.Klassename));
-                // Verbindung öffnen 
                 cmd.ExecuteNonQuery();
                 GetKundenID();
                 AddFaecherToKunde();
-                //Verbindung schließen
                 con.Close();
             }
         }
@@ -486,7 +481,6 @@ namespace Bibo_Verwaltung
             }
         }
 
-
         /// <summary>
         /// Füllt ein DataSet-Objekt mit den Kundendaten 
         /// </summary>
@@ -498,11 +492,8 @@ namespace Bibo_Verwaltung
                 {
                     ds.Tables.Add("KundenListe");
                 }
-
                 ds.Tables["KundenListe"].Rows.Clear();
-
                 if (con.ConnectError()) return;
-
                 if (!showKlasse)
                 {
                     //nach klasse selectieren
@@ -529,7 +520,6 @@ namespace Bibo_Verwaltung
             grid.Columns["kunde_ID"].Visible = false;
             grid.Columns["kunde_klasse"].Visible = false;
             grid.Columns["Klassenstufe"].Visible = false;
-
             grid.Columns["Vorname"].SortMode = DataGridViewColumnSortMode.NotSortable;
             grid.Columns["Nachname"].SortMode = DataGridViewColumnSortMode.NotSortable;
             if (!showKlasse)

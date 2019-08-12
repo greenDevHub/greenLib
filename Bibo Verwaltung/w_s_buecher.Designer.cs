@@ -229,7 +229,7 @@
             this.lb_anzahl.Margin = new System.Windows.Forms.Padding(3);
             this.lb_anzahl.Name = "lb_anzahl";
             this.helpProvider.SetShowHelp(this.lb_anzahl, true);
-            this.lb_anzahl.Size = new System.Drawing.Size(123, 20);
+            this.lb_anzahl.Size = new System.Drawing.Size(117, 19);
             this.lb_anzahl.TabIndex = 49;
             this.lb_anzahl.Text = "Anzahl Exemplare:";
             // 
@@ -290,7 +290,7 @@
             this.lb_Erscheinungsdatum.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Erscheinungsdatum.Name = "lb_Erscheinungsdatum";
             this.helpProvider.SetShowHelp(this.lb_Erscheinungsdatum, true);
-            this.lb_Erscheinungsdatum.Size = new System.Drawing.Size(140, 20);
+            this.lb_Erscheinungsdatum.Size = new System.Drawing.Size(130, 19);
             this.lb_Erscheinungsdatum.TabIndex = 20;
             this.lb_Erscheinungsdatum.Text = "Erscheinungsdatum:*";
             // 
@@ -302,7 +302,7 @@
             this.lb_Auflage.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Auflage.Name = "lb_Auflage";
             this.helpProvider.SetShowHelp(this.lb_Auflage, true);
-            this.lb_Auflage.Size = new System.Drawing.Size(56, 20);
+            this.lb_Auflage.Size = new System.Drawing.Size(54, 19);
             this.lb_Auflage.TabIndex = 18;
             this.lb_Auflage.Text = "Auflage";
             // 
@@ -342,7 +342,7 @@
             this.lb_Neupreis.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Neupreis.Name = "lb_Neupreis";
             this.helpProvider.SetShowHelp(this.lb_Neupreis, true);
-            this.lb_Neupreis.Size = new System.Drawing.Size(69, 20);
+            this.lb_Neupreis.Size = new System.Drawing.Size(64, 19);
             this.lb_Neupreis.TabIndex = 3;
             this.lb_Neupreis.Text = "Neupreis:";
             // 
@@ -389,7 +389,7 @@
             this.dTP_Erscheinungsdatum.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dTP_Erscheinungsdatum.Location = new System.Drawing.Point(183, 208);
             this.dTP_Erscheinungsdatum.MaximumSize = new System.Drawing.Size(376, 30);
-            this.dTP_Erscheinungsdatum.MinimumSize = new System.Drawing.Size(0, 30);
+            this.dTP_Erscheinungsdatum.MinimumSize = new System.Drawing.Size(0, 29);
             this.dTP_Erscheinungsdatum.Name = "dTP_Erscheinungsdatum";
             this.helpProvider.SetShowHelp(this.dTP_Erscheinungsdatum, true);
             this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(230, 30);
@@ -440,7 +440,7 @@
             this.lb_Sprache.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Sprache.Name = "lb_Sprache";
             this.helpProvider.SetShowHelp(this.lb_Sprache, true);
-            this.lb_Sprache.Size = new System.Drawing.Size(68, 20);
+            this.lb_Sprache.Size = new System.Drawing.Size(65, 19);
             this.lb_Sprache.TabIndex = 14;
             this.lb_Sprache.Text = "Sprache:*";
             // 
@@ -493,7 +493,7 @@
             this.rb_Update_Buch.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_Update_Buch.Name = "rb_Update_Buch";
             this.helpProvider.SetShowHelp(this.rb_Update_Buch, true);
-            this.rb_Update_Buch.Size = new System.Drawing.Size(92, 20);
+            this.rb_Update_Buch.Size = new System.Drawing.Size(88, 19);
             this.rb_Update_Buch.TabIndex = 43;
             this.rb_Update_Buch.Text = "Bearbeiten";
             this.rb_Update_Buch.UseSelectable = true;
@@ -510,7 +510,7 @@
             this.rb_Add_Buch.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_Add_Buch.Name = "rb_Add_Buch";
             this.helpProvider.SetShowHelp(this.rb_Add_Buch, true);
-            this.rb_Add_Buch.Size = new System.Drawing.Size(97, 20);
+            this.rb_Add_Buch.Size = new System.Drawing.Size(90, 19);
             this.rb_Add_Buch.TabIndex = 41;
             this.rb_Add_Buch.TabStop = true;
             this.rb_Add_Buch.Text = "Hinzufügen";
@@ -527,7 +527,7 @@
             this.rb_Delete_Buch.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_Delete_Buch.Name = "rb_Delete_Buch";
             this.helpProvider.SetShowHelp(this.rb_Delete_Buch, true);
-            this.rb_Delete_Buch.Size = new System.Drawing.Size(86, 20);
+            this.rb_Delete_Buch.Size = new System.Drawing.Size(80, 19);
             this.rb_Delete_Buch.TabIndex = 42;
             this.rb_Delete_Buch.Text = "Entfernen";
             this.rb_Delete_Buch.UseSelectable = true;
@@ -557,7 +557,7 @@
             this.lb_Verlag.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Verlag.Name = "lb_Verlag";
             this.helpProvider.SetShowHelp(this.lb_Verlag, true);
-            this.lb_Verlag.Size = new System.Drawing.Size(57, 20);
+            this.lb_Verlag.Size = new System.Drawing.Size(55, 19);
             this.lb_Verlag.TabIndex = 10;
             this.lb_Verlag.Text = "Verlag:*";
             // 
@@ -569,7 +569,7 @@
             this.lb_Autor.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Autor.Name = "lb_Autor";
             this.helpProvider.SetShowHelp(this.lb_Autor, true);
-            this.lb_Autor.Size = new System.Drawing.Size(50, 20);
+            this.lb_Autor.Size = new System.Drawing.Size(49, 19);
             this.lb_Autor.TabIndex = 8;
             this.lb_Autor.Text = "Autor:\'";
             // 
@@ -613,7 +613,7 @@
             this.lb_Genre.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Genre.Name = "lb_Genre";
             this.helpProvider.SetShowHelp(this.lb_Genre, true);
-            this.lb_Genre.Size = new System.Drawing.Size(57, 20);
+            this.lb_Genre.Size = new System.Drawing.Size(53, 19);
             this.lb_Genre.TabIndex = 5;
             this.lb_Genre.Text = "Genre:*";
             // 
@@ -663,7 +663,7 @@
             this.lb_Titel.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Titel.Name = "lb_Titel";
             this.helpProvider.SetShowHelp(this.lb_Titel, true);
-            this.lb_Titel.Size = new System.Drawing.Size(44, 20);
+            this.lb_Titel.Size = new System.Drawing.Size(42, 19);
             this.lb_Titel.TabIndex = 3;
             this.lb_Titel.Text = "Titel:*";
             // 
@@ -715,7 +715,7 @@
             this.lb_ISBN.Margin = new System.Windows.Forms.Padding(3);
             this.lb_ISBN.Name = "lb_ISBN";
             this.helpProvider.SetShowHelp(this.lb_ISBN, true);
-            this.lb_ISBN.Size = new System.Drawing.Size(47, 20);
+            this.lb_ISBN.Size = new System.Drawing.Size(46, 19);
             this.lb_ISBN.TabIndex = 1;
             this.lb_ISBN.Text = "ISBN:*";
             // 
@@ -815,26 +815,26 @@
             this.entfernenToolStripMenuItem,
             this.exemplareToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 76);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(129, 70);
             // 
             // ladenToolStripMenuItem
             // 
             this.ladenToolStripMenuItem.Name = "ladenToolStripMenuItem";
-            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
+            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.ladenToolStripMenuItem.Text = "Laden";
             this.ladenToolStripMenuItem.Click += new System.EventHandler(this.ladenToolStripMenuItem_Click);
             // 
             // entfernenToolStripMenuItem
             // 
             this.entfernenToolStripMenuItem.Name = "entfernenToolStripMenuItem";
-            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
+            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.entfernenToolStripMenuItem.Text = "Entfernen";
             this.entfernenToolStripMenuItem.Click += new System.EventHandler(this.entfernenToolStripMenuItem_Click);
             // 
             // exemplareToolStripMenuItem
             // 
             this.exemplareToolStripMenuItem.Name = "exemplareToolStripMenuItem";
-            this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
+            this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.exemplareToolStripMenuItem.Text = "Exemplare";
             this.exemplareToolStripMenuItem.Click += new System.EventHandler(this.exemplareToolStripMenuItem_Click);
             // 
@@ -1053,7 +1053,7 @@
             this.metroLabel3.Location = new System.Drawing.Point(3, 31);
             this.metroLabel3.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(163, 20);
+            this.metroLabel3.Size = new System.Drawing.Size(151, 19);
             this.metroLabel3.TabIndex = 55;
             this.metroLabel3.Text = "Neue Barcodes drucken:";
             // 
@@ -1076,7 +1076,7 @@
             this.metroLabel2.Location = new System.Drawing.Point(3, 3);
             this.metroLabel2.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(128, 20);
+            this.metroLabel2.Size = new System.Drawing.Size(121, 19);
             this.metroLabel2.TabIndex = 49;
             this.metroLabel2.Text = "Barcodes gedruckt:";
             // 
@@ -1172,7 +1172,7 @@
             this.metroLabel1.Location = new System.Drawing.Point(3, 304);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(151, 20);
+            this.metroLabel1.Size = new System.Drawing.Size(141, 19);
             this.metroLabel1.TabIndex = 49;
             this.metroLabel1.Text = "Exemplare hinzufügen:";
             // 
@@ -1270,6 +1270,7 @@
             this.MaximizeBox = false;
             this.Name = "w_s_buecher";
             this.Resizable = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Bücher";
             this.Activated += new System.EventHandler(this.w_s_buecher_Activated);

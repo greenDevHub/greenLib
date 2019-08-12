@@ -105,8 +105,8 @@ namespace Bibo_Verwaltung
                 {
                     if (!b.Zustand.IfContains(cb_zustand.Text))
                     {
-                        b.Zustand.Add(cb_zustand.Text);
-                        b.Zustand.FillCombobox(ref cb_zustand, b.Zustand.GetID(cb_zustand.Text));
+                        b.Zustand.AddZustand(cb_zustand.Text);
+                        b.Zustand.FillCombobox(ref cb_zustand, b.Zustand.GetZustandsID(cb_zustand.Text));
                     }
                     lb.Visible = false;
                     b.ExemplarID = tb_id.Text;
@@ -197,8 +197,8 @@ namespace Bibo_Verwaltung
                 {
                     if (!b.Zustand.IfContains(cb_zustand.Text))
                     {
-                        b.Zustand.Add(cb_zustand.Text);
-                        b.Zustand.FillCombobox(ref cb_zustand, b.Zustand.GetID(cb_zustand.Text));
+                        b.Zustand.AddZustand(cb_zustand.Text);
+                        b.Zustand.FillCombobox(ref cb_zustand, b.Zustand.GetZustandsID(cb_zustand.Text));
                     }
                     lb.Visible = false;
                     b.ExemplarID = tb_id.Text;

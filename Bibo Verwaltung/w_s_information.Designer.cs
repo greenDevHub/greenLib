@@ -291,6 +291,7 @@
             this.MaximizeBox = false;
             this.Name = "w_s_information";
             this.Resizable = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Details";
             this.tLP_Information.ResumeLayout(false);

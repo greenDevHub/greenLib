@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework.Controls;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -63,16 +64,13 @@ namespace Bibo_Verwaltung
             if (con.ConnectError()) return;
             string RawCommand = "SELECT * FROM [dbo].[t_s_faecher] WHERE f_id = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, FachID);
-            // Einlesen der Datenzeilen und Ausgabe an der Konsole 
             while (dr.Read())
             {
                 FachID = dr["f_id"].ToString();
                 FachKurz = dr["f_kurzform"].ToString();
                 FachLang = dr["f_langform"].ToString();
             }
-            // DataReader schließen 
             dr.Close();
-            // Verbindung schließen 
             con.Close();
         }
 
@@ -122,8 +120,7 @@ namespace Bibo_Verwaltung
             try
             {
                 if (con.ConnectError()) return;
-                string RawCommand = "SELECT f_id as 'ID', f_kurzform as 'Kurzbezeichnung', f_langform as 'Langbezeichnung' FROM [dbo].[t_s_faecher]";
-                // Verbindung öffnen 
+                string RawCommand = "SELECT f_id as 'ID', f_kurzform as 'Kürzel', f_langform as 'Langbezeichnung' FROM [dbo].[t_s_faecher]";
                 adapter = new SqlDataAdapter(RawCommand, con.Con);
                 adapter.Fill(ds);
                 con.Close();
@@ -141,12 +138,14 @@ namespace Bibo_Verwaltung
             grid.DataSource = ds.Tables[0];
             grid.Columns["ID"].Visible = false;
         }
+
         public void FillDT(ref DataTable dt, object value = null)
         {
             ds.Tables[0].Clear();
             FillObject();
             dt = ds.Tables[0];
         }
+
         /// <summary>
         /// Füllt ein ComboBox-Objekt mit den Fachdaten 
         /// </summary>
@@ -156,8 +155,24 @@ namespace Bibo_Verwaltung
             FillObject();
             cb.DataSource = ds.Tables[0];
             cb.ValueMember = "ID";
-            cb.DisplayMember = "Kurzbezeichnung";
+            cb.DisplayMember = "Kürzel";
             cb.SelectedValue = value;
+        }
+
+        /// <summary>
+        /// Prüft die Daten aus einen DataGridView-Objekt auf Veränderungen 
+        /// </summary>
+        public bool GetChangesGrid(ref MetroGrid grid)
+        {
+            DataSet changes = ds.GetChanges();
+            if (changes != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>

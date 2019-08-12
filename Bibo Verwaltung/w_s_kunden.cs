@@ -20,40 +20,102 @@ namespace Bibo_Verwaltung
         public w_s_Kunden(string userName)
         {
             InitializeComponent();
+            Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName;
-            if (userName.Contains("(Gast)"))
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+            if (user.Rechteid.Equals("0"))
             {
+                rb_Neukunde.Enabled = false;
+                rb_KundeBearbeiten.Enabled = false;
+                rb_KundeLoeschen.Enabled = false;
+                mtP_Filter.Enabled = false;
                 bt_confirm.Enabled = false;
-                gv_Kunde.Enabled = false;
+                gv_faecher.Enabled = false;
+                gv_result.Enabled = false;
                 bt_cleanup.Enabled = false;
-                metroPanel2.Enabled = false;
-                bt_ImEx.Enabled = false;
-                MetroPanel hidePanel = new MetroPanel();
-                this.Controls.Add(hidePanel);
-                Point punkt = gv_Kunde.FindForm().PointToClient(gv_Kunde.Parent.PointToScreen(gv_Kunde.Location));
-                hidePanel.Location = new Point(punkt.X, punkt.Y + 25);
-                hidePanel.Size = gv_Kunde.Size;
-                hidePanel.Height = hidePanel.Height - 25;
-                hidePanel.BringToFront();
-                hidePanel.Enabled = false;
+                mbt_Import.Enabled = false;
+                mbt_Export.Enabled = false;
+                tb_KundenID.Enabled = false;
+                tb_Vorname.Enabled = false;
+                tb_Nachname.Enabled = false;
+                mdtp_GebDat.Enabled = false;
+                tb_Strasse.Enabled = false;
+                tb_Hausnummer.Enabled = false;
+                tb_Postleitzahl.Enabled = false;
+                tb_Ort.Enabled = false;
+                tb_Klasse.Enabled = false;
+                tb_Mail.Enabled = false;
+                tb_Telefonnummer.Enabled = false;
+                kundeBearbeitenToolStripMenuItem.Enabled = false;
+                kundeEntfernenToolStripMenuItem.Enabled = false;
+                leistungskursAuswählenToolStripMenuItem.Enabled = false;
             }
-            else if (userName.Contains("(Benutzer)"))
+            else if (user.Rechteid.Equals("1"))
             {
+                rb_Neukunde.Enabled = true;
+                rb_KundeBearbeiten.Enabled = true;
+                rb_KundeLoeschen.Enabled = true;
+                mtP_Filter.Enabled = true;
                 bt_confirm.Enabled = true;
-                gv_Kunde.Enabled = true;
-                bt_cleanup.Enabled = false;
-                metroPanel2.Enabled = true;
-                bt_ImEx.Enabled = true;
-            }
-            else if (userName.Contains("(Admin)"))
-            {
-                bt_confirm.Enabled = true;
-                gv_Kunde.Enabled = true;
+                gv_faecher.Enabled = true;
+                gv_result.Enabled = true;
                 bt_cleanup.Enabled = true;
-                metroPanel2.Enabled = true;
-                bt_ImEx.Enabled = true;
+                mbt_Import.Enabled = true;
+                mbt_Export.Enabled = false;
+                tb_Vorname.Enabled = true;
+                tb_Nachname.Enabled = true;
+                mdtp_GebDat.Enabled = true;
+                tb_Strasse.Enabled = true;
+                tb_Hausnummer.Enabled = true;
+                tb_Postleitzahl.Enabled = true;
+                tb_Ort.Enabled = true;
+                tb_Klasse.Enabled = true;
+                tb_Mail.Enabled = true;
+                tb_Telefonnummer.Enabled = true;
+                kundeBearbeitenToolStripMenuItem.Enabled = true;
+                kundeEntfernenToolStripMenuItem.Enabled = true;
+                leistungskursAuswählenToolStripMenuItem.Enabled = true;
             }
+            else if (user.Rechteid == "2")
+            {
+                rb_Neukunde.Enabled = true;
+                rb_KundeBearbeiten.Enabled = true;
+                rb_KundeLoeschen.Enabled = true;
+                mtP_Filter.Enabled = true;
+                bt_confirm.Enabled = true;
+                gv_faecher.Enabled = true;
+                gv_result.Enabled = true;
+                bt_cleanup.Enabled = true;
+                mbt_Import.Enabled = true;
+                mbt_Export.Enabled = true;
+                tb_Vorname.Enabled = true;
+                tb_Nachname.Enabled = true;
+                mdtp_GebDat.Enabled = true;
+                tb_Strasse.Enabled = true;
+                tb_Hausnummer.Enabled = true;
+                tb_Postleitzahl.Enabled = true;
+                tb_Ort.Enabled = true;
+                tb_Klasse.Enabled = true;
+                tb_Mail.Enabled = true;
+                tb_Telefonnummer.Enabled = true;
+                kundeBearbeitenToolStripMenuItem.Enabled = true;
+                kundeEntfernenToolStripMenuItem.Enabled = true;
+                leistungskursAuswählenToolStripMenuItem.Enabled = true;
+            }
+
+            //bt_confirm.Enabled = false;
+            //gv_Kunde.Enabled = false;
+            //bt_cleanup.Enabled = false;
+            //metroPanel2.Enabled = false;
+            //bt_ImEx.Enabled = false;
+            //MetroPanel hidePanel = new MetroPanel();
+            //this.Controls.Add(hidePanel);
+            //Point punkt = gv_Kunde.FindForm().PointToClient(gv_Kunde.Parent.PointToScreen(gv_Kunde.Location));
+            //hidePanel.Location = new Point(punkt.X, punkt.Y + 25);
+            //hidePanel.Size = gv_Kunde.Size;
+            //hidePanel.Height = hidePanel.Height - 25;
+            //hidePanel.BringToFront();
+            //hidePanel.Enabled = false;      
         }
         #endregion
 
@@ -66,7 +128,7 @@ namespace Bibo_Verwaltung
             kunde.KundenID = tb_KundenID.Text;
             kunde.Vorname = tb_Vorname.Text;
             kunde.Nachname = tb_Nachname.Text;
-            kunde.Gd = dTP_gd.Value.Date;
+            kunde.Gd = mdtp_GebDat.Value.Date;
             kunde.Strasse = tb_Strasse.Text;
             kunde.Hausnummer = tb_Hausnummer.Text;
             kunde.Postleitzahl = tb_Postleitzahl.Text;
@@ -79,18 +141,18 @@ namespace Bibo_Verwaltung
             for (int i = 0; i < gv_result.Rows.Count; i++)
             {
                 DataGridViewRow row = gv_result.Rows[i];
-                if (row.Cells["Kurzbezeichnung"].Value != null)
+                if (row.Cells["Kürzel"].Value != null)
                 {
-                    if (row.Cells["Kurzbezeichnung"].Value.ToString() != "")
+                    if (row.Cells["Kürzel"].Value.ToString() != "")
                     {
                         if (row.DefaultCellStyle.BackColor == Color.Yellow)
                         {
-                            kunde.Faecher.Add(row.Cells["Kurzbezeichnung"].Value.ToString().Substring(1));
-                            kunde.LeistungskursListe.Add(row.Cells["Kurzbezeichnung"].Value.ToString().Substring(1));
+                            kunde.Faecher.Add(row.Cells["Kürzel"].Value.ToString().Substring(1));
+                            kunde.LeistungskursListe.Add(row.Cells["Kürzel"].Value.ToString().Substring(1));
                         }
                         else
                         {
-                            kunde.Faecher.Add(row.Cells["Kurzbezeichnung"].Value.ToString());
+                            kunde.Faecher.Add(row.Cells["Kürzel"].Value.ToString());
                         }
                     }
                 }
@@ -142,7 +204,7 @@ namespace Bibo_Verwaltung
             lb_kunde_add.Visible = false;
             tb_Vorname.Text = "";
             tb_Nachname.Text = "";
-            dTP_gd.Text = "";
+            mdtp_GebDat.Text = "";
             tb_Strasse.Text = "";
             tb_Hausnummer.Text = "";
             tb_Postleitzahl.Text = "";
@@ -178,74 +240,77 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void SetModus()
         {
-            if (rb_KundeBearbeiten.Checked)
+            if (new Benutzer(currentUser).Rechteid != "0")
             {
-                bt_confirm.Text = "Speichern";
-                tb_KundenID.Enabled = false;
-                tb_Vorname.Enabled = false;
-                tb_Nachname.Enabled = false;
-                dTP_gd.Enabled = false;
-                tb_Strasse.Enabled = true;
-                tb_Hausnummer.Enabled = true;
-                tb_Postleitzahl.Enabled = true;
-                tb_Ort.Enabled = true;
-                tb_Klasse.Enabled = true;
-                tb_Mail.Enabled = true;
-                tb_Telefonnummer.Enabled = true;
-                lb_KundenID.Text = "Kunden-ID:*";
-                lb_Vorname.Text = "Vorname:*";
-                lb_Nachname.Text = "Nachname:*";
-                lb_geburtsdatum.Text = "Geburtsdatum:*";
-                lb_Strasse.Text = "Strasse:";
-                lb_Hausnummer.Text = "Hausnummer:";
-                lb_Ort.Text = "Wohnort:";
-                lb_Postleitzahl.Text = "Postleitzahl:";
-            }
-            else if (rb_Neukunde.Checked)
-            {
-                bt_confirm.Text = "Hinzufügen";
-                tb_KundenID.Enabled = false;
-                tb_Vorname.Enabled = true;
-                tb_Nachname.Enabled = true;
-                dTP_gd.Enabled = true;
-                tb_Strasse.Enabled = true;
-                tb_Hausnummer.Enabled = true;
-                tb_Postleitzahl.Enabled = true;
-                tb_Ort.Enabled = true;
-                tb_Klasse.Enabled = true;
-                tb_Mail.Enabled = true;
-                tb_Telefonnummer.Enabled = true;
-                lb_KundenID.Text = "Kunden-ID:";
-                lb_Vorname.Text = "Vorname:*";
-                lb_Nachname.Text = "Nachname:*";
-                lb_geburtsdatum.Text = "Geburtsdatum:*";
-                lb_Strasse.Text = "Strasse:";
-                lb_Hausnummer.Text = "Hausnummer:";
-                lb_Ort.Text = "Wohnort:";
-                lb_Postleitzahl.Text = "Postleitzahl:";
-            }
-            else if (rb_KundeLoeschen.Checked)
-            {
-                bt_confirm.Text = "Löschen";
-                tb_KundenID.Enabled = true;
-                tb_Vorname.Enabled = false;
-                tb_Nachname.Enabled = false;
-                tb_Strasse.Enabled = false;
-                dTP_gd.Enabled = false;
-                tb_Hausnummer.Enabled = false;
-                tb_Postleitzahl.Enabled = false;
-                tb_Ort.Enabled = false;
-                tb_Klasse.Enabled = false;
-                tb_Mail.Enabled = false;
-                tb_Telefonnummer.Enabled = false;
-                lb_KundenID.Text = "Kunden-ID:*";
-                lb_Vorname.Text = "Vorname:";
-                lb_Nachname.Text = "Nachname:";
-                lb_geburtsdatum.Text = "Geburtsdatum:";
-                lb_Strasse.Text = "Strasse:";
-                lb_Ort.Text = "Wohnort:";
-                lb_Hausnummer.Text = "Hausnummer:";
-                lb_Postleitzahl.Text = "Postleitzahl:";
+                if (rb_KundeBearbeiten.Checked)
+                {
+                    bt_confirm.Text = "Speichern";
+                    tb_KundenID.Enabled = false;
+                    tb_Vorname.Enabled = false;
+                    tb_Nachname.Enabled = false;
+                    mdtp_GebDat.Enabled = false;
+                    tb_Strasse.Enabled = true;
+                    tb_Hausnummer.Enabled = true;
+                    tb_Postleitzahl.Enabled = true;
+                    tb_Ort.Enabled = true;
+                    tb_Klasse.Enabled = true;
+                    tb_Mail.Enabled = true;
+                    tb_Telefonnummer.Enabled = true;
+                    lb_KundenID.Text = "Kunden-ID:*";
+                    lb_Vorname.Text = "Vorname:*";
+                    lb_Nachname.Text = "Nachname:*";
+                    lb_geburtsdatum.Text = "Geburtsdatum:*";
+                    lb_Strasse.Text = "Strasse:";
+                    lb_Hausnummer.Text = "Hausnummer:";
+                    lb_Ort.Text = "Wohnort:";
+                    lb_Postleitzahl.Text = "Postleitzahl:";
+                }
+                else if (rb_Neukunde.Checked)
+                {
+                    bt_confirm.Text = "Hinzufügen";
+                    tb_KundenID.Enabled = false;
+                    tb_Vorname.Enabled = true;
+                    tb_Nachname.Enabled = true;
+                    mdtp_GebDat.Enabled = true;
+                    tb_Strasse.Enabled = true;
+                    tb_Hausnummer.Enabled = true;
+                    tb_Postleitzahl.Enabled = true;
+                    tb_Ort.Enabled = true;
+                    tb_Klasse.Enabled = true;
+                    tb_Mail.Enabled = true;
+                    tb_Telefonnummer.Enabled = true;
+                    lb_KundenID.Text = "Kunden-ID:";
+                    lb_Vorname.Text = "Vorname:*";
+                    lb_Nachname.Text = "Nachname:*";
+                    lb_geburtsdatum.Text = "Geburtsdatum:*";
+                    lb_Strasse.Text = "Strasse:";
+                    lb_Hausnummer.Text = "Hausnummer:";
+                    lb_Ort.Text = "Wohnort:";
+                    lb_Postleitzahl.Text = "Postleitzahl:";
+                }
+                else if (rb_KundeLoeschen.Checked)
+                {
+                    bt_confirm.Text = "Löschen";
+                    tb_KundenID.Enabled = true;
+                    tb_Vorname.Enabled = false;
+                    tb_Nachname.Enabled = false;
+                    tb_Strasse.Enabled = false;
+                    mdtp_GebDat.Enabled = false;
+                    tb_Hausnummer.Enabled = false;
+                    tb_Postleitzahl.Enabled = false;
+                    tb_Ort.Enabled = false;
+                    tb_Klasse.Enabled = false;
+                    tb_Mail.Enabled = false;
+                    tb_Telefonnummer.Enabled = false;
+                    lb_KundenID.Text = "Kunden-ID:*";
+                    lb_Vorname.Text = "Vorname:";
+                    lb_Nachname.Text = "Nachname:";
+                    lb_geburtsdatum.Text = "Geburtsdatum:";
+                    lb_Strasse.Text = "Strasse:";
+                    lb_Ort.Text = "Wohnort:";
+                    lb_Hausnummer.Text = "Hausnummer:";
+                    lb_Postleitzahl.Text = "Postleitzahl:";
+                }
             }
         }
 
@@ -326,7 +391,7 @@ namespace Bibo_Verwaltung
             tb_KundenID.Text = kunde.KundenID;
             tb_Vorname.Text = kunde.Vorname;
             tb_Nachname.Text = kunde.Nachname;
-            dTP_gd.Value = kunde.Gd;
+            mdtp_GebDat.Value = kunde.Gd;
             tb_Strasse.Text = kunde.Strasse;
             tb_Hausnummer.Text = kunde.Hausnummer;
             tb_Postleitzahl.Text = kunde.Postleitzahl;
@@ -695,7 +760,7 @@ namespace Bibo_Verwaltung
                 backgroundWorker1.RunWorkerAsync();
             }
         }
-        
+
         private void gv_faecher_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -703,15 +768,11 @@ namespace Bibo_Verwaltung
                 DataGridViewRow row = this.gv_faecher.Rows[e.RowIndex];
                 if (gv_faecher.Rows[e.RowIndex].DefaultCellStyle.BackColor != Color.Yellow)
                 {
-                    if (row.Cells["Kurzbezeichnung"].Value.ToString() != "")
+                    if (row.Cells["Kürzel"].Value.ToString() != "")
                     {
                         kunde.Fach = new Fach(row.Cells["ID"].Value.ToString());
-                        //CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[gv_faecher.DataSource];
-                        //currencyManager1.SuspendBinding();
-                        //gv_faecher.Rows[e.RowIndex].Visible = false;
                         row.DefaultCellStyle.BackColor = Color.Yellow;
                         row.DefaultCellStyle.SelectionBackColor = Color.Gold;
-                        //currencyManager1.ResumeBinding();
                         gv_result.Rows.Add(kunde.Fach.FachKurz, kunde.Fach.FachID);
                     }
                 }
@@ -737,7 +798,7 @@ namespace Bibo_Verwaltung
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.gv_result.Rows[e.RowIndex];
-                if (row.Cells["Kurzbezeichnung"].Value != null && !row.Cells["Kurzbezeichnung"].Value.Equals(""))
+                if (row.Cells["Kürzel"].Value != null && !row.Cells["Kürzel"].Value.Equals(""))
                 {
                     kunde.Fach = new Fach(row.Cells["ID"].Value.ToString());
                     if (row.DefaultCellStyle.BackColor == Color.Yellow)
@@ -751,12 +812,8 @@ namespace Bibo_Verwaltung
                         DataGridViewRow gvRow = gv_faecher.Rows[i];
                         if (gvRow.Cells["ID"].Value.ToString() == kunde.Fach.FachID)
                         {
-                            //CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[gv_faecher.DataSource];
-                            //currencyManager1.SuspendBinding();
-                            //gv_faecher.Rows[i].Visible = true;
                             gvRow.DefaultCellStyle.BackColor = Color.White;
                             gvRow.DefaultCellStyle.SelectionBackColor = gv_result.DefaultCellStyle.SelectionBackColor;
-                            //currencyManager1.ResumeBinding();
                             i = gv_faecher.Rows.Count;
                         }
                     }
@@ -774,14 +831,14 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
-                    gv_result.SelectedRows[0].Cells["Kurzbezeichnung"].Value = "*" + gv_result.SelectedRows[0].Cells["Kurzbezeichnung"].Value.ToString();
+                    gv_result.SelectedRows[0].Cells["Kürzel"].Value = "*" + gv_result.SelectedRows[0].Cells["Kürzel"].Value.ToString();
                     gv_result.SelectedRows[0].DefaultCellStyle.BackColor = Color.Yellow;
                     kunde.Leistungskurse++;
                 }
             }
             else
             {
-                gv_result.SelectedRows[0].Cells["Kurzbezeichnung"].Value = gv_result.SelectedRows[0].Cells["Kurzbezeichnung"].Value.ToString().Substring(1);
+                gv_result.SelectedRows[0].Cells["Kürzel"].Value = gv_result.SelectedRows[0].Cells["Kürzel"].Value.ToString().Substring(1);
                 gv_result.SelectedRows[0].DefaultCellStyle.BackColor = Color.White;
                 kunde.Leistungskurse--;
             }
@@ -809,15 +866,15 @@ namespace Bibo_Verwaltung
 
         private void rb_alles_CheckedChanged(object sender, EventArgs e)
         {
-            if (rb_alles.Checked)
+            if (rb_FilterAlles.Checked)
             {
                 (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
             }
-            else if (rb_schueler.Checked)
+            else if (rb_FilterSchueler.Checked)
             {
                 (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%' AND Klasse NOT LIKE '{9}'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, "");
             }
-            else if (rb_andere.Checked)
+            else if (rb_FilterAndere.Checked)
             {
                 (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%' AND Klasse LIKE '{9}'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, "");
             }
@@ -857,7 +914,6 @@ namespace Bibo_Verwaltung
                     errors++;
                 }
             }
-            //kunde.FillGrid(ref gv_Kunde);
             if (!backgroundWorker1.IsBusy)
             {
                 backgroundWorker1.RunWorkerAsync();
@@ -881,26 +937,29 @@ namespace Bibo_Verwaltung
 
         private void gv_Kunde_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
+            if (new Benutzer(currentUser).Rechteid != "0")
             {
-                if (!gv_Kunde.Rows[e.RowIndex].Selected)
+                if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
                 {
-                    gv_Kunde.ClearSelection();
-                    gv_Kunde.Rows[e.RowIndex].Selected = true;
-                }
-                if (gv_Kunde.SelectedRows.Count > 1)
-                {
-                    kundeBearbeitenToolStripMenuItem.Text = "Ausgewählten Kunden bearbeiten";
-                    kundeBearbeitenToolStripMenuItem.Enabled = false;
-                    kundeEntfernenToolStripMenuItem.Text = "Ausgewählte Kunden entfernen (" + gv_Kunde.SelectedRows.Count + ")";
-                    kundeEntfernenToolStripMenuItem.Enabled = true;
-                }
-                else
-                {
-                    kundeBearbeitenToolStripMenuItem.Text = "Ausgewählten Kunden bearbeiten";
-                    kundeBearbeitenToolStripMenuItem.Enabled = true;
-                    kundeEntfernenToolStripMenuItem.Text = "Ausgewählten Kunden entfernen";
-                    kundeEntfernenToolStripMenuItem.Enabled = true;
+                    if (!gv_Kunde.Rows[e.RowIndex].Selected)
+                    {
+                        gv_Kunde.ClearSelection();
+                        gv_Kunde.Rows[e.RowIndex].Selected = true;
+                    }
+                    if (gv_Kunde.SelectedRows.Count > 1)
+                    {
+                        kundeBearbeitenToolStripMenuItem.Text = "Ausgewählten Kunden bearbeiten";
+                        kundeBearbeitenToolStripMenuItem.Enabled = false;
+                        kundeEntfernenToolStripMenuItem.Text = "Ausgewählte Kunden entfernen (" + gv_Kunde.SelectedRows.Count + ")";
+                        kundeEntfernenToolStripMenuItem.Enabled = true;
+                    }
+                    else
+                    {
+                        kundeBearbeitenToolStripMenuItem.Text = "Ausgewählten Kunden bearbeiten";
+                        kundeBearbeitenToolStripMenuItem.Enabled = true;
+                        kundeEntfernenToolStripMenuItem.Text = "Ausgewählten Kunden entfernen";
+                        kundeEntfernenToolStripMenuItem.Enabled = true;
+                    }
                 }
             }
         }
@@ -916,7 +975,6 @@ namespace Bibo_Verwaltung
                     try
                     {
                         kunde.DeactivateAllSchueler();
-                        //kunde.FillGrid(ref gv_Kunde);
                         if (!backgroundWorker1.IsBusy)
                         {
                             backgroundWorker1.RunWorkerAsync();
@@ -965,7 +1023,7 @@ namespace Bibo_Verwaltung
             DataTable dtFach = new DataTable();
             kunde.Fach.FillDT(ref dtFach);
             var dtKunde = mgKunde.DataSource;
-            while(loaded == false)
+            while (loaded == false)
             {
 
             }
@@ -998,7 +1056,6 @@ namespace Bibo_Verwaltung
             }
             catch { }
         }
-        #endregion
 
         private void BackgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
@@ -1010,5 +1067,12 @@ namespace Bibo_Verwaltung
         {
             loaded = true;
         }
+
+        private void Mbt_Export_Click(object sender, EventArgs e)
+        {
+            ExcelExport export = new ExcelExport();
+            export.ExportAsCSV(gv_Kunde);
+        }
+        #endregion
     }
 }

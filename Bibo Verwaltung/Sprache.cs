@@ -12,6 +12,12 @@ namespace Bibo_Verwaltung
 {
     class Sprache
     {
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
+        SqlCommandBuilder comb = new SqlCommandBuilder();
+        SQL_Verbindung con = new SQL_Verbindung();
+
         #region Sprache Eigenschaften
         string spracheid;
         /// <summary>
@@ -58,12 +64,6 @@ namespace Bibo_Verwaltung
             dr.Close();
             con.Close();
         }
-
-        SqlDataAdapter adapter = new SqlDataAdapter();
-        DataSet ds = new DataSet();
-        DataTable dt = new DataTable();
-        SqlCommandBuilder comb = new SqlCommandBuilder();
-        SQL_Verbindung con = new SQL_Verbindung();
 
         /// <summary>
         /// Füllt ein DataSet mit Sprachdaten 
@@ -114,6 +114,22 @@ namespace Bibo_Verwaltung
             grid.DataSource = ds.Tables[0];
             grid.Columns[0].Visible = false;
             grid.Columns["sprach_name"].HeaderText = "Bezeichnung";
+        }
+
+        /// <summary>
+        /// Prüft die Daten aus einen DataGridView-Objekt auf Veränderungen 
+        /// </summary>
+        public bool GetChangesGrid(ref MetroGrid grid)
+        {
+            DataSet changes = ds.GetChanges();
+            if (changes != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>

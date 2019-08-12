@@ -280,6 +280,7 @@
             this.Name = "w_s_klasse_stufe";
             this.Padding = new System.Windows.Forms.Padding(15, 60, 15, 16);
             this.Resizable = false;
+            this.ShowInTaskbar = false;
             this.Style = MetroFramework.MetroColorStyle.Orange;
             this.Text = "Zuordnung der Klassen zu einer Klassenstufe";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_klassenstufe_FormClosing);

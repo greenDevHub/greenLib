@@ -295,6 +295,7 @@
             this.MaximizeBox = false;
             this.Name = "w_s_buch_fach";
             this.Resizable = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Orange;
             this.Text = "Zuordnung der Bücher zu einem Fach";

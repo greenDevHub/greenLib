@@ -106,6 +106,7 @@
             this.tb_user.MaxLength = 32767;
             this.tb_user.Name = "tb_user";
             this.tb_user.PasswordChar = '\0';
+            this.tb_user.PromptText = "Benutzername";
             this.tb_user.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_user.SelectedText = "";
             this.tb_user.SelectionLength = 0;
@@ -139,6 +140,7 @@
             this.tb_pw.MaxLength = 32767;
             this.tb_pw.Name = "tb_pw";
             this.tb_pw.PasswordChar = '●';
+            this.tb_pw.PromptText = "Passwort";
             this.tb_pw.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_pw.SelectedText = "";
             this.tb_pw.SelectionLength = 0;
@@ -356,6 +358,7 @@
             this.MaximizeBox = false;
             this.Name = "w_s_user";
             this.Resizable = false;
+            this.ShowInTaskbar = false;
             this.Style = MetroFramework.MetroColorStyle.Teal;
             this.Text = "Benutzerverwaltung";
             ((System.ComponentModel.ISupportInitialize)(this.gv_Benutzer)).EndInit();

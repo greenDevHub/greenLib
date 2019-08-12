@@ -12,6 +12,12 @@ namespace Bibo_Verwaltung
 {
     class Verlag
     {
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
+        SqlCommandBuilder comb = new SqlCommandBuilder();
+        SQL_Verbindung con = new SQL_Verbindung();
+
         #region Verlag Eigenschafen
         string verlagid;
         /// <summary>
@@ -37,35 +43,33 @@ namespace Bibo_Verwaltung
         public Verlag(string verlagid)
         {
             this.verlagid = verlagid;
-            Load();
+            LoadVerlag();
             FillObject();
         }
         #endregion
 
-        #region Load
-        private void Load()
+        /// <summary>
+        /// Lädt die Verlagsdaten eines Verlags
+        /// </summary>
+        private void LoadVerlag()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
             string RawCommand = "SELECT * FROM [dbo].[t_s_verlag] WHERE ver_id = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, verlagid);
-            // Einlesen der Datenzeilen und Ausgabe an der Konsole 
             while (dr.Read())
             {
                 VerlagID = dr["ver_id"].ToString();
                 Verlagname = dr["ver_name"].ToString();
             }
-            // DataReader schließen 
             dr.Close();
-            // Verbindung schließen 
             con.Close();
         }
-        #endregion
 
-        #region Add
-        public void Add(string verlag)
+        /// <summary>
+        /// Fügt einen Verlag der Datenbank hinzu 
+        /// </summary>
+        public void AddVerlag(string verlag)
         {
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
             string RawCommand = "INSERT INTO [dbo].[t_s_verlag] (ver_name) VALUES (@0)";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
@@ -73,12 +77,12 @@ namespace Bibo_Verwaltung
             cmd.ExecuteNonQuery();
             con.Close();
         }
-        #endregion
 
-        #region GetID
-        public string GetID(string verlag)
+        /// <summary>
+        /// Gibt die ID eines Verlags zurück
+        /// </summary>
+        public string GetVerlagsID(string verlag)
         {
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return "";
             string RawCommand = "SELECT ver_id FROM [dbo].[t_s_verlag] WHERE ver_name = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, verlag);
@@ -90,49 +94,83 @@ namespace Bibo_Verwaltung
             con.Close();
             return VerlagID;
         }
-        #endregion
 
-        #region Fill Object
-        SqlDataAdapter adapter = new SqlDataAdapter();
-        DataSet ds = new DataSet();
-        DataTable dt = new DataTable();
-        SqlCommandBuilder comb = new SqlCommandBuilder();
+        /// <summary>
+        /// Füllt ein DataSet mit Verlagsdaten 
+        /// </summary>
         private void FillObject()
         {
-            dt.Clear();
-            SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
             string RawCommand = "SELECT * FROM [dbo].[t_s_verlag]";
-
-            // Verbindung öffnen 
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
             adapter.Fill(dt);
             con.Close();
         }
+
         public bool IfContains(string value)
         {
             bool contains = dt.AsEnumerable().Any(row => value == row.Field<String>("ver_name"));
             return contains;
         }
+
+        /// <summary>
+        /// Entfernt den gesamten Inhalt im DataSet 
+        /// </summary>
+        private void ClearDataSource()
+        {
+            try
+            {
+                ds.Tables[0].Rows.Clear();
+                dt.Clear();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Füllt eine ComoBox mit Verlagsdaten 
+        /// </summary>
         public void FillCombobox(ref AdvancedComboBox cb, object value)
         {
+            ClearDataSource();
             FillObject();
             cb.DataSource = dt;
             cb.ValueMember = "ver_id";
             cb.DisplayMember = "ver_name";
             cb.SelectedValue = value;
         }
-  
+
+        /// <summary>
+        /// Füllt ein DataGridView-Objekt mit Verlagsdaten 
+        /// </summary>
         public void FillGrid(ref MetroGrid grid, object value = null)
         {
+            ClearDataSource();
+            FillObject();
             grid.DataSource = ds.Tables[0];
             grid.Columns[0].Visible = false;
             grid.Columns["ver_name"].HeaderText = "Bezeichnung";
         }
-        #endregion
 
-        #region Speichern Grid
+        /// <summary>
+        /// Prüft die Daten aus einen DataGridView-Objekt auf Veränderungen 
+        /// </summary>
+        public bool GetChangesGrid(ref MetroGrid grid)
+        {
+            DataSet changes = ds.GetChanges();
+            if (changes != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Speichert die Daten aus einen DataGridView-Objekt in die Datenbank 
+        /// </summary>
         public void SaveGrid(ref MetroGrid grid)
         {
             comb = new SqlCommandBuilder(adapter);
@@ -142,6 +180,5 @@ namespace Bibo_Verwaltung
                 adapter.Update(changes);
             }
         }
-        #endregion
     }
 }

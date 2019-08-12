@@ -44,9 +44,9 @@
             this.bt_Test = new MetroFramework.Controls.MetroButton();
             this.bt_Save = new MetroFramework.Controls.MetroButton();
             this.bt_Clear = new MetroFramework.Controls.MetroButton();
+            this.bt_close = new MetroFramework.Controls.MetroButton();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.metroLink1 = new MetroFramework.Controls.MetroLink();
-            this.bt_close = new MetroFramework.Controls.MetroButton();
             this.tLP_Top.SuspendLayout();
             this.tLP_2.SuspendLayout();
             this.SuspendLayout();
@@ -82,7 +82,7 @@
             this.lb_Server.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Server.Name = "lb_Server";
             this.helpProvider.SetShowHelp(this.lb_Server, true);
-            this.lb_Server.Size = new System.Drawing.Size(146, 20);
+            this.lb_Server.Size = new System.Drawing.Size(146, 19);
             this.lb_Server.TabIndex = 3;
             this.lb_Server.Text = "Server:";
             // 
@@ -133,7 +133,7 @@
             this.lb_Database.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Database.Name = "lb_Database";
             this.helpProvider.SetShowHelp(this.lb_Database, true);
-            this.lb_Database.Size = new System.Drawing.Size(146, 20);
+            this.lb_Database.Size = new System.Drawing.Size(146, 19);
             this.lb_Database.TabIndex = 7;
             this.lb_Database.Text = "Datenbank:";
             // 
@@ -185,7 +185,7 @@
             this.lb_Security.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Security.Name = "lb_Security";
             this.helpProvider.SetShowHelp(this.lb_Security, true);
-            this.lb_Security.Size = new System.Drawing.Size(146, 20);
+            this.lb_Security.Size = new System.Drawing.Size(146, 19);
             this.lb_Security.TabIndex = 8;
             this.lb_Security.Text = "Sicherheit:";
             // 
@@ -196,7 +196,7 @@
             this.lb_Passwort.Location = new System.Drawing.Point(3, 123);
             this.lb_Passwort.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Passwort.Name = "lb_Passwort";
-            this.lb_Passwort.Size = new System.Drawing.Size(146, 20);
+            this.lb_Passwort.Size = new System.Drawing.Size(146, 19);
             this.lb_Passwort.TabIndex = 13;
             this.lb_Passwort.Text = "Passwort:";
             // 
@@ -246,7 +246,7 @@
             this.lb_Benutzername.Location = new System.Drawing.Point(3, 93);
             this.lb_Benutzername.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Benutzername.Name = "lb_Benutzername";
-            this.lb_Benutzername.Size = new System.Drawing.Size(146, 20);
+            this.lb_Benutzername.Size = new System.Drawing.Size(146, 19);
             this.lb_Benutzername.TabIndex = 10;
             this.lb_Benutzername.Text = "Benutzername:";
             // 
@@ -398,16 +398,6 @@
             this.bt_Clear.UseSelectable = true;
             this.bt_Clear.Click += new System.EventHandler(this.ClearAll);
             // 
-            // metroLink1
-            // 
-            this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Settings64;
-            this.metroLink1.ImageSize = 32;
-            this.metroLink1.Location = new System.Drawing.Point(23, 19);
-            this.metroLink1.Name = "metroLink1";
-            this.metroLink1.Size = new System.Drawing.Size(32, 34);
-            this.metroLink1.TabIndex = 19;
-            this.metroLink1.UseSelectable = true;
-            // 
             // bt_close
             // 
             this.bt_close.Dock = System.Windows.Forms.DockStyle.Right;
@@ -421,6 +411,16 @@
             this.bt_close.Text = "Schließen";
             this.bt_close.UseSelectable = true;
             this.bt_close.Click += new System.EventHandler(this.Bt_close_Click);
+            // 
+            // metroLink1
+            // 
+            this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Settings64;
+            this.metroLink1.ImageSize = 32;
+            this.metroLink1.Location = new System.Drawing.Point(23, 19);
+            this.metroLink1.Name = "metroLink1";
+            this.metroLink1.Size = new System.Drawing.Size(32, 34);
+            this.metroLink1.TabIndex = 19;
+            this.metroLink1.UseSelectable = true;
             // 
             // w_s_einstellungen
             // 

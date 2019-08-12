@@ -12,110 +12,55 @@ namespace Bibo_Verwaltung
 {
     class ExcelExport
     {
-        #region ExcelExport
-        public void ToExcel(DataGridView dGV)
+        Protokoll log = new Protokoll();
+
+        public void ExportAsCSV(DataGridView grid)
         {
-            try
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "CSV|*.csv";
+            dialog.Title = "Als Tabelle abspeichern";
+            dialog.ShowDialog();
+            if (dialog.FileName != "")
             {
-                SaveFileDialog dialog = new SaveFileDialog();
-                dialog.Filter = "CSV|*.csv";
-                dialog.Title = "Als Tabelle abspeichern";
-                dialog.ShowDialog();
-
-                //Überprüfen, ob Filename vergeben wurde
-                if (dialog.FileName != "")
+                try
                 {
-                    //Überprüfen, ob Rows vorhanden sind
-                    if (dGV.RowCount > 0)
+                    StreamWriter csvFileWriter = new StreamWriter(dialog.FileName, false);
+                    //ColumnHeader schreiben
+                    string columnHeaderText = "";
+                    int countColumn = grid.ColumnCount - 1;
+                    if (countColumn >= 0)
                     {
-                        string value = "";
-                        DataGridViewRow dr = new DataGridViewRow();
-                        StreamWriter sw = new StreamWriter(dialog.FileName);
-                        
-                        //Head Rows schreiben
-                        for (int i = 0; i <= dGV.Columns.Count - 1; i++)
-                        {
-                            if (i > 0)
-                            {
-                                sw.Write(";");
-                            }
-                            sw.Write(dGV.Columns[i].HeaderText);
-                        }
-
-                        sw.WriteLine();
-                        //Rows aus dGV in csv
-                        for (int j = 0; j <= dGV.Rows.Count - 1; j++)
-                        {
-                            if (j > 0)
-                            {
-                                sw.WriteLine();
-                            }
-
-                            dr = dGV.Rows[j];
-
-                            for (int i = 0; i <= dGV.Columns.Count - 1; i++)
-                            {
-                                if (i > 0)
-                                {
-                                    sw.Write(";");
-                                }
-
-                                value = dr.Cells[i].Value.ToString();
-                                //Replace
-                                value = value.Replace(',', ' ');
-                                value = value.Replace(Environment.NewLine, " ");
-
-                                sw.Write(value);
-                            }
-                        }
-                        sw.Close();
-                        MessageBox.Show("Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        columnHeaderText = grid.Columns[0].HeaderText;
                     }
+                    for (int i = 1; i <= countColumn; i++)
+                    {
+                        columnHeaderText = columnHeaderText + ';' + grid.Columns[i].HeaderText;
+                    }
+                    csvFileWriter.WriteLine(columnHeaderText);
+                    //Rows schreiben
+                    foreach (DataGridViewRow row in grid.Rows)
+                    {
+                        if (!row.IsNewRow)
+                        {
+                            string dataFromGrid = "";
+                            dataFromGrid = row.Cells[0].Value.ToString();
+                            for (int i = 1; i <= countColumn; i++)
+                            {
+                                dataFromGrid = dataFromGrid + ';' + row.Cells[i].Value.ToString();
+                            }
+                            csvFileWriter.WriteLine(dataFromGrid);
+                        }
+                    }
+                    csvFileWriter.Flush();
+                    csvFileWriter.Close();
+                }
+                catch (Exception exceptionObject)
+                {
+                    log.CreateReport(exceptionObject);
                 }
             }
-            catch
-            {
-                MessageBox.Show("Beim Exportvorgang ist ein unbekannter Fehler aufgetreten!", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
         }
-        #endregion
-
-        #region Alter Export
-        /*
-        Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
-        Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
-        Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
-        worksheet = workbook.Sheets["Tabelle1"];
-        worksheet = workbook.ActiveSheet;
-        worksheet.Name = tabellenname;
-
-        for (int i = 1; i < dGV.Columns.Count + 1; i++)
-        {
-            worksheet.Cells[1, i] = dGV.Columns[i - 1].HeaderText;
-
-        }
-
-        for (int i = 0; i < dGV.Rows.Count; i++)
-        {
-            for (int j = 0; j < dGV.Columns.Count; j++)
-            {
-                worksheet.Cells[i + 2, j + 1] = dGV.Rows[i].Cells[j].Value.ToString();
-            }
-        }
-
-        var SpeichernDialog = new SaveFileDialog();
-        SpeichernDialog.FileName = filename;
-         SpeichernDialog.DefaultExt = ".xlsx";
-        if (SpeichernDialog.ShowDialog() == DialogResult.OK)
-        {
-            workbook.SaveAs(SpeichernDialog.FileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-
-        }
-        */
-
     }
+}
 
-        #endregion
-    }
 
-    

@@ -157,6 +157,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Protokoll.cs" />
     <Compile Include="Schuelerimport.cs" />
     <Compile Include="Schueler.cs" />
     <Compile Include="Screenshot.cs" />
@@ -216,6 +217,12 @@
     </Compile>
     <Compile Include="w_s_login.designer.cs">
       <DependentUpon>w_s_login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="w_s_manage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_manage.Designer.cs">
+      <DependentUpon>w_s_manage.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_schueler.cs">
       <SubType>Form</SubType>
@@ -398,6 +405,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_login.resx">
       <DependentUpon>w_s_login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="w_s_manage.resx">
+      <DependentUpon>w_s_manage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_rueckgabe.resx">
       <DependentUpon>w_s_rueckgabe.cs</DependentUpon>

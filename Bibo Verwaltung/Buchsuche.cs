@@ -28,6 +28,7 @@ namespace Bibo_Verwaltung
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
         SqlCommandBuilder comb = new SqlCommandBuilder();
+        Protokoll log = new Protokoll();
 
         DateTime dt = new DateTime();
         DateTime now = new DateTime();
@@ -58,7 +59,10 @@ namespace Bibo_Verwaltung
                 ds.Tables[0].Rows.Clear();
                 ds.Reset();
             }
-            catch { }
+            catch (Exception exceptionObject)
+            {
+                log.CreateReport(exceptionObject);
+            }
         }
 
         /// <summary>
@@ -82,7 +86,6 @@ namespace Bibo_Verwaltung
             try
             {
                 now = DateTime.Today;
-
                 for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
                 {
                     DataGridViewRow row = grid.Rows[i];
@@ -117,7 +120,10 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
-            catch { }    
+            catch (Exception exceptionObject)
+            {
+                log.CreateReport(exceptionObject);
+            }
         }
         public void Set_StatusMarkNew(ref MetroGrid grid, ref List<int> BackRedForeBlack, ref List<int> BackYellowForeBlack, ref List<int> BackLimeForeBlack, ref List<int> BackBlackForeWhite, List<string> blackList)
         {
@@ -163,7 +169,10 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
-            catch { }
+            catch (Exception exceptionObject)
+            {
+                log.CreateReport(exceptionObject);
+            }
         }
 
         /// <summary>
@@ -200,7 +209,10 @@ namespace Bibo_Verwaltung
                 grid.Columns["Klasse"].Visible = true;
                 grid.Columns["Kunden ID"].Visible = false;
             }
-            catch { }
+            catch (Exception exceptionObject)
+            {
+                log.CreateReport(exceptionObject);
+            }
         }
 
         /// <summary>
@@ -215,7 +227,10 @@ namespace Bibo_Verwaltung
                 grid.Columns["Nachname"].Visible = false;
                 grid.Columns["Klasse"].Visible = false;
             }
-            catch { }
+            catch (Exception exceptionObject)
+            {
+                log.CreateReport(exceptionObject);
+            }
         }
 
         /// <summary>
@@ -228,7 +243,10 @@ namespace Bibo_Verwaltung
                 ds.Tables[0].DefaultView.RowFilter = string.Format("Rückgabedatum > '{0}'", DateTime.Now.Date.ToShortDateString());
                 grid.Refresh();
             }
-            catch { }
+            catch (Exception exceptionObject)
+            {
+                log.CreateReport(exceptionObject);
+            }
         }
 
         /// <summary>
@@ -241,7 +259,10 @@ namespace Bibo_Verwaltung
                 ds.Tables[0].DefaultView.RowFilter = string.Format("Rückgabedatum < '{0}'", DateTime.Now.Date.ToShortDateString());
                 grid.Refresh();
             }
-            catch { }
+            catch (Exception exceptionObject)
+            {
+                log.CreateReport(exceptionObject);
+            }
         }
 
         /// <summary>
@@ -254,7 +275,10 @@ namespace Bibo_Verwaltung
                 ds.Tables[0].DefaultView.RowFilter = string.Format("Rückgabedatum = '{0}'", DateTime.Now.Date.ToShortDateString());
                 grid.Refresh();
             }
-            catch { }
+            catch (Exception exceptionObject)
+            {
+                log.CreateReport(exceptionObject);
+            }
         }
 
         /// <summary>
@@ -267,7 +291,10 @@ namespace Bibo_Verwaltung
                 ds.Tables[0].DefaultView.RowFilter = string.Format("Leihnummer IS NULL");
                 grid.Refresh();
             }
-            catch { }
+            catch (Exception exceptionObject)
+            {
+                log.CreateReport(exceptionObject);
+            }
         }
 
         /// <summary>
@@ -280,7 +307,10 @@ namespace Bibo_Verwaltung
                 ds.Tables[0].DefaultView.RowFilter = string.Format("ExemplarID IS NOT NULL");
                 grid.Refresh();
             }
-            catch { }
+            catch (Exception exceptionObject)
+            {
+                log.CreateReport(exceptionObject);
+            }
         }
 
         /// <summary>
@@ -318,7 +348,10 @@ namespace Bibo_Verwaltung
                 ds.Tables[0].DefaultView.RowFilter = string.Format("ExemplarID LIKE '{0}%' AND ISBN LIKE '{1}%' AND Titel LIKE '{2}%' AND Verlag LIKE '{3}%' AND Genre LIKE '{4}%'", ExemplarID, ISBN, Titel, Verlag, Genre);
                 grid.Refresh();
             }
-            catch { }
+            catch (Exception exceptionObject)
+            {
+                log.CreateReport(exceptionObject);
+            }
         }
 
         /// <summary>
@@ -343,7 +376,10 @@ namespace Bibo_Verwaltung
                 ds.Tables[0].DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%' AND Nachname LIKE '{1}%' AND Klasse LIKE '{2}%'", vorname, nachname, klasse);
                 grid.Refresh();
             }
-            catch { }
+            catch (Exception exceptionObject)
+            {
+                log.CreateReport(exceptionObject);
+            }
         }
     }
 }

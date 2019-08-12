@@ -20,25 +20,48 @@ namespace Bibo_Verwaltung
         public w_s_rueckgabe(string userName)
         {
             InitializeComponent();
+            Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName;
-            zustand.FillCombobox(ref cb_Zustand, -1);
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+            if (user.Rechteid.Equals("0"))
+            {
+                bt_AddBuch.Enabled = false;
+                bt_Zu_aendern.Enabled = false;
+                bt_Rueckgabe.Enabled = false;
+            }
+            else
+            {
+                bt_AddBuch.Enabled = true;
+                bt_Zu_aendern.Enabled = true;
+                bt_Rueckgabe.Enabled = true;
+                zustand.FillCombobox(ref cb_Zustand, -1);
+            }
         }
 
         public w_s_rueckgabe(string userName, string[] list)
         {
             InitializeComponent();
+            Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName;
-            zustand.FillCombobox(ref cb_Zustand, -1);
-            foreach(string s in list)
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+            if (user.Rechteid.Equals("0"))
             {
-                tb_BuchCode.Text = s;
-                EnterBuch();
+                bt_AddBuch.Enabled = false;
+                bt_Zu_aendern.Enabled = false;
+                bt_Rueckgabe.Enabled = false;
             }
-
-            //rueckgabe.FillRueckListe(list);
-            //rueckgabe.SetSlider(ref rueckList_Slider, ref tb_listVon, ref tb_listBis);
+            else
+            {
+                bt_AddBuch.Enabled = true;
+                bt_Zu_aendern.Enabled = true;
+                bt_Rueckgabe.Enabled = true;
+                zustand.FillCombobox(ref cb_Zustand, -1);
+                foreach (string exemplar in list)
+                {
+                    tb_BuchCode.Text = exemplar;
+                    EnterBuch();
+                }
+            }
         }
         #endregion
 
@@ -232,7 +255,7 @@ namespace Bibo_Verwaltung
                         }
                         rueckgabe.Verfuegbar = buch_exemplar.IsSpecificAvailable();
                         llb_BuchTitel.Enabled = true;
-                        llb_BuchTitel.Text = rueckgabe.TrimText(new Buch(buch_exemplar.ISBN).Titel, 30);                        
+                        llb_BuchTitel.Text = rueckgabe.TrimText(new Buch(buch_exemplar.ISBN).Titel, 30);
                         cb_Zustand.SelectedValue = buch_exemplar.Zustand.ZustandID;
                         rueckgabe.ZustandStart = buch_exemplar.Zustand.Zustandname;
                         rueckgabe.ZustandEnde = buch_exemplar.Zustand.Zustandname;
@@ -343,36 +366,21 @@ namespace Bibo_Verwaltung
                     foreach (DataRow row in rueckgabe.RueckListe.Rows)
                     {
                         rueckgabe.Load_Info(row[0].ToString());
-                        rueckgabe.Execute_Rueckgabe(row[0].ToString(), rueckgabe.KID, row[1].ToString(), zustand.GetID(row[2].ToString()), row[2].ToString(), rueckgabe.Leihdatum.ToShortDateString(), DateTime.Now.Date.ToShortDateString());
+                        rueckgabe.Execute_Rueckgabe(row[0].ToString(), rueckgabe.KID, row[1].ToString(), zustand.GetZustandsID(row[2].ToString()), row[2].ToString(), rueckgabe.Leihdatum.ToShortDateString(), DateTime.Now.Date.ToShortDateString());
                     }
-                    MetroMessageBox.Show(this,"Die Buchrückgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MetroMessageBox.Show(this, "Die Buchrückgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch
                 {
-                    MetroMessageBox.Show(this,"Die Buchrückgabe konnte nicht abgeschlossen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this, "Die Buchrückgabe konnte nicht abgeschlossen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 rueckgabe.ClearRueckList();
-                rueckgabe.SetSlider(ref rueckList_Slider, ref tb_listVon, ref tb_listBis);              
+                rueckgabe.SetSlider(ref rueckList_Slider, ref tb_listVon, ref tb_listBis);
                 tb_BuchCode.Text = "";
                 tb_BuchCode.Focus();
             }
         }
         #endregion
-
-        private void PrintTable(DataTable table)
-        {
-            foreach (DataRow row in table.Rows)
-            {
-                foreach (DataColumn column in table.Columns)
-                {
-                    Console.Write(row[column]);
-                    Console.Write(" | ");
-                }
-                Console.WriteLine(";");
-                Console.WriteLine("####################################################################################################");
-            }
-            Console.WriteLine("END");
-        }
 
         #region Componenten-Aktionen
         private void tb_BuchCode_TextChanged(object sender, EventArgs e)
@@ -421,31 +429,36 @@ namespace Bibo_Verwaltung
 
         private void bt_open_Click(object sender, EventArgs e)
         {
-            Form Zustand = new w_s_zustand();
+            Form Zustand = new w_s_manage(currentUser, "Zustand");
             Zustand.ShowDialog(this);
-            zustand.FillCombobox(ref cb_Zustand, -1);
+            if (!new Benutzer(currentUser).Rechteid.Equals("0"))
+            {
+                zustand.FillCombobox(ref cb_Zustand, -1);
+            }
         }
 
         private void bt_AddBuch_Click(object sender, EventArgs e)
         {
             EnterBuch();
-        }    
+        }
 
         private void Tb_BuchCode_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)13)
+            if (!new Benutzer(currentUser).Rechteid.Equals("0"))
             {
-                EnterBuch();
+                if (e.KeyChar == (char)13)
+                {
+                    EnterBuch();
+                }
             }
         }
-        #endregion
 
         private void Llb_gesListe_Click(object sender, EventArgs e)
         {
             MetroMessageBox.Show(this, rueckgabe.GetListInfo(), "Information", MessageBoxButtons.OK, MessageBoxIcon.Information, (150 + rueckgabe.RueckListe.Rows.Count * 15));
         }
 
-        private void LeihList_Slider_ValueChanged(object sender, EventArgs e)
+        private void RueckList_Slider_ValueChanged(object sender, EventArgs e)
         {
             tb_listVon.Text = rueckList_Slider.Value.ToString();
             tb_listBis.Text = rueckList_Slider.Maximum.ToString();
@@ -490,5 +503,6 @@ namespace Bibo_Verwaltung
             tb_BuchCode.Focus();
             tb_BuchCode.SelectAll();
         }
+        #endregion
     }
 }
