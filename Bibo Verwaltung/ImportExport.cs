@@ -375,76 +375,76 @@ namespace Bibo_Verwaltung
 
         //TODO
         #region ExcelExport
-        private void createExcelFile(DataGridView grid)
-        {
-            try
-            {
-                SaveFileDialog dialog = new SaveFileDialog();
-                dialog.Filter = "CSV|*.csv";
-                dialog.Title = "Als Tabelle abspeichern";
-                dialog.ShowDialog();
+        //private void createExcelFile(DataGridView grid)
+        //{
+        //    try
+        //    {
+        //        SaveFileDialog dialog = new SaveFileDialog();
+        //        dialog.Filter = "CSV|*.csv";
+        //        dialog.Title = "Als Tabelle abspeichern";
+        //        dialog.ShowDialog();
 
-                //Überprüfen, ob Filename vergeben wurde
-                if (dialog.FileName != "")
-                {
-                    //Überprüfen, ob Rows vorhanden sind
-                    if (grid.RowCount > 0)
-                    {
-                        string value = "";
-                        DataGridViewRow dr = new DataGridViewRow();
-                        StreamWriter sw = new StreamWriter(dialog.FileName);
+        //        //Überprüfen, ob Filename vergeben wurde
+        //        if (dialog.FileName != "")
+        //        {
+        //            //Überprüfen, ob Rows vorhanden sind
+        //            if (grid.RowCount > 0)
+        //            {
+        //                string value = "";
+        //                DataGridViewRow dr = new DataGridViewRow();
+        //                StreamWriter sw = new StreamWriter(dialog.FileName);
 
-                        //Head Rows schreiben
-                        for (int i = 0; i <= grid.Columns.Count - 1; i++)
-                        {
-                            if (i > 0)
-                            {
-                                sw.Write(";");
-                            }
-                            sw.Write(grid.Columns[i].HeaderText);
-                        }
+        //                //Head Rows schreiben
+        //                for (int i = 0; i <= grid.Columns.Count - 1; i++)
+        //                {
+        //                    if (i > 0)
+        //                    {
+        //                        sw.Write(";");
+        //                    }
+        //                    sw.Write(grid.Columns[i].HeaderText);
+        //                }
 
-                        sw.WriteLine();
-                        //Rows aus grid in csv
-                        for (int j = 0; j <= grid.Rows.Count - 1; j++)
-                        {
-                            if (j > 0)
-                            {
-                                sw.WriteLine();
-                            }
+        //                sw.WriteLine();
+        //                //Rows aus grid in csv
+        //                for (int j = 0; j <= grid.Rows.Count - 1; j++)
+        //                {
+        //                    if (j > 0)
+        //                    {
+        //                        sw.WriteLine();
+        //                    }
 
-                            dr = grid.Rows[j];
+        //                    dr = grid.Rows[j];
 
-                            for (int i = 0; i <= grid.Columns.Count - 1; i++)
-                            {
-                                if (i > 0)
-                                {
-                                    sw.Write(";");
-                                }
+        //                    for (int i = 0; i <= grid.Columns.Count - 1; i++)
+        //                    {
+        //                        if (i > 0)
+        //                        {
+        //                            sw.Write(";");
+        //                        }
 
-                                value = dr.Cells[i].Value.ToString();
-                                //Replace
-                                value = value.Replace(',', ' ');
-                                value = value.Replace(Environment.NewLine, " ");
+        //                        value = dr.Cells[i].Value.ToString();
+        //                        //Replace
+        //                        value = value.Replace(',', ' ');
+        //                        value = value.Replace(Environment.NewLine, " ");
 
-                                sw.Write(value);
-                            }
-                        }
-                        sw.Close();
-                        MessageBox.Show("Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Beim Exportvorgang ist ein unbekannter Fehler aufgetreten!", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
+        //                        sw.Write(value);
+        //                    }
+        //                }
+        //                sw.Close();
+        //                MessageBox.Show("Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //            }
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        MessageBox.Show("Beim Exportvorgang ist ein unbekannter Fehler aufgetreten!", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //    }
+        //}
 
-        public void executeExport(ref DataGridView grid)
-        {
-            createExcelFile(grid);
-        }
+        //public void executeExport(ref DataGridView grid)
+        //{
+        //    createExcelFile(grid);
+        //}
         #endregion
 
         #region get SQL Columns

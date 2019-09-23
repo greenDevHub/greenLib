@@ -1,0 +1,776 @@
+﻿namespace Bibo_Verwaltung
+{
+    partial class w_s_exemplare
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_exemplare));
+            this.gv_Exemplare = new MetroFramework.Controls.MetroGrid();
+            this.contextMenuStrip = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.ladenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.entfernenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.barcodeDruckenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gb_BarcodeBox = new System.Windows.Forms.GroupBox();
+            this.mtb_Barcode = new MetroFramework.Controls.MetroTextBox();
+            this.BarcodeBox = new System.Windows.Forms.PictureBox();
+            this.mlb_barcode = new MetroFramework.Controls.MetroLabel();
+            this.bt_Print = new MetroFramework.Controls.MetroButton();
+            this.tb_ExempCount = new MetroFramework.Controls.MetroTextBox();
+            this.mlb_Vorhanden = new MetroFramework.Controls.MetroLabel();
+            this.mlb_ExempCount = new MetroFramework.Controls.MetroLabel();
+            this.tb_Vorhanden = new MetroFramework.Controls.MetroTextBox();
+            this.bt_Clear = new MetroFramework.Controls.MetroButton();
+            this.bt_zustand_add = new MetroFramework.Controls.MetroButton();
+            this.lb_Message = new MetroFramework.Controls.MetroTextBox();
+            this.bt_Add = new MetroFramework.Controls.MetroButton();
+            this.rb_delete = new MetroFramework.Controls.MetroRadioButton();
+            this.rb_edit = new MetroFramework.Controls.MetroRadioButton();
+            this.rb_neu = new MetroFramework.Controls.MetroRadioButton();
+            this.mlb_AufDat = new MetroFramework.Controls.MetroLabel();
+            this.mlb_Zustand = new MetroFramework.Controls.MetroLabel();
+            this.mlb_ID = new MetroFramework.Controls.MetroLabel();
+            this.mlb_ISBN = new MetroFramework.Controls.MetroLabel();
+            this.tb_ID = new MetroFramework.Controls.MetroTextBox();
+            this.tb_ISBN = new MetroFramework.Controls.MetroTextBox();
+            this.bt_Close = new MetroFramework.Controls.MetroButton();
+            this.mbt_Export = new MetroFramework.Controls.MetroButton();
+            this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.acb_Zustand = new Bibo_Verwaltung.AdvancedComboBox();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.dTP_AufDat = new MetroFramework.Controls.MetroDateTime();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.mbt_Import = new MetroFramework.Controls.MetroButton();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).BeginInit();
+            this.contextMenuStrip.SuspendLayout();
+            this.gb_BarcodeBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BarcodeBox)).BeginInit();
+            this.metroPanel1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // gv_Exemplare
+            // 
+            this.gv_Exemplare.AllowUserToAddRows = false;
+            this.gv_Exemplare.AllowUserToDeleteRows = false;
+            this.gv_Exemplare.AllowUserToResizeColumns = false;
+            this.gv_Exemplare.AllowUserToResizeRows = false;
+            this.gv_Exemplare.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_Exemplare.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gv_Exemplare.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gv_Exemplare.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.gv_Exemplare.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gv_Exemplare.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.gv_Exemplare.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gv_Exemplare.ContextMenuStrip = this.contextMenuStrip;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gv_Exemplare.DefaultCellStyle = dataGridViewCellStyle5;
+            this.gv_Exemplare.EnableHeadersVisualStyles = false;
+            this.gv_Exemplare.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.gv_Exemplare.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.helpProvider.SetHelpString(this.gv_Exemplare, "Hier werden ihnen alle vorhandenen Buchexemplare angezeigt.");
+            this.gv_Exemplare.Location = new System.Drawing.Point(364, 63);
+            this.gv_Exemplare.Name = "gv_Exemplare";
+            this.gv_Exemplare.ReadOnly = true;
+            this.gv_Exemplare.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gv_Exemplare.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.gv_Exemplare.RowHeadersWidth = 51;
+            this.gv_Exemplare.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.gv_Exemplare.RowTemplate.DividerHeight = 1;
+            this.gv_Exemplare.RowTemplate.Height = 24;
+            this.gv_Exemplare.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.helpProvider.SetShowHelp(this.gv_Exemplare, true);
+            this.gv_Exemplare.Size = new System.Drawing.Size(813, 434);
+            this.gv_Exemplare.TabIndex = 0;
+            this.gv_Exemplare.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Buch_CellDoubleClick);
+            this.gv_Exemplare.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.grid_buchid_CellMouseDown);
+            this.gv_Exemplare.MouseDown += new System.Windows.Forms.MouseEventHandler(this.grid_buchid_MouseDown);
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ladenToolStripMenuItem,
+            this.entfernenToolStripMenuItem,
+            this.barcodeDruckenToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip1";
+            this.contextMenuStrip.Size = new System.Drawing.Size(164, 70);
+            // 
+            // ladenToolStripMenuItem
+            // 
+            this.ladenToolStripMenuItem.Name = "ladenToolStripMenuItem";
+            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.ladenToolStripMenuItem.Text = "Laden";
+            this.ladenToolStripMenuItem.Click += new System.EventHandler(this.ladenToolStripMenuItem_Click);
+            // 
+            // entfernenToolStripMenuItem
+            // 
+            this.entfernenToolStripMenuItem.Name = "entfernenToolStripMenuItem";
+            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.entfernenToolStripMenuItem.Text = "Entfernen";
+            this.entfernenToolStripMenuItem.Click += new System.EventHandler(this.entfernenToolStripMenuItem_Click);
+            // 
+            // barcodeDruckenToolStripMenuItem
+            // 
+            this.barcodeDruckenToolStripMenuItem.Name = "barcodeDruckenToolStripMenuItem";
+            this.barcodeDruckenToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.barcodeDruckenToolStripMenuItem.Text = "Barcode drucken";
+            this.barcodeDruckenToolStripMenuItem.Click += new System.EventHandler(this.barcodeDruckenToolStripMenuItem_Click);
+            // 
+            // gb_BarcodeBox
+            // 
+            this.gb_BarcodeBox.Controls.Add(this.mtb_Barcode);
+            this.gb_BarcodeBox.Controls.Add(this.BarcodeBox);
+            this.gb_BarcodeBox.Controls.Add(this.mlb_barcode);
+            this.gb_BarcodeBox.Controls.Add(this.bt_Print);
+            this.gb_BarcodeBox.Location = new System.Drawing.Point(3, 188);
+            this.gb_BarcodeBox.Name = "gb_BarcodeBox";
+            this.gb_BarcodeBox.Padding = new System.Windows.Forms.Padding(1);
+            this.gb_BarcodeBox.Size = new System.Drawing.Size(328, 190);
+            this.gb_BarcodeBox.TabIndex = 28;
+            this.gb_BarcodeBox.TabStop = false;
+            // 
+            // mtb_Barcode
+            // 
+            // 
+            // 
+            // 
+            this.mtb_Barcode.CustomButton.Image = null;
+            this.mtb_Barcode.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.mtb_Barcode.CustomButton.Name = "";
+            this.mtb_Barcode.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.mtb_Barcode.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.mtb_Barcode.CustomButton.TabIndex = 1;
+            this.mtb_Barcode.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.mtb_Barcode.CustomButton.UseSelectable = true;
+            this.mtb_Barcode.CustomButton.Visible = false;
+            this.mtb_Barcode.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.mtb_Barcode.Lines = new string[0];
+            this.mtb_Barcode.Location = new System.Drawing.Point(123, 17);
+            this.mtb_Barcode.MaxLength = 32767;
+            this.mtb_Barcode.Name = "mtb_Barcode";
+            this.mtb_Barcode.PasswordChar = '\0';
+            this.mtb_Barcode.PromptText = "Code";
+            this.mtb_Barcode.ReadOnly = true;
+            this.mtb_Barcode.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.mtb_Barcode.SelectedText = "";
+            this.mtb_Barcode.SelectionLength = 0;
+            this.mtb_Barcode.SelectionStart = 0;
+            this.mtb_Barcode.ShortcutsEnabled = true;
+            this.mtb_Barcode.Size = new System.Drawing.Size(175, 24);
+            this.mtb_Barcode.TabIndex = 24;
+            this.mtb_Barcode.UseSelectable = true;
+            this.mtb_Barcode.WaterMark = "Code";
+            this.mtb_Barcode.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.mtb_Barcode.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // BarcodeBox
+            // 
+            this.BarcodeBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BarcodeBox.Location = new System.Drawing.Point(4, 47);
+            this.BarcodeBox.Name = "BarcodeBox";
+            this.BarcodeBox.Size = new System.Drawing.Size(320, 105);
+            this.BarcodeBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.BarcodeBox.TabIndex = 23;
+            this.BarcodeBox.TabStop = false;
+            // 
+            // mlb_barcode
+            // 
+            this.mlb_barcode.Location = new System.Drawing.Point(4, 17);
+            this.mlb_barcode.Margin = new System.Windows.Forms.Padding(3);
+            this.mlb_barcode.Name = "mlb_barcode";
+            this.mlb_barcode.Size = new System.Drawing.Size(113, 24);
+            this.mlb_barcode.TabIndex = 26;
+            this.mlb_barcode.Text = "Barcode:";
+            this.mlb_barcode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // bt_Print
+            // 
+            this.bt_Print.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_Print.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.helpProvider.SetHelpString(this.bt_Print, "Klicken sie hier, um den Barcode auszudrucken.");
+            this.bt_Print.Location = new System.Drawing.Point(147, 158);
+            this.bt_Print.Name = "bt_Print";
+            this.helpProvider.SetShowHelp(this.bt_Print, true);
+            this.bt_Print.Size = new System.Drawing.Size(177, 24);
+            this.bt_Print.TabIndex = 25;
+            this.bt_Print.Text = "Drucken";
+            this.bt_Print.UseSelectable = true;
+            this.bt_Print.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // tb_ExempCount
+            // 
+            // 
+            // 
+            // 
+            this.tb_ExempCount.CustomButton.Image = null;
+            this.tb_ExempCount.CustomButton.Location = new System.Drawing.Point(63, 2);
+            this.tb_ExempCount.CustomButton.Name = "";
+            this.tb_ExempCount.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_ExempCount.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_ExempCount.CustomButton.TabIndex = 1;
+            this.tb_ExempCount.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_ExempCount.CustomButton.UseSelectable = true;
+            this.tb_ExempCount.CustomButton.Visible = false;
+            this.tb_ExempCount.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.tb_ExempCount.Lines = new string[0];
+            this.tb_ExempCount.Location = new System.Drawing.Point(126, 128);
+            this.tb_ExempCount.MaxLength = 32767;
+            this.tb_ExempCount.Name = "tb_ExempCount";
+            this.tb_ExempCount.PasswordChar = '\0';
+            this.tb_ExempCount.PromptText = "Anzahl";
+            this.tb_ExempCount.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_ExempCount.SelectedText = "";
+            this.tb_ExempCount.SelectionLength = 0;
+            this.tb_ExempCount.SelectionStart = 0;
+            this.tb_ExempCount.ShortcutsEnabled = true;
+            this.tb_ExempCount.Size = new System.Drawing.Size(85, 24);
+            this.tb_ExempCount.TabIndex = 27;
+            this.tb_ExempCount.UseSelectable = true;
+            this.tb_ExempCount.WaterMark = "Anzahl";
+            this.tb_ExempCount.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_ExempCount.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_ExempCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_number_KeyPress);
+            this.tb_ExempCount.Leave += new System.EventHandler(this.tb_number_Leave);
+            // 
+            // mlb_Vorhanden
+            // 
+            this.helpProvider.SetHelpString(this.mlb_Vorhanden, "Wählen sie hier die Anzahl der Bücher, welches sie hinzufügen möchten, ein.");
+            this.mlb_Vorhanden.Location = new System.Drawing.Point(3, 158);
+            this.mlb_Vorhanden.Margin = new System.Windows.Forms.Padding(3);
+            this.mlb_Vorhanden.Name = "mlb_Vorhanden";
+            this.helpProvider.SetShowHelp(this.mlb_Vorhanden, true);
+            this.mlb_Vorhanden.Size = new System.Drawing.Size(117, 24);
+            this.mlb_Vorhanden.TabIndex = 26;
+            this.mlb_Vorhanden.Text = "Vorhanden:";
+            this.mlb_Vorhanden.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // mlb_ExempCount
+            // 
+            this.helpProvider.SetHelpString(this.mlb_ExempCount, "Wählen sie hier die Anzahl der Bücher, welches sie hinzufügen möchten, ein.");
+            this.mlb_ExempCount.Location = new System.Drawing.Point(3, 128);
+            this.mlb_ExempCount.Margin = new System.Windows.Forms.Padding(3);
+            this.mlb_ExempCount.Name = "mlb_ExempCount";
+            this.helpProvider.SetShowHelp(this.mlb_ExempCount, true);
+            this.mlb_ExempCount.Size = new System.Drawing.Size(117, 24);
+            this.mlb_ExempCount.TabIndex = 21;
+            this.mlb_ExempCount.Text = "Anzahl Exemplare:";
+            this.mlb_ExempCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tb_Vorhanden
+            // 
+            // 
+            // 
+            // 
+            this.tb_Vorhanden.CustomButton.Image = null;
+            this.tb_Vorhanden.CustomButton.Location = new System.Drawing.Point(63, 2);
+            this.tb_Vorhanden.CustomButton.Name = "";
+            this.tb_Vorhanden.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_Vorhanden.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_Vorhanden.CustomButton.TabIndex = 1;
+            this.tb_Vorhanden.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_Vorhanden.CustomButton.UseSelectable = true;
+            this.tb_Vorhanden.CustomButton.Visible = false;
+            this.tb_Vorhanden.Enabled = false;
+            this.tb_Vorhanden.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.tb_Vorhanden.Lines = new string[0];
+            this.tb_Vorhanden.Location = new System.Drawing.Point(126, 158);
+            this.tb_Vorhanden.MaxLength = 32767;
+            this.tb_Vorhanden.Name = "tb_Vorhanden";
+            this.tb_Vorhanden.PasswordChar = '\0';
+            this.tb_Vorhanden.PromptText = "Anzahl";
+            this.tb_Vorhanden.ReadOnly = true;
+            this.tb_Vorhanden.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_Vorhanden.SelectedText = "";
+            this.tb_Vorhanden.SelectionLength = 0;
+            this.tb_Vorhanden.SelectionStart = 0;
+            this.tb_Vorhanden.ShortcutsEnabled = true;
+            this.tb_Vorhanden.Size = new System.Drawing.Size(85, 24);
+            this.tb_Vorhanden.TabIndex = 20;
+            this.tb_Vorhanden.UseSelectable = true;
+            this.tb_Vorhanden.WaterMark = "Anzahl";
+            this.tb_Vorhanden.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_Vorhanden.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // bt_Clear
+            // 
+            this.bt_Clear.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_Clear.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.helpProvider.SetHelpString(this.bt_Clear, "Leeren sie alle oben liegenden Textfelder.");
+            this.bt_Clear.Location = new System.Drawing.Point(3, 415);
+            this.bt_Clear.Name = "bt_Clear";
+            this.helpProvider.SetShowHelp(this.bt_Clear, true);
+            this.bt_Clear.Size = new System.Drawing.Size(111, 24);
+            this.bt_Clear.TabIndex = 19;
+            this.bt_Clear.Text = "Leeren";
+            this.bt_Clear.UseSelectable = true;
+            this.bt_Clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
+            // bt_zustand_add
+            // 
+            this.bt_zustand_add.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_zustand_add.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.helpProvider.SetHelpString(this.bt_zustand_add, "Klicken sie auf diesen Button, um neue Zustände hinzuzufügen.");
+            this.bt_zustand_add.Location = new System.Drawing.Point(307, 63);
+            this.bt_zustand_add.Name = "bt_zustand_add";
+            this.helpProvider.SetShowHelp(this.bt_zustand_add, true);
+            this.bt_zustand_add.Size = new System.Drawing.Size(24, 24);
+            this.bt_zustand_add.TabIndex = 18;
+            this.bt_zustand_add.Text = "+";
+            this.bt_zustand_add.UseSelectable = true;
+            this.bt_zustand_add.Click += new System.EventHandler(this.bt_zustand_Click);
+            // 
+            // lb_Message
+            // 
+            // 
+            // 
+            // 
+            this.lb_Message.CustomButton.Image = null;
+            this.lb_Message.CustomButton.Location = new System.Drawing.Point(304, 1);
+            this.lb_Message.CustomButton.Name = "";
+            this.lb_Message.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.lb_Message.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.lb_Message.CustomButton.TabIndex = 1;
+            this.lb_Message.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.lb_Message.CustomButton.UseSelectable = true;
+            this.lb_Message.CustomButton.Visible = false;
+            this.lb_Message.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.lb_Message.FontWeight = MetroFramework.MetroTextBoxWeight.Light;
+            this.lb_Message.Lines = new string[] {
+        "Das Buch wurde erfolgreich hinzugefügt!"};
+            this.lb_Message.Location = new System.Drawing.Point(3, 384);
+            this.lb_Message.MaxLength = 32767;
+            this.lb_Message.Multiline = true;
+            this.lb_Message.Name = "lb_Message";
+            this.lb_Message.PasswordChar = '\0';
+            this.lb_Message.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.lb_Message.SelectedText = "";
+            this.lb_Message.SelectionLength = 0;
+            this.lb_Message.SelectionStart = 0;
+            this.lb_Message.ShortcutsEnabled = true;
+            this.lb_Message.Size = new System.Drawing.Size(328, 25);
+            this.lb_Message.TabIndex = 17;
+            this.lb_Message.Text = "Das Buch wurde erfolgreich hinzugefügt!";
+            this.lb_Message.UseSelectable = true;
+            this.lb_Message.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.lb_Message.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // bt_Add
+            // 
+            this.bt_Add.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_Add.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.helpProvider.SetHelpString(this.bt_Add, "Fügen sie alle oben eingetragen Daten hinzu.");
+            this.bt_Add.Location = new System.Drawing.Point(150, 415);
+            this.bt_Add.Name = "bt_Add";
+            this.helpProvider.SetShowHelp(this.bt_Add, true);
+            this.bt_Add.Size = new System.Drawing.Size(181, 24);
+            this.bt_Add.TabIndex = 16;
+            this.bt_Add.Text = "Hinzufügen";
+            this.bt_Add.UseSelectable = true;
+            this.bt_Add.Click += new System.EventHandler(this.bt_Add_Click);
+            // 
+            // rb_delete
+            // 
+            this.rb_delete.AutoSize = true;
+            this.rb_delete.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rb_delete.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
+            this.rb_delete.Location = new System.Drawing.Point(213, 63);
+            this.rb_delete.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
+            this.rb_delete.Name = "rb_delete";
+            this.rb_delete.Size = new System.Drawing.Size(80, 19);
+            this.rb_delete.TabIndex = 14;
+            this.rb_delete.Text = "Entfernen";
+            this.rb_delete.UseSelectable = true;
+            this.rb_delete.CheckedChanged += new System.EventHandler(this.rb_Delete_CheckedChanged);
+            // 
+            // rb_edit
+            // 
+            this.rb_edit.AutoSize = true;
+            this.rb_edit.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rb_edit.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
+            this.rb_edit.Location = new System.Drawing.Point(119, 63);
+            this.rb_edit.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
+            this.rb_edit.Name = "rb_edit";
+            this.rb_edit.Size = new System.Drawing.Size(88, 19);
+            this.rb_edit.TabIndex = 13;
+            this.rb_edit.Text = "Bearbeiten";
+            this.rb_edit.UseSelectable = true;
+            this.rb_edit.CheckedChanged += new System.EventHandler(this.rb_Edit_CheckedChanged);
+            // 
+            // rb_neu
+            // 
+            this.rb_neu.AutoSize = true;
+            this.rb_neu.Checked = true;
+            this.rb_neu.Cursor = System.Windows.Forms.Cursors.Default;
+            this.rb_neu.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rb_neu.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
+            this.rb_neu.Location = new System.Drawing.Point(23, 63);
+            this.rb_neu.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
+            this.rb_neu.Name = "rb_neu";
+            this.rb_neu.Size = new System.Drawing.Size(90, 19);
+            this.rb_neu.TabIndex = 12;
+            this.rb_neu.TabStop = true;
+            this.rb_neu.Text = "Hinzufügen";
+            this.rb_neu.UseSelectable = true;
+            this.rb_neu.CheckedChanged += new System.EventHandler(this.rb_Neu_CheckedChanged);
+            // 
+            // mlb_AufDat
+            // 
+            this.helpProvider.SetHelpString(this.mlb_AufDat, "Wählen sie hier das Aufnahmedatum des Buches, welches sie hinzufügen möchten.");
+            this.mlb_AufDat.Location = new System.Drawing.Point(3, 93);
+            this.mlb_AufDat.Margin = new System.Windows.Forms.Padding(3);
+            this.mlb_AufDat.Name = "mlb_AufDat";
+            this.helpProvider.SetShowHelp(this.mlb_AufDat, true);
+            this.mlb_AufDat.Size = new System.Drawing.Size(117, 29);
+            this.mlb_AufDat.TabIndex = 5;
+            this.mlb_AufDat.Text = "Aufnahmedatum:";
+            this.mlb_AufDat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // mlb_Zustand
+            // 
+            this.helpProvider.SetHelpString(this.mlb_Zustand, "Tragen sie hier den Zustand des Buches, welches sie hinzufügen möchten, ein.");
+            this.mlb_Zustand.Location = new System.Drawing.Point(3, 63);
+            this.mlb_Zustand.Margin = new System.Windows.Forms.Padding(3);
+            this.mlb_Zustand.Name = "mlb_Zustand";
+            this.helpProvider.SetShowHelp(this.mlb_Zustand, true);
+            this.mlb_Zustand.Size = new System.Drawing.Size(117, 24);
+            this.mlb_Zustand.TabIndex = 4;
+            this.mlb_Zustand.Text = "Zustand:";
+            this.mlb_Zustand.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // mlb_ID
+            // 
+            this.helpProvider.SetHelpString(this.mlb_ID, "Tragen sie hier die Buch-ID ein, um das gewünschte Buch zu laden. Buch-IDs werden" +
+        " automatisch generiert.");
+            this.mlb_ID.Location = new System.Drawing.Point(3, 33);
+            this.mlb_ID.Margin = new System.Windows.Forms.Padding(3);
+            this.mlb_ID.Name = "mlb_ID";
+            this.helpProvider.SetShowHelp(this.mlb_ID, true);
+            this.mlb_ID.Size = new System.Drawing.Size(117, 24);
+            this.mlb_ID.TabIndex = 3;
+            this.mlb_ID.Text = "Buch-ID:";
+            this.mlb_ID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // mlb_ISBN
+            // 
+            this.helpProvider.SetHelpString(this.mlb_ISBN, "Tragen sie hier die ISBN-13 ein, um das gewünschte Buch zu laden.");
+            this.mlb_ISBN.Location = new System.Drawing.Point(3, 3);
+            this.mlb_ISBN.Margin = new System.Windows.Forms.Padding(3);
+            this.mlb_ISBN.Name = "mlb_ISBN";
+            this.helpProvider.SetShowHelp(this.mlb_ISBN, true);
+            this.mlb_ISBN.Size = new System.Drawing.Size(117, 24);
+            this.mlb_ISBN.TabIndex = 2;
+            this.mlb_ISBN.Text = "ISBN:";
+            this.mlb_ISBN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tb_ID
+            // 
+            // 
+            // 
+            // 
+            this.tb_ID.CustomButton.Image = null;
+            this.tb_ID.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_ID.CustomButton.Name = "";
+            this.tb_ID.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_ID.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_ID.CustomButton.TabIndex = 1;
+            this.tb_ID.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_ID.CustomButton.UseSelectable = true;
+            this.tb_ID.CustomButton.Visible = false;
+            this.tb_ID.Enabled = false;
+            this.tb_ID.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.tb_ID.Lines = new string[0];
+            this.tb_ID.Location = new System.Drawing.Point(126, 33);
+            this.tb_ID.MaxLength = 32767;
+            this.tb_ID.Name = "tb_ID";
+            this.tb_ID.PasswordChar = '\0';
+            this.tb_ID.PromptText = "ID";
+            this.tb_ID.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_ID.SelectedText = "";
+            this.tb_ID.SelectionLength = 0;
+            this.tb_ID.SelectionStart = 0;
+            this.tb_ID.ShortcutsEnabled = true;
+            this.tb_ID.Size = new System.Drawing.Size(175, 24);
+            this.tb_ID.TabIndex = 1;
+            this.tb_ID.UseSelectable = true;
+            this.tb_ID.WaterMark = "ID";
+            this.tb_ID.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_ID.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_ID.TextChanged += new System.EventHandler(this.tb_id_TextChanged);
+            this.tb_ID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_id_KeyPress);
+            // 
+            // tb_ISBN
+            // 
+            // 
+            // 
+            // 
+            this.tb_ISBN.CustomButton.Image = null;
+            this.tb_ISBN.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_ISBN.CustomButton.Name = "";
+            this.tb_ISBN.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_ISBN.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_ISBN.CustomButton.TabIndex = 1;
+            this.tb_ISBN.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_ISBN.CustomButton.UseSelectable = true;
+            this.tb_ISBN.CustomButton.Visible = false;
+            this.tb_ISBN.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.helpProvider.SetHelpString(this.tb_ISBN, "Tragen sie hier die ISBN-13 ein, um das gewünschte Buch zu laden.");
+            this.tb_ISBN.Lines = new string[0];
+            this.tb_ISBN.Location = new System.Drawing.Point(126, 3);
+            this.tb_ISBN.MaxLength = 32767;
+            this.tb_ISBN.Name = "tb_ISBN";
+            this.tb_ISBN.PasswordChar = '\0';
+            this.tb_ISBN.PromptText = "ISBN";
+            this.tb_ISBN.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_ISBN.SelectedText = "";
+            this.tb_ISBN.SelectionLength = 0;
+            this.tb_ISBN.SelectionStart = 0;
+            this.tb_ISBN.ShortcutsEnabled = true;
+            this.helpProvider.SetShowHelp(this.tb_ISBN, true);
+            this.tb_ISBN.Size = new System.Drawing.Size(175, 24);
+            this.tb_ISBN.TabIndex = 0;
+            this.tb_ISBN.UseSelectable = true;
+            this.tb_ISBN.WaterMark = "ISBN";
+            this.tb_ISBN.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_ISBN.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_ISBN.TextChanged += new System.EventHandler(this.tb_isbn_TextChanged);
+            // 
+            // bt_Close
+            // 
+            this.bt_Close.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_Close.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.helpProvider.SetHelpString(this.bt_Close, "Schließen sie das akuelle Fenster.");
+            this.bt_Close.Location = new System.Drawing.Point(1002, 503);
+            this.bt_Close.Name = "bt_Close";
+            this.helpProvider.SetShowHelp(this.bt_Close, true);
+            this.bt_Close.Size = new System.Drawing.Size(175, 24);
+            this.bt_Close.TabIndex = 21;
+            this.bt_Close.Text = "Schließen";
+            this.bt_Close.UseSelectable = true;
+            this.bt_Close.Click += new System.EventHandler(this.bt_close_Click);
+            // 
+            // mbt_Export
+            // 
+            this.mbt_Export.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.mbt_Export.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.helpProvider.SetHelpString(this.mbt_Export, "Exportieren sie ihre Buchdaten in eine Exceltabelle.");
+            this.mbt_Export.Location = new System.Drawing.Point(545, 503);
+            this.mbt_Export.Name = "mbt_Export";
+            this.helpProvider.SetShowHelp(this.mbt_Export, true);
+            this.mbt_Export.Size = new System.Drawing.Size(175, 24);
+            this.mbt_Export.TabIndex = 22;
+            this.mbt_Export.Text = "Exemplardaten-Export";
+            this.mbt_Export.UseSelectable = true;
+            // 
+            // acb_Zustand
+            // 
+            this.acb_Zustand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.acb_Zustand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.acb_Zustand.BorderColor = System.Drawing.Color.Gray;
+            this.acb_Zustand.DataRowView = true;
+            this.acb_Zustand.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.acb_Zustand.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.acb_Zustand, "Tragen sie hier den Zustand des Buches, welches sie hinzufügen möchten, ein.");
+            this.acb_Zustand.HighlightColor = System.Drawing.Color.DeepSkyBlue;
+            this.acb_Zustand.ItemHeight = 18;
+            this.acb_Zustand.Location = new System.Drawing.Point(126, 63);
+            this.acb_Zustand.Name = "acb_Zustand";
+            this.helpProvider.SetShowHelp(this.acb_Zustand, true);
+            this.acb_Zustand.Size = new System.Drawing.Size(175, 24);
+            this.acb_Zustand.TabIndex = 11;
+            this.acb_Zustand.TextChanged += new System.EventHandler(this.cb_zustand_TextChanged);
+            // 
+            // metroPanel1
+            // 
+            this.metroPanel1.Controls.Add(this.gb_BarcodeBox);
+            this.metroPanel1.Controls.Add(this.dTP_AufDat);
+            this.metroPanel1.Controls.Add(this.lb_Message);
+            this.metroPanel1.Controls.Add(this.tb_ExempCount);
+            this.metroPanel1.Controls.Add(this.mlb_Vorhanden);
+            this.metroPanel1.Controls.Add(this.bt_Clear);
+            this.metroPanel1.Controls.Add(this.mlb_ISBN);
+            this.metroPanel1.Controls.Add(this.bt_Add);
+            this.metroPanel1.Controls.Add(this.tb_Vorhanden);
+            this.metroPanel1.Controls.Add(this.mlb_ExempCount);
+            this.metroPanel1.Controls.Add(this.tb_ISBN);
+            this.metroPanel1.Controls.Add(this.mlb_ID);
+            this.metroPanel1.Controls.Add(this.tb_ID);
+            this.metroPanel1.Controls.Add(this.acb_Zustand);
+            this.metroPanel1.Controls.Add(this.bt_zustand_add);
+            this.metroPanel1.Controls.Add(this.mlb_Zustand);
+            this.metroPanel1.Controls.Add(this.mlb_AufDat);
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(23, 88);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(335, 447);
+            this.metroPanel1.TabIndex = 23;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // dTP_AufDat
+            // 
+            this.dTP_AufDat.CustomFormat = " dd : MMMM : yyyy";
+            this.dTP_AufDat.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dTP_AufDat.Location = new System.Drawing.Point(126, 93);
+            this.dTP_AufDat.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dTP_AufDat.Name = "dTP_AufDat";
+            this.dTP_AufDat.Size = new System.Drawing.Size(175, 29);
+            this.dTP_AufDat.TabIndex = 50;
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.Timer_Tick);
+            // 
+            // metroProgressSpinner1
+            // 
+            this.metroProgressSpinner1.Location = new System.Drawing.Point(545, 63);
+            this.metroProgressSpinner1.Maximum = 100;
+            this.metroProgressSpinner1.Name = "metroProgressSpinner1";
+            this.metroProgressSpinner1.Size = new System.Drawing.Size(484, 434);
+            this.metroProgressSpinner1.TabIndex = 24;
+            this.metroProgressSpinner1.UseSelectable = true;
+            // 
+            // backgroundWorker
+            // 
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
+            // 
+            // mbt_Import
+            // 
+            this.mbt_Import.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.mbt_Import.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.mbt_Import.Location = new System.Drawing.Point(364, 503);
+            this.mbt_Import.Name = "mbt_Import";
+            this.mbt_Import.Size = new System.Drawing.Size(175, 24);
+            this.mbt_Import.Style = MetroFramework.MetroColorStyle.Teal;
+            this.mbt_Import.TabIndex = 25;
+            this.mbt_Import.Text = "Exemplardaten-Import";
+            this.mbt_Import.UseSelectable = true;
+            // 
+            // w_s_exemplare
+            // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(1200, 550);
+            this.Controls.Add(this.mbt_Import);
+            this.Controls.Add(this.metroProgressSpinner1);
+            this.Controls.Add(this.metroPanel1);
+            this.Controls.Add(this.mbt_Export);
+            this.Controls.Add(this.bt_Close);
+            this.Controls.Add(this.rb_delete);
+            this.Controls.Add(this.gv_Exemplare);
+            this.Controls.Add(this.rb_edit);
+            this.Controls.Add(this.rb_neu);
+            this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.MaximizeBox = false;
+            this.Name = "w_s_exemplare";
+            this.Resizable = false;
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Exemplare";
+            this.Activated += new System.EventHandler(this.w_s_buchid_Activated);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_buchid_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).EndInit();
+            this.contextMenuStrip.ResumeLayout(false);
+            this.gb_BarcodeBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.BarcodeBox)).EndInit();
+            this.metroPanel1.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private MetroFramework.Controls.MetroGrid gv_Exemplare;
+        private MetroFramework.Controls.MetroLabel mlb_AufDat;
+        private MetroFramework.Controls.MetroLabel mlb_Zustand;
+        private MetroFramework.Controls.MetroLabel mlb_ID;
+        private MetroFramework.Controls.MetroLabel mlb_ISBN;
+        private MetroFramework.Controls.MetroTextBox tb_ID;
+        private MetroFramework.Controls.MetroTextBox tb_ISBN;
+        private AdvancedComboBox acb_Zustand;
+        private MetroFramework.Controls.MetroRadioButton rb_delete;
+        private MetroFramework.Controls.MetroRadioButton rb_edit;
+        private MetroFramework.Controls.MetroRadioButton rb_neu;
+        private MetroFramework.Controls.MetroButton bt_Add;
+        private MetroFramework.Controls.MetroTextBox lb_Message;
+        private MetroFramework.Controls.MetroButton bt_zustand_add;
+        private MetroFramework.Controls.MetroButton bt_Clear;
+        private MetroFramework.Controls.MetroButton bt_Close;
+        private MetroFramework.Controls.MetroButton mbt_Export;
+        private MetroFramework.Controls.MetroTextBox tb_Vorhanden;
+        private MetroFramework.Controls.MetroLabel mlb_ExempCount;
+        private System.Windows.Forms.PictureBox BarcodeBox;
+        private MetroFramework.Controls.MetroTextBox mtb_Barcode;
+        private MetroFramework.Controls.MetroButton bt_Print;
+        private System.Windows.Forms.HelpProvider helpProvider;
+        private MetroFramework.Controls.MetroTextBox tb_ExempCount;
+        private MetroFramework.Controls.MetroLabel mlb_Vorhanden;
+        private System.Windows.Forms.GroupBox gb_BarcodeBox;
+        private MetroFramework.Controls.MetroContextMenu contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem ladenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem entfernenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem barcodeDruckenToolStripMenuItem;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
+        private MetroFramework.Controls.MetroLabel mlb_barcode;
+        private System.Windows.Forms.Timer timer;
+        private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private MetroFramework.Controls.MetroDateTime dTP_AufDat;
+        private MetroFramework.Controls.MetroButton mbt_Import;
+    }
+}

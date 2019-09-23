@@ -440,7 +440,7 @@
             this.mT_Klassenstufen.Size = new System.Drawing.Size(157, 46);
             this.mT_Klassenstufen.Style = MetroFramework.MetroColorStyle.Orange;
             this.mT_Klassenstufen.TabIndex = 3;
-            this.mT_Klassenstufen.Text = "Klassenstufen";
+            this.mT_Klassenstufen.Text = "Klassenstufe - Klassen";
             this.mT_Klassenstufen.UseSelectable = true;
             this.mT_Klassenstufen.Click += new System.EventHandler(this.bt_Klassenstufe_Click);
             // 

@@ -201,7 +201,7 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form Buecher = new w_s_buecher(true);
+                Form Buecher = new w_s_buecher(currentUser, true);
                 Buecher.ShowDialog(this);
             }
             else
@@ -318,7 +318,6 @@ namespace Bibo_Verwaltung
             {
                 Form buchFach = new w_s_buch_fach(currentUser);
                 buchFach.ShowDialog(this);
-                HidePanel();
             }
             else
             {
@@ -332,7 +331,6 @@ namespace Bibo_Verwaltung
             {
                 Form buchStufe = new w_s_buch_stufe(currentUser);
                 buchStufe.ShowDialog(this);
-                HidePanel();
             }
             else
             {
@@ -346,7 +344,6 @@ namespace Bibo_Verwaltung
             {
                 Form fachStufe = new w_s_fach_stufe(currentUser);
                 fachStufe.ShowDialog(this);
-                HidePanel();
             }
             else
             {

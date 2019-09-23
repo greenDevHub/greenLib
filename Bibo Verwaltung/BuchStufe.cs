@@ -24,6 +24,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public BuchStufe()
         {
+            FillObject();
         }
         #endregion
 

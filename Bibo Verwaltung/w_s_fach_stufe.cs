@@ -21,10 +21,19 @@ namespace Bibo_Verwaltung
         public w_s_fach_stufe(string userName)
         {
             InitializeComponent();
+            Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
+            if (user.Rechteid.Equals("0"))
+            {
+                bt_Bearbeiten.Enabled = false;
+            }
+            else
+            {
+                bt_Bearbeiten.Enabled = true;
+            }
             this.Text = Text + " - Angemeldet als: " + userName;
             IniKlassenstufen();
-            LoadFaecher();
+            //LoadFaecher();
         }
 
         #region Fenster-Methoden
@@ -80,7 +89,7 @@ namespace Bibo_Verwaltung
                 for (int i = 0; i <= gv_Faecher.Rows.Count - 1; i++)
                 {
                     DataGridViewRow row = gv_Faecher.Rows[i];
-                    string fach = row.Cells["Kurzbezeichnung"].Value.ToString();
+                    string fach = row.Cells["Kürzel"].Value.ToString();
 
                     if (fach.Contains("*"))
                     {
@@ -126,7 +135,7 @@ namespace Bibo_Verwaltung
                 relation.ItemArray = exemlarDetails;
                 faecherListe.Rows.Add(relation);
 
-                row.Cells["Kurzbezeichnung"].Value = "*" + row.Cells["Kurzbezeichnung"].Value.ToString();
+                row.Cells["Kürzel"].Value = "*" + row.Cells["Kürzel"].Value.ToString();
                 row.DefaultCellStyle.BackColor = Color.Yellow;
                 row.DefaultCellStyle.ForeColor = Color.Black;
             }
@@ -154,7 +163,7 @@ namespace Bibo_Verwaltung
                 }
                 faecherListe.AcceptChanges();
 
-                gridrow.Cells["Kurzbezeichnung"].Value = gridrow.Cells["Kurzbezeichnung"].Value.ToString().Substring(1);
+                gridrow.Cells["Kürzel"].Value = gridrow.Cells["Kürzel"].Value.ToString().Substring(1);
                 gridrow.DefaultCellStyle.BackColor = Color.White;
                 gridrow.DefaultCellStyle.ForeColor = Color.DimGray;
             }
@@ -225,7 +234,7 @@ namespace Bibo_Verwaltung
         private void gv_Faecher_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = gv_Faecher.CurrentRow;
-            string fach = row.Cells["Kurzbezeichnung"].Value.ToString();
+            string fach = row.Cells["Kürzel"].Value.ToString();
             if (!fach.Contains("*"))
             {
                 AddToFaecherList();

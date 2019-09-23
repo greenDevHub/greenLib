@@ -150,6 +150,7 @@
     <Compile Include="ExcelExport.cs" />
     <Compile Include="FachStufe.cs" />
     <Compile Include="Fach.cs" />
+    <Compile Include="Import.cs" />
     <Compile Include="Klasse.cs" />
     <Compile Include="Klassenstufe.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -301,11 +302,11 @@
     <Compile Include="w_s_bild_bearbeiten.Designer.cs">
       <DependentUpon>w_s_bild_bearbeiten.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_buchid.cs">
+    <Compile Include="w_s_exemplare.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_buchid.Designer.cs">
-      <DependentUpon>w_s_buchid.cs</DependentUpon>
+    <Compile Include="w_s_exemplare.Designer.cs">
+      <DependentUpon>w_s_exemplare.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_buchsuche.cs">
       <SubType>Form</SubType>
@@ -427,8 +428,8 @@
     <EmbeddedResource Include="w_s_bild_bearbeiten.resx">
       <DependentUpon>w_s_bild_bearbeiten.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_buchid.resx">
-      <DependentUpon>w_s_buchid.cs</DependentUpon>
+    <EmbeddedResource Include="w_s_exemplare.resx">
+      <DependentUpon>w_s_exemplare.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_buchsuche.resx">
       <DependentUpon>w_s_buchsuche.cs</DependentUpon>

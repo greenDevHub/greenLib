@@ -38,7 +38,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public FachStufe()
         {
-
+            FillObject();
         }
         /// <summary>
         /// Erschaft das Objekt FachStufe
@@ -73,7 +73,7 @@ namespace Bibo_Verwaltung
         private void FillObject()
         {
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT bf_fachid, bf_klassenstufe, f_kurzform as 'Kurzbezeichnung', f_langform as 'Langbezeichnung' FROM [dbo].[t_s_fach_stufe] left join [dbo].[t_s_faecher] on f_id = bf_fachid order by f_kurzform";
+            string RawCommand = "SELECT bf_fachid, bf_klassenstufe, f_kurzform as 'Kürzel', f_langform as 'Langbezeichnung' FROM [dbo].[t_s_fach_stufe] left join [dbo].[t_s_faecher] on f_id = bf_fachid order by f_kurzform";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
@@ -109,7 +109,7 @@ namespace Bibo_Verwaltung
                         {
                             if (ds.Tables[0].Rows[i]["bf_klassenstufe"].ToString() == stufe)
                             {
-                                row.Cells["Kurzbezeichnung"].Value = "*" + row.Cells["Kurzbezeichnung"].Value.ToString();
+                                row.Cells["Kürzel"].Value = "*" + row.Cells["Kürzel"].Value.ToString();
                                 row.DefaultCellStyle.BackColor = Color.Yellow;
                                 row.DefaultCellStyle.ForeColor = Color.Black;
                             }

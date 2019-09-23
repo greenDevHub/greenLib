@@ -21,7 +21,16 @@ namespace Bibo_Verwaltung
         public w_s_buch_stufe(string userName)
         {
             InitializeComponent();
+            Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
+            if (user.Rechteid.Equals("0"))
+            {
+                bt_Bearbeiten.Enabled = false;
+            }
+            else
+            {
+                bt_Bearbeiten.Enabled = true;
+            }
             this.Text = Text + " - Angemeldet als: " + userName;
             IniKlassenstufen();
             LoadBuecher();

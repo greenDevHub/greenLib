@@ -18,18 +18,39 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_buecher : MetroFramework.Forms.MetroForm
     {
-        public w_s_buecher(bool bool1)
+        #region Constructor
+        string currentUser;
+        public w_s_buecher(string userName, bool bool1)
         {
             InitializeComponent();
+            Benutzer user = new Benutzer(userName);
+            this.currentUser = userName;
+            this.Text = Text + " - Angemeldet als: " + userName;
+
+            if (user.Rechteid.Equals("0"))
+            {
+                
+            }
+            else if (user.Rechteid.Equals("1"))
+            {
+                
+            }
+            else if (user.Rechteid == "2")
+            {
+                
+            }
+
             timer1.Start();
             //b.FillGrid_Buch(ref Grid_Buch);
             Comboboxen();
-            pictureBox2.Visible = false;
+            picBox_Gross.Visible = false;
             gb_zoom.Visible = false;
             comboBox1.Visible = false;
             comboBox1.DropDownHeight = 1;
             this.bool1 = bool1;
         }
+        #endregion
+
         bool loaded = false;
         private string location = "";
         Buch b = new Buch();
@@ -98,28 +119,28 @@ namespace Bibo_Verwaltung
 
         private void bt_Verlag_s_Click(object sender, EventArgs e)
         {
-            Form Verlag = new w_s_verlage();
+            Form Verlag = new w_s_manage(currentUser, "Verlag");
             Verlag.ShowDialog(this);
             b.Verlag.FillCombobox(ref cb_Verlag, 0);
         }
 
         private void bt_Autor_s_Click(object sender, EventArgs e)
         {
-            Form Autor = new w_s_autoren();
+            Form Autor = new w_s_manage(currentUser, "Autor");
             Autor.ShowDialog(this);
             b.Autor.FillCombobox(ref cb_Autor, 0);
         }
 
         private void bt_Genre_s_Click(object sender, EventArgs e)
         {
-            Form Genres = new w_s_genres();
+            Form Genres = new w_s_manage(currentUser, "Genre");
             Genres.ShowDialog(this);
             b.Genre.FillCombobox(ref cb_Genre, 0);
         }
 
         private void bt_Sprache_s_Click_1(object sender, EventArgs e)
         {
-            Form Sprache = new w_s_sprachen();
+            Form Sprache = new w_s_manage(currentUser, "Sprache");
             Sprache.ShowDialog(this);
             b.Sprache.FillCombobox(ref cb_Sprache, 0);
         }
@@ -150,7 +171,7 @@ namespace Bibo_Verwaltung
             }
             b.Er_datum = dTP_Erscheinungsdatum.Value;
 
-            if (pictureBox1.ImageLocation == null || pictureBox1.ImageLocation.Equals(""))
+            if (picBox_Klein.ImageLocation == null || picBox_Klein.ImageLocation.Equals(""))
             {
                 b.BildPfad = "";
                 Delete_picture(location);
@@ -160,7 +181,7 @@ namespace Bibo_Verwaltung
             else
             {
                 Copy_picture();
-                b.BildPfad = pictureBox1.ImageLocation;
+                b.BildPfad = picBox_Klein.ImageLocation;
                 b.Image = System.IO.File.ReadAllBytes(b.BildPfad);
                 b.ImageDate = DateTime.Parse(DateTime.UtcNow.ToShortTimeString());
             }
@@ -194,7 +215,7 @@ namespace Bibo_Verwaltung
             }
             b.Er_datum = dTP_Erscheinungsdatum.Value;
             b.Anzahl = 0;
-            if (pictureBox1.ImageLocation == null || pictureBox1.ImageLocation.Equals(""))
+            if (picBox_Klein.ImageLocation == null || picBox_Klein.ImageLocation.Equals(""))
             {
                 b.BildPfad = "";
                 Delete_picture(location);
@@ -204,7 +225,7 @@ namespace Bibo_Verwaltung
             else
             {
                 Copy_picture();
-                b.BildPfad = pictureBox1.ImageLocation;
+                b.BildPfad = picBox_Klein.ImageLocation;
                 b.Image = System.IO.File.ReadAllBytes(b.BildPfad);
                 b.ImageDate = DateTime.Parse(DateTime.UtcNow.ToShortTimeString());
             }
@@ -240,7 +261,7 @@ namespace Bibo_Verwaltung
                 if (ifDownloaded)
                 {
                     b.SaveBuch();
-                    Form Buchid = new w_s_buchid(tb_ISBN.Text);
+                    Form Buchid = new w_s_exemplare(currentUser, tb_ISBN.Text);
                     Buchid.ShowDialog(this);
                     b.FillGrid_Buch(ref Grid_Buch);
                     Clear_All();
@@ -248,7 +269,7 @@ namespace Bibo_Verwaltung
                 else if (!ifDownloaded && ValidateISBN())
                 {
                     b.SaveBuch();
-                    Form Buchid = new w_s_buchid(tb_ISBN.Text);
+                    Form Buchid = new w_s_exemplare(currentUser, tb_ISBN.Text);
                     Buchid.ShowDialog(this);
                     b.FillGrid_Buch(ref Grid_Buch);
                     Clear_All();
@@ -259,7 +280,7 @@ namespace Bibo_Verwaltung
                     if (dialogResult == DialogResult.Yes)
                     {
                         b.SaveBuch();
-                        Form Buchid = new w_s_buchid(tb_ISBN.Text);
+                        Form Buchid = new w_s_exemplare(currentUser, tb_ISBN.Text);
                         Buchid.ShowDialog(this);
                         b.FillGrid_Buch(ref Grid_Buch);
                         Clear_All();
@@ -279,7 +300,7 @@ namespace Bibo_Verwaltung
             t.Interval = 3000; // it will Tick in 3 seconds
             t.Tick += (s, a) =>
             {
-                rTB_1.Hide();
+                mtb_Nachricht.Hide();
                 t.Stop();
             };
                 if (rb_Update_Buch.Checked && !checkbox_autor.Checked && !tb_ISBN.Text.Equals("") && !tb_Titel.Text.Equals("") && !cb_Autor.Text.Equals("") && !cb_Verlag.Text.Equals("")
@@ -312,7 +333,7 @@ namespace Bibo_Verwaltung
                     b.Autoren.Clear();
                     b.Autoren.Add(cb_Autor.Text);
                     UpdateBuch();
-                    rTB_1.Visible = true;
+                    mtb_Nachricht.Visible = true;
                     t.Start();
                 }
                 catch
@@ -359,7 +380,7 @@ namespace Bibo_Verwaltung
                         b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetSprachID(cb_Sprache.Text)));
                     }
                     UpdateBuch();
-                    rTB_1.Visible = true;
+                    mtb_Nachricht.Visible = true;
                     t.Start();
                 }
                 catch
@@ -386,7 +407,7 @@ namespace Bibo_Verwaltung
                             Delete_picture(location);
                             Clear_All();
                             b.FillGrid_Buch(ref Grid_Buch);
-                            rTB_1.Visible = true;
+                            mtb_Nachricht.Visible = true;
                             t.Start();
                         }
                         else
@@ -450,7 +471,7 @@ namespace Bibo_Verwaltung
                         //    i++;
                         //}
                         AddBuch();
-                        rTB_1.Visible = true;
+                        mtb_Nachricht.Visible = true;
                         t.Start();
                     }
                     else
@@ -486,7 +507,7 @@ namespace Bibo_Verwaltung
                         //    i++;
                         //}
                         AddBuch();
-                        rTB_1.Visible = true;
+                        mtb_Nachricht.Visible = true;
                         t.Start();
                     }
 
@@ -524,7 +545,7 @@ namespace Bibo_Verwaltung
                             b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetSprachID(cb_Sprache.Text)));
                         }
                         AddBuch();
-                        rTB_1.Visible = true;
+                        mtb_Nachricht.Visible = true;
                         t.Start();
                     }
                     else
@@ -545,7 +566,7 @@ namespace Bibo_Verwaltung
                             b.Sprache.FillCombobox(ref cb_Sprache, int.Parse(b.Sprache.GetSprachID(cb_Sprache.Text)));
                         }
                         AddBuch();
-                        rTB_1.Visible = true;
+                        mtb_Nachricht.Visible = true;
                         t.Start();
                     }
                 }
@@ -611,10 +632,10 @@ namespace Bibo_Verwaltung
             tb_Auflage.Text = "";
             tb_Neupreis.Text = "";
             tb_anzahl.Text = "";
-            pictureBox2.Image = null;
-            pictureBox2.ImageLocation = null;
-            pictureBox1.Image = null;
-            pictureBox1.ImageLocation = null;
+            picBox_Gross.Image = null;
+            picBox_Gross.ImageLocation = null;
+            picBox_Klein.Image = null;
+            picBox_Klein.ImageLocation = null;
             tb_ISBN.BackColor = Color.White;
             tb_Titel.BackColor = Color.White;
             cb_Autor.BackColor = Color.White;
@@ -699,8 +720,8 @@ namespace Bibo_Verwaltung
                 bt_speichern_buecher.Text = "Hinzufügen";
                 bt_picture.Enabled = true;
                 bt_pic_delete.Enabled = true;
-                pictureBox1.Enabled = true;
-                rTB_1.Text = "Das Buch wurde erfolgreich hinzugefügt!";
+                picBox_Klein.Enabled = true;
+                mtb_Nachricht.Text = "Das Buch wurde erfolgreich hinzugefügt!";
                 lb_ISBN.Text = "ISBN:*";
                 lb_Titel.Text = "Titel:*";
                 lb_Autor.Text = "Autor:*";
@@ -730,8 +751,8 @@ namespace Bibo_Verwaltung
                 bt_speichern_buecher.Text = "Speichern";
                 bt_picture.Enabled = true;
                 bt_pic_delete.Enabled = true;
-                pictureBox1.Enabled = true;
-                rTB_1.Text = "Das Buch wurde erfolgreich bearbeitet!";
+                picBox_Klein.Enabled = true;
+                mtb_Nachricht.Text = "Das Buch wurde erfolgreich bearbeitet!";
                 lb_ISBN.Text = "ISBN:";
                 lb_Titel.Text = "Titel:*";
                 lb_Autor.Text = "Autor:*";
@@ -761,8 +782,8 @@ namespace Bibo_Verwaltung
                 bt_speichern_buecher.Text = "Löschen";
                 bt_picture.Enabled = false;
                 bt_pic_delete.Enabled = false;
-                pictureBox1.Enabled = false;
-                rTB_1.Text = "Das Buch wurde erfolgreich gelöscht!";
+                picBox_Klein.Enabled = false;
+                mtb_Nachricht.Text = "Das Buch wurde erfolgreich gelöscht!";
                 lb_ISBN.Text = "ISBN:*";
                 lb_Titel.Text = "Titel:";
                 lb_Autor.Text = "Autor:";
@@ -866,18 +887,18 @@ namespace Bibo_Verwaltung
                 try
                 {
                     MemoryStream mem = new MemoryStream(b.Image);
-                    pictureBox1.Image = Image.FromStream(mem);
+                    picBox_Klein.Image = Image.FromStream(mem);
                     string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Bilder\\" + tb_ISBN.Text + ".png";
                     if (!File.Exists(filePath))
                     {
-                        pictureBox1.Image.Save(filePath, ImageFormat.Png);
-                        pictureBox1.ImageLocation = filePath;
+                        picBox_Klein.Image.Save(filePath, ImageFormat.Png);
+                        picBox_Klein.ImageLocation = filePath;
                     }
                     else
                     {
                         Delete_picture(filePath);
-                        pictureBox1.Image.Save(filePath, ImageFormat.Png);
-                        pictureBox1.ImageLocation = filePath;
+                        picBox_Klein.Image.Save(filePath, ImageFormat.Png);
+                        picBox_Klein.ImageLocation = filePath;
                     }
                 }
                 catch { }
@@ -888,7 +909,7 @@ namespace Bibo_Verwaltung
                 {
                     try
                     {
-                        pictureBox1.ImageLocation = b.BildPfad;
+                        picBox_Klein.ImageLocation = b.BildPfad;
                     }
                     catch
                     {
@@ -897,8 +918,8 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
-                    pictureBox1.Image = null;
-                    pictureBox1.ImageLocation = null;
+                    picBox_Klein.Image = null;
+                    picBox_Klein.ImageLocation = null;
                 }
             }
             b.Verlag.FillCombobox(ref cb_Verlag, b.Verlag.VerlagID);
@@ -1161,7 +1182,7 @@ namespace Bibo_Verwaltung
             {
                 ValidateISBN();
                 imgLocation = GetPicture();
-                pictureBox1.ImageLocation = imgLocation;
+                picBox_Klein.ImageLocation = imgLocation;
             }
             if(dialogResult == DialogResult.No)
             {
@@ -1170,16 +1191,16 @@ namespace Bibo_Verwaltung
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     imgLocation = dialog.FileName.ToString();
-                    pictureBox1.ImageLocation = imgLocation;
+                    picBox_Klein.ImageLocation = imgLocation;
                 }
             }
         }
 
         private void bt_pic_add_Click(object sender, EventArgs e)
         {
-            location = pictureBox1.ImageLocation;
-            pictureBox1.ImageLocation = null;
-            pictureBox2.ImageLocation = null;
+            location = picBox_Klein.ImageLocation;
+            picBox_Klein.ImageLocation = null;
+            picBox_Gross.ImageLocation = null;
             b.Image = null;
         }
 
@@ -1201,12 +1222,12 @@ namespace Bibo_Verwaltung
 
         private void Copy_picture()
         {
-            string oldLocation = pictureBox1.ImageLocation;
+            string oldLocation = picBox_Klein.ImageLocation;
             string newLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Bilder\\" + tb_ISBN.Text +".png";
             if(!File.Exists(newLocation) && oldLocation != newLocation)
             {
-                pictureBox1.Image.Save(newLocation, ImageFormat.Png);
-                pictureBox1.ImageLocation = newLocation;
+                picBox_Klein.Image.Save(newLocation, ImageFormat.Png);
+                picBox_Klein.ImageLocation = newLocation;
             }
             else if(oldLocation == newLocation) { }
             else
@@ -1235,17 +1256,17 @@ namespace Bibo_Verwaltung
 
         private void ZoomInOut(bool zoom)
         {
-            if(pictureBox1.Image != null)
+            if(picBox_Klein.Image != null)
             {
-                pictureBox2.Image = pictureBox1.Image;
+                picBox_Gross.Image = picBox_Klein.Image;
                 if (!zoom)
                 {
-                    pictureBox2.Visible = false;
+                    picBox_Gross.Visible = false;
                     gb_zoom.Visible = false;
                 }
                 else
                 {
-                    pictureBox2.Visible = true;
+                    picBox_Gross.Visible = true;
                     gb_zoom.Visible = true;
                 }
             }
@@ -1300,7 +1321,7 @@ namespace Bibo_Verwaltung
                     ifVerlagExists = false;
                 }
                 tb_Titel.Text = GetTitle().Replace("[", "(").Replace("]", ")");
-                pictureBox1.ImageLocation = GetPicture();
+                picBox_Klein.ImageLocation = GetPicture();
                 ifDownloaded = true;
                 MetroMessageBox.Show(this,"Das Buch \"" + tb_Titel.Text + "\" wurde erfolgreich geladen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -1548,7 +1569,7 @@ namespace Bibo_Verwaltung
         {
             string isbnAktuell = Grid_Buch.SelectedRows[0].Cells["ISBN"].Value.ToString();
             tb_ISBN.Text = isbnAktuell;
-            Form Buchid = new w_s_buchid(isbnAktuell);
+            Form Buchid = new w_s_exemplare(currentUser, isbnAktuell);
             Buchid.ShowDialog(this);
             //b.FillGrid_Buch(ref Grid_Buch);
             if (!backgroundWorker1.IsBusy)
@@ -1730,6 +1751,11 @@ namespace Bibo_Verwaltung
         private void Timer2_Tick(object sender, EventArgs e)
         {
             loaded = true;
+        }
+
+        private void Mtb_Import_Click(object sender, EventArgs e)
+        {
+            //Import
         }
     }
 }

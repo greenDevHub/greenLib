@@ -22,7 +22,16 @@ namespace Bibo_Verwaltung
         public w_s_klasse_stufe(string userName)
         {
             InitializeComponent();
+            Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
+            if (user.Rechteid.Equals("0"))
+            {
+                bt_Bearbeiten.Enabled = false;
+            }
+            else
+            {
+                bt_Bearbeiten.Enabled = true;              
+            }
             IniKlassenstufen();
         }
         #endregion

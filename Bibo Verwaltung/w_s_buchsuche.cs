@@ -24,7 +24,56 @@ namespace Bibo_Verwaltung
         public w_s_buchsuche(string userName)
         {
             InitializeComponent();
+            Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
+            if (user.Rechteid.Equals("0"))
+            {
+                tb_ExemplarID.Enabled = false;
+                tb_ISBN.Enabled = false;
+                tb_Titel.Enabled = false;
+                cb_Autor.Enabled = false;
+                cb_Verlag.Enabled = false;
+                cb_Genre.Enabled = false;
+                tb_VName.Enabled = false;
+                tb_NName.Enabled = false;
+                tb_Klasse.Enabled = false;
+                cb_KundeAnz.Enabled = false;
+                cb_Verfügbar_Anz.Enabled = false;
+                rb_REDonly.Enabled = false;
+                rb_YELLOWonly.Enabled = false;
+                rb_GREENonly.Enabled = false;
+                rb_Default.Enabled = false;
+                bt_Ausleihen.Enabled = false;
+                bt_rueckgabe.Enabled = false;
+                bt_reset.Enabled = false;
+                bt_Clear.Enabled = false;
+                ausleihen.Enabled = false;
+                exemplarZurückgebenToolStripMenuItem.Enabled = false;
+                ausleihlisteToolStripMenuItem.Enabled = false;
+                rueckgabelisteToolStripMenuItem.Enabled = false;
+            }
+            else
+            {
+                tb_ExemplarID.Enabled = true;
+                tb_ISBN.Enabled = true;
+                tb_Titel.Enabled = true;
+                cb_Autor.Enabled = true;
+                cb_Verlag.Enabled = true;
+                cb_Genre.Enabled = true;
+                tb_VName.Enabled = true;
+                tb_NName.Enabled = true;
+                tb_Klasse.Enabled = true;
+                cb_KundeAnz.Enabled = true;
+                cb_Verfügbar_Anz.Enabled = true;
+                rb_REDonly.Enabled = true;
+                rb_YELLOWonly.Enabled = true;
+                rb_GREENonly.Enabled = true;
+                rb_Default.Enabled = true;
+                bt_Ausleihen.Enabled = true;
+                bt_rueckgabe.Enabled = true;
+                bt_reset.Enabled = true;
+                bt_Clear.Enabled = true;
+            }
             this.Text = Text + " - Angemeldet als: " + userName;
         }
         #endregion
@@ -215,7 +264,6 @@ namespace Bibo_Verwaltung
             {
                 buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe);
             }
-
         }
 
         private void cb_Autor_Enter(object sender, EventArgs e)
@@ -395,99 +443,105 @@ namespace Bibo_Verwaltung
 
         private void gv_buchsuche_MouseDown(object sender, MouseEventArgs e)
         {
-            if (!(gv_buchsuche.HitTest(e.X, e.Y).RowIndex >= 0))
+            if (new Benutzer(currentUser).Rechteid != "0")
             {
-                gv_buchsuche.ClearSelection();
-                hinzufügenToolStripMenuItem.Visible = false;
-                entfernenToolStripMenuItem.Visible = false;
-                ausleihen.Visible = false;
-                ausleihenToolStripMenuItem.Visible = false;
-                exemplarZurückgebenToolStripMenuItem.Visible = false;
-                ausleihlisteToolStripMenuItem.Visible = false;
-                rueckgabelisteToolStripMenuItem.Visible = false;
-                hinzufügenToolStripMenuItem1.Visible = false;
-                entfernenToolStripMenuItem1.Visible = false;
-                zurueckgebenToolStripMenuItem.Visible = false;
-            }
-            else
-            {
-                hinzufügenToolStripMenuItem.Visible = true;
-                entfernenToolStripMenuItem.Visible = true;
-                ausleihen.Visible = true;
-                ausleihenToolStripMenuItem.Visible = true;
-                exemplarZurückgebenToolStripMenuItem.Visible = true;
-                ausleihlisteToolStripMenuItem.Visible = true;
-                rueckgabelisteToolStripMenuItem.Visible = true;
-                hinzufügenToolStripMenuItem1.Visible = true;
-                entfernenToolStripMenuItem1.Visible = true;
-                zurueckgebenToolStripMenuItem.Visible = true;
+                if (!(gv_buchsuche.HitTest(e.X, e.Y).RowIndex >= 0))
+                {
+                    gv_buchsuche.ClearSelection();
+                    hinzufügenToolStripMenuItem.Visible = false;
+                    entfernenToolStripMenuItem.Visible = false;
+                    ausleihen.Visible = false;
+                    ausleihenToolStripMenuItem.Visible = false;
+                    exemplarZurückgebenToolStripMenuItem.Visible = false;
+                    ausleihlisteToolStripMenuItem.Visible = false;
+                    rueckgabelisteToolStripMenuItem.Visible = false;
+                    hinzufügenToolStripMenuItem1.Visible = false;
+                    entfernenToolStripMenuItem1.Visible = false;
+                    zurueckgebenToolStripMenuItem.Visible = false;
+                }
+                else
+                {
+                    hinzufügenToolStripMenuItem.Visible = true;
+                    entfernenToolStripMenuItem.Visible = true;
+                    ausleihen.Visible = true;
+                    ausleihenToolStripMenuItem.Visible = true;
+                    exemplarZurückgebenToolStripMenuItem.Visible = true;
+                    ausleihlisteToolStripMenuItem.Visible = true;
+                    rueckgabelisteToolStripMenuItem.Visible = true;
+                    hinzufügenToolStripMenuItem1.Visible = true;
+                    entfernenToolStripMenuItem1.Visible = true;
+                    zurueckgebenToolStripMenuItem.Visible = true;
+                }
             }
         }
 
         private void gv_buchsuche_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
+            if (new Benutzer(currentUser).Rechteid != "0")
             {
-                if (!gv_buchsuche.Rows[e.RowIndex].Selected)
+                if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
                 {
-                    gv_buchsuche.ClearSelection();
-                    gv_buchsuche.Rows[e.RowIndex].Selected = true;
-                }
-                if (rueckListe.Count != 0)
-                {
-                    zurueckgebenToolStripMenuItem.Enabled = true;
-
-                }
-                else
-                {
-                    zurueckgebenToolStripMenuItem.Enabled = false;
-                }
-                if (leihListe.Count != 0)
-                {
-                    ausleihenToolStripMenuItem.Enabled = true;
-
-                }
-                else
-                {
-                    ausleihenToolStripMenuItem.Enabled = false;
-
-                }
-                if (gv_buchsuche.SelectedRows[0].Cells["Rückgabedatum"].Value.ToString().Equals(""))
-                {
-                    entfernenToolStripMenuItem1.Enabled = false;
-                    hinzufügenToolStripMenuItem1.Enabled = false;
-                    if (leihListe.Contains(gv_buchsuche.SelectedRows[0].Cells["ExemplarID"].Value.ToString()))
+                    if (!gv_buchsuche.Rows[e.RowIndex].Selected)
                     {
-                        hinzufügenToolStripMenuItem.Enabled = false;
-                        entfernenToolStripMenuItem.Enabled = true;
+                        gv_buchsuche.ClearSelection();
+                        gv_buchsuche.Rows[e.RowIndex].Selected = true;
+                    }
+                    if (rueckListe.Count != 0)
+                    {
+                        zurueckgebenToolStripMenuItem.Enabled = true;
+
                     }
                     else
                     {
-                        hinzufügenToolStripMenuItem.Enabled = true;
-                        entfernenToolStripMenuItem.Enabled = false;
+                        zurueckgebenToolStripMenuItem.Enabled = false;
                     }
-                    ausleihen.Enabled = true;
-                    exemplarZurückgebenToolStripMenuItem.Enabled = false;
-                }
-                else
-                {
-                    entfernenToolStripMenuItem.Enabled = false;
-                    hinzufügenToolStripMenuItem.Enabled = false;
-                    ausleihen.Enabled = false;
-                    exemplarZurückgebenToolStripMenuItem.Enabled = true;
-                    if (rueckListe.Contains(gv_buchsuche.SelectedRows[0].Cells["ExemplarID"].Value.ToString()))
+                    if (leihListe.Count != 0)
                     {
-                        hinzufügenToolStripMenuItem1.Enabled = false;
-                        entfernenToolStripMenuItem1.Enabled = true;
+                        ausleihenToolStripMenuItem.Enabled = true;
+
                     }
                     else
                     {
-                        hinzufügenToolStripMenuItem1.Enabled = true;
+                        ausleihenToolStripMenuItem.Enabled = false;
+
+                    }
+                    if (gv_buchsuche.SelectedRows[0].Cells["Rückgabedatum"].Value.ToString().Equals(""))
+                    {
                         entfernenToolStripMenuItem1.Enabled = false;
+                        hinzufügenToolStripMenuItem1.Enabled = false;
+                        if (leihListe.Contains(gv_buchsuche.SelectedRows[0].Cells["ExemplarID"].Value.ToString()))
+                        {
+                            hinzufügenToolStripMenuItem.Enabled = false;
+                            entfernenToolStripMenuItem.Enabled = true;
+                        }
+                        else
+                        {
+                            hinzufügenToolStripMenuItem.Enabled = true;
+                            entfernenToolStripMenuItem.Enabled = false;
+                        }
+                        ausleihen.Enabled = true;
+                        exemplarZurückgebenToolStripMenuItem.Enabled = false;
                     }
-                    
+                    else
+                    {
+                        entfernenToolStripMenuItem.Enabled = false;
+                        hinzufügenToolStripMenuItem.Enabled = false;
+                        ausleihen.Enabled = false;
+                        exemplarZurückgebenToolStripMenuItem.Enabled = true;
+                        if (rueckListe.Contains(gv_buchsuche.SelectedRows[0].Cells["ExemplarID"].Value.ToString()))
+                        {
+                            hinzufügenToolStripMenuItem1.Enabled = false;
+                            entfernenToolStripMenuItem1.Enabled = true;
+                        }
+                        else
+                        {
+                            hinzufügenToolStripMenuItem1.Enabled = true;
+                            entfernenToolStripMenuItem1.Enabled = false;
+                        }
+
+                    }
+
                 }
-                        
             }
         }
 

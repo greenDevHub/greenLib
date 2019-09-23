@@ -69,7 +69,7 @@ namespace Bibo_Verwaltung
         {
             if (Text == "Buch-Details")
             {
-                Form Buecher = new w_s_buecher(true);
+                Form Buecher = new w_s_buecher(currentUser, true);
                 Buecher.ShowDialog(this);
             }
             else if (Text == "Kunden-Details")
