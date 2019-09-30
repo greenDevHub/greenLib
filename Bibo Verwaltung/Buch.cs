@@ -541,7 +541,9 @@ namespace Bibo_Verwaltung
             try
             {
                 ds.Tables[0].Clear();
+                ds.Tables[0].Columns.Clear();
                 dt.Clear();
+                dt.Columns.Clear();
             }
             catch { }
         }
@@ -619,14 +621,14 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt eine ComoBox mit Buchdaten 
         /// </summary>
-        public void FillCombobox(ref ComboBox cb, object value)
+        public void FillCombobox(ref AdvancedComboBox cb, int value)
         {
             ClearDataSource();
-            FillObjectBuch();
+            FillObjectBuchShort();
             cb.DataSource = ds.Tables[0];
             cb.ValueMember = "ISBN";
             cb.DisplayMember = "Titel";
-            cb.SelectedValue = value;
+            cb.SelectedIndex = value;
         }
 
         /// <summary>

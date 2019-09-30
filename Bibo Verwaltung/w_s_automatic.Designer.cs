@@ -56,6 +56,7 @@
             this.dp_RueckDatum = new MetroFramework.Controls.MetroDateTime();
             this.a_cb_Klasse = new Bibo_Verwaltung.AdvancedComboBox();
             this.a_cb_Modus = new Bibo_Verwaltung.AdvancedComboBox();
+            this.mbt_Suche = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Schueler)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_suggested)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).BeginInit();
@@ -346,7 +347,7 @@
             // 
             // 
             this.tb_ExemplarID.CustomButton.Image = null;
-            this.tb_ExemplarID.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_ExemplarID.CustomButton.Location = new System.Drawing.Point(123, 2);
             this.tb_ExemplarID.CustomButton.Name = "";
             this.tb_ExemplarID.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.tb_ExemplarID.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -367,7 +368,7 @@
             this.tb_ExemplarID.SelectionLength = 0;
             this.tb_ExemplarID.SelectionStart = 0;
             this.tb_ExemplarID.ShortcutsEnabled = true;
-            this.tb_ExemplarID.Size = new System.Drawing.Size(175, 24);
+            this.tb_ExemplarID.Size = new System.Drawing.Size(145, 24);
             this.tb_ExemplarID.Style = MetroFramework.MetroColorStyle.Yellow;
             this.tb_ExemplarID.TabIndex = 5;
             this.tb_ExemplarID.UseSelectable = true;
@@ -393,7 +394,7 @@
             this.lb_Klasse.Size = new System.Drawing.Size(50, 24);
             this.lb_Klasse.Style = MetroFramework.MetroColorStyle.Yellow;
             this.lb_Klasse.TabIndex = 23;
-            this.lb_Klasse.Text = "Klasse:";
+            this.lb_Klasse.Text = "-";
             this.lb_Klasse.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lb_Klasse.Visible = false;
             // 
@@ -406,7 +407,6 @@
             this.dp_RueckDatum.Name = "dp_RueckDatum";
             this.dp_RueckDatum.Size = new System.Drawing.Size(179, 29);
             this.dp_RueckDatum.TabIndex = 2;
-            this.dp_RueckDatum.ValueChanged += new System.EventHandler(this.dp_RueckDatum_ValueChanged);
             // 
             // a_cb_Klasse
             // 
@@ -425,7 +425,6 @@
             this.a_cb_Klasse.Size = new System.Drawing.Size(175, 24);
             this.a_cb_Klasse.Sorted = true;
             this.a_cb_Klasse.TabIndex = 3;
-            this.a_cb_Klasse.Text = "Klasse";
             this.a_cb_Klasse.Visible = false;
             // 
             // a_cb_Modus
@@ -448,14 +447,25 @@
             this.a_cb_Modus.Size = new System.Drawing.Size(175, 24);
             this.a_cb_Modus.Sorted = true;
             this.a_cb_Modus.TabIndex = 1;
-            this.a_cb_Modus.Text = "Modus";
             this.a_cb_Modus.SelectedIndexChanged += new System.EventHandler(this.a_cb_Modus_SelectedIndexChanged);
+            // 
+            // mbt_Suche
+            // 
+            this.mbt_Suche.DisplayFocus = true;
+            this.mbt_Suche.Location = new System.Drawing.Point(861, 137);
+            this.mbt_Suche.Name = "mbt_Suche";
+            this.mbt_Suche.Size = new System.Drawing.Size(24, 24);
+            this.mbt_Suche.TabIndex = 24;
+            this.mbt_Suche.Text = "🔍";
+            this.mbt_Suche.UseSelectable = true;
+            this.mbt_Suche.Click += new System.EventHandler(this.Mbt_Suche_Click);
             // 
             // w_s_automatic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(908, 525);
+            this.Controls.Add(this.mbt_Suche);
             this.Controls.Add(this.a_cb_Klasse);
             this.Controls.Add(this.dp_RueckDatum);
             this.Controls.Add(this.lb_Klasse);
@@ -509,5 +519,6 @@
         private MetroFramework.Controls.MetroLabel lb_Klasse;
         private MetroFramework.Controls.MetroDateTime dp_RueckDatum;
         private AdvancedComboBox a_cb_Klasse;
+        private MetroFramework.Controls.MetroButton mbt_Suche;
     }
 }

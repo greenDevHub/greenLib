@@ -41,6 +41,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -188,6 +189,12 @@
     </Compile>
     <Compile Include="w_s_buch_stufe.Designer.cs">
       <DependentUpon>w_s_buch_stufe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="w_s_exemplarSuche.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_exemplarSuche.Designer.cs">
+      <DependentUpon>w_s_exemplarSuche.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_fach_stufe.cs">
       <SubType>Form</SubType>
@@ -388,6 +395,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_buch_stufe.resx">
       <DependentUpon>w_s_buch_stufe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="w_s_exemplarSuche.resx">
+      <DependentUpon>w_s_exemplarSuche.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_fach_stufe.resx">
       <DependentUpon>w_s_fach_stufe.cs</DependentUpon>

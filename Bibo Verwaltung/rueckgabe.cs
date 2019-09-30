@@ -109,7 +109,7 @@ namespace Bibo_Verwaltung
         private void FillObject()
         {
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT buch_titel as 'Titel', aus_leihdatum as 'Leihdatum', aus_rückgabedatum as 'Rückgabedatum', aus_buchid FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid left join t_s_buecher on buch_isbn = bu_isbn WHERE aus_kundenid = @0";
+            string RawCommand = "SELECT aus_buchid as 'ID', buch_titel as 'Titel', aus_leihdatum as 'Leihdatum', aus_rückgabedatum as 'Rückgabedatum' FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid left join t_s_buecher on buch_isbn = bu_isbn WHERE aus_kundenid = @0";
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.SelectCommand.Parameters.AddWithValue("@0", KID);
             adapter.Fill(ds);
@@ -136,8 +136,18 @@ namespace Bibo_Verwaltung
             ClearDataSource();
             FillObject();
             grid.DataSource = ds.Tables[0];
-            grid.Columns["aus_buchid"].Visible = false;
         }
+
+        ///// <summary>
+        ///// Gibt ein DataTable-Objekt mit den ausgeliehen Büchern der Kunden zurück 
+        ///// </summary>
+        //public DataTable GetAusgeliehen(string KundenID)
+        //{
+        //    KID = KundenID;
+        //    ClearDataSource();
+        //    FillObject();
+        //    return ds.Tables[0];
+        //}
 
         /// <summary>
         /// Prüft die Buchrückgabeliste auf das Vorhandensein der angegebenen Exemlar ID 

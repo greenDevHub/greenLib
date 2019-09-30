@@ -12,15 +12,26 @@ namespace Bibo_Verwaltung
 {
     class Klasse
     {
+        SQL_Verbindung con = new SQL_Verbindung();
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
+
         string klasse;
         /// <summary>
         /// E-Mail Adresse des Kunden
         /// </summary>
         public string Klassename { get { return klasse; } set { klasse = value; } }
-        SQL_Verbindung con = new SQL_Verbindung();
-        SqlDataAdapter adapter = new SqlDataAdapter();
-        DataSet ds = new DataSet();
-        DataTable dt = new DataTable();
+
+        #region Objekt-Constructor
+        /// <summary>
+        /// Erschaft das Objekt Kunde
+        /// </summary>
+        public Klasse()
+        {
+            FillObject();
+        }
+        #endregion
 
         /// <summary>
         /// Füllt das DataSet 

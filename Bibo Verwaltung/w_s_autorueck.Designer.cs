@@ -66,7 +66,7 @@
             this.lb_Klasse.Size = new System.Drawing.Size(50, 24);
             this.lb_Klasse.Style = MetroFramework.MetroColorStyle.Yellow;
             this.lb_Klasse.TabIndex = 41;
-            this.lb_Klasse.Text = "Klasse:";
+            this.lb_Klasse.Text = "-";
             this.lb_Klasse.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lb_Klasse.Visible = false;
             // 
@@ -219,7 +219,7 @@
             this.gv_selected.AllowUserToDeleteRows = false;
             this.gv_selected.AllowUserToResizeColumns = false;
             this.gv_selected.AllowUserToResizeRows = false;
-            this.gv_selected.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gv_selected.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.gv_selected.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_selected.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv_selected.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -409,7 +409,6 @@
             this.a_cb_Klasse.Size = new System.Drawing.Size(175, 24);
             this.a_cb_Klasse.Sorted = true;
             this.a_cb_Klasse.TabIndex = 27;
-            this.a_cb_Klasse.Text = "Klasse";
             this.a_cb_Klasse.Visible = false;
             // 
             // a_cb_Modus
@@ -432,7 +431,6 @@
             this.a_cb_Modus.Size = new System.Drawing.Size(175, 24);
             this.a_cb_Modus.Sorted = true;
             this.a_cb_Modus.TabIndex = 25;
-            this.a_cb_Modus.Text = "Modus";
             this.a_cb_Modus.SelectedIndexChanged += new System.EventHandler(this.A_cb_Modus_SelectedIndexChanged);
             // 
             // w_s_autorueck
@@ -457,9 +455,14 @@
             this.Controls.Add(this.gv_selected);
             this.Controls.Add(this.gv_suggested);
             this.Controls.Add(this.gv_Schueler);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "w_s_autorueck";
+            this.Resizable = false;
             this.ShowInTaskbar = false;
-            this.Text = "w_s_autorueck";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Style = MetroFramework.MetroColorStyle.Yellow;
+            this.Text = "Automatische Lehrbuchrückgabe";
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_suggested)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Schueler)).EndInit();

@@ -461,17 +461,17 @@ namespace Bibo_Verwaltung
         /// </summary>
         public bool Ausgeliehen()
         {
-            string leihnummer = "";
+            string anzahl = "";
             if (con.ConnectError()) return true;
-            string RawCommand = "SELECT aus_leihnummer from t_bd_ausgeliehen WHERE aus_kundenid = @0";
+            string RawCommand = "SELECT Count(aus_leihnummer) as 'Anzahl' from t_bd_ausgeliehen WHERE aus_kundenid = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, KundenID);
             while (dr.Read())
             {
-                leihnummer = dr["aus_leihnummer"].ToString();
+                anzahl = dr["Anzahl"].ToString();
             }
             dr.Close();
             con.Close();
-            if (leihnummer == null || leihnummer == "")
+            if (anzahl == "0" || anzahl == "")
             {
                 return false;
             }
@@ -479,6 +479,22 @@ namespace Bibo_Verwaltung
             {
                 return true;
             }
+        }
+
+        /// <summary>
+        /// Gibt ein DataTable-Objekt mit den ausgeliehen Büchern der Kunden zurück 
+        /// </summary>
+        public DataTable GetAusgeliehen(string KID)
+        {
+            KundenID = KID;
+            DataTable result = new DataTable();
+            if (con.ConnectError()) return result;
+            string RawCommand = "SELECT aus_buchid as 'ExemplarID', buch_isbn as 'ISBN', aus_leihdatum as 'Leihdatum', aus_rückgabedatum as 'Rückgabedatum' FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid left join t_s_buecher on buch_isbn = bu_isbn WHERE aus_kundenid = @0";
+            adapter = new SqlDataAdapter(RawCommand, con.Con);
+            adapter.SelectCommand.Parameters.AddWithValue("@0", KID);
+            adapter.Fill(result);
+            con.Close();
+            return result;
         }
 
         /// <summary>
