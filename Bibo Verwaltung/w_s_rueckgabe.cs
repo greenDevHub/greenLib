@@ -358,7 +358,7 @@ namespace Bibo_Verwaltung
         private void Buchrueckgabe()
         {
             DialogResult dialogResult = MetroMessageBox.Show(this, rueckgabe.GetRueckgabeList() + "ausgeliehen von: '" + rueckgabe.TrimText(kunde.Vorname + " " + kunde.Nachname, 30) + "' wirklich als zurückgegeben markieren?", "Achtung",
-                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question, this.Height / 2);
             if (dialogResult == DialogResult.OK)
             {
                 try

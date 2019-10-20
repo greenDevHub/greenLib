@@ -166,6 +166,7 @@
             this.mtb_Nachricht.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.mtb_Nachricht.UseSelectable = true;
             this.mtb_Nachricht.UseWaitCursor = true;
+            this.mtb_Nachricht.Visible = false;
             this.mtb_Nachricht.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtb_Nachricht.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
@@ -221,14 +222,15 @@
             // 
             // lb_anzahl
             // 
+            this.lb_anzahl.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_anzahl, "Tragen sie die Anzahl der Exemplare ihres Buches hier ein.");
             this.lb_anzahl.Location = new System.Drawing.Point(4, 333);
             this.lb_anzahl.Margin = new System.Windows.Forms.Padding(3);
             this.lb_anzahl.Name = "lb_anzahl";
             this.helpProvider.SetShowHelp(this.lb_anzahl, true);
-            this.lb_anzahl.Size = new System.Drawing.Size(130, 24);
+            this.lb_anzahl.Size = new System.Drawing.Size(148, 19);
             this.lb_anzahl.TabIndex = 49;
-            this.lb_anzahl.Text = "Anzahl Exemplare:";
+            this.lb_anzahl.Text = "Vorhandene Exemplare:";
             this.lb_anzahl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // bt_pic_delete
@@ -337,7 +339,7 @@
             // 
             // 
             this.tb_anzahl.CustomButton.Image = null;
-            this.tb_anzahl.CustomButton.Location = new System.Drawing.Point(53, 2);
+            this.tb_anzahl.CustomButton.Location = new System.Drawing.Point(28, 2);
             this.tb_anzahl.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.tb_anzahl.CustomButton.Name = "";
             this.tb_anzahl.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -350,7 +352,7 @@
             this.tb_anzahl.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.helpProvider.SetHelpString(this.tb_anzahl, "Tragen sie die Anzahl der Exemplare ihres Buches hier ein.");
             this.tb_anzahl.Lines = new string[0];
-            this.tb_anzahl.Location = new System.Drawing.Point(140, 333);
+            this.tb_anzahl.Location = new System.Drawing.Point(165, 333);
             this.tb_anzahl.MaximumSize = new System.Drawing.Size(375, 24);
             this.tb_anzahl.MaxLength = 32767;
             this.tb_anzahl.MinimumSize = new System.Drawing.Size(50, 24);
@@ -362,7 +364,7 @@
             this.tb_anzahl.SelectionStart = 0;
             this.tb_anzahl.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_anzahl, true);
-            this.tb_anzahl.Size = new System.Drawing.Size(75, 24);
+            this.tb_anzahl.Size = new System.Drawing.Size(50, 24);
             this.tb_anzahl.TabIndex = 48;
             this.tb_anzahl.UseSelectable = true;
             this.tb_anzahl.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -712,6 +714,7 @@
             // picBox_Gross
             // 
             this.picBox_Gross.BackColor = System.Drawing.Color.White;
+            this.picBox_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picBox_Gross.Location = new System.Drawing.Point(0, 0);
             this.picBox_Gross.Margin = new System.Windows.Forms.Padding(0);
             this.picBox_Gross.Name = "picBox_Gross";
@@ -773,7 +776,7 @@
             this.Grid_Buch.RowTemplate.Height = 24;
             this.Grid_Buch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.helpProvider.SetShowHelp(this.Grid_Buch, true);
-            this.Grid_Buch.Size = new System.Drawing.Size(801, 484);
+            this.Grid_Buch.Size = new System.Drawing.Size(801, 475);
             this.Grid_Buch.TabIndex = 0;
             this.Grid_Buch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Buch_CellDoubleClick);
             this.Grid_Buch.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Grid_Buch_CellMouseDown);
@@ -787,26 +790,26 @@
             this.entfernenToolStripMenuItem,
             this.exemplareToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(129, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(130, 70);
             // 
             // ladenToolStripMenuItem
             // 
             this.ladenToolStripMenuItem.Name = "ladenToolStripMenuItem";
-            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.ladenToolStripMenuItem.Text = "Laden";
             this.ladenToolStripMenuItem.Click += new System.EventHandler(this.ladenToolStripMenuItem_Click);
             // 
             // entfernenToolStripMenuItem
             // 
             this.entfernenToolStripMenuItem.Name = "entfernenToolStripMenuItem";
-            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.entfernenToolStripMenuItem.Text = "Entfernen";
             this.entfernenToolStripMenuItem.Click += new System.EventHandler(this.entfernenToolStripMenuItem_Click);
             // 
             // exemplareToolStripMenuItem
             // 
             this.exemplareToolStripMenuItem.Name = "exemplareToolStripMenuItem";
-            this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.exemplareToolStripMenuItem.Text = "Exemplare";
             this.exemplareToolStripMenuItem.Click += new System.EventHandler(this.exemplareToolStripMenuItem_Click);
             // 
@@ -855,10 +858,10 @@
             // 
             // metroProgressSpinner1
             // 
-            this.metroProgressSpinner1.Location = new System.Drawing.Point(580, 63);
+            this.metroProgressSpinner1.Location = new System.Drawing.Point(540, 63);
             this.metroProgressSpinner1.Maximum = 100;
             this.metroProgressSpinner1.Name = "metroProgressSpinner1";
-            this.metroProgressSpinner1.Size = new System.Drawing.Size(485, 484);
+            this.metroProgressSpinner1.Size = new System.Drawing.Size(475, 475);
             this.metroProgressSpinner1.TabIndex = 51;
             this.metroProgressSpinner1.UseSelectable = true;
             // 
@@ -1027,12 +1030,12 @@
             // 
             this.bt_print.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_print.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_print.Location = new System.Drawing.Point(287, 453);
+            this.bt_print.Location = new System.Drawing.Point(250, 453);
             this.bt_print.Name = "bt_print";
-            this.bt_print.Size = new System.Drawing.Size(56, 24);
+            this.bt_print.Size = new System.Drawing.Size(93, 24);
             this.bt_print.Style = MetroFramework.MetroColorStyle.Blue;
             this.bt_print.TabIndex = 56;
-            this.bt_print.Text = "Neue Barcodes drucken";
+            this.bt_print.Text = "Drucken";
             this.bt_print.UseSelectable = true;
             this.bt_print.Click += new System.EventHandler(this.bt_print_Click);
             // 
@@ -1064,7 +1067,7 @@
             this.tb_barcodePrinted.Enabled = false;
             this.tb_barcodePrinted.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.tb_barcodePrinted.Lines = new string[0];
-            this.tb_barcodePrinted.Location = new System.Drawing.Point(140, 423);
+            this.tb_barcodePrinted.Location = new System.Drawing.Point(169, 423);
             this.tb_barcodePrinted.Margin = new System.Windows.Forms.Padding(3, 1, 3, 3);
             this.tb_barcodePrinted.MaximumSize = new System.Drawing.Size(375, 24);
             this.tb_barcodePrinted.MaxLength = 32767;
@@ -1098,7 +1101,7 @@
             // 
             // 
             this.tb_barcodeAdd.CustomButton.Image = null;
-            this.tb_barcodeAdd.CustomButton.Location = new System.Drawing.Point(90, 2);
+            this.tb_barcodeAdd.CustomButton.Location = new System.Drawing.Point(53, 2);
             this.tb_barcodeAdd.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.tb_barcodeAdd.CustomButton.Name = "";
             this.tb_barcodeAdd.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -1122,7 +1125,7 @@
             this.tb_barcodeAdd.SelectionLength = 0;
             this.tb_barcodeAdd.SelectionStart = 0;
             this.tb_barcodeAdd.ShortcutsEnabled = false;
-            this.tb_barcodeAdd.Size = new System.Drawing.Size(112, 24);
+            this.tb_barcodeAdd.Size = new System.Drawing.Size(75, 24);
             this.tb_barcodeAdd.TabIndex = 48;
             this.tb_barcodeAdd.UseSelectable = true;
             this.tb_barcodeAdd.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -1134,7 +1137,7 @@
             this.checkedListBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.HighlightColor = System.Drawing.Color.Green;
-            this.checkedListBox1.Location = new System.Drawing.Point(140, 123);
+            this.checkedListBox1.Location = new System.Drawing.Point(140, 112);
             this.checkedListBox1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(175, 79);
@@ -1144,12 +1147,13 @@
             // 
             // metroLabel1
             // 
+            this.metroLabel1.AutoSize = true;
             this.metroLabel1.Location = new System.Drawing.Point(4, 303);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(130, 24);
+            this.metroLabel1.Size = new System.Drawing.Size(141, 19);
             this.metroLabel1.TabIndex = 49;
-            this.metroLabel1.Text = "addAnzahl Exemplare:";
+            this.metroLabel1.Text = "Exemplare hinzufügen:";
             this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBox1
@@ -1176,7 +1180,7 @@
             // 
             // 
             this.tb_neu.CustomButton.Image = null;
-            this.tb_neu.CustomButton.Location = new System.Drawing.Point(53, 2);
+            this.tb_neu.CustomButton.Location = new System.Drawing.Point(28, 2);
             this.tb_neu.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.tb_neu.CustomButton.Name = "";
             this.tb_neu.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -1188,7 +1192,7 @@
             this.tb_neu.Enabled = false;
             this.tb_neu.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.tb_neu.Lines = new string[0];
-            this.tb_neu.Location = new System.Drawing.Point(140, 303);
+            this.tb_neu.Location = new System.Drawing.Point(165, 303);
             this.tb_neu.MaximumSize = new System.Drawing.Size(375, 24);
             this.tb_neu.MaxLength = 32767;
             this.tb_neu.MinimumSize = new System.Drawing.Size(50, 24);
@@ -1199,7 +1203,7 @@
             this.tb_neu.SelectionLength = 0;
             this.tb_neu.SelectionStart = 0;
             this.tb_neu.ShortcutsEnabled = false;
-            this.tb_neu.Size = new System.Drawing.Size(75, 24);
+            this.tb_neu.Size = new System.Drawing.Size(50, 24);
             this.tb_neu.TabIndex = 48;
             this.tb_neu.UseSelectable = true;
             this.tb_neu.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -1233,7 +1237,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1200, 750);
+            this.ClientSize = new System.Drawing.Size(1200, 584);
             this.Controls.Add(this.mtb_Import);
             this.Controls.Add(this.metroProgressBar1);
             this.Controls.Add(this.metroPanel1);

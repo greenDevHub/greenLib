@@ -74,7 +74,7 @@
             this.dp_RueckDatum.Location = new System.Drawing.Point(116, 118);
             this.dp_RueckDatum.MinimumSize = new System.Drawing.Size(0, 29);
             this.dp_RueckDatum.Name = "dp_RueckDatum";
-            this.dp_RueckDatum.Size = new System.Drawing.Size(179, 30);
+            this.dp_RueckDatum.Size = new System.Drawing.Size(179, 29);
             this.dp_RueckDatum.Style = MetroFramework.MetroColorStyle.Green;
             this.dp_RueckDatum.TabIndex = 2;
             // 
@@ -400,6 +400,7 @@
             this.tb_NName.MaxLength = 32767;
             this.tb_NName.Name = "tb_NName";
             this.tb_NName.PasswordChar = '\0';
+            this.tb_NName.PromptText = "Nachname";
             this.tb_NName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_NName.SelectedText = "";
             this.tb_NName.SelectionLength = 0;
@@ -434,6 +435,7 @@
             this.tb_VName.MaxLength = 32767;
             this.tb_VName.Name = "tb_VName";
             this.tb_VName.PasswordChar = '\0';
+            this.tb_VName.PromptText = "Vorname";
             this.tb_VName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_VName.SelectedText = "";
             this.tb_VName.SelectionLength = 0;
@@ -490,7 +492,7 @@
             this.bt_Abbrechen.Size = new System.Drawing.Size(100, 24);
             this.bt_Abbrechen.Style = MetroFramework.MetroColorStyle.Green;
             this.bt_Abbrechen.TabIndex = 10;
-            this.bt_Abbrechen.Text = "Abbrechen";
+            this.bt_Abbrechen.Text = "Schließen";
             this.bt_Abbrechen.UseSelectable = true;
             // 
             // gb_Exemplar

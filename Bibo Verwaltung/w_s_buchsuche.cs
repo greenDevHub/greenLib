@@ -334,47 +334,64 @@ namespace Bibo_Verwaltung
 
         private void tb_ExemplarID_TextChanged(object sender, EventArgs e)
         {
-            buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
+            //buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
+            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+
         }
 
         private void tb_ISBN_TextChanged(object sender, EventArgs e)
         {
-            buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
+            //buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
+            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+
         }
 
         private void tb_Titel_TextChanged(object sender, EventArgs e)
         {
-            buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
+            //buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
+            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+
         }
 
         private void cb_Autor_TextChanged(object sender, EventArgs e)
         {
-            buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
+            //buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
+            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+
         }
 
         private void cb_Verlag_TextChanged(object sender, EventArgs e)
         {
-            buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
+            //buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
+            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+
         }
 
         private void cb_Genre_TextChanged(object sender, EventArgs e)
         {
-            buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
+            //buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
+            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+
         }
 
         private void tb_nachname_TextChanged(object sender, EventArgs e)
         {
-            buchsuche.Execute_KundenSearch(ref gv_buchsuche, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+            //buchsuche.Execute_KundenSearch(ref gv_buchsuche, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+
         }
 
         private void tb_vorname_TextChanged(object sender, EventArgs e)
         {
-            buchsuche.Execute_KundenSearch(ref gv_buchsuche, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+            //buchsuche.Execute_KundenSearch(ref gv_buchsuche, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
         }
 
         private void tb_klasse_TextChanged(object sender, EventArgs e)
         {
-            buchsuche.Execute_KundenSearch(ref gv_buchsuche, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+            //buchsuche.Execute_KundenSearch(ref gv_buchsuche, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+
         }
         List<string> leihListe = new List<string>();
         List<string> rueckListe = new List<string>();
@@ -699,6 +716,7 @@ namespace Bibo_Verwaltung
             Form Ausleihe = new w_s_ausleihe(currentUser, leih);
             Ausleihe.ShowDialog(this);
             leihListe.Clear();
+            lb_liste.Text = "";
             rueckgabelisteToolStripMenuItem.Enabled = true;
             if (!backgroundWorker1.IsBusy)
             {
@@ -813,6 +831,7 @@ namespace Bibo_Verwaltung
             Form Rueckgabe = new w_s_rueckgabe(currentUser, rueckListe.ToArray());
             Rueckgabe.ShowDialog(this);
             rueckListe.Clear();
+            lb_liste.Text = "";
             ausleihlisteToolStripMenuItem.Enabled = true;
             if (!backgroundWorker1.IsBusy)
             {
@@ -828,6 +847,10 @@ namespace Bibo_Verwaltung
             buchsuche.Set_StatusMark(ref gv_buchsuche, rueckListe);
             rueckgabelisteToolStripMenuItem.Enabled = true;
             ausleihlisteToolStripMenuItem.Enabled = true;
+        }
+        private void ClearListe()
+        {
+
         }
     }
 }

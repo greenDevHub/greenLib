@@ -67,14 +67,15 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void LoadForm()
         {
-            tb_ID.Text = exemplar.ExemplarID;
-            tb_ISBN.Text = exemplar.ISBN;
-            acb_Zustand.Text = exemplar.Zustand.Zustandname;
-            dTP_AufDat.Value = exemplar.Aufnahmedatum;
+            Exemplar ex = new Exemplar(exemplar.ExemplarID);
+            tb_ID.Text = ex.ExemplarID;
+            tb_ISBN.Text = ex.ISBN;
+            acb_Zustand.Text = ex.Zustand.Zustandname;
+            dTP_AufDat.Value = ex.Aufnahmedatum;
             
             #region Barcode generieren
             string code = "";
-            code = exemplar.ExemplarID;
+            code = ex.ExemplarID;
             for (int i = code.Length; i < 7;)
             {
                 code = "0" + code;
@@ -106,7 +107,7 @@ namespace Bibo_Verwaltung
             #endregion
 
             rb_edit.Checked = true;
-            exemplar.Zustand.FillCombobox(ref acb_Zustand, exemplar.Zustand.ZustandID);
+            ex.Zustand.FillCombobox(ref acb_Zustand, ex.Zustand.ZustandID);
         }
 
         /// <summary>
@@ -119,7 +120,6 @@ namespace Bibo_Verwaltung
             acb_Zustand.SelectedIndex = -1;
             dTP_AufDat.Value = DateTime.Now;
             tb_ExempCount.Text = "1";
-            tb_Vorhanden.Text = "";
             mtb_Barcode.Text = "";
             BarcodeBox.Image = null;
             lb_Message.Visible = false;
