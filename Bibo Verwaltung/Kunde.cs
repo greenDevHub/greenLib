@@ -330,7 +330,10 @@ namespace Bibo_Verwaltung
         {
 
             {
-                Klasse.AddKlasse(Klasse.Klassename);
+                if (!Klasse.Klassename.Equals(""))
+                {
+                    Klasse.AddKlasse(Klasse.Klassename);
+                }
                 string RawCommand = "INSERT INTO [dbo].[t_s_kunden] (kunde_vorname, kunde_nachname, kunde_geburtsdatum, kunde_ort, kunde_postleitzahl, kunde_strasse, kunde_telefonnummer, kunde_hausnummer, kunde_mail, kunde_klasse, kunde_activated) VALUES (@vorname, @nachname, @gd, @ort, @postleitzahl, @strasse, @telefonnummer, @hausnummer, @mail, @klasse, 1)";
                 con.ConnectError();
                 SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
@@ -343,7 +346,15 @@ namespace Bibo_Verwaltung
                 cmd.Parameters.AddWithValue("@telefonnummer", Telefonnummer);
                 cmd.Parameters.AddWithValue("@hausnummer", Hausnummer);
                 cmd.Parameters.AddWithValue("@mail", Mail);
-                cmd.Parameters.AddWithValue("@klasse", Klasse.GetID(Klasse.Klassename));
+                if (!Klasse.Klassename.Equals(""))
+                {
+                    cmd.Parameters.AddWithValue("@klasse", Klasse.GetID(Klasse.Klassename));
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@klasse", DBNull.Value);
+                }
+                
                 cmd.ExecuteNonQuery();
                 GetKundenID();
                 AddFaecherToKunde();
@@ -387,6 +398,10 @@ namespace Bibo_Verwaltung
         public void UpdateKunde()
         {
             {
+                if (!Klasse.Klassename.Equals(""))
+                {
+                    Klasse.AddKlasse(Klasse.Klassename);
+                }
                 string RawCommand = "UPDATE [dbo].[t_s_kunden] SET kunde_ort = @ort, kunde_postleitzahl = @postleitzahl, kunde_strasse = @strasse, kunde_telefonnummer = @telefonnummer, kunde_hausnummer = @hausnummer, kunde_mail = @mail, kunde_klasse = @klasse WHERE kunde_ID = @k_ID";
                 con.ConnectError();
                 SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
@@ -396,7 +411,15 @@ namespace Bibo_Verwaltung
                 cmd.Parameters.AddWithValue("@telefonnummer", Telefonnummer);
                 cmd.Parameters.AddWithValue("@hausnummer", Hausnummer);
                 cmd.Parameters.AddWithValue("@mail", Mail);
-                cmd.Parameters.AddWithValue("@klasse", Klasse.GetID(Klasse.Klassename));
+                if (!Klasse.Klassename.Equals(""))
+                {
+                    cmd.Parameters.AddWithValue("@klasse", Klasse.GetID(Klasse.Klassename));
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@klasse", DBNull.Value);
+
+                }
                 cmd.Parameters.AddWithValue("@k_ID", KundenID);
                 // Verbindung öffnen 
                 cmd.ExecuteNonQuery();

@@ -13,6 +13,7 @@ using System.Media;
 using MetroFramework;
 using bpac;
 using MetroFramework.Controls;
+using System.Threading;
 
 namespace Bibo_Verwaltung
 {
@@ -296,7 +297,7 @@ namespace Bibo_Verwaltung
         
         private void Save_Buecher(object sender, EventArgs e)
         {
-            var t = new Timer();
+            var t = new System.Windows.Forms.Timer();
             t.Interval = 3000; // it will Tick in 3 seconds
             t.Tick += (s, a) =>
             {
@@ -1452,12 +1453,13 @@ namespace Bibo_Verwaltung
 
         private void tb_Neupreis_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
+            char a = Convert.ToChar(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != a))
             {
                 SystemSounds.Beep.Play();
                 e.Handled = true;
             }
-            if ((e.KeyChar == ',') && ((sender as MetroFramework.Controls.MetroTextBox).Text.IndexOf(',') > -1))
+            if ((e.KeyChar == a) && ((sender as MetroFramework.Controls.MetroTextBox).Text.IndexOf(a) > -1))
             {
                 e.Handled = true;
             }
