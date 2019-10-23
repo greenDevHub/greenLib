@@ -572,11 +572,11 @@ namespace Bibo_Verwaltung
                     try
                     {
                         SetKundenValues();
-                        if (kunde.Faecher.Count > 1 && kunde.Klasse.Equals(""))
+                        if (kunde.Faecher.Count > 1 && kunde.Klasse.Klassename.Equals(""))
                         {
                             MetroMessageBox.Show(this, "Sie haben zwar Fächer ausgewählt, aber keine Klasse. Bitte geben Sie auch die Klasse des Schülers an!", "Klasse fehlt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
-                        else if (kunde.Faecher.Count.Equals(0) && !kunde.Klasse.Equals(""))
+                        else if (kunde.Faecher.Count.Equals(0) && !kunde.Klasse.Klassename.Equals(""))
                         {
                             DialogResult dr = MetroMessageBox.Show(this, "Sie haben zwar eine Klasse ausgewählt, aber keine Fächer. Möchten Sie auch die Fächer angeben?", "Fächer fehlen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                             if (dr == DialogResult.No)
@@ -744,10 +744,11 @@ namespace Bibo_Verwaltung
         {
             if (e.RowIndex >= 0)
             {
-                ClearForm();
                 DataGridViewRow row = this.gv_Kunde.Rows[e.RowIndex];
+                string index = row.Cells["Kunden-ID"].Value.ToString();
+                ClearForm();
+                LoadKunde(index);
                 rb_KundeBearbeiten.Checked = true;
-                LoadKunde(row.Cells["Kunden-ID"].Value.ToString());
             }
         }
 

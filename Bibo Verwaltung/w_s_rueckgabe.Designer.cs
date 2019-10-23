@@ -549,7 +549,7 @@
             this.bt_Abbrechen.Size = new System.Drawing.Size(100, 24);
             this.bt_Abbrechen.Style = MetroFramework.MetroColorStyle.Green;
             this.bt_Abbrechen.TabIndex = 53;
-            this.bt_Abbrechen.Text = "Abbrechen";
+            this.bt_Abbrechen.Text = "Schließen";
             this.bt_Abbrechen.UseSelectable = true;
             // 
             // w_s_rueckgabe

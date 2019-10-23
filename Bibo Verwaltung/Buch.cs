@@ -152,6 +152,7 @@ namespace Bibo_Verwaltung
             }
             this.isbn = isbn;
             LoadBuch();
+            LoadAutoren();
         }
 
         /// <summary>

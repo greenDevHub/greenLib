@@ -369,11 +369,78 @@ namespace Bibo_Verwaltung
                 {
                     nachname = "";
                 }
-                if (klasse == "Klassenstufe")
+                if (klasse == "Klasse")
                 {
                     klasse = "";
                 }
                 ds.Tables[0].DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%' AND Nachname LIKE '{1}%' AND Klasse LIKE '{2}%'", vorname, nachname, klasse);
+                grid.Refresh();
+            }
+            catch (Exception exceptionObject)
+            {
+                log.CreateReport(exceptionObject);
+            }
+        }
+
+        public void Execute_Search(ref MetroGrid grid, string ExemplarID, string ISBN, string Titel, string Autor, string Verlag, string Genre, string vorname, string nachname, string klasse)
+        {
+            try
+            {
+                if (ExemplarID == "ExemplarID")
+                {
+                    ExemplarID = "";
+                }
+                if (ISBN == "ISBN")
+                {
+                    ISBN = "";
+                }
+                if (Titel == "Titel")
+                {
+                    Titel = "";
+                }
+                if (Autor == "Autor")
+                {
+                    Autor = "";
+                }
+                if (Verlag == "Verlag")
+                {
+                    Verlag = "";
+                }
+                if (Genre == "Genre")
+                {
+                    Genre = "";
+                }
+
+                string rawFilter = string.Format("ExemplarID LIKE '{0}%' AND ISBN LIKE '{1}%' AND Titel LIKE '{2}%' AND Verlag LIKE '{3}%' AND Genre LIKE '{4}%'", ExemplarID, ISBN, Titel, Verlag, Genre);
+                if (vorname == "Vorname" || vorname == "")
+                {
+                    //rawFilter = rawFilter + " AND Vorname is null";
+                    vorname = "";
+                }
+                else
+                {
+                    rawFilter = rawFilter + string.Format(" AND Vorname LIKE '{0}%'",vorname);
+                }
+                if (nachname == "Nachname" || nachname == "")
+                {
+                    //rawFilter = rawFilter + " AND Nachname is null";
+                    nachname = "";
+                }
+                else
+                {
+                    rawFilter = rawFilter + string.Format(" AND Nachname LIKE '{0}%'", nachname);
+                }
+                if (klasse == "Klasse" || klasse == "")
+                {
+                    //rawFilter = rawFilter + " AND Klasse is null";
+                    klasse = "";
+                }
+                else
+                {
+                    rawFilter = rawFilter + string.Format(" AND Klasse LIKE '{0}%'", klasse);
+                }
+
+                ds.Tables[0].DefaultView.RowFilter = rawFilter;
                 grid.Refresh();
             }
             catch (Exception exceptionObject)

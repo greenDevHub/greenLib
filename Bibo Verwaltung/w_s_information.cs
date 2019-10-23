@@ -34,7 +34,19 @@ namespace Bibo_Verwaltung
                 lb_8.Text = "Erscheinungsdatum:";
                 lb_2_1.Text = buch.ISBN;
                 lb_2_2.Text = buch.Titel;
-                lb_2_3.Text = buch.Autor.Autorname;
+                if (buch.Autoren.Count > 1)
+                {
+                    lb_2_3.Text = "";
+                    foreach(string s in buch.Autoren)
+                    {
+                        lb_2_3.Text = lb_2_3.Text + s + ", ";
+                    }
+                    lb_2_3.Text = lb_2_3.Text.Substring(0, lb_2_3.Text.Length - 2);
+                }
+                else if(buch.Autoren.Count == 0)
+                {
+                    lb_2_3.Text = "-";
+                }
                 lb_2_4.Text = buch.Genre.Genrename;
                 lb_2_5.Text = buch.Verlag.Verlagname;
                 lb_2_6.Text = buch.Auflage;

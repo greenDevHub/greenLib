@@ -277,7 +277,7 @@ namespace Bibo_Verwaltung
         {
             kunde = new Kunde(ausleihe.KID);
             DialogResult dialogResult = MetroMessageBox.Show(this, ausleihe.GetAusleihList() + "an: '" + ausleihe.TrimText(kunde.Vorname + " " + kunde.Nachname, 30) + "' wirklich ausleihen?", "Achtung",
-                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question,this.Height/2);
             if (dialogResult == DialogResult.OK)
             {
                 try
