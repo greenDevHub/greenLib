@@ -214,6 +214,12 @@
     <Compile Include="w_s_analytics.Designer.cs">
       <DependentUpon>w_s_analytics.cs</DependentUpon>
     </Compile>
+    <Compile Include="w_s_importAssist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_importAssist.Designer.cs">
+      <DependentUpon>w_s_importAssist.cs</DependentUpon>
+    </Compile>
     <Compile Include="w_s_klasse_stufe.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -407,6 +413,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_analytics.resx">
       <DependentUpon>w_s_analytics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="w_s_importAssist.resx">
+      <DependentUpon>w_s_importAssist.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_import_export.resx">
       <DependentUpon>w_s_import_export.cs</DependentUpon>

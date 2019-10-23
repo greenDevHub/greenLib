@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework.Controls;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -84,6 +85,12 @@ namespace Bibo_Verwaltung
         /// Zieltabelle in der Datenbank
         /// </summary>
         public string Zieltabelle { get { return target; } set { target = value; } }
+
+        DataTable userDataTypes = new DataTable();
+        /// <summary>
+        /// Liste der zur Ausleihe ausgewaehlten Exemplare 
+        /// </summary>
+        public DataTable UserDataTypes { get { return userDataTypes; } set { userDataTypes = value; } }
         #endregion
 
         #region Objekt Constructor
@@ -104,15 +111,85 @@ namespace Bibo_Verwaltung
             UseFirstRowAsColumnHeader = colheader;
             ReadCSV(preview);
         }
+
+        /// <summary>
+        /// Erschafft ein Objekt zum importieren/exportieren von CSV-Dateien.
+        /// </summary>
+        public Import()
+        {
+            FilePath = "C:";
+            Separator = ';';
+            Textqualifizierer = '"';
+            Datumsfolge = datfolge;
+            Datumstrennzeichen = '.';
+            Zeittrennzeichen = ':';
+            IsVierstelligeJahre = true;
+            IsFuehrendeDatumsNull = true;
+            Dezimaltrennzeichen = ',';
+            UseFirstRowAsColumnHeader = false;
+        }
         #endregion
 
         /// <summary>
         /// Erschafft eine Vorschau von 10 Datensätzen der Importdaten und stellt diese in einer GridView dar.
         /// </summary>
-        public void FillGridView_Preview(ref DataGridView grid, object value = null)
+        public void FillGridView_Preview(ref MetroGrid grid, object value = null)
         {
+            ClearInputTable();
             ReadCSV(true);
             grid.DataSource = CSVData;
+        }
+
+        /// <summary>
+        /// Liest eine CSV-Datei ein und erstellt daraus einen String.
+        /// </summary>
+        public String ReadFile()
+        {
+            System.IO.StreamReader file = new System.IO.StreamReader(FilePath);
+            string line = file.ReadLine();
+            if (line.Contains(";"))
+            {
+                Separator = ';';
+            }
+            else if (line.Contains(" "))
+            {
+                Separator = ' ';
+            }
+            else if (line.Contains('\t'))
+            {
+                Separator = '\t';
+            }
+            else if (line.Contains(","))
+            {
+                Separator = ',';
+            }
+            else if (line.Contains('"'))
+            {
+                Textqualifizierer = '"';
+            }
+            else if (line.Contains("'"))
+            {
+                Textqualifizierer = '\'';
+            }
+            int curr = 0;
+            int i = 0;
+            StringBuilder sb = new StringBuilder();
+            sb.Clear();
+            sb.AppendLine(line);
+            while ((line = file.ReadLine()) != null)
+            {
+                if (i <= 20)
+                {
+                    sb.AppendLine(line);
+                    i++;
+                }
+                string[] parts = line.Split(Separator);
+                if (parts.Length > curr)
+                {
+                    curr = parts.Length;
+                }
+            }
+            return sb.ToString();
         }
 
         /// <summary>
@@ -132,14 +209,14 @@ namespace Bibo_Verwaltung
                 {
                     foreach (string s in firstline)
                     {
-                        CSVData.Columns.Add(s);
+                        CSVData.Columns.Add(s.Replace(Textqualifizierer.ToString(), ""));
                     }
                 }
                 else
                 {
                     foreach (string s in firstline)
                     {
-                        CSVData.Columns.Add("Column" + Convert.ToString(i));
+                        CSVData.Columns.Add("Feld" + Convert.ToString(i + 1));
                         i++;
                     }
                     CSVData.Rows.Add(firstline);
@@ -208,16 +285,16 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Ermittelt das Tabellen-Schema der Zieltabelle in der SQL-Datenbank.
         /// </summary>
-        private void GetSchemaOfSQLTable(string table)
+        public DataTable GetSchemaOfSQLTable()
         {
             schema.Clear();
-            if (con.ConnectError()) return;
-            string RawCommand = "SELECT COLUMN_NAME, DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @0";
-            // Verbindung öffnen 
+            if (con.ConnectError()) return null;
+            string RawCommand = "SELECT SUBSTRING(COLUMN_NAME, CHARINDEX('_', COLUMN_NAME)+1, LEN(COLUMN_NAME)) as 'Feld', DATA_TYPE as 'Datentyp' FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @0";
             adapter = new SqlDataAdapter(RawCommand, con.Con);
-            adapter.SelectCommand.Parameters.AddWithValue("@0", table);
+            adapter.SelectCommand.Parameters.AddWithValue("@0", Zieltabelle);
             adapter.Fill(schema);
             con.Close();
+            return schema;
         }
 
         /// <summary>
@@ -246,7 +323,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Gleicht die Spaltenanzahl der Datatable aus der CSV-Datei mit der Struktur der Zieltabelle in der SQL-Datenbank ab.
         /// </summary>
-        private bool checkSchema()
+        private bool CheckSchema()
         {
             bool schemaOK = false;
             if (CSVData.Columns.Count == schema.Rows.Count)
@@ -258,6 +335,80 @@ namespace Bibo_Verwaltung
                 schemaOK = false;
             }
             return schemaOK;
+        }
+
+        /// <summary>
+        /// Leert die Input-DataTable
+        /// </summary>
+        private void ClearInputTable()
+        {
+            CSVData.Clear();
+            CSVData.Columns.Clear();
+        }
+
+        /// <summary>
+        /// Erstellt eine Datatable für den Daten-Import in die SQL-Datenbank.
+        /// </summary>
+        private void CreateImportTable()
+        {
+            CellsOK();
+            GetSchemaOfSQLTable();
+
+        }
+
+        /// <summary>
+        /// Überträgt eine Datatable in eine SQL-Datenbank.
+        /// </summary>
+        private void TransferDataTable()
+        {
+            //try
+            //{
+                if (con.ConnectError()) return;
+                using (var bulkCopy = new SqlBulkCopy(con.Con))
+                {
+
+                CSVData.Columns[0].ColumnName = "au_id";
+                CSVData.Columns[1].ColumnName = "au_name";
+
+
+                    for (int i=0;i<UserDataTypes.Rows.Count; i++)
+                    {
+                    if (Convert.ToBoolean(UserDataTypes.Rows[i]["überspringen"]) != true)
+                    //bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+                    bulkCopy.ColumnMappings.Add(UserDataTypes.Rows[i]["Feldname"].ToString(), Convert.ToInt32(schema.Rows[i][0].ToString().Replace("Feld",""))-1);
+                }
+                    bulkCopy.BulkCopyTimeout = 600;
+                    bulkCopy.DestinationTableName = Zieltabelle;
+                    bulkCopy.WriteToServer(CSVData);
+                }
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("Diese Datei enthält eine inkorrekte Daten-Struktur! Die Datei kann nicht eingelesen werden.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+        }
+
+        /// <summary>
+        /// Importiert eine CSV-Datei in eine SQL-Datenbank.
+        /// </summary>
+        public void ExecuteImport()
+        {
+            //Input-Table leeren
+            ClearInputTable();
+
+            //CSV-Datei einlesen
+            ReadCSV(false);
+
+            //Schema-Abgleich
+            if (CheckSchema())
+            {
+                TransferDataTable();
+            }
+            else
+            {
+                //Open Spanten-Auswahl-Dialog
+                TransferDataTable();
+            }
         }
     }
 }

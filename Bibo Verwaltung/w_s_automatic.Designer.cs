@@ -452,9 +452,11 @@
             // mbt_Suche
             // 
             this.mbt_Suche.DisplayFocus = true;
+            this.mbt_Suche.Enabled = false;
             this.mbt_Suche.Location = new System.Drawing.Point(861, 137);
             this.mbt_Suche.Name = "mbt_Suche";
             this.mbt_Suche.Size = new System.Drawing.Size(24, 24);
+            this.mbt_Suche.Style = MetroFramework.MetroColorStyle.Yellow;
             this.mbt_Suche.TabIndex = 24;
             this.mbt_Suche.Text = "🔍";
             this.mbt_Suche.UseSelectable = true;

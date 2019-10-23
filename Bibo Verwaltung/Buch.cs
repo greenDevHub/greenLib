@@ -621,14 +621,14 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt eine ComoBox mit Buchdaten 
         /// </summary>
-        public void FillCombobox(ref AdvancedComboBox cb, int value)
+        public void FillCombobox(ref AdvancedComboBox cb, object value)
         {
             ClearDataSource();
             FillObjectBuchShort();
             cb.DataSource = ds.Tables[0];
             cb.ValueMember = "ISBN";
             cb.DisplayMember = "Titel";
-            cb.SelectedIndex = value;
+            cb.SelectedValue = value;
         }
 
         /// <summary>

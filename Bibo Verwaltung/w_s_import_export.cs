@@ -28,6 +28,10 @@ namespace Bibo_Verwaltung
             this.dataoftable = table;
             setModus(modus);
         }
+        public w_s_import_export()
+        {
+            InitializeComponent();
+        }
 
         private void setModus(bool modus)
         {

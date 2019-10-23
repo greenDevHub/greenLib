@@ -134,13 +134,13 @@ namespace Bibo_Verwaltung
         {
             inAusleihAction = false;
             tb_ExemplarID.Enabled = false;
-            a_cb_Modus.SelectedIndex = 0;
             bt_bestaetigen.Text = "Schüler laden";
             tb_ExemplarID.Text = "";
             a_cb_Modus.Enabled = true;
             dp_RueckDatum.Enabled = true;
             bt_back.Enabled = false;
             bt_next.Enabled = false;
+            mbt_Suche.Enabled = false;
             gv_suggested.Enabled = false;
             gv_selected.Enabled = false;
             bt_abschließen.Enabled = false;
@@ -149,6 +149,9 @@ namespace Bibo_Verwaltung
             gv_selected.DataSource = null;
             autoausleihe.ClearLeihList();
             selectedBuecher.Rows.Clear();
+            a_cb_Modus.SelectedIndex = -1;
+            a_cb_Modus.SelectedIndex = 0;
+            a_cb_Modus.Focus();
         }
 
         /// <summary>
@@ -360,6 +363,7 @@ namespace Bibo_Verwaltung
                 a_cb_Klasse.Enabled = false;
                 bt_back.Enabled = true;
                 bt_next.Enabled = true;
+                mbt_Suche.Enabled = true;
                 gv_suggested.Enabled = true;
                 gv_selected.Enabled = true;
                 bt_abschließen.Enabled = true;
@@ -562,10 +566,10 @@ namespace Bibo_Verwaltung
                 if (result == DialogResult.OK)
                 {
                     tb_ExemplarID.Text = form.ExemplarID;
+                    tb_ExemplarID.Focus();
+                    tb_ExemplarID.SelectAll();
                 }
             }
-            //Form Suche = new w_s_exemplarSuche(currentUser);
-            //Suche.ShowDialog();
         }
     }
 }

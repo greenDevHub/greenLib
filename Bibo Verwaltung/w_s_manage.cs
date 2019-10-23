@@ -19,7 +19,7 @@ namespace Bibo_Verwaltung
         float originalHeightLabel = 0;
         float originalHeightText = 0;
         bool suchmodus = false;
-        
+
         Fach fach;
         Sprache sprache;
         Genre genre;
@@ -179,7 +179,7 @@ namespace Bibo_Verwaltung
             {
                 result = autor.GetChangesGrid(ref gv_manage);
             }
-            else if (currentModus == "Genre") 
+            else if (currentModus == "Genre")
             {
                 result = genre.GetChangesGrid(ref gv_manage);
             }
@@ -222,8 +222,37 @@ namespace Bibo_Verwaltung
 
         private void Mbt_Import_Click(object sender, EventArgs e)
         {
-            Form Import = new w_s_schuelerimport("t_s_faecher", true, currentUser);
-            Import.ShowDialog(this);
+            Form import;
+            if (currentModus == "Fach")
+            {
+                import = new w_s_importAssist("t_s_faecher");
+                import.ShowDialog(this);
+            }
+            else if (currentModus == "Sprache")
+            {
+                import = new w_s_importAssist("t_s_sprache");
+                import.ShowDialog(this);
+            }
+            else if (currentModus == "Autor")
+            {
+                import = new w_s_importAssist("t_s_autor");
+                import.ShowDialog(this);
+            }
+            else if (currentModus == "Genre")
+            {
+                import = new w_s_importAssist("t_s_genre");
+                import.ShowDialog(this);
+            }
+            else if (currentModus == "Zustand")
+            {
+                import = new w_s_importAssist("t_s_zustand");
+                import.ShowDialog(this);
+            }
+            else if (currentModus == "Verlag")
+            {
+                import = new w_s_importAssist("t_s_verlag");
+                import.ShowDialog(this);
+            }
             LoadContent();
         }
 
@@ -232,7 +261,7 @@ namespace Bibo_Verwaltung
             try
             {
                 ExcelExport export = new ExcelExport();
-                export.ExportAsCSV(gv_manage);                
+                export.ExportAsCSV(gv_manage);
                 MetroMessageBox.Show(this, "Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch
