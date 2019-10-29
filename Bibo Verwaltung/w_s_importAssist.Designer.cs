@@ -34,12 +34,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_importAssist));
             this.tc_ImportAssist = new System.Windows.Forms.TabControl();
             this.tp_Filename = new System.Windows.Forms.TabPage();
             this.division = new System.Windows.Forms.Panel();
@@ -97,16 +98,16 @@
             this.mbt_next3 = new MetroFramework.Controls.MetroButton();
             this.mbt_finish3 = new MetroFramework.Controls.MetroButton();
             this.tb_Zuordnung = new System.Windows.Forms.TabPage();
-            this.gv_DB = new MetroFramework.Controls.MetroGrid();
-            this.gv_File = new MetroFramework.Controls.MetroGrid();
-            this.mlb_Anweisung4 = new MetroFramework.Controls.MetroLabel();
-            this.mlb_File = new MetroFramework.Controls.MetroLabel();
-            this.mlb_DB = new MetroFramework.Controls.MetroLabel();
             this.mbt_Cancel4 = new MetroFramework.Controls.MetroButton();
             this.mbt_Advanced4 = new MetroFramework.Controls.MetroButton();
             this.mbt_back4 = new MetroFramework.Controls.MetroButton();
             this.mbt_next4 = new MetroFramework.Controls.MetroButton();
             this.mbt_finish4 = new MetroFramework.Controls.MetroButton();
+            this.mlb_DB = new MetroFramework.Controls.MetroLabel();
+            this.mlb_File = new MetroFramework.Controls.MetroLabel();
+            this.mlb_Anweisung4 = new MetroFramework.Controls.MetroLabel();
+            this.gv_File = new MetroFramework.Controls.MetroGrid();
+            this.gv_DB = new MetroFramework.Controls.MetroGrid();
             this.tc_ImportAssist.SuspendLayout();
             this.tp_Filename.SuspendLayout();
             this.tp_Datentypen.SuspendLayout();
@@ -117,8 +118,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_DataTyp)).BeginInit();
             this.gb_FeldOpt.SuspendLayout();
             this.tb_Zuordnung.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gv_DB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_File)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_DB)).BeginInit();
             this.SuspendLayout();
             // 
             // tc_ImportAssist
@@ -1084,150 +1085,6 @@
             this.tb_Zuordnung.Text = "Schritt 4";
             this.tb_Zuordnung.UseVisualStyleBackColor = true;
             // 
-            // gv_DB
-            // 
-            this.gv_DB.AllowUserToAddRows = false;
-            this.gv_DB.AllowUserToDeleteRows = false;
-            this.gv_DB.AllowUserToResizeColumns = false;
-            this.gv_DB.AllowUserToResizeRows = false;
-            this.gv_DB.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.gv_DB.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_DB.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gv_DB.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.gv_DB.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gv_DB.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.gv_DB.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gv_DB.DefaultCellStyle = dataGridViewCellStyle11;
-            this.gv_DB.EnableHeadersVisualStyles = false;
-            this.gv_DB.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.gv_DB.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_DB.Location = new System.Drawing.Point(6, 82);
-            this.gv_DB.MultiSelect = false;
-            this.gv_DB.Name = "gv_DB";
-            this.gv_DB.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gv_DB.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
-            this.gv_DB.RowHeadersWidth = 30;
-            this.gv_DB.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.gv_DB.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_DB.ShowCellErrors = false;
-            this.gv_DB.ShowCellToolTips = false;
-            this.gv_DB.ShowEditingIcon = false;
-            this.gv_DB.ShowRowErrors = false;
-            this.gv_DB.Size = new System.Drawing.Size(367, 144);
-            this.gv_DB.Style = MetroFramework.MetroColorStyle.Silver;
-            this.gv_DB.TabIndex = 33;
-            // 
-            // gv_File
-            // 
-            this.gv_File.AllowUserToAddRows = false;
-            this.gv_File.AllowUserToDeleteRows = false;
-            this.gv_File.AllowUserToResizeColumns = false;
-            this.gv_File.AllowUserToResizeRows = false;
-            this.gv_File.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.gv_File.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_File.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gv_File.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.gv_File.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gv_File.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.gv_File.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gv_File.DefaultCellStyle = dataGridViewCellStyle8;
-            this.gv_File.EnableHeadersVisualStyles = false;
-            this.gv_File.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.gv_File.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_File.Location = new System.Drawing.Point(379, 82);
-            this.gv_File.MultiSelect = false;
-            this.gv_File.Name = "gv_File";
-            this.gv_File.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gv_File.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.gv_File.RowHeadersWidth = 30;
-            this.gv_File.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.gv_File.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_File.ShowCellErrors = false;
-            this.gv_File.ShowCellToolTips = false;
-            this.gv_File.ShowEditingIcon = false;
-            this.gv_File.ShowRowErrors = false;
-            this.gv_File.Size = new System.Drawing.Size(364, 144);
-            this.gv_File.Style = MetroFramework.MetroColorStyle.Silver;
-            this.gv_File.TabIndex = 34;
-            // 
-            // mlb_Anweisung4
-            // 
-            this.mlb_Anweisung4.AutoSize = true;
-            this.mlb_Anweisung4.Location = new System.Drawing.Point(6, 20);
-            this.mlb_Anweisung4.Name = "mlb_Anweisung4";
-            this.mlb_Anweisung4.Size = new System.Drawing.Size(428, 19);
-            this.mlb_Anweisung4.Style = MetroFramework.MetroColorStyle.Silver;
-            this.mlb_Anweisung4.TabIndex = 35;
-            this.mlb_Anweisung4.Text = "Orden Sie den Feldern der Datenbank die zu importierenden Felder zu.";
-            this.mlb_Anweisung4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.mlb_Anweisung4.WrapToLine = true;
-            // 
-            // mlb_File
-            // 
-            this.mlb_File.AutoSize = true;
-            this.mlb_File.Location = new System.Drawing.Point(379, 60);
-            this.mlb_File.Name = "mlb_File";
-            this.mlb_File.Size = new System.Drawing.Size(42, 19);
-            this.mlb_File.Style = MetroFramework.MetroColorStyle.Silver;
-            this.mlb_File.TabIndex = 36;
-            this.mlb_File.Text = "Datei:";
-            this.mlb_File.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.mlb_File.WrapToLine = true;
-            // 
-            // mlb_DB
-            // 
-            this.mlb_DB.AutoSize = true;
-            this.mlb_DB.Location = new System.Drawing.Point(6, 60);
-            this.mlb_DB.Name = "mlb_DB";
-            this.mlb_DB.Size = new System.Drawing.Size(74, 19);
-            this.mlb_DB.Style = MetroFramework.MetroColorStyle.Silver;
-            this.mlb_DB.TabIndex = 37;
-            this.mlb_DB.Text = "Datenbank:";
-            this.mlb_DB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.mlb_DB.WrapToLine = true;
-            // 
             // mbt_Cancel4
             // 
             this.mbt_Cancel4.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -1295,12 +1152,157 @@
             this.mbt_finish4.UseSelectable = true;
             this.mbt_finish4.Click += new System.EventHandler(this.Mbt_finish_Click);
             // 
+            // mlb_DB
+            // 
+            this.mlb_DB.AutoSize = true;
+            this.mlb_DB.Location = new System.Drawing.Point(6, 60);
+            this.mlb_DB.Name = "mlb_DB";
+            this.mlb_DB.Size = new System.Drawing.Size(74, 19);
+            this.mlb_DB.Style = MetroFramework.MetroColorStyle.Silver;
+            this.mlb_DB.TabIndex = 37;
+            this.mlb_DB.Text = "Datenbank:";
+            this.mlb_DB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.mlb_DB.WrapToLine = true;
+            // 
+            // mlb_File
+            // 
+            this.mlb_File.AutoSize = true;
+            this.mlb_File.Location = new System.Drawing.Point(379, 60);
+            this.mlb_File.Name = "mlb_File";
+            this.mlb_File.Size = new System.Drawing.Size(42, 19);
+            this.mlb_File.Style = MetroFramework.MetroColorStyle.Silver;
+            this.mlb_File.TabIndex = 36;
+            this.mlb_File.Text = "Datei:";
+            this.mlb_File.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.mlb_File.WrapToLine = true;
+            // 
+            // mlb_Anweisung4
+            // 
+            this.mlb_Anweisung4.AutoSize = true;
+            this.mlb_Anweisung4.Location = new System.Drawing.Point(6, 20);
+            this.mlb_Anweisung4.Name = "mlb_Anweisung4";
+            this.mlb_Anweisung4.Size = new System.Drawing.Size(428, 19);
+            this.mlb_Anweisung4.Style = MetroFramework.MetroColorStyle.Silver;
+            this.mlb_Anweisung4.TabIndex = 35;
+            this.mlb_Anweisung4.Text = "Orden Sie den Feldern der Datenbank die zu importierenden Felder zu.";
+            this.mlb_Anweisung4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.mlb_Anweisung4.WrapToLine = true;
+            // 
+            // gv_File
+            // 
+            this.gv_File.AllowUserToAddRows = false;
+            this.gv_File.AllowUserToDeleteRows = false;
+            this.gv_File.AllowUserToResizeColumns = false;
+            this.gv_File.AllowUserToResizeRows = false;
+            this.gv_File.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_File.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gv_File.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gv_File.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.gv_File.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gv_File.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.gv_File.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gv_File.DefaultCellStyle = dataGridViewCellStyle8;
+            this.gv_File.EnableHeadersVisualStyles = false;
+            this.gv_File.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.gv_File.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gv_File.Location = new System.Drawing.Point(379, 82);
+            this.gv_File.MultiSelect = false;
+            this.gv_File.Name = "gv_File";
+            this.gv_File.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gv_File.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.gv_File.RowHeadersWidth = 30;
+            this.gv_File.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.gv_File.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gv_File.ShowCellErrors = false;
+            this.gv_File.ShowCellToolTips = false;
+            this.gv_File.ShowEditingIcon = false;
+            this.gv_File.ShowRowErrors = false;
+            this.gv_File.Size = new System.Drawing.Size(364, 144);
+            this.gv_File.Style = MetroFramework.MetroColorStyle.Silver;
+            this.gv_File.TabIndex = 34;
+            // 
+            // gv_DB
+            // 
+            this.gv_DB.AllowUserToAddRows = false;
+            this.gv_DB.AllowUserToDeleteRows = false;
+            this.gv_DB.AllowUserToResizeColumns = false;
+            this.gv_DB.AllowUserToResizeRows = false;
+            this.gv_DB.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_DB.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gv_DB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gv_DB.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.gv_DB.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gv_DB.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.gv_DB.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gv_DB.DefaultCellStyle = dataGridViewCellStyle11;
+            this.gv_DB.EnableHeadersVisualStyles = false;
+            this.gv_DB.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.gv_DB.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gv_DB.Location = new System.Drawing.Point(6, 82);
+            this.gv_DB.MultiSelect = false;
+            this.gv_DB.Name = "gv_DB";
+            this.gv_DB.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gv_DB.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            this.gv_DB.RowHeadersWidth = 30;
+            this.gv_DB.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.gv_DB.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gv_DB.ShowCellErrors = false;
+            this.gv_DB.ShowCellToolTips = false;
+            this.gv_DB.ShowEditingIcon = false;
+            this.gv_DB.ShowRowErrors = false;
+            this.gv_DB.Size = new System.Drawing.Size(367, 144);
+            this.gv_DB.Style = MetroFramework.MetroColorStyle.Silver;
+            this.gv_DB.TabIndex = 33;
+            // 
             // w_s_importAssist
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tc_ImportAssist);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "w_s_importAssist";
@@ -1323,8 +1325,8 @@
             this.gb_FeldOpt.ResumeLayout(false);
             this.tb_Zuordnung.ResumeLayout(false);
             this.tb_Zuordnung.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gv_DB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_File)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_DB)).EndInit();
             this.ResumeLayout(false);
 
         }

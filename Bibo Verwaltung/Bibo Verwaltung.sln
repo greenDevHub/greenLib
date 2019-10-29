@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2042
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bibo Verwaltung", "Bibo Verwaltung.csproj", "{C144EE33-6B1C-4D1F-876E-895F2F35D6A7}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -11,6 +11,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{030A1736-F9FB-48B7-A593-844DCFEB6243}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenSize", "..\ScreenSize\ScreenSize\ScreenSize.csproj", "{361179B6-418A-42B0-A81D-74A59ADB2045}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "greenLib Installer 32", "..\greenLib Installer\greenLib Installer.vdproj", "{B2439C99-6A9B-41D2-81CE-B716C04504AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,10 @@ Global
 		{361179B6-418A-42B0-A81D-74A59ADB2045}.Release|Any CPU.Build.0 = Release|Any CPU
 		{361179B6-418A-42B0-A81D-74A59ADB2045}.Release|x64.ActiveCfg = Release|Any CPU
 		{361179B6-418A-42B0-A81D-74A59ADB2045}.Release|x64.Build.0 = Release|Any CPU
+		{B2439C99-6A9B-41D2-81CE-B716C04504AB}.Debug|Any CPU.ActiveCfg = Debug
+		{B2439C99-6A9B-41D2-81CE-B716C04504AB}.Debug|x64.ActiveCfg = Debug
+		{B2439C99-6A9B-41D2-81CE-B716C04504AB}.Release|Any CPU.ActiveCfg = Release
+		{B2439C99-6A9B-41D2-81CE-B716C04504AB}.Release|x64.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

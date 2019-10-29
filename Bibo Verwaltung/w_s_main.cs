@@ -34,7 +34,7 @@ namespace Bibo_Verwaltung
             picBox.Visible = false;
             picBox.SizeMode = PictureBoxSizeMode.StretchImage;
             Benutzer user = new Benutzer(userName);
-            this.Text = "     Bibliotheksverwaltung - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+            this.Text = "     greenLib - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             this.currentUser = userName;
             if (user.Rechteid.Equals("0") || user.Rechteid.Equals("1"))
             {

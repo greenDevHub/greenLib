@@ -70,7 +70,7 @@
   <PropertyGroup />
   <PropertyGroup />
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>greenLib.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
@@ -578,6 +578,8 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="greenLib.ico" />
+    <None Include="greenLib.png" />
     <Content Include="icon.ico" />
     <None Include="Resources\BarcodePreset.bmp" />
     <None Include="Resources\BarcodePreset.lbx" />

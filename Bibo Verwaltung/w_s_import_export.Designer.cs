@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_import_export));
             this.bibo_VerwaltungDataSet1 = new Bibo_Verwaltung.Bibo_VerwaltungDataSet();
             this.bt_durchsuchen = new System.Windows.Forms.Button();
             this.tb_path = new System.Windows.Forms.TextBox();
@@ -418,7 +419,7 @@
             // 
             this.gv_columns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_columns.Location = new System.Drawing.Point(12, 314);
-            this.gv_columns.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.gv_columns.Margin = new System.Windows.Forms.Padding(1);
             this.gv_columns.Name = "gv_columns";
             this.gv_columns.RowTemplate.Height = 40;
             this.gv_columns.Size = new System.Drawing.Size(630, 26);
@@ -445,6 +446,7 @@
             this.Controls.Add(this.tb_path);
             this.Controls.Add(this.lb_anweissung);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "w_s_import_export";
             this.Text = "Import/Export";
             this.Shown += new System.EventHandler(this.w_s_importDialog_Shown);

@@ -37,6 +37,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_autorueck));
             this.lb_Klasse = new MetroFramework.Controls.MetroLabel();
             this.lb_ExID = new MetroFramework.Controls.MetroLabel();
             this.tb_ExemplarID = new MetroFramework.Controls.MetroTextBox();
@@ -455,6 +456,7 @@
             this.Controls.Add(this.gv_selected);
             this.Controls.Add(this.gv_suggested);
             this.Controls.Add(this.gv_Schueler);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "w_s_autorueck";

@@ -28,32 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_bild_bearbeiten));
             this.bt_save_bild = new System.Windows.Forms.Button();
             this.bt_Schliessen = new System.Windows.Forms.Button();
             this.lb_buch_bild = new System.Windows.Forms.Label();
             this.bt_browse = new System.Windows.Forms.Button();
             this.cb_buch_bild = new System.Windows.Forms.ComboBox();
             this.bt_view_bild = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(375, 15);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(475, 408);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // bt_save_bild
             // 
-            this.bt_save_bild.Location = new System.Drawing.Point(40, 121);
-            this.bt_save_bild.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bt_save_bild.Location = new System.Drawing.Point(30, 98);
             this.bt_save_bild.Name = "bt_save_bild";
-            this.bt_save_bild.Size = new System.Drawing.Size(128, 53);
+            this.bt_save_bild.Size = new System.Drawing.Size(96, 43);
             this.bt_save_bild.TabIndex = 2;
             this.bt_save_bild.Text = "Speichern";
             this.bt_save_bild.UseVisualStyleBackColor = true;
@@ -62,10 +52,9 @@
             // bt_Schliessen
             // 
             this.bt_Schliessen.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.bt_Schliessen.Location = new System.Drawing.Point(164, 255);
-            this.bt_Schliessen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bt_Schliessen.Location = new System.Drawing.Point(123, 207);
             this.bt_Schliessen.Name = "bt_Schliessen";
-            this.bt_Schliessen.Size = new System.Drawing.Size(133, 28);
+            this.bt_Schliessen.Size = new System.Drawing.Size(100, 23);
             this.bt_Schliessen.TabIndex = 3;
             this.bt_Schliessen.Text = "Schließen";
             this.bt_Schliessen.UseVisualStyleBackColor = true;
@@ -73,19 +62,17 @@
             // lb_buch_bild
             // 
             this.lb_buch_bild.AutoSize = true;
-            this.lb_buch_bild.Location = new System.Drawing.Point(16, 50);
-            this.lb_buch_bild.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lb_buch_bild.Location = new System.Drawing.Point(12, 41);
             this.lb_buch_bild.Name = "lb_buch_bild";
-            this.lb_buch_bild.Size = new System.Drawing.Size(48, 17);
+            this.lb_buch_bild.Size = new System.Drawing.Size(38, 13);
             this.lb_buch_bild.TabIndex = 4;
             this.lb_buch_bild.Text = "Buch :";
             // 
             // bt_browse
             // 
-            this.bt_browse.Location = new System.Drawing.Point(75, 198);
-            this.bt_browse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bt_browse.Location = new System.Drawing.Point(56, 161);
             this.bt_browse.Name = "bt_browse";
-            this.bt_browse.Size = new System.Drawing.Size(181, 33);
+            this.bt_browse.Size = new System.Drawing.Size(136, 27);
             this.bt_browse.TabIndex = 5;
             this.bt_browse.Text = "Browse";
             this.bt_browse.UseVisualStyleBackColor = true;
@@ -94,27 +81,34 @@
             // cb_buch_bild
             // 
             this.cb_buch_bild.FormattingEnabled = true;
-            this.cb_buch_bild.Location = new System.Drawing.Point(75, 47);
-            this.cb_buch_bild.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cb_buch_bild.Location = new System.Drawing.Point(56, 38);
             this.cb_buch_bild.Name = "cb_buch_bild";
-            this.cb_buch_bild.Size = new System.Drawing.Size(289, 24);
+            this.cb_buch_bild.Size = new System.Drawing.Size(218, 21);
             this.cb_buch_bild.TabIndex = 6;
             // 
             // bt_view_bild
             // 
-            this.bt_view_bild.Location = new System.Drawing.Point(204, 121);
-            this.bt_view_bild.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bt_view_bild.Location = new System.Drawing.Point(153, 98);
             this.bt_view_bild.Name = "bt_view_bild";
-            this.bt_view_bild.Size = new System.Drawing.Size(132, 53);
+            this.bt_view_bild.Size = new System.Drawing.Size(99, 43);
             this.bt_view_bild.TabIndex = 7;
             this.bt_view_bild.Text = "Anzeigen";
             this.bt_view_bild.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(281, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(356, 332);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // w_s_bild_bearbeiten
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(863, 436);
+            this.ClientSize = new System.Drawing.Size(647, 354);
             this.Controls.Add(this.bt_view_bild);
             this.Controls.Add(this.cb_buch_bild);
             this.Controls.Add(this.bt_browse);
@@ -122,7 +116,7 @@
             this.Controls.Add(this.bt_Schliessen);
             this.Controls.Add(this.bt_save_bild);
             this.Controls.Add(this.pictureBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "w_s_bild_bearbeiten";
             this.Text = "w_s_bild_bearbeiten";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

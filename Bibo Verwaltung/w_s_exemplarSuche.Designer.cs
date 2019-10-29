@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_exemplarSuche));
             this.a_cb_Buecher = new Bibo_Verwaltung.AdvancedComboBox();
             this.gv_Exemplare = new MetroFramework.Controls.MetroGrid();
             this.mbt_OK = new MetroFramework.Controls.MetroButton();
@@ -143,6 +144,7 @@
             this.Controls.Add(this.mbt_OK);
             this.Controls.Add(this.gv_Exemplare);
             this.Controls.Add(this.a_cb_Buecher);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "w_s_exemplarSuche";

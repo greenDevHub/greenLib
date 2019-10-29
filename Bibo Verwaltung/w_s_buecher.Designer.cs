@@ -43,7 +43,6 @@
             this.bt_speichern_buecher = new MetroFramework.Controls.MetroButton();
             this.lb_anzahl = new MetroFramework.Controls.MetroLabel();
             this.bt_pic_delete = new MetroFramework.Controls.MetroButton();
-            this.picBox_Klein = new System.Windows.Forms.PictureBox();
             this.bt_picture = new MetroFramework.Controls.MetroButton();
             this.lb_Erscheinungsdatum = new MetroFramework.Controls.MetroLabel();
             this.lb_Auflage = new MetroFramework.Controls.MetroLabel();
@@ -67,7 +66,6 @@
             this.tb_ISBN = new MetroFramework.Controls.MetroTextBox();
             this.lb_ISBN = new MetroFramework.Controls.MetroLabel();
             this.button1 = new MetroFramework.Controls.MetroButton();
-            this.picBox_Gross = new System.Windows.Forms.PictureBox();
             this.Grid_Buch = new MetroFramework.Controls.MetroGrid();
             this.contextMenuStrip1 = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.ladenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,15 +96,17 @@
             this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.picBox_Klein = new System.Windows.Forms.PictureBox();
+            this.picBox_Gross = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBox_Klein)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBox_Gross)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Buch)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.gb_zoom.SuspendLayout();
             this.metroPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox_Klein)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox_Gross)).BeginInit();
             this.SuspendLayout();
             // 
             // tsspracheBindingSource
@@ -249,20 +249,6 @@
             this.bt_pic_delete.Text = "Bild entfernen";
             this.bt_pic_delete.UseSelectable = true;
             this.bt_pic_delete.Click += new System.EventHandler(this.bt_pic_add_Click);
-            // 
-            // picBox_Klein
-            // 
-            this.helpProvider.SetHelpString(this.picBox_Klein, "Wenn sie mit ihrer Maus über dieses Vorschaubild ihres aktuellen Buches fahren, s" +
-        "ehen sie eine vergrößerte Darstellung.");
-            this.picBox_Klein.Location = new System.Drawing.Point(221, 243);
-            this.picBox_Klein.Name = "picBox_Klein";
-            this.helpProvider.SetShowHelp(this.picBox_Klein, true);
-            this.picBox_Klein.Size = new System.Drawing.Size(122, 114);
-            this.picBox_Klein.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBox_Klein.TabIndex = 46;
-            this.picBox_Klein.TabStop = false;
-            this.picBox_Klein.MouseEnter += new System.EventHandler(this.pictureBox1_MouseEnter);
-            this.picBox_Klein.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
             // 
             // bt_picture
             // 
@@ -710,19 +696,6 @@
             this.button1.Text = "*";
             this.button1.UseSelectable = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // picBox_Gross
-            // 
-            this.picBox_Gross.BackColor = System.Drawing.Color.White;
-            this.picBox_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picBox_Gross.Location = new System.Drawing.Point(0, 0);
-            this.picBox_Gross.Margin = new System.Windows.Forms.Padding(0);
-            this.picBox_Gross.Name = "picBox_Gross";
-            this.picBox_Gross.Size = new System.Drawing.Size(801, 475);
-            this.picBox_Gross.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBox_Gross.TabIndex = 50;
-            this.picBox_Gross.TabStop = false;
-            this.picBox_Gross.Visible = false;
             // 
             // Grid_Buch
             // 
@@ -1233,6 +1206,33 @@
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.Timer2_Tick);
             // 
+            // picBox_Klein
+            // 
+            this.helpProvider.SetHelpString(this.picBox_Klein, "Wenn sie mit ihrer Maus über dieses Vorschaubild ihres aktuellen Buches fahren, s" +
+        "ehen sie eine vergrößerte Darstellung.");
+            this.picBox_Klein.Location = new System.Drawing.Point(221, 243);
+            this.picBox_Klein.Name = "picBox_Klein";
+            this.helpProvider.SetShowHelp(this.picBox_Klein, true);
+            this.picBox_Klein.Size = new System.Drawing.Size(122, 114);
+            this.picBox_Klein.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBox_Klein.TabIndex = 46;
+            this.picBox_Klein.TabStop = false;
+            this.picBox_Klein.MouseEnter += new System.EventHandler(this.pictureBox1_MouseEnter);
+            this.picBox_Klein.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
+            // 
+            // picBox_Gross
+            // 
+            this.picBox_Gross.BackColor = System.Drawing.Color.White;
+            this.picBox_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picBox_Gross.Location = new System.Drawing.Point(0, 0);
+            this.picBox_Gross.Margin = new System.Windows.Forms.Padding(0);
+            this.picBox_Gross.Name = "picBox_Gross";
+            this.picBox_Gross.Size = new System.Drawing.Size(801, 475);
+            this.picBox_Gross.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBox_Gross.TabIndex = 50;
+            this.picBox_Gross.TabStop = false;
+            this.picBox_Gross.Visible = false;
+            // 
             // w_s_buecher
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1259,13 +1259,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBox_Klein)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBox_Gross)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Buch)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.gb_zoom.ResumeLayout(false);
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox_Klein)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox_Gross)).EndInit();
             this.ResumeLayout(false);
 
         }

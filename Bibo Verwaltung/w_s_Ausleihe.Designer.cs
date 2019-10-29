@@ -37,7 +37,6 @@
             this.lb_BuchZustand = new MetroFramework.Controls.MetroLabel();
             this.llb_BuchTitel = new MetroFramework.Controls.MetroLink();
             this.bt_AddBuch = new MetroFramework.Controls.MetroButton();
-            this.picBox_Buchcover = new System.Windows.Forms.PictureBox();
             this.leihList_Slider = new System.Windows.Forms.HScrollBar();
             this.tb_listBis = new MetroFramework.Controls.MetroTextBox();
             this.tb_listVon = new MetroFramework.Controls.MetroTextBox();
@@ -61,10 +60,11 @@
             this.lb_Exemplar = new MetroFramework.Controls.MetroLabel();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.lb_Kunden = new MetroFramework.Controls.MetroLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).BeginInit();
+            this.picBox_Buchcover = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
             this.gb_Exemplar.SuspendLayout();
             this.metroPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).BeginInit();
             this.SuspendLayout();
             // 
             // dp_RueckDatum
@@ -126,15 +126,6 @@
             this.bt_AddBuch.Text = "+";
             this.bt_AddBuch.UseSelectable = true;
             this.bt_AddBuch.Click += new System.EventHandler(this.bt_AddBuch_Click);
-            // 
-            // picBox_Buchcover
-            // 
-            this.picBox_Buchcover.Location = new System.Drawing.Point(331, 3);
-            this.picBox_Buchcover.Name = "picBox_Buchcover";
-            this.picBox_Buchcover.Size = new System.Drawing.Size(235, 201);
-            this.picBox_Buchcover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBox_Buchcover.TabIndex = 31;
-            this.picBox_Buchcover.TabStop = false;
             // 
             // leihList_Slider
             // 
@@ -575,6 +566,15 @@
             this.lb_Kunden.TabIndex = 52;
             this.lb_Kunden.Text = "Kunden-Informationen:";
             // 
+            // picBox_Buchcover
+            // 
+            this.picBox_Buchcover.Location = new System.Drawing.Point(331, 3);
+            this.picBox_Buchcover.Name = "picBox_Buchcover";
+            this.picBox_Buchcover.Size = new System.Drawing.Size(235, 201);
+            this.picBox_Buchcover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBox_Buchcover.TabIndex = 31;
+            this.picBox_Buchcover.TabStop = false;
+            // 
             // w_s_ausleihe
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -597,12 +597,12 @@
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "Buchausleihe";
             this.Shown += new System.EventHandler(this.W_s_ausleihe_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).EndInit();
             this.gb_Exemplar.ResumeLayout(false);
             this.gb_Exemplar.PerformLayout();
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

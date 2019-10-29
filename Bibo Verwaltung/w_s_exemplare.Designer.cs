@@ -40,7 +40,6 @@
             this.barcodeDruckenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gb_BarcodeBox = new System.Windows.Forms.GroupBox();
             this.mtb_Barcode = new MetroFramework.Controls.MetroTextBox();
-            this.BarcodeBox = new System.Windows.Forms.PictureBox();
             this.mlb_barcode = new MetroFramework.Controls.MetroLabel();
             this.bt_Print = new MetroFramework.Controls.MetroButton();
             this.tb_ExempCount = new MetroFramework.Controls.MetroTextBox();
@@ -70,11 +69,12 @@
             this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.mbt_Import = new MetroFramework.Controls.MetroButton();
+            this.BarcodeBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.gb_BarcodeBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BarcodeBox)).BeginInit();
             this.metroPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BarcodeBox)).BeginInit();
             this.SuspendLayout();
             // 
             // gv_Exemplare
@@ -211,16 +211,6 @@
             this.mtb_Barcode.WaterMark = "Code";
             this.mtb_Barcode.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtb_Barcode.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // BarcodeBox
-            // 
-            this.BarcodeBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.BarcodeBox.Location = new System.Drawing.Point(4, 47);
-            this.BarcodeBox.Name = "BarcodeBox";
-            this.BarcodeBox.Size = new System.Drawing.Size(320, 105);
-            this.BarcodeBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.BarcodeBox.TabIndex = 23;
-            this.BarcodeBox.TabStop = false;
             // 
             // mlb_barcode
             // 
@@ -697,6 +687,16 @@
             this.mbt_Import.Text = "Exemplardaten-Import";
             this.mbt_Import.UseSelectable = true;
             // 
+            // BarcodeBox
+            // 
+            this.BarcodeBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BarcodeBox.Location = new System.Drawing.Point(4, 47);
+            this.BarcodeBox.Name = "BarcodeBox";
+            this.BarcodeBox.Size = new System.Drawing.Size(320, 105);
+            this.BarcodeBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.BarcodeBox.TabIndex = 23;
+            this.BarcodeBox.TabStop = false;
+            // 
             // w_s_exemplare
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -724,8 +724,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             this.gb_BarcodeBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.BarcodeBox)).EndInit();
             this.metroPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.BarcodeBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

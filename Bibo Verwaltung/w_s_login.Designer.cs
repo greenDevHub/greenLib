@@ -33,9 +33,9 @@
             this.tb_User = new MetroFramework.Controls.MetroTextBox();
             this.tb_Password = new MetroFramework.Controls.MetroTextBox();
             this.bt_Login = new MetroFramework.Controls.MetroButton();
-            this.metroLink1 = new MetroFramework.Controls.MetroLink();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
+            this.metroLink1 = new MetroFramework.Controls.MetroLink();
             this.SuspendLayout();
             // 
             // tb_User
@@ -59,6 +59,7 @@
             this.tb_User.MaxLength = 32767;
             this.tb_User.Name = "tb_User";
             this.tb_User.PasswordChar = '\0';
+            this.tb_User.PromptText = "Benutzername";
             this.tb_User.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_User.SelectedText = "";
             this.tb_User.SelectionLength = 0;
@@ -94,6 +95,7 @@
             this.tb_Password.MaxLength = 32767;
             this.tb_Password.Name = "tb_Password";
             this.tb_Password.PasswordChar = '●';
+            this.tb_Password.PromptText = "Passwort";
             this.tb_Password.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Password.SelectedText = "";
             this.tb_Password.SelectionLength = 0;
@@ -123,18 +125,6 @@
             this.bt_Login.UseSelectable = true;
             this.bt_Login.Click += new System.EventHandler(this.bt_Login_Click);
             // 
-            // metroLink1
-            // 
-            this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Login;
-            this.metroLink1.ImageSize = 32;
-            this.metroLink1.Location = new System.Drawing.Point(23, 25);
-            this.metroLink1.Margin = new System.Windows.Forms.Padding(2);
-            this.metroLink1.Name = "metroLink1";
-            this.metroLink1.Size = new System.Drawing.Size(22, 24);
-            this.metroLink1.Style = MetroFramework.MetroColorStyle.Black;
-            this.metroLink1.TabIndex = 5;
-            this.metroLink1.UseSelectable = true;
-            // 
             // timer1
             // 
             this.timer1.Interval = 25;
@@ -151,6 +141,18 @@
             this.metroProgressBar1.Step = 1;
             this.metroProgressBar1.Style = MetroFramework.MetroColorStyle.Black;
             this.metroProgressBar1.TabIndex = 6;
+            // 
+            // metroLink1
+            // 
+            this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Login;
+            this.metroLink1.ImageSize = 32;
+            this.metroLink1.Location = new System.Drawing.Point(23, 25);
+            this.metroLink1.Margin = new System.Windows.Forms.Padding(2);
+            this.metroLink1.Name = "metroLink1";
+            this.metroLink1.Size = new System.Drawing.Size(22, 24);
+            this.metroLink1.Style = MetroFramework.MetroColorStyle.Black;
+            this.metroLink1.TabIndex = 5;
+            this.metroLink1.UseSelectable = true;
             // 
             // w_s_login
             // 

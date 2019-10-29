@@ -85,7 +85,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 111);
+            this.ClientSize = new System.Drawing.Size(330, 107);
             this.ControlBox = false;
             this.Controls.Add(this.mlb_Message);
             this.Controls.Add(this.mbt_Cancel);

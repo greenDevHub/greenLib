@@ -101,7 +101,7 @@
             this.lb_TxtQuali.Location = new System.Drawing.Point(3, 38);
             this.lb_TxtQuali.Margin = new System.Windows.Forms.Padding(3);
             this.lb_TxtQuali.Name = "lb_TxtQuali";
-            this.lb_TxtQuali.Size = new System.Drawing.Size(109, 20);
+            this.lb_TxtQuali.Size = new System.Drawing.Size(103, 19);
             this.lb_TxtQuali.Style = MetroFramework.MetroColorStyle.Teal;
             this.lb_TxtQuali.TabIndex = 1;
             this.lb_TxtQuali.Text = "Textqualifizierer:";
@@ -112,7 +112,7 @@
             this.lb_FeldTrenn.Location = new System.Drawing.Point(3, 3);
             this.lb_FeldTrenn.Margin = new System.Windows.Forms.Padding(3);
             this.lb_FeldTrenn.Name = "lb_FeldTrenn";
-            this.lb_FeldTrenn.Size = new System.Drawing.Size(120, 20);
+            this.lb_FeldTrenn.Size = new System.Drawing.Size(110, 19);
             this.lb_FeldTrenn.Style = MetroFramework.MetroColorStyle.Teal;
             this.lb_FeldTrenn.TabIndex = 0;
             this.lb_FeldTrenn.Text = "Feldtrennzeichen:";
@@ -155,11 +155,11 @@
             this.rb_faecher.AutoSize = true;
             this.rb_faecher.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_faecher.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.rb_faecher.Location = new System.Drawing.Point(463, 8);
+            this.rb_faecher.Location = new System.Drawing.Point(466, 8);
             this.rb_faecher.Margin = new System.Windows.Forms.Padding(3, 3, 16, 3);
             this.rb_faecher.MinimumSize = new System.Drawing.Size(54, 16);
             this.rb_faecher.Name = "rb_faecher";
-            this.rb_faecher.Size = new System.Drawing.Size(67, 20);
+            this.rb_faecher.Size = new System.Drawing.Size(64, 19);
             this.rb_faecher.Style = MetroFramework.MetroColorStyle.Teal;
             this.rb_faecher.TabIndex = 2;
             this.rb_faecher.Text = "Fächer";
@@ -176,7 +176,7 @@
             this.rb_schueler2.Margin = new System.Windows.Forms.Padding(3, 3, 16, 3);
             this.rb_schueler2.MinimumSize = new System.Drawing.Size(100, 16);
             this.rb_schueler2.Name = "rb_schueler2";
-            this.rb_schueler2.Size = new System.Drawing.Size(125, 20);
+            this.rb_schueler2.Size = new System.Drawing.Size(117, 19);
             this.rb_schueler2.Style = MetroFramework.MetroColorStyle.Teal;
             this.rb_schueler2.TabIndex = 2;
             this.rb_schueler2.Text = "Sekundarstufe 2";
@@ -193,7 +193,7 @@
             this.rb_schueler1.Margin = new System.Windows.Forms.Padding(3, 3, 16, 3);
             this.rb_schueler1.MinimumSize = new System.Drawing.Size(98, 16);
             this.rb_schueler1.Name = "rb_schueler1";
-            this.rb_schueler1.Size = new System.Drawing.Size(122, 20);
+            this.rb_schueler1.Size = new System.Drawing.Size(115, 19);
             this.rb_schueler1.Style = MetroFramework.MetroColorStyle.Teal;
             this.rb_schueler1.TabIndex = 1;
             this.rb_schueler1.TabStop = true;
@@ -266,7 +266,7 @@
             this.cb_ColHeader.MaximumSize = new System.Drawing.Size(400, 16);
             this.cb_ColHeader.MinimumSize = new System.Drawing.Size(160, 16);
             this.cb_ColHeader.Name = "cb_ColHeader";
-            this.cb_ColHeader.Size = new System.Drawing.Size(210, 16);
+            this.cb_ColHeader.Size = new System.Drawing.Size(197, 16);
             this.cb_ColHeader.Style = MetroFramework.MetroColorStyle.Teal;
             this.cb_ColHeader.TabIndex = 5;
             this.cb_ColHeader.Text = "Erste Zeile enthält Feldnamen";
@@ -279,7 +279,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cb_TxtQuali.Font = new System.Drawing.Font("Candara", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_TxtQuali.FormattingEnabled = true;
-            this.cb_TxtQuali.ItemHeight = 24;
+            this.cb_TxtQuali.ItemHeight = 23;
             this.cb_TxtQuali.Items.AddRange(new object[] {
             "\"",
             "\'"});
@@ -287,7 +287,7 @@
             this.cb_TxtQuali.MaximumSize = new System.Drawing.Size(401, 0);
             this.cb_TxtQuali.MinimumSize = new System.Drawing.Size(161, 0);
             this.cb_TxtQuali.Name = "cb_TxtQuali";
-            this.cb_TxtQuali.Size = new System.Drawing.Size(390, 30);
+            this.cb_TxtQuali.Size = new System.Drawing.Size(390, 29);
             this.cb_TxtQuali.Style = MetroFramework.MetroColorStyle.Teal;
             this.cb_TxtQuali.TabIndex = 4;
             this.cb_TxtQuali.UseSelectable = true;
@@ -298,7 +298,7 @@
             this.label1.Location = new System.Drawing.Point(3, 73);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(160, 20);
+            this.label1.Size = new System.Drawing.Size(148, 19);
             this.label1.Style = MetroFramework.MetroColorStyle.Teal;
             this.label1.TabIndex = 7;
             this.label1.Text = "Obere Zeilen Entfernen:";
@@ -348,7 +348,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cb_FeldTrenn.Font = new System.Drawing.Font("Candara", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_FeldTrenn.FormattingEnabled = true;
-            this.cb_FeldTrenn.ItemHeight = 24;
+            this.cb_FeldTrenn.ItemHeight = 23;
             this.cb_FeldTrenn.Items.AddRange(new object[] {
             ",",
             ";",
@@ -358,7 +358,7 @@
             this.cb_FeldTrenn.MaximumSize = new System.Drawing.Size(401, 0);
             this.cb_FeldTrenn.MinimumSize = new System.Drawing.Size(161, 0);
             this.cb_FeldTrenn.Name = "cb_FeldTrenn";
-            this.cb_FeldTrenn.Size = new System.Drawing.Size(390, 30);
+            this.cb_FeldTrenn.Size = new System.Drawing.Size(390, 29);
             this.cb_FeldTrenn.Style = MetroFramework.MetroColorStyle.Teal;
             this.cb_FeldTrenn.TabIndex = 3;
             this.cb_FeldTrenn.UseSelectable = true;
@@ -373,7 +373,7 @@
             this.lb_path.Margin = new System.Windows.Forms.Padding(3);
             this.lb_path.MinimumSize = new System.Drawing.Size(63, 16);
             this.lb_path.Name = "lb_path";
-            this.lb_path.Size = new System.Drawing.Size(79, 20);
+            this.lb_path.Size = new System.Drawing.Size(75, 19);
             this.lb_path.Style = MetroFramework.MetroColorStyle.Teal;
             this.lb_path.TabIndex = 21;
             this.lb_path.Text = "Dateiname:";
@@ -486,7 +486,7 @@
             this.rb_single.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_single.MinimumSize = new System.Drawing.Size(128, 16);
             this.rb_single.Name = "rb_single";
-            this.rb_single.Size = new System.Drawing.Size(157, 20);
+            this.rb_single.Size = new System.Drawing.Size(146, 19);
             this.rb_single.Style = MetroFramework.MetroColorStyle.Teal;
             this.rb_single.TabIndex = 0;
             this.rb_single.TabStop = true;
@@ -505,7 +505,7 @@
             this.rb_multi.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_multi.MinimumSize = new System.Drawing.Size(160, 16);
             this.rb_multi.Name = "rb_multi";
-            this.rb_multi.Size = new System.Drawing.Size(200, 20);
+            this.rb_multi.Size = new System.Drawing.Size(186, 19);
             this.rb_multi.Style = MetroFramework.MetroColorStyle.Teal;
             this.rb_multi.TabIndex = 0;
             this.rb_multi.Text = "Mehrere Dateien auswählen";
@@ -664,7 +664,7 @@
             this.lb_Importmodus.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Importmodus.MinimumSize = new System.Drawing.Size(76, 16);
             this.lb_Importmodus.Name = "lb_Importmodus";
-            this.lb_Importmodus.Size = new System.Drawing.Size(95, 20);
+            this.lb_Importmodus.Size = new System.Drawing.Size(93, 19);
             this.lb_Importmodus.Style = MetroFramework.MetroColorStyle.Teal;
             this.lb_Importmodus.TabIndex = 0;
             this.lb_Importmodus.Text = "Importmodus:";
@@ -675,7 +675,7 @@
             this.lb_Vorschau.Location = new System.Drawing.Point(3, 3);
             this.lb_Vorschau.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Vorschau.Name = "lb_Vorschau";
-            this.lb_Vorschau.Size = new System.Drawing.Size(76, 20);
+            this.lb_Vorschau.Size = new System.Drawing.Size(72, 19);
             this.lb_Vorschau.Style = MetroFramework.MetroColorStyle.Teal;
             this.lb_Vorschau.TabIndex = 42;
             this.lb_Vorschau.Text = "Zieltabelle:";
@@ -686,7 +686,7 @@
             this.lb_Vorschau1.Location = new System.Drawing.Point(3, 38);
             this.lb_Vorschau1.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Vorschau1.Name = "lb_Vorschau1";
-            this.lb_Vorschau1.Size = new System.Drawing.Size(69, 20);
+            this.lb_Vorschau1.Size = new System.Drawing.Size(64, 19);
             this.lb_Vorschau1.Style = MetroFramework.MetroColorStyle.Teal;
             this.lb_Vorschau1.TabIndex = 42;
             this.lb_Vorschau1.Text = "Vorschau:";
@@ -807,7 +807,7 @@
             this.metroLabel1.Location = new System.Drawing.Point(22, 60);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(290, 20);
+            this.metroLabel1.Size = new System.Drawing.Size(267, 19);
             this.metroLabel1.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroLabel1.TabIndex = 52;
             this.metroLabel1.Text = "Wählen Sie eine oder mehrere Dateien aus";
@@ -873,7 +873,7 @@
             this.metroLabel2.Location = new System.Drawing.Point(22, 181);
             this.metroLabel2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 0);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(184, 20);
+            this.metroLabel2.Size = new System.Drawing.Size(169, 19);
             this.metroLabel2.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroLabel2.TabIndex = 54;
             this.metroLabel2.Text = "Durch die Dateien scrollen";
@@ -885,7 +885,7 @@
             this.metroLabel3.Location = new System.Drawing.Point(22, 304);
             this.metroLabel3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 0);
             this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(152, 20);
+            this.metroLabel3.Size = new System.Drawing.Size(141, 19);
             this.metroLabel3.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroLabel3.TabIndex = 55;
             this.metroLabel3.Text = "Anzeige der Vorschau";
@@ -937,7 +937,7 @@
             this.metroLabel4.Location = new System.Drawing.Point(626, 60);
             this.metroLabel4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(181, 20);
+            this.metroLabel4.Size = new System.Drawing.Size(165, 19);
             this.metroLabel4.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroLabel4.TabIndex = 57;
             this.metroLabel4.Text = "Wählen Sie das Importziel";
@@ -968,7 +968,7 @@
             this.metroLabel5.Location = new System.Drawing.Point(623, 127);
             this.metroLabel5.Margin = new System.Windows.Forms.Padding(2, 3, 2, 0);
             this.metroLabel5.Name = "metroLabel5";
-            this.metroLabel5.Size = new System.Drawing.Size(220, 20);
+            this.metroLabel5.Size = new System.Drawing.Size(201, 19);
             this.metroLabel5.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroLabel5.TabIndex = 59;
             this.metroLabel5.Text = "Stellen Sie die Formatierung ein";

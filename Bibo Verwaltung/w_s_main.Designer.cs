@@ -241,7 +241,7 @@
             // 
             // image
             // 
-            this.image.Image = global::Bibo_Verwaltung.Properties.Resources.icon;
+            this.image.Image = global::Bibo_Verwaltung.Properties.Resources.greenLib;
             this.image.ImageSize = 32;
             this.image.Location = new System.Drawing.Point(10, 21);
             this.image.Margin = new System.Windows.Forms.Padding(2);
@@ -458,7 +458,7 @@
             this.Name = "w_s_main";
             this.Padding = new System.Windows.Forms.Padding(9, 60, 9, 8);
             this.Resizable = false;
-            this.Text = "     Bibliotheksverwaltung";
+            this.Text = "     greenLib";
             this.Activated += new System.EventHandler(this.w_s_main_Activated);
             this.panel.ResumeLayout(false);
             this.pl_unschaerfe.ResumeLayout(false);
