@@ -27,9 +27,14 @@ namespace Bibo_Verwaltung
             {
                 bt_Bearbeiten.Enabled = false;
             }
-            else
+            else if (user.Rechteid == "1")
             {
                 bt_Bearbeiten.Enabled = true;
+            }
+            else if (user.Rechteid == "2")
+            {
+                bt_Bearbeiten.Enabled = true;
+                mbt_ImEx.Enabled = true;
             }
             this.Text = Text + " - Angemeldet als: " + userName;
             IniKlassenstufen();
@@ -74,7 +79,7 @@ namespace Bibo_Verwaltung
             }
             catch
             {
-                MetroMessageBox.Show(this,"Beim Laden der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Beim Laden der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -110,7 +115,7 @@ namespace Bibo_Verwaltung
             }
             catch
             {
-                MetroMessageBox.Show(this,"Beim Anzeigen der bisher zugeordneten Fächer ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Beim Anzeigen der bisher zugeordneten Fächer ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -141,7 +146,7 @@ namespace Bibo_Verwaltung
             }
             catch
             {
-                MetroMessageBox.Show(this,"Beim Hinzufügen dieses Faches zur Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Beim Hinzufügen dieses Faches zur Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -169,7 +174,7 @@ namespace Bibo_Verwaltung
             }
             catch
             {
-                MetroMessageBox.Show(this,"Beim Entfernen dieses Faches aus der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Beim Entfernen dieses Faches aus der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -182,7 +187,7 @@ namespace Bibo_Verwaltung
             {
                 if (aenderungungen == true)
                 {
-                    DialogResult dr = MetroMessageBox.Show(this,"Sollen die Änderungen gespeichert werden?", "Warnung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    DialogResult dr = MetroMessageBox.Show(this, "Sollen die Änderungen gespeichert werden?", "Warnung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (dr == DialogResult.Yes)
                     {
                         try
@@ -192,14 +197,14 @@ namespace Bibo_Verwaltung
                         }
                         catch
                         {
-                            MetroMessageBox.Show(this,"Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MetroMessageBox.Show(this, "Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
             }
         }
         #endregion
-        
+
         #region Componenten-Aktionen
         private void bt_Bearbeiten_Click(object sender, EventArgs e)
         {
@@ -222,7 +227,7 @@ namespace Bibo_Verwaltung
                 gv_Klassenstufe.Enabled = true;
                 SaveZuordnungen();
                 bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
-                LoadFaecher();             
+                LoadFaecher();
             }
         }
 
@@ -251,7 +256,7 @@ namespace Bibo_Verwaltung
         {
             SaveZuordnungen();
         }
-        
+
         private void bt_back_Click(object sender, EventArgs e)
         {
             bt_back.Enabled = false;
@@ -266,5 +271,31 @@ namespace Bibo_Verwaltung
             Close();
         }
         #endregion
+
+        private void mbt_ImEx_Click(object sender, EventArgs e)
+        {
+            Form custom = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export");
+            custom.ShowDialog(this);
+            if (custom.DialogResult == DialogResult.Yes)
+            {
+                //Form autoausleihe = new w_s_automatic(currentUser);
+                //autoausleihe.ShowDialog(this);
+            }
+            else if (custom.DialogResult == DialogResult.No)
+            {
+                try
+                {
+                    ExcelExport export = new ExcelExport();
+                    string[] source = { "t_s_fach_stufe" };
+                    export.ExportAsCSV(source);
+                    MetroMessageBox.Show(this, "Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch
+                {
+                    MetroMessageBox.Show(this, "Beim Exportvorgang ist ein Fehler aufgetreten!", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else { }
+        }
     }
 }

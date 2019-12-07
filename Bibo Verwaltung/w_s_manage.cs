@@ -261,7 +261,7 @@ namespace Bibo_Verwaltung
             try
             {
                 ExcelExport export = new ExcelExport();
-                export.ExportAsCSV(gv_manage);
+                export.ExportDataGridViewAsCSV(gv_manage);
                 MetroMessageBox.Show(this, "Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch

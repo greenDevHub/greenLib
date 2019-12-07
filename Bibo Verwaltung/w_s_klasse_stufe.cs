@@ -28,9 +28,14 @@ namespace Bibo_Verwaltung
             {
                 bt_Bearbeiten.Enabled = false;
             }
-            else
+            else if (user.Rechteid == "1")
             {
-                bt_Bearbeiten.Enabled = true;              
+                bt_Bearbeiten.Enabled = true;
+            }
+            else if (user.Rechteid == "2")
+            {
+                bt_Bearbeiten.Enabled = true;
+                mbt_ImEx.Enabled = true;
             }
             IniKlassenstufen();
         }
@@ -265,6 +270,32 @@ namespace Bibo_Verwaltung
         private void bt_Abbrechen_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void mbt_ImEx_Click(object sender, EventArgs e)
+        {
+            Form custom = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export");
+            custom.ShowDialog(this);
+            if (custom.DialogResult == DialogResult.Yes)
+            {
+                //Form autoausleihe = new w_s_automatic(currentUser);
+                //autoausleihe.ShowDialog(this);
+            }
+            else if (custom.DialogResult == DialogResult.No)
+            {
+                try
+                {
+                    ExcelExport export = new ExcelExport();
+                    string[] source = { "t_s_klasse_stufe" };
+                    export.ExportAsCSV(source);
+                    MetroMessageBox.Show(this, "Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch
+                {
+                    MetroMessageBox.Show(this, "Beim Exportvorgang ist ein Fehler aufgetreten!", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else { }
         }
         #endregion
     }

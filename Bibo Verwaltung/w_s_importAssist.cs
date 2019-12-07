@@ -18,108 +18,23 @@ namespace Bibo_Verwaltung
         Import import = new Import();
         DataTable typ = new DataTable();
 
+        #region Objekt-Constructor
+        /// <summary>
+        /// Öffnet den Import-Assist zum importieren von CSV-Dateien
+        /// </summary>
         public w_s_importAssist(string targetDBTable)
         {
             InitializeComponent();
-            import.Zieltabelle = targetDBTable;
+            import.Zieltabellen = targetDBTable;
         }
-
-        private void LoadDataTyp(ref MetroGrid grid, object value = null)
-        {
-            gv_DataTyp.DataSource = null;
-            typ.Clear();
-            if (typ.Columns.Count < 1)
-            {
-                typ.Columns.Add("Feldname");
-            }
-            foreach (DataGridViewColumn col in gv_Vorschau.Columns)
-            {
-                DataRow relation;
-                string[] rowData = new string[1];
-                rowData[0] = gv_Vorschau.Columns[col.Index].Name;
-                relation = typ.NewRow();
-                relation.ItemArray = rowData;
-                typ.Rows.Add(relation);
-            }
-            gv_DataTyp.DataSource = typ;
-            gv_DataTyp.Columns["Feldname"].SortMode = DataGridViewColumnSortMode.NotSortable;
-
-            if (!gv_DataTyp.Columns.Contains("Feld ist Primärschlüssel"))
-            {
-                DataGridViewCheckBoxColumn checkbox1 = new DataGridViewCheckBoxColumn();
-                checkbox1.HeaderText = "Feld ist Primärschlüssel";
-                checkbox1.Name = "Primärschlüssel";
-                checkbox1.FlatStyle = FlatStyle.System;
-                checkbox1.ThreeState = false;
-                gv_DataTyp.Columns.Add(checkbox1);
-                gv_DataTyp.Columns["Primärschlüssel"].SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
-            if (!gv_DataTyp.Columns.Contains("Feld nicht importieren (überspringen)"))
-            {
-                DataGridViewCheckBoxColumn checkbox2 = new DataGridViewCheckBoxColumn();
-                checkbox2.HeaderText = "Feld nicht importieren (überspringen)";
-                checkbox2.Name = "überspringen";
-                checkbox2.FlatStyle = FlatStyle.System;
-                checkbox2.ThreeState = false;
-                gv_DataTyp.Columns.Add(checkbox2);
-                gv_DataTyp.Columns["überspringen"].SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
-            if (!gv_DataTyp.Columns.Contains("Datentyp"))
-            {
-                DataGridViewComboBoxColumn combobox1 = new DataGridViewComboBoxColumn();
-                combobox1.HeaderText = "Datentyp";
-                combobox1.Name = "Datentyp";
-                combobox1.MaxDropDownItems = 8;
-                combobox1.Items.Add("Ja/Nein (Boolean)");
-                combobox1.Items.Add("Byte");
-                combobox1.Items.Add("Integer");
-                combobox1.Items.Add("Währung");
-                combobox1.Items.Add("Single");
-                combobox1.Items.Add("Double");
-                combobox1.Items.Add("Datum mit Uhrzeit");
-                combobox1.Items.Add("Text (String)");
-                combobox1.DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing;
-                combobox1.Width = 1000;
-                gv_DataTyp.Columns.Add(combobox1);
-                gv_DataTyp.Columns["Datentyp"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                for (int i = 0; i < gv_DataTyp.RowCount; i++)
-                {
-                    DataGridViewComboBoxCell comboValue = (DataGridViewComboBoxCell)(gv_DataTyp.Rows[i].Cells["Datentyp"]);
-                    comboValue.Value = combobox1.Items[0];
-                }
-            }
-            gv_DataTyp.Columns["Feldname"].DisplayIndex = 0;
-            gv_DataTyp.Columns["Datentyp"].DisplayIndex = 1;
-            gv_DataTyp.Columns["Primärschlüssel"].DisplayIndex = 2;
-            gv_DataTyp.Columns["überspringen"].DisplayIndex = 3;
-        }
-
-        private void FileDialog()
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = "Wählen Sie eine Datei für den Datenimport";
-            openFileDialog.Filter = "Text Files|*.txt; *.csv";
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                if (openFileDialog.FileName.Contains(".txt") || openFileDialog.FileName.Contains(".csv"))
-                {
-                    import.FilePath = openFileDialog.FileName;
-                    mtb_Filename.Text = openFileDialog.FileName;
-                }
-                else
-                {
-                    mtb_Filename.Text = "";
-                    MetroMessageBox.Show(this, "Der angegebene Dateiname ist ungültig. Bitte verwenden sie nur Dateien mit der Endung \'.txt\' oder \'.csv\'!");
-                    FileDialog();
-                }
-            }
-
-        }
+        #endregion
 
         private void Mbt_Suche_Click(object sender, EventArgs e)
         {
-            FileDialog();
-            rtb_Vorschau.Text = import.ReadFile();
+            if (import.ShowFileDialog(this, ref mtb_Filename) == System.Windows.Forms.DialogResult.OK)
+            {
+                rtb_Vorschau.Text = import.ReadFile();
+            }
         }
 
         private void Mbt_Advanced_Click(object sender, EventArgs e)
@@ -141,7 +56,7 @@ namespace Bibo_Verwaltung
             import.IsFuehrendeDatumsNull = mch_DatNullen.Checked;
             import.Dezimaltrennzeichen = Convert.ToChar(mtb_DezSym.Text); ;
             import.UseFirstRowAsColumnHeader = mcb_ColHeader.Checked;
-            import.ExecuteImport();
+            import.ExecuteImport(this, ref gv_DataTyp, ref gv_DB);
             Cursor.Current = Cursors.Default;
         }
 
@@ -156,6 +71,26 @@ namespace Bibo_Verwaltung
             {
                 if (File.Exists(mtb_Filename.Text))
                 {
+                    mbt_Suche.Enabled = false;
+                    mtb_Filename.Enabled = false;
+                    rtb_Vorschau.Enabled = false;
+                    mbt_Cancel.Enabled = false;
+                    mbt_next.Enabled = false;
+                    mbt_finish.Enabled = false;
+                    acb_FeldTrenn.Enabled = true;
+                    acb_TextQuali.Enabled = true;
+                    mcb_ColHeader.Enabled = true;
+                    acb_DatFolge.Enabled = true;
+                    mtb_DatTrenn.Enabled = true;
+                    mtb_ZeitTrenn.Enabled = true;
+                    mch_4stelligeJahre.Enabled = true;
+                    mch_DatNullen.Enabled = true;
+                    mtb_DezSym.Enabled = true;
+                    gv_Vorschau.Enabled = true;
+                    mbt_Cancel2.Enabled = true;
+                    mbt_next2.Enabled = true;
+                    mbt_back2.Enabled = true;
+                    mbt_finish2.Enabled = true;
                     tc_ImportAssist.SelectTab(1);
                     if (acb_FeldTrenn.SelectedItem == null)
                     {
@@ -166,7 +101,7 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
-                    MetroMessageBox.Show(this, "Der Pfad: " + mtb_Filename.Text + " ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this, "Der Pfad: '" + mtb_Filename.Text + "' ist ungülig!", "Error in Dateipfad", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     mtb_Filename.Focus();
                     mtb_Filename.SelectAll();
                 }
@@ -175,125 +110,122 @@ namespace Bibo_Verwaltung
 
         private void Mbt_back2_Click(object sender, EventArgs e)
         {
+            mbt_Suche.Enabled = true;
+            mtb_Filename.Enabled = true;
+            rtb_Vorschau.Enabled = true;
+            mbt_Cancel.Enabled = true;
+            mbt_next.Enabled = true;
+            mbt_finish.Enabled = true;
             tc_ImportAssist.SelectTab(0);
         }
 
         private void Mbt_next2_Click(object sender, EventArgs e)
         {
+            acb_FeldTrenn.Enabled = false;
+            acb_TextQuali.Enabled = false;
+            mcb_ColHeader.Enabled = false;
+            acb_DatFolge.Enabled = false;
+            mtb_DatTrenn.Enabled = false;
+            mtb_ZeitTrenn.Enabled = false;
+            mch_4stelligeJahre.Enabled = false;
+            mch_DatNullen.Enabled = false;
+            mtb_DezSym.Enabled = false;
+            gv_Vorschau.Enabled = false;
+            mbt_Cancel2.Enabled = false;
+            mbt_next2.Enabled = false;
+            mbt_back2.Enabled = false;
+            mbt_finish2.Enabled = false;
+            mtb_FeldName.Enabled = true;
+            acb_DataTyp.Enabled = true;
+            mcb_Primary.Enabled = true;
+            mcb_Selected.Enabled = true;
+            gv_DataTyp.Enabled = true;
+            mbt_Cancel3.Enabled = true;
+            mbt_next3.Enabled = true;
+            mbt_back3.Enabled = true;
+            mbt_finish3.Enabled = true;
             tc_ImportAssist.SelectTab(2);
-            LoadDataTyp(ref gv_DataTyp);
+            import.LoadDatatypAssignment(ref gv_DataTyp);
         }
 
         private void Mbt_back3_Click(object sender, EventArgs e)
         {
+            acb_FeldTrenn.Enabled = true;
+            acb_TextQuali.Enabled = true;
+            mcb_ColHeader.Enabled = true;
+            acb_DatFolge.Enabled = true;
+            mtb_DatTrenn.Enabled = true;
+            mtb_ZeitTrenn.Enabled = true;
+            mch_4stelligeJahre.Enabled = true;
+            mch_DatNullen.Enabled = true;
+            mtb_DezSym.Enabled = true;
+            gv_Vorschau.Enabled = true;
+            mbt_Cancel2.Enabled = true;
+            mbt_next2.Enabled = true;
+            mbt_back2.Enabled = true;
+            mbt_finish2.Enabled = true;
             tc_ImportAssist.SelectTab(1);
-        }
-
-        private void Acb_FeldTrenn_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            char sep;
-            if (acb_FeldTrenn.SelectedItem.ToString() == "{Leerzeichen}")
-            {
-                sep = Convert.ToChar(" ");
-            }
-            else if (acb_FeldTrenn.SelectedItem.ToString() == "{Tabulator}")
-            {
-                sep = '\t';
-            }
-            else
-            {
-                sep = Convert.ToChar(acb_FeldTrenn.SelectedItem.ToString());
-            }
-            import.Separator = sep;
-            import.FillGridView_Preview(ref gv_Vorschau);
         }
 
         private void Mcb_ColHeader_CheckedChanged(object sender, EventArgs e)
         {
             import.UseFirstRowAsColumnHeader = mcb_ColHeader.Checked;
-            import.FillGridView_Preview(ref gv_Vorschau);
+            import.FillGridView_Preview(this, ref gv_Vorschau);
         }
 
         private void Acb_TextQuali_SelectedIndexChanged(object sender, EventArgs e)
         {
             import.Textqualifizierer = Convert.ToChar(acb_TextQuali.SelectedItem.ToString());
-            import.FillGridView_Preview(ref gv_Vorschau);
+            import.FillGridView_Preview(this, ref gv_Vorschau);
         }
 
         private void Acb_DatFolge_SelectedIndexChanged(object sender, EventArgs e)
         {
             import.Datumsfolge = acb_DatFolge.SelectedItem.ToString();
-            import.FillGridView_Preview(ref gv_Vorschau);
+            import.FillGridView_Preview(this, ref gv_Vorschau);
         }
 
         private void Mtb_DatTrenn_TextChanged(object sender, EventArgs e)
         {
-            if (mtb_DatTrenn.Text.Length == 1)
+            if (import.Set_DatTrenn(this, ref mtb_DatTrenn))
             {
-                char dattrenn = Convert.ToChar(mtb_DatTrenn.Text);
-                if (dattrenn == '.' | dattrenn == '-' | dattrenn == '/')
-                {
-                    import.Datumstrennzeichen = dattrenn;
-                    import.FillGridView_Preview(ref gv_Vorschau);
-                }
-            }
-            else
-            {
-                MetroMessageBox.Show(this, "Das Datumstrennzeichen ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                import.FillGridView_Preview(this, ref gv_Vorschau);
             }
         }
 
         private void Mtb_ZeitTrenn_TextChanged(object sender, EventArgs e)
         {
-            if (mtb_ZeitTrenn.Text.Length == 1)
+            if (import.Set_ZeitTrenn(this, ref mtb_ZeitTrenn))
             {
-                char zeittrenn = Convert.ToChar(mtb_ZeitTrenn.Text);
-                if (zeittrenn == ':' | zeittrenn == '-' | zeittrenn == '/')
-                {
-                    import.Zeittrennzeichen = zeittrenn;
-                    import.FillGridView_Preview(ref gv_Vorschau);
-                }
-            }
-            else
-            {
-                MetroMessageBox.Show(this, "Das Zeittrennzeichen ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                import.FillGridView_Preview(this, ref gv_Vorschau);
             }
         }
 
         private void Mch_4stelligeJahre_CheckedChanged(object sender, EventArgs e)
         {
             import.IsVierstelligeJahre = mch_4stelligeJahre.Checked;
-            import.FillGridView_Preview(ref gv_Vorschau);
+            import.FillGridView_Preview(this, ref gv_Vorschau);
         }
 
         private void Mch_DatNullen_CheckedChanged(object sender, EventArgs e)
         {
             import.IsFuehrendeDatumsNull = mch_DatNullen.Checked;
-            import.FillGridView_Preview(ref gv_Vorschau);
+            import.FillGridView_Preview(this, ref gv_Vorschau);
         }
 
         private void Mtb_DezSym_TextChanged(object sender, EventArgs e)
         {
-            if (mtb_DezSym.Text.Length == 1)
+            if (import.Set_DezSym(this, ref mtb_DezSym))
             {
-                char dezsym = Convert.ToChar(mtb_DezSym.Text);
-                if (dezsym == ',' | dezsym == '.')
-                {
-                    import.Dezimaltrennzeichen = dezsym;
-                    import.FillGridView_Preview(ref gv_Vorschau);
-                }
-            }
-            else
-            {
-                MetroMessageBox.Show(this, "Das Dezimalsymbol ist ungülig!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                import.FillGridView_Preview(this, ref gv_Vorschau);
             }
         }
 
         private void Gv_DataTyp_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             mtb_FeldName.Text = gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["Feldname"].Value.ToString();
-            acb_DataTyp.SelectedItem= gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["Datentyp"].Value.ToString();
-            mcb_Primary.Checked= Convert.ToBoolean(gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["Primärschlüssel"].Value);
+            acb_DataTyp.SelectedItem = gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["Datentyp"].Value.ToString();
+            mcb_Primary.Checked = Convert.ToBoolean(gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["Primärschlüssel"].Value);
             mcb_Selected.Checked = Convert.ToBoolean(gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["überspringen"].Value);
         }
 
@@ -301,6 +233,8 @@ namespace Bibo_Verwaltung
         {
             if (gv_DataTyp.CurrentRow != null)
             {
+                string colName = gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["Feldname"].Value.ToString();
+                import.RenameColumn(colName, mtb_FeldName.Text);
                 gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["Feldname"].Value = mtb_FeldName.Text;
             }
         }
@@ -315,6 +249,8 @@ namespace Bibo_Verwaltung
 
         private void Gv_DataTyp_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            string colName = mtb_FeldName.Text;
+            import.RenameColumn(colName, gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["Feldname"].Value.ToString());
             mtb_FeldName.Text = gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["Feldname"].Value.ToString();
             acb_DataTyp.SelectedItem = gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["Datentyp"].Value.ToString();
             mcb_Primary.Checked = Convert.ToBoolean(gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["Primärschlüssel"].Value);
@@ -333,16 +269,163 @@ namespace Bibo_Verwaltung
 
         private void Mbt_next3_Click(object sender, EventArgs e)
         {
+            mtb_FeldName.Enabled = false;
+            acb_DataTyp.Enabled = false;
+            mcb_Primary.Enabled = false;
+            mcb_Selected.Enabled = false;
+            gv_DataTyp.Enabled = false;
+            mbt_Cancel3.Enabled = false;
+            mbt_next3.Enabled = false;
+            mbt_back3.Enabled = false;
+            mbt_finish3.Enabled = false;
+            mbt_Cancel4.Enabled = true;
+            mbt_next4.Enabled = true;
+            mbt_back4.Enabled = true;
+            mbt_finish4.Enabled = true;
             tc_ImportAssist.SelectTab(3);
-            //            BindingSource bs = (BindingSource)gv_DataTyp.DataSource; 
-            //userDataTypes = (DataTable)bs.DataSource;
-            import.UserDataTypes = (gv_DataTyp.DataSource as DataTable);
-            gv_DB.DataSource = import.GetSchemaOfSQLTable();
+
+            import.CreateImportTable(ref gv_DataTyp);
+            import.FillGridView_SpaltenZuordnung(this, ref gv_DB);
+            //gv_DB.Columns[0].Name = "DestinationColumn";
+            //if (gv_DB.Columns.Contains("SourceColumn"))
+            //{
+            //    gv_DB.Columns.Remove("SourceColumn");
+            //}
+            //DataGridViewComboBoxColumn combobox1 = new DataGridViewComboBoxColumn();
+            //combobox1.HeaderText = "Zuordnung der Spalten aus der CSV-Datei";
+            //combobox1.Name = "SourceColumn";
+            //combobox1.MaxDropDownItems = 8;
+            //combobox1.Items.Add("--keine--");
+            //for (int i = 0; i < import.CSVData_ToServer.Columns.Count; i++)
+            //{
+            //    combobox1.Items.Add(import.CSVData_ToServer.Columns[i].ColumnName);
+            //}
+            //combobox1.DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing;
+            //combobox1.Width = 1000;
+            //gv_DB.Columns.Add(combobox1);
+            //gv_DB.Columns["SourceColumn"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            //for (int i = 0; i < gv_DB.RowCount; i++)
+            //{
+            //    DataGridViewComboBoxCell comboValue = (DataGridViewComboBoxCell)(gv_DB.Rows[i].Cells["SourceColumn"]);
+            //    comboValue.Value = combobox1.Items[0];
+            //}
+
         }
 
         private void Mbt_back4_Click(object sender, EventArgs e)
         {
+            mtb_FeldName.Enabled = true;
+            acb_DataTyp.Enabled = true;
+            mcb_Primary.Enabled = true;
+            mcb_Selected.Enabled = true;
+            gv_DataTyp.Enabled = true;
+            mbt_Cancel3.Enabled = true;
+            mbt_next3.Enabled = true;
+            mbt_back3.Enabled = true;
+            mbt_finish3.Enabled = true;
             tc_ImportAssist.SelectTab(2);
         }
+
+        #region EventHandler für TextChanged, SelectedItemChanged und CheckedChanged in DataGridView 
+        //Eigener EventHandler für TextChanged, SelectedItemChanged und CheckedChanged in DataGridView 
+        private void gv_DataTyp_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            int colIndex;
+            int rowIndex;
+            var txtBox = e.Control as TextBox;
+            var chBox = e.Control as CheckBox;
+            var comBox = e.Control as ComboBox;
+            colIndex = gv_DataTyp.CurrentCell.ColumnIndex;
+            rowIndex = gv_DataTyp.CurrentCell.RowIndex;
+            if (e.Control is TextBox)
+            {
+                if (txtBox != null)
+                {
+                    txtBox.TextChanged += new EventHandler(ItemTxtBox_TextChanged);
+                }
+            }
+            else if (e.Control is ComboBox)
+            {
+                if (comBox != null)
+                {
+                    comBox.SelectedIndexChanged += new EventHandler(ItemComboBox_SelectedIndexChanged);
+                }
+            }
+            else if (e.Control is CheckBox)
+            {
+                if (chBox != null)
+                {
+                    chBox.CheckedChanged += new EventHandler(ItemCheckedChanged_CheckedChanged);
+                }
+            }
+        }
+
+        //EventHandler für TextChanged
+        void ItemTxtBox_TextChanged(object sender, EventArgs e)
+        {
+            if ((sender as TextBox).Text != null && (sender as TextBox).Text.Trim() != "")
+            {
+                string colName = mtb_FeldName.Text;
+                import.RenameColumn(colName, gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["Feldname"].EditedFormattedValue.ToString());
+                mtb_FeldName.Text = gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["Feldname"].EditedFormattedValue.ToString();
+            }
+        }
+
+        //EventHandler für SelectedIndexChanged
+        void ItemComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((sender as ComboBox).SelectedItem != null && (sender as ComboBox).SelectedIndex != -1)
+            {
+                acb_DataTyp.Text = gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["Datentyp"].EditedFormattedValue.ToString();
+            }
+        }
+
+        //EventHandler für CheckedChanged
+        void ItemCheckedChanged_CheckedChanged(object sender, EventArgs e)
+        {
+            if ((sender as CheckBox).Name == "mcb_Primary")
+            {
+
+                mcb_Primary.Checked = Convert.ToBoolean(gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["Primärschlüssel"].Value);
+            }
+            else if ((sender as CheckBox).Name == "überspringen")
+            {
+                mcb_Selected.Checked = Convert.ToBoolean(gv_DataTyp.Rows[gv_DataTyp.CurrentRow.Index].Cells["Primärschlüssel"].Value);
+
+            }
+        }
+
+        private void acb_FeldTrenn_TextChanged(object sender, EventArgs e)
+        {
+            if (import.Set_Seperator(this, ref acb_FeldTrenn))
+            {
+                import.FillGridView_Preview(this, ref gv_Vorschau);
+            }
+        }
+
+        private void mtb_DatTrenn_Leave(object sender, EventArgs e)
+        {
+            if (mtb_DatTrenn.Text == "")
+            {
+                mtb_DatTrenn.Text = ".";
+            }
+        }
+
+        private void mtb_ZeitTrenn_Leave(object sender, EventArgs e)
+        {
+            if (mtb_ZeitTrenn.Text == "")
+            {
+                mtb_ZeitTrenn.Text = ".";
+            }
+        }
+
+        private void mtb_DezSym_Leave(object sender, EventArgs e)
+        {
+            if (mtb_DezSym.Text == "")
+            {
+                mtb_DezSym.Text = ".";
+            }
+        }
+        #endregion
     }
 }

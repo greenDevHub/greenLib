@@ -1208,7 +1208,7 @@ namespace Bibo_Verwaltung
         private void bt_Excel_Click(object sender, EventArgs e)
         {
             ExcelExport export = new ExcelExport();
-            export.ExportAsCSV(Grid_Buch);
+            export.ExportDataGridViewAsCSV(Grid_Buch);
         }
 
         private void tb_ISBN_Click(object sender, EventArgs e)

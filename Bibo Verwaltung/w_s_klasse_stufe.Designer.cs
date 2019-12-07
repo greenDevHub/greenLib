@@ -45,6 +45,7 @@
             this.lb_Klassenstufe = new MetroFramework.Controls.MetroLabel();
             this.bt_Abbrechen = new MetroFramework.Controls.MetroButton();
             this.bt_Bearbeiten = new MetroFramework.Controls.MetroButton();
+            this.mbt_ImEx = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Klassen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Klassenstufe)).BeginInit();
             this.SuspendLayout();
@@ -203,7 +204,7 @@
             this.bt_back.Enabled = false;
             this.bt_back.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_back.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_back.Location = new System.Drawing.Point(26, 453);
+            this.bt_back.Location = new System.Drawing.Point(142, 453);
             this.bt_back.Name = "bt_back";
             this.bt_back.Size = new System.Drawing.Size(89, 24);
             this.bt_back.Style = MetroFramework.MetroColorStyle.Orange;
@@ -239,9 +240,9 @@
             this.bt_Abbrechen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.bt_Abbrechen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Abbrechen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_Abbrechen.Location = new System.Drawing.Point(347, 453);
+            this.bt_Abbrechen.Location = new System.Drawing.Point(422, 453);
             this.bt_Abbrechen.Name = "bt_Abbrechen";
-            this.bt_Abbrechen.Size = new System.Drawing.Size(175, 24);
+            this.bt_Abbrechen.Size = new System.Drawing.Size(100, 24);
             this.bt_Abbrechen.Style = MetroFramework.MetroColorStyle.Orange;
             this.bt_Abbrechen.TabIndex = 79;
             this.bt_Abbrechen.Text = "Schließen";
@@ -252,20 +253,35 @@
             // 
             this.bt_Bearbeiten.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Bearbeiten.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_Bearbeiten.Location = new System.Drawing.Point(121, 453);
+            this.bt_Bearbeiten.Location = new System.Drawing.Point(237, 453);
             this.bt_Bearbeiten.Name = "bt_Bearbeiten";
-            this.bt_Bearbeiten.Size = new System.Drawing.Size(175, 24);
+            this.bt_Bearbeiten.Size = new System.Drawing.Size(170, 24);
             this.bt_Bearbeiten.Style = MetroFramework.MetroColorStyle.Orange;
             this.bt_Bearbeiten.TabIndex = 78;
             this.bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
             this.bt_Bearbeiten.UseSelectable = true;
             this.bt_Bearbeiten.Click += new System.EventHandler(this.bt_Bearbeiten_Click);
             // 
+            // mbt_ImEx
+            // 
+            this.mbt_ImEx.Enabled = false;
+            this.mbt_ImEx.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.mbt_ImEx.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.mbt_ImEx.Location = new System.Drawing.Point(26, 453);
+            this.mbt_ImEx.Name = "mbt_ImEx";
+            this.mbt_ImEx.Size = new System.Drawing.Size(100, 24);
+            this.mbt_ImEx.Style = MetroFramework.MetroColorStyle.Orange;
+            this.mbt_ImEx.TabIndex = 83;
+            this.mbt_ImEx.Text = "Import/Export";
+            this.mbt_ImEx.UseSelectable = true;
+            this.mbt_ImEx.Click += new System.EventHandler(this.mbt_ImEx_Click);
+            // 
             // w_s_klasse_stufe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(545, 500);
+            this.Controls.Add(this.mbt_ImEx);
             this.Controls.Add(this.gv_Klassen);
             this.Controls.Add(this.gv_Klassenstufe);
             this.Controls.Add(this.bt_back);
@@ -300,5 +316,6 @@
         private MetroFramework.Controls.MetroLabel lb_Klassenstufe;
         private MetroFramework.Controls.MetroButton bt_Abbrechen;
         private MetroFramework.Controls.MetroButton bt_Bearbeiten;
+        private MetroFramework.Controls.MetroButton mbt_ImEx;
     }
 }

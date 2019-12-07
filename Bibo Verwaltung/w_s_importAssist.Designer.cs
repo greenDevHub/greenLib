@@ -252,6 +252,7 @@
             // 
             this.rtb_Vorschau.Location = new System.Drawing.Point(6, 115);
             this.rtb_Vorschau.Name = "rtb_Vorschau";
+            this.rtb_Vorschau.ReadOnly = true;
             this.rtb_Vorschau.Size = new System.Drawing.Size(734, 188);
             this.rtb_Vorschau.TabIndex = 12;
             this.rtb_Vorschau.Text = "";
@@ -373,6 +374,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gv_Vorschau.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gv_Vorschau.Enabled = false;
             this.gv_Vorschau.EnableHeadersVisualStyles = false;
             this.gv_Vorschau.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_Vorschau.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -445,6 +447,7 @@
             this.mtb_DezSym.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.mtb_DezSym.CustomButton.UseSelectable = true;
             this.mtb_DezSym.CustomButton.Visible = false;
+            this.mtb_DezSym.Enabled = false;
             this.mtb_DezSym.Lines = new string[] {
         ","};
             this.mtb_DezSym.Location = new System.Drawing.Point(363, 82);
@@ -464,6 +467,7 @@
             this.mtb_DezSym.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtb_DezSym.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.mtb_DezSym.TextChanged += new System.EventHandler(this.Mtb_DezSym_TextChanged);
+            this.mtb_DezSym.Leave += new System.EventHandler(this.mtb_DezSym_Leave);
             // 
             // mtb_ZeitTrenn
             // 
@@ -479,6 +483,7 @@
             this.mtb_ZeitTrenn.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.mtb_ZeitTrenn.CustomButton.UseSelectable = true;
             this.mtb_ZeitTrenn.CustomButton.Visible = false;
+            this.mtb_ZeitTrenn.Enabled = false;
             this.mtb_ZeitTrenn.Lines = new string[] {
         ":"};
             this.mtb_ZeitTrenn.Location = new System.Drawing.Point(147, 82);
@@ -498,6 +503,7 @@
             this.mtb_ZeitTrenn.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtb_ZeitTrenn.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.mtb_ZeitTrenn.TextChanged += new System.EventHandler(this.Mtb_ZeitTrenn_TextChanged);
+            this.mtb_ZeitTrenn.Leave += new System.EventHandler(this.mtb_ZeitTrenn_Leave);
             // 
             // mtb_DatTrenn
             // 
@@ -513,6 +519,7 @@
             this.mtb_DatTrenn.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.mtb_DatTrenn.CustomButton.UseSelectable = true;
             this.mtb_DatTrenn.CustomButton.Visible = false;
+            this.mtb_DatTrenn.Enabled = false;
             this.mtb_DatTrenn.Lines = new string[] {
         "."};
             this.mtb_DatTrenn.Location = new System.Drawing.Point(147, 49);
@@ -532,11 +539,13 @@
             this.mtb_DatTrenn.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtb_DatTrenn.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.mtb_DatTrenn.TextChanged += new System.EventHandler(this.Mtb_DatTrenn_TextChanged);
+            this.mtb_DatTrenn.Leave += new System.EventHandler(this.mtb_DatTrenn_Leave);
             // 
             // acb_DatFolge
             // 
             this.acb_DatFolge.BorderColor = System.Drawing.Color.Gray;
             this.acb_DatFolge.DataRowView = false;
+            this.acb_DatFolge.Enabled = false;
             this.acb_DatFolge.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.acb_DatFolge.FormattingEnabled = true;
             this.acb_DatFolge.HighlightColor = System.Drawing.Color.Gray;
@@ -557,6 +566,7 @@
             // mch_4stelligeJahre
             // 
             this.mch_4stelligeJahre.DisplayFocus = true;
+            this.mch_4stelligeJahre.Enabled = false;
             this.mch_4stelligeJahre.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.mch_4stelligeJahre.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.mch_4stelligeJahre.Location = new System.Drawing.Point(258, 16);
@@ -571,6 +581,7 @@
             // mch_DatNullen
             // 
             this.mch_DatNullen.DisplayFocus = true;
+            this.mch_DatNullen.Enabled = false;
             this.mch_DatNullen.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.mch_DatNullen.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.mch_DatNullen.Location = new System.Drawing.Point(258, 49);
@@ -639,6 +650,7 @@
             // mcb_ColHeader
             // 
             this.mcb_ColHeader.DisplayFocus = true;
+            this.mcb_ColHeader.Enabled = false;
             this.mcb_ColHeader.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.mcb_ColHeader.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.mcb_ColHeader.Location = new System.Drawing.Point(10, 82);
@@ -654,6 +666,7 @@
             // 
             this.acb_TextQuali.BorderColor = System.Drawing.Color.Gray;
             this.acb_TextQuali.DataRowView = false;
+            this.acb_TextQuali.Enabled = false;
             this.acb_TextQuali.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.acb_TextQuali.FormattingEnabled = true;
             this.acb_TextQuali.HighlightColor = System.Drawing.Color.Gray;
@@ -671,6 +684,7 @@
             // 
             this.acb_FeldTrenn.BorderColor = System.Drawing.Color.Gray;
             this.acb_FeldTrenn.DataRowView = false;
+            this.acb_FeldTrenn.Enabled = false;
             this.acb_FeldTrenn.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.acb_FeldTrenn.FormattingEnabled = true;
             this.acb_FeldTrenn.HighlightColor = System.Drawing.Color.Gray;
@@ -684,7 +698,7 @@
             this.acb_FeldTrenn.Size = new System.Drawing.Size(107, 27);
             this.acb_FeldTrenn.Sorted = true;
             this.acb_FeldTrenn.TabIndex = 29;
-            this.acb_FeldTrenn.SelectedIndexChanged += new System.EventHandler(this.Acb_FeldTrenn_SelectedIndexChanged);
+            this.acb_FeldTrenn.TextChanged += new System.EventHandler(this.acb_FeldTrenn_TextChanged);
             // 
             // mlb_TextQuali
             // 
@@ -722,6 +736,7 @@
             // 
             this.mbt_Cancel2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.mbt_Cancel2.DisplayFocus = true;
+            this.mbt_Cancel2.Enabled = false;
             this.mbt_Cancel2.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_Cancel2.Location = new System.Drawing.Point(322, 309);
             this.mbt_Cancel2.Name = "mbt_Cancel2";
@@ -748,6 +763,7 @@
             // mbt_back2
             // 
             this.mbt_back2.DisplayFocus = true;
+            this.mbt_back2.Enabled = false;
             this.mbt_back2.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_back2.Location = new System.Drawing.Point(428, 309);
             this.mbt_back2.Name = "mbt_back2";
@@ -761,6 +777,7 @@
             // mbt_next2
             // 
             this.mbt_next2.DisplayFocus = true;
+            this.mbt_next2.Enabled = false;
             this.mbt_next2.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_next2.Location = new System.Drawing.Point(534, 309);
             this.mbt_next2.Name = "mbt_next2";
@@ -775,6 +792,7 @@
             // 
             this.mbt_finish2.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.mbt_finish2.DisplayFocus = true;
+            this.mbt_finish2.Enabled = false;
             this.mbt_finish2.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_finish2.Location = new System.Drawing.Point(640, 309);
             this.mbt_finish2.Name = "mbt_finish2";
@@ -844,6 +862,7 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gv_DataTyp.DefaultCellStyle = dataGridViewCellStyle5;
+            this.gv_DataTyp.Enabled = false;
             this.gv_DataTyp.EnableHeadersVisualStyles = false;
             this.gv_DataTyp.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_DataTyp.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -871,6 +890,7 @@
             this.gv_DataTyp.TabIndex = 32;
             this.gv_DataTyp.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_DataTyp_CellClick);
             this.gv_DataTyp.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_DataTyp_CellValueChanged);
+            this.gv_DataTyp.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.gv_DataTyp_EditingControlShowing);
             // 
             // mlb_Vorschau3
             // 
@@ -901,6 +921,7 @@
             // 
             // mcb_Primary
             // 
+            this.mcb_Primary.Enabled = false;
             this.mcb_Primary.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.mcb_Primary.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.mcb_Primary.Location = new System.Drawing.Point(64, 52);
@@ -936,6 +957,7 @@
             // 
             this.acb_DataTyp.BorderColor = System.Drawing.Color.Gray;
             this.acb_DataTyp.DataRowView = false;
+            this.acb_DataTyp.Enabled = false;
             this.acb_DataTyp.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.acb_DataTyp.FormattingEnabled = true;
             this.acb_DataTyp.HighlightColor = System.Drawing.Color.Gray;
@@ -968,6 +990,7 @@
             this.mtb_FeldName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.mtb_FeldName.CustomButton.UseSelectable = true;
             this.mtb_FeldName.CustomButton.Visible = false;
+            this.mtb_FeldName.Enabled = false;
             this.mtb_FeldName.Lines = new string[0];
             this.mtb_FeldName.Location = new System.Drawing.Point(138, 23);
             this.mtb_FeldName.MaxLength = 32767;
@@ -988,6 +1011,7 @@
             // 
             // mcb_Selected
             // 
+            this.mcb_Selected.Enabled = false;
             this.mcb_Selected.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.mcb_Selected.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.mcb_Selected.Location = new System.Drawing.Point(410, 52);
@@ -1003,6 +1027,7 @@
             // 
             this.mbt_Cancel3.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.mbt_Cancel3.DisplayFocus = true;
+            this.mbt_Cancel3.Enabled = false;
             this.mbt_Cancel3.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_Cancel3.Location = new System.Drawing.Point(322, 309);
             this.mbt_Cancel3.Name = "mbt_Cancel3";
@@ -1029,6 +1054,7 @@
             // mbt_back3
             // 
             this.mbt_back3.DisplayFocus = true;
+            this.mbt_back3.Enabled = false;
             this.mbt_back3.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_back3.Location = new System.Drawing.Point(428, 309);
             this.mbt_back3.Name = "mbt_back3";
@@ -1042,6 +1068,7 @@
             // mbt_next3
             // 
             this.mbt_next3.DisplayFocus = true;
+            this.mbt_next3.Enabled = false;
             this.mbt_next3.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_next3.Location = new System.Drawing.Point(534, 309);
             this.mbt_next3.Name = "mbt_next3";
@@ -1056,6 +1083,7 @@
             // 
             this.mbt_finish3.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.mbt_finish3.DisplayFocus = true;
+            this.mbt_finish3.Enabled = false;
             this.mbt_finish3.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_finish3.Location = new System.Drawing.Point(640, 309);
             this.mbt_finish3.Name = "mbt_finish3";
@@ -1089,6 +1117,7 @@
             // 
             this.mbt_Cancel4.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.mbt_Cancel4.DisplayFocus = true;
+            this.mbt_Cancel4.Enabled = false;
             this.mbt_Cancel4.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_Cancel4.Location = new System.Drawing.Point(322, 309);
             this.mbt_Cancel4.Name = "mbt_Cancel4";
@@ -1115,6 +1144,7 @@
             // mbt_back4
             // 
             this.mbt_back4.DisplayFocus = true;
+            this.mbt_back4.Enabled = false;
             this.mbt_back4.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_back4.Location = new System.Drawing.Point(428, 309);
             this.mbt_back4.Name = "mbt_back4";
@@ -1142,6 +1172,7 @@
             // 
             this.mbt_finish4.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.mbt_finish4.DisplayFocus = true;
+            this.mbt_finish4.Enabled = false;
             this.mbt_finish4.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_finish4.Location = new System.Drawing.Point(640, 309);
             this.mbt_finish4.Name = "mbt_finish4";

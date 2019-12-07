@@ -46,6 +46,7 @@
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.bt_back = new MetroFramework.Controls.MetroButton();
+            this.mbt_ImEx = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Faecher)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Buecher)).BeginInit();
             this.SuspendLayout();
@@ -276,12 +277,27 @@
             this.bt_back.UseSelectable = true;
             this.bt_back.Click += new System.EventHandler(this.bt_back_Click);
             // 
+            // mbt_ImEx
+            // 
+            this.mbt_ImEx.Enabled = false;
+            this.mbt_ImEx.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.mbt_ImEx.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.mbt_ImEx.Location = new System.Drawing.Point(26, 453);
+            this.mbt_ImEx.Name = "mbt_ImEx";
+            this.mbt_ImEx.Size = new System.Drawing.Size(175, 24);
+            this.mbt_ImEx.Style = MetroFramework.MetroColorStyle.Orange;
+            this.mbt_ImEx.TabIndex = 76;
+            this.mbt_ImEx.Text = "Daten Import/Export";
+            this.mbt_ImEx.UseSelectable = true;
+            this.mbt_ImEx.Click += new System.EventHandler(this.mbt_ImEx_Click);
+            // 
             // w_s_buch_fach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btAbbrechen;
             this.ClientSize = new System.Drawing.Size(920, 500);
+            this.Controls.Add(this.mbt_ImEx);
             this.Controls.Add(this.bt_back);
             this.Controls.Add(this.gv_Buecher);
             this.Controls.Add(this.metroLabel2);
@@ -315,5 +331,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroButton bt_back;
+        private MetroFramework.Controls.MetroButton mbt_ImEx;
     }
 }

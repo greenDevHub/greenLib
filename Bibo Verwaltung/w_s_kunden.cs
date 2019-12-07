@@ -1072,7 +1072,7 @@ namespace Bibo_Verwaltung
         private void Mbt_Export_Click(object sender, EventArgs e)
         {
             ExcelExport export = new ExcelExport();
-            export.ExportAsCSV(gv_Kunde);
+            export.ExportDataGridViewAsCSV(gv_Kunde);
         }
         #endregion
     }
