@@ -1,0 +1,117 @@
+Informationen über das Aufrufen von JIT-Debuggen
+anstelle dieses Dialogfelds finden Sie am Ende dieser Meldung.
+
+************** Ausnahmetext **************
+System.ArgumentOutOfRangeException: InvalidArgument=Value mit dem Wert 0 ist für index ungültig.
+Parametername: index
+   bei System.Windows.Forms.ComboBox.ObjectCollection.get_Item(Int32 index)
+   bei System.Windows.Forms.ComboBox.get_Text()
+   bei Bibo_Verwaltung.w_s_buchsuche.cb_Autor_TextChanged(Object sender, EventArgs e) in C:\Users\gehmlichj\source\repos\NewRepo\Bibo Verwaltung\w_s_buchsuche.cs:Zeile 359.
+   bei System.Windows.Forms.Control.OnTextChanged(EventArgs e)
+   bei System.Windows.Forms.ComboBox.OnTextChanged(EventArgs e)
+   bei System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
+   bei Bibo_Verwaltung.w_s_buchsuche.<>c__DisplayClass37_0.<BackgroundWorker1_DoWork>b__1() in C:\Users\gehmlichj\source\repos\NewRepo\Bibo Verwaltung\w_s_buchsuche.cs:Zeile 651.
+
+
+************** Geladene Assemblys **************
+mscorlib
+    Assembly-Version: 4.0.0.0.
+    Win32-Version: 4.7.3394.0 built by: NET472REL1LAST_C.
+    CodeBase: file:///C:/Windows/Microsoft.NET/Framework64/v4.0.30319/mscorlib.dll.
+----------------------------------------
+Bibo Verwaltung
+    Assembly-Version: 1.0.0.0.
+    Win32-Version: 1.0.0.0.
+    CodeBase: file:///C:/Users/gehmlichj/source/repos/NewRepo/Bibo%20Verwaltung/bin/Debug/Bibo%20Verwaltung.exe.
+----------------------------------------
+System
+    Assembly-Version: 4.0.0.0.
+    Win32-Version: 4.7.3362.0 built by: NET472REL1LAST_C.
+    CodeBase: file:///C:/windows/Microsoft.Net/assembly/GAC_MSIL/System/v4.0_4.0.0.0__b77a5c561934e089/System.dll.
+----------------------------------------
+System.Windows.Forms
+    Assembly-Version: 4.0.0.0.
+    Win32-Version: 4.7.3324.0 built by: NET472REL1LAST_C.
+    CodeBase: file:///C:/windows/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms/v4.0_4.0.0.0__b77a5c561934e089/System.Windows.Forms.dll.
+----------------------------------------
+System.Drawing
+    Assembly-Version: 4.0.0.0.
+    Win32-Version: 4.7.3190.0 built by: NET472REL1LAST_C.
+    CodeBase: file:///C:/windows/Microsoft.Net/assembly/GAC_MSIL/System.Drawing/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Drawing.dll.
+----------------------------------------
+MetroFramework
+    Assembly-Version: 1.4.0.0.
+    Win32-Version: 1.4.0.0.
+    CodeBase: file:///C:/Users/gehmlichj/source/repos/NewRepo/Bibo%20Verwaltung/bin/Debug/MetroFramework.DLL.
+----------------------------------------
+System.Configuration
+    Assembly-Version: 4.0.0.0.
+    Win32-Version: 4.7.3324.0 built by: NET472REL1LAST_C.
+    CodeBase: file:///C:/windows/Microsoft.Net/assembly/GAC_MSIL/System.Configuration/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Configuration.dll.
+----------------------------------------
+System.Core
+    Assembly-Version: 4.0.0.0.
+    Win32-Version: 4.7.3362.0 built by: NET472REL1LAST_C.
+    CodeBase: file:///C:/windows/Microsoft.Net/assembly/GAC_MSIL/System.Core/v4.0_4.0.0.0__b77a5c561934e089/System.Core.dll.
+----------------------------------------
+System.Xml
+    Assembly-Version: 4.0.0.0.
+    Win32-Version: 4.7.3190.0 built by: NET472REL1LAST_C.
+    CodeBase: file:///C:/windows/Microsoft.Net/assembly/GAC_MSIL/System.Xml/v4.0_4.0.0.0__b77a5c561934e089/System.Xml.dll.
+----------------------------------------
+MetroFramework.Fonts
+    Assembly-Version: 1.4.0.0.
+    Win32-Version: 1.4.0.0.
+    CodeBase: file:///C:/Users/gehmlichj/source/repos/NewRepo/Bibo%20Verwaltung/bin/Debug/MetroFramework.Fonts.DLL.
+----------------------------------------
+System.Data
+    Assembly-Version: 4.0.0.0.
+    Win32-Version: 4.7.3260.0 built by: NET472REL1LAST_C.
+    CodeBase: file:///C:/windows/Microsoft.Net/assembly/GAC_64/System.Data/v4.0_4.0.0.0__b77a5c561934e089/System.Data.dll.
+----------------------------------------
+System.Data.resources
+    Assembly-Version: 4.0.0.0.
+    Win32-Version: 4.7.3190.0 built by: NET472REL1LAST_C.
+    CodeBase: file:///C:/windows/Microsoft.Net/assembly/GAC_MSIL/System.Data.resources/v4.0_4.0.0.0_de_b77a5c561934e089/System.Data.resources.dll.
+----------------------------------------
+System.Transactions
+    Assembly-Version: 4.0.0.0.
+    Win32-Version: 4.7.3260.0 built by: NET472REL1LAST_C.
+    CodeBase: file:///C:/windows/Microsoft.Net/assembly/GAC_64/System.Transactions/v4.0_4.0.0.0__b77a5c561934e089/System.Transactions.dll.
+----------------------------------------
+System.EnterpriseServices
+    Assembly-Version: 4.0.0.0.
+    Win32-Version: 4.7.3190.0 built by: NET472REL1LAST_C.
+    CodeBase: file:///C:/windows/Microsoft.Net/assembly/GAC_64/System.EnterpriseServices/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.EnterpriseServices.dll.
+----------------------------------------
+System.Numerics
+    Assembly-Version: 4.0.0.0.
+    Win32-Version: 4.7.3190.0 built by: NET472REL1LAST_C.
+    CodeBase: file:///C:/windows/Microsoft.Net/assembly/GAC_MSIL/System.Numerics/v4.0_4.0.0.0__b77a5c561934e089/System.Numerics.dll.
+----------------------------------------
+System.Windows.Forms.resources
+    Assembly-Version: 4.0.0.0.
+    Win32-Version: 4.7.3190.0 built by: NET472REL1LAST_C.
+    CodeBase: file:///C:/windows/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms.resources/v4.0_4.0.0.0_de_b77a5c561934e089/System.Windows.Forms.resources.dll.
+----------------------------------------
+mscorlib.resources
+    Assembly-Version: 4.0.0.0.
+    Win32-Version: 4.7.3190.0 built by: NET472REL1LAST_C.
+    CodeBase: file:///C:/windows/Microsoft.Net/assembly/GAC_MSIL/mscorlib.resources/v4.0_4.0.0.0_de_b77a5c561934e089/mscorlib.resources.dll.
+----------------------------------------
+
+************** JIT-Debuggen **************
+Um das JIT-Debuggen (Just-In-Time) zu aktivieren, muss in der
+Konfigurationsdatei der Anwendung oder des Computers
+(machine.config) der jitDebugging-Wert im Abschnitt system.windows.forms festgelegt werden.
+Die Anwendung muss mit aktiviertem Debuggen kompiliert werden.
+
+Zum Beispiel:
+
+<configuration>
+    <system.windows.forms jitDebugging="true" />
+</configuration>
+
+Wenn das JIT-Debuggen aktiviert ist, werden alle nicht behandelten
+Ausnahmen an den JIT-Debugger gesendet, der auf dem
+Computer registriert ist, und nicht in diesem Dialogfeld behandelt.
