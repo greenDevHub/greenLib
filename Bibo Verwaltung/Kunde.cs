@@ -290,6 +290,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public bool AlreadyExists()
         {
+            KundenID = "";
             if (con.ConnectError()) return false;
             string RawCommand = "SELECT * FROM [dbo].[t_s_kunden] WHERE kunde_vorname = @0 and kunde_nachname = @1 and kunde_geburtsdatum = @2";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, Vorname, Nachname, Gd.Date);
@@ -308,7 +309,30 @@ namespace Bibo_Verwaltung
                 return true;
             }
         }
-
+        /// <summary>
+        /// Prüft, ob ein Kunde bereits existiert
+        /// </summary>
+        public bool IsActivated()
+        {
+            Activated = false;
+            if (con.ConnectError()) return false;
+            string RawCommand = "SELECT * FROM [dbo].[t_s_kunden] WHERE kunde_ID = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, KundenID);
+            while (dr.Read())
+            {
+                if (dr["kunde_activated"].ToString().Equals("True"))
+                {
+                    Activated = true;
+                }
+                else
+                {
+                    Activated = false;
+                }
+            }
+            dr.Close();
+            con.Close();
+            return Activated;
+        }
         /// <summary>
         /// Lädt die KundenID
         /// </summary>
@@ -402,9 +426,12 @@ namespace Bibo_Verwaltung
                 {
                     Klasse.AddKlasse(Klasse.Klassename);
                 }
-                string RawCommand = "UPDATE [dbo].[t_s_kunden] SET kunde_ort = @ort, kunde_postleitzahl = @postleitzahl, kunde_strasse = @strasse, kunde_telefonnummer = @telefonnummer, kunde_hausnummer = @hausnummer, kunde_mail = @mail, kunde_klasse = @klasse WHERE kunde_ID = @k_ID";
+                string RawCommand = "UPDATE [dbo].[t_s_kunden] SET kunde_vorname = @vorname, kunde_nachname = @nachname, kunde_geburtsdatum = @gd, kunde_ort = @ort, kunde_postleitzahl = @postleitzahl, kunde_strasse = @strasse, kunde_telefonnummer = @telefonnummer, kunde_hausnummer = @hausnummer, kunde_mail = @mail, kunde_klasse = @klasse WHERE kunde_ID = @k_ID";
                 con.ConnectError();
                 SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+                cmd.Parameters.AddWithValue("@vorname", Vorname);
+                cmd.Parameters.AddWithValue("@nachname", Nachname);
+                cmd.Parameters.AddWithValue("@gd", Gd.Date);
                 cmd.Parameters.AddWithValue("@ort", Ort);
                 cmd.Parameters.AddWithValue("@postleitzahl", Postleitzahl);
                 cmd.Parameters.AddWithValue("@strasse", Strasse);

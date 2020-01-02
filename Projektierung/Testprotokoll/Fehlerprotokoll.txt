@@ -15,17 +15,17 @@ Loginfenser
 > #01 Username / login ist nicht im Focus
 
 Kundenverwaltung
-> #02 Wieso kann Name/Nachname nicht geändert werden?
-> #03 Kunden id wird beim Wechsel zwischen bearbeiten und hinzufügen nicht gelöscht
->> Es ist zwar möglich Eingaben zu ändern aber nicht dies als neuen Nutzer hinzuzufügen
->>> Filter leeren ist die einzige Möglichkeit neue Nutzer hinzuzufügen nachdem ein Nutzer ausgewählt wurde
-> #04 Wenn das Fenster zwischenzeitlich nicht im Fokus war wird die Suche in der Tabelle zurück gesetzt, 
->> Kriterien bleiben aber in den Feldern
-> #05 Hinzufügen von einem Kunde mit selben Vorname, Name und Geburtsdatum wird verhindert, aber keine Meldung angezeigt
-> #06 Ändern des Geburtsdatum wird verhindert, Tippfehler?
+DONE> #02 Wieso kann Name/Nachname nicht geändert werden?
+DONE> #03 Kunden id wird beim Wechsel zwischen bearbeiten und hinzufügen nicht gelöscht
+DONE>> Es ist zwar möglich Eingaben zu ändern aber nicht dies als neuen Nutzer hinzuzufügen
+DONE>>> Filter leeren ist die einzige Möglichkeit neue Nutzer hinzuzufügen nachdem ein Nutzer ausgewählt wurde
+DONE> #04 Wenn das Fenster zwischenzeitlich nicht im Fokus war wird die Suche in der Tabelle zurück gesetzt, 
+DONE>> Kriterien bleiben aber in den Feldern
+DONE> #05 Hinzufügen von einem Kunde mit selben Vorname, Name und Geburtsdatum wird verhindert, aber keine Meldung angezeigt
+DONE> #06 Ändern des Geburtsdatum wird verhindert, Tippfehler?
 > #07 Klasse sollte über dropdown Menü ausgewählt werden wie alle Stammdaten
 > #08 Klassen verwalten Modul?
-> #40 Suche nach Geburtsdatum
+DONE> #40 Suche nach Geburtsdatum
 
 Bücherverwaltung
 > #09 Nicht alle Pflichtfelder werden rot markiert bei neu erstellen (vereinheitlichung auch kunde)

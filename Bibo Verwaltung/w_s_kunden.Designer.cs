@@ -905,6 +905,7 @@
             this.mdtp_GebDat.Name = "mdtp_GebDat";
             this.mdtp_GebDat.Size = new System.Drawing.Size(174, 29);
             this.mdtp_GebDat.TabIndex = 49;
+            this.mdtp_GebDat.ValueChanged += new System.EventHandler(this.Mdtp_GebDat_ValueChanged);
             // 
             // metroProgressSpinner2
             // 

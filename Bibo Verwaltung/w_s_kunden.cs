@@ -246,9 +246,9 @@ namespace Bibo_Verwaltung
                 {
                     bt_confirm.Text = "Speichern";
                     tb_KundenID.Enabled = false;
-                    tb_Vorname.Enabled = false;
-                    tb_Nachname.Enabled = false;
-                    mdtp_GebDat.Enabled = false;
+                    tb_Vorname.Enabled = true;
+                    tb_Nachname.Enabled = true;
+                    mdtp_GebDat.Enabled = true;
                     tb_Strasse.Enabled = true;
                     tb_Hausnummer.Enabled = true;
                     tb_Postleitzahl.Enabled = true;
@@ -268,6 +268,8 @@ namespace Bibo_Verwaltung
                 else if (rb_Neukunde.Checked)
                 {
                     bt_confirm.Text = "Hinzufügen";
+                    tb_KundenID.Text = "";
+
                     tb_KundenID.Enabled = false;
                     tb_Vorname.Enabled = true;
                     tb_Nachname.Enabled = true;
@@ -379,7 +381,16 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void KundenFilter()
         {
-            (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
+            if (mdtp_GebDat.Value.Date != DateTime.Now.Date)
+            {
+                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%' AND Geburtsdatum LIKE '{9}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, mdtp_GebDat.Value.Date.ToShortDateString());
+
+            }
+            else
+            {
+                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
+
+            }
         }
 
         /// <summary>
@@ -447,20 +458,49 @@ namespace Bibo_Verwaltung
             if (rb_KundeBearbeiten.Checked)
             {
                 if (!tb_Vorname.Text.Equals("")
-                && !tb_Nachname.Text.Equals(""))
+                && !tb_Nachname.Text.Equals("") && !tb_KundenID.Text.Equals(""))
                 {
                     try
                     {
                         SetKundenValues();
-                        kunde.UpdateKunde();
-                        ClearForm();
-                        kunde.FillGrid(ref gv_Kunde);
-                        gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
-                        gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
-                        lb_kunde_add.Visible = false;
-                        lb_kunde_add.Text = "Der Kunde wurde bearbeitet!";
-                        lb_kunde_add.Visible = true;
-                        t.Start();
+                        if (kunde.AlreadyExists())
+                        {
+                            DialogResult dr = MetroMessageBox.Show(this, "Ein Kunde mit diesem Vornamen, Nachnamen und Geburtsdatum existiert bereits. Die betreffenden Kunden wären dann nur anhand der anderen Felder (ID, Straße, Ort,...) unterscheidbar. Trotzdem hinzufügen?", "Kunde schon vorhanden.", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            if(dr == DialogResult.Yes)
+                            {
+                                kunde.KundenID = tb_KundenID.Text;
+                                kunde.UpdateKunde();
+                                ClearForm();
+                                kunde.FillGrid(ref gv_Kunde);
+                                gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
+                                gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
+                                lb_kunde_add.Visible = false;
+                                lb_kunde_add.Text = "Der Kunde wurde bearbeitet!";
+                                lb_kunde_add.Visible = true;
+                                t.Start();
+                            }
+                            else
+                            {
+                                lb_kunde_add.Visible = false;
+                                lb_kunde_add.Text = "Der Kunde wurde nicht bearbeitet!";
+                                lb_kunde_add.Visible = true;
+                                t.Start();
+                            }
+                        }
+                        else
+                        {
+                            kunde.KundenID = tb_KundenID.Text;
+                            kunde.UpdateKunde();
+                            ClearForm();
+                            kunde.FillGrid(ref gv_Kunde);
+                            gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
+                            gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
+                            lb_kunde_add.Visible = false;
+                            lb_kunde_add.Text = "Der Kunde wurde bearbeitet!";
+                            lb_kunde_add.Visible = true;
+                            t.Start();
+                        }
+
                     }
                     catch (SqlException)
                     {
@@ -581,16 +621,19 @@ namespace Bibo_Verwaltung
                             DialogResult dr = MetroMessageBox.Show(this, "Sie haben zwar eine Klasse ausgewählt, aber keine Fächer. Möchten Sie auch die Fächer angeben?", "Fächer fehlen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                             if (dr == DialogResult.No)
                             {
-                                if (kunde.AlreadyExists() && kunde.Activated)
+                                if (kunde.AlreadyExists() && kunde.IsActivated())
                                 {
                                     object[] args = new object[] { kunde.Vorname, kunde.Nachname, kunde.Gd.ToShortDateString() };
                                     string message = String.Format("Es existiert bereits ein Eintrag zu dem Kunden '{0} {1} ({2})'. Bitte überprüfen Sie ihre Angaben!", args);
                                     MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 }
-                                else if (kunde.AlreadyExists() && !kunde.Activated)
+                                else if (kunde.AlreadyExists() && !kunde.IsActivated())
                                 {
                                     kunde.ActivateKunde();
                                     kunde.UpdateKunde();
+                                    object[] args = new object[] { kunde.Vorname, kunde.Nachname, kunde.Gd.ToShortDateString() };
+                                    string message = String.Format("Es existiert bereits ein deaktivierter Eintrag zu dem Kunden '{0} {1} ({2})'. Der betroffene Eintrag wurde stattdessen reaktiviert und aktualisiert.", args);
+                                    MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 }
                                 else
                                 {
@@ -609,16 +652,19 @@ namespace Bibo_Verwaltung
                         }
                         else
                         {
-                            if (kunde.AlreadyExists() && kunde.Activated)
+                            if (kunde.AlreadyExists() && kunde.IsActivated())
                             {
                                 object[] args = new object[] { kunde.Vorname, kunde.Nachname, kunde.Gd.ToShortDateString() };
                                 string message = String.Format("Es existiert bereits ein Eintrag zu dem Kunden '{0} {1} ({2})'. Bitte überprüfen Sie ihre Angaben!", args);
                                 MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
-                            else if (kunde.AlreadyExists() && !kunde.Activated)
+                            else if (kunde.AlreadyExists() && !kunde.IsActivated())
                             {
                                 kunde.ActivateKunde();
                                 kunde.UpdateKunde();
+                                object[] args = new object[] { kunde.Vorname, kunde.Nachname, kunde.Gd.ToShortDateString() };
+                                string message = String.Format("Es existiert bereits ein deaktivierter Eintrag zu dem Kunden '{0} {1} ({2})'. Der betroffene Eintrag wurde stattdessen reaktiviert und aktualisiert.", args);
+                                MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                             else
                             {
@@ -1062,6 +1108,7 @@ namespace Bibo_Verwaltung
         {
             gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
             gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
+            KundenFilter();
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
@@ -1075,5 +1122,10 @@ namespace Bibo_Verwaltung
             export.ExportDataGridViewAsCSV(gv_Kunde);
         }
         #endregion
+
+        private void Mdtp_GebDat_ValueChanged(object sender, EventArgs e)
+        {
+                KundenFilter();
+        }
     }
 }
