@@ -40,6 +40,7 @@
             this.barcodeDruckenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gb_BarcodeBox = new System.Windows.Forms.GroupBox();
             this.mtb_Barcode = new MetroFramework.Controls.MetroTextBox();
+            this.BarcodeBox = new System.Windows.Forms.PictureBox();
             this.mlb_barcode = new MetroFramework.Controls.MetroLabel();
             this.bt_Print = new MetroFramework.Controls.MetroButton();
             this.tb_ExempCount = new MetroFramework.Controls.MetroTextBox();
@@ -69,12 +70,13 @@
             this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.mbt_Import = new MetroFramework.Controls.MetroButton();
-            this.BarcodeBox = new System.Windows.Forms.PictureBox();
+            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.gb_BarcodeBox.SuspendLayout();
-            this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BarcodeBox)).BeginInit();
+            this.metroPanel1.SuspendLayout();
+            this.metroPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // gv_Exemplare
@@ -83,7 +85,10 @@
             this.gv_Exemplare.AllowUserToDeleteRows = false;
             this.gv_Exemplare.AllowUserToResizeColumns = false;
             this.gv_Exemplare.AllowUserToResizeRows = false;
-            this.gv_Exemplare.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_Exemplare.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gv_Exemplare.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gv_Exemplare.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_Exemplare.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv_Exemplare.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -174,7 +179,7 @@
             this.gb_BarcodeBox.Location = new System.Drawing.Point(3, 188);
             this.gb_BarcodeBox.Name = "gb_BarcodeBox";
             this.gb_BarcodeBox.Padding = new System.Windows.Forms.Padding(1);
-            this.gb_BarcodeBox.Size = new System.Drawing.Size(328, 190);
+            this.gb_BarcodeBox.Size = new System.Drawing.Size(328, 243);
             this.gb_BarcodeBox.TabIndex = 28;
             this.gb_BarcodeBox.TabStop = false;
             // 
@@ -184,7 +189,7 @@
             // 
             // 
             this.mtb_Barcode.CustomButton.Image = null;
-            this.mtb_Barcode.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.mtb_Barcode.CustomButton.Location = new System.Drawing.Point(149, 2);
             this.mtb_Barcode.CustomButton.Name = "";
             this.mtb_Barcode.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.mtb_Barcode.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -205,12 +210,22 @@
             this.mtb_Barcode.SelectionLength = 0;
             this.mtb_Barcode.SelectionStart = 0;
             this.mtb_Barcode.ShortcutsEnabled = true;
-            this.mtb_Barcode.Size = new System.Drawing.Size(175, 24);
+            this.mtb_Barcode.Size = new System.Drawing.Size(171, 24);
             this.mtb_Barcode.TabIndex = 24;
             this.mtb_Barcode.UseSelectable = true;
             this.mtb_Barcode.WaterMark = "Code";
             this.mtb_Barcode.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtb_Barcode.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // BarcodeBox
+            // 
+            this.BarcodeBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BarcodeBox.Location = new System.Drawing.Point(4, 47);
+            this.BarcodeBox.Name = "BarcodeBox";
+            this.BarcodeBox.Size = new System.Drawing.Size(320, 162);
+            this.BarcodeBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.BarcodeBox.TabIndex = 23;
+            this.BarcodeBox.TabStop = false;
             // 
             // mlb_barcode
             // 
@@ -227,10 +242,10 @@
             this.bt_Print.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Print.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Print, "Klicken sie hier, um den Barcode auszudrucken.");
-            this.bt_Print.Location = new System.Drawing.Point(147, 158);
+            this.bt_Print.Location = new System.Drawing.Point(202, 215);
             this.bt_Print.Name = "bt_Print";
             this.helpProvider.SetShowHelp(this.bt_Print, true);
-            this.bt_Print.Size = new System.Drawing.Size(177, 24);
+            this.bt_Print.Size = new System.Drawing.Size(122, 24);
             this.bt_Print.TabIndex = 25;
             this.bt_Print.Text = "Drucken";
             this.bt_Print.UseSelectable = true;
@@ -330,13 +345,14 @@
             // 
             // bt_Clear
             // 
+            this.bt_Clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_Clear.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Clear.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Clear, "Leeren sie alle oben liegenden Textfelder.");
-            this.bt_Clear.Location = new System.Drawing.Point(3, 415);
+            this.bt_Clear.Location = new System.Drawing.Point(3, 468);
             this.bt_Clear.Name = "bt_Clear";
             this.helpProvider.SetShowHelp(this.bt_Clear, true);
-            this.bt_Clear.Size = new System.Drawing.Size(111, 24);
+            this.bt_Clear.Size = new System.Drawing.Size(122, 24);
             this.bt_Clear.TabIndex = 19;
             this.bt_Clear.Text = "Leeren";
             this.bt_Clear.UseSelectable = true;
@@ -347,7 +363,7 @@
             this.bt_zustand_add.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_zustand_add.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_zustand_add, "Klicken sie auf diesen Button, um neue Zustände hinzuzufügen.");
-            this.bt_zustand_add.Location = new System.Drawing.Point(307, 63);
+            this.bt_zustand_add.Location = new System.Drawing.Point(303, 63);
             this.bt_zustand_add.Name = "bt_zustand_add";
             this.helpProvider.SetShowHelp(this.bt_zustand_add, true);
             this.bt_zustand_add.Size = new System.Drawing.Size(24, 24);
@@ -362,7 +378,7 @@
             // 
             // 
             this.lb_Message.CustomButton.Image = null;
-            this.lb_Message.CustomButton.Location = new System.Drawing.Point(304, 1);
+            this.lb_Message.CustomButton.Location = new System.Drawing.Point(300, 1);
             this.lb_Message.CustomButton.Name = "";
             this.lb_Message.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.lb_Message.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -374,7 +390,7 @@
             this.lb_Message.FontWeight = MetroFramework.MetroTextBoxWeight.Light;
             this.lb_Message.Lines = new string[] {
         "Das Buch wurde erfolgreich hinzugefügt!"};
-            this.lb_Message.Location = new System.Drawing.Point(3, 384);
+            this.lb_Message.Location = new System.Drawing.Point(3, 437);
             this.lb_Message.MaxLength = 32767;
             this.lb_Message.Multiline = true;
             this.lb_Message.Name = "lb_Message";
@@ -384,7 +400,7 @@
             this.lb_Message.SelectionLength = 0;
             this.lb_Message.SelectionStart = 0;
             this.lb_Message.ShortcutsEnabled = true;
-            this.lb_Message.Size = new System.Drawing.Size(328, 25);
+            this.lb_Message.Size = new System.Drawing.Size(324, 25);
             this.lb_Message.TabIndex = 17;
             this.lb_Message.Text = "Das Buch wurde erfolgreich hinzugefügt!";
             this.lb_Message.UseSelectable = true;
@@ -393,13 +409,14 @@
             // 
             // bt_Add
             // 
+            this.bt_Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_Add.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Add.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Add, "Fügen sie alle oben eingetragen Daten hinzu.");
-            this.bt_Add.Location = new System.Drawing.Point(150, 415);
+            this.bt_Add.Location = new System.Drawing.Point(205, 468);
             this.bt_Add.Name = "bt_Add";
             this.helpProvider.SetShowHelp(this.bt_Add, true);
-            this.bt_Add.Size = new System.Drawing.Size(181, 24);
+            this.bt_Add.Size = new System.Drawing.Size(122, 24);
             this.bt_Add.TabIndex = 16;
             this.bt_Add.Text = "Hinzufügen";
             this.bt_Add.UseSelectable = true;
@@ -505,7 +522,7 @@
             // 
             // 
             this.tb_ID.CustomButton.Image = null;
-            this.tb_ID.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_ID.CustomButton.Location = new System.Drawing.Point(149, 2);
             this.tb_ID.CustomButton.Name = "";
             this.tb_ID.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.tb_ID.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -526,7 +543,7 @@
             this.tb_ID.SelectionLength = 0;
             this.tb_ID.SelectionStart = 0;
             this.tb_ID.ShortcutsEnabled = true;
-            this.tb_ID.Size = new System.Drawing.Size(175, 24);
+            this.tb_ID.Size = new System.Drawing.Size(171, 24);
             this.tb_ID.TabIndex = 1;
             this.tb_ID.UseSelectable = true;
             this.tb_ID.WaterMark = "ID";
@@ -541,7 +558,7 @@
             // 
             // 
             this.tb_ISBN.CustomButton.Image = null;
-            this.tb_ISBN.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_ISBN.CustomButton.Location = new System.Drawing.Point(149, 2);
             this.tb_ISBN.CustomButton.Name = "";
             this.tb_ISBN.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.tb_ISBN.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -563,7 +580,7 @@
             this.tb_ISBN.SelectionStart = 0;
             this.tb_ISBN.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_ISBN, true);
-            this.tb_ISBN.Size = new System.Drawing.Size(175, 24);
+            this.tb_ISBN.Size = new System.Drawing.Size(171, 24);
             this.tb_ISBN.TabIndex = 0;
             this.tb_ISBN.UseSelectable = true;
             this.tb_ISBN.WaterMark = "ISBN";
@@ -573,13 +590,14 @@
             // 
             // bt_Close
             // 
+            this.bt_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_Close.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Close.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Close, "Schließen sie das akuelle Fenster.");
-            this.bt_Close.Location = new System.Drawing.Point(1002, 503);
+            this.bt_Close.Location = new System.Drawing.Point(688, 3);
             this.bt_Close.Name = "bt_Close";
             this.helpProvider.SetShowHelp(this.bt_Close, true);
-            this.bt_Close.Size = new System.Drawing.Size(175, 24);
+            this.bt_Close.Size = new System.Drawing.Size(122, 24);
             this.bt_Close.TabIndex = 21;
             this.bt_Close.Text = "Schließen";
             this.bt_Close.UseSelectable = true;
@@ -590,12 +608,12 @@
             this.mbt_Export.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mbt_Export.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.mbt_Export, "Exportieren sie ihre Buchdaten in eine Exceltabelle.");
-            this.mbt_Export.Location = new System.Drawing.Point(545, 503);
+            this.mbt_Export.Location = new System.Drawing.Point(131, 3);
             this.mbt_Export.Name = "mbt_Export";
             this.helpProvider.SetShowHelp(this.mbt_Export, true);
-            this.mbt_Export.Size = new System.Drawing.Size(175, 24);
+            this.mbt_Export.Size = new System.Drawing.Size(122, 24);
             this.mbt_Export.TabIndex = 22;
-            this.mbt_Export.Text = "Exemplardaten-Export";
+            this.mbt_Export.Text = "Daten-Export";
             this.mbt_Export.UseSelectable = true;
             // 
             // acb_Zustand
@@ -612,12 +630,15 @@
             this.acb_Zustand.Location = new System.Drawing.Point(126, 63);
             this.acb_Zustand.Name = "acb_Zustand";
             this.helpProvider.SetShowHelp(this.acb_Zustand, true);
-            this.acb_Zustand.Size = new System.Drawing.Size(175, 24);
+            this.acb_Zustand.Size = new System.Drawing.Size(171, 24);
             this.acb_Zustand.TabIndex = 11;
             this.acb_Zustand.TextChanged += new System.EventHandler(this.cb_zustand_TextChanged);
             // 
             // metroPanel1
             // 
+            this.metroPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.metroPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.metroPanel1.Controls.Add(this.gb_BarcodeBox);
             this.metroPanel1.Controls.Add(this.dTP_AufDat);
             this.metroPanel1.Controls.Add(this.lb_Message);
@@ -640,7 +661,7 @@
             this.metroPanel1.HorizontalScrollbarSize = 10;
             this.metroPanel1.Location = new System.Drawing.Point(23, 88);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(335, 447);
+            this.metroPanel1.Size = new System.Drawing.Size(335, 497);
             this.metroPanel1.TabIndex = 23;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
@@ -653,7 +674,7 @@
             this.dTP_AufDat.Location = new System.Drawing.Point(126, 93);
             this.dTP_AufDat.MinimumSize = new System.Drawing.Size(0, 29);
             this.dTP_AufDat.Name = "dTP_AufDat";
-            this.dTP_AufDat.Size = new System.Drawing.Size(175, 29);
+            this.dTP_AufDat.Size = new System.Drawing.Size(171, 29);
             this.dTP_AufDat.TabIndex = 50;
             // 
             // timer
@@ -664,6 +685,9 @@
             // 
             // metroProgressSpinner1
             // 
+            this.metroProgressSpinner1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.metroProgressSpinner1.Location = new System.Drawing.Point(545, 63);
             this.metroProgressSpinner1.Maximum = 100;
             this.metroProgressSpinner1.Name = "metroProgressSpinner1";
@@ -679,33 +703,40 @@
             // 
             this.mbt_Import.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mbt_Import.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.mbt_Import.Location = new System.Drawing.Point(364, 503);
+            this.mbt_Import.Location = new System.Drawing.Point(3, 3);
             this.mbt_Import.Name = "mbt_Import";
-            this.mbt_Import.Size = new System.Drawing.Size(175, 24);
+            this.mbt_Import.Size = new System.Drawing.Size(122, 24);
             this.mbt_Import.Style = MetroFramework.MetroColorStyle.Teal;
             this.mbt_Import.TabIndex = 25;
-            this.mbt_Import.Text = "Exemplardaten-Import";
+            this.mbt_Import.Text = "Daten-Import";
             this.mbt_Import.UseSelectable = true;
             // 
-            // BarcodeBox
+            // metroPanel2
             // 
-            this.BarcodeBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.BarcodeBox.Location = new System.Drawing.Point(4, 47);
-            this.BarcodeBox.Name = "BarcodeBox";
-            this.BarcodeBox.Size = new System.Drawing.Size(320, 105);
-            this.BarcodeBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.BarcodeBox.TabIndex = 23;
-            this.BarcodeBox.TabStop = false;
+            this.metroPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroPanel2.Controls.Add(this.mbt_Import);
+            this.metroPanel2.Controls.Add(this.mbt_Export);
+            this.metroPanel2.Controls.Add(this.bt_Close);
+            this.metroPanel2.HorizontalScrollbarBarColor = true;
+            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.HorizontalScrollbarSize = 10;
+            this.metroPanel2.Location = new System.Drawing.Point(364, 553);
+            this.metroPanel2.Name = "metroPanel2";
+            this.metroPanel2.Size = new System.Drawing.Size(813, 32);
+            this.metroPanel2.TabIndex = 26;
+            this.metroPanel2.VerticalScrollbarBarColor = true;
+            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.VerticalScrollbarSize = 10;
             // 
             // w_s_exemplare
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1200, 550);
-            this.Controls.Add(this.mbt_Import);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(1200, 600);
+            this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.metroProgressSpinner1);
             this.Controls.Add(this.metroPanel1);
-            this.Controls.Add(this.mbt_Export);
-            this.Controls.Add(this.bt_Close);
             this.Controls.Add(this.rb_delete);
             this.Controls.Add(this.gv_Exemplare);
             this.Controls.Add(this.rb_edit);
@@ -713,9 +744,8 @@
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1200, 600);
             this.Name = "w_s_exemplare";
-            this.Resizable = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Exemplare";
@@ -724,8 +754,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             this.gb_BarcodeBox.ResumeLayout(false);
-            this.metroPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.BarcodeBox)).EndInit();
+            this.metroPanel1.ResumeLayout(false);
+            this.metroPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -770,5 +801,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker;
         private MetroFramework.Controls.MetroDateTime dTP_AufDat;
         private MetroFramework.Controls.MetroButton mbt_Import;
+        private MetroFramework.Controls.MetroPanel metroPanel2;
     }
 }

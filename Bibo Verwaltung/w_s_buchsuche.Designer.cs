@@ -87,25 +87,25 @@
             this.lb_liste = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.bt_reset = new MetroFramework.Controls.MetroButton();
+            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             ((System.ComponentModel.ISupportInitialize)(this.gv_buchsuche)).BeginInit();
             this.CM_Ausleihen.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.gb_Kunden.SuspendLayout();
             this.gb_GridView.SuspendLayout();
             this.gb_Suche.SuspendLayout();
+            this.metroPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // gv_buchsuche
             // 
             this.gv_buchsuche.AllowUserToAddRows = false;
             this.gv_buchsuche.AllowUserToDeleteRows = false;
-            this.gv_buchsuche.AllowUserToResizeColumns = false;
-            this.gv_buchsuche.AllowUserToResizeRows = false;
-            this.gv_buchsuche.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_buchsuche.AllowUserToOrderColumns = true;
+            this.gv_buchsuche.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gv_buchsuche.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_buchsuche.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gv_buchsuche.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.gv_buchsuche.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.gv_buchsuche.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(188)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
@@ -151,7 +151,7 @@
             this.gv_buchsuche.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv_buchsuche.ShowEditingIcon = false;
             this.helpProvider.SetShowHelp(this.gv_buchsuche, true);
-            this.gv_buchsuche.Size = new System.Drawing.Size(848, 484);
+            this.gv_buchsuche.Size = new System.Drawing.Size(764, 488);
             this.gv_buchsuche.Style = MetroFramework.MetroColorStyle.Lime;
             this.gv_buchsuche.TabIndex = 0;
             this.gv_buchsuche.VirtualMode = true;
@@ -283,14 +283,15 @@
             // 
             // bt_Ausleihen
             // 
+            this.bt_Ausleihen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_Ausleihen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Ausleihen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Ausleihen, "Klicken sie auf diesen Button, nachdem sie ein Buch im obenliegenden Feld makiert" +
         " haben, um dieses gewählte Buch auszuleihen.");
-            this.bt_Ausleihen.Location = new System.Drawing.Point(3, 486);
+            this.bt_Ausleihen.Location = new System.Drawing.Point(2, 497);
             this.bt_Ausleihen.Name = "bt_Ausleihen";
             this.helpProvider.SetShowHelp(this.bt_Ausleihen, true);
-            this.bt_Ausleihen.Size = new System.Drawing.Size(86, 24);
+            this.bt_Ausleihen.Size = new System.Drawing.Size(122, 24);
             this.bt_Ausleihen.Style = MetroFramework.MetroColorStyle.Lime;
             this.bt_Ausleihen.TabIndex = 15;
             this.bt_Ausleihen.Text = "Buchausleihe";
@@ -303,7 +304,7 @@
             // 
             // 
             this.tb_ExemplarID.CustomButton.Image = null;
-            this.tb_ExemplarID.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_ExemplarID.CustomButton.Location = new System.Drawing.Point(261, 2);
             this.tb_ExemplarID.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.tb_ExemplarID.CustomButton.Name = "";
             this.tb_ExemplarID.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -327,7 +328,7 @@
             this.tb_ExemplarID.SelectionStart = 0;
             this.tb_ExemplarID.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_ExemplarID, true);
-            this.tb_ExemplarID.Size = new System.Drawing.Size(175, 24);
+            this.tb_ExemplarID.Size = new System.Drawing.Size(283, 24);
             this.tb_ExemplarID.Style = MetroFramework.MetroColorStyle.Lime;
             this.tb_ExemplarID.TabIndex = 0;
             this.tb_ExemplarID.UseSelectable = true;
@@ -343,7 +344,7 @@
             // 
             // 
             this.tb_ISBN.CustomButton.Image = null;
-            this.tb_ISBN.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_ISBN.CustomButton.Location = new System.Drawing.Point(261, 2);
             this.tb_ISBN.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.tb_ISBN.CustomButton.Name = "";
             this.tb_ISBN.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -368,7 +369,7 @@
             this.tb_ISBN.SelectionStart = 0;
             this.tb_ISBN.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_ISBN, true);
-            this.tb_ISBN.Size = new System.Drawing.Size(175, 24);
+            this.tb_ISBN.Size = new System.Drawing.Size(283, 24);
             this.tb_ISBN.Style = MetroFramework.MetroColorStyle.Lime;
             this.tb_ISBN.TabIndex = 1;
             this.tb_ISBN.UseSelectable = true;
@@ -384,7 +385,7 @@
             // 
             // 
             this.tb_Titel.CustomButton.Image = null;
-            this.tb_Titel.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_Titel.CustomButton.Location = new System.Drawing.Point(261, 2);
             this.tb_Titel.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.tb_Titel.CustomButton.Name = "";
             this.tb_Titel.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -408,7 +409,7 @@
             this.tb_Titel.SelectionStart = 0;
             this.tb_Titel.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Titel, true);
-            this.tb_Titel.Size = new System.Drawing.Size(175, 24);
+            this.tb_Titel.Size = new System.Drawing.Size(283, 24);
             this.tb_Titel.Style = MetroFramework.MetroColorStyle.Lime;
             this.tb_Titel.TabIndex = 2;
             this.tb_Titel.UseSelectable = true;
@@ -423,7 +424,7 @@
             // 
             // 
             this.tb_NName.CustomButton.Image = null;
-            this.tb_NName.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_NName.CustomButton.Location = new System.Drawing.Point(261, 2);
             this.tb_NName.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.tb_NName.CustomButton.Name = "";
             this.tb_NName.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -448,7 +449,7 @@
             this.tb_NName.SelectionStart = 0;
             this.tb_NName.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_NName, true);
-            this.tb_NName.Size = new System.Drawing.Size(175, 24);
+            this.tb_NName.Size = new System.Drawing.Size(283, 24);
             this.tb_NName.Style = MetroFramework.MetroColorStyle.Lime;
             this.tb_NName.TabIndex = 7;
             this.tb_NName.UseSelectable = true;
@@ -463,7 +464,7 @@
             // 
             // 
             this.tb_VName.CustomButton.Image = null;
-            this.tb_VName.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_VName.CustomButton.Location = new System.Drawing.Point(261, 2);
             this.tb_VName.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.tb_VName.CustomButton.Name = "";
             this.tb_VName.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -488,7 +489,7 @@
             this.tb_VName.SelectionStart = 0;
             this.tb_VName.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_VName, true);
-            this.tb_VName.Size = new System.Drawing.Size(175, 24);
+            this.tb_VName.Size = new System.Drawing.Size(283, 24);
             this.tb_VName.Style = MetroFramework.MetroColorStyle.Lime;
             this.tb_VName.TabIndex = 6;
             this.tb_VName.UseSelectable = true;
@@ -499,13 +500,14 @@
             // 
             // bt_Clear
             // 
+            this.bt_Clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_Clear.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Clear.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Clear, "Leeren sie alle linksseitig liegenden Textfelder.");
-            this.bt_Clear.Location = new System.Drawing.Point(198, 486);
+            this.bt_Clear.Location = new System.Drawing.Point(259, 497);
             this.bt_Clear.Name = "bt_Clear";
             this.helpProvider.SetShowHelp(this.bt_Clear, true);
-            this.bt_Clear.Size = new System.Drawing.Size(100, 24);
+            this.bt_Clear.Size = new System.Drawing.Size(122, 24);
             this.bt_Clear.Style = MetroFramework.MetroColorStyle.Lime;
             this.bt_Clear.TabIndex = 16;
             this.bt_Clear.Text = "Filter löschen";
@@ -518,7 +520,7 @@
             // 
             // 
             this.tb_Klasse.CustomButton.Image = null;
-            this.tb_Klasse.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_Klasse.CustomButton.Location = new System.Drawing.Point(261, 2);
             this.tb_Klasse.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.tb_Klasse.CustomButton.Name = "";
             this.tb_Klasse.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -543,7 +545,7 @@
             this.tb_Klasse.SelectionStart = 0;
             this.tb_Klasse.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Klasse, true);
-            this.tb_Klasse.Size = new System.Drawing.Size(175, 24);
+            this.tb_Klasse.Size = new System.Drawing.Size(283, 24);
             this.tb_Klasse.Style = MetroFramework.MetroColorStyle.Lime;
             this.tb_Klasse.TabIndex = 8;
             this.tb_Klasse.UseSelectable = true;
@@ -575,7 +577,7 @@
             this.metroPanel1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.metroPanel1.Name = "metroPanel1";
             this.helpProvider.SetShowHelp(this.metroPanel1, true);
-            this.metroPanel1.Size = new System.Drawing.Size(296, 185);
+            this.metroPanel1.Size = new System.Drawing.Size(379, 185);
             this.metroPanel1.Style = MetroFramework.MetroColorStyle.Lime;
             this.metroPanel1.TabIndex = 37;
             this.metroPanel1.VerticalScrollbarBarColor = true;
@@ -584,7 +586,7 @@
             // 
             // metroProgressSpinner2
             // 
-            this.metroProgressSpinner2.Location = new System.Drawing.Point(132, 93);
+            this.metroProgressSpinner2.Location = new System.Drawing.Point(184, 93);
             this.metroProgressSpinner2.Margin = new System.Windows.Forms.Padding(2);
             this.metroProgressSpinner2.Maximum = 100;
             this.metroProgressSpinner2.MaximumSize = new System.Drawing.Size(447, 484);
@@ -682,7 +684,7 @@
             this.cb_Verlag.Location = new System.Drawing.Point(93, 123);
             this.cb_Verlag.Name = "cb_Verlag";
             this.helpProvider.SetShowHelp(this.cb_Verlag, true);
-            this.cb_Verlag.Size = new System.Drawing.Size(175, 24);
+            this.cb_Verlag.Size = new System.Drawing.Size(283, 24);
             this.cb_Verlag.Sorted = true;
             this.cb_Verlag.TabIndex = 4;
             this.cb_Verlag.Text = "Verlag";
@@ -706,7 +708,7 @@
             this.cb_Genre.Location = new System.Drawing.Point(93, 153);
             this.cb_Genre.Name = "cb_Genre";
             this.helpProvider.SetShowHelp(this.cb_Genre, true);
-            this.cb_Genre.Size = new System.Drawing.Size(175, 24);
+            this.cb_Genre.Size = new System.Drawing.Size(283, 24);
             this.cb_Genre.Sorted = true;
             this.cb_Genre.TabIndex = 5;
             this.cb_Genre.Text = "Genre";
@@ -730,7 +732,7 @@
             this.cb_Autor.Location = new System.Drawing.Point(93, 93);
             this.cb_Autor.Name = "cb_Autor";
             this.helpProvider.SetShowHelp(this.cb_Autor, true);
-            this.cb_Autor.Size = new System.Drawing.Size(175, 24);
+            this.cb_Autor.Size = new System.Drawing.Size(283, 24);
             this.cb_Autor.Sorted = true;
             this.cb_Autor.TabIndex = 3;
             this.cb_Autor.Text = "Autor";
@@ -754,16 +756,17 @@
             // 
             // bt_Schliessen
             // 
+            this.bt_Schliessen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_Schliessen.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.bt_Schliessen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Schliessen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Schliessen, "Schließen sie das akuelle Fenster.");
-            this.bt_Schliessen.Location = new System.Drawing.Point(1002, 553);
+            this.bt_Schliessen.Location = new System.Drawing.Point(638, 3);
             this.bt_Schliessen.MaximumSize = new System.Drawing.Size(375, 24);
             this.bt_Schliessen.MinimumSize = new System.Drawing.Size(100, 24);
             this.bt_Schliessen.Name = "bt_Schliessen";
             this.helpProvider.SetShowHelp(this.bt_Schliessen, true);
-            this.bt_Schliessen.Size = new System.Drawing.Size(175, 24);
+            this.bt_Schliessen.Size = new System.Drawing.Size(122, 24);
             this.bt_Schliessen.TabIndex = 17;
             this.bt_Schliessen.Text = "Schließen";
             this.bt_Schliessen.UseSelectable = true;
@@ -806,14 +809,15 @@
             // 
             // bt_rueckgabe
             // 
+            this.bt_rueckgabe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_rueckgabe.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_rueckgabe.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_rueckgabe, "Klicken sie auf diesen Button, nachdem sie ein Buch im obenliegenden Feld makiert" +
         " haben, um dieses gewählte Buch auszuleihen.");
-            this.bt_rueckgabe.Location = new System.Drawing.Point(95, 486);
+            this.bt_rueckgabe.Location = new System.Drawing.Point(131, 497);
             this.bt_rueckgabe.Name = "bt_rueckgabe";
             this.helpProvider.SetShowHelp(this.bt_rueckgabe, true);
-            this.bt_rueckgabe.Size = new System.Drawing.Size(97, 24);
+            this.bt_rueckgabe.Size = new System.Drawing.Size(122, 24);
             this.bt_rueckgabe.Style = MetroFramework.MetroColorStyle.Lime;
             this.bt_rueckgabe.TabIndex = 40;
             this.bt_rueckgabe.Text = "Buchrückgabe";
@@ -834,7 +838,7 @@
             this.gb_Kunden.Location = new System.Drawing.Point(2, 238);
             this.gb_Kunden.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gb_Kunden.Name = "gb_Kunden";
-            this.gb_Kunden.Size = new System.Drawing.Size(296, 92);
+            this.gb_Kunden.Size = new System.Drawing.Size(379, 92);
             this.gb_Kunden.Style = MetroFramework.MetroColorStyle.Lime;
             this.gb_Kunden.TabIndex = 39;
             this.gb_Kunden.VerticalScrollbarBarColor = true;
@@ -855,14 +859,18 @@
             // 
             // gb_GridView
             // 
+            this.gb_GridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gb_GridView.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.gb_GridView.Controls.Add(this.metroProgressSpinner1);
             this.gb_GridView.Controls.Add(this.gv_buchsuche);
             this.gb_GridView.HorizontalScrollbarBarColor = true;
             this.gb_GridView.HorizontalScrollbarHighlightOnWheel = false;
             this.gb_GridView.HorizontalScrollbarSize = 10;
-            this.gb_GridView.Location = new System.Drawing.Point(330, 63);
+            this.gb_GridView.Location = new System.Drawing.Point(414, 63);
             this.gb_GridView.Name = "gb_GridView";
-            this.gb_GridView.Size = new System.Drawing.Size(848, 484);
+            this.gb_GridView.Size = new System.Drawing.Size(764, 488);
             this.gb_GridView.TabIndex = 40;
             this.gb_GridView.VerticalScrollbarBarColor = true;
             this.gb_GridView.VerticalScrollbarHighlightOnWheel = false;
@@ -870,6 +878,9 @@
             // 
             // metroProgressSpinner1
             // 
+            this.metroProgressSpinner1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.metroProgressSpinner1.Location = new System.Drawing.Point(209, 0);
             this.metroProgressSpinner1.Margin = new System.Windows.Forms.Padding(2);
             this.metroProgressSpinner1.Maximum = 100;
@@ -882,6 +893,8 @@
             // 
             // gb_Suche
             // 
+            this.gb_Suche.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.gb_Suche.Controls.Add(this.bt_rueckgabe);
             this.gb_Suche.Controls.Add(this.rb_Default);
             this.gb_Suche.Controls.Add(this.rb_GREENonly);
@@ -900,7 +913,7 @@
             this.gb_Suche.HorizontalScrollbarSize = 10;
             this.gb_Suche.Location = new System.Drawing.Point(23, 63);
             this.gb_Suche.Name = "gb_Suche";
-            this.gb_Suche.Size = new System.Drawing.Size(301, 514);
+            this.gb_Suche.Size = new System.Drawing.Size(385, 524);
             this.gb_Suche.TabIndex = 41;
             this.gb_Suche.VerticalScrollbarBarColor = true;
             this.gb_Suche.VerticalScrollbarHighlightOnWheel = false;
@@ -973,7 +986,7 @@
             // lb_liste
             // 
             this.lb_liste.AutoSize = true;
-            this.lb_liste.Location = new System.Drawing.Point(567, 553);
+            this.lb_liste.Location = new System.Drawing.Point(260, 3);
             this.lb_liste.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_liste.Name = "lb_liste";
             this.lb_liste.Size = new System.Drawing.Size(0, 0);
@@ -982,7 +995,7 @@
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(447, 553);
+            this.metroLabel1.Location = new System.Drawing.Point(130, 3);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(117, 19);
@@ -993,33 +1006,48 @@
             // 
             this.bt_reset.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_reset.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_reset.Location = new System.Drawing.Point(330, 549);
-            this.bt_reset.Margin = new System.Windows.Forms.Padding(2);
+            this.bt_reset.Location = new System.Drawing.Point(3, 3);
             this.bt_reset.Name = "bt_reset";
-            this.bt_reset.Size = new System.Drawing.Size(112, 24);
+            this.bt_reset.Size = new System.Drawing.Size(122, 24);
             this.bt_reset.TabIndex = 44;
             this.bt_reset.Text = "Liste zurücksetzen";
             this.bt_reset.UseSelectable = true;
             this.bt_reset.Click += new System.EventHandler(this.Bt_reset_Click);
             // 
+            // metroPanel2
+            // 
+            this.metroPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.metroPanel2.Controls.Add(this.metroLabel1);
+            this.metroPanel2.Controls.Add(this.lb_liste);
+            this.metroPanel2.Controls.Add(this.bt_Schliessen);
+            this.metroPanel2.Controls.Add(this.bt_reset);
+            this.metroPanel2.HorizontalScrollbarBarColor = true;
+            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.HorizontalScrollbarSize = 10;
+            this.metroPanel2.Location = new System.Drawing.Point(414, 557);
+            this.metroPanel2.Name = "metroPanel2";
+            this.metroPanel2.Size = new System.Drawing.Size(763, 30);
+            this.metroPanel2.TabIndex = 45;
+            this.metroPanel2.VerticalScrollbarBarColor = true;
+            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.VerticalScrollbarSize = 10;
+            // 
             // w_s_buchsuche
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.bt_Schliessen;
             this.ClientSize = new System.Drawing.Size(1200, 600);
-            this.Controls.Add(this.bt_reset);
-            this.Controls.Add(this.metroLabel1);
-            this.Controls.Add(this.lb_liste);
-            this.Controls.Add(this.bt_Schliessen);
+            this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.gb_Suche);
             this.Controls.Add(this.gb_GridView);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1200, 600);
             this.Name = "w_s_buchsuche";
-            this.Resizable = false;
             this.helpProvider.SetShowHelp(this, false);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -1033,8 +1061,9 @@
             this.gb_GridView.ResumeLayout(false);
             this.gb_Suche.ResumeLayout(false);
             this.gb_Suche.PerformLayout();
+            this.metroPanel2.ResumeLayout(false);
+            this.metroPanel2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -1094,5 +1123,6 @@
         private MetroFramework.Controls.MetroLabel lb_liste;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroButton bt_reset;
+        private MetroFramework.Controls.MetroPanel metroPanel2;
     }
 }

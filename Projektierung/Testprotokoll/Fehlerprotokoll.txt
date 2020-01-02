@@ -1,6 +1,6 @@
 Allgemein
 > °00 Buttons passen vom Layout nicht mehr zum restlichen design
-< °01 Warum ist die Fenstergröße nicht änderbar aber zu klein für diverse Tabellen?
+DONE< °01 Warum ist die Fenstergröße nicht änderbar aber zu klein für diverse Tabellen?
 < °02 keine <nichts> Angabe bei auswal Menüs in Filtern
 < °03 konfigurierbare Standard Ausleihzeit?
 < °04 Keine Trennung zwischen Suchen und Bearbeiten von Stammdaten
@@ -9,7 +9,7 @@ Allgemein
 
 
 Hauptfenster
-> #00 Statistik entfernen
+DONE > #00 Statistik entfernen
 
 Loginfenser
 > #01 Username / login ist nicht im Focus

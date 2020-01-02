@@ -230,7 +230,7 @@ namespace Bibo_Verwaltung
                     gv_Schueler.ClearSelection();
                 }
             }
-            if (gv_Schueler.CurrentRow.Index < gv_Schueler.Rows.Count - 1)
+            if (gv_Schueler.CurrentRow != null && gv_Schueler.CurrentRow.Index < gv_Schueler.Rows.Count - 1)
             {
                 if (gv_Schueler.Rows.Count > 1)
                 {

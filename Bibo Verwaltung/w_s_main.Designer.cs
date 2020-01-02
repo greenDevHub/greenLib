@@ -43,7 +43,6 @@
             this.mT_Einstellungen = new MetroFramework.Controls.MetroTile();
             this.mT_Benutzerverwaltung = new MetroFramework.Controls.MetroTile();
             this.mT_Abmelden = new MetroFramework.Controls.MetroTile();
-            this.mT_Statistik = new MetroFramework.Controls.MetroTile();
             this.image = new MetroFramework.Controls.MetroLink();
             this.metroProgressBar = new MetroFramework.Controls.MetroProgressBar();
             this.timer = new System.Windows.Forms.Timer(this.components);
@@ -190,7 +189,7 @@
             // mT_Einstellungen
             // 
             this.mT_Einstellungen.ActiveControl = null;
-            this.mT_Einstellungen.Location = new System.Drawing.Point(6, 221);
+            this.mT_Einstellungen.Location = new System.Drawing.Point(663, 167);
             this.mT_Einstellungen.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Einstellungen.Name = "mT_Einstellungen";
             this.mT_Einstellungen.Size = new System.Drawing.Size(157, 46);
@@ -216,7 +215,7 @@
             // mT_Abmelden
             // 
             this.mT_Abmelden.ActiveControl = null;
-            this.mT_Abmelden.Location = new System.Drawing.Point(169, 221);
+            this.mT_Abmelden.Location = new System.Drawing.Point(663, 221);
             this.mT_Abmelden.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Abmelden.Name = "mT_Abmelden";
             this.mT_Abmelden.Size = new System.Drawing.Size(157, 46);
@@ -225,19 +224,6 @@
             this.mT_Abmelden.Text = "Abmelden";
             this.mT_Abmelden.UseSelectable = true;
             this.mT_Abmelden.Click += new System.EventHandler(this.mT_Abmelden_Click);
-            // 
-            // mT_Statistik
-            // 
-            this.mT_Statistik.ActiveControl = null;
-            this.mT_Statistik.Location = new System.Drawing.Point(663, 221);
-            this.mT_Statistik.Margin = new System.Windows.Forms.Padding(4);
-            this.mT_Statistik.Name = "mT_Statistik";
-            this.mT_Statistik.Size = new System.Drawing.Size(157, 46);
-            this.mT_Statistik.Style = MetroFramework.MetroColorStyle.Green;
-            this.mT_Statistik.TabIndex = 7;
-            this.mT_Statistik.Text = "Statistik";
-            this.mT_Statistik.UseSelectable = true;
-            this.mT_Statistik.Click += new System.EventHandler(this.bt_Stats_Click);
             // 
             // image
             // 
@@ -274,7 +260,7 @@
             this.mT_ausgabe.BackColor = System.Drawing.Color.OliveDrab;
             this.mT_ausgabe.Location = new System.Drawing.Point(6, 112);
             this.mT_ausgabe.Name = "mT_ausgabe";
-            this.mT_ausgabe.Size = new System.Drawing.Size(157, 46);
+            this.mT_ausgabe.Size = new System.Drawing.Size(157, 101);
             this.mT_ausgabe.Style = MetroFramework.MetroColorStyle.Green;
             this.mT_ausgabe.TabIndex = 10;
             this.mT_ausgabe.Text = "Buchausgabe";
@@ -287,7 +273,7 @@
             this.mT_rueckgabe.BackColor = System.Drawing.Color.OliveDrab;
             this.mT_rueckgabe.Location = new System.Drawing.Point(169, 112);
             this.mT_rueckgabe.Name = "mT_rueckgabe";
-            this.mT_rueckgabe.Size = new System.Drawing.Size(157, 46);
+            this.mT_rueckgabe.Size = new System.Drawing.Size(157, 101);
             this.mT_rueckgabe.Style = MetroFramework.MetroColorStyle.Green;
             this.mT_rueckgabe.TabIndex = 11;
             this.mT_rueckgabe.Text = "Buchrückgabe";
@@ -307,7 +293,6 @@
             this.panel.Controls.Add(this.mT_ausgabe);
             this.panel.Controls.Add(this.mT_Sprachen);
             this.panel.Controls.Add(this.mT_Genres);
-            this.panel.Controls.Add(this.mT_Statistik);
             this.panel.Controls.Add(this.mT_ausleihen);
             this.panel.Controls.Add(this.mT_Abmelden);
             this.panel.Controls.Add(this.mT_Einstellungen);
@@ -328,7 +313,7 @@
             // 
             this.bt_AutoAusgabe.ActiveControl = null;
             this.bt_AutoAusgabe.BackColor = System.Drawing.Color.Gold;
-            this.bt_AutoAusgabe.Location = new System.Drawing.Point(6, 167);
+            this.bt_AutoAusgabe.Location = new System.Drawing.Point(6, 221);
             this.bt_AutoAusgabe.Name = "bt_AutoAusgabe";
             this.bt_AutoAusgabe.Size = new System.Drawing.Size(319, 46);
             this.bt_AutoAusgabe.Style = MetroFramework.MetroColorStyle.Yellow;
@@ -340,7 +325,7 @@
             // bt_zu
             // 
             this.bt_zu.ActiveControl = null;
-            this.bt_zu.Location = new System.Drawing.Point(663, 167);
+            this.bt_zu.Location = new System.Drawing.Point(663, 112);
             this.bt_zu.Margin = new System.Windows.Forms.Padding(4);
             this.bt_zu.Name = "bt_zu";
             this.bt_zu.Size = new System.Drawing.Size(157, 46);
@@ -355,7 +340,7 @@
             this.pl_unschaerfe.BackColor = System.Drawing.Color.Black;
             this.pl_unschaerfe.Controls.Add(this.transparentPanel1);
             this.pl_unschaerfe.ForeColor = System.Drawing.Color.Transparent;
-            this.pl_unschaerfe.Location = new System.Drawing.Point(0, 21);
+            this.pl_unschaerfe.Location = new System.Drawing.Point(0, 22);
             this.pl_unschaerfe.Name = "pl_unschaerfe";
             this.pl_unschaerfe.Opacity = 25;
             this.pl_unschaerfe.Size = new System.Drawing.Size(847, 325);
@@ -482,7 +467,6 @@
         private MetroFramework.Controls.MetroTile mT_Einstellungen;
         private MetroFramework.Controls.MetroTile mT_Benutzerverwaltung;
         private MetroFramework.Controls.MetroTile mT_Abmelden;
-        private MetroFramework.Controls.MetroTile mT_Statistik;
         private MetroFramework.Controls.MetroLink image;
         private MetroFramework.Controls.MetroProgressBar metroProgressBar;
         private System.Windows.Forms.Timer timer;

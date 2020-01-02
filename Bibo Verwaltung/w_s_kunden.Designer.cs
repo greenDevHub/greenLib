@@ -93,6 +93,7 @@
             this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.mbt_Export = new MetroFramework.Controls.MetroButton();
+            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
             this.cm_kunde.SuspendLayout();
             this.metroPanel1.SuspendLayout();
@@ -100,6 +101,7 @@
             this.cm_result.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_faecher)).BeginInit();
             this.mtP_Filter.SuspendLayout();
+            this.metroPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lb_Telefonnummer
@@ -592,11 +594,13 @@
             // 
             // lb_kunde_add
             // 
+            this.lb_kunde_add.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
             // 
             this.lb_kunde_add.CustomButton.Image = null;
-            this.lb_kunde_add.CustomButton.Location = new System.Drawing.Point(263, 2);
+            this.lb_kunde_add.CustomButton.Location = new System.Drawing.Point(262, 2);
             this.lb_kunde_add.CustomButton.Name = "";
             this.lb_kunde_add.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.lb_kunde_add.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -608,7 +612,7 @@
             this.lb_kunde_add.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.lb_kunde_add.Lines = new string[] {
         "Der Kunde wurde erfolgreich hinzugefügt!"};
-            this.lb_kunde_add.Location = new System.Drawing.Point(3, 612);
+            this.lb_kunde_add.Location = new System.Drawing.Point(3, 588);
             this.lb_kunde_add.MaxLength = 32767;
             this.lb_kunde_add.Multiline = true;
             this.lb_kunde_add.Name = "lb_kunde_add";
@@ -618,7 +622,7 @@
             this.lb_kunde_add.SelectionLength = 0;
             this.lb_kunde_add.SelectionStart = 0;
             this.lb_kunde_add.ShortcutsEnabled = true;
-            this.lb_kunde_add.Size = new System.Drawing.Size(285, 24);
+            this.lb_kunde_add.Size = new System.Drawing.Size(284, 24);
             this.lb_kunde_add.Style = MetroFramework.MetroColorStyle.Teal;
             this.lb_kunde_add.TabIndex = 40;
             this.lb_kunde_add.Text = "Der Kunde wurde erfolgreich hinzugefügt!";
@@ -629,13 +633,14 @@
             // 
             // bt_clear
             // 
+            this.bt_clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_clear.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_clear.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_clear, "Leeren sie alle oben liegenden Textfelder.");
-            this.bt_clear.Location = new System.Drawing.Point(3, 582);
+            this.bt_clear.Location = new System.Drawing.Point(3, 618);
             this.bt_clear.Name = "bt_clear";
             this.helpProvider.SetShowHelp(this.bt_clear, true);
-            this.bt_clear.Size = new System.Drawing.Size(135, 24);
+            this.bt_clear.Size = new System.Drawing.Size(122, 24);
             this.bt_clear.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_clear.TabIndex = 16;
             this.bt_clear.Text = "Leeren";
@@ -694,13 +699,14 @@
             // 
             // bt_confirm
             // 
+            this.bt_confirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_confirm.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_confirm.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_confirm, "Speichern sie alle oben eingetragenen Daten.");
-            this.bt_confirm.Location = new System.Drawing.Point(153, 582);
+            this.bt_confirm.Location = new System.Drawing.Point(165, 618);
             this.bt_confirm.Name = "bt_confirm";
             this.helpProvider.SetShowHelp(this.bt_confirm, true);
-            this.bt_confirm.Size = new System.Drawing.Size(135, 24);
+            this.bt_confirm.Size = new System.Drawing.Size(122, 24);
             this.bt_confirm.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_confirm.TabIndex = 17;
             this.bt_confirm.Text = "Speichern";
@@ -709,14 +715,15 @@
             // 
             // bt_OK
             // 
+            this.bt_OK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.bt_OK.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_OK.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_OK, "Schließen sie das akuelle Fenster.");
-            this.bt_OK.Location = new System.Drawing.Point(1002, 703);
+            this.bt_OK.Location = new System.Drawing.Point(733, 3);
             this.bt_OK.Name = "bt_OK";
             this.helpProvider.SetShowHelp(this.bt_OK, true);
-            this.bt_OK.Size = new System.Drawing.Size(175, 24);
+            this.bt_OK.Size = new System.Drawing.Size(122, 24);
             this.bt_OK.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_OK.TabIndex = 21;
             this.bt_OK.Text = "Schließen";
@@ -728,6 +735,9 @@
             this.gv_Kunde.AllowUserToDeleteRows = false;
             this.gv_Kunde.AllowUserToResizeColumns = false;
             this.gv_Kunde.AllowUserToResizeRows = false;
+            this.gv_Kunde.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gv_Kunde.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.gv_Kunde.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_Kunde.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -831,17 +841,19 @@
             // 
             this.mbt_Import.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mbt_Import.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.mbt_Import.Location = new System.Drawing.Point(504, 703);
+            this.mbt_Import.Location = new System.Drawing.Point(4, 3);
             this.mbt_Import.Name = "mbt_Import";
-            this.mbt_Import.Size = new System.Drawing.Size(175, 24);
+            this.mbt_Import.Size = new System.Drawing.Size(122, 24);
             this.mbt_Import.Style = MetroFramework.MetroColorStyle.Teal;
             this.mbt_Import.TabIndex = 20;
-            this.mbt_Import.Text = "Kundendaten-Import";
+            this.mbt_Import.Text = "Daten-Import";
             this.mbt_Import.UseSelectable = true;
             this.mbt_Import.Click += new System.EventHandler(this.bt_ImEx_Click);
             // 
             // metroPanel1
             // 
+            this.metroPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.metroPanel1.Controls.Add(this.mdtp_GebDat);
             this.metroPanel1.Controls.Add(this.metroProgressSpinner2);
             this.metroPanel1.Controls.Add(this.lb_faecher);
@@ -875,8 +887,9 @@
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
             this.metroPanel1.Location = new System.Drawing.Point(23, 88);
+            this.metroPanel1.MaximumSize = new System.Drawing.Size(420, 3000);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(290, 639);
+            this.metroPanel1.Size = new System.Drawing.Size(290, 647);
             this.metroPanel1.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroPanel1.TabIndex = 43;
             this.metroPanel1.VerticalScrollbarBarColor = true;
@@ -895,6 +908,8 @@
             // 
             // metroProgressSpinner2
             // 
+            this.metroProgressSpinner2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.metroProgressSpinner2.BackColor = System.Drawing.Color.Lavender;
             this.metroProgressSpinner2.Location = new System.Drawing.Point(3, 363);
             this.metroProgressSpinner2.Maximum = 100;
@@ -910,6 +925,8 @@
             this.gv_result.AllowUserToDeleteRows = false;
             this.gv_result.AllowUserToResizeColumns = false;
             this.gv_result.AllowUserToResizeRows = false;
+            this.gv_result.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gv_result.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_result.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_result.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -1000,6 +1017,9 @@
             this.gv_faecher.AllowUserToAddRows = false;
             this.gv_faecher.AllowUserToDeleteRows = false;
             this.gv_faecher.AllowUserToResizeRows = false;
+            this.gv_faecher.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gv_faecher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.gv_faecher.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_faecher.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -1111,6 +1131,8 @@
             // 
             // mtP_Filter
             // 
+            this.mtP_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.mtP_Filter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mtP_Filter.Controls.Add(this.rb_FilterSchueler);
             this.mtP_Filter.Controls.Add(this.rb_FilterAndere);
@@ -1130,9 +1152,9 @@
             // 
             this.bt_cleanup.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_cleanup.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_cleanup.Location = new System.Drawing.Point(323, 703);
+            this.bt_cleanup.Location = new System.Drawing.Point(260, 3);
             this.bt_cleanup.Name = "bt_cleanup";
-            this.bt_cleanup.Size = new System.Drawing.Size(175, 24);
+            this.bt_cleanup.Size = new System.Drawing.Size(250, 24);
             this.bt_cleanup.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_cleanup.TabIndex = 19;
             this.bt_cleanup.Text = "Schülerdaten-Cleanup";
@@ -1146,6 +1168,9 @@
             // 
             // metroProgressSpinner1
             // 
+            this.metroProgressSpinner1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.metroProgressSpinner1.BackColor = System.Drawing.Color.White;
             this.metroProgressSpinner1.Location = new System.Drawing.Point(469, 125);
             this.metroProgressSpinner1.Maximum = 100;
@@ -1165,36 +1190,52 @@
             // 
             this.mbt_Export.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mbt_Export.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.mbt_Export.Location = new System.Drawing.Point(685, 703);
+            this.mbt_Export.Location = new System.Drawing.Point(132, 3);
             this.mbt_Export.Name = "mbt_Export";
-            this.mbt_Export.Size = new System.Drawing.Size(175, 24);
+            this.mbt_Export.Size = new System.Drawing.Size(122, 24);
             this.mbt_Export.Style = MetroFramework.MetroColorStyle.Teal;
             this.mbt_Export.TabIndex = 49;
-            this.mbt_Export.Text = "Kundendaten-Export";
+            this.mbt_Export.Text = "Daten-Export";
             this.mbt_Export.UseSelectable = true;
             this.mbt_Export.Click += new System.EventHandler(this.Mbt_Export_Click);
+            // 
+            // metroPanel2
+            // 
+            this.metroPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroPanel2.Controls.Add(this.bt_cleanup);
+            this.metroPanel2.Controls.Add(this.mbt_Export);
+            this.metroPanel2.Controls.Add(this.mbt_Import);
+            this.metroPanel2.Controls.Add(this.bt_OK);
+            this.metroPanel2.HorizontalScrollbarBarColor = true;
+            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.HorizontalScrollbarSize = 10;
+            this.metroPanel2.Location = new System.Drawing.Point(319, 703);
+            this.metroPanel2.Name = "metroPanel2";
+            this.metroPanel2.Size = new System.Drawing.Size(858, 32);
+            this.metroPanel2.TabIndex = 50;
+            this.metroPanel2.VerticalScrollbarBarColor = true;
+            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.VerticalScrollbarSize = 10;
             // 
             // w_s_Kunden
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1200, 750);
-            this.Controls.Add(this.mbt_Export);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(1200, 745);
+            this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.metroProgressSpinner1);
             this.Controls.Add(this.mtP_Filter);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.metroLabel1);
-            this.Controls.Add(this.bt_cleanup);
-            this.Controls.Add(this.mbt_Import);
-            this.Controls.Add(this.bt_OK);
             this.Controls.Add(this.rb_KundeLoeschen);
             this.Controls.Add(this.gv_Kunde);
             this.Controls.Add(this.rb_KundeBearbeiten);
             this.Controls.Add(this.rb_Neukunde);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(983, 745);
             this.Name = "w_s_Kunden";
-            this.Resizable = false;
             this.ShowInTaskbar = false;
             this.Style = MetroFramework.MetroColorStyle.Teal;
             this.Text = "Kundenverwaltung";
@@ -1208,6 +1249,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_faecher)).EndInit();
             this.mtP_Filter.ResumeLayout(false);
             this.mtP_Filter.PerformLayout();
+            this.metroPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1268,5 +1310,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Kürzel;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private MetroFramework.Controls.MetroButton mbt_Export;
+        private MetroFramework.Controls.MetroPanel metroPanel2;
     }
 }
