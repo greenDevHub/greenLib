@@ -620,6 +620,7 @@ namespace Bibo_Verwaltung
 
         private void Clear_All()
         {
+            dTP_Erscheinungsdatum.ResetText();
             tb_barcodePrinted.Text = "";
             tb_barcodeAdd.Text = "";
             tb_neu.Text = "";
@@ -647,19 +648,43 @@ namespace Bibo_Verwaltung
             tb_Neupreis.BackColor = Color.White;
             tb_anzahl.BackColor = Color.White;
         }
+        /// <summary>
+        /// Sucht nach Büchern in einer GridView
+        /// </summary>
+        private void BuchFilter()
+        {
+            try
+            {
+                if (dTP_Erscheinungsdatum.Value.Date != DateTime.Now.Date)
+                {
+                    (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%' AND Autor LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Sprache LIKE '%{5}%' AND Erscheinungsdatum LIKE '%{6}%'", tb_Titel.Text, tb_ISBN.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, cb_Sprache.Text, dTP_Erscheinungsdatum.Value.Date.ToShortDateString());
+
+                }
+                else
+                {
+                    (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%' AND Autor LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Sprache LIKE '%{5}%'", tb_Titel.Text, tb_ISBN.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, cb_Sprache.Text);
+                }
+            }
+            catch
+            {
+
+            }
+
+        }
 
         #region Textboxfarbe
         private void tb_ISBN_TextChanged(object sender, EventArgs e)
         {
             tb_ISBN.Text = tb_ISBN.Text.Replace(" ", "");
-            (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '{0}%' and ISBN LIKE '{1}%'", tb_Titel.Text, tb_ISBN.Text);
+            BuchFilter();
             tb_ISBN.BackColor = Color.White;
         }
 
         private void tb_Titel_TextChanged(object sender, EventArgs e)
         {
-            (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '{0}%' and ISBN LIKE '{1}%'", tb_Titel.Text, tb_ISBN.Text);
+            BuchFilter();
             tb_Titel.BackColor = Color.White;
+            tb_Titel.UseCustomBackColor = false;
         }
         private void tb_Neupreis_TextChanged(object sender, EventArgs e)
         {
@@ -673,21 +698,25 @@ namespace Bibo_Verwaltung
 
         private void cb_Sprache_TextChanged(object sender, EventArgs e)
         {
+            BuchFilter();
             cb_Sprache.BackColor = Color.White;
         }
 
         private void cb_Genre_TextChanged(object sender, EventArgs e)
         {
+            BuchFilter();
             cb_Genre.BackColor = Color.White;
         }
 
         private void cb_Verlag_TextChanged(object sender, EventArgs e)
         {
+            BuchFilter();
             cb_Verlag.BackColor = Color.White;
         }
 
         private void cb_Autor_TextChanged(object sender, EventArgs e)
         {
+            BuchFilter();
             cb_Autor.BackColor = Color.White;
             if (checkbox_autor.Checked && checkedListBox1.Visible)
             {
@@ -951,12 +980,24 @@ namespace Bibo_Verwaltung
 
         private void IsOK()
         {
+            if (tb_ISBN.Text.Equals(""))
+            {
+                tb_ISBN.UseCustomBackColor = true;
+                tb_ISBN.BackColor = Color.Red;
+            }
+            else
+            {
+                tb_ISBN.UseCustomBackColor = false;
+                tb_ISBN.BackColor = Color.White;
+            }
             if (tb_Titel.Text.Equals(""))
             {
+                tb_Titel.UseCustomBackColor = true;
                 tb_Titel.BackColor = Color.Red;
             }
             else
             {
+                tb_Titel.UseCustomBackColor = false;
                 tb_Titel.BackColor = Color.White;
             }
 
@@ -997,10 +1038,12 @@ namespace Bibo_Verwaltung
             }
             if (dTP_Erscheinungsdatum.Text.Equals(""))
             {
+                dTP_Erscheinungsdatum.UseCustomBackColor = true;
                 dTP_Erscheinungsdatum.BackColor = Color.Red;
             }
             else
             {
+                dTP_Erscheinungsdatum.UseCustomBackColor = false;
                 dTP_Erscheinungsdatum.BackColor = Color.White;
             }
         }
@@ -1745,7 +1788,10 @@ namespace Bibo_Verwaltung
             }
             catch
             {
-
+                //eventueller Fix vom Problem der einfrierenden Ladeanimation
+                //Prüfung notwendig
+                metroProgressSpinner1.Visible = false;
+                Grid_Buch.Visible = true;
             }
 
         }
@@ -1758,6 +1804,18 @@ namespace Bibo_Verwaltung
         private void Mtb_Import_Click(object sender, EventArgs e)
         {
             //Import
+        }
+
+        private void DTP_Erscheinungsdatum_ValueChanged(object sender, EventArgs e)
+        {
+            BuchFilter();
+            dTP_Erscheinungsdatum.UseCustomBackColor = false;
+            dTP_Erscheinungsdatum.BackColor = Color.White;
+        }
+
+        private void BackgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            BuchFilter();
         }
     }
 }

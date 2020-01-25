@@ -28,17 +28,14 @@ DONE> #06 Ändern des Geburtsdatum wird verhindert, Tippfehler?
 DONE> #40 Suche nach Geburtsdatum
 
 Bücherverwaltung
-> #09 Nicht alle Pflichtfelder werden rot markiert bei neu erstellen (vereinheitlichung auch kunde)
-> #10 beim Buch anlegen bleibt Bücherverwaltung manchmal in der Ladeanimation hängen (siehe screenshot)
+DONE> #09 Nicht alle Pflichtfelder werden rot markiert bei neu erstellen (vereinheitlichung auch kunde)
+TEST NOTWENDIG> #10 beim Buch anlegen bleibt Bücherverwaltung manchmal in der Ladeanimation hängen (siehe screenshot)
 > #11 Import nicht implementiert? - noch in arbeit
-> #13 Kundeninformation wird ausgeblendet wenn ein Ausleihvorgang abgeschlossen wird
-< °06 Tabelle wird beim start mit gestauchter Tabellenbreite angezeigt
-> #14 Der Autor wird nicht in die Suche einbezogen (und auch nicht in der tabelle angezeigt)
-> #15 Die Klassenstufe wird als id angezeigt und nicht in die Suche einbezogen
-< °07 Verwendung der Checkbox beim Autor?
-> #16 Erscheinungsdatum wird nicht zurückgesetzt
-> #31 Nur Titel und ISBN wird für die Suche genutzt
-> #41 Titel mit Button aus Hauptmenü vereinheitlichen
+DONE> #14 Der Autor wird nicht in die Suche einbezogen
+DONE< °07 Verwendung der Checkbox beim Autor?
+DONE> #16 Erscheinungsdatum wird nicht zurückgesetzt
+DONE> #31 Nur Titel und ISBN wird für die Suche genutzt
+DONE> #41 Titel mit Button aus Hauptmenü vereinheitlichen
 
 Exemplar
 > #17 Import/Export funktion nicht implementiert?
@@ -46,6 +43,10 @@ Exemplar
 < °08 Exemplare Löschen?
 
 Buchübersicht
+> #14 Der Autor wird nicht in die Suche einbezogen (und auch nicht in der tabelle angezeigt)
+> #15 Die Klassenstufe wird als id angezeigt und nicht in die Suche einbezogen
+> #13 Kundeninformation wird ausgeblendet wenn ein Ausleihvorgang abgeschlossen wird
+DONE< °06 Tabelle wird beim start mit gestauchter Tabellenbreite angezeigt
 > #19 Fehler beim abbrechen des Ausleihvorgangs 
 >> wenn eine Ausleihliste erstellt wird
 >> die Ausleihliste versucht wird zurück zu geben über Rechtsklick

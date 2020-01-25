@@ -323,56 +323,26 @@ namespace Bibo_Verwaltung
         {
             if (tb_Vorname.Text.Equals(""))
             {
+                tb_Vorname.UseCustomBackColor = true;
                 tb_Vorname.BackColor = Color.Red;
             }
             else
             {
+                tb_Vorname.UseCustomBackColor = false;
+
                 tb_Vorname.BackColor = Color.White;
             }
 
             if (tb_Nachname.Text.Equals(""))
             {
+                tb_Nachname.UseCustomBackColor = true;
                 tb_Nachname.BackColor = Color.Red;
             }
             else
             {
+                tb_Nachname.UseCustomBackColor = false;
+
                 tb_Nachname.BackColor = Color.White;
-            }
-
-            if (tb_Strasse.Text.Equals(""))
-            {
-                tb_Strasse.BackColor = Color.Red;
-            }
-            else
-            {
-                tb_Strasse.BackColor = Color.White;
-            }
-
-            if (tb_Hausnummer.Text.Equals(""))
-            {
-                tb_Hausnummer.BackColor = Color.Red;
-            }
-            else
-            {
-                tb_Hausnummer.BackColor = Color.White;
-            }
-
-            if (tb_Postleitzahl.Text.Equals(""))
-            {
-                tb_Postleitzahl.BackColor = Color.Red;
-            }
-            else
-            {
-                tb_Postleitzahl.BackColor = Color.White;
-            }
-
-            if (tb_Ort.Text.Equals(""))
-            {
-                tb_Ort.BackColor = Color.Red;
-            }
-            else
-            {
-                tb_Ort.BackColor = Color.White;
             }
         }
 
@@ -383,12 +353,12 @@ namespace Bibo_Verwaltung
         {
             if (mdtp_GebDat.Value.Date != DateTime.Now.Date)
             {
-                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%' AND Geburtsdatum LIKE '{9}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, mdtp_GebDat.Value.Date.ToShortDateString());
+                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%' AND Geburtsdatum LIKE '{9}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, mdtp_GebDat.Value.Date.ToShortDateString());
 
             }
             else
             {
-                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
+                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
 
             }
         }
@@ -733,13 +703,15 @@ namespace Bibo_Verwaltung
         }
 
         private void tb_Vorname_TextChanged(object sender, EventArgs e)
-        {
+        { 
+            tb_Vorname.UseCustomBackColor = false;
             tb_Vorname.BackColor = Color.White;
             KundenFilter();
         }
 
         private void tb_Nachname_TextChanged(object sender, EventArgs e)
         {
+            tb_Nachname.UseCustomBackColor = false;
             tb_Nachname.BackColor = Color.White;
             KundenFilter();
         }
