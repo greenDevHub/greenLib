@@ -64,19 +64,21 @@ namespace Bibo_Verwaltung
                 log.CreateReport(exceptionObject);
             }
         }
-        List<string> Autoren = new List<string>();
-        private void LoadAutoren(string isbn)
+        private List<string> LoadAutoren(string isbn)
         {
-            Autoren.Clear();
-            if (con.ConnectError()) return;
+            List<string> autoren = new List<string>();
+            SQL_Verbindung connection = new SQL_Verbindung();
+            if (connection.ConnectError()) return autoren;
             string RawCommand = "SELECT * FROM [dbo].[t_s_buch_autor] WHERE  ba_isbn = @0";
-            SqlDataReader dr = con.ExcecuteCommand(RawCommand, isbn);
+            SqlDataReader dr = connection.ExcecuteCommand(RawCommand, isbn);
             while (dr.Read())
             {
                 Autor autor = new Autor(dr["ba_autorid"].ToString());
-                Autoren.Add(autor.Autorname);
+                autoren.Add(autor.Autorname);
             }
             dr.Close();
+            connection.Close();
+            return autoren;
         }
         DataTable dataTable = new DataTable();
 
@@ -103,11 +105,18 @@ namespace Bibo_Verwaltung
             dataTable.Columns.Add("Sprache");
             dataTable.Columns.Add("Zustand");
             dataTable.Columns.Add("Leihnummer");
-            foreach (DataRow row in ds.Tables[0].Rows)
+            var sampleResults = from DataRow sampleRow in ds.Tables[0].AsEnumerable()
+                                select sampleRow;
+
+            Parallel.ForEach(sampleResults, row =>
             //foreach (DataRow row in dataTable.Rows)
 
             {
-                DataRow dataRow = dataTable.NewRow();
+                DataRow dataRow;
+                lock (dataTable)
+                {
+                    dataRow = dataTable.NewRow();
+                }
                 dataRow["ISBN"] = row[ds.Tables[0].Columns.IndexOf("ISBN")].ToString();
                 string s = row[ds.Tables[0].Columns.IndexOf("Rückgabedatum")].ToString();
                 dataRow["Rückgabedatum"] = DateTime.MinValue;
@@ -128,17 +137,21 @@ namespace Bibo_Verwaltung
                 dataRow["Sprache"] = row[ds.Tables[0].Columns.IndexOf("Sprache")].ToString();
                 dataRow["Zustand"] = row[ds.Tables[0].Columns.IndexOf("Zustand")].ToString();
                 dataRow["Leihnummer"] = row[ds.Tables[0].Columns.IndexOf("Leihnummer")].ToString();
-                LoadAutoren(row[ds.Tables[0].Columns.IndexOf("ISBN")].ToString());
+                List<string> autoren = new List<string>();
+                autoren = LoadAutoren(row[ds.Tables[0].Columns.IndexOf("ISBN")].ToString());
                 string autor = "";
-                foreach (string a in Autoren)
+                foreach (string a in autoren)
                 {
                     autor = autor + a + ", ";
                 }
                 autor = autor.Substring(0, autor.Length - 2);
-                row["Autor"] = autor;
+                //row["Autor"] = autor;
                 dataRow["Autor"] = autor;
-                //dataTable.Rows.Add(dataRow);
-            }
+                lock (dataTable)
+                {
+                    dataTable.Rows.Add(dataRow);
+                }
+            });
             grid.DataSource = dataTable;
             Hide_KundenDetails(ref grid);
         }

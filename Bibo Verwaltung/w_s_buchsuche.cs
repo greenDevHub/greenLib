@@ -359,17 +359,21 @@ namespace Bibo_Verwaltung
 
         private void Filter()
         {
-            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+            if (searchActivated)
+            {
+                buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
 
-            addRowFilter();
-            if (rueckListe.Count != 0)
-            {
-                buchsuche.Set_StatusMark(ref gv_buchsuche, rueckListe);
+                addRowFilter();
+                if (rueckListe.Count != 0)
+                {
+                    buchsuche.Set_StatusMark(ref gv_buchsuche, rueckListe);
+                }
+                else
+                {
+                    buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe);
+                }
             }
-            else
-            {
-                buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe);
-            }
+
         }
         private void tb_ExemplarID_TextChanged(object sender, EventArgs e)
         {
@@ -389,17 +393,17 @@ namespace Bibo_Verwaltung
 
         private void cb_Autor_TextChanged(object sender, EventArgs e)
         {
-            Filter();
+                Filter();
         }
 
         private void cb_Verlag_TextChanged(object sender, EventArgs e)
         {
-            Filter();
+                Filter();
         }
 
         private void cb_Genre_TextChanged(object sender, EventArgs e)
         {
-            Filter();
+                Filter();
         }
 
         private void tb_nachname_TextChanged(object sender, EventArgs e)
@@ -623,7 +627,7 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
-
+        bool searchActivated = true;
         private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             try
@@ -673,7 +677,7 @@ namespace Bibo_Verwaltung
                     gv_buchsuche.Columns["Vorname"].Visible = false;
                     gv_buchsuche.Columns["Nachname"].Visible = false;
                     gv_buchsuche.Columns["Klasse"].Visible = false;
-
+                    searchActivated = false;
                     cb_Autor.DataSource = cbAutor.DataSource;
                     cb_Autor.ValueMember = "au_id";
                     cb_Autor.DisplayMember = "au_autor";
@@ -704,9 +708,9 @@ namespace Bibo_Verwaltung
                     cb_Autor.Visible = true;
                     cb_Genre.Visible = true;
                     cb_Verlag.Visible = true;
-                    //buchsuche.FillGrid(ref gv_buchsuche);
-                    //buchsuche.Set_StatusMark(ref gv_buchsuche);
-
+                    string rawFilter = string.Format("ExemplarID LIKE '{0}%' AND ISBN LIKE '{1}%' AND Titel LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Autor LIKE '%{5}%'", "", "", "", "", "", "");
+                    (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = rawFilter;
+                    addRowFilter();
                     foreach (int i in RedBlack)
                     {
                         gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = Color.Red;
@@ -728,6 +732,7 @@ namespace Bibo_Verwaltung
                         gv_buchsuche.Rows[i].DefaultCellStyle.ForeColor = Color.White;
                     }
                     gv_buchsuche.Refresh();
+                    searchActivated = true;
                 });
             }
             catch {

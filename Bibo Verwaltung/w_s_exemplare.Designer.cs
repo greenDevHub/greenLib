@@ -39,8 +39,9 @@
             this.entfernenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barcodeDruckenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gb_BarcodeBox = new System.Windows.Forms.GroupBox();
-            this.mtb_Barcode = new MetroFramework.Controls.MetroTextBox();
+            this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
             this.BarcodeBox = new System.Windows.Forms.PictureBox();
+            this.mtb_Barcode = new MetroFramework.Controls.MetroTextBox();
             this.mlb_barcode = new MetroFramework.Controls.MetroLabel();
             this.bt_Print = new MetroFramework.Controls.MetroButton();
             this.tb_ExempCount = new MetroFramework.Controls.MetroTextBox();
@@ -63,6 +64,7 @@
             this.bt_Close = new MetroFramework.Controls.MetroButton();
             this.mbt_Export = new MetroFramework.Controls.MetroButton();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.acb_Zustand = new Bibo_Verwaltung.AdvancedComboBox();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.dTP_AufDat = new MetroFramework.Controls.MetroDateTime();
             this.timer = new System.Windows.Forms.Timer(this.components);
@@ -70,18 +72,16 @@
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.mbt_Import = new MetroFramework.Controls.MetroButton();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
-            this.acb_Zustand = new Bibo_Verwaltung.AdvancedComboBox();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
-            this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.gb_BarcodeBox.SuspendLayout();
+            this.metroPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BarcodeBox)).BeginInit();
             this.metroPanel1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             this.metroPanel3.SuspendLayout();
-            this.metroPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // gv_Exemplare
@@ -189,6 +189,32 @@
             this.gb_BarcodeBox.TabIndex = 28;
             this.gb_BarcodeBox.TabStop = false;
             // 
+            // metroPanel4
+            // 
+            this.metroPanel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.metroPanel4.Controls.Add(this.BarcodeBox);
+            this.metroPanel4.HorizontalScrollbarBarColor = true;
+            this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel4.HorizontalScrollbarSize = 10;
+            this.metroPanel4.Location = new System.Drawing.Point(5, 48);
+            this.metroPanel4.Name = "metroPanel4";
+            this.metroPanel4.Size = new System.Drawing.Size(319, 161);
+            this.metroPanel4.TabIndex = 27;
+            this.metroPanel4.VerticalScrollbarBarColor = true;
+            this.metroPanel4.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel4.VerticalScrollbarSize = 10;
+            // 
+            // BarcodeBox
+            // 
+            this.BarcodeBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BarcodeBox.Location = new System.Drawing.Point(0, 0);
+            this.BarcodeBox.Name = "BarcodeBox";
+            this.BarcodeBox.Size = new System.Drawing.Size(317, 159);
+            this.BarcodeBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.BarcodeBox.TabIndex = 23;
+            this.BarcodeBox.TabStop = false;
+            this.metroToolTip1.SetToolTip(this.BarcodeBox, "    Dies ist der Barcode des entsprechenden Exemplars.    ");
+            // 
             // mtb_Barcode
             // 
             // 
@@ -224,17 +250,6 @@
             this.mtb_Barcode.WaterMark = "Code";
             this.mtb_Barcode.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtb_Barcode.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // BarcodeBox
-            // 
-            this.BarcodeBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BarcodeBox.Location = new System.Drawing.Point(0, 0);
-            this.BarcodeBox.Name = "BarcodeBox";
-            this.BarcodeBox.Size = new System.Drawing.Size(317, 159);
-            this.BarcodeBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.BarcodeBox.TabIndex = 23;
-            this.BarcodeBox.TabStop = false;
-            this.metroToolTip1.SetToolTip(this.BarcodeBox, "    Dies ist der Barcode des entsprechenden Exemplars.    ");
             // 
             // mlb_barcode
             // 
@@ -639,6 +654,26 @@
             this.metroToolTip1.SetToolTip(this.mbt_Export, "    Exportieren sie ihre Exemplardaten in eine Exceltabelle.    ");
             this.mbt_Export.UseSelectable = true;
             // 
+            // acb_Zustand
+            // 
+            this.acb_Zustand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.acb_Zustand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.acb_Zustand.BorderColor = System.Drawing.Color.Gray;
+            this.acb_Zustand.DataRowView = true;
+            this.acb_Zustand.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.acb_Zustand.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.acb_Zustand, "Tragen sie hier den Zustand des Buches, welches sie hinzufügen möchten, ein.");
+            this.acb_Zustand.HighlightColor = System.Drawing.Color.DeepSkyBlue;
+            this.acb_Zustand.ItemHeight = 18;
+            this.acb_Zustand.Location = new System.Drawing.Point(126, 88);
+            this.acb_Zustand.Name = "acb_Zustand";
+            this.helpProvider.SetShowHelp(this.acb_Zustand, true);
+            this.acb_Zustand.Size = new System.Drawing.Size(171, 24);
+            this.acb_Zustand.TabIndex = 11;
+            this.metroToolTip1.SetToolTip(this.acb_Zustand, "    Tragen sie hier den Zustand des Buches, welches sie hinzufügen möchten, ein. " +
+        "   ");
+            this.acb_Zustand.TextChanged += new System.EventHandler(this.cb_zustand_TextChanged);
+            // 
             // metroPanel1
             // 
             this.metroPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -704,6 +739,7 @@
             // backgroundWorker
             // 
             this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_RunWorkerCompleted);
             // 
             // mbt_Import
             // 
@@ -736,26 +772,6 @@
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
             // 
-            // acb_Zustand
-            // 
-            this.acb_Zustand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.acb_Zustand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.acb_Zustand.BorderColor = System.Drawing.Color.Gray;
-            this.acb_Zustand.DataRowView = true;
-            this.acb_Zustand.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.acb_Zustand.FormattingEnabled = true;
-            this.helpProvider.SetHelpString(this.acb_Zustand, "Tragen sie hier den Zustand des Buches, welches sie hinzufügen möchten, ein.");
-            this.acb_Zustand.HighlightColor = System.Drawing.Color.DeepSkyBlue;
-            this.acb_Zustand.ItemHeight = 18;
-            this.acb_Zustand.Location = new System.Drawing.Point(126, 88);
-            this.acb_Zustand.Name = "acb_Zustand";
-            this.helpProvider.SetShowHelp(this.acb_Zustand, true);
-            this.acb_Zustand.Size = new System.Drawing.Size(171, 24);
-            this.acb_Zustand.TabIndex = 11;
-            this.metroToolTip1.SetToolTip(this.acb_Zustand, "    Tragen sie hier den Zustand des Buches, welches sie hinzufügen möchten, ein. " +
-        "   ");
-            this.acb_Zustand.TextChanged += new System.EventHandler(this.cb_zustand_TextChanged);
-            // 
             // metroToolTip1
             // 
             this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
@@ -780,21 +796,6 @@
             this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel3.VerticalScrollbarSize = 10;
             // 
-            // metroPanel4
-            // 
-            this.metroPanel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.metroPanel4.Controls.Add(this.BarcodeBox);
-            this.metroPanel4.HorizontalScrollbarBarColor = true;
-            this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel4.HorizontalScrollbarSize = 10;
-            this.metroPanel4.Location = new System.Drawing.Point(5, 48);
-            this.metroPanel4.Name = "metroPanel4";
-            this.metroPanel4.Size = new System.Drawing.Size(319, 161);
-            this.metroPanel4.TabIndex = 27;
-            this.metroPanel4.VerticalScrollbarBarColor = true;
-            this.metroPanel4.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel4.VerticalScrollbarSize = 10;
-            // 
             // w_s_exemplare
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -816,12 +817,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             this.gb_BarcodeBox.ResumeLayout(false);
+            this.metroPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.BarcodeBox)).EndInit();
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel3.ResumeLayout(false);
-            this.metroPanel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

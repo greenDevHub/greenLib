@@ -387,11 +387,20 @@ namespace Bibo_Verwaltung
             }
             try
             {
-                exemplar.Zustand.FillCombobox(ref acb_Zustand, -1);
-                string s = gv_Exemplare.SelectedRows[0].Cells["Zustand"].Value.ToString();
-                //exemplar.Zustand.LoadZustand();
-                int i = acb_Zustand.FindStringExact(s);
-                acb_Zustand.SelectedIndex = i;//!!!!!!!!!!!!
+
+                //exemplar.Zustand.FillCombobox(ref acb_Zustand, -1);
+                //if (tb_ID.Text != "")
+                //{
+                //    LoadForm();
+                //}
+                //if (gv_Exemplare.SelectedRows.Count > 0)
+                //{
+                //    string s = gv_Exemplare.SelectedRows[0].Cells["Zustand"].Value.ToString();
+                //    //exemplar.Zustand.LoadZustand();
+                //    int i = acb_Zustand.FindStringExact(s);
+                //    acb_Zustand.SelectedIndex = i;//!!!!!!!!!!!!
+
+                //}
             }
             catch
             {
@@ -652,6 +661,18 @@ namespace Bibo_Verwaltung
                 metroProgressSpinner1.Visible = false;
                 gv_Exemplare.Visible = true;
             });
+        }
+
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            exemplar.Zustand.FillCombobox(ref acb_Zustand, -1);
+            if (tb_ID.Text != "")
+            {
+                LoadForm();
+            }
+            gv_Exemplare.Sort(gv_Exemplare.Columns[0], ListSortDirection.Descending);
+            gv_Exemplare.Sort(gv_Exemplare.Columns[0],ListSortDirection.Ascending);
+
         }
 
         //private void PrintBarcode(string barcodeData)
