@@ -100,6 +100,7 @@
             this.cb_Genre = new Bibo_Verwaltung.AdvancedComboBox();
             this.cb_Sprache = new Bibo_Verwaltung.AdvancedComboBox();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.bt_exemplar = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).BeginInit();
@@ -783,8 +784,10 @@
             this.Grid_Buch.TabIndex = 0;
             this.metroToolTip1.SetToolTip(this.Grid_Buch, "      In diesem Bereich werden alle Bücher der Datenbank angezeigt. Mit einem Rec" +
         "htsklick können Sie weitere Aktionen wählen.      ");
+            this.Grid_Buch.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Buch_CellClick);
             this.Grid_Buch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Buch_CellDoubleClick);
             this.Grid_Buch.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Grid_Buch_CellMouseDown);
+            this.Grid_Buch.Click += new System.EventHandler(this.Grid_Buch_Click);
             this.Grid_Buch.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grid_Buch_MouseDown);
             // 
             // contextMenuStrip1
@@ -1190,6 +1193,7 @@
             this.metroPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.metroPanel2.Controls.Add(this.mtb_Import);
             this.metroPanel2.Controls.Add(this.bt_Schliessen);
+            this.metroPanel2.Controls.Add(this.bt_exemplar);
             this.metroPanel2.Controls.Add(this.bt_Excel);
             this.metroPanel2.HorizontalScrollbarBarColor = true;
             this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
@@ -1324,6 +1328,18 @@
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Default;
             // 
+            // bt_exemplar
+            // 
+            this.bt_exemplar.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_exemplar.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.bt_exemplar.Location = new System.Drawing.Point(548, 3);
+            this.bt_exemplar.Name = "bt_exemplar";
+            this.bt_exemplar.Size = new System.Drawing.Size(122, 24);
+            this.bt_exemplar.TabIndex = 1;
+            this.bt_exemplar.Text = "Exemplaransicht";
+            this.bt_exemplar.UseSelectable = true;
+            this.bt_exemplar.Click += new System.EventHandler(this.Bt_exemplar_Click);
+            // 
             // w_s_buecher
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1427,5 +1443,6 @@
         private MetroFramework.Controls.MetroButton mtb_Import;
         private MetroFramework.Controls.MetroPanel metroPanel2;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
+        private MetroFramework.Controls.MetroButton bt_exemplar;
     }
 }

@@ -385,8 +385,19 @@ namespace Bibo_Verwaltung
             {
                 backgroundWorker.RunWorkerAsync();
             }
-            exemplar.Zustand.FillCombobox(ref acb_Zustand, 1);
-            acb_Zustand.SelectedItem = exemplar.Zustand.ZustandID;//!!!!!!!!!!!!
+            try
+            {
+                exemplar.Zustand.FillCombobox(ref acb_Zustand, -1);
+                string s = gv_Exemplare.SelectedRows[0].Cells["Zustand"].Value.ToString();
+                //exemplar.Zustand.LoadZustand();
+                int i = acb_Zustand.FindStringExact(s);
+                acb_Zustand.SelectedIndex = i;//!!!!!!!!!!!!
+            }
+            catch
+            {
+
+            }
+
             SetModus();
         }
 

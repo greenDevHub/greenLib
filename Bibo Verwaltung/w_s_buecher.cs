@@ -1790,8 +1790,12 @@ namespace Bibo_Verwaltung
             {
                 //eventueller Fix vom Problem der einfrierenden Ladeanimation
                 //Prüfung notwendig
-                metroProgressSpinner1.Visible = false;
-                Grid_Buch.Visible = true;
+                BeginInvoke((Action)delegate ()
+                {
+                    metroProgressSpinner1.Visible = false;
+                    Grid_Buch.Visible = true;
+                    MetroFramework.MetroMessageBox.Show(this, "Fehler beim Laden der Daten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                });
             }
 
         }
@@ -1816,6 +1820,44 @@ namespace Bibo_Verwaltung
         private void BackgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             BuchFilter();
+        }
+
+        private void Bt_exemplar_Click(object sender, EventArgs e)
+        {
+            if (Grid_Buch.SelectedRows.Count == 1)
+            {
+                Form Buchid = new w_s_exemplare(currentUser, Grid_Buch.SelectedRows[0].Cells[0].Value.ToString());
+                Buchid.ShowDialog(this);
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "Es wurde kein Buch ausgewählt. Bitte wählen Sie zuerst ein Buch in der Tabellenansicht aus.", "Kein Buch ausgewählt.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                bt_exemplar.Enabled = false;
+            }
+        }
+
+        private void Grid_Buch_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (Grid_Buch.SelectedRows.Count == 1)
+            {
+                bt_exemplar.Enabled = true;
+            }
+            else
+            {
+                bt_exemplar.Enabled = false;
+            }
+        }
+
+        private void Grid_Buch_Click(object sender, EventArgs e)
+        {
+            if (Grid_Buch.SelectedRows.Count == 1)
+            {
+                bt_exemplar.Enabled = true;
+            }
+            else
+            {
+                bt_exemplar.Enabled = false;
+            }
         }
     }
 }

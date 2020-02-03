@@ -169,6 +169,7 @@
             this.MaximizeBox = false;
             this.Name = "w_s_login";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "     Login";
             this.ResumeLayout(false);

@@ -154,12 +154,37 @@ namespace Bibo_Verwaltung
                 buchsuche.Hide_KundenDetails(ref gv_buchsuche);
             }
         }
-
+        private void addRowFilter()
+        {
+            string rowfilter = "";
+            if (cb_Verfügbar_Anz.Checked)
+            {
+                rowfilter = rowfilter + "Leihnummer = ''";
+            }
+            else
+            {
+                rowfilter = rowfilter + "ExemplarID IS NOT NULL";
+            }
+            if (rb_GREENonly.Checked)
+            {
+                rowfilter = rowfilter + string.Format(" AND Rückgabedatum > #{0}#", DateTime.Now.Date);
+            }
+            else if (rb_REDonly.Checked)
+            {
+                rowfilter = rowfilter + string.Format(" AND Rückgabedatum < #{0}# AND Rückgabedatum <> #{1}#", DateTime.Now.Date, DateTime.MinValue.Date);
+            }
+            else if (rb_YELLOWonly.Checked)
+            {
+                rowfilter = rowfilter + string.Format(" AND Rückgabedatum = #{0}#", DateTime.Now.Date);
+            }
+            (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter + " AND " + rowfilter;
+        }
         private void cb_Verfügbar_Anz_CheckedChanged(object sender, EventArgs e)
         {
             if (cb_Verfügbar_Anz.Checked == true)
             {
-                (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = string.Format("Leihnummer IS NULL");
+                
+                (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter.Replace("ExemplarID IS NOT NULL", string.Format("Leihnummer = ''"));
                 if (leihListe.Count != 0)
                 {
                     buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe);
@@ -177,7 +202,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = string.Format("ExemplarID IS NOT NULL");
+                (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter.Replace("Leihnummer = ''", string.Format("ExemplarID IS NOT NULL"));
                 //buchsuche.Show_AlleExemplare(ref gv_buchsuche);
                 if (leihListe.Count != 0)
                 {
@@ -332,66 +357,64 @@ namespace Bibo_Verwaltung
             }
         }
 
+        private void Filter()
+        {
+            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+
+            addRowFilter();
+            if (rueckListe.Count != 0)
+            {
+                buchsuche.Set_StatusMark(ref gv_buchsuche, rueckListe);
+            }
+            else
+            {
+                buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe);
+            }
+        }
         private void tb_ExemplarID_TextChanged(object sender, EventArgs e)
         {
-            //buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
-            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+            Filter();
 
         }
 
         private void tb_ISBN_TextChanged(object sender, EventArgs e)
         {
-            //buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
-            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
-
+            Filter();
         }
 
         private void tb_Titel_TextChanged(object sender, EventArgs e)
         {
-            //buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
-            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
-
+            Filter();
         }
 
         private void cb_Autor_TextChanged(object sender, EventArgs e)
         {
-            //buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
-            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
-
+            Filter();
         }
 
         private void cb_Verlag_TextChanged(object sender, EventArgs e)
         {
-            //buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
-            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
-
+            Filter();
         }
 
         private void cb_Genre_TextChanged(object sender, EventArgs e)
         {
-            //buchsuche.Execute_BuchSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text);
-            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
-
+            Filter();
         }
 
         private void tb_nachname_TextChanged(object sender, EventArgs e)
         {
-            //buchsuche.Execute_KundenSearch(ref gv_buchsuche, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
-            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
-
+            Filter();
         }
 
         private void tb_vorname_TextChanged(object sender, EventArgs e)
         {
-            //buchsuche.Execute_KundenSearch(ref gv_buchsuche, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
-            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+            Filter();
         }
 
         private void tb_klasse_TextChanged(object sender, EventArgs e)
         {
-            //buchsuche.Execute_KundenSearch(ref gv_buchsuche, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
-            buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
-
+            Filter();
         }
         List<string> leihListe = new List<string>();
         List<string> rueckListe = new List<string>();
@@ -564,6 +587,9 @@ namespace Bibo_Verwaltung
 
         private void rb_Default_CheckedChanged(object sender, EventArgs e)
         {
+            string rowfilter = (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter;
+            string[] rowFilters = rowfilter.Split(new[] { " AND Rückgabedatum" }, StringSplitOptions.None);
+            rowfilter = rowFilters[0];
             if (rb_GREENonly.Checked)
             {
                 buchsuche.Show_GreenExemplare(ref gv_buchsuche);
@@ -578,19 +604,22 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                buchsuche.Show_AlleExemplare(ref gv_buchsuche);
-                if(leihListe.Count != 0)
-                {
-                    buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe);
-                }
-                else if(rueckListe.Count != 0)
-                {
-                    buchsuche.Set_StatusMark(ref gv_buchsuche, rueckListe);
-                }
-                else
-                {
-                    buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe);
-                }
+                (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = rowfilter;
+                gv_buchsuche.Refresh();
+                //buchsuche.Show_AlleExemplare(ref gv_buchsuche);
+                
+            }
+            if (leihListe.Count != 0)
+            {
+                buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe);
+            }
+            else if (rueckListe.Count != 0)
+            {
+                buchsuche.Set_StatusMark(ref gv_buchsuche, rueckListe);
+            }
+            else
+            {
+                buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe);
             }
         }
         #endregion
@@ -622,9 +651,9 @@ namespace Bibo_Verwaltung
                 List<int> BlackWhite = new List<int>();
                 buchsuche.FillComboBoxes(ref cbAutor, ref cbVerlag, ref cbGenre);
                 buchsuche.FillGrid(ref mgBuSu);
-                if(rueckListe.Count != 0)
+                if (rueckListe.Count != 0)
                 {
-                    buchsuche.Set_StatusMarkNew(ref mgBuSu, ref RedBlack, ref YellowBlack, ref LimeBlack, ref BlackWhite,rueckListe);
+                    buchsuche.Set_StatusMarkNew(ref mgBuSu, ref RedBlack, ref YellowBlack, ref LimeBlack, ref BlackWhite, rueckListe);
                 }
                 else
                 {
@@ -701,7 +730,26 @@ namespace Bibo_Verwaltung
                     gv_buchsuche.Refresh();
                 });
             }
-            catch { }
+            catch {
+                try
+                {
+                    BeginInvoke((Action)delegate
+                    {
+                        metroProgressSpinner1.Visible = false;
+                        metroProgressSpinner2.Visible = false;
+                        gv_buchsuche.Visible = true;
+                        cb_Autor.Visible = true;
+                        cb_Genre.Visible = true;
+                        cb_Verlag.Visible = true;
+                        MetroFramework.MetroMessageBox.Show(this, "Fehler beim Laden der Daten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    });
+                }
+                catch
+                {
+
+                }
+                }
+
         }
 
         private void Timer1_Tick(object sender, EventArgs e)

@@ -12,7 +12,7 @@ Hauptfenster
 DONE > #00 Statistik entfernen
 
 Loginfenser
-> #01 Username / login ist nicht im Focus
+DONE> #01 Username / login ist nicht im Focus
 
 Kundenverwaltung
 DONE> #02 Wieso kann Name/Nachname nicht geändert werden?
@@ -30,7 +30,7 @@ DONE> #40 Suche nach Geburtsdatum
 Bücherverwaltung
 DONE> #09 Nicht alle Pflichtfelder werden rot markiert bei neu erstellen (vereinheitlichung auch kunde)
 TEST NOTWENDIG> #10 beim Buch anlegen bleibt Bücherverwaltung manchmal in der Ladeanimation hängen (siehe screenshot)
-> #11 Import nicht implementiert? - noch in arbeit
+IN ARBEIT> #11 Import nicht implementiert?
 DONE> #14 Der Autor wird nicht in die Suche einbezogen
 DONE< °07 Verwendung der Checkbox beim Autor?
 DONE> #16 Erscheinungsdatum wird nicht zurückgesetzt
@@ -38,12 +38,12 @@ DONE> #31 Nur Titel und ISBN wird für die Suche genutzt
 DONE> #41 Titel mit Button aus Hauptmenü vereinheitlichen
 
 Exemplar
-> #17 Import/Export funktion nicht implementiert?
-> #18 kein Zugag zur Exemplar verwaltung um neue Exemplare hinzuzufügen 
-< °08 Exemplare Löschen?
+IN ARBEIT> #17 Import/Export funktion nicht implementiert?
+DONE> #18 kein Zugag zur Exemplar verwaltung um neue Exemplare hinzuzufügen 
+???weiß nich mehr was das problem war< °08 Exemplare Löschen?
 
 Buchübersicht
-> #14 Der Autor wird nicht in die Suche einbezogen (und auch nicht in der tabelle angezeigt)
+DONE> #14 Der Autor wird nicht in die Suche einbezogen (und auch nicht in der tabelle angezeigt)
 > #15 Die Klassenstufe wird als id angezeigt und nicht in die Suche einbezogen
 > #13 Kundeninformation wird ausgeblendet wenn ein Ausleihvorgang abgeschlossen wird
 DONE< °06 Tabelle wird beim start mit gestauchter Tabellenbreite angezeigt
@@ -57,8 +57,8 @@ DONE< °06 Tabelle wird beim start mit gestauchter Tabellenbreite angezeigt
 > #21 Ausleih/Rückgabeliste in der Buchübersicht wird nicht geleert
 >> wenn eine Ausleihliste über den Button Buchausleihe 
 >> an Kunden ausgeliehen wird, wird die liste danach nicht geleert (Anzeige unten)
-> #22 Suche umstellen von Beginnt mit zu enthält (z.b. bei buchtitel, evtl. für alle Module)
-> #12 Farblegende ergänzen
+DONE> #22 Suche umstellen von Beginnt mit zu enthält (z.b. bei buchtitel, evtl. für alle Module)
+DONE> #12 Farblegende ergänzen
 
 Buchrückgabe
 > #23 wenn die Zustandsliste Aktualisiert wird verschwindeet der aktuelle Zustand

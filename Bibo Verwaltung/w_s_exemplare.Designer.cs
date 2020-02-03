@@ -63,7 +63,6 @@
             this.bt_Close = new MetroFramework.Controls.MetroButton();
             this.mbt_Export = new MetroFramework.Controls.MetroButton();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
-            this.acb_Zustand = new Bibo_Verwaltung.AdvancedComboBox();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.dTP_AufDat = new MetroFramework.Controls.MetroDateTime();
             this.timer = new System.Windows.Forms.Timer(this.components);
@@ -71,12 +70,18 @@
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.mbt_Import = new MetroFramework.Controls.MetroButton();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
+            this.acb_Zustand = new Bibo_Verwaltung.AdvancedComboBox();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
+            this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.gb_BarcodeBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BarcodeBox)).BeginInit();
             this.metroPanel1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
+            this.metroPanel3.SuspendLayout();
+            this.metroPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // gv_Exemplare
@@ -115,7 +120,7 @@
             this.gv_Exemplare.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_Exemplare.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.helpProvider.SetHelpString(this.gv_Exemplare, "Hier werden ihnen alle vorhandenen Buchexemplare angezeigt.");
-            this.gv_Exemplare.Location = new System.Drawing.Point(364, 63);
+            this.gv_Exemplare.Location = new System.Drawing.Point(3, 3);
             this.gv_Exemplare.Name = "gv_Exemplare";
             this.gv_Exemplare.ReadOnly = true;
             this.gv_Exemplare.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -133,8 +138,9 @@
             this.gv_Exemplare.RowTemplate.Height = 24;
             this.gv_Exemplare.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.helpProvider.SetShowHelp(this.gv_Exemplare, true);
-            this.gv_Exemplare.Size = new System.Drawing.Size(813, 434);
+            this.gv_Exemplare.Size = new System.Drawing.Size(807, 481);
             this.gv_Exemplare.TabIndex = 0;
+            this.metroToolTip1.SetToolTip(this.gv_Exemplare, "    Hier werden Ihnen alle in der Datenbank vorhandenen Exemplare angezeigt.    ");
             this.gv_Exemplare.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Buch_CellDoubleClick);
             this.gv_Exemplare.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.grid_buchid_CellMouseDown);
             this.gv_Exemplare.MouseDown += new System.Windows.Forms.MouseEventHandler(this.grid_buchid_MouseDown);
@@ -172,11 +178,11 @@
             // 
             // gb_BarcodeBox
             // 
+            this.gb_BarcodeBox.Controls.Add(this.metroPanel4);
             this.gb_BarcodeBox.Controls.Add(this.mtb_Barcode);
-            this.gb_BarcodeBox.Controls.Add(this.BarcodeBox);
             this.gb_BarcodeBox.Controls.Add(this.mlb_barcode);
             this.gb_BarcodeBox.Controls.Add(this.bt_Print);
-            this.gb_BarcodeBox.Location = new System.Drawing.Point(3, 188);
+            this.gb_BarcodeBox.Location = new System.Drawing.Point(3, 213);
             this.gb_BarcodeBox.Name = "gb_BarcodeBox";
             this.gb_BarcodeBox.Padding = new System.Windows.Forms.Padding(1);
             this.gb_BarcodeBox.Size = new System.Drawing.Size(328, 243);
@@ -197,6 +203,7 @@
             this.mtb_Barcode.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.mtb_Barcode.CustomButton.UseSelectable = true;
             this.mtb_Barcode.CustomButton.Visible = false;
+            this.mtb_Barcode.Enabled = false;
             this.mtb_Barcode.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.mtb_Barcode.Lines = new string[0];
             this.mtb_Barcode.Location = new System.Drawing.Point(123, 17);
@@ -212,6 +219,7 @@
             this.mtb_Barcode.ShortcutsEnabled = true;
             this.mtb_Barcode.Size = new System.Drawing.Size(171, 24);
             this.mtb_Barcode.TabIndex = 24;
+            this.metroToolTip1.SetToolTip(this.mtb_Barcode, "    Dies ist der Zahlwert für den Barcode.    ");
             this.mtb_Barcode.UseSelectable = true;
             this.mtb_Barcode.WaterMark = "Code";
             this.mtb_Barcode.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -219,13 +227,14 @@
             // 
             // BarcodeBox
             // 
-            this.BarcodeBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.BarcodeBox.Location = new System.Drawing.Point(4, 47);
+            this.BarcodeBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BarcodeBox.Location = new System.Drawing.Point(0, 0);
             this.BarcodeBox.Name = "BarcodeBox";
-            this.BarcodeBox.Size = new System.Drawing.Size(320, 162);
+            this.BarcodeBox.Size = new System.Drawing.Size(317, 159);
             this.BarcodeBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.BarcodeBox.TabIndex = 23;
             this.BarcodeBox.TabStop = false;
+            this.metroToolTip1.SetToolTip(this.BarcodeBox, "    Dies ist der Barcode des entsprechenden Exemplars.    ");
             // 
             // mlb_barcode
             // 
@@ -248,6 +257,7 @@
             this.bt_Print.Size = new System.Drawing.Size(122, 24);
             this.bt_Print.TabIndex = 25;
             this.bt_Print.Text = "Drucken";
+            this.metroToolTip1.SetToolTip(this.bt_Print, "    Klicken sie hier, um den Barcode auszudrucken.    ");
             this.bt_Print.UseSelectable = true;
             this.bt_Print.Click += new System.EventHandler(this.button1_Click_1);
             // 
@@ -267,7 +277,7 @@
             this.tb_ExempCount.CustomButton.Visible = false;
             this.tb_ExempCount.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.tb_ExempCount.Lines = new string[0];
-            this.tb_ExempCount.Location = new System.Drawing.Point(126, 128);
+            this.tb_ExempCount.Location = new System.Drawing.Point(126, 153);
             this.tb_ExempCount.MaxLength = 32767;
             this.tb_ExempCount.Name = "tb_ExempCount";
             this.tb_ExempCount.PasswordChar = '\0';
@@ -279,6 +289,8 @@
             this.tb_ExempCount.ShortcutsEnabled = true;
             this.tb_ExempCount.Size = new System.Drawing.Size(85, 24);
             this.tb_ExempCount.TabIndex = 27;
+            this.metroToolTip1.SetToolTip(this.tb_ExempCount, "    Geben Sie hier die Anzahl der Exemplare an, die neu hinzugefügt werden soll. " +
+        "   ");
             this.tb_ExempCount.UseSelectable = true;
             this.tb_ExempCount.WaterMark = "Anzahl";
             this.tb_ExempCount.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -289,7 +301,7 @@
             // mlb_Vorhanden
             // 
             this.helpProvider.SetHelpString(this.mlb_Vorhanden, "Wählen sie hier die Anzahl der Bücher, welches sie hinzufügen möchten, ein.");
-            this.mlb_Vorhanden.Location = new System.Drawing.Point(3, 158);
+            this.mlb_Vorhanden.Location = new System.Drawing.Point(3, 183);
             this.mlb_Vorhanden.Margin = new System.Windows.Forms.Padding(3);
             this.mlb_Vorhanden.Name = "mlb_Vorhanden";
             this.helpProvider.SetShowHelp(this.mlb_Vorhanden, true);
@@ -301,7 +313,7 @@
             // mlb_ExempCount
             // 
             this.helpProvider.SetHelpString(this.mlb_ExempCount, "Wählen sie hier die Anzahl der Bücher, welches sie hinzufügen möchten, ein.");
-            this.mlb_ExempCount.Location = new System.Drawing.Point(3, 128);
+            this.mlb_ExempCount.Location = new System.Drawing.Point(3, 153);
             this.mlb_ExempCount.Margin = new System.Windows.Forms.Padding(3);
             this.mlb_ExempCount.Name = "mlb_ExempCount";
             this.helpProvider.SetShowHelp(this.mlb_ExempCount, true);
@@ -327,7 +339,7 @@
             this.tb_Vorhanden.Enabled = false;
             this.tb_Vorhanden.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.tb_Vorhanden.Lines = new string[0];
-            this.tb_Vorhanden.Location = new System.Drawing.Point(126, 158);
+            this.tb_Vorhanden.Location = new System.Drawing.Point(126, 183);
             this.tb_Vorhanden.MaxLength = 32767;
             this.tb_Vorhanden.Name = "tb_Vorhanden";
             this.tb_Vorhanden.PasswordChar = '\0';
@@ -339,6 +351,7 @@
             this.tb_Vorhanden.ShortcutsEnabled = true;
             this.tb_Vorhanden.Size = new System.Drawing.Size(85, 24);
             this.tb_Vorhanden.TabIndex = 20;
+            this.metroToolTip1.SetToolTip(this.tb_Vorhanden, "    So viele Exemplare sind bereits in der Datenbank registriert.    ");
             this.tb_Vorhanden.UseSelectable = true;
             this.tb_Vorhanden.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Vorhanden.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -349,12 +362,13 @@
             this.bt_Clear.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Clear.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Clear, "Leeren sie alle oben liegenden Textfelder.");
-            this.bt_Clear.Location = new System.Drawing.Point(3, 468);
+            this.bt_Clear.Location = new System.Drawing.Point(3, 493);
             this.bt_Clear.Name = "bt_Clear";
             this.helpProvider.SetShowHelp(this.bt_Clear, true);
             this.bt_Clear.Size = new System.Drawing.Size(122, 24);
             this.bt_Clear.TabIndex = 19;
             this.bt_Clear.Text = "Leeren";
+            this.metroToolTip1.SetToolTip(this.bt_Clear, "    Leeren sie alle oben liegenden Textfelder.    ");
             this.bt_Clear.UseSelectable = true;
             this.bt_Clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
@@ -363,12 +377,13 @@
             this.bt_zustand_add.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_zustand_add.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_zustand_add, "Klicken sie auf diesen Button, um neue Zustände hinzuzufügen.");
-            this.bt_zustand_add.Location = new System.Drawing.Point(303, 63);
+            this.bt_zustand_add.Location = new System.Drawing.Point(303, 88);
             this.bt_zustand_add.Name = "bt_zustand_add";
             this.helpProvider.SetShowHelp(this.bt_zustand_add, true);
             this.bt_zustand_add.Size = new System.Drawing.Size(24, 24);
             this.bt_zustand_add.TabIndex = 18;
             this.bt_zustand_add.Text = "+";
+            this.metroToolTip1.SetToolTip(this.bt_zustand_add, "    Klicken sie auf diesen Button, um neue Zustände hinzuzufügen.    ");
             this.bt_zustand_add.UseSelectable = true;
             this.bt_zustand_add.Click += new System.EventHandler(this.bt_zustand_Click);
             // 
@@ -390,7 +405,7 @@
             this.lb_Message.FontWeight = MetroFramework.MetroTextBoxWeight.Light;
             this.lb_Message.Lines = new string[] {
         "Das Buch wurde erfolgreich hinzugefügt!"};
-            this.lb_Message.Location = new System.Drawing.Point(3, 437);
+            this.lb_Message.Location = new System.Drawing.Point(3, 462);
             this.lb_Message.MaxLength = 32767;
             this.lb_Message.Multiline = true;
             this.lb_Message.Name = "lb_Message";
@@ -413,12 +428,13 @@
             this.bt_Add.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Add.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Add, "Fügen sie alle oben eingetragen Daten hinzu.");
-            this.bt_Add.Location = new System.Drawing.Point(205, 468);
+            this.bt_Add.Location = new System.Drawing.Point(205, 493);
             this.bt_Add.Name = "bt_Add";
             this.helpProvider.SetShowHelp(this.bt_Add, true);
             this.bt_Add.Size = new System.Drawing.Size(122, 24);
             this.bt_Add.TabIndex = 16;
             this.bt_Add.Text = "Hinzufügen";
+            this.metroToolTip1.SetToolTip(this.bt_Add, "    Fügen sie alle oben eingetragen Daten hinzu.    ");
             this.bt_Add.UseSelectable = true;
             this.bt_Add.Click += new System.EventHandler(this.bt_Add_Click);
             // 
@@ -427,12 +443,13 @@
             this.rb_delete.AutoSize = true;
             this.rb_delete.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_delete.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.rb_delete.Location = new System.Drawing.Point(213, 63);
+            this.rb_delete.Location = new System.Drawing.Point(193, 3);
             this.rb_delete.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_delete.Name = "rb_delete";
             this.rb_delete.Size = new System.Drawing.Size(80, 19);
             this.rb_delete.TabIndex = 14;
             this.rb_delete.Text = "Entfernen";
+            this.metroToolTip1.SetToolTip(this.rb_delete, "    Klicken sie hier, um ein vorhandenes Exemplar zu löschen.    ");
             this.rb_delete.UseSelectable = true;
             this.rb_delete.CheckedChanged += new System.EventHandler(this.rb_Delete_CheckedChanged);
             // 
@@ -441,12 +458,13 @@
             this.rb_edit.AutoSize = true;
             this.rb_edit.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_edit.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.rb_edit.Location = new System.Drawing.Point(119, 63);
+            this.rb_edit.Location = new System.Drawing.Point(99, 3);
             this.rb_edit.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_edit.Name = "rb_edit";
             this.rb_edit.Size = new System.Drawing.Size(88, 19);
             this.rb_edit.TabIndex = 13;
             this.rb_edit.Text = "Bearbeiten";
+            this.metroToolTip1.SetToolTip(this.rb_edit, "    Klicken sie hier, um ein vorhandenes Exemplar zu bearbeiten.    ");
             this.rb_edit.UseSelectable = true;
             this.rb_edit.CheckedChanged += new System.EventHandler(this.rb_Edit_CheckedChanged);
             // 
@@ -457,20 +475,21 @@
             this.rb_neu.Cursor = System.Windows.Forms.Cursors.Default;
             this.rb_neu.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_neu.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.rb_neu.Location = new System.Drawing.Point(23, 63);
+            this.rb_neu.Location = new System.Drawing.Point(3, 3);
             this.rb_neu.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_neu.Name = "rb_neu";
             this.rb_neu.Size = new System.Drawing.Size(90, 19);
             this.rb_neu.TabIndex = 12;
             this.rb_neu.TabStop = true;
             this.rb_neu.Text = "Hinzufügen";
+            this.metroToolTip1.SetToolTip(this.rb_neu, "    Klicken sie hier, um ein neues Exemplar hinzuzufügen.    ");
             this.rb_neu.UseSelectable = true;
             this.rb_neu.CheckedChanged += new System.EventHandler(this.rb_Neu_CheckedChanged);
             // 
             // mlb_AufDat
             // 
             this.helpProvider.SetHelpString(this.mlb_AufDat, "Wählen sie hier das Aufnahmedatum des Buches, welches sie hinzufügen möchten.");
-            this.mlb_AufDat.Location = new System.Drawing.Point(3, 93);
+            this.mlb_AufDat.Location = new System.Drawing.Point(3, 118);
             this.mlb_AufDat.Margin = new System.Windows.Forms.Padding(3);
             this.mlb_AufDat.Name = "mlb_AufDat";
             this.helpProvider.SetShowHelp(this.mlb_AufDat, true);
@@ -482,7 +501,7 @@
             // mlb_Zustand
             // 
             this.helpProvider.SetHelpString(this.mlb_Zustand, "Tragen sie hier den Zustand des Buches, welches sie hinzufügen möchten, ein.");
-            this.mlb_Zustand.Location = new System.Drawing.Point(3, 63);
+            this.mlb_Zustand.Location = new System.Drawing.Point(3, 88);
             this.mlb_Zustand.Margin = new System.Windows.Forms.Padding(3);
             this.mlb_Zustand.Name = "mlb_Zustand";
             this.helpProvider.SetShowHelp(this.mlb_Zustand, true);
@@ -495,7 +514,7 @@
             // 
             this.helpProvider.SetHelpString(this.mlb_ID, "Tragen sie hier die Buch-ID ein, um das gewünschte Buch zu laden. Buch-IDs werden" +
         " automatisch generiert.");
-            this.mlb_ID.Location = new System.Drawing.Point(3, 33);
+            this.mlb_ID.Location = new System.Drawing.Point(3, 58);
             this.mlb_ID.Margin = new System.Windows.Forms.Padding(3);
             this.mlb_ID.Name = "mlb_ID";
             this.helpProvider.SetShowHelp(this.mlb_ID, true);
@@ -507,7 +526,7 @@
             // mlb_ISBN
             // 
             this.helpProvider.SetHelpString(this.mlb_ISBN, "Tragen sie hier die ISBN-13 ein, um das gewünschte Buch zu laden.");
-            this.mlb_ISBN.Location = new System.Drawing.Point(3, 3);
+            this.mlb_ISBN.Location = new System.Drawing.Point(3, 28);
             this.mlb_ISBN.Margin = new System.Windows.Forms.Padding(3);
             this.mlb_ISBN.Name = "mlb_ISBN";
             this.helpProvider.SetShowHelp(this.mlb_ISBN, true);
@@ -533,7 +552,7 @@
             this.tb_ID.Enabled = false;
             this.tb_ID.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.tb_ID.Lines = new string[0];
-            this.tb_ID.Location = new System.Drawing.Point(126, 33);
+            this.tb_ID.Location = new System.Drawing.Point(126, 58);
             this.tb_ID.MaxLength = 32767;
             this.tb_ID.Name = "tb_ID";
             this.tb_ID.PasswordChar = '\0';
@@ -545,6 +564,7 @@
             this.tb_ID.ShortcutsEnabled = true;
             this.tb_ID.Size = new System.Drawing.Size(171, 24);
             this.tb_ID.TabIndex = 1;
+            this.metroToolTip1.SetToolTip(this.tb_ID, "    Tragen Sie hier die Buch-ID ein (sichtbar auf dem Barcode).    ");
             this.tb_ID.UseSelectable = true;
             this.tb_ID.WaterMark = "ID";
             this.tb_ID.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -569,7 +589,7 @@
             this.tb_ISBN.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.helpProvider.SetHelpString(this.tb_ISBN, "Tragen sie hier die ISBN-13 ein, um das gewünschte Buch zu laden.");
             this.tb_ISBN.Lines = new string[0];
-            this.tb_ISBN.Location = new System.Drawing.Point(126, 3);
+            this.tb_ISBN.Location = new System.Drawing.Point(126, 28);
             this.tb_ISBN.MaxLength = 32767;
             this.tb_ISBN.Name = "tb_ISBN";
             this.tb_ISBN.PasswordChar = '\0';
@@ -582,6 +602,7 @@
             this.helpProvider.SetShowHelp(this.tb_ISBN, true);
             this.tb_ISBN.Size = new System.Drawing.Size(171, 24);
             this.tb_ISBN.TabIndex = 0;
+            this.metroToolTip1.SetToolTip(this.tb_ISBN, "    Tragen sie hier die ISBN-13 ein, um das gewünschte Buch zu laden.    ");
             this.tb_ISBN.UseSelectable = true;
             this.tb_ISBN.WaterMark = "ISBN";
             this.tb_ISBN.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -600,6 +621,7 @@
             this.bt_Close.Size = new System.Drawing.Size(122, 24);
             this.bt_Close.TabIndex = 21;
             this.bt_Close.Text = "Schließen";
+            this.metroToolTip1.SetToolTip(this.bt_Close, "    Schließen sie das akuelle Fenster.    ");
             this.bt_Close.UseSelectable = true;
             this.bt_Close.Click += new System.EventHandler(this.bt_close_Click);
             // 
@@ -614,25 +636,8 @@
             this.mbt_Export.Size = new System.Drawing.Size(122, 24);
             this.mbt_Export.TabIndex = 22;
             this.mbt_Export.Text = "Daten-Export";
+            this.metroToolTip1.SetToolTip(this.mbt_Export, "    Exportieren sie ihre Exemplardaten in eine Exceltabelle.    ");
             this.mbt_Export.UseSelectable = true;
-            // 
-            // acb_Zustand
-            // 
-            this.acb_Zustand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.acb_Zustand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.acb_Zustand.BorderColor = System.Drawing.Color.Gray;
-            this.acb_Zustand.DataRowView = true;
-            this.acb_Zustand.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.acb_Zustand.FormattingEnabled = true;
-            this.helpProvider.SetHelpString(this.acb_Zustand, "Tragen sie hier den Zustand des Buches, welches sie hinzufügen möchten, ein.");
-            this.acb_Zustand.HighlightColor = System.Drawing.Color.DeepSkyBlue;
-            this.acb_Zustand.ItemHeight = 18;
-            this.acb_Zustand.Location = new System.Drawing.Point(126, 63);
-            this.acb_Zustand.Name = "acb_Zustand";
-            this.helpProvider.SetShowHelp(this.acb_Zustand, true);
-            this.acb_Zustand.Size = new System.Drawing.Size(171, 24);
-            this.acb_Zustand.TabIndex = 11;
-            this.acb_Zustand.TextChanged += new System.EventHandler(this.cb_zustand_TextChanged);
             // 
             // metroPanel1
             // 
@@ -641,8 +646,11 @@
             this.metroPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.metroPanel1.Controls.Add(this.gb_BarcodeBox);
             this.metroPanel1.Controls.Add(this.dTP_AufDat);
+            this.metroPanel1.Controls.Add(this.rb_delete);
             this.metroPanel1.Controls.Add(this.lb_Message);
             this.metroPanel1.Controls.Add(this.tb_ExempCount);
+            this.metroPanel1.Controls.Add(this.rb_neu);
+            this.metroPanel1.Controls.Add(this.rb_edit);
             this.metroPanel1.Controls.Add(this.mlb_Vorhanden);
             this.metroPanel1.Controls.Add(this.bt_Clear);
             this.metroPanel1.Controls.Add(this.mlb_ISBN);
@@ -659,9 +667,9 @@
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(23, 88);
+            this.metroPanel1.Location = new System.Drawing.Point(23, 63);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(335, 497);
+            this.metroPanel1.Size = new System.Drawing.Size(335, 522);
             this.metroPanel1.TabIndex = 23;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
@@ -671,11 +679,12 @@
             // 
             this.dTP_AufDat.CustomFormat = " dd : MMMM : yyyy";
             this.dTP_AufDat.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dTP_AufDat.Location = new System.Drawing.Point(126, 93);
+            this.dTP_AufDat.Location = new System.Drawing.Point(126, 118);
             this.dTP_AufDat.MinimumSize = new System.Drawing.Size(0, 29);
             this.dTP_AufDat.Name = "dTP_AufDat";
             this.dTP_AufDat.Size = new System.Drawing.Size(171, 29);
             this.dTP_AufDat.TabIndex = 50;
+            this.metroToolTip1.SetToolTip(this.dTP_AufDat, "    Wählen Sie hier das Aufnahmedatum des Exemplares aus.    ");
             // 
             // timer
             // 
@@ -685,13 +694,10 @@
             // 
             // metroProgressSpinner1
             // 
-            this.metroProgressSpinner1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroProgressSpinner1.Location = new System.Drawing.Point(545, 63);
+            this.metroProgressSpinner1.Location = new System.Drawing.Point(163, 3);
             this.metroProgressSpinner1.Maximum = 100;
             this.metroProgressSpinner1.Name = "metroProgressSpinner1";
-            this.metroProgressSpinner1.Size = new System.Drawing.Size(484, 434);
+            this.metroProgressSpinner1.Size = new System.Drawing.Size(481, 481);
             this.metroProgressSpinner1.TabIndex = 24;
             this.metroProgressSpinner1.UseSelectable = true;
             // 
@@ -709,6 +715,7 @@
             this.mbt_Import.Style = MetroFramework.MetroColorStyle.Teal;
             this.mbt_Import.TabIndex = 25;
             this.mbt_Import.Text = "Daten-Import";
+            this.metroToolTip1.SetToolTip(this.mbt_Import, "    Importieren Sie Daten von einer externen Quelle.    ");
             this.mbt_Import.UseSelectable = true;
             // 
             // metroPanel2
@@ -729,18 +736,73 @@
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
             // 
+            // acb_Zustand
+            // 
+            this.acb_Zustand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.acb_Zustand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.acb_Zustand.BorderColor = System.Drawing.Color.Gray;
+            this.acb_Zustand.DataRowView = true;
+            this.acb_Zustand.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.acb_Zustand.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.acb_Zustand, "Tragen sie hier den Zustand des Buches, welches sie hinzufügen möchten, ein.");
+            this.acb_Zustand.HighlightColor = System.Drawing.Color.DeepSkyBlue;
+            this.acb_Zustand.ItemHeight = 18;
+            this.acb_Zustand.Location = new System.Drawing.Point(126, 88);
+            this.acb_Zustand.Name = "acb_Zustand";
+            this.helpProvider.SetShowHelp(this.acb_Zustand, true);
+            this.acb_Zustand.Size = new System.Drawing.Size(171, 24);
+            this.acb_Zustand.TabIndex = 11;
+            this.metroToolTip1.SetToolTip(this.acb_Zustand, "    Tragen sie hier den Zustand des Buches, welches sie hinzufügen möchten, ein. " +
+        "   ");
+            this.acb_Zustand.TextChanged += new System.EventHandler(this.cb_zustand_TextChanged);
+            // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
+            // metroPanel3
+            // 
+            this.metroPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroPanel3.Controls.Add(this.metroProgressSpinner1);
+            this.metroPanel3.Controls.Add(this.gv_Exemplare);
+            this.metroPanel3.HorizontalScrollbarBarColor = true;
+            this.metroPanel3.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel3.HorizontalScrollbarSize = 10;
+            this.metroPanel3.Location = new System.Drawing.Point(364, 63);
+            this.metroPanel3.Name = "metroPanel3";
+            this.metroPanel3.Size = new System.Drawing.Size(813, 487);
+            this.metroPanel3.TabIndex = 27;
+            this.metroPanel3.VerticalScrollbarBarColor = true;
+            this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel3.VerticalScrollbarSize = 10;
+            // 
+            // metroPanel4
+            // 
+            this.metroPanel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.metroPanel4.Controls.Add(this.BarcodeBox);
+            this.metroPanel4.HorizontalScrollbarBarColor = true;
+            this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel4.HorizontalScrollbarSize = 10;
+            this.metroPanel4.Location = new System.Drawing.Point(5, 48);
+            this.metroPanel4.Name = "metroPanel4";
+            this.metroPanel4.Size = new System.Drawing.Size(319, 161);
+            this.metroPanel4.TabIndex = 27;
+            this.metroPanel4.VerticalScrollbarBarColor = true;
+            this.metroPanel4.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel4.VerticalScrollbarSize = 10;
+            // 
             // w_s_exemplare
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1200, 600);
+            this.Controls.Add(this.metroPanel3);
             this.Controls.Add(this.metroPanel2);
-            this.Controls.Add(this.metroProgressSpinner1);
             this.Controls.Add(this.metroPanel1);
-            this.Controls.Add(this.rb_delete);
-            this.Controls.Add(this.gv_Exemplare);
-            this.Controls.Add(this.rb_edit);
-            this.Controls.Add(this.rb_neu);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -748,7 +810,7 @@
             this.Name = "w_s_exemplare";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Exemplare";
+            this.Text = "Exemplarverwaltung";
             this.Activated += new System.EventHandler(this.w_s_buchid_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_buchid_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).EndInit();
@@ -756,9 +818,11 @@
             this.gb_BarcodeBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.BarcodeBox)).EndInit();
             this.metroPanel1.ResumeLayout(false);
+            this.metroPanel1.PerformLayout();
             this.metroPanel2.ResumeLayout(false);
+            this.metroPanel3.ResumeLayout(false);
+            this.metroPanel4.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -802,5 +866,8 @@
         private MetroFramework.Controls.MetroDateTime dTP_AufDat;
         private MetroFramework.Controls.MetroButton mbt_Import;
         private MetroFramework.Controls.MetroPanel metroPanel2;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
+        private MetroFramework.Controls.MetroPanel metroPanel3;
+        private MetroFramework.Controls.MetroPanel metroPanel4;
     }
 }
