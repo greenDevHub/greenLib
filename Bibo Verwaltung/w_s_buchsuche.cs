@@ -143,7 +143,7 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private void cb_KundeAnz_CheckedChanged(object sender, EventArgs e)
+        private void ShowKundeDetails()
         {
             if (cb_KundeAnz.Checked == true)
             {
@@ -153,6 +153,10 @@ namespace Bibo_Verwaltung
             {
                 buchsuche.Hide_KundenDetails(ref gv_buchsuche);
             }
+        }
+        private void cb_KundeAnz_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowKundeDetails();
         }
         private void addRowFilter()
         {
@@ -549,7 +553,7 @@ namespace Bibo_Verwaltung
                         ausleihenToolStripMenuItem.Enabled = false;
 
                     }
-                    if (gv_buchsuche.SelectedRows[0].Cells["Rückgabedatum"].Value.ToString().Equals(""))
+                    if (gv_buchsuche.SelectedRows[0].Cells["Rückgabedatum"].Value.ToString().Equals("") || gv_buchsuche.SelectedRows[0].Cells["Rückgabedatum"].Value.ToString().Equals(DateTime.MinValue.ToString()))
                     {
                         entfernenToolStripMenuItem1.Enabled = false;
                         hinzufügenToolStripMenuItem1.Enabled = false;
@@ -589,11 +593,13 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private void rb_Default_CheckedChanged(object sender, EventArgs e)
+        private void checkedChanged()
         {
             string rowfilter = (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter;
             string[] rowFilters = rowfilter.Split(new[] { " AND Rückgabedatum" }, StringSplitOptions.None);
             rowfilter = rowFilters[0];
+            (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = rowfilter;
+            gv_buchsuche.Refresh();
             if (rb_GREENonly.Checked)
             {
                 buchsuche.Show_GreenExemplare(ref gv_buchsuche);
@@ -605,13 +611,6 @@ namespace Bibo_Verwaltung
             else if (rb_REDonly.Checked)
             {
                 buchsuche.Show_RedExemplare(ref gv_buchsuche);
-            }
-            else
-            {
-                (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = rowfilter;
-                gv_buchsuche.Refresh();
-                //buchsuche.Show_AlleExemplare(ref gv_buchsuche);
-                
             }
             if (leihListe.Count != 0)
             {
@@ -634,6 +633,8 @@ namespace Bibo_Verwaltung
             {
                 BeginInvoke((Action)delegate ()
                 {
+                    gb_Suche.Enabled = false;
+                    gb_liste.Enabled = false;
                     metroProgressSpinner1.Visible = true;
                     metroProgressSpinner2.Visible = true;
                     gv_buchsuche.DataSource = null;
@@ -702,12 +703,6 @@ namespace Bibo_Verwaltung
                     {
                         cb_Genre.Text = "Genre";
                     }
-                    metroProgressSpinner1.Visible = false;
-                    metroProgressSpinner2.Visible = false;
-                    gv_buchsuche.Visible = true;
-                    cb_Autor.Visible = true;
-                    cb_Genre.Visible = true;
-                    cb_Verlag.Visible = true;
                     string rawFilter = string.Format("ExemplarID LIKE '{0}%' AND ISBN LIKE '{1}%' AND Titel LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Autor LIKE '%{5}%'", "", "", "", "", "", "");
                     (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = rawFilter;
                     addRowFilter();
@@ -733,6 +728,15 @@ namespace Bibo_Verwaltung
                     }
                     gv_buchsuche.Refresh();
                     searchActivated = true;
+                    ShowKundeDetails();
+                    metroProgressSpinner1.Visible = false;
+                    metroProgressSpinner2.Visible = false;
+                    gv_buchsuche.Visible = true;
+                    cb_Autor.Visible = true;
+                    cb_Genre.Visible = true;
+                    cb_Verlag.Visible = true;
+                    gb_Suche.Enabled = true;
+                    gb_liste.Enabled = true;
                 });
             }
             catch {
@@ -904,6 +908,42 @@ namespace Bibo_Verwaltung
         private void ClearListe()
         {
 
+        }
+
+        private void Rb_REDonly_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_REDonly.Checked)
+            {
+                checkedChanged();
+
+            }
+        }
+
+        private void Rb_YELLOWonly_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_YELLOWonly.Checked)
+            {
+                checkedChanged();
+
+            }
+        }
+
+        private void Rb_GREENonly_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_GREENonly.Checked)
+            {
+                checkedChanged();
+
+            }
+        }
+
+        private void Rb_Default_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_Default.Checked)
+            {
+                checkedChanged();
+
+            }
         }
     }
 }

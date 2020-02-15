@@ -318,7 +318,7 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                dataTable.DefaultView.RowFilter = dataTable.DefaultView.RowFilter + string.Format("Rückgabedatum > #{0}#", DateTime.Now.Date);
+                dataTable.DefaultView.RowFilter = dataTable.DefaultView.RowFilter + string.Format(" AND Rückgabedatum > '#{0}#'", DateTime.Now.Date);
                 grid.Refresh();
             }
             catch (Exception exceptionObject)
@@ -334,8 +334,11 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                dataTable.DefaultView.RowFilter = dataTable.DefaultView.RowFilter+string.Format(" AND Rückgabedatum < #{0}# AND Rückgabedatum <> #{1}#", DateTime.Now.Date,DateTime.MinValue.Date);
+                dataTable.DefaultView.RowFilter = dataTable.DefaultView.RowFilter + string.Format(" AND Rückgabedatum < '#{0}#' AND Rückgabedatum <> '#{1}#'", DateTime.Now.Date, DateTime.MinValue.Date);
                 grid.Refresh();
+                //dataTable.DefaultView.RowFilter = "ExemplarID LIKE '%' AND ISBN LIKE '%' AND Titel LIKE '%%' AND Verlag LIKE '%%' AND Genre LIKE '%%' AND Autor LIKE '%%' AND ExemplarID IS NOT NULL";
+                //dataTable.DefaultView.RowFilter = dataTable.DefaultView.RowFilter + string.Format(" AND Rückgabedatum < #{0}#",DateTime.Now.Date);
+                //grid.Refresh();
             }
             catch (Exception exceptionObject)
             {
@@ -350,7 +353,7 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                dataTable.DefaultView.RowFilter = dataTable.DefaultView.RowFilter+string.Format(" AND Rückgabedatum = #{0}#", DateTime.Now.Date);
+                dataTable.DefaultView.RowFilter = dataTable.DefaultView.RowFilter+string.Format(" AND Rückgabedatum = '#{0}#'", DateTime.Now.Date);
                 grid.Refresh();
             }
             catch (Exception exceptionObject)

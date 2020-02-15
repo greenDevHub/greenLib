@@ -642,25 +642,34 @@ namespace Bibo_Verwaltung
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            BeginInvoke((Action)delegate ()
+            try
             {
-                metroProgressSpinner1.Visible = true;
-                gv_Exemplare.Visible = false;
-            });
-            MetroGrid mgExemplar = new MetroGrid();
-            exemplar.FillGrid(ref mgExemplar);
-            var dtExemplar = mgExemplar.DataSource;
-            while (loaded == false)
+                BeginInvoke((Action)delegate ()
+                {
+                    metroProgressSpinner1.Visible = true;
+                    gv_Exemplare.Visible = false;
+                });
+                MetroGrid mgExemplar = new MetroGrid();
+                exemplar.FillGrid(ref mgExemplar);
+                var dtExemplar = mgExemplar.DataSource;
+                while (loaded == false)
+                {
+
+                }
+                loaded = false;
+                BeginInvoke((Action)delegate ()
+                {
+                    gv_Exemplare.DataSource = null;
+                    gv_Exemplare.DataSource = dtExemplar;
+                    tb_Vorhanden.Text = gv_Exemplare.RowCount.ToString();
+                    metroProgressSpinner1.Visible = false;
+                    gv_Exemplare.Visible = true;
+                });
+            }
+            catch
             {
 
             }
-            BeginInvoke((Action)delegate ()
-            {
-                gv_Exemplare.DataSource = dtExemplar;
-                tb_Vorhanden.Text = gv_Exemplare.RowCount.ToString();
-                metroProgressSpinner1.Visible = false;
-                gv_Exemplare.Visible = true;
-            });
         }
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -670,8 +679,8 @@ namespace Bibo_Verwaltung
             {
                 LoadForm();
             }
-            gv_Exemplare.Sort(gv_Exemplare.Columns[0], ListSortDirection.Descending);
-            gv_Exemplare.Sort(gv_Exemplare.Columns[0],ListSortDirection.Ascending);
+            ////gv_Exemplare.Sort(gv_Exemplare.Columns[0], ListSortDirection.Descending);
+            //gv_Exemplare.Sort(gv_Exemplare.Columns[0],ListSortDirection.Ascending);
 
         }
 
