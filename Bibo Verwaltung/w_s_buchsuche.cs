@@ -225,10 +225,11 @@ namespace Bibo_Verwaltung
 
         private void Ausleihvorgang(object sender, EventArgs e)
         {
-            if(leihListe.Count != 0)
+            if (leihListe.Count != 0)
             {
                 Form Ausleihe = new w_s_ausleihe(currentUser,leihListe.ToArray());
                 Ausleihe.ShowDialog(this);
+                lb_liste.Text = "";
                 leihListe.Clear();
                 rueckgabelisteToolStripMenuItem.Enabled = true;
                 if (!backgroundWorker1.IsBusy)
@@ -637,7 +638,15 @@ namespace Bibo_Verwaltung
                     gb_liste.Enabled = false;
                     metroProgressSpinner1.Visible = true;
                     metroProgressSpinner2.Visible = true;
-                    gv_buchsuche.DataSource = null;
+                    try
+                    {
+                        //gv_buchsuche.DataSource = null;
+
+                    }
+                    catch(Exception ex)
+                    {
+
+                    }
                     cb_Autor.DataSource = null;
                     cb_Genre.DataSource = null;
                     cb_Verlag.DataSource = null;
@@ -672,6 +681,7 @@ namespace Bibo_Verwaltung
                 BeginInvoke((Action)delegate
                 {
                     gv_buchsuche.DataSource = dtBuSu;
+                    //gv_buchsuche.Sort(gv_buchsuche.Columns[1], ListSortDirection.Descending);
                     gv_buchsuche.Columns["Kunden ID"].Visible = false;
                     gv_buchsuche.Columns["Leihnummer"].Visible = false;
                     gv_buchsuche.Columns["Kunden ID"].Visible = false;
@@ -739,7 +749,7 @@ namespace Bibo_Verwaltung
                     gb_liste.Enabled = true;
                 });
             }
-            catch {
+            catch(Exception ex) {
                 try
                 {
                     BeginInvoke((Action)delegate
@@ -799,6 +809,7 @@ namespace Bibo_Verwaltung
             {
                 Form Rueckgabe = new w_s_rueckgabe(currentUser, rueckListe.ToArray());
                 Rueckgabe.ShowDialog(this);
+                lb_liste.Text = "";
                 rueckListe.Clear();
                 ausleihlisteToolStripMenuItem.Enabled = true;
                 if (!backgroundWorker1.IsBusy)

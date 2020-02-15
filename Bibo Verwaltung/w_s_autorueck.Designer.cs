@@ -62,7 +62,8 @@
             // 
             // lb_Klasse
             // 
-            this.lb_Klasse.Location = new System.Drawing.Point(204, 82);
+            this.lb_Klasse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_Klasse.Location = new System.Drawing.Point(564, 82);
             this.lb_Klasse.Name = "lb_Klasse";
             this.lb_Klasse.Size = new System.Drawing.Size(50, 24);
             this.lb_Klasse.Style = MetroFramework.MetroColorStyle.Yellow;
@@ -73,7 +74,8 @@
             // 
             // lb_ExID
             // 
-            this.lb_ExID.Location = new System.Drawing.Point(610, 137);
+            this.lb_ExID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_ExID.Location = new System.Drawing.Point(636, 137);
             this.lb_ExID.Name = "lb_ExID";
             this.lb_ExID.Size = new System.Drawing.Size(94, 24);
             this.lb_ExID.Style = MetroFramework.MetroColorStyle.Yellow;
@@ -83,6 +85,7 @@
             // 
             // tb_ExemplarID
             // 
+            this.tb_ExemplarID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
             // 
@@ -98,7 +101,7 @@
             this.tb_ExemplarID.Enabled = false;
             this.tb_ExemplarID.ForeColor = System.Drawing.SystemColors.GrayText;
             this.tb_ExemplarID.Lines = new string[0];
-            this.tb_ExemplarID.Location = new System.Drawing.Point(710, 137);
+            this.tb_ExemplarID.Location = new System.Drawing.Point(802, 137);
             this.tb_ExemplarID.MaxLength = 32767;
             this.tb_ExemplarID.Name = "tb_ExemplarID";
             this.tb_ExemplarID.PasswordChar = '\0';
@@ -119,12 +122,13 @@
             // 
             // bt_back
             // 
+            this.bt_back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_back.DisplayFocus = true;
             this.bt_back.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_back.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_back.Location = new System.Drawing.Point(23, 479);
+            this.bt_back.Location = new System.Drawing.Point(23, 453);
             this.bt_back.Name = "bt_back";
-            this.bt_back.Size = new System.Drawing.Size(120, 23);
+            this.bt_back.Size = new System.Drawing.Size(120, 24);
             this.bt_back.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_back.TabIndex = 31;
             this.bt_back.Text = "vorheriger Schüler";
@@ -133,13 +137,14 @@
             // 
             // bt_abschließen
             // 
+            this.bt_abschließen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_abschließen.DisplayFocus = true;
             this.bt_abschließen.Enabled = false;
             this.bt_abschließen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_abschließen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_abschließen.Location = new System.Drawing.Point(710, 479);
+            this.bt_abschließen.Location = new System.Drawing.Point(802, 453);
             this.bt_abschließen.Name = "bt_abschließen";
-            this.bt_abschließen.Size = new System.Drawing.Size(175, 23);
+            this.bt_abschließen.Size = new System.Drawing.Size(175, 24);
             this.bt_abschließen.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_abschließen.TabIndex = 35;
             this.bt_abschließen.Text = "Rückgabevorgang ausführen";
@@ -148,10 +153,11 @@
             // 
             // bt_bestaetigen
             // 
+            this.bt_bestaetigen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_bestaetigen.DisplayFocus = true;
             this.bt_bestaetigen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_bestaetigen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_bestaetigen.Location = new System.Drawing.Point(441, 82);
+            this.bt_bestaetigen.Location = new System.Drawing.Point(833, 82);
             this.bt_bestaetigen.Name = "bt_bestaetigen";
             this.bt_bestaetigen.Size = new System.Drawing.Size(144, 24);
             this.bt_bestaetigen.Style = MetroFramework.MetroColorStyle.Yellow;
@@ -162,12 +168,13 @@
             // 
             // bt_next
             // 
+            this.bt_next.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_next.DisplayFocus = true;
             this.bt_next.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_next.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_next.Location = new System.Drawing.Point(193, 479);
+            this.bt_next.Location = new System.Drawing.Point(203, 453);
             this.bt_next.Name = "bt_next";
-            this.bt_next.Size = new System.Drawing.Size(120, 23);
+            this.bt_next.Size = new System.Drawing.Size(120, 24);
             this.bt_next.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_next.TabIndex = 34;
             this.bt_next.Text = "nächster Schüler";
@@ -176,8 +183,9 @@
             // 
             // lb_selected
             // 
+            this.lb_selected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_selected.AutoSize = true;
-            this.lb_selected.Location = new System.Drawing.Point(610, 173);
+            this.lb_selected.Location = new System.Drawing.Point(636, 173);
             this.lb_selected.Name = "lb_selected";
             this.lb_selected.Size = new System.Drawing.Size(128, 19);
             this.lb_selected.Style = MetroFramework.MetroColorStyle.Yellow;
@@ -220,6 +228,8 @@
             this.gv_selected.AllowUserToDeleteRows = false;
             this.gv_selected.AllowUserToResizeColumns = false;
             this.gv_selected.AllowUserToResizeRows = false;
+            this.gv_selected.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gv_selected.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.gv_selected.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_selected.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -246,7 +256,7 @@
             this.gv_selected.EnableHeadersVisualStyles = false;
             this.gv_selected.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_selected.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_selected.Location = new System.Drawing.Point(610, 195);
+            this.gv_selected.Location = new System.Drawing.Point(636, 195);
             this.gv_selected.MultiSelect = false;
             this.gv_selected.Name = "gv_selected";
             this.gv_selected.ReadOnly = true;
@@ -266,7 +276,7 @@
             this.gv_selected.ShowCellToolTips = false;
             this.gv_selected.ShowEditingIcon = false;
             this.gv_selected.ShowRowErrors = false;
-            this.gv_selected.Size = new System.Drawing.Size(275, 278);
+            this.gv_selected.Size = new System.Drawing.Size(341, 252);
             this.gv_selected.Style = MetroFramework.MetroColorStyle.Yellow;
             this.gv_selected.TabIndex = 33;
             // 
@@ -275,6 +285,9 @@
             this.gv_suggested.AllowUserToAddRows = false;
             this.gv_suggested.AllowUserToDeleteRows = false;
             this.gv_suggested.AllowUserToResizeRows = false;
+            this.gv_suggested.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gv_suggested.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.gv_suggested.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_suggested.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -321,7 +334,7 @@
             this.gv_suggested.ShowCellToolTips = false;
             this.gv_suggested.ShowEditingIcon = false;
             this.gv_suggested.ShowRowErrors = false;
-            this.gv_suggested.Size = new System.Drawing.Size(275, 336);
+            this.gv_suggested.Size = new System.Drawing.Size(301, 310);
             this.gv_suggested.Style = MetroFramework.MetroColorStyle.Yellow;
             this.gv_suggested.TabIndex = 32;
             // 
@@ -331,6 +344,8 @@
             this.gv_Schueler.AllowUserToDeleteRows = false;
             this.gv_Schueler.AllowUserToResizeColumns = false;
             this.gv_Schueler.AllowUserToResizeRows = false;
+            this.gv_Schueler.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.gv_Schueler.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_Schueler.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_Schueler.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -378,14 +393,15 @@
             this.gv_Schueler.ShowCellToolTips = false;
             this.gv_Schueler.ShowEditingIcon = false;
             this.gv_Schueler.ShowRowErrors = false;
-            this.gv_Schueler.Size = new System.Drawing.Size(300, 336);
+            this.gv_Schueler.Size = new System.Drawing.Size(300, 310);
             this.gv_Schueler.Style = MetroFramework.MetroColorStyle.Yellow;
             this.gv_Schueler.TabIndex = 30;
             this.gv_Schueler.CurrentCellChanged += new System.EventHandler(this.Gv_Schueler_CurrentCellChanged);
             // 
             // metroButton1
             // 
-            this.metroButton1.Location = new System.Drawing.Point(441, 479);
+            this.metroButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroButton1.Location = new System.Drawing.Point(533, 454);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(75, 23);
             this.metroButton1.TabIndex = 42;
@@ -395,6 +411,7 @@
             // 
             // a_cb_Klasse
             // 
+            this.a_cb_Klasse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.a_cb_Klasse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.a_cb_Klasse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.a_cb_Klasse.BorderColor = System.Drawing.Color.Gray;
@@ -405,9 +422,9 @@
             this.a_cb_Klasse.FormattingEnabled = true;
             this.a_cb_Klasse.HighlightColor = System.Drawing.Color.Gold;
             this.a_cb_Klasse.ItemHeight = 18;
-            this.a_cb_Klasse.Location = new System.Drawing.Point(260, 82);
+            this.a_cb_Klasse.Location = new System.Drawing.Point(636, 82);
             this.a_cb_Klasse.Name = "a_cb_Klasse";
-            this.a_cb_Klasse.Size = new System.Drawing.Size(175, 24);
+            this.a_cb_Klasse.Size = new System.Drawing.Size(191, 24);
             this.a_cb_Klasse.Sorted = true;
             this.a_cb_Klasse.TabIndex = 27;
             this.a_cb_Klasse.Visible = false;
@@ -438,7 +455,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(908, 525);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(1000, 500);
             this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.a_cb_Klasse);
             this.Controls.Add(this.lb_Klasse);
@@ -457,10 +475,8 @@
             this.Controls.Add(this.gv_suggested);
             this.Controls.Add(this.gv_Schueler);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1000, 500);
             this.Name = "w_s_autorueck";
-            this.Resizable = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Yellow;

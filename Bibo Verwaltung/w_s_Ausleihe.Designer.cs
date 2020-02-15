@@ -57,50 +57,58 @@
             this.bt_Abbrechen = new MetroFramework.Controls.MetroButton();
             this.gb_Exemplar = new MetroFramework.Controls.MetroPanel();
             this.llb_gesListe = new MetroFramework.Controls.MetroLink();
+            this.picBox_Buchcover = new System.Windows.Forms.PictureBox();
             this.lb_Exemplar = new MetroFramework.Controls.MetroLabel();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.lb_Kunden = new MetroFramework.Controls.MetroLabel();
-            this.picBox_Buchcover = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
             this.gb_Exemplar.SuspendLayout();
-            this.metroPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).BeginInit();
+            this.metroPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dp_RueckDatum
             // 
+            this.dp_RueckDatum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dp_RueckDatum.CustomFormat = " dd : MMMM : yyyy";
             this.dp_RueckDatum.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dp_RueckDatum.Location = new System.Drawing.Point(116, 118);
             this.dp_RueckDatum.MinimumSize = new System.Drawing.Size(0, 29);
             this.dp_RueckDatum.Name = "dp_RueckDatum";
-            this.dp_RueckDatum.Size = new System.Drawing.Size(179, 29);
+            this.dp_RueckDatum.Size = new System.Drawing.Size(164, 29);
             this.dp_RueckDatum.Style = MetroFramework.MetroColorStyle.Green;
             this.dp_RueckDatum.TabIndex = 2;
             // 
             // lb_BuchStatus
             // 
+            this.lb_BuchStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_BuchStatus.Enabled = false;
             this.lb_BuchStatus.Location = new System.Drawing.Point(116, 93);
             this.lb_BuchStatus.Margin = new System.Windows.Forms.Padding(3);
             this.lb_BuchStatus.Name = "lb_BuchStatus";
-            this.lb_BuchStatus.Size = new System.Drawing.Size(179, 24);
+            this.lb_BuchStatus.Size = new System.Drawing.Size(164, 24);
             this.lb_BuchStatus.TabIndex = 40;
             this.lb_BuchStatus.Text = "nicht verfügbar";
             this.lb_BuchStatus.UseCustomForeColor = true;
             // 
             // lb_BuchZustand
             // 
+            this.lb_BuchZustand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_BuchZustand.Enabled = false;
             this.lb_BuchZustand.Location = new System.Drawing.Point(115, 63);
             this.lb_BuchZustand.Margin = new System.Windows.Forms.Padding(3);
             this.lb_BuchZustand.Name = "lb_BuchZustand";
-            this.lb_BuchZustand.Size = new System.Drawing.Size(180, 24);
+            this.lb_BuchZustand.Size = new System.Drawing.Size(165, 24);
             this.lb_BuchZustand.TabIndex = 38;
             this.lb_BuchZustand.Text = "nicht verfügbar";
             // 
             // llb_BuchTitel
             // 
+            this.llb_BuchTitel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.llb_BuchTitel.AutoSize = true;
             this.llb_BuchTitel.Enabled = false;
             this.llb_BuchTitel.ForeColor = System.Drawing.SystemColors.Highlight;
@@ -116,9 +124,10 @@
             // 
             // bt_AddBuch
             // 
+            this.bt_AddBuch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_AddBuch.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_AddBuch.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_AddBuch.Location = new System.Drawing.Point(301, 3);
+            this.bt_AddBuch.Location = new System.Drawing.Point(286, 3);
             this.bt_AddBuch.Name = "bt_AddBuch";
             this.bt_AddBuch.Size = new System.Drawing.Size(24, 24);
             this.bt_AddBuch.Style = MetroFramework.MetroColorStyle.Green;
@@ -129,12 +138,14 @@
             // 
             // leihList_Slider
             // 
+            this.leihList_Slider.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.leihList_Slider.Enabled = false;
             this.leihList_Slider.LargeChange = 1;
             this.leihList_Slider.Location = new System.Drawing.Point(143, 153);
             this.leihList_Slider.Maximum = 0;
             this.leihList_Slider.Name = "leihList_Slider";
-            this.leihList_Slider.Size = new System.Drawing.Size(125, 24);
+            this.leihList_Slider.Size = new System.Drawing.Size(110, 24);
             this.leihList_Slider.TabIndex = 3;
             this.leihList_Slider.TabStop = true;
             this.leihList_Slider.Scroll += new System.Windows.Forms.ScrollEventHandler(this.leihList_Slider_Scroll);
@@ -142,6 +153,7 @@
             // 
             // tb_listBis
             // 
+            this.tb_listBis.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tb_listBis.Cursor = System.Windows.Forms.Cursors.Default;
             // 
             // 
@@ -157,7 +169,7 @@
             this.tb_listBis.CustomButton.Visible = false;
             this.tb_listBis.Lines = new string[] {
         "-"};
-            this.tb_listBis.Location = new System.Drawing.Point(271, 153);
+            this.tb_listBis.Location = new System.Drawing.Point(256, 153);
             this.tb_listBis.MaxLength = 32767;
             this.tb_listBis.Name = "tb_listBis";
             this.tb_listBis.PasswordChar = '\0';
@@ -217,11 +229,13 @@
             // 
             // tb_BuchCode
             // 
+            this.tb_BuchCode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
             // 
             this.tb_BuchCode.CustomButton.Image = null;
-            this.tb_BuchCode.CustomButton.Location = new System.Drawing.Point(158, 2);
+            this.tb_BuchCode.CustomButton.Location = new System.Drawing.Point(143, 2);
             this.tb_BuchCode.CustomButton.Name = "";
             this.tb_BuchCode.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.tb_BuchCode.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -239,7 +253,7 @@
             this.tb_BuchCode.SelectionLength = 0;
             this.tb_BuchCode.SelectionStart = 0;
             this.tb_BuchCode.ShortcutsEnabled = true;
-            this.tb_BuchCode.Size = new System.Drawing.Size(180, 24);
+            this.tb_BuchCode.Size = new System.Drawing.Size(165, 24);
             this.tb_BuchCode.Style = MetroFramework.MetroColorStyle.Green;
             this.tb_BuchCode.TabIndex = 0;
             this.tb_BuchCode.UseSelectable = true;
@@ -306,11 +320,12 @@
             // 
             // bt_NeuKunde
             // 
+            this.bt_NeuKunde.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_NeuKunde.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_NeuKunde.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_NeuKunde.Location = new System.Drawing.Point(391, 3);
+            this.bt_NeuKunde.Location = new System.Drawing.Point(316, 3);
             this.bt_NeuKunde.Name = "bt_NeuKunde";
-            this.bt_NeuKunde.Size = new System.Drawing.Size(175, 24);
+            this.bt_NeuKunde.Size = new System.Drawing.Size(235, 24);
             this.bt_NeuKunde.Style = MetroFramework.MetroColorStyle.Green;
             this.bt_NeuKunde.TabIndex = 6;
             this.bt_NeuKunde.Text = "Neuen Kunden hinzufügen";
@@ -323,7 +338,10 @@
             this.gv_Kunde.AllowUserToDeleteRows = false;
             this.gv_Kunde.AllowUserToResizeColumns = false;
             this.gv_Kunde.AllowUserToResizeRows = false;
-            this.gv_Kunde.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_Kunde.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gv_Kunde.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gv_Kunde.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_Kunde.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv_Kunde.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -367,12 +385,13 @@
             this.gv_Kunde.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_Kunde.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv_Kunde.ShowEditingIcon = false;
-            this.gv_Kunde.Size = new System.Drawing.Size(563, 149);
+            this.gv_Kunde.Size = new System.Drawing.Size(548, 164);
             this.gv_Kunde.Style = MetroFramework.MetroColorStyle.Green;
             this.gv_Kunde.TabIndex = 5;
             // 
             // tb_NName
             // 
+            this.tb_NName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             // 
             // 
             // 
@@ -387,7 +406,7 @@
             this.tb_NName.CustomButton.Visible = false;
             this.tb_NName.ForeColor = System.Drawing.SystemColors.GrayText;
             this.tb_NName.Lines = new string[0];
-            this.tb_NName.Location = new System.Drawing.Point(242, 188);
+            this.tb_NName.Location = new System.Drawing.Point(242, 203);
             this.tb_NName.MaxLength = 32767;
             this.tb_NName.Name = "tb_NName";
             this.tb_NName.PasswordChar = '\0';
@@ -408,6 +427,7 @@
             // 
             // tb_VName
             // 
+            this.tb_VName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             // 
             // 
             // 
@@ -422,7 +442,7 @@
             this.tb_VName.CustomButton.Visible = false;
             this.tb_VName.ForeColor = System.Drawing.SystemColors.GrayText;
             this.tb_VName.Lines = new string[0];
-            this.tb_VName.Location = new System.Drawing.Point(86, 188);
+            this.tb_VName.Location = new System.Drawing.Point(86, 203);
             this.tb_VName.MaxLength = 32767;
             this.tb_VName.Name = "tb_VName";
             this.tb_VName.PasswordChar = '\0';
@@ -443,7 +463,8 @@
             // 
             // lb_Suche
             // 
-            this.lb_Suche.Location = new System.Drawing.Point(3, 188);
+            this.lb_Suche.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lb_Suche.Location = new System.Drawing.Point(3, 203);
             this.lb_Suche.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Suche.Name = "lb_Suche";
             this.lb_Suche.Size = new System.Drawing.Size(77, 24);
@@ -462,9 +483,10 @@
             // 
             // bt_Submit
             // 
+            this.bt_Submit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_Submit.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Submit.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_Submit.Location = new System.Drawing.Point(23, 538);
+            this.bt_Submit.Location = new System.Drawing.Point(23, 553);
             this.bt_Submit.Name = "bt_Submit";
             this.bt_Submit.Size = new System.Drawing.Size(175, 24);
             this.bt_Submit.Style = MetroFramework.MetroColorStyle.Green;
@@ -475,12 +497,13 @@
             // 
             // bt_Abbrechen
             // 
+            this.bt_Abbrechen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_Abbrechen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.bt_Abbrechen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Abbrechen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_Abbrechen.Location = new System.Drawing.Point(492, 538);
+            this.bt_Abbrechen.Location = new System.Drawing.Point(402, 553);
             this.bt_Abbrechen.Name = "bt_Abbrechen";
-            this.bt_Abbrechen.Size = new System.Drawing.Size(100, 24);
+            this.bt_Abbrechen.Size = new System.Drawing.Size(175, 24);
             this.bt_Abbrechen.Style = MetroFramework.MetroColorStyle.Green;
             this.bt_Abbrechen.TabIndex = 10;
             this.bt_Abbrechen.Text = "Schließen";
@@ -488,6 +511,8 @@
             // 
             // gb_Exemplar
             // 
+            this.gb_Exemplar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gb_Exemplar.Controls.Add(this.llb_gesListe);
             this.gb_Exemplar.Controls.Add(this.picBox_Buchcover);
             this.gb_Exemplar.Controls.Add(this.dp_RueckDatum);
@@ -510,7 +535,7 @@
             this.gb_Exemplar.HorizontalScrollbarSize = 10;
             this.gb_Exemplar.Location = new System.Drawing.Point(23, 82);
             this.gb_Exemplar.Name = "gb_Exemplar";
-            this.gb_Exemplar.Size = new System.Drawing.Size(569, 207);
+            this.gb_Exemplar.Size = new System.Drawing.Size(554, 207);
             this.gb_Exemplar.TabIndex = 49;
             this.gb_Exemplar.VerticalScrollbarBarColor = true;
             this.gb_Exemplar.VerticalScrollbarHighlightOnWheel = false;
@@ -518,13 +543,25 @@
             // 
             // llb_gesListe
             // 
+            this.llb_gesListe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.llb_gesListe.Location = new System.Drawing.Point(116, 180);
             this.llb_gesListe.Name = "llb_gesListe";
-            this.llb_gesListe.Size = new System.Drawing.Size(179, 24);
+            this.llb_gesListe.Size = new System.Drawing.Size(164, 24);
             this.llb_gesListe.TabIndex = 43;
             this.llb_gesListe.Text = "gesamte Ausleihliste anzeigen";
             this.llb_gesListe.UseSelectable = true;
             this.llb_gesListe.Click += new System.EventHandler(this.llb_gesListe_Click);
+            // 
+            // picBox_Buchcover
+            // 
+            this.picBox_Buchcover.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picBox_Buchcover.Location = new System.Drawing.Point(316, 3);
+            this.picBox_Buchcover.Name = "picBox_Buchcover";
+            this.picBox_Buchcover.Size = new System.Drawing.Size(235, 201);
+            this.picBox_Buchcover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBox_Buchcover.TabIndex = 31;
+            this.picBox_Buchcover.TabStop = false;
             // 
             // lb_Exemplar
             // 
@@ -538,6 +575,9 @@
             // 
             // metroPanel2
             // 
+            this.metroPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.metroPanel2.Controls.Add(this.tb_NName);
             this.metroPanel2.Controls.Add(this.lb_Suche);
             this.metroPanel2.Controls.Add(this.tb_VName);
@@ -549,7 +589,7 @@
             this.metroPanel2.HorizontalScrollbarSize = 10;
             this.metroPanel2.Location = new System.Drawing.Point(23, 317);
             this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(569, 215);
+            this.metroPanel2.Size = new System.Drawing.Size(554, 230);
             this.metroPanel2.TabIndex = 51;
             this.metroPanel2.VerticalScrollbarBarColor = true;
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
@@ -566,20 +606,12 @@
             this.lb_Kunden.TabIndex = 52;
             this.lb_Kunden.Text = "Kunden-Informationen:";
             // 
-            // picBox_Buchcover
-            // 
-            this.picBox_Buchcover.Location = new System.Drawing.Point(331, 3);
-            this.picBox_Buchcover.Name = "picBox_Buchcover";
-            this.picBox_Buchcover.Size = new System.Drawing.Size(235, 201);
-            this.picBox_Buchcover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBox_Buchcover.TabIndex = 31;
-            this.picBox_Buchcover.TabStop = false;
-            // 
             // w_s_ausleihe
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.bt_Abbrechen;
-            this.ClientSize = new System.Drawing.Size(615, 585);
+            this.ClientSize = new System.Drawing.Size(600, 600);
             this.Controls.Add(this.lb_Kunden);
             this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.lb_Exemplar);
@@ -589,9 +621,8 @@
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(600, 600);
             this.Name = "w_s_ausleihe";
-            this.Resizable = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Green;
@@ -600,9 +631,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).EndInit();
             this.gb_Exemplar.ResumeLayout(false);
             this.gb_Exemplar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).EndInit();
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

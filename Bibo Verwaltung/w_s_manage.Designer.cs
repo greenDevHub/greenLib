@@ -49,11 +49,11 @@
             // 
             this.mbt_Uebernehmen.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.mbt_Uebernehmen.DisplayFocus = true;
-            this.mbt_Uebernehmen.Dock = System.Windows.Forms.DockStyle.Top;
+            this.mbt_Uebernehmen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mbt_Uebernehmen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mbt_Uebernehmen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_Uebernehmen.Location = new System.Drawing.Point(3, 586);
-            this.mbt_Uebernehmen.MaximumSize = new System.Drawing.Size(200, 24);
+            this.mbt_Uebernehmen.MaximumSize = new System.Drawing.Size(0, 24);
             this.mbt_Uebernehmen.MinimumSize = new System.Drawing.Size(50, 24);
             this.mbt_Uebernehmen.Name = "mbt_Uebernehmen";
             this.mbt_Uebernehmen.Size = new System.Drawing.Size(107, 24);
@@ -69,7 +69,7 @@
             this.mbt_Suchen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mbt_Suchen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_Suchen.Location = new System.Drawing.Point(3, 551);
-            this.mbt_Suchen.MaximumSize = new System.Drawing.Size(200, 24);
+            this.mbt_Suchen.MaximumSize = new System.Drawing.Size(0, 24);
             this.mbt_Suchen.MinimumSize = new System.Drawing.Size(50, 24);
             this.mbt_Suchen.Name = "mbt_Suchen";
             this.mbt_Suchen.Size = new System.Drawing.Size(107, 24);
@@ -81,11 +81,11 @@
             // 
             // lb_Suche
             // 
+            this.lb_Suche.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Suche.AutoSize = true;
             this.tLP_Faecher.SetColumnSpan(this.lb_Suche, 3);
-            this.lb_Suche.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lb_Suche.Location = new System.Drawing.Point(3, 0);
-            this.lb_Suche.MaximumSize = new System.Drawing.Size(400, 24);
             this.lb_Suche.MinimumSize = new System.Drawing.Size(280, 24);
             this.lb_Suche.Name = "lb_Suche";
             this.lb_Suche.Size = new System.Drawing.Size(336, 24);
@@ -155,7 +155,7 @@
             this.mbt_Import.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mbt_Import.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_Import.Location = new System.Drawing.Point(116, 551);
-            this.mbt_Import.MaximumSize = new System.Drawing.Size(200, 24);
+            this.mbt_Import.MaximumSize = new System.Drawing.Size(0, 24);
             this.mbt_Import.MinimumSize = new System.Drawing.Size(50, 24);
             this.mbt_Import.Name = "mbt_Import";
             this.mbt_Import.Size = new System.Drawing.Size(108, 24);
@@ -167,6 +167,9 @@
             // 
             // tLP_Faecher
             // 
+            this.tLP_Faecher.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tLP_Faecher.ColumnCount = 3;
             this.tLP_Faecher.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tLP_Faecher.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
@@ -193,6 +196,8 @@
             // 
             // tb_Suchen
             // 
+            this.tb_Suchen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tLP_Faecher.SetColumnSpan(this.tb_Suchen, 3);
             // 
             // 
@@ -206,11 +211,9 @@
             this.tb_Suchen.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.tb_Suchen.CustomButton.UseSelectable = true;
             this.tb_Suchen.CustomButton.Visible = false;
-            this.tb_Suchen.Dock = System.Windows.Forms.DockStyle.Top;
             this.tb_Suchen.Enabled = false;
             this.tb_Suchen.Lines = new string[0];
             this.tb_Suchen.Location = new System.Drawing.Point(3, 24);
-            this.tb_Suchen.MaximumSize = new System.Drawing.Size(400, 24);
             this.tb_Suchen.MaxLength = 32767;
             this.tb_Suchen.MinimumSize = new System.Drawing.Size(200, 24);
             this.tb_Suchen.Name = "tb_Suchen";
@@ -236,7 +239,7 @@
             this.mtb_Export.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mtb_Export.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mtb_Export.Location = new System.Drawing.Point(230, 551);
-            this.mtb_Export.MaximumSize = new System.Drawing.Size(200, 24);
+            this.mtb_Export.MaximumSize = new System.Drawing.Size(0, 24);
             this.mtb_Export.MinimumSize = new System.Drawing.Size(50, 24);
             this.mtb_Export.Name = "mtb_Export";
             this.mtb_Export.Size = new System.Drawing.Size(109, 24);
@@ -250,12 +253,13 @@
             // 
             this.mbt_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.mbt_Cancel.DisplayFocus = true;
-            this.mbt_Cancel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.mbt_Cancel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mbt_Cancel.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mbt_Cancel.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_Cancel.Location = new System.Drawing.Point(230, 586);
+            this.mbt_Cancel.MaximumSize = new System.Drawing.Size(0, 24);
             this.mbt_Cancel.Name = "mbt_Cancel";
-            this.mbt_Cancel.Size = new System.Drawing.Size(109, 23);
+            this.mbt_Cancel.Size = new System.Drawing.Size(109, 24);
             this.mbt_Cancel.TabIndex = 7;
             this.mbt_Cancel.Text = "Abbrechen";
             this.mbt_Cancel.UseSelectable = true;
@@ -264,14 +268,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(384, 700);
             this.Controls.Add(this.tLP_Faecher);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(384, 700);
             this.Movable = false;
             this.Name = "w_s_manage";
-            this.Resizable = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "-";

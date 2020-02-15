@@ -63,7 +63,10 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
             this.gv_Klassen.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.gv_Klassen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gv_Klassen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gv_Klassen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gv_Klassen.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_Klassen.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv_Klassen.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -125,7 +128,7 @@
             this.gv_Klassen.ShowCellToolTips = false;
             this.gv_Klassen.ShowEditingIcon = false;
             this.gv_Klassen.ShowRowErrors = false;
-            this.gv_Klassen.Size = new System.Drawing.Size(220, 360);
+            this.gv_Klassen.Size = new System.Drawing.Size(595, 360);
             this.gv_Klassen.Style = MetroFramework.MetroColorStyle.Orange;
             this.gv_Klassen.TabIndex = 77;
             this.gv_Klassen.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Klassen_CellDoubleClick);
@@ -136,6 +139,8 @@
             this.gv_Klassenstufe.AllowUserToDeleteRows = false;
             this.gv_Klassenstufe.AllowUserToResizeColumns = false;
             this.gv_Klassenstufe.AllowUserToResizeRows = false;
+            this.gv_Klassenstufe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.gv_Klassenstufe.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_Klassenstufe.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_Klassenstufe.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -197,16 +202,18 @@
             this.gv_Klassenstufe.Size = new System.Drawing.Size(270, 360);
             this.gv_Klassenstufe.Style = MetroFramework.MetroColorStyle.Orange;
             this.gv_Klassenstufe.TabIndex = 76;
+            this.gv_Klassenstufe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Klassenstufe_CellDoubleClick);
             this.gv_Klassenstufe.SelectionChanged += new System.EventHandler(this.gv_Klassenstufe_SelectionChanged);
             // 
             // bt_back
             // 
+            this.bt_back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_back.Enabled = false;
             this.bt_back.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_back.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_back.Location = new System.Drawing.Point(142, 453);
+            this.bt_back.Location = new System.Drawing.Point(302, 453);
             this.bt_back.Name = "bt_back";
-            this.bt_back.Size = new System.Drawing.Size(89, 24);
+            this.bt_back.Size = new System.Drawing.Size(175, 24);
             this.bt_back.Style = MetroFramework.MetroColorStyle.Orange;
             this.bt_back.TabIndex = 82;
             this.bt_back.Text = "Zurück";
@@ -217,7 +224,7 @@
             // 
             this.lb_Klassen.AutoSize = true;
             this.lb_Klassen.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lb_Klassen.Location = new System.Drawing.Point(302, 60);
+            this.lb_Klassen.Location = new System.Drawing.Point(307, 60);
             this.lb_Klassen.Name = "lb_Klassen";
             this.lb_Klassen.Size = new System.Drawing.Size(138, 19);
             this.lb_Klassen.Style = MetroFramework.MetroColorStyle.Orange;
@@ -228,7 +235,7 @@
             // 
             this.lb_Klassenstufe.AutoSize = true;
             this.lb_Klassenstufe.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lb_Klassenstufe.Location = new System.Drawing.Point(23, 60);
+            this.lb_Klassenstufe.Location = new System.Drawing.Point(28, 60);
             this.lb_Klassenstufe.Name = "lb_Klassenstufe";
             this.lb_Klassenstufe.Size = new System.Drawing.Size(95, 19);
             this.lb_Klassenstufe.Style = MetroFramework.MetroColorStyle.Orange;
@@ -237,12 +244,13 @@
             // 
             // bt_Abbrechen
             // 
+            this.bt_Abbrechen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_Abbrechen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.bt_Abbrechen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Abbrechen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_Abbrechen.Location = new System.Drawing.Point(422, 453);
+            this.bt_Abbrechen.Location = new System.Drawing.Point(722, 453);
             this.bt_Abbrechen.Name = "bt_Abbrechen";
-            this.bt_Abbrechen.Size = new System.Drawing.Size(100, 24);
+            this.bt_Abbrechen.Size = new System.Drawing.Size(175, 24);
             this.bt_Abbrechen.Style = MetroFramework.MetroColorStyle.Orange;
             this.bt_Abbrechen.TabIndex = 79;
             this.bt_Abbrechen.Text = "Schließen";
@@ -251,11 +259,12 @@
             // 
             // bt_Bearbeiten
             // 
+            this.bt_Bearbeiten.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_Bearbeiten.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Bearbeiten.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_Bearbeiten.Location = new System.Drawing.Point(237, 453);
+            this.bt_Bearbeiten.Location = new System.Drawing.Point(483, 453);
             this.bt_Bearbeiten.Name = "bt_Bearbeiten";
-            this.bt_Bearbeiten.Size = new System.Drawing.Size(170, 24);
+            this.bt_Bearbeiten.Size = new System.Drawing.Size(175, 24);
             this.bt_Bearbeiten.Style = MetroFramework.MetroColorStyle.Orange;
             this.bt_Bearbeiten.TabIndex = 78;
             this.bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
@@ -264,15 +273,16 @@
             // 
             // mbt_ImEx
             // 
+            this.mbt_ImEx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.mbt_ImEx.Enabled = false;
             this.mbt_ImEx.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mbt_ImEx.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_ImEx.Location = new System.Drawing.Point(26, 453);
             this.mbt_ImEx.Name = "mbt_ImEx";
-            this.mbt_ImEx.Size = new System.Drawing.Size(100, 24);
+            this.mbt_ImEx.Size = new System.Drawing.Size(175, 24);
             this.mbt_ImEx.Style = MetroFramework.MetroColorStyle.Orange;
             this.mbt_ImEx.TabIndex = 83;
-            this.mbt_ImEx.Text = "Import/Export";
+            this.mbt_ImEx.Text = "Daten Import/Export";
             this.mbt_ImEx.UseSelectable = true;
             this.mbt_ImEx.Click += new System.EventHandler(this.mbt_ImEx_Click);
             // 
@@ -280,7 +290,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(545, 500);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(920, 500);
             this.Controls.Add(this.mbt_ImEx);
             this.Controls.Add(this.gv_Klassen);
             this.Controls.Add(this.gv_Klassenstufe);
@@ -291,11 +302,8 @@
             this.Controls.Add(this.bt_Bearbeiten);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(1);
-            this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(230, 466);
+            this.MinimumSize = new System.Drawing.Size(862, 500);
             this.Name = "w_s_klasse_stufe";
-            this.Padding = new System.Windows.Forms.Padding(15, 60, 15, 16);
-            this.Resizable = false;
             this.ShowInTaskbar = false;
             this.Style = MetroFramework.MetroColorStyle.Orange;
             this.Text = "Zuordnung der Klassen zu einer Klassenstufe";

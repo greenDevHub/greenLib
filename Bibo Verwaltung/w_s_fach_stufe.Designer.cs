@@ -63,7 +63,10 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
             this.gv_Faecher.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.gv_Faecher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_Faecher.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gv_Faecher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gv_Faecher.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_Faecher.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv_Faecher.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -125,13 +128,14 @@
             this.gv_Faecher.ShowCellToolTips = false;
             this.gv_Faecher.ShowEditingIcon = false;
             this.gv_Faecher.ShowRowErrors = false;
-            this.gv_Faecher.Size = new System.Drawing.Size(607, 360);
+            this.gv_Faecher.Size = new System.Drawing.Size(595, 360);
             this.gv_Faecher.Style = MetroFramework.MetroColorStyle.Orange;
             this.gv_Faecher.TabIndex = 1;
             this.gv_Faecher.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Faecher_CellDoubleClick);
             // 
             // bt_Bearbeiten
             // 
+            this.bt_Bearbeiten.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_Bearbeiten.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Bearbeiten.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.bt_Bearbeiten.Location = new System.Drawing.Point(483, 453);
@@ -145,10 +149,11 @@
             // 
             // btAbbrechen
             // 
+            this.btAbbrechen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btAbbrechen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btAbbrechen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.btAbbrechen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.btAbbrechen.Location = new System.Drawing.Point(734, 453);
+            this.btAbbrechen.Location = new System.Drawing.Point(722, 453);
             this.btAbbrechen.Name = "btAbbrechen";
             this.btAbbrechen.Size = new System.Drawing.Size(175, 24);
             this.btAbbrechen.Style = MetroFramework.MetroColorStyle.Orange;
@@ -185,6 +190,8 @@
             this.gv_Klassenstufe.AllowUserToDeleteRows = false;
             this.gv_Klassenstufe.AllowUserToResizeColumns = false;
             this.gv_Klassenstufe.AllowUserToResizeRows = false;
+            this.gv_Klassenstufe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.gv_Klassenstufe.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_Klassenstufe.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_Klassenstufe.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -246,10 +253,12 @@
             this.gv_Klassenstufe.Size = new System.Drawing.Size(270, 360);
             this.gv_Klassenstufe.Style = MetroFramework.MetroColorStyle.Orange;
             this.gv_Klassenstufe.TabIndex = 0;
+            this.gv_Klassenstufe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Klassenstufe_CellDoubleClick);
             this.gv_Klassenstufe.SelectionChanged += new System.EventHandler(this.gv_Klassenstufe_SelectionChanged);
             // 
             // bt_back
             // 
+            this.bt_back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_back.Enabled = false;
             this.bt_back.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_back.FontWeight = MetroFramework.MetroButtonWeight.Regular;
@@ -264,6 +273,7 @@
             // 
             // mbt_ImEx
             // 
+            this.mbt_ImEx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.mbt_ImEx.Enabled = false;
             this.mbt_ImEx.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mbt_ImEx.FontWeight = MetroFramework.MetroButtonWeight.Regular;
@@ -280,6 +290,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.btAbbrechen;
             this.ClientSize = new System.Drawing.Size(920, 500);
             this.Controls.Add(this.mbt_ImEx);
@@ -292,9 +303,8 @@
             this.Controls.Add(this.bt_Bearbeiten);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(1);
-            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(862, 500);
             this.Name = "w_s_fach_stufe";
-            this.Resizable = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Orange;

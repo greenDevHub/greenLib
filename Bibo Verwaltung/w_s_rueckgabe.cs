@@ -429,12 +429,14 @@ namespace Bibo_Verwaltung
 
         private void bt_open_Click(object sender, EventArgs e)
         {
+            int index = cb_Zustand.SelectedIndex;
             Form Zustand = new w_s_manage(currentUser, "Zustand");
             Zustand.ShowDialog(this);
             if (!new Benutzer(currentUser).Rechteid.Equals("0"))
             {
                 zustand.FillCombobox(ref cb_Zustand, -1);
             }
+            cb_Zustand.SelectedIndex = index;
         }
 
         private void bt_AddBuch_Click(object sender, EventArgs e)

@@ -24,6 +24,7 @@ namespace Bibo_Verwaltung
         Image resultImage = null;
         List<Image> images = new List<Image>();
         bool loaded = false;
+        bool guest = false;
 
         #region Constructor
         string currentUser;
@@ -35,15 +36,18 @@ namespace Bibo_Verwaltung
             this.Text = Text + " - Angemeldet als: " + userName;
             if (user.Rechteid.Equals("0"))
             {
-
+                guest = true;
+                guestMode(guest);
             }
             else if (user.Rechteid.Equals("1"))
             {
-
+                guest = false;
+                guestMode(guest);
             }
             else if (user.Rechteid == "2")
             {
-
+                guest = false;
+                guestMode(guest);
             }
             exemplar.ISBN = isbn;
             tb_ISBN.Text = exemplar.ISBN;
@@ -51,7 +55,15 @@ namespace Bibo_Verwaltung
             tb_ExempCount.Text = gv_Exemplare.RowCount.ToString();
         }
         #endregion
-
+        private void guestMode(bool activate)
+        {
+            bt_Add.Enabled = !activate;
+            bt_Print.Enabled = !activate;
+            mbt_Export.Enabled = !activate;
+            mbt_Import.Enabled = !activate;
+            entfernenToolStripMenuItem.Enabled = !activate;
+            barcodeDruckenToolStripMenuItem.Enabled = !activate;
+        }
         private void Grid_Buch_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -161,6 +173,7 @@ namespace Bibo_Verwaltung
                 dTP_AufDat.Enabled = true;
                 tb_ExempCount.Enabled = false;
             }
+            guestMode(guest);
         }
         
         /// <summary>
@@ -507,14 +520,27 @@ namespace Bibo_Verwaltung
 
         private void entfernenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            int errorCount = 0;
             for (int i = 0; i < gv_Exemplare.SelectedRows.Count; i++)
             {
                 exemplar.ExemplarID = gv_Exemplare.SelectedRows[i].Cells[0].Value.ToString();
-                exemplar.Deactivate_Exemplar();
+                if (exemplar.IsSpecificAvailable())
+                {
+                    exemplar.Deactivate_Exemplar();
+                }
+                else
+                {
+                    errorCount++;
+                }
             }
             exemplar.FillGrid(ref gv_Exemplare);
             tb_Vorhanden.Text = gv_Exemplare.RowCount.ToString();
             Clear_Form();
+            if (errorCount > 0)
+            {
+                MetroMessageBox.Show(this, "Nicht alle Exemplare konnten gelöscht werden, da sie sich noch im Verleih befinden. Bitte markieren Sie diese zuerst als 'zurückgegeben'!", "Achtung",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void barcodeDruckenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -569,6 +595,7 @@ namespace Bibo_Verwaltung
                     barcodeDruckenToolStripMenuItem.Enabled = true;
                 }
             }
+            guestMode(guest);
         }
 
         private void grid_buchid_MouseDown(object sender, MouseEventArgs e)

@@ -81,7 +81,6 @@ namespace Bibo_Verwaltung
             return autoren;
         }
         DataTable dataTable = new DataTable();
-
         /// <summary>
         /// Füllt ein DataGridView-Objekt mit den Buchdaten 
         /// </summary>
@@ -90,21 +89,22 @@ namespace Bibo_Verwaltung
             ClearDataSource();
             FillObject();
             dataTable.Reset();
+            DataTable dataTable2 = new DataTable();
             //dataTable = ds.Tables[0];
-            dataTable.Columns.Add("ISBN");
-            dataTable.Columns.Add("Rückgabedatum", typeof(DateTime));
-            dataTable.Columns.Add("Titel");
-            dataTable.Columns.Add("ExemplarID");
-            dataTable.Columns.Add("Kunden ID");
-            dataTable.Columns.Add("Vorname");
-            dataTable.Columns.Add("Nachname");
-            dataTable.Columns.Add("Klasse");
-            dataTable.Columns.Add("Autor");
-            dataTable.Columns.Add("Genre");
-            dataTable.Columns.Add("Verlag");
-            dataTable.Columns.Add("Sprache");
-            dataTable.Columns.Add("Zustand");
-            dataTable.Columns.Add("Leihnummer");
+            dataTable2.Columns.Add("ISBN");
+            dataTable2.Columns.Add("Rückgabedatum", typeof(DateTime));
+            dataTable2.Columns.Add("Titel");
+            dataTable2.Columns.Add("ExemplarID");
+            dataTable2.Columns.Add("Kunden ID");
+            dataTable2.Columns.Add("Vorname");
+            dataTable2.Columns.Add("Nachname");
+            dataTable2.Columns.Add("Klasse");
+            dataTable2.Columns.Add("Autor");
+            dataTable2.Columns.Add("Genre");
+            dataTable2.Columns.Add("Verlag");
+            dataTable2.Columns.Add("Sprache");
+            dataTable2.Columns.Add("Zustand");
+            dataTable2.Columns.Add("Leihnummer");
             var sampleResults = from DataRow sampleRow in ds.Tables[0].AsEnumerable()
                                 select sampleRow;
 
@@ -113,9 +113,9 @@ namespace Bibo_Verwaltung
 
             {
                 DataRow dataRow;
-                lock (dataTable)
+                lock (dataTable2)
                 {
-                    dataRow = dataTable.NewRow();
+                    dataRow = dataTable2.NewRow();
                 }
                 dataRow["ISBN"] = row[ds.Tables[0].Columns.IndexOf("ISBN")].ToString();
                 string s = row[ds.Tables[0].Columns.IndexOf("Rückgabedatum")].ToString();
@@ -147,11 +147,15 @@ namespace Bibo_Verwaltung
                 autor = autor.Substring(0, autor.Length - 2);
                 //row["Autor"] = autor;
                 dataRow["Autor"] = autor;
-                lock (dataTable)
+                lock (dataTable2)
                 {
-                    dataTable.Rows.Add(dataRow);
+                    dataTable2.Rows.Add(dataRow);
                 }
             });
+            DataView dv = new DataView();
+            dv = dataTable2.DefaultView;
+            dv.Sort = "Rückgabedatum desc";
+            dataTable = dv.ToTable();
             grid.DataSource = dataTable;
             Hide_KundenDetails(ref grid);
         }

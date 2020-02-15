@@ -17,6 +17,7 @@ namespace Bibo_Verwaltung
         #region Constructor
         string currentUser;
         bool loaded = false;
+        bool guest = false;
         public w_s_Kunden(string userName)
         {
             InitializeComponent();
@@ -25,82 +26,18 @@ namespace Bibo_Verwaltung
             this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             if (user.Rechteid.Equals("0"))
             {
-                rb_Neukunde.Enabled = false;
-                rb_KundeBearbeiten.Enabled = false;
-                rb_KundeLoeschen.Enabled = false;
-                mtP_Filter.Enabled = false;
-                bt_confirm.Enabled = false;
-                gv_faecher.Enabled = false;
-                gv_result.Enabled = false;
-                bt_cleanup.Enabled = false;
-                mbt_Import.Enabled = false;
-                mbt_Export.Enabled = false;
-                tb_KundenID.Enabled = false;
-                tb_Vorname.Enabled = false;
-                tb_Nachname.Enabled = false;
-                mdtp_GebDat.Enabled = false;
-                tb_Strasse.Enabled = false;
-                tb_Hausnummer.Enabled = false;
-                tb_Postleitzahl.Enabled = false;
-                tb_Ort.Enabled = false;
-                tb_Klasse.Enabled = false;
-                tb_Mail.Enabled = false;
-                tb_Telefonnummer.Enabled = false;
-                kundeBearbeitenToolStripMenuItem.Enabled = false;
-                kundeEntfernenToolStripMenuItem.Enabled = false;
-                leistungskursAuswählenToolStripMenuItem.Enabled = false;
+                guest = true;
+                guestMode(guest);
             }
             else if (user.Rechteid.Equals("1"))
             {
-                rb_Neukunde.Enabled = true;
-                rb_KundeBearbeiten.Enabled = true;
-                rb_KundeLoeschen.Enabled = true;
-                mtP_Filter.Enabled = true;
-                bt_confirm.Enabled = true;
-                gv_faecher.Enabled = true;
-                gv_result.Enabled = true;
-                bt_cleanup.Enabled = true;
-                mbt_Import.Enabled = true;
-                mbt_Export.Enabled = false;
-                tb_Vorname.Enabled = true;
-                tb_Nachname.Enabled = true;
-                mdtp_GebDat.Enabled = true;
-                tb_Strasse.Enabled = true;
-                tb_Hausnummer.Enabled = true;
-                tb_Postleitzahl.Enabled = true;
-                tb_Ort.Enabled = true;
-                tb_Klasse.Enabled = true;
-                tb_Mail.Enabled = true;
-                tb_Telefonnummer.Enabled = true;
-                kundeBearbeitenToolStripMenuItem.Enabled = true;
-                kundeEntfernenToolStripMenuItem.Enabled = true;
-                leistungskursAuswählenToolStripMenuItem.Enabled = true;
+                guest = false;
+                guestMode(guest);
             }
             else if (user.Rechteid == "2")
             {
-                rb_Neukunde.Enabled = true;
-                rb_KundeBearbeiten.Enabled = true;
-                rb_KundeLoeschen.Enabled = true;
-                mtP_Filter.Enabled = true;
-                bt_confirm.Enabled = true;
-                gv_faecher.Enabled = true;
-                gv_result.Enabled = true;
-                bt_cleanup.Enabled = true;
-                mbt_Import.Enabled = true;
-                mbt_Export.Enabled = true;
-                tb_Vorname.Enabled = true;
-                tb_Nachname.Enabled = true;
-                mdtp_GebDat.Enabled = true;
-                tb_Strasse.Enabled = true;
-                tb_Hausnummer.Enabled = true;
-                tb_Postleitzahl.Enabled = true;
-                tb_Ort.Enabled = true;
-                tb_Klasse.Enabled = true;
-                tb_Mail.Enabled = true;
-                tb_Telefonnummer.Enabled = true;
-                kundeBearbeitenToolStripMenuItem.Enabled = true;
-                kundeEntfernenToolStripMenuItem.Enabled = true;
-                leistungskursAuswählenToolStripMenuItem.Enabled = true;
+                guest = false;
+                guestMode(guest);
             }
 
             //bt_confirm.Enabled = false;
@@ -118,7 +55,14 @@ namespace Bibo_Verwaltung
             //hidePanel.Enabled = false;      
         }
         #endregion
-
+        private void guestMode(bool activate)
+        {
+            bt_confirm.Enabled = !activate;
+            mbt_Import.Enabled = !activate;
+            mbt_Export.Enabled = !activate;
+            bt_cleanup.Enabled = !activate;
+            kundeEntfernenToolStripMenuItem.Enabled = !activate;
+        }
         #region Fenster-Methoden
         /// <summary>
         /// Setzt die Kundendaten in ein Kunden-Objekt 
@@ -240,8 +184,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void SetModus()
         {
-            if (new Benutzer(currentUser).Rechteid != "0")
-            {
+
                 if (rb_KundeBearbeiten.Checked)
                 {
                     bt_confirm.Text = "Speichern";
@@ -313,7 +256,7 @@ namespace Bibo_Verwaltung
                     lb_Hausnummer.Text = "Hausnummer:";
                     lb_Postleitzahl.Text = "Postleitzahl:";
                 }
-            }
+            guestMode(guest);
         }
 
         /// <summary>
@@ -956,8 +899,6 @@ namespace Bibo_Verwaltung
 
         private void gv_Kunde_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (new Benutzer(currentUser).Rechteid != "0")
-            {
                 if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
                 {
                     if (!gv_Kunde.Rows[e.RowIndex].Selected)
@@ -980,7 +921,7 @@ namespace Bibo_Verwaltung
                         kundeEntfernenToolStripMenuItem.Enabled = true;
                     }
                 }
-            }
+            guestMode(guest);
         }
 
         private void bt_cleanup_Click(object sender, EventArgs e)

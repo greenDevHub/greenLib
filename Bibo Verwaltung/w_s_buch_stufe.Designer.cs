@@ -56,6 +56,8 @@
             this.gv_Klassenstufe.AllowUserToDeleteRows = false;
             this.gv_Klassenstufe.AllowUserToResizeColumns = false;
             this.gv_Klassenstufe.AllowUserToResizeRows = false;
+            this.gv_Klassenstufe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.gv_Klassenstufe.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_Klassenstufe.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_Klassenstufe.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -117,6 +119,7 @@
             this.gv_Klassenstufe.Size = new System.Drawing.Size(270, 360);
             this.gv_Klassenstufe.Style = MetroFramework.MetroColorStyle.Orange;
             this.gv_Klassenstufe.TabIndex = 0;
+            this.gv_Klassenstufe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Klassenstufe_CellDoubleClick);
             this.gv_Klassenstufe.SelectionChanged += new System.EventHandler(this.gv_Klassenstufe_SelectionChanged);
             // 
             // gv_Buecher
@@ -132,7 +135,10 @@
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
             this.gv_Buecher.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.gv_Buecher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_Buecher.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gv_Buecher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gv_Buecher.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_Buecher.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv_Buecher.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -194,17 +200,18 @@
             this.gv_Buecher.ShowCellToolTips = false;
             this.gv_Buecher.ShowEditingIcon = false;
             this.gv_Buecher.ShowRowErrors = false;
-            this.gv_Buecher.Size = new System.Drawing.Size(607, 360);
+            this.gv_Buecher.Size = new System.Drawing.Size(595, 360);
             this.gv_Buecher.Style = MetroFramework.MetroColorStyle.Orange;
             this.gv_Buecher.TabIndex = 1;
             this.gv_Buecher.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Buecher_CellDoubleClick);
             // 
             // btAbbrechen
             // 
+            this.btAbbrechen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btAbbrechen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btAbbrechen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.btAbbrechen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.btAbbrechen.Location = new System.Drawing.Point(734, 453);
+            this.btAbbrechen.Location = new System.Drawing.Point(722, 453);
             this.btAbbrechen.Name = "btAbbrechen";
             this.btAbbrechen.Size = new System.Drawing.Size(175, 24);
             this.btAbbrechen.Style = MetroFramework.MetroColorStyle.Orange;
@@ -215,6 +222,7 @@
             // 
             // bt_Bearbeiten
             // 
+            this.bt_Bearbeiten.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_Bearbeiten.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Bearbeiten.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.bt_Bearbeiten.Location = new System.Drawing.Point(483, 453);
@@ -250,6 +258,7 @@
             // 
             // bt_back
             // 
+            this.bt_back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_back.Enabled = false;
             this.bt_back.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_back.FontWeight = MetroFramework.MetroButtonWeight.Regular;
@@ -264,6 +273,7 @@
             // 
             // mbt_ImEx
             // 
+            this.mbt_ImEx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.mbt_ImEx.Enabled = false;
             this.mbt_ImEx.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mbt_ImEx.FontWeight = MetroFramework.MetroButtonWeight.Regular;
@@ -280,6 +290,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.btAbbrechen;
             this.ClientSize = new System.Drawing.Size(920, 500);
             this.Controls.Add(this.mbt_ImEx);
@@ -291,9 +302,8 @@
             this.Controls.Add(this.btAbbrechen);
             this.Controls.Add(this.bt_Bearbeiten);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(862, 500);
             this.Name = "w_s_buch_stufe";
-            this.Resizable = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Orange;

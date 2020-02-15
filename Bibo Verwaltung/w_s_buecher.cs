@@ -21,6 +21,7 @@ namespace Bibo_Verwaltung
     {
         #region Constructor
         string currentUser;
+        bool guest = false;
         public w_s_buecher(string userName, bool bool1)
         {
             InitializeComponent();
@@ -30,15 +31,18 @@ namespace Bibo_Verwaltung
 
             if (user.Rechteid.Equals("0"))
             {
-                
+                guest = true;
+                guestMode(guest);
             }
             else if (user.Rechteid.Equals("1"))
             {
-                
+                guest = false;
+                guestMode(guest);
             }
             else if (user.Rechteid == "2")
             {
-                
+                guest = false;
+                guestMode(guest);
             }
 
             timer1.Start();
@@ -51,7 +55,15 @@ namespace Bibo_Verwaltung
             this.bool1 = bool1;
         }
         #endregion
-
+        private void guestMode(bool activate)
+        {
+            bt_speichern_buecher.Enabled = !activate;
+            bt_print.Enabled = !activate;
+            bt_pic_delete.Enabled = !activate;
+            bt_picture.Enabled = !activate;
+            bt_Excel.Enabled = !activate;
+            entfernenToolStripMenuItem.Enabled = !activate;
+        }
         bool loaded = false;
         private string location = "";
         Buch b = new Buch();
@@ -824,6 +836,7 @@ namespace Bibo_Verwaltung
                 checkbox_autor.Enabled = false;
                 button1.Enabled = false;
             }
+            guestMode(guest);
         }
         #endregion
 
@@ -846,6 +859,7 @@ namespace Bibo_Verwaltung
         private void rb_Neubuch_CheckedChanged(object sender, EventArgs e)
         {
             Modus();
+            
             Objekt_White();
         }
 
@@ -1576,6 +1590,7 @@ namespace Bibo_Verwaltung
                     exemplareToolStripMenuItem.Enabled = true;
                 }
             }
+            guestMode(guest);
         }
 
         private void ladenToolStripMenuItem_Click(object sender, EventArgs e)

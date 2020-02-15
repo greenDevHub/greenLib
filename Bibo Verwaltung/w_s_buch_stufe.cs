@@ -17,7 +17,7 @@ namespace Bibo_Verwaltung
         private DataTable buecherListe = new DataTable();
         private bool aenderungungen = false;
         string currentUser;
-
+        bool gast = false;
         public w_s_buch_stufe(string userName)
         {
             InitializeComponent();
@@ -25,14 +25,17 @@ namespace Bibo_Verwaltung
             this.currentUser = userName;
             if (user.Rechteid.Equals("0"))
             {
+                gast = true;
                 bt_Bearbeiten.Enabled = false;
             }
             else if (user.Rechteid == "1")
             {
+                gast = false;
                 bt_Bearbeiten.Enabled = true;
             }
             else if (user.Rechteid == "2")
             {
+                gast = false;
                 bt_Bearbeiten.Enabled = true;
                 mbt_ImEx.Enabled = true;
             }
@@ -183,7 +186,8 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void SaveZuordnungen()
         {
-            if (gv_Klassenstufe.CurrentRow != null)
+
+            if (!gast && gv_Klassenstufe.CurrentRow != null)
             {
                 if (aenderungungen == true)
                 {
@@ -295,7 +299,23 @@ namespace Bibo_Verwaltung
                 }
             }
             else { }
-        }   
+        }
         #endregion
+
+        private void Gv_Klassenstufe_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
+            {
+                if (gv_Klassenstufe.CurrentRow != null)
+                {
+                    bt_back.Enabled = true;
+                    gv_Buecher.Enabled = true;
+                    gv_Klassenstufe.Enabled = false;
+                    bs.Show_AllBuecher(ref gv_Buecher, (e.RowIndex + 1).ToString());
+                    FillFaecherList();
+                    bt_Bearbeiten.Text = "Übernehmen";
+                }
+            }
+        }
     }
 }

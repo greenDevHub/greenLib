@@ -17,7 +17,7 @@ namespace Bibo_Verwaltung
         DataTable klassenListe = new DataTable();
         bool aenderungungen = false;
         string currentUser;
-
+        bool gast = false;
         #region Constructor
         public w_s_klasse_stufe(string userName)
         {
@@ -26,14 +26,17 @@ namespace Bibo_Verwaltung
             this.currentUser = userName;
             if (user.Rechteid.Equals("0"))
             {
+                gast = true;
                 bt_Bearbeiten.Enabled = false;
             }
             else if (user.Rechteid == "1")
             {
+                gast = false;
                 bt_Bearbeiten.Enabled = true;
             }
             else if (user.Rechteid == "2")
             {
+                gast = false;
                 bt_Bearbeiten.Enabled = true;
                 mbt_ImEx.Enabled = true;
             }
@@ -184,7 +187,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void SaveZuordnungen()
         {
-            if (gv_Klassenstufe.CurrentRow != null)
+            if (!gast && gv_Klassenstufe.CurrentRow != null)
             {
                 if (aenderungungen == true)
                 {
@@ -298,5 +301,21 @@ namespace Bibo_Verwaltung
             else { }
         }
         #endregion
+
+        private void Gv_Klassenstufe_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
+            {
+                if (gv_Klassenstufe.CurrentRow != null)
+                {
+                    bt_back.Enabled = true;
+                    gv_Klassen.Enabled = true;
+                    gv_Klassenstufe.Enabled = false;
+                    kl_st.Show_AllKlassen(ref gv_Klassen, (e.RowIndex + 1).ToString());
+                    FillKlassenList();
+                    bt_Bearbeiten.Text = "Übernehmen";
+                }
+            }
+        }
     }
 }
