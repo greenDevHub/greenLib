@@ -1470,5 +1470,17 @@ namespace Bibo_Verwaltung
                 columnIndex = e.ColumnIndex;
             }
         }
+
+        private void MetroGrid_Vorschau_MouseDown(object sender, MouseEventArgs e)
+        {
+                if (!(metroGrid_Vorschau.HitTest(e.X, e.Y).RowIndex >= 0)||!(metroGrid_Vorschau.HitTest(e.X,e.Y).ColumnIndex>=0))
+                {
+                spalteEntfernenToolStripMenuItem.Visible = false;
+                }
+                else
+                {
+                spalteEntfernenToolStripMenuItem.Visible = true;
+                }
+        }
     }
 }

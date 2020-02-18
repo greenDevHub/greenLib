@@ -787,6 +787,7 @@
             this.gv_Kunde.TabIndex = 18;
             this.gv_Kunde.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Kunde_CellDoubleClick);
             this.gv_Kunde.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_Kunde_CellMouseDown);
+            this.gv_Kunde.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Gv_Kunde_MouseDown);
             // 
             // cm_kunde
             // 
@@ -982,6 +983,7 @@
             this.gv_result.TabIndex = 15;
             this.gv_result.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_result_CellDoubleClick);
             this.gv_result.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_result_CellMouseDown);
+            this.gv_result.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Gv_result_MouseDown);
             // 
             // Kürzel
             // 

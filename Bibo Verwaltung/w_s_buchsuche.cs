@@ -494,7 +494,7 @@ namespace Bibo_Verwaltung
         {
             if (new Benutzer(currentUser).Rechteid != "0")
             {
-                if (!(gv_buchsuche.HitTest(e.X, e.Y).RowIndex >= 0))
+                if (!(gv_buchsuche.HitTest(e.X, e.Y).RowIndex >= 0) || !(gv_buchsuche.HitTest(e.X,e.Y).ColumnIndex >=0))
                 {
                     gv_buchsuche.ClearSelection();
                     hinzufügenToolStripMenuItem.Visible = false;
@@ -507,6 +507,8 @@ namespace Bibo_Verwaltung
                     hinzufügenToolStripMenuItem1.Visible = false;
                     entfernenToolStripMenuItem1.Visible = false;
                     zurueckgebenToolStripMenuItem.Visible = false;
+                    buchAnzeigenToolStripMenuItem.Visible = false;
+                    kundenAnzeigenToolStripMenuItem.Visible = false;
                 }
                 else
                 {
@@ -520,6 +522,8 @@ namespace Bibo_Verwaltung
                     hinzufügenToolStripMenuItem1.Visible = true;
                     entfernenToolStripMenuItem1.Visible = true;
                     zurueckgebenToolStripMenuItem.Visible = true;
+                    buchAnzeigenToolStripMenuItem.Visible = true;
+                    kundenAnzeigenToolStripMenuItem.Visible = true;
                 }
             }
         }

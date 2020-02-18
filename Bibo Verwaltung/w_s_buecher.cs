@@ -1670,7 +1670,7 @@ namespace Bibo_Verwaltung
 
         private void Grid_Buch_MouseDown(object sender, MouseEventArgs e)
         {
-            if (!(Grid_Buch.HitTest(e.X, e.Y).RowIndex >=0))
+            if (!(Grid_Buch.HitTest(e.X, e.Y).RowIndex >=0) || !(Grid_Buch.HitTest(e.X, e.Y).ColumnIndex >= 0))
             {
                 Grid_Buch.ClearSelection();
                 ladenToolStripMenuItem.Visible = false;

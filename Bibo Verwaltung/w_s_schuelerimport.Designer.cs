@@ -761,13 +761,14 @@
             this.metroGrid_Vorschau.RowTemplate.DividerHeight = 1;
             this.metroGrid_Vorschau.RowTemplate.Height = 24;
             this.metroGrid_Vorschau.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.metroGrid_Vorschau.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullColumnSelect;
+            this.metroGrid_Vorschau.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.metroGrid_Vorschau.Size = new System.Drawing.Size(1070, 148);
             this.metroGrid_Vorschau.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroGrid_Vorschau.TabIndex = 51;
             this.metroGrid_Vorschau.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroGrid_Vorschau.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.MetroGrid_Vorschau_CellMouseDown);
             this.metroGrid_Vorschau.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gv_Vorschau_KeyDown);
+            this.metroGrid_Vorschau.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MetroGrid_Vorschau_MouseDown);
             // 
             // metroContextMenu1
             // 

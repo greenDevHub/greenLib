@@ -1054,5 +1054,33 @@ namespace Bibo_Verwaltung
         {
                 KundenFilter();
         }
+
+        private void Gv_Kunde_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (!(gv_Kunde.HitTest(e.X, e.Y).RowIndex >= 0) || !(gv_Kunde.HitTest(e.X, e.Y).ColumnIndex >= 0))
+            {
+                gv_Kunde.ClearSelection();
+                kundeBearbeitenToolStripMenuItem.Visible = false;
+                kundeEntfernenToolStripMenuItem.Visible = false;
+            }
+            else
+            {
+                kundeBearbeitenToolStripMenuItem.Visible = true;
+                kundeEntfernenToolStripMenuItem.Visible = true;
+            }
+        }
+
+        private void Gv_result_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (!(gv_result.HitTest(e.X, e.Y).RowIndex >= 0) || !(gv_result.HitTest(e.X, e.Y).ColumnIndex >= 0))
+            {
+                gv_result.ClearSelection();
+                leistungskursAuswählenToolStripMenuItem.Visible = false;
+            }
+            else
+            {
+                leistungskursAuswählenToolStripMenuItem.Visible = true;
+            }
+        }
     }
 }
