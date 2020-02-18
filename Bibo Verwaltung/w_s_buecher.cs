@@ -22,6 +22,36 @@ namespace Bibo_Verwaltung
         #region Constructor
         string currentUser;
         bool guest = false;
+        string buchIsbn = "";
+        public w_s_buecher(string userName, string isbn)
+        {
+            InitializeComponent();
+            Benutzer user = new Benutzer(userName);
+            this.currentUser = userName;
+            this.Text = Text + " - Angemeldet als: " + userName;
+            buchIsbn = isbn;
+
+            if (user.Rechteid.Equals("0"))
+            {
+                guest = true;
+                guestMode(guest);
+            }
+            else if (user.Rechteid.Equals("1"))
+            {
+                guest = false;
+                guestMode(guest);
+            }
+            else if (user.Rechteid == "2")
+            {
+                guest = false;
+                guestMode(guest);
+            }
+            Comboboxen();
+            picBox_Gross.Visible = false;
+            gb_zoom.Visible = false;
+            comboBox1.Visible = false;
+            comboBox1.DropDownHeight = 1;
+        }
         public w_s_buecher(string userName, bool bool1)
         {
             InitializeComponent();
@@ -45,7 +75,6 @@ namespace Bibo_Verwaltung
                 guestMode(guest);
             }
 
-            timer1.Start();
             //b.FillGrid_Buch(ref Grid_Buch);
             Comboboxen();
             picBox_Gross.Visible = false;
@@ -1656,18 +1685,6 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (metroProgressBar1.Value == 100)
-            {
-                timer1.Stop();
-            }
-            metroProgressBar1.Invoke((Action)delegate ()
-            {
-                metroProgressBar1.PerformStep();
-            });
-        }
-
         private void bt_Schliessen_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -1835,6 +1852,11 @@ namespace Bibo_Verwaltung
         private void BackgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             BuchFilter();
+            if(buchIsbn != "")
+            {
+                tb_ISBN.Text = buchIsbn;
+                LoadBuch();
+            }
         }
 
         private void Bt_exemplar_Click(object sender, EventArgs e)

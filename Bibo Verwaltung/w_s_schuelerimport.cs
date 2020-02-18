@@ -1446,5 +1446,29 @@ namespace Bibo_Verwaltung
             cb_TxtQuali.Text = "";
             metroGrid_Vorschau.DataSource = null;
         }
+
+        private void SpalteEntfernenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                    int i = metroGrid_Vorschau.SelectedCells[0].ColumnIndex;
+                    metroGrid_Vorschau.Columns.RemoveAt(columnIndex);
+                    removeAt.Add(columnIndex);
+            }
+            catch
+            {
+                MetroMessageBox.Show(this, "Es konnte keine Spalte entfernt werden!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        int columnIndex = 0;
+        private void MetroGrid_Vorschau_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                metroGrid_Vorschau.ClearSelection();
+                metroGrid_Vorschau.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+                columnIndex = e.ColumnIndex;
+            }
+        }
     }
 }

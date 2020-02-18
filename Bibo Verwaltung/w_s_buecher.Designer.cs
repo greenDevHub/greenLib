@@ -94,8 +94,6 @@
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.comboBox1 = new Bibo_Verwaltung.AdvancedComboBox();
             this.tb_neu = new MetroFramework.Controls.MetroTextBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
@@ -1276,21 +1274,6 @@
             this.tb_neu.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
             this.tb_neu.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_neu_KeyPress);
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 1;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // metroProgressBar1
-            // 
-            this.metroProgressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroProgressBar1.Location = new System.Drawing.Point(0, 0);
-            this.metroProgressBar1.Margin = new System.Windows.Forms.Padding(2);
-            this.metroProgressBar1.Name = "metroProgressBar1";
-            this.metroProgressBar1.Size = new System.Drawing.Size(1200, 5);
-            this.metroProgressBar1.TabIndex = 53;
-            // 
             // backgroundWorker1
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
@@ -1331,6 +1314,7 @@
             this.bt_exemplar.Size = new System.Drawing.Size(122, 24);
             this.bt_exemplar.TabIndex = 1;
             this.bt_exemplar.Text = "Exemplaransicht";
+            this.metroToolTip1.SetToolTip(this.bt_exemplar, "    Wechseln Sie in die Exemplaransicht des gewählten Buches.    ");
             this.bt_exemplar.UseSelectable = true;
             this.bt_exemplar.Click += new System.EventHandler(this.Bt_exemplar_Click);
             // 
@@ -1346,7 +1330,6 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1200, 600);
             this.Controls.Add(this.metroPanel2);
-            this.Controls.Add(this.metroProgressBar1);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.gb_zoom);
             this.Controls.Add(this.metroProgressSpinner1);
@@ -1427,8 +1410,6 @@
         private System.Windows.Forms.ToolStripMenuItem exemplareToolStripMenuItem;
         private AdvancedComboBox comboBox1;
         private MetroFramework.Controls.MetroPanel metroPanel1;
-        private System.Windows.Forms.Timer timer1;
-        private MetroFramework.Controls.MetroProgressBar metroProgressBar1;
         private MetroFramework.Controls.MetroTextBox tb_neu;
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroLabel metroLabel1;

@@ -18,6 +18,30 @@ namespace Bibo_Verwaltung
         string currentUser;
         bool loaded = false;
         bool guest = false;
+        string kundenID = "";
+        public w_s_Kunden(string userName, string kundenID)
+        {
+            InitializeComponent();
+            Benutzer user = new Benutzer(userName);
+            this.currentUser = userName;
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+            if (user.Rechteid.Equals("0"))
+            {
+                guest = true;
+                guestMode(guest);
+            }
+            else if (user.Rechteid.Equals("1"))
+            {
+                guest = false;
+                guestMode(guest);
+            }
+            else if (user.Rechteid == "2")
+            {
+                guest = false;
+                guestMode(guest);
+            }
+            this.kundenID = kundenID;
+        }
         public w_s_Kunden(string userName)
         {
             InitializeComponent();
@@ -39,20 +63,6 @@ namespace Bibo_Verwaltung
                 guest = false;
                 guestMode(guest);
             }
-
-            //bt_confirm.Enabled = false;
-            //gv_Kunde.Enabled = false;
-            //bt_cleanup.Enabled = false;
-            //metroPanel2.Enabled = false;
-            //bt_ImEx.Enabled = false;
-            //MetroPanel hidePanel = new MetroPanel();
-            //this.Controls.Add(hidePanel);
-            //Point punkt = gv_Kunde.FindForm().PointToClient(gv_Kunde.Parent.PointToScreen(gv_Kunde.Location));
-            //hidePanel.Location = new Point(punkt.X, punkt.Y + 25);
-            //hidePanel.Size = gv_Kunde.Size;
-            //hidePanel.Height = hidePanel.Height - 25;
-            //hidePanel.BringToFront();
-            //hidePanel.Enabled = false;      
         }
         #endregion
         private void guestMode(bool activate)
@@ -1022,6 +1032,10 @@ namespace Bibo_Verwaltung
             gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
             gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
             KundenFilter();
+            if(kundenID != "")
+            {
+                LoadKunde(kundenID);
+            }
         }
 
         private void Timer1_Tick(object sender, EventArgs e)

@@ -530,6 +530,7 @@ namespace Bibo_Verwaltung
             {
                 if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
                 {
+                    buchAnzeigenToolStripMenuItem.Enabled = true;
                     if (!gv_buchsuche.Rows[e.RowIndex].Selected)
                     {
                         gv_buchsuche.ClearSelection();
@@ -588,6 +589,14 @@ namespace Bibo_Verwaltung
                             entfernenToolStripMenuItem1.Enabled = false;
                         }
 
+                    }
+                    if(!gv_buchsuche.SelectedRows[0].Cells["Kunden ID"].Value.ToString().Equals(""))
+                    {
+                        kundenAnzeigenToolStripMenuItem.Enabled = true;
+                    }
+                    else
+                    {
+                        kundenAnzeigenToolStripMenuItem.Enabled = false;
                     }
 
                 }
@@ -955,6 +964,18 @@ namespace Bibo_Verwaltung
                 checkedChanged();
 
             }
+        }
+
+        private void KundenAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form Kunde = new w_s_Kunden(currentUser, gv_buchsuche.SelectedRows[0].Cells["Kunden ID"].Value.ToString());
+            Kunde.ShowDialog(this);
+        }
+
+        private void BuchAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form Buch = new w_s_buecher(currentUser, gv_buchsuche.SelectedRows[0].Cells["ISBN"].Value.ToString());
+            Buch.ShowDialog(this);
         }
     }
 }
