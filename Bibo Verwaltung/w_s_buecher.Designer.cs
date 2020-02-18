@@ -94,6 +94,7 @@
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.comboBox1 = new Bibo_Verwaltung.AdvancedComboBox();
             this.tb_neu = new MetroFramework.Controls.MetroTextBox();
+            this.rb_search = new MetroFramework.Controls.MetroRadioButton();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
@@ -464,8 +465,7 @@
             this.rb_Update_Buch.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_Update_Buch.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.helpProvider.SetHelpString(this.rb_Update_Buch, "Klicken sie hier, um ein vorhandenes Buch zu bearbeiten.");
-            this.rb_Update_Buch.Location = new System.Drawing.Point(111, 3);
-            this.rb_Update_Buch.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
+            this.rb_Update_Buch.Location = new System.Drawing.Point(170, 3);
             this.rb_Update_Buch.Name = "rb_Update_Buch";
             this.helpProvider.SetShowHelp(this.rb_Update_Buch, true);
             this.rb_Update_Buch.Size = new System.Drawing.Size(88, 19);
@@ -478,17 +478,14 @@
             // rb_Add_Buch
             // 
             this.rb_Add_Buch.AutoSize = true;
-            this.rb_Add_Buch.Checked = true;
             this.rb_Add_Buch.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_Add_Buch.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.helpProvider.SetHelpString(this.rb_Add_Buch, "Klicken sie hier, um ein neues Buch hinzuzufügen.");
-            this.rb_Add_Buch.Location = new System.Drawing.Point(4, 3);
-            this.rb_Add_Buch.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
+            this.rb_Add_Buch.Location = new System.Drawing.Point(74, 3);
             this.rb_Add_Buch.Name = "rb_Add_Buch";
             this.helpProvider.SetShowHelp(this.rb_Add_Buch, true);
             this.rb_Add_Buch.Size = new System.Drawing.Size(90, 19);
             this.rb_Add_Buch.TabIndex = 41;
-            this.rb_Add_Buch.TabStop = true;
             this.rb_Add_Buch.Text = "Hinzufügen";
             this.metroToolTip1.SetToolTip(this.rb_Add_Buch, "    Klicken sie hier, um ein neues Buch hinzuzufügen.    ");
             this.rb_Add_Buch.UseSelectable = true;
@@ -500,8 +497,7 @@
             this.rb_Delete_Buch.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_Delete_Buch.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.helpProvider.SetHelpString(this.rb_Delete_Buch, "Klicken sie hier, um ein vorhandenes Buch zu löschen.");
-            this.rb_Delete_Buch.Location = new System.Drawing.Point(201, 3);
-            this.rb_Delete_Buch.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
+            this.rb_Delete_Buch.Location = new System.Drawing.Point(264, 3);
             this.rb_Delete_Buch.Name = "rb_Delete_Buch";
             this.helpProvider.SetShowHelp(this.rb_Delete_Buch, true);
             this.rb_Delete_Buch.Size = new System.Drawing.Size(80, 19);
@@ -796,26 +792,26 @@
             this.entfernenToolStripMenuItem,
             this.exemplareToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(130, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
             // 
             // ladenToolStripMenuItem
             // 
             this.ladenToolStripMenuItem.Name = "ladenToolStripMenuItem";
-            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ladenToolStripMenuItem.Text = "Laden";
             this.ladenToolStripMenuItem.Click += new System.EventHandler(this.ladenToolStripMenuItem_Click);
             // 
             // entfernenToolStripMenuItem
             // 
             this.entfernenToolStripMenuItem.Name = "entfernenToolStripMenuItem";
-            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.entfernenToolStripMenuItem.Text = "Entfernen";
             this.entfernenToolStripMenuItem.Click += new System.EventHandler(this.entfernenToolStripMenuItem_Click);
             // 
             // exemplareToolStripMenuItem
             // 
             this.exemplareToolStripMenuItem.Name = "exemplareToolStripMenuItem";
-            this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exemplareToolStripMenuItem.Text = "Exemplare";
             this.exemplareToolStripMenuItem.Click += new System.EventHandler(this.exemplareToolStripMenuItem_Click);
             // 
@@ -1039,6 +1035,7 @@
             this.metroPanel1.Controls.Add(this.comboBox1);
             this.metroPanel1.Controls.Add(this.tb_neu);
             this.metroPanel1.Controls.Add(this.tb_anzahl);
+            this.metroPanel1.Controls.Add(this.rb_search);
             this.metroPanel1.Controls.Add(this.rb_Add_Buch);
             this.metroPanel1.Controls.Add(this.rb_Update_Buch);
             this.metroPanel1.Controls.Add(this.rb_Delete_Buch);
@@ -1274,6 +1271,22 @@
             this.tb_neu.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
             this.tb_neu.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_neu_KeyPress);
             // 
+            // rb_search
+            // 
+            this.rb_search.AutoSize = true;
+            this.rb_search.Checked = true;
+            this.rb_search.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rb_search.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
+            this.rb_search.Location = new System.Drawing.Point(3, 3);
+            this.rb_search.Name = "rb_search";
+            this.rb_search.Size = new System.Drawing.Size(66, 19);
+            this.rb_search.TabIndex = 41;
+            this.rb_search.TabStop = true;
+            this.rb_search.Text = "Suchen";
+            this.metroToolTip1.SetToolTip(this.rb_search, "    Klicken sie hier, um nach einem Buch zu suchen.    ");
+            this.rb_search.UseSelectable = true;
+            this.rb_search.CheckedChanged += new System.EventHandler(this.Rb_search_CheckedChanged);
+            // 
             // backgroundWorker1
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
@@ -1425,5 +1438,6 @@
         private MetroFramework.Controls.MetroPanel metroPanel2;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
         private MetroFramework.Controls.MetroButton bt_exemplar;
+        private MetroFramework.Controls.MetroRadioButton rb_search;
     }
 }

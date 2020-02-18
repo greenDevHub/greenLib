@@ -72,6 +72,10 @@ namespace Bibo_Verwaltung
             mbt_Export.Enabled = !activate;
             bt_cleanup.Enabled = !activate;
             kundeEntfernenToolStripMenuItem.Enabled = !activate;
+            if (rb_search.Checked)
+            {
+                bt_confirm.Enabled = false;
+            }
         }
         #region Fenster-Methoden
         /// <summary>
@@ -266,7 +270,32 @@ namespace Bibo_Verwaltung
                     lb_Hausnummer.Text = "Hausnummer:";
                     lb_Postleitzahl.Text = "Postleitzahl:";
                 }
+                else if (rb_search.Checked)
+            {
+                bt_confirm.Text = "---";
+                tb_KundenID.Enabled = true;
+                tb_Vorname.Enabled = true;
+                tb_Nachname.Enabled = true;
+                mdtp_GebDat.Enabled = true;
+                tb_Strasse.Enabled = true;
+                tb_Hausnummer.Enabled = true;
+                tb_Postleitzahl.Enabled = true;
+                tb_Ort.Enabled = true;
+                tb_Klasse.Enabled = true;
+                tb_Mail.Enabled = true;
+                tb_Telefonnummer.Enabled = true;
+                lb_KundenID.Text = "Kunden-ID:";
+                lb_Vorname.Text = "Vorname:";
+                lb_Nachname.Text = "Nachname:";
+                lb_geburtsdatum.Text = "Geburtsdatum:";
+                lb_Strasse.Text = "Strasse:";
+                lb_Hausnummer.Text = "Hausnummer:";
+                lb_Ort.Text = "Wohnort:";
+                lb_Postleitzahl.Text = "Postleitzahl:";
+                bt_confirm.Enabled = false;
+            }
             guestMode(guest);
+            
         }
 
         /// <summary>
@@ -306,12 +335,12 @@ namespace Bibo_Verwaltung
         {
             if (mdtp_GebDat.Value.Date != DateTime.Now.Date)
             {
-                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%' AND Geburtsdatum LIKE '{9}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, mdtp_GebDat.Value.Date.ToShortDateString());
+                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%' AND Geburtsdatum LIKE '{9}%' AND [Kunden-ID] LIKE '%{10}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, mdtp_GebDat.Value.Date.ToShortDateString(), tb_KundenID);
 
             }
             else
             {
-                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
+                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%' AND [Kunden-ID] LIKE '%{9}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, tb_KundenID);
 
             }
         }
@@ -641,6 +670,12 @@ namespace Bibo_Verwaltung
             SetBackground_White();
         }
 
+        private void Rb_search_CheckedChanged(object sender, EventArgs e)
+        {
+            SetModus();
+            SetBackground_White();
+        }
+
         private void w_s_kunden_Activated(object sender, EventArgs e)
         {
             SetModus();
@@ -653,6 +688,7 @@ namespace Bibo_Verwaltung
         private void tb_KundenID_TextChanged(object sender, EventArgs e)
         {
             tb_KundenID.BackColor = Color.White;
+            KundenFilter();
         }
 
         private void tb_Vorname_TextChanged(object sender, EventArgs e)
@@ -1082,5 +1118,7 @@ namespace Bibo_Verwaltung
                 leistungskursAuswählenToolStripMenuItem.Visible = true;
             }
         }
+
+
     }
 }

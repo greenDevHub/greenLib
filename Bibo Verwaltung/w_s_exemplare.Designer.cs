@@ -67,6 +67,7 @@
             this.acb_Zustand = new Bibo_Verwaltung.AdvancedComboBox();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.dTP_AufDat = new MetroFramework.Controls.MetroDateTime();
+            this.rb_search = new MetroFramework.Controls.MetroRadioButton();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
@@ -458,8 +459,7 @@
             this.rb_delete.AutoSize = true;
             this.rb_delete.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_delete.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.rb_delete.Location = new System.Drawing.Point(193, 3);
-            this.rb_delete.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
+            this.rb_delete.Location = new System.Drawing.Point(252, 3);
             this.rb_delete.Name = "rb_delete";
             this.rb_delete.Size = new System.Drawing.Size(80, 19);
             this.rb_delete.TabIndex = 14;
@@ -473,8 +473,7 @@
             this.rb_edit.AutoSize = true;
             this.rb_edit.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_edit.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.rb_edit.Location = new System.Drawing.Point(99, 3);
-            this.rb_edit.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
+            this.rb_edit.Location = new System.Drawing.Point(163, 3);
             this.rb_edit.Name = "rb_edit";
             this.rb_edit.Size = new System.Drawing.Size(88, 19);
             this.rb_edit.TabIndex = 13;
@@ -486,16 +485,13 @@
             // rb_neu
             // 
             this.rb_neu.AutoSize = true;
-            this.rb_neu.Checked = true;
             this.rb_neu.Cursor = System.Windows.Forms.Cursors.Default;
             this.rb_neu.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_neu.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.rb_neu.Location = new System.Drawing.Point(3, 3);
-            this.rb_neu.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
+            this.rb_neu.Location = new System.Drawing.Point(70, 3);
             this.rb_neu.Name = "rb_neu";
             this.rb_neu.Size = new System.Drawing.Size(90, 19);
             this.rb_neu.TabIndex = 12;
-            this.rb_neu.TabStop = true;
             this.rb_neu.Text = "Hinzufügen";
             this.metroToolTip1.SetToolTip(this.rb_neu, "    Klicken sie hier, um ein neues Exemplar hinzuzufügen.    ");
             this.rb_neu.UseSelectable = true;
@@ -564,7 +560,6 @@
             this.tb_ID.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.tb_ID.CustomButton.UseSelectable = true;
             this.tb_ID.CustomButton.Visible = false;
-            this.tb_ID.Enabled = false;
             this.tb_ID.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.tb_ID.Lines = new string[0];
             this.tb_ID.Location = new System.Drawing.Point(126, 58);
@@ -601,6 +596,7 @@
             this.tb_ISBN.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.tb_ISBN.CustomButton.UseSelectable = true;
             this.tb_ISBN.CustomButton.Visible = false;
+            this.tb_ISBN.Enabled = false;
             this.tb_ISBN.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.helpProvider.SetHelpString(this.tb_ISBN, "Tragen sie hier die ISBN-13 ein, um das gewünschte Buch zu laden.");
             this.tb_ISBN.Lines = new string[0];
@@ -684,6 +680,7 @@
             this.metroPanel1.Controls.Add(this.rb_delete);
             this.metroPanel1.Controls.Add(this.lb_Message);
             this.metroPanel1.Controls.Add(this.tb_ExempCount);
+            this.metroPanel1.Controls.Add(this.rb_search);
             this.metroPanel1.Controls.Add(this.rb_neu);
             this.metroPanel1.Controls.Add(this.rb_edit);
             this.metroPanel1.Controls.Add(this.mlb_Vorhanden);
@@ -720,6 +717,23 @@
             this.dTP_AufDat.Size = new System.Drawing.Size(171, 29);
             this.dTP_AufDat.TabIndex = 50;
             this.metroToolTip1.SetToolTip(this.dTP_AufDat, "    Wählen Sie hier das Aufnahmedatum des Exemplares aus.    ");
+            this.dTP_AufDat.ValueChanged += new System.EventHandler(this.DTP_AufDat_ValueChanged);
+            // 
+            // rb_search
+            // 
+            this.rb_search.AutoSize = true;
+            this.rb_search.Checked = true;
+            this.rb_search.Cursor = System.Windows.Forms.Cursors.Default;
+            this.rb_search.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rb_search.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
+            this.rb_search.Location = new System.Drawing.Point(3, 3);
+            this.rb_search.Name = "rb_search";
+            this.rb_search.Size = new System.Drawing.Size(66, 19);
+            this.rb_search.TabIndex = 12;
+            this.rb_search.TabStop = true;
+            this.rb_search.Text = "Suchen";
+            this.rb_search.UseSelectable = true;
+            this.rb_search.CheckedChanged += new System.EventHandler(this.Bt_search_CheckedChanged);
             // 
             // timer
             // 
@@ -814,6 +828,7 @@
             this.Text = "Exemplarverwaltung";
             this.Activated += new System.EventHandler(this.w_s_buchid_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_buchid_FormClosing);
+            this.Shown += new System.EventHandler(this.W_s_exemplare_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             this.gb_BarcodeBox.ResumeLayout(false);
@@ -870,5 +885,6 @@
         private MetroFramework.Components.MetroToolTip metroToolTip1;
         private MetroFramework.Controls.MetroPanel metroPanel3;
         private MetroFramework.Controls.MetroPanel metroPanel4;
+        private MetroFramework.Controls.MetroRadioButton rb_search;
     }
 }

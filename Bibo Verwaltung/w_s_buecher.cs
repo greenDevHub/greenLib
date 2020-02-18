@@ -92,6 +92,12 @@ namespace Bibo_Verwaltung
             bt_picture.Enabled = !activate;
             bt_Excel.Enabled = !activate;
             entfernenToolStripMenuItem.Enabled = !activate;
+            if (rb_search.Checked)
+            {
+                bt_speichern_buecher.Enabled = false;
+                bt_pic_delete.Enabled = false;
+                bt_picture.Enabled = false;
+            }
         }
         bool loaded = false;
         private string location = "";
@@ -656,7 +662,7 @@ namespace Bibo_Verwaltung
         private void bt_clear_buecher_Click(object sender, EventArgs e)
         {
             Clear_All();
-            rb_Add_Buch.Checked = true;
+            //rb_Add_Buch.Checked = true;
         }
 
         private void Clear_All()
@@ -866,6 +872,39 @@ namespace Bibo_Verwaltung
                 button1.Enabled = false;
             }
             guestMode(guest);
+            if (rb_search.Checked)
+            {
+                bt_speichern_buecher.Enabled = false;
+                bt_pic_delete.Enabled = false;
+                bt_picture.Enabled = false;
+
+                bt_print.Enabled = true;
+                tb_barcodeAdd.Enabled = true;
+                tb_neu.Enabled = false;
+                tb_ISBN.Enabled = true;
+                tb_Titel.Enabled = true;
+                cb_Autor.Enabled = true;
+                cb_Verlag.Enabled = true;
+                cb_Sprache.Enabled = true;
+                cb_Genre.Enabled = true;
+                tb_Auflage.Enabled = true;
+                tb_Neupreis.Enabled = true;
+                dTP_Erscheinungsdatum.Enabled = true;
+                bt_speichern_buecher.Text = "---";
+                picBox_Klein.Enabled = true;
+                mtb_Nachricht.Text = "Das Buch wurde erfolgreich hinzugefügt!";
+                lb_ISBN.Text = "ISBN:";
+                lb_Titel.Text = "Titel:";
+                lb_Autor.Text = "Autor:";
+                lb_Verlag.Text = "Verlag:";
+                lb_Genre.Text = "Genre:";
+                lb_Sprache.Text = "Sprache:";
+                lb_Erscheinungsdatum.Text = "Erscheinungsdatum:";
+                checkbox_autor.Enabled = false;
+                button1.Enabled = true;
+
+            }
+            
         }
         #endregion
 
@@ -899,6 +938,11 @@ namespace Bibo_Verwaltung
         }
 
         private void rb_Delete_CheckedChanged(object sender, EventArgs e)
+        {
+            Modus();
+            Objekt_White();
+        }
+        private void Rb_search_CheckedChanged(object sender, EventArgs e)
         {
             Modus();
             Objekt_White();
@@ -1896,5 +1940,7 @@ namespace Bibo_Verwaltung
                 bt_exemplar.Enabled = false;
             }
         }
+
+
     }
 }
