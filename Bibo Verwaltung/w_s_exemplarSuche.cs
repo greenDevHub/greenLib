@@ -17,14 +17,18 @@ namespace Bibo_Verwaltung
         string exemplarID;
         public string ExemplarID { get { return exemplarID; } set { exemplarID = value; } }
 
+        int currentstufe;
+        public int CurrentStufe { get { return currentstufe; } set { currentstufe = value; } }
+
         #region Constructor
         string currentUser;
-        public w_s_exemplarSuche(string userName)
+        public w_s_exemplarSuche(string userName, int stufe)
         {
             InitializeComponent();
             this.currentUser = userName;
+            this.currentstufe = stufe;
             this.Text = Text + " - Angemeldet als: " + userName;
-            buch.FillCombobox(ref a_cb_Buecher, 0);
+            buch.FillComboSuche(ref a_cb_Buecher, CurrentStufe, 0);
             a_cb_Buecher.SelectedIndex = 0;
         }
         #endregion
@@ -33,7 +37,7 @@ namespace Bibo_Verwaltung
         {
             if (a_cb_Buecher.SelectedItem != null)
             {
-                gv_Exemplare.DataSource = new Exemplar().GetAllExemplare(a_cb_Buecher.SelectedValue.ToString());
+                gv_Exemplare.DataSource = new Exemplar().GetBuchSucheExemplare(CurrentStufe, a_cb_Buecher.SelectedValue.ToString());
                 gv_Exemplare.Refresh();
             }
         }

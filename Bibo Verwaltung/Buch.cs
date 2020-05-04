@@ -517,6 +517,19 @@ namespace Bibo_Verwaltung
             con.Close();
         }
 
+        private void FillComboBoxBuchSuche(int stufe)
+        {
+            dt.Rows.Clear();
+            dt.Columns.Clear();
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT buch_isbn as 'ISBN', buch_titel as 'Titel' FROM t_s_buchid left join t_s_buecher on buch_isbn = bu_isbn left join t_s_buch_stufe on bs_isbn = bu_isbn WHERE bs_klassenstufe = @stufe AND bu_activated = 1 AND bu_id NOT IN (SELECT aus_buchid FROM t_bd_ausgeliehen) group by buch_isbn, buch_titel";
+            adapter2 = new SqlDataAdapter(RawCommand, con.Con);
+            adapter2.SelectCommand.Parameters.AddWithValue("@stufe", stufe);
+            adapter2.Fill(ds);
+            adapter2.Fill(dt);
+            con.Close();
+        }
+
         public string AutorNames()
         {
             string text = "";
@@ -626,6 +639,19 @@ namespace Bibo_Verwaltung
         {
             ClearDataSource();
             FillObjectBuchShort();
+            cb.DataSource = ds.Tables[0];
+            cb.ValueMember = "ISBN";
+            cb.DisplayMember = "Titel";
+            cb.SelectedValue = value;
+        }
+
+        /// <summary>
+        /// Füllt die ComboBox der Buchsuche (AutoAusleihe) mit Buchdaten 
+        /// </summary>
+        public void FillComboSuche(ref AdvancedComboBox cb, int klassenstufe, object value)
+        {
+            ClearDataSource();
+            FillComboBoxBuchSuche(klassenstufe);
             cb.DataSource = ds.Tables[0];
             cb.ValueMember = "ISBN";
             cb.DisplayMember = "Titel";

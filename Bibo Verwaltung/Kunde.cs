@@ -539,7 +539,23 @@ namespace Bibo_Verwaltung
             KundenID = KID;
             DataTable result = new DataTable();
             if (con.ConnectError()) return result;
-            string RawCommand = "SELECT aus_buchid as 'ExemplarID', buch_isbn as 'ISBN', aus_leihdatum as 'Leihdatum', aus_rückgabedatum as 'Rückgabedatum' FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid left join t_s_buecher on buch_isbn = bu_isbn WHERE aus_kundenid = @0";
+            string RawCommand = "SELECT aus_buchid as 'ID', buch_isbn as 'ISBN', aus_leihdatum as 'Leihdatum', aus_rückgabedatum as 'Rückgabedatum' FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid left join t_s_buecher on buch_isbn = bu_isbn WHERE aus_kundenid = @0";
+            adapter = new SqlDataAdapter(RawCommand, con.Con);
+            adapter.SelectCommand.Parameters.AddWithValue("@0", KID);
+            adapter.Fill(result);
+            con.Close();
+            return result;
+        }
+
+        /// <summary>
+        /// Gibt ein DataTable-Objekt mit den ausgeliehen Schul-Büchern der Kunden zurück 
+        /// </summary>
+        public DataTable GetSchulbuchAusgeliehen(string KID)
+        {
+            KundenID = KID;
+            DataTable result = new DataTable();
+            if (con.ConnectError()) return result;
+            string RawCommand = "SELECT aus_buchid as 'ID', f_kurzform as 'Fach', buch_isbn as 'ISBN', aus_leihdatum as 'Leihdatum', aus_rückgabedatum as 'Rückgabedatum' FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid left join t_s_buecher on buch_isbn = bu_isbn left join t_s_buch_fach on bf_isbn = buch_isbn left join t_s_faecher on f_id = bf_fachid WHERE aus_kundenid = @0 AND buch_isbn IN (SELECT bf_isbn FROM t_s_buch_fach)";
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.SelectCommand.Parameters.AddWithValue("@0", KID);
             adapter.Fill(result);
@@ -562,7 +578,7 @@ namespace Bibo_Verwaltung
                 if (con.ConnectError()) return;
                 if (!showKlasse)
                 {
-                    //nach klasse selectieren
+                    //nach klasse selektieren
                     string RawCommand = "SELECT kunde_ID, kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_klasse, k_bezeichnung as 'Klasse', ks_klassenstufe as 'Klassenstufe' FROM [dbo].[t_s_kunden] left join [dbo].[t_s_klassen] on k_id = kunde_klasse left join [dbo].[t_s_klasse_stufe] on ks_klasse = kunde_klasse WHERE kunde_activated = 1 AND kunde_klasse = @klasse order by Klasse";
                     adapter = new SqlDataAdapter(RawCommand, con.Con);
                     adapter.SelectCommand.Parameters.AddWithValue("@klasse", klasse);
@@ -570,8 +586,9 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
-                    string RawCommand = "SELECT kunde_ID, kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_klasse, k_bezeichnung as 'Klasse', ks_klassenstufe as 'Klassenstufe' FROM [dbo].[t_s_kunden] left join [dbo].[t_s_klassen] on k_id = kunde_klasse left join [dbo].[t_s_klasse_stufe] on ks_klasse = kunde_klasse WHERE kunde_activated = 1 order by Klasse";
+                    string RawCommand = "SELECT kunde_ID, kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_klasse, k_bezeichnung as 'Klasse', ks_klassenstufe as 'Klassenstufe' FROM [dbo].[t_s_kunden] left join [dbo].[t_s_klassen] on k_id = kunde_klasse left join [dbo].[t_s_klasse_stufe] on ks_klasse = kunde_klasse WHERE kunde_activated = 1 AND ks_klassenstufe = @klasse";
                     adapter = new SqlDataAdapter(RawCommand, con.Con);
+                    adapter.SelectCommand.Parameters.AddWithValue("@klasse", klasse);
                     adapter.Fill(ds.Tables["KundenListe"]);
                 }
                 con.Close();

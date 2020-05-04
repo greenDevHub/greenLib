@@ -79,4 +79,4 @@ DONE>> als Gast können Bücher bearbeitet werden
 
 Automatische Lehrbuchverwaltung
 > wurde bisher noch nicht getestet
-> muss noch getestet werden!
+> muss noch getestet werden! ->kann getestet werden!!!

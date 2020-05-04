@@ -54,6 +54,25 @@ namespace Bibo_Verwaltung
         }
 
         /// <summary>
+        /// Gibt die Stufe der Klasse zurück (bei nicht gefunden Wert = 0) 
+        /// </summary>
+        public int GetStufe(int klassenid)
+        {
+            int Stufe = 0;
+            if (con.ConnectError()) return 0;
+            string RawCommand = "SELECT ks_klassenstufe FROM [dbo].[t_s_klasse_stufe] WHERE ks_klasse = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, klassenid);
+            while (dr.Read())
+            {
+                Stufe = Convert.ToInt32(dr["ks_klassenstufe"].ToString());
+            }
+            dr.Close();
+            con.Close();
+            return Stufe;
+        }
+
+
+        /// <summary>
         /// Markiert die zugeordneten Klassen
         /// </summary>
         private void Set_Mark(ref MetroFramework.Controls.MetroGrid grid, string stufe, object value = null)

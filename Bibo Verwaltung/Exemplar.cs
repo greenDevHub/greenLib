@@ -373,6 +373,19 @@ namespace Bibo_Verwaltung
             return result;
         }
 
+        public DataTable GetBuchSucheExemplare(int stufe, string isbn)
+        {
+            DataTable result = new DataTable();
+            if (con.ConnectError()) return result;
+            string RawCommand = "SELECT bu_id as 'ExemplarID', buch_isbn as 'ISBN', buch_titel as 'Titel' FROM t_s_buchid left join t_s_buecher on buch_isbn = bu_isbn left join t_s_buch_stufe on bs_isbn = bu_isbn WHERE bs_klassenstufe = @stufe AND bu_activated = 1 AND buch_isbn = @isbn AND bu_id NOT IN (SELECT aus_buchid FROM t_bd_ausgeliehen)";
+            adapter2 = new SqlDataAdapter(RawCommand, con.Con);
+            adapter2.SelectCommand.Parameters.AddWithValue("@stufe", stufe);
+            adapter2.SelectCommand.Parameters.AddWithValue("@isbn", isbn);
+            adapter2.Fill(result);
+            con.Close();
+            return result;
+        }
+
         public void SelectLastRow(string isbn)
         {
             if (con.ConnectError()) return;

@@ -149,7 +149,6 @@
             this.MinimizeBox = false;
             this.Name = "w_s_exemplarSuche";
             this.Resizable = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Yellow;
             this.Text = "Exemplar-Suche";
