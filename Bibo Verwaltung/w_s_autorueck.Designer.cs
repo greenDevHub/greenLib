@@ -39,7 +39,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_autorueck));
             this.lb_Klasse = new MetroFramework.Controls.MetroLabel();
-            this.lb_ExID = new MetroFramework.Controls.MetroLabel();
             this.tb_ExemplarID = new MetroFramework.Controls.MetroTextBox();
             this.bt_back = new MetroFramework.Controls.MetroButton();
             this.bt_abschließen = new MetroFramework.Controls.MetroButton();
@@ -52,7 +51,6 @@
             this.gv_selected = new MetroFramework.Controls.MetroGrid();
             this.gv_suggested = new MetroFramework.Controls.MetroGrid();
             this.gv_Schueler = new MetroFramework.Controls.MetroGrid();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.a_cb_Klasse = new Bibo_Verwaltung.AdvancedComboBox();
             this.a_cb_Modus = new Bibo_Verwaltung.AdvancedComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).BeginInit();
@@ -63,7 +61,7 @@
             // lb_Klasse
             // 
             this.lb_Klasse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lb_Klasse.Location = new System.Drawing.Point(564, 82);
+            this.lb_Klasse.Location = new System.Drawing.Point(239, 82);
             this.lb_Klasse.Name = "lb_Klasse";
             this.lb_Klasse.Size = new System.Drawing.Size(50, 24);
             this.lb_Klasse.Style = MetroFramework.MetroColorStyle.Yellow;
@@ -72,17 +70,6 @@
             this.lb_Klasse.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lb_Klasse.Visible = false;
             // 
-            // lb_ExID
-            // 
-            this.lb_ExID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lb_ExID.Location = new System.Drawing.Point(636, 137);
-            this.lb_ExID.Name = "lb_ExID";
-            this.lb_ExID.Size = new System.Drawing.Size(94, 24);
-            this.lb_ExID.Style = MetroFramework.MetroColorStyle.Yellow;
-            this.lb_ExID.TabIndex = 40;
-            this.lb_ExID.Text = "Exemplar ID:";
-            this.lb_ExID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // tb_ExemplarID
             // 
             this.tb_ExemplarID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -90,7 +77,7 @@
             // 
             // 
             this.tb_ExemplarID.CustomButton.Image = null;
-            this.tb_ExemplarID.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_ExemplarID.CustomButton.Location = new System.Drawing.Point(373, 2);
             this.tb_ExemplarID.CustomButton.Name = "";
             this.tb_ExemplarID.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.tb_ExemplarID.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -101,7 +88,7 @@
             this.tb_ExemplarID.Enabled = false;
             this.tb_ExemplarID.ForeColor = System.Drawing.SystemColors.GrayText;
             this.tb_ExemplarID.Lines = new string[0];
-            this.tb_ExemplarID.Location = new System.Drawing.Point(802, 137);
+            this.tb_ExemplarID.Location = new System.Drawing.Point(582, 137);
             this.tb_ExemplarID.MaxLength = 32767;
             this.tb_ExemplarID.Name = "tb_ExemplarID";
             this.tb_ExemplarID.PasswordChar = '\0';
@@ -111,7 +98,7 @@
             this.tb_ExemplarID.SelectionLength = 0;
             this.tb_ExemplarID.SelectionStart = 0;
             this.tb_ExemplarID.ShortcutsEnabled = true;
-            this.tb_ExemplarID.Size = new System.Drawing.Size(175, 24);
+            this.tb_ExemplarID.Size = new System.Drawing.Size(395, 24);
             this.tb_ExemplarID.Style = MetroFramework.MetroColorStyle.Yellow;
             this.tb_ExemplarID.TabIndex = 29;
             this.tb_ExemplarID.UseSelectable = true;
@@ -142,9 +129,9 @@
             this.bt_abschließen.Enabled = false;
             this.bt_abschließen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_abschließen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_abschließen.Location = new System.Drawing.Point(802, 453);
+            this.bt_abschließen.Location = new System.Drawing.Point(777, 453);
             this.bt_abschließen.Name = "bt_abschließen";
-            this.bt_abschließen.Size = new System.Drawing.Size(175, 24);
+            this.bt_abschließen.Size = new System.Drawing.Size(200, 24);
             this.bt_abschließen.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_abschließen.TabIndex = 35;
             this.bt_abschließen.Text = "Rückgabevorgang ausführen";
@@ -172,7 +159,7 @@
             this.bt_next.DisplayFocus = true;
             this.bt_next.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_next.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_next.Location = new System.Drawing.Point(203, 453);
+            this.bt_next.Location = new System.Drawing.Point(149, 453);
             this.bt_next.Name = "bt_next";
             this.bt_next.Size = new System.Drawing.Size(120, 24);
             this.bt_next.Style = MetroFramework.MetroColorStyle.Yellow;
@@ -185,7 +172,7 @@
             // 
             this.lb_selected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_selected.AutoSize = true;
-            this.lb_selected.Location = new System.Drawing.Point(636, 173);
+            this.lb_selected.Location = new System.Drawing.Point(582, 173);
             this.lb_selected.Name = "lb_selected";
             this.lb_selected.Size = new System.Drawing.Size(128, 19);
             this.lb_selected.Style = MetroFramework.MetroColorStyle.Yellow;
@@ -195,7 +182,7 @@
             // lb_suggested
             // 
             this.lb_suggested.AutoSize = true;
-            this.lb_suggested.Location = new System.Drawing.Point(329, 115);
+            this.lb_suggested.Location = new System.Drawing.Point(275, 115);
             this.lb_suggested.Name = "lb_suggested";
             this.lb_suggested.Size = new System.Drawing.Size(132, 19);
             this.lb_suggested.Style = MetroFramework.MetroColorStyle.Yellow;
@@ -256,10 +243,9 @@
             this.gv_selected.EnableHeadersVisualStyles = false;
             this.gv_selected.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_selected.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_selected.Location = new System.Drawing.Point(636, 195);
+            this.gv_selected.Location = new System.Drawing.Point(582, 195);
             this.gv_selected.MultiSelect = false;
             this.gv_selected.Name = "gv_selected";
-            this.gv_selected.ReadOnly = true;
             this.gv_selected.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(196)))), ((int)(((byte)(37)))));
@@ -269,14 +255,14 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gv_selected.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.gv_selected.RowHeadersWidth = 30;
+            this.gv_selected.RowHeadersWidth = 5;
             this.gv_selected.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_selected.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv_selected.ShowCellErrors = false;
             this.gv_selected.ShowCellToolTips = false;
             this.gv_selected.ShowEditingIcon = false;
             this.gv_selected.ShowRowErrors = false;
-            this.gv_selected.Size = new System.Drawing.Size(341, 252);
+            this.gv_selected.Size = new System.Drawing.Size(395, 252);
             this.gv_selected.Style = MetroFramework.MetroColorStyle.Yellow;
             this.gv_selected.TabIndex = 33;
             // 
@@ -288,7 +274,7 @@
             this.gv_suggested.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gv_suggested.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_suggested.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gv_suggested.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_suggested.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv_suggested.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -314,7 +300,7 @@
             this.gv_suggested.EnableHeadersVisualStyles = false;
             this.gv_suggested.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_suggested.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_suggested.Location = new System.Drawing.Point(329, 137);
+            this.gv_suggested.Location = new System.Drawing.Point(275, 137);
             this.gv_suggested.MultiSelect = false;
             this.gv_suggested.Name = "gv_suggested";
             this.gv_suggested.ReadOnly = true;
@@ -327,7 +313,7 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gv_suggested.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.gv_suggested.RowHeadersWidth = 30;
+            this.gv_suggested.RowHeadersWidth = 5;
             this.gv_suggested.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_suggested.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv_suggested.ShowCellErrors = false;
@@ -346,7 +332,7 @@
             this.gv_Schueler.AllowUserToResizeRows = false;
             this.gv_Schueler.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.gv_Schueler.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gv_Schueler.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gv_Schueler.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_Schueler.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv_Schueler.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -386,28 +372,17 @@
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gv_Schueler.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.gv_Schueler.RowHeadersWidth = 30;
+            this.gv_Schueler.RowHeadersWidth = 5;
             this.gv_Schueler.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_Schueler.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv_Schueler.ShowCellErrors = false;
             this.gv_Schueler.ShowCellToolTips = false;
             this.gv_Schueler.ShowEditingIcon = false;
             this.gv_Schueler.ShowRowErrors = false;
-            this.gv_Schueler.Size = new System.Drawing.Size(300, 310);
+            this.gv_Schueler.Size = new System.Drawing.Size(246, 310);
             this.gv_Schueler.Style = MetroFramework.MetroColorStyle.Yellow;
             this.gv_Schueler.TabIndex = 30;
             this.gv_Schueler.CurrentCellChanged += new System.EventHandler(this.Gv_Schueler_CurrentCellChanged);
-            // 
-            // metroButton1
-            // 
-            this.metroButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroButton1.Location = new System.Drawing.Point(533, 454);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(75, 23);
-            this.metroButton1.TabIndex = 42;
-            this.metroButton1.Text = "metroButton1";
-            this.metroButton1.UseSelectable = true;
-            this.metroButton1.Click += new System.EventHandler(this.MetroButton1_Click);
             // 
             // a_cb_Klasse
             // 
@@ -415,16 +390,16 @@
             this.a_cb_Klasse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.a_cb_Klasse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.a_cb_Klasse.BorderColor = System.Drawing.Color.Gray;
-            this.a_cb_Klasse.DataRowView = false;
+            this.a_cb_Klasse.DataRowView = true;
             this.a_cb_Klasse.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.a_cb_Klasse.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.a_cb_Klasse.ForeColor = System.Drawing.SystemColors.GrayText;
             this.a_cb_Klasse.FormattingEnabled = true;
             this.a_cb_Klasse.HighlightColor = System.Drawing.Color.Gold;
             this.a_cb_Klasse.ItemHeight = 18;
-            this.a_cb_Klasse.Location = new System.Drawing.Point(636, 82);
+            this.a_cb_Klasse.Location = new System.Drawing.Point(295, 82);
             this.a_cb_Klasse.Name = "a_cb_Klasse";
-            this.a_cb_Klasse.Size = new System.Drawing.Size(191, 24);
+            this.a_cb_Klasse.Size = new System.Drawing.Size(210, 24);
             this.a_cb_Klasse.Sorted = true;
             this.a_cb_Klasse.TabIndex = 27;
             this.a_cb_Klasse.Visible = false;
@@ -442,11 +417,11 @@
             this.a_cb_Modus.HighlightColor = System.Drawing.Color.Gold;
             this.a_cb_Modus.ItemHeight = 18;
             this.a_cb_Modus.Items.AddRange(new object[] {
-            "Ausgabe nach Klasse",
-            "Ausgabe nach Klassenstufe"});
+            "Rückgabe nach Klasse",
+            "Rückgabe nach Klassenstufe"});
             this.a_cb_Modus.Location = new System.Drawing.Point(23, 82);
             this.a_cb_Modus.Name = "a_cb_Modus";
-            this.a_cb_Modus.Size = new System.Drawing.Size(175, 24);
+            this.a_cb_Modus.Size = new System.Drawing.Size(210, 24);
             this.a_cb_Modus.Sorted = true;
             this.a_cb_Modus.TabIndex = 25;
             this.a_cb_Modus.SelectedIndexChanged += new System.EventHandler(this.A_cb_Modus_SelectedIndexChanged);
@@ -457,10 +432,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1000, 500);
-            this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.a_cb_Klasse);
             this.Controls.Add(this.lb_Klasse);
-            this.Controls.Add(this.lb_ExID);
             this.Controls.Add(this.tb_ExemplarID);
             this.Controls.Add(this.bt_back);
             this.Controls.Add(this.bt_abschließen);
@@ -480,7 +453,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Yellow;
-            this.Text = "Automatische Lehrbuchrückgabe";
+            this.Text = "Lehrbuchrückgabe";
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_suggested)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Schueler)).EndInit();
@@ -493,7 +466,6 @@
 
         private AdvancedComboBox a_cb_Klasse;
         private MetroFramework.Controls.MetroLabel lb_Klasse;
-        private MetroFramework.Controls.MetroLabel lb_ExID;
         private MetroFramework.Controls.MetroTextBox tb_ExemplarID;
         private MetroFramework.Controls.MetroButton bt_back;
         private MetroFramework.Controls.MetroButton bt_abschließen;
@@ -507,6 +479,5 @@
         private MetroFramework.Controls.MetroGrid gv_selected;
         private MetroFramework.Controls.MetroGrid gv_suggested;
         private MetroFramework.Controls.MetroGrid gv_Schueler;
-        private MetroFramework.Controls.MetroButton metroButton1;
     }
 }

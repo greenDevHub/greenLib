@@ -63,7 +63,7 @@
             // 
             // lb_Jahr
             // 
-            this.lb_Jahr.Location = new System.Drawing.Point(204, 82);
+            this.lb_Jahr.Location = new System.Drawing.Point(239, 82);
             this.lb_Jahr.Name = "lb_Jahr";
             this.lb_Jahr.Size = new System.Drawing.Size(109, 24);
             this.lb_Jahr.Style = MetroFramework.MetroColorStyle.Yellow;
@@ -327,9 +327,9 @@
             this.bt_abschließen.Enabled = false;
             this.bt_abschließen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_abschließen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_abschließen.Location = new System.Drawing.Point(802, 453);
+            this.bt_abschließen.Location = new System.Drawing.Point(777, 453);
             this.bt_abschließen.Name = "bt_abschließen";
-            this.bt_abschließen.Size = new System.Drawing.Size(175, 24);
+            this.bt_abschließen.Size = new System.Drawing.Size(200, 24);
             this.bt_abschließen.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_abschließen.TabIndex = 8;
             this.bt_abschließen.Text = "Ausleihvorgang ausführen";
@@ -392,7 +392,7 @@
             // lb_Klasse
             // 
             this.lb_Klasse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lb_Klasse.Location = new System.Drawing.Point(504, 82);
+            this.lb_Klasse.Location = new System.Drawing.Point(539, 82);
             this.lb_Klasse.Name = "lb_Klasse";
             this.lb_Klasse.Size = new System.Drawing.Size(50, 24);
             this.lb_Klasse.Style = MetroFramework.MetroColorStyle.Yellow;
@@ -405,7 +405,7 @@
             // 
             this.dp_RueckDatum.CustomFormat = " dd : MMMM : yyyy";
             this.dp_RueckDatum.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dp_RueckDatum.Location = new System.Drawing.Point(319, 79);
+            this.dp_RueckDatum.Location = new System.Drawing.Point(354, 79);
             this.dp_RueckDatum.MinimumSize = new System.Drawing.Size(0, 29);
             this.dp_RueckDatum.Name = "dp_RueckDatum";
             this.dp_RueckDatum.Size = new System.Drawing.Size(179, 29);
@@ -438,9 +438,9 @@
             this.a_cb_Klasse.FormattingEnabled = true;
             this.a_cb_Klasse.HighlightColor = System.Drawing.Color.Gold;
             this.a_cb_Klasse.ItemHeight = 18;
-            this.a_cb_Klasse.Location = new System.Drawing.Point(560, 84);
+            this.a_cb_Klasse.Location = new System.Drawing.Point(595, 82);
             this.a_cb_Klasse.Name = "a_cb_Klasse";
-            this.a_cb_Klasse.Size = new System.Drawing.Size(191, 24);
+            this.a_cb_Klasse.Size = new System.Drawing.Size(210, 24);
             this.a_cb_Klasse.Sorted = true;
             this.a_cb_Klasse.TabIndex = 3;
             this.a_cb_Klasse.Visible = false;
@@ -462,7 +462,7 @@
             "Ausgabe nach Klassenstufe"});
             this.a_cb_Modus.Location = new System.Drawing.Point(23, 82);
             this.a_cb_Modus.Name = "a_cb_Modus";
-            this.a_cb_Modus.Size = new System.Drawing.Size(175, 24);
+            this.a_cb_Modus.Size = new System.Drawing.Size(210, 24);
             this.a_cb_Modus.Sorted = true;
             this.a_cb_Modus.TabIndex = 1;
             this.a_cb_Modus.SelectedIndexChanged += new System.EventHandler(this.a_cb_Modus_SelectedIndexChanged);
@@ -497,7 +497,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Yellow;
-            this.Text = "Automatische Lehrbuchausgabe";
+            this.Text = "Lehrbuchausgabe";
             ((System.ComponentModel.ISupportInitialize)(this.gv_Schueler)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_suggested)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).EndInit();

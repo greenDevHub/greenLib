@@ -386,7 +386,7 @@ namespace Bibo_Verwaltung
                     }
                     else
                     {
-                        MetroMessageBox.Show(this, "Es konnten keine Schüler geladen werden. Prüfen Sie ggf. alle Zuordnungen! (Klassen, Klassenstufen, Fächer, Bücher)", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MetroMessageBox.Show(this, "Es gibt keine Schüler in dieser Klasse bzw. Klassenstufe. Die Ausgabe wird beendet!", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         EndAusgabe();
                     }
                 }
@@ -397,7 +397,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MetroMessageBox.Show(this, "Wählen Sie bitte eine Klasse aus!", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MetroMessageBox.Show(this, "Wählen Sie den Ausgabe-Modus und eine Klasse bzw. eine Klassenstufe aus!", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -567,13 +567,11 @@ namespace Bibo_Verwaltung
                 a_cb_Klasse.Enabled = true;
             }
         }
-        #endregion
 
         private void Mbt_Suche_Click(object sender, EventArgs e)
         {
             if (a_cb_Modus.SelectedIndex == 0)
             {
-                
                 using (var form = new w_s_exemplarSuche(currentUser, new Klassenstufe().GetStufe(new Klasse().GetID(a_cb_Klasse.Text))))
                 {
                     var result = form.ShowDialog();
@@ -600,7 +598,7 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
-           
         }
+        #endregion
     }
 }

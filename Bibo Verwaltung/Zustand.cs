@@ -63,13 +63,28 @@ namespace Bibo_Verwaltung
         public DataGridViewComboBoxColumn FillDataGridViewComboBox()
         {
             DataGridViewComboBoxColumn cb = new DataGridViewComboBoxColumn();
+            ClearDataSource();
+            DataRow relation;
+            string[] defaultValue = new string[2];
+
+            defaultValue[0] = "0";
+            defaultValue[1] = "--auswählen--";
+            if (dt.Columns.Count != 2)
+            {
+                dt.Columns.Add();
+            }
+            relation = dt.NewRow();
+            relation.ItemArray = defaultValue;
+            dt.Rows.Add(relation);
             FillObject();
             cb.HeaderText = "Zustand";
-            cb.Name = "cb";
+            cb.Name = "cbzustand";
+            cb.DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing;
+            cb.Width = 1500;
+            cb.SortMode = DataGridViewColumnSortMode.NotSortable;
             cb.DataSource = dt;
             cb.ValueMember = "zu_id";
             cb.DisplayMember = "zu_zustand";
-            //cb.SelectedValue = value;
             return cb;
         }
 
@@ -181,6 +196,23 @@ namespace Bibo_Verwaltung
             dr.Close();
             con.Close();
             return ZustandID;
+        }
+
+        /// <summary>
+        /// Gibt den ausgeschriebenen Buchzustand der ID zurück
+        /// </summary>
+        public string GetZustandsName(string id)
+        {
+            if (con.ConnectError()) return "";
+            string RawCommand = "SELECT zu_zustand FROM [dbo].[t_s_zustand] WHERE zu_id = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, id);
+            while (dr.Read())
+            {
+                Zustandname = dr["zu_zustand"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            return Zustandname;
         }
 
         public bool IfContains(string value)

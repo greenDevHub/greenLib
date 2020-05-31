@@ -30,7 +30,6 @@ namespace Bibo_Verwaltung
         Rueckgabe autorueckgabe = new Rueckgabe();
         Zustand zustand = new Zustand();
         Kunde kunden = new Kunde();
-        //DataTable schulBuecher = new DataTable();
         DataTable selectedBuecher = new DataTable();
         bool inRueckAction;
 
@@ -92,6 +91,7 @@ namespace Bibo_Verwaltung
             bt_bestaetigen.Text = "Schüler laden";
             tb_ExemplarID.Text = "";
             a_cb_Modus.Enabled = true;
+            a_cb_Klasse.Enabled = true;
             bt_back.Enabled = false;
             bt_next.Enabled = false;
             gv_suggested.Enabled = false;
@@ -100,6 +100,7 @@ namespace Bibo_Verwaltung
             gv_suggested.DataSource = null;
             gv_Schueler.DataSource = null;
             gv_selected.DataSource = null;
+            gv_selected.Columns.Clear();
             autorueckgabe.ClearRueckList();
             selectedBuecher.Rows.Clear();
         }
@@ -109,30 +110,34 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void LastSchueler()
         {
-            if (inRueckAction)
+            try
             {
-                if (gv_Schueler.CurrentRow.Index >= 1)
+                if (inRueckAction)
                 {
-                    gv_Schueler.CurrentCell = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index - 1].Cells[1];
-                    if (gv_Schueler.Rows.Count > 1)
+                    if (gv_Schueler.CurrentRow.Index >= 1)
                     {
-                        bt_next.Enabled = true;
+                        gv_Schueler.CurrentCell = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index - 1].Cells[1];
+                        if (gv_Schueler.Rows.Count > 1)
+                        {
+                            bt_next.Enabled = true;
+                        }
+                        if (gv_Schueler.CurrentRow.Index == 0)
+                        {
+                            bt_back.Enabled = false;
+                        }
+                        if (gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.LimeGreen || gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.Red)
+                        {
+                            gv_Schueler.ClearSelection();
+                        }
+                        tb_ExemplarID.Text = "";
+                        tb_ExemplarID.Focus();
+                        autorueckgabe.ClearRueckList();
+                        selectedBuecher.Rows.Clear();
+                        gv_selected.Refresh();
                     }
-                    if (gv_Schueler.CurrentRow.Index == 0)
-                    {
-                        bt_back.Enabled = false;
-                    }
-                    if (gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.LimeGreen || gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.Red)
-                    {
-                        gv_Schueler.ClearSelection();
-                    }
-                    tb_ExemplarID.Text = "";
-                    tb_ExemplarID.Focus();
-                    autorueckgabe.ClearRueckList();
-                    selectedBuecher.Rows.Clear();
-                    gv_selected.Refresh();
                 }
             }
+            catch { }
         }
 
         /// <summary>
@@ -172,43 +177,47 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void NextSchueler()
         {
-            if (IsComplete(ref gv_Schueler) || gv_Schueler.CurrentCell.RowIndex == gv_Schueler.RowCount - 1)
+            try
             {
-                DialogResult dialogResult = MetroMessageBox.Show(this, "Sie sind am Ende der Schülerliste angekommen. Möchten Sie die Lehrbuch-Rückgabe abschließen?", "Warnung",
-                        MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                if (dialogResult == DialogResult.OK)
+                if (IsComplete(ref gv_Schueler) || gv_Schueler.CurrentCell.RowIndex == gv_Schueler.RowCount - 1)
                 {
-                    EndAusgabe();
-                }
-                else
-                {
-                    gv_Schueler.ClearSelection();
-                }
-            }
-            if (inRueckAction)
-            {
-                if (gv_Schueler.CurrentRow.Index < gv_Schueler.Rows.Count - 1)
-                {
-                    if (gv_Schueler.Rows.Count > 1)
+                    DialogResult dialogResult = MetroMessageBox.Show(this, "Sie sind am Ende der Schülerliste angekommen. Möchten Sie die Lehrbuch-Rückgabe abschließen?", "Warnung",
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.OK)
                     {
-                        bt_back.Enabled = true;
+                        EndAusgabe();
                     }
-                    gv_Schueler.CurrentCell = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index + 1].Cells[1];
-                    if (gv_Schueler.CurrentRow.Index == gv_Schueler.Rows.Count - 1)
-                    {
-                        bt_next.Enabled = false;
-                    }
-                    if (gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.LimeGreen || gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.Red)
+                    else
                     {
                         gv_Schueler.ClearSelection();
                     }
-                    tb_ExemplarID.Text = "";
-                    tb_ExemplarID.Focus();
-                    autorueckgabe.ClearRueckList();
-                    selectedBuecher.Rows.Clear();              
-                }               
+                }
+                if (inRueckAction)
+                {
+                    if (gv_Schueler.CurrentRow.Index < gv_Schueler.Rows.Count - 1)
+                    {
+                        if (gv_Schueler.Rows.Count > 1)
+                        {
+                            bt_back.Enabled = true;
+                        }
+                        gv_Schueler.CurrentCell = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index + 1].Cells[1];
+                        if (gv_Schueler.CurrentRow.Index == gv_Schueler.Rows.Count - 1)
+                        {
+                            bt_next.Enabled = false;
+                        }
+                        if (gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.LimeGreen || gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.Red)
+                        {
+                            gv_Schueler.ClearSelection();
+                        }
+                        tb_ExemplarID.Text = "";
+                        tb_ExemplarID.Focus();
+                        autorueckgabe.ClearRueckList();
+                        selectedBuecher.Rows.Clear();
+                    }
+                }
+                gv_selected.Refresh();
             }
-            gv_selected.Refresh();
+            catch { }
         }
 
         /// <summary>
@@ -240,7 +249,7 @@ namespace Bibo_Verwaltung
             int result = -1;
             for (int i = 0; i <= gv_suggested.Rows.Count - 1; i++)
             {
-                if (gv_suggested.Rows[i].Cells["Titel"].Value.ToString() == new Exemplar().GetTitel(tb_ExemplarID.Text))
+                if (gv_suggested.Rows[i].Cells["ID"].Value.ToString() == tb_ExemplarID.Text)
                 {
                     result = i;
                 }
@@ -255,19 +264,20 @@ namespace Bibo_Verwaltung
         {
             try
             {
+                autorueckgabe.AddToRueckgabeList();
                 for (int i = 0; i < selectedBuecher.Rows.Count; i++)
                 {
-                    if (selectedBuecher.Rows[i]["Titel"].ToString() == new Exemplar().GetTitel(autorueckgabe.RueckListe.Rows[autorueckgabe.GetIndexInRueckliste()][0].ToString()))
+                    if (selectedBuecher.Rows[i]["ID"].ToString() == autorueckgabe.RueckListe.Rows[autorueckgabe.GetIndexInRueckliste()][0].ToString())
                     {
                         i = 0;
                         UnSelectExemplar();
                     }
                 }
-                autorueckgabe.AddToRueckgabeList();
                 DataRow relation;
-                string[] exemlarDetails = new string[2];
+                string[] exemlarDetails = new string[3];
                 exemlarDetails[0] = autorueckgabe.ExemplarID;
-                exemlarDetails[1] = new Exemplar().GetTitel(autorueckgabe.RueckListe.Rows[autorueckgabe.GetIndexInRueckliste()][0].ToString());
+                exemlarDetails[1] = autorueckgabe.RueckListe.Rows[autorueckgabe.GetIndexInRueckliste()][1].ToString();
+                exemlarDetails[2] = new Exemplar().GetTitel(autorueckgabe.RueckListe.Rows[autorueckgabe.GetIndexInRueckliste()][0].ToString());
                 relation = selectedBuecher.NewRow();
                 relation.ItemArray = exemlarDetails;
                 selectedBuecher.Rows.Add(relation);
@@ -293,8 +303,28 @@ namespace Bibo_Verwaltung
             }
             catch { }
         }
+
+        /// <summary>
+        /// Prüft ob bei allen Exemplaren in der DataGridView der IstZustands-ComboBox-Wert gestetz wurde (False bei Default-Wert ausgewählt)
+        /// </summary>
+        private bool CheckIstZustaende()
+        {
+            bool result = true;
+            for (int i = 0; i < selectedBuecher.Rows.Count; i++)
+            {
+                DataGridViewRow row = gv_selected.Rows[i];
+                string istzustand = row.Cells["cbzustand"].Value.ToString();
+                if ((istzustand == null) || (istzustand == "0"))
+                {
+                    result = false;
+                    break;
+                }
+            }
+            return result;
+        }
         #endregion
 
+        #region Componenten-Aktionen
         private void A_cb_Modus_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (a_cb_Modus.SelectedIndex == 0)
@@ -331,7 +361,7 @@ namespace Bibo_Verwaltung
         {
             if (!inRueckAction)
             {
-                if (a_cb_Modus.SelectedIndex != -1)
+                if (a_cb_Modus.SelectedIndex != -1 && a_cb_Klasse.SelectedIndex != -1)
                 {
                     inRueckAction = true;
                     bt_bestaetigen.Text = "Rückgabe beenden";
@@ -348,20 +378,25 @@ namespace Bibo_Verwaltung
                     }
                     else
                     {
-                        kunden.GetKundenList(ref gv_Schueler, true, 0);
+                        kunden.GetKundenList(ref gv_Schueler, true, Convert.ToInt32(a_cb_Klasse.Text.Substring(13)));
                     }
                     if (gv_Schueler.Rows.Count != 0)
                     {
                         gv_Schueler.CurrentCell = gv_Schueler.Rows[0].Cells[1];
                         gv_Schueler.Rows[0].Selected = true;
                         MarkSchueler();
+                        tb_ExemplarID.Enabled = true;
+                        tb_ExemplarID.Focus();
                     }
-                    tb_ExemplarID.Enabled = true;
-                    tb_ExemplarID.Focus();
+                    else
+                    {
+                        MetroMessageBox.Show(this, "Es gibt keine Schüler in dieser Klasse bzw. Klassenstufe. Die Rückgabe wird beendet!", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        EndAusgabe();
+                    }
                 }
                 else
                 {
-                    MetroMessageBox.Show(this, "Wählen Sie den Rückgabe-Modus und eine Klasse bzw. Klassenstufe aus!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MetroMessageBox.Show(this, "Wählen Sie den Rückgabe-Modus und eine Klasse bzw. eine Klassenstufe aus!", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
@@ -391,36 +426,47 @@ namespace Bibo_Verwaltung
                 if (dialogResult == DialogResult.OK)
                 {
                     DataGridViewRow Kundenrow = gv_Schueler.CurrentRow;
-                    try
+                    if (CheckIstZustaende())
                     {
-                        foreach (DataRow row in autorueckgabe.RueckListe.Rows)
+                        try
                         {
-                            autorueckgabe.Load_Info(row[0].ToString());
-                            //autorueckgabe.Execute_Rueckgabe(row[0].ToString(), autorueckgabe.KID, row[1].ToString(), zustand.GetZustandsID(row[2].ToString()), row[2].ToString(), autorueckgabe.Leihdatum.ToShortDateString(), DateTime.Now.Date.ToShortDateString()); //Später einbauen (das ist der fertig-funktionsfähige Befehl)
-                            autorueckgabe.Execute_Rueckgabe(row[0].ToString(), autorueckgabe.KID, row[1].ToString(), "1", "1", autorueckgabe.Leihdatum.ToShortDateString(), DateTime.Now.Date.ToShortDateString());
+                            for (int i = 0; i < selectedBuecher.Rows.Count; i++)
+                            {
+                                autorueckgabe.ExemplarID = selectedBuecher.Rows[i]["ID"].ToString();
+                                autorueckgabe.RueckListe.Rows[autorueckgabe.GetIndexInRueckliste()][2] = gv_selected.Rows[i].Cells["cbzustand"].Value.ToString();
+                            }
+                            foreach (DataRow row in autorueckgabe.RueckListe.Rows)
+                            {
+                                autorueckgabe.Load_Info(row[0].ToString());
+                                autorueckgabe.Execute_Rueckgabe(row[0].ToString(), autorueckgabe.KID, row[1].ToString(), row[2].ToString(), zustand.GetZustandsName(row[2].ToString()), autorueckgabe.Leihdatum.ToShortDateString(), DateTime.Now.Date.ToShortDateString()); //Später einbauen (das ist der fertig-funktionsfähige Befehl)
+                            }
+                            MetroMessageBox.Show(this, "Die Buchrückgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if (IsComplete(ref gv_suggested))
+                            {
+                                Kundenrow.DefaultCellStyle.BackColor = Color.LimeGreen;
+                                Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                            }
+                            else if (IsNotEmpty(ref gv_suggested))
+                            {
+                                Kundenrow.DefaultCellStyle.BackColor = Color.Gray;
+                                Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                            }
                         }
-                        MetroMessageBox.Show(this, "Die Buchrückgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        if (IsComplete(ref gv_suggested))
+                        catch
                         {
-                            Kundenrow.DefaultCellStyle.BackColor = Color.LimeGreen;
-                            Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                            MetroMessageBox.Show(this, "Die Buchrückgabe konnte nicht abgeschlossen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            if (IsComplete(ref gv_suggested))
+                            {
+                                Kundenrow.DefaultCellStyle.BackColor = Color.Red;
+                                Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                            }
                         }
-                        else if (IsNotEmpty(ref gv_suggested))
-                        {
-                            Kundenrow.DefaultCellStyle.BackColor = Color.Gray;
-                            Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
-                        }
+                        NextSchueler();
                     }
-                    catch
+                    else
                     {
-                        MetroMessageBox.Show(this, "Die Buchrückgabe konnte nicht abgeschlossen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        if (IsComplete(ref gv_suggested))
-                        {
-                            Kundenrow.DefaultCellStyle.BackColor = Color.Red;
-                            Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
-                        }
+                        MetroMessageBox.Show(this, "Prüfen Sie die Auswahl in der 'Ist-Zustand'-Spalte!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
-                    NextSchueler();
                 }
             }
             else
@@ -459,11 +505,13 @@ namespace Bibo_Verwaltung
                         Exemplar buch_exemplar = new Exemplar(tb_ExemplarID.Text);
                         if (buch_exemplar.IsActivated())
                         {
+                            lb_selected.Text = "ausgewählte Bücher:";
                             autorueckgabe.ExemplarID = buch_exemplar.ExemplarID;
                             autorueckgabe.ZustandStart = buch_exemplar.GetZustandLang(autorueckgabe.ExemplarID);
                             if (selectedBuecher.Columns.Count < 2)
                             {
                                 selectedBuecher.Columns.Add("ID");
+                                selectedBuecher.Columns.Add("Soll-Zustand");
                                 selectedBuecher.Columns.Add("Titel");
                             }
                             if (!buch_exemplar.IsSpecificAvailable())
@@ -496,6 +544,20 @@ namespace Bibo_Verwaltung
                             }
                             gv_selected.DataSource = selectedBuecher;
                             gv_selected.Refresh();
+                            if (gv_selected.Columns.Contains("cbzustand"))
+                            {
+                                gv_selected.Columns.Remove("cbzustand");
+                            }
+                            DataGridViewComboBoxColumn combobox = new DataGridViewComboBoxColumn();
+                            combobox = zustand.FillDataGridViewComboBox();
+                            gv_selected.Columns.Add(combobox);
+                            gv_selected.Columns["cbzustand"].DisplayIndex = 2;
+                            gv_selected.Columns["cbzustand"].HeaderText = "aktueller Ist-Zustand";
+                            for (int i = 0; i < gv_selected.RowCount; i++)
+                            {
+                                DataGridViewComboBoxCell comboValue = (DataGridViewComboBoxCell)(gv_selected.Rows[i].Cells["cbzustand"]);
+                                comboValue.Value = 0;
+                            }
                             gv_selected.ClearSelection();
                             tb_ExemplarID.Focus();
                             tb_ExemplarID.SelectAll();
@@ -508,30 +570,6 @@ namespace Bibo_Verwaltung
                 }
             }
         }
-
-        private void MetroButton1_Click(object sender, EventArgs e)
-        {
-            //ataGridViewComboBoxColumn cmb = new DataGridViewComboBoxColumn();
-            gv_selected.Columns.Add(zustand.FillDataGridViewComboBox());
-            gv_selected.Refresh();
-            //DataGridViewComboBoxColumn cmb = new DataGridViewComboBoxColumn();
-            //cmb.HeaderText = "Select Data";
-            //cmb.Name = "cmb";
-            //cmb.MaxDropDownItems = 4;
-            ////zustand.FillCombobox(ref cmb);
-            //cmb.Items.Add("True");
-            //cmb.Items.Add("False");
-            //cmb.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-            //gv_selected.Columns.Add(cmb);
-
-            //var list11 = new List<string>() { "10", "30", "80", "100" };
-            //money.DataSource = list11;
-            //money.DisplayMember = "";
-            //money.HeaderText = "Money";
-            //money.DataPropertyName = "Money";
-
-            //gv_selected.DataSource = selectedBuecher;
-            //gv_selected.Columns.Add(cbo1);
-        }
+        #endregion
     }
 }
