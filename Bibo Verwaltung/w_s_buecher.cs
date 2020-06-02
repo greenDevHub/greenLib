@@ -1259,9 +1259,14 @@ namespace Bibo_Verwaltung
 
         private bool ValidateISBN()
         {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             WebClient client = new WebClient();
+
             try
             {
+
+                string s = "http://www.buecher-nach-isbn.info/" + tb_ISBN.Text;
                 htmlData = client.DownloadString("http://www.buecher-nach-isbn.info/" + tb_ISBN.Text);
 
                 if (htmlData.Contains("<h1 class=\"title\">"))
@@ -1273,7 +1278,7 @@ namespace Bibo_Verwaltung
                     return false;
                 }
             }
-            catch
+            catch(Exception e)
             {
                 try {
                     client.UseDefaultCredentials = true;
