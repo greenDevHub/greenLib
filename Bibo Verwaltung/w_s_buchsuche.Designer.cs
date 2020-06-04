@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_buchsuche));
             this.gv_buchsuche = new MetroFramework.Controls.MetroGrid();
             this.CM_Ausleihen = new MetroFramework.Controls.MetroContextMenu(this.components);
@@ -96,6 +96,7 @@
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.bt_reset = new MetroFramework.Controls.MetroButton();
             this.gb_liste = new MetroFramework.Controls.MetroPanel();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             ((System.ComponentModel.ISupportInitialize)(this.gv_buchsuche)).BeginInit();
             this.CM_Ausleihen.SuspendLayout();
             this.metroPanel1.SuspendLayout();
@@ -120,25 +121,25 @@
             this.gv_buchsuche.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv_buchsuche.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.gv_buchsuche.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(188)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(219)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gv_buchsuche.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(188)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(219)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gv_buchsuche.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.gv_buchsuche.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_buchsuche.ContextMenuStrip = this.CM_Ausleihen;
             this.gv_buchsuche.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(219)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gv_buchsuche.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(219)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gv_buchsuche.DefaultCellStyle = dataGridViewCellStyle5;
             this.gv_buchsuche.EnableHeadersVisualStyles = false;
             this.gv_buchsuche.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_buchsuche.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -149,14 +150,14 @@
             this.gv_buchsuche.Name = "gv_buchsuche";
             this.gv_buchsuche.ReadOnly = true;
             this.gv_buchsuche.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(188)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(219)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gv_buchsuche.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(188)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(219)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gv_buchsuche.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.gv_buchsuche.RowHeadersWidth = 35;
             this.gv_buchsuche.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_buchsuche.RowTemplate.DividerHeight = 1;
@@ -324,6 +325,8 @@
             this.bt_Ausleihen.Style = MetroFramework.MetroColorStyle.Lime;
             this.bt_Ausleihen.TabIndex = 15;
             this.bt_Ausleihen.Text = "Buchausleihe";
+            this.metroToolTip1.SetToolTip(this.bt_Ausleihen, "Klicken Sie hier, nachdem Sie ein Buch ausgewählt haben, um dieses Buch auszuleih" +
+        "en.");
             this.bt_Ausleihen.UseSelectable = true;
             this.bt_Ausleihen.Click += new System.EventHandler(this.Ausleihvorgang);
             // 
@@ -360,6 +363,7 @@
             this.tb_ExemplarID.Size = new System.Drawing.Size(283, 24);
             this.tb_ExemplarID.Style = MetroFramework.MetroColorStyle.Lime;
             this.tb_ExemplarID.TabIndex = 0;
+            this.metroToolTip1.SetToolTip(this.tb_ExemplarID, "Geben Sie hier die Buch-ID ein.");
             this.tb_ExemplarID.UseSelectable = true;
             this.tb_ExemplarID.WaterMark = "Exemplar ID";
             this.tb_ExemplarID.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -401,6 +405,7 @@
             this.tb_ISBN.Size = new System.Drawing.Size(283, 24);
             this.tb_ISBN.Style = MetroFramework.MetroColorStyle.Lime;
             this.tb_ISBN.TabIndex = 1;
+            this.metroToolTip1.SetToolTip(this.tb_ISBN, "Geben Sie hier die ISBN-13 des Buches ein.");
             this.tb_ISBN.UseSelectable = true;
             this.tb_ISBN.WaterMark = "ISBN";
             this.tb_ISBN.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -441,6 +446,7 @@
             this.tb_Titel.Size = new System.Drawing.Size(283, 24);
             this.tb_Titel.Style = MetroFramework.MetroColorStyle.Lime;
             this.tb_Titel.TabIndex = 2;
+            this.metroToolTip1.SetToolTip(this.tb_Titel, "Geben Sie hier den Titel des Buches ein.");
             this.tb_Titel.UseSelectable = true;
             this.tb_Titel.WaterMark = "Titel";
             this.tb_Titel.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -481,6 +487,7 @@
             this.tb_NName.Size = new System.Drawing.Size(283, 24);
             this.tb_NName.Style = MetroFramework.MetroColorStyle.Lime;
             this.tb_NName.TabIndex = 7;
+            this.metroToolTip1.SetToolTip(this.tb_NName, "Geben Sie hier den Nachnamen des Kunden ein.");
             this.tb_NName.UseSelectable = true;
             this.tb_NName.WaterMark = "Nachname";
             this.tb_NName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -521,6 +528,7 @@
             this.tb_VName.Size = new System.Drawing.Size(283, 24);
             this.tb_VName.Style = MetroFramework.MetroColorStyle.Lime;
             this.tb_VName.TabIndex = 6;
+            this.metroToolTip1.SetToolTip(this.tb_VName, "Geben Sie hier den Vornamen des Kunden ein.");
             this.tb_VName.UseSelectable = true;
             this.tb_VName.WaterMark = "Vorname";
             this.tb_VName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -540,6 +548,7 @@
             this.bt_Clear.Style = MetroFramework.MetroColorStyle.Lime;
             this.bt_Clear.TabIndex = 16;
             this.bt_Clear.Text = "Filter löschen";
+            this.metroToolTip1.SetToolTip(this.bt_Clear, "Klicken Sie hier, um alle eingegebenen Suchkriterien zurückzusetzen.");
             this.bt_Clear.UseSelectable = true;
             this.bt_Clear.Click += new System.EventHandler(this.bt_Clear_Click);
             // 
@@ -577,6 +586,7 @@
             this.tb_Klasse.Size = new System.Drawing.Size(283, 24);
             this.tb_Klasse.Style = MetroFramework.MetroColorStyle.Lime;
             this.tb_Klasse.TabIndex = 8;
+            this.metroToolTip1.SetToolTip(this.tb_Klasse, "Geben Sie hier die Klassenstufe des Kunden ein.");
             this.tb_Klasse.UseSelectable = true;
             this.tb_Klasse.WaterMark = "Klassenstufe";
             this.tb_Klasse.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -717,6 +727,7 @@
             this.cb_Verlag.Sorted = true;
             this.cb_Verlag.TabIndex = 4;
             this.cb_Verlag.Text = "Verlag";
+            this.metroToolTip1.SetToolTip(this.cb_Verlag, "Geben Sie hier den Verlag des Buches ein.");
             this.cb_Verlag.TextChanged += new System.EventHandler(this.cb_Verlag_TextChanged);
             this.cb_Verlag.Enter += new System.EventHandler(this.cb_Verlag_Enter);
             this.cb_Verlag.Leave += new System.EventHandler(this.cb_Verlag_Leave);
@@ -741,6 +752,7 @@
             this.cb_Genre.Sorted = true;
             this.cb_Genre.TabIndex = 5;
             this.cb_Genre.Text = "Genre";
+            this.metroToolTip1.SetToolTip(this.cb_Genre, "Geben Sie hier das Genre des Buches ein.");
             this.cb_Genre.TextChanged += new System.EventHandler(this.cb_Genre_TextChanged);
             this.cb_Genre.Enter += new System.EventHandler(this.cb_Genre_Enter);
             this.cb_Genre.Leave += new System.EventHandler(this.cb_Genre_Leave);
@@ -765,6 +777,7 @@
             this.cb_Autor.Sorted = true;
             this.cb_Autor.TabIndex = 3;
             this.cb_Autor.Text = "Autor";
+            this.metroToolTip1.SetToolTip(this.cb_Autor, "Geben Sie hier den Namen des Autors des Buches ein.");
             this.cb_Autor.TextChanged += new System.EventHandler(this.cb_Autor_TextChanged);
             this.cb_Autor.Enter += new System.EventHandler(this.cb_Autor_Enter);
             this.cb_Autor.Leave += new System.EventHandler(this.cb_Autor_Leave);
@@ -850,6 +863,8 @@
             this.bt_rueckgabe.Style = MetroFramework.MetroColorStyle.Lime;
             this.bt_rueckgabe.TabIndex = 40;
             this.bt_rueckgabe.Text = "Buchrückgabe";
+            this.metroToolTip1.SetToolTip(this.bt_rueckgabe, "Klicken Sie hier, nachdem Sie ein Buch ausgewählt haben, um dieses Buch zurückzug" +
+        "eben.");
             this.bt_rueckgabe.UseSelectable = true;
             this.bt_rueckgabe.Click += new System.EventHandler(this.Bt_rueckgabe_Click);
             // 
@@ -1122,6 +1137,7 @@
             this.bt_reset.Size = new System.Drawing.Size(122, 24);
             this.bt_reset.TabIndex = 44;
             this.bt_reset.Text = "Liste zurücksetzen";
+            this.metroToolTip1.SetToolTip(this.bt_reset, "Klicken Sie hier, um die Liste zurückzusetzen.");
             this.bt_reset.UseSelectable = true;
             this.bt_reset.Click += new System.EventHandler(this.Bt_reset_Click);
             // 
@@ -1144,6 +1160,12 @@
             this.gb_liste.VerticalScrollbarBarColor = true;
             this.gb_liste.VerticalScrollbarHighlightOnWheel = false;
             this.gb_liste.VerticalScrollbarSize = 10;
+            // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // w_s_buchsuche
             // 
@@ -1244,5 +1266,6 @@
         private MetroFramework.Controls.MetroLabel lb_legende;
         private System.Windows.Forms.ToolStripMenuItem kundenAnzeigenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buchAnzeigenToolStripMenuItem;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
     }
 }

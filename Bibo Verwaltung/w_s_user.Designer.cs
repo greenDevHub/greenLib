@@ -47,6 +47,7 @@
             this.bt_OK = new MetroFramework.Controls.MetroButton();
             this.mP_Eingaben = new MetroFramework.Controls.MetroPanel();
             this.cb_Rechte = new Bibo_Verwaltung.AdvancedComboBox();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Benutzer)).BeginInit();
             this.mP_Eingaben.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +84,7 @@
             this.bt_clear.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_clear.TabIndex = 6;
             this.bt_clear.Text = "Leeren";
+            this.metroToolTip1.SetToolTip(this.bt_clear, " Hier können Sie alle oben liegenden Textfelder leeren.");
             this.bt_clear.UseSelectable = true;
             this.bt_clear.Click += new System.EventHandler(this.ClearForm);
             // 
@@ -115,6 +117,7 @@
             this.tb_user.Size = new System.Drawing.Size(175, 24);
             this.tb_user.Style = MetroFramework.MetroColorStyle.Teal;
             this.tb_user.TabIndex = 3;
+            this.metroToolTip1.SetToolTip(this.tb_user, "Geben Sie hier den Namen des Benutzers ein.");
             this.tb_user.UseSelectable = true;
             this.tb_user.WaterMark = "Benutzername";
             this.tb_user.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -149,6 +152,7 @@
             this.tb_pw.Size = new System.Drawing.Size(175, 24);
             this.tb_pw.Style = MetroFramework.MetroColorStyle.Teal;
             this.tb_pw.TabIndex = 4;
+            this.metroToolTip1.SetToolTip(this.tb_pw, "Geben Sie hier das Passwort des dazugehörigen Benutzers ein.");
             this.tb_pw.UseSelectable = true;
             this.tb_pw.UseSystemPasswordChar = true;
             this.tb_pw.WaterMark = "Passwort";
@@ -176,6 +180,7 @@
             this.bt_confirm.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_confirm.TabIndex = 7;
             this.bt_confirm.Text = "Hinzufügen";
+            this.metroToolTip1.SetToolTip(this.bt_confirm, "Hier können Sie einen bestimmten Benutzer hinzufügen/bearbeiten/entfernen.");
             this.bt_confirm.UseSelectable = true;
             this.bt_confirm.Click += new System.EventHandler(this.bt_confirm_Click);
             // 
@@ -346,6 +351,13 @@
             this.cb_Rechte.Name = "cb_Rechte";
             this.cb_Rechte.Size = new System.Drawing.Size(175, 24);
             this.cb_Rechte.TabIndex = 5;
+            this.metroToolTip1.SetToolTip(this.cb_Rechte, "Hier können Sie die Rechte des Benutzers auswählen/ansehen.");
+            // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // w_s_user
             // 
@@ -384,5 +396,6 @@
         private MetroFramework.Controls.MetroLabel lb_rechte;
         private AdvancedComboBox cb_Rechte;
         private MetroFramework.Controls.MetroPanel mP_Eingaben;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
     }
 }
