@@ -225,8 +225,8 @@ namespace Bibo_Verwaltung
             Form import;
             if (currentModus == "Fach")
             {
-                import = new w_s_importAssist("t_s_faecher");
-                import.ShowDialog(this);
+                Form Import = new w_s_schuelerimport("t_s_faecher", true, currentUser);
+                Import.ShowDialog(this);
             }
             else if (currentModus == "Sprache")
             {

@@ -131,7 +131,57 @@ namespace Bibo_Verwaltung
                 return false;
             }
         }
+        /// <summary>
+        /// Entfernt Duplikate aus den Changes
+        /// </summary>
+        /// <param name="changes"></param>
+        /// <returns></returns>
+        private DataSet noDuplicates(DataSet changes)
+        {
+            try
+            {
+                string a = changes.Tables[0].Rows[0][0].ToString();
 
+                DataTable oldData = new DataTable();
+                oldData.Columns.Add("id", typeof(int));
+                oldData.Columns.Add("name", typeof(string));
+
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    string str = dr[0].ToString();
+                    if (dr[0].ToString() != "")
+                    {
+                        DataRow row = oldData.NewRow();
+                        row[0] = int.Parse(dr[0].ToString());
+                        row[1] = dr[1].ToString();
+                        oldData.Rows.Add(row);
+                    }
+                }
+
+
+                DataTable clearedChanges = changes.Tables[0].DefaultView.ToTable(true);
+                DataSet cleared = new DataSet();
+                List<int> removeAt = new List<int>();
+                for (int i = 0; i < clearedChanges.Rows.Count; i++)
+                {
+                    string s = clearedChanges.Rows[i][1].ToString();
+                    if (oldData.AsEnumerable().Any(row => s == row.Field<String>("name")))
+                    {
+                        removeAt.Add(i);
+                    }
+                }
+                for (int i = 0; i < removeAt.Count; i++)
+                {
+                    clearedChanges.Rows.RemoveAt(removeAt[i] - i);
+                }
+                cleared.Tables.Add(clearedChanges);
+                return cleared;
+            }
+            catch (Exception ex)
+            {
+                return changes;
+            }
+        }
         /// <summary>
         /// Speichert die Daten aus einen DataGridView-Objekt in die Datenbank 
         /// </summary>
@@ -141,6 +191,7 @@ namespace Bibo_Verwaltung
             DataSet changes = ds.GetChanges();
             if (changes != null)
             {
+                changes = noDuplicates(changes);
                 adapter.Update(changes);
             }
         }

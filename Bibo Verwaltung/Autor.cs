@@ -73,11 +73,16 @@ namespace Bibo_Verwaltung
             if (con.ConnectError()) return;
             for (int i = 0; i < autors.Count;)
             {
-                string RawCommand = "INSERT INTO [dbo].[t_s_autor] (au_autor) VALUES (@0)";
-                SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-                cmd.Parameters.AddWithValue("@0", autors[i]);
-                cmd.ExecuteNonQuery();
+                if (!IfContains(autors[i]))
+                {
+                    string RawCommand = "INSERT INTO [dbo].[t_s_autor] (au_autor) VALUES (@0)";
+                    SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+                    cmd.Parameters.AddWithValue("@0", autors[i]);
+                    cmd.ExecuteNonQuery();
+                    
+                }
                 i++;
+
             }
             con.Close();
         }
@@ -185,6 +190,9 @@ namespace Bibo_Verwaltung
             }
         }
 
+        
+
+
         //TODO
         private DataSet CleanUp(DataSet set)
         {
@@ -236,6 +244,57 @@ namespace Bibo_Verwaltung
         }
 
         /// <summary>
+        /// Entfernt Duplikate aus den Changes
+        /// </summary>
+        /// <param name="changes"></param>
+        /// <returns></returns>
+        private DataSet noDuplicates(DataSet changes)
+        {
+            try
+            {
+                string a = changes.Tables[0].Rows[0][0].ToString();
+
+                DataTable oldData = new DataTable();
+                oldData.Columns.Add("id", typeof(int));
+                oldData.Columns.Add("name", typeof(string));
+
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    string str = dr[0].ToString();
+                    if (dr[0].ToString() != "")
+                    {
+                        DataRow row = oldData.NewRow();
+                        row[0] = int.Parse(dr[0].ToString());
+                        row[1] = dr[1].ToString();
+                        oldData.Rows.Add(row);
+                    }
+                }
+
+
+                DataTable clearedChanges = changes.Tables[0].DefaultView.ToTable(true);
+                DataSet cleared = new DataSet();
+                List<int> removeAt = new List<int>();
+                for (int i = 0; i < clearedChanges.Rows.Count; i++)
+                {
+                    string s = clearedChanges.Rows[i][1].ToString();
+                    if (oldData.AsEnumerable().Any(row => s == row.Field<String>("name")))
+                    {
+                        removeAt.Add(i);
+                    }
+                }
+                for (int i = 0; i < removeAt.Count; i++)
+                {
+                    clearedChanges.Rows.RemoveAt(removeAt[i] - i);
+                }
+                cleared.Tables.Add(clearedChanges);
+                return cleared;
+            }
+            catch (Exception ex)
+            {
+                return changes;
+            }
+        }
+        /// <summary>
         /// Speichert die Daten aus einen DataGridView-Objekt in die Datenbank 
         /// </summary>
         public void SaveGrid() //bool userDeletedRows
@@ -245,38 +304,39 @@ namespace Bibo_Verwaltung
             DataSet changes = ds.GetChanges();
             if (changes != null)
             {
-                CleanUp(changes);
-                //Tabelle Changes durchgehen
-                for (int changeRowIndex = changes.Tables[0].Rows.Count - 1; changeRowIndex >= 0; changeRowIndex--)
-                {
-                    try
-                    {
-                        //Row setzten
-                        currentChangeRow = changes.Tables[0].Rows[changeRowIndex];
-                        //Vergleichsstring aus Changes bauen
-                        string currentChangeRowString = "#";
-                        for (int changeColIndex = 1; changeColIndex <= changes.Tables[0].Columns.Count - 1; changeColIndex++) //row in string (an Col 1)
-                        {
-                            currentChangeRowString = currentChangeRowString + currentChangeRow[changeColIndex].ToString();
-                        }
-                        //Vergleichen
-                        foreach (DataRow dtRow in dt.Rows)
-                        {
-                            //Vergleichsstring aus dt bauen
-                            string currentDTRowString = "#";
-                            for (int dtColIndex = 1; dtColIndex <= dt.Columns.Count - 1; dtColIndex++) //row in string (an Col 1)
-                            {
-                                currentDTRowString = currentDTRowString + dtRow[dtColIndex].ToString();
-                                if (currentChangeRowString == currentDTRowString)
-                                {
-                                    currentChangeRow.Delete();
-                                }
-                            }
-                        }
-                    }
-                    catch { }
-                }
-                //Änderungen in Datenbank übernehmen
+                changes = noDuplicates(changes);
+                //CleanUp(changes);
+                ////Tabelle Changes durchgehen
+                //for (int changeRowIndex = changes.Tables[0].Rows.Count - 1; changeRowIndex >= 0; changeRowIndex--)
+                //{
+                //    try
+                //    {
+                //        //Row setzten
+                //        currentChangeRow = changes.Tables[0].Rows[changeRowIndex];
+                //        //Vergleichsstring aus Changes bauen
+                //        string currentChangeRowString = "#";
+                //        for (int changeColIndex = 1; changeColIndex <= changes.Tables[0].Columns.Count - 1; changeColIndex++) //row in string (an Col 1)
+                //        {
+                //            currentChangeRowString = currentChangeRowString + currentChangeRow[changeColIndex].ToString();
+                //        }
+                //        //Vergleichen
+                //        foreach (DataRow dtRow in dt.Rows)
+                //        {
+                //            //Vergleichsstring aus dt bauen
+                //            string currentDTRowString = "#";
+                //            for (int dtColIndex = 1; dtColIndex <= dt.Columns.Count - 1; dtColIndex++) //row in string (an Col 1)
+                //            {
+                //                currentDTRowString = currentDTRowString + dtRow[dtColIndex].ToString();
+                //                if (currentChangeRowString == currentDTRowString)
+                //                {
+                //                    currentChangeRow.Delete();
+                //                }
+                //            }
+                //        }
+                //    }
+                //    catch { }
+                //}
+                ////Änderungen in Datenbank übernehmen
                 adapter.Update(changes);
             }
         }

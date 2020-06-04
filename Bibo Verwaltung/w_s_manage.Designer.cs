@@ -273,7 +273,6 @@
             this.Controls.Add(this.tLP_Faecher);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(384, 700);
-            this.Movable = false;
             this.Name = "w_s_manage";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

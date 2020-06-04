@@ -683,8 +683,10 @@ namespace Bibo_Verwaltung
             tb_anzahl.Text = "";
             picBox_Gross.Image = null;
             picBox_Gross.ImageLocation = null;
+            picBox_Gross.Refresh();
             picBox_Klein.Image = null;
             picBox_Klein.ImageLocation = null;
+            picBox_Klein.Refresh();
             tb_ISBN.BackColor = Color.White;
             tb_Titel.BackColor = Color.White;
             cb_Autor.BackColor = Color.White;
@@ -1946,6 +1948,9 @@ namespace Bibo_Verwaltung
             }
         }
 
-
+        private void Tb_ISBN_Leave_1(object sender, EventArgs e)
+        {
+            tb_ISBN.Text = tb_ISBN.Text.Replace("-", "");
+        }
     }
 }
