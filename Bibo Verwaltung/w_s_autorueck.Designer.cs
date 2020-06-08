@@ -53,6 +53,7 @@
             this.gv_Schueler = new MetroFramework.Controls.MetroGrid();
             this.a_cb_Klasse = new Bibo_Verwaltung.AdvancedComboBox();
             this.a_cb_Modus = new Bibo_Verwaltung.AdvancedComboBox();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_suggested)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Schueler)).BeginInit();
@@ -101,6 +102,7 @@
             this.tb_ExemplarID.Size = new System.Drawing.Size(395, 24);
             this.tb_ExemplarID.Style = MetroFramework.MetroColorStyle.Yellow;
             this.tb_ExemplarID.TabIndex = 3;
+            this.metroToolTip1.SetToolTip(this.tb_ExemplarID, "Geben Sie eine Exemplarnummer ein oder Scannen Sie eines für die Rückgabe.");
             this.tb_ExemplarID.UseSelectable = true;
             this.tb_ExemplarID.WaterMark = "Exemplar ID";
             this.tb_ExemplarID.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -111,6 +113,7 @@
             // 
             this.bt_back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_back.DisplayFocus = true;
+            this.bt_back.Enabled = false;
             this.bt_back.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_back.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.bt_back.Location = new System.Drawing.Point(23, 453);
@@ -119,6 +122,7 @@
             this.bt_back.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_back.TabIndex = 5;
             this.bt_back.Text = "vorheriger Schüler";
+            this.metroToolTip1.SetToolTip(this.bt_back, "Gehen Sie zum vorherigen Schüler.");
             this.bt_back.UseSelectable = true;
             this.bt_back.Click += new System.EventHandler(this.Bt_back_Click);
             // 
@@ -135,6 +139,7 @@
             this.bt_abschließen.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_abschließen.TabIndex = 4;
             this.bt_abschließen.Text = "Rückgabevorgang ausführen";
+            this.metroToolTip1.SetToolTip(this.bt_abschließen, "Führen Sie den Rückgabevorgang aus.");
             this.bt_abschließen.UseSelectable = true;
             this.bt_abschließen.Click += new System.EventHandler(this.Bt_abschließen_Click);
             // 
@@ -150,6 +155,7 @@
             this.bt_bestaetigen.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_bestaetigen.TabIndex = 2;
             this.bt_bestaetigen.Text = "Schüler laden";
+            this.metroToolTip1.SetToolTip(this.bt_bestaetigen, "Laden Sie die dazugehörigen Schüler.");
             this.bt_bestaetigen.UseSelectable = true;
             this.bt_bestaetigen.Click += new System.EventHandler(this.Bt_bestaetigen_Click);
             // 
@@ -157,6 +163,7 @@
             // 
             this.bt_next.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_next.DisplayFocus = true;
+            this.bt_next.Enabled = false;
             this.bt_next.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_next.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.bt_next.Location = new System.Drawing.Point(149, 453);
@@ -165,6 +172,7 @@
             this.bt_next.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_next.TabIndex = 6;
             this.bt_next.Text = "nächster Schüler";
+            this.metroToolTip1.SetToolTip(this.bt_next, "Gehen Sie zum nächsten Schüler.");
             this.bt_next.UseSelectable = true;
             this.bt_next.Click += new System.EventHandler(this.Bt_next_Click);
             // 
@@ -266,6 +274,7 @@
             this.gv_selected.Style = MetroFramework.MetroColorStyle.Yellow;
             this.gv_selected.TabIndex = 33;
             this.gv_selected.TabStop = false;
+            this.metroToolTip1.SetToolTip(this.gv_selected, "Dies sind die ausgewählten Exemplare.");
             // 
             // gv_suggested
             // 
@@ -325,6 +334,7 @@
             this.gv_suggested.Style = MetroFramework.MetroColorStyle.Yellow;
             this.gv_suggested.TabIndex = 32;
             this.gv_suggested.TabStop = false;
+            this.metroToolTip1.SetToolTip(this.gv_suggested, "Dies sind die ausgeliehenen Lehrbücher des Schülers.");
             // 
             // gv_Schueler
             // 
@@ -406,6 +416,7 @@
             this.a_cb_Klasse.Size = new System.Drawing.Size(245, 24);
             this.a_cb_Klasse.Sorted = true;
             this.a_cb_Klasse.TabIndex = 1;
+            this.metroToolTip1.SetToolTip(this.a_cb_Klasse, "Wählen Sie die Klasse bzw. Klassenstufe.");
             this.a_cb_Klasse.Visible = false;
             // 
             // a_cb_Modus
@@ -429,7 +440,15 @@
             this.a_cb_Modus.Size = new System.Drawing.Size(210, 24);
             this.a_cb_Modus.Sorted = true;
             this.a_cb_Modus.TabIndex = 0;
+            this.metroToolTip1.SetToolTip(this.a_cb_Modus, "Wählen Sie den Rückgabemodus.");
             this.a_cb_Modus.SelectedIndexChanged += new System.EventHandler(this.A_cb_Modus_SelectedIndexChanged);
+            // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroToolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.MetroToolTip1_Popup);
             // 
             // w_s_autorueck
             // 
@@ -485,5 +504,6 @@
         private MetroFramework.Controls.MetroGrid gv_selected;
         private MetroFramework.Controls.MetroGrid gv_suggested;
         private MetroFramework.Controls.MetroGrid gv_Schueler;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
     }
 }

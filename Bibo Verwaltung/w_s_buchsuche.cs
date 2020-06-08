@@ -1036,5 +1036,25 @@ namespace Bibo_Verwaltung
         {
             filterActive = true;
         }
+
+        private void Cb_Autor_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            filterActive = true;
+        }
+
+        private void Cb_Verlag_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            filterActive = true;
+        }
+
+        private void Cb_Genre_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            filterActive = true;
+        }
+
+        private void MetroToolTip1_Popup(object sender, PopupEventArgs e)
+        {
+            e.ToolTipSize = new Size(e.ToolTipSize.Width+32, e.ToolTipSize.Height);
+        }
     }
 }

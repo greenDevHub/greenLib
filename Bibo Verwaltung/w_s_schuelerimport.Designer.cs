@@ -87,6 +87,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.bt_Schliessen = new MetroFramework.Controls.MetroButton();
             this.bt_clear = new MetroFramework.Controls.MetroButton();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gv_columns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid_Vorschau)).BeginInit();
@@ -96,6 +98,7 @@
             this.metroPanel3.SuspendLayout();
             this.metroPanel4.SuspendLayout();
             this.metroPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // lb_TxtQuali
@@ -133,6 +136,7 @@
             this.bt_Vorschau.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_Vorschau.TabIndex = 10;
             this.bt_Vorschau.Text = "Vorschau";
+            this.metroToolTip1.SetToolTip(this.bt_Vorschau, "Lassen Sie sich die Vorschau mit den gewählten Einstellungen anzeigen.");
             this.bt_Vorschau.UseSelectable = true;
             this.bt_Vorschau.Click += new System.EventHandler(this.bt_Vorschau_Click);
             // 
@@ -150,6 +154,7 @@
             this.bt_usepreset.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_usepreset.TabIndex = 15;
             this.bt_usepreset.Text = "Vorlage anwenden";
+            this.metroToolTip1.SetToolTip(this.bt_usepreset, "Wenden Sie eine gespeicherte Vorlage auf die ausgewählte Datei an.");
             this.bt_usepreset.UseSelectable = true;
             this.bt_usepreset.Click += new System.EventHandler(this.bt_usePreset_Click);
             // 
@@ -168,6 +173,7 @@
             this.rb_faecher.TabIndex = 5;
             this.rb_faecher.TabStop = true;
             this.rb_faecher.Text = "Fächer";
+            this.metroToolTip1.SetToolTip(this.rb_faecher, "Importieren Sie Fächer.");
             this.rb_faecher.UseSelectable = true;
             this.rb_faecher.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
@@ -186,6 +192,7 @@
             this.rb_schueler2.TabIndex = 4;
             this.rb_schueler2.TabStop = true;
             this.rb_schueler2.Text = "Sekundarstufe 2";
+            this.metroToolTip1.SetToolTip(this.rb_schueler2, "Importieren Sie Schüler der Sekundärstufe 2.");
             this.rb_schueler2.UseSelectable = true;
             this.rb_schueler2.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
@@ -204,6 +211,7 @@
             this.rb_schueler1.TabIndex = 3;
             this.rb_schueler1.TabStop = true;
             this.rb_schueler1.Text = "Sekundarstufe 1";
+            this.metroToolTip1.SetToolTip(this.rb_schueler1, "Importieren Sie Schüler der Sekundärstufe 1.");
             this.rb_schueler1.UseSelectable = true;
             this.rb_schueler1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
@@ -260,6 +268,7 @@
             this.gv_columns.Style = MetroFramework.MetroColorStyle.Teal;
             this.gv_columns.TabIndex = 31;
             this.gv_columns.TabStop = false;
+            this.metroToolTip1.SetToolTip(this.gv_columns, "Dies ist die Struktur der Datenbanktabelle (Zieltabelle).");
             // 
             // cb_ColHeader
             // 
@@ -277,6 +286,8 @@
             this.cb_ColHeader.Style = MetroFramework.MetroColorStyle.Teal;
             this.cb_ColHeader.TabIndex = 9;
             this.cb_ColHeader.Text = "Erste Zeile enthält Feldnamen";
+            this.metroToolTip1.SetToolTip(this.cb_ColHeader, "Wählen Sie diese Option, wenn die erste Zeile der Datei die Feldnamen (Spaltennam" +
+        "en) enthält.");
             this.cb_ColHeader.UseSelectable = true;
             // 
             // cb_TxtQuali
@@ -297,6 +308,8 @@
             this.cb_TxtQuali.Size = new System.Drawing.Size(390, 29);
             this.cb_TxtQuali.Style = MetroFramework.MetroColorStyle.Teal;
             this.cb_TxtQuali.TabIndex = 7;
+            this.metroToolTip1.SetToolTip(this.cb_TxtQuali, "Wählen Sie den Textqualifizierer. Dieser markiert in der zu importierenden Datei " +
+        "Text.");
             this.cb_TxtQuali.UseSelectable = true;
             // 
             // label1
@@ -344,6 +357,8 @@
             this.tb_lines.Size = new System.Drawing.Size(390, 24);
             this.tb_lines.Style = MetroFramework.MetroColorStyle.Teal;
             this.tb_lines.TabIndex = 8;
+            this.metroToolTip1.SetToolTip(this.tb_lines, "Entfernen Sie durch Eingabe einer Zahl leere oder unnütze Zeilen am Kopf der Date" +
+        "i.");
             this.tb_lines.UseSelectable = true;
             this.tb_lines.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_lines.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -368,6 +383,8 @@
             this.cb_FeldTrenn.Size = new System.Drawing.Size(390, 29);
             this.cb_FeldTrenn.Style = MetroFramework.MetroColorStyle.Teal;
             this.cb_FeldTrenn.TabIndex = 6;
+            this.metroToolTip1.SetToolTip(this.cb_FeldTrenn, "Wählen Sie das Feldtrennzeichen. Dieses trennt in der zu importierenden Datei die" +
+        " einzelnen Daten voneinander.");
             this.cb_FeldTrenn.UseSelectable = true;
             // 
             // lb_path
@@ -401,6 +418,7 @@
             this.bt_durchsuchen.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_durchsuchen.TabIndex = 2;
             this.bt_durchsuchen.Text = "Durchsuchen";
+            this.metroToolTip1.SetToolTip(this.bt_durchsuchen, "Wählen Sie die Datei(en) aus.");
             this.bt_durchsuchen.UseSelectable = true;
             this.bt_durchsuchen.Click += new System.EventHandler(this.bt_durchsuchen_Click);
             // 
@@ -464,6 +482,7 @@
             this.bt_accept.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_accept.TabIndex = 17;
             this.bt_accept.Text = "Alle Dateien importieren";
+            this.metroToolTip1.SetToolTip(this.bt_accept, "Importieren Sie alle gewählten Dateien.");
             this.bt_accept.UseSelectable = true;
             this.bt_accept.Click += new System.EventHandler(this.bt_accept_Click);
             // 
@@ -481,6 +500,8 @@
             this.bt_saveProfile.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_saveProfile.TabIndex = 14;
             this.bt_saveProfile.Text = "Vorlage speichern";
+            this.metroToolTip1.SetToolTip(this.bt_saveProfile, "Speichern Sie die aktuellen Formatierungseinstellungen als Vorlage für einen spät" +
+        "eren Import.");
             this.bt_saveProfile.UseSelectable = true;
             this.bt_saveProfile.Click += new System.EventHandler(this.bt_saveProfile_Click);
             // 
@@ -501,6 +522,7 @@
             this.rb_single.TabIndex = 0;
             this.rb_single.TabStop = true;
             this.rb_single.Text = "Eine Datei auswählen";
+            this.metroToolTip1.SetToolTip(this.rb_single, "Importieren Sie eine Datei.");
             this.rb_single.UseSelectable = true;
             this.rb_single.CheckedChanged += new System.EventHandler(this.rb_single_CheckedChanged);
             // 
@@ -520,6 +542,7 @@
             this.rb_multi.TabIndex = 1;
             this.rb_multi.TabStop = true;
             this.rb_multi.Text = "Mehrere Dateien auswählen";
+            this.metroToolTip1.SetToolTip(this.rb_multi, "Importieren Sie mehrere Dateien mit gleichem Aufbau (z.B. verschiedene Klassen).");
             this.rb_multi.UseSelectable = true;
             this.rb_multi.CheckedChanged += new System.EventHandler(this.rb_single_CheckedChanged);
             // 
@@ -535,6 +558,7 @@
             this.slider_preview.Name = "slider_preview";
             this.slider_preview.Size = new System.Drawing.Size(524, 24);
             this.slider_preview.TabIndex = 200;
+            this.metroToolTip1.SetToolTip(this.slider_preview, "Blättern Sie durch die Dateien.");
             this.slider_preview.ValueChanged += new System.EventHandler(this.scrollbar_ValueChanged);
             // 
             // tb_min
@@ -660,6 +684,7 @@
             this.bt_removefile.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_removefile.TabIndex = 13;
             this.bt_removefile.Text = "Datei entfernen";
+            this.metroToolTip1.SetToolTip(this.bt_removefile, "Entfernen Sie die ausgewählte Datei aus der Liste.");
             this.bt_removefile.UseSelectable = true;
             this.bt_removefile.Click += new System.EventHandler(this.bt_removefile_Click);
             // 
@@ -772,6 +797,7 @@
             this.metroGrid_Vorschau.TabIndex = 51;
             this.metroGrid_Vorschau.TabStop = false;
             this.metroGrid_Vorschau.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroToolTip1.SetToolTip(this.metroGrid_Vorschau, "Dies ist die Vorschau der zu importierenden Daten.");
             this.metroGrid_Vorschau.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.MetroGrid_Vorschau_CellMouseDown);
             this.metroGrid_Vorschau.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gv_Vorschau_KeyDown);
             this.metroGrid_Vorschau.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MetroGrid_Vorschau_MouseDown);
@@ -964,6 +990,7 @@
             this.bt_importSingle.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_importSingle.TabIndex = 16;
             this.bt_importSingle.Text = "Aktuelle Datei importieren";
+            this.metroToolTip1.SetToolTip(this.bt_importSingle, "Importieren Sie die aktuell ausgewählte Datei.");
             this.bt_importSingle.UseSelectable = true;
             this.bt_importSingle.Click += new System.EventHandler(this.bt_importSingle_Click);
             // 
@@ -1069,8 +1096,21 @@
             this.bt_clear.Size = new System.Drawing.Size(188, 24);
             this.bt_clear.TabIndex = 18;
             this.bt_clear.Text = "Leeren";
+            this.metroToolTip1.SetToolTip(this.bt_clear, "Leeren Sie das Formular.");
             this.bt_clear.UseSelectable = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroToolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.MetroToolTip1_Popup);
+            // 
+            // metroStyleManager1
+            // 
+            this.metroStyleManager1.Owner = null;
+            this.metroStyleManager1.Style = MetroFramework.MetroColorStyle.Teal;
             // 
             // w_s_schuelerimport
             // 
@@ -1110,6 +1150,7 @@
             this.metroPanel4.PerformLayout();
             this.metroPanel5.ResumeLayout(false);
             this.metroPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1166,5 +1207,7 @@
         private MetroFramework.Controls.MetroButton bt_clear;
         private MetroFramework.Controls.MetroContextMenu metroContextMenu1;
         private System.Windows.Forms.ToolStripMenuItem spalteEntfernenToolStripMenuItem;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
+        private MetroFramework.Components.MetroStyleManager metroStyleManager1;
     }
 }

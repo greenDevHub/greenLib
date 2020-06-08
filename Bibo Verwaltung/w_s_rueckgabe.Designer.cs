@@ -61,6 +61,7 @@
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.bt_Abbrechen = new MetroFramework.Controls.MetroButton();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Verlauf)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).BeginInit();
             this.metroPanel1.SuspendLayout();
@@ -80,6 +81,7 @@
             this.bt_Rueckgabe.Style = MetroFramework.MetroColorStyle.Green;
             this.bt_Rueckgabe.TabIndex = 11;
             this.bt_Rueckgabe.Text = "Buchrückgabe abschließen";
+            this.metroToolTip1.SetToolTip(this.bt_Rueckgabe, "Klicken sie auf diesen Button um die Buchrückgabe abzuschließen.");
             this.bt_Rueckgabe.UseSelectable = true;
             this.bt_Rueckgabe.Click += new System.EventHandler(this.bt_Rueckgabe_Click);
             // 
@@ -98,6 +100,7 @@
             this.bt_Zu_aendern.Style = MetroFramework.MetroColorStyle.Green;
             this.bt_Zu_aendern.TabIndex = 9;
             this.bt_Zu_aendern.Text = "Buchzustand ändern";
+            this.metroToolTip1.SetToolTip(this.bt_Zu_aendern, "Ändern Sie den Zustand des Exemplares bei der Rückgabe.");
             this.bt_Zu_aendern.UseSelectable = true;
             this.bt_Zu_aendern.Click += new System.EventHandler(this.bt_Zu_aendern_Click);
             // 
@@ -160,6 +163,8 @@
             this.gv_Verlauf.Style = MetroFramework.MetroColorStyle.Green;
             this.gv_Verlauf.TabIndex = 2;
             this.gv_Verlauf.TabStop = false;
+            this.metroToolTip1.SetToolTip(this.gv_Verlauf, "Hier wird ihnen angezeigt, welche Kunden das aktuelle Buch früher ausgeliehen hab" +
+        "en.");
             // 
             // tb_BuchCode
             // 
@@ -193,6 +198,7 @@
             this.tb_BuchCode.Size = new System.Drawing.Size(165, 24);
             this.tb_BuchCode.Style = MetroFramework.MetroColorStyle.Green;
             this.tb_BuchCode.TabIndex = 1;
+            this.metroToolTip1.SetToolTip(this.tb_BuchCode, "Geben Sie den Code des Exemplares ein oder nutzen Sie einen Barcode-Scanner.");
             this.tb_BuchCode.UseSelectable = true;
             this.tb_BuchCode.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_BuchCode.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -226,6 +232,8 @@
             this.bt_AddBuch.Style = MetroFramework.MetroColorStyle.Green;
             this.bt_AddBuch.TabIndex = 2;
             this.bt_AddBuch.Text = "+";
+            this.metroToolTip1.SetToolTip(this.bt_AddBuch, "Fügt einen Eintrag zur Buchrückgabeliste hinzu. Ist das Buch bereits in der Liste" +
+        " enthalten wird es wieder entfernt.");
             this.bt_AddBuch.UseSelectable = true;
             this.bt_AddBuch.Click += new System.EventHandler(this.bt_AddBuch_Click);
             // 
@@ -242,6 +250,7 @@
             this.bt_open.Style = MetroFramework.MetroColorStyle.Green;
             this.bt_open.TabIndex = 6;
             this.bt_open.Text = "*";
+            this.metroToolTip1.SetToolTip(this.bt_open, "Hier gelangen Sie zur Zustands-Verwaltung.");
             this.bt_open.UseSelectable = true;
             this.bt_open.Click += new System.EventHandler(this.bt_open_Click);
             // 
@@ -398,8 +407,9 @@
             this.cb_Zustand.Location = new System.Drawing.Point(115, 153);
             this.cb_Zustand.Name = "cb_Zustand";
             this.helpProvider.SetShowHelp(this.cb_Zustand, true);
-            this.cb_Zustand.Size = new System.Drawing.Size(135, 24);
+            this.cb_Zustand.Size = new System.Drawing.Size(165, 24);
             this.cb_Zustand.TabIndex = 5;
+            this.metroToolTip1.SetToolTip(this.cb_Zustand, "Wählen Sie einen neuen Zustand bei einer Zustandsänderung.");
             // 
             // metroPanel1
             // 
@@ -462,6 +472,7 @@
             this.rueckList_Slider.Size = new System.Drawing.Size(110, 24);
             this.rueckList_Slider.TabIndex = 7;
             this.rueckList_Slider.TabStop = true;
+            this.metroToolTip1.SetToolTip(this.rueckList_Slider, "Blättern Sie durch die verschiedenen Einträge der Ausleihliste.");
             this.rueckList_Slider.Scroll += new System.Windows.Forms.ScrollEventHandler(this.RueckList_Slider_Scroll);
             this.rueckList_Slider.ValueChanged += new System.EventHandler(this.RueckList_Slider_ValueChanged);
             // 
@@ -602,6 +613,13 @@
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
             // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroToolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.MetroToolTip1_Popup);
+            // 
             // w_s_rueckgabe
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -663,6 +681,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroButton bt_Abbrechen;
         private MetroFramework.Controls.MetroPanel metroPanel2;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
     }
 }
 

@@ -277,7 +277,7 @@ namespace Bibo_Verwaltung
         {
             kunde = new Kunde(ausleihe.KID);
             DialogResult dialogResult = MetroMessageBox.Show(this, ausleihe.GetAusleihList() + "an: '" + ausleihe.TrimText(kunde.Vorname + " " + kunde.Nachname, 30) + "' wirklich ausleihen?", "Achtung",
-                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question,this.Height/2);
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question, 211 + ausleihe.LeihListe.Rows.Count * 17);
             if (dialogResult == DialogResult.OK)
             {
                 try
@@ -506,6 +506,11 @@ namespace Bibo_Verwaltung
                 bt_Submit.Focus();
                 e.SuppressKeyPress = true;
             }
+        }
+
+        private void MetroToolTip1_Popup(object sender, PopupEventArgs e)
+        {
+            e.ToolTipSize = new Size(e.ToolTipSize.Width + 32, e.ToolTipSize.Height);
         }
     }
 }

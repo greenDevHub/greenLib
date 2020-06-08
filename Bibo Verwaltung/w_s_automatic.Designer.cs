@@ -56,6 +56,7 @@
             this.mbt_Suche = new MetroFramework.Controls.MetroButton();
             this.a_cb_Klasse = new Bibo_Verwaltung.AdvancedComboBox();
             this.a_cb_Modus = new Bibo_Verwaltung.AdvancedComboBox();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Schueler)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_suggested)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).BeginInit();
@@ -190,6 +191,8 @@
             this.gv_suggested.Style = MetroFramework.MetroColorStyle.Yellow;
             this.gv_suggested.TabIndex = 6;
             this.gv_suggested.TabStop = false;
+            this.metroToolTip1.SetToolTip(this.gv_suggested, "Dies sind die für den Schüler vorgeschlagenen Bücher, welche anhand seiner Fächer" +
+        " und Klassenstufe ermittelt werden.");
             // 
             // gv_selected
             // 
@@ -249,6 +252,7 @@
             this.gv_selected.Style = MetroFramework.MetroColorStyle.Yellow;
             this.gv_selected.TabIndex = 7;
             this.gv_selected.TabStop = false;
+            this.metroToolTip1.SetToolTip(this.gv_selected, "Dies sind Ihre ausgewählten Exemplare.");
             // 
             // lb_Anweisung1
             // 
@@ -305,6 +309,7 @@
             this.bt_next.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_next.TabIndex = 8;
             this.bt_next.Text = "nächster Schüler";
+            this.metroToolTip1.SetToolTip(this.bt_next, "Gehen Sie zum nächsten Schüler.");
             this.bt_next.UseSelectable = true;
             this.bt_next.Click += new System.EventHandler(this.bt_next_Click);
             // 
@@ -320,6 +325,7 @@
             this.bt_bestaetigen.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_bestaetigen.TabIndex = 3;
             this.bt_bestaetigen.Text = "Schüler laden";
+            this.metroToolTip1.SetToolTip(this.bt_bestaetigen, "Laden Sie die Schüler der ausgewählten Klasse bzw. Klassenstufe.");
             this.bt_bestaetigen.UseSelectable = true;
             this.bt_bestaetigen.Click += new System.EventHandler(this.bt_bestaetigen_Click);
             // 
@@ -336,6 +342,7 @@
             this.bt_abschließen.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_abschließen.TabIndex = 6;
             this.bt_abschließen.Text = "Ausleihvorgang ausführen";
+            this.metroToolTip1.SetToolTip(this.bt_abschließen, "Führen Sie den Ausleihvorgang aus.");
             this.bt_abschließen.UseSelectable = true;
             this.bt_abschließen.Click += new System.EventHandler(this.bt_abschließen_Click);
             // 
@@ -352,6 +359,7 @@
             this.bt_back.Style = MetroFramework.MetroColorStyle.Yellow;
             this.bt_back.TabIndex = 7;
             this.bt_back.Text = "vorheriger Schüler";
+            this.metroToolTip1.SetToolTip(this.bt_back, "Gehen Sie zum vorherigen Schüler.");
             this.bt_back.UseSelectable = true;
             this.bt_back.Click += new System.EventHandler(this.bt_back_Click);
             // 
@@ -386,6 +394,8 @@
             this.tb_ExemplarID.Size = new System.Drawing.Size(365, 24);
             this.tb_ExemplarID.Style = MetroFramework.MetroColorStyle.Yellow;
             this.tb_ExemplarID.TabIndex = 4;
+            this.metroToolTip1.SetToolTip(this.tb_ExemplarID, "Wählen Sie die Exemplar-Nummer des zu verleihenden Exemplares oder Scannen Sie di" +
+        "ese ein.");
             this.tb_ExemplarID.UseSelectable = true;
             this.tb_ExemplarID.WaterMark = "Exemplar ID";
             this.tb_ExemplarID.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -413,6 +423,7 @@
             this.dp_RueckDatum.Name = "dp_RueckDatum";
             this.dp_RueckDatum.Size = new System.Drawing.Size(165, 29);
             this.dp_RueckDatum.TabIndex = 1;
+            this.metroToolTip1.SetToolTip(this.dp_RueckDatum, "Wählen Sie das Rückgabedatum für den Buchverleih.");
             // 
             // mbt_Suche
             // 
@@ -425,6 +436,7 @@
             this.mbt_Suche.Style = MetroFramework.MetroColorStyle.Yellow;
             this.mbt_Suche.TabIndex = 5;
             this.mbt_Suche.Text = "🔍";
+            this.metroToolTip1.SetToolTip(this.mbt_Suche, "Suchen Sie nach Exemplaren.");
             this.mbt_Suche.UseSelectable = true;
             this.mbt_Suche.Click += new System.EventHandler(this.Mbt_Suche_Click);
             // 
@@ -447,6 +459,7 @@
             this.a_cb_Klasse.Size = new System.Drawing.Size(245, 24);
             this.a_cb_Klasse.Sorted = true;
             this.a_cb_Klasse.TabIndex = 2;
+            this.metroToolTip1.SetToolTip(this.a_cb_Klasse, "Wählen Sie die Klasse bzw. Klassenstufe.");
             this.a_cb_Klasse.Visible = false;
             // 
             // a_cb_Modus
@@ -470,7 +483,15 @@
             this.a_cb_Modus.Size = new System.Drawing.Size(210, 24);
             this.a_cb_Modus.Sorted = true;
             this.a_cb_Modus.TabIndex = 0;
+            this.metroToolTip1.SetToolTip(this.a_cb_Modus, "Wählen Sie den Ausgabemodus.");
             this.a_cb_Modus.SelectedIndexChanged += new System.EventHandler(this.a_cb_Modus_SelectedIndexChanged);
+            // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroToolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.MetroToolTip1_Popup);
             // 
             // w_s_automatic
             // 
@@ -531,5 +552,6 @@
         private MetroFramework.Controls.MetroDateTime dp_RueckDatum;
         private AdvancedComboBox a_cb_Klasse;
         private MetroFramework.Controls.MetroButton mbt_Suche;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
     }
 }

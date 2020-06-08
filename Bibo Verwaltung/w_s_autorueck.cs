@@ -18,12 +18,17 @@ namespace Bibo_Verwaltung
         public w_s_autorueck(string userName)
         {
             InitializeComponent();
+            Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName;
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
 
             a_cb_Modus.SelectedIndex = 0;
             bt_bestaetigen.Text = "Schüler laden";
             inRueckAction = false;
+            bool b = !user.Rechteid.Equals("0");
+            a_cb_Modus.Enabled = b;
+            a_cb_Klasse.Enabled = b;
+            bt_bestaetigen.Enabled = b;
         }
         #endregion
 
@@ -581,5 +586,10 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
+
+        private void MetroToolTip1_Popup(object sender, PopupEventArgs e)
+        {
+            e.ToolTipSize = new Size(e.ToolTipSize.Width + 32, e.ToolTipSize.Height);
+        }
     }
 }

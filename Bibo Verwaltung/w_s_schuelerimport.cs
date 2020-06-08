@@ -1491,5 +1491,10 @@ namespace Bibo_Verwaltung
                 spalteEntfernenToolStripMenuItem.Visible = true;
                 }
         }
+
+        private void MetroToolTip1_Popup(object sender, PopupEventArgs e)
+        {
+            e.ToolTipSize = new Size(e.ToolTipSize.Width + 32, e.ToolTipSize.Height);
+        }
     }
 }

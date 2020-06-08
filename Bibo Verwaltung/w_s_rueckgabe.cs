@@ -358,7 +358,7 @@ namespace Bibo_Verwaltung
         private void Buchrueckgabe()
         {
             DialogResult dialogResult = MetroMessageBox.Show(this, rueckgabe.GetRueckgabeList() + "ausgeliehen von: '" + rueckgabe.TrimText(kunde.Vorname + " " + kunde.Nachname, 30) + "' wirklich als zurückgegeben markieren?", "Achtung",
-                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question, this.Height / 2);
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question, 211 + rueckgabe.RueckListe.Rows.Count * 17);
             if (dialogResult == DialogResult.OK)
             {
                 try
@@ -506,5 +506,10 @@ namespace Bibo_Verwaltung
             tb_BuchCode.SelectAll();
         }
         #endregion
+
+        private void MetroToolTip1_Popup(object sender, PopupEventArgs e)
+        {
+            e.ToolTipSize = new Size(e.ToolTipSize.Width + 32, e.ToolTipSize.Height);
+        }
     }
 }

@@ -42,7 +42,6 @@
             this.mT_ausleihen = new MetroFramework.Controls.MetroTile();
             this.mT_Einstellungen = new MetroFramework.Controls.MetroTile();
             this.mT_Benutzerverwaltung = new MetroFramework.Controls.MetroTile();
-            this.mT_Abmelden = new MetroFramework.Controls.MetroTile();
             this.metroProgressBar = new MetroFramework.Controls.MetroProgressBar();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.mT_ausgabe = new MetroFramework.Controls.MetroTile();
@@ -60,9 +59,11 @@
             this.mT_Klassenstufen = new MetroFramework.Controls.MetroTile();
             this.bt_logout = new MetroFramework.Controls.MetroLink();
             this.image = new MetroFramework.Controls.MetroLink();
+            this.mainStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.panel.SuspendLayout();
             this.pl_unschaerfe.SuspendLayout();
             this.transparentPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainStyleManager)).BeginInit();
             this.SuspendLayout();
             // 
             // mT_Kunden
@@ -213,20 +214,6 @@
             this.mT_Benutzerverwaltung.Text = "Benutzerverwaltung";
             this.mT_Benutzerverwaltung.UseSelectable = true;
             this.mT_Benutzerverwaltung.Click += new System.EventHandler(this.bt_Benutzerverwaltung_Click);
-            // 
-            // mT_Abmelden
-            // 
-            this.mT_Abmelden.ActiveControl = null;
-            this.mT_Abmelden.Location = new System.Drawing.Point(508, 11);
-            this.mT_Abmelden.Margin = new System.Windows.Forms.Padding(4);
-            this.mT_Abmelden.Name = "mT_Abmelden";
-            this.mT_Abmelden.Size = new System.Drawing.Size(157, 46);
-            this.mT_Abmelden.Style = MetroFramework.MetroColorStyle.Silver;
-            this.mT_Abmelden.TabIndex = 23;
-            this.mT_Abmelden.Text = "Abmelden";
-            this.mT_Abmelden.UseSelectable = true;
-            this.mT_Abmelden.Visible = false;
-            this.mT_Abmelden.Click += new System.EventHandler(this.mT_Abmelden_Click);
             // 
             // metroProgressBar
             // 
@@ -440,12 +427,14 @@
             // 
             // bt_logout
             // 
+            this.bt_logout.DisplayFocus = true;
+            this.bt_logout.FontWeight = MetroFramework.MetroLinkWeight.Light;
             this.bt_logout.Image = ((System.Drawing.Image)(resources.GetObject("bt_logout.Image")));
             this.bt_logout.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.bt_logout.ImageSize = 32;
-            this.bt_logout.Location = new System.Drawing.Point(673, 21);
+            this.bt_logout.ImageSize = 24;
+            this.bt_logout.Location = new System.Drawing.Point(757, 26);
             this.bt_logout.Name = "bt_logout";
-            this.bt_logout.Size = new System.Drawing.Size(104, 43);
+            this.bt_logout.Size = new System.Drawing.Size(83, 31);
             this.bt_logout.TabIndex = 22;
             this.bt_logout.Text = "Abmelden";
             this.bt_logout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -465,6 +454,10 @@
             this.image.UseSelectable = true;
             this.image.Click += new System.EventHandler(this.image_Click);
             // 
+            // mainStyleManager
+            // 
+            this.mainStyleManager.Owner = this;
+            // 
             // w_s_main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -474,7 +467,6 @@
             this.Controls.Add(this.panel);
             this.Controls.Add(this.metroProgressBar);
             this.Controls.Add(this.image);
-            this.Controls.Add(this.mT_Abmelden);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -483,10 +475,12 @@
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Text = "     greenLib";
+            this.Theme = MetroFramework.MetroThemeStyle.Default;
             this.Activated += new System.EventHandler(this.w_s_main_Activated);
             this.panel.ResumeLayout(false);
             this.pl_unschaerfe.ResumeLayout(false);
             this.transparentPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mainStyleManager)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -505,7 +499,6 @@
         private MetroFramework.Controls.MetroTile mT_ausleihen;
         private MetroFramework.Controls.MetroTile mT_Einstellungen;
         private MetroFramework.Controls.MetroTile mT_Benutzerverwaltung;
-        private MetroFramework.Controls.MetroTile mT_Abmelden;
         private MetroFramework.Controls.MetroLink image;
         private MetroFramework.Controls.MetroProgressBar metroProgressBar;
         private System.Windows.Forms.Timer timer;
@@ -522,5 +515,6 @@
         private MetroFramework.Controls.MetroTile bt_AutoAusgabe;
         private MetroFramework.Controls.MetroTile mT_Klassen;
         private MetroFramework.Controls.MetroLink bt_logout;
+        private MetroFramework.Components.MetroStyleManager mainStyleManager;
     }
 }

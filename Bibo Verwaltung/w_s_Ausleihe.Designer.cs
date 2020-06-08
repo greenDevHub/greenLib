@@ -61,6 +61,7 @@
             this.lb_Exemplar = new MetroFramework.Controls.MetroLabel();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.lb_Kunden = new MetroFramework.Controls.MetroLabel();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
             this.gb_Exemplar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).BeginInit();
@@ -79,6 +80,8 @@
             this.dp_RueckDatum.Size = new System.Drawing.Size(164, 29);
             this.dp_RueckDatum.Style = MetroFramework.MetroColorStyle.Green;
             this.dp_RueckDatum.TabIndex = 4;
+            this.metroToolTip1.SetToolTip(this.dp_RueckDatum, "Wählen Sie ein Datum aus, an dem das Buch bzw. die Bücher zurückgegeben werden so" +
+        "llen.");
             // 
             // lb_BuchStatus
             // 
@@ -134,6 +137,8 @@
             this.bt_AddBuch.Style = MetroFramework.MetroColorStyle.Green;
             this.bt_AddBuch.TabIndex = 2;
             this.bt_AddBuch.Text = "+";
+            this.metroToolTip1.SetToolTip(this.bt_AddBuch, "Fügt einen Eintrag zur Buchrückgabeliste hinzu. Ist das Buch bereits in der Liste" +
+        " enthalten wird es wieder entfernt.");
             this.bt_AddBuch.UseSelectable = true;
             this.bt_AddBuch.Click += new System.EventHandler(this.bt_AddBuch_Click);
             // 
@@ -149,6 +154,7 @@
             this.leihList_Slider.Size = new System.Drawing.Size(110, 24);
             this.leihList_Slider.TabIndex = 5;
             this.leihList_Slider.TabStop = true;
+            this.metroToolTip1.SetToolTip(this.leihList_Slider, "Blättern Sie durch die verschiedenen Einträge der Ausleihliste.");
             this.leihList_Slider.Scroll += new System.Windows.Forms.ScrollEventHandler(this.leihList_Slider_Scroll);
             this.leihList_Slider.ValueChanged += new System.EventHandler(this.leihList_Slider_ValueChanged);
             // 
@@ -257,6 +263,7 @@
             this.tb_BuchCode.Size = new System.Drawing.Size(165, 24);
             this.tb_BuchCode.Style = MetroFramework.MetroColorStyle.Green;
             this.tb_BuchCode.TabIndex = 1;
+            this.metroToolTip1.SetToolTip(this.tb_BuchCode, "Geben Sie den Code des Exemplares ein oder nutzen Sie einen Barcode-Scanner.");
             this.tb_BuchCode.UseSelectable = true;
             this.tb_BuchCode.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_BuchCode.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -330,6 +337,7 @@
             this.bt_NeuKunde.Style = MetroFramework.MetroColorStyle.Green;
             this.bt_NeuKunde.TabIndex = 8;
             this.bt_NeuKunde.Text = "Neuen Kunden hinzufügen";
+            this.metroToolTip1.SetToolTip(this.bt_NeuKunde, "Gelangen Sie zur Kunden-Verwaltung.");
             this.bt_NeuKunde.UseSelectable = true;
             this.bt_NeuKunde.Click += new System.EventHandler(this.bt_NeuKunde_Click);
             // 
@@ -389,6 +397,7 @@
             this.gv_Kunde.Size = new System.Drawing.Size(548, 164);
             this.gv_Kunde.Style = MetroFramework.MetroColorStyle.Green;
             this.gv_Kunde.TabIndex = 9;
+            this.metroToolTip1.SetToolTip(this.gv_Kunde, "Wählen Sie einen Kunden aus.");
             this.gv_Kunde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Kunde_KeyDown);
             // 
             // tb_NName
@@ -421,6 +430,7 @@
             this.tb_NName.Size = new System.Drawing.Size(152, 24);
             this.tb_NName.Style = MetroFramework.MetroColorStyle.Green;
             this.tb_NName.TabIndex = 11;
+            this.metroToolTip1.SetToolTip(this.tb_NName, "Suchen Sie einen Kunden nach seinem Nachnamen.");
             this.tb_NName.UseSelectable = true;
             this.tb_NName.WaterMark = "Nachname";
             this.tb_NName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -457,6 +467,7 @@
             this.tb_VName.Size = new System.Drawing.Size(150, 24);
             this.tb_VName.Style = MetroFramework.MetroColorStyle.Green;
             this.tb_VName.TabIndex = 10;
+            this.metroToolTip1.SetToolTip(this.tb_VName, "Suchen Sie einen Kunden nach seinem Vornamen.");
             this.tb_VName.UseSelectable = true;
             this.tb_VName.WaterMark = "Vorname";
             this.tb_VName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -494,6 +505,7 @@
             this.bt_Submit.Style = MetroFramework.MetroColorStyle.Green;
             this.bt_Submit.TabIndex = 12;
             this.bt_Submit.Text = "Ausleihvorgang abschließen";
+            this.metroToolTip1.SetToolTip(this.bt_Submit, "Schließen Sie den Ausleihvorgang ab.");
             this.bt_Submit.UseSelectable = true;
             this.bt_Submit.Click += new System.EventHandler(this.bt_Submit_Click);
             // 
@@ -609,6 +621,13 @@
             this.lb_Kunden.TabIndex = 52;
             this.lb_Kunden.Text = "Kunden-Informationen:";
             // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroToolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.MetroToolTip1_Popup);
+            // 
             // w_s_ausleihe
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -673,5 +692,6 @@
         private MetroFramework.Controls.MetroPanel metroPanel2;
         private MetroFramework.Controls.MetroLabel lb_Kunden;
         private MetroFramework.Controls.MetroLink llb_gesListe;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
     }
 }
