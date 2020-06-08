@@ -320,15 +320,16 @@
             this.tLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28582F));
             this.tLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28816F));
             this.tLP_Top.Size = new System.Drawing.Size(497, 213);
-            this.tLP_Top.TabIndex = 18;
+            this.tLP_Top.TabIndex = 0;
+            this.tLP_Top.TabStop = true;
             // 
             // tLP_2
             // 
             this.tLP_2.AutoSize = true;
             this.tLP_2.ColumnCount = 3;
-            this.tLP_2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tLP_2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tLP_2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tLP_2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tLP_2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tLP_2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tLP_2.Controls.Add(this.bt_Test, 0, 0);
             this.tLP_2.Controls.Add(this.bt_Save, 2, 0);
             this.tLP_2.Controls.Add(this.bt_Clear, 1, 0);
@@ -339,7 +340,7 @@
             this.tLP_2.RowCount = 1;
             this.tLP_2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLP_2.Size = new System.Drawing.Size(345, 30);
-            this.tLP_2.TabIndex = 16;
+            this.tLP_2.TabIndex = 6;
             // 
             // bt_Test
             // 
@@ -354,8 +355,8 @@
             this.bt_Test.MinimumSize = new System.Drawing.Size(38, 24);
             this.bt_Test.Name = "bt_Test";
             this.helpProvider.SetShowHelp(this.bt_Test, true);
-            this.bt_Test.Size = new System.Drawing.Size(132, 24);
-            this.bt_Test.TabIndex = 15;
+            this.bt_Test.Size = new System.Drawing.Size(109, 24);
+            this.bt_Test.TabIndex = 6;
             this.bt_Test.Text = "Verbindungstest";
             this.bt_Test.UseSelectable = true;
             this.bt_Test.Click += new System.EventHandler(this.TestConnect);
@@ -368,13 +369,13 @@
             this.bt_Save.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Save.FontWeight = MetroFramework.MetroButtonWeight.Light;
             this.helpProvider.SetHelpString(this.bt_Save, "Speichern sie alle oben eingetragenen Daten.");
-            this.bt_Save.Location = new System.Drawing.Point(244, 3);
+            this.bt_Save.Location = new System.Drawing.Point(233, 3);
             this.bt_Save.MaximumSize = new System.Drawing.Size(150, 24);
             this.bt_Save.MinimumSize = new System.Drawing.Size(38, 24);
             this.bt_Save.Name = "bt_Save";
             this.helpProvider.SetShowHelp(this.bt_Save, true);
-            this.bt_Save.Size = new System.Drawing.Size(98, 24);
-            this.bt_Save.TabIndex = 7;
+            this.bt_Save.Size = new System.Drawing.Size(109, 24);
+            this.bt_Save.TabIndex = 8;
             this.bt_Save.Text = "Speichern";
             this.bt_Save.UseSelectable = true;
             this.bt_Save.Click += new System.EventHandler(this.SetSettings);
@@ -387,12 +388,12 @@
             this.bt_Clear.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Clear.FontWeight = MetroFramework.MetroButtonWeight.Light;
             this.helpProvider.SetHelpString(this.bt_Clear, "Leeren sie alle oben liegenden Textfelder.");
-            this.bt_Clear.Location = new System.Drawing.Point(141, 3);
+            this.bt_Clear.Location = new System.Drawing.Point(118, 3);
             this.bt_Clear.MaximumSize = new System.Drawing.Size(150, 24);
             this.bt_Clear.MinimumSize = new System.Drawing.Size(38, 24);
             this.bt_Clear.Name = "bt_Clear";
             this.helpProvider.SetShowHelp(this.bt_Clear, true);
-            this.bt_Clear.Size = new System.Drawing.Size(97, 24);
+            this.bt_Clear.Size = new System.Drawing.Size(109, 24);
             this.bt_Clear.TabIndex = 7;
             this.bt_Clear.Text = "Leeren";
             this.bt_Clear.UseSelectable = true;
@@ -400,14 +401,14 @@
             // 
             // bt_close
             // 
-            this.bt_close.Dock = System.Windows.Forms.DockStyle.Right;
+            this.bt_close.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bt_close.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.bt_close.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_close.Location = new System.Drawing.Point(293, 183);
-            this.bt_close.MaximumSize = new System.Drawing.Size(225, 24);
+            this.bt_close.FontWeight = MetroFramework.MetroButtonWeight.Light;
+            this.bt_close.Location = new System.Drawing.Point(155, 183);
+            this.bt_close.MaximumSize = new System.Drawing.Size(500, 24);
             this.bt_close.Name = "bt_close";
-            this.bt_close.Size = new System.Drawing.Size(201, 24);
-            this.bt_close.TabIndex = 17;
+            this.bt_close.Size = new System.Drawing.Size(339, 24);
+            this.bt_close.TabIndex = 9;
             this.bt_close.Text = "Schließen";
             this.bt_close.UseSelectable = true;
             this.bt_close.Click += new System.EventHandler(this.Bt_close_Click);
@@ -420,6 +421,7 @@
             this.metroLink1.Name = "metroLink1";
             this.metroLink1.Size = new System.Drawing.Size(32, 34);
             this.metroLink1.TabIndex = 19;
+            this.metroLink1.TabStop = false;
             this.metroLink1.UseSelectable = true;
             // 
             // w_s_einstellungen
@@ -434,6 +436,7 @@
             this.MaximizeBox = false;
             this.Name = "w_s_einstellungen";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Silver;
             this.Text = "      Einstellungen";

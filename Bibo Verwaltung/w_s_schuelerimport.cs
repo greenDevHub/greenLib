@@ -382,6 +382,12 @@ namespace Bibo_Verwaltung
         /// <param name="e"></param>
         private void bt_Vorschau_Click(object sender, EventArgs e)
         {
+            noPreset();
+
+        }
+
+        private void noPreset()
+        {
             usePreset = false;
             removeAt.Clear();
             indexes.Clear();
@@ -418,7 +424,6 @@ namespace Bibo_Verwaltung
                     MetroMessageBox.Show(this, "Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-
         }
 
         /// <summary>
@@ -791,7 +796,7 @@ namespace Bibo_Verwaltung
                             {
                                 k.LeistungskursListe.Add("");
                             }
-                            if (!k.AlreadyExists())
+                            if (!k.AlreadyExists(false))
                             {
                                 k.AddKunde();
                             }
@@ -822,7 +827,7 @@ namespace Bibo_Verwaltung
                                     k.LeistungskursListe.Add(fach);
                                 }
                             }
-                            if (!k.AlreadyExists())
+                            if (!k.AlreadyExists(false))
                             {
                                 k.AddKunde();
                             }
@@ -1319,6 +1324,10 @@ namespace Bibo_Verwaltung
                         MetroMessageBox.Show(this, "Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
+            }
+            else
+            {
+                noPreset();
             }
         }
 

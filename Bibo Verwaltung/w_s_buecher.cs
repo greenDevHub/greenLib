@@ -1550,6 +1550,7 @@ namespace Bibo_Verwaltung
         {
             if (e.KeyCode == Keys.Enter && !rb_Delete_Buch.Checked)
             {
+                tb_ISBN.Text = tb_ISBN.Text.Replace("-", "");
                 if (Grid_Buch.Rows.Count == 0)
                 {
                     AutoLoad();
@@ -1951,6 +1952,33 @@ namespace Bibo_Verwaltung
         private void Tb_ISBN_Leave_1(object sender, EventArgs e)
         {
             tb_ISBN.Text = tb_ISBN.Text.Replace("-", "");
+        }
+
+        private void Grid_Buch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                if (Grid_Buch.SelectedRows.Count >= 1)
+                {
+                    DataGridViewRow row = this.Grid_Buch.SelectedRows[0];
+                    tb_ISBN.Text = row.Cells[0].Value.ToString();
+                    if (bool1)
+                    {
+                        LoadBuch();
+                    }
+                    else
+                    {
+                        LoadBuch();
+                        this.Hide();
+                    }
+                }
+                e.SuppressKeyPress = true;
+            }
+            else if(e.KeyCode == Keys.Tab)
+            {
+                mtb_Import.Focus();
+                e.SuppressKeyPress = true;
+            }
         }
     }
 }

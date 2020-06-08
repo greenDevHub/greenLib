@@ -73,21 +73,7 @@ namespace Bibo_Verwaltung
                 {
                     DataGridViewRow row = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index];
                     autoausleihe.FillSuggestGrid(ref gv_suggested, row.Cells["kunde_ID"].Value.ToString());
-                    if (IsComplete(ref gv_suggested))
-                    {
-                        row.DefaultCellStyle.BackColor = Color.LimeGreen;
-                        row.DefaultCellStyle.ForeColor = Color.Black;
-                    }
-                    else if (IsNotEmpty(ref gv_suggested))
-                    {
-                        row.DefaultCellStyle.BackColor = Color.Gray;
-                        row.DefaultCellStyle.ForeColor = Color.Black;
-                    }
-                    else
-                    {
-                        row.DefaultCellStyle.BackColor = default;
-                        row.DefaultCellStyle.ForeColor = default;
-                    }
+                    
                     try
                     {
                         lb_selected.Text = "bereits geliehene Bücher:";
@@ -118,6 +104,27 @@ namespace Bibo_Verwaltung
                     }
                     catch { }
                     gv_suggested.ClearSelection();
+                    if (IsComplete(ref gv_suggested))
+                    {
+                        row.DefaultCellStyle.SelectionBackColor = Color.LightGreen;
+                        row.DefaultCellStyle.SelectionForeColor = Color.Black;
+                        row.DefaultCellStyle.BackColor = Color.LimeGreen;
+                        row.DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                    else if (IsNotEmpty(ref gv_suggested))
+                    {
+                        row.DefaultCellStyle.SelectionBackColor = Color.LightGray;
+                        row.DefaultCellStyle.SelectionForeColor = Color.Black;
+                        row.DefaultCellStyle.BackColor = Color.Gray;
+                        row.DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.SelectionBackColor = default;
+                        row.DefaultCellStyle.SelectionForeColor = default;
+                        row.DefaultCellStyle.BackColor = default;
+                        row.DefaultCellStyle.ForeColor = default;
+                    }
                 }
             }
             catch
@@ -189,7 +196,7 @@ namespace Bibo_Verwaltung
                 if (grid.Rows[i].DefaultCellStyle.BackColor != Color.LimeGreen)
                 {
                     result = false;
-                    return result;
+                    //return result;
                 }
             }
             return result;
@@ -206,7 +213,7 @@ namespace Bibo_Verwaltung
                 if (grid.Rows[i].DefaultCellStyle.BackColor == Color.LimeGreen)
                 {
                     result = true;
-                    return result;
+                    //return result;
                 }
             }
             return result;
@@ -242,10 +249,10 @@ namespace Bibo_Verwaltung
                 {
                     bt_next.Enabled = false;
                 }
-                if (gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.LimeGreen || gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.Red)
-                {
-                    gv_Schueler.ClearSelection();
-                }
+                //if (gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.LimeGreen || gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.Red)
+                //{
+                //    gv_Schueler.ClearSelection();
+                //}
                 tb_ExemplarID.Text = "";
                 tb_ExemplarID.Focus();
                 autoausleihe.ClearLeihList();
@@ -316,7 +323,7 @@ namespace Bibo_Verwaltung
             autoausleihe.KID = gv_Schueler.CurrentRow.Cells["kunde_ID"].Value.ToString();
             kunden = new Kunde(autoausleihe.KID);
             DialogResult dialogResult = MetroMessageBox.Show(this, autoausleihe.GetAusleihList() + "an: '" + autoausleihe.TrimText(kunden.Vorname + " " + kunden.Nachname, 30) + "' wirklich ausleihen?", "Bestätigung",
-                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question,211 + autoausleihe.LeihListe.Rows.Count*17);
             if (dialogResult == DialogResult.OK)
             {
                 DataGridViewRow Kundenrow = gv_Schueler.CurrentRow;
@@ -359,7 +366,7 @@ namespace Bibo_Verwaltung
                 if (!inAusleihAction)
                 {
                     inAusleihAction = true;
-                    bt_bestaetigen.Text = "Ausgabe abbrechen";
+                    bt_bestaetigen.Text = "Ausgabe beenden";
                     a_cb_Modus.Enabled = false;
                     dp_RueckDatum.Enabled = false;
                     a_cb_Klasse.Enabled = false;
@@ -381,8 +388,11 @@ namespace Bibo_Verwaltung
                     {
                         gv_Schueler.CurrentCell = gv_Schueler.Rows[0].Cells[1];
                         gv_Schueler.Rows[0].Selected = true;
+                        //Hat Schüler alle Bücher, die er benötigt, ausgeliehen?
+                        MarkSchueler();
                         tb_ExemplarID.Enabled = true;
                         tb_ExemplarID.Focus();
+                        LoadSchulBuecher();
                     }
                     else
                     {
@@ -400,7 +410,45 @@ namespace Bibo_Verwaltung
                 MetroMessageBox.Show(this, "Wählen Sie den Ausgabe-Modus und eine Klasse bzw. eine Klassenstufe aus!", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
+        private void MarkSchueler()
+        {
+            for (int i = 0; i < gv_Schueler.RowCount; i++)
+            {
+                DataGridViewRow Kundenrow = gv_Schueler.Rows[i];
+                kunden.KundenID = gv_Schueler.Rows[i].Cells["kunde_ID"].Value.ToString();
+                List<string> suggestedBooks = autoausleihe.SuggestedBooks(kunden.KundenID);
+                List<string> borrowedBooks = kunden.BorrowedBooks(kunden.KundenID);
+                int countBooks = 0;
+                foreach(string book in suggestedBooks)
+                {
+                    if (!borrowedBooks.Contains(book))
+                    {
+                        countBooks++;
+                    }
+                }
+                if (countBooks >0 && countBooks==suggestedBooks.Count)
+                {
+                    Kundenrow.DefaultCellStyle.SelectionBackColor = default;
+                    Kundenrow.DefaultCellStyle.SelectionForeColor = default;
+                    Kundenrow.DefaultCellStyle.BackColor = default;
+                    Kundenrow.DefaultCellStyle.ForeColor = default;
+                }
+                else if(countBooks>0 && countBooks < suggestedBooks.Count)
+                {
+                    Kundenrow.DefaultCellStyle.SelectionBackColor = Color.LightGray;
+                    Kundenrow.DefaultCellStyle.SelectionForeColor = Color.Black;
+                    Kundenrow.DefaultCellStyle.BackColor = Color.Gray;
+                    Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    Kundenrow.DefaultCellStyle.SelectionBackColor = Color.GreenYellow;
+                    Kundenrow.DefaultCellStyle.SelectionForeColor = Color.Black;
+                    Kundenrow.DefaultCellStyle.BackColor = Color.LimeGreen;
+                    Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                }
+            }
+        }
         private void gv_Schueler_SelectionChanged(object sender, EventArgs e)
         {
             LoadSchulBuecher();
@@ -540,14 +588,17 @@ namespace Bibo_Verwaltung
         {
             if (a_cb_Modus.SelectedIndex == 0)
             {
+                a_cb_Klasse.DataSource = null;
+                a_cb_Klasse.Sorted = true;
                 lb_Klasse.Text = "Klasse:";
                 lb_Klasse.Visible = true;
-                new Klasse().FillCombobox(ref a_cb_Klasse, 0);
+                new Klasse().FillCombobox(ref a_cb_Klasse,1);
                 a_cb_Klasse.Visible = true;
                 a_cb_Klasse.Enabled = true;
             }
             else
             {
+                a_cb_Klasse.Sorted = false;
                 lb_Klasse.Text = "Stufe:";
                 lb_Klasse.Visible = true;
                 DataTable stufen = new DataTable();

@@ -275,7 +275,7 @@
             this.bt_Verwaltung.MinimumSize = new System.Drawing.Size(50, 24);
             this.bt_Verwaltung.Name = "bt_Verwaltung";
             this.bt_Verwaltung.Size = new System.Drawing.Size(137, 24);
-            this.bt_Verwaltung.TabIndex = 26;
+            this.bt_Verwaltung.TabIndex = 1;
             this.bt_Verwaltung.Text = "Verwalten";
             this.bt_Verwaltung.UseSelectable = true;
             this.bt_Verwaltung.Click += new System.EventHandler(this.bt_kunde_Click);
@@ -291,6 +291,7 @@
             this.MaximizeBox = false;
             this.Name = "w_s_information";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Details";

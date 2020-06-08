@@ -91,7 +91,7 @@ namespace Bibo_Verwaltung
             kunde.Hausnummer = tb_Hausnummer.Text;
             kunde.Postleitzahl = tb_Postleitzahl.Text;
             kunde.Ort = tb_Ort.Text;
-            kunde.Klasse.Klassename = tb_Klasse.Text;
+            kunde.Klasse.Klassename = cb_klasse.Text;
             kunde.Mail = tb_Mail.Text;
             kunde.Telefonnummer = tb_Telefonnummer.Text;
             kunde.Faecher.Clear();
@@ -167,7 +167,7 @@ namespace Bibo_Verwaltung
             tb_Hausnummer.Text = "";
             tb_Postleitzahl.Text = "";
             tb_Ort.Text = "";
-            tb_Klasse.Text = "";
+            cb_klasse.Text = "";
             tb_Mail.Text = "";
             tb_Telefonnummer.Text = "";
             tb_KundenID.Text = "";
@@ -188,7 +188,7 @@ namespace Bibo_Verwaltung
             tb_Strasse.BackColor = Color.White;
             tb_Postleitzahl.BackColor = Color.White;
             tb_Ort.BackColor = Color.White;
-            tb_Klasse.BackColor = Color.White;
+            cb_klasse.BackColor = Color.White;
             tb_Mail.BackColor = Color.White;
             tb_Telefonnummer.BackColor = Color.White;
         }
@@ -210,7 +210,7 @@ namespace Bibo_Verwaltung
                     tb_Hausnummer.Enabled = true;
                     tb_Postleitzahl.Enabled = true;
                     tb_Ort.Enabled = true;
-                    tb_Klasse.Enabled = true;
+                    cb_klasse.Enabled = true;
                     tb_Mail.Enabled = true;
                     tb_Telefonnummer.Enabled = true;
                     lb_KundenID.Text = "Kunden-ID:*";
@@ -235,7 +235,7 @@ namespace Bibo_Verwaltung
                     tb_Hausnummer.Enabled = true;
                     tb_Postleitzahl.Enabled = true;
                     tb_Ort.Enabled = true;
-                    tb_Klasse.Enabled = true;
+                    cb_klasse.Enabled = true;
                     tb_Mail.Enabled = true;
                     tb_Telefonnummer.Enabled = true;
                     lb_KundenID.Text = "Kunden-ID:";
@@ -258,7 +258,7 @@ namespace Bibo_Verwaltung
                     tb_Hausnummer.Enabled = false;
                     tb_Postleitzahl.Enabled = false;
                     tb_Ort.Enabled = false;
-                    tb_Klasse.Enabled = false;
+                    cb_klasse.Enabled = false;
                     tb_Mail.Enabled = false;
                     tb_Telefonnummer.Enabled = false;
                     lb_KundenID.Text = "Kunden-ID:*";
@@ -281,7 +281,7 @@ namespace Bibo_Verwaltung
                 tb_Hausnummer.Enabled = true;
                 tb_Postleitzahl.Enabled = true;
                 tb_Ort.Enabled = true;
-                tb_Klasse.Enabled = true;
+                cb_klasse.Enabled = true;
                 tb_Mail.Enabled = true;
                 tb_Telefonnummer.Enabled = true;
                 lb_KundenID.Text = "Kunden-ID:";
@@ -333,16 +333,24 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void KundenFilter()
         {
-            if (mdtp_GebDat.Value.Date != DateTime.Now.Date)
+            try
             {
-                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%' AND Geburtsdatum LIKE '{9}%' AND [Kunden-ID] LIKE '%{10}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, mdtp_GebDat.Value.Date.ToShortDateString(), tb_KundenID.Text);
+                if (mdtp_GebDat.Value.Date != DateTime.Now.Date)
+                {
+                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%' AND Geburtsdatum LIKE '{9}%' AND [Kunden-ID] LIKE '%{10}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, mdtp_GebDat.Value.Date.ToShortDateString(), tb_KundenID.Text);
+
+                }
+                else
+                {
+                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%' AND [Kunden-ID] LIKE '%{9}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, tb_KundenID.Text);
+
+                }
+            }
+            catch
+            {
 
             }
-            else
-            {
-                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%' AND [Kunden-ID] LIKE '%{9}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, tb_KundenID.Text);
 
-            }
         }
 
         /// <summary>
@@ -359,7 +367,7 @@ namespace Bibo_Verwaltung
             tb_Hausnummer.Text = kunde.Hausnummer;
             tb_Postleitzahl.Text = kunde.Postleitzahl;
             tb_Ort.Text = kunde.Ort;
-            tb_Klasse.Text = kunde.Klasse.Klassename;
+            cb_klasse.Text = kunde.Klasse.Klassename;
             tb_Mail.Text = kunde.Mail;
             tb_Telefonnummer.Text = kunde.Telefonnummer;
             if (kunde.Faecher.Count > 0)
@@ -415,7 +423,7 @@ namespace Bibo_Verwaltung
                     try
                     {
                         SetKundenValues();
-                        if (kunde.AlreadyExists())
+                        if (kunde.AlreadyExists(true))
                         {
                             DialogResult dr = MetroMessageBox.Show(this, "Ein Kunde mit diesem Vornamen, Nachnamen und Geburtsdatum existiert bereits. Die betreffenden Kunden wären dann nur anhand der anderen Felder (ID, Straße, Ort,...) unterscheidbar. Trotzdem hinzufügen?", "Kunde schon vorhanden.", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                             if(dr == DialogResult.Yes)
@@ -544,10 +552,10 @@ namespace Bibo_Verwaltung
                         tb_Ort.BackColor = Color.Red;
                         error = true;
                     }
-                    if (!tb_Klasse.Text.Equals("") && !CheckSpecialNumbers(tb_Klasse.Text))
+                    if (!cb_klasse.Text.Equals("") && !CheckSpecialNumbers(cb_klasse.Text))
                     {
                         errorMessage += "\n - Klasse ist nicht richtig formatiert";
-                        tb_Telefonnummer.BackColor = Color.Red;
+                        cb_klasse.BackColor = Color.Red;
                         error = true;
                     }
                     if (!tb_Telefonnummer.Text.Equals("") && !CheckSpecialNumbers(tb_Telefonnummer.Text))
@@ -573,13 +581,13 @@ namespace Bibo_Verwaltung
                             DialogResult dr = MetroMessageBox.Show(this, "Sie haben zwar eine Klasse ausgewählt, aber keine Fächer. Möchten Sie auch die Fächer angeben?", "Fächer fehlen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                             if (dr == DialogResult.No)
                             {
-                                if (kunde.AlreadyExists() && kunde.IsActivated())
+                                if (kunde.AlreadyExists(false) && kunde.IsActivated())
                                 {
                                     object[] args = new object[] { kunde.Vorname, kunde.Nachname, kunde.Gd.ToShortDateString() };
                                     string message = String.Format("Es existiert bereits ein Eintrag zu dem Kunden '{0} {1} ({2})'. Bitte überprüfen Sie ihre Angaben!", args);
                                     MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 }
-                                else if (kunde.AlreadyExists() && !kunde.IsActivated())
+                                else if (kunde.AlreadyExists(false) && !kunde.IsActivated())
                                 {
                                     kunde.ActivateKunde();
                                     kunde.UpdateKunde();
@@ -604,13 +612,13 @@ namespace Bibo_Verwaltung
                         }
                         else
                         {
-                            if (kunde.AlreadyExists() && kunde.IsActivated())
+                            if (kunde.AlreadyExists(false) && kunde.IsActivated())
                             {
                                 object[] args = new object[] { kunde.Vorname, kunde.Nachname, kunde.Gd.ToShortDateString() };
                                 string message = String.Format("Es existiert bereits ein Eintrag zu dem Kunden '{0} {1} ({2})'. Bitte überprüfen Sie ihre Angaben!", args);
                                 MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
-                            else if (kunde.AlreadyExists() && !kunde.IsActivated())
+                            else if (kunde.AlreadyExists(false) && !kunde.IsActivated())
                             {
                                 kunde.ActivateKunde();
                                 kunde.UpdateKunde();
@@ -678,11 +686,11 @@ namespace Bibo_Verwaltung
 
         private void w_s_kunden_Activated(object sender, EventArgs e)
         {
-            SetModus();
-            if (!backgroundWorker1.IsBusy)
-            {
-                backgroundWorker1.RunWorkerAsync();
-            }
+            //SetModus();
+            //if (!backgroundWorker1.IsBusy)
+            //{
+            //    backgroundWorker1.RunWorkerAsync();
+            //}
         }
 
         private void tb_KundenID_TextChanged(object sender, EventArgs e)
@@ -729,9 +737,9 @@ namespace Bibo_Verwaltung
             KundenFilter();
         }
 
-        private void tb_Klasse_TextChanged(object sender, EventArgs e)
+        private void cb_klasse_TextChanged(object sender, EventArgs e)
         {
-            tb_Klasse.BackColor = Color.White;
+            cb_klasse.BackColor = Color.White;
             KundenFilter();
         }
 
@@ -876,15 +884,15 @@ namespace Bibo_Verwaltung
         {
             if (rb_FilterAlles.Checked)
             {
-                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
+                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
             }
             else if (rb_FilterSchueler.Checked)
             {
-                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%' AND Klasse NOT LIKE '{9}'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, "");
+                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%' AND Klasse NOT LIKE '{9}'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, "");
             }
             else if (rb_FilterAndere.Checked)
             {
-                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%' AND Klasse LIKE '{9}'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, "");
+                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%' AND Klasse LIKE '{9}'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, "");
             }
         }
 
@@ -1011,6 +1019,7 @@ namespace Bibo_Verwaltung
             List<string> selectedFachIDs = new List<string>();
             BeginInvoke((Action)delegate ()
             {
+                kunde.Klasse.FillCombobox(ref cb_klasse, 0);
                 for (int i = 0; i < gv_faecher.Rows.Count; i++)
                 {
                     DataGridViewRow row = gv_faecher.Rows[i];
@@ -1119,6 +1128,120 @@ namespace Bibo_Verwaltung
             }
         }
 
+        private void Bt_klasse_s_Click(object sender, EventArgs e)
+        {
+            Form Klasse = new w_s_manage(currentUser, "Klasse");
+            Klasse.ShowDialog(this);
+            kunde.Klasse.FillCombobox(ref cb_klasse, 0);
+        }
 
+        private void W_s_Kunden_Shown(object sender, EventArgs e)
+        {
+            SetModus();
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
+
+        private void Gv_faecher_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (gv_faecher.SelectedRows[0].Index >= 0)
+                {
+                    DataGridViewRow row = this.gv_faecher.SelectedRows[0];
+                    if (gv_faecher.SelectedRows[0].DefaultCellStyle.BackColor != Color.Yellow)
+                    {
+                        if (row.Cells["Kürzel"].Value.ToString() != "")
+                        {
+                            kunde.Fach = new Fach(row.Cells["ID"].Value.ToString());
+                            row.DefaultCellStyle.BackColor = Color.Yellow;
+                            row.DefaultCellStyle.SelectionBackColor = Color.Gold;
+                            gv_result.Rows.Add(kunde.Fach.FachKurz, kunde.Fach.FachID);
+                        }
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = Color.White;
+                        row.DefaultCellStyle.SelectionBackColor = gv_result.DefaultCellStyle.SelectionBackColor;
+                        for (int i = 0; i < gv_result.Rows.Count; i++)
+                        {
+                            DataGridViewRow gvRow = gv_result.Rows[i];
+                            if (gvRow.Cells["ID"].Value.ToString() == row.Cells["ID"].Value.ToString())
+                            {
+                                gv_result.Rows.RemoveAt(i);
+                                i = gv_result.Rows.Count;
+                            }
+                        }
+                    }
+                }
+                e.SuppressKeyPress = true;
+            }
+            else if(e.KeyCode == Keys.Tab)
+            {
+                gv_result.Focus();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void Gv_result_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (gv_result.SelectedRows[0].Index >= 0)
+                {
+                    DataGridViewRow row = this.gv_result.SelectedRows[0];
+                    if (row.Cells["Kürzel"].Value != null && !row.Cells["Kürzel"].Value.Equals(""))
+                    {
+                        kunde.Fach = new Fach(row.Cells["ID"].Value.ToString());
+                        if (row.DefaultCellStyle.BackColor == Color.Yellow)
+                        {
+                            kunde.Leistungskurse--;
+                        }
+                        gv_result.Rows.RemoveAt(gv_result.SelectedRows[0].Index);
+
+                        for (int i = 0; i < gv_faecher.Rows.Count; i++)
+                        {
+                            DataGridViewRow gvRow = gv_faecher.Rows[i];
+                            if (gvRow.Cells["ID"].Value.ToString() == kunde.Fach.FachID)
+                            {
+                                gvRow.DefaultCellStyle.BackColor = Color.White;
+                                gvRow.DefaultCellStyle.SelectionBackColor = gv_result.DefaultCellStyle.SelectionBackColor;
+                                i = gv_faecher.Rows.Count;
+                            }
+                        }
+                    }
+                }
+                e.SuppressKeyPress = true;
+            }
+            else if (e.KeyCode == Keys.Tab)
+            {
+                bt_clear.Focus();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void Gv_Kunde_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (gv_Kunde.SelectedRows[0].Index >= 0)
+                {
+                    DataGridViewRow row = this.gv_Kunde.SelectedRows[0];
+                    string index = row.Cells["Kunden-ID"].Value.ToString();
+                    ClearForm();
+                    LoadKunde(index);
+                    rb_KundeBearbeiten.Checked = true;
+                }
+                e.SuppressKeyPress = true;
+            }
+            else if (e.KeyCode == Keys.Tab)
+            {
+                mbt_Import.Focus();
+                e.SuppressKeyPress = true;
+            }
+            
+        }
     }
 }

@@ -288,24 +288,34 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Prüft, ob ein Kunde bereits existiert
         /// </summary>
-        public bool AlreadyExists()
+        public bool AlreadyExists(bool edit)
         {
-            KundenID = "";
+            string newID = "";
+            if (!edit)
+            {
+                KundenID = "";
+            }
             if (con.ConnectError()) return false;
             string RawCommand = "SELECT * FROM [dbo].[t_s_kunden] WHERE kunde_vorname = @0 and kunde_nachname = @1 and kunde_geburtsdatum = @2";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, Vorname, Nachname, Gd.Date);
             while (dr.Read())
             {
-                KundenID = dr["kunde_id"].ToString();
+                newID = dr["kunde_id"].ToString();
             }
             dr.Close();
             con.Close();
-            if (KundenID == null || KundenID == "")
+            if (newID == null || newID == "")
+            {
+                KundenID = newID;
+                return false;
+            }
+            else if(edit && newID == KundenID)
             {
                 return false;
             }
             else
             {
+                KundenID = newID;
                 return true;
             }
         }
@@ -613,6 +623,28 @@ namespace Bibo_Verwaltung
             {
                 grid.Columns["Klasse"].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+        }
+
+        /// <summary>
+        /// Gibt ein DataTable-Objekt mit den ausgeliehen Büchern der Kunden zurück 
+        /// </summary>
+        public List<string> BorrowedBooks(string KID)
+        {
+            KundenID = KID;
+            List<string> borrowedBooks = new List<string>();
+            DataTable result = new DataTable();
+            if (con.ConnectError()) return borrowedBooks;
+            string RawCommand = "SELECT aus_buchid as 'ID', buch_isbn as 'ISBN' FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid left join t_s_buecher on buch_isbn = bu_isbn WHERE aus_kundenid = @0";
+            adapter = new SqlDataAdapter(RawCommand, con.Con);
+            adapter.SelectCommand.Parameters.AddWithValue("@0", KID);
+            adapter.Fill(result);
+            con.Close();
+            for(int i = 0; i < result.Rows.Count; i++)
+            {
+                string isbn = result.Rows[i][1].ToString();
+                borrowedBooks.Add(isbn);
+            }
+            return borrowedBooks;
         }
     }
 }

@@ -41,6 +41,7 @@
             this.tb_Suchen = new MetroFramework.Controls.MetroTextBox();
             this.mtb_Export = new MetroFramework.Controls.MetroButton();
             this.mbt_Cancel = new MetroFramework.Controls.MetroButton();
+            this.bt_sort_on_off = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.gv_manage)).BeginInit();
             this.tLP_Faecher.SuspendLayout();
             this.SuspendLayout();
@@ -52,13 +53,13 @@
             this.mbt_Uebernehmen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mbt_Uebernehmen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mbt_Uebernehmen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.mbt_Uebernehmen.Location = new System.Drawing.Point(3, 586);
+            this.mbt_Uebernehmen.Location = new System.Drawing.Point(116, 586);
             this.mbt_Uebernehmen.MaximumSize = new System.Drawing.Size(0, 24);
             this.mbt_Uebernehmen.MinimumSize = new System.Drawing.Size(50, 24);
             this.mbt_Uebernehmen.Name = "mbt_Uebernehmen";
-            this.mbt_Uebernehmen.Size = new System.Drawing.Size(107, 24);
+            this.mbt_Uebernehmen.Size = new System.Drawing.Size(108, 24);
             this.mbt_Uebernehmen.Style = MetroFramework.MetroColorStyle.Teal;
-            this.mbt_Uebernehmen.TabIndex = 6;
+            this.mbt_Uebernehmen.TabIndex = 7;
             this.mbt_Uebernehmen.Text = "Übernehmen";
             this.mbt_Uebernehmen.UseSelectable = true;
             // 
@@ -146,6 +147,7 @@
             this.gv_manage.Size = new System.Drawing.Size(336, 491);
             this.gv_manage.Style = MetroFramework.MetroColorStyle.Blue;
             this.gv_manage.TabIndex = 2;
+            this.gv_manage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_manage_KeyDown);
             this.gv_manage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Gv_manage_KeyPress);
             // 
             // mbt_Import
@@ -180,8 +182,9 @@
             this.tLP_Faecher.Controls.Add(this.mbt_Import, 1, 3);
             this.tLP_Faecher.Controls.Add(this.mbt_Suchen, 0, 3);
             this.tLP_Faecher.Controls.Add(this.mtb_Export, 2, 3);
-            this.tLP_Faecher.Controls.Add(this.mbt_Uebernehmen, 0, 4);
             this.tLP_Faecher.Controls.Add(this.mbt_Cancel, 2, 4);
+            this.tLP_Faecher.Controls.Add(this.mbt_Uebernehmen, 1, 4);
+            this.tLP_Faecher.Controls.Add(this.bt_sort_on_off, 0, 4);
             this.tLP_Faecher.Location = new System.Drawing.Point(21, 61);
             this.tLP_Faecher.Margin = new System.Windows.Forms.Padding(1);
             this.tLP_Faecher.Name = "tLP_Faecher";
@@ -192,7 +195,7 @@
             this.tLP_Faecher.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tLP_Faecher.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tLP_Faecher.Size = new System.Drawing.Size(342, 618);
-            this.tLP_Faecher.TabIndex = 1;
+            this.tLP_Faecher.TabIndex = 0;
             // 
             // tb_Suchen
             // 
@@ -260,9 +263,26 @@
             this.mbt_Cancel.MaximumSize = new System.Drawing.Size(0, 24);
             this.mbt_Cancel.Name = "mbt_Cancel";
             this.mbt_Cancel.Size = new System.Drawing.Size(109, 24);
-            this.mbt_Cancel.TabIndex = 7;
+            this.mbt_Cancel.TabIndex = 8;
             this.mbt_Cancel.Text = "Abbrechen";
             this.mbt_Cancel.UseSelectable = true;
+            // 
+            // bt_sort_on_off
+            // 
+            this.bt_sort_on_off.DisplayFocus = true;
+            this.bt_sort_on_off.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bt_sort_on_off.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_sort_on_off.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.bt_sort_on_off.Location = new System.Drawing.Point(3, 586);
+            this.bt_sort_on_off.MaximumSize = new System.Drawing.Size(0, 24);
+            this.bt_sort_on_off.MinimumSize = new System.Drawing.Size(50, 24);
+            this.bt_sort_on_off.Name = "bt_sort_on_off";
+            this.bt_sort_on_off.Size = new System.Drawing.Size(107, 24);
+            this.bt_sort_on_off.Style = MetroFramework.MetroColorStyle.Teal;
+            this.bt_sort_on_off.TabIndex = 6;
+            this.bt_sort_on_off.Text = "unsortiert";
+            this.bt_sort_on_off.UseSelectable = true;
+            this.bt_sort_on_off.Click += new System.EventHandler(this.Bt_sort_on_off_Click);
             // 
             // w_s_manage
             // 
@@ -296,5 +316,6 @@
         private MetroFramework.Controls.MetroButton mbt_Import;
         private MetroFramework.Controls.MetroButton mtb_Export;
         private MetroFramework.Controls.MetroButton mbt_Cancel;
+        private MetroFramework.Controls.MetroButton bt_sort_on_off;
     }
 }

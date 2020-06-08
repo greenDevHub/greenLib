@@ -454,5 +454,18 @@ namespace Bibo_Verwaltung
             grid.DataSource = ds.Tables["BuecherListe"];
             grid.Columns["bf_fachid"].Visible = false;
         }
+
+        public List<string> SuggestedBooks(string kundenid)
+        {
+            KID = kundenid;
+            SuggestBuecher(GetKlassenstufe());
+            List<string> suggestedBooks = new List<string>();
+            for(int i = 0; i < ds.Tables[1].Rows.Count; i++)
+            {
+                string isbn = ds.Tables[1].Rows[i][1].ToString();
+                suggestedBooks.Add(isbn);
+            }
+            return suggestedBooks;
+        }
     }
 }

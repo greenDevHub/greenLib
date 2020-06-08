@@ -295,12 +295,17 @@ namespace Bibo_Verwaltung
                 buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe);
             }
         }
-
+        bool filterActive = true;
         private void cb_Autor_Enter(object sender, EventArgs e)
         {
             if (cb_Autor.Text == "Autor")
             {
+                filterActive = false;
                 cb_Autor.Text = "";
+            }
+            else
+            {
+                filterActive = true;
             }
             cb_Autor.ForeColor = Color.Black;
         }
@@ -309,11 +314,13 @@ namespace Bibo_Verwaltung
         {
             if (cb_Autor.Text == "")
             {
+                filterActive = false;
                 cb_Autor.Text = "Autor";
                 cb_Autor.ForeColor = Color.Gray;
             }
             else
             {
+                filterActive = true;
                 cb_Autor.ForeColor = Color.Black;
             }
         }
@@ -322,7 +329,12 @@ namespace Bibo_Verwaltung
         {
             if (cb_Verlag.Text == "Verlag")
             {
+                filterActive = false;
                 cb_Verlag.Text = "";
+            }
+            else
+            {
+                filterActive = true;
             }
             cb_Verlag.ForeColor = Color.Black;
         }
@@ -331,11 +343,13 @@ namespace Bibo_Verwaltung
         {
             if (cb_Verlag.Text == "")
             {
+                filterActive = false;
                 cb_Verlag.Text = "Verlag";
                 cb_Verlag.ForeColor = Color.Gray;
             }
             else
             {
+                filterActive = true;
                 cb_Verlag.ForeColor = Color.Black;
             }
         }
@@ -344,7 +358,12 @@ namespace Bibo_Verwaltung
         {
             if (cb_Genre.Text == "Genre")
             {
+                filterActive = false;
                 cb_Genre.Text = "";
+            }
+            else
+            {
+                filterActive = true;
             }
             cb_Genre.ForeColor = Color.Black;
         }
@@ -353,31 +372,37 @@ namespace Bibo_Verwaltung
         {
             if (cb_Genre.Text == "")
             {
+                filterActive = false;
                 cb_Genre.Text = "Genre";
                 cb_Genre.ForeColor = Color.Gray;
             }
             else
             {
+                filterActive = true;
                 cb_Genre.ForeColor = Color.Black;
             }
         }
 
         private void Filter()
         {
-            if (searchActivated)
+            if (filterActive)
             {
-                buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+                if (searchActivated)
+                {
+                    buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
 
-                addRowFilter();
-                if (rueckListe.Count != 0)
-                {
-                    buchsuche.Set_StatusMark(ref gv_buchsuche, rueckListe);
-                }
-                else
-                {
-                    buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe);
+                    addRowFilter();
+                    if (rueckListe.Count != 0)
+                    {
+                        buchsuche.Set_StatusMark(ref gv_buchsuche, rueckListe);
+                    }
+                    else
+                    {
+                        buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe);
+                    }
                 }
             }
+            
 
         }
         private void tb_ExemplarID_TextChanged(object sender, EventArgs e)
@@ -398,17 +423,17 @@ namespace Bibo_Verwaltung
 
         private void cb_Autor_TextChanged(object sender, EventArgs e)
         {
-                Filter();
+            Filter();
         }
 
         private void cb_Verlag_TextChanged(object sender, EventArgs e)
         {
-                Filter();
+            Filter();
         }
 
         private void cb_Genre_TextChanged(object sender, EventArgs e)
         {
-                Filter();
+            Filter();
         }
 
         private void tb_nachname_TextChanged(object sender, EventArgs e)
@@ -980,6 +1005,36 @@ namespace Bibo_Verwaltung
         {
             Form Buch = new w_s_buecher(currentUser, gv_buchsuche.SelectedRows[0].Cells["ISBN"].Value.ToString());
             Buch.ShowDialog(this);
+        }
+
+        private void Gv_buchsuche_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                CM_Ausleihen.Show(gv_buchsuche.PointToScreen(gv_buchsuche.GetCellDisplayRectangle(0, gv_buchsuche.SelectedRows[0].Index, false).Location));
+                e.SuppressKeyPress = true;
+            }
+            else if(e.KeyCode == Keys.Tab)
+            {
+                bt_reset.Select();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void Cb_Autor_KeyDown(object sender, KeyEventArgs e)
+        {
+            filterActive = true;
+    
+        }
+
+        private void Cb_Verlag_KeyDown(object sender, KeyEventArgs e)
+        {
+            filterActive = true;
+        }
+
+        private void Cb_Genre_KeyDown(object sender, KeyEventArgs e)
+        {
+            filterActive = true;
         }
     }
 }

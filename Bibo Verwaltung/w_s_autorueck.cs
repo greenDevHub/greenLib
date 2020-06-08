@@ -69,11 +69,15 @@ namespace Bibo_Verwaltung
                 kunden.KundenID = gv_Schueler.Rows[i].Cells["kunde_ID"].Value.ToString();
                 if (kunden.Ausgeliehen())
                 {
+                    Kundenrow.DefaultCellStyle.SelectionBackColor = default;
+                    Kundenrow.DefaultCellStyle.SelectionForeColor = default;
                     Kundenrow.DefaultCellStyle.BackColor = default;
                     Kundenrow.DefaultCellStyle.ForeColor = default;
                 }
                 else
                 {
+                    Kundenrow.DefaultCellStyle.SelectionBackColor = Color.GreenYellow;
+                    Kundenrow.DefaultCellStyle.SelectionForeColor = Color.Black;
                     Kundenrow.DefaultCellStyle.BackColor = Color.LimeGreen;
                     Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
                 }
@@ -125,10 +129,10 @@ namespace Bibo_Verwaltung
                         {
                             bt_back.Enabled = false;
                         }
-                        if (gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.LimeGreen || gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.Red)
-                        {
-                            gv_Schueler.ClearSelection();
-                        }
+                        //if (gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.LimeGreen || gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.Red)
+                        //{
+                        //    gv_Schueler.ClearSelection();
+                        //}
                         tb_ExemplarID.Text = "";
                         tb_ExemplarID.Focus();
                         autorueckgabe.ClearRueckList();
@@ -205,10 +209,10 @@ namespace Bibo_Verwaltung
                         {
                             bt_next.Enabled = false;
                         }
-                        if (gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.LimeGreen || gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.Red)
-                        {
-                            gv_Schueler.ClearSelection();
-                        }
+                        //if (gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.LimeGreen || gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.Red)
+                        //{
+                        //    gv_Schueler.ClearSelection();
+                        //}
                         tb_ExemplarID.Text = "";
                         tb_ExemplarID.Focus();
                         autorueckgabe.ClearRueckList();
@@ -329,14 +333,17 @@ namespace Bibo_Verwaltung
         {
             if (a_cb_Modus.SelectedIndex == 0)
             {
+                a_cb_Klasse.DataSource = null;
+                a_cb_Klasse.Sorted = true;
                 lb_Klasse.Text = "Klasse:";
                 lb_Klasse.Visible = true;
-                new Klasse().FillCombobox(ref a_cb_Klasse, 0);
+                new Klasse().FillCombobox(ref a_cb_Klasse, 1);
                 a_cb_Klasse.Visible = true;
                 a_cb_Klasse.Enabled = true;
             }
             else
             {
+                a_cb_Klasse.Sorted = false;
                 lb_Klasse.Text = "Stufe:";
                 lb_Klasse.Visible = true;
                 DataTable stufen = new DataTable();
@@ -422,7 +429,7 @@ namespace Bibo_Verwaltung
                 autorueckgabe.KID = gv_Schueler.CurrentRow.Cells["kunde_ID"].Value.ToString();
                 kunden = new Kunde(autorueckgabe.KID);
                 DialogResult dialogResult = MetroMessageBox.Show(this, autorueckgabe.GetRueckgabeList() + "an: '" + autorueckgabe.TrimText(kunden.Vorname + " " + kunden.Nachname, 30) + "' wirklich zurücknehmen?", "Achtung",
-                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question,211 + autorueckgabe.RueckListe.Rows.Count * 17);
                 if (dialogResult == DialogResult.OK)
                 {
                     DataGridViewRow Kundenrow = gv_Schueler.CurrentRow;
@@ -448,6 +455,8 @@ namespace Bibo_Verwaltung
                             }
                             else if (IsNotEmpty(ref gv_suggested))
                             {
+                                Kundenrow.DefaultCellStyle.SelectionBackColor = Color.LightGray;
+                                Kundenrow.DefaultCellStyle.SelectionForeColor = Color.Black;
                                 Kundenrow.DefaultCellStyle.BackColor = Color.Gray;
                                 Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
                             }
@@ -511,7 +520,7 @@ namespace Bibo_Verwaltung
                             if (selectedBuecher.Columns.Count < 2)
                             {
                                 selectedBuecher.Columns.Add("ID");
-                                selectedBuecher.Columns.Add("Soll-Zustand");
+                                selectedBuecher.Columns.Add("Vorheriger Zustand");
                                 selectedBuecher.Columns.Add("Titel");
                             }
                             if (!buch_exemplar.IsSpecificAvailable())
@@ -561,6 +570,7 @@ namespace Bibo_Verwaltung
                             gv_selected.ClearSelection();
                             tb_ExemplarID.Focus();
                             tb_ExemplarID.SelectAll();
+                            combobox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
                         }
                     }
                     catch

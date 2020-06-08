@@ -71,14 +71,14 @@
             // 
             this.dp_RueckDatum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dp_RueckDatum.CustomFormat = " dd : MMMM : yyyy";
+            this.dp_RueckDatum.CustomFormat = "dd.MM.yyy";
             this.dp_RueckDatum.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dp_RueckDatum.Location = new System.Drawing.Point(116, 118);
             this.dp_RueckDatum.MinimumSize = new System.Drawing.Size(0, 29);
             this.dp_RueckDatum.Name = "dp_RueckDatum";
             this.dp_RueckDatum.Size = new System.Drawing.Size(164, 29);
             this.dp_RueckDatum.Style = MetroFramework.MetroColorStyle.Green;
-            this.dp_RueckDatum.TabIndex = 2;
+            this.dp_RueckDatum.TabIndex = 4;
             // 
             // lb_BuchStatus
             // 
@@ -110,13 +110,14 @@
             this.llb_BuchTitel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.llb_BuchTitel.AutoSize = true;
+            this.llb_BuchTitel.DisplayFocus = true;
             this.llb_BuchTitel.Enabled = false;
             this.llb_BuchTitel.ForeColor = System.Drawing.SystemColors.Highlight;
             this.llb_BuchTitel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.llb_BuchTitel.Location = new System.Drawing.Point(115, 33);
             this.llb_BuchTitel.Name = "llb_BuchTitel";
             this.llb_BuchTitel.Size = new System.Drawing.Size(180, 27);
-            this.llb_BuchTitel.TabIndex = 1;
+            this.llb_BuchTitel.TabIndex = 3;
             this.llb_BuchTitel.Text = "keine Treffer";
             this.llb_BuchTitel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.llb_BuchTitel.UseSelectable = true;
@@ -131,7 +132,7 @@
             this.bt_AddBuch.Name = "bt_AddBuch";
             this.bt_AddBuch.Size = new System.Drawing.Size(24, 24);
             this.bt_AddBuch.Style = MetroFramework.MetroColorStyle.Green;
-            this.bt_AddBuch.TabIndex = 4;
+            this.bt_AddBuch.TabIndex = 2;
             this.bt_AddBuch.Text = "+";
             this.bt_AddBuch.UseSelectable = true;
             this.bt_AddBuch.Click += new System.EventHandler(this.bt_AddBuch_Click);
@@ -146,7 +147,7 @@
             this.leihList_Slider.Maximum = 0;
             this.leihList_Slider.Name = "leihList_Slider";
             this.leihList_Slider.Size = new System.Drawing.Size(110, 24);
-            this.leihList_Slider.TabIndex = 3;
+            this.leihList_Slider.TabIndex = 5;
             this.leihList_Slider.TabStop = true;
             this.leihList_Slider.Scroll += new System.Windows.Forms.ScrollEventHandler(this.leihList_Slider_Scroll);
             this.leihList_Slider.ValueChanged += new System.EventHandler(this.leihList_Slider_ValueChanged);
@@ -255,7 +256,7 @@
             this.tb_BuchCode.ShortcutsEnabled = true;
             this.tb_BuchCode.Size = new System.Drawing.Size(165, 24);
             this.tb_BuchCode.Style = MetroFramework.MetroColorStyle.Green;
-            this.tb_BuchCode.TabIndex = 0;
+            this.tb_BuchCode.TabIndex = 1;
             this.tb_BuchCode.UseSelectable = true;
             this.tb_BuchCode.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_BuchCode.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -327,7 +328,7 @@
             this.bt_NeuKunde.Name = "bt_NeuKunde";
             this.bt_NeuKunde.Size = new System.Drawing.Size(235, 24);
             this.bt_NeuKunde.Style = MetroFramework.MetroColorStyle.Green;
-            this.bt_NeuKunde.TabIndex = 6;
+            this.bt_NeuKunde.TabIndex = 8;
             this.bt_NeuKunde.Text = "Neuen Kunden hinzufügen";
             this.bt_NeuKunde.UseSelectable = true;
             this.bt_NeuKunde.Click += new System.EventHandler(this.bt_NeuKunde_Click);
@@ -387,7 +388,8 @@
             this.gv_Kunde.ShowEditingIcon = false;
             this.gv_Kunde.Size = new System.Drawing.Size(548, 164);
             this.gv_Kunde.Style = MetroFramework.MetroColorStyle.Green;
-            this.gv_Kunde.TabIndex = 5;
+            this.gv_Kunde.TabIndex = 9;
+            this.gv_Kunde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Kunde_KeyDown);
             // 
             // tb_NName
             // 
@@ -418,7 +420,7 @@
             this.tb_NName.ShortcutsEnabled = true;
             this.tb_NName.Size = new System.Drawing.Size(152, 24);
             this.tb_NName.Style = MetroFramework.MetroColorStyle.Green;
-            this.tb_NName.TabIndex = 8;
+            this.tb_NName.TabIndex = 11;
             this.tb_NName.UseSelectable = true;
             this.tb_NName.WaterMark = "Nachname";
             this.tb_NName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -454,7 +456,7 @@
             this.tb_VName.ShortcutsEnabled = true;
             this.tb_VName.Size = new System.Drawing.Size(150, 24);
             this.tb_VName.Style = MetroFramework.MetroColorStyle.Green;
-            this.tb_VName.TabIndex = 7;
+            this.tb_VName.TabIndex = 10;
             this.tb_VName.UseSelectable = true;
             this.tb_VName.WaterMark = "Vorname";
             this.tb_VName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -490,7 +492,7 @@
             this.bt_Submit.Name = "bt_Submit";
             this.bt_Submit.Size = new System.Drawing.Size(175, 24);
             this.bt_Submit.Style = MetroFramework.MetroColorStyle.Green;
-            this.bt_Submit.TabIndex = 9;
+            this.bt_Submit.TabIndex = 12;
             this.bt_Submit.Text = "Ausleihvorgang abschließen";
             this.bt_Submit.UseSelectable = true;
             this.bt_Submit.Click += new System.EventHandler(this.bt_Submit_Click);
@@ -505,7 +507,7 @@
             this.bt_Abbrechen.Name = "bt_Abbrechen";
             this.bt_Abbrechen.Size = new System.Drawing.Size(175, 24);
             this.bt_Abbrechen.Style = MetroFramework.MetroColorStyle.Green;
-            this.bt_Abbrechen.TabIndex = 10;
+            this.bt_Abbrechen.TabIndex = 13;
             this.bt_Abbrechen.Text = "Schließen";
             this.bt_Abbrechen.UseSelectable = true;
             // 
@@ -536,7 +538,7 @@
             this.gb_Exemplar.Location = new System.Drawing.Point(23, 82);
             this.gb_Exemplar.Name = "gb_Exemplar";
             this.gb_Exemplar.Size = new System.Drawing.Size(554, 207);
-            this.gb_Exemplar.TabIndex = 49;
+            this.gb_Exemplar.TabIndex = 0;
             this.gb_Exemplar.VerticalScrollbarBarColor = true;
             this.gb_Exemplar.VerticalScrollbarHighlightOnWheel = false;
             this.gb_Exemplar.VerticalScrollbarSize = 10;
@@ -545,10 +547,11 @@
             // 
             this.llb_gesListe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.llb_gesListe.DisplayFocus = true;
             this.llb_gesListe.Location = new System.Drawing.Point(116, 180);
             this.llb_gesListe.Name = "llb_gesListe";
             this.llb_gesListe.Size = new System.Drawing.Size(164, 24);
-            this.llb_gesListe.TabIndex = 43;
+            this.llb_gesListe.TabIndex = 6;
             this.llb_gesListe.Text = "gesamte Ausleihliste anzeigen";
             this.llb_gesListe.UseSelectable = true;
             this.llb_gesListe.Click += new System.EventHandler(this.llb_gesListe_Click);
@@ -590,7 +593,7 @@
             this.metroPanel2.Location = new System.Drawing.Point(23, 317);
             this.metroPanel2.Name = "metroPanel2";
             this.metroPanel2.Size = new System.Drawing.Size(554, 230);
-            this.metroPanel2.TabIndex = 51;
+            this.metroPanel2.TabIndex = 7;
             this.metroPanel2.VerticalScrollbarBarColor = true;
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
@@ -623,6 +626,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(600, 600);
             this.Name = "w_s_ausleihe";
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Green;

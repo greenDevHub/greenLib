@@ -149,35 +149,52 @@ namespace Bibo_Verwaltung
             if (rb_neu.Checked)
             {
                 Clear_Form();
-                lb_Message.Text = "Das Buch wurde hinzugefügt!";
+                lb_Message.Text = "Das Exemplar wurde hinzugefügt!";
                 bt_Add.Text = "Hinzufügen";
                 tb_ID.Enabled = false;
                 tb_ISBN.Enabled = false;
                 acb_Zustand.Enabled = true;
                 dTP_AufDat.Enabled = true;
                 tb_ExempCount.Enabled = true;
+                mlb_ISBN.Text = "ISBN:";
+                mlb_ID.Text = "Exemplar-ID:";
+                mlb_Zustand.Text = "Zustand:*";
+                mlb_AufDat.Text = "Aufnahmedatum:*";
+                mlb_ExempCount.Text = "Anzahl Exemplare:*";
+                mlb_Vorhanden.Text = "Vorhanden:";
             }
             if (rb_delete.Checked)
             {
-                lb_Message.Text = "Das Buch wurde gelöscht!";
+                lb_Message.Text = "Das Exemplar wurde gelöscht!";
                 bt_Add.Text = "Löschen";
                 tb_ID.Enabled = true;
                 tb_ISBN.Enabled = false;
                 acb_Zustand.Enabled = false;
                 dTP_AufDat.Enabled = false;
                 tb_ExempCount.Enabled = false;
+                mlb_ISBN.Text = "ISBN:";
+                mlb_ID.Text = "Exemplar-ID:*";
+                mlb_Zustand.Text = "Zustand:";
+                mlb_AufDat.Text = "Aufnahmedatum:";
+                mlb_ExempCount.Text = "Anzahl Exemplare:";
+                mlb_Vorhanden.Text = "Vorhanden:";
             }
             if (rb_edit.Checked)
             {
-                lb_Message.Text = "Das Buch wurde gespeichert!";
+                lb_Message.Text = "Das Exemplar wurde gespeichert!";
                 bt_Add.Text = "Speichern";
                 tb_ID.Enabled = false;
                 tb_ISBN.Enabled = false;
                 acb_Zustand.Enabled = true;
                 dTP_AufDat.Enabled = true;
                 tb_ExempCount.Enabled = false;
+                mlb_ISBN.Text = "ISBN:";
+                mlb_ID.Text = "Exemplar-ID:*";
+                mlb_Zustand.Text = "Zustand:*";
+                mlb_AufDat.Text = "Aufnahmedatum:*";
+                mlb_ExempCount.Text = "Anzahl Exemplare:";
+                mlb_Vorhanden.Text = "Vorhanden:";
             }
-            guestMode(guest);
             if (rb_search.Checked)
             {
                 bt_Add.Text = "---";
@@ -187,7 +204,14 @@ namespace Bibo_Verwaltung
                 dTP_AufDat.Enabled = true;
                 tb_ExempCount.Enabled = false;
                 bt_Add.Enabled = false;
+                mlb_ISBN.Text = "ISBN:";
+                mlb_ID.Text = "Exemplar-ID:";
+                mlb_Zustand.Text = "Zustand:";
+                mlb_AufDat.Text = "Aufnahmedatum:";
+                mlb_ExempCount.Text = "Anzahl Exemplare:";
+                mlb_Vorhanden.Text = "Vorhanden:";
             }
+            guestMode(guest);
         }
         
         /// <summary>
@@ -316,7 +340,7 @@ namespace Bibo_Verwaltung
                 }
                 catch (SqlException)
                 {
-                    MetroMessageBox.Show(this, "Das Buch konnte nicht gelöscht werden!", "Error",
+                    MetroMessageBox.Show(this, "Das Exemplar konnte nicht gelöscht werden!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 if (!backgroundWorker.IsBusy)
@@ -347,7 +371,7 @@ namespace Bibo_Verwaltung
                 }
                 catch (SqlException)
                 {
-                    MetroMessageBox.Show(this, "Das Buch konnte nicht bearbeitet werden!", "Error",
+                    MetroMessageBox.Show(this, "Das Exemplar konnte nicht bearbeitet werden!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 if (!backgroundWorker.IsBusy)
@@ -357,19 +381,19 @@ namespace Bibo_Verwaltung
             }
             else if (rb_edit.Checked)
             {
-                MetroMessageBox.Show(this, "Füllen Sie alle Felder aus, um ein Buch zu bearbeiten!", "Achtung",
+                MetroMessageBox.Show(this, "Füllen Sie alle Felder aus, um ein Exemplar zu bearbeiten!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 IsOK();
             }
             else if (rb_neu.Checked)
             {
-                MetroMessageBox.Show(this, "Füllen Sie alle Felder aus, um ein neues Buch hinzuzufügen!", "Achtung",
+                MetroMessageBox.Show(this, "Füllen Sie alle Felder aus, um ein neues Exemplar hinzuzufügen!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 IsOK();
             }
             else if (rb_delete.Checked)
             {
-                MetroMessageBox.Show(this, "Füllen Sie alle Felder aus, um ein Buch zu löschen!", "Achtung",
+                MetroMessageBox.Show(this, "Füllen Sie alle Felder aus, um ein Exemplar zu löschen!", "Achtung",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 if (tb_ID.Text.Equals(""))
                 {
@@ -756,6 +780,15 @@ namespace Bibo_Verwaltung
             if (!backgroundWorker.IsBusy)
             {
                 backgroundWorker.RunWorkerAsync();
+            }
+        }
+
+        private void Gv_Exemplare_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                mbt_Import.Select();
             }
         }
 

@@ -50,6 +50,7 @@
             this.lb_Kunde = new MetroFramework.Controls.MetroLabel();
             this.lb_AusleiheEnde = new MetroFramework.Controls.MetroLabel();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.cb_Zustand = new Bibo_Verwaltung.AdvancedComboBox();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.llb_gesListe = new MetroFramework.Controls.MetroLink();
             this.rueckList_Slider = new System.Windows.Forms.HScrollBar();
@@ -59,7 +60,6 @@
             this.lb_Exemplar = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.bt_Abbrechen = new MetroFramework.Controls.MetroButton();
-            this.cb_Zustand = new Bibo_Verwaltung.AdvancedComboBox();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Verlauf)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).BeginInit();
@@ -78,7 +78,7 @@
             this.helpProvider.SetShowHelp(this.bt_Rueckgabe, true);
             this.bt_Rueckgabe.Size = new System.Drawing.Size(175, 24);
             this.bt_Rueckgabe.Style = MetroFramework.MetroColorStyle.Green;
-            this.bt_Rueckgabe.TabIndex = 9;
+            this.bt_Rueckgabe.TabIndex = 11;
             this.bt_Rueckgabe.Text = "Buchrückgabe abschließen";
             this.bt_Rueckgabe.UseSelectable = true;
             this.bt_Rueckgabe.Click += new System.EventHandler(this.bt_Rueckgabe_Click);
@@ -96,7 +96,7 @@
             this.helpProvider.SetShowHelp(this.bt_Zu_aendern, true);
             this.bt_Zu_aendern.Size = new System.Drawing.Size(234, 24);
             this.bt_Zu_aendern.Style = MetroFramework.MetroColorStyle.Green;
-            this.bt_Zu_aendern.TabIndex = 7;
+            this.bt_Zu_aendern.TabIndex = 9;
             this.bt_Zu_aendern.Text = "Buchzustand ändern";
             this.bt_Zu_aendern.UseSelectable = true;
             this.bt_Zu_aendern.Click += new System.EventHandler(this.bt_Zu_aendern_Click);
@@ -291,6 +291,7 @@
             // 
             this.llb_BuchTitel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.llb_BuchTitel.DisplayFocus = true;
             this.llb_BuchTitel.Enabled = false;
             this.helpProvider.SetHelpString(this.llb_BuchTitel, "Hier wird ihnen angezeigt, welches Buch ausgeliehen wurde.");
             this.llb_BuchTitel.Location = new System.Drawing.Point(115, 33);
@@ -319,6 +320,7 @@
             // 
             this.llb_Kunde.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.llb_Kunde.DisplayFocus = true;
             this.llb_Kunde.Enabled = false;
             this.helpProvider.SetHelpString(this.llb_Kunde, "Hier wird ihnen angezeigt, wer das aktuelle Buch ausgeliehen hat.");
             this.llb_Kunde.Location = new System.Drawing.Point(115, 63);
@@ -380,6 +382,25 @@
             this.lb_AusleiheEnde.Text = "Rückgabe fällig:";
             this.lb_AusleiheEnde.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // cb_Zustand
+            // 
+            this.cb_Zustand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cb_Zustand.BorderColor = System.Drawing.Color.Green;
+            this.cb_Zustand.DataRowView = true;
+            this.cb_Zustand.Enabled = false;
+            this.cb_Zustand.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.cb_Zustand.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_Zustand, "Hier wird der letzte Zustand des ausgeliehen Buches angezeigt. Ändern sie diesen " +
+        "wenn sich der Zustand geändert hat.");
+            this.cb_Zustand.HighlightColor = System.Drawing.Color.Green;
+            this.cb_Zustand.ItemHeight = 18;
+            this.cb_Zustand.Location = new System.Drawing.Point(115, 153);
+            this.cb_Zustand.Name = "cb_Zustand";
+            this.helpProvider.SetShowHelp(this.cb_Zustand, true);
+            this.cb_Zustand.Size = new System.Drawing.Size(135, 24);
+            this.cb_Zustand.TabIndex = 5;
+            // 
             // metroPanel1
             // 
             this.metroPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -411,7 +432,7 @@
             this.metroPanel1.Location = new System.Drawing.Point(23, 82);
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(554, 242);
-            this.metroPanel1.TabIndex = 30;
+            this.metroPanel1.TabIndex = 0;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
@@ -420,10 +441,11 @@
             // 
             this.llb_gesListe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.llb_gesListe.DisplayFocus = true;
             this.llb_gesListe.Location = new System.Drawing.Point(116, 213);
             this.llb_gesListe.Name = "llb_gesListe";
             this.llb_gesListe.Size = new System.Drawing.Size(164, 24);
-            this.llb_gesListe.TabIndex = 48;
+            this.llb_gesListe.TabIndex = 8;
             this.llb_gesListe.Text = "gesamte Ausleihliste anzeigen";
             this.llb_gesListe.UseSelectable = true;
             this.llb_gesListe.Click += new System.EventHandler(this.Llb_gesListe_Click);
@@ -438,7 +460,7 @@
             this.rueckList_Slider.Maximum = 0;
             this.rueckList_Slider.Name = "rueckList_Slider";
             this.rueckList_Slider.Size = new System.Drawing.Size(110, 24);
-            this.rueckList_Slider.TabIndex = 44;
+            this.rueckList_Slider.TabIndex = 7;
             this.rueckList_Slider.TabStop = true;
             this.rueckList_Slider.Scroll += new System.Windows.Forms.ScrollEventHandler(this.RueckList_Slider_Scroll);
             this.rueckList_Slider.ValueChanged += new System.EventHandler(this.RueckList_Slider_ValueChanged);
@@ -559,28 +581,9 @@
             this.bt_Abbrechen.Name = "bt_Abbrechen";
             this.bt_Abbrechen.Size = new System.Drawing.Size(175, 24);
             this.bt_Abbrechen.Style = MetroFramework.MetroColorStyle.Green;
-            this.bt_Abbrechen.TabIndex = 53;
+            this.bt_Abbrechen.TabIndex = 12;
             this.bt_Abbrechen.Text = "Schließen";
             this.bt_Abbrechen.UseSelectable = true;
-            // 
-            // cb_Zustand
-            // 
-            this.cb_Zustand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cb_Zustand.BorderColor = System.Drawing.Color.Green;
-            this.cb_Zustand.DataRowView = true;
-            this.cb_Zustand.Enabled = false;
-            this.cb_Zustand.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.cb_Zustand.FormattingEnabled = true;
-            this.helpProvider.SetHelpString(this.cb_Zustand, "Hier wird der letzte Zustand des ausgeliehen Buches angezeigt. Ändern sie diesen " +
-        "wenn sich der Zustand geändert hat.");
-            this.cb_Zustand.HighlightColor = System.Drawing.Color.Green;
-            this.cb_Zustand.ItemHeight = 18;
-            this.cb_Zustand.Location = new System.Drawing.Point(115, 153);
-            this.cb_Zustand.Name = "cb_Zustand";
-            this.helpProvider.SetShowHelp(this.cb_Zustand, true);
-            this.cb_Zustand.Size = new System.Drawing.Size(135, 24);
-            this.cb_Zustand.TabIndex = 5;
             // 
             // metroPanel2
             // 
@@ -594,7 +597,7 @@
             this.metroPanel2.Location = new System.Drawing.Point(23, 349);
             this.metroPanel2.Name = "metroPanel2";
             this.metroPanel2.Size = new System.Drawing.Size(554, 198);
-            this.metroPanel2.TabIndex = 54;
+            this.metroPanel2.TabIndex = 10;
             this.metroPanel2.VerticalScrollbarBarColor = true;
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
@@ -614,6 +617,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(600, 600);
             this.Name = "w_s_rueckgabe";
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Green;

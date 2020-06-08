@@ -396,11 +396,13 @@ namespace Bibo_Verwaltung
             pl_unschaerfe.BringToFront();
             pl_unschaerfe.BackColor = Color.Transparent;
             pl_unschaerfe.Visible = true;
+            mT_klassenstufebuch.Select();
         }
 
         private void metroTile_Click(object sender, EventArgs e)
         {
             HidePanel();
+            bt_zu.Select();
         }
 
         private void w_s_main_Activated(object sender, EventArgs e)
@@ -429,6 +431,19 @@ namespace Bibo_Verwaltung
                     autoruechgabe.ShowDialog(this);
                 }
                 else { }
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void MT_Klassen_Click(object sender, EventArgs e)
+        {
+            if (!connected)
+            {
+                Form manage = new w_s_manage(currentUser, "Klasse");
+                manage.ShowDialog(this);
             }
             else
             {

@@ -121,6 +121,7 @@
             this.gv_Klassenstufe.TabIndex = 0;
             this.gv_Klassenstufe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Klassenstufe_CellDoubleClick);
             this.gv_Klassenstufe.SelectionChanged += new System.EventHandler(this.gv_Klassenstufe_SelectionChanged);
+            this.gv_Klassenstufe.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Klassenstufe_KeyDown);
             // 
             // gv_Buecher
             // 
@@ -203,7 +204,10 @@
             this.gv_Buecher.Size = new System.Drawing.Size(595, 360);
             this.gv_Buecher.Style = MetroFramework.MetroColorStyle.Orange;
             this.gv_Buecher.TabIndex = 1;
+            this.gv_Buecher.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Buecher_CellClick);
             this.gv_Buecher.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Buecher_CellDoubleClick);
+            this.gv_Buecher.Sorted += new System.EventHandler(this.Gv_Buecher_Sorted);
+            this.gv_Buecher.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Buecher_KeyDown);
             // 
             // btAbbrechen
             // 
@@ -215,7 +219,7 @@
             this.btAbbrechen.Name = "btAbbrechen";
             this.btAbbrechen.Size = new System.Drawing.Size(175, 24);
             this.btAbbrechen.Style = MetroFramework.MetroColorStyle.Orange;
-            this.btAbbrechen.TabIndex = 6;
+            this.btAbbrechen.TabIndex = 4;
             this.btAbbrechen.Text = "Schließen";
             this.btAbbrechen.UseSelectable = true;
             this.btAbbrechen.Click += new System.EventHandler(this.btAbbrechen_Click);
@@ -229,7 +233,7 @@
             this.bt_Bearbeiten.Name = "bt_Bearbeiten";
             this.bt_Bearbeiten.Size = new System.Drawing.Size(175, 24);
             this.bt_Bearbeiten.Style = MetroFramework.MetroColorStyle.Orange;
-            this.bt_Bearbeiten.TabIndex = 5;
+            this.bt_Bearbeiten.TabIndex = 3;
             this.bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
             this.bt_Bearbeiten.UseSelectable = true;
             this.bt_Bearbeiten.Click += new System.EventHandler(this.bt_Bearbeiten_Click);
@@ -266,7 +270,7 @@
             this.bt_back.Name = "bt_back";
             this.bt_back.Size = new System.Drawing.Size(175, 24);
             this.bt_back.Style = MetroFramework.MetroColorStyle.Orange;
-            this.bt_back.TabIndex = 75;
+            this.bt_back.TabIndex = 2;
             this.bt_back.Text = "Zurück";
             this.bt_back.UseSelectable = true;
             this.bt_back.Click += new System.EventHandler(this.bt_back_Click);
@@ -281,7 +285,7 @@
             this.mbt_ImEx.Name = "mbt_ImEx";
             this.mbt_ImEx.Size = new System.Drawing.Size(175, 24);
             this.mbt_ImEx.Style = MetroFramework.MetroColorStyle.Orange;
-            this.mbt_ImEx.TabIndex = 76;
+            this.mbt_ImEx.TabIndex = 5;
             this.mbt_ImEx.Text = "Daten Import/Export";
             this.mbt_ImEx.UseSelectable = true;
             this.mbt_ImEx.Click += new System.EventHandler(this.mbt_ImEx_Click);
@@ -304,6 +308,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(862, 500);
             this.Name = "w_s_buch_stufe";
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Orange;

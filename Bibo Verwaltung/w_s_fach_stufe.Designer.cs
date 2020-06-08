@@ -57,10 +57,10 @@
             this.gv_Faecher.AllowUserToResizeColumns = false;
             this.gv_Faecher.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
             this.gv_Faecher.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gv_Faecher.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -131,7 +131,10 @@
             this.gv_Faecher.Size = new System.Drawing.Size(595, 360);
             this.gv_Faecher.Style = MetroFramework.MetroColorStyle.Orange;
             this.gv_Faecher.TabIndex = 1;
+            this.gv_Faecher.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Faecher_CellClick);
             this.gv_Faecher.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Faecher_CellDoubleClick);
+            this.gv_Faecher.Sorted += new System.EventHandler(this.Gv_Faecher_Sorted);
+            this.gv_Faecher.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Faecher_KeyDown);
             // 
             // bt_Bearbeiten
             // 
@@ -255,6 +258,7 @@
             this.gv_Klassenstufe.TabIndex = 0;
             this.gv_Klassenstufe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Klassenstufe_CellDoubleClick);
             this.gv_Klassenstufe.SelectionChanged += new System.EventHandler(this.gv_Klassenstufe_SelectionChanged);
+            this.gv_Klassenstufe.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Klassenstufe_KeyDown);
             // 
             // bt_back
             // 
@@ -266,7 +270,7 @@
             this.bt_back.Name = "bt_back";
             this.bt_back.Size = new System.Drawing.Size(175, 24);
             this.bt_back.Style = MetroFramework.MetroColorStyle.Orange;
-            this.bt_back.TabIndex = 74;
+            this.bt_back.TabIndex = 2;
             this.bt_back.Text = "Zurück";
             this.bt_back.UseSelectable = true;
             this.bt_back.Click += new System.EventHandler(this.bt_back_Click);
@@ -281,7 +285,7 @@
             this.mbt_ImEx.Name = "mbt_ImEx";
             this.mbt_ImEx.Size = new System.Drawing.Size(175, 24);
             this.mbt_ImEx.Style = MetroFramework.MetroColorStyle.Orange;
-            this.mbt_ImEx.TabIndex = 75;
+            this.mbt_ImEx.TabIndex = 5;
             this.mbt_ImEx.Text = "Daten Import/Export";
             this.mbt_ImEx.UseSelectable = true;
             this.mbt_ImEx.Click += new System.EventHandler(this.mbt_ImEx_Click);
@@ -305,6 +309,7 @@
             this.Margin = new System.Windows.Forms.Padding(1);
             this.MinimumSize = new System.Drawing.Size(862, 500);
             this.Name = "w_s_fach_stufe";
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Orange;

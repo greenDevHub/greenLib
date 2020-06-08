@@ -63,7 +63,7 @@ namespace Bibo_Verwaltung
                 lb_3.Text = "Straße, Hausnummer";
                 lb_4.Text = "PLZ:";
                 lb_5.Text = "Ort:";
-                lb_6.Text = "Klassenstufe:";
+                lb_6.Text = "Klasse:";
                 lb_7.Text = "E-Mail:";
                 lb_8.Text = "Telefonnummer:";
                 lb_2_1.Text = kunde.Vorname;

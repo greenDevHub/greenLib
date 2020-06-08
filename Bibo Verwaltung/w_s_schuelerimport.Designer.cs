@@ -131,7 +131,7 @@
             this.bt_Vorschau.Name = "bt_Vorschau";
             this.bt_Vorschau.Size = new System.Drawing.Size(188, 24);
             this.bt_Vorschau.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_Vorschau.TabIndex = 25;
+            this.bt_Vorschau.TabIndex = 10;
             this.bt_Vorschau.Text = "Vorschau";
             this.bt_Vorschau.UseSelectable = true;
             this.bt_Vorschau.Click += new System.EventHandler(this.bt_Vorschau_Click);
@@ -148,7 +148,7 @@
             this.bt_usepreset.Name = "bt_usepreset";
             this.bt_usepreset.Size = new System.Drawing.Size(188, 24);
             this.bt_usepreset.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_usepreset.TabIndex = 28;
+            this.bt_usepreset.TabIndex = 15;
             this.bt_usepreset.Text = "Vorlage anwenden";
             this.bt_usepreset.UseSelectable = true;
             this.bt_usepreset.Click += new System.EventHandler(this.bt_usePreset_Click);
@@ -165,7 +165,8 @@
             this.rb_faecher.Name = "rb_faecher";
             this.rb_faecher.Size = new System.Drawing.Size(64, 19);
             this.rb_faecher.Style = MetroFramework.MetroColorStyle.Teal;
-            this.rb_faecher.TabIndex = 2;
+            this.rb_faecher.TabIndex = 5;
+            this.rb_faecher.TabStop = true;
             this.rb_faecher.Text = "Fächer";
             this.rb_faecher.UseSelectable = true;
             this.rb_faecher.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
@@ -182,7 +183,8 @@
             this.rb_schueler2.Name = "rb_schueler2";
             this.rb_schueler2.Size = new System.Drawing.Size(117, 19);
             this.rb_schueler2.Style = MetroFramework.MetroColorStyle.Teal;
-            this.rb_schueler2.TabIndex = 2;
+            this.rb_schueler2.TabIndex = 4;
+            this.rb_schueler2.TabStop = true;
             this.rb_schueler2.Text = "Sekundarstufe 2";
             this.rb_schueler2.UseSelectable = true;
             this.rb_schueler2.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
@@ -199,7 +201,7 @@
             this.rb_schueler1.Name = "rb_schueler1";
             this.rb_schueler1.Size = new System.Drawing.Size(115, 19);
             this.rb_schueler1.Style = MetroFramework.MetroColorStyle.Teal;
-            this.rb_schueler1.TabIndex = 1;
+            this.rb_schueler1.TabIndex = 3;
             this.rb_schueler1.TabStop = true;
             this.rb_schueler1.Text = "Sekundarstufe 1";
             this.rb_schueler1.UseSelectable = true;
@@ -257,6 +259,7 @@
             this.gv_columns.Size = new System.Drawing.Size(1070, 29);
             this.gv_columns.Style = MetroFramework.MetroColorStyle.Teal;
             this.gv_columns.TabIndex = 31;
+            this.gv_columns.TabStop = false;
             // 
             // cb_ColHeader
             // 
@@ -272,7 +275,7 @@
             this.cb_ColHeader.Name = "cb_ColHeader";
             this.cb_ColHeader.Size = new System.Drawing.Size(197, 16);
             this.cb_ColHeader.Style = MetroFramework.MetroColorStyle.Teal;
-            this.cb_ColHeader.TabIndex = 5;
+            this.cb_ColHeader.TabIndex = 9;
             this.cb_ColHeader.Text = "Erste Zeile enthält Feldnamen";
             this.cb_ColHeader.UseSelectable = true;
             // 
@@ -293,7 +296,7 @@
             this.cb_TxtQuali.Name = "cb_TxtQuali";
             this.cb_TxtQuali.Size = new System.Drawing.Size(390, 29);
             this.cb_TxtQuali.Style = MetroFramework.MetroColorStyle.Teal;
-            this.cb_TxtQuali.TabIndex = 4;
+            this.cb_TxtQuali.TabIndex = 7;
             this.cb_TxtQuali.UseSelectable = true;
             // 
             // label1
@@ -340,7 +343,7 @@
             this.tb_lines.ShortcutsEnabled = true;
             this.tb_lines.Size = new System.Drawing.Size(390, 24);
             this.tb_lines.Style = MetroFramework.MetroColorStyle.Teal;
-            this.tb_lines.TabIndex = 6;
+            this.tb_lines.TabIndex = 8;
             this.tb_lines.UseSelectable = true;
             this.tb_lines.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_lines.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -364,7 +367,7 @@
             this.cb_FeldTrenn.Name = "cb_FeldTrenn";
             this.cb_FeldTrenn.Size = new System.Drawing.Size(390, 29);
             this.cb_FeldTrenn.Style = MetroFramework.MetroColorStyle.Teal;
-            this.cb_FeldTrenn.TabIndex = 3;
+            this.cb_FeldTrenn.TabIndex = 6;
             this.cb_FeldTrenn.UseSelectable = true;
             // 
             // lb_path
@@ -396,7 +399,7 @@
             this.bt_durchsuchen.Name = "bt_durchsuchen";
             this.bt_durchsuchen.Size = new System.Drawing.Size(493, 24);
             this.bt_durchsuchen.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_durchsuchen.TabIndex = 18;
+            this.bt_durchsuchen.TabIndex = 2;
             this.bt_durchsuchen.Text = "Durchsuchen";
             this.bt_durchsuchen.UseSelectable = true;
             this.bt_durchsuchen.Click += new System.EventHandler(this.bt_durchsuchen_Click);
@@ -435,7 +438,8 @@
             this.tb_path.ShortcutsEnabled = true;
             this.tb_path.Size = new System.Drawing.Size(493, 24);
             this.tb_path.Style = MetroFramework.MetroColorStyle.Teal;
-            this.tb_path.TabIndex = 17;
+            this.tb_path.TabIndex = 200;
+            this.tb_path.TabStop = false;
             this.tb_path.UseSelectable = true;
             this.tb_path.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_path.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -458,7 +462,7 @@
             this.bt_accept.Name = "bt_accept";
             this.bt_accept.Size = new System.Drawing.Size(188, 24);
             this.bt_accept.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_accept.TabIndex = 32;
+            this.bt_accept.TabIndex = 17;
             this.bt_accept.Text = "Alle Dateien importieren";
             this.bt_accept.UseSelectable = true;
             this.bt_accept.Click += new System.EventHandler(this.bt_accept_Click);
@@ -475,7 +479,7 @@
             this.bt_saveProfile.Name = "bt_saveProfile";
             this.bt_saveProfile.Size = new System.Drawing.Size(188, 24);
             this.bt_saveProfile.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_saveProfile.TabIndex = 28;
+            this.bt_saveProfile.TabIndex = 14;
             this.bt_saveProfile.Text = "Vorlage speichern";
             this.bt_saveProfile.UseSelectable = true;
             this.bt_saveProfile.Click += new System.EventHandler(this.bt_saveProfile_Click);
@@ -513,7 +517,8 @@
             this.rb_multi.Name = "rb_multi";
             this.rb_multi.Size = new System.Drawing.Size(186, 19);
             this.rb_multi.Style = MetroFramework.MetroColorStyle.Teal;
-            this.rb_multi.TabIndex = 0;
+            this.rb_multi.TabIndex = 1;
+            this.rb_multi.TabStop = true;
             this.rb_multi.Text = "Mehrere Dateien auswählen";
             this.rb_multi.UseSelectable = true;
             this.rb_multi.CheckedChanged += new System.EventHandler(this.rb_single_CheckedChanged);
@@ -529,7 +534,7 @@
             this.slider_preview.MinimumSize = new System.Drawing.Size(160, 24);
             this.slider_preview.Name = "slider_preview";
             this.slider_preview.Size = new System.Drawing.Size(524, 24);
-            this.slider_preview.TabIndex = 35;
+            this.slider_preview.TabIndex = 200;
             this.slider_preview.ValueChanged += new System.EventHandler(this.scrollbar_ValueChanged);
             // 
             // tb_min
@@ -653,7 +658,7 @@
             this.bt_removefile.Name = "bt_removefile";
             this.bt_removefile.Size = new System.Drawing.Size(592, 24);
             this.bt_removefile.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_removefile.TabIndex = 38;
+            this.bt_removefile.TabIndex = 13;
             this.bt_removefile.Text = "Datei entfernen";
             this.bt_removefile.UseSelectable = true;
             this.bt_removefile.Click += new System.EventHandler(this.bt_removefile_Click);
@@ -765,6 +770,7 @@
             this.metroGrid_Vorschau.Size = new System.Drawing.Size(1070, 148);
             this.metroGrid_Vorschau.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroGrid_Vorschau.TabIndex = 51;
+            this.metroGrid_Vorschau.TabStop = false;
             this.metroGrid_Vorschau.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroGrid_Vorschau.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.MetroGrid_Vorschau_CellMouseDown);
             this.metroGrid_Vorschau.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gv_Vorschau_KeyDown);
@@ -819,7 +825,8 @@
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(600, 93);
             this.metroPanel1.Style = MetroFramework.MetroColorStyle.Teal;
-            this.metroPanel1.TabIndex = 51;
+            this.metroPanel1.TabIndex = 0;
+            this.metroPanel1.TabStop = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 9;
@@ -856,7 +863,7 @@
             this.metroPanel2.Name = "metroPanel2";
             this.metroPanel2.Size = new System.Drawing.Size(600, 95);
             this.metroPanel2.Style = MetroFramework.MetroColorStyle.Teal;
-            this.metroPanel2.TabIndex = 53;
+            this.metroPanel2.TabIndex = 11;
             this.metroPanel2.VerticalScrollbarBarColor = true;
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 9;
@@ -873,7 +880,7 @@
             this.bt_right.Name = "bt_right";
             this.bt_right.Size = new System.Drawing.Size(16, 24);
             this.bt_right.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_right.TabIndex = 52;
+            this.bt_right.TabIndex = 12;
             this.bt_right.UseSelectable = true;
             this.bt_right.Click += new System.EventHandler(this.bt_right_Click);
             // 
@@ -888,7 +895,7 @@
             this.bt_left.Name = "bt_left";
             this.bt_left.Size = new System.Drawing.Size(16, 24);
             this.bt_left.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_left.TabIndex = 51;
+            this.bt_left.TabIndex = 11;
             this.bt_left.UseSelectable = true;
             this.bt_left.Click += new System.EventHandler(this.bt_left_Click);
             // 
@@ -938,7 +945,7 @@
             this.metroPanel3.Name = "metroPanel3";
             this.metroPanel3.Size = new System.Drawing.Size(1156, 221);
             this.metroPanel3.Style = MetroFramework.MetroColorStyle.Teal;
-            this.metroPanel3.TabIndex = 56;
+            this.metroPanel3.TabIndex = 14;
             this.metroPanel3.VerticalScrollbarBarColor = true;
             this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel3.VerticalScrollbarSize = 9;
@@ -955,7 +962,7 @@
             this.bt_importSingle.Name = "bt_importSingle";
             this.bt_importSingle.Size = new System.Drawing.Size(188, 24);
             this.bt_importSingle.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_importSingle.TabIndex = 32;
+            this.bt_importSingle.TabIndex = 16;
             this.bt_importSingle.Text = "Aktuelle Datei importieren";
             this.bt_importSingle.UseSelectable = true;
             this.bt_importSingle.Click += new System.EventHandler(this.bt_importSingle_Click);
@@ -988,7 +995,7 @@
             this.metroPanel4.Name = "metroPanel4";
             this.metroPanel4.Size = new System.Drawing.Size(548, 39);
             this.metroPanel4.Style = MetroFramework.MetroColorStyle.Teal;
-            this.metroPanel4.TabIndex = 58;
+            this.metroPanel4.TabIndex = 3;
             this.metroPanel4.VerticalScrollbarBarColor = true;
             this.metroPanel4.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel4.VerticalScrollbarSize = 9;
@@ -1026,7 +1033,7 @@
             this.metroPanel5.Name = "metroPanel5";
             this.metroPanel5.Size = new System.Drawing.Size(552, 149);
             this.metroPanel5.Style = MetroFramework.MetroColorStyle.Teal;
-            this.metroPanel5.TabIndex = 60;
+            this.metroPanel5.TabIndex = 6;
             this.metroPanel5.VerticalScrollbarBarColor = true;
             this.metroPanel5.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel5.VerticalScrollbarSize = 9;
@@ -1047,7 +1054,7 @@
             this.bt_Schliessen.MinimumSize = new System.Drawing.Size(262, 24);
             this.bt_Schliessen.Name = "bt_Schliessen";
             this.bt_Schliessen.Size = new System.Drawing.Size(375, 24);
-            this.bt_Schliessen.TabIndex = 61;
+            this.bt_Schliessen.TabIndex = 19;
             this.bt_Schliessen.Text = "Schließen";
             this.bt_Schliessen.UseSelectable = true;
             this.bt_Schliessen.Click += new System.EventHandler(this.bt_Schliessen_Click);
@@ -1060,7 +1067,7 @@
             this.bt_clear.Location = new System.Drawing.Point(298, 553);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(188, 24);
-            this.bt_clear.TabIndex = 62;
+            this.bt_clear.TabIndex = 18;
             this.bt_clear.Text = "Leeren";
             this.bt_clear.UseSelectable = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
@@ -1087,6 +1094,7 @@
             this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.MinimumSize = new System.Drawing.Size(1200, 600);
             this.Name = "w_s_schuelerimport";
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Teal;
             this.Text = "Import von Schülern";
             ((System.ComponentModel.ISupportInitialize)(this.gv_columns)).EndInit();

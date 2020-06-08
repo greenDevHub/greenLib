@@ -130,8 +130,11 @@
             this.gv_Klassen.ShowRowErrors = false;
             this.gv_Klassen.Size = new System.Drawing.Size(595, 360);
             this.gv_Klassen.Style = MetroFramework.MetroColorStyle.Orange;
-            this.gv_Klassen.TabIndex = 77;
+            this.gv_Klassen.TabIndex = 1;
+            this.gv_Klassen.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Klassen_CellClick);
             this.gv_Klassen.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Klassen_CellDoubleClick);
+            this.gv_Klassen.Sorted += new System.EventHandler(this.Gv_Klassen_Sorted);
+            this.gv_Klassen.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Klassen_KeyDown);
             // 
             // gv_Klassenstufe
             // 
@@ -201,9 +204,10 @@
             this.gv_Klassenstufe.ShowRowErrors = false;
             this.gv_Klassenstufe.Size = new System.Drawing.Size(270, 360);
             this.gv_Klassenstufe.Style = MetroFramework.MetroColorStyle.Orange;
-            this.gv_Klassenstufe.TabIndex = 76;
+            this.gv_Klassenstufe.TabIndex = 0;
             this.gv_Klassenstufe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Klassenstufe_CellDoubleClick);
             this.gv_Klassenstufe.SelectionChanged += new System.EventHandler(this.gv_Klassenstufe_SelectionChanged);
+            this.gv_Klassenstufe.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Klassenstufe_KeyDown);
             // 
             // bt_back
             // 
@@ -215,7 +219,7 @@
             this.bt_back.Name = "bt_back";
             this.bt_back.Size = new System.Drawing.Size(175, 24);
             this.bt_back.Style = MetroFramework.MetroColorStyle.Orange;
-            this.bt_back.TabIndex = 82;
+            this.bt_back.TabIndex = 2;
             this.bt_back.Text = "Zurück";
             this.bt_back.UseSelectable = true;
             this.bt_back.Click += new System.EventHandler(this.bt_back_Click);
@@ -252,7 +256,7 @@
             this.bt_Abbrechen.Name = "bt_Abbrechen";
             this.bt_Abbrechen.Size = new System.Drawing.Size(175, 24);
             this.bt_Abbrechen.Style = MetroFramework.MetroColorStyle.Orange;
-            this.bt_Abbrechen.TabIndex = 79;
+            this.bt_Abbrechen.TabIndex = 4;
             this.bt_Abbrechen.Text = "Schließen";
             this.bt_Abbrechen.UseSelectable = true;
             this.bt_Abbrechen.Click += new System.EventHandler(this.bt_Abbrechen_Click);
@@ -266,7 +270,7 @@
             this.bt_Bearbeiten.Name = "bt_Bearbeiten";
             this.bt_Bearbeiten.Size = new System.Drawing.Size(175, 24);
             this.bt_Bearbeiten.Style = MetroFramework.MetroColorStyle.Orange;
-            this.bt_Bearbeiten.TabIndex = 78;
+            this.bt_Bearbeiten.TabIndex = 3;
             this.bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
             this.bt_Bearbeiten.UseSelectable = true;
             this.bt_Bearbeiten.Click += new System.EventHandler(this.bt_Bearbeiten_Click);
@@ -281,7 +285,7 @@
             this.mbt_ImEx.Name = "mbt_ImEx";
             this.mbt_ImEx.Size = new System.Drawing.Size(175, 24);
             this.mbt_ImEx.Style = MetroFramework.MetroColorStyle.Orange;
-            this.mbt_ImEx.TabIndex = 83;
+            this.mbt_ImEx.TabIndex = 5;
             this.mbt_ImEx.Text = "Daten Import/Export";
             this.mbt_ImEx.UseSelectable = true;
             this.mbt_ImEx.Click += new System.EventHandler(this.mbt_ImEx_Click);
@@ -304,6 +308,7 @@
             this.Margin = new System.Windows.Forms.Padding(1);
             this.MinimumSize = new System.Drawing.Size(862, 500);
             this.Name = "w_s_klasse_stufe";
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowInTaskbar = false;
             this.Style = MetroFramework.MetroColorStyle.Orange;
             this.Text = "Zuordnung der Klassen zu einer Klassenstufe";

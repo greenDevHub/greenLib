@@ -61,7 +61,7 @@
             // lb_Klasse
             // 
             this.lb_Klasse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lb_Klasse.Location = new System.Drawing.Point(239, 82);
+            this.lb_Klasse.Location = new System.Drawing.Point(526, 82);
             this.lb_Klasse.Name = "lb_Klasse";
             this.lb_Klasse.Size = new System.Drawing.Size(50, 24);
             this.lb_Klasse.Style = MetroFramework.MetroColorStyle.Yellow;
@@ -100,7 +100,7 @@
             this.tb_ExemplarID.ShortcutsEnabled = true;
             this.tb_ExemplarID.Size = new System.Drawing.Size(395, 24);
             this.tb_ExemplarID.Style = MetroFramework.MetroColorStyle.Yellow;
-            this.tb_ExemplarID.TabIndex = 29;
+            this.tb_ExemplarID.TabIndex = 3;
             this.tb_ExemplarID.UseSelectable = true;
             this.tb_ExemplarID.WaterMark = "Exemplar ID";
             this.tb_ExemplarID.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -117,7 +117,7 @@
             this.bt_back.Name = "bt_back";
             this.bt_back.Size = new System.Drawing.Size(120, 24);
             this.bt_back.Style = MetroFramework.MetroColorStyle.Yellow;
-            this.bt_back.TabIndex = 31;
+            this.bt_back.TabIndex = 5;
             this.bt_back.Text = "vorheriger Schüler";
             this.bt_back.UseSelectable = true;
             this.bt_back.Click += new System.EventHandler(this.Bt_back_Click);
@@ -133,7 +133,7 @@
             this.bt_abschließen.Name = "bt_abschließen";
             this.bt_abschließen.Size = new System.Drawing.Size(200, 24);
             this.bt_abschließen.Style = MetroFramework.MetroColorStyle.Yellow;
-            this.bt_abschließen.TabIndex = 35;
+            this.bt_abschließen.TabIndex = 4;
             this.bt_abschließen.Text = "Rückgabevorgang ausführen";
             this.bt_abschließen.UseSelectable = true;
             this.bt_abschließen.Click += new System.EventHandler(this.Bt_abschließen_Click);
@@ -148,7 +148,7 @@
             this.bt_bestaetigen.Name = "bt_bestaetigen";
             this.bt_bestaetigen.Size = new System.Drawing.Size(144, 24);
             this.bt_bestaetigen.Style = MetroFramework.MetroColorStyle.Yellow;
-            this.bt_bestaetigen.TabIndex = 28;
+            this.bt_bestaetigen.TabIndex = 2;
             this.bt_bestaetigen.Text = "Schüler laden";
             this.bt_bestaetigen.UseSelectable = true;
             this.bt_bestaetigen.Click += new System.EventHandler(this.Bt_bestaetigen_Click);
@@ -163,7 +163,7 @@
             this.bt_next.Name = "bt_next";
             this.bt_next.Size = new System.Drawing.Size(120, 24);
             this.bt_next.Style = MetroFramework.MetroColorStyle.Yellow;
-            this.bt_next.TabIndex = 34;
+            this.bt_next.TabIndex = 6;
             this.bt_next.Text = "nächster Schüler";
             this.bt_next.UseSelectable = true;
             this.bt_next.Click += new System.EventHandler(this.Bt_next_Click);
@@ -265,6 +265,7 @@
             this.gv_selected.Size = new System.Drawing.Size(395, 252);
             this.gv_selected.Style = MetroFramework.MetroColorStyle.Yellow;
             this.gv_selected.TabIndex = 33;
+            this.gv_selected.TabStop = false;
             // 
             // gv_suggested
             // 
@@ -323,6 +324,7 @@
             this.gv_suggested.Size = new System.Drawing.Size(301, 310);
             this.gv_suggested.Style = MetroFramework.MetroColorStyle.Yellow;
             this.gv_suggested.TabIndex = 32;
+            this.gv_suggested.TabStop = false;
             // 
             // gv_Schueler
             // 
@@ -382,6 +384,7 @@
             this.gv_Schueler.Size = new System.Drawing.Size(246, 310);
             this.gv_Schueler.Style = MetroFramework.MetroColorStyle.Yellow;
             this.gv_Schueler.TabIndex = 30;
+            this.gv_Schueler.TabStop = false;
             this.gv_Schueler.CurrentCellChanged += new System.EventHandler(this.Gv_Schueler_CurrentCellChanged);
             // 
             // a_cb_Klasse
@@ -392,16 +395,17 @@
             this.a_cb_Klasse.BorderColor = System.Drawing.Color.Gray;
             this.a_cb_Klasse.DataRowView = true;
             this.a_cb_Klasse.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.a_cb_Klasse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.a_cb_Klasse.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.a_cb_Klasse.ForeColor = System.Drawing.SystemColors.GrayText;
             this.a_cb_Klasse.FormattingEnabled = true;
             this.a_cb_Klasse.HighlightColor = System.Drawing.Color.Gold;
             this.a_cb_Klasse.ItemHeight = 18;
-            this.a_cb_Klasse.Location = new System.Drawing.Point(295, 82);
+            this.a_cb_Klasse.Location = new System.Drawing.Point(582, 82);
             this.a_cb_Klasse.Name = "a_cb_Klasse";
-            this.a_cb_Klasse.Size = new System.Drawing.Size(210, 24);
+            this.a_cb_Klasse.Size = new System.Drawing.Size(245, 24);
             this.a_cb_Klasse.Sorted = true;
-            this.a_cb_Klasse.TabIndex = 27;
+            this.a_cb_Klasse.TabIndex = 1;
             this.a_cb_Klasse.Visible = false;
             // 
             // a_cb_Modus
@@ -411,6 +415,7 @@
             this.a_cb_Modus.BorderColor = System.Drawing.Color.Gray;
             this.a_cb_Modus.DataRowView = false;
             this.a_cb_Modus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.a_cb_Modus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.a_cb_Modus.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.a_cb_Modus.ForeColor = System.Drawing.SystemColors.GrayText;
             this.a_cb_Modus.FormattingEnabled = true;
@@ -423,7 +428,7 @@
             this.a_cb_Modus.Name = "a_cb_Modus";
             this.a_cb_Modus.Size = new System.Drawing.Size(210, 24);
             this.a_cb_Modus.Sorted = true;
-            this.a_cb_Modus.TabIndex = 25;
+            this.a_cb_Modus.TabIndex = 0;
             this.a_cb_Modus.SelectedIndexChanged += new System.EventHandler(this.A_cb_Modus_SelectedIndexChanged);
             // 
             // w_s_autorueck
@@ -450,6 +455,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1000, 500);
             this.Name = "w_s_autorueck";
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Yellow;

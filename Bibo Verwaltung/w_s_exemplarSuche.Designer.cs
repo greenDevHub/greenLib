@@ -32,27 +32,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_exemplarSuche));
-            this.a_cb_Buecher = new Bibo_Verwaltung.AdvancedComboBox();
             this.gv_Exemplare = new MetroFramework.Controls.MetroGrid();
             this.mbt_OK = new MetroFramework.Controls.MetroButton();
             this.mlb_Suche = new MetroFramework.Controls.MetroLabel();
+            this.a_cb_Buecher = new Bibo_Verwaltung.AdvancedComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).BeginInit();
             this.SuspendLayout();
-            // 
-            // a_cb_Buecher
-            // 
-            this.a_cb_Buecher.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.a_cb_Buecher.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.a_cb_Buecher.BorderColor = System.Drawing.Color.Gray;
-            this.a_cb_Buecher.DataRowView = true;
-            this.a_cb_Buecher.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.a_cb_Buecher.FormattingEnabled = true;
-            this.a_cb_Buecher.HighlightColor = System.Drawing.Color.Gray;
-            this.a_cb_Buecher.Location = new System.Drawing.Point(23, 63);
-            this.a_cb_Buecher.Name = "a_cb_Buecher";
-            this.a_cb_Buecher.Size = new System.Drawing.Size(554, 27);
-            this.a_cb_Buecher.TabIndex = 0;
-            this.a_cb_Buecher.SelectedIndexChanged += new System.EventHandler(this.AdvancedComboBox1_SelectedIndexChanged);
             // 
             // gv_Exemplare
             // 
@@ -134,6 +119,21 @@
             this.mlb_Suche.TabIndex = 3;
             this.mlb_Suche.Text = "Suchergebnisse:";
             // 
+            // a_cb_Buecher
+            // 
+            this.a_cb_Buecher.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.a_cb_Buecher.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.a_cb_Buecher.BorderColor = System.Drawing.Color.Gray;
+            this.a_cb_Buecher.DataRowView = true;
+            this.a_cb_Buecher.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.a_cb_Buecher.FormattingEnabled = true;
+            this.a_cb_Buecher.HighlightColor = System.Drawing.Color.Gray;
+            this.a_cb_Buecher.Location = new System.Drawing.Point(23, 63);
+            this.a_cb_Buecher.Name = "a_cb_Buecher";
+            this.a_cb_Buecher.Size = new System.Drawing.Size(554, 27);
+            this.a_cb_Buecher.TabIndex = 0;
+            this.a_cb_Buecher.SelectedIndexChanged += new System.EventHandler(this.AdvancedComboBox1_SelectedIndexChanged);
+            // 
             // w_s_exemplarSuche
             // 
             this.AcceptButton = this.mbt_OK;
@@ -149,6 +149,7 @@
             this.MinimizeBox = false;
             this.Name = "w_s_exemplarSuche";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Yellow;
             this.Text = "Exemplar-Suche";

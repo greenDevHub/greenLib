@@ -209,6 +209,7 @@ namespace Bibo_Verwaltung
                 SaveZuordnungen();
                 bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
                 LoadBuecher();
+                gv_Faecher.Select();
             }
         }
 
@@ -292,6 +293,82 @@ namespace Bibo_Verwaltung
                     FillBuecherList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
+            }
+        }
+        private void SetColor()
+        {
+            for (int i = 0; i < gv_Buecher.Rows.Count; i++)
+            {
+                string klassename = gv_Buecher.Rows[i].Cells[0].Value.ToString();
+                if (klassename.Contains("*"))
+                {
+                    gv_Buecher.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
+                    gv_Buecher.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    gv_Buecher.Rows[i].DefaultCellStyle.BackColor = default;
+                    gv_Buecher.Rows[i].DefaultCellStyle.ForeColor = default;
+                }
+            }
+        }
+        private void Gv_Buecher_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SetColor();
+        }
+
+        private void Gv_Buecher_Sorted(object sender, EventArgs e)
+        {
+            SetColor();
+        }
+
+        private void Gv_Faecher_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
+                {
+                    if (gv_Faecher.CurrentRow != null)
+                    {
+                        bt_back.Enabled = true;
+                        gv_Buecher.Enabled = true;
+                        gv_Faecher.Enabled = false;
+                        bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.SelectedRows[0].Index].Cells["ID"].Value.ToString());
+                        FillBuecherList();
+                        bt_Bearbeiten.Text = "Übernehmen";
+                    }
+                }
+                e.SuppressKeyPress = true;
+            }
+            else if (e.KeyCode == Keys.Tab)
+            {
+                bt_Bearbeiten.Select();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void Gv_Buecher_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                DataGridViewRow row = gv_Buecher.CurrentRow;
+                string fach = row.Cells["ISBN"].Value.ToString();
+                if (!fach.Contains("*"))
+                {
+                    AddToBuecherList();
+                    aenderungungen = true;
+                }
+                else
+                {
+                    RemoveFromBuecherList();
+                    aenderungungen = true;
+                }
+                e.SuppressKeyPress = true;
+            }
+            else if (e.KeyCode == Keys.Tab)
+            {
+                bt_back.Select();
+                e.SuppressKeyPress = true;
             }
         }
     }

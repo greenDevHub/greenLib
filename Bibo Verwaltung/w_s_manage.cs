@@ -26,6 +26,7 @@ namespace Bibo_Verwaltung
         Zustand zustand;
         Autor autor;
         Verlag verlag;
+        Klasse klasse;
 
         public w_s_manage(string userName, string modus)
         {
@@ -93,6 +94,12 @@ namespace Bibo_Verwaltung
                 verlag = new Verlag();
                 verlag.FillGrid(ref gv_manage);
             }
+            else if (currentModus == "Klasse")
+            {
+                Text = "Klasse" + " - Angemeldet als: " + userName;
+                klasse = new Klasse();
+                klasse.FillGrid(ref gv_manage);
+            }
             originalHeightLabel = tLP_Faecher.RowStyles[0].Height;
             originalHeightText = tLP_Faecher.RowStyles[1].Height;
             tLP_Faecher.RowStyles[0].Height = 0;
@@ -128,6 +135,10 @@ namespace Bibo_Verwaltung
             {
                 verlag.FillGrid(ref gv_manage);
             }
+            else if (currentModus == "Klasse")
+            {
+                klasse.FillGrid(ref gv_manage);
+            }
         }
 
         /// <summary>
@@ -158,6 +169,10 @@ namespace Bibo_Verwaltung
             else if (currentModus == "Verlag")
             {
                 verlag.SaveGrid(ref gv_manage);
+            }
+            else if (currentModus == "Klasse")
+            {
+                klasse.SaveGrid(ref gv_manage);
             }
         }
 
@@ -190,6 +205,10 @@ namespace Bibo_Verwaltung
             else if (currentModus == "Verlag")
             {
                 result = verlag.GetChangesGrid(ref gv_manage);
+            }
+            else if (currentModus == "Klasse")
+            {
+                result = klasse.GetChangesGrid(ref gv_manage);
             }
             return result;
         }
@@ -251,6 +270,11 @@ namespace Bibo_Verwaltung
             else if (currentModus == "Verlag")
             {
                 import = new w_s_importAssist("t_s_verlag");
+                import.ShowDialog(this);
+            }
+            else if (currentModus == "Klasse")
+            {
+                import = new w_s_importAssist("t_s_klasse");
                 import.ShowDialog(this);
             }
             LoadContent();
@@ -321,6 +345,10 @@ namespace Bibo_Verwaltung
             {
                 (gv_manage.DataSource as DataTable).DefaultView.RowFilter = string.Format("ver_name LIKE '{0}%'", tb_Suchen.Text);
             }
+            else if (currentModus == "Klasse")
+            {
+                (gv_manage.DataSource as DataTable).DefaultView.RowFilter = string.Format("Klasse LIKE '{0}%'", tb_Suchen.Text);
+            }
         }
 
         private void Gv_manage_KeyPress(object sender, KeyPressEventArgs e)
@@ -328,6 +356,43 @@ namespace Bibo_Verwaltung
             if (e.KeyChar == (char)Keys.Back)
             {
                 SendKeys.Send("{DELETE}");
+            }
+        }
+
+        private void Bt_sort_on_off_Click(object sender, EventArgs e)
+        {
+            if(bt_sort_on_off.Text == "unsortiert")
+            {
+                bt_sort_on_off.Text = "aufsteigend";
+                gv_manage.Sort(gv_manage.Columns[1], ListSortDirection.Ascending);
+
+            }
+            else if(bt_sort_on_off.Text == "aufsteigend")
+            {
+                bt_sort_on_off.Text = "absteigend";
+                gv_manage.Sort(gv_manage.Columns[1], ListSortDirection.Descending);
+
+            }
+            else if (bt_sort_on_off.Text == "absteigend")
+            {
+                bt_sort_on_off.Text = "unsortiert";
+                gv_manage.Sort(gv_manage.Columns[0], ListSortDirection.Ascending);
+
+            }
+        }
+
+        private void Gv_manage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                //gv_manage.CurrentCell = gv_manage.SelectedCells[0];
+                gv_manage.BeginEdit(true);
+                e.SuppressKeyPress = true;
+            }
+            else if(e.KeyCode == Keys.Tab)
+            {
+                mbt_Suchen.Focus();
+                e.SuppressKeyPress = true;
             }
         }
     }

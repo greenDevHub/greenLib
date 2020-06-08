@@ -231,6 +231,7 @@ namespace Bibo_Verwaltung
                 SaveZuordnungen();
                 bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
                 LoadFaecher();
+                gv_Klassenstufe.Select();
             }
         }
 
@@ -300,7 +301,6 @@ namespace Bibo_Verwaltung
             }
             else { }
         }
-
         private void Gv_Klassenstufe_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
@@ -314,6 +314,84 @@ namespace Bibo_Verwaltung
                     FillFaecherList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
+            }
+            
+        }
+        private void SetColor()
+        {
+            for (int i = 0; i < gv_Faecher.Rows.Count; i++)
+            {
+                string klassename = gv_Faecher.Rows[i].Cells[1].Value.ToString();
+                if (klassename.Contains("*"))
+                {
+                    gv_Faecher.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
+                    gv_Faecher.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    gv_Faecher.Rows[i].DefaultCellStyle.BackColor = default;
+                    gv_Faecher.Rows[i].DefaultCellStyle.ForeColor = default;
+                }
+            }
+        }
+        private void Gv_Faecher_Sorted(object sender, EventArgs e)
+        {
+            SetColor();
+        }
+
+        private void Gv_Faecher_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SetColor();
+        }
+
+        private void Gv_Klassenstufe_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
+                {
+                    if (gv_Klassenstufe.CurrentRow != null)
+                    {
+                        bt_back.Enabled = true;
+                        gv_Faecher.Enabled = true;
+                        gv_Klassenstufe.Enabled = false;
+                        fs.Show_AllFaecher(ref gv_Faecher, (gv_Klassenstufe.SelectedRows[0].Index+1).ToString());
+                        FillFaecherList();
+                        bt_Bearbeiten.Text = "Übernehmen";
+                    }
+                }
+                e.SuppressKeyPress = true;
+            }
+            else if (e.KeyCode == Keys.Tab)
+            {
+                bt_Bearbeiten.Select();
+                e.SuppressKeyPress = true;
+            }
+
+        }
+
+        private void Gv_Faecher_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                DataGridViewRow row = gv_Faecher.CurrentRow;
+                string fach = row.Cells["Kürzel"].Value.ToString();
+                if (!fach.Contains("*"))
+                {
+                    AddToFaecherList();
+                    aenderungungen = true;
+                }
+                else
+                {
+                    RemoveFromFaecherList();
+                    aenderungungen = true;
+                }
+                e.SuppressKeyPress = true;
+            }
+            else if(e.KeyCode == Keys.Tab)
+            {
+                bt_back.Select();
+                e.SuppressKeyPress = true;
             }
             
         }

@@ -129,9 +129,10 @@
             this.gv_Faecher.ShowRowErrors = false;
             this.gv_Faecher.Size = new System.Drawing.Size(270, 360);
             this.gv_Faecher.Style = MetroFramework.MetroColorStyle.Orange;
-            this.gv_Faecher.TabIndex = 1;
+            this.gv_Faecher.TabIndex = 0;
             this.gv_Faecher.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Faecher_CellDoubleClick);
             this.gv_Faecher.SelectionChanged += new System.EventHandler(this.gv_Faecher_SelectionChanged);
+            this.gv_Faecher.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Faecher_KeyDown);
             // 
             // gv_Buecher
             // 
@@ -167,7 +168,7 @@
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.DimGray;
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(133)))), ((int)(((byte)(72)))));
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
@@ -192,9 +193,9 @@
             this.gv_Buecher.RowHeadersWidth = 30;
             this.gv_Buecher.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.DimGray;
             dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(133)))), ((int)(((byte)(72)))));
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.White;
             this.gv_Buecher.RowsDefaultCellStyle = dataGridViewCellStyle10;
@@ -214,7 +215,10 @@
             this.gv_Buecher.Size = new System.Drawing.Size(595, 360);
             this.gv_Buecher.Style = MetroFramework.MetroColorStyle.Orange;
             this.gv_Buecher.TabIndex = 1;
+            this.gv_Buecher.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Buecher_CellClick);
             this.gv_Buecher.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Buecher_CellDoubleClick);
+            this.gv_Buecher.Sorted += new System.EventHandler(this.Gv_Buecher_Sorted);
+            this.gv_Buecher.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Buecher_KeyDown);
             // 
             // btAbbrechen
             // 
@@ -228,7 +232,7 @@
             this.btAbbrechen.Name = "btAbbrechen";
             this.btAbbrechen.Size = new System.Drawing.Size(175, 24);
             this.btAbbrechen.Style = MetroFramework.MetroColorStyle.Orange;
-            this.btAbbrechen.TabIndex = 66;
+            this.btAbbrechen.TabIndex = 4;
             this.btAbbrechen.Text = "Schließen";
             this.btAbbrechen.UseSelectable = true;
             this.btAbbrechen.Click += new System.EventHandler(this.bt_close_Click);
@@ -244,7 +248,7 @@
             this.bt_Bearbeiten.Name = "bt_Bearbeiten";
             this.bt_Bearbeiten.Size = new System.Drawing.Size(175, 24);
             this.bt_Bearbeiten.Style = MetroFramework.MetroColorStyle.Orange;
-            this.bt_Bearbeiten.TabIndex = 65;
+            this.bt_Bearbeiten.TabIndex = 3;
             this.bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
             this.bt_Bearbeiten.UseSelectable = true;
             this.bt_Bearbeiten.Click += new System.EventHandler(this.bt_Bearbeiten_Click);
@@ -281,7 +285,7 @@
             this.bt_back.Name = "bt_back";
             this.bt_back.Size = new System.Drawing.Size(175, 24);
             this.bt_back.Style = MetroFramework.MetroColorStyle.Orange;
-            this.bt_back.TabIndex = 75;
+            this.bt_back.TabIndex = 2;
             this.bt_back.Text = "Zurück";
             this.bt_back.UseSelectable = true;
             this.bt_back.Click += new System.EventHandler(this.bt_back_Click);
@@ -296,7 +300,7 @@
             this.mbt_ImEx.Name = "mbt_ImEx";
             this.mbt_ImEx.Size = new System.Drawing.Size(175, 24);
             this.mbt_ImEx.Style = MetroFramework.MetroColorStyle.Orange;
-            this.mbt_ImEx.TabIndex = 76;
+            this.mbt_ImEx.TabIndex = 5;
             this.mbt_ImEx.Text = "Daten Import/Export";
             this.mbt_ImEx.UseSelectable = true;
             this.mbt_ImEx.Click += new System.EventHandler(this.mbt_ImEx_Click);
@@ -321,6 +325,7 @@
             this.Margin = new System.Windows.Forms.Padding(1);
             this.MinimumSize = new System.Drawing.Size(862, 500);
             this.Name = "w_s_buch_fach";
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Orange;

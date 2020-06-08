@@ -209,6 +209,24 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
+        private void SetColor()
+        {
+            for(int i = 0; i < gv_Klassen.Rows.Count; i++)
+            {
+                string klassename = gv_Klassen.Rows[i].Cells[1].Value.ToString();
+                if (klassename.Contains("*"))
+                {
+                    gv_Klassen.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
+                    gv_Klassen.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    gv_Klassen.Rows[i].DefaultCellStyle.BackColor = default;
+                    gv_Klassen.Rows[i].DefaultCellStyle.ForeColor = default;
+                }
+            }
+        }
+
         #region Componenten-Aktionen
         private void bt_Bearbeiten_Click(object sender, EventArgs e)
         {
@@ -220,6 +238,8 @@ namespace Bibo_Verwaltung
                     gv_Klassen.Enabled = true;
                     gv_Klassenstufe.Enabled = false;
                     kl_st.Show_AllKlassen(ref gv_Klassen, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                    gv_Klassen.Sort(gv_Klassen.Columns[1], ListSortDirection.Ascending);
+                    SetColor();
                     FillKlassenList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
@@ -232,6 +252,7 @@ namespace Bibo_Verwaltung
                 SaveZuordnungen();
                 bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
                 LoadKlassen();
+                gv_Klassenstufe.Select();
             }
         }
 
@@ -315,6 +336,66 @@ namespace Bibo_Verwaltung
                     FillKlassenList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
+            }
+        }
+
+        private void Gv_Klassen_Sorted(object sender, EventArgs e)
+        {
+            SetColor();
+        }
+
+        private void Gv_Klassen_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SetColor();
+        }
+
+        private void Gv_Klassenstufe_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
+                {
+                    if (gv_Klassenstufe.CurrentRow != null)
+                    {
+                        bt_back.Enabled = true;
+                        gv_Klassen.Enabled = true;
+                        gv_Klassenstufe.Enabled = false;
+                        kl_st.Show_AllKlassen(ref gv_Klassen, (gv_Klassenstufe.SelectedRows[0].Index + 1).ToString());
+                        FillKlassenList();
+                        bt_Bearbeiten.Text = "Übernehmen";
+                    }
+                }
+                e.SuppressKeyPress = true;
+            }
+            else if (e.KeyCode == Keys.Tab)
+            {
+                bt_Bearbeiten.Select();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void Gv_Klassen_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                DataGridViewRow row = gv_Klassen.CurrentRow;
+                string klasse = row.Cells["Klasse"].Value.ToString();
+                if (!klasse.Contains("*"))
+                {
+                    AddToKlassenList();
+                    aenderungungen = true;
+                }
+                else
+                {
+                    RemoveFromKlassenList();
+                    aenderungungen = true;
+                }
+                e.SuppressKeyPress = true;
+            }
+            else if (e.KeyCode == Keys.Tab)
+            {
+                bt_back.Select();
+                e.SuppressKeyPress = true;
             }
         }
     }

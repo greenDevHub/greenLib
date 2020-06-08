@@ -498,5 +498,14 @@ namespace Bibo_Verwaltung
             tb_BuchCode.SelectAll();
         }
         #endregion
+
+        private void Gv_Kunde_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Tab || e.KeyCode == Keys.Enter)
+            {
+                bt_Submit.Focus();
+                e.SuppressKeyPress = true;
+            }
+        }
     }
 }
