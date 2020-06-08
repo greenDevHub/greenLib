@@ -113,32 +113,32 @@
             this.metroPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // tsspracheBindingSource
-            // 
+            //
             this.tsspracheBindingSource.DataMember = "t_s_sprache";
             this.tsspracheBindingSource.DataSource = this.biboVerwaltungDataSetBindingSource;
-            // 
+            //
             // biboVerwaltungDataSetBindingSource
-            // 
+            //
             this.biboVerwaltungDataSetBindingSource.DataSource = this.bibo_VerwaltungDataSet;
             this.biboVerwaltungDataSetBindingSource.Position = 0;
-            // 
+            //
             // bibo_VerwaltungDataSet
-            // 
+            //
             this.bibo_VerwaltungDataSet.DataSetName = "Bibo_VerwaltungDataSet";
             this.bibo_VerwaltungDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
+            //
             // t_s_spracheTableAdapter
-            // 
+            //
             this.t_s_spracheTableAdapter.ClearBeforeFill = true;
-            // 
+            //
             // mtb_Nachricht
-            // 
+            //
             this.mtb_Nachricht.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            // 
-            // 
-            // 
+            //
+            //
+            //
             this.mtb_Nachricht.CustomButton.Image = null;
             this.mtb_Nachricht.CustomButton.Location = new System.Drawing.Point(159, 2);
             this.mtb_Nachricht.CustomButton.Margin = new System.Windows.Forms.Padding(2);
@@ -176,9 +176,9 @@
             this.mtb_Nachricht.Visible = false;
             this.mtb_Nachricht.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtb_Nachricht.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
+            //
             // checkbox_autor
-            // 
+            //
             this.checkbox_autor.AutoSize = true;
             this.checkbox_autor.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkbox_autor.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
@@ -194,9 +194,9 @@
         "ch angeben.    ");
             this.checkbox_autor.UseSelectable = true;
             this.checkbox_autor.CheckedChanged += new System.EventHandler(this.checkbox_autor_CheckedChanged);
-            // 
+            //
             // bt_clear_buecher
-            // 
+            //
             this.bt_clear_buecher.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_clear_buecher.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_clear_buecher.FontWeight = MetroFramework.MetroButtonWeight.Regular;
@@ -213,9 +213,9 @@
             this.metroToolTip1.SetToolTip(this.bt_clear_buecher, "    Leeren sie alle oben liegenden Textfelder.    ");
             this.bt_clear_buecher.UseSelectable = true;
             this.bt_clear_buecher.Click += new System.EventHandler(this.bt_clear_buecher_Click);
-            // 
+            //
             // bt_speichern_buecher
-            // 
+            //
             this.bt_speichern_buecher.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_speichern_buecher.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_speichern_buecher.FontWeight = MetroFramework.MetroButtonWeight.Regular;
@@ -232,9 +232,9 @@
             this.metroToolTip1.SetToolTip(this.bt_speichern_buecher, "    Speichern sie alle oben eingetragenen Daten.    ");
             this.bt_speichern_buecher.UseSelectable = true;
             this.bt_speichern_buecher.Click += new System.EventHandler(this.Save_Buecher);
-            // 
+            //
             // lb_anzahl
-            // 
+            //
             this.lb_anzahl.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_anzahl, "Tragen sie die Anzahl der Exemplare ihres Buches hier ein.");
             this.lb_anzahl.Location = new System.Drawing.Point(4, 333);
@@ -245,9 +245,9 @@
             this.lb_anzahl.TabIndex = 49;
             this.lb_anzahl.Text = "Vorhandene Exemplare:";
             this.lb_anzahl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // bt_pic_delete
-            // 
+            //
             this.bt_pic_delete.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_pic_delete.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_pic_delete, "Entfernen sie ein Bild zu ihrem Buch.");
@@ -263,9 +263,9 @@
             this.metroToolTip1.SetToolTip(this.bt_pic_delete, "    Entfernen sie ein Bild zu ihrem Buch.    ");
             this.bt_pic_delete.UseSelectable = true;
             this.bt_pic_delete.Click += new System.EventHandler(this.bt_pic_add_Click);
-            // 
+            //
             // bt_picture
-            // 
+            //
             this.bt_picture.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_picture.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_picture, "Laden sie ein Bild zu ihrem Buch hoch.");
@@ -281,9 +281,9 @@
             this.metroToolTip1.SetToolTip(this.bt_picture, "    Laden sie ein Bild zu ihrem Buch hoch.    ");
             this.bt_picture.UseSelectable = true;
             this.bt_picture.Click += new System.EventHandler(this.bt_picture_Click);
-            // 
+            //
             // lb_Erscheinungsdatum
-            // 
+            //
             this.helpProvider.SetHelpString(this.lb_Erscheinungsdatum, "Wählen sie das Erscheinungsdatum ihres Buches hier ein.");
             this.lb_Erscheinungsdatum.Location = new System.Drawing.Point(4, 208);
             this.lb_Erscheinungsdatum.Margin = new System.Windows.Forms.Padding(3);
@@ -293,9 +293,9 @@
             this.lb_Erscheinungsdatum.TabIndex = 20;
             this.lb_Erscheinungsdatum.Text = "Erscheinungsdatum:*";
             this.lb_Erscheinungsdatum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // lb_Auflage
-            // 
+            //
             this.helpProvider.SetHelpString(this.lb_Auflage, "Tragen sie die Auflage ihres Buches hier ein.");
             this.lb_Auflage.Location = new System.Drawing.Point(4, 243);
             this.lb_Auflage.Margin = new System.Windows.Forms.Padding(3);
@@ -305,9 +305,9 @@
             this.lb_Auflage.TabIndex = 18;
             this.lb_Auflage.Text = "Auflage:";
             this.lb_Auflage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // bt_Sprache_s
-            // 
+            //
             this.bt_Sprache_s.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Sprache_s.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Sprache_s, "Klicken sie auf diesen Button, um neue Sprachen hinzuzufügen.");
@@ -322,9 +322,9 @@
             this.metroToolTip1.SetToolTip(this.bt_Sprache_s, "    Klicken sie auf diesen Button, um neue Sprachen hinzuzufügen.    ");
             this.bt_Sprache_s.UseSelectable = true;
             this.bt_Sprache_s.Click += new System.EventHandler(this.bt_Sprache_s_Click_1);
-            // 
+            //
             // lb_Neupreis
-            // 
+            //
             this.helpProvider.SetHelpString(this.lb_Neupreis, "Tragen sie den Neupreis ihres Buches hier ein.");
             this.lb_Neupreis.Location = new System.Drawing.Point(4, 273);
             this.lb_Neupreis.Margin = new System.Windows.Forms.Padding(3);
@@ -334,12 +334,12 @@
             this.lb_Neupreis.TabIndex = 3;
             this.lb_Neupreis.Text = "Neupreis in €:";
             this.lb_Neupreis.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // tb_anzahl
-            // 
-            // 
-            // 
-            // 
+            //
+            //
+            //
+            //
             this.tb_anzahl.CustomButton.Image = null;
             this.tb_anzahl.CustomButton.Location = new System.Drawing.Point(35, 2);
             this.tb_anzahl.CustomButton.Margin = new System.Windows.Forms.Padding(2);
@@ -372,12 +372,12 @@
             this.tb_anzahl.UseSelectable = true;
             this.tb_anzahl.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_anzahl.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
-            // 
+            //
             // tb_Auflage
-            // 
-            // 
-            // 
-            // 
+            //
+            //
+            //
+            //
             this.tb_Auflage.CustomButton.Image = null;
             this.tb_Auflage.CustomButton.Location = new System.Drawing.Point(35, 2);
             this.tb_Auflage.CustomButton.Margin = new System.Windows.Forms.Padding(2);
@@ -410,9 +410,9 @@
             this.tb_Auflage.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Auflage.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
             this.tb_Auflage.TextChanged += new System.EventHandler(this.tb_Auflage_TextChanged);
-            // 
+            //
             // lb_Sprache
-            // 
+            //
             this.helpProvider.SetHelpString(this.lb_Sprache, "Tragen sie die Sprache ihres Buches hier ein.");
             this.lb_Sprache.Location = new System.Drawing.Point(4, 178);
             this.lb_Sprache.Margin = new System.Windows.Forms.Padding(3);
@@ -422,12 +422,12 @@
             this.lb_Sprache.TabIndex = 14;
             this.lb_Sprache.Text = "Sprache:*";
             this.lb_Sprache.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // tb_Neupreis
-            // 
-            // 
-            // 
-            // 
+            //
+            //
+            //
+            //
             this.tb_Neupreis.CustomButton.Image = null;
             this.tb_Neupreis.CustomButton.Location = new System.Drawing.Point(35, 2);
             this.tb_Neupreis.CustomButton.Margin = new System.Windows.Forms.Padding(2);
@@ -462,9 +462,9 @@
             this.tb_Neupreis.TextChanged += new System.EventHandler(this.tb_Neupreis_TextChanged);
             this.tb_Neupreis.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_Neupreis_KeyPress);
             this.tb_Neupreis.Leave += new System.EventHandler(this.tb_Neupreis_Leave);
-            // 
+            //
             // rb_Update_Buch
-            // 
+            //
             this.rb_Update_Buch.AutoSize = true;
             this.rb_Update_Buch.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_Update_Buch.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
@@ -478,9 +478,9 @@
             this.metroToolTip1.SetToolTip(this.rb_Update_Buch, "    Klicken sie hier, um ein vorhandenes Buch zu bearbeiten.    ");
             this.rb_Update_Buch.UseSelectable = true;
             this.rb_Update_Buch.CheckedChanged += new System.EventHandler(this.rb_Edit_CheckedChanged);
-            // 
+            //
             // rb_Add_Buch
-            // 
+            //
             this.rb_Add_Buch.AutoSize = true;
             this.rb_Add_Buch.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_Add_Buch.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
@@ -494,9 +494,9 @@
             this.metroToolTip1.SetToolTip(this.rb_Add_Buch, "    Klicken sie hier, um ein neues Buch hinzuzufügen.    ");
             this.rb_Add_Buch.UseSelectable = true;
             this.rb_Add_Buch.CheckedChanged += new System.EventHandler(this.rb_Neubuch_CheckedChanged);
-            // 
+            //
             // rb_Delete_Buch
-            // 
+            //
             this.rb_Delete_Buch.AutoSize = true;
             this.rb_Delete_Buch.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_Delete_Buch.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
@@ -510,9 +510,9 @@
             this.metroToolTip1.SetToolTip(this.rb_Delete_Buch, "    Klicken sie hier, um ein vorhandenes Buch zu löschen.    ");
             this.rb_Delete_Buch.UseSelectable = true;
             this.rb_Delete_Buch.CheckedChanged += new System.EventHandler(this.rb_Delete_CheckedChanged);
-            // 
+            //
             // bt_Autor_s
-            // 
+            //
             this.bt_Autor_s.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Autor_s.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Autor_s, "Klicken sie auf diesen Button, um neue Autoren hinzuzufügen.");
@@ -527,9 +527,9 @@
             this.metroToolTip1.SetToolTip(this.bt_Autor_s, "    Klicken sie auf diesen Button, um neue Autoren hinzuzufügen.    ");
             this.bt_Autor_s.UseSelectable = true;
             this.bt_Autor_s.Click += new System.EventHandler(this.bt_Autor_s_Click);
-            // 
+            //
             // lb_Verlag
-            // 
+            //
             this.helpProvider.SetHelpKeyword(this.lb_Verlag, "Tragen sie den Verlag ihres Buches hier ein.");
             this.lb_Verlag.Location = new System.Drawing.Point(4, 118);
             this.lb_Verlag.Margin = new System.Windows.Forms.Padding(3);
@@ -539,9 +539,9 @@
             this.lb_Verlag.TabIndex = 10;
             this.lb_Verlag.Text = "Verlag:*";
             this.lb_Verlag.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // lb_Autor
-            // 
+            //
             this.helpProvider.SetHelpString(this.lb_Autor, "Tragen sie den Autor ihres Buches hier ein.");
             this.lb_Autor.Location = new System.Drawing.Point(4, 88);
             this.lb_Autor.Margin = new System.Windows.Forms.Padding(3);
@@ -551,9 +551,9 @@
             this.lb_Autor.TabIndex = 8;
             this.lb_Autor.Text = "Autor:*";
             this.lb_Autor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // bt_Verlag_s
-            // 
+            //
             this.bt_Verlag_s.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Verlag_s.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Verlag_s, "Klicken sie auf diesen Button, um neue Verläge hinzuzufügen.");
@@ -568,9 +568,9 @@
             this.metroToolTip1.SetToolTip(this.bt_Verlag_s, "    Klicken sie auf diesen Button, um neue Verläge hinzuzufügen.    ");
             this.bt_Verlag_s.UseSelectable = true;
             this.bt_Verlag_s.Click += new System.EventHandler(this.bt_Verlag_s_Click);
-            // 
+            //
             // bt_Genre_s
-            // 
+            //
             this.bt_Genre_s.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Genre_s.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Genre_s, "Klicken sie auf diesen Button, um neue Genres hinzuzufügen.");
@@ -585,9 +585,9 @@
             this.metroToolTip1.SetToolTip(this.bt_Genre_s, "    Klicken sie auf diesen Button, um neue Genres hinzuzufügen.    ");
             this.bt_Genre_s.UseSelectable = true;
             this.bt_Genre_s.Click += new System.EventHandler(this.bt_Genre_s_Click);
-            // 
+            //
             // lb_Genre
-            // 
+            //
             this.helpProvider.SetHelpString(this.lb_Genre, "Tragen sie das Genre ihres Buches hier ein.");
             this.lb_Genre.Location = new System.Drawing.Point(4, 148);
             this.lb_Genre.Margin = new System.Windows.Forms.Padding(3);
@@ -597,12 +597,12 @@
             this.lb_Genre.TabIndex = 5;
             this.lb_Genre.Text = "Genre:*";
             this.lb_Genre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // tb_Titel
-            // 
-            // 
-            // 
-            // 
+            //
+            //
+            //
+            //
             this.tb_Titel.CustomButton.Image = null;
             this.tb_Titel.CustomButton.Location = new System.Drawing.Point(153, 2);
             this.tb_Titel.CustomButton.Margin = new System.Windows.Forms.Padding(2);
@@ -636,9 +636,9 @@
             this.tb_Titel.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
             this.tb_Titel.TextChanged += new System.EventHandler(this.tb_Titel_TextChanged);
             this.tb_Titel.Click += new System.EventHandler(this.tb_Titel_Click);
-            // 
+            //
             // lb_Titel
-            // 
+            //
             this.helpProvider.SetHelpString(this.lb_Titel, "Tragen sie den Titel ihres Buches hier ein.");
             this.lb_Titel.Location = new System.Drawing.Point(4, 58);
             this.lb_Titel.Margin = new System.Windows.Forms.Padding(3);
@@ -648,12 +648,12 @@
             this.lb_Titel.TabIndex = 3;
             this.lb_Titel.Text = "Titel:*";
             this.lb_Titel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // tb_ISBN
-            // 
-            // 
-            // 
-            // 
+            //
+            //
+            //
+            //
             this.tb_ISBN.CustomButton.Image = null;
             this.tb_ISBN.CustomButton.Location = new System.Drawing.Point(153, 2);
             this.tb_ISBN.CustomButton.Margin = new System.Windows.Forms.Padding(2);
@@ -692,9 +692,9 @@
             this.tb_ISBN.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_ISBN_KeyDown);
             this.tb_ISBN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_ISBN_KeyPress);
             this.tb_ISBN.Leave += new System.EventHandler(this.Tb_ISBN_Leave_1);
-            // 
+            //
             // lb_ISBN
-            // 
+            //
             this.helpProvider.SetHelpString(this.lb_ISBN, "Tragen sie hier die ISBN-13 ein, um das gewünschte Buch zu laden.");
             this.lb_ISBN.Location = new System.Drawing.Point(4, 28);
             this.lb_ISBN.Margin = new System.Windows.Forms.Padding(3);
@@ -704,9 +704,9 @@
             this.lb_ISBN.TabIndex = 1;
             this.lb_ISBN.Text = "ISBN:*";
             this.lb_ISBN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // button1
-            // 
+            //
             this.button1.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.button1.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.button1, "Wenn sie eine ISBN eingetragen haben, können sie auf diesen Stern klicken, um res" +
@@ -723,15 +723,15 @@
         "um restliche Buchinformationen automatisch ausfüllen zu lassen.      ");
             this.button1.UseSelectable = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
+            //
             // Grid_Buch
-            // 
+            //
             this.Grid_Buch.AllowUserToAddRows = false;
             this.Grid_Buch.AllowUserToDeleteRows = false;
             this.Grid_Buch.AllowUserToOrderColumns = true;
             this.Grid_Buch.AllowUserToResizeRows = false;
-            this.Grid_Buch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.Grid_Buch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Grid_Buch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.Grid_Buch.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -789,9 +789,9 @@
             this.Grid_Buch.Click += new System.EventHandler(this.Grid_Buch_Click);
             this.Grid_Buch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Grid_Buch_KeyDown);
             this.Grid_Buch.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grid_Buch_MouseDown);
-            // 
+            //
             // contextMenuStrip1
-            // 
+            //
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ladenToolStripMenuItem,
@@ -801,31 +801,31 @@
             this.contextMenuStrip1.Size = new System.Drawing.Size(130, 70);
             this.contextMenuStrip1.Style = MetroFramework.MetroColorStyle.Blue;
             this.contextMenuStrip1.UseStyleColors = true;
-            // 
+            //
             // ladenToolStripMenuItem
-            // 
+            //
             this.ladenToolStripMenuItem.Name = "ladenToolStripMenuItem";
             this.ladenToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.ladenToolStripMenuItem.Text = "Laden";
             this.ladenToolStripMenuItem.Click += new System.EventHandler(this.ladenToolStripMenuItem_Click);
-            // 
+            //
             // entfernenToolStripMenuItem
-            // 
+            //
             this.entfernenToolStripMenuItem.Name = "entfernenToolStripMenuItem";
             this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.entfernenToolStripMenuItem.Text = "Entfernen";
             this.entfernenToolStripMenuItem.Click += new System.EventHandler(this.entfernenToolStripMenuItem_Click);
-            // 
+            //
             // exemplareToolStripMenuItem
-            // 
+            //
             this.exemplareToolStripMenuItem.Name = "exemplareToolStripMenuItem";
             this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.exemplareToolStripMenuItem.Text = "Exemplare";
             this.exemplareToolStripMenuItem.Click += new System.EventHandler(this.exemplareToolStripMenuItem_Click);
-            // 
+            //
             // bt_Schliessen
-            // 
-            this.bt_Schliessen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            //
+            this.bt_Schliessen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_Schliessen.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.bt_Schliessen.FontSize = MetroFramework.MetroButtonSize.Medium;
@@ -840,9 +840,9 @@
             this.metroToolTip1.SetToolTip(this.bt_Schliessen, "    Schließen sie das akuelle Fenster.    ");
             this.bt_Schliessen.UseSelectable = true;
             this.bt_Schliessen.Click += new System.EventHandler(this.bt_Schliessen_Click);
-            // 
+            //
             // bt_Excel
-            // 
+            //
             this.bt_Excel.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Excel.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_Excel, "Exportieren sie ihre Bücherdaten in eine Exceltabelle.");
@@ -855,11 +855,11 @@
             this.metroToolTip1.SetToolTip(this.bt_Excel, "    Exportieren sie ihre Bücherdaten in eine Exceltabelle.    ");
             this.bt_Excel.UseSelectable = true;
             this.bt_Excel.Click += new System.EventHandler(this.bt_Excel_Click);
-            // 
+            //
             // gb_zoom
-            // 
-            this.gb_zoom.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.gb_zoom.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gb_zoom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.gb_zoom.Controls.Add(this.picBox_Gross);
@@ -873,9 +873,9 @@
             this.gb_zoom.VerticalScrollbarBarColor = true;
             this.gb_zoom.VerticalScrollbarHighlightOnWheel = false;
             this.gb_zoom.VerticalScrollbarSize = 8;
-            // 
+            //
             // picBox_Gross
-            // 
+            //
             this.picBox_Gross.BackColor = System.Drawing.Color.White;
             this.picBox_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picBox_Gross.Location = new System.Drawing.Point(0, 0);
@@ -886,11 +886,11 @@
             this.picBox_Gross.TabIndex = 50;
             this.picBox_Gross.TabStop = false;
             this.picBox_Gross.Visible = false;
-            // 
+            //
             // metroProgressSpinner1
-            // 
-            this.metroProgressSpinner1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.metroProgressSpinner1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.metroProgressSpinner1.Location = new System.Drawing.Point(540, 63);
             this.metroProgressSpinner1.Maximum = 100;
@@ -899,9 +899,9 @@
             this.metroProgressSpinner1.TabIndex = 51;
             this.metroProgressSpinner1.TabStop = false;
             this.metroProgressSpinner1.UseSelectable = true;
-            // 
+            //
             // mtb_Import
-            // 
+            //
             this.mtb_Import.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mtb_Import.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.mtb_Import, "Exportieren sie ihre Bücherdaten in eine Exceltabelle.");
@@ -914,9 +914,9 @@
             this.metroToolTip1.SetToolTip(this.mtb_Import, "    Importieren Sie Daten von einer externen Quelle.    ");
             this.mtb_Import.UseSelectable = true;
             this.mtb_Import.Click += new System.EventHandler(this.Mtb_Import_Click);
-            // 
+            //
             // picBox_Klein
-            // 
+            //
             this.helpProvider.SetHelpString(this.picBox_Klein, "Wenn sie mit ihrer Maus über dieses Vorschaubild ihres aktuellen Buches fahren, s" +
         "ehen sie eine vergrößerte Darstellung.");
             this.picBox_Klein.Location = new System.Drawing.Point(221, 243);
@@ -930,9 +930,9 @@
         "ahren, sehen sie eine vergrößerte Darstellung.         ");
             this.picBox_Klein.MouseEnter += new System.EventHandler(this.pictureBox1_MouseEnter);
             this.picBox_Klein.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
-            // 
+            //
             // cb_Autor
-            // 
+            //
             this.cb_Autor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Autor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Autor.BorderColor = System.Drawing.Color.Gray;
@@ -951,9 +951,9 @@
             this.cb_Autor.TabIndex = 6;
             this.metroToolTip1.SetToolTip(this.cb_Autor, "    Tragen sie den Autor ihres Buches hier ein.    ");
             this.cb_Autor.TextChanged += new System.EventHandler(this.cb_Autor_TextChanged);
-            // 
+            //
             // cb_Verlag
-            // 
+            //
             this.cb_Verlag.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Verlag.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Verlag.BorderColor = System.Drawing.Color.Gray;
@@ -972,9 +972,9 @@
             this.cb_Verlag.TabIndex = 10;
             this.metroToolTip1.SetToolTip(this.cb_Verlag, "    Tragen sie den Verlag ihres Buches hier ein.    ");
             this.cb_Verlag.TextChanged += new System.EventHandler(this.cb_Verlag_TextChanged);
-            // 
+            //
             // cb_Genre
-            // 
+            //
             this.cb_Genre.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Genre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Genre.BorderColor = System.Drawing.Color.Gray;
@@ -993,9 +993,9 @@
             this.cb_Genre.TabIndex = 12;
             this.metroToolTip1.SetToolTip(this.cb_Genre, "    Tragen sie das Genre ihres Buches hier ein.    ");
             this.cb_Genre.TextChanged += new System.EventHandler(this.cb_Genre_TextChanged);
-            // 
+            //
             // cb_Sprache
-            // 
+            //
             this.cb_Sprache.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_Sprache.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_Sprache.BorderColor = System.Drawing.Color.Gray;
@@ -1014,10 +1014,10 @@
             this.cb_Sprache.TabIndex = 14;
             this.metroToolTip1.SetToolTip(this.cb_Sprache, "    Tragen sie die Sprache ihres Buches hier ein.    ");
             this.cb_Sprache.TextChanged += new System.EventHandler(this.cb_Sprache_TextChanged);
-            // 
+            //
             // metroPanel1
-            // 
-            this.metroPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            //
+            this.metroPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.metroPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.metroPanel1.Controls.Add(this.dTP_Erscheinungsdatum);
@@ -1076,9 +1076,9 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 8;
-            // 
+            //
             // dTP_Erscheinungsdatum
-            // 
+            //
             this.dTP_Erscheinungsdatum.CustomFormat = " dd.MM.yyyy";
             this.dTP_Erscheinungsdatum.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dTP_Erscheinungsdatum.Location = new System.Drawing.Point(140, 208);
@@ -1088,9 +1088,9 @@
             this.dTP_Erscheinungsdatum.TabIndex = 16;
             this.metroToolTip1.SetToolTip(this.dTP_Erscheinungsdatum, "    Wählen sie das Erscheinungsdatum ihres Buches hier aus.    ");
             this.dTP_Erscheinungsdatum.ValueChanged += new System.EventHandler(this.DTP_Erscheinungsdatum_ValueChanged);
-            // 
+            //
             // bt_print
-            // 
+            //
             this.bt_print.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_print.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.bt_print.Location = new System.Drawing.Point(221, 453);
@@ -1102,9 +1102,9 @@
             this.metroToolTip1.SetToolTip(this.bt_print, "    Drucken Sie die eingegebene Anzahl Barcodes.    ");
             this.bt_print.UseSelectable = true;
             this.bt_print.Click += new System.EventHandler(this.bt_print_Click);
-            // 
+            //
             // metroLabel3
-            // 
+            //
             this.metroLabel3.Location = new System.Drawing.Point(4, 453);
             this.metroLabel3.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel3.Name = "metroLabel3";
@@ -1112,12 +1112,12 @@
             this.metroLabel3.TabIndex = 55;
             this.metroLabel3.Text = "Neue Barcodes drucken:";
             this.metroLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // tb_barcodePrinted
-            // 
-            // 
-            // 
-            // 
+            //
+            //
+            //
+            //
             this.tb_barcodePrinted.CustomButton.Image = null;
             this.tb_barcodePrinted.CustomButton.Location = new System.Drawing.Point(35, 2);
             this.tb_barcodePrinted.CustomButton.Margin = new System.Windows.Forms.Padding(2);
@@ -1149,9 +1149,9 @@
             this.tb_barcodePrinted.UseSelectable = true;
             this.tb_barcodePrinted.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_barcodePrinted.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
-            // 
+            //
             // metroLabel2
-            // 
+            //
             this.metroLabel2.Location = new System.Drawing.Point(4, 423);
             this.metroLabel2.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel2.Name = "metroLabel2";
@@ -1159,12 +1159,12 @@
             this.metroLabel2.TabIndex = 49;
             this.metroLabel2.Text = "Barcodes gedruckt:";
             this.metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // tb_barcodeAdd
-            // 
-            // 
-            // 
-            // 
+            //
+            //
+            //
+            //
             this.tb_barcodeAdd.CustomButton.Image = null;
             this.tb_barcodeAdd.CustomButton.Location = new System.Drawing.Point(35, 2);
             this.tb_barcodeAdd.CustomButton.Margin = new System.Windows.Forms.Padding(2);
@@ -1199,9 +1199,9 @@
             this.tb_barcodeAdd.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_barcodeAdd.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
             this.tb_barcodeAdd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_barcodeAdd_KeyPress);
-            // 
+            //
             // checkedListBox1
-            // 
+            //
             this.checkedListBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.HighlightColor = System.Drawing.Color.Green;
@@ -1213,9 +1213,9 @@
             this.metroToolTip1.SetToolTip(this.checkedListBox1, "Wählen Sie hier mehrere Autoren aus.");
             this.checkedListBox1.Visible = false;
             this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
-            // 
+            //
             // metroLabel1
-            // 
+            //
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.Location = new System.Drawing.Point(4, 303);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
@@ -1224,9 +1224,9 @@
             this.metroLabel1.TabIndex = 49;
             this.metroLabel1.Text = "Exemplare hinzufügen:";
             this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // comboBox1
-            // 
+            //
             this.comboBox1.BackColor = System.Drawing.Color.White;
             this.comboBox1.BorderColor = System.Drawing.Color.Gray;
             this.comboBox1.DataRowView = true;
@@ -1242,12 +1242,12 @@
             this.comboBox1.Size = new System.Drawing.Size(18, 24);
             this.comboBox1.TabIndex = 7;
             this.comboBox1.Click += new System.EventHandler(this.comboBox1_Click);
-            // 
+            //
             // tb_neu
-            // 
-            // 
-            // 
-            // 
+            //
+            //
+            //
+            //
             this.tb_neu.CustomButton.Image = null;
             this.tb_neu.CustomButton.Location = new System.Drawing.Point(35, 2);
             this.tb_neu.CustomButton.Margin = new System.Windows.Forms.Padding(2);
@@ -1280,9 +1280,9 @@
             this.tb_neu.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_neu.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
             this.tb_neu.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_neu_KeyPress);
-            // 
+            //
             // rb_search
-            // 
+            //
             this.rb_search.AutoSize = true;
             this.rb_search.Checked = true;
             this.rb_search.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
@@ -1296,21 +1296,21 @@
             this.metroToolTip1.SetToolTip(this.rb_search, "    Klicken sie hier, um nach einem Buch zu suchen.    ");
             this.rb_search.UseSelectable = true;
             this.rb_search.CheckedChanged += new System.EventHandler(this.Rb_search_CheckedChanged);
-            // 
+            //
             // backgroundWorker1
-            // 
+            //
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker1_RunWorkerCompleted);
-            // 
+            //
             // timer2
-            // 
+            //
             this.timer2.Enabled = true;
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.Timer2_Tick);
-            // 
+            //
             // metroPanel2
-            // 
-            this.metroPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.metroPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.metroPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.metroPanel2.Controls.Add(this.mtb_Import);
@@ -1327,9 +1327,9 @@
             this.metroPanel2.VerticalScrollbarBarColor = true;
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
-            // 
+            //
             // bt_exemplar
-            // 
+            //
             this.bt_exemplar.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_exemplar.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.bt_exemplar.Location = new System.Drawing.Point(548, 3);
@@ -1340,19 +1340,19 @@
             this.metroToolTip1.SetToolTip(this.bt_exemplar, "    Wechseln Sie in die Exemplaransicht des gewählten Buches.    ");
             this.bt_exemplar.UseSelectable = true;
             this.bt_exemplar.Click += new System.EventHandler(this.Bt_exemplar_Click);
-            // 
+            //
             // metroToolTip1
-            // 
+            //
             this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Default;
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Default;
-            // 
+            //
             // metroStyleManager1
-            // 
+            //
             this.metroStyleManager1.Owner = null;
-            // 
+            //
             // w_s_buecher
-            // 
+            //
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1200, 600);

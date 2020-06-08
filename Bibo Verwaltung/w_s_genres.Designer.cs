@@ -39,6 +39,7 @@
             this.gv_Genres = new MetroFramework.Controls.MetroGrid();
             this.bt_Suchen = new MetroFramework.Controls.MetroButton();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.tLP_Sprachen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Genres)).BeginInit();
             this.SuspendLayout();
@@ -109,6 +110,7 @@
             this.helpProvider.SetShowHelp(this.tb_Suchen, true);
             this.tb_Suchen.Size = new System.Drawing.Size(298, 24);
             this.tb_Suchen.TabIndex = 52;
+            this.metroToolTip1.SetToolTip(this.tb_Suchen, "Geben Sie hier den Suchbegriff ein.");
             this.tb_Suchen.UseSelectable = true;
             this.tb_Suchen.Visible = false;
             this.tb_Suchen.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -130,6 +132,7 @@
             this.bt_Uebernehmen.Size = new System.Drawing.Size(146, 24);
             this.bt_Uebernehmen.TabIndex = 51;
             this.bt_Uebernehmen.Text = "Übernehmen";
+            this.metroToolTip1.SetToolTip(this.bt_Uebernehmen, "Speichern Sie ihre eingegebenen Daten.");
             this.bt_Uebernehmen.UseSelectable = true;
             this.bt_Uebernehmen.Click += new System.EventHandler(this.bt_Uebernehmen_Click);
             // 
@@ -203,8 +206,15 @@
             this.bt_Suchen.Size = new System.Drawing.Size(146, 24);
             this.bt_Suchen.TabIndex = 54;
             this.bt_Suchen.Text = "Suchen AN";
+            this.metroToolTip1.SetToolTip(this.bt_Suchen, "Aktivieren/Deaktivieren Sie die Suche.");
             this.bt_Suchen.UseSelectable = true;
             this.bt_Suchen.Click += new System.EventHandler(this.bt_Suchen_Click);
+            // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // w_s_genres
             // 
@@ -234,5 +244,6 @@
         private MetroFramework.Controls.MetroButton bt_Uebernehmen;
         private MetroFramework.Controls.MetroButton bt_Suchen;
         private System.Windows.Forms.HelpProvider helpProvider;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
     }
 }

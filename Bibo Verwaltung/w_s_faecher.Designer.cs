@@ -40,6 +40,7 @@
             this.bt_verwaltung = new MetroFramework.Controls.MetroButton();
             this.lb_Faecher = new MetroFramework.Controls.MetroLabel();
             this.tb_Suchen = new MetroFramework.Controls.MetroTextBox();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Faecher)).BeginInit();
             this.tLP_Faecher.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +59,7 @@
             this.bt_Uebernehmen.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_Uebernehmen.TabIndex = 51;
             this.bt_Uebernehmen.Text = "Übernehmen";
+            this.metroToolTip1.SetToolTip(this.bt_Uebernehmen, "Speichern Sie ihre eingegebenen Daten.");
             this.bt_Uebernehmen.UseSelectable = true;
             // 
             // bt_Suchen
@@ -73,6 +75,7 @@
             this.bt_Suchen.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_Suchen.TabIndex = 54;
             this.bt_Suchen.Text = "Suchen AN";
+            this.metroToolTip1.SetToolTip(this.bt_Suchen, "Aktivieren/Deaktivieren Sie die Suche.");
             this.bt_Suchen.UseSelectable = true;
             this.bt_Suchen.Click += new System.EventHandler(this.bt_Suchen_Click);
             // 
@@ -89,6 +92,7 @@
             this.bt_import.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_import.TabIndex = 55;
             this.bt_import.Text = "Import";
+            this.metroToolTip1.SetToolTip(this.bt_import, "Importieren Sie hier Fächer aus einer externen Datei.");
             this.bt_import.UseSelectable = true;
             this.bt_import.Click += new System.EventHandler(this.bt_import_Click_1);
             // 
@@ -186,6 +190,7 @@
             this.bt_verwaltung.Style = MetroFramework.MetroColorStyle.Teal;
             this.bt_verwaltung.TabIndex = 54;
             this.bt_verwaltung.Text = "Fächer zu Klassenstufen zuordnen";
+            this.metroToolTip1.SetToolTip(this.bt_verwaltung, "Ordnen Sie hier den Klassenstufen die dazugehörigen Fächer zu.");
             this.bt_verwaltung.UseSelectable = true;
             this.bt_verwaltung.Click += new System.EventHandler(this.bt_Verwaltung_Click);
             // 
@@ -236,11 +241,18 @@
             this.tb_Suchen.Size = new System.Drawing.Size(302, 24);
             this.tb_Suchen.Style = MetroFramework.MetroColorStyle.Teal;
             this.tb_Suchen.TabIndex = 52;
+            this.metroToolTip1.SetToolTip(this.tb_Suchen, "Geben Sie hier den Suchbegriff ein.");
             this.tb_Suchen.UseSelectable = true;
             this.tb_Suchen.Visible = false;
             this.tb_Suchen.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Suchen.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Suchen.TextChanged += new System.EventHandler(this.tb_Suchen_TextChanged);
+            // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // w_s_faecher
             // 
@@ -272,5 +284,6 @@
         private System.Windows.Forms.TableLayoutPanel tLP_Faecher;
         private MetroFramework.Controls.MetroLabel lb_Faecher;
         private MetroFramework.Controls.MetroTextBox tb_Suchen;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
     }
 }

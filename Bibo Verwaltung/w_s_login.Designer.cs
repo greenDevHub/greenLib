@@ -36,6 +36,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
             this.metroLink1 = new MetroFramework.Controls.MetroLink();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.SuspendLayout();
             // 
             // tb_User
@@ -70,6 +71,7 @@
             this.tb_User.Style = MetroFramework.MetroColorStyle.Black;
             this.tb_User.TabIndex = 2;
             this.tb_User.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroToolTip1.SetToolTip(this.tb_User, "Geben Sie hier Ihren Benutzernamen ein.");
             this.tb_User.UseSelectable = true;
             this.tb_User.WaterMark = "Benutzername";
             this.tb_User.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -105,6 +107,7 @@
             this.tb_Password.Size = new System.Drawing.Size(224, 24);
             this.tb_Password.Style = MetroFramework.MetroColorStyle.Black;
             this.tb_Password.TabIndex = 3;
+            this.metroToolTip1.SetToolTip(this.tb_Password, "Geben Sie hier Ihr Passwort ein.");
             this.tb_Password.UseSelectable = true;
             this.tb_Password.UseSystemPasswordChar = true;
             this.tb_Password.WaterMark = "Passwort";
@@ -122,6 +125,7 @@
             this.bt_Login.Style = MetroFramework.MetroColorStyle.Black;
             this.bt_Login.TabIndex = 4;
             this.bt_Login.Text = "Login";
+            this.metroToolTip1.SetToolTip(this.bt_Login, "Loggen Sie sich hier mit Ihren eingegebenen Daten ein.");
             this.bt_Login.UseSelectable = true;
             this.bt_Login.Click += new System.EventHandler(this.bt_Login_Click);
             // 
@@ -154,6 +158,12 @@
             this.metroLink1.TabIndex = 5;
             this.metroLink1.UseSelectable = true;
             // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
             // w_s_login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -183,5 +193,6 @@
         private MetroFramework.Controls.MetroLink metroLink1;
         private System.Windows.Forms.Timer timer1;
         private MetroFramework.Controls.MetroProgressBar metroProgressBar1;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
     }
 }

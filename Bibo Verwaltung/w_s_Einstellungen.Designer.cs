@@ -47,12 +47,13 @@
             this.bt_close = new MetroFramework.Controls.MetroButton();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.metroLink1 = new MetroFramework.Controls.MetroLink();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.tLP_Top.SuspendLayout();
             this.tLP_2.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // cb_Security
-            // 
+            //
             this.cb_Security.BorderColor = System.Drawing.Color.Gray;
             this.cb_Security.DataRowView = false;
             this.cb_Security.DisplayMember = "1";
@@ -71,10 +72,11 @@
             this.helpProvider.SetShowHelp(this.cb_Security, true);
             this.cb_Security.Size = new System.Drawing.Size(339, 24);
             this.cb_Security.TabIndex = 3;
+            this.metroToolTip1.SetToolTip(this.cb_Security, "Wählen Sie hier Ihre gewünschte Authentifizierungsvariante.");
             this.cb_Security.TextChanged += new System.EventHandler(this.Visibility);
-            // 
+            //
             // lb_Server
-            // 
+            //
             this.lb_Server.AutoSize = true;
             this.lb_Server.Dock = System.Windows.Forms.DockStyle.Top;
             this.helpProvider.SetHelpString(this.lb_Server, "Servername ihrer Datenbank");
@@ -85,12 +87,12 @@
             this.lb_Server.Size = new System.Drawing.Size(146, 19);
             this.lb_Server.TabIndex = 3;
             this.lb_Server.Text = "Server:";
-            // 
+            //
             // tb_Database
-            // 
-            // 
-            // 
-            // 
+            //
+            //
+            //
+            //
             this.tb_Database.CustomButton.Image = null;
             this.tb_Database.CustomButton.Location = new System.Drawing.Point(317, 2);
             this.tb_Database.CustomButton.Margin = new System.Windows.Forms.Padding(2);
@@ -120,12 +122,13 @@
             this.tb_Database.Size = new System.Drawing.Size(339, 24);
             this.tb_Database.Style = MetroFramework.MetroColorStyle.Silver;
             this.tb_Database.TabIndex = 2;
+            this.metroToolTip1.SetToolTip(this.tb_Database, "Geben Sie hier den Namen Ihrer Datenbank ein.");
             this.tb_Database.UseSelectable = true;
             this.tb_Database.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Database.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
+            //
             // lb_Database
-            // 
+            //
             this.lb_Database.AutoSize = true;
             this.lb_Database.Dock = System.Windows.Forms.DockStyle.Top;
             this.helpProvider.SetHelpString(this.lb_Database, "Name ihrer Datenbank");
@@ -136,14 +139,14 @@
             this.lb_Database.Size = new System.Drawing.Size(146, 19);
             this.lb_Database.TabIndex = 7;
             this.lb_Database.Text = "Datenbank:";
-            // 
+            //
             // tb_Server
-            // 
-            this.tb_Server.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.tb_Server.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            // 
-            // 
-            // 
+            //
+            //
+            //
             this.tb_Server.CustomButton.Image = null;
             this.tb_Server.CustomButton.Location = new System.Drawing.Point(317, 2);
             this.tb_Server.CustomButton.Margin = new System.Windows.Forms.Padding(2);
@@ -172,12 +175,13 @@
             this.tb_Server.Size = new System.Drawing.Size(339, 24);
             this.tb_Server.Style = MetroFramework.MetroColorStyle.Silver;
             this.tb_Server.TabIndex = 1;
+            this.metroToolTip1.SetToolTip(this.tb_Server, "  Geben Sie hier den Namen des Servers Ihrer Datenbank ein.");
             this.tb_Server.UseSelectable = true;
             this.tb_Server.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Server.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
+            //
             // lb_Security
-            // 
+            //
             this.lb_Security.AutoSize = true;
             this.lb_Security.Dock = System.Windows.Forms.DockStyle.Top;
             this.helpProvider.SetHelpString(this.lb_Security, "Authentifizierungsvariante");
@@ -188,9 +192,9 @@
             this.lb_Security.Size = new System.Drawing.Size(146, 19);
             this.lb_Security.TabIndex = 8;
             this.lb_Security.Text = "Sicherheit:";
-            // 
+            //
             // lb_Passwort
-            // 
+            //
             this.lb_Passwort.AutoSize = true;
             this.lb_Passwort.Dock = System.Windows.Forms.DockStyle.Top;
             this.lb_Passwort.Location = new System.Drawing.Point(3, 123);
@@ -199,15 +203,15 @@
             this.lb_Passwort.Size = new System.Drawing.Size(146, 19);
             this.lb_Passwort.TabIndex = 13;
             this.lb_Passwort.Text = "Passwort:";
-            // 
+            //
             // tb_Passwort
-            // 
-            this.tb_Passwort.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.tb_Passwort.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            // 
-            // 
-            // 
+            //
+            //
+            //
             this.tb_Passwort.CustomButton.Image = null;
             this.tb_Passwort.CustomButton.Location = new System.Drawing.Point(317, 2);
             this.tb_Passwort.CustomButton.Margin = new System.Windows.Forms.Padding(2);
@@ -234,13 +238,14 @@
             this.tb_Passwort.Size = new System.Drawing.Size(339, 24);
             this.tb_Passwort.Style = MetroFramework.MetroColorStyle.Silver;
             this.tb_Passwort.TabIndex = 5;
+            this.metroToolTip1.SetToolTip(this.tb_Passwort, "Geben Sie hier Ihren SQL-Passwort ein.");
             this.tb_Passwort.UseSelectable = true;
             this.tb_Passwort.UseSystemPasswordChar = true;
             this.tb_Passwort.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Passwort.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
+            //
             // lb_Benutzername
-            // 
+            //
             this.lb_Benutzername.AutoSize = true;
             this.lb_Benutzername.Dock = System.Windows.Forms.DockStyle.Top;
             this.lb_Benutzername.Location = new System.Drawing.Point(3, 93);
@@ -249,15 +254,15 @@
             this.lb_Benutzername.Size = new System.Drawing.Size(146, 19);
             this.lb_Benutzername.TabIndex = 10;
             this.lb_Benutzername.Text = "Benutzername:";
-            // 
+            //
             // tb_Benutzername
-            // 
-            this.tb_Benutzername.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.tb_Benutzername.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            // 
-            // 
-            // 
+            //
+            //
+            //
             this.tb_Benutzername.CustomButton.Image = null;
             this.tb_Benutzername.CustomButton.Location = new System.Drawing.Point(317, 2);
             this.tb_Benutzername.CustomButton.Margin = new System.Windows.Forms.Padding(2);
@@ -284,14 +289,15 @@
             this.tb_Benutzername.Size = new System.Drawing.Size(339, 24);
             this.tb_Benutzername.Style = MetroFramework.MetroColorStyle.Silver;
             this.tb_Benutzername.TabIndex = 4;
+            this.metroToolTip1.SetToolTip(this.tb_Benutzername, "Geben Sie hier Ihren SQL-Benutzernamen ein.");
             this.tb_Benutzername.UseSelectable = true;
             this.tb_Benutzername.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Benutzername.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
+            //
             // tLP_Top
-            // 
-            this.tLP_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.tLP_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tLP_Top.ColumnCount = 2;
             this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.72917F));
@@ -322,9 +328,9 @@
             this.tLP_Top.Size = new System.Drawing.Size(497, 213);
             this.tLP_Top.TabIndex = 0;
             this.tLP_Top.TabStop = true;
-            // 
+            //
             // tLP_2
-            // 
+            //
             this.tLP_2.AutoSize = true;
             this.tLP_2.ColumnCount = 3;
             this.tLP_2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -341,15 +347,15 @@
             this.tLP_2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLP_2.Size = new System.Drawing.Size(345, 30);
             this.tLP_2.TabIndex = 6;
-            // 
+            //
             // bt_Test
-            // 
-            this.bt_Test.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.bt_Test.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_Test.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Test.FontWeight = MetroFramework.MetroButtonWeight.Light;
-            this.helpProvider.SetHelpString(this.bt_Test, "Testen sie ihre Verbindung zu ihrer Datenbank.");
+            this.helpProvider.SetHelpString(this.bt_Test, "Test der Verbindung zu Ihrer Datenbank");
             this.bt_Test.Location = new System.Drawing.Point(3, 3);
             this.bt_Test.MaximumSize = new System.Drawing.Size(225, 24);
             this.bt_Test.MinimumSize = new System.Drawing.Size(38, 24);
@@ -358,13 +364,14 @@
             this.bt_Test.Size = new System.Drawing.Size(109, 24);
             this.bt_Test.TabIndex = 6;
             this.bt_Test.Text = "Verbindungstest";
+            this.metroToolTip1.SetToolTip(this.bt_Test, " Testen Sie hier die Verbindung zu Ihrer Datenbank.");
             this.bt_Test.UseSelectable = true;
             this.bt_Test.Click += new System.EventHandler(this.TestConnect);
-            // 
+            //
             // bt_Save
-            // 
-            this.bt_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.bt_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_Save.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Save.FontWeight = MetroFramework.MetroButtonWeight.Light;
@@ -377,18 +384,19 @@
             this.bt_Save.Size = new System.Drawing.Size(109, 24);
             this.bt_Save.TabIndex = 8;
             this.bt_Save.Text = "Speichern";
+            this.metroToolTip1.SetToolTip(this.bt_Save, " Hier können Sie alle oben eingetragenen Daten speichern.");
             this.bt_Save.UseSelectable = true;
             this.bt_Save.Click += new System.EventHandler(this.SetSettings);
-            // 
+            //
             // bt_Clear
-            // 
-            this.bt_Clear.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.bt_Clear.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_Clear.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Clear.FontWeight = MetroFramework.MetroButtonWeight.Light;
             this.helpProvider.SetHelpString(this.bt_Clear, "Leeren sie alle oben liegenden Textfelder.");
-            this.bt_Clear.Location = new System.Drawing.Point(118, 3);
+            this.bt_Clear.Location = new System.Drawing.Point(141, 3);
             this.bt_Clear.MaximumSize = new System.Drawing.Size(150, 24);
             this.bt_Clear.MinimumSize = new System.Drawing.Size(38, 24);
             this.bt_Clear.Name = "bt_Clear";
@@ -396,11 +404,12 @@
             this.bt_Clear.Size = new System.Drawing.Size(109, 24);
             this.bt_Clear.TabIndex = 7;
             this.bt_Clear.Text = "Leeren";
+            this.metroToolTip1.SetToolTip(this.bt_Clear, " Hier können Sie alle oben liegenden Textfelder leeren.");
             this.bt_Clear.UseSelectable = true;
             this.bt_Clear.Click += new System.EventHandler(this.ClearAll);
-            // 
+            //
             // bt_close
-            // 
+            //
             this.bt_close.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bt_close.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_close.FontWeight = MetroFramework.MetroButtonWeight.Light;
@@ -412,9 +421,9 @@
             this.bt_close.Text = "Schließen";
             this.bt_close.UseSelectable = true;
             this.bt_close.Click += new System.EventHandler(this.Bt_close_Click);
-            // 
+            //
             // metroLink1
-            // 
+            //
             this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Settings64;
             this.metroLink1.ImageSize = 32;
             this.metroLink1.Location = new System.Drawing.Point(23, 19);
@@ -423,9 +432,15 @@
             this.metroLink1.TabIndex = 19;
             this.metroLink1.TabStop = false;
             this.metroLink1.UseSelectable = true;
-            // 
+            //
+            // metroToolTip1
+            //
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            //
             // w_s_einstellungen
-            // 
+            //
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(538, 284);
             this.Controls.Add(this.metroLink1);
@@ -466,5 +481,6 @@
         private System.Windows.Forms.HelpProvider helpProvider;
         private MetroFramework.Controls.MetroLink metroLink1;
         private MetroFramework.Controls.MetroButton bt_close;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
     }
 }
