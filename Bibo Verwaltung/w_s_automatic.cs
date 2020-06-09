@@ -1,4 +1,5 @@
 ﻿using MetroFramework;
+using MetroFramework.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,9 +16,23 @@ namespace Bibo_Verwaltung
     {
         #region Constructor
         string currentUser;
-        public w_s_automatic(string userName)
+        Color fc = Color.Black;
+        Color bc = Color.White;
+        public w_s_automatic(string userName, MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_automatic = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Yellow;
+            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+                fc = Color.White;
+                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
+                a_cb_Klasse.ForeColor = fc;
+                a_cb_Klasse.BackColor = bc;
+                a_cb_Modus.ForeColor = fc;
+                a_cb_Modus.BackColor = bc;
+            }
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
@@ -26,8 +41,11 @@ namespace Bibo_Verwaltung
             bt_bestaetigen.Text = "Schüler laden";
             inAusleihAction = false;
             bool b = !user.Rechteid.Equals("0");
-            a_cb_Modus.Enabled = b;
-            a_cb_Klasse.Enabled = b;
+            a_cb_Modus.TabStop = b;
+            p_modus.Visible = !b;
+
+            a_cb_Klasse.TabStop = b;
+            p_klasse.Visible = !b;
             dp_RueckDatum.Enabled = b;
             bt_bestaetigen.Enabled = b;
         }
@@ -149,7 +167,8 @@ namespace Bibo_Verwaltung
             bt_bestaetigen.Text = "Schüler laden";
             tb_ExemplarID.Text = "";
             lb_selected.Text = "bereits geliehene Bücher:";
-            a_cb_Modus.Enabled = true;
+            a_cb_Modus.TabStop = true;
+            p_modus.Visible = false;
             dp_RueckDatum.Enabled = true;
             bt_back.Enabled = false;
             bt_next.Enabled = false;
@@ -373,9 +392,13 @@ namespace Bibo_Verwaltung
                 {
                     inAusleihAction = true;
                     bt_bestaetigen.Text = "Ausgabe beenden";
-                    a_cb_Modus.Enabled = false;
+                    a_cb_Modus.TabStop = false;
+                    p_modus.Visible = true;
+
                     dp_RueckDatum.Enabled = false;
-                    a_cb_Klasse.Enabled = false;
+
+                    a_cb_Klasse.TabStop = false;
+                    p_klasse.Visible = true;
                     bt_next.Enabled = true;
                     mbt_Suche.Enabled = true;
                     gv_suggested.Enabled = true;
@@ -600,7 +623,8 @@ namespace Bibo_Verwaltung
                 lb_Klasse.Visible = true;
                 new Klasse().FillCombobox(ref a_cb_Klasse,1);
                 a_cb_Klasse.Visible = true;
-                a_cb_Klasse.Enabled = true;
+                a_cb_Klasse.TabStop = true;
+                p_klasse.Visible = false;
             }
             else
             {
@@ -621,7 +645,8 @@ namespace Bibo_Verwaltung
                 a_cb_Klasse.DisplayMember = "Klassenstufe";
                 a_cb_Klasse.SelectedItem = 0;
                 a_cb_Klasse.Visible = true;
-                a_cb_Klasse.Enabled = true;
+                a_cb_Klasse.TabStop = true;
+                p_klasse.Visible = false;
             }
         }
 
@@ -629,8 +654,9 @@ namespace Bibo_Verwaltung
         {
             if (a_cb_Modus.SelectedIndex == 0)
             {
-                using (var form = new w_s_exemplarSuche(currentUser, new Klassenstufe().GetStufe(new Klasse().GetID(a_cb_Klasse.Text))))
+                using (w_s_exemplarSuche form = new w_s_exemplarSuche(currentUser, new Klassenstufe().GetStufe(new Klasse().GetID(a_cb_Klasse.Text)),msm_automatic))
                 {
+                    msm_automatic.Clone(form);
                     var result = form.ShowDialog();
                     if (result == DialogResult.OK)
                     {
@@ -643,8 +669,9 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                using (var form = new w_s_exemplarSuche(currentUser, Convert.ToInt32(a_cb_Klasse.Text.Substring(13))))
+                using (var form = new w_s_exemplarSuche(currentUser, Convert.ToInt32(a_cb_Klasse.Text.Substring(13)),msm_automatic))
                 {
+                    msm_automatic.Clone(form);
                     var result = form.ShowDialog();
                     if (result == DialogResult.OK)
                     {

@@ -1,4 +1,5 @@
 ﻿using MetroFramework;
+using MetroFramework.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,9 +20,12 @@ namespace Bibo_Verwaltung
         string currentUser;
         bool gast = false;
         #region Constructor
-        public w_s_klasse_stufe(string userName)
+        public w_s_klasse_stufe(string userName, MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_klasse_stufe = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Orange;
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             if (user.Rechteid.Equals("0"))
@@ -298,7 +302,8 @@ namespace Bibo_Verwaltung
 
         private void mbt_ImEx_Click(object sender, EventArgs e)
         {
-            Form custom = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export");
+            w_s_selfmade_dialog custom = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export",msm_klasse_stufe);
+            msm_klasse_stufe.Clone(custom);
             custom.ShowDialog(this);
             if (custom.DialogResult == DialogResult.Yes)
             {

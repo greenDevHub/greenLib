@@ -27,10 +27,20 @@ namespace Bibo_Verwaltung
         Autor autor;
         Verlag verlag;
         Klasse klasse;
-
-        public w_s_manage(string userName, string modus)
+        Color fc = Color.Black;
+        Color bc = Color.White;
+        public w_s_manage(string userName, string modus, MetroFramework.Components.MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_manage = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Teal;
+            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+                fc = Color.White;
+                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
+            }
+
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName + " (" + user.Rechte + ")";
             this.currentModus = modus;
@@ -244,38 +254,52 @@ namespace Bibo_Verwaltung
             Form import;
             if (currentModus == "Fach")
             {
-                Form Import = new w_s_schuelerimport("t_s_faecher", true, currentUser);
+                w_s_schuelerimport Import = new w_s_schuelerimport("t_s_faecher", true, currentUser,msm_manage);
+                msm_manage.Clone(Import);
                 Import.ShowDialog(this);
+                Import.Dispose();
             }
             else if (currentModus == "Sprache")
             {
-                import = new w_s_importAssist("t_s_sprache");
+                import = new w_s_importAssist("t_s_sprache", msm_manage);
+                msm_manage.Clone(import);
                 import.ShowDialog(this);
+                import.Dispose();
             }
             else if (currentModus == "Autor")
             {
-                import = new w_s_importAssist("t_s_autor");
+                import = new w_s_importAssist("t_s_autor", msm_manage);
+                msm_manage.Clone(import);
                 import.ShowDialog(this);
+                import.Dispose();
             }
             else if (currentModus == "Genre")
             {
-                import = new w_s_importAssist("t_s_genre");
+                import = new w_s_importAssist("t_s_genre", msm_manage);
+                msm_manage.Clone(import);
                 import.ShowDialog(this);
+                import.Dispose();
             }
             else if (currentModus == "Zustand")
             {
-                import = new w_s_importAssist("t_s_zustand");
+                import = new w_s_importAssist("t_s_zustand", msm_manage);
+                msm_manage.Clone(import);
                 import.ShowDialog(this);
+                import.Dispose();
             }
             else if (currentModus == "Verlag")
             {
-                import = new w_s_importAssist("t_s_verlag");
+                import = new w_s_importAssist("t_s_verlag", msm_manage);
+                msm_manage.Clone(import);
                 import.ShowDialog(this);
+                import.Dispose();
             }
             else if (currentModus == "Klasse")
             {
-                import = new w_s_importAssist("t_s_klasse");
+                import = new w_s_importAssist("t_s_klasse", msm_manage);
+                msm_manage.Clone(import);
                 import.ShowDialog(this);
+                import.Dispose();
             }
             LoadContent();
         }

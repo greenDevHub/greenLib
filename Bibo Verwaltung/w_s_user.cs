@@ -15,9 +15,21 @@ namespace Bibo_Verwaltung
     {
         #region Constructor
         string currentUser;
-        public w_s_user(string userName)
+        Color fc = Color.Black;
+        Color bc = Color.White;
+        public w_s_user(string userName, MetroFramework.Components.MetroStyleManager msm)
         {
             InitializeComponent();
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Teal;
+            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+                fc = Color.White;
+                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
+                cb_Rechte.ForeColor = fc;
+                cb_Rechte.BackColor = bc;
+            }
+
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName;
             user.FillGrid(ref gv_Benutzer);

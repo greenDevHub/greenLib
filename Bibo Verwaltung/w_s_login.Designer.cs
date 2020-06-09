@@ -37,6 +37,8 @@
             this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
             this.metroLink1 = new MetroFramework.Controls.MetroLink();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.msm_login = new MetroFramework.Components.MetroStyleManager(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.msm_login)).BeginInit();
             this.SuspendLayout();
             // 
             // tb_User
@@ -70,7 +72,6 @@
             this.tb_User.Size = new System.Drawing.Size(224, 24);
             this.tb_User.Style = MetroFramework.MetroColorStyle.Black;
             this.tb_User.TabIndex = 2;
-            this.tb_User.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroToolTip1.SetToolTip(this.tb_User, "Geben Sie hier Ihren Benutzernamen ein.");
             this.tb_User.UseSelectable = true;
             this.tb_User.WaterMark = "Benutzername";
@@ -164,6 +165,11 @@
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
+            // msm_login
+            // 
+            this.msm_login.Owner = this;
+            this.msm_login.Style = MetroFramework.MetroColorStyle.Black;
+            // 
             // w_s_login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -182,6 +188,7 @@
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "     Login";
+            ((System.ComponentModel.ISupportInitialize)(this.msm_login)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -194,5 +201,6 @@
         private System.Windows.Forms.Timer timer1;
         private MetroFramework.Controls.MetroProgressBar metroProgressBar1;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
+        private MetroFramework.Components.MetroStyleManager msm_login;
     }
 }

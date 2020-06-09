@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -36,7 +37,9 @@
             this.mbt_OK = new MetroFramework.Controls.MetroButton();
             this.mlb_Suche = new MetroFramework.Controls.MetroLabel();
             this.a_cb_Buecher = new Bibo_Verwaltung.AdvancedComboBox();
+            this.msm_exemplarsuche = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_exemplarsuche)).BeginInit();
             this.SuspendLayout();
             // 
             // gv_Exemplare
@@ -84,7 +87,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gv_Exemplare.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.gv_Exemplare.RowHeadersWidth = 30;
+            this.gv_Exemplare.RowHeadersWidth = 5;
             this.gv_Exemplare.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_Exemplare.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv_Exemplare.ShowCellErrors = false;
@@ -125,6 +128,7 @@
             this.a_cb_Buecher.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.a_cb_Buecher.BorderColor = System.Drawing.Color.Gray;
             this.a_cb_Buecher.DataRowView = true;
+            this.a_cb_Buecher.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.a_cb_Buecher.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.a_cb_Buecher.FormattingEnabled = true;
             this.a_cb_Buecher.HighlightColor = System.Drawing.Color.Gray;
@@ -133,6 +137,11 @@
             this.a_cb_Buecher.Size = new System.Drawing.Size(554, 27);
             this.a_cb_Buecher.TabIndex = 0;
             this.a_cb_Buecher.SelectedIndexChanged += new System.EventHandler(this.AdvancedComboBox1_SelectedIndexChanged);
+            // 
+            // msm_exemplarsuche
+            // 
+            this.msm_exemplarsuche.Owner = this;
+            this.msm_exemplarsuche.Style = MetroFramework.MetroColorStyle.Yellow;
             // 
             // w_s_exemplarSuche
             // 
@@ -154,6 +163,7 @@
             this.Style = MetroFramework.MetroColorStyle.Yellow;
             this.Text = "Exemplar-Suche";
             ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_exemplarsuche)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -165,5 +175,6 @@
         private MetroFramework.Controls.MetroGrid gv_Exemplare;
         private MetroFramework.Controls.MetroButton mbt_OK;
         private MetroFramework.Controls.MetroLabel mlb_Suche;
+        private MetroFramework.Components.MetroStyleManager msm_exemplarsuche;
     }
 }

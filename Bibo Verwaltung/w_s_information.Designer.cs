@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_information));
             this.bt_Ok = new MetroFramework.Controls.MetroButton();
             this.lb_1 = new MetroFramework.Controls.MetroLabel();
@@ -48,7 +49,9 @@
             this.lb_2_2 = new MetroFramework.Controls.MetroLabel();
             this.lb_2_1 = new MetroFramework.Controls.MetroLabel();
             this.bt_Verwaltung = new MetroFramework.Controls.MetroButton();
+            this.msm_info = new MetroFramework.Components.MetroStyleManager(this.components);
             this.tLP_Information.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_info)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_Ok
@@ -280,6 +283,10 @@
             this.bt_Verwaltung.UseSelectable = true;
             this.bt_Verwaltung.Click += new System.EventHandler(this.bt_kunde_Click);
             // 
+            // msm_info
+            // 
+            this.msm_info.Owner = this;
+            // 
             // w_s_information
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -297,6 +304,7 @@
             this.Text = "Details";
             this.tLP_Information.ResumeLayout(false);
             this.tLP_Information.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_info)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -322,6 +330,7 @@
         private MetroFramework.Controls.MetroLabel lb_2_2;
         private MetroFramework.Controls.MetroLabel lb_2_1;
         private MetroFramework.Controls.MetroButton bt_Verwaltung;
+        private MetroFramework.Components.MetroStyleManager msm_info;
 
         public object CustomValue { get; internal set; }
     }

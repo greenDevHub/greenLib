@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Configuration;
 
 namespace Bibo_Verwaltung
 {
@@ -17,11 +18,26 @@ namespace Bibo_Verwaltung
         public w_s_login()
         {
             InitializeComponent();
+            this.StyleManager = msm_login;
+            RefreshTheme();
             timer1.Start();
             tb_Password.Focus();
             tb_User.Focus();
         }
 
+        private void RefreshTheme()
+        {
+            ConfigurationManager.RefreshSection("appSettings");
+            string darkmode = ConfigurationManager.AppSettings["darkmode"];
+            if (darkmode == "true")
+            {
+                this.StyleManager.Theme = MetroThemeStyle.Dark;
+            }
+            else
+            {
+                this.StyleManager.Theme = MetroThemeStyle.Light;
+            }
+        }
         // private bool error = false;
 
         private void Anmelden()
@@ -35,8 +51,10 @@ namespace Bibo_Verwaltung
             if (con.ConnectError())
             {
                 //error = true;
-                Form Einstellungen = new w_s_einstellungen();
+                w_s_einstellungen Einstellungen = new w_s_einstellungen(this.StyleManager);
+                this.StyleManager.Clone(Einstellungen);
                 Einstellungen.ShowDialog(this);
+                Einstellungen.Dispose();
                 return;
             }
             //else
@@ -50,7 +68,8 @@ namespace Bibo_Verwaltung
             if (user.LoginUser(pw, name) == true)
             {
                 this.Hide();
-                Form Main = new w_s_main(name);
+                w_s_main Main = new w_s_main(name, this.StyleManager);
+                this.StyleManager.Clone(Main);
                 Main.Closed += (s, args) => this.Close();
                 Main.Show();
             }

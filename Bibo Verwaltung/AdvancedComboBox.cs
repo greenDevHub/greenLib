@@ -19,6 +19,7 @@ namespace Bibo_Verwaltung
         private const int WM_PAINT = 0xF;
         private int buttonWidth = SystemInformation.HorizontalScrollBarArrowWidth;
 
+        private Brush ArrowBrush = new SolidBrush(SystemColors.ControlText);
         public AdvancedComboBox()
         {
             base.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
@@ -53,6 +54,46 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
+            switch (m.Msg)
+            {
+                case 0xf:
+                    //Paint the background. Only the borders
+                    //will show up because the edit
+                    //box will be overlayed
+                    Graphics g = this.CreateGraphics();
+                    Pen p = new Pen(Color.White, 2);
+                    //Draw the background of the dropdown button
+                    Rectangle rect = new Rectangle(this.Width - 17, 1, 16, this.Height - 2);
+                    g.FillRectangle(new SolidBrush(this.BackColor), rect);
+
+                    //Create the path for the arrow
+                    System.Drawing.Drawing2D.GraphicsPath pth = new System.Drawing.Drawing2D.GraphicsPath();
+                    PointF TopLeft = new PointF(this.Width - 13, (this.Height - 5) / 2);
+                    PointF TopRight = new PointF(this.Width - 6, (this.Height - 5) / 2);
+                    PointF Bottom = new PointF(this.Width - 9, (this.Height + 2) / 2);
+                    pth.AddLine(TopLeft, TopRight);
+                    pth.AddLine(TopRight, Bottom);
+
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
+                    //Determine the arrow's color.
+                    if (this.DroppedDown)
+                    {
+                        ArrowBrush = new SolidBrush(ForeColor);
+                    }
+                    else
+                    {
+                        ArrowBrush = new SolidBrush(ForeColor);
+                    }
+
+                    //Draw the arrow
+                    g.FillPath(ArrowBrush, pth);
+
+                    break;
+                default:
+                    break; // TODO: might not be correct. Was : Exit Select
+            }
+
         }
         void AdvancedComboBox_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -79,8 +120,7 @@ namespace Bibo_Verwaltung
                       new SolidBrush(combo.ForeColor),
                       new Point(e.Bounds.X, e.Bounds.Y));
             }
-
-
+            
             e.DrawFocusRectangle();
         }
     }

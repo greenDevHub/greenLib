@@ -1,4 +1,5 @@
 ﻿using MetroFramework;
+using MetroFramework.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,9 +16,23 @@ namespace Bibo_Verwaltung
     {
         #region Constructor
         string currentUser;
-        public w_s_autorueck(string userName)
+        Color fc = Color.Black;
+        Color bc = Color.White;
+        public w_s_autorueck(string userName, MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_autorueck = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Yellow;
+            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+                fc = Color.White;
+                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
+                a_cb_Klasse.ForeColor = fc;
+                a_cb_Klasse.BackColor = bc;
+                a_cb_Modus.ForeColor = fc;
+                a_cb_Modus.BackColor = bc;
+            }
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
@@ -26,8 +41,10 @@ namespace Bibo_Verwaltung
             bt_bestaetigen.Text = "Schüler laden";
             inRueckAction = false;
             bool b = !user.Rechteid.Equals("0");
-            a_cb_Modus.Enabled = b;
-            a_cb_Klasse.Enabled = b;
+            a_cb_Modus.TabStop = b;
+            p_modus.Visible = !b;
+            a_cb_Klasse.TabStop = b;
+            p_klasse.Visible = !b;
             bt_bestaetigen.Enabled = b;
         }
         #endregion
@@ -99,8 +116,10 @@ namespace Bibo_Verwaltung
             a_cb_Modus.SelectedIndex = 0;
             bt_bestaetigen.Text = "Schüler laden";
             tb_ExemplarID.Text = "";
-            a_cb_Modus.Enabled = true;
-            a_cb_Klasse.Enabled = true;
+            a_cb_Modus.TabStop = true;
+            p_modus.Visible = false;
+            a_cb_Klasse.TabStop = true;
+            p_klasse.Visible = false;
             bt_back.Enabled = false;
             bt_next.Enabled = false;
             gv_suggested.Enabled = false;
@@ -344,7 +363,8 @@ namespace Bibo_Verwaltung
                 lb_Klasse.Visible = true;
                 new Klasse().FillCombobox(ref a_cb_Klasse, 1);
                 a_cb_Klasse.Visible = true;
-                a_cb_Klasse.Enabled = true;
+                a_cb_Klasse.TabStop = true;
+                p_klasse.Visible = false;
             }
             else
             {
@@ -365,7 +385,8 @@ namespace Bibo_Verwaltung
                 a_cb_Klasse.DisplayMember = "Klassenstufe";
                 a_cb_Klasse.SelectedItem = 0;
                 a_cb_Klasse.Visible = true;
-                a_cb_Klasse.Enabled = true;
+                a_cb_Klasse.TabStop = true;
+                p_klasse.Visible = false;
             }
         }
 
@@ -377,8 +398,10 @@ namespace Bibo_Verwaltung
                 {
                     inRueckAction = true;
                     bt_bestaetigen.Text = "Rückgabe beenden";
-                    a_cb_Modus.Enabled = false;
-                    a_cb_Klasse.Enabled = false;
+                    a_cb_Modus.TabStop = false;
+                    p_modus.Visible = true;
+                    a_cb_Klasse.TabStop = false;
+                    p_klasse.Visible = true;
                     bt_back.Enabled = true;
                     bt_next.Enabled = true;
                     gv_suggested.Enabled = true;

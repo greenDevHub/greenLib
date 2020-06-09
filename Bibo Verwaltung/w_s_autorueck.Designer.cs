@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -54,9 +55,13 @@
             this.a_cb_Klasse = new Bibo_Verwaltung.AdvancedComboBox();
             this.a_cb_Modus = new Bibo_Verwaltung.AdvancedComboBox();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.msm_autorueck = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.p_modus = new Bibo_Verwaltung.TransparentPanel();
+            this.p_klasse = new Bibo_Verwaltung.TransparentPanel();
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_suggested)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Schueler)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_autorueck)).BeginInit();
             this.SuspendLayout();
             // 
             // lb_Klasse
@@ -406,6 +411,7 @@
             this.a_cb_Klasse.DataRowView = true;
             this.a_cb_Klasse.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.a_cb_Klasse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.a_cb_Klasse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.a_cb_Klasse.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.a_cb_Klasse.ForeColor = System.Drawing.SystemColors.GrayText;
             this.a_cb_Klasse.FormattingEnabled = true;
@@ -427,6 +433,7 @@
             this.a_cb_Modus.DataRowView = false;
             this.a_cb_Modus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.a_cb_Modus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.a_cb_Modus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.a_cb_Modus.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.a_cb_Modus.ForeColor = System.Drawing.SystemColors.GrayText;
             this.a_cb_Modus.FormattingEnabled = true;
@@ -450,12 +457,35 @@
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroToolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.MetroToolTip1_Popup);
             // 
+            // msm_autorueck
+            // 
+            this.msm_autorueck.Owner = this;
+            this.msm_autorueck.Style = MetroFramework.MetroColorStyle.Yellow;
+            // 
+            // p_modus
+            // 
+            this.p_modus.Location = new System.Drawing.Point(23, 82);
+            this.p_modus.Name = "p_modus";
+            this.p_modus.Size = new System.Drawing.Size(210, 24);
+            this.p_modus.TabIndex = 42;
+            this.p_modus.Visible = false;
+            // 
+            // p_klasse
+            // 
+            this.p_klasse.Location = new System.Drawing.Point(582, 82);
+            this.p_klasse.Name = "p_klasse";
+            this.p_klasse.Size = new System.Drawing.Size(245, 24);
+            this.p_klasse.TabIndex = 43;
+            this.p_klasse.Visible = false;
+            // 
             // w_s_autorueck
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1000, 500);
+            this.Controls.Add(this.p_klasse);
+            this.Controls.Add(this.p_modus);
             this.Controls.Add(this.a_cb_Klasse);
             this.Controls.Add(this.lb_Klasse);
             this.Controls.Add(this.tb_ExemplarID);
@@ -482,6 +512,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_suggested)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Schueler)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_autorueck)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -505,5 +536,8 @@
         private MetroFramework.Controls.MetroGrid gv_suggested;
         private MetroFramework.Controls.MetroGrid gv_Schueler;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
+        private MetroFramework.Components.MetroStyleManager msm_autorueck;
+        private TransparentPanel p_klasse;
+        private TransparentPanel p_modus;
     }
 }

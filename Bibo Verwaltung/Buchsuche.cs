@@ -163,7 +163,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Setzt die Farbe eines DataGridView-Rows anhand der Rückgabestatus 
         /// </summary>
-        public void Set_StatusMark(ref MetroGrid grid, List<string> blackList)
+        public void Set_StatusMark(ref MetroGrid grid, List<string> blackList, Color red, Color yellow, Color green, Color listfc, Color listbc)
         {
             try
             {
@@ -171,8 +171,8 @@ namespace Bibo_Verwaltung
                 for (int i = 0; i <= dataTable.Rows.Count - 1; i++)
                 {
                     DataGridViewRow row = grid.Rows[i];
-                    row.DefaultCellStyle.BackColor = Color.White;
-                    row.DefaultCellStyle.ForeColor = Color.Gray;
+                    row.DefaultCellStyle.BackColor = default;
+                    row.DefaultCellStyle.ForeColor = default;
                     if (row.Cells["Leihnummer"].Value.ToString() != "")
                     {
                         string s = row.Cells["Rückgabedatum"].Value.ToString();
@@ -181,24 +181,24 @@ namespace Bibo_Verwaltung
 
                         if (dt < now)
                         {
-                            row.DefaultCellStyle.BackColor = Color.Red;
+                            row.DefaultCellStyle.BackColor = red;
                             row.DefaultCellStyle.ForeColor = Color.Black;
                         }
                         else if (dt == now)
                         {
-                            row.DefaultCellStyle.BackColor = Color.Yellow;
+                            row.DefaultCellStyle.BackColor = yellow;
                             row.DefaultCellStyle.ForeColor = Color.Black;
                         }
                         else
                         {
-                            row.DefaultCellStyle.BackColor = Color.LimeGreen;
+                            row.DefaultCellStyle.BackColor = green;
                             row.DefaultCellStyle.ForeColor = Color.Black;
                         }
                     }
                     if (blackList.Contains(row.Cells["ExemplarID"].Value.ToString()))
                     {
-                        row.DefaultCellStyle.ForeColor = Color.White;
-                        row.DefaultCellStyle.BackColor = Color.Black;
+                        row.DefaultCellStyle.ForeColor = listfc;
+                        row.DefaultCellStyle.BackColor = listbc;
                     }
                 }
             }

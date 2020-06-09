@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -23,9 +24,12 @@ namespace Bibo_Verwaltung
         SQL_Verbindung connection = new SQL_Verbindung();
 
         #region Constructor
-        public w_s_main(string userName)
+        public w_s_main(string userName, MetroFramework.Components.MetroStyleManager msm)
         {
             InitializeComponent();
+
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Blue;
             timer.Start();
             picBox = new PictureBox();
             this.Controls.Add(picBox);
@@ -136,8 +140,10 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form Kunden = new w_s_Kunden(currentUser);
+                w_s_Kunden Kunden = new w_s_Kunden(currentUser,this.StyleManager);
+                this.StyleManager.Clone(Kunden);
                 Kunden.ShowDialog(this);
+                Kunden.Dispose();
             }
             else
             {
@@ -149,8 +155,11 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form manage = new w_s_manage(currentUser, "Genre");
+                w_s_manage manage = new w_s_manage(currentUser, "Genre", this.StyleManager);
+                this.StyleManager.Clone(manage);
+
                 manage.ShowDialog(this);
+                manage.Dispose();
             }
             else
             {
@@ -162,8 +171,11 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form manage = new w_s_manage(currentUser, "Sprache");
+                w_s_manage manage = new w_s_manage(currentUser, "Sprache", this.StyleManager);
+                this.StyleManager.Clone(manage);
+
                 manage.ShowDialog(this);
+                manage.Dispose();
             }
             else
             {
@@ -175,8 +187,11 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form manage = new w_s_manage(currentUser, "Autor");
+                w_s_manage manage = new w_s_manage(currentUser, "Autor", this.StyleManager);
+                this.StyleManager.Clone(manage);
+
                 manage.ShowDialog(this);
+                manage.Dispose();
             }
             else
             {
@@ -188,8 +203,11 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form manage = new w_s_manage(currentUser, "Verlag");
+                w_s_manage manage = new w_s_manage(currentUser, "Verlag", this.StyleManager);
+                this.StyleManager.Clone(manage);
+
                 manage.ShowDialog(this);
+                manage.Dispose();
             }
             else
             {
@@ -201,8 +219,11 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form Buecher = new w_s_buecher(currentUser, true);
-                Buecher.ShowDialog(this);
+                w_s_buecher Buecher = new w_s_buecher(currentUser, true, this.StyleManager);
+                this.StyleManager.Clone(Buecher);
+                Buecher.ShowDialog();
+
+                Buecher.Dispose();
             }
             else
             {
@@ -212,16 +233,21 @@ namespace Bibo_Verwaltung
 
         private void bt_Einstellungen_Click(object sender, EventArgs e)
         {
-            Form Einstellungen = new w_s_einstellungen();
+            w_s_einstellungen Einstellungen = new w_s_einstellungen(this.StyleManager);
+            this.StyleManager.Clone(Einstellungen);
             Einstellungen.ShowDialog(this);
+            Einstellungen.Dispose();
         }
 
         private void bt_Zustand_Click(object sender, EventArgs e)
         {
             if (!connected)
             {
-                Form manage = new w_s_manage(currentUser, "Zustand");
+                w_s_manage manage = new w_s_manage(currentUser, "Zustand",this.StyleManager);
+                this.StyleManager.Clone(manage);
+
                 manage.ShowDialog(this);
+                manage.Dispose();
             }
             else
             {
@@ -233,8 +259,10 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form Details = new w_s_buchsuche(currentUser);
+                w_s_buchsuche Details = new w_s_buchsuche(currentUser, this.StyleManager);
+                this.StyleManager.Clone(Details);
                 Details.ShowDialog(this);
+                Details.Dispose();
             }
             else
             {
@@ -246,8 +274,10 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form users = new w_s_user(currentUser);
+                w_s_user users = new w_s_user(currentUser, this.StyleManager);
+                this.StyleManager.Clone(users);
                 users.ShowDialog(this);
+                users.Dispose();
             }
             else
             {
@@ -259,8 +289,11 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form manage = new w_s_manage(currentUser, "Fach");
+                w_s_manage manage = new w_s_manage(currentUser, "Fach", this.StyleManager);
+                this.StyleManager.Clone(manage);
+
                 manage.ShowDialog(this);
+                manage.Dispose();
             }
             else
             {
@@ -286,8 +319,10 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form stufe = new w_s_klasse_stufe(currentUser);
+                w_s_klasse_stufe stufe = new w_s_klasse_stufe(currentUser, this.StyleManager);
+                this.StyleManager.Clone(stufe);
                 stufe.ShowDialog(this);
+                stufe.Dispose();
             }
             else
             {
@@ -316,8 +351,10 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form buchFach = new w_s_buch_fach(currentUser);
+                w_s_buch_fach buchFach = new w_s_buch_fach(currentUser,this.StyleManager);
+                this.StyleManager.Clone(buchFach);
                 buchFach.ShowDialog(this);
+                buchFach.Dispose();
             }
             else
             {
@@ -329,8 +366,10 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form buchStufe = new w_s_buch_stufe(currentUser);
+                w_s_buch_stufe buchStufe = new w_s_buch_stufe(currentUser, this.StyleManager);
+                this.StyleManager.Clone(buchStufe);
                 buchStufe.ShowDialog(this);
+                buchStufe.Dispose();
             }
             else
             {
@@ -342,8 +381,10 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form fachStufe = new w_s_fach_stufe(currentUser);
+                w_s_fach_stufe fachStufe = new w_s_fach_stufe(currentUser, this.StyleManager);
+                this.StyleManager.Clone(fachStufe);
                 fachStufe.ShowDialog(this);
+                fachStufe.Dispose();
             }
             else
             {
@@ -355,8 +396,10 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form ausleihe = new w_s_ausleihe(currentUser);
+                w_s_ausleihe ausleihe = new w_s_ausleihe(currentUser, this.StyleManager);
+                this.StyleManager.Clone(ausleihe);
                 ausleihe.ShowDialog(this);
+                ausleihe.Dispose();
             }
             else
             {
@@ -368,8 +411,10 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form rueckgabe = new w_s_rueckgabe(currentUser);
+                w_s_rueckgabe rueckgabe = new w_s_rueckgabe(currentUser, this.StyleManager);
+                this.StyleManager.Clone(rueckgabe);
                 rueckgabe.ShowDialog(this);
+                rueckgabe.Dispose();
             }
             else
             {
@@ -418,17 +463,22 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form custom = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Ausleih- oder den Rückgabe-Modus!", "Ausleih-Modus", "Rückgabe-Modus");
+                w_s_selfmade_dialog custom = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Ausleih- oder den Rückgabe-Modus!", "Ausleih-Modus", "Rückgabe-Modus", this.StyleManager);
+                this.StyleManager.Clone(custom);
                 custom.ShowDialog(this);
                 if (custom.DialogResult == DialogResult.Yes)
                 {
-                    Form autoausleihe = new w_s_automatic(currentUser);
+                    w_s_automatic autoausleihe = new w_s_automatic(currentUser, this.StyleManager);
+                    this.StyleManager.Clone(autoausleihe);
                     autoausleihe.ShowDialog(this);
+                    autoausleihe.Dispose();
                 }
                 else if (custom.DialogResult == DialogResult.No)
                 {
-                    Form autoruechgabe = new w_s_autorueck(currentUser);
+                    w_s_autorueck autoruechgabe = new w_s_autorueck(currentUser, this.StyleManager);
+                    this.StyleManager.Clone(autoruechgabe);
                     autoruechgabe.ShowDialog(this);
+                    autoruechgabe.Dispose();
                 }
                 else { }
             }
@@ -442,12 +492,37 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                Form manage = new w_s_manage(currentUser, "Klasse");
+                w_s_manage manage = new w_s_manage(currentUser, "Klasse", this.StyleManager);
+                this.StyleManager.Clone(manage);
+
                 manage.ShowDialog(this);
+                manage.Dispose();
             }
             else
             {
                 MetroMessageBox.Show(this, "Sie müssen eine Verbindung zu einem SQL-Server herstellen, bevor Sie auf weitere Funktionen der Software zugreifen können!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void MetroLink1_Click(object sender, EventArgs e)
+        {
+            if(this.StyleManager.Theme == MetroThemeStyle.Light)
+            {
+                System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.AppSettings.Settings["darkmode"].Value = "true";
+                config.Save(ConfigurationSaveMode.Full,true);
+                ConfigurationManager.RefreshSection("appSettings");
+                this.StyleManager.Theme = MetroThemeStyle.Dark;
+                pl_unschaerfe.Opacity = 0;
+            }
+            else
+            {
+                System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.AppSettings.Settings["darkmode"].Value = "false";
+                config.Save(ConfigurationSaveMode.Full, true);
+                ConfigurationManager.RefreshSection("appSettings");
+                this.StyleManager.Theme = MetroThemeStyle.Light;
+                pl_unschaerfe.Opacity = 0;
             }
         }
     }

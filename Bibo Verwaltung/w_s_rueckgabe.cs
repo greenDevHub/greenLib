@@ -1,4 +1,5 @@
 ﻿using MetroFramework;
+using MetroFramework.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,9 +18,12 @@ namespace Bibo_Verwaltung
     {
         #region Constructor
         string currentUser;
-        public w_s_rueckgabe(string userName)
+        public w_s_rueckgabe(string userName, MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_rueckgabe = msm;
+            this.StyleManager = msm;
+            SetStyle();
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
@@ -38,9 +42,12 @@ namespace Bibo_Verwaltung
             }
         }
 
-        public w_s_rueckgabe(string userName, string[] list)
+        public w_s_rueckgabe(string userName, string[] list, MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_rueckgabe = msm;
+            this.StyleManager = msm;
+            SetStyle();
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
@@ -64,7 +71,21 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
+        Color fc = Color.Black;
+        Color bc = Color.White;
+        private void SetStyle()
+        {
+            this.StyleManager.Style = MetroColorStyle.Green;
+            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+                fc = Color.White;
+                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
+                cb_Zustand.ForeColor = fc;
+                cb_Zustand.BackColor = bc;
+                picBox_Buchcover.BackColor = bc;
+            }
 
+        }
         Rueckgabe rueckgabe = new Rueckgabe();
         Zustand zustand = new Zustand();
         Kunde kunde = new Kunde();
@@ -133,7 +154,8 @@ namespace Bibo_Verwaltung
             lb_AusleihStart.Text = "nicht verfügbar";
             lb_AusleihEnde.Enabled = false;
             lb_AusleihEnde.Text = "nicht verfügbar";
-            cb_Zustand.Enabled = false;
+            cb_Zustand.TabStop = false;
+            tpanel.Visible = true;
             bt_Zu_aendern.Text = "Buchzustand ändern";
             cb_Zustand.SelectedValue = -1;
             lb_AusleihEnde.ForeColor = Color.Black;
@@ -323,13 +345,15 @@ namespace Bibo_Verwaltung
                             if (dr == DialogResult.Yes)
                             {
                                 rueckgabe.ZustandEnde = cb_Zustand.Text;
-                                cb_Zustand.Enabled = false;
+                                cb_Zustand.TabStop = false;
+                                tpanel.Visible = true;
                                 bt_Zu_aendern.Text = "Buchzustand ändern";
                             }
                             else
                             {
                                 rueckgabe.ZustandEnde = rueckgabe.ZustandStart;
-                                cb_Zustand.Enabled = false;
+                                cb_Zustand.TabStop = false;
+                                tpanel.Visible = true;
                                 bt_Zu_aendern.Text = "Buchzustand ändern";
                             }
                         }
@@ -390,14 +414,18 @@ namespace Bibo_Verwaltung
 
         private void llb_Buch_LinkClicked(object sender, EventArgs e)
         {
-            Form Info = new w_s_information(1, rueckgabe.ExemplarID, currentUser);
+            w_s_information Info = new w_s_information(1, rueckgabe.ExemplarID, currentUser, msm_rueckgabe);
+            msm_rueckgabe.Clone(Info);
             Info.ShowDialog();
+            Info.Dispose();
         }
 
         private void llb_Kunde_LinkClicked(object sender, EventArgs e)
         {
-            Form Info = new w_s_information(2, kunde.KundenID, currentUser);
+            w_s_information Info = new w_s_information(2, kunde.KundenID, currentUser,msm_rueckgabe);
+            msm_rueckgabe.Clone(Info);
             Info.ShowDialog();
+            Info.Dispose();
         }
 
         private void bt_Rueckgabe_Click(object sender, EventArgs e)
@@ -414,15 +442,19 @@ namespace Bibo_Verwaltung
 
         private void bt_Zu_aendern_Click(object sender, EventArgs e)
         {
-            if (cb_Zustand.Enabled == false)
+            if (cb_Zustand.TabStop == false)
             {
-                cb_Zustand.Enabled = true;
+                tpanel.Visible = false;
+                cb_Zustand.TabStop = true;
+                //cb_Zustand.Enabled = true;
                 bt_Zu_aendern.Text = "Übernehmen";
             }
             else
             {
+                tpanel.Visible = true;
                 rueckgabe.ZustandEnde = cb_Zustand.Text;
-                cb_Zustand.Enabled = false;
+                cb_Zustand.TabStop = false;
+                //cb_Zustand.Enabled = false;
                 bt_Zu_aendern.Text = "Buchzustand ändern";
             }
         }
@@ -430,8 +462,10 @@ namespace Bibo_Verwaltung
         private void bt_open_Click(object sender, EventArgs e)
         {
             int index = cb_Zustand.SelectedIndex;
-            Form Zustand = new w_s_manage(currentUser, "Zustand");
+            w_s_manage Zustand = new w_s_manage(currentUser, "Zustand",this.StyleManager);
+            this.StyleManager.Clone(Zustand);
             Zustand.ShowDialog(this);
+            Zustand.Dispose();
             if (!new Benutzer(currentUser).Rechteid.Equals("0"))
             {
                 zustand.FillCombobox(ref cb_Zustand, -1);

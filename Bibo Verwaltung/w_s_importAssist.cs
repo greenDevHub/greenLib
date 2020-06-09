@@ -1,4 +1,5 @@
 ﻿using MetroFramework;
+using MetroFramework.Components;
 using MetroFramework.Controls;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,30 @@ namespace Bibo_Verwaltung
     {
         Import import = new Import();
         DataTable typ = new DataTable();
-
+        Color fc = Color.Black;
+        Color bc = Color.White;
         #region Objekt-Constructor
         /// <summary>
         /// Öffnet den Import-Assist zum importieren von CSV-Dateien
         /// </summary>
-        public w_s_importAssist(string targetDBTable)
+        public w_s_importAssist(string targetDBTable, MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_import = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Silver;
+            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+                fc = Color.White;
+                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
+                foreach(TabPage tp in tc_ImportAssist.TabPages)
+                {
+                    tp.ForeColor = fc;
+                    tp.BackColor = bc;
+                }
+                rtb_Vorschau.ForeColor = fc;
+                rtb_Vorschau.BackColor = bc;
+            }
             import.Zieltabellen = targetDBTable;
         }
         #endregion

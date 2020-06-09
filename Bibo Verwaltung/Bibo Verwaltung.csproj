@@ -580,6 +580,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="greenLib.ico" />
+    <None Include="Resources\sun.png" />
     <None Include="Resources\logout %281%29.png" />
     <None Include="greenLib.png" />
     <Content Include="icon.ico" />

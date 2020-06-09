@@ -50,6 +50,10 @@
             this.bt_AutoAusgabe = new MetroFramework.Controls.MetroTile();
             this.bt_zu = new MetroFramework.Controls.MetroTile();
             this.mT_Klassen = new MetroFramework.Controls.MetroTile();
+            this.bt_logout = new MetroFramework.Controls.MetroLink();
+            this.image = new MetroFramework.Controls.MetroLink();
+            this.mainStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.bt_darkmode = new MetroFramework.Controls.MetroLink();
             this.pl_unschaerfe = new Bibo_Verwaltung.TransparentPanel();
             this.transparentPanel1 = new Bibo_Verwaltung.TransparentPanel();
             this.mT_klassenstufebuch = new MetroFramework.Controls.MetroTile();
@@ -57,13 +61,10 @@
             this.mT_klassenstufefach = new MetroFramework.Controls.MetroTile();
             this.mT_fachbuch = new MetroFramework.Controls.MetroTile();
             this.mT_Klassenstufen = new MetroFramework.Controls.MetroTile();
-            this.bt_logout = new MetroFramework.Controls.MetroLink();
-            this.image = new MetroFramework.Controls.MetroLink();
-            this.mainStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainStyleManager)).BeginInit();
             this.pl_unschaerfe.SuspendLayout();
             this.transparentPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mainStyleManager)).BeginInit();
             this.SuspendLayout();
             // 
             // mT_Kunden
@@ -329,6 +330,51 @@
             this.mT_Klassen.UseSelectable = true;
             this.mT_Klassen.Click += new System.EventHandler(this.MT_Klassen_Click);
             // 
+            // bt_logout
+            // 
+            this.bt_logout.DisplayFocus = true;
+            this.bt_logout.FontWeight = MetroFramework.MetroLinkWeight.Light;
+            this.bt_logout.Image = ((System.Drawing.Image)(resources.GetObject("bt_logout.Image")));
+            this.bt_logout.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bt_logout.ImageSize = 24;
+            this.bt_logout.Location = new System.Drawing.Point(757, 26);
+            this.bt_logout.Name = "bt_logout";
+            this.bt_logout.Size = new System.Drawing.Size(83, 31);
+            this.bt_logout.TabIndex = 22;
+            this.bt_logout.Text = "Abmelden";
+            this.bt_logout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bt_logout.UseSelectable = true;
+            this.bt_logout.Click += new System.EventHandler(this.mT_Abmelden_Click);
+            // 
+            // image
+            // 
+            this.image.Image = global::Bibo_Verwaltung.Properties.Resources.greenLib;
+            this.image.ImageSize = 32;
+            this.image.Location = new System.Drawing.Point(10, 21);
+            this.image.Margin = new System.Windows.Forms.Padding(2);
+            this.image.Name = "image";
+            this.image.Size = new System.Drawing.Size(32, 32);
+            this.image.TabIndex = 24;
+            this.image.TabStop = false;
+            this.image.UseSelectable = true;
+            this.image.Click += new System.EventHandler(this.image_Click);
+            // 
+            // mainStyleManager
+            // 
+            this.mainStyleManager.Owner = this;
+            // 
+            // bt_darkmode
+            // 
+            this.bt_darkmode.DisplayFocus = true;
+            this.bt_darkmode.Image = global::Bibo_Verwaltung.Properties.Resources.Brightness;
+            this.bt_darkmode.ImageSize = 24;
+            this.bt_darkmode.Location = new System.Drawing.Point(673, 25);
+            this.bt_darkmode.Name = "bt_darkmode";
+            this.bt_darkmode.Size = new System.Drawing.Size(37, 32);
+            this.bt_darkmode.TabIndex = 23;
+            this.bt_darkmode.UseSelectable = true;
+            this.bt_darkmode.Click += new System.EventHandler(this.MetroLink1_Click);
+            // 
             // pl_unschaerfe
             // 
             this.pl_unschaerfe.BackColor = System.Drawing.Color.Black;
@@ -336,7 +382,7 @@
             this.pl_unschaerfe.ForeColor = System.Drawing.Color.Transparent;
             this.pl_unschaerfe.Location = new System.Drawing.Point(0, 21);
             this.pl_unschaerfe.Name = "pl_unschaerfe";
-            this.pl_unschaerfe.Opacity = 25;
+            this.pl_unschaerfe.Opacity = 0;
             this.pl_unschaerfe.Size = new System.Drawing.Size(847, 325);
             this.pl_unschaerfe.TabIndex = 14;
             this.pl_unschaerfe.TabStop = true;
@@ -425,43 +471,11 @@
             this.mT_Klassenstufen.UseSelectable = true;
             this.mT_Klassenstufen.Click += new System.EventHandler(this.bt_Klassenstufe_Click);
             // 
-            // bt_logout
-            // 
-            this.bt_logout.DisplayFocus = true;
-            this.bt_logout.FontWeight = MetroFramework.MetroLinkWeight.Light;
-            this.bt_logout.Image = ((System.Drawing.Image)(resources.GetObject("bt_logout.Image")));
-            this.bt_logout.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.bt_logout.ImageSize = 24;
-            this.bt_logout.Location = new System.Drawing.Point(757, 26);
-            this.bt_logout.Name = "bt_logout";
-            this.bt_logout.Size = new System.Drawing.Size(83, 31);
-            this.bt_logout.TabIndex = 22;
-            this.bt_logout.Text = "Abmelden";
-            this.bt_logout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bt_logout.UseSelectable = true;
-            this.bt_logout.Click += new System.EventHandler(this.mT_Abmelden_Click);
-            // 
-            // image
-            // 
-            this.image.Image = global::Bibo_Verwaltung.Properties.Resources.greenLib;
-            this.image.ImageSize = 32;
-            this.image.Location = new System.Drawing.Point(10, 21);
-            this.image.Margin = new System.Windows.Forms.Padding(2);
-            this.image.Name = "image";
-            this.image.Size = new System.Drawing.Size(32, 32);
-            this.image.TabIndex = 24;
-            this.image.TabStop = false;
-            this.image.UseSelectable = true;
-            this.image.Click += new System.EventHandler(this.image_Click);
-            // 
-            // mainStyleManager
-            // 
-            this.mainStyleManager.Owner = this;
-            // 
             // w_s_main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(847, 346);
+            this.Controls.Add(this.bt_darkmode);
             this.Controls.Add(this.bt_logout);
             this.Controls.Add(this.pl_unschaerfe);
             this.Controls.Add(this.panel);
@@ -478,9 +492,9 @@
             this.Theme = MetroFramework.MetroThemeStyle.Default;
             this.Activated += new System.EventHandler(this.w_s_main_Activated);
             this.panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mainStyleManager)).EndInit();
             this.pl_unschaerfe.ResumeLayout(false);
             this.transparentPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mainStyleManager)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -516,5 +530,6 @@
         private MetroFramework.Controls.MetroTile mT_Klassen;
         private MetroFramework.Controls.MetroLink bt_logout;
         private MetroFramework.Components.MetroStyleManager mainStyleManager;
+        private MetroFramework.Controls.MetroLink bt_darkmode;
     }
 }

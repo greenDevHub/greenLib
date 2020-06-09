@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MetroFramework;
+using MetroFramework.Components;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,11 +22,25 @@ namespace Bibo_Verwaltung
         int currentstufe;
         public int CurrentStufe { get { return currentstufe; } set { currentstufe = value; } }
 
+        Color fc = Color.Black;
+        Color bc = Color.White;
+
         #region Constructor
         string currentUser;
-        public w_s_exemplarSuche(string userName, int stufe)
+        public w_s_exemplarSuche(string userName, int stufe, MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_exemplarsuche = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Yellow;
+            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+                fc = Color.White;
+                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
+                a_cb_Buecher.ForeColor = fc;
+                a_cb_Buecher.BackColor = bc;
+
+            }
             this.currentUser = userName;
             this.currentstufe = stufe;
             this.Text = Text + " - Angemeldet als: " + userName;

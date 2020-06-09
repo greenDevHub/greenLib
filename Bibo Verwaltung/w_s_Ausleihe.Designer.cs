@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -62,10 +63,12 @@
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.lb_Kunden = new MetroFramework.Controls.MetroLabel();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.msm_ausleihe = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
             this.gb_Exemplar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).BeginInit();
             this.metroPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_ausleihe)).BeginInit();
             this.SuspendLayout();
             // 
             // dp_RueckDatum
@@ -628,6 +631,11 @@
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroToolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.MetroToolTip1_Popup);
             // 
+            // msm_ausleihe
+            // 
+            this.msm_ausleihe.Owner = this;
+            this.msm_ausleihe.Style = MetroFramework.MetroColorStyle.Green;
+            // 
             // w_s_ausleihe
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -650,6 +658,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "Buchausleihe";
+            this.Theme = MetroFramework.MetroThemeStyle.Default;
             this.Shown += new System.EventHandler(this.W_s_ausleihe_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).EndInit();
             this.gb_Exemplar.ResumeLayout(false);
@@ -657,6 +666,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).EndInit();
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_ausleihe)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -693,5 +703,6 @@
         private MetroFramework.Controls.MetroLabel lb_Kunden;
         private MetroFramework.Controls.MetroLink llb_gesListe;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
+        private MetroFramework.Components.MetroStyleManager msm_ausleihe;
     }
 }

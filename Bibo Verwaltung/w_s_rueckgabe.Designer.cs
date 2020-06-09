@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -52,6 +53,7 @@
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.cb_Zustand = new Bibo_Verwaltung.AdvancedComboBox();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.tpanel = new Bibo_Verwaltung.TransparentPanel();
             this.llb_gesListe = new MetroFramework.Controls.MetroLink();
             this.rueckList_Slider = new System.Windows.Forms.HScrollBar();
             this.tb_listBis = new MetroFramework.Controls.MetroTextBox();
@@ -62,10 +64,12 @@
             this.bt_Abbrechen = new MetroFramework.Controls.MetroButton();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.msm_rueckgabe = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Verlauf)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).BeginInit();
             this.metroPanel1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_rueckgabe)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_Rueckgabe
@@ -397,7 +401,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cb_Zustand.BorderColor = System.Drawing.Color.Green;
             this.cb_Zustand.DataRowView = true;
-            this.cb_Zustand.Enabled = false;
+            this.cb_Zustand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cb_Zustand.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.cb_Zustand.FormattingEnabled = true;
             this.helpProvider.SetHelpString(this.cb_Zustand, "Hier wird der letzte Zustand des ausgeliehen Buches angezeigt. Ändern sie diesen " +
@@ -409,12 +413,14 @@
             this.helpProvider.SetShowHelp(this.cb_Zustand, true);
             this.cb_Zustand.Size = new System.Drawing.Size(165, 24);
             this.cb_Zustand.TabIndex = 5;
+            this.cb_Zustand.TabStop = false;
             this.metroToolTip1.SetToolTip(this.cb_Zustand, "Wählen Sie einen neuen Zustand bei einer Zustandsänderung.");
             // 
             // metroPanel1
             // 
             this.metroPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroPanel1.Controls.Add(this.tpanel);
             this.metroPanel1.Controls.Add(this.llb_gesListe);
             this.metroPanel1.Controls.Add(this.rueckList_Slider);
             this.metroPanel1.Controls.Add(this.tb_listBis);
@@ -446,6 +452,13 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // tpanel
+            // 
+            this.tpanel.Location = new System.Drawing.Point(115, 153);
+            this.tpanel.Name = "tpanel";
+            this.tpanel.Size = new System.Drawing.Size(165, 24);
+            this.tpanel.TabIndex = 48;
             // 
             // llb_gesListe
             // 
@@ -492,6 +505,7 @@
             this.tb_listBis.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.tb_listBis.CustomButton.UseSelectable = true;
             this.tb_listBis.CustomButton.Visible = false;
+            this.tb_listBis.Enabled = false;
             this.tb_listBis.Lines = new string[] {
         "-"};
             this.tb_listBis.Location = new System.Drawing.Point(256, 183);
@@ -530,6 +544,7 @@
             this.tb_listVon.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.tb_listVon.CustomButton.UseSelectable = true;
             this.tb_listVon.CustomButton.Visible = false;
+            this.tb_listVon.Enabled = false;
             this.tb_listVon.Lines = new string[] {
         "-"};
             this.tb_listVon.Location = new System.Drawing.Point(115, 183);
@@ -620,6 +635,11 @@
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroToolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.MetroToolTip1_Popup);
             // 
+            // msm_rueckgabe
+            // 
+            this.msm_rueckgabe.Owner = this;
+            this.msm_rueckgabe.Style = MetroFramework.MetroColorStyle.Green;
+            // 
             // w_s_rueckgabe
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -645,6 +665,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).EndInit();
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.msm_rueckgabe)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -682,6 +703,8 @@
         private MetroFramework.Controls.MetroButton bt_Abbrechen;
         private MetroFramework.Controls.MetroPanel metroPanel2;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
+        private MetroFramework.Components.MetroStyleManager msm_rueckgabe;
+        private TransparentPanel tpanel;
     }
 }
 

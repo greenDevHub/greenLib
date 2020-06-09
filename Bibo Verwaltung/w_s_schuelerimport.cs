@@ -43,11 +43,19 @@ namespace Bibo_Verwaltung
         List<string> files = new List<string>();
         List<string> filesShort = new List<string>();
         int errors = 0;
-        public w_s_schuelerimport(string target, bool modus, string userName)
+        public w_s_schuelerimport(string target, bool modus, string userName, MetroFramework.Components.MetroStyleManager msm)
         {
             this.currentUser = userName;
             this.target = target;
             InitializeComponent();
+            msm_schuelerimport = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Teal;
+            if(this.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+
+            }
+
             tb_lines.Text = "0";
             setModus(modus);
             SetTarget();
@@ -1354,14 +1362,22 @@ namespace Bibo_Verwaltung
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (progressBar1.Value == 100)
+            try
             {
-                timer1.Stop();
+                if (progressBar1.Value == 100)
+                {
+                    timer1.Stop();
+                }
+                progressBar1.Invoke((Action)delegate ()
+                {
+                    progressBar1.PerformStep();
+                });
+
             }
-            progressBar1.Invoke((Action)delegate ()
+            catch
             {
-                progressBar1.PerformStep();
-            });
+
+            }
         }
 
         /// <summary>

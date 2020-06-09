@@ -46,8 +46,8 @@
             this.gv_Benutzer = new MetroFramework.Controls.MetroGrid();
             this.bt_OK = new MetroFramework.Controls.MetroButton();
             this.mP_Eingaben = new MetroFramework.Controls.MetroPanel();
-            this.cb_Rechte = new Bibo_Verwaltung.AdvancedComboBox();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.cb_Rechte = new Bibo_Verwaltung.AdvancedComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Benutzer)).BeginInit();
             this.mP_Eingaben.SuspendLayout();
             this.SuspendLayout();
@@ -334,11 +334,18 @@
             this.mP_Eingaben.VerticalScrollbarHighlightOnWheel = false;
             this.mP_Eingaben.VerticalScrollbarSize = 10;
             // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
             // cb_Rechte
             // 
             this.cb_Rechte.BorderColor = System.Drawing.Color.Gray;
             this.cb_Rechte.DataRowView = false;
             this.cb_Rechte.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_Rechte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cb_Rechte.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.cb_Rechte.FormattingEnabled = true;
             this.cb_Rechte.HighlightColor = System.Drawing.Color.Teal;
@@ -352,12 +359,6 @@
             this.cb_Rechte.Size = new System.Drawing.Size(175, 24);
             this.cb_Rechte.TabIndex = 5;
             this.metroToolTip1.SetToolTip(this.cb_Rechte, "Hier können Sie die Rechte des Benutzers auswählen/ansehen.");
-            // 
-            // metroToolTip1
-            // 
-            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroToolTip1.StyleManager = null;
-            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // w_s_user
             // 
@@ -373,6 +374,7 @@
             this.ShowInTaskbar = false;
             this.Style = MetroFramework.MetroColorStyle.Teal;
             this.Text = "Benutzerverwaltung";
+            this.Theme = MetroFramework.MetroThemeStyle.Default;
             ((System.ComponentModel.ISupportInitialize)(this.gv_Benutzer)).EndInit();
             this.mP_Eingaben.ResumeLayout(false);
             this.mP_Eingaben.PerformLayout();

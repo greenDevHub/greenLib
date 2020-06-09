@@ -35,7 +35,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_schuelerimport));
             this.lb_TxtQuali = new MetroFramework.Controls.MetroLabel();
             this.lb_FeldTrenn = new MetroFramework.Controls.MetroLabel();
@@ -88,7 +87,7 @@
             this.bt_Schliessen = new MetroFramework.Controls.MetroButton();
             this.bt_clear = new MetroFramework.Controls.MetroButton();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.msm_schuelerimport = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gv_columns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid_Vorschau)).BeginInit();
@@ -98,7 +97,7 @@
             this.metroPanel3.SuspendLayout();
             this.metroPanel4.SuspendLayout();
             this.metroPanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_schuelerimport)).BeginInit();
             this.SuspendLayout();
             // 
             // lb_TxtQuali
@@ -551,12 +550,11 @@
             this.slider_preview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.slider_preview.LargeChange = 1;
-            this.slider_preview.Location = new System.Drawing.Point(37, 5);
+            this.slider_preview.Location = new System.Drawing.Point(37, 6);
             this.slider_preview.Maximum = 0;
-            this.slider_preview.MaximumSize = new System.Drawing.Size(700, 24);
-            this.slider_preview.MinimumSize = new System.Drawing.Size(160, 24);
+            this.slider_preview.MinimumSize = new System.Drawing.Size(160, 20);
             this.slider_preview.Name = "slider_preview";
-            this.slider_preview.Size = new System.Drawing.Size(524, 24);
+            this.slider_preview.Size = new System.Drawing.Size(524, 20);
             this.slider_preview.TabIndex = 200;
             this.metroToolTip1.SetToolTip(this.slider_preview, "Blättern Sie durch die Dateien.");
             this.slider_preview.ValueChanged += new System.EventHandler(this.scrollbar_ValueChanged);
@@ -654,7 +652,6 @@
             this.tb_aktuell.Enabled = false;
             this.tb_aktuell.Lines = new string[0];
             this.tb_aktuell.Location = new System.Drawing.Point(3, 32);
-            this.tb_aktuell.MaximumSize = new System.Drawing.Size(600, 24);
             this.tb_aktuell.MaxLength = 32767;
             this.tb_aktuell.Name = "tb_aktuell";
             this.tb_aktuell.PasswordChar = '\0';
@@ -678,7 +675,6 @@
             this.bt_removefile.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_removefile.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.bt_removefile.Location = new System.Drawing.Point(3, 62);
-            this.bt_removefile.MaximumSize = new System.Drawing.Size(600, 24);
             this.bt_removefile.Name = "bt_removefile";
             this.bt_removefile.Size = new System.Drawing.Size(592, 24);
             this.bt_removefile.Style = MetroFramework.MetroColorStyle.Teal;
@@ -777,17 +773,6 @@
             this.metroGrid_Vorschau.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.metroGrid_Vorschau.RowHeadersWidth = 51;
             this.metroGrid_Vorschau.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.metroGrid_Vorschau.RowsDefaultCellStyle = dataGridViewCellStyle7;
-            this.metroGrid_Vorschau.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
-            this.metroGrid_Vorschau.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.metroGrid_Vorschau.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            this.metroGrid_Vorschau.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
-            this.metroGrid_Vorschau.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.metroGrid_Vorschau.RowTemplate.DividerHeight = 1;
             this.metroGrid_Vorschau.RowTemplate.Height = 24;
             this.metroGrid_Vorschau.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
@@ -796,7 +781,6 @@
             this.metroGrid_Vorschau.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroGrid_Vorschau.TabIndex = 51;
             this.metroGrid_Vorschau.TabStop = false;
-            this.metroGrid_Vorschau.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroToolTip1.SetToolTip(this.metroGrid_Vorschau, "Dies ist die Vorschau der zu importierenden Daten.");
             this.metroGrid_Vorschau.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.MetroGrid_Vorschau_CellMouseDown);
             this.metroGrid_Vorschau.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gv_Vorschau_KeyDown);
@@ -804,6 +788,8 @@
             // 
             // metroContextMenu1
             // 
+            this.metroContextMenu1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.metroContextMenu1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.metroContextMenu1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.spalteEntfernenToolStripMenuItem});
             this.metroContextMenu1.Name = "metroContextMenu1";
@@ -1077,10 +1063,9 @@
             this.bt_Schliessen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Schliessen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.bt_Schliessen.Location = new System.Drawing.Point(792, 553);
-            this.bt_Schliessen.MaximumSize = new System.Drawing.Size(375, 24);
             this.bt_Schliessen.MinimumSize = new System.Drawing.Size(262, 24);
             this.bt_Schliessen.Name = "bt_Schliessen";
-            this.bt_Schliessen.Size = new System.Drawing.Size(375, 24);
+            this.bt_Schliessen.Size = new System.Drawing.Size(382, 24);
             this.bt_Schliessen.TabIndex = 19;
             this.bt_Schliessen.Text = "Schließen";
             this.bt_Schliessen.UseSelectable = true;
@@ -1107,10 +1092,10 @@
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroToolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.MetroToolTip1_Popup);
             // 
-            // metroStyleManager1
+            // msm_schuelerimport
             // 
-            this.metroStyleManager1.Owner = null;
-            this.metroStyleManager1.Style = MetroFramework.MetroColorStyle.Teal;
+            this.msm_schuelerimport.Owner = this;
+            this.msm_schuelerimport.Style = MetroFramework.MetroColorStyle.Teal;
             // 
             // w_s_schuelerimport
             // 
@@ -1150,7 +1135,7 @@
             this.metroPanel4.PerformLayout();
             this.metroPanel5.ResumeLayout(false);
             this.metroPanel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_schuelerimport)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1208,6 +1193,6 @@
         private MetroFramework.Controls.MetroContextMenu metroContextMenu1;
         private System.Windows.Forms.ToolStripMenuItem spalteEntfernenToolStripMenuItem;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
-        private MetroFramework.Components.MetroStyleManager metroStyleManager1;
+        private MetroFramework.Components.MetroStyleManager msm_schuelerimport;
     }
 }

@@ -28,9 +28,21 @@ namespace Bibo_Verwaltung
 
         #region Constructor
         string currentUser;
-        public w_s_exemplare(string userName, string isbn)
+        Color fc = Color.Black;
+        Color bc = Color.White;
+        public w_s_exemplare(string userName, string isbn, MetroFramework.Components.MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_exemplare = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Blue;
+            if(this.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+                fc = Color.White;
+                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
+                acb_Zustand.ForeColor = fc;
+                acb_Zustand.BackColor = bc;
+            }
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName;
@@ -153,7 +165,8 @@ namespace Bibo_Verwaltung
                 bt_Add.Text = "Hinzufügen";
                 tb_ID.Enabled = false;
                 tb_ISBN.Enabled = false;
-                acb_Zustand.Enabled = true;
+                acb_Zustand.TabStop = true;
+                tpanel.Visible = false;
                 dTP_AufDat.Enabled = true;
                 tb_ExempCount.Enabled = true;
                 mlb_ISBN.Text = "ISBN:";
@@ -169,7 +182,8 @@ namespace Bibo_Verwaltung
                 bt_Add.Text = "Löschen";
                 tb_ID.Enabled = true;
                 tb_ISBN.Enabled = false;
-                acb_Zustand.Enabled = false;
+                acb_Zustand.TabStop = false;
+                tpanel.Visible = true;
                 dTP_AufDat.Enabled = false;
                 tb_ExempCount.Enabled = false;
                 mlb_ISBN.Text = "ISBN:";
@@ -185,7 +199,8 @@ namespace Bibo_Verwaltung
                 bt_Add.Text = "Speichern";
                 tb_ID.Enabled = false;
                 tb_ISBN.Enabled = false;
-                acb_Zustand.Enabled = true;
+                acb_Zustand.TabStop = true;
+                tpanel.Visible = false;
                 dTP_AufDat.Enabled = true;
                 tb_ExempCount.Enabled = false;
                 mlb_ISBN.Text = "ISBN:";
@@ -200,7 +215,8 @@ namespace Bibo_Verwaltung
                 bt_Add.Text = "---";
                 tb_ID.Enabled = true;
                 tb_ISBN.Enabled = false;
-                acb_Zustand.Enabled = true;
+                acb_Zustand.TabStop = true;
+                tpanel.Visible = false;
                 dTP_AufDat.Enabled = true;
                 tb_ExempCount.Enabled = false;
                 bt_Add.Enabled = false;
@@ -236,7 +252,7 @@ namespace Bibo_Verwaltung
         {
             tb_ID.BackColor = Color.White;
             tb_ISBN.BackColor = Color.White;
-            acb_Zustand.BackColor = Color.White;
+            acb_Zustand.BackColor = bc;
             dTP_AufDat.BackColor = Color.White;
         }
 
@@ -436,7 +452,7 @@ namespace Bibo_Verwaltung
         private void cb_zustand_TextChanged(object sender, EventArgs e)
         {
             Filter();
-            acb_Zustand.BackColor = Color.White;
+            acb_Zustand.BackColor = bc;
         }
 
         private void rb_Neu_CheckedChanged(object sender, EventArgs e)
@@ -478,8 +494,10 @@ namespace Bibo_Verwaltung
 
         private void bt_zustand_Click(object sender, EventArgs e)
         {
-            Form Zustand = new w_s_manage(currentUser, "Zustand");
+            w_s_manage Zustand = new w_s_manage(currentUser, "Zustand",msm_exemplare);
+            msm_exemplare.Clone(Zustand);
             Zustand.ShowDialog(this);
+            Zustand.Dispose();
             exemplar.Zustand.FillCombobox(ref acb_Zustand, 0);
         }
 

@@ -1,4 +1,5 @@
 ﻿using MetroFramework;
+using MetroFramework.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,9 +18,12 @@ namespace Bibo_Verwaltung
     {
         #region Constructor
         string currentUser;
-        public w_s_ausleihe(string userName)
+        public w_s_ausleihe(string userName, MetroFramework.Components.MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_ausleihe = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Green;
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
@@ -44,9 +48,12 @@ namespace Bibo_Verwaltung
             }
         }
 
-        public w_s_ausleihe(string userName, string[] list)
+        public w_s_ausleihe(string userName, string[] list, MetroFramework.Components.MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_ausleihe = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Green;
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
@@ -73,7 +80,6 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
-
         Ausleihe ausleihe = new Ausleihe();
         Kunde kunde = new Kunde();
 
@@ -360,8 +366,10 @@ namespace Bibo_Verwaltung
 
         private void bt_NeuKunde_Click(object sender, EventArgs e)
         {
-            Form Kunden = new w_s_Kunden(currentUser);
+            w_s_Kunden Kunden = new w_s_Kunden(currentUser,msm_ausleihe);
+            msm_ausleihe.Clone(Kunden);
             Kunden.ShowDialog(this);
+            Kunden.Dispose();
             kunde.FillGrid(ref gv_Kunde);
         }
 
@@ -442,8 +450,10 @@ namespace Bibo_Verwaltung
 
         private void llb_BuchTitel_Click(object sender, EventArgs e)
         {
-            Form Info = new w_s_information(1, ausleihe.ExemplarID, currentUser);
+            w_s_information Info = new w_s_information(1, ausleihe.ExemplarID, currentUser,msm_ausleihe);
+            msm_ausleihe.Clone(Info);
             Info.ShowDialog();
+            Info.Dispose();
         }
 
         private void llb_gesListe_Click(object sender, EventArgs e)

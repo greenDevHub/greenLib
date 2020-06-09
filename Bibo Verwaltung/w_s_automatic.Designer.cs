@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -54,12 +55,16 @@
             this.lb_Klasse = new MetroFramework.Controls.MetroLabel();
             this.dp_RueckDatum = new MetroFramework.Controls.MetroDateTime();
             this.mbt_Suche = new MetroFramework.Controls.MetroButton();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.msm_automatic = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.p_klasse = new Bibo_Verwaltung.TransparentPanel();
             this.a_cb_Klasse = new Bibo_Verwaltung.AdvancedComboBox();
             this.a_cb_Modus = new Bibo_Verwaltung.AdvancedComboBox();
-            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.p_modus = new Bibo_Verwaltung.TransparentPanel();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Schueler)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_suggested)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_automatic)).BeginInit();
             this.SuspendLayout();
             // 
             // lb_Jahr
@@ -440,6 +445,26 @@
             this.mbt_Suche.UseSelectable = true;
             this.mbt_Suche.Click += new System.EventHandler(this.Mbt_Suche_Click);
             // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroToolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.MetroToolTip1_Popup);
+            // 
+            // msm_automatic
+            // 
+            this.msm_automatic.Owner = this;
+            this.msm_automatic.Style = MetroFramework.MetroColorStyle.Yellow;
+            // 
+            // p_klasse
+            // 
+            this.p_klasse.Location = new System.Drawing.Point(582, 82);
+            this.p_klasse.Name = "p_klasse";
+            this.p_klasse.Size = new System.Drawing.Size(245, 24);
+            this.p_klasse.TabIndex = 24;
+            this.p_klasse.Visible = false;
+            // 
             // a_cb_Klasse
             // 
             this.a_cb_Klasse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -449,6 +474,7 @@
             this.a_cb_Klasse.DataRowView = true;
             this.a_cb_Klasse.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.a_cb_Klasse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.a_cb_Klasse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.a_cb_Klasse.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.a_cb_Klasse.ForeColor = System.Drawing.SystemColors.GrayText;
             this.a_cb_Klasse.FormattingEnabled = true;
@@ -470,6 +496,7 @@
             this.a_cb_Modus.DataRowView = false;
             this.a_cb_Modus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.a_cb_Modus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.a_cb_Modus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.a_cb_Modus.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.a_cb_Modus.ForeColor = System.Drawing.SystemColors.GrayText;
             this.a_cb_Modus.FormattingEnabled = true;
@@ -486,12 +513,13 @@
             this.metroToolTip1.SetToolTip(this.a_cb_Modus, "Wählen Sie den Ausgabemodus.");
             this.a_cb_Modus.SelectedIndexChanged += new System.EventHandler(this.a_cb_Modus_SelectedIndexChanged);
             // 
-            // metroToolTip1
+            // p_modus
             // 
-            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroToolTip1.StyleManager = null;
-            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroToolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.MetroToolTip1_Popup);
+            this.p_modus.Location = new System.Drawing.Point(23, 82);
+            this.p_modus.Name = "p_modus";
+            this.p_modus.Size = new System.Drawing.Size(210, 24);
+            this.p_modus.TabIndex = 25;
+            this.p_modus.Visible = false;
             // 
             // w_s_automatic
             // 
@@ -499,6 +527,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1000, 500);
+            this.Controls.Add(this.p_modus);
+            this.Controls.Add(this.p_klasse);
             this.Controls.Add(this.mbt_Suche);
             this.Controls.Add(this.a_cb_Klasse);
             this.Controls.Add(this.dp_RueckDatum);
@@ -528,6 +558,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_Schueler)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_suggested)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_automatic)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -553,5 +584,8 @@
         private AdvancedComboBox a_cb_Klasse;
         private MetroFramework.Controls.MetroButton mbt_Suche;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
+        private MetroFramework.Components.MetroStyleManager msm_automatic;
+        private TransparentPanel p_klasse;
+        private TransparentPanel p_modus;
     }
 }

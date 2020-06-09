@@ -13,15 +13,18 @@ namespace Bibo_Verwaltung
     public partial class w_s_Kunden : MetroFramework.Forms.MetroForm
     {
         Kunde kunde = new Kunde();
-
+        Color fc = Color.Black;
+        Color bc = Color.White;
         #region Constructor
         string currentUser;
         bool loaded = false;
         bool guest = false;
         string kundenID = "";
-        public w_s_Kunden(string userName, string kundenID)
+        public w_s_Kunden(string userName, string kundenID, MetroFramework.Components.MetroStyleManager msm)
         {
             InitializeComponent();
+            this.StyleManager = msm;
+            SetStyle();
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
@@ -42,9 +45,11 @@ namespace Bibo_Verwaltung
             }
             this.kundenID = kundenID;
         }
-        public w_s_Kunden(string userName)
+        public w_s_Kunden(string userName, MetroFramework.Components.MetroStyleManager msm)
         {
+            this.StyleManager = msm;
             InitializeComponent();
+            SetStyle();
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
@@ -65,6 +70,17 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
+        private void SetStyle()
+        {
+            this.StyleManager.Style = MetroColorStyle.Teal;
+            if(this.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+                fc = Color.White;
+                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
+                cb_klasse.ForeColor = fc;
+                cb_klasse.BackColor = bc;
+            }
+        }
         private void guestMode(bool activate)
         {
             bt_confirm.Enabled = !activate;
@@ -188,11 +204,12 @@ namespace Bibo_Verwaltung
             tb_Strasse.BackColor = Color.White;
             tb_Postleitzahl.BackColor = Color.White;
             tb_Ort.BackColor = Color.White;
-            cb_klasse.BackColor = Color.White;
+            cb_klasse.BackColor = bc;
             tb_Mail.BackColor = Color.White;
             tb_Telefonnummer.BackColor = Color.White;
         }
 
+        bool readOnly = false;
         /// <summary>
         /// Setzt die Componenten auf den aktuellen Arbeits-Modus
         /// </summary>
@@ -210,6 +227,7 @@ namespace Bibo_Verwaltung
                     tb_Hausnummer.Enabled = true;
                     tb_Postleitzahl.Enabled = true;
                     tb_Ort.Enabled = true;
+                readOnly = false;
                     cb_klasse.Enabled = true;
                     tb_Mail.Enabled = true;
                     tb_Telefonnummer.Enabled = true;
@@ -235,6 +253,7 @@ namespace Bibo_Verwaltung
                     tb_Hausnummer.Enabled = true;
                     tb_Postleitzahl.Enabled = true;
                     tb_Ort.Enabled = true;
+                readOnly = false;
                     cb_klasse.Enabled = true;
                     tb_Mail.Enabled = true;
                     tb_Telefonnummer.Enabled = true;
@@ -258,7 +277,8 @@ namespace Bibo_Verwaltung
                     tb_Hausnummer.Enabled = false;
                     tb_Postleitzahl.Enabled = false;
                     tb_Ort.Enabled = false;
-                    cb_klasse.Enabled = false;
+                readOnly = true;
+                //cb_klasse.Enabled = false;
                     tb_Mail.Enabled = false;
                     tb_Telefonnummer.Enabled = false;
                     lb_KundenID.Text = "Kunden-ID:*";
@@ -281,6 +301,7 @@ namespace Bibo_Verwaltung
                 tb_Hausnummer.Enabled = true;
                 tb_Postleitzahl.Enabled = true;
                 tb_Ort.Enabled = true;
+                readOnly = false;
                 cb_klasse.Enabled = true;
                 tb_Mail.Enabled = true;
                 tb_Telefonnummer.Enabled = true;
@@ -295,6 +316,15 @@ namespace Bibo_Verwaltung
                 bt_confirm.Enabled = false;
             }
             guestMode(guest);
+            if (readOnly)
+            {
+                cb_klasse.DataSource = null;
+            }
+            else if(cb_klasse.DataSource == null)
+            {
+                Klasse k = new Klasse();
+                k.FillCombobox(ref cb_klasse,0);
+            }
             
         }
 
@@ -739,7 +769,7 @@ namespace Bibo_Verwaltung
 
         private void cb_klasse_TextChanged(object sender, EventArgs e)
         {
-            cb_klasse.BackColor = Color.White;
+            cb_klasse.BackColor = bc;
             KundenFilter();
         }
 
@@ -769,8 +799,10 @@ namespace Bibo_Verwaltung
 
         private void bt_ImEx_Click(object sender, EventArgs e)
         {
-            Form import = new w_s_schuelerimport("t_s_schueler", true, currentUser);
+            w_s_schuelerimport import = new w_s_schuelerimport("t_s_schueler", true, currentUser,this.StyleManager);
+            this.StyleManager.Clone(import);
             import.ShowDialog(this);
+            import.Dispose();
             if (!backgroundWorker1.IsBusy)
             {
                 backgroundWorker1.RunWorkerAsync();
@@ -996,9 +1028,11 @@ namespace Bibo_Verwaltung
                         DialogResult drFinished = MetroMessageBox.Show(this, "Die Datenbank wurde erfolgreich von allen Schülern bereinigt. Wollen Sie zum Import wechseln?", "Vorgang erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (drFinished == DialogResult.Yes)
                         {
-                            Form import = new w_s_schuelerimport("t_s_schueler", true, currentUser);
+                            w_s_schuelerimport import = new w_s_schuelerimport("t_s_schueler", true, currentUser,this.StyleManager);
+                            this.StyleManager.Clone(import);
                             this.Hide();
                             import.ShowDialog(this);
+                            import.Dispose();
                             this.Show();
                             if (!backgroundWorker1.IsBusy)
                             {
@@ -1019,29 +1053,22 @@ namespace Bibo_Verwaltung
             List<string> selectedFachIDs = new List<string>();
             BeginInvoke((Action)delegate ()
             {
-                kunde.Klasse.FillCombobox(ref cb_klasse, 0);
-                for (int i = 0; i < gv_faecher.Rows.Count; i++)
-                {
-                    DataGridViewRow row = gv_faecher.Rows[i];
-                    if (row.DefaultCellStyle.BackColor == Color.Yellow)
-                    {
-                        selectedFachIDs.Add(row.Cells["ID"].ToString());
-                    }
-                }
+                
                 metroProgressSpinner1.Visible = true;
                 metroProgressSpinner2.Visible = true;
                 gv_faecher.Visible = false;
                 gv_Kunde.Visible = false;
             });
+
+            while (loaded == false)
+            {
+
+            }
             MetroGrid mgKunde = new MetroGrid();
             kunde.FillGrid(ref mgKunde);
             DataTable dtFach = new DataTable();
             kunde.Fach.FillDT(ref dtFach);
             var dtKunde = mgKunde.DataSource;
-            while (loaded == false)
-            {
-
-            }
             try
             {
                 BeginInvoke((Action)delegate ()
@@ -1067,6 +1094,15 @@ namespace Bibo_Verwaltung
                     metroProgressSpinner2.Visible = false;
                     gv_faecher.Visible = true;
                     gv_Kunde.Visible = true;
+                    kunde.Klasse.FillCombobox(ref cb_klasse, 0);
+                    for (int i = 0; i < gv_faecher.Rows.Count; i++)
+                    {
+                        DataGridViewRow row = gv_faecher.Rows[i];
+                        if (row.DefaultCellStyle.BackColor == Color.Yellow)
+                        {
+                            selectedFachIDs.Add(row.Cells["ID"].ToString());
+                        }
+                    }
                 });
             }
             catch { }
@@ -1130,8 +1166,10 @@ namespace Bibo_Verwaltung
 
         private void Bt_klasse_s_Click(object sender, EventArgs e)
         {
-            Form Klasse = new w_s_manage(currentUser, "Klasse");
+            w_s_manage Klasse = new w_s_manage(currentUser, "Klasse",this.StyleManager);
+            this.StyleManager.Clone(Klasse);
             Klasse.ShowDialog(this);
+            Klasse.Dispose();
             kunde.Klasse.FillCombobox(ref cb_klasse, 0);
         }
 
@@ -1242,6 +1280,11 @@ namespace Bibo_Verwaltung
                 e.SuppressKeyPress = true;
             }
             
+        }
+
+        private void Cb_klasse_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (readOnly) e.SuppressKeyPress = true;
         }
     }
 }

@@ -66,6 +66,7 @@
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.acb_Zustand = new Bibo_Verwaltung.AdvancedComboBox();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.tpanel = new Bibo_Verwaltung.TransparentPanel();
             this.dTP_AufDat = new MetroFramework.Controls.MetroDateTime();
             this.rb_search = new MetroFramework.Controls.MetroRadioButton();
             this.timer = new System.Windows.Forms.Timer(this.components);
@@ -75,7 +76,7 @@
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
-            this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.msm_exemplare = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.gb_BarcodeBox.SuspendLayout();
@@ -84,7 +85,7 @@
             this.metroPanel1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             this.metroPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_exemplare)).BeginInit();
             this.SuspendLayout();
             // 
             // gv_Exemplare
@@ -135,6 +136,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gv_Exemplare.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.gv_Exemplare.RowHeadersVisible = false;
             this.gv_Exemplare.RowHeadersWidth = 51;
             this.gv_Exemplare.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_Exemplare.RowTemplate.DividerHeight = 1;
@@ -151,6 +153,8 @@
             // 
             // contextMenuStrip
             // 
+            this.contextMenuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.contextMenuStrip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ladenToolStripMenuItem,
@@ -664,6 +668,7 @@
             this.acb_Zustand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.acb_Zustand.BorderColor = System.Drawing.Color.Gray;
             this.acb_Zustand.DataRowView = true;
+            this.acb_Zustand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.acb_Zustand.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.acb_Zustand.FormattingEnabled = true;
             this.helpProvider.SetHelpString(this.acb_Zustand, "Tragen sie hier den Zustand des Buches, welches sie hinzufügen möchten, ein.");
@@ -683,6 +688,7 @@
             this.metroPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.metroPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.metroPanel1.Controls.Add(this.tpanel);
             this.metroPanel1.Controls.Add(this.gb_BarcodeBox);
             this.metroPanel1.Controls.Add(this.dTP_AufDat);
             this.metroPanel1.Controls.Add(this.rb_delete);
@@ -714,6 +720,14 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // tpanel
+            // 
+            this.tpanel.Location = new System.Drawing.Point(138, 88);
+            this.tpanel.Name = "tpanel";
+            this.tpanel.Size = new System.Drawing.Size(159, 24);
+            this.tpanel.TabIndex = 27;
+            this.tpanel.Visible = false;
             // 
             // dTP_AufDat
             // 
@@ -818,9 +832,9 @@
             this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel3.VerticalScrollbarSize = 10;
             // 
-            // metroStyleManager1
+            // msm_exemplare
             // 
-            this.metroStyleManager1.Owner = null;
+            this.msm_exemplare.Owner = this;
             // 
             // w_s_exemplare
             // 
@@ -839,6 +853,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Exemplarverwaltung";
+            this.Theme = MetroFramework.MetroThemeStyle.Default;
             this.Activated += new System.EventHandler(this.w_s_buchid_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_buchid_FormClosing);
             this.Shown += new System.EventHandler(this.W_s_exemplare_Shown);
@@ -851,7 +866,7 @@
             this.metroPanel1.PerformLayout();
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_exemplare)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -900,6 +915,7 @@
         private MetroFramework.Controls.MetroPanel metroPanel3;
         private MetroFramework.Controls.MetroPanel metroPanel4;
         private MetroFramework.Controls.MetroRadioButton rb_search;
-        private MetroFramework.Components.MetroStyleManager metroStyleManager1;
+        private MetroFramework.Components.MetroStyleManager msm_exemplare;
+        private TransparentPanel tpanel;
     }
 }

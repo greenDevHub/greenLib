@@ -108,9 +108,9 @@
             this.metroPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.SuspendLayout();
-            //
+            // 
             // lb_Telefonnummer
-            //
+            // 
             this.helpProvider.SetHelpString(this.lb_Telefonnummer, "Tragen sie die Telefonnummer ihres Kunden hier ein.");
             this.lb_Telefonnummer.Location = new System.Drawing.Point(3, 308);
             this.lb_Telefonnummer.Margin = new System.Windows.Forms.Padding(3);
@@ -121,12 +121,12 @@
             this.lb_Telefonnummer.TabIndex = 16;
             this.lb_Telefonnummer.Text = "Telefonnummer:";
             this.lb_Telefonnummer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            // 
             // tb_Telefonnummer
-            //
-            //
-            //
-            //
+            // 
+            // 
+            // 
+            // 
             this.tb_Telefonnummer.CustomButton.Image = null;
             this.tb_Telefonnummer.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_Telefonnummer.CustomButton.Name = "";
@@ -158,9 +158,9 @@
             this.tb_Telefonnummer.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Telefonnummer.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Telefonnummer.TextChanged += new System.EventHandler(this.tb_Telefonnummer_TextChanged);
-            //
+            // 
             // lb_Vorname
-            //
+            // 
             this.helpProvider.SetHelpString(this.lb_Vorname, "Tragen sie den Vornamen ihres Kunden hier ein.");
             this.lb_Vorname.Location = new System.Drawing.Point(3, 33);
             this.lb_Vorname.Margin = new System.Windows.Forms.Padding(3);
@@ -171,9 +171,9 @@
             this.lb_Vorname.TabIndex = 21;
             this.lb_Vorname.Text = "Vorname:";
             this.lb_Vorname.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            // 
             // lb_Nachname
-            //
+            // 
             this.helpProvider.SetHelpString(this.lb_Nachname, "Tragen sie den Nachnamen ihres Kunden hier ein.");
             this.lb_Nachname.Location = new System.Drawing.Point(3, 63);
             this.lb_Nachname.Margin = new System.Windows.Forms.Padding(3);
@@ -184,12 +184,12 @@
             this.lb_Nachname.TabIndex = 23;
             this.lb_Nachname.Text = "Nachname:";
             this.lb_Nachname.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            // 
             // tb_KundenID
-            //
-            //
-            //
-            //
+            // 
+            // 
+            // 
+            // 
             this.tb_KundenID.CustomButton.Image = null;
             this.tb_KundenID.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_KundenID.CustomButton.Name = "";
@@ -218,9 +218,9 @@
             this.tb_KundenID.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_KundenID.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_KundenID.TextChanged += new System.EventHandler(this.tb_KundenID_TextChanged);
-            //
+            // 
             // lb_Strasse
-            //
+            // 
             this.helpProvider.SetHelpString(this.lb_Strasse, "Tragen sie die Straße ihres Kunden hier ein.");
             this.lb_Strasse.Location = new System.Drawing.Point(3, 128);
             this.lb_Strasse.Margin = new System.Windows.Forms.Padding(3);
@@ -231,9 +231,9 @@
             this.lb_Strasse.TabIndex = 7;
             this.lb_Strasse.Text = "Strasse:";
             this.lb_Strasse.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            // 
             // lb_Hausnummer
-            //
+            // 
             this.helpProvider.SetHelpString(this.lb_Hausnummer, "Tragen sie die Hausnummer  ihres Kunden hier ein.");
             this.lb_Hausnummer.Location = new System.Drawing.Point(3, 158);
             this.lb_Hausnummer.Margin = new System.Windows.Forms.Padding(3);
@@ -244,9 +244,9 @@
             this.lb_Hausnummer.TabIndex = 27;
             this.lb_Hausnummer.Text = "Hausnummer:";
             this.lb_Hausnummer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            // 
             // lb_Postleitzahl
-            //
+            // 
             this.helpProvider.SetHelpString(this.lb_Postleitzahl, "Tragen sie die Postleitzahl ihres Kunden hier ein.");
             this.lb_Postleitzahl.Location = new System.Drawing.Point(3, 188);
             this.lb_Postleitzahl.Margin = new System.Windows.Forms.Padding(3);
@@ -257,12 +257,12 @@
             this.lb_Postleitzahl.TabIndex = 29;
             this.lb_Postleitzahl.Text = "Postleitzahl:";
             this.lb_Postleitzahl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            // 
             // tb_Nachname
-            //
-            //
-            //
-            //
+            // 
+            // 
+            // 
+            // 
             this.tb_Nachname.CustomButton.Image = null;
             this.tb_Nachname.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_Nachname.CustomButton.Name = "";
@@ -294,9 +294,9 @@
             this.tb_Nachname.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Nachname.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Nachname.TextChanged += new System.EventHandler(this.tb_Nachname_TextChanged);
-            //
+            // 
             // lb_Ort
-            //
+            // 
             this.helpProvider.SetHelpString(this.lb_Ort, "Tragen sie den  Wohnort ihres Kunden hier ein.");
             this.lb_Ort.Location = new System.Drawing.Point(3, 218);
             this.lb_Ort.Margin = new System.Windows.Forms.Padding(3);
@@ -307,12 +307,12 @@
             this.lb_Ort.TabIndex = 31;
             this.lb_Ort.Text = "Wohnort:";
             this.lb_Ort.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            // 
             // tb_Vorname
-            //
-            //
-            //
-            //
+            // 
+            // 
+            // 
+            // 
             this.tb_Vorname.CustomButton.Image = null;
             this.tb_Vorname.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_Vorname.CustomButton.Name = "";
@@ -344,12 +344,12 @@
             this.tb_Vorname.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Vorname.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Vorname.TextChanged += new System.EventHandler(this.tb_Vorname_TextChanged);
-            //
+            // 
             // tb_Strasse
-            //
-            //
-            //
-            //
+            // 
+            // 
+            // 
+            // 
             this.tb_Strasse.CustomButton.Image = null;
             this.tb_Strasse.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_Strasse.CustomButton.Name = "";
@@ -381,9 +381,9 @@
             this.tb_Strasse.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Strasse.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Strasse.TextChanged += new System.EventHandler(this.tb_Strasse_TextChanged);
-            //
+            // 
             // lb_Klasse
-            //
+            // 
             this.helpProvider.SetHelpString(this.lb_Klasse, "Tragen sie die Klasse ihres Kunden hier ein.");
             this.lb_Klasse.Location = new System.Drawing.Point(3, 248);
             this.lb_Klasse.Margin = new System.Windows.Forms.Padding(3);
@@ -394,12 +394,12 @@
             this.lb_Klasse.TabIndex = 34;
             this.lb_Klasse.Text = "Klasse:";
             this.lb_Klasse.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            // 
             // tb_Mail
-            //
-            //
-            //
-            //
+            // 
+            // 
+            // 
+            // 
             this.tb_Mail.CustomButton.Image = null;
             this.tb_Mail.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_Mail.CustomButton.Name = "";
@@ -431,9 +431,9 @@
             this.tb_Mail.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Mail.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Mail.TextChanged += new System.EventHandler(this.tb_Mail_TextChanged);
-            //
+            // 
             // lb_Mail
-            //
+            // 
             this.helpProvider.SetHelpString(this.lb_Mail, "Tragen sie die E-Mail Adresse ihres Kunden hier ein.");
             this.lb_Mail.Location = new System.Drawing.Point(3, 278);
             this.lb_Mail.Margin = new System.Windows.Forms.Padding(3);
@@ -444,12 +444,12 @@
             this.lb_Mail.TabIndex = 37;
             this.lb_Mail.Text = "Mail:";
             this.lb_Mail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            // 
             // tb_Hausnummer
-            //
-            //
-            //
-            //
+            // 
+            // 
+            // 
+            // 
             this.tb_Hausnummer.CustomButton.Image = null;
             this.tb_Hausnummer.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_Hausnummer.CustomButton.Name = "";
@@ -481,12 +481,12 @@
             this.tb_Hausnummer.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Hausnummer.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Hausnummer.TextChanged += new System.EventHandler(this.tb_Hausnummer_TextChanged);
-            //
+            // 
             // tb_Postleitzahl
-            //
-            //
-            //
-            //
+            // 
+            // 
+            // 
+            // 
             this.tb_Postleitzahl.CustomButton.Image = null;
             this.tb_Postleitzahl.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_Postleitzahl.CustomButton.Name = "";
@@ -518,12 +518,12 @@
             this.tb_Postleitzahl.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Postleitzahl.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Postleitzahl.TextChanged += new System.EventHandler(this.tb_Postleitzahl_TextChanged);
-            //
+            // 
             // tb_Ort
-            //
-            //
-            //
-            //
+            // 
+            // 
+            // 
+            // 
             this.tb_Ort.CustomButton.Image = null;
             this.tb_Ort.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_Ort.CustomButton.Name = "";
@@ -555,9 +555,9 @@
             this.tb_Ort.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Ort.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Ort.TextChanged += new System.EventHandler(this.tb_Ort_TextChanged);
-            //
+            // 
             // lb_KundenID
-            //
+            // 
             this.helpProvider.SetHelpString(this.lb_KundenID, resources.GetString("lb_KundenID.HelpString"));
             this.lb_KundenID.Location = new System.Drawing.Point(3, 3);
             this.lb_KundenID.Margin = new System.Windows.Forms.Padding(3);
@@ -568,14 +568,14 @@
             this.lb_KundenID.TabIndex = 0;
             this.lb_KundenID.Text = "Kunden-ID:";
             this.lb_KundenID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            // 
             // lb_kunde_add
-            //
-            this.lb_kunde_add.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            // 
+            this.lb_kunde_add.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            //
-            //
-            //
+            // 
+            // 
+            // 
             this.lb_kunde_add.CustomButton.Image = null;
             this.lb_kunde_add.CustomButton.Location = new System.Drawing.Point(332, 2);
             this.lb_kunde_add.CustomButton.Name = "";
@@ -608,9 +608,9 @@
             this.lb_kunde_add.Visible = false;
             this.lb_kunde_add.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.lb_kunde_add.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            //
+            // 
             // bt_clear
-            //
+            // 
             this.bt_clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_clear.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_clear.FontWeight = MetroFramework.MetroButtonWeight.Regular;
@@ -625,9 +625,9 @@
             this.metroToolTip1.SetToolTip(this.bt_clear, "    Leeren sie hier alle oben liegenden Textfelder.    ");
             this.bt_clear.UseSelectable = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
-            //
+            // 
             // rb_KundeLoeschen
-            //
+            // 
             this.rb_KundeLoeschen.AutoSize = true;
             this.rb_KundeLoeschen.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_KundeLoeschen.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
@@ -642,9 +642,9 @@
             this.metroToolTip1.SetToolTip(this.rb_KundeLoeschen, "    Klicken sie hier, um einen vorhandenen Kunden zu löschen.    ");
             this.rb_KundeLoeschen.UseSelectable = true;
             this.rb_KundeLoeschen.CheckedChanged += new System.EventHandler(this.rb_KundeLoeschen_CheckedChanged);
-            //
+            // 
             // rb_KundeBearbeiten
-            //
+            // 
             this.rb_KundeBearbeiten.AutoSize = true;
             this.rb_KundeBearbeiten.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_KundeBearbeiten.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
@@ -659,9 +659,9 @@
             this.metroToolTip1.SetToolTip(this.rb_KundeBearbeiten, "    Klicken sie hier, um einen Kunden zu bearbeiten.    ");
             this.rb_KundeBearbeiten.UseSelectable = true;
             this.rb_KundeBearbeiten.CheckedChanged += new System.EventHandler(this.rb_KundeBearbeiten_CheckedChanged);
-            //
+            // 
             // rb_Neukunde
-            //
+            // 
             this.rb_Neukunde.AutoSize = true;
             this.rb_Neukunde.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_Neukunde.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
@@ -676,9 +676,9 @@
             this.metroToolTip1.SetToolTip(this.rb_Neukunde, "    Klicken sie hier, um einen neuen Kunden hinzuzufügen.    ");
             this.rb_Neukunde.UseSelectable = true;
             this.rb_Neukunde.CheckedChanged += new System.EventHandler(this.rb_Neukunde_CheckedChanged);
-            //
+            // 
             // bt_confirm
-            //
+            // 
             this.bt_confirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_confirm.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_confirm.FontWeight = MetroFramework.MetroButtonWeight.Regular;
@@ -693,9 +693,9 @@
             this.metroToolTip1.SetToolTip(this.bt_confirm, "    Speichern sie hier alle oben eingetragenen Daten.    ");
             this.bt_confirm.UseSelectable = true;
             this.bt_confirm.Click += new System.EventHandler(this.bt_confirm_click);
-            //
+            // 
             // bt_OK
-            //
+            // 
             this.bt_OK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.bt_OK.FontSize = MetroFramework.MetroButtonSize.Medium;
@@ -709,15 +709,15 @@
             this.bt_OK.TabIndex = 30;
             this.bt_OK.Text = "Schließen";
             this.bt_OK.UseSelectable = true;
-            //
+            // 
             // gv_Kunde
-            //
+            // 
             this.gv_Kunde.AllowUserToAddRows = false;
             this.gv_Kunde.AllowUserToDeleteRows = false;
             this.gv_Kunde.AllowUserToResizeColumns = false;
             this.gv_Kunde.AllowUserToResizeRows = false;
-            this.gv_Kunde.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.gv_Kunde.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gv_Kunde.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.gv_Kunde.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -770,9 +770,9 @@
             this.gv_Kunde.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_Kunde_CellMouseDown);
             this.gv_Kunde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Kunde_KeyDown);
             this.gv_Kunde.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Gv_Kunde_MouseDown);
-            //
+            // 
             // cm_kunde
-            //
+            // 
             this.cm_kunde.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.cm_kunde.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.cm_kunde.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -781,23 +781,23 @@
             this.kundeEntfernenToolStripMenuItem});
             this.cm_kunde.Name = "cm_kunde";
             this.cm_kunde.Size = new System.Drawing.Size(168, 48);
-            //
+            // 
             // kundeBearbeitenToolStripMenuItem
-            //
+            // 
             this.kundeBearbeitenToolStripMenuItem.Name = "kundeBearbeitenToolStripMenuItem";
             this.kundeBearbeitenToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.kundeBearbeitenToolStripMenuItem.Text = "Kunde bearbeiten";
             this.kundeBearbeitenToolStripMenuItem.Click += new System.EventHandler(this.kundeBearbeitenToolStripMenuItem_Click);
-            //
+            // 
             // kundeEntfernenToolStripMenuItem
-            //
+            // 
             this.kundeEntfernenToolStripMenuItem.Name = "kundeEntfernenToolStripMenuItem";
             this.kundeEntfernenToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.kundeEntfernenToolStripMenuItem.Text = "Kunde entfernen";
             this.kundeEntfernenToolStripMenuItem.Click += new System.EventHandler(this.kundeEntfernenToolStripMenuItem_Click);
-            //
+            // 
             // lb_geburtsdatum
-            //
+            // 
             this.helpProvider.SetHelpString(this.lb_geburtsdatum, "Tragen sie den Nachnamen ihres Kunden hier ein.");
             this.lb_geburtsdatum.Location = new System.Drawing.Point(3, 93);
             this.lb_geburtsdatum.Margin = new System.Windows.Forms.Padding(3);
@@ -808,9 +808,9 @@
             this.lb_geburtsdatum.TabIndex = 41;
             this.lb_geburtsdatum.Text = "Geburtsdatum:";
             this.lb_geburtsdatum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            // 
             // lb_faecher
-            //
+            // 
             this.lb_faecher.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_faecher, "Tragen sie die Telefonnummer ihres Kunden hier ein.");
             this.lb_faecher.Location = new System.Drawing.Point(3, 341);
@@ -821,9 +821,9 @@
             this.lb_faecher.Style = MetroFramework.MetroColorStyle.Teal;
             this.lb_faecher.TabIndex = 48;
             this.lb_faecher.Text = "Fächer:";
-            //
+            // 
             // bt_klasse_s
-            //
+            // 
             this.bt_klasse_s.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_klasse_s.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_klasse_s, "Klicken sie auf diesen Button, um neue Autoren hinzuzufügen.");
@@ -837,19 +837,20 @@
             this.bt_klasse_s.Text = "+";
             this.bt_klasse_s.UseSelectable = true;
             this.bt_klasse_s.Click += new System.EventHandler(this.Bt_klasse_s_Click);
-            //
+            // 
             // cb_klasse
-            //
+            // 
             this.cb_klasse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_klasse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_klasse.BorderColor = System.Drawing.Color.Gray;
             this.cb_klasse.DataRowView = true;
             this.cb_klasse.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cb_klasse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cb_klasse.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_klasse.ForeColor = System.Drawing.Color.Black;
             this.cb_klasse.FormattingEnabled = true;
             this.helpProvider.SetHelpString(this.cb_klasse, "Tragen sie den Autor ihres Buches hier ein.");
-            this.cb_klasse.HighlightColor = System.Drawing.Color.DeepSkyBlue;
+            this.cb_klasse.HighlightColor = System.Drawing.Color.Teal;
             this.cb_klasse.ItemHeight = 18;
             this.cb_klasse.Location = new System.Drawing.Point(113, 248);
             this.cb_klasse.Name = "cb_klasse";
@@ -857,9 +858,10 @@
             this.cb_klasse.Size = new System.Drawing.Size(216, 24);
             this.cb_klasse.TabIndex = 13;
             this.cb_klasse.TextChanged += new System.EventHandler(this.cb_klasse_TextChanged);
-            //
+            this.cb_klasse.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cb_klasse_KeyDown);
+            // 
             // mbt_Import
-            //
+            // 
             this.mbt_Import.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mbt_Import.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_Import.Location = new System.Drawing.Point(4, 3);
@@ -871,10 +873,10 @@
             this.metroToolTip1.SetToolTip(this.mbt_Import, "    Importieren Sie Daten von einer externen Quelle.    ");
             this.mbt_Import.UseSelectable = true;
             this.mbt_Import.Click += new System.EventHandler(this.bt_ImEx_Click);
-            //
+            // 
             // metroPanel1
-            //
-            this.metroPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            // 
+            this.metroPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.metroPanel1.Controls.Add(this.cb_klasse);
             this.metroPanel1.Controls.Add(this.bt_klasse_s);
@@ -919,9 +921,9 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
-            //
+            // 
             // mdtp_GebDat
-            //
+            // 
             this.mdtp_GebDat.CustomFormat = " dd.MM.yyyy";
             this.mdtp_GebDat.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.mdtp_GebDat.Location = new System.Drawing.Point(113, 93);
@@ -931,10 +933,10 @@
             this.mdtp_GebDat.TabIndex = 8;
             this.metroToolTip1.SetToolTip(this.mdtp_GebDat, "Tragen sie das Geburtsdatum des Kunden hier ein.");
             this.mdtp_GebDat.ValueChanged += new System.EventHandler(this.Mdtp_GebDat_ValueChanged);
-            //
+            // 
             // metroProgressSpinner2
-            //
-            this.metroProgressSpinner2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            // 
+            this.metroProgressSpinner2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.metroProgressSpinner2.BackColor = System.Drawing.Color.Lavender;
             this.metroProgressSpinner2.Location = new System.Drawing.Point(9, 363);
@@ -945,14 +947,14 @@
             this.metroProgressSpinner2.TabIndex = 17;
             this.metroProgressSpinner2.TabStop = false;
             this.metroProgressSpinner2.UseSelectable = true;
-            //
+            // 
             // gv_result
-            //
+            // 
             this.gv_result.AllowUserToAddRows = false;
             this.gv_result.AllowUserToDeleteRows = false;
             this.gv_result.AllowUserToResizeColumns = false;
             this.gv_result.AllowUserToResizeRows = false;
-            this.gv_result.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.gv_result.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gv_result.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_result.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -1010,24 +1012,24 @@
             this.gv_result.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_result_CellMouseDown);
             this.gv_result.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_result_KeyDown);
             this.gv_result.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Gv_result_MouseDown);
-            //
+            // 
             // Kürzel
-            //
+            // 
             this.Kürzel.HeaderText = "Kürzel";
             this.Kürzel.MinimumWidth = 6;
             this.Kürzel.Name = "Kürzel";
             this.Kürzel.ReadOnly = true;
-            //
+            // 
             // ID
-            //
+            // 
             this.ID.HeaderText = "ID";
             this.ID.MinimumWidth = 6;
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
             this.ID.Visible = false;
-            //
+            // 
             // cm_result
-            //
+            // 
             this.cm_result.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.cm_result.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.cm_result.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -1035,21 +1037,21 @@
             this.leistungskursAuswählenToolStripMenuItem});
             this.cm_result.Name = "metroContextMenu1";
             this.cm_result.Size = new System.Drawing.Size(206, 26);
-            //
+            // 
             // leistungskursAuswählenToolStripMenuItem
-            //
+            // 
             this.leistungskursAuswählenToolStripMenuItem.Name = "leistungskursAuswählenToolStripMenuItem";
             this.leistungskursAuswählenToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.leistungskursAuswählenToolStripMenuItem.Text = "Leistungskurs auswählen";
             this.leistungskursAuswählenToolStripMenuItem.Click += new System.EventHandler(this.leistungskursAuswählenToolStripMenuItem_Click);
-            //
+            // 
             // gv_faecher
-            //
+            // 
             this.gv_faecher.AllowUserToAddRows = false;
             this.gv_faecher.AllowUserToDeleteRows = false;
             this.gv_faecher.AllowUserToResizeRows = false;
-            this.gv_faecher.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.gv_faecher.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gv_faecher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.gv_faecher.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -1102,9 +1104,9 @@
             this.gv_faecher.TabIndex = 17;
             this.gv_faecher.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_faecher_CellDoubleClick);
             this.gv_faecher.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_faecher_KeyDown);
-            //
+            // 
             // metroLabel1
-            //
+            // 
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.Location = new System.Drawing.Point(389, 63);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
@@ -1113,9 +1115,9 @@
             this.metroLabel1.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroLabel1.TabIndex = 0;
             this.metroLabel1.Text = "Filter:";
-            //
+            // 
             // rb_FilterAlles
-            //
+            // 
             this.rb_FilterAlles.AutoSize = true;
             this.rb_FilterAlles.Checked = true;
             this.rb_FilterAlles.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
@@ -1130,9 +1132,9 @@
             this.rb_FilterAlles.Text = "Alles anzeigen";
             this.rb_FilterAlles.UseSelectable = true;
             this.rb_FilterAlles.CheckedChanged += new System.EventHandler(this.rb_alles_CheckedChanged);
-            //
+            // 
             // rb_FilterSchueler
-            //
+            // 
             this.rb_FilterSchueler.AutoSize = true;
             this.rb_FilterSchueler.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_FilterSchueler.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
@@ -1146,9 +1148,9 @@
             this.rb_FilterSchueler.Text = "nur Schüler anzeigen";
             this.rb_FilterSchueler.UseSelectable = true;
             this.rb_FilterSchueler.CheckedChanged += new System.EventHandler(this.rb_alles_CheckedChanged);
-            //
+            // 
             // rb_FilterAndere
-            //
+            // 
             this.rb_FilterAndere.AutoSize = true;
             this.rb_FilterAndere.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_FilterAndere.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
@@ -1162,10 +1164,10 @@
             this.rb_FilterAndere.Text = "alle Schüler ausblenden";
             this.rb_FilterAndere.UseSelectable = true;
             this.rb_FilterAndere.CheckedChanged += new System.EventHandler(this.rb_alles_CheckedChanged);
-            //
+            // 
             // mtP_Filter
-            //
-            this.mtP_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            // 
+            this.mtP_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mtP_Filter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mtP_Filter.Controls.Add(this.rb_FilterSchueler);
@@ -1181,9 +1183,9 @@
             this.mtP_Filter.VerticalScrollbarBarColor = true;
             this.mtP_Filter.VerticalScrollbarHighlightOnWheel = false;
             this.mtP_Filter.VerticalScrollbarSize = 10;
-            //
+            // 
             // bt_cleanup
-            //
+            // 
             this.bt_cleanup.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_cleanup.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.bt_cleanup.Location = new System.Drawing.Point(260, 3);
@@ -1194,16 +1196,16 @@
             this.bt_cleanup.Text = "Schülerdaten-Cleanup";
             this.bt_cleanup.UseSelectable = true;
             this.bt_cleanup.Click += new System.EventHandler(this.bt_cleanup_Click);
-            //
+            // 
             // backgroundWorker1
-            //
+            // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker1_RunWorkerCompleted);
-            //
+            // 
             // metroProgressSpinner1
-            //
-            this.metroProgressSpinner1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            // 
+            this.metroProgressSpinner1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.metroProgressSpinner1.BackColor = System.Drawing.Color.White;
             this.metroProgressSpinner1.Location = new System.Drawing.Point(490, 125);
@@ -1213,15 +1215,15 @@
             this.metroProgressSpinner1.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroProgressSpinner1.TabIndex = 48;
             this.metroProgressSpinner1.UseSelectable = true;
-            //
+            // 
             // timer1
-            //
+            // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
-            //
+            // 
             // mbt_Export
-            //
+            // 
             this.mbt_Export.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mbt_Export.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.mbt_Export.Location = new System.Drawing.Point(132, 3);
@@ -1233,10 +1235,10 @@
             this.metroToolTip1.SetToolTip(this.mbt_Export, "    Exportieren sie ihre Kundendaten in eine Exceltabelle.    ");
             this.mbt_Export.UseSelectable = true;
             this.mbt_Export.Click += new System.EventHandler(this.Mbt_Export_Click);
-            //
+            // 
             // metroPanel2
-            //
-            this.metroPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            // 
+            this.metroPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.metroPanel2.Controls.Add(this.bt_cleanup);
             this.metroPanel2.Controls.Add(this.mbt_Export);
@@ -1252,9 +1254,9 @@
             this.metroPanel2.VerticalScrollbarBarColor = true;
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
-            //
+            // 
             // rb_search
-            //
+            // 
             this.rb_search.AutoSize = true;
             this.rb_search.Checked = true;
             this.rb_search.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
@@ -1269,19 +1271,20 @@
             this.metroToolTip1.SetToolTip(this.rb_search, "    Klicken sie hier, um nach einem Kunden zu suchen.    ");
             this.rb_search.UseSelectable = true;
             this.rb_search.CheckedChanged += new System.EventHandler(this.Rb_search_CheckedChanged);
-            //
+            // 
             // metroStyleManager1
-            //
+            // 
             this.metroStyleManager1.Owner = null;
             this.metroStyleManager1.Style = MetroFramework.MetroColorStyle.Teal;
+            // 
             // metroToolTip1
-            //
+            // 
             this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Default;
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Default;
-            //
+            // 
             // w_s_Kunden
-            //
+            // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1200, 745);

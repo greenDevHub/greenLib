@@ -18,10 +18,20 @@ namespace Bibo_Verwaltung
         Einstellung set = new Einstellung();
         int originalHeight = 0;
         float originalRowHeight = 0;
-
-        public w_s_einstellungen()
+        Color fc = Color.Black;
+        Color bc = Color.White;
+        public w_s_einstellungen(MetroFramework.Components.MetroStyleManager msm)
         {
             InitializeComponent();
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Silver;
+            if(this.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+                fc = Color.White;
+                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
+                cb_Security.ForeColor = fc;
+                cb_Security.BackColor = bc;
+            }
             this.StartPosition = FormStartPosition.CenterScreen;
             originalHeight = ClientSize.Height;
             originalRowHeight = tLP_Top.RowStyles[3].Height;
@@ -94,7 +104,7 @@ namespace Bibo_Verwaltung
             tb_Server.BackColor = Color.White;
             tb_Benutzername.BackColor = Color.White;
             tb_Passwort.BackColor = Color.White;
-            cb_Security.BackColor = Color.White;
+            cb_Security.BackColor = bc;
         }
         #endregion
 

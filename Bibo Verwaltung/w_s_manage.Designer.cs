@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -42,8 +43,10 @@
             this.mtb_Export = new MetroFramework.Controls.MetroButton();
             this.mbt_Cancel = new MetroFramework.Controls.MetroButton();
             this.bt_sort_on_off = new MetroFramework.Controls.MetroButton();
+            this.msm_manage = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gv_manage)).BeginInit();
             this.tLP_Faecher.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_manage)).BeginInit();
             this.SuspendLayout();
             // 
             // mbt_Uebernehmen
@@ -145,7 +148,6 @@
             this.gv_manage.RowTemplate.DividerHeight = 1;
             this.gv_manage.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gv_manage.Size = new System.Drawing.Size(336, 491);
-            this.gv_manage.Style = MetroFramework.MetroColorStyle.Blue;
             this.gv_manage.TabIndex = 2;
             this.gv_manage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_manage_KeyDown);
             this.gv_manage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Gv_manage_KeyPress);
@@ -284,6 +286,11 @@
             this.bt_sort_on_off.UseSelectable = true;
             this.bt_sort_on_off.Click += new System.EventHandler(this.Bt_sort_on_off_Click);
             // 
+            // msm_manage
+            // 
+            this.msm_manage.Owner = this;
+            this.msm_manage.Style = MetroFramework.MetroColorStyle.Teal;
+            // 
             // w_s_manage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -294,13 +301,16 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(384, 700);
             this.Name = "w_s_manage";
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Style = MetroFramework.MetroColorStyle.Teal;
             this.Text = "-";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.W_s_manage_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.gv_manage)).EndInit();
             this.tLP_Faecher.ResumeLayout(false);
             this.tLP_Faecher.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_manage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -317,5 +327,6 @@
         private MetroFramework.Controls.MetroButton mtb_Export;
         private MetroFramework.Controls.MetroButton mbt_Cancel;
         private MetroFramework.Controls.MetroButton bt_sort_on_off;
+        private MetroFramework.Components.MetroStyleManager msm_manage;
     }
 }
