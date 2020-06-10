@@ -138,6 +138,15 @@
     <Compile Include="Benutzer.cs" />
     <Compile Include="BitmapFilter.cs" />
     <Compile Include="BuchStufe.cs" />
+    <Compile Include="EasterEgg\Circle.cs" />
+    <Compile Include="EasterEgg\form_snake.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EasterEgg\form_snake.Designer.cs">
+      <DependentUpon>form_snake.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EasterEgg\Input.cs" />
+    <Compile Include="EasterEgg\Settings.cs" />
     <Compile Include="Exemplar.cs" />
     <Compile Include="Buchsuche.cs" />
     <Compile Include="Extension\Lehrbuchausgabe\BuchFach.cs" />
@@ -388,6 +397,9 @@
       <DependentUpon>w_s_zustand.cs</DependentUpon>
     </Compile>
     <Compile Include="Zustand.cs" />
+    <EmbeddedResource Include="EasterEgg\form_snake.resx">
+      <DependentUpon>form_snake.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Extension\Lehrbuchausgabe\w_b_buch_fach.resx">
       <DependentUpon>w_b_buch_fach.cs</DependentUpon>
     </EmbeddedResource>

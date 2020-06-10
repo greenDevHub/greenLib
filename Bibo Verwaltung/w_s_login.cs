@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Configuration;
+using Bibo_Verwaltung.EasterEgg;
 
 namespace Bibo_Verwaltung
 {
@@ -96,6 +97,18 @@ namespace Bibo_Verwaltung
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
+        }
+
+        private void MetroLink1_Click(object sender, EventArgs e)
+        {
+            if (tb_User.Text == "Snake")
+            {
+                form_snake snake = new form_snake(this.StyleManager);
+                this.StyleManager.Clone(snake);
+                snake.ShowDialog();
+                snake.Dispose();
+            }
+
         }
 
         //private void timer1_Tick(object sender, EventArgs e)

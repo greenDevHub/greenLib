@@ -158,6 +158,7 @@
             this.metroLink1.Style = MetroFramework.MetroColorStyle.Black;
             this.metroLink1.TabIndex = 5;
             this.metroLink1.UseSelectable = true;
+            this.metroLink1.Click += new System.EventHandler(this.MetroLink1_Click);
             // 
             // metroToolTip1
             // 
