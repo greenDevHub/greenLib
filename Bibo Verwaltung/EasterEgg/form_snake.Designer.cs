@@ -159,6 +159,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "form_snake";
+            this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Red;
             this.Text = "Snake";

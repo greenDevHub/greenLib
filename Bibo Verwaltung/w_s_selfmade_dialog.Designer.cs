@@ -42,9 +42,9 @@
             // 
             this.mbt_Choice1.DialogResult = System.Windows.Forms.DialogResult.Yes;
             this.mbt_Choice1.DisplayFocus = true;
-            this.mbt_Choice1.Location = new System.Drawing.Point(23, 76);
+            this.mbt_Choice1.Location = new System.Drawing.Point(23, 90);
             this.mbt_Choice1.Name = "mbt_Choice1";
-            this.mbt_Choice1.Size = new System.Drawing.Size(90, 23);
+            this.mbt_Choice1.Size = new System.Drawing.Size(110, 23);
             this.mbt_Choice1.TabIndex = 5;
             this.mbt_Choice1.Text = "-";
             this.mbt_Choice1.UseSelectable = true;
@@ -53,9 +53,9 @@
             // 
             this.mbt_Choice2.DialogResult = System.Windows.Forms.DialogResult.No;
             this.mbt_Choice2.DisplayFocus = true;
-            this.mbt_Choice2.Location = new System.Drawing.Point(118, 76);
+            this.mbt_Choice2.Location = new System.Drawing.Point(145, 90);
             this.mbt_Choice2.Name = "mbt_Choice2";
-            this.mbt_Choice2.Size = new System.Drawing.Size(90, 23);
+            this.mbt_Choice2.Size = new System.Drawing.Size(110, 23);
             this.mbt_Choice2.TabIndex = 6;
             this.mbt_Choice2.Text = "-";
             this.mbt_Choice2.UseSelectable = true;
@@ -64,9 +64,9 @@
             // 
             this.mbt_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.mbt_Cancel.DisplayFocus = true;
-            this.mbt_Cancel.Location = new System.Drawing.Point(213, 76);
+            this.mbt_Cancel.Location = new System.Drawing.Point(267, 90);
             this.mbt_Cancel.Name = "mbt_Cancel";
-            this.mbt_Cancel.Size = new System.Drawing.Size(90, 23);
+            this.mbt_Cancel.Size = new System.Drawing.Size(110, 23);
             this.mbt_Cancel.TabIndex = 7;
             this.mbt_Cancel.Text = "Abbrechen";
             this.mbt_Cancel.UseSelectable = true;
@@ -78,7 +78,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mlb_Message.Location = new System.Drawing.Point(0, 12);
             this.mlb_Message.Name = "mlb_Message";
-            this.mlb_Message.Size = new System.Drawing.Size(334, 58);
+            this.mlb_Message.Size = new System.Drawing.Size(400, 75);
             this.mlb_Message.TabIndex = 8;
             this.mlb_Message.Text = "-";
             this.mlb_Message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -93,7 +93,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(326, 103);
+            this.ClientSize = new System.Drawing.Size(400, 120);
             this.ControlBox = false;
             this.Controls.Add(this.mlb_Message);
             this.Controls.Add(this.mbt_Cancel);

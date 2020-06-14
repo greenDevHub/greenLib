@@ -972,8 +972,8 @@ namespace Bibo_Verwaltung
                 checkbox_autor.Enabled = false;
                 button1.Enabled = true;
 
-            guestMode(guest);
             }
+            guestMode(guest);
             
         }
         #endregion
