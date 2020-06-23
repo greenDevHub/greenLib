@@ -237,6 +237,8 @@ namespace Bibo_Verwaltung
             this.StyleManager.Clone(Einstellungen);
             Einstellungen.ShowDialog(this);
             Einstellungen.Dispose();
+            connection = new SQL_Verbindung();
+            connected = connection.ConnectError();
         }
 
         private void bt_Zustand_Click(object sender, EventArgs e)
@@ -424,24 +426,42 @@ namespace Bibo_Verwaltung
 
         #region EasterEgg
         int counter = 0;
+        int secondCounter = 0;
         private void image_Click(object sender, EventArgs e)
         {
             counter++;
-            if (counter >= 10)
+
+            if (counter == 5)
             {
-                MetroMessageBox.Show(this, "Herzlichen GLückwunsch! Sie haben Langeweile!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                counter = 0;
+                secondCounter++;
+                if (secondCounter == 3)
+                {
+                    MetroMessageBox.Show(this, "Geben Sie im Login-Fenster als Benutzername 'Snake' ein und klicken Sie auf das Schloss-Symbol!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    secondCounter = 0;
+                    counter = 0;
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Herzlichen Glückwunsch! Sie haben Langeweile!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    counter = 0;
+                }
+
             }
+
         }
         #endregion
 
         private void bt_zu_Click(object sender, EventArgs e)
         {
-            Blur(10);
-            pl_unschaerfe.BringToFront();
-            pl_unschaerfe.BackColor = Color.Transparent;
-            pl_unschaerfe.Visible = true;
-            mT_klassenstufebuch.Select();
+            //Blur(10);
+            //pl_unschaerfe.BringToFront();
+            //pl_unschaerfe.BackColor = Color.Transparent;
+            //pl_unschaerfe.Visible = true;
+            //mT_klassenstufebuch.Select();
+            w_s_zuordnungen zuordnung = new w_s_zuordnungen(this.StyleManager, currentUser);
+            this.StyleManager.Clone(zuordnung);
+            zuordnung.ShowDialog(this);
+            zuordnung.Dispose();
         }
 
         private void metroTile_Click(object sender, EventArgs e)
@@ -452,11 +472,11 @@ namespace Bibo_Verwaltung
 
         private void w_s_main_Activated(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    connected = connection.ConnectError();
-            //}
-            //catch { }
+            try
+            {
+                connected = connection.ConnectError();
+            }
+            catch { }
         }
 
         private void bt_AutoAusgabe_Click(object sender, EventArgs e)

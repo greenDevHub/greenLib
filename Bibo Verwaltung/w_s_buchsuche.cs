@@ -103,7 +103,7 @@ namespace Bibo_Verwaltung
                 bt_reset.Enabled = true;
                 bt_Clear.Enabled = true;
             }
-            this.Text = Text + " - Angemeldet als: " + userName;
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
         }
         #endregion
 

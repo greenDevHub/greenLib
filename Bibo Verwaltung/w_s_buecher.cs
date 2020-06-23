@@ -31,7 +31,7 @@ namespace Bibo_Verwaltung
             SetStyle();
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName;
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             buchIsbn = isbn;
 
             if (user.Rechteid.Equals("0"))

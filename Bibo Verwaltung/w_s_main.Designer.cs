@@ -50,10 +50,10 @@
             this.bt_AutoAusgabe = new MetroFramework.Controls.MetroTile();
             this.bt_zu = new MetroFramework.Controls.MetroTile();
             this.mT_Klassen = new MetroFramework.Controls.MetroTile();
-            this.bt_logout = new MetroFramework.Controls.MetroLink();
-            this.image = new MetroFramework.Controls.MetroLink();
             this.mainStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.bt_darkmode = new MetroFramework.Controls.MetroLink();
+            this.bt_logout = new MetroFramework.Controls.MetroLink();
+            this.image = new MetroFramework.Controls.MetroLink();
             this.pl_unschaerfe = new Bibo_Verwaltung.TransparentPanel();
             this.transparentPanel1 = new Bibo_Verwaltung.TransparentPanel();
             this.mT_klassenstufebuch = new MetroFramework.Controls.MetroTile();
@@ -158,6 +158,7 @@
             this.mT_Buecher.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Buecher.Name = "mT_Buecher";
             this.mT_Buecher.Size = new System.Drawing.Size(157, 99);
+            this.mT_Buecher.Style = MetroFramework.MetroColorStyle.Blue;
             this.mT_Buecher.TabIndex = 5;
             this.mT_Buecher.Text = "Bücherverwaltung";
             this.mT_Buecher.UseSelectable = true;
@@ -330,6 +331,22 @@
             this.mT_Klassen.UseSelectable = true;
             this.mT_Klassen.Click += new System.EventHandler(this.MT_Klassen_Click);
             // 
+            // mainStyleManager
+            // 
+            this.mainStyleManager.Owner = this;
+            // 
+            // bt_darkmode
+            // 
+            this.bt_darkmode.DisplayFocus = true;
+            this.bt_darkmode.Image = global::Bibo_Verwaltung.Properties.Resources.Brightness;
+            this.bt_darkmode.ImageSize = 24;
+            this.bt_darkmode.Location = new System.Drawing.Point(673, 25);
+            this.bt_darkmode.Name = "bt_darkmode";
+            this.bt_darkmode.Size = new System.Drawing.Size(37, 32);
+            this.bt_darkmode.TabIndex = 23;
+            this.bt_darkmode.UseSelectable = true;
+            this.bt_darkmode.Click += new System.EventHandler(this.MetroLink1_Click);
+            // 
             // bt_logout
             // 
             this.bt_logout.DisplayFocus = true;
@@ -359,28 +376,12 @@
             this.image.UseSelectable = true;
             this.image.Click += new System.EventHandler(this.image_Click);
             // 
-            // mainStyleManager
-            // 
-            this.mainStyleManager.Owner = this;
-            // 
-            // bt_darkmode
-            // 
-            this.bt_darkmode.DisplayFocus = true;
-            this.bt_darkmode.Image = global::Bibo_Verwaltung.Properties.Resources.Brightness;
-            this.bt_darkmode.ImageSize = 24;
-            this.bt_darkmode.Location = new System.Drawing.Point(673, 25);
-            this.bt_darkmode.Name = "bt_darkmode";
-            this.bt_darkmode.Size = new System.Drawing.Size(37, 32);
-            this.bt_darkmode.TabIndex = 23;
-            this.bt_darkmode.UseSelectable = true;
-            this.bt_darkmode.Click += new System.EventHandler(this.MetroLink1_Click);
-            // 
             // pl_unschaerfe
             // 
             this.pl_unschaerfe.BackColor = System.Drawing.Color.Black;
             this.pl_unschaerfe.Controls.Add(this.transparentPanel1);
             this.pl_unschaerfe.ForeColor = System.Drawing.Color.Transparent;
-            this.pl_unschaerfe.Location = new System.Drawing.Point(0, 21);
+            this.pl_unschaerfe.Location = new System.Drawing.Point(757, 9);
             this.pl_unschaerfe.Name = "pl_unschaerfe";
             this.pl_unschaerfe.Opacity = 0;
             this.pl_unschaerfe.Size = new System.Drawing.Size(847, 325);

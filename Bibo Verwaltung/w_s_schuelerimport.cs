@@ -62,7 +62,8 @@ namespace Bibo_Verwaltung
             ImportMode();
             CheckSelected();
             SetSlider();
-            this.Text = Text + " - Angemeldet als: " + userName;
+            Benutzer user = new Benutzer(userName);
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             timer1.Start();
         }
         /// <summary>

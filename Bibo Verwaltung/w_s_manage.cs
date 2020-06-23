@@ -72,41 +72,41 @@ namespace Bibo_Verwaltung
             {
                 fach = new Fach();
                 fach.FillGrid(ref gv_manage);
-                Text = "Fächer" + " - Angemeldet als: " + userName;
+                Text = "Fächer" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             }
             else if (currentModus == "Sprache")
             {
-                Text = "Sprachen" + " - Angemeldet als: " + userName;
+                Text = "Sprachen" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
                 sprache = new Sprache();
                 sprache.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Autor")
             {
-                Text = "Autoren" + " - Angemeldet als: " + userName;
+                Text = "Autoren" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
                 autor = new Autor();
                 autor.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Genre")
             {
-                Text = "Genres" + " - Angemeldet als: " + userName;
+                Text = "Genres" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
                 genre = new Genre();
                 genre.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Zustand")
             {
-                Text = "Buchzustände" + " - Angemeldet als: " + userName;
+                Text = "Buchzustände" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
                 zustand = new Zustand();
                 zustand.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Verlag")
             {
-                Text = "Verlage" + " - Angemeldet als: " + userName;
+                Text = "Verlage" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
                 verlag = new Verlag();
                 verlag.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Klasse")
             {
-                Text = "Klasse" + " - Angemeldet als: " + userName;
+                Text = "Klasse" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
                 klasse = new Klasse();
                 klasse.FillGrid(ref gv_manage);
             }

@@ -390,6 +390,12 @@
     <Compile Include="w_s_buecher.Designer.cs">
       <DependentUpon>w_s_buecher.cs</DependentUpon>
     </Compile>
+    <Compile Include="w_s_zuordnungen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="w_s_zuordnungen.Designer.cs">
+      <DependentUpon>w_s_zuordnungen.cs</DependentUpon>
+    </Compile>
     <Compile Include="w_s_zustand.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -506,6 +512,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_buecher.resx">
       <DependentUpon>w_s_buecher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="w_s_zuordnungen.resx">
+      <DependentUpon>w_s_zuordnungen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_zustand.resx">
       <DependentUpon>w_s_zustand.cs</DependentUpon>

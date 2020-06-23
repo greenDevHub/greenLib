@@ -43,7 +43,8 @@ namespace Bibo_Verwaltung
             }
             this.currentUser = userName;
             this.currentstufe = stufe;
-            this.Text = Text + " - Angemeldet als: " + userName;
+            Benutzer user = new Benutzer(userName);
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             buch.FillComboSuche(ref a_cb_Buecher, CurrentStufe, 0);
             a_cb_Buecher.SelectedIndex = 0;
         }

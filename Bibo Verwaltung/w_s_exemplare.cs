@@ -45,7 +45,7 @@ namespace Bibo_Verwaltung
             }
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName;
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             if (user.Rechteid.Equals("0"))
             {
                 guest = true;

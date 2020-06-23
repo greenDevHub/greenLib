@@ -84,31 +84,38 @@ namespace Bibo_Verwaltung
             return fInfo.IsReadOnly;
         }
 
-        public void SaveSettings(bool message)
+        public int SaveSettings(bool message)
         {
+            int i = 0;
             if (!IsFileReadOnly(path))
             {
                 File.WriteAllText(path, Server + "\r\n" + Database + "\r\n" + Security + "\r\n" + Name + "\r\n" + Pw);
                 if (message)
                 {
-                    MessageBox.Show("Datenbankserver-Verbindung erfolgreich gespeichert!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    i = 0;
+                    //MessageBox.Show("Datenbankserver-Verbindung erfolgreich gespeichert!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
             {
                 if (message)
                 {
-                    MessageBox.Show("Speichern fehlgeschlagen. Die Konfigurationsdatei ist schreibgeschützt!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    i = 1;
+                    //MessageBox.Show("Speichern fehlgeschlagen. Die Konfigurationsdatei ist schreibgeschützt!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show("Die Änderungen konnten nicht übernommen werden. Die Konfigurationsdatei ist schreibgeschützt!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    i = 2;
+                    //MessageBox.Show("Die Änderungen konnten nicht übernommen werden. Die Konfigurationsdatei ist schreibgeschützt!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            
+            return i;
         }
 
-        public void LoadSettings()
+        public int LoadSettings()
         {
+            int i = 0;
             try
             {
                 if (!File_Exists(path))
@@ -127,15 +134,18 @@ namespace Bibo_Verwaltung
                 {
                     if (zeilen.Skip(2).First() == "Windows Authentifizierung")
                     {
+                        i = 0;
                         Security = "Windows Authentifizierung";
                     }
                     else if (zeilen.Skip(2).First() == "SQL Authentifizierung")
                     {
+                        i = 1;
                         Security = "SQL Authentifizierung";
                     }
                     else if (zeilen.Skip(2).First() != "")
                     {
-                        MessageBox.Show("Unbekannte Authentifizierungsart. Windows Authentifizierung wurde ausgewählt", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        i = 2;
+                        //MessageBox.Show("Unbekannte Authentifizierungsart. Windows Authentifizierung wurde ausgewählt", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Security = "Windows Authentifizierung";
                         SaveSettings(true);
                     }
@@ -145,6 +155,7 @@ namespace Bibo_Verwaltung
             {
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Einstellungen");
             }
+            return i;
             #endregion
         }
     }

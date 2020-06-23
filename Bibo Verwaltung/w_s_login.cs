@@ -52,6 +52,7 @@ namespace Bibo_Verwaltung
             if (con.ConnectError())
             {
                 //error = true;
+                MetroMessageBox.Show(this, "Die Verbindung zum SQL-Server konnte nicht hergestellt werden. Bitte überprüfen Sie die Verbindungseinstellungen.", "Keine Verbindung.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 w_s_einstellungen Einstellungen = new w_s_einstellungen(this.StyleManager);
                 this.StyleManager.Clone(Einstellungen);
                 Einstellungen.ShowDialog(this);
@@ -101,12 +102,13 @@ namespace Bibo_Verwaltung
 
         private void MetroLink1_Click(object sender, EventArgs e)
         {
-            if (tb_User.Text == "Snake")
+            if (tb_User.Text.Equals("Snake",StringComparison.InvariantCultureIgnoreCase))
             {
                 form_snake snake = new form_snake(this.StyleManager);
                 this.StyleManager.Clone(snake);
                 snake.ShowDialog();
                 snake.Dispose();
+                tb_User.Text = "";
             }
 
         }

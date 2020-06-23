@@ -44,6 +44,7 @@ namespace Bibo_Verwaltung
                 bt_Bearbeiten.Enabled = true;
                 mbt_ImEx.Enabled = true;
             }
+            this.Text = "Zuordnung der Klassen zu einer Klassenstufe - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             IniKlassenstufen();
         }
         #endregion

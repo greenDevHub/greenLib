@@ -43,7 +43,7 @@ namespace Bibo_Verwaltung
                 bt_Bearbeiten.Enabled = true;
                 mbt_ImEx.Enabled = true;
             }
-            this.Text = Text + " - Angemeldet als: " + userName;
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             IniKlassenstufen();
             //LoadFaecher();
         }
