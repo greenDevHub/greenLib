@@ -46,8 +46,8 @@
             this.gv_Benutzer = new MetroFramework.Controls.MetroGrid();
             this.bt_OK = new MetroFramework.Controls.MetroButton();
             this.mP_Eingaben = new MetroFramework.Controls.MetroPanel();
-            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.cb_Rechte = new Bibo_Verwaltung.AdvancedComboBox();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Benutzer)).BeginInit();
             this.mP_Eingaben.SuspendLayout();
             this.SuspendLayout();
@@ -158,6 +158,7 @@
             this.tb_pw.WaterMark = "Passwort";
             this.tb_pw.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_pw.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_pw.Enter += new System.EventHandler(this.Tb_pw_Enter);
             // 
             // lb_user
             // 
@@ -274,7 +275,7 @@
             this.gv_Benutzer.EnableHeadersVisualStyles = false;
             this.gv_Benutzer.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_Benutzer.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_Benutzer.Location = new System.Drawing.Point(317, 63);
+            this.gv_Benutzer.Location = new System.Drawing.Point(327, 63);
             this.gv_Benutzer.MultiSelect = false;
             this.gv_Benutzer.Name = "gv_Benutzer";
             this.gv_Benutzer.ReadOnly = true;
@@ -290,7 +291,7 @@
             this.gv_Benutzer.RowHeadersVisible = false;
             this.gv_Benutzer.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_Benutzer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_Benutzer.Size = new System.Drawing.Size(272, 142);
+            this.gv_Benutzer.Size = new System.Drawing.Size(262, 142);
             this.gv_Benutzer.Style = MetroFramework.MetroColorStyle.Teal;
             this.gv_Benutzer.TabIndex = 17;
             this.gv_Benutzer.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Benutzer_CellDoubleClick);
@@ -327,18 +328,12 @@
             this.mP_Eingaben.HorizontalScrollbarSize = 10;
             this.mP_Eingaben.Location = new System.Drawing.Point(23, 63);
             this.mP_Eingaben.Name = "mP_Eingaben";
-            this.mP_Eingaben.Size = new System.Drawing.Size(282, 182);
+            this.mP_Eingaben.Size = new System.Drawing.Size(298, 182);
             this.mP_Eingaben.Style = MetroFramework.MetroColorStyle.Teal;
             this.mP_Eingaben.TabIndex = 45;
             this.mP_Eingaben.VerticalScrollbarBarColor = true;
             this.mP_Eingaben.VerticalScrollbarHighlightOnWheel = false;
             this.mP_Eingaben.VerticalScrollbarSize = 10;
-            // 
-            // metroToolTip1
-            // 
-            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroToolTip1.StyleManager = null;
-            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // cb_Rechte
             // 
@@ -359,6 +354,12 @@
             this.cb_Rechte.Size = new System.Drawing.Size(175, 24);
             this.cb_Rechte.TabIndex = 5;
             this.metroToolTip1.SetToolTip(this.cb_Rechte, "Hier können Sie die Rechte des Benutzers auswählen/ansehen.");
+            // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // w_s_user
             // 

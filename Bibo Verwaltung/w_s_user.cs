@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -114,8 +115,17 @@ namespace Bibo_Verwaltung
                 }
                 try
                 {
-                    aUser.AddUser(name, pw, rechte);
-                    Clear();
+                    if (tb_pw.Text == "Passwort123456" || tb_pw.Text == "" || tb_user.Text == "")
+                    {
+                        MetroMessageBox.Show(this, "Bitte geben Sie alle nötigen Informationen an!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                       
+                        aUser.AddUser(name, SetPassword(pw), rechte);
+                        Clear();
+                    }
+
                 }
                 catch
                 {
@@ -126,13 +136,26 @@ namespace Bibo_Verwaltung
             {
                 try
                 {
-                    aUser.DeleteUser(name);
-                    Clear();
+                    Benutzer userLoggedIn = new Benutzer(currentUser);
+                    Benutzer userDelete = new Benutzer(tb_user.Text);
+                    if (userLoggedIn.BenutzerName != userDelete.BenutzerName)
+                    {
+                        aUser.DeleteUser(name);
+                        Clear();
+                    }
+                    else
+                    {
+                        MetroMessageBox.Show(this, "Sie versuchen Ihren eigenen Nutzer zu löschen. Dies ist allerdings nicht möglich.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
                 catch
                 {
+
                     MetroMessageBox.Show(this, "Beim Löschen des gewählten Nutzers ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 }
+
+
             }
             else if (bt_confirm.Text.Equals("Speichern"))
             {
@@ -144,14 +167,15 @@ namespace Bibo_Verwaltung
                 }
                 try
                 {
-                    if(tb_pw.Text == "Passwort123456" || tb_pw.Text == "")
+                    if(tb_pw.Text == "Passwort123456" || tb_pw.Text == "" || tb_user.Text == "")
                     {
-                        MetroMessageBox.Show(this, "Bitte geben Sie ein gültiges Passwort ein!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MetroMessageBox.Show(this, "Bitte geben Sie alle nötigen Informationen an!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         tb_pw.Clear();
                     }
                     else
                     {
-                        aUser.UpdateUser(name, pw, rechte);
+                        
+                        aUser.UpdateUser(name, SetPassword(pw), rechte);
                         Clear();
                     }
                     
@@ -163,6 +187,21 @@ namespace Bibo_Verwaltung
             }
         }
 
+        private string SetPassword(string password)
+        {
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100000);
+            byte[] hash = pbkdf2.GetBytes(20);
+
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+
+            return Convert.ToBase64String(hashBytes);
+
+        }
         private void rb_Neukunde_CheckedChanged(object sender, EventArgs e)
         {
             SetModus();
@@ -191,5 +230,17 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
+
+        private void Tb_pw_Enter(object sender, EventArgs e)
+        {
+            if (rb_KundeBearbeiten.Checked)
+            {
+                tb_pw.Clear();
+            }
+            if(tb_pw.Text == "Passwort123456")
+            {
+                tb_pw.Text = "";
+            }
+        }
     }
 }
