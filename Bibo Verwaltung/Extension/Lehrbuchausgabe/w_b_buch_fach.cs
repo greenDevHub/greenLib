@@ -376,5 +376,37 @@ namespace Bibo_Verwaltung
                 e.SuppressKeyPress = true;
             }
         }
+
+        private void Tb_isbn_TextChanged(object sender, EventArgs e)
+        {
+            Filter();
+        }
+
+        private void Tb_titel_TextChanged(object sender, EventArgs e)
+        {
+            Filter();
+        }
+
+        private void Filter()
+        {
+            try
+            {
+                (gv_Buecher.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%'", tb_titel.Text, tb_isbn.Text);
+                SetColor();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void Gv_Buecher_EnabledChanged(object sender, EventArgs e)
+        {
+            tb_titel.Enabled = gv_Buecher.Enabled;
+            tb_isbn.Enabled = gv_Buecher.Enabled;
+            tb_titel.Text = "";
+            tb_isbn.Text = "";
+            (gv_Buecher.DataSource as DataTable).DefaultView.RowFilter = null;
+        }
     }
 }

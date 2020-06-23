@@ -400,5 +400,36 @@ namespace Bibo_Verwaltung
             }
             
         }
+
+        private void Gv_Faecher_EnabledChanged(object sender, EventArgs e)
+        {
+            tb_kurz.Enabled = gv_Faecher.Enabled;
+            tb_lang.Enabled = gv_Faecher.Enabled;
+            tb_lang.Clear();
+            tb_kurz.Clear();
+            (gv_Faecher.DataSource as DataTable).DefaultView.RowFilter = null;
+        }
+
+        private void Tb_kurz_TextChanged(object sender, EventArgs e)
+        {
+            Filter();
+        }
+
+        private void Tb_lang_TextChanged(object sender, EventArgs e)
+        {
+            Filter();
+        }
+        private void Filter()
+        {
+            try
+            {
+                (gv_Faecher.DataSource as DataTable).DefaultView.RowFilter = string.Format("Kürzel LIKE '%{0}%' and Langbezeichnung LIKE '%{1}%'", tb_kurz.Text, tb_lang.Text);
+                SetColor();
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

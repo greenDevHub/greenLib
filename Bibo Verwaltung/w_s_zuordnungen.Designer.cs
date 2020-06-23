@@ -55,10 +55,10 @@
             // metroTile1
             // 
             this.metroTile1.ActiveControl = null;
-            this.metroTile1.Location = new System.Drawing.Point(168, 119);
+            this.metroTile1.Location = new System.Drawing.Point(172, 119);
             this.metroTile1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 8);
             this.metroTile1.Name = "metroTile1";
-            this.metroTile1.Size = new System.Drawing.Size(158, 46);
+            this.metroTile1.Size = new System.Drawing.Size(155, 46);
             this.metroTile1.Style = MetroFramework.MetroColorStyle.Brown;
             this.metroTile1.TabIndex = 18;
             this.metroTile1.Text = "Zurück";
@@ -81,10 +81,10 @@
             // mT_fachbuch
             // 
             this.mT_fachbuch.ActiveControl = null;
-            this.mT_fachbuch.Location = new System.Drawing.Point(169, 13);
+            this.mT_fachbuch.Location = new System.Drawing.Point(172, 67);
             this.mT_fachbuch.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
             this.mT_fachbuch.Name = "mT_fachbuch";
-            this.mT_fachbuch.Size = new System.Drawing.Size(158, 46);
+            this.mT_fachbuch.Size = new System.Drawing.Size(155, 46);
             this.mT_fachbuch.Style = MetroFramework.MetroColorStyle.Orange;
             this.mT_fachbuch.TabIndex = 15;
             this.mT_fachbuch.Text = "Fächer - Bücher";
@@ -95,10 +95,10 @@
             // 
             this.mT_Klassenstufen.ActiveControl = null;
             this.mT_Klassenstufen.BackColor = System.Drawing.Color.OrangeRed;
-            this.mT_Klassenstufen.Location = new System.Drawing.Point(169, 66);
+            this.mT_Klassenstufen.Location = new System.Drawing.Point(172, 13);
             this.mT_Klassenstufen.Margin = new System.Windows.Forms.Padding(4);
             this.mT_Klassenstufen.Name = "mT_Klassenstufen";
-            this.mT_Klassenstufen.Size = new System.Drawing.Size(157, 46);
+            this.mT_Klassenstufen.Size = new System.Drawing.Size(155, 46);
             this.mT_Klassenstufen.Style = MetroFramework.MetroColorStyle.Orange;
             this.mT_Klassenstufen.TabIndex = 17;
             this.mT_Klassenstufen.Text = "Klassenstufe - Klassen";

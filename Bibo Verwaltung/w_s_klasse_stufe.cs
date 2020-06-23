@@ -404,5 +404,29 @@ namespace Bibo_Verwaltung
                 e.SuppressKeyPress = true;
             }
         }
+
+        private void Tb_kurz_TextChanged(object sender, EventArgs e)
+        {
+            Filter();
+        }
+
+        private void Gv_Klassen_EnabledChanged(object sender, EventArgs e)
+        {
+            tb_klasse.Enabled = gv_Klassen.Enabled;
+            tb_klasse.Clear();
+
+        }
+        private void Filter()
+        {
+            try
+            {
+                (gv_Klassen.DataSource as DataTable).DefaultView.RowFilter = string.Format("Klasse LIKE '%{0}%'", tb_klasse.Text);
+                SetColor();
+            }
+            catch
+            {
+
+            }
+        }
     }
 }
