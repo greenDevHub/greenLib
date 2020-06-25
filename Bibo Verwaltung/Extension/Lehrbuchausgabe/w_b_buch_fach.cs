@@ -59,7 +59,7 @@ namespace Bibo_Verwaltung
                 buecherListe.Rows.Clear();
                 if (gv_Faecher.CurrentRow != null)
                 {
-                    bf.Show_FachBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString());
+                    bf.Show_FachBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString(), lk);
                 }
             }
             catch
@@ -177,7 +177,7 @@ namespace Bibo_Verwaltung
                     {
                         try
                         {
-                            bf.Save_Zuordnung(buecherListe, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString());
+                            bf.Save_Zuordnung(buecherListe, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString(),lk);
                             aenderungungen = false;
                         }
                         catch
@@ -200,7 +200,7 @@ namespace Bibo_Verwaltung
                     bt_back.Enabled = true;
                     gv_Buecher.Enabled = true;
                     gv_Faecher.Enabled = false;
-                    bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString());
+                    bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString(),lk);
                     FillBuecherList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
@@ -214,6 +214,8 @@ namespace Bibo_Verwaltung
                 bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
                 LoadBuecher();
                 gv_Faecher.Select();
+                tb_fach.Clear();
+
             }
         }
 
@@ -255,6 +257,7 @@ namespace Bibo_Verwaltung
             gv_Faecher.Enabled = true;
             bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
             LoadBuecher();
+            tb_fach.Clear();
         }
         
         private void mbt_ImEx_Click(object sender, EventArgs e)
@@ -294,7 +297,7 @@ namespace Bibo_Verwaltung
                     bt_back.Enabled = true;
                     gv_Buecher.Enabled = true;
                     gv_Faecher.Enabled = false;
-                    bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[e.RowIndex].Cells["ID"].Value.ToString());
+                    bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[e.RowIndex].Cells["ID"].Value.ToString(),lk);
                     FillBuecherList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
@@ -338,7 +341,7 @@ namespace Bibo_Verwaltung
                         bt_back.Enabled = true;
                         gv_Buecher.Enabled = true;
                         gv_Faecher.Enabled = false;
-                        bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.SelectedRows[0].Index].Cells["ID"].Value.ToString());
+                        bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.SelectedRows[0].Index].Cells["ID"].Value.ToString(),lk);
                         FillBuecherList();
                         bt_Bearbeiten.Text = "Übernehmen";
                     }
@@ -399,6 +402,17 @@ namespace Bibo_Verwaltung
 
             }
         }
+        private void FilterFach()
+        {
+            try
+            {
+                (gv_Faecher.DataSource as DataTable).DefaultView.RowFilter = string.Format("Langbezeichnung LIKE '%{0}%'", tb_fach.Text);
+            }
+            catch
+            {
+
+            }
+        }
 
         private void Gv_Buecher_EnabledChanged(object sender, EventArgs e)
         {
@@ -407,6 +421,40 @@ namespace Bibo_Verwaltung
             tb_titel.Text = "";
             tb_isbn.Text = "";
             (gv_Buecher.DataSource as DataTable).DefaultView.RowFilter = null;
+        }
+
+        private void Tb_fach_TextChanged(object sender, EventArgs e)
+        {
+            FilterFach();
+        }
+
+        private void Gv_Faecher_EnabledChanged(object sender, EventArgs e)
+        {
+            tb_fach.Enabled = gv_Faecher.Enabled;
+
+
+            bt_lk.Enabled = gv_Faecher.Enabled;
+
+        }
+        bool lk = false;
+        private void Bt_lk_Click(object sender, EventArgs e)
+        {
+            if(bt_lk.Text.Equals("Zu Leistungskurs wechseln",StringComparison.InvariantCultureIgnoreCase))
+            {
+                //ALLE FÄCHER LEISTUNGSKURS
+                bt_lk.Text = "Zu Grundkurs wechseln";
+                lb_titel.Text = "Fächer (LK):";
+                lk = true;
+            }
+            else
+            {
+                //ALLE FÄCHER GRUNDKURS
+                //STANDARD FALL
+                bt_lk.Text = "Zu Leistungskurs wechseln";
+                lb_titel.Text = "Fächer (GK):";
+                lk = false;
+            }
+            LoadBuecher();
         }
     }
 }

@@ -40,13 +40,16 @@
             this.gv_Buecher = new MetroFramework.Controls.MetroGrid();
             this.btAbbrechen = new MetroFramework.Controls.MetroButton();
             this.bt_Bearbeiten = new MetroFramework.Controls.MetroButton();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.lb_titel = new MetroFramework.Controls.MetroLabel();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.bt_back = new MetroFramework.Controls.MetroButton();
             this.mbt_ImEx = new MetroFramework.Controls.MetroButton();
             this.msm_buch_fach = new MetroFramework.Components.MetroStyleManager(this.components);
             this.tb_isbn = new MetroFramework.Controls.MetroTextBox();
             this.tb_titel = new MetroFramework.Controls.MetroTextBox();
+            this.bt_lk = new MetroFramework.Controls.MetroButton();
+            this.tb_fach = new MetroFramework.Controls.MetroTextBox();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Faecher)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Buecher)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.msm_buch_fach)).BeginInit();
@@ -86,7 +89,7 @@
             this.gv_Faecher.EnableHeadersVisualStyles = false;
             this.gv_Faecher.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_Faecher.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_Faecher.Location = new System.Drawing.Point(26, 82);
+            this.gv_Faecher.Location = new System.Drawing.Point(26, 114);
             this.gv_Faecher.MultiSelect = false;
             this.gv_Faecher.Name = "gv_Faecher";
             this.gv_Faecher.ReadOnly = true;
@@ -108,11 +111,12 @@
             this.gv_Faecher.ShowCellToolTips = false;
             this.gv_Faecher.ShowEditingIcon = false;
             this.gv_Faecher.ShowRowErrors = false;
-            this.gv_Faecher.Size = new System.Drawing.Size(270, 360);
+            this.gv_Faecher.Size = new System.Drawing.Size(270, 328);
             this.gv_Faecher.Style = MetroFramework.MetroColorStyle.Orange;
             this.gv_Faecher.TabIndex = 0;
             this.gv_Faecher.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Faecher_CellDoubleClick);
             this.gv_Faecher.SelectionChanged += new System.EventHandler(this.gv_Faecher_SelectionChanged);
+            this.gv_Faecher.EnabledChanged += new System.EventHandler(this.Gv_Faecher_EnabledChanged);
             this.gv_Faecher.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Faecher_KeyDown);
             // 
             // gv_Buecher
@@ -215,16 +219,16 @@
             this.bt_Bearbeiten.UseSelectable = true;
             this.bt_Bearbeiten.Click += new System.EventHandler(this.bt_Bearbeiten_Click);
             // 
-            // metroLabel1
+            // lb_titel
             // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel1.Location = new System.Drawing.Point(23, 60);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(52, 19);
-            this.metroLabel1.Style = MetroFramework.MetroColorStyle.Orange;
-            this.metroLabel1.TabIndex = 68;
-            this.metroLabel1.Text = "Fächer:";
+            this.lb_titel.AutoSize = true;
+            this.lb_titel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lb_titel.Location = new System.Drawing.Point(23, 60);
+            this.lb_titel.Name = "lb_titel";
+            this.lb_titel.Size = new System.Drawing.Size(82, 19);
+            this.lb_titel.Style = MetroFramework.MetroColorStyle.Orange;
+            this.lb_titel.TabIndex = 68;
+            this.lb_titel.Text = "Fächer (GK):";
             // 
             // metroLabel2
             // 
@@ -342,6 +346,61 @@
             this.tb_titel.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_titel.TextChanged += new System.EventHandler(this.Tb_titel_TextChanged);
             // 
+            // bt_lk
+            // 
+            this.bt_lk.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_lk.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.bt_lk.Location = new System.Drawing.Point(124, 85);
+            this.bt_lk.Name = "bt_lk";
+            this.bt_lk.Size = new System.Drawing.Size(172, 23);
+            this.bt_lk.TabIndex = 70;
+            this.bt_lk.Text = "Zu Leistungskurs wechseln";
+            this.metroToolTip1.SetToolTip(this.bt_lk, "    Wechseln Sie zwischen Leistungskurs und Grundkurs (Nur für Bücher der Sekunda" +
+        "rstufe II)    ");
+            this.bt_lk.UseSelectable = true;
+            this.bt_lk.Click += new System.EventHandler(this.Bt_lk_Click);
+            // 
+            // tb_fach
+            // 
+            this.tb_fach.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.tb_fach.CustomButton.Image = null;
+            this.tb_fach.CustomButton.Location = new System.Drawing.Point(150, 1);
+            this.tb_fach.CustomButton.Name = "";
+            this.tb_fach.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.tb_fach.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_fach.CustomButton.TabIndex = 1;
+            this.tb_fach.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_fach.CustomButton.UseSelectable = true;
+            this.tb_fach.CustomButton.Visible = false;
+            this.tb_fach.Lines = new string[0];
+            this.tb_fach.Location = new System.Drawing.Point(124, 56);
+            this.tb_fach.MaxLength = 32767;
+            this.tb_fach.Name = "tb_fach";
+            this.tb_fach.PasswordChar = '\0';
+            this.tb_fach.PromptText = "Suche nach Fach (Lang)";
+            this.tb_fach.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_fach.SelectedText = "";
+            this.tb_fach.SelectionLength = 0;
+            this.tb_fach.SelectionStart = 0;
+            this.tb_fach.ShortcutsEnabled = true;
+            this.tb_fach.ShowClearButton = true;
+            this.tb_fach.Size = new System.Drawing.Size(172, 23);
+            this.tb_fach.TabIndex = 2;
+            this.tb_fach.UseSelectable = true;
+            this.tb_fach.WaterMark = "Suche nach Fach (Lang)";
+            this.tb_fach.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_fach.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_fach.TextChanged += new System.EventHandler(this.Tb_fach_TextChanged);
+            // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
             // w_s_buch_fach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -349,14 +408,16 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.btAbbrechen;
             this.ClientSize = new System.Drawing.Size(920, 500);
+            this.Controls.Add(this.bt_lk);
             this.Controls.Add(this.tb_titel);
+            this.Controls.Add(this.tb_fach);
             this.Controls.Add(this.tb_isbn);
             this.Controls.Add(this.mbt_ImEx);
             this.Controls.Add(this.bt_back);
             this.Controls.Add(this.gv_Buecher);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.gv_Faecher);
-            this.Controls.Add(this.metroLabel1);
+            this.Controls.Add(this.lb_titel);
             this.Controls.Add(this.btAbbrechen);
             this.Controls.Add(this.bt_Bearbeiten);
             this.HelpButton = true;
@@ -383,12 +444,15 @@
         private MetroFramework.Controls.MetroGrid gv_Buecher;
         private MetroFramework.Controls.MetroButton btAbbrechen;
         private MetroFramework.Controls.MetroButton bt_Bearbeiten;
-        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroLabel lb_titel;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroButton bt_back;
         private MetroFramework.Controls.MetroButton mbt_ImEx;
         private MetroFramework.Components.MetroStyleManager msm_buch_fach;
         private MetroFramework.Controls.MetroTextBox tb_titel;
         private MetroFramework.Controls.MetroTextBox tb_isbn;
+        private MetroFramework.Controls.MetroButton bt_lk;
+        private MetroFramework.Controls.MetroTextBox tb_fach;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
     }
 }

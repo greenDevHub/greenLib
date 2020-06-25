@@ -1,124 +1,124 @@
-/****** Object:  Database [Bibo_Verwaltung]    Script Date: 08.02.2019 Robert Jehring ******/
+/****** Object:  Database [greenLib]    Script Date: 08.02.2019 Robert Jehring ******/
 USE master
 
-WHILE EXISTS(select NULL from sys.databases where name='Bibo_Verwaltung')
+WHILE EXISTS(select NULL from sys.databases where name='greenLib')
 BEGIN
     DECLARE @SQL varchar(max)
     SELECT @SQL = COALESCE(@SQL,'') + 'Kill ' + Convert(varchar, SPId) + ';'
     FROM MASTER..SysProcesses
-    WHERE DBId = DB_ID(N'Bibo_Verwaltung') AND SPId <> @@SPId
+    WHERE DBId = DB_ID(N'greenLib') AND SPId <> @@SPId
     EXEC(@SQL)
-	IF  EXISTS (SELECT name FROM sys.databases WHERE name = N'Bibo_Verwaltung')
-	DROP DATABASE [Bibo_Verwaltung]
+	IF  EXISTS (SELECT name FROM sys.databases WHERE name = N'greenLib')
+	DROP DATABASE [greenLib]
 END
 GO
 
-IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'Bibo_Verwaltung')
+IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'greenLib')
 BEGIN
-CREATE DATABASE [Bibo_Verwaltung]
+CREATE DATABASE [greenLib]
 END
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET COMPATIBILITY_LEVEL = 120
+ALTER DATABASE [greenLib] SET COMPATIBILITY_LEVEL = 120
 GO
 
 IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
 begin
-EXEC [Bibo_Verwaltung].[dbo].[sp_fulltext_database] @action = 'enable'
+EXEC [greenLib].[dbo].[sp_fulltext_database] @action = 'enable'
 end
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET ANSI_NULL_DEFAULT OFF 
+ALTER DATABASE [greenLib] SET ANSI_NULL_DEFAULT OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET ANSI_NULLS OFF 
+ALTER DATABASE [greenLib] SET ANSI_NULLS OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET ANSI_PADDING OFF 
+ALTER DATABASE [greenLib] SET ANSI_PADDING OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET ANSI_WARNINGS OFF 
+ALTER DATABASE [greenLib] SET ANSI_WARNINGS OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET ARITHABORT OFF 
+ALTER DATABASE [greenLib] SET ARITHABORT OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET AUTO_CLOSE OFF 
+ALTER DATABASE [greenLib] SET AUTO_CLOSE OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET AUTO_SHRINK ON 
+ALTER DATABASE [greenLib] SET AUTO_SHRINK ON 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET AUTO_UPDATE_STATISTICS ON 
+ALTER DATABASE [greenLib] SET AUTO_UPDATE_STATISTICS ON 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET CURSOR_CLOSE_ON_COMMIT OFF 
+ALTER DATABASE [greenLib] SET CURSOR_CLOSE_ON_COMMIT OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET CURSOR_DEFAULT  GLOBAL 
+ALTER DATABASE [greenLib] SET CURSOR_DEFAULT  GLOBAL 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET CONCAT_NULL_YIELDS_NULL OFF 
+ALTER DATABASE [greenLib] SET CONCAT_NULL_YIELDS_NULL OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET NUMERIC_ROUNDABORT OFF 
+ALTER DATABASE [greenLib] SET NUMERIC_ROUNDABORT OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET QUOTED_IDENTIFIER OFF 
+ALTER DATABASE [greenLib] SET QUOTED_IDENTIFIER OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET RECURSIVE_TRIGGERS OFF 
+ALTER DATABASE [greenLib] SET RECURSIVE_TRIGGERS OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET  DISABLE_BROKER 
+ALTER DATABASE [greenLib] SET  DISABLE_BROKER 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+ALTER DATABASE [greenLib] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET DATE_CORRELATION_OPTIMIZATION OFF 
+ALTER DATABASE [greenLib] SET DATE_CORRELATION_OPTIMIZATION OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET TRUSTWORTHY OFF 
+ALTER DATABASE [greenLib] SET TRUSTWORTHY OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+ALTER DATABASE [greenLib] SET ALLOW_SNAPSHOT_ISOLATION OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET PARAMETERIZATION SIMPLE 
+ALTER DATABASE [greenLib] SET PARAMETERIZATION SIMPLE 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET READ_COMMITTED_SNAPSHOT OFF 
+ALTER DATABASE [greenLib] SET READ_COMMITTED_SNAPSHOT OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET HONOR_BROKER_PRIORITY OFF 
+ALTER DATABASE [greenLib] SET HONOR_BROKER_PRIORITY OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET RECOVERY SIMPLE 
+ALTER DATABASE [greenLib] SET RECOVERY SIMPLE 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET  MULTI_USER 
+ALTER DATABASE [greenLib] SET  MULTI_USER 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET PAGE_VERIFY CHECKSUM  
+ALTER DATABASE [greenLib] SET PAGE_VERIFY CHECKSUM  
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET DB_CHAINING OFF 
+ALTER DATABASE [greenLib] SET DB_CHAINING OFF 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+ALTER DATABASE [greenLib] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+ALTER DATABASE [greenLib] SET TARGET_RECOVERY_TIME = 0 SECONDS 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET DELAYED_DURABILITY = DISABLED 
+ALTER DATABASE [greenLib] SET DELAYED_DURABILITY = DISABLED 
 GO
 
-ALTER DATABASE [Bibo_Verwaltung] SET  READ_WRITE 
+ALTER DATABASE [greenLib] SET  READ_WRITE 
 GO
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_autor]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_autor]
 GO
@@ -130,7 +130,7 @@ CREATE TABLE [dbo].[t_s_autor](
 	PRIMARY KEY (au_id))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_genre]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_genre]
 GO
@@ -142,7 +142,7 @@ CREATE TABLE [dbo].[t_s_genre](
 	PRIMARY KEY (ger_id))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_klassen]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_klassen]
 GO
@@ -154,7 +154,7 @@ CREATE TABLE [dbo].[t_s_klassen](
 	PRIMARY KEY (k_id))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_kunden]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_kunden]
 GO
@@ -178,7 +178,7 @@ CREATE TABLE [dbo].[t_s_kunden](
 		REFERENCES t_s_klassen (k_id))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_sprache]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_sprache]
 GO
@@ -190,7 +190,7 @@ CREATE TABLE [dbo].[t_s_sprache](
 	PRIMARY KEY (sprach_id))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_verlag]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_verlag]
 GO
@@ -202,7 +202,7 @@ CREATE TABLE [dbo].[t_s_verlag](
 	PRIMARY KEY (ver_id))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_zustand]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_zustand]
 GO
@@ -214,7 +214,7 @@ CREATE TABLE [dbo].[t_s_zustand](
 	PRIMARY KEY (zu_id))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buecher]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_buecher]
 GO
@@ -243,7 +243,7 @@ CREATE TABLE [dbo].[t_s_buecher](
 		REFERENCES t_s_sprache (sprach_id))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buch_autor]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_buch_autor]
 GO
@@ -260,7 +260,7 @@ CREATE TABLE [dbo].[t_s_buch_autor](
 		REFERENCES t_s_autor (au_id))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buchid]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_buchid]
 GO
@@ -280,7 +280,7 @@ CREATE TABLE [dbo].[t_s_buchid](
 		REFERENCES t_s_buecher (buch_isbn))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_bd_ausgeliehen]') AND type in (N'U'))
 DROP TABLE [dbo].[t_bd_ausgeliehen]
 GO
@@ -299,7 +299,7 @@ CREATE TABLE [dbo].[t_bd_ausgeliehen](
 	    REFERENCES t_s_kunden (kunde_id))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_verlauf]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_verlauf]
 GO
@@ -320,7 +320,7 @@ CREATE TABLE [dbo].[t_s_verlauf](
 	    REFERENCES t_s_kunden (kunde_id))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_benutzer]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_benutzer]
 GO
@@ -334,7 +334,7 @@ CREATE TABLE [dbo].[t_s_benutzer](
 	Insert INTO t_s_benutzer (b_name, b_password, b_rechte) VALUES ('admin', CAST('eAr/ADMmqCi+3N1eBPS131Jqi+7HQpLC3UEFG5QmnLVxCXoA' AS VARBINARY(MAX)), 2)
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_faecher]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_faecher]
 GO
@@ -347,7 +347,7 @@ CREATE TABLE [dbo].[t_s_faecher](
 	PRIMARY KEY (f_id))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_fach_kunde]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_fach_kunde]
 GO
@@ -365,7 +365,7 @@ CREATE TABLE [dbo].[t_s_fach_kunde](
 		REFERENCES t_s_faecher (f_id))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_fach_stufe]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_fach_stufe]
 GO
@@ -380,7 +380,7 @@ CREATE TABLE [dbo].[t_s_fach_stufe](
 		REFERENCES t_s_faecher (f_id))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buch_stufe]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_buch_stufe]
 GO
@@ -395,7 +395,7 @@ CREATE TABLE [dbo].[t_s_buch_stufe](
 		REFERENCES t_s_buecher (buch_isbn))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_klasse_stufe]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_klasse_stufe]
 GO
@@ -410,7 +410,7 @@ CREATE TABLE [dbo].[t_s_klasse_stufe](
 		REFERENCES t_s_klassen (k_id))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_buch_fach]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_buch_fach]
 GO
@@ -420,6 +420,7 @@ CREATE TABLE [dbo].[t_s_buch_fach](
 	[bf_id] [int] IDENTITY (1,1) NOT NULL,
 	[bf_isbn] [nvarchar](32) NOT NULL,
 	[bf_fachid] [int] NOT NULL,
+	[bf_lk] [bit] NOT NULL,
 	PRIMARY KEY(bf_id),
 	FOREIGN KEY (bf_isbn)
 		REFERENCES t_s_buecher (buch_isbn),
@@ -427,7 +428,7 @@ CREATE TABLE [dbo].[t_s_buch_fach](
 		REFERENCES t_s_faecher (f_id))
 END
 
-use Bibo_Verwaltung
+use greenLib
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[t_s_preis]') AND type in (N'U'))
 DROP TABLE [dbo].[t_s_benutzer]
 GO

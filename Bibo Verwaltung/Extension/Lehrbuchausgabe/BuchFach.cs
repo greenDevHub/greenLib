@@ -34,6 +34,25 @@ namespace Bibo_Verwaltung
             con.Close();
         }
 
+        private void FillObjectLK(bool leistungskurs)
+        {
+            string lk = "";
+            if (leistungskurs == true)
+            {
+                lk = "1";
+            }
+            else
+            {
+                lk = "0";
+            }
+            if (con.ConnectError()) return;
+            string RawCommand = "SELECT bf_isbn as 'ISBN', Convert(nvarchar, bf_fachid) as 'bf_fachid', buch_titel as 'Titel' FROM [dbo].[t_s_buch_fach] left join [dbo].[t_s_buecher] on buch_isbn = bf_isbn WHERE bf_lk = " + lk + " order by buch_titel";
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            adapter = new SqlDataAdapter(RawCommand, con.Con);
+            adapter.Fill(ds);
+            con.Close();
+        }
+
         /// <summary>
         /// Entfernt den gesamten Inhalt im DataSet 
         /// </summary>
@@ -77,10 +96,10 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt ein DataGridView-Objekt mit den Buchdaten 
         /// </summary>
-        public void Show_AllBuecher(ref MetroFramework.Controls.MetroGrid gridBuecher, string fachID, object value = null)
+        public void Show_AllBuecher(ref MetroFramework.Controls.MetroGrid gridBuecher, string fachID, bool lk, object value = null)
         {
             ClearDataSource();
-            FillObject();
+            FillObjectLK(lk);
             buecher.FillGrid_Short(ref gridBuecher);
             Set_Mark(ref gridBuecher, fachID);
         }
@@ -88,10 +107,10 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Füllt ein DataGridView-Objekt mit den Fach-Bücher-Zuordnungsdatendaten  
         /// </summary>
-        public void Show_FachBuecher(ref MetroFramework.Controls.MetroGrid grid, string fachID, object value = null)
+        public void Show_FachBuecher(ref MetroFramework.Controls.MetroGrid grid, string fachID, bool leistungskurs, object value = null)
         {
             ClearDataSource();
-            FillObject();
+            FillObjectLK(leistungskurs);
             ds.Tables[0].DefaultView.RowFilter = string.Format("bf_fachid LIKE '{0}'", fachID);
             grid.DataSource = ds.Tables[0];
             grid.Columns["bf_fachid"].Visible = false;
@@ -100,21 +119,32 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Überschreibt und speichert die Zuordnungsdatendaten eines Faches mit vorhandenen Büchern in der Datenbank 
         /// </summary>
-        public void Save_Zuordnung(DataTable zuordnung, string fachID)
+        public void Save_Zuordnung(DataTable zuordnung, string fachID, bool leistungskurs)
         {
             if (con.ConnectError()) return;
-            string RawCommand1 = "DELETE FROM [dbo].[t_s_buch_fach] WHERE bf_fachid = @fachid";
+            string lk;
+            if (leistungskurs)
+            {
+                lk = "1";
+            }
+            else
+            {
+                lk = "0";
+            }
+            string RawCommand1 = "DELETE FROM [dbo].[t_s_buch_fach] WHERE bf_fachid = @fachid AND bf_lk = @lk";
             con.ConnectError();
             SqlCommand cmd1 = new SqlCommand(RawCommand1, con.Con);
             cmd1.Parameters.AddWithValue("@fachid", fachID);
+            cmd1.Parameters.AddWithValue("@lk", lk);
             cmd1.ExecuteNonQuery();
 
-            string RawCommand2 = "INSERT INTO [dbo].[t_s_buch_fach] (bf_isbn, bf_fachid) VALUES (@isbn, @fachid)";
+            string RawCommand2 = "INSERT INTO [dbo].[t_s_buch_fach] (bf_isbn, bf_fachid, bf_lk) VALUES (@isbn, @fachid, @lk)";
             foreach (DataRow row in zuordnung.Rows)
             {
                 SqlCommand cmd2 = new SqlCommand(RawCommand2, con.Con);
                 cmd2.Parameters.AddWithValue("@isbn", row[0].ToString());
                 cmd2.Parameters.AddWithValue("@fachid", fachID);
+                cmd2.Parameters.AddWithValue("@lk", lk);
                 cmd2.ExecuteNonQuery();
             }
             con.Close();

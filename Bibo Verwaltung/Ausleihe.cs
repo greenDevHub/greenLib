@@ -392,7 +392,7 @@ namespace Bibo_Verwaltung
                 ds.Tables["FaecherListe"].Rows.Clear();
 
                 if (con.ConnectError()) return;
-                string RawCommand = "SELECT fs_fachid FROM [dbo].[t_s_fach_kunde] WHERE fs_kundenid = @0";
+                string RawCommand = "SELECT fs_fachid, fs_lk FROM [dbo].[t_s_fach_kunde] WHERE fs_kundenid = @0";
                 adapter = new SqlDataAdapter(RawCommand, con.Con);
                 adapter.SelectCommand.Parameters.AddWithValue("@0", KID);
                 adapter.Fill(ds.Tables["FaecherListe"]);
@@ -417,12 +417,13 @@ namespace Bibo_Verwaltung
                 ds.Tables["BuecherListe"].Rows.Clear();
 
                 if (con.ConnectError()) return;
-                string RawCommand = "SELECT f_kurzform as 'Fach', bf_isbn as 'ISBN', buch_titel as 'Titel', bf_fachid FROM [dbo].[t_s_buch_fach] left join t_s_buecher on buch_isbn = bf_isbn left join t_s_faecher on f_id = bf_fachid left join t_s_buch_stufe on bs_isbn = bf_isbn WHERE bf_fachid = @0 AND bs_klassenstufe = @1";
+                string RawCommand = "SELECT f_kurzform as 'Fach', bf_isbn as 'ISBN', buch_titel as 'Titel', bf_fachid FROM [dbo].[t_s_buch_fach] left join t_s_buecher on buch_isbn = bf_isbn left join t_s_faecher on f_id = bf_fachid left join t_s_buch_stufe on bs_isbn = bf_isbn WHERE bf_fachid = @0 AND bs_klassenstufe = @1 AND bf_lk = @2";
                 for (int i = 0; i < ds.Tables["FaecherListe"].Rows.Count; i++)
                 {
                     adapter = new SqlDataAdapter(RawCommand, con.Con);
                     adapter.SelectCommand.Parameters.AddWithValue("@0", ds.Tables["FaecherListe"].Rows[i][0]);
                     adapter.SelectCommand.Parameters.AddWithValue("@1", Klassenstufe);
+                    adapter.SelectCommand.Parameters.AddWithValue("@2", ds.Tables["FaecherListe"].Rows[i][1].ToString());
                     adapter.Fill(ds.Tables["BuecherListe"]);
                     con.Close();
                 }
