@@ -1,5 +1,6 @@
 ﻿using MetroFramework.Controls;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -163,42 +164,45 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                string a = changes.Tables[0].Rows[0][0].ToString();
+                Hashtable hTable = new Hashtable();
+                ArrayList duplicateList = new ArrayList();
 
-                DataTable oldData = new DataTable();
-                oldData.Columns.Add("id", typeof(int));
-                oldData.Columns.Add("name", typeof(string));
-
-                foreach (DataRow dr in ds.Tables[0].Rows)
+                //1. Die Changes-Tabelle auf duplikate überprüfen (mehrfache eingabe des selben Wertes)
+                foreach (DataRow drow in changes.Tables[0].Rows)
                 {
-                    string str = dr[0].ToString();
-                    if (dr[0].ToString() != "")
+                    if (hTable.Contains(drow[0]))
                     {
-                        DataRow row = oldData.NewRow();
-                        row[0] = int.Parse(dr[0].ToString());
-                        row[1] = dr[1].ToString();
-                        oldData.Rows.Add(row);
+                        duplicateList.Add(drow);
+                    }
+                    else
+                    {
+                        hTable.Add(drow[0], string.Empty);
                     }
                 }
-
-
-                DataTable clearedChanges = changes.Tables[0].DefaultView.ToTable(true);
-                DataSet cleared = new DataSet();
-                List<int> removeAt = new List<int>();
-                for (int i = 0; i < clearedChanges.Rows.Count; i++)
+                //Entfernen der Duplikate von 1.
+                foreach (DataRow dRow in duplicateList)
                 {
-                    string s = clearedChanges.Rows[i][1].ToString();
-                    if (oldData.AsEnumerable().Any(row => s == row.Field<String>("name")))
+                    changes.Tables[0].Rows.Remove(dRow);
+                }
+
+                //2. Die Ausgangsdaten auf die Werte überprüfen, die in den Changes sind
+                duplicateList.Clear();
+                var s = dt.Rows;
+                for (int i = 0; i < changes.Tables[0].Rows.Count; i++)
+                {
+                    string str = changes.Tables[0].Rows[i][1].ToString();
+                    bool contains = dt.AsEnumerable().Any(row => str.Equals(row.Field<String>(1), StringComparison.InvariantCultureIgnoreCase));
+                    if (contains)
                     {
-                        removeAt.Add(i);
+                        duplicateList.Add(changes.Tables[0].Rows[i]);
                     }
                 }
-                for (int i = 0; i < removeAt.Count; i++)
+                //Entfernen der Duplikate von 2.
+                foreach (DataRow dRow in duplicateList)
                 {
-                    clearedChanges.Rows.RemoveAt(removeAt[i] - i);
+                    changes.Tables[0].Rows.Remove(dRow);
                 }
-                cleared.Tables.Add(clearedChanges);
-                return cleared;
+                return changes;
             }
             catch (Exception ex)
             {

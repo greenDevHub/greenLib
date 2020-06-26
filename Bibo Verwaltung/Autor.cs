@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
 using MetroFramework.Controls;
+using System.Collections;
 
 namespace Bibo_Verwaltung
 {
@@ -190,59 +191,6 @@ namespace Bibo_Verwaltung
             }
         }
 
-        
-
-
-        //TODO
-        private DataSet CleanUp(DataSet set)
-        {
-            DataRow currentChangeRow;
-            int i = 0;
-            string currentChangeRowString = "#";
-            string currentDTRowString = "#";
-
-            //Tabelle Changes durchgehen
-            for (int changeRowIndex = set.Tables[0].Rows.Count - 1; changeRowIndex >= 0; changeRowIndex--)
-            {
-                //Row setzten
-                currentChangeRow = set.Tables[0].Rows[changeRowIndex];
-                try
-                {
-                    //Vergleichsstring aus Changes bauen
-                    currentChangeRowString = "#";
-                    for (int changeColIndex = 1; changeColIndex <= set.Tables[0].Columns.Count - 1; changeColIndex++) //row in string (an Col 1)
-                    {
-                        currentChangeRowString = currentChangeRowString + currentChangeRow[changeColIndex].ToString();
-                    }
-                }
-                catch { }
-                //Vergleichen
-                foreach (DataRow setRow in set.Tables[0].Rows)
-                {
-                    try
-                    {
-                        //Vergleichsstring aus dt bauen
-                        currentDTRowString = "#";
-                        for (int dtColIndex = 1; dtColIndex <= set.Tables[0].Columns.Count - 1; dtColIndex++) //row in string (an Col 1)
-                        {
-                            currentDTRowString = currentDTRowString + setRow[dtColIndex].ToString();
-                        }
-                    }
-                    catch { }
-                }
-                if (currentChangeRowString == currentDTRowString && currentChangeRowString != "#")
-                {
-                    i++;
-                }
-                if (i > 1)
-                {
-                    currentChangeRow.Delete();
-                }
-                i = 0;
-            }
-            return set;
-        }
-
         /// <summary>
         /// Entfernt Duplikate aus den Changes
         /// </summary>
@@ -252,42 +200,45 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                string a = changes.Tables[0].Rows[0][0].ToString();
+                Hashtable hTable = new Hashtable();
+                ArrayList duplicateList = new ArrayList();
 
-                DataTable oldData = new DataTable();
-                oldData.Columns.Add("id", typeof(int));
-                oldData.Columns.Add("name", typeof(string));
-
-                foreach (DataRow dr in ds.Tables[0].Rows)
+                //1. Die Changes-Tabelle auf duplikate überprüfen (mehrfache eingabe des selben Wertes)
+                foreach (DataRow drow in changes.Tables[0].Rows)
                 {
-                    string str = dr[0].ToString();
-                    if (dr[0].ToString() != "")
+                    if (hTable.Contains(drow[0]))
                     {
-                        DataRow row = oldData.NewRow();
-                        row[0] = int.Parse(dr[0].ToString());
-                        row[1] = dr[1].ToString();
-                        oldData.Rows.Add(row);
+                        duplicateList.Add(drow);
+                    }
+                    else
+                    {
+                        hTable.Add(drow[0], string.Empty);
                     }
                 }
-
-
-                DataTable clearedChanges = changes.Tables[0].DefaultView.ToTable(true);
-                DataSet cleared = new DataSet();
-                List<int> removeAt = new List<int>();
-                for (int i = 0; i < clearedChanges.Rows.Count; i++)
+                //Entfernen der Duplikate von 1.
+                foreach (DataRow dRow in duplicateList)
                 {
-                    string s = clearedChanges.Rows[i][1].ToString();
-                    if (oldData.AsEnumerable().Any(row => s == row.Field<String>("name")))
+                    changes.Tables[0].Rows.Remove(dRow);
+                }
+
+                //2. Die Ausgangsdaten auf die Werte überprüfen, die in den Changes sind
+                duplicateList.Clear();
+                var s = dt.Rows;
+                for (int i = 0; i < changes.Tables[0].Rows.Count; i++)
+                {
+                    string str = changes.Tables[0].Rows[i][1].ToString();
+                    bool contains = dt.AsEnumerable().Any(row => str.Equals(row.Field<String>(1), StringComparison.InvariantCultureIgnoreCase));
+                    if (contains)
                     {
-                        removeAt.Add(i);
+                        duplicateList.Add(changes.Tables[0].Rows[i]);
                     }
                 }
-                for (int i = 0; i < removeAt.Count; i++)
+                //Entfernen der Duplikate von 2.
+                foreach (DataRow dRow in duplicateList)
                 {
-                    clearedChanges.Rows.RemoveAt(removeAt[i] - i);
+                    changes.Tables[0].Rows.Remove(dRow);
                 }
-                cleared.Tables.Add(clearedChanges);
-                return cleared;
+                return changes;
             }
             catch (Exception ex)
             {
@@ -299,44 +250,11 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void SaveGrid() //bool userDeletedRows
         {
-            DataRow currentChangeRow;
             comb = new SqlCommandBuilder(adapter);
             DataSet changes = ds.GetChanges();
             if (changes != null)
             {
                 changes = noDuplicates(changes);
-                //CleanUp(changes);
-                ////Tabelle Changes durchgehen
-                //for (int changeRowIndex = changes.Tables[0].Rows.Count - 1; changeRowIndex >= 0; changeRowIndex--)
-                //{
-                //    try
-                //    {
-                //        //Row setzten
-                //        currentChangeRow = changes.Tables[0].Rows[changeRowIndex];
-                //        //Vergleichsstring aus Changes bauen
-                //        string currentChangeRowString = "#";
-                //        for (int changeColIndex = 1; changeColIndex <= changes.Tables[0].Columns.Count - 1; changeColIndex++) //row in string (an Col 1)
-                //        {
-                //            currentChangeRowString = currentChangeRowString + currentChangeRow[changeColIndex].ToString();
-                //        }
-                //        //Vergleichen
-                //        foreach (DataRow dtRow in dt.Rows)
-                //        {
-                //            //Vergleichsstring aus dt bauen
-                //            string currentDTRowString = "#";
-                //            for (int dtColIndex = 1; dtColIndex <= dt.Columns.Count - 1; dtColIndex++) //row in string (an Col 1)
-                //            {
-                //                currentDTRowString = currentDTRowString + dtRow[dtColIndex].ToString();
-                //                if (currentChangeRowString == currentDTRowString)
-                //                {
-                //                    currentChangeRow.Delete();
-                //                }
-                //            }
-                //        }
-                //    }
-                //    catch { }
-                //}
-                ////Änderungen in Datenbank übernehmen
                 adapter.Update(changes);
             }
         }

@@ -342,7 +342,7 @@ namespace Bibo_Verwaltung
                         mbt_Uebernehmen.Focus();
                         SaveContent();
                     }
-                    catch
+                    catch(Exception ex)
                     {
                         MetroMessageBox.Show(this, "Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
