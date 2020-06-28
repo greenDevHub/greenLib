@@ -1075,7 +1075,7 @@ namespace Bibo_Verwaltung
                 {
                     MemoryStream mem = new MemoryStream(b.Image);
                     picBox_Klein.Image = Image.FromStream(mem);
-                    string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Bilder\\" + tb_ISBN.Text + ".png";
+                    string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\Bilder\\" + tb_ISBN.Text + ".png";
                     if (!File.Exists(filePath))
                     {
                         picBox_Klein.Image.Save(filePath, ImageFormat.Png);
@@ -1220,7 +1220,7 @@ namespace Bibo_Verwaltung
                     int i3 = location.IndexOf(s3) - 2;
                     location = location.Substring(i2, i3 - i2);
                     string bildURL = "http://www.buecher-nach-isbn.info/" + location;
-                    string fileURL = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Downloads\\" + tb_ISBN.Text + "_DOWNLOAD.jpg";
+                    string fileURL = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\Downloads\\" + tb_ISBN.Text + "_DOWNLOAD.jpg";
                     WebClient client = new WebClient();
                     client.DownloadFile(bildURL, fileURL);
                     return fileURL;
@@ -1429,7 +1429,7 @@ namespace Bibo_Verwaltung
         private void Copy_picture()
         {
             string oldLocation = picBox_Klein.ImageLocation;
-            string newLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Bilder\\" + tb_ISBN.Text +".png";
+            string newLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\Bilder\\" + tb_ISBN.Text +".png";
             if(!File.Exists(newLocation) && oldLocation != newLocation)
             {
                 picBox_Klein.Image.Save(newLocation, ImageFormat.Png);
@@ -1838,7 +1838,7 @@ namespace Bibo_Verwaltung
                 if (test)
                 {
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    string strFilePath = path + "\\Bibliothek\\Einstellungen\\BarcodePreset.lbx";
+                    string strFilePath = path + "\\greenLib\\Einstellungen\\BarcodePreset.lbx";
                     IDocument doc = new Document();
                     doc.Open(strFilePath);
                     int barcodeIndex = doc.GetBarcodeIndex("Barcode");

@@ -51,11 +51,11 @@ namespace Bibo_Verwaltung
                 mT_Einstellungen.Enabled = true;
             }
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            System.IO.Directory.CreateDirectory(path + "\\Bibliothek");
-            System.IO.Directory.CreateDirectory(path + "\\Bibliothek\\Bilder");
-            System.IO.Directory.CreateDirectory(path + "\\Bibliothek\\Einstellungen");
-            System.IO.Directory.CreateDirectory(path + "\\Bibliothek\\Downloads");
-            string strFilePath = path+"\\Bibliothek\\Einstellungen\\BarcodePreset.lbx";
+            System.IO.Directory.CreateDirectory(path + "\\greenLib");
+            System.IO.Directory.CreateDirectory(path + "\\greenLib\\Bilder");
+            System.IO.Directory.CreateDirectory(path + "\\greenLib\\Einstellungen");
+            System.IO.Directory.CreateDirectory(path + "\\greenLib\\Downloads");
+            string strFilePath = path+"\\greenLib\\Einstellungen\\BarcodePreset.lbx";
             if (!File.Exists(strFilePath))
             {
                 File.WriteAllBytes(strFilePath, Properties.Resources.BarcodePreset);

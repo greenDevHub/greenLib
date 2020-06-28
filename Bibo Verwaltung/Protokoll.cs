@@ -9,8 +9,8 @@ namespace Bibo_Verwaltung
 {
     class Protokoll
     {
-        public string pathpublic = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\LogFiles\\error_reports.txt";
-        public string pathprivate = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\LogFiles\\system_error_reports.txt";
+        public string pathpublic = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\LogFiles\\error_reports.txt";
+        public string pathprivate = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\LogFiles\\system_error_reports.txt";
 
         public Protokoll()
         {
@@ -56,7 +56,7 @@ namespace Bibo_Verwaltung
             {
                 if (!Directory.Exists(pathpublic))
                 {
-                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\LogFiles");
+                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\LogFiles");
                 }
 
                 using (StreamWriter sw = File.AppendText(pathpublic))

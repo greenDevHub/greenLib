@@ -623,12 +623,6 @@
     <None Include="Resources\iconfinder_icon-ios7-arrow-right_211607.png" />
     <None Include="Resources\296812-64.png" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ScreenSize\ScreenSize\ScreenSize.csproj">
-      <Project>{361179b6-418a-42b0-a81d-74a59adb2045}</Project>
-      <Name>ScreenSize</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

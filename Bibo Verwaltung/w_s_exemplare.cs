@@ -706,7 +706,7 @@ namespace Bibo_Verwaltung
                 if (test)
                 {
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    string strFilePath = path + "\\Bibliothek\\Einstellungen\\BarcodePreset.lbx";
+                    string strFilePath = path + "\\greenLib\\Einstellungen\\BarcodePreset.lbx";
                     IDocument doc = new Document();
                     doc.Open(strFilePath);
                     int barcodeIndex = doc.GetBarcodeIndex("Barcode");

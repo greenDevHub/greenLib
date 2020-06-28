@@ -401,6 +401,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cb_Zustand.BorderColor = System.Drawing.Color.Green;
             this.cb_Zustand.DataRowView = true;
+            this.cb_Zustand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_Zustand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cb_Zustand.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.cb_Zustand.FormattingEnabled = true;

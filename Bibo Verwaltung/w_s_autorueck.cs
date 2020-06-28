@@ -594,6 +594,10 @@ namespace Bibo_Verwaltung
                             {
                                 DataGridViewComboBoxCell comboValue = (DataGridViewComboBoxCell)(gv_selected.Rows[i].Cells["cbzustand"]);
                                 comboValue.Value = 0;
+                                string valueMember = gv_selected.Rows[i].Cells[1].Value.ToString();
+                                valueMember = zustand.GetZustandsID(valueMember);
+                                gv_selected.Rows[i].Cells[3].Value = int.Parse(valueMember);
+
                             }
                             gv_selected.ClearSelection();
                             tb_ExemplarID.Focus();

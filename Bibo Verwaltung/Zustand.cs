@@ -170,13 +170,13 @@ namespace Bibo_Verwaltung
                 //1. Die Changes-Tabelle auf duplikate überprüfen (mehrfache eingabe des selben Wertes)
                 foreach (DataRow drow in changes.Tables[0].Rows)
                 {
-                    if (hTable.Contains(drow[0]))
+                    if (hTable.Contains(drow[1]))
                     {
                         duplicateList.Add(drow);
                     }
                     else
                     {
-                        hTable.Add(drow[0], string.Empty);
+                        hTable.Add(drow[1], string.Empty);
                     }
                 }
                 //Entfernen der Duplikate von 1.

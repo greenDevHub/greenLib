@@ -31,9 +31,9 @@ namespace Bibo_Verwaltung
         private string pw;
         public string Pw { get { return pw; } set { pw = value; } }
 
-        public string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Einstellungen\\ConnectionSettings.txt";
+        public string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\Einstellungen\\ConnectionSettings.txt";
 
-        private string homePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Einstellungen";
+        private string homePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\Einstellungen";
         public string HomePath { get { return homePath; } set { homePath = value; } }
 
         public double scale;
@@ -153,7 +153,7 @@ namespace Bibo_Verwaltung
             }
             catch (Exception)
             {
-                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Einstellungen");
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\Einstellungen");
             }
             return i;
             #endregion

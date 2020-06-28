@@ -1288,9 +1288,9 @@
             this.metroLabel1.Location = new System.Drawing.Point(4, 303);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(141, 19);
+            this.metroLabel1.Size = new System.Drawing.Size(147, 19);
             this.metroLabel1.TabIndex = 49;
-            this.metroLabel1.Text = "Exemplare hinzufügen:";
+            this.metroLabel1.Text = "Exemplare (neu) hinzuf.:";
             this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tb_neu
