@@ -28,8 +28,9 @@ namespace Bibo_Verwaltung
 
         private void RefreshTheme()
         {
-            ConfigurationManager.RefreshSection("appSettings");
-            string darkmode = ConfigurationManager.AppSettings["darkmode"];
+            //ConfigurationManager.RefreshSection("appSettings");
+            //string darkmode = ConfigurationManager.AppSettings["darkmode"];
+            string darkmode = Properties.Settings.Default.darkmode;
             if (darkmode == "true")
             {
                 this.StyleManager.Theme = MetroThemeStyle.Dark;

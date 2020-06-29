@@ -528,19 +528,23 @@ namespace Bibo_Verwaltung
         {
             if(this.StyleManager.Theme == MetroThemeStyle.Light)
             {
-                System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                config.AppSettings.Settings["darkmode"].Value = "true";
-                config.Save(ConfigurationSaveMode.Full,true);
-                ConfigurationManager.RefreshSection("appSettings");
+                Properties.Settings.Default.darkmode = "true";
+                Properties.Settings.Default.Save();
+                //System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                //config.AppSettings.Settings["darkmode"].Value = "true";
+                //config.Save(ConfigurationSaveMode.Full,true);
+                //ConfigurationManager.RefreshSection("appSettings");
                 this.StyleManager.Theme = MetroThemeStyle.Dark;
                 pl_unschaerfe.Opacity = 0;
             }
             else
             {
-                System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                config.AppSettings.Settings["darkmode"].Value = "false";
-                config.Save(ConfigurationSaveMode.Full, true);
-                ConfigurationManager.RefreshSection("appSettings");
+                Properties.Settings.Default.darkmode = "false";
+                Properties.Settings.Default.Save();
+                //System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                //config.AppSettings.Settings["darkmode"].Value = "false";
+                //config.Save(ConfigurationSaveMode.Full, true);
+                //ConfigurationManager.RefreshSection("appSettings");
                 this.StyleManager.Theme = MetroThemeStyle.Light;
                 pl_unschaerfe.Opacity = 0;
             }
