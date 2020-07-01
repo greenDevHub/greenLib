@@ -34,6 +34,7 @@ namespace Bibo_Verwaltung
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName;
             user.FillGrid(ref gv_Benutzer);
+            rb_Neukunde.Select();
         }
         #endregion
 
@@ -84,6 +85,7 @@ namespace Bibo_Verwaltung
         {
             tb_user.Text = "";
             tb_pw.Text = "";
+            tb_pw2.Text = "";
             cb_Rechte.Text = "";
             cb_Rechte.SelectedIndex = -1;
             user.FillGrid(ref gv_Benutzer);
@@ -115,15 +117,22 @@ namespace Bibo_Verwaltung
                 }
                 try
                 {
-                    if (tb_pw.Text == "Passwort123456" || tb_pw.Text == "" || tb_user.Text == "")
+                    if (tb_pw.Text == "Passwort123456" || tb_pw.Text == "" || tb_user.Text == "" || tb_pw2.Text == "")
                     {
                         MetroMessageBox.Show(this, "Bitte geben Sie alle nötigen Informationen an!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
-                       
-                        aUser.AddUser(name, SetPassword(pw), rechte);
-                        Clear();
+                        if (PasswordCorrect())
+                        {
+                            aUser.AddUser(name, SetPassword(pw), rechte);
+                            Clear();
+                        }
+                        else
+                        {
+                            MetroMessageBox.Show(this, "Die beiden Passwörter stimmen nicht überein!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+
                     }
 
                 }
@@ -167,16 +176,23 @@ namespace Bibo_Verwaltung
                 }
                 try
                 {
-                    if(tb_pw.Text == "Passwort123456" || tb_pw.Text == "" || tb_user.Text == "")
+                    if(tb_pw.Text == "Passwort123456" || tb_pw.Text == "" || tb_user.Text == "" || tb_pw2.Text == "")
                     {
                         MetroMessageBox.Show(this, "Bitte geben Sie alle nötigen Informationen an!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         tb_pw.Clear();
                     }
                     else
                     {
-                        
-                        aUser.UpdateUser(name, SetPassword(pw), rechte);
-                        Clear();
+                        if (PasswordCorrect())
+                        {
+                            aUser.UpdateUser(name, SetPassword(pw), rechte);
+                            Clear();
+                        }
+                        else
+                        {
+                            MetroMessageBox.Show(this, "Die beiden Passwörter stimmen nicht überein!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+
                     }
                     
                 }
@@ -186,7 +202,19 @@ namespace Bibo_Verwaltung
                 }
             }
         }
-
+        private bool PasswordCorrect()
+        {
+            bool correct = false;
+            if(tb_pw.Text == tb_pw2.Text && tb_pw.Text != "")
+            {
+                correct = true;
+            }
+            else
+            {
+                correct = false;
+            }
+            return correct;
+        }
         private string SetPassword(string password)
         {
             byte[] salt;
@@ -225,6 +253,7 @@ namespace Bibo_Verwaltung
                 tb_user.Text = row.Cells["Name"].Value.ToString();
                 Benutzer user = new Benutzer(tb_user.Text);
                 tb_pw.Text = "Passwort123456";
+                tb_pw2.Text = "";
                 cb_Rechte.SelectedIndex = int.Parse(user.Rechteid);
                 rb_KundeBearbeiten.Checked = true;
             }
@@ -233,13 +262,33 @@ namespace Bibo_Verwaltung
 
         private void Tb_pw_Enter(object sender, EventArgs e)
         {
-            if (rb_KundeBearbeiten.Checked)
-            {
-                tb_pw.Clear();
-            }
+            //if (rb_KundeBearbeiten.Checked)
+            //{
+            //    tb_pw.Clear();
+            //}
             if(tb_pw.Text == "Passwort123456")
             {
                 tb_pw.Text = "";
+            }
+        }
+
+        private void bt_show_MouseDown(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                tb_pw.UseSystemPasswordChar = false;
+                tb_pw2.UseSystemPasswordChar = false;
+                tb_pw.PasswordChar = '\0';
+                tb_pw2.PasswordChar = '\0';
+            }
+        }
+
+        private void bt_show_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                tb_pw.UseSystemPasswordChar = true;
+                tb_pw2.UseSystemPasswordChar = true;
             }
         }
     }

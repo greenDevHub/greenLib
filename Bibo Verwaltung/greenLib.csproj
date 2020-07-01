@@ -601,6 +601,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="greenLib.ico" />
+    <None Include="Resources\eye.png" />
     <None Include="Resources\Handbuch.pdf" />
     <None Include="Resources\question.png" />
     <None Include="Resources\sun.png" />
