@@ -959,6 +959,8 @@
             this.cb_Genre.TabIndex = 12;
             this.metroToolTip1.SetToolTip(this.cb_Genre, "    Tragen sie das Genre ihres Buches hier ein.    ");
             this.cb_Genre.TextChanged += new System.EventHandler(this.cb_Genre_TextChanged);
+            this.cb_Genre.Enter += new System.EventHandler(this.cb_Genre_Enter);
+            this.cb_Genre.MouseEnter += new System.EventHandler(this.cb_Genre_MouseEnter);
             // 
             // cb_Verlag
             // 
@@ -981,6 +983,8 @@
             this.cb_Verlag.TabIndex = 10;
             this.metroToolTip1.SetToolTip(this.cb_Verlag, "    Tragen sie den Verlag ihres Buches hier ein.    ");
             this.cb_Verlag.TextChanged += new System.EventHandler(this.cb_Verlag_TextChanged);
+            this.cb_Verlag.Enter += new System.EventHandler(this.cb_Verlag_Enter);
+            this.cb_Verlag.MouseEnter += new System.EventHandler(this.cb_Verlag_MouseEnter);
             // 
             // cb_Sprache
             // 
@@ -1003,6 +1007,8 @@
             this.cb_Sprache.TabIndex = 14;
             this.metroToolTip1.SetToolTip(this.cb_Sprache, "    Tragen sie die Sprache ihres Buches hier ein.    ");
             this.cb_Sprache.TextChanged += new System.EventHandler(this.cb_Sprache_TextChanged);
+            this.cb_Sprache.Enter += new System.EventHandler(this.cb_Sprache_Enter);
+            this.cb_Sprache.MouseEnter += new System.EventHandler(this.cb_Sprache_MouseEnter);
             // 
             // cb_Autor
             // 
@@ -1025,7 +1031,9 @@
             this.cb_Autor.TabIndex = 6;
             this.metroToolTip1.SetToolTip(this.cb_Autor, "    Tragen sie den Autor ihres Buches hier ein.    ");
             this.cb_Autor.TextChanged += new System.EventHandler(this.cb_Autor_TextChanged);
+            this.cb_Autor.Enter += new System.EventHandler(this.cb_Autor_Enter);
             this.cb_Autor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cb_Autor_KeyDown);
+            this.cb_Autor.MouseEnter += new System.EventHandler(this.cb_Autor_MouseEnter);
             // 
             // metroPanel1
             // 

@@ -131,6 +131,7 @@ namespace Bibo_Verwaltung
         public void FillCombobox(ref AdvancedComboBox cb, object value)
         {
             ClearDataSource();
+            if(cb.AutoCompleteSource != AutoCompleteSource.None) cb.AutoCompleteSource = AutoCompleteSource.None;
             FillObject();
             cb.DataSource = dt;
             cb.ValueMember = "au_id";

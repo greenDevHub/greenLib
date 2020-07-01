@@ -262,57 +262,58 @@ namespace Bibo_Verwaltung
 
         private void Mbt_Import_Click(object sender, EventArgs e)
         {
-            Form import;
-            if (currentModus == "Fach")
-            {
-                w_s_schuelerimport Import = new w_s_schuelerimport("t_s_faecher", true, currentUser,msm_manage);
-                msm_manage.Clone(Import);
-                Import.ShowDialog(this);
-                Import.Dispose();
-            }
-            else if (currentModus == "Sprache")
-            {
-                import = new w_s_importAssist("t_s_sprache", msm_manage);
-                msm_manage.Clone(import);
-                import.ShowDialog(this);
-                import.Dispose();
-            }
-            else if (currentModus == "Autor")
-            {
-                import = new w_s_importAssist("t_s_autor", msm_manage);
-                msm_manage.Clone(import);
-                import.ShowDialog(this);
-                import.Dispose();
-            }
-            else if (currentModus == "Genre")
-            {
-                import = new w_s_importAssist("t_s_genre", msm_manage);
-                msm_manage.Clone(import);
-                import.ShowDialog(this);
-                import.Dispose();
-            }
-            else if (currentModus == "Zustand")
-            {
-                import = new w_s_importAssist("t_s_zustand", msm_manage);
-                msm_manage.Clone(import);
-                import.ShowDialog(this);
-                import.Dispose();
-            }
-            else if (currentModus == "Verlag")
-            {
-                import = new w_s_importAssist("t_s_verlag", msm_manage);
-                msm_manage.Clone(import);
-                import.ShowDialog(this);
-                import.Dispose();
-            }
-            else if (currentModus == "Klasse")
-            {
-                import = new w_s_importAssist("t_s_klasse", msm_manage);
-                msm_manage.Clone(import);
-                import.ShowDialog(this);
-                import.Dispose();
-            }
-            LoadContent();
+            MetroMessageBox.Show(this, "Diese Funktion ist in der aktuellen Version noch nicht verfügbar.", "Noch nicht verfügbar.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //Form import;
+            //if (currentModus == "Fach")
+            //{
+            //    w_s_schuelerimport Import = new w_s_schuelerimport("t_s_faecher", true, currentUser,msm_manage);
+            //    msm_manage.Clone(Import);
+            //    Import.ShowDialog(this);
+            //    Import.Dispose();
+            //}
+            //else if (currentModus == "Sprache")
+            //{
+            //    import = new w_s_importAssist("t_s_sprache", msm_manage);
+            //    msm_manage.Clone(import);
+            //    import.ShowDialog(this);
+            //    import.Dispose();
+            //}
+            //else if (currentModus == "Autor")
+            //{
+            //    import = new w_s_importAssist("t_s_autor", msm_manage);
+            //    msm_manage.Clone(import);
+            //    import.ShowDialog(this);
+            //    import.Dispose();
+            //}
+            //else if (currentModus == "Genre")
+            //{
+            //    import = new w_s_importAssist("t_s_genre", msm_manage);
+            //    msm_manage.Clone(import);
+            //    import.ShowDialog(this);
+            //    import.Dispose();
+            //}
+            //else if (currentModus == "Zustand")
+            //{
+            //    import = new w_s_importAssist("t_s_zustand", msm_manage);
+            //    msm_manage.Clone(import);
+            //    import.ShowDialog(this);
+            //    import.Dispose();
+            //}
+            //else if (currentModus == "Verlag")
+            //{
+            //    import = new w_s_importAssist("t_s_verlag", msm_manage);
+            //    msm_manage.Clone(import);
+            //    import.ShowDialog(this);
+            //    import.Dispose();
+            //}
+            //else if (currentModus == "Klasse")
+            //{
+            //    import = new w_s_importAssist("t_s_klasse", msm_manage);
+            //    msm_manage.Clone(import);
+            //    import.ShowDialog(this);
+            //    import.Dispose();
+            //}
+            //LoadContent();
         }
 
         private void Mtb_Export_Click(object sender, EventArgs e)

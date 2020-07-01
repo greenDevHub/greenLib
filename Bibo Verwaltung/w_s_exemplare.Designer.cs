@@ -661,11 +661,11 @@
             this.mbt_Export.Text = "Daten-Export";
             this.metroToolTip1.SetToolTip(this.mbt_Export, "    Exportieren sie ihre Exemplardaten in eine Exceltabelle.    ");
             this.mbt_Export.UseSelectable = true;
+            this.mbt_Export.Click += new System.EventHandler(this.mbt_Export_Click);
             // 
             // acb_Zustand
             // 
             this.acb_Zustand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.acb_Zustand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.acb_Zustand.BorderColor = System.Drawing.Color.Gray;
             this.acb_Zustand.DataRowView = true;
             this.acb_Zustand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -682,6 +682,7 @@
             this.metroToolTip1.SetToolTip(this.acb_Zustand, "    Tragen sie hier den Zustand des Buches, welches sie hinzufügen möchten, ein. " +
         "   ");
             this.acb_Zustand.TextChanged += new System.EventHandler(this.cb_zustand_TextChanged);
+            this.acb_Zustand.Enter += new System.EventHandler(this.acb_Zustand_Enter);
             // 
             // metroPanel1
             // 
@@ -789,6 +790,7 @@
             this.mbt_Import.Text = "Daten-Import";
             this.metroToolTip1.SetToolTip(this.mbt_Import, "    Importieren Sie Daten von einer externen Quelle.    ");
             this.mbt_Import.UseSelectable = true;
+            this.mbt_Import.Click += new System.EventHandler(this.mbt_Import_Click);
             // 
             // metroPanel2
             // 

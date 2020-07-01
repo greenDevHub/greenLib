@@ -135,7 +135,12 @@ namespace Bibo_Verwaltung
             #endregion
 
             rb_edit.Checked = true;
-            ex.Zustand.FillCombobox(ref acb_Zustand, ex.Zustand.ZustandID);
+
+            if (acb_Zustand.DataSource == null)
+            {
+                exemplar.Zustand.FillCombobox(ref acb_Zustand, -1);
+
+            }
         }
 
         /// <summary>
@@ -729,11 +734,13 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
+                    tb_ID.ResetText();
                     MetroMessageBox.Show(this, "Es gab einen Fehler bei der Kommunikation mit dem Drucker!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch
             {
+                tb_ID.ResetText();
                 MetroMessageBox.Show(this, "Es gab einen Fehler bei der Kommunikation mit dem Drucker!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -749,6 +756,10 @@ namespace Bibo_Verwaltung
             {
                 BeginInvoke((Action)delegate ()
                 {
+                    if(acb_Zustand.AutoCompleteSource != AutoCompleteSource.None)
+                    {
+                        acb_Zustand.AutoCompleteSource = AutoCompleteSource.None;
+                    }
                     metroProgressSpinner1.Visible = true;
                     gv_Exemplare.Visible = false;
                 });
@@ -764,9 +775,10 @@ namespace Bibo_Verwaltung
                 {
                     gv_Exemplare.DataSource = null;
                     gv_Exemplare.DataSource = dtExemplar;
-                    tb_Vorhanden.Text = gv_Exemplare.RowCount.ToString();
+                    gv_Exemplare.Refresh();
                     metroProgressSpinner1.Visible = false;
                     gv_Exemplare.Visible = true;
+                    tb_Vorhanden.Text = gv_Exemplare.RowCount.ToString();
                 });
             }
             catch(Exception ex)
@@ -783,7 +795,11 @@ namespace Bibo_Verwaltung
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            exemplar.Zustand.FillCombobox(ref acb_Zustand, -1);
+            if(acb_Zustand.DataSource == null)
+            {
+                exemplar.Zustand.FillCombobox(ref acb_Zustand, -1);
+
+            }
             if (tb_ID.Text != "")
             {
                 LoadForm();
@@ -807,6 +823,31 @@ namespace Bibo_Verwaltung
             {
                 e.SuppressKeyPress = true;
                 mbt_Import.Select();
+            }
+        }
+
+        private void acb_Zustand_Enter(object sender, EventArgs e)
+        {
+            if (acb_Zustand.AutoCompleteSource == AutoCompleteSource.None) acb_Zustand.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        private void mbt_Import_Click(object sender, EventArgs e)
+        {
+            MetroMessageBox.Show(this, "Diese Funktion ist in der aktuellen Version noch nicht verfügbar.", "Noch nicht verfügbar.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void mbt_Export_Click(object sender, EventArgs e)
+        {
+            ExcelExport export = new ExcelExport();
+            try
+            {
+                export.ExportDataGridViewAsCSV(gv_Exemplare);
+                MetroMessageBox.Show(this, "Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch
+            {
+                MetroMessageBox.Show(this, "Beim Exportvorgang ist ein Fehler aufgetreten!", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

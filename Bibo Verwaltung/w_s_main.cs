@@ -129,12 +129,6 @@ namespace Bibo_Verwaltung
             return bmp;
         }
 
-        private void HidePanel()
-        {
-            UnBlur();
-            pl_unschaerfe.Visible = false;
-        }
-
         #region Formulare aufrufen
         private void bt_Kunden_Click(object sender, EventArgs e)
         {
@@ -466,7 +460,6 @@ namespace Bibo_Verwaltung
 
         private void metroTile_Click(object sender, EventArgs e)
         {
-            HidePanel();
             bt_zu.Select();
         }
 
@@ -535,7 +528,6 @@ namespace Bibo_Verwaltung
                 //config.Save(ConfigurationSaveMode.Full,true);
                 //ConfigurationManager.RefreshSection("appSettings");
                 this.StyleManager.Theme = MetroThemeStyle.Dark;
-                pl_unschaerfe.Opacity = 0;
             }
             else
             {
@@ -546,7 +538,6 @@ namespace Bibo_Verwaltung
                 //config.Save(ConfigurationSaveMode.Full, true);
                 //ConfigurationManager.RefreshSection("appSettings");
                 this.StyleManager.Theme = MetroThemeStyle.Light;
-                pl_unschaerfe.Opacity = 0;
             }
         }
     }

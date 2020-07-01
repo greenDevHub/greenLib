@@ -1413,7 +1413,16 @@ namespace Bibo_Verwaltung
         private void bt_Excel_Click(object sender, EventArgs e)
         {
             ExcelExport export = new ExcelExport();
-            export.ExportDataGridViewAsCSV(Grid_Buch);
+            try
+            {
+                export.ExportDataGridViewAsCSV(Grid_Buch);
+                MetroMessageBox.Show(this, "Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch
+            {
+                MetroMessageBox.Show(this, "Beim Exportvorgang ist ein Fehler aufgetreten!", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void tb_ISBN_Click(object sender, EventArgs e)
@@ -1489,7 +1498,7 @@ namespace Bibo_Verwaltung
 
         private void AutoLoad()
         {
-            if (ValidateISBN() && !tb_ISBN.Text.Equals(""))
+            if (!tb_ISBN.Text.Equals("")&&ValidateISBN())
             {
                 if (GetAutor().Count > 1)
                 {
@@ -1971,6 +1980,7 @@ namespace Bibo_Verwaltung
 
         private void Mtb_Import_Click(object sender, EventArgs e)
         {
+            MetroMessageBox.Show(this, "Diese Funktion ist in der aktuellen Version noch nicht verfügbar.", "Noch nicht verfügbar.", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //Import
         }
 
@@ -2071,6 +2081,62 @@ namespace Bibo_Verwaltung
             {
                 e.SuppressKeyPress = true;
             }
+        }
+
+        private void cb_Genre_Enter(object sender, EventArgs e)
+        {
+            if (cb_Genre.Text == "") cb_Genre.SelectedIndex = -1;
+            if (cb_Genre.AutoCompleteSource == AutoCompleteSource.None) cb_Genre.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+        }
+
+        private void cb_Verlag_Enter(object sender, EventArgs e)
+        {
+            if (cb_Verlag.Text == "") cb_Verlag.SelectedIndex = -1;
+            if (cb_Verlag.AutoCompleteSource == AutoCompleteSource.None) cb_Verlag.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+        }
+
+        private void cb_Sprache_Enter(object sender, EventArgs e)
+        {
+            if (cb_Sprache.Text == "") cb_Sprache.SelectedIndex = -1;
+            if (cb_Sprache.AutoCompleteSource == AutoCompleteSource.None) cb_Sprache.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+        }
+
+        private void cb_Autor_Enter(object sender, EventArgs e)
+        {
+            if (cb_Autor.Text == "") cb_Autor.SelectedIndex = -1;
+            if (cb_Autor.AutoCompleteSource == AutoCompleteSource.None) cb_Autor.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        private void cb_Genre_MouseEnter(object sender, EventArgs e)
+        {
+            if (cb_Genre.Text == "") cb_Genre.SelectedIndex = -1;
+            if (cb_Genre.AutoCompleteSource == AutoCompleteSource.None) cb_Genre.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+        }
+
+        private void cb_Verlag_MouseEnter(object sender, EventArgs e)
+        {
+            if (cb_Verlag.Text == "") cb_Verlag.SelectedIndex = -1;
+            if (cb_Verlag.AutoCompleteSource == AutoCompleteSource.None) cb_Verlag.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+        }
+
+        private void cb_Sprache_MouseEnter(object sender, EventArgs e)
+        {
+            if (cb_Sprache.Text == "") cb_Sprache.SelectedIndex = -1;
+            if (cb_Sprache.AutoCompleteSource == AutoCompleteSource.None) cb_Sprache.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+        }
+
+        private void cb_Autor_MouseEnter(object sender, EventArgs e)
+        {
+            if (cb_Autor.Text == "") cb_Autor.SelectedIndex = -1;
+            if (cb_Autor.AutoCompleteSource == AutoCompleteSource.None) cb_Autor.AutoCompleteSource = AutoCompleteSource.ListItems;
+
         }
     }
 }

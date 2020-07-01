@@ -267,8 +267,9 @@ namespace Bibo_Verwaltung
             custom.ShowDialog(this);
             if (custom.DialogResult == DialogResult.Yes)
             {
-                //Form autoausleihe = new w_s_automatic(currentUser);
-                //autoausleihe.ShowDialog(this);
+                //Import
+                MetroMessageBox.Show(this, "Diese Funktion ist in der aktuellen Version noch nicht verfügbar.", "Noch nicht verfügbar.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
             else if (custom.DialogResult == DialogResult.No)
             {

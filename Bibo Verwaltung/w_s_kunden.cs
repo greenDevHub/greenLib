@@ -1127,7 +1127,16 @@ namespace Bibo_Verwaltung
         private void Mbt_Export_Click(object sender, EventArgs e)
         {
             ExcelExport export = new ExcelExport();
-            export.ExportDataGridViewAsCSV(gv_Kunde);
+            try
+            {
+                export.ExportDataGridViewAsCSV(gv_Kunde);
+                MetroMessageBox.Show(this, "Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch
+            {
+                MetroMessageBox.Show(this, "Beim Exportvorgang ist ein Fehler aufgetreten!", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
 

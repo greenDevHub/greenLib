@@ -79,58 +79,66 @@ namespace Bibo_Verwaltung
             dialog.Filter = "CSV|*.csv";
             dialog.Title = "Als Tabelle(n) abspeichern";
             dialog.FileName = "Tabelle.csv";
-            dialog.ShowDialog();
-            string FileNames = dialog.FileName.Replace(".csv", "");
-            foreach (DataTable tb in ds.Tables)
+            if(dialog.ShowDialog() == DialogResult.OK)
             {
-                if (FileNames == "Tabelle")
+                string FileNames = dialog.FileName.Replace(".csv", "");
+                foreach (DataTable tb in ds.Tables)
                 {
-                    FileNames = "Tabelle" + table.ToString() + ".csv";
-                }
-                else
-                {
-                    FileNames = dialog.FileName.Replace(".csv", "") + table.ToString() + ".csv";
-                }
-                try
-                {
-                    int h = 1;
-                    while (File.Exists(FileNames))
+                    if (FileNames == "Tabelle")
                     {
-                        FileNames = FileNames.Replace(".csv", "") + " (" + (table + h).ToString() + ")" + ".csv";
-                        h++;
+                        FileNames = "Tabelle" + table.ToString() + ".csv";
                     }
-                    StreamWriter csvFileWriter = new StreamWriter(FileNames, false);
-                    //ColumnHeader schreiben
-                    string columnHeaderText = "";
-                    int countColumn = ds.Tables[table].Columns.Count - 1;
-                    if (countColumn >= 0)
+                    else
                     {
-                        columnHeaderText = ds.Tables[table].Columns[0].ColumnName;
+                        FileNames = dialog.FileName.Replace(".csv", "") + table.ToString() + ".csv";
                     }
-                    for (int i = 1; i <= countColumn; i++)
+                    try
                     {
-                        columnHeaderText = columnHeaderText + ';' + ds.Tables[table].Columns[i].ColumnName;
-                    }
-                    csvFileWriter.WriteLine(columnHeaderText);
-                    //Rows schreiben
-                    foreach (DataRow row in ds.Tables[table].Rows)
-                    {
-                        string dataFromGrid = "";
-                        dataFromGrid = row[0].ToString();
+                        int h = 1;
+                        while (File.Exists(FileNames))
+                        {
+                            FileNames = FileNames.Replace(".csv", "") + " (" + (table + h).ToString() + ")" + ".csv";
+                            h++;
+                        }
+                        StreamWriter csvFileWriter = new StreamWriter(FileNames, false);
+                        //ColumnHeader schreiben
+                        string columnHeaderText = "";
+                        int countColumn = ds.Tables[table].Columns.Count - 1;
+                        if (countColumn >= 0)
+                        {
+                            columnHeaderText = ds.Tables[table].Columns[0].ColumnName;
+                        }
                         for (int i = 1; i <= countColumn; i++)
                         {
-                            dataFromGrid = dataFromGrid + ';' + row[i].ToString();
+                            columnHeaderText = columnHeaderText + ';' + ds.Tables[table].Columns[i].ColumnName;
                         }
-                        csvFileWriter.WriteLine(dataFromGrid);
+                        csvFileWriter.WriteLine(columnHeaderText);
+                        //Rows schreiben
+                        foreach (DataRow row in ds.Tables[table].Rows)
+                        {
+                            string dataFromGrid = "";
+                            dataFromGrid = row[0].ToString();
+                            for (int i = 1; i <= countColumn; i++)
+                            {
+                                dataFromGrid = dataFromGrid + ';' + row[i].ToString();
+                            }
+                            csvFileWriter.WriteLine(dataFromGrid);
+                        }
+                        csvFileWriter.Flush();
+                        csvFileWriter.Close();
                     }
-                    csvFileWriter.Flush();
-                    csvFileWriter.Close();
+                    catch (Exception exceptionObject)
+                    {
+                        log.CreateReport(exceptionObject);
+                        throw new Exception("Beim Exportvorgang ist ein Fehler aufgetreten.");
+                    }
+                    table++;
                 }
-                catch (Exception exceptionObject)
-                {
-                    log.CreateReport(exceptionObject);
-                }
-                table++;
+
+            }
+            else
+            {
+                throw new Exception("Der Exportvorgang wurde abgebrochen.");
             }
         }
 

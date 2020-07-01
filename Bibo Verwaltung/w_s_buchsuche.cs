@@ -331,6 +331,8 @@ namespace Bibo_Verwaltung
         bool filterActive = true;
         private void cb_Autor_Enter(object sender, EventArgs e)
         {
+            if (cb_Autor.AutoCompleteSource == AutoCompleteSource.None) cb_Autor.AutoCompleteSource = AutoCompleteSource.ListItems;
+
             if (cb_Autor.Text == "Autor")
             {
                 filterActive = false;
@@ -360,6 +362,8 @@ namespace Bibo_Verwaltung
 
         private void cb_Verlag_Enter(object sender, EventArgs e)
         {
+            if (cb_Verlag.AutoCompleteSource == AutoCompleteSource.None) cb_Verlag.AutoCompleteSource = AutoCompleteSource.ListItems;
+
             if (cb_Verlag.Text == "Verlag")
             {
                 filterActive = false;
@@ -389,6 +393,8 @@ namespace Bibo_Verwaltung
 
         private void cb_Genre_Enter(object sender, EventArgs e)
         {
+            if (cb_Genre.AutoCompleteSource == AutoCompleteSource.None) cb_Genre.AutoCompleteSource = AutoCompleteSource.ListItems;
+
             if (cb_Genre.Text == "Genre")
             {
                 filterActive = false;
@@ -724,6 +730,9 @@ namespace Bibo_Verwaltung
                     cb_Genre.DataSource = null;
                     cb_Verlag.DataSource = null;
                     gv_buchsuche.Visible = false;
+                    if(cb_Autor.AutoCompleteSource != AutoCompleteSource.None) cb_Autor.AutoCompleteSource = AutoCompleteSource.None;
+                    if (cb_Verlag.AutoCompleteSource != AutoCompleteSource.None) cb_Verlag.AutoCompleteSource = AutoCompleteSource.None;
+                    if (cb_Genre.AutoCompleteSource != AutoCompleteSource.None) cb_Genre.AutoCompleteSource = AutoCompleteSource.None;
                     cb_Autor.Visible = false;
                     cb_Genre.Visible = false;
                     cb_Verlag.Visible = false;
@@ -1102,6 +1111,31 @@ namespace Bibo_Verwaltung
         private void MetroToolTip1_Popup(object sender, PopupEventArgs e)
         {
             e.ToolTipSize = new Size(e.ToolTipSize.Width+32, e.ToolTipSize.Height);
+        }
+
+        private void w_s_buchsuche_Deactivate(object sender, EventArgs e)
+        {
+            if (cb_Autor.AutoCompleteSource != AutoCompleteSource.None) cb_Autor.AutoCompleteSource = AutoCompleteSource.None;
+            if (cb_Verlag.AutoCompleteSource != AutoCompleteSource.None) cb_Verlag.AutoCompleteSource = AutoCompleteSource.None;
+            if (cb_Genre.AutoCompleteSource != AutoCompleteSource.None) cb_Genre.AutoCompleteSource = AutoCompleteSource.None;
+        }
+
+        private void cb_Autor_MouseEnter(object sender, EventArgs e)
+        {
+            if (cb_Autor.AutoCompleteSource == AutoCompleteSource.None) cb_Autor.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+        }
+
+        private void cb_Verlag_MouseEnter(object sender, EventArgs e)
+        {
+            if (cb_Verlag.AutoCompleteSource == AutoCompleteSource.None) cb_Verlag.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+        }
+
+        private void cb_Genre_MouseEnter(object sender, EventArgs e)
+        {
+            if (cb_Genre.AutoCompleteSource == AutoCompleteSource.None) cb_Genre.AutoCompleteSource = AutoCompleteSource.ListItems;
+
         }
     }
 }
