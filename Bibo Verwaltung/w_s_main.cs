@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -538,6 +539,21 @@ namespace Bibo_Verwaltung
                 //config.Save(ConfigurationSaveMode.Full, true);
                 //ConfigurationManager.RefreshSection("appSettings");
                 this.StyleManager.Theme = MetroThemeStyle.Light;
+            }
+        }
+
+        private void bt_help_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                String openPDFFile = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\greenLib Handbuch.pdf";//PDF DOc name
+                System.IO.File.WriteAllBytes(openPDFFile, global::Bibo_Verwaltung.Properties.Resources.Handbuch);//the resource automatically creates            
+                System.Diagnostics.Process.Start(openPDFFile);
+
+            }
+            catch
+            {
+                MetroMessageBox.Show(this, "Es ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

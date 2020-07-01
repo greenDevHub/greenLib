@@ -54,6 +54,7 @@
             this.bt_darkmode = new MetroFramework.Controls.MetroLink();
             this.bt_logout = new MetroFramework.Controls.MetroLink();
             this.image = new MetroFramework.Controls.MetroLink();
+            this.bt_help = new MetroFramework.Controls.MetroLink();
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainStyleManager)).BeginInit();
             this.SuspendLayout();
@@ -331,7 +332,7 @@
             this.bt_darkmode.DisplayFocus = true;
             this.bt_darkmode.Image = global::Bibo_Verwaltung.Properties.Resources.Brightness;
             this.bt_darkmode.ImageSize = 24;
-            this.bt_darkmode.Location = new System.Drawing.Point(673, 25);
+            this.bt_darkmode.Location = new System.Drawing.Point(714, 25);
             this.bt_darkmode.Name = "bt_darkmode";
             this.bt_darkmode.Size = new System.Drawing.Size(37, 32);
             this.bt_darkmode.TabIndex = 23;
@@ -362,15 +363,28 @@
             this.image.Margin = new System.Windows.Forms.Padding(2);
             this.image.Name = "image";
             this.image.Size = new System.Drawing.Size(32, 32);
-            this.image.TabIndex = 24;
+            this.image.TabIndex = 25;
             this.image.TabStop = false;
             this.image.UseSelectable = true;
             this.image.Click += new System.EventHandler(this.image_Click);
+            // 
+            // bt_help
+            // 
+            this.bt_help.DisplayFocus = true;
+            this.bt_help.Image = global::Bibo_Verwaltung.Properties.Resources.question;
+            this.bt_help.ImageSize = 24;
+            this.bt_help.Location = new System.Drawing.Point(671, 25);
+            this.bt_help.Name = "bt_help";
+            this.bt_help.Size = new System.Drawing.Size(37, 32);
+            this.bt_help.TabIndex = 24;
+            this.bt_help.UseSelectable = true;
+            this.bt_help.Click += new System.EventHandler(this.bt_help_Click);
             // 
             // w_s_main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(847, 346);
+            this.Controls.Add(this.bt_help);
             this.Controls.Add(this.bt_darkmode);
             this.Controls.Add(this.bt_logout);
             this.Controls.Add(this.panel);
@@ -417,5 +431,6 @@
         private MetroFramework.Controls.MetroLink bt_logout;
         private MetroFramework.Components.MetroStyleManager mainStyleManager;
         private MetroFramework.Controls.MetroLink bt_darkmode;
+        private MetroFramework.Controls.MetroLink bt_help;
     }
 }
