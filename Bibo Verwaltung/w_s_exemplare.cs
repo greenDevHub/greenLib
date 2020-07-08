@@ -738,7 +738,7 @@ namespace Bibo_Verwaltung
                     MetroMessageBox.Show(this, "Es gab einen Fehler bei der Kommunikation mit dem Drucker!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 tb_ID.ResetText();
                 MetroMessageBox.Show(this, "Es gab einen Fehler bei der Kommunikation mit dem Drucker!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
