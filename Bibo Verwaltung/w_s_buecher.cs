@@ -1715,6 +1715,7 @@ namespace Bibo_Verwaltung
                         byte[] bytes = Encoding.Default.GetBytes(str);
                         str = Encoding.UTF8.GetString(bytes);
                         str = System.Net.WebUtility.HtmlDecode(str);
+                        str = Regex.Replace(str, "<.*?>", " ").Trim();
                     }
                 }
                 
@@ -1752,6 +1753,7 @@ namespace Bibo_Verwaltung
                         {
                             str = str.Substring(str.IndexOf(":") + 2);
                         }
+                        str = Regex.Replace(str, "<.*?>", " ").Trim();
 
                     }
                 }
@@ -1787,9 +1789,53 @@ namespace Bibo_Verwaltung
                         str = Encoding.UTF8.GetString(bytes);
                         str = System.Net.WebUtility.HtmlDecode(str);
                         str = str.Replace("Erscheinungsdatum: ", "");
+                        str = Regex.Replace(str, "<.*?>", " ").Trim();
                     }
                 }
                 
+                return str;
+            }
+            catch
+            {
+                return str;
+            }
+        }
+        private string GetPreisNeu()
+        {
+            string str = "";
+            try
+            {
+                string s = "<strong>ISBN/Einband/Preis</strong>";
+                if (htmlData.Contains(s))
+                {
+                    int i = htmlData.IndexOf(s) + s.Length;
+                    if (i >= 0)
+                    {
+                        htmlData = htmlData.Substring(i);
+                        s = "<td";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        s = ">";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        i = htmlData.IndexOf("</td>");
+                        str = htmlData.Substring(0, i).Trim();
+                        s = "EUR ";
+                        i = str.IndexOf(s) + s.Length;
+                        str = str.Substring(i).Replace(".",",");
+                        s = " (DE)";
+                        i = str.IndexOf(s);
+                        if (i >= 1)
+                        {
+                            str = str.Substring(0, i);
+                        }
+                        byte[] bytes = Encoding.Default.GetBytes(str);
+                        str = Encoding.UTF8.GetString(bytes);
+                        str = System.Net.WebUtility.HtmlDecode(str);
+                        str = Regex.Replace(str, "<.*?>", " ").Trim();
+                    }
+                }
+
                 return str;
             }
             catch
@@ -1826,6 +1872,7 @@ namespace Bibo_Verwaltung
                             int i2 = str.IndexOf(")");
                             str = str.Substring(0, i1).Trim();
                         }
+                        str = Regex.Replace(str, "<.*?>", " ").Trim();
                     }
                 }
                 
@@ -1924,7 +1971,11 @@ namespace Bibo_Verwaltung
                         dTP_Erscheinungsdatum.Value = DateTime.UtcNow;
                     }
                 }
-
+                var preis = GetPreisNeu();
+                if (!preis.Equals(""))
+                {
+                    tb_Neupreis.Text = preis;
+                }
                 var sprache = GetSpracheNeu();
                 if (!sprache.Equals(""))
                 {
