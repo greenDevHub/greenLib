@@ -446,6 +446,17 @@ namespace Bibo_Verwaltung
         }
         private void tb_ExemplarID_TextChanged(object sender, EventArgs e)
         {
+            #region Buchcode parsen
+            if (tb_ExemplarID.Text.Length == 8)
+            {
+                string seven = tb_ExemplarID.Text.Substring(0, 7);
+                string eight = tb_ExemplarID.Text.Substring(7, 1);
+                if (_checksum_ean8(seven).ToString().Equals(eight))
+                {
+                    tb_ExemplarID.Text = int.Parse(seven).ToString();
+                }
+            }
+            #endregion
             Filter();
 
         }

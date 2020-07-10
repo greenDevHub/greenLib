@@ -161,26 +161,26 @@
             this.entfernenToolStripMenuItem,
             this.barcodeDruckenToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(164, 70);
+            this.contextMenuStrip.Size = new System.Drawing.Size(181, 92);
             // 
             // ladenToolStripMenuItem
             // 
             this.ladenToolStripMenuItem.Name = "ladenToolStripMenuItem";
-            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ladenToolStripMenuItem.Text = "Laden";
             this.ladenToolStripMenuItem.Click += new System.EventHandler(this.ladenToolStripMenuItem_Click);
             // 
             // entfernenToolStripMenuItem
             // 
             this.entfernenToolStripMenuItem.Name = "entfernenToolStripMenuItem";
-            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.entfernenToolStripMenuItem.Text = "Entfernen";
             this.entfernenToolStripMenuItem.Click += new System.EventHandler(this.entfernenToolStripMenuItem_Click);
             // 
             // barcodeDruckenToolStripMenuItem
             // 
             this.barcodeDruckenToolStripMenuItem.Name = "barcodeDruckenToolStripMenuItem";
-            this.barcodeDruckenToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.barcodeDruckenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.barcodeDruckenToolStripMenuItem.Text = "Barcode drucken";
             this.barcodeDruckenToolStripMenuItem.Click += new System.EventHandler(this.barcodeDruckenToolStripMenuItem_Click);
             // 

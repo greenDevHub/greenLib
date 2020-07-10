@@ -404,7 +404,7 @@ namespace Bibo_Verwaltung
                     p_klasse.Visible = true;
                     bt_back.Enabled = true;
                     bt_next.Enabled = true;
-                    gv_suggested.Enabled = true;
+                    //gv_suggested.Enabled = true;
                     gv_selected.Enabled = true;
                     bt_abschließen.Enabled = true;
                     if (a_cb_Modus.SelectedIndex == 0)

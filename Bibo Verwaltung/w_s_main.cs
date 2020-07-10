@@ -57,9 +57,15 @@ namespace Bibo_Verwaltung
             System.IO.Directory.CreateDirectory(path + "\\greenLib\\Einstellungen");
             System.IO.Directory.CreateDirectory(path + "\\greenLib\\Downloads");
             string strFilePath = path+"\\greenLib\\Einstellungen\\BarcodePreset.lbx";
-            if (!File.Exists(strFilePath))
+            try
             {
+                if (!File.Exists(strFilePath)) File.Delete(strFilePath);
                 File.WriteAllBytes(strFilePath, Properties.Resources.BarcodePreset);
+
+            }
+            catch
+            {
+
             }
         }
         #endregion

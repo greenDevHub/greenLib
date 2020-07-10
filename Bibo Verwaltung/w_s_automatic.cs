@@ -130,7 +130,7 @@ namespace Bibo_Verwaltung
                     gv_suggested.ClearSelection();
                     if (IsComplete(ref gv_suggested))
                     {
-                        row.DefaultCellStyle.SelectionBackColor = Color.LightGreen;
+                        row.DefaultCellStyle.SelectionBackColor = Color.GreenYellow;
                         row.DefaultCellStyle.SelectionForeColor = Color.Black;
                         row.DefaultCellStyle.BackColor = Color.LimeGreen;
                         row.DefaultCellStyle.ForeColor = Color.Black;
@@ -401,7 +401,7 @@ namespace Bibo_Verwaltung
                     p_klasse.Visible = true;
                     bt_next.Enabled = true;
                     mbt_Suche.Enabled = true;
-                    gv_suggested.Enabled = true;
+                    //gv_suggested.Enabled = true;
                     gv_selected.Enabled = true;
                     bt_abschließen.Enabled = true;
                     autoausleihe.Rueckgabedatum = dp_RueckDatum.Value;

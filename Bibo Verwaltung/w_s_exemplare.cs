@@ -100,10 +100,24 @@ namespace Bibo_Verwaltung
             tb_ISBN.Text = ex.ISBN;
             acb_Zustand.Text = ex.Zustand.Zustandname;
             dTP_AufDat.Value = ex.Aufnahmedatum;
+            GenerateBarcode(ex.ExemplarID);
             
+
+            rb_edit.Checked = true;
+
+            if (acb_Zustand.DataSource == null)
+            {
+                exemplar.Zustand.FillCombobox(ref acb_Zustand, -1);
+
+            }
+        }
+
+
+        private void GenerateBarcode(string id)
+        {
             #region Barcode generieren
             string code = "";
-            code = ex.ExemplarID;
+            code = id;
             for (int i = code.Length; i < 7;)
             {
                 code = "0" + code;
@@ -133,14 +147,6 @@ namespace Bibo_Verwaltung
             BarcodeBox.Width = resultImage.Width;
             BarcodeBox.Image = resultImage;
             #endregion
-
-            rb_edit.Checked = true;
-
-            if (acb_Zustand.DataSource == null)
-            {
-                exemplar.Zustand.FillCombobox(ref acb_Zustand, -1);
-
-            }
         }
 
         /// <summary>
@@ -530,6 +536,7 @@ namespace Bibo_Verwaltung
         {
             List<string> barcodes = new List<string>();
             barcodes.Add(mtb_Barcode.Text);
+
             PrintMultipleBarcodes(barcodes);
             //PrintDocument doc = new PrintDocument();
             //PrintDialog pd = new PrintDialog();
@@ -626,18 +633,28 @@ namespace Bibo_Verwaltung
 
         private void barcodeDruckenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<string> barcodes = new List<string>();
-            //images.Clear();
-            foreach (DataGridViewRow row in gv_Exemplare.SelectedRows)
+            try
             {
-                tb_ID.Text = row.Cells["Exemplar"].Value.ToString();
-                LoadForm();
-                barcodes.Add(mtb_Barcode.Text);
-                //images.Add(BarcodeBox.Image);
+                List<string> barcodes = new List<string>();
+                //images.Clear();
+                foreach (DataGridViewRow row in gv_Exemplare.SelectedRows)
+                {
+                    exemplar.ExemplarID = row.Cells["Exemplar"].Value.ToString();
+                    GenerateBarcode(exemplar.ExemplarID);
+                    //LoadForm();
+                    barcodes.Add(mtb_Barcode.Text);
+                    //images.Add(BarcodeBox.Image);
 
+                }
+                Clear_Form();
+                PrintMultipleBarcodes(barcodes);
             }
-            Clear_Form();
-            PrintMultipleBarcodes(barcodes);
+            catch(Exception ex)
+            {
+                MetroMessageBox.Show(this, ex.Message+"Es gab einen Fehler bei dem Druckvorgang!", "Fehler",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             //PrintDocument doc = new PrintDocument();
             //PrintDialog pd = new PrintDialog();
             //doc.PrintPage += Doc_PrintMultiplePages;
@@ -735,7 +752,7 @@ namespace Bibo_Verwaltung
                 else
                 {
                     tb_ID.ResetText();
-                    MetroMessageBox.Show(this, "Es gab einen Fehler bei der Kommunikation mit dem Drucker!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this, "Der Drucker ist nicht online!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch(Exception ex)
