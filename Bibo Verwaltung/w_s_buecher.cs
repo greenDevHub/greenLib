@@ -1339,18 +1339,23 @@ namespace Bibo_Verwaltung
             {
                 client.UseDefaultCredentials = true;
                 client.Proxy = null;
-                string s = "http://www.buecher-nach-isbn.info/" + tb_ISBN.Text;
-                htmlData = client.DownloadString("http://www.google.de");
                 client.Credentials = CredentialCache.DefaultCredentials;
-                htmlData = client.DownloadString("https://portal.dnb.de/opac.htm?query="+ tb_ISBN.Text+"&method=simpleSearch");
-
+                htmlData = client.DownloadString("https://portal.dnb.de/opac.htm?query=" + tb_ISBN.Text + "&method=simpleSearch");
                 if (htmlData.Contains("Link zu diesem Datensatz"))
                 {
                     return true;
                 }
                 else
                 {
-                    return false;
+                    htmlData = client.DownloadString("https://portal.dnb.de/opac.htm?method=showFullRecord&currentResultId=" + tb_ISBN.Text + "%26any&currentPosition=1");
+                    if (htmlData.Contains("Link zu diesem Datensatz"))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
             catch (Exception e)
@@ -1542,15 +1547,19 @@ namespace Bibo_Verwaltung
                     if (i >= 0)
                     {
                         htmlData = htmlData.Substring(i);
-                        i = htmlData.IndexOf("<a href=\"");
-                        htmlData = htmlData.Substring(i + 10, htmlData.Length - i - 10);
-                        i = htmlData.IndexOf("\" >");
-                        htmlData = htmlData.Substring(i + 3, htmlData.Length - i - 3);
-                        i = htmlData.IndexOf("</a>");
+                        s = @"<td";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        s = @">";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        i = htmlData.IndexOf("</td>");
                         str = htmlData.Substring(0, i).Trim();
                         byte[] bytes = Encoding.Default.GetBytes(str);
                         str = Encoding.UTF8.GetString(bytes);
                         str = System.Net.WebUtility.HtmlDecode(str);
+                        str = Regex.Replace(str, "<.*?>", " ").Trim();
+
 
                     }
                 }
@@ -1573,31 +1582,18 @@ namespace Bibo_Verwaltung
                     if (i >= 0)
                     {
                         htmlData = htmlData.Substring(i);
-                        i = htmlData.IndexOf("<a href=\"");
-                        if (i < 20)
-                        {
-                            htmlData = htmlData.Substring(i + 10, htmlData.Length - i - 10);
-                            s = "\" >";
-                            i = htmlData.IndexOf(s) + s.Length;
-                            htmlData = htmlData.Substring(i);
-
-                        }
-                        else
-                        {
-                            s = "<td";
-                            i = htmlData.IndexOf(s) + s.Length;
-                            htmlData = htmlData.Substring(i);
-                            s = ">";
-                            i = htmlData.IndexOf(s) + s.Length;
-                            htmlData = htmlData.Substring(i);
-
-                        }
+                        s = @"<td";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        s = @">";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
                         i = htmlData.IndexOf("</td>");
                         str = htmlData.Substring(0, i).Trim();
                         byte[] bytes = Encoding.Default.GetBytes(str);
                         str = Encoding.UTF8.GetString(bytes);
                         str = System.Net.WebUtility.HtmlDecode(str);
-                        str = Regex.Replace(str, "<.*?>", " ");
+                        str = Regex.Replace(str, "<.*?>", " ").Trim();
                     }
                 }
                     
@@ -1627,41 +1623,62 @@ namespace Bibo_Verwaltung
                         s = @">";
                         i = htmlData.IndexOf(s) + s.Length;
                         htmlData = htmlData.Substring(i);
-
-                        bool nextAutor = true;
-                        while (nextAutor)
+                        string autorenData = htmlData;
+                        s = "</td>";
+                        i = autorenData.IndexOf(s);
+                        autorenData = autorenData.Substring(0, i).Trim();
+                        var a = Regex.Split(autorenData, "<.*?>");
+                        foreach(string au in a)
                         {
-                            s = "\" >";
-                            i = htmlData.IndexOf(s) + s.Length;
-                            htmlData = htmlData.Substring(i);
-                            //Unformatierter Autorname
-                            s = "</a>";
-                            i = htmlData.IndexOf(s);
-                            autor = htmlData.Substring(0, i);
-                            if (!autor.Contains(",") || autor.Length > 200)
+                            if (!au.Equals(""))
                             {
-                                nextAutor = false;
-                            }
-                            else
-                            {
-                                htmlData = htmlData.Substring(i + s.Length);
-                                autor = autor.Trim();
+                                autor = au;
                                 byte[] bytes = Encoding.Default.GetBytes(autor);
                                 autor = Encoding.UTF8.GetString(bytes);
                                 autor = System.Net.WebUtility.HtmlDecode(autor);
                                 if (autor.Contains("(") && autor.Contains(")"))
                                 {
                                     int i1 = autor.IndexOf("(");
-                                    int i2 = autor.IndexOf(")");
                                     autor = autor.Substring(0, i1).Trim();
+
                                 }
                                 string vorname = autor.Substring(autor.IndexOf(", ") + 2);
                                 string nachname = autor.Substring(0, autor.IndexOf(", "));
                                 autor = vorname + " " + nachname;
                                 autoren.Add(autor);
-
                             }
+                            
                         }
+                        //while (nextAutor)
+                        //{
+                        //    //Unformatierter Autorname
+                        //    s = "</a>";
+                        //    i = htmlData.IndexOf(s);
+                        //    autor = htmlData.Substring(0, i);
+                        //    if (!autor.Contains(",") || autor.Length > 200)
+                        //    {
+                        //        nextAutor = false;
+                        //    }
+                        //    else
+                        //    {
+                        //        htmlData = htmlData.Substring(i + s.Length);
+                        //        autor = autor.Trim();
+                        //        byte[] bytes = Encoding.Default.GetBytes(autor);
+                        //        autor = Encoding.UTF8.GetString(bytes);
+                        //        autor = System.Net.WebUtility.HtmlDecode(autor);
+                        //        if (autor.Contains("(") && autor.Contains(")"))
+                        //        {
+                        //            int i1 = autor.IndexOf("(");
+                        //            int i2 = autor.IndexOf(")");
+                        //            autor = autor.Substring(0, i1).Trim();
+                        //        }
+                        //        string vorname = autor.Substring(autor.IndexOf(", ") + 2);
+                        //        string nachname = autor.Substring(0, autor.IndexOf(", "));
+                        //        autor = vorname + " " + nachname;
+                        //        autoren.Add(autor);
+
+                        //    }
+                        //}
 
 
 
@@ -1842,6 +1859,7 @@ namespace Bibo_Verwaltung
             {
 
                 htmlData = Regex.Replace(htmlData, @"\t|\n|\r", "");
+                htmlData = Regex.Replace(htmlData, "<a href=.*?>", "");
                 var genre = GetGenreNeu();
                 if (!genre.Equals(""))
                 {
