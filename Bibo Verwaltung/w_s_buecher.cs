@@ -1331,6 +1331,7 @@ namespace Bibo_Verwaltung
 
         private bool ValidateNewISBN()
         {
+            Cursor.Current = Cursors.WaitCursor;
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             WebClient client = new WebClient();
@@ -1347,7 +1348,7 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
-                    htmlData = client.DownloadString("https://portal.dnb.de/opac.htm?method=showFullRecord&currentResultId=" + tb_ISBN.Text + "%26any&currentPosition=1");
+                    htmlData = client.DownloadString("https://portal.dnb.de/opac.htm?method=showFullRecord&currentResultId=" + tb_ISBN.Text + "%26any&currentPosition=0");
                     if (htmlData.Contains("Link zu diesem Datensatz"))
                     {
                         return true;
@@ -1362,53 +1363,55 @@ namespace Bibo_Verwaltung
             {
                 return false;
             }
+            Cursor.Current = Cursors.Default;
+            
+        }
+
+        private bool ValidateISBN()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            WebClient client = new WebClient();
+
+            try
+            {
+                client.Headers.Add("User-Agent: Other");
+                client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                htmlData = client.DownloadString("http://www.buecher-nach-isbn.info/" + tb_ISBN.Text);
+                if (htmlData.Contains("<h1 class=\"title\">"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-        
-        //private bool ValidateISBN()
-        //{
-        //    ServicePointManager.Expect100Continue = true;
-        //    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-        //    WebClient client = new WebClient();
+            catch (Exception e)
+            {
+                try
+                {
+                    client.UseDefaultCredentials = true;
+                    client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                    htmlData = client.DownloadString("http://www.buecher-nach-isbn.info/" + tb_ISBN.Text);
 
-        //    try
-        //    {
-        //        client.Proxy = null;
-        //        string s = "http://www.buecher-nach-isbn.info/" + tb_ISBN.Text;
-        //        htmlData = client.DownloadString("http://www.google.de");
-        //        client.Credentials = CredentialCache.DefaultCredentials;
-        //        var asd = client.DownloadString(@"https://stackoverflow.com/questions/307688/how-to-download-a-file-from-a-url-in-c");
-        //        htmlData = client.DownloadString("http://www.buecher-nach-isbn.info/" + tb_ISBN.Text);
-        //        if (htmlData.Contains("<h1 class=\"title\">"))
-        //        {
-        //            return true;
-        //        }
-        //        else
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        try {
-        //            client.UseDefaultCredentials = true;
-        //            client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
-        //            htmlData = client.DownloadString("http://www.buecher-nach-isbn.info/" + tb_ISBN.Text);
-
-        //            if (htmlData.Contains("<h1 class=\"title\">"))
-        //            {
-        //                return true;
-        //            }
-        //            else
-        //            {
-        //                return false;
-        //            }
-        //        }
-        //        catch
-        //        {
-        //            return false;
-        //        }
-        //    }        
-        //}
+                    if (htmlData.Contains("<h1 class=\"title\">"))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            Cursor.Current = Cursors.Default;
+        }
 
         private void Comboboxen()
         {
@@ -1636,16 +1639,25 @@ namespace Bibo_Verwaltung
                                 byte[] bytes = Encoding.Default.GetBytes(autor);
                                 autor = Encoding.UTF8.GetString(bytes);
                                 autor = System.Net.WebUtility.HtmlDecode(autor);
-                                if (autor.Contains("(") && autor.Contains(")"))
+                                if (autor.Contains("(Verfasser)"))
                                 {
                                     int i1 = autor.IndexOf("(");
                                     autor = autor.Substring(0, i1).Trim();
-
+                                    if (autor.Contains(","))
+                                    {
+                                        string vorname = autor.Substring(autor.IndexOf(", ") + 2);
+                                        string nachname = autor.Substring(0, autor.IndexOf(", "));
+                                        autor = vorname + " " + nachname;
+                                    }
+                                    autoren.Add(autor);
                                 }
-                                string vorname = autor.Substring(autor.IndexOf(", ") + 2);
-                                string nachname = autor.Substring(0, autor.IndexOf(", "));
-                                autor = vorname + " " + nachname;
-                                autoren.Add(autor);
+                                //if (autor.Contains("(") && autor.Contains(")"))
+                                //{
+                                //    int i1 = autor.IndexOf("(");
+                                //    autor = autor.Substring(0, i1).Trim();
+
+                                //}
+
                             }
                             
                         }
@@ -1790,6 +1802,8 @@ namespace Bibo_Verwaltung
                         str = System.Net.WebUtility.HtmlDecode(str);
                         str = str.Replace("Erscheinungsdatum: ", "");
                         str = Regex.Replace(str, "<.*?>", " ").Trim();
+                        str = Regex.Replace(str, "[^0-9.]", "").Trim();
+
                     }
                 }
                 
@@ -1819,20 +1833,30 @@ namespace Bibo_Verwaltung
                         i = htmlData.IndexOf(s) + s.Length;
                         htmlData = htmlData.Substring(i);
                         i = htmlData.IndexOf("</td>");
-                        str = htmlData.Substring(0, i).Trim();
                         s = "EUR ";
-                        i = str.IndexOf(s) + s.Length;
-                        str = str.Substring(i).Replace(".",",");
-                        s = " (DE)";
-                        i = str.IndexOf(s);
-                        if (i >= 1)
+                        var pattern = @"(EUR )([0-9]+.[0-9]+)( \(DE\))";
+                        var pattern2 = @"(EUR )([0-9]+.[0-9]+)";
+
+                        if (Regex.IsMatch(htmlData, pattern))
                         {
-                            str = str.Substring(0, i);
+                            var matches = Regex.Matches(htmlData, pattern);
+                            str = matches[0].Groups[2].Value;
+                            byte[] bytes = Encoding.Default.GetBytes(str);
+                            str = Encoding.UTF8.GetString(bytes);
+                            str = System.Net.WebUtility.HtmlDecode(str);
+                            str = Regex.Replace(str, "<.*?>", " ").Trim();
                         }
-                        byte[] bytes = Encoding.Default.GetBytes(str);
-                        str = Encoding.UTF8.GetString(bytes);
-                        str = System.Net.WebUtility.HtmlDecode(str);
-                        str = Regex.Replace(str, "<.*?>", " ").Trim();
+                        else if(Regex.IsMatch(htmlData, pattern2))
+                        {
+                            var matches = Regex.Matches(htmlData, pattern2);
+                            str = matches[0].Groups[2].Value;
+                            byte[] bytes = Encoding.Default.GetBytes(str);
+                            str = Encoding.UTF8.GetString(bytes);
+                            str = System.Net.WebUtility.HtmlDecode(str);
+                            str = Regex.Replace(str, "<.*?>", " ").Trim();
+                        }
+                        else return str;
+                        
                     }
                 }
 
@@ -1907,13 +1931,13 @@ namespace Bibo_Verwaltung
 
                 htmlData = Regex.Replace(htmlData, @"\t|\n|\r", "");
                 htmlData = Regex.Replace(htmlData, "<a href=.*?>", "");
-                var genre = GetGenreNeu();
+                var genre = GetGenreNeu().Replace("[", "(").Replace("]", ")");
                 if (!genre.Equals(""))
                 {
                     cb_Genre.Text = genre;
                 }
 
-                var titel = GetTitelNeu();
+                var titel = GetTitelNeu().Replace("[", "(").Replace("]", ")");
                 if (!titel.Equals(""))
                 {
                     tb_Titel.Text = titel;
@@ -1946,13 +1970,13 @@ namespace Bibo_Verwaltung
                     cb_Autor.Text = autorstring.Substring(0, autorstring.Length - 2);
                 }
 
-                var ausgabe = GetAusgabeNeu();
+                var ausgabe = GetAusgabeNeu().Replace("[", "(").Replace("]", ")");
                 if (!ausgabe.Equals(""))
                 {
                     tb_Auflage.Text = ausgabe;
                 }
 
-                var verlag = GetVerlagNeu();
+                var verlag = GetVerlagNeu().Replace("[", "(").Replace("]", ")");
                 if (!verlag.Equals(""))
                 {
                     cb_Verlag.Text = verlag;
@@ -1976,7 +2000,7 @@ namespace Bibo_Verwaltung
                 {
                     tb_Neupreis.Text = preis;
                 }
-                var sprache = GetSpracheNeu();
+                var sprache = GetSpracheNeu().Replace("[", "(").Replace("]", ")");
                 if (!sprache.Equals(""))
                 {
                     cb_Sprache.Text = sprache;
@@ -1996,64 +2020,65 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MetroMessageBox.Show(this, "Es konnten zu dieser ISBN keine Informationen gefunden werden. Bitte überprüfen Sie ihre Eingabe nach Fehlern!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AutoLoadBuecherNachISBN();
+                //MetroMessageBox.Show(this, "Es konnten zu dieser ISBN keine Informationen gefunden werden. Bitte überprüfen Sie ihre Eingabe nach Fehlern!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
 
         }
-        //private void AutoLoadBuecherNachISBN()
-        //{
-        //    if (!tb_ISBN.Text.Equals("")&&ValidateNewISBN())
-        //    {
-        //        if (GetAutor().Count > 1)
-        //        {
-        //            checkbox_autor.Checked = true;
-        //        }
-        //        else
-        //        {
-        //            checkbox_autor.Checked = false;
-        //        }
-        //        string autorstring = "";
-        //        needAutor.Clear();
-        //        b.Autoren.Clear();
-        //        foreach (string s in GetAutor())
-        //        {
-        //            autorstring = autorstring + s + ", ";
-                    
-        //            b.Autoren.Add(s);
-        //            if (!b.Autor.IfContains(s))
-        //            {
-        //                needAutor.Add(s.Replace("[", "(").Replace("]", ")"));
-        //            }
-        //        }
-        //        if (!autorstring.Equals(""))
-        //        {
-        //            cb_Autor.Text = autorstring.Substring(0, autorstring.Length - 2);
-        //        }
-        //        if (b.Verlag.IfContains(GetVerlag()))
-        //        {
-        //            cb_Verlag.Text = GetVerlag().Replace("[", "(").Replace("]", ")");
-        //            ifVerlagExists = true;
-        //        }
-        //        else
-        //        {
-        //            cb_Verlag.Text = GetVerlag().Replace("[", "(").Replace("]", ")");
-        //            ifVerlagExists = false;
-        //        }
-        //        tb_Titel.Text = GetTitle().Replace("[", "(").Replace("]", ")");
-        //        picBox_Klein.ImageLocation = GetPicture();
-        //        ifDownloaded = true;
-        //        MetroMessageBox.Show(this,"Das Buch \"" + tb_Titel.Text + "\" wurde erfolgreich geladen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //    }
-        //    else if(tb_ISBN.Text.Equals(""))
-        //    {
-        //        MetroMessageBox.Show(this,"Bitte geben Sie eine ISBN ein!","Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //    }
-        //    else
-        //    {
-        //        MetroMessageBox.Show(this,"Es konnten zu dieser ISBN keine Informationen gefunden werden. Bitte überprüfen Sie ihre Eingabe nach Fehlern!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //    }
-        //}
+        private void AutoLoadBuecherNachISBN()
+        {
+            if (!tb_ISBN.Text.Equals("") && ValidateISBN())
+            {
+                if (GetAutor().Count > 1)
+                {
+                    checkbox_autor.Checked = true;
+                }
+                else
+                {
+                    checkbox_autor.Checked = false;
+                }
+                string autorstring = "";
+                needAutor.Clear();
+                b.Autoren.Clear();
+                foreach (string s in GetAutor())
+                {
+                    autorstring = autorstring + s + ", ";
+
+                    b.Autoren.Add(s);
+                    if (!b.Autor.IfContains(s))
+                    {
+                        needAutor.Add(s.Replace("[", "(").Replace("]", ")"));
+                    }
+                }
+                if (!autorstring.Equals(""))
+                {
+                    cb_Autor.Text = autorstring.Substring(0, autorstring.Length - 2);
+                }
+                if (b.Verlag.IfContains(GetVerlag()))
+                {
+                    cb_Verlag.Text = GetVerlag().Replace("[", "(").Replace("]", ")");
+                    ifVerlagExists = true;
+                }
+                else
+                {
+                    cb_Verlag.Text = GetVerlag().Replace("[", "(").Replace("]", ")");
+                    ifVerlagExists = false;
+                }
+                tb_Titel.Text = GetTitle().Replace("[", "(").Replace("]", ")");
+                picBox_Klein.ImageLocation = GetPicture();
+                ifDownloaded = true;
+                MetroMessageBox.Show(this, "Das Buch \"" + tb_Titel.Text + "\" wurde erfolgreich geladen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (tb_ISBN.Text.Equals(""))
+            {
+                MetroMessageBox.Show(this, "Bitte geben Sie eine ISBN ein!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "Es konnten zu dieser ISBN keine Informationen gefunden werden. Bitte überprüfen Sie ihre Eingabe nach Fehlern!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
