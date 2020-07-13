@@ -39,6 +39,7 @@
             this.lb_Benutzername = new MetroFramework.Controls.MetroLabel();
             this.tb_Benutzername = new MetroFramework.Controls.MetroTextBox();
             this.tLP_Top = new System.Windows.Forms.TableLayoutPanel();
+            this.cb_Security = new Bibo_Verwaltung.AdvancedComboBox();
             this.tLP_2 = new System.Windows.Forms.TableLayoutPanel();
             this.bt_Test = new MetroFramework.Controls.MetroButton();
             this.bt_Save = new MetroFramework.Controls.MetroButton();
@@ -47,7 +48,6 @@
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.metroLink1 = new MetroFramework.Controls.MetroLink();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            this.cb_Security = new Bibo_Verwaltung.AdvancedComboBox();
             this.tLP_Top.SuspendLayout();
             this.tLP_2.SuspendLayout();
             this.SuspendLayout();
@@ -306,6 +306,30 @@
             this.tLP_Top.TabIndex = 0;
             this.tLP_Top.TabStop = true;
             // 
+            // cb_Security
+            // 
+            this.cb_Security.BorderColor = System.Drawing.Color.Gray;
+            this.cb_Security.DataRowView = false;
+            this.cb_Security.DisplayMember = "1";
+            this.cb_Security.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cb_Security.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_Security.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cb_Security.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.cb_Security.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_Security, "Authentifizierungsvariante");
+            this.cb_Security.HighlightColor = System.Drawing.Color.Gray;
+            this.cb_Security.ItemHeight = 18;
+            this.cb_Security.Items.AddRange(new object[] {
+            "Windows Authentifizierung",
+            "SQL Authentifizierung"});
+            this.cb_Security.Location = new System.Drawing.Point(155, 63);
+            this.cb_Security.Name = "cb_Security";
+            this.helpProvider.SetShowHelp(this.cb_Security, true);
+            this.cb_Security.Size = new System.Drawing.Size(339, 24);
+            this.cb_Security.TabIndex = 3;
+            this.metroToolTip1.SetToolTip(this.cb_Security, "Wählen Sie hier Ihre gewünschte Authentifizierungsvariante.");
+            this.cb_Security.TextChanged += new System.EventHandler(this.Visibility);
+            // 
             // tLP_2
             // 
             this.tLP_2.AutoSize = true;
@@ -415,30 +439,6 @@
             this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
-            // 
-            // cb_Security
-            // 
-            this.cb_Security.BorderColor = System.Drawing.Color.Gray;
-            this.cb_Security.DataRowView = false;
-            this.cb_Security.DisplayMember = "1";
-            this.cb_Security.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cb_Security.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_Security.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cb_Security.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.cb_Security.FormattingEnabled = true;
-            this.helpProvider.SetHelpString(this.cb_Security, "Authentifizierungsvariante");
-            this.cb_Security.HighlightColor = System.Drawing.Color.Gray;
-            this.cb_Security.ItemHeight = 18;
-            this.cb_Security.Items.AddRange(new object[] {
-            "Windows Authentifizierung",
-            "SQL Authentifizierung"});
-            this.cb_Security.Location = new System.Drawing.Point(155, 63);
-            this.cb_Security.Name = "cb_Security";
-            this.helpProvider.SetShowHelp(this.cb_Security, true);
-            this.cb_Security.Size = new System.Drawing.Size(339, 24);
-            this.cb_Security.TabIndex = 3;
-            this.metroToolTip1.SetToolTip(this.cb_Security, "Wählen Sie hier Ihre gewünschte Authentifizierungsvariante.");
-            this.cb_Security.TextChanged += new System.EventHandler(this.Visibility);
             // 
             // w_s_einstellungen
             // 

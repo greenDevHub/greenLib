@@ -1388,6 +1388,8 @@
             // 
             // bt_exemplar
             // 
+            this.bt_exemplar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_exemplar.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_exemplar.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.bt_exemplar.Location = new System.Drawing.Point(548, 3);
