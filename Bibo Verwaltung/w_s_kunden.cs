@@ -365,18 +365,28 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                if (mdtp_GebDat.Value.Date != DateTime.Now.Date)
+                if (mdtp_GebDat.Value.Date != DateTime.Now.Date && tb_KundenID.Text != "")
                 {
-                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%' AND Geburtsdatum LIKE '{9}%' AND [Kunden-ID] LIKE '%{10}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, mdtp_GebDat.Value.Date.ToShortDateString(), tb_KundenID.Text);
+                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%' AND Convert(Geburtsdatum, System.String) LIKE '{9}%' AND Convert([Kunden-ID], System.String) LIKE '%{10}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, mdtp_GebDat.Value.Date.ToShortDateString(), tb_KundenID.Text);
+
+                }
+                else if (tb_KundenID.Text != "")
+                {
+                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%' AND Convert([Kunden-ID], System.String) LIKE '%{9}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, tb_KundenID.Text);
+
+                }
+                else if (mdtp_GebDat.Value.Date != DateTime.Now.Date && tb_KundenID.Text == "")
+                {
+                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%' AND Convert(Geburtsdatum, System.String) LIKE '{9}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, mdtp_GebDat.Value.Date.ToShortDateString());
 
                 }
                 else
                 {
-                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%' AND [Kunden-ID] LIKE '%{9}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, tb_KundenID.Text);
+                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
 
                 }
             }
-            catch
+            catch(Exception ex)
             {
 
             }
@@ -1105,18 +1115,31 @@ namespace Bibo_Verwaltung
                     }
                 });
             }
-            catch { }
+            catch {
+                metroProgressSpinner1.Visible = false;
+                metroProgressSpinner2.Visible = false;
+                gv_faecher.Visible = true;
+                gv_Kunde.Visible = true;
+            }
         }
 
         private void BackgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
-            gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
-            KundenFilter();
-            if(kundenID != "")
+            try
             {
-                LoadKunde(kundenID);
+                gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
+                gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
+                KundenFilter();
+                if (kundenID != "")
+                {
+                    LoadKunde(kundenID);
+                }
             }
+            catch
+            {
+
+            }
+
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
@@ -1294,6 +1317,6 @@ namespace Bibo_Verwaltung
         private void Cb_klasse_KeyDown(object sender, KeyEventArgs e)
         {
             if (readOnly) e.SuppressKeyPress = true;
-        }
+        }        
     }
 }

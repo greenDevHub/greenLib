@@ -113,7 +113,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public Kunde()
         {
-            FillObject();
+            FillObjectNeu();
         }
 
         /// <summary>
@@ -123,8 +123,8 @@ namespace Bibo_Verwaltung
         {
             this.kundenid = kundenid;
             LoadKunde();
-            LoadFaecher();
-            FillObject();
+            LoadFaecherNeu();
+            FillObjectNeu();
         }
         #endregion
 
@@ -163,6 +163,32 @@ namespace Bibo_Verwaltung
             con.Close();
         }
 
+        private void LoadFaecherNeu()
+        {
+            Faecher.Clear();
+            LeistungskursListe.Clear();
+            if (con.ConnectError()) return;
+            string RawCommand = "use greenLib Select f_kurzform from t_s_fach_kunde left join t_s_faecher on f_id = fs_fachid WHERE fs_kundenid = @0 and fs_lk = 1";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, KundenID);
+            while (dr.Read())
+            {
+                LeistungskursListe.Add(dr["f_kurzform"].ToString());
+            }
+            dr.Close();
+            RawCommand = "use greenLib Select f_kurzform from t_s_fach_kunde left join t_s_faecher on f_id = fs_fachid WHERE fs_kundenid = @0";
+            dr = con.ExcecuteCommand(RawCommand, KundenID);
+            while (dr.Read())
+            {
+                Faecher.Add(dr["f_kurzform"].ToString());
+            }
+            for (int i = LeistungskursListe.Count; i < 2; i++)
+            {
+                LeistungskursListe.Add("");
+            }
+            dr.Close();
+            con.Close();
+
+        }
         private void LoadFaecher()
         {
             Faecher.Clear();
@@ -204,6 +230,22 @@ namespace Bibo_Verwaltung
             catch { }
         }
 
+        private void FillObjectNeu()
+        {
+            try
+            {
+                if (con.ConnectError()) return;
+                string RawCommand = "use greenLib SELECT kunde_ID as 'Kunden-ID', kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_geburtsdatum as 'Geburtsdatum', kunde_strasse as 'Straße', kunde_hausnummer as 'Hausnummer', kunde_postleitzahl as 'Postleitzahl', kunde_ort as 'Wohnort', k_bezeichnung as 'Klasse', kunde_mail as 'Mail', kunde_telefonnummer as 'Telefonnummer', stuff(( SELECT distinct ', '+ cast(f_kurzform as varchar(10)) FROM t_s_fach_kunde left join t_s_faecher on f_id = fs_fachid where fs_kundenid = kunde_id and fs_lk=1 FOR XML PATH('')),1,1,'') + ',' + stuff(( SELECT distinct ', '+ cast(f_kurzform as varchar(10)) FROM t_s_fach_kunde left join t_s_faecher on f_id = fs_fachid where fs_kundenid = kunde_id and fs_lk=0 FOR XML PATH('')),1,1,'') as 'Fächer' FROM [dbo].[t_s_kunden] left join t_s_klassen on k_id=kunde_klasse WHERE kunde_activated = 1";
+                adapter = new SqlDataAdapter(RawCommand, con.Con);
+                adapter.Fill(ds);
+                con.Close();
+            }
+            catch
+            {
+
+            }
+        }
+
         /// <summary>
         /// Entfernt den gesamten Inhalt im DataSet 
         /// </summary>
@@ -222,67 +264,69 @@ namespace Bibo_Verwaltung
         public void FillGrid(ref MetroGrid grid, object value = null)
         {
             ClearDataSource();
-            FillObject();
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Kunden-ID");
-            dt.Columns.Add("Vorname");
-            dt.Columns.Add("Nachname");
-            dt.Columns.Add("Geburtsdatum");
-            dt.Columns.Add("Straße");
-            dt.Columns.Add("Hausnummer");
-            dt.Columns.Add("Postleitzahl");
-            dt.Columns.Add("Wohnort");
-            dt.Columns.Add("Klasse");
-            dt.Columns.Add("Mail");
-            dt.Columns.Add("Telefonnummer");
-            dt.Columns.Add("Fächer");
+            FillObjectNeu();
+            //FillObject();
+            //DataTable dt = new DataTable();
+            //dt.Columns.Add("Kunden-ID");
+            //dt.Columns.Add("Vorname");
+            //dt.Columns.Add("Nachname");
+            //dt.Columns.Add("Geburtsdatum");
+            //dt.Columns.Add("Straße");
+            //dt.Columns.Add("Hausnummer");
+            //dt.Columns.Add("Postleitzahl");
+            //dt.Columns.Add("Wohnort");
+            //dt.Columns.Add("Klasse");
+            //dt.Columns.Add("Mail");
+            //dt.Columns.Add("Telefonnummer");
+            //dt.Columns.Add("Fächer");
 
-            foreach (DataRow row in ds.Tables[0].Rows)
-            {
-                KundenID = row[ds.Tables[0].Columns.IndexOf("Kunden-ID")].ToString();
-                Vorname = row[ds.Tables[0].Columns.IndexOf("Vorname")].ToString();
-                Nachname = row[ds.Tables[0].Columns.IndexOf("Nachname")].ToString();
-                Gd = (DateTime)row[ds.Tables[0].Columns.IndexOf("Geburtsdatum")];
-                Strasse = row[ds.Tables[0].Columns.IndexOf("Straße")].ToString();
-                Hausnummer = row[ds.Tables[0].Columns.IndexOf("Hausnummer")].ToString();
-                Postleitzahl = row[ds.Tables[0].Columns.IndexOf("Postleitzahl")].ToString();
-                Ort = row[ds.Tables[0].Columns.IndexOf("Wohnort")].ToString();
-                Klasse.Klassename = row[ds.Tables[0].Columns.IndexOf("Klasse")].ToString();
-                Mail = row[ds.Tables[0].Columns.IndexOf("Mail")].ToString();
-                Telefonnummer = row[ds.Tables[0].Columns.IndexOf("Telefonnummer")].ToString();
-                LoadFaecher();
-                DataRow dataRow = dt.NewRow();
-                dataRow["Kunden-ID"] = KundenID;
-                dataRow["Vorname"] = Vorname;
-                dataRow["Nachname"] = Nachname;
-                dataRow["Geburtsdatum"] = Gd.ToShortDateString();
-                dataRow["Straße"] = Strasse;
-                dataRow["Hausnummer"] = Hausnummer;
-                dataRow["Postleitzahl"] = Postleitzahl;
-                dataRow["Wohnort"] = Ort;
-                dataRow["Klasse"] = Klasse.Klassename;
-                dataRow["Mail"] = Mail;
-                dataRow["Telefonnummer"] = Telefonnummer;
-                string fach = "";
-                foreach (string s in Faecher)
-                {
-                    fach = fach + s + ", ";
-                }
-                try
-                {
-                    if (fach.Length >= 2)
-                    {
-                        fach = fach.Substring(0, fach.Length - 2);
-                    }
-                }
-                catch
-                {
-                    fach = "";
-                }
-                dataRow["Fächer"] = fach;
-                dt.Rows.Add(dataRow);
-            }
-            grid.DataSource = dt;
+            //foreach (DataRow row in ds.Tables[0].Rows)
+            //{
+            //    KundenID = row[ds.Tables[0].Columns.IndexOf("Kunden-ID")].ToString();
+            //    Vorname = row[ds.Tables[0].Columns.IndexOf("Vorname")].ToString();
+            //    Nachname = row[ds.Tables[0].Columns.IndexOf("Nachname")].ToString();
+            //    Gd = (DateTime)row[ds.Tables[0].Columns.IndexOf("Geburtsdatum")];
+            //    Strasse = row[ds.Tables[0].Columns.IndexOf("Straße")].ToString();
+            //    Hausnummer = row[ds.Tables[0].Columns.IndexOf("Hausnummer")].ToString();
+            //    Postleitzahl = row[ds.Tables[0].Columns.IndexOf("Postleitzahl")].ToString();
+            //    Ort = row[ds.Tables[0].Columns.IndexOf("Wohnort")].ToString();
+            //    Klasse.Klassename = row[ds.Tables[0].Columns.IndexOf("Klasse")].ToString();
+            //    Mail = row[ds.Tables[0].Columns.IndexOf("Mail")].ToString();
+            //    Telefonnummer = row[ds.Tables[0].Columns.IndexOf("Telefonnummer")].ToString();
+            //    LoadFaecher();
+            //    DataRow dataRow = dt.NewRow();
+            //    dataRow["Kunden-ID"] = KundenID;
+            //    dataRow["Vorname"] = Vorname;
+            //    dataRow["Nachname"] = Nachname;
+            //    dataRow["Geburtsdatum"] = Gd.ToShortDateString();
+            //    dataRow["Straße"] = Strasse;
+            //    dataRow["Hausnummer"] = Hausnummer;
+            //    dataRow["Postleitzahl"] = Postleitzahl;
+            //    dataRow["Wohnort"] = Ort;
+            //    dataRow["Klasse"] = Klasse.Klassename;
+            //    dataRow["Mail"] = Mail;
+            //    dataRow["Telefonnummer"] = Telefonnummer;
+            //    string fach = "";
+            //    foreach (string s in Faecher)
+            //    {
+            //        fach = fach + s + ", ";
+            //    }
+            //    try
+            //    {
+            //        if (fach.Length >= 2)
+            //        {
+            //            fach = fach.Substring(0, fach.Length - 2);
+            //        }
+            //    }
+            //    catch
+            //    {
+            //        fach = "";
+            //    }
+            //    dataRow["Fächer"] = fach;
+            //    dt.Rows.Add(dataRow);
+            //}
+            //grid.DataSource = dt;
+            grid.DataSource = ds.Tables[0];
         }
 
         /// <summary>

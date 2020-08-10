@@ -173,7 +173,6 @@ namespace Bibo_Verwaltung
             try
             {
                 ClearRueckList();
-                Load_Info(inputList[0].ToString());
                 DataRow relation;
                 string[] exemlarDetails = new string[3];
 
@@ -186,6 +185,7 @@ namespace Bibo_Verwaltung
 
                 for (int i = 0; i <= inputList.Length - 1; i++)
                 {
+                    Load_Info(inputList[i].ToString());
                     exemlarDetails[0] = ExemplarID;
                     exemlarDetails[1] = ZustandStart;
                     exemlarDetails[2] = ZustandEnde;
@@ -283,7 +283,7 @@ namespace Bibo_Verwaltung
             {
                 exemplar = new Exemplar(RueckListe.Rows[0][0].ToString());
                 exemplar_info = new Buch(exemplar.ISBN);
-                resultString = resultString + "das Buch: " + Environment.NewLine + Environment.NewLine + exemplar_info.Titel + ", " + Environment.NewLine + Environment.NewLine;
+                resultString = resultString + "das Buch: " + Environment.NewLine + Environment.NewLine + TrimText(exemplar_info.Titel, 30) + ", " + Environment.NewLine + Environment.NewLine;
             }
             else
             {
@@ -342,7 +342,6 @@ namespace Bibo_Verwaltung
             {
                 DataRow relation;
                 string[] exemlarDetails = new string[3];
-
                 exemlarDetails[0] = ExemplarID;
                 exemlarDetails[1] = ZustandStart;
                 exemlarDetails[2] = ZustandEnde;

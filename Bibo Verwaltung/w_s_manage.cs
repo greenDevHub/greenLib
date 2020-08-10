@@ -42,7 +42,7 @@ namespace Bibo_Verwaltung
             }
 
             Benutzer user = new Benutzer(userName);
-            this.currentUser = userName + " (" + user.Rechte + ")";
+            this.currentUser = userName;
             this.currentModus = modus;
             if (user.Rechteid.Equals("0"))
             {
@@ -262,15 +262,19 @@ namespace Bibo_Verwaltung
 
         private void Mbt_Import_Click(object sender, EventArgs e)
         {
-            MetroMessageBox.Show(this, "Diese Funktion ist in der aktuellen Version noch nicht verfügbar.", "Noch nicht verfügbar.", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //Form import;
-            //if (currentModus == "Fach")
-            //{
-            //    w_s_schuelerimport Import = new w_s_schuelerimport("t_s_faecher", true, currentUser,msm_manage);
-            //    msm_manage.Clone(Import);
-            //    Import.ShowDialog(this);
-            //    Import.Dispose();
-            //}
+            if (currentModus == "Fach")
+            {
+                w_s_schuelerimport Import = new w_s_schuelerimport("t_s_faecher", true, currentUser, msm_manage);
+                msm_manage.Clone(Import);
+                Import.ShowDialog(this);
+                Import.Dispose();
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "Diese Funktion ist in der aktuellen Version noch nicht verfügbar.", "Noch nicht verfügbar.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
             //else if (currentModus == "Sprache")
             //{
             //    import = new w_s_importAssist("t_s_sprache", msm_manage);

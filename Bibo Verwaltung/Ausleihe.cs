@@ -188,7 +188,7 @@ namespace Bibo_Verwaltung
                 sb.Append("das Buch: ");
                 sb.AppendLine();
                 sb.AppendLine();
-                sb.Append(exemplar.Titel);
+                sb.Append(TrimText(exemplar.Titel, 30));
                 sb.Append(", ");
                 sb.AppendLine();
                 sb.AppendLine();

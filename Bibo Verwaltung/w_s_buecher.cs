@@ -56,6 +56,7 @@ namespace Bibo_Verwaltung
             gb_zoom.Visible = false;
             comboBox1.Visible = false;
             comboBox1.DropDownHeight = 1;
+            tb_ISBN.Focus();
         }
         Color fc = Color.Black;
         Color bc = Color.White;
@@ -92,6 +93,8 @@ namespace Bibo_Verwaltung
             comboBox1.Visible = false;
             comboBox1.DropDownHeight = 1;
             this.bool1 = bool1;
+            tb_ISBN.Focus();
+
         }
         #endregion
 
@@ -711,6 +714,9 @@ namespace Bibo_Verwaltung
         private void bt_clear_buecher_Click(object sender, EventArgs e)
         {
             Clear_All();
+            rb_Add_Buch.Checked = true;
+            tb_ISBN.Focus();
+            
             //rb_Add_Buch.Checked = true;
         }
 
@@ -1001,23 +1007,30 @@ namespace Bibo_Verwaltung
             Modus();
             
             Objekt_White();
+            tb_ISBN.Focus();
+
         }
 
         private void rb_Edit_CheckedChanged(object sender, EventArgs e)
         {
             Modus();
             Objekt_White();
+            tb_ISBN.Focus();
+
         }
 
         private void rb_Delete_CheckedChanged(object sender, EventArgs e)
         {
             Modus();
             Objekt_White();
+            tb_ISBN.Focus();
+
         }
         private void Rb_search_CheckedChanged(object sender, EventArgs e)
         {
             Modus();
             Objekt_White();
+            tb_ISBN.Focus();
         }
         #endregion
 
@@ -1914,10 +1927,14 @@ namespace Bibo_Verwaltung
                 string bildURL = "https://portal.dnb.de/opac/mvb/cover.htm?isbn=" + tb_ISBN.Text;
                 string fileURL = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\Downloads\\" + tb_ISBN.Text + "_DOWNLOAD.jpg";
                 WebClient client = new WebClient();
+                client.UseDefaultCredentials = true;
+                client.Proxy = WebRequest.DefaultWebProxy;
+                client.Credentials = CredentialCache.DefaultCredentials;
+                client.Proxy.Credentials = CredentialCache.DefaultCredentials;
                 client.DownloadFile(bildURL, fileURL);
                 return fileURL;
             }
-            catch
+            catch(Exception ex)
             {
                 MetroMessageBox.Show(this, "Es konnte kein Bild geladen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return "";
@@ -2513,12 +2530,20 @@ namespace Bibo_Verwaltung
             {
                 //eventueller Fix vom Problem der einfrierenden Ladeanimation
                 //Prüfung notwendig
-                BeginInvoke((Action)delegate ()
+                try
                 {
-                    metroProgressSpinner1.Visible = false;
-                    Grid_Buch.Visible = true;
-                    MetroFramework.MetroMessageBox.Show(this, "Fehler beim Laden der Daten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                });
+                    BeginInvoke((Action)delegate ()
+                    {
+                        metroProgressSpinner1.Visible = false;
+                        Grid_Buch.Visible = true;
+                        MetroFramework.MetroMessageBox.Show(this, "Fehler beim Laden der Daten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    });
+                }
+                catch
+                {
+
+                }
+
             }
 
         }

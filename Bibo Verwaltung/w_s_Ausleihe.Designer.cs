@@ -64,6 +64,9 @@
             this.lb_Kunden = new MetroFramework.Controls.MetroLabel();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.msm_ausleihe = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.timer_input = new System.Windows.Forms.Timer(this.components);
+            this.spinner = new MetroFramework.Controls.MetroProgressSpinner();
+            this.worker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
             this.gb_Exemplar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).BeginInit();
@@ -596,6 +599,7 @@
             this.metroPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroPanel2.Controls.Add(this.spinner);
             this.metroPanel2.Controls.Add(this.tb_NName);
             this.metroPanel2.Controls.Add(this.lb_Suche);
             this.metroPanel2.Controls.Add(this.tb_VName);
@@ -635,6 +639,26 @@
             // 
             this.msm_ausleihe.Owner = this;
             this.msm_ausleihe.Style = MetroFramework.MetroColorStyle.Green;
+            // 
+            // timer_input
+            // 
+            this.timer_input.Interval = 1000;
+            this.timer_input.Tick += new System.EventHandler(this.timer_input_Tick);
+            // 
+            // spinner
+            // 
+            this.spinner.Location = new System.Drawing.Point(183, 33);
+            this.spinner.Maximum = 100;
+            this.spinner.Name = "spinner";
+            this.spinner.Size = new System.Drawing.Size(164, 164);
+            this.spinner.TabIndex = 44;
+            this.spinner.TabStop = false;
+            this.spinner.UseSelectable = true;
+            this.spinner.Visible = false;
+            // 
+            // worker
+            // 
+            this.worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.worker_DoWork);
             // 
             // w_s_ausleihe
             // 
@@ -704,5 +728,8 @@
         private MetroFramework.Controls.MetroLink llb_gesListe;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
         private MetroFramework.Components.MetroStyleManager msm_ausleihe;
+        private System.Windows.Forms.Timer timer_input;
+        private MetroFramework.Controls.MetroProgressSpinner spinner;
+        private System.ComponentModel.BackgroundWorker worker;
     }
 }

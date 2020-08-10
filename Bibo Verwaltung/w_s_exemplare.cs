@@ -452,10 +452,44 @@ namespace Bibo_Verwaltung
         private void tb_isbn_TextChanged(object sender, EventArgs e)
         {
             tb_ISBN.BackColor = Color.White;
-        }
 
+        }
+        static int _checksum_ean8(String data)
+        {
+            // Test string for correct length
+            if (data.Length != 7 && data.Length != 8)
+                return -1;
+            // Test string for being numeric
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (data[i] < 0x30 || data[i] > 0x39)
+                    return -1;
+            }
+            int sum = 0;
+            for (int i = 6; i >= 0; i--)
+            {
+                int digit = data[i] - 0x30;
+                if ((i & 0x01) == 1)
+                    sum += digit;
+                else
+                    sum += digit * 3;
+            }
+            int mod = sum % 10;
+            return mod == 0 ? 0 : 10 - mod;
+        }
         private void tb_id_TextChanged(object sender, EventArgs e)
         {
+            #region Buchcode parsen
+            if (tb_ID.Text.Length == 8)
+            {
+                string seven = tb_ID.Text.Substring(0, 7);
+                string eight = tb_ID.Text.Substring(7, 1);
+                if (_checksum_ean8(seven).ToString().Equals(eight))
+                {
+                    tb_ID.Text = int.Parse(seven).ToString();
+                }
+            }
+            #endregion
             Filter();
             tb_ID.BackColor = Color.White;
         }

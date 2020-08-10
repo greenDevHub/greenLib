@@ -63,11 +63,13 @@ namespace Bibo_Verwaltung
                 bt_Zu_aendern.Enabled = true;
                 bt_Rueckgabe.Enabled = true;
                 zustand.FillCombobox(ref cb_Zustand, -1);
-                foreach (string exemplar in list)
-                {
-                    tb_BuchCode.Text = exemplar;
-                    EnterBuch();
-                }
+                rueckgabe.FillRueckListe(list);
+                rueckgabe.SetSlider(ref rueckList_Slider, ref tb_listVon, ref tb_listBis);
+                //foreach (string exemplar in list)
+                //{
+                //    tb_BuchCode.Text = exemplar;
+                //    EnterBuch();
+                //}
             }
         }
         #endregion
@@ -277,7 +279,8 @@ namespace Bibo_Verwaltung
                         }
                         rueckgabe.Verfuegbar = buch_exemplar.IsSpecificAvailable();
                         llb_BuchTitel.Enabled = true;
-                        llb_BuchTitel.Text = rueckgabe.TrimText(new Buch(buch_exemplar.ISBN).Titel, 30);
+                        llb_BuchTitel.Text =rueckgabe.TrimText( buch_exemplar.Titel,30);
+                        //llb_BuchTitel.Text = rueckgabe.TrimText(new Buch(buch_exemplar.ISBN).Titel, 30);
                         cb_Zustand.SelectedValue = buch_exemplar.Zustand.ZustandID;
                         rueckgabe.ZustandStart = buch_exemplar.Zustand.Zustandname;
                         rueckgabe.ZustandEnde = buch_exemplar.Zustand.Zustandname;
@@ -335,6 +338,7 @@ namespace Bibo_Verwaltung
         {
             if (tb_BuchCode.Text != "")
             {
+
                 if (!rueckgabe.Verfuegbar)
                 {
                     if (!rueckgabe.CheckRueckList())
@@ -390,7 +394,7 @@ namespace Bibo_Verwaltung
                     foreach (DataRow row in rueckgabe.RueckListe.Rows)
                     {
                         rueckgabe.Load_Info(row[0].ToString());
-                        rueckgabe.Execute_Rueckgabe(row[0].ToString(), rueckgabe.KID, row[1].ToString(), zustand.GetZustandsID(row[2].ToString()), row[2].ToString(), rueckgabe.Leihdatum.ToShortDateString(), DateTime.Now.Date.ToShortDateString());
+                        rueckgabe.Execute_Rueckgabe(rueckgabe.ExemplarID.ToString(), rueckgabe.KID, rueckgabe.ZustandStart.ToString(), zustand.GetZustandsID(rueckgabe.ZustandEnde.ToString()), rueckgabe.ZustandEnde.ToString(), rueckgabe.Leihdatum.ToShortDateString(), DateTime.Now.Date.ToShortDateString());
                     }
                     MetroMessageBox.Show(this, "Die Buchrückgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -409,7 +413,27 @@ namespace Bibo_Verwaltung
         #region Componenten-Aktionen
         private void tb_BuchCode_TextChanged(object sender, EventArgs e)
         {
-            ShowBuchResults();
+            if (tb_BuchCode.Text.Length == 8 && _checksum_ean8(tb_BuchCode.Text.Substring(0, 7)).ToString().Equals(tb_BuchCode.Text.Substring(7, 1)))
+            {
+                tb_BuchCode.Text = int.Parse(tb_BuchCode.Text.Substring(0, 7)).ToString();
+                ShowBuchResults();
+
+            }
+            else if( tb_BuchCode.Text == "")
+            {
+                ShowBuchResults();
+
+            }
+            else if (rueckgabe.RueckListe.AsEnumerable().Any(row => tb_BuchCode.Text == row.Field<String>("Column1")))
+            {
+                ShowBuchResults();
+            }
+            else
+            {
+                timer_input.Stop();
+                timer_input.Start();
+
+            }
         }
 
         private void llb_Buch_LinkClicked(object sender, EventArgs e)
@@ -544,6 +568,12 @@ namespace Bibo_Verwaltung
         private void MetroToolTip1_Popup(object sender, PopupEventArgs e)
         {
             e.ToolTipSize = new Size(e.ToolTipSize.Width + 32, e.ToolTipSize.Height);
+        }
+
+        private void timer_input_Tick(object sender, EventArgs e)
+        {
+            ShowBuchResults();
+            timer_input.Stop();
         }
     }
 }

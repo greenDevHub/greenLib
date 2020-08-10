@@ -46,6 +46,10 @@ namespace Bibo_Verwaltung
             }
             this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             faecher.FillGrid(ref gv_Faecher);
+            foreach (DataGridViewColumn column in gv_Faecher.Columns) 
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
         #region Fenster-Methoden
@@ -295,12 +299,25 @@ namespace Bibo_Verwaltung
             {
                 if (gv_Faecher.CurrentRow != null)
                 {
-                    bt_back.Enabled = true;
-                    gv_Buecher.Enabled = true;
-                    gv_Faecher.Enabled = false;
-                    bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[e.RowIndex].Cells["ID"].Value.ToString(),lk);
-                    FillBuecherList();
-                    bt_Bearbeiten.Text = "Übernehmen";
+                    try
+                    {
+                        bt_back.Enabled = true;
+                        gv_Buecher.Enabled = true;
+                        gv_Faecher.Enabled = false;
+                        bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[e.RowIndex].Cells["ID"].Value.ToString(), lk);
+                        FillBuecherList();
+                        bt_Bearbeiten.Text = "Übernehmen";
+                    }
+                    catch
+                    {
+                        bt_back.Enabled = false;
+                        gv_Buecher.Enabled = false;
+                        gv_Faecher.Enabled = true;
+                        bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
+                        LoadBuecher();
+                        tb_fach.Clear();
+                    }
+
                 }
             }
         }

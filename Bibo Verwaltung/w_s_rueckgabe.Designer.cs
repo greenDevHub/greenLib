@@ -51,9 +51,7 @@
             this.lb_Kunde = new MetroFramework.Controls.MetroLabel();
             this.lb_AusleiheEnde = new MetroFramework.Controls.MetroLabel();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
-            this.cb_Zustand = new Bibo_Verwaltung.AdvancedComboBox();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.tpanel = new Bibo_Verwaltung.TransparentPanel();
             this.llb_gesListe = new MetroFramework.Controls.MetroLink();
             this.rueckList_Slider = new System.Windows.Forms.HScrollBar();
             this.tb_listBis = new MetroFramework.Controls.MetroTextBox();
@@ -65,6 +63,9 @@
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.msm_rueckgabe = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.timer_input = new System.Windows.Forms.Timer(this.components);
+            this.tpanel = new Bibo_Verwaltung.TransparentPanel();
+            this.cb_Zustand = new Bibo_Verwaltung.AdvancedComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Verlauf)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).BeginInit();
             this.metroPanel1.SuspendLayout();
@@ -395,28 +396,6 @@
             this.lb_AusleiheEnde.Text = "Rückgabe fällig:";
             this.lb_AusleiheEnde.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // cb_Zustand
-            // 
-            this.cb_Zustand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cb_Zustand.BorderColor = System.Drawing.Color.Green;
-            this.cb_Zustand.DataRowView = true;
-            this.cb_Zustand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_Zustand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cb_Zustand.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.cb_Zustand.FormattingEnabled = true;
-            this.helpProvider.SetHelpString(this.cb_Zustand, "Hier wird der letzte Zustand des ausgeliehen Buches angezeigt. Ändern sie diesen " +
-        "wenn sich der Zustand geändert hat.");
-            this.cb_Zustand.HighlightColor = System.Drawing.Color.Green;
-            this.cb_Zustand.ItemHeight = 18;
-            this.cb_Zustand.Location = new System.Drawing.Point(115, 153);
-            this.cb_Zustand.Name = "cb_Zustand";
-            this.helpProvider.SetShowHelp(this.cb_Zustand, true);
-            this.cb_Zustand.Size = new System.Drawing.Size(165, 24);
-            this.cb_Zustand.TabIndex = 5;
-            this.cb_Zustand.TabStop = false;
-            this.metroToolTip1.SetToolTip(this.cb_Zustand, "Wählen Sie einen neuen Zustand bei einer Zustandsänderung.");
-            // 
             // metroPanel1
             // 
             this.metroPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -453,13 +432,6 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
-            // 
-            // tpanel
-            // 
-            this.tpanel.Location = new System.Drawing.Point(115, 153);
-            this.tpanel.Name = "tpanel";
-            this.tpanel.Size = new System.Drawing.Size(165, 24);
-            this.tpanel.TabIndex = 48;
             // 
             // llb_gesListe
             // 
@@ -641,6 +613,40 @@
             this.msm_rueckgabe.Owner = this;
             this.msm_rueckgabe.Style = MetroFramework.MetroColorStyle.Green;
             // 
+            // timer_input
+            // 
+            this.timer_input.Interval = 1000;
+            this.timer_input.Tick += new System.EventHandler(this.timer_input_Tick);
+            // 
+            // tpanel
+            // 
+            this.tpanel.Location = new System.Drawing.Point(115, 153);
+            this.tpanel.Name = "tpanel";
+            this.tpanel.Size = new System.Drawing.Size(165, 24);
+            this.tpanel.TabIndex = 48;
+            // 
+            // cb_Zustand
+            // 
+            this.cb_Zustand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cb_Zustand.BorderColor = System.Drawing.Color.Green;
+            this.cb_Zustand.DataRowView = true;
+            this.cb_Zustand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_Zustand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cb_Zustand.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.cb_Zustand.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_Zustand, "Hier wird der letzte Zustand des ausgeliehen Buches angezeigt. Ändern sie diesen " +
+        "wenn sich der Zustand geändert hat.");
+            this.cb_Zustand.HighlightColor = System.Drawing.Color.Green;
+            this.cb_Zustand.ItemHeight = 18;
+            this.cb_Zustand.Location = new System.Drawing.Point(115, 153);
+            this.cb_Zustand.Name = "cb_Zustand";
+            this.helpProvider.SetShowHelp(this.cb_Zustand, true);
+            this.cb_Zustand.Size = new System.Drawing.Size(165, 24);
+            this.cb_Zustand.TabIndex = 5;
+            this.cb_Zustand.TabStop = false;
+            this.metroToolTip1.SetToolTip(this.cb_Zustand, "Wählen Sie einen neuen Zustand bei einer Zustandsänderung.");
+            // 
             // w_s_rueckgabe
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -706,6 +712,7 @@
         private MetroFramework.Components.MetroToolTip metroToolTip1;
         private MetroFramework.Components.MetroStyleManager msm_rueckgabe;
         private TransparentPanel tpanel;
+        private System.Windows.Forms.Timer timer_input;
     }
 }
 
