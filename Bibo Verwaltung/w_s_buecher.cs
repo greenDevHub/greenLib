@@ -2521,6 +2521,12 @@ namespace Bibo_Verwaltung
                 }
                 BeginInvoke((Action)delegate ()
                 {
+                    Grid_Buch.DataSource = null;
+                    Grid_Buch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                    Grid_Buch.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+                    Grid_Buch.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+                    Grid_Buch.AllowUserToResizeColumns = true;
+                    Grid_Buch.RowHeadersVisible = false;
                     Grid_Buch.DataSource = dtBuch;
                     metroProgressSpinner1.Visible = false;
                     Grid_Buch.Visible = true;

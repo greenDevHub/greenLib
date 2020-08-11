@@ -468,6 +468,7 @@ namespace Bibo_Verwaltung
                 + "buch_titel as 'Titel',"
                 + "ger_name as 'Genre',"
                 + "ver_name as 'Verlag',"
+                + "stuff(( SELECT distinct ', '+ cast(au_autor as varchar(512)) FROM t_s_buch_autor left join t_s_autor on au_id = ba_autorid where ba_isbn = buch_isbn FOR XML PATH('')),1,1,'') as 'Autor',"
                 + "buch_erscheinungsdatum as 'Erscheinungsdatum',"
                 + "sprach_name as 'Sprache',"
                 + "buch_auflage as 'Auflage',"
@@ -480,29 +481,6 @@ namespace Bibo_Verwaltung
             adapter2 = new SqlDataAdapter(RawCommand, con.Con);
             adapter2.Fill(ds);
             adapter2.Fill(dt);
-            //if (ds2.Tables[0].Columns.Contains("Autor"))
-            //{
-            //    ds2.Tables[0].Columns.RemoveAt(ds2.Tables[0].Columns.IndexOf("Autor"));
-            //}
-            //ds2.Tables[0].Columns.Add("Autor", typeof(System.String));
-            //foreach (DataRow row in ds2.Tables[0].Rows)
-            //{
-            //    string text = "";
-            //    foreach (string s in AutorListe.GetNames(row["AutorlisteID"].ToString()))
-            //    {
-            //        if (s != null && !s.Equals(""))
-            //        {
-            //            text = text + s + ", ";
-            //        }
-            //    }
-            //    if (text.Length > 2)
-            //    {
-            //        text = text.Substring(0, text.Length - 2);
-            //    }
-            //    row["Autor"] = text;
-            //}
-            //ds2.Tables[0].Columns["Autor"].SetOrdinal(3);
-
             con.Close();
         }
 
@@ -569,56 +547,56 @@ namespace Bibo_Verwaltung
         {
             ClearDataSource();
             FillObjectBuch();
-            DataTable dt = new DataTable();
-            dt.Columns.Add("ISBN");
-            dt.Columns.Add("Titel");
-            dt.Columns.Add("Genre");
-            dt.Columns.Add("Autor");
-            dt.Columns.Add("Verlag");
-            dt.Columns.Add("Erscheinungsdatum");
-            dt.Columns.Add("Sprache");
-            dt.Columns.Add("Auflage");
-            dt.Columns.Add("Neupreis");
-            dt.Columns.Add("Bild");
-            dt.Columns.Add("Anzahl Exemplare");
+            //DataTable dt = new DataTable();
+            //dt.Columns.Add("ISBN");
+            //dt.Columns.Add("Titel");
+            //dt.Columns.Add("Genre");
+            //dt.Columns.Add("Autor");
+            //dt.Columns.Add("Verlag");
+            //dt.Columns.Add("Erscheinungsdatum");
+            //dt.Columns.Add("Sprache");
+            //dt.Columns.Add("Auflage");
+            //dt.Columns.Add("Neupreis");
+            //dt.Columns.Add("Bild");
+            //dt.Columns.Add("Anzahl Exemplare");
             List<string> s = ds.Tables[0].AsEnumerable().Select(x => x[0].ToString()).ToList();
             foreach (string e in s)
             {
                 SaveExemplarCount(e);
             }
-            foreach(DataRow row in ds.Tables[0].Rows)
-            {
-                ISBN = row[ds.Tables[0].Columns.IndexOf("ISBN")].ToString();
-                Titel = row[ds.Tables[0].Columns.IndexOf("Titel")].ToString();
-                Genre.Genrename = row[ds.Tables[0].Columns.IndexOf("Genre")].ToString();
-                Verlag.Verlagname = row[ds.Tables[0].Columns.IndexOf("Verlag")].ToString();
-                Er_datum = DateTime.Parse(row[ds.Tables[0].Columns.IndexOf("Erscheinungsdatum")].ToString());
-                Sprache.Sprachename = row[ds.Tables[0].Columns.IndexOf("Sprache")].ToString();
-                Auflage = row[ds.Tables[0].Columns.IndexOf("Auflage")].ToString();
-                Neupreis = decimal.Parse(row[ds.Tables[0].Columns.IndexOf("Neupreis")].ToString());
-                BildPfad = row[ds.Tables[0].Columns.IndexOf("ISBN")].ToString();
-                Anzahl = int.Parse(row[ds.Tables[0].Columns.IndexOf("Anzahl Exemplare")].ToString());
-                LoadAutoren();
-                DataRow dataRow = dt.NewRow();
-                dataRow["ISBN"] = ISBN;
-                dataRow["Titel"] = Titel;
-                dataRow["Genre"] = Genre.Genrename;
-                dataRow["Verlag"] = Verlag.Verlagname;
-                dataRow["Erscheinungsdatum"] = Er_datum.ToString("dd.MM.yyyy");
-                dataRow["Sprache"] = Sprache.Sprachename;
-                dataRow["Auflage"] = Auflage;
-                dataRow["Neupreis"] = Neupreis;
-                dataRow["Bild"] = BildPfad;
-                dataRow["Anzahl Exemplare"] = Anzahl;
-                string autor = "";
-                foreach(string a in Autoren)
-                {
-                    autor = autor + a + ", ";
-                }
-                autor = autor.Substring(0, autor.Length - 2);
-                dataRow["Autor"] = autor;
-                dt.Rows.Add(dataRow);
-            }
+            //foreach(DataRow row in ds.Tables[0].Rows)
+            //{
+            //    ISBN = row[ds.Tables[0].Columns.IndexOf("ISBN")].ToString();
+            //    Titel = row[ds.Tables[0].Columns.IndexOf("Titel")].ToString();
+            //    Genre.Genrename = row[ds.Tables[0].Columns.IndexOf("Genre")].ToString();
+            //    Verlag.Verlagname = row[ds.Tables[0].Columns.IndexOf("Verlag")].ToString();
+            //    Er_datum = DateTime.Parse(row[ds.Tables[0].Columns.IndexOf("Erscheinungsdatum")].ToString());
+            //    Sprache.Sprachename = row[ds.Tables[0].Columns.IndexOf("Sprache")].ToString();
+            //    Auflage = row[ds.Tables[0].Columns.IndexOf("Auflage")].ToString();
+            //    Neupreis = decimal.Parse(row[ds.Tables[0].Columns.IndexOf("Neupreis")].ToString());
+            //    BildPfad = row[ds.Tables[0].Columns.IndexOf("ISBN")].ToString();
+            //    Anzahl = int.Parse(row[ds.Tables[0].Columns.IndexOf("Anzahl Exemplare")].ToString());
+            //    LoadAutoren();
+            //    DataRow dataRow = dt.NewRow();
+            //    dataRow["ISBN"] = ISBN;
+            //    dataRow["Titel"] = Titel;
+            //    dataRow["Genre"] = Genre.Genrename;
+            //    dataRow["Verlag"] = Verlag.Verlagname;
+            //    dataRow["Erscheinungsdatum"] = Er_datum.ToString("dd.MM.yyyy");
+            //    dataRow["Sprache"] = Sprache.Sprachename;
+            //    dataRow["Auflage"] = Auflage;
+            //    dataRow["Neupreis"] = Neupreis;
+            //    dataRow["Bild"] = BildPfad;
+            //    dataRow["Anzahl Exemplare"] = Anzahl;
+            //    string autor = "";
+            //    foreach(string a in Autoren)
+            //    {
+            //        autor = autor + a + ", ";
+            //    }
+            //    autor = autor.Substring(0, autor.Length - 2);
+            //    dataRow["Autor"] = autor;
+            //    dt.Rows.Add(dataRow);
+            //}
             grid.DataSource = dt;
         }
 

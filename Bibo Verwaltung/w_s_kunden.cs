@@ -1083,8 +1083,20 @@ namespace Bibo_Verwaltung
             {
                 BeginInvoke((Action)delegate ()
                 {
+                    gv_Kunde.DataSource = null;
+                    gv_Kunde.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                    gv_Kunde.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+                    gv_Kunde.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+                    gv_Kunde.AllowUserToResizeColumns = true;
+                    gv_Kunde.RowHeadersVisible = false;
                     gv_Kunde.DataSource = dtKunde;
-                    gv_Kunde.Columns["Fächer"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                    //gv_Kunde.Columns["Fächer"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                    gv_faecher.DataSource = null;
+                    gv_faecher.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                    gv_faecher.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+                    gv_faecher.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+                    gv_faecher.AllowUserToResizeColumns = true;
+                    gv_faecher.RowHeadersVisible = false;
                     gv_faecher.DataSource = dtFach;
                     gv_faecher.Columns["ID"].Visible = false;
                     foreach (string s in selectedFachIDs)

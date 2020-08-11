@@ -158,6 +158,7 @@ namespace Bibo_Verwaltung
             cb_KundeAnz.Checked = false;
             rb_Default.Checked = true;
             buchsuche.Show_AlleExemplare(ref gv_buchsuche);
+            filterActive = true;
             if (leihListe.Count != 0)
             {
                 buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
