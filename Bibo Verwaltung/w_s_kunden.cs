@@ -187,6 +187,7 @@ namespace Bibo_Verwaltung
             tb_Mail.Text = "";
             tb_Telefonnummer.Text = "";
             tb_KundenID.Text = "";
+            tb_search.Text = "";
             kunde.Fach.FillGrid(ref gv_faecher);
             gv_result.Rows.Clear();
             SetBackground_White();
@@ -1092,7 +1093,7 @@ namespace Bibo_Verwaltung
                     gv_Kunde.DataSource = dtKunde;
                     //gv_Kunde.Columns["Fächer"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
                     gv_faecher.DataSource = null;
-                    gv_faecher.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                    //gv_faecher.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
                     gv_faecher.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
                     gv_faecher.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
                     gv_faecher.AllowUserToResizeColumns = true;
@@ -1329,6 +1330,76 @@ namespace Bibo_Verwaltung
         private void Cb_klasse_KeyDown(object sender, KeyEventArgs e)
         {
             if (readOnly) e.SuppressKeyPress = true;
-        }        
+        }
+
+        private void tb_search_TextChanged(object sender, EventArgs e)
+        {
+            Filter();
+        }
+        private void Filter()
+        {
+            try
+            {
+                (gv_faecher.DataSource as DataTable).DefaultView.RowFilter = string.Format("Kürzel LIKE '%{0}%'", tb_search.Text);
+                SetColor();
+            }
+            catch
+            {
+
+            }
+        }
+        private void SetColor()
+        {
+            if (tb_KundenID.Text != "" && kunde.KundenID == tb_KundenID.Text)
+            {
+                string fachIndex = "";
+                foreach (string fach in kunde.Faecher)
+                {
+                    fachIndex = kunde.Fach.GetIDByShortform(fach);
+                    for (int i = 0; i < gv_faecher.Rows.Count; i++)
+                    {
+                        DataGridViewRow row = gv_faecher.Rows[i];
+                        if (row.Cells["ID"].Value.ToString().Equals(fachIndex))
+                        {
+                            row.DefaultCellStyle.BackColor = Color.Yellow;
+                            row.DefaultCellStyle.SelectionBackColor = Color.Gold;
+                            i = gv_faecher.Rows.Count;
+                        }
+                    }
+                }
+            }
+            else if (tb_KundenID.Text != "")
+            {
+                kunde = new Kunde(tb_KundenID.Text);
+                SetColor();
+            }
+            else
+            {
+                //Neukunde
+                foreach(DataGridViewRow dr in gv_result.Rows)
+                {
+                    string fach = dr.Cells["Kürzel"].Value.ToString();
+                    string fachIndex = "";
+                    fachIndex = kunde.Fach.GetIDByShortform(fach);
+                    for (int i = 0; i < gv_faecher.Rows.Count; i++)
+                    {
+                        DataGridViewRow row = gv_faecher.Rows[i];
+                        if (row.Cells["ID"].Value.ToString().Equals(fachIndex))
+                        {
+                            row.DefaultCellStyle.BackColor = Color.Yellow;
+                            row.DefaultCellStyle.SelectionBackColor = Color.Gold;
+                            i = gv_faecher.Rows.Count;
+                        }
+                    }
+                }
+                
+            }
+
+        }
+
+        private void gv_faecher_Sorted(object sender, EventArgs e)
+        {
+            SetColor();
+        }
     }
 }

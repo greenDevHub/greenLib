@@ -748,6 +748,10 @@ namespace Bibo_Verwaltung
             {
                 buchsuche.Show_RedExemplare(ref gv_buchsuche);
             }
+            else if (rb_allColors.Checked)
+            {
+                buchsuche.Show_AllColors(ref gv_buchsuche);
+            }
             if (leihListe.Count != 0)
             {
                 buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
@@ -1300,6 +1304,15 @@ namespace Bibo_Verwaltung
         private void gv_buchsuche_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             //SetColor(e.RowIndex);
+        }
+
+        private void rb_allColors_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_allColors.Checked)
+            {
+                checkedChanged();
+
+            }
         }
     }
     

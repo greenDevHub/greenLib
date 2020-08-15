@@ -395,6 +395,22 @@ namespace Bibo_Verwaltung
                 log.CreateReport(exceptionObject);
             }
         }
+        /// <summary>
+        /// Zeigt alle verliehenen Exemplare
+        /// </summary>
+        /// <param name="grid"></param>
+        public void Show_AllColors(ref MetroGrid grid)
+        {
+            try
+            {
+                ds.Tables[0].DefaultView.RowFilter = ds.Tables[0].DefaultView.RowFilter + string.Format(" AND Rückgabedatum IS NOT NULL");
+                grid.Refresh();
+            }
+            catch (Exception exceptionObject)
+            {
+                log.CreateReport(exceptionObject);
+            }
+        }
 
         /// <summary>
         /// Zeigt alle Exemplare 

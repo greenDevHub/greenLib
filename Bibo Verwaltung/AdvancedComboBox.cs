@@ -40,9 +40,15 @@ namespace Bibo_Verwaltung
         {
             BorderColorPrivate = BorderColor;
         }
+        [System.Runtime.ExceptionServices.HandleProcessCorruptedStateExceptions]
         protected override void WndProc(ref Message m)
         {
-            base.WndProc(ref m);
+            try
+            {
+                base.WndProc(ref m);
+
+            }
+            catch { }
             if (m.Msg == WM_PAINT)
             {
                 using (var g = Graphics.FromHwnd(Handle))

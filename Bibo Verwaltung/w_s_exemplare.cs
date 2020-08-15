@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using bpac;
 using System.IO;
 using MetroFramework.Controls;
+using System.Threading;
 
 namespace Bibo_Verwaltung
 {
@@ -270,7 +271,7 @@ namespace Bibo_Verwaltung
         private void bt_Add_Click(object sender, EventArgs e)
         {
             List<string> idList = new List<string>();
-            var t = new Timer();
+            var t = new System.Windows.Forms.Timer();
             t.Interval = 3000; // it will Tick in 3 seconds
             t.Tick += (s, a) =>
             {
@@ -807,10 +808,18 @@ namespace Bibo_Verwaltung
             {
                 BeginInvoke((Action)delegate ()
                 {
-                    if(acb_Zustand.AutoCompleteSource != AutoCompleteSource.None)
+                    try
                     {
-                        acb_Zustand.AutoCompleteSource = AutoCompleteSource.None;
+                        if (acb_Zustand.AutoCompleteSource != AutoCompleteSource.None)
+                        {
+                            acb_Zustand.AutoCompleteSource = AutoCompleteSource.None;
+                        }
                     }
+                    catch
+                    {
+
+                    }
+
                     metroProgressSpinner1.Visible = true;
                     gv_Exemplare.Visible = false;
                 });
@@ -830,6 +839,7 @@ namespace Bibo_Verwaltung
                     metroProgressSpinner1.Visible = false;
                     gv_Exemplare.Visible = true;
                     tb_Vorhanden.Text = gv_Exemplare.RowCount.ToString();
+                    
                 });
             }
             catch(Exception ex)
@@ -846,7 +856,8 @@ namespace Bibo_Verwaltung
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if(acb_Zustand.DataSource == null)
+
+            if (acb_Zustand.DataSource == null)
             {
                 exemplar.Zustand.FillCombobox(ref acb_Zustand, -1);
 

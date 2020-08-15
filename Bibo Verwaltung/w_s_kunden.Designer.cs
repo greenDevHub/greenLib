@@ -98,6 +98,8 @@
             this.rb_search = new MetroFramework.Controls.MetroRadioButton();
             this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.tb_search = new MetroFramework.Controls.MetroTextBox();
+            this.metroContextMenu1 = new MetroFramework.Controls.MetroContextMenu(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
             this.cm_kunde.SuspendLayout();
             this.metroPanel1.SuspendLayout();
@@ -878,6 +880,7 @@
             // 
             this.metroPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.metroPanel1.Controls.Add(this.tb_search);
             this.metroPanel1.Controls.Add(this.cb_klasse);
             this.metroPanel1.Controls.Add(this.bt_klasse_s);
             this.metroPanel1.Controls.Add(this.mdtp_GebDat);
@@ -939,10 +942,10 @@
             this.metroProgressSpinner2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.metroProgressSpinner2.BackColor = System.Drawing.Color.Lavender;
-            this.metroProgressSpinner2.Location = new System.Drawing.Point(9, 363);
+            this.metroProgressSpinner2.Location = new System.Drawing.Point(22, 364);
             this.metroProgressSpinner2.Maximum = 100;
             this.metroProgressSpinner2.Name = "metroProgressSpinner2";
-            this.metroProgressSpinner2.Size = new System.Drawing.Size(213, 213);
+            this.metroProgressSpinner2.Size = new System.Drawing.Size(207, 207);
             this.metroProgressSpinner2.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroProgressSpinner2.TabIndex = 17;
             this.metroProgressSpinner2.TabStop = false;
@@ -985,7 +988,7 @@
             this.gv_result.EnableHeadersVisualStyles = false;
             this.gv_result.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_result.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_result.Location = new System.Drawing.Point(235, 360);
+            this.gv_result.Location = new System.Drawing.Point(235, 338);
             this.gv_result.MultiSelect = false;
             this.gv_result.Name = "gv_result";
             this.gv_result.ReadOnly = true;
@@ -1005,7 +1008,7 @@
             this.gv_result.RowTemplate.Height = 24;
             this.gv_result.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.gv_result.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_result.Size = new System.Drawing.Size(122, 216);
+            this.gv_result.Size = new System.Drawing.Size(122, 238);
             this.gv_result.Style = MetroFramework.MetroColorStyle.Teal;
             this.gv_result.TabIndex = 18;
             this.gv_result.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_result_CellDoubleClick);
@@ -1053,7 +1056,7 @@
             this.gv_faecher.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gv_faecher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_faecher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_faecher.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_faecher.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv_faecher.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -1078,7 +1081,7 @@
             this.gv_faecher.EnableHeadersVisualStyles = false;
             this.gv_faecher.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_faecher.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_faecher.Location = new System.Drawing.Point(3, 360);
+            this.gv_faecher.Location = new System.Drawing.Point(3, 364);
             this.gv_faecher.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.gv_faecher.MultiSelect = false;
             this.gv_faecher.Name = "gv_faecher";
@@ -1099,10 +1102,11 @@
             this.gv_faecher.RowTemplate.Height = 24;
             this.gv_faecher.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.gv_faecher.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_faecher.Size = new System.Drawing.Size(226, 216);
+            this.gv_faecher.Size = new System.Drawing.Size(226, 212);
             this.gv_faecher.Style = MetroFramework.MetroColorStyle.Teal;
             this.gv_faecher.TabIndex = 17;
             this.gv_faecher.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_faecher_CellDoubleClick);
+            this.gv_faecher.Sorted += new System.EventHandler(this.gv_faecher_Sorted);
             this.gv_faecher.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_faecher_KeyDown);
             // 
             // metroLabel1
@@ -1283,6 +1287,44 @@
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Default;
             // 
+            // tb_search
+            // 
+            // 
+            // 
+            // 
+            this.tb_search.CustomButton.Image = null;
+            this.tb_search.CustomButton.Location = new System.Drawing.Point(94, 1);
+            this.tb_search.CustomButton.Name = "";
+            this.tb_search.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.tb_search.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_search.CustomButton.TabIndex = 1;
+            this.tb_search.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_search.CustomButton.UseSelectable = true;
+            this.tb_search.CustomButton.Visible = false;
+            this.tb_search.Lines = new string[0];
+            this.tb_search.Location = new System.Drawing.Point(113, 338);
+            this.tb_search.MaxLength = 32767;
+            this.tb_search.Name = "tb_search";
+            this.tb_search.PasswordChar = '\0';
+            this.tb_search.PromptText = "Suche nach Kürzel";
+            this.tb_search.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_search.SelectedText = "";
+            this.tb_search.SelectionLength = 0;
+            this.tb_search.SelectionStart = 0;
+            this.tb_search.ShortcutsEnabled = true;
+            this.tb_search.Size = new System.Drawing.Size(116, 23);
+            this.tb_search.TabIndex = 49;
+            this.tb_search.UseSelectable = true;
+            this.tb_search.WaterMark = "Suche nach Kürzel";
+            this.tb_search.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_search.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_search.TextChanged += new System.EventHandler(this.tb_search_TextChanged);
+            // 
+            // metroContextMenu1
+            // 
+            this.metroContextMenu1.Name = "metroContextMenu1";
+            this.metroContextMenu1.Size = new System.Drawing.Size(61, 4);
+            // 
             // w_s_Kunden
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1384,5 +1426,7 @@
         private AdvancedComboBox cb_klasse;
         private MetroFramework.Components.MetroStyleManager metroStyleManager1;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
+        private MetroFramework.Controls.MetroTextBox tb_search;
+        private MetroFramework.Controls.MetroContextMenu metroContextMenu1;
     }
 }
