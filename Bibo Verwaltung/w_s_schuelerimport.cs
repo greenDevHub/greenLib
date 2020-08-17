@@ -763,6 +763,7 @@ namespace Bibo_Verwaltung
             {
                 foreach (DataRow row in sortedDT.Rows)
                 {
+                    if (singleImport) progressBar1.PerformStep();
                     if (target.Equals("t_s_schueler"))
                     {
                         Kunde k = new Kunde();
@@ -903,6 +904,8 @@ namespace Bibo_Verwaltung
             //timer.Stop();
         }
 
+        bool singleImport;
+        int lineCount = 0;
         /// <summary>
         /// Startet den Importvorgang
         /// </summary>
@@ -910,6 +913,7 @@ namespace Bibo_Verwaltung
         /// <param name="singleImport"></param>
         private void StartImport(bool withPreset, bool singleImport)
         {
+            this.singleImport = singleImport;
             string file = "";
             errors = 0;
             errorMessage = "";
@@ -921,9 +925,15 @@ namespace Bibo_Verwaltung
             progressBar1.Maximum = filesTotal;
             progressBar1.Value = 0;
             progressBar1.Step = 1;
+            Cursor.Current = Cursors.WaitCursor;
+
             if (singleImport)
             {
                 file = files[slider_preview.Value - 1];
+                lineCount = File.ReadAllLines(file).Count();
+                progressBar1.Maximum = lineCount;
+                progressBar1.Value = 0;
+                progressBar1.Step = 1;
             }
             try
             {
@@ -1008,6 +1018,7 @@ namespace Bibo_Verwaltung
             {
                 if (filesDone == 1)
                 {
+                    Cursor.Current = Cursors.Default;
                     DialogResult dr = MetroMessageBox.Show(this, "Die Datei wurde erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dr == DialogResult.Yes)
                     {
@@ -1020,6 +1031,7 @@ namespace Bibo_Verwaltung
                 }
                 else if (filesDone > 1)
                 {
+                    Cursor.Current = Cursors.Default;
                     DialogResult dr = MetroMessageBox.Show(this, "Die Dateien wurden erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dr == DialogResult.Yes)
                     {

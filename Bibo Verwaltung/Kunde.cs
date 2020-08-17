@@ -536,7 +536,16 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@id", KundenID);
             cmd.ExecuteNonQuery();
         }
-
+        /// <summary>
+        /// Löscht alle Fächer von allen deaktivierten Kunden
+        /// </summary>
+        private void DeleteAllFaecher()
+        {
+            string RawCommand = "DELETE FROM t_s_fach_kunde WHERE fs_kundenid in (SELECT kunde_id FROM t_s_kunden WHERE kunde_activated = 0)";
+            con.ConnectError();
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.ExecuteNonQuery();
+        }
         /// <summary>
         /// Aktiviert einen Kunden in der Datenbank 
         /// </summary>
@@ -553,9 +562,9 @@ namespace Bibo_Verwaltung
         public void DeactivateAllSchueler()
         {
             if (con.ConnectError()) return;
-            string RawCommand = "UPDATE t_s_kunden set kunde_activated = 0, kunde_klasse = null from t_s_kunden left join t_bd_ausgeliehen on kunde_ID=aus_kundenid WHERE kunde_klasse !='' and aus_leihnummer is NULL";
+            string RawCommand = "UPDATE t_s_kunden set kunde_activated = 0, kunde_klasse = null from t_s_kunden left join t_bd_ausgeliehen on kunde_ID=aus_kundenid WHERE kunde_klasse !='' AND kunde_klasse IS NOT NULL and aus_leihnummer is NULL";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-            DeleteFaecherFromKunde();
+            DeleteAllFaecher();
             cmd.ExecuteNonQuery();
             con.Close();
         }

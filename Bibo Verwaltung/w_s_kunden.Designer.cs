@@ -76,6 +76,7 @@
             this.cb_klasse = new Bibo_Verwaltung.AdvancedComboBox();
             this.mbt_Import = new MetroFramework.Controls.MetroButton();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.tb_search = new MetroFramework.Controls.MetroTextBox();
             this.mdtp_GebDat = new MetroFramework.Controls.MetroDateTime();
             this.metroProgressSpinner2 = new MetroFramework.Controls.MetroProgressSpinner();
             this.gv_result = new MetroFramework.Controls.MetroGrid();
@@ -98,8 +99,8 @@
             this.rb_search = new MetroFramework.Controls.MetroRadioButton();
             this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            this.tb_search = new MetroFramework.Controls.MetroTextBox();
             this.metroContextMenu1 = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.timer_start = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
             this.cm_kunde.SuspendLayout();
             this.metroPanel1.SuspendLayout();
@@ -925,6 +926,39 @@
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
+            // tb_search
+            // 
+            // 
+            // 
+            // 
+            this.tb_search.CustomButton.Image = null;
+            this.tb_search.CustomButton.Location = new System.Drawing.Point(94, 1);
+            this.tb_search.CustomButton.Name = "";
+            this.tb_search.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.tb_search.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_search.CustomButton.TabIndex = 1;
+            this.tb_search.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_search.CustomButton.UseSelectable = true;
+            this.tb_search.CustomButton.Visible = false;
+            this.tb_search.Lines = new string[0];
+            this.tb_search.Location = new System.Drawing.Point(113, 338);
+            this.tb_search.MaxLength = 32767;
+            this.tb_search.Name = "tb_search";
+            this.tb_search.PasswordChar = '\0';
+            this.tb_search.PromptText = "Suche nach Kürzel";
+            this.tb_search.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_search.SelectedText = "";
+            this.tb_search.SelectionLength = 0;
+            this.tb_search.SelectionStart = 0;
+            this.tb_search.ShortcutsEnabled = true;
+            this.tb_search.Size = new System.Drawing.Size(116, 23);
+            this.tb_search.TabIndex = 49;
+            this.tb_search.UseSelectable = true;
+            this.tb_search.WaterMark = "Suche nach Kürzel";
+            this.tb_search.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_search.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_search.TextChanged += new System.EventHandler(this.tb_search_TextChanged);
+            // 
             // mdtp_GebDat
             // 
             this.mdtp_GebDat.CustomFormat = " dd.MM.yyyy";
@@ -1287,43 +1321,15 @@
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Default;
             // 
-            // tb_search
-            // 
-            // 
-            // 
-            // 
-            this.tb_search.CustomButton.Image = null;
-            this.tb_search.CustomButton.Location = new System.Drawing.Point(94, 1);
-            this.tb_search.CustomButton.Name = "";
-            this.tb_search.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.tb_search.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.tb_search.CustomButton.TabIndex = 1;
-            this.tb_search.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.tb_search.CustomButton.UseSelectable = true;
-            this.tb_search.CustomButton.Visible = false;
-            this.tb_search.Lines = new string[0];
-            this.tb_search.Location = new System.Drawing.Point(113, 338);
-            this.tb_search.MaxLength = 32767;
-            this.tb_search.Name = "tb_search";
-            this.tb_search.PasswordChar = '\0';
-            this.tb_search.PromptText = "Suche nach Kürzel";
-            this.tb_search.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.tb_search.SelectedText = "";
-            this.tb_search.SelectionLength = 0;
-            this.tb_search.SelectionStart = 0;
-            this.tb_search.ShortcutsEnabled = true;
-            this.tb_search.Size = new System.Drawing.Size(116, 23);
-            this.tb_search.TabIndex = 49;
-            this.tb_search.UseSelectable = true;
-            this.tb_search.WaterMark = "Suche nach Kürzel";
-            this.tb_search.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.tb_search.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.tb_search.TextChanged += new System.EventHandler(this.tb_search_TextChanged);
-            // 
             // metroContextMenu1
             // 
             this.metroContextMenu1.Name = "metroContextMenu1";
             this.metroContextMenu1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // timer_start
+            // 
+            this.timer_start.Interval = 1000;
+            this.timer_start.Tick += new System.EventHandler(this.timer_start_Tick);
             // 
             // w_s_Kunden
             // 
@@ -1349,7 +1355,6 @@
             this.Style = MetroFramework.MetroColorStyle.Teal;
             this.Text = "Kundenverwaltung";
             this.Activated += new System.EventHandler(this.w_s_kunden_Activated);
-            this.Shown += new System.EventHandler(this.W_s_Kunden_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).EndInit();
             this.cm_kunde.ResumeLayout(false);
             this.metroPanel1.ResumeLayout(false);
@@ -1428,5 +1433,6 @@
         private MetroFramework.Components.MetroToolTip metroToolTip1;
         private MetroFramework.Controls.MetroTextBox tb_search;
         private MetroFramework.Controls.MetroContextMenu metroContextMenu1;
+        private System.Windows.Forms.Timer timer_start;
     }
 }

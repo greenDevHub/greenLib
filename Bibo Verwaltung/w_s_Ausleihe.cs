@@ -46,10 +46,7 @@ namespace Bibo_Verwaltung
                 tb_VName.Enabled = true;
                 tb_NName.Enabled = true;
                 bt_Submit.Enabled = true;
-                if (!worker.IsBusy && handleCreated)
-                {
-                    worker.RunWorkerAsync();
-                }
+                timer_start.Start();
             }
         }
 
@@ -80,10 +77,7 @@ namespace Bibo_Verwaltung
                 tb_VName.Enabled = true;
                 tb_NName.Enabled = true;
                 bt_Submit.Enabled = true;
-                if (!worker.IsBusy && handleCreated)
-                {
-                    worker.RunWorkerAsync();
-                }
+                timer_start.Start();
                 ausleihe.FillAusleihListe(list);
                 ausleihe.SetSlider(ref leihList_Slider, ref tb_listVon, ref tb_listBis);
             }
@@ -580,6 +574,9 @@ namespace Bibo_Verwaltung
                     BeginInvoke((Action)delegate ()
                     {
                         gv_Kunde.DataSource = null;
+                        gv_Kunde.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                        gv_Kunde.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+                        gv_Kunde.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
                         gv_Kunde.DataSource = ds;
                         gv_Kunde.Refresh();
                         spinner.Visible = false;
@@ -604,10 +601,19 @@ namespace Bibo_Verwaltung
         private void Form1_HandleCreated(object sender, EventArgs e)
         {
             handleCreated = true;
-            if (!worker.IsBusy)
+            //if (!worker.IsBusy)
+            //{
+            //    worker.RunWorkerAsync();
+            //}
+        }
+
+        private void timer_start_Tick(object sender, EventArgs e)
+        {
+            if (!worker.IsBusy && handleCreated)
             {
                 worker.RunWorkerAsync();
             }
+            timer_start.Stop();
         }
     }
 }

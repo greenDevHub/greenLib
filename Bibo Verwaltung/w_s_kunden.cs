@@ -44,6 +44,7 @@ namespace Bibo_Verwaltung
                 guestMode(guest);
             }
             this.kundenID = kundenID;
+            timer_start.Start();
         }
         public w_s_Kunden(string userName, MetroFramework.Components.MetroStyleManager msm)
         {
@@ -68,6 +69,7 @@ namespace Bibo_Verwaltung
                 guest = false;
                 guestMode(guest);
             }
+            timer_start.Start();
         }
         #endregion
         private void SetStyle()
@@ -509,7 +511,7 @@ namespace Bibo_Verwaltung
                         }
 
                     }
-                    catch (SqlException)
+                    catch (SqlException ex)
                     {
                         MetroMessageBox.Show(this, "Der Kunde konnte nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -1068,7 +1070,7 @@ namespace Bibo_Verwaltung
                             }
                         }
                     }
-                    catch
+                    catch(Exception ex)
                     {
                         MetroMessageBox.Show(this, "Bei dem Vorgang ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -1233,15 +1235,6 @@ namespace Bibo_Verwaltung
             Klasse.ShowDialog(this);
             Klasse.Dispose();
             kunde.Klasse.FillCombobox(ref cb_klasse, 0);
-        }
-
-        private void W_s_Kunden_Shown(object sender, EventArgs e)
-        {
-            SetModus();
-            if (!backgroundWorker1.IsBusy)
-            {
-                backgroundWorker1.RunWorkerAsync();
-            }
         }
 
         private void Gv_faecher_KeyDown(object sender, KeyEventArgs e)
@@ -1417,6 +1410,16 @@ namespace Bibo_Verwaltung
         private void gv_faecher_Sorted(object sender, EventArgs e)
         {
             SetColor();
+        }
+
+        private void timer_start_Tick(object sender, EventArgs e)
+        {
+            SetModus();
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
+            timer_start.Stop();
         }
     }
 }
