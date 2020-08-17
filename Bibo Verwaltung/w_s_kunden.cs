@@ -368,24 +368,32 @@ namespace Bibo_Verwaltung
             {
                 if (mdtp_GebDat.Value.Date != DateTime.Now.Date && tb_KundenID.Text != "")
                 {
-                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%' AND Convert(Geburtsdatum, System.String) LIKE '{9}%' AND Convert([Kunden-ID], System.String) LIKE '%{10}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, mdtp_GebDat.Value.Date.ToShortDateString(), tb_KundenID.Text);
+                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Mail LIKE '%{6}%' AND Telefonnummer LIKE '{7}%' AND Convert(Geburtsdatum, System.String) LIKE '{8}%' AND Convert([Kunden-ID], System.String) LIKE '%{9}%' AND Klasse LIKE '{10}%' ", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Mail.Text, tb_Telefonnummer.Text, mdtp_GebDat.Value.Date.ToShortDateString(), tb_KundenID.Text, cb_klasse.Text);
 
                 }
                 else if (tb_KundenID.Text != "")
                 {
-                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%' AND Convert([Kunden-ID], System.String) LIKE '%{9}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, tb_KundenID.Text);
+                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Mail LIKE '%{6}%' AND Telefonnummer LIKE '{7}%' AND Convert([Kunden-ID], System.String) LIKE '%{8}%' AND Klasse LIKE '{9}%' ", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Mail.Text, tb_Telefonnummer.Text, tb_KundenID.Text, cb_klasse.Text);
 
                 }
                 else if (mdtp_GebDat.Value.Date != DateTime.Now.Date && tb_KundenID.Text == "")
                 {
-                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%' AND Convert(Geburtsdatum, System.String) LIKE '{9}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, mdtp_GebDat.Value.Date.ToShortDateString());
+                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Mail LIKE '%{6}%' AND Telefonnummer LIKE '{7}%' AND Convert(Geburtsdatum, System.String) LIKE '{8}%' AND Klasse LIKE '{6}%' ", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Mail.Text, tb_Telefonnummer.Text, mdtp_GebDat.Value.Date.ToShortDateString(), cb_klasse.Text);
 
                 }
                 else
                 {
-                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '%{7}%' AND Telefonnummer LIKE '{8}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
+                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '%{0}%'AND Nachname LIKE '%{1}%' AND Straße LIKE '%{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Mail LIKE '%{6}%' AND Telefonnummer LIKE '{7}%' AND Klasse LIKE '{8}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, tb_Mail.Text, tb_Telefonnummer.Text, cb_klasse.Text);
 
                 }
+                if(cb_klasse.Text == "")
+                {
+                    string s = (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter;
+                    var test = s.Split(new string[] { " AND Klasse" }, StringSplitOptions.None);
+                    s = test[0];
+                    (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = s;
+                }
+                setRadioButton();
             }
             catch(Exception ex)
             {
@@ -923,20 +931,31 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private void rb_alles_CheckedChanged(object sender, EventArgs e)
+        private void setRadioButton()
         {
             if (rb_FilterAlles.Checked)
             {
-                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
+                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter.Replace(" AND Klasse IS NOT NULL", "");
+                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter.Replace(" AND Klasse IS NULL", "");
+                //(gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text);
             }
             else if (rb_FilterSchueler.Checked)
             {
-                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%' AND Klasse NOT LIKE '{9}'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, "");
+                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter.Replace(" AND Klasse IS NULL", " AND Klasse IS NOT NULL");
+                if (!(gv_Kunde.DataSource as DataTable).DefaultView.RowFilter.Contains(" AND Klasse IS NOT NULL")) (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter + " AND Klasse IS NOT NULL";
+                //(gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%' AND Klasse NOT LIKE '{9}'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, "");
             }
             else if (rb_FilterAndere.Checked)
             {
-                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%' AND Klasse LIKE '{9}'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, "");
+                (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter.Replace(" AND Klasse IS NOT NULL", " AND Klasse IS NULL");
+                if (!(gv_Kunde.DataSource as DataTable).DefaultView.RowFilter.Contains(" AND Klasse IS NULL")) (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = (gv_Kunde.DataSource as DataTable).DefaultView.RowFilter + " AND Klasse IS NULL";
+
+                //(gv_Kunde.DataSource as DataTable).DefaultView.RowFilter = string.Format("Vorname LIKE '{0}%'AND Nachname LIKE '{1}%' AND Straße LIKE '{2}%' AND Hausnummer LIKE '{3}%' AND Postleitzahl LIKE '{4}%' AND Wohnort LIKE '{5}%' AND Klasse LIKE '{6}%' AND Mail LIKE '{7}%' AND Telefonnummer LIKE '{8}%' AND Klasse LIKE '{9}'", tb_Vorname.Text, tb_Nachname.Text, tb_Strasse.Text, tb_Hausnummer.Text, tb_Postleitzahl.Text, tb_Ort.Text, cb_klasse.Text, tb_Mail.Text, tb_Telefonnummer.Text, "");
             }
+        }
+        private void rb_alles_CheckedChanged(object sender, EventArgs e)
+        {
+            setRadioButton();
         }
 
         private void kundeBearbeitenToolStripMenuItem_Click(object sender, EventArgs e)
