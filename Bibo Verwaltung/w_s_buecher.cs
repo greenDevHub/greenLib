@@ -2012,7 +2012,7 @@ namespace Bibo_Verwaltung
                         dTP_Erscheinungsdatum.Value = DateTime.UtcNow;
                     }
                 }
-                var preis = GetPreisNeu();
+                var preis = GetPreisNeu().Replace('.',',');
                 if (!preis.Equals(""))
                 {
                     tb_Neupreis.Text = preis;

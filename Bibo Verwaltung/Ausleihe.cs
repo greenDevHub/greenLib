@@ -79,7 +79,16 @@ namespace Bibo_Verwaltung
                 ClearLeihList();
                 DataRow relation;
                 string[] exemlarDetails = new string[2];
-
+                List<string> newList = new List<string>();
+                foreach(string s in inputList)
+                {
+                    Exemplar ex = new Exemplar(s);
+                    if (ex.IsSpecificAvailable())
+                    {
+                        newList.Add(s);
+                    }
+                }
+                inputList = newList.ToArray();
                 if (LeihListe.Columns.Count != 2)
                 {
                     LeihListe.Columns.Add();

@@ -1266,6 +1266,7 @@ namespace Bibo_Verwaltung
                     DateTime now = DateTime.Today;
                     row.DefaultCellStyle.BackColor = default;
                     row.DefaultCellStyle.ForeColor = default;
+                    row.DefaultCellStyle.SelectionBackColor = default;
                     if (row.Cells["Leihnummer"].Value.ToString() != "")
                     {
                         string s = row.Cells["Rückgabedatum"].Value.ToString();
@@ -1275,22 +1276,29 @@ namespace Bibo_Verwaltung
                         {
                             row.DefaultCellStyle.BackColor = red;
                             row.DefaultCellStyle.ForeColor = Color.Black;
+                            row.DefaultCellStyle.SelectionBackColor = Color.Red;
+
                         }
                         else if (dt == now)
                         {
                             row.DefaultCellStyle.BackColor = yellow;
                             row.DefaultCellStyle.ForeColor = Color.Black;
+                            row.DefaultCellStyle.SelectionBackColor = Color.Yellow;
+
                         }
                         else
                         {
                             row.DefaultCellStyle.BackColor = green;
                             row.DefaultCellStyle.ForeColor = Color.Black;
+                            row.DefaultCellStyle.SelectionBackColor = Color.Lime;
+
                         }
                     }
                     if (blackList.Contains(row.Cells["ExemplarID"].Value.ToString()))
                     {
                         row.DefaultCellStyle.ForeColor = listfc;
                         row.DefaultCellStyle.BackColor = listbc;
+                        row.DefaultCellStyle.SelectionBackColor = Color.DimGray;
                     }
                 }
                 catch(Exception ex)
