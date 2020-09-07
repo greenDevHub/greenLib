@@ -112,7 +112,17 @@ namespace Bibo_Verwaltung
 
             }
         }
-
+        private string GetCode(string id)
+        {
+            string code = "";
+            code = id;
+            for (int i = code.Length; i < 7;)
+            {
+                code = "0" + code;
+                i++;
+            }
+            return code;
+        }
 
         private void GenerateBarcode(string id)
         {
@@ -312,9 +322,10 @@ namespace Bibo_Verwaltung
                         //images.Clear();
                         foreach (string id in idList)
                         {
-                            tb_ID.Text = id;
-                            LoadForm();
-                            barcodes.Add(mtb_Barcode.Text);
+                            //tb_ID.Text = id;
+                            //LoadForm();
+                            string code = GetCode(id);
+                            barcodes.Add(code);
                             //images.Add(BarcodeBox.Image);
                         }
                         PrintMultipleBarcodes(barcodes);

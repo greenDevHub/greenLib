@@ -193,11 +193,13 @@ namespace Bibo_Verwaltung
 
             if (LeihListe.Rows.Count == 1)
             {
-                exemplar = new Buch(new Exemplar(LeihListe.Rows[0][0].ToString()).ISBN);
+                Exemplar ex = new Exemplar();
+                string titel = ex.GetTitel(LeihListe.Rows[0][0].ToString());
+                //exemplar = new Buch(new Exemplar(LeihListe.Rows[0][0].ToString()).ISBN);
                 sb.Append("das Buch: ");
                 sb.AppendLine();
                 sb.AppendLine();
-                sb.Append(TrimText(exemplar.Titel, 30));
+                sb.Append(TrimText(titel, 30));
                 sb.Append(", ");
                 sb.AppendLine();
                 sb.AppendLine();
@@ -209,9 +211,12 @@ namespace Bibo_Verwaltung
                 sb.AppendLine();
                 for (int i = 0; i < LeihListe.Rows.Count; i++)
                 {
-                    exemplar = new Buch(new Exemplar(LeihListe.Rows[i][0].ToString()).ISBN);
+                    Exemplar ex = new Exemplar();
+                    string titel = ex.GetTitel(LeihListe.Rows[i][0].ToString());
+                    //exemplar = new Buch(new Exemplar(LeihListe.Rows[i][0].ToString()).ISBN);
+                    //string titel = exemplar.Titel;
                     sb.Append("-  ");
-                    sb.Append(TrimText(exemplar.Titel, 30));
+                    sb.Append(TrimText(titel, 30));
                     sb.Append(", ");
                     sb.AppendLine();
                 }

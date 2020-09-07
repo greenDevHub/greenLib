@@ -357,7 +357,15 @@ namespace Bibo_Verwaltung
                     Buchid.ShowDialog(this);
 
                     Buchid.Dispose();
-                    b.FillGrid_Buch(ref Grid_Buch);
+                    try
+                    {
+                        b.FillGrid_Buch(ref Grid_Buch);
+
+                    }
+                    catch
+                    {
+
+                    }
                     Clear_All();
                 }
                 else if (!ifDownloaded && ValidateNewISBN())
@@ -368,7 +376,15 @@ namespace Bibo_Verwaltung
                     Buchid.ShowDialog(this);
 
                     Buchid.Dispose();
-                    b.FillGrid_Buch(ref Grid_Buch);
+                    try
+                    {
+                        b.FillGrid_Buch(ref Grid_Buch);
+
+                    }
+                    catch
+                    {
+
+                    }
                     Clear_All();
                 }
                 else
@@ -382,7 +398,15 @@ namespace Bibo_Verwaltung
                         Buchid.ShowDialog(this);
 
                         Buchid.Dispose();
-                        b.FillGrid_Buch(ref Grid_Buch);
+                        try
+                        {
+                            b.FillGrid_Buch(ref Grid_Buch);
+
+                        }
+                        catch
+                        {
+
+                        }
                         Clear_All();
                     }
                     else if (dialogResult == DialogResult.No)
@@ -612,7 +636,7 @@ namespace Bibo_Verwaltung
                     }
 
                 }
-                catch
+                catch(Exception ex)
                 {
                     MetroMessageBox.Show(this,"Das Buch konnte nicht hinzugefügt werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }

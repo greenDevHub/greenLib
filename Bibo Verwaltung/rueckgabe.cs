@@ -215,9 +215,14 @@ namespace Bibo_Verwaltung
             {
                 for (int i = 0; i < RueckListe.Rows.Count; i++)
                 {
-                    exemplar = new Buch(new Exemplar(RueckListe.Rows[i][0].ToString()).ISBN);
+                    Exemplar ex = new Exemplar();
+                    string titel = ex.GetTitel(RueckListe.Rows[i][0].ToString());
+
+
+                    //exemplar = new Buch(new Exemplar(RueckListe.Rows[i][0].ToString()).ISBN);
+                    //titel = exemplar.Titel;
                     sb.Append("-  ");
-                    sb.Append(TrimText(exemplar.Titel, 30));
+                    sb.Append(TrimText(titel, 30));
                     if (i < RueckListe.Rows.Count)
                     {
                         sb.Append(", ");
@@ -281,18 +286,22 @@ namespace Bibo_Verwaltung
             string resultString = "Möchten Sie ";
             if (RueckListe.Rows.Count == 1)
             {
-                exemplar = new Exemplar(RueckListe.Rows[0][0].ToString());
-                exemplar_info = new Buch(exemplar.ISBN);
-                resultString = resultString + "das Buch: " + Environment.NewLine + Environment.NewLine + TrimText(exemplar_info.Titel, 30) + ", " + Environment.NewLine + Environment.NewLine;
+                Exemplar ex = new Exemplar();
+                string titel = ex.GetTitel(RueckListe.Rows[0][0].ToString());
+                //exemplar = new Exemplar(RueckListe.Rows[0][0].ToString());
+                //exemplar_info = new Buch(exemplar.ISBN);
+                resultString = resultString + "das Buch: " + Environment.NewLine + Environment.NewLine + TrimText(titel, 30) + ", " + Environment.NewLine + Environment.NewLine;
             }
             else
             {
                 resultString = resultString + "die Bücher: " + Environment.NewLine + Environment.NewLine;
                 foreach (DataRow row in RueckListe.Rows)
                 {
-                    exemplar = new Exemplar(row[0].ToString());
-                    exemplar_info = new Buch(exemplar.ISBN);
-                    resultString = resultString + "-  " + TrimText(exemplar_info.Titel, 30) + ", " + Environment.NewLine;
+                    Exemplar ex = new Exemplar();
+                    string titel = ex.GetTitel(row[0].ToString());
+                    //exemplar = new Exemplar(row[0].ToString());
+                    //exemplar_info = new Buch(exemplar.ISBN);
+                    resultString = resultString + "-  " + TrimText(titel, 30) + ", " + Environment.NewLine;
                 }
                 resultString = resultString + Environment.NewLine;
             }
