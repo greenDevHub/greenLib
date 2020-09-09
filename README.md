@@ -56,14 +56,14 @@ Folgen Sie den nachfolgenden Anweisungen Schritt für Schritt.
 
  Support
 ------------
-Bei Fragen, Problemen, Anregungen, etc. kontaktieren Sie uns bitte unter: ... 
+Bei Fragen, Problemen, Anregungen, etc. kontaktieren Sie uns bitte unter: greendev@web.de
 
  Autoren
 ------------
-* **Laurenz** - *Developer* - [???](https://github.com/??)
-* **Robert** - *Developer* - [???](https://github.com/??)
-* **Justin** - *Developer* - [???](https://github.com/??)
-* **Josua** - *Unsere Mutti* - [gehmlichj](https://github.com/gehmlichj)
-* **Erik** - *War ab und zu dabei* - [EGoesche](https://github.com/EGoesche)
+* **Laurenz** - *Developer* - [???](https://github.com/Laurenz01)
+* **Robert** - *Developer* - [???](https://github.com/RobJeh)
+* **Justin** - *Developer* - [???](https://github.com/Just2407)
+* **Josua** - *Project leadership* - [gehmlichj](https://github.com/jgehmlich)
+* **Erik** - *Graphics and design* - [EGoesche](https://github.com/EGoesche)
 
 Um zu erfahren, wer zusätzlich an diesem Projekt gearbeitet hat, lesen Sie bitte die contributors-Datei.
