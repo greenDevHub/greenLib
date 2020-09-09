@@ -1,9 +1,9 @@
 <!--lint disable no-literal-urls-->
 <p align="center">
-  <a href="https://nodejs.org/">
+  <a href="https://github.com/greendevhub/greenLib/">
     <img
-      alt="Node.js"
-      src="https://github.com/gehmlichj/greenLib/blob/master/icon.svg"
+      alt="greenLib"
+      src="https://github.com/greendevhub/greenLib/blob/master/icon.svg"
       width="300"
     />
   </a>
