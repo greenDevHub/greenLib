@@ -60,10 +60,10 @@ Bei Fragen, Problemen, Anregungen, etc. kontaktieren Sie uns bitte unter: greend
 
  Autoren
 ------------
-* **Laurenz** - *Developer* - [???](https://github.com/Laurenz01)
-* **Robert** - *Developer* - [???](https://github.com/RobJeh)
-* **Justin** - *Developer* - [???](https://github.com/Just2407)
-* **Josua** - *Project leadership* - [gehmlichj](https://github.com/jgehmlich)
+* **Laurenz** - *Developer* - [Laurenz01](https://github.com/Laurenz01)
+* **Robert** - *Developer* - [RobJeh](https://github.com/RobJeh)
+* **Justin** - *Developer* - [Just2407](https://github.com/Just2407)
+* **Josua** - *Project leadership* - [jgehmlich](https://github.com/jgehmlich)
 * **Erik** - *Graphics and design* - [EGoesche](https://github.com/EGoesche)
 
 Um zu erfahren, wer zusätzlich an diesem Projekt gearbeitet hat, lesen Sie bitte die contributors-Datei.
