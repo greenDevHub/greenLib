@@ -51,10 +51,10 @@
             this.bt_zu = new MetroFramework.Controls.MetroTile();
             this.mT_Klassen = new MetroFramework.Controls.MetroTile();
             this.mainStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.bt_help = new MetroFramework.Controls.MetroLink();
             this.bt_darkmode = new MetroFramework.Controls.MetroLink();
             this.bt_logout = new MetroFramework.Controls.MetroLink();
             this.image = new MetroFramework.Controls.MetroLink();
-            this.bt_help = new MetroFramework.Controls.MetroLink();
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainStyleManager)).BeginInit();
             this.SuspendLayout();
@@ -327,10 +327,22 @@
             // 
             this.mainStyleManager.Owner = this;
             // 
+            // bt_help
+            // 
+            this.bt_help.DisplayFocus = true;
+            this.bt_help.Image = global::Bibo_Verwaltung.Properties.Resources.QuestionMark;
+            this.bt_help.ImageSize = 24;
+            this.bt_help.Location = new System.Drawing.Point(671, 25);
+            this.bt_help.Name = "bt_help";
+            this.bt_help.Size = new System.Drawing.Size(37, 32);
+            this.bt_help.TabIndex = 24;
+            this.bt_help.UseSelectable = true;
+            this.bt_help.Click += new System.EventHandler(this.bt_help_Click);
+            // 
             // bt_darkmode
             // 
             this.bt_darkmode.DisplayFocus = true;
-            this.bt_darkmode.Image = global::Bibo_Verwaltung.Properties.Resources.Brightness;
+            this.bt_darkmode.Image = global::Bibo_Verwaltung.Properties.Resources.DarkMode;
             this.bt_darkmode.ImageSize = 24;
             this.bt_darkmode.Location = new System.Drawing.Point(714, 25);
             this.bt_darkmode.Name = "bt_darkmode";
@@ -343,7 +355,7 @@
             // 
             this.bt_logout.DisplayFocus = true;
             this.bt_logout.FontWeight = MetroFramework.MetroLinkWeight.Light;
-            this.bt_logout.Image = ((System.Drawing.Image)(resources.GetObject("bt_logout.Image")));
+            this.bt_logout.Image = global::Bibo_Verwaltung.Properties.Resources.Exit;
             this.bt_logout.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bt_logout.ImageSize = 24;
             this.bt_logout.Location = new System.Drawing.Point(757, 26);
@@ -367,18 +379,6 @@
             this.image.TabStop = false;
             this.image.UseSelectable = true;
             this.image.Click += new System.EventHandler(this.image_Click);
-            // 
-            // bt_help
-            // 
-            this.bt_help.DisplayFocus = true;
-            this.bt_help.Image = global::Bibo_Verwaltung.Properties.Resources.question;
-            this.bt_help.ImageSize = 24;
-            this.bt_help.Location = new System.Drawing.Point(671, 25);
-            this.bt_help.Name = "bt_help";
-            this.bt_help.Size = new System.Drawing.Size(37, 32);
-            this.bt_help.TabIndex = 24;
-            this.bt_help.UseSelectable = true;
-            this.bt_help.Click += new System.EventHandler(this.bt_help_Click);
             // 
             // w_s_main
             // 

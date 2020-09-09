@@ -35,9 +35,9 @@
             this.bt_Login = new MetroFramework.Controls.MetroButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
-            this.metroLink1 = new MetroFramework.Controls.MetroLink();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.msm_login = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.metroLink1 = new MetroFramework.Controls.MetroLink();
             ((System.ComponentModel.ISupportInitialize)(this.msm_login)).BeginInit();
             this.SuspendLayout();
             // 
@@ -147,19 +147,6 @@
             this.metroProgressBar1.Style = MetroFramework.MetroColorStyle.Black;
             this.metroProgressBar1.TabIndex = 6;
             // 
-            // metroLink1
-            // 
-            this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Login;
-            this.metroLink1.ImageSize = 32;
-            this.metroLink1.Location = new System.Drawing.Point(23, 25);
-            this.metroLink1.Margin = new System.Windows.Forms.Padding(2);
-            this.metroLink1.Name = "metroLink1";
-            this.metroLink1.Size = new System.Drawing.Size(22, 24);
-            this.metroLink1.Style = MetroFramework.MetroColorStyle.Black;
-            this.metroLink1.TabIndex = 5;
-            this.metroLink1.UseSelectable = true;
-            this.metroLink1.Click += new System.EventHandler(this.MetroLink1_Click);
-            // 
             // metroToolTip1
             // 
             this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
@@ -170,6 +157,19 @@
             // 
             this.msm_login.Owner = this;
             this.msm_login.Style = MetroFramework.MetroColorStyle.Black;
+            // 
+            // metroLink1
+            // 
+            this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Lock;
+            this.metroLink1.ImageSize = 24;
+            this.metroLink1.Location = new System.Drawing.Point(23, 25);
+            this.metroLink1.Margin = new System.Windows.Forms.Padding(2);
+            this.metroLink1.Name = "metroLink1";
+            this.metroLink1.Size = new System.Drawing.Size(22, 24);
+            this.metroLink1.Style = MetroFramework.MetroColorStyle.Black;
+            this.metroLink1.TabIndex = 5;
+            this.metroLink1.UseSelectable = true;
+            this.metroLink1.Click += new System.EventHandler(this.MetroLink1_Click);
             // 
             // w_s_login
             // 

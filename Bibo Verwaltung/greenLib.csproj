@@ -624,6 +624,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="greenLib.ico" />
+    <Content Include="Resources\DarkMode.png" />
+    <None Include="Resources\Exit.png" />
+    <Content Include="Resources\Lock.png" />
+    <Content Include="Resources\QuestionMark.png" />
     <None Include="Resources\eye.png" />
     <None Include="Resources\Handbuch.pdf" />
     <None Include="Resources\question.png" />
