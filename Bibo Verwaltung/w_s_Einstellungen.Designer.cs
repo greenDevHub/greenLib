@@ -46,8 +46,8 @@
             this.bt_Clear = new MetroFramework.Controls.MetroButton();
             this.bt_close = new MetroFramework.Controls.MetroButton();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
-            this.metroLink1 = new MetroFramework.Controls.MetroLink();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.metroLink1 = new MetroFramework.Controls.MetroLink();
             this.tLP_Top.SuspendLayout();
             this.tLP_2.SuspendLayout();
             this.SuspendLayout();
@@ -423,9 +423,15 @@
             this.bt_close.UseSelectable = true;
             this.bt_close.Click += new System.EventHandler(this.Bt_close_Click);
             // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
             // metroLink1
             // 
-            this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Settings64;
+            this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Settings;
             this.metroLink1.ImageSize = 32;
             this.metroLink1.Location = new System.Drawing.Point(23, 19);
             this.metroLink1.Name = "metroLink1";
@@ -433,12 +439,6 @@
             this.metroLink1.TabIndex = 19;
             this.metroLink1.TabStop = false;
             this.metroLink1.UseSelectable = true;
-            // 
-            // metroToolTip1
-            // 
-            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroToolTip1.StyleManager = null;
-            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // w_s_einstellungen
             // 

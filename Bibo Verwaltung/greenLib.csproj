@@ -625,6 +625,7 @@
   <ItemGroup>
     <Content Include="greenLib.ico" />
     <Content Include="Resources\DarkMode.png" />
+    <Content Include="Resources\Settings.png" />
     <None Include="Resources\Exit.png" />
     <Content Include="Resources\Lock.png" />
     <Content Include="Resources\QuestionMark.png" />
