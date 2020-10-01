@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_barcode));
             this.bt_Drucken = new System.Windows.Forms.Button();
-            this.pb_Barcode = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.lb_AusCode = new System.Windows.Forms.Label();
+            this.pb_Barcode = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Barcode)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,15 +45,6 @@
             this.bt_Drucken.TabIndex = 0;
             this.bt_Drucken.Text = "Drucken";
             this.bt_Drucken.UseVisualStyleBackColor = true;
-            // 
-            // pb_Barcode
-            // 
-            this.pb_Barcode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pb_Barcode.Location = new System.Drawing.Point(12, 25);
-            this.pb_Barcode.Name = "pb_Barcode";
-            this.pb_Barcode.Size = new System.Drawing.Size(415, 150);
-            this.pb_Barcode.TabIndex = 1;
-            this.pb_Barcode.TabStop = false;
             // 
             // button1
             // 
@@ -80,6 +72,15 @@
             this.lb_AusCode.TabIndex = 4;
             this.lb_AusCode.Text = "Ausleihvorgangs-Code:";
             // 
+            // pb_Barcode
+            // 
+            this.pb_Barcode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pb_Barcode.Location = new System.Drawing.Point(12, 25);
+            this.pb_Barcode.Name = "pb_Barcode";
+            this.pb_Barcode.Size = new System.Drawing.Size(415, 150);
+            this.pb_Barcode.TabIndex = 1;
+            this.pb_Barcode.TabStop = false;
+            // 
             // w_s_barcode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -90,6 +91,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pb_Barcode);
             this.Controls.Add(this.bt_Drucken);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "w_s_barcode";
             this.Text = "w_s_barcode";
             ((System.ComponentModel.ISupportInitialize)(this.pb_Barcode)).EndInit();

@@ -46,14 +46,18 @@
             this.gv_Benutzer = new MetroFramework.Controls.MetroGrid();
             this.bt_OK = new MetroFramework.Controls.MetroButton();
             this.mP_Eingaben = new MetroFramework.Controls.MetroPanel();
+            this.bt_show = new MetroFramework.Controls.MetroLink();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.tb_pw2 = new MetroFramework.Controls.MetroTextBox();
             this.cb_Rechte = new Bibo_Verwaltung.AdvancedComboBox();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Benutzer)).BeginInit();
             this.mP_Eingaben.SuspendLayout();
             this.SuspendLayout();
             // 
             // lb_rechte
             // 
-            this.lb_rechte.Location = new System.Drawing.Point(3, 88);
+            this.lb_rechte.Location = new System.Drawing.Point(3, 118);
             this.lb_rechte.Margin = new System.Windows.Forms.Padding(3);
             this.lb_rechte.Name = "lb_rechte";
             this.lb_rechte.Size = new System.Drawing.Size(96, 24);
@@ -77,12 +81,13 @@
             // 
             this.bt_clear.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_clear.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_clear.Location = new System.Drawing.Point(3, 148);
+            this.bt_clear.Location = new System.Drawing.Point(3, 193);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(96, 24);
+            this.bt_clear.Size = new System.Drawing.Size(176, 24);
             this.bt_clear.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_clear.TabIndex = 6;
+            this.bt_clear.TabIndex = 7;
             this.bt_clear.Text = "Leeren";
+            this.metroToolTip1.SetToolTip(this.bt_clear, " Hier können Sie alle oben liegenden Textfelder leeren.");
             this.bt_clear.UseSelectable = true;
             this.bt_clear.Click += new System.EventHandler(this.ClearForm);
             // 
@@ -102,7 +107,7 @@
             this.tb_user.CustomButton.Visible = false;
             this.tb_user.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.tb_user.Lines = new string[0];
-            this.tb_user.Location = new System.Drawing.Point(105, 28);
+            this.tb_user.Location = new System.Drawing.Point(156, 28);
             this.tb_user.MaxLength = 32767;
             this.tb_user.Name = "tb_user";
             this.tb_user.PasswordChar = '\0';
@@ -115,6 +120,7 @@
             this.tb_user.Size = new System.Drawing.Size(175, 24);
             this.tb_user.Style = MetroFramework.MetroColorStyle.Teal;
             this.tb_user.TabIndex = 3;
+            this.metroToolTip1.SetToolTip(this.tb_user, "Geben Sie hier den Namen des Benutzers ein.");
             this.tb_user.UseSelectable = true;
             this.tb_user.WaterMark = "Benutzername";
             this.tb_user.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -136,7 +142,7 @@
             this.tb_pw.CustomButton.Visible = false;
             this.tb_pw.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.tb_pw.Lines = new string[0];
-            this.tb_pw.Location = new System.Drawing.Point(105, 58);
+            this.tb_pw.Location = new System.Drawing.Point(156, 58);
             this.tb_pw.MaxLength = 32767;
             this.tb_pw.Name = "tb_pw";
             this.tb_pw.PasswordChar = '●';
@@ -149,11 +155,13 @@
             this.tb_pw.Size = new System.Drawing.Size(175, 24);
             this.tb_pw.Style = MetroFramework.MetroColorStyle.Teal;
             this.tb_pw.TabIndex = 4;
+            this.metroToolTip1.SetToolTip(this.tb_pw, "Geben Sie hier das Passwort des dazugehörigen Benutzers ein.");
             this.tb_pw.UseSelectable = true;
             this.tb_pw.UseSystemPasswordChar = true;
             this.tb_pw.WaterMark = "Passwort";
             this.tb_pw.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_pw.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_pw.Enter += new System.EventHandler(this.Tb_pw_Enter);
             // 
             // lb_user
             // 
@@ -170,21 +178,22 @@
             // 
             this.bt_confirm.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_confirm.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_confirm.Location = new System.Drawing.Point(105, 148);
+            this.bt_confirm.Location = new System.Drawing.Point(185, 193);
             this.bt_confirm.Name = "bt_confirm";
-            this.bt_confirm.Size = new System.Drawing.Size(175, 24);
+            this.bt_confirm.Size = new System.Drawing.Size(176, 24);
             this.bt_confirm.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_confirm.TabIndex = 7;
+            this.bt_confirm.TabIndex = 8;
             this.bt_confirm.Text = "Hinzufügen";
+            this.metroToolTip1.SetToolTip(this.bt_confirm, "Hier können Sie einen bestimmten Benutzer hinzufügen/bearbeiten/entfernen.");
             this.bt_confirm.UseSelectable = true;
             this.bt_confirm.Click += new System.EventHandler(this.bt_confirm_Click);
             // 
             // lb_Benutzer_add
             // 
-            this.lb_Benutzer_add.Location = new System.Drawing.Point(3, 118);
+            this.lb_Benutzer_add.Location = new System.Drawing.Point(3, 148);
             this.lb_Benutzer_add.Margin = new System.Windows.Forms.Padding(3);
             this.lb_Benutzer_add.Name = "lb_Benutzer_add";
-            this.lb_Benutzer_add.Size = new System.Drawing.Size(276, 24);
+            this.lb_Benutzer_add.Size = new System.Drawing.Size(328, 24);
             this.lb_Benutzer_add.Style = MetroFramework.MetroColorStyle.Teal;
             this.lb_Benutzer_add.TabIndex = 40;
             this.lb_Benutzer_add.Text = "Der Benutzer wurde erfolgreich hinzugefügt!";
@@ -196,7 +205,7 @@
             this.rb_KundeLoeschen.AutoSize = true;
             this.rb_KundeLoeschen.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_KundeLoeschen.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.rb_KundeLoeschen.Location = new System.Drawing.Point(203, 3);
+            this.rb_KundeLoeschen.Location = new System.Drawing.Point(251, 3);
             this.rb_KundeLoeschen.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
             this.rb_KundeLoeschen.Name = "rb_KundeLoeschen";
             this.rb_KundeLoeschen.Size = new System.Drawing.Size(80, 19);
@@ -211,7 +220,7 @@
             this.rb_KundeBearbeiten.AutoSize = true;
             this.rb_KundeBearbeiten.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_KundeBearbeiten.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.rb_KundeBearbeiten.Location = new System.Drawing.Point(104, 3);
+            this.rb_KundeBearbeiten.Location = new System.Drawing.Point(121, 3);
             this.rb_KundeBearbeiten.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
             this.rb_KundeBearbeiten.Name = "rb_KundeBearbeiten";
             this.rb_KundeBearbeiten.Size = new System.Drawing.Size(88, 19);
@@ -269,7 +278,7 @@
             this.gv_Benutzer.EnableHeadersVisualStyles = false;
             this.gv_Benutzer.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_Benutzer.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_Benutzer.Location = new System.Drawing.Point(317, 63);
+            this.gv_Benutzer.Location = new System.Drawing.Point(393, 63);
             this.gv_Benutzer.MultiSelect = false;
             this.gv_Benutzer.Name = "gv_Benutzer";
             this.gv_Benutzer.ReadOnly = true;
@@ -285,9 +294,9 @@
             this.gv_Benutzer.RowHeadersVisible = false;
             this.gv_Benutzer.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_Benutzer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_Benutzer.Size = new System.Drawing.Size(272, 142);
+            this.gv_Benutzer.Size = new System.Drawing.Size(283, 190);
             this.gv_Benutzer.Style = MetroFramework.MetroColorStyle.Teal;
-            this.gv_Benutzer.TabIndex = 17;
+            this.gv_Benutzer.TabIndex = 9;
             this.gv_Benutzer.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Benutzer_CellDoubleClick);
             // 
             // bt_OK
@@ -295,16 +304,17 @@
             this.bt_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.bt_OK.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_OK.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_OK.Location = new System.Drawing.Point(489, 211);
+            this.bt_OK.Location = new System.Drawing.Point(576, 259);
             this.bt_OK.Name = "bt_OK";
             this.bt_OK.Size = new System.Drawing.Size(100, 24);
             this.bt_OK.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_OK.TabIndex = 8;
+            this.bt_OK.TabIndex = 10;
             this.bt_OK.Text = "Schließen";
             this.bt_OK.UseSelectable = true;
             // 
             // mP_Eingaben
             // 
+            this.mP_Eingaben.Controls.Add(this.bt_show);
             this.mP_Eingaben.Controls.Add(this.lb_Benutzer_add);
             this.mP_Eingaben.Controls.Add(this.bt_confirm);
             this.mP_Eingaben.Controls.Add(this.rb_Neukunde);
@@ -312,8 +322,10 @@
             this.mP_Eingaben.Controls.Add(this.lb_user);
             this.mP_Eingaben.Controls.Add(this.lb_rechte);
             this.mP_Eingaben.Controls.Add(this.rb_KundeBearbeiten);
+            this.mP_Eingaben.Controls.Add(this.metroLabel1);
             this.mP_Eingaben.Controls.Add(this.lb_pw);
             this.mP_Eingaben.Controls.Add(this.tb_user);
+            this.mP_Eingaben.Controls.Add(this.tb_pw2);
             this.mP_Eingaben.Controls.Add(this.tb_pw);
             this.mP_Eingaben.Controls.Add(this.rb_KundeLoeschen);
             this.mP_Eingaben.Controls.Add(this.cb_Rechte);
@@ -322,35 +334,102 @@
             this.mP_Eingaben.HorizontalScrollbarSize = 10;
             this.mP_Eingaben.Location = new System.Drawing.Point(23, 63);
             this.mP_Eingaben.Name = "mP_Eingaben";
-            this.mP_Eingaben.Size = new System.Drawing.Size(282, 182);
+            this.mP_Eingaben.Size = new System.Drawing.Size(364, 220);
             this.mP_Eingaben.Style = MetroFramework.MetroColorStyle.Teal;
             this.mP_Eingaben.TabIndex = 45;
             this.mP_Eingaben.VerticalScrollbarBarColor = true;
             this.mP_Eingaben.VerticalScrollbarHighlightOnWheel = false;
             this.mP_Eingaben.VerticalScrollbarSize = 10;
             // 
+            // bt_show
+            // 
+            this.bt_show.Image = global::Bibo_Verwaltung.Properties.Resources.eye;
+            this.bt_show.Location = new System.Drawing.Point(337, 88);
+            this.bt_show.Name = "bt_show";
+            this.bt_show.Size = new System.Drawing.Size(24, 24);
+            this.bt_show.TabIndex = 44;
+            this.bt_show.TabStop = false;
+            this.bt_show.UseSelectable = true;
+            this.bt_show.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bt_show_MouseDown);
+            this.bt_show.MouseUp += new System.Windows.Forms.MouseEventHandler(this.bt_show_MouseUp);
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.Location = new System.Drawing.Point(3, 88);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(147, 24);
+            this.metroLabel1.Style = MetroFramework.MetroColorStyle.Teal;
+            this.metroLabel1.TabIndex = 21;
+            this.metroLabel1.Text = "Passwort wiederholen:";
+            this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tb_pw2
+            // 
+            // 
+            // 
+            // 
+            this.tb_pw2.CustomButton.Image = null;
+            this.tb_pw2.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_pw2.CustomButton.Name = "";
+            this.tb_pw2.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.tb_pw2.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_pw2.CustomButton.TabIndex = 1;
+            this.tb_pw2.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_pw2.CustomButton.UseSelectable = true;
+            this.tb_pw2.CustomButton.Visible = false;
+            this.tb_pw2.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.tb_pw2.Lines = new string[0];
+            this.tb_pw2.Location = new System.Drawing.Point(156, 88);
+            this.tb_pw2.MaxLength = 32767;
+            this.tb_pw2.Name = "tb_pw2";
+            this.tb_pw2.PasswordChar = '●';
+            this.tb_pw2.PromptText = "Passwort wiederholen";
+            this.tb_pw2.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_pw2.SelectedText = "";
+            this.tb_pw2.SelectionLength = 0;
+            this.tb_pw2.SelectionStart = 0;
+            this.tb_pw2.ShortcutsEnabled = true;
+            this.tb_pw2.Size = new System.Drawing.Size(175, 24);
+            this.tb_pw2.Style = MetroFramework.MetroColorStyle.Teal;
+            this.tb_pw2.TabIndex = 5;
+            this.tb_pw2.UseSelectable = true;
+            this.tb_pw2.UseSystemPasswordChar = true;
+            this.tb_pw2.WaterMark = "Passwort wiederholen";
+            this.tb_pw2.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_pw2.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_pw2.Enter += new System.EventHandler(this.Tb_pw_Enter);
+            // 
             // cb_Rechte
             // 
             this.cb_Rechte.BorderColor = System.Drawing.Color.Gray;
             this.cb_Rechte.DataRowView = false;
             this.cb_Rechte.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_Rechte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cb_Rechte.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.cb_Rechte.FormattingEnabled = true;
-            this.cb_Rechte.HighlightColor = System.Drawing.Color.Teal;
+            this.cb_Rechte.HighlightColor = System.Drawing.Color.LightSeaGreen;
             this.cb_Rechte.ItemHeight = 18;
             this.cb_Rechte.Items.AddRange(new object[] {
             "Gast",
             "Benutzer",
             "Admin"});
-            this.cb_Rechte.Location = new System.Drawing.Point(105, 88);
+            this.cb_Rechte.Location = new System.Drawing.Point(156, 118);
             this.cb_Rechte.Name = "cb_Rechte";
             this.cb_Rechte.Size = new System.Drawing.Size(175, 24);
-            this.cb_Rechte.TabIndex = 5;
+            this.cb_Rechte.TabIndex = 6;
+            this.metroToolTip1.SetToolTip(this.cb_Rechte, "Hier können Sie die Rechte des Benutzers auswählen/ansehen.");
+            // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // w_s_user
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(612, 253);
+            this.ClientSize = new System.Drawing.Size(691, 296);
             this.Controls.Add(this.mP_Eingaben);
             this.Controls.Add(this.gv_Benutzer);
             this.Controls.Add(this.bt_OK);
@@ -361,6 +440,7 @@
             this.ShowInTaskbar = false;
             this.Style = MetroFramework.MetroColorStyle.Teal;
             this.Text = "Benutzerverwaltung";
+            this.Theme = MetroFramework.MetroThemeStyle.Default;
             ((System.ComponentModel.ISupportInitialize)(this.gv_Benutzer)).EndInit();
             this.mP_Eingaben.ResumeLayout(false);
             this.mP_Eingaben.PerformLayout();
@@ -384,5 +464,9 @@
         private MetroFramework.Controls.MetroLabel lb_rechte;
         private AdvancedComboBox cb_Rechte;
         private MetroFramework.Controls.MetroPanel mP_Eingaben;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroTextBox tb_pw2;
+        private MetroFramework.Controls.MetroLink bt_show;
     }
 }

@@ -18,10 +18,20 @@ namespace Bibo_Verwaltung
         Einstellung set = new Einstellung();
         int originalHeight = 0;
         float originalRowHeight = 0;
-
-        public w_s_einstellungen()
+        Color fc = Color.Black;
+        Color bc = Color.White;
+        public w_s_einstellungen(MetroFramework.Components.MetroStyleManager msm)
         {
             InitializeComponent();
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Silver;
+            if(this.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+                fc = Color.White;
+                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
+                cb_Security.ForeColor = fc;
+                cb_Security.BackColor = bc;
+            }
             this.StartPosition = FormStartPosition.CenterScreen;
             originalHeight = ClientSize.Height;
             originalRowHeight = tLP_Top.RowStyles[3].Height;
@@ -51,13 +61,31 @@ namespace Bibo_Verwaltung
                 set.Name = tb_Benutzername.Text;
                 set.Pw = tb_Passwort.Text;
                 set.Database = tb_Database.Text;
-                set.SaveSettings(true);
+                int i = set.SaveSettings(true);
+                if(i == 0)
+                {
+                    MetroMessageBox.Show(this, "Datenbankserver-Verbindung erfolgreich gespeichert!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else if(i == 1)
+                {
+                    MetroMessageBox.Show(this, "Speichern fehlgeschlagen. Die Konfigurationsdatei ist schreibgeschützt!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MetroMessageBox.Show(this,"Die Änderungen konnten nicht übernommen werden. Die Konfigurationsdatei ist schreibgeschützt!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
+                    
+                
             }
         }
 
         private void GetSettings()
         {
-            set.LoadSettings();
+            if(set.LoadSettings() == 2)
+            {
+                MetroMessageBox.Show(this,"Unbekannte Authentifizierungsart. Windows Authentifizierung wurde ausgewählt", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             tb_Server.Text = set.Server;
             tb_Database.Text = set.Database;
             cb_Security.Text = set.Security;
@@ -94,7 +122,7 @@ namespace Bibo_Verwaltung
             tb_Server.BackColor = Color.White;
             tb_Benutzername.BackColor = Color.White;
             tb_Passwort.BackColor = Color.White;
-            cb_Security.BackColor = Color.White;
+            cb_Security.BackColor = bc;
         }
         #endregion
 
@@ -122,6 +150,11 @@ namespace Bibo_Verwaltung
             if (!con.ConnectError())
             {
                 MetroMessageBox.Show(this,"Verbindung konnte erfolgreich hergestellt werden!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                bt_Save.Focus();
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "Die Verbindung konnte nicht hergestellt werden. Bitte überprüfen Sie Ihre Einstellungen.", "Keine Verbindung.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 bt_Save.Focus();
             }
         }

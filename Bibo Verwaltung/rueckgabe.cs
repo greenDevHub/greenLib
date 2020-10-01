@@ -109,7 +109,7 @@ namespace Bibo_Verwaltung
         private void FillObject()
         {
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT buch_titel as 'Titel', aus_leihdatum as 'Leihdatum', aus_rückgabedatum as 'Rückgabedatum', aus_buchid FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid left join t_s_buecher on buch_isbn = bu_isbn WHERE aus_kundenid = @0";
+            string RawCommand = "SELECT aus_buchid as 'ID', aus_leihdatum as 'Geliehen', aus_rückgabedatum as 'Rückgabe', buch_titel as 'Titel' FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid left join t_s_buecher on buch_isbn = bu_isbn WHERE aus_kundenid = @0 AND buch_isbn in (SELECT bf_isbn FROM t_s_buch_fach)";
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.SelectCommand.Parameters.AddWithValue("@0", KID);
             adapter.Fill(ds);
@@ -136,8 +136,18 @@ namespace Bibo_Verwaltung
             ClearDataSource();
             FillObject();
             grid.DataSource = ds.Tables[0];
-            grid.Columns["aus_buchid"].Visible = false;
         }
+
+        ///// <summary>
+        ///// Gibt ein DataTable-Objekt mit den ausgeliehen Büchern der Kunden zurück 
+        ///// </summary>
+        //public DataTable GetAusgeliehen(string KundenID)
+        //{
+        //    KID = KundenID;
+        //    ClearDataSource();
+        //    FillObject();
+        //    return ds.Tables[0];
+        //}
 
         /// <summary>
         /// Prüft die Buchrückgabeliste auf das Vorhandensein der angegebenen Exemlar ID 
@@ -163,7 +173,6 @@ namespace Bibo_Verwaltung
             try
             {
                 ClearRueckList();
-                Load_Info(inputList[0].ToString());
                 DataRow relation;
                 string[] exemlarDetails = new string[3];
 
@@ -176,6 +185,7 @@ namespace Bibo_Verwaltung
 
                 for (int i = 0; i <= inputList.Length - 1; i++)
                 {
+                    Load_Info(inputList[i].ToString());
                     exemlarDetails[0] = ExemplarID;
                     exemlarDetails[1] = ZustandStart;
                     exemlarDetails[2] = ZustandEnde;
@@ -205,9 +215,14 @@ namespace Bibo_Verwaltung
             {
                 for (int i = 0; i < RueckListe.Rows.Count; i++)
                 {
-                    exemplar = new Buch(new Exemplar(RueckListe.Rows[i][0].ToString()).ISBN);
+                    Exemplar ex = new Exemplar();
+                    string titel = ex.GetTitel(RueckListe.Rows[i][0].ToString());
+
+
+                    //exemplar = new Buch(new Exemplar(RueckListe.Rows[i][0].ToString()).ISBN);
+                    //titel = exemplar.Titel;
                     sb.Append("-  ");
-                    sb.Append(TrimText(exemplar.Titel, 30));
+                    sb.Append(TrimText(titel, 30));
                     if (i < RueckListe.Rows.Count)
                     {
                         sb.Append(", ");
@@ -271,18 +286,22 @@ namespace Bibo_Verwaltung
             string resultString = "Möchten Sie ";
             if (RueckListe.Rows.Count == 1)
             {
-                exemplar = new Exemplar(RueckListe.Rows[0][0].ToString());
-                exemplar_info = new Buch(exemplar.ISBN);
-                resultString = resultString + "das Buch: " + Environment.NewLine + Environment.NewLine + exemplar_info.Titel + ", " + Environment.NewLine + Environment.NewLine;
+                Exemplar ex = new Exemplar();
+                string titel = ex.GetTitel(RueckListe.Rows[0][0].ToString());
+                //exemplar = new Exemplar(RueckListe.Rows[0][0].ToString());
+                //exemplar_info = new Buch(exemplar.ISBN);
+                resultString = resultString + "das Buch: " + Environment.NewLine + Environment.NewLine + TrimText(titel, 30) + ", " + Environment.NewLine + Environment.NewLine;
             }
             else
             {
                 resultString = resultString + "die Bücher: " + Environment.NewLine + Environment.NewLine;
                 foreach (DataRow row in RueckListe.Rows)
                 {
-                    exemplar = new Exemplar(row[0].ToString());
-                    exemplar_info = new Buch(exemplar.ISBN);
-                    resultString = resultString + "-  " + TrimText(exemplar_info.Titel, 30) + ", " + Environment.NewLine;
+                    Exemplar ex = new Exemplar();
+                    string titel = ex.GetTitel(row[0].ToString());
+                    //exemplar = new Exemplar(row[0].ToString());
+                    //exemplar_info = new Buch(exemplar.ISBN);
+                    resultString = resultString + "-  " + TrimText(titel, 30) + ", " + Environment.NewLine;
                 }
                 resultString = resultString + Environment.NewLine;
             }
@@ -332,7 +351,6 @@ namespace Bibo_Verwaltung
             {
                 DataRow relation;
                 string[] exemlarDetails = new string[3];
-
                 exemlarDetails[0] = ExemplarID;
                 exemlarDetails[1] = ZustandStart;
                 exemlarDetails[2] = ZustandEnde;

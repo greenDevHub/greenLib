@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework.Components;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,9 +14,12 @@ namespace Bibo_Verwaltung
     public partial class w_s_information : MetroFramework.Forms.MetroForm
     {
         string currentUser;
-        public w_s_information(int modus, string id, string userName)
+        public w_s_information(int modus, string id, string userName, MetroStyleManager msm)
         {           
             InitializeComponent();
+            msm_info = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroFramework.MetroColorStyle.Blue;
             this.currentUser = userName;
             if (modus == 1)
             {
@@ -34,7 +38,19 @@ namespace Bibo_Verwaltung
                 lb_8.Text = "Erscheinungsdatum:";
                 lb_2_1.Text = buch.ISBN;
                 lb_2_2.Text = buch.Titel;
-                lb_2_3.Text = buch.Autor.Autorname;
+                if (buch.Autoren.Count > 1)
+                {
+                    lb_2_3.Text = "";
+                    foreach(string s in buch.Autoren)
+                    {
+                        lb_2_3.Text = lb_2_3.Text + s + ", ";
+                    }
+                    lb_2_3.Text = lb_2_3.Text.Substring(0, lb_2_3.Text.Length - 2);
+                }
+                else if(buch.Autoren.Count == 0)
+                {
+                    lb_2_3.Text = "-";
+                }
                 lb_2_4.Text = buch.Genre.Genrename;
                 lb_2_5.Text = buch.Verlag.Verlagname;
                 lb_2_6.Text = buch.Auflage;
@@ -51,7 +67,7 @@ namespace Bibo_Verwaltung
                 lb_3.Text = "Straße, Hausnummer";
                 lb_4.Text = "PLZ:";
                 lb_5.Text = "Ort:";
-                lb_6.Text = "Klassenstufe:";
+                lb_6.Text = "Klasse:";
                 lb_7.Text = "E-Mail:";
                 lb_8.Text = "Telefonnummer:";
                 lb_2_1.Text = kunde.Vorname;
@@ -69,13 +85,17 @@ namespace Bibo_Verwaltung
         {
             if (Text == "Buch-Details")
             {
-                Form Buecher = new w_s_buecher(currentUser, true);
+                w_s_buecher Buecher = new w_s_buecher(currentUser, true, msm_info);
+                msm_info.Clone(Buecher);
                 Buecher.ShowDialog(this);
+                Buecher.Dispose();
             }
             else if (Text == "Kunden-Details")
             {
-                Form Kunden = new w_s_Kunden(currentUser);
+                w_s_Kunden Kunden = new w_s_Kunden(currentUser,msm_info);
+                msm_info.Clone(Kunden);
                 Kunden.ShowDialog(this);
+                Kunden.Dispose();
             }
         }
     }

@@ -1,0 +1,82 @@
+Allgemein
+> °00 Buttons passen vom Layout nicht mehr zum restlichen design
+DONE< °01 Warum ist die Fenstergröße nicht änderbar aber zu klein für diverse Tabellen?
+< °02 keine <nichts> Angabe bei auswal Menüs in Filtern
+< °03 konfigurierbare Standard Ausleihzeit?
+< °04 Keine Trennung zwischen Suchen und Bearbeiten von Stammdaten
+< °05 Eingabe im Entfernen garnich möglich, um nach Datensatz zu suchen der gelöscht werden soll
+< °06 Button wird markiert wenn er Tabindex 0 hat
+
+
+Hauptfenster
+DONE > #00 Statistik entfernen
+
+Loginfenser
+DONE> #01 Username / login ist nicht im Focus
+
+Kundenverwaltung
+> #07 Klasse sollte über dropdown Menü ausgewählt werden wie alle Stammdaten
+> #08 Klassen verwalten Modul?
+DONE> #02 Wieso kann Name/Nachname nicht geändert werden?
+DONE> #03 Kunden id wird beim Wechsel zwischen bearbeiten und hinzufügen nicht gelöscht
+DONE>> Es ist zwar möglich Eingaben zu ändern aber nicht dies als neuen Nutzer hinzuzufügen
+DONE>>> Filter leeren ist die einzige Möglichkeit neue Nutzer hinzuzufügen nachdem ein Nutzer ausgewählt wurde
+DONE> #04 Wenn das Fenster zwischenzeitlich nicht im Fokus war wird die Suche in der Tabelle zurück gesetzt, 
+DONE>> Kriterien bleiben aber in den Feldern
+DONE> #05 Hinzufügen von einem Kunde mit selben Vorname, Name und Geburtsdatum wird verhindert, aber keine Meldung angezeigt
+DONE> #06 Ändern des Geburtsdatum wird verhindert, Tippfehler?
+
+DONE> #40 Suche nach Geburtsdatum
+
+Bücherverwaltung
+DONE> #09 Nicht alle Pflichtfelder werden rot markiert bei neu erstellen (vereinheitlichung auch kunde)
+TEST NOTWENDIG> #10 beim Buch anlegen bleibt Bücherverwaltung manchmal in der Ladeanimation hängen (siehe screenshot)
+IN ARBEIT> #11 Import nicht implementiert?
+DONE> #14 Der Autor wird nicht in die Suche einbezogen
+DONE< °07 Verwendung der Checkbox beim Autor?
+DONE> #16 Erscheinungsdatum wird nicht zurückgesetzt
+DONE> #31 Nur Titel und ISBN wird für die Suche genutzt
+DONE> #41 Titel mit Button aus Hauptmenü vereinheitlichen
+
+Exemplar
+IN ARBEIT> #17 Import/Export funktion nicht implementiert?
+DONE> #18 kein Zugag zur Exemplar verwaltung um neue Exemplare hinzuzufügen 
+???weiß nich mehr was das problem war< °08 Exemplare Löschen?
+
+Buchübersicht
+> #15 Die Klassenstufe wird als id angezeigt und nicht in die Suche einbezogen
+DONE> #14 Der Autor wird nicht in die Suche einbezogen (und auch nicht in der tabelle angezeigt)
+DONE> #13 Kundeninformation wird ausgeblendet wenn ein Ausleihvorgang abgeschlossen wird
+DONE< °06 Tabelle wird beim start mit gestauchter Tabellenbreite angezeigt
+DONE> #19 Fehler beim abbrechen des Ausleihvorgangs 
+>> wenn eine Ausleihliste erstellt wird
+>> die Ausleihliste versucht wird zurück zu geben über Rechtsklick
+>> der Vorgang abgebrochen wird ohne ein Buch zurück zu geben
+>> stürzt das programm ab
+>>> tritt nur außerhalb von VS auf
+DONE, soll so sein> #20 ausleihliste wird immer geleert wenn ausleifenster geschlossen wird
+DONE> #21 Ausleih/Rückgabeliste in der Buchübersicht wird nicht geleert
+DONE>> wenn eine Ausleihliste über den Button Buchausleihe 
+DONE>> an Kunden ausgeliehen wird, wird die liste danach nicht geleert (Anzeige unten)
+DONE> #22 Suche umstellen von Beginnt mit zu enthält (z.b. bei buchtitel, evtl. für alle Module)
+DONE> #12 Farblegende ergänzen
+
+Buchrückgabe
+DONE> #23 wenn die Zustandsliste Aktualisiert wird verschwindeet der aktuelle Zustand
+
+Import
+> #24 Verlag Import Schritt 4 Zuordnung?
+> #25 Kundenimport konnte nicht getestet werden
+
+Zuordnung
+DONE> #26 Bei doppelclick auf erste Tabelle bearbeitung starten
+
+Rechteverwaltung
+>automatische Lehrbuchaus- und rückgabe noch ausstehend
+DONE> #30 integriert?
+DONE>> als Gast können keine Bücher ausgeliehen werden
+DONE>> als Gast können Bücher bearbeitet werden
+
+Automatische Lehrbuchverwaltung
+> wurde bisher noch nicht getestet
+> muss noch getestet werden! ->kann getestet werden!!!

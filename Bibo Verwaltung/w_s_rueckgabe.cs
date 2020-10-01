@@ -1,4 +1,5 @@
 ﻿using MetroFramework;
+using MetroFramework.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,9 +18,12 @@ namespace Bibo_Verwaltung
     {
         #region Constructor
         string currentUser;
-        public w_s_rueckgabe(string userName)
+        public w_s_rueckgabe(string userName, MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_rueckgabe = msm;
+            this.StyleManager = msm;
+            SetStyle();
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
@@ -38,9 +42,12 @@ namespace Bibo_Verwaltung
             }
         }
 
-        public w_s_rueckgabe(string userName, string[] list)
+        public w_s_rueckgabe(string userName, string[] list, MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_rueckgabe = msm;
+            this.StyleManager = msm;
+            SetStyle();
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
@@ -56,15 +63,31 @@ namespace Bibo_Verwaltung
                 bt_Zu_aendern.Enabled = true;
                 bt_Rueckgabe.Enabled = true;
                 zustand.FillCombobox(ref cb_Zustand, -1);
-                foreach (string exemplar in list)
-                {
-                    tb_BuchCode.Text = exemplar;
-                    EnterBuch();
-                }
+                rueckgabe.FillRueckListe(list);
+                rueckgabe.SetSlider(ref rueckList_Slider, ref tb_listVon, ref tb_listBis);
+                //foreach (string exemplar in list)
+                //{
+                //    tb_BuchCode.Text = exemplar;
+                //    EnterBuch();
+                //}
             }
         }
         #endregion
+        Color fc = Color.Black;
+        Color bc = Color.White;
+        private void SetStyle()
+        {
+            this.StyleManager.Style = MetroColorStyle.Green;
+            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+                fc = Color.White;
+                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
+                cb_Zustand.ForeColor = fc;
+                cb_Zustand.BackColor = bc;
+                picBox_Buchcover.BackColor = bc;
+            }
 
+        }
         Rueckgabe rueckgabe = new Rueckgabe();
         Zustand zustand = new Zustand();
         Kunde kunde = new Kunde();
@@ -133,7 +156,8 @@ namespace Bibo_Verwaltung
             lb_AusleihStart.Text = "nicht verfügbar";
             lb_AusleihEnde.Enabled = false;
             lb_AusleihEnde.Text = "nicht verfügbar";
-            cb_Zustand.Enabled = false;
+            cb_Zustand.TabStop = false;
+            tpanel.Visible = true;
             bt_Zu_aendern.Text = "Buchzustand ändern";
             cb_Zustand.SelectedValue = -1;
             lb_AusleihEnde.ForeColor = Color.Black;
@@ -255,7 +279,8 @@ namespace Bibo_Verwaltung
                         }
                         rueckgabe.Verfuegbar = buch_exemplar.IsSpecificAvailable();
                         llb_BuchTitel.Enabled = true;
-                        llb_BuchTitel.Text = rueckgabe.TrimText(new Buch(buch_exemplar.ISBN).Titel, 30);
+                        llb_BuchTitel.Text =rueckgabe.TrimText( buch_exemplar.Titel,30);
+                        //llb_BuchTitel.Text = rueckgabe.TrimText(new Buch(buch_exemplar.ISBN).Titel, 30);
                         cb_Zustand.SelectedValue = buch_exemplar.Zustand.ZustandID;
                         rueckgabe.ZustandStart = buch_exemplar.Zustand.Zustandname;
                         rueckgabe.ZustandEnde = buch_exemplar.Zustand.Zustandname;
@@ -313,6 +338,7 @@ namespace Bibo_Verwaltung
         {
             if (tb_BuchCode.Text != "")
             {
+
                 if (!rueckgabe.Verfuegbar)
                 {
                     if (!rueckgabe.CheckRueckList())
@@ -323,13 +349,15 @@ namespace Bibo_Verwaltung
                             if (dr == DialogResult.Yes)
                             {
                                 rueckgabe.ZustandEnde = cb_Zustand.Text;
-                                cb_Zustand.Enabled = false;
+                                cb_Zustand.TabStop = false;
+                                tpanel.Visible = true;
                                 bt_Zu_aendern.Text = "Buchzustand ändern";
                             }
                             else
                             {
                                 rueckgabe.ZustandEnde = rueckgabe.ZustandStart;
-                                cb_Zustand.Enabled = false;
+                                cb_Zustand.TabStop = false;
+                                tpanel.Visible = true;
                                 bt_Zu_aendern.Text = "Buchzustand ändern";
                             }
                         }
@@ -358,7 +386,7 @@ namespace Bibo_Verwaltung
         private void Buchrueckgabe()
         {
             DialogResult dialogResult = MetroMessageBox.Show(this, rueckgabe.GetRueckgabeList() + "ausgeliehen von: '" + rueckgabe.TrimText(kunde.Vorname + " " + kunde.Nachname, 30) + "' wirklich als zurückgegeben markieren?", "Achtung",
-                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question, 211 + rueckgabe.RueckListe.Rows.Count * 17);
             if (dialogResult == DialogResult.OK)
             {
                 try
@@ -366,7 +394,7 @@ namespace Bibo_Verwaltung
                     foreach (DataRow row in rueckgabe.RueckListe.Rows)
                     {
                         rueckgabe.Load_Info(row[0].ToString());
-                        rueckgabe.Execute_Rueckgabe(row[0].ToString(), rueckgabe.KID, row[1].ToString(), zustand.GetZustandsID(row[2].ToString()), row[2].ToString(), rueckgabe.Leihdatum.ToShortDateString(), DateTime.Now.Date.ToShortDateString());
+                        rueckgabe.Execute_Rueckgabe(rueckgabe.ExemplarID.ToString(), rueckgabe.KID, rueckgabe.ZustandStart.ToString(), zustand.GetZustandsID(rueckgabe.ZustandEnde.ToString()), rueckgabe.ZustandEnde.ToString(), rueckgabe.Leihdatum.ToShortDateString(), DateTime.Now.Date.ToShortDateString());
                     }
                     MetroMessageBox.Show(this, "Die Buchrückgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -385,19 +413,43 @@ namespace Bibo_Verwaltung
         #region Componenten-Aktionen
         private void tb_BuchCode_TextChanged(object sender, EventArgs e)
         {
-            ShowBuchResults();
+            if (tb_BuchCode.Text.Length == 8 && _checksum_ean8(tb_BuchCode.Text.Substring(0, 7)).ToString().Equals(tb_BuchCode.Text.Substring(7, 1)))
+            {
+                tb_BuchCode.Text = int.Parse(tb_BuchCode.Text.Substring(0, 7)).ToString();
+                ShowBuchResults();
+
+            }
+            else if( tb_BuchCode.Text == "")
+            {
+                ShowBuchResults();
+
+            }
+            else if (rueckgabe.RueckListe.AsEnumerable().Any(row => tb_BuchCode.Text == row.Field<String>("Column1")))
+            {
+                ShowBuchResults();
+            }
+            else
+            {
+                timer_input.Stop();
+                timer_input.Start();
+
+            }
         }
 
         private void llb_Buch_LinkClicked(object sender, EventArgs e)
         {
-            Form Info = new w_s_information(1, rueckgabe.ExemplarID, currentUser);
+            w_s_information Info = new w_s_information(1, rueckgabe.ExemplarID, currentUser, msm_rueckgabe);
+            msm_rueckgabe.Clone(Info);
             Info.ShowDialog();
+            Info.Dispose();
         }
 
         private void llb_Kunde_LinkClicked(object sender, EventArgs e)
         {
-            Form Info = new w_s_information(2, kunde.KundenID, currentUser);
+            w_s_information Info = new w_s_information(2, kunde.KundenID, currentUser,msm_rueckgabe);
+            msm_rueckgabe.Clone(Info);
             Info.ShowDialog();
+            Info.Dispose();
         }
 
         private void bt_Rueckgabe_Click(object sender, EventArgs e)
@@ -414,27 +466,35 @@ namespace Bibo_Verwaltung
 
         private void bt_Zu_aendern_Click(object sender, EventArgs e)
         {
-            if (cb_Zustand.Enabled == false)
+            if (cb_Zustand.TabStop == false)
             {
-                cb_Zustand.Enabled = true;
+                tpanel.Visible = false;
+                cb_Zustand.TabStop = true;
+                //cb_Zustand.Enabled = true;
                 bt_Zu_aendern.Text = "Übernehmen";
             }
             else
             {
+                tpanel.Visible = true;
                 rueckgabe.ZustandEnde = cb_Zustand.Text;
-                cb_Zustand.Enabled = false;
+                cb_Zustand.TabStop = false;
+                //cb_Zustand.Enabled = false;
                 bt_Zu_aendern.Text = "Buchzustand ändern";
             }
         }
 
         private void bt_open_Click(object sender, EventArgs e)
         {
-            Form Zustand = new w_s_manage(currentUser, "Zustand");
+            int index = cb_Zustand.SelectedIndex;
+            w_s_manage Zustand = new w_s_manage(currentUser, "Zustand",this.StyleManager);
+            this.StyleManager.Clone(Zustand);
             Zustand.ShowDialog(this);
+            Zustand.Dispose();
             if (!new Benutzer(currentUser).Rechteid.Equals("0"))
             {
                 zustand.FillCombobox(ref cb_Zustand, -1);
             }
+            cb_Zustand.SelectedIndex = index;
         }
 
         private void bt_AddBuch_Click(object sender, EventArgs e)
@@ -504,5 +564,16 @@ namespace Bibo_Verwaltung
             tb_BuchCode.SelectAll();
         }
         #endregion
+
+        private void MetroToolTip1_Popup(object sender, PopupEventArgs e)
+        {
+            e.ToolTipSize = new Size(e.ToolTipSize.Width + 32, e.ToolTipSize.Height);
+        }
+
+        private void timer_input_Tick(object sender, EventArgs e)
+        {
+            ShowBuchResults();
+            timer_input.Stop();
+        }
     }
 }

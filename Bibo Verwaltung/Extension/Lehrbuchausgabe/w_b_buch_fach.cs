@@ -1,4 +1,5 @@
 ﻿using MetroFramework;
+using MetroFramework.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,22 +19,37 @@ namespace Bibo_Verwaltung
         private DataTable buecherListe = new DataTable();
         private bool aenderungungen = false;
         string currentUser;
-
-        public w_s_buch_fach(string userName)
+        bool gast = false;
+        public w_s_buch_fach(string userName, MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_buch_fach = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Orange;
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             if (user.Rechteid.Equals("0"))
             {
+                gast = true;
                 bt_Bearbeiten.Enabled = false;
             }
-            else
+            else if (user.Rechteid == "1")
             {
+                gast = false;
                 bt_Bearbeiten.Enabled = true;
             }
-            this.Text = Text + " - Angemeldet als: " + userName;
+            else if (user.Rechteid == "2")
+            {
+                gast = false;
+                bt_Bearbeiten.Enabled = true;
+                mbt_ImEx.Enabled = true;
+            }
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             faecher.FillGrid(ref gv_Faecher);
+            foreach (DataGridViewColumn column in gv_Faecher.Columns) 
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
         #region Fenster-Methoden
@@ -47,7 +63,7 @@ namespace Bibo_Verwaltung
                 buecherListe.Rows.Clear();
                 if (gv_Faecher.CurrentRow != null)
                 {
-                    bf.Show_FachBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString());
+                    bf.Show_FachBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString(), lk);
                 }
             }
             catch
@@ -156,7 +172,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void SaveZuordnungen()
         {
-            if (gv_Faecher.CurrentRow != null)
+            if (!gast && gv_Faecher.CurrentRow != null)
             {
                 if (aenderungungen == true)
                 {
@@ -165,7 +181,7 @@ namespace Bibo_Verwaltung
                     {
                         try
                         {
-                            bf.Save_Zuordnung(buecherListe, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString());
+                            bf.Save_Zuordnung(buecherListe, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString(),lk);
                             aenderungungen = false;
                         }
                         catch
@@ -188,7 +204,7 @@ namespace Bibo_Verwaltung
                     bt_back.Enabled = true;
                     gv_Buecher.Enabled = true;
                     gv_Faecher.Enabled = false;
-                    bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString());
+                    bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString(),lk);
                     FillBuecherList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
@@ -201,6 +217,9 @@ namespace Bibo_Verwaltung
                 SaveZuordnungen();
                 bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
                 LoadBuecher();
+                gv_Faecher.Select();
+                tb_fach.Clear();
+
             }
         }
 
@@ -242,7 +261,218 @@ namespace Bibo_Verwaltung
             gv_Faecher.Enabled = true;
             bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
             LoadBuecher();
+            tb_fach.Clear();
+        }
+        
+        private void mbt_ImEx_Click(object sender, EventArgs e)
+        {
+            w_s_selfmade_dialog custom = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export", msm_buch_fach);
+            msm_buch_fach.Clone(custom);
+            custom.ShowDialog(this);
+            if (custom.DialogResult == DialogResult.Yes)
+            {
+                //Import
+                MetroMessageBox.Show(this, "Diese Funktion ist in der aktuellen Version noch nicht verfügbar.", "Noch nicht verfügbar.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            else if (custom.DialogResult == DialogResult.No)
+            {
+                try
+                {
+                    ExcelExport export = new ExcelExport();
+                    string[] source = { "t_s_buch_fach" };
+                    export.ExportAsCSV(source);
+                    MetroMessageBox.Show(this, "Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch
+                {
+                    MetroMessageBox.Show(this, "Beim Exportvorgang ist ein Fehler aufgetreten!", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else { }
         }
         #endregion
+
+        private void Gv_Faecher_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
+            {
+                if (gv_Faecher.CurrentRow != null)
+                {
+                    try
+                    {
+                        bt_back.Enabled = true;
+                        gv_Buecher.Enabled = true;
+                        gv_Faecher.Enabled = false;
+                        bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[e.RowIndex].Cells["ID"].Value.ToString(), lk);
+                        FillBuecherList();
+                        bt_Bearbeiten.Text = "Übernehmen";
+                    }
+                    catch
+                    {
+                        bt_back.Enabled = false;
+                        gv_Buecher.Enabled = false;
+                        gv_Faecher.Enabled = true;
+                        bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
+                        LoadBuecher();
+                        tb_fach.Clear();
+                    }
+
+                }
+            }
+        }
+        private void SetColor()
+        {
+            for (int i = 0; i < gv_Buecher.Rows.Count; i++)
+            {
+                string klassename = gv_Buecher.Rows[i].Cells[0].Value.ToString();
+                if (klassename.Contains("*"))
+                {
+                    gv_Buecher.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
+                    gv_Buecher.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    gv_Buecher.Rows[i].DefaultCellStyle.BackColor = default;
+                    gv_Buecher.Rows[i].DefaultCellStyle.ForeColor = default;
+                }
+            }
+        }
+        private void Gv_Buecher_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SetColor();
+        }
+
+        private void Gv_Buecher_Sorted(object sender, EventArgs e)
+        {
+            SetColor();
+        }
+
+        private void Gv_Faecher_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
+                {
+                    if (gv_Faecher.CurrentRow != null)
+                    {
+                        bt_back.Enabled = true;
+                        gv_Buecher.Enabled = true;
+                        gv_Faecher.Enabled = false;
+                        bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.SelectedRows[0].Index].Cells["ID"].Value.ToString(),lk);
+                        FillBuecherList();
+                        bt_Bearbeiten.Text = "Übernehmen";
+                    }
+                }
+                e.SuppressKeyPress = true;
+            }
+            else if (e.KeyCode == Keys.Tab)
+            {
+                bt_Bearbeiten.Select();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void Gv_Buecher_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                DataGridViewRow row = gv_Buecher.CurrentRow;
+                string fach = row.Cells["ISBN"].Value.ToString();
+                if (!fach.Contains("*"))
+                {
+                    AddToBuecherList();
+                    aenderungungen = true;
+                }
+                else
+                {
+                    RemoveFromBuecherList();
+                    aenderungungen = true;
+                }
+                e.SuppressKeyPress = true;
+            }
+            else if (e.KeyCode == Keys.Tab)
+            {
+                bt_back.Select();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void Tb_isbn_TextChanged(object sender, EventArgs e)
+        {
+            Filter();
+        }
+
+        private void Tb_titel_TextChanged(object sender, EventArgs e)
+        {
+            Filter();
+        }
+
+        private void Filter()
+        {
+            try
+            {
+                (gv_Buecher.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%'", tb_titel.Text, tb_isbn.Text);
+                SetColor();
+            }
+            catch
+            {
+
+            }
+        }
+        private void FilterFach()
+        {
+            try
+            {
+                (gv_Faecher.DataSource as DataTable).DefaultView.RowFilter = string.Format("Langbezeichnung LIKE '%{0}%'", tb_fach.Text);
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void Gv_Buecher_EnabledChanged(object sender, EventArgs e)
+        {
+            tb_titel.Enabled = gv_Buecher.Enabled;
+            tb_isbn.Enabled = gv_Buecher.Enabled;
+            tb_titel.Text = "";
+            tb_isbn.Text = "";
+            (gv_Buecher.DataSource as DataTable).DefaultView.RowFilter = null;
+        }
+
+        private void Tb_fach_TextChanged(object sender, EventArgs e)
+        {
+            FilterFach();
+        }
+
+        private void Gv_Faecher_EnabledChanged(object sender, EventArgs e)
+        {
+            tb_fach.Enabled = gv_Faecher.Enabled;
+
+
+            bt_lk.Enabled = gv_Faecher.Enabled;
+
+        }
+        bool lk = false;
+        private void Bt_lk_Click(object sender, EventArgs e)
+        {
+            if(bt_lk.Text.Equals("Zu Leistungskurs wechseln",StringComparison.InvariantCultureIgnoreCase))
+            {
+                //ALLE FÄCHER LEISTUNGSKURS
+                bt_lk.Text = "Zu Grundkurs wechseln";
+                lb_titel.Text = "Fächer (LK):";
+                lk = true;
+            }
+            else
+            {
+                //ALLE FÄCHER GRUNDKURS
+                //STANDARD FALL
+                bt_lk.Text = "Zu Leistungskurs wechseln";
+                lb_titel.Text = "Fächer (GK):";
+                lk = false;
+            }
+            LoadBuecher();
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MetroFramework.Controls;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -15,6 +16,7 @@ namespace Bibo_Verwaltung
         SQL_Verbindung con = new SQL_Verbindung();
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
         SqlCommandBuilder comb = new SqlCommandBuilder();
 
         #region Eigenschaften eine Faches
@@ -119,10 +121,12 @@ namespace Bibo_Verwaltung
         {
             try
             {
+                dt.Clear();
                 if (con.ConnectError()) return;
                 string RawCommand = "SELECT f_id as 'ID', f_kurzform as 'Kürzel', f_langform as 'Langbezeichnung' FROM [dbo].[t_s_faecher]";
                 adapter = new SqlDataAdapter(RawCommand, con.Con);
                 adapter.Fill(ds);
+                adapter.Fill(dt);
                 con.Close();
             }
             catch { }
@@ -174,6 +178,73 @@ namespace Bibo_Verwaltung
                 return false;
             }
         }
+        /// <summary>
+        /// Entfernt Duplikate aus den Changes
+        /// </summary>
+        /// <param name="changes"></param>
+        /// <returns></returns>
+        private DataSet noDuplicates(DataSet changes)
+        {
+            try
+            {
+                Hashtable hTable = new Hashtable();
+                ArrayList duplicateList = new ArrayList();
+
+                //1. Die Changes-Tabelle auf duplikate überprüfen (mehrfache eingabe des selben Wertes)
+                foreach (DataRow drow in changes.Tables[0].Rows)
+                {
+                    if (hTable.Contains(drow[1]))
+                    {
+                        duplicateList.Add(drow);
+                    }
+                    else
+                    {
+                        hTable.Add(drow[1], string.Empty);
+                    }
+                }
+                //Entfernen der Duplikate von 1.
+                foreach (DataRow dRow in duplicateList)
+                {
+                    changes.Tables[0].Rows.Remove(dRow);
+                }
+
+                //2. Die Ausgangsdaten auf die Werte überprüfen, die in den Changes sind
+                duplicateList.Clear();
+                var s = dt.Rows;
+                for (int i = 0; i < changes.Tables[0].Rows.Count; i++)
+                {
+                    string str = changes.Tables[0].Rows[i][1].ToString();
+                    bool contains = dt.AsEnumerable().Any(row => str.Equals(row.Field<String>(1),StringComparison.InvariantCultureIgnoreCase));
+                    string id1 = changes.Tables[0].Rows[i][0].ToString();
+                    if(id1 != "")
+                    {
+                        string str2 = dt.Select("ID = " + id1)[0][1].ToString();
+                        if (contains && !str.Equals(str2, StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            duplicateList.Add(changes.Tables[0].Rows[i]);
+                        }
+                    }
+                    else
+                    {
+                        if (contains)
+                        {
+                            duplicateList.Add(changes.Tables[0].Rows[i]);
+                        }
+                    }
+
+                }
+                //Entfernen der Duplikate von 2.
+                foreach (DataRow dRow in duplicateList)
+                {
+                    changes.Tables[0].Rows.Remove(dRow);
+                }
+                return changes;
+            }
+            catch (Exception ex)
+            {
+                return changes;
+            }
+        }
 
         /// <summary>
         /// Speichert ein DataGridView-Objekt in die Datenbank 
@@ -184,6 +255,7 @@ namespace Bibo_Verwaltung
             DataSet changes = ds.GetChanges();
             if (changes != null)
             {
+                changes = noDuplicates(changes);
                 adapter.Update(changes);
             }
         }

@@ -26,7 +26,6 @@ namespace Bibo_Verwaltung
         [STAThread]
         static void Main()
         {
-            Process.Start("ScreenSize.exe");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new w_s_login());

@@ -1,4 +1,6 @@
 ﻿using MetroFramework;
+using MetroFramework.Components;
+using MetroFramework.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,9 +19,13 @@ namespace Bibo_Verwaltung
     {
         #region Constructor
         string currentUser;
-        public w_s_ausleihe(string userName)
+        public w_s_ausleihe(string userName, MetroFramework.Components.MetroStyleManager msm)
         {
+            HandleCreated += Form1_HandleCreated;
             InitializeComponent();
+            msm_ausleihe = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Green;
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
@@ -40,13 +46,17 @@ namespace Bibo_Verwaltung
                 tb_VName.Enabled = true;
                 tb_NName.Enabled = true;
                 bt_Submit.Enabled = true;
-                kunde.FillGrid(ref gv_Kunde);
+                timer_start.Start();
             }
         }
 
-        public w_s_ausleihe(string userName, string[] list)
+        public w_s_ausleihe(string userName, string[] list, MetroFramework.Components.MetroStyleManager msm)
         {
+            HandleCreated += Form1_HandleCreated;
             InitializeComponent();
+            msm_ausleihe = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Green;
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
@@ -67,13 +77,12 @@ namespace Bibo_Verwaltung
                 tb_VName.Enabled = true;
                 tb_NName.Enabled = true;
                 bt_Submit.Enabled = true;
-                kunde.FillGrid(ref gv_Kunde);
+                timer_start.Start();
                 ausleihe.FillAusleihListe(list);
                 ausleihe.SetSlider(ref leihList_Slider, ref tb_listVon, ref tb_listBis);
             }
         }
         #endregion
-
         Ausleihe ausleihe = new Ausleihe();
         Kunde kunde = new Kunde();
 
@@ -127,7 +136,10 @@ namespace Bibo_Verwaltung
             {
                 llb_BuchTitel.Enabled = false;
                 llb_BuchTitel.Text = "keine Treffer";
-                kunde.FillGrid(ref gv_Kunde);
+                if (!worker.IsBusy)
+                {
+                    worker.RunWorkerAsync();
+                }
                 lb_BuchZustand.Enabled = false;
                 lb_BuchZustand.Text = "nicht verfügbar";
                 lb_BuchStatus.Enabled = false;
@@ -277,7 +289,7 @@ namespace Bibo_Verwaltung
         {
             kunde = new Kunde(ausleihe.KID);
             DialogResult dialogResult = MetroMessageBox.Show(this, ausleihe.GetAusleihList() + "an: '" + ausleihe.TrimText(kunde.Vorname + " " + kunde.Nachname, 30) + "' wirklich ausleihen?", "Achtung",
-                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question, 211 + ausleihe.LeihListe.Rows.Count * 17);
             if (dialogResult == DialogResult.OK)
             {
                 try
@@ -300,11 +312,30 @@ namespace Bibo_Verwaltung
             }
         }
         #endregion
-
         #region Componenten-Aktionen
         private void tb_BuchCode_TextChanged(object sender, EventArgs e)
         {
+            if (tb_BuchCode.Text.Length == 8 && _checksum_ean8(tb_BuchCode.Text.Substring(0, 7)).ToString().Equals(tb_BuchCode.Text.Substring(7, 1)))
+            {
+                tb_BuchCode.Text = int.Parse(tb_BuchCode.Text.Substring(0, 7)).ToString();
                 ShowBuchResults();
+
+            }
+            else if (tb_BuchCode.Text == "")
+            {
+                ShowBuchResults();
+
+            }
+            else if (ausleihe.LeihListe.AsEnumerable().Any(row => tb_BuchCode.Text == row.Field<String>("Column1")))
+            {
+                ShowBuchResults();
+            }
+            else
+            {
+                timer_input.Stop();
+                timer_input.Start();
+
+            }
         }
 
         private void bt_AddBuch_Click(object sender, EventArgs e)
@@ -360,9 +391,14 @@ namespace Bibo_Verwaltung
 
         private void bt_NeuKunde_Click(object sender, EventArgs e)
         {
-            Form Kunden = new w_s_Kunden(currentUser);
+            w_s_Kunden Kunden = new w_s_Kunden(currentUser,msm_ausleihe);
+            msm_ausleihe.Clone(Kunden);
             Kunden.ShowDialog(this);
-            kunde.FillGrid(ref gv_Kunde);
+            Kunden.Dispose();
+            if (!worker.IsBusy)
+            {
+                worker.RunWorkerAsync();
+            }
         }
 
         private void bt_Submit_Click(object sender, EventArgs e)
@@ -442,8 +478,10 @@ namespace Bibo_Verwaltung
 
         private void llb_BuchTitel_Click(object sender, EventArgs e)
         {
-            Form Info = new w_s_information(1, ausleihe.ExemplarID, currentUser);
+            w_s_information Info = new w_s_information(1, ausleihe.ExemplarID, currentUser,msm_ausleihe);
+            msm_ausleihe.Clone(Info);
             Info.ShowDialog();
+            Info.Dispose();
         }
 
         private void llb_gesListe_Click(object sender, EventArgs e)
@@ -498,5 +536,84 @@ namespace Bibo_Verwaltung
             tb_BuchCode.SelectAll();
         }
         #endregion
+
+        private void Gv_Kunde_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Tab || e.KeyCode == Keys.Enter)
+            {
+                bt_Submit.Focus();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void MetroToolTip1_Popup(object sender, PopupEventArgs e)
+        {
+            e.ToolTipSize = new Size(e.ToolTipSize.Width + 32, e.ToolTipSize.Height);
+        }
+
+        private void timer_input_Tick(object sender, EventArgs e)
+        {
+            ShowBuchResults();
+            timer_input.Stop();
+        }
+
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (handleCreated)
+            {
+                try
+                {
+                    BeginInvoke((Action)delegate ()
+                    {
+                        spinner.Visible = true;
+                        gv_Kunde.Visible = false;
+                    });
+                    MetroGrid mg = new MetroGrid();
+                    kunde.FillGrid(ref mg);
+                    var ds = mg.DataSource;
+                    BeginInvoke((Action)delegate ()
+                    {
+                        gv_Kunde.DataSource = null;
+                        gv_Kunde.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                        gv_Kunde.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+                        gv_Kunde.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+                        gv_Kunde.DataSource = ds;
+                        gv_Kunde.Refresh();
+                        spinner.Visible = false;
+                        gv_Kunde.Visible = true;
+                    });
+                }
+                catch (Exception ex)
+                {
+                    BeginInvoke((Action)delegate ()
+                    {
+                        MetroMessageBox.Show(this, ex.Message + "Es trat ein Fehler beim Laden der Daten auf.", "Ladefehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        spinner.Visible = false;
+                        gv_Kunde.Visible = true;
+                    });
+                }
+            }
+            
+
+
+        }
+        bool handleCreated = false;
+        private void Form1_HandleCreated(object sender, EventArgs e)
+        {
+            handleCreated = true;
+            //if (!worker.IsBusy)
+            //{
+            //    worker.RunWorkerAsync();
+            //}
+        }
+
+        private void timer_start_Tick(object sender, EventArgs e)
+        {
+            if (!worker.IsBusy && handleCreated)
+            {
+                worker.RunWorkerAsync();
+            }
+            timer_start.Stop();
+        }
     }
 }

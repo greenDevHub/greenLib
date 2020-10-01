@@ -1,4 +1,5 @@
 ﻿using MetroFramework;
+using MetroFramework.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,21 +18,33 @@ namespace Bibo_Verwaltung
         DataTable klassenListe = new DataTable();
         bool aenderungungen = false;
         string currentUser;
-
+        bool gast = false;
         #region Constructor
-        public w_s_klasse_stufe(string userName)
+        public w_s_klasse_stufe(string userName, MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_klasse_stufe = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Orange;
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             if (user.Rechteid.Equals("0"))
             {
+                gast = true;
                 bt_Bearbeiten.Enabled = false;
             }
-            else
+            else if (user.Rechteid == "1")
             {
-                bt_Bearbeiten.Enabled = true;              
+                gast = false;
+                bt_Bearbeiten.Enabled = true;
             }
+            else if (user.Rechteid == "2")
+            {
+                gast = false;
+                bt_Bearbeiten.Enabled = true;
+                mbt_ImEx.Enabled = true;
+            }
+            this.Text = "Zuordnung der Klassen zu einer Klassenstufe - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             IniKlassenstufen();
         }
         #endregion
@@ -179,7 +192,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void SaveZuordnungen()
         {
-            if (gv_Klassenstufe.CurrentRow != null)
+            if (!gast && gv_Klassenstufe.CurrentRow != null)
             {
                 if (aenderungungen == true)
                 {
@@ -201,6 +214,24 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
+        private void SetColor()
+        {
+            for(int i = 0; i < gv_Klassen.Rows.Count; i++)
+            {
+                string klassename = gv_Klassen.Rows[i].Cells[1].Value.ToString();
+                if (klassename.Contains("*"))
+                {
+                    gv_Klassen.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
+                    gv_Klassen.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    gv_Klassen.Rows[i].DefaultCellStyle.BackColor = default;
+                    gv_Klassen.Rows[i].DefaultCellStyle.ForeColor = default;
+                }
+            }
+        }
+
         #region Componenten-Aktionen
         private void bt_Bearbeiten_Click(object sender, EventArgs e)
         {
@@ -212,6 +243,8 @@ namespace Bibo_Verwaltung
                     gv_Klassen.Enabled = true;
                     gv_Klassenstufe.Enabled = false;
                     kl_st.Show_AllKlassen(ref gv_Klassen, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                    gv_Klassen.Sort(gv_Klassen.Columns[1], ListSortDirection.Ascending);
+                    SetColor();
                     FillKlassenList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
@@ -224,6 +257,7 @@ namespace Bibo_Verwaltung
                 SaveZuordnungen();
                 bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
                 LoadKlassen();
+                gv_Klassenstufe.Select();
             }
         }
 
@@ -266,6 +300,133 @@ namespace Bibo_Verwaltung
         {
             Close();
         }
+
+        private void mbt_ImEx_Click(object sender, EventArgs e)
+        {
+            w_s_selfmade_dialog custom = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export",msm_klasse_stufe);
+            msm_klasse_stufe.Clone(custom);
+            custom.ShowDialog(this);
+            if (custom.DialogResult == DialogResult.Yes)
+            {
+                //Import
+                MetroMessageBox.Show(this, "Diese Funktion ist in der aktuellen Version noch nicht verfügbar.", "Noch nicht verfügbar.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (custom.DialogResult == DialogResult.No)
+            {
+                try
+                {
+                    ExcelExport export = new ExcelExport();
+                    string[] source = { "t_s_klasse_stufe" };
+                    export.ExportAsCSV(source);
+                    MetroMessageBox.Show(this, "Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch
+                {
+                    MetroMessageBox.Show(this, "Beim Exportvorgang ist ein Fehler aufgetreten!", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else { }
+        }
         #endregion
+
+        private void Gv_Klassenstufe_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
+            {
+                if (gv_Klassenstufe.CurrentRow != null)
+                {
+                    bt_back.Enabled = true;
+                    gv_Klassen.Enabled = true;
+                    gv_Klassenstufe.Enabled = false;
+                    kl_st.Show_AllKlassen(ref gv_Klassen, (e.RowIndex + 1).ToString());
+                    FillKlassenList();
+                    bt_Bearbeiten.Text = "Übernehmen";
+                }
+            }
+        }
+
+        private void Gv_Klassen_Sorted(object sender, EventArgs e)
+        {
+            SetColor();
+        }
+
+        private void Gv_Klassen_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SetColor();
+        }
+
+        private void Gv_Klassenstufe_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
+                {
+                    if (gv_Klassenstufe.CurrentRow != null)
+                    {
+                        bt_back.Enabled = true;
+                        gv_Klassen.Enabled = true;
+                        gv_Klassenstufe.Enabled = false;
+                        kl_st.Show_AllKlassen(ref gv_Klassen, (gv_Klassenstufe.SelectedRows[0].Index + 1).ToString());
+                        FillKlassenList();
+                        bt_Bearbeiten.Text = "Übernehmen";
+                    }
+                }
+                e.SuppressKeyPress = true;
+            }
+            else if (e.KeyCode == Keys.Tab)
+            {
+                bt_Bearbeiten.Select();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void Gv_Klassen_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                DataGridViewRow row = gv_Klassen.CurrentRow;
+                string klasse = row.Cells["Klasse"].Value.ToString();
+                if (!klasse.Contains("*"))
+                {
+                    AddToKlassenList();
+                    aenderungungen = true;
+                }
+                else
+                {
+                    RemoveFromKlassenList();
+                    aenderungungen = true;
+                }
+                e.SuppressKeyPress = true;
+            }
+            else if (e.KeyCode == Keys.Tab)
+            {
+                bt_back.Select();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void Tb_kurz_TextChanged(object sender, EventArgs e)
+        {
+            Filter();
+        }
+
+        private void Gv_Klassen_EnabledChanged(object sender, EventArgs e)
+        {
+            tb_klasse.Enabled = gv_Klassen.Enabled;
+            tb_klasse.Clear();
+
+        }
+        private void Filter()
+        {
+            try
+            {
+                (gv_Klassen.DataSource as DataTable).DefaultView.RowFilter = string.Format("Klasse LIKE '%{0}%'", tb_klasse.Text);
+                SetColor();
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

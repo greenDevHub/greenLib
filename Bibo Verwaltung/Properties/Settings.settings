@@ -10,5 +10,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=DESKTOP-1ALAVSD;Initial Catalog=Bibo_Verwaltung;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="darkmode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">false</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

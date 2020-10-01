@@ -1,4 +1,5 @@
 ﻿using MetroFramework;
+using MetroFramework.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,19 +16,38 @@ namespace Bibo_Verwaltung
     {
         #region Constructor
         string currentUser;
-        public w_s_automatic(string userName)
+        Color fc = Color.Black;
+        Color bc = Color.White;
+        public w_s_automatic(string userName, MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_automatic = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Yellow;
+            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+                fc = Color.White;
+                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
+                a_cb_Klasse.ForeColor = fc;
+                a_cb_Klasse.BackColor = bc;
+                a_cb_Modus.ForeColor = fc;
+                a_cb_Modus.BackColor = bc;
+            }
+            Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName;
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
 
-            a_cb_Modus.SelectedIndex = -1;
-            a_cb_Modus.Text = "Modus";
-            new Klasse().FillCombobox(ref a_cb_Klasse, -1);
-            a_cb_Klasse.SelectedIndex = -1;
-            a_cb_Klasse.Text = "Klasse";
+            a_cb_Modus.SelectedIndex = 0;
             bt_bestaetigen.Text = "Schüler laden";
             inAusleihAction = false;
+            bool b = !user.Rechteid.Equals("0");
+            a_cb_Modus.TabStop = b;
+            p_modus.Visible = !b;
+
+            a_cb_Klasse.TabStop = b;
+            p_klasse.Visible = !b;
+            dp_RueckDatum.Enabled = b;
+            bt_bestaetigen.Enabled = b;
         }
         #endregion
 
@@ -73,12 +93,62 @@ namespace Bibo_Verwaltung
             try
             {
                 schulBuecher.Rows.Clear();
-
                 if (gv_Schueler.CurrentRow != null)
                 {
                     DataGridViewRow row = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index];
                     autoausleihe.FillSuggestGrid(ref gv_suggested, row.Cells["kunde_ID"].Value.ToString());
+                    
+                    try
+                    {
+                        lb_selected.Text = "bereits geliehene Bücher:";
+                        DataTable rueck = new Kunde().GetSchulbuchAusgeliehen(row.Cells["kunde_ID"].Value.ToString());
+                        gv_selected.DataSource = rueck;
+                        gv_selected.Refresh();
+                        for (int i = 0; i <= gv_suggested.RowCount - 1; i++)
+                        {
+                            DataGridViewRow row1 = gv_suggested.Rows[i];
+                            int j = 0;
+                            bool found = false;
+                            do
+                            {
+                                if (row1.Cells["ISBN"].Value.ToString() == rueck.Rows[j]["ISBN"].ToString())
+                                {
+                                    found = true;
+                                    row1.DefaultCellStyle.BackColor = Color.LimeGreen;
+                                    row1.DefaultCellStyle.ForeColor = Color.Black;
+                                }
+                                else
+                                {
+                                    row1.DefaultCellStyle.BackColor = default;
+                                    row1.DefaultCellStyle.ForeColor = default;
+                                }
+                                j++;
+                            } while (!found && j <= rueck.Rows.Count - 1);
+                        }
+                    }
+                    catch { }
                     gv_suggested.ClearSelection();
+                    if (IsComplete(ref gv_suggested))
+                    {
+                        row.DefaultCellStyle.SelectionBackColor = Color.GreenYellow;
+                        row.DefaultCellStyle.SelectionForeColor = Color.Black;
+                        row.DefaultCellStyle.BackColor = Color.LimeGreen;
+                        row.DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                    else if (IsNotEmpty(ref gv_suggested))
+                    {
+                        row.DefaultCellStyle.SelectionBackColor = Color.LightGray;
+                        row.DefaultCellStyle.SelectionForeColor = Color.Black;
+                        row.DefaultCellStyle.BackColor = Color.Gray;
+                        row.DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.SelectionBackColor = default;
+                        row.DefaultCellStyle.SelectionForeColor = default;
+                        row.DefaultCellStyle.BackColor = default;
+                        row.DefaultCellStyle.ForeColor = default;
+                    }
                 }
             }
             catch
@@ -94,16 +164,15 @@ namespace Bibo_Verwaltung
         {
             inAusleihAction = false;
             tb_ExemplarID.Enabled = false;
-            a_cb_Modus.SelectedIndex = -1;
-            a_cb_Modus.Text = "Modus";
-            a_cb_Klasse.SelectedIndex = -1;
-            a_cb_Klasse.Text = "Klasse";
             bt_bestaetigen.Text = "Schüler laden";
             tb_ExemplarID.Text = "";
-            a_cb_Modus.Enabled = true;
+            lb_selected.Text = "bereits geliehene Bücher:";
+            a_cb_Modus.TabStop = true;
+            p_modus.Visible = false;
             dp_RueckDatum.Enabled = true;
             bt_back.Enabled = false;
             bt_next.Enabled = false;
+            mbt_Suche.Enabled = false;
             gv_suggested.Enabled = false;
             gv_selected.Enabled = false;
             bt_abschließen.Enabled = false;
@@ -112,6 +181,9 @@ namespace Bibo_Verwaltung
             gv_selected.DataSource = null;
             autoausleihe.ClearLeihList();
             selectedBuecher.Rows.Clear();
+            a_cb_Modus.SelectedIndex = -1;
+            a_cb_Modus.SelectedIndex = 0;
+            a_cb_Modus.Focus();
         }
 
         /// <summary>
@@ -119,7 +191,6 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void LastSchueler()
         {
-            IsComplete(ref gv_Schueler);
             if (gv_Schueler.CurrentRow.Index >= 1)
             {
                 gv_Schueler.CurrentCell = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index - 1].Cells[1];
@@ -140,7 +211,7 @@ namespace Bibo_Verwaltung
         }
 
         /// <summary>
-        /// Prüft ob alle Schüler der aktuellen Auswahl ihnre Schulbücher erfolgreich erhalten haben
+        /// Prüft die aktuelle Auswahl auf Vollständigkeit (Anhand der BackColor)
         /// </summary>
         private bool IsComplete(ref MetroFramework.Controls.MetroGrid grid)
         {
@@ -150,7 +221,24 @@ namespace Bibo_Verwaltung
                 if (grid.Rows[i].DefaultCellStyle.BackColor != Color.LimeGreen)
                 {
                     result = false;
-                    return result;
+                    //return result;
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Prüft die aktuelle Auswahl auf Vorhandensein einiger Einträge (Anhand der BackColor)
+        /// </summary>
+        private bool IsNotEmpty(ref MetroFramework.Controls.MetroGrid grid)
+        {
+            bool result = false;
+            for (int i = 0; i < grid.Rows.Count; i++)
+            {
+                if (grid.Rows[i].DefaultCellStyle.BackColor == Color.LimeGreen)
+                {
+                    result = true;
+                    //return result;
                 }
             }
             return result;
@@ -161,10 +249,10 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void NextSchueler()
         {
-            if (IsComplete(ref gv_Schueler))
+            if (IsComplete(ref gv_Schueler) || gv_Schueler.CurrentCell.RowIndex == gv_Schueler.RowCount - 1)
             {
-                DialogResult dialogResult = MetroMessageBox.Show(this, "Sie sind am Ende der Schülerliste angekommen. Möchten Sie die Lehrbuch-Ausgabe abschließen?", "Warnung",
-                        MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                DialogResult dialogResult = MetroMessageBox.Show(this, "Sie sind am Ende der Schülerliste angekommen. Möchten Sie die Lehrbuch-Ausgabe abschließen?", "Information",
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 if (dialogResult == DialogResult.OK)
                 {
                     EndAusgabe();
@@ -174,7 +262,7 @@ namespace Bibo_Verwaltung
                     gv_Schueler.ClearSelection();
                 }
             }
-            if (gv_Schueler.CurrentRow.Index < gv_Schueler.Rows.Count - 1)
+            if (gv_Schueler.CurrentRow != null && gv_Schueler.CurrentRow.Index < gv_Schueler.Rows.Count - 1)
             {
                 if (gv_Schueler.Rows.Count > 1)
                 {
@@ -186,10 +274,10 @@ namespace Bibo_Verwaltung
                 {
                     bt_next.Enabled = false;
                 }
-                if (gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.LimeGreen || gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.Red)
-                {
-                    gv_Schueler.ClearSelection();
-                }
+                //if (gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.LimeGreen || gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.Red)
+                //{
+                //    gv_Schueler.ClearSelection();
+                //}
                 tb_ExemplarID.Text = "";
                 tb_ExemplarID.Focus();
                 autoausleihe.ClearLeihList();
@@ -221,14 +309,6 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                for (int i = 0; i < selectedBuecher.Rows.Count; i++)
-                {
-                    if (selectedBuecher.Rows[i]["Titel"].ToString() == new Exemplar().GetTitel(autoausleihe.LeihListe.Rows[autoausleihe.GetIndexInLeihliste()][0].ToString()))
-                    {
-                        i = 0;
-                        UnSelectExemplar();
-                    }
-                }
                 autoausleihe.AddToAusleihList();
                 DataRow relation;
                 string[] exemlarDetails = new string[2];
@@ -237,7 +317,7 @@ namespace Bibo_Verwaltung
                 relation = selectedBuecher.NewRow();
                 relation.ItemArray = exemlarDetails;
                 selectedBuecher.Rows.Add(relation);
-             }
+            }
             catch { }
         }
 
@@ -259,52 +339,145 @@ namespace Bibo_Verwaltung
             }
             catch { }
         }
+
+        /// <summary>
+        /// Führt die Buchausgabe für den aktuellen Schüler aus
+        /// </summary>
+        private void CompleteSchueler()
+        {
+            autoausleihe.KID = gv_Schueler.CurrentRow.Cells["kunde_ID"].Value.ToString();
+            kunden = new Kunde(autoausleihe.KID);
+            DialogResult dialogResult = MetroMessageBox.Show(this, autoausleihe.GetAusleihList() + "an: '" + autoausleihe.TrimText(kunden.Vorname + " " + kunden.Nachname, 30) + "' wirklich ausleihen?", "Bestätigung",
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question,211 + autoausleihe.LeihListe.Rows.Count*17);
+            if (dialogResult == DialogResult.OK)
+            {
+                DataGridViewRow Kundenrow = gv_Schueler.CurrentRow;
+                try
+                {
+                    foreach (DataRow row in autoausleihe.LeihListe.Rows)
+                    {
+                        autoausleihe.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(), row[1].ToString(), Convert.ToInt32(kunden.KundenID));
+                    }
+                    if (IsComplete(ref gv_suggested))
+                    {
+                        Kundenrow.DefaultCellStyle.BackColor = Color.LimeGreen;
+                        Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                    else if (IsNotEmpty(ref gv_suggested))
+                    {
+                        Kundenrow.DefaultCellStyle.BackColor = Color.Gray;
+                        Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                }
+                catch
+                {
+                    MetroMessageBox.Show(this, "Die Buchausgabe konnte nicht abgeschlossen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (IsComplete(ref gv_suggested))
+                    {
+                        Kundenrow.DefaultCellStyle.BackColor = Color.Red;
+                        Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                }
+                NextSchueler();
+            }
+        }
         #endregion
 
         #region Componenten-Aktionen
         private void bt_bestaetigen_Click(object sender, EventArgs e)
         {
-            if (!inAusleihAction)
+            if (a_cb_Klasse.Text != "")
             {
-                if (a_cb_Modus.SelectedIndex != -1)
+                if (!inAusleihAction)
                 {
                     inAusleihAction = true;
-                    bt_bestaetigen.Text = "Ausgabe abbrechen";
-                    a_cb_Modus.Enabled = false;
+                    bt_bestaetigen.Text = "Ausgabe beenden";
+                    a_cb_Modus.TabStop = false;
+                    p_modus.Visible = true;
+
                     dp_RueckDatum.Enabled = false;
-                    a_cb_Klasse.Enabled = false;
-                    bt_back.Enabled = true;
+
+                    a_cb_Klasse.TabStop = false;
+                    p_klasse.Visible = true;
                     bt_next.Enabled = true;
-                    gv_suggested.Enabled = true;
+                    mbt_Suche.Enabled = true;
+                    //gv_suggested.Enabled = true;
                     gv_selected.Enabled = true;
                     bt_abschließen.Enabled = true;
+                    autoausleihe.Rueckgabedatum = dp_RueckDatum.Value;
                     if (a_cb_Modus.SelectedIndex == 0)
                     {
                         kunden.GetKundenList(ref gv_Schueler, false, new Klasse().GetID(a_cb_Klasse.Text));
                     }
                     else
                     {
-                        kunden.GetKundenList(ref gv_Schueler, true, 0);
+                        kunden.GetKundenList(ref gv_Schueler, true, Convert.ToInt32(a_cb_Klasse.Text.Substring(13)));
                     }
                     if (gv_Schueler.Rows.Count != 0)
                     {
                         gv_Schueler.CurrentCell = gv_Schueler.Rows[0].Cells[1];
                         gv_Schueler.Rows[0].Selected = true;
+                        //Hat Schüler alle Bücher, die er benötigt, ausgeliehen?
+                        MarkSchueler();
+                        tb_ExemplarID.Enabled = true;
+                        tb_ExemplarID.Focus();
+                        LoadSchulBuecher();
                     }
-                    tb_ExemplarID.Enabled = true;
-                    tb_ExemplarID.Focus();
+                    else
+                    {
+                        MetroMessageBox.Show(this, "Es gibt keine Schüler in dieser Klasse bzw. Klassenstufe. Die Ausgabe wird beendet!", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        EndAusgabe();
+                    }
                 }
                 else
                 {
-                    MetroMessageBox.Show(this, "Wählen Sie den Ausgabe-Modus, ein Rückgabedatum und ggf. eine Klasse aus!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    EndAusgabe();
                 }
             }
             else
             {
-                EndAusgabe();
+                MetroMessageBox.Show(this, "Wählen Sie den Ausgabe-Modus und eine Klasse bzw. eine Klassenstufe aus!", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
+        private void MarkSchueler()
+        {
+            for (int i = 0; i < gv_Schueler.RowCount; i++)
+            {
+                DataGridViewRow Kundenrow = gv_Schueler.Rows[i];
+                kunden.KundenID = gv_Schueler.Rows[i].Cells["kunde_ID"].Value.ToString();
+                List<string> suggestedBooks = autoausleihe.SuggestedBooks(kunden.KundenID);
+                List<string> borrowedBooks = kunden.BorrowedBooks(kunden.KundenID);
+                int countBooks = 0;
+                foreach(string book in suggestedBooks)
+                {
+                    if (!borrowedBooks.Contains(book))
+                    {
+                        countBooks++;
+                    }
+                }
+                if (countBooks >0 && countBooks==suggestedBooks.Count)
+                {
+                    Kundenrow.DefaultCellStyle.SelectionBackColor = default;
+                    Kundenrow.DefaultCellStyle.SelectionForeColor = default;
+                    Kundenrow.DefaultCellStyle.BackColor = default;
+                    Kundenrow.DefaultCellStyle.ForeColor = default;
+                }
+                else if(countBooks>0 && countBooks < suggestedBooks.Count)
+                {
+                    Kundenrow.DefaultCellStyle.SelectionBackColor = Color.LightGray;
+                    Kundenrow.DefaultCellStyle.SelectionForeColor = Color.Black;
+                    Kundenrow.DefaultCellStyle.BackColor = Color.Gray;
+                    Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    Kundenrow.DefaultCellStyle.SelectionBackColor = Color.GreenYellow;
+                    Kundenrow.DefaultCellStyle.SelectionForeColor = Color.Black;
+                    Kundenrow.DefaultCellStyle.BackColor = Color.LimeGreen;
+                    Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                }
+            }
+        }
         private void gv_Schueler_SelectionChanged(object sender, EventArgs e)
         {
             LoadSchulBuecher();
@@ -324,36 +497,26 @@ namespace Bibo_Verwaltung
         {
             if (autoausleihe.LeihListe.Rows.Count != 0)
             {
-                autoausleihe.KID = gv_Schueler.CurrentRow.Cells["kunde_ID"].Value.ToString();
-                kunden = new Kunde(autoausleihe.KID);
-                DialogResult dialogResult = MetroMessageBox.Show(this, autoausleihe.GetAusleihList() + "an: '" + autoausleihe.TrimText(kunden.Vorname + " " + kunden.Nachname, 30) + "' wirklich ausleihen?", "Achtung",
-                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (dialogResult == DialogResult.OK)
+                bool isOK = true;
+                for (int i = 0; i <= gv_suggested.RowCount - 1; i++)
                 {
-                    DataGridViewRow Kundenrow = gv_Schueler.CurrentRow;
-                    try
+                    DataGridViewRow row = gv_suggested.Rows[i];
+                    if (row.DefaultCellStyle.BackColor != Color.LimeGreen)
                     {
-                        foreach (DataRow row in autoausleihe.LeihListe.Rows)
-                        {
-                            autoausleihe.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(), row[1].ToString(), Convert.ToInt32(kunden.KundenID));
-                        }
-                        MetroMessageBox.Show(this, "Die Buchausgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        if (IsComplete(ref gv_suggested))
-                        {
-                            Kundenrow.DefaultCellStyle.BackColor = Color.LimeGreen;
-                            Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
-                        }
+                        isOK = false;
                     }
-                    catch
+                }
+                if (!isOK)
+                {
+                    DialogResult dr = MetroMessageBox.Show(this, "Sie haben nicht alle vorgeschlagenen Bücher ausgewählt! Möchten Sie wirklich fortfahren?", "Bestätigung", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (dr == DialogResult.OK)
                     {
-                        MetroMessageBox.Show(this, "Die Buchausgabe konnte nicht abgeschlossen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        if (IsComplete(ref gv_suggested))
-                        {
-                            Kundenrow.DefaultCellStyle.BackColor = Color.Red;
-                            Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
-                        }
+                        CompleteSchueler();
                     }
-                    NextSchueler();
+                }
+                else
+                {
+                    CompleteSchueler();
                 }
             }
             else
@@ -385,10 +548,11 @@ namespace Bibo_Verwaltung
                         Exemplar buch_exemplar = new Exemplar(tb_ExemplarID.Text);
                         if (buch_exemplar.IsActivated())
                         {
+                            lb_selected.Text = "ausgewählte Bücher:";
                             autoausleihe.ExemplarID = buch_exemplar.ExemplarID;
                             if (selectedBuecher.Columns.Count < 2)
                             {
-                                selectedBuecher.Columns.Add("exemplarID");
+                                selectedBuecher.Columns.Add("ID");
                                 selectedBuecher.Columns.Add("Titel");
                             }
                             if (buch_exemplar.IsSpecificAvailable())
@@ -397,22 +561,37 @@ namespace Bibo_Verwaltung
                                 if (GetIndexInSuggestedBuecher() != -1)
                                 {
                                     Buchrow = gv_suggested.Rows[GetIndexInSuggestedBuecher()];
+                                    if (!autoausleihe.CheckLeihList())
+                                    {
+                                        SelectExemplar();
+                                        Buchrow.DefaultCellStyle.BackColor = Color.LimeGreen;
+                                        Buchrow.DefaultCellStyle.ForeColor = Color.Black;
+                                    }
+                                    else
+                                    {
+                                        UnSelectExemplar();
+                                        Buchrow.DefaultCellStyle.BackColor = default;
+                                        Buchrow.DefaultCellStyle.ForeColor = default;
+                                    }
                                 }
                                 else
                                 {
-                                    DialogResult dialogResult = MetroMessageBox.Show(this, "Dieses Buch ist als nicht notwendig eingestuft!", "Warnung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                }
-                                if (!autoausleihe.CheckLeihList())
-                                {
-                                    SelectExemplar();
-                                    Buchrow.DefaultCellStyle.BackColor = Color.LimeGreen;
-                                    Buchrow.DefaultCellStyle.ForeColor = Color.Black;
-                                }
-                                else
-                                {
-                                    UnSelectExemplar();
-                                    Buchrow.DefaultCellStyle.BackColor = default;
-                                    Buchrow.DefaultCellStyle.ForeColor = default;
+                                    if (!autoausleihe.CheckLeihList())
+                                    {
+                                        DialogResult dialogResult = MetroMessageBox.Show(this, "Dieses Buch ist als nicht notwendig eingestuft! Soll es ungeachtet dessen zur Buchausleihliste hinugefügt werden?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                                        if (dialogResult == DialogResult.Yes)
+                                        {
+                                            SelectExemplar();
+                                            Buchrow.DefaultCellStyle.BackColor = Color.LimeGreen;
+                                            Buchrow.DefaultCellStyle.ForeColor = Color.Black;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        UnSelectExemplar();
+                                        Buchrow.DefaultCellStyle.BackColor = default;
+                                        Buchrow.DefaultCellStyle.ForeColor = default;
+                                    }
                                 }
                             }
                             else
@@ -420,7 +599,6 @@ namespace Bibo_Verwaltung
                                 MetroMessageBox.Show(this, "Dieses Buch wurde verliehen. Es kann nicht zur Buchausleihliste hinzugefügt werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             gv_selected.DataSource = selectedBuecher;
-                            gv_selected.Columns["exemplarID"].Visible = false;
                             gv_selected.Refresh();
                             gv_selected.ClearSelection();
                             tb_ExemplarID.Focus();
@@ -437,24 +615,79 @@ namespace Bibo_Verwaltung
 
         private void a_cb_Modus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (a_cb_Modus.SelectedIndex != 0)
+            if (a_cb_Modus.SelectedIndex == 0)
             {
-                lb_Klasse.Visible = false;
-                a_cb_Klasse.Enabled = false;
-                a_cb_Klasse.Visible = false;
+                a_cb_Klasse.DataSource = null;
+                a_cb_Klasse.Sorted = true;
+                lb_Klasse.Text = "Klasse:";
+                lb_Klasse.Visible = true;
+                new Klasse().FillCombobox(ref a_cb_Klasse,1);
+                a_cb_Klasse.Visible = true;
+                a_cb_Klasse.TabStop = true;
+                p_klasse.Visible = false;
             }
             else
             {
+                a_cb_Klasse.Sorted = false;
+                lb_Klasse.Text = "Stufe:";
                 lb_Klasse.Visible = true;
-                a_cb_Klasse.Enabled = true;
+                DataTable stufen = new DataTable();
+                stufen.Columns.Add("Index");
+                stufen.Columns.Add("Klassenstufe");
+                for (int i = 1; i <= 13; i++)
+                {
+                    stufen.Rows.Add();
+                    stufen.Rows[i - 1][0] = i.ToString();
+                    stufen.Rows[i - 1][1] = "Klassenstufe " + i.ToString();
+                }
+                a_cb_Klasse.DataSource = stufen;
+                a_cb_Klasse.ValueMember = "Index";
+                a_cb_Klasse.DisplayMember = "Klassenstufe";
+                a_cb_Klasse.SelectedItem = 0;
                 a_cb_Klasse.Visible = true;
+                a_cb_Klasse.TabStop = true;
+                p_klasse.Visible = false;
             }
         }
 
-        private void dp_RueckDatum_ValueChanged(object sender, EventArgs e)
+        private void Mbt_Suche_Click(object sender, EventArgs e)
         {
-            autoausleihe.Rueckgabedatum = dp_RueckDatum.Value;
+            if (a_cb_Modus.SelectedIndex == 0)
+            {
+                using (w_s_exemplarSuche form = new w_s_exemplarSuche(currentUser, new Klassenstufe().GetStufe(new Klasse().GetID(a_cb_Klasse.Text)),msm_automatic))
+                {
+                    msm_automatic.Clone(form);
+                    var result = form.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        tb_ExemplarID.Text = form.ExemplarID;
+                        tb_ExemplarID.Focus();
+                        tb_ExemplarID.SelectAll();
+                        SendKeys.Send("{ENTER}");
+                    }
+                }
+            }
+            else
+            {
+                using (var form = new w_s_exemplarSuche(currentUser, Convert.ToInt32(a_cb_Klasse.Text.Substring(13)),msm_automatic))
+                {
+                    msm_automatic.Clone(form);
+                    var result = form.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        tb_ExemplarID.Text = form.ExemplarID;
+                        tb_ExemplarID.Focus();
+                        tb_ExemplarID.SelectAll();
+                        SendKeys.Send("{ENTER}");
+                    }
+                }
+            }
         }
         #endregion
+
+        private void MetroToolTip1_Popup(object sender, PopupEventArgs e)
+        {
+            e.ToolTipSize = new Size(e.ToolTipSize.Width + 32, e.ToolTipSize.Height);
+        }
     }
 }

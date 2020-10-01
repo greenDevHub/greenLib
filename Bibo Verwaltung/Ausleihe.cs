@@ -79,7 +79,16 @@ namespace Bibo_Verwaltung
                 ClearLeihList();
                 DataRow relation;
                 string[] exemlarDetails = new string[2];
-
+                List<string> newList = new List<string>();
+                foreach(string s in inputList)
+                {
+                    Exemplar ex = new Exemplar(s);
+                    if (ex.IsSpecificAvailable())
+                    {
+                        newList.Add(s);
+                    }
+                }
+                inputList = newList.ToArray();
                 if (LeihListe.Columns.Count != 2)
                 {
                     LeihListe.Columns.Add();
@@ -184,11 +193,13 @@ namespace Bibo_Verwaltung
 
             if (LeihListe.Rows.Count == 1)
             {
-                exemplar = new Buch(new Exemplar(LeihListe.Rows[0][0].ToString()).ISBN);
+                Exemplar ex = new Exemplar();
+                string titel = ex.GetTitel(LeihListe.Rows[0][0].ToString());
+                //exemplar = new Buch(new Exemplar(LeihListe.Rows[0][0].ToString()).ISBN);
                 sb.Append("das Buch: ");
                 sb.AppendLine();
                 sb.AppendLine();
-                sb.Append(exemplar.Titel);
+                sb.Append(TrimText(titel, 30));
                 sb.Append(", ");
                 sb.AppendLine();
                 sb.AppendLine();
@@ -200,9 +211,12 @@ namespace Bibo_Verwaltung
                 sb.AppendLine();
                 for (int i = 0; i < LeihListe.Rows.Count; i++)
                 {
-                    exemplar = new Buch(new Exemplar(LeihListe.Rows[i][0].ToString()).ISBN);
+                    Exemplar ex = new Exemplar();
+                    string titel = ex.GetTitel(LeihListe.Rows[i][0].ToString());
+                    //exemplar = new Buch(new Exemplar(LeihListe.Rows[i][0].ToString()).ISBN);
+                    //string titel = exemplar.Titel;
                     sb.Append("-  ");
-                    sb.Append(TrimText(exemplar.Titel, 30));
+                    sb.Append(TrimText(titel, 30));
                     sb.Append(", ");
                     sb.AppendLine();
                 }
@@ -392,7 +406,7 @@ namespace Bibo_Verwaltung
                 ds.Tables["FaecherListe"].Rows.Clear();
 
                 if (con.ConnectError()) return;
-                string RawCommand = "SELECT fs_fachid FROM [dbo].[t_s_fach_kunde] WHERE fs_kundenid = @0";
+                string RawCommand = "SELECT fs_fachid, fs_lk FROM [dbo].[t_s_fach_kunde] WHERE fs_kundenid = @0";
                 adapter = new SqlDataAdapter(RawCommand, con.Con);
                 adapter.SelectCommand.Parameters.AddWithValue("@0", KID);
                 adapter.Fill(ds.Tables["FaecherListe"]);
@@ -417,12 +431,13 @@ namespace Bibo_Verwaltung
                 ds.Tables["BuecherListe"].Rows.Clear();
 
                 if (con.ConnectError()) return;
-                string RawCommand = "SELECT bf_isbn as 'ISBN', buch_titel as 'Titel', f_kurzform as 'Fach', bf_fachid FROM [dbo].[t_s_buch_fach] left join t_s_buecher on buch_isbn = bf_isbn left join t_s_faecher on f_id = bf_fachid left join t_s_buch_stufe on bs_isbn = bf_isbn WHERE bf_fachid = @0 AND bs_klassenstufe = @1";
+                string RawCommand = "SELECT f_kurzform as 'Fach', bf_isbn as 'ISBN', buch_titel as 'Titel', bf_fachid FROM [dbo].[t_s_buch_fach] left join t_s_buecher on buch_isbn = bf_isbn left join t_s_faecher on f_id = bf_fachid left join t_s_buch_stufe on bs_isbn = bf_isbn WHERE bf_fachid = @0 AND bs_klassenstufe = @1 AND bf_lk = @2";
                 for (int i = 0; i < ds.Tables["FaecherListe"].Rows.Count; i++)
                 {
                     adapter = new SqlDataAdapter(RawCommand, con.Con);
                     adapter.SelectCommand.Parameters.AddWithValue("@0", ds.Tables["FaecherListe"].Rows[i][0]);
                     adapter.SelectCommand.Parameters.AddWithValue("@1", Klassenstufe);
+                    adapter.SelectCommand.Parameters.AddWithValue("@2", ds.Tables["FaecherListe"].Rows[i][1].ToString());
                     adapter.Fill(ds.Tables["BuecherListe"]);
                     con.Close();
                 }
@@ -453,6 +468,19 @@ namespace Bibo_Verwaltung
             SuggestBuecher(stufe);
             grid.DataSource = ds.Tables["BuecherListe"];
             grid.Columns["bf_fachid"].Visible = false;
+        }
+
+        public List<string> SuggestedBooks(string kundenid)
+        {
+            KID = kundenid;
+            SuggestBuecher(GetKlassenstufe());
+            List<string> suggestedBooks = new List<string>();
+            for(int i = 0; i < ds.Tables[1].Rows.Count; i++)
+            {
+                string isbn = ds.Tables[1].Rows[i][1].ToString();
+                suggestedBooks.Add(isbn);
+            }
+            return suggestedBooks;
         }
     }
 }

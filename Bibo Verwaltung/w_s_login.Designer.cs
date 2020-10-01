@@ -33,9 +33,12 @@
             this.tb_User = new MetroFramework.Controls.MetroTextBox();
             this.tb_Password = new MetroFramework.Controls.MetroTextBox();
             this.bt_Login = new MetroFramework.Controls.MetroButton();
-            this.metroLink1 = new MetroFramework.Controls.MetroLink();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.msm_login = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.metroLink1 = new MetroFramework.Controls.MetroLink();
+            ((System.ComponentModel.ISupportInitialize)(this.msm_login)).BeginInit();
             this.SuspendLayout();
             // 
             // tb_User
@@ -59,6 +62,7 @@
             this.tb_User.MaxLength = 32767;
             this.tb_User.Name = "tb_User";
             this.tb_User.PasswordChar = '\0';
+            this.tb_User.PromptText = "Benutzername";
             this.tb_User.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_User.SelectedText = "";
             this.tb_User.SelectionLength = 0;
@@ -68,7 +72,7 @@
             this.tb_User.Size = new System.Drawing.Size(224, 24);
             this.tb_User.Style = MetroFramework.MetroColorStyle.Black;
             this.tb_User.TabIndex = 2;
-            this.tb_User.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroToolTip1.SetToolTip(this.tb_User, "Geben Sie hier Ihren Benutzernamen ein.");
             this.tb_User.UseSelectable = true;
             this.tb_User.WaterMark = "Benutzername";
             this.tb_User.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -94,6 +98,7 @@
             this.tb_Password.MaxLength = 32767;
             this.tb_Password.Name = "tb_Password";
             this.tb_Password.PasswordChar = '●';
+            this.tb_Password.PromptText = "Passwort";
             this.tb_Password.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Password.SelectedText = "";
             this.tb_Password.SelectionLength = 0;
@@ -103,6 +108,7 @@
             this.tb_Password.Size = new System.Drawing.Size(224, 24);
             this.tb_Password.Style = MetroFramework.MetroColorStyle.Black;
             this.tb_Password.TabIndex = 3;
+            this.metroToolTip1.SetToolTip(this.tb_Password, "Geben Sie hier Ihr Passwort ein.");
             this.tb_Password.UseSelectable = true;
             this.tb_Password.UseSystemPasswordChar = true;
             this.tb_Password.WaterMark = "Passwort";
@@ -120,20 +126,9 @@
             this.bt_Login.Style = MetroFramework.MetroColorStyle.Black;
             this.bt_Login.TabIndex = 4;
             this.bt_Login.Text = "Login";
+            this.metroToolTip1.SetToolTip(this.bt_Login, "Loggen Sie sich hier mit Ihren eingegebenen Daten ein.");
             this.bt_Login.UseSelectable = true;
             this.bt_Login.Click += new System.EventHandler(this.bt_Login_Click);
-            // 
-            // metroLink1
-            // 
-            this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Login;
-            this.metroLink1.ImageSize = 32;
-            this.metroLink1.Location = new System.Drawing.Point(23, 25);
-            this.metroLink1.Margin = new System.Windows.Forms.Padding(2);
-            this.metroLink1.Name = "metroLink1";
-            this.metroLink1.Size = new System.Drawing.Size(22, 24);
-            this.metroLink1.Style = MetroFramework.MetroColorStyle.Black;
-            this.metroLink1.TabIndex = 5;
-            this.metroLink1.UseSelectable = true;
             // 
             // timer1
             // 
@@ -152,6 +147,30 @@
             this.metroProgressBar1.Style = MetroFramework.MetroColorStyle.Black;
             this.metroProgressBar1.TabIndex = 6;
             // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
+            // msm_login
+            // 
+            this.msm_login.Owner = this;
+            this.msm_login.Style = MetroFramework.MetroColorStyle.Black;
+            // 
+            // metroLink1
+            // 
+            this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Lock;
+            this.metroLink1.ImageSize = 24;
+            this.metroLink1.Location = new System.Drawing.Point(23, 25);
+            this.metroLink1.Margin = new System.Windows.Forms.Padding(2);
+            this.metroLink1.Name = "metroLink1";
+            this.metroLink1.Size = new System.Drawing.Size(22, 24);
+            this.metroLink1.Style = MetroFramework.MetroColorStyle.Black;
+            this.metroLink1.TabIndex = 5;
+            this.metroLink1.UseSelectable = true;
+            this.metroLink1.Click += new System.EventHandler(this.MetroLink1_Click);
+            // 
             // w_s_login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -167,8 +186,10 @@
             this.MaximizeBox = false;
             this.Name = "w_s_login";
             this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "     Login";
+            ((System.ComponentModel.ISupportInitialize)(this.msm_login)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -180,5 +201,7 @@
         private MetroFramework.Controls.MetroLink metroLink1;
         private System.Windows.Forms.Timer timer1;
         private MetroFramework.Controls.MetroProgressBar metroProgressBar1;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
+        private MetroFramework.Components.MetroStyleManager msm_login;
     }
 }

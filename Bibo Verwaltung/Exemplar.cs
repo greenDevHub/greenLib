@@ -259,13 +259,13 @@ namespace Bibo_Verwaltung
         }
 
         /// <summary>
-        /// Lädt die Exemplar Titel anhand der ID 
+        /// Lädt den Exemplar Titel anhand der ID 
         /// </summary>
         public string GetTitel(string exemplarID)
         {
             string titel = "";
             if (con.ConnectError()) return "";
-            string RawCommand = "SELECT buch_titel as 'Titel' FROM t_s_buchid left join t_s_buecher on bu_isbn = buch_isbn WHERE bu_id = @0 GROUP BY buch_titel ";
+            string RawCommand = "SELECT buch_titel as 'Titel' FROM t_s_buchid left join t_s_buecher on bu_isbn = buch_isbn WHERE bu_id = @0 GROUP BY buch_titel";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, exemplarID);
             while (dr.Read())
             {
@@ -274,6 +274,24 @@ namespace Bibo_Verwaltung
             dr.Close();
             con.Close();
             return titel;
+        }
+
+        /// <summary>
+        /// Lädt den Exemplar Zustand anhand der ID (als Wort)
+        /// </summary>
+        public string GetZustandLang(string exemplarID)
+        {
+            string zustand = "";
+            if (con.ConnectError()) return "";
+            string RawCommand = "SELECT zu_zustand as 'Zustand' FROM t_s_buchid left join t_s_zustand on bu_zustandsid = zu_id WHERE bu_id = @0 GROUP BY zu_zustand";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, exemplarID);
+            while (dr.Read())
+            {
+                zustand = dr["Zustand"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            return zustand;
         }
 
         /// <summary>
@@ -341,6 +359,31 @@ namespace Bibo_Verwaltung
             }
             dr.Close();
             con.Close();
+        }
+
+        public DataTable GetAllExemplare(string isbn)
+        {
+            DataTable result = new DataTable();
+            if (con.ConnectError()) return result;
+            string RawCommand = "SELECT bu_id as 'ExemplarID', bu_isbn as 'ISBN', buch_titel as 'Titel' FROM t_s_buchid left join t_s_buecher on bu_isbn = buch_isbn WHERE bu_isbn = @isbn AND bu_activated = 1";
+            adapter2 = new SqlDataAdapter(RawCommand, con.Con);        
+            adapter2.SelectCommand.Parameters.AddWithValue("@isbn", isbn);
+            adapter2.Fill(result);
+            con.Close();
+            return result;
+        }
+
+        public DataTable GetBuchSucheExemplare(int stufe, string isbn)
+        {
+            DataTable result = new DataTable();
+            if (con.ConnectError()) return result;
+            string RawCommand = "SELECT bu_id as 'ExemplarID', buch_isbn as 'ISBN', buch_titel as 'Titel' FROM t_s_buchid left join t_s_buecher on buch_isbn = bu_isbn left join t_s_buch_stufe on bs_isbn = bu_isbn WHERE bs_klassenstufe = @stufe AND bu_activated = 1 AND buch_isbn = @isbn AND bu_id NOT IN (SELECT aus_buchid FROM t_bd_ausgeliehen)";
+            adapter2 = new SqlDataAdapter(RawCommand, con.Con);
+            adapter2.SelectCommand.Parameters.AddWithValue("@stufe", stufe);
+            adapter2.SelectCommand.Parameters.AddWithValue("@isbn", isbn);
+            adapter2.Fill(result);
+            con.Close();
+            return result;
         }
 
         public void SelectLastRow(string isbn)

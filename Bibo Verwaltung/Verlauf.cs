@@ -27,7 +27,7 @@ namespace Bibo_Verwaltung
             dt.Clear();
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
-            string RawCommand = "SELECT * FROM [dbo].[t_s_verlauf] WHERE id_buch = @0";
+            string RawCommand = "SELECT ver_id, id_buch, k_id, kunde_vorname, kunde_nachname, zu_vor, zu_nach, aus_geliehen, aus_ruckgabe FROM [dbo].[t_s_verlauf]  left join t_s_kunden on kunde_id = k_id WHERE id_buch = @0";
 
             // Verbindung öffnen 
             adapter = new SqlDataAdapter(RawCommand, con.Con);
@@ -50,6 +50,8 @@ namespace Bibo_Verwaltung
             grid.Columns["zu_nach"].HeaderText = "Zustand nach der Verleihung:";
             grid.Columns["aus_geliehen"].HeaderText = "Ausleihdatum:";
             grid.Columns["aus_ruckgabe"].HeaderText = "Rückgabedatum:";
+            grid.Columns["kunde_vorname"].HeaderText = "Vorname:";
+            grid.Columns["kunde_nachname"].HeaderText = "Nachname:";
         }
         #endregion
     }

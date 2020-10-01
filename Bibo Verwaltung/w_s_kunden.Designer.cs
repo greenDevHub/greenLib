@@ -55,7 +55,6 @@
             this.tb_Mail = new MetroFramework.Controls.MetroTextBox();
             this.lb_Mail = new MetroFramework.Controls.MetroLabel();
             this.tb_Hausnummer = new MetroFramework.Controls.MetroTextBox();
-            this.tb_Klasse = new MetroFramework.Controls.MetroTextBox();
             this.tb_Postleitzahl = new MetroFramework.Controls.MetroTextBox();
             this.tb_Ort = new MetroFramework.Controls.MetroTextBox();
             this.lb_KundenID = new MetroFramework.Controls.MetroLabel();
@@ -73,8 +72,11 @@
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.lb_geburtsdatum = new MetroFramework.Controls.MetroLabel();
             this.lb_faecher = new MetroFramework.Controls.MetroLabel();
+            this.bt_klasse_s = new MetroFramework.Controls.MetroButton();
+            this.cb_klasse = new Bibo_Verwaltung.AdvancedComboBox();
             this.mbt_Import = new MetroFramework.Controls.MetroButton();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.tb_search = new MetroFramework.Controls.MetroTextBox();
             this.mdtp_GebDat = new MetroFramework.Controls.MetroDateTime();
             this.metroProgressSpinner2 = new MetroFramework.Controls.MetroProgressSpinner();
             this.gv_result = new MetroFramework.Controls.MetroGrid();
@@ -93,6 +95,12 @@
             this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.mbt_Export = new MetroFramework.Controls.MetroButton();
+            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
+            this.rb_search = new MetroFramework.Controls.MetroRadioButton();
+            this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.metroContextMenu1 = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.timer_start = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
             this.cm_kunde.SuspendLayout();
             this.metroPanel1.SuspendLayout();
@@ -100,6 +108,8 @@
             this.cm_result.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_faecher)).BeginInit();
             this.mtP_Filter.SuspendLayout();
+            this.metroPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // lb_Telefonnummer
@@ -121,7 +131,7 @@
             // 
             // 
             this.tb_Telefonnummer.CustomButton.Image = null;
-            this.tb_Telefonnummer.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_Telefonnummer.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_Telefonnummer.CustomButton.Name = "";
             this.tb_Telefonnummer.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.tb_Telefonnummer.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -142,9 +152,10 @@
             this.tb_Telefonnummer.SelectionStart = 0;
             this.tb_Telefonnummer.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Telefonnummer, true);
-            this.tb_Telefonnummer.Size = new System.Drawing.Size(175, 24);
+            this.tb_Telefonnummer.Size = new System.Drawing.Size(245, 24);
             this.tb_Telefonnummer.Style = MetroFramework.MetroColorStyle.Teal;
-            this.tb_Telefonnummer.TabIndex = 13;
+            this.tb_Telefonnummer.TabIndex = 16;
+            this.metroToolTip1.SetToolTip(this.tb_Telefonnummer, "Tragen sie die Telefonnummer des Kunden hier ein.");
             this.tb_Telefonnummer.UseSelectable = true;
             this.tb_Telefonnummer.WaterMark = "Telefonnummer";
             this.tb_Telefonnummer.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -183,7 +194,7 @@
             // 
             // 
             this.tb_KundenID.CustomButton.Image = null;
-            this.tb_KundenID.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_KundenID.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_KundenID.CustomButton.Name = "";
             this.tb_KundenID.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.tb_KundenID.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -203,9 +214,9 @@
             this.tb_KundenID.SelectionStart = 0;
             this.tb_KundenID.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_KundenID, true);
-            this.tb_KundenID.Size = new System.Drawing.Size(175, 24);
+            this.tb_KundenID.Size = new System.Drawing.Size(245, 24);
             this.tb_KundenID.Style = MetroFramework.MetroColorStyle.Teal;
-            this.tb_KundenID.TabIndex = 3;
+            this.tb_KundenID.TabIndex = 5;
             this.tb_KundenID.UseSelectable = true;
             this.tb_KundenID.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_KundenID.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -256,7 +267,7 @@
             // 
             // 
             this.tb_Nachname.CustomButton.Image = null;
-            this.tb_Nachname.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_Nachname.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_Nachname.CustomButton.Name = "";
             this.tb_Nachname.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.tb_Nachname.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -277,9 +288,10 @@
             this.tb_Nachname.SelectionStart = 0;
             this.tb_Nachname.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Nachname, true);
-            this.tb_Nachname.Size = new System.Drawing.Size(175, 24);
+            this.tb_Nachname.Size = new System.Drawing.Size(245, 24);
             this.tb_Nachname.Style = MetroFramework.MetroColorStyle.Teal;
-            this.tb_Nachname.TabIndex = 5;
+            this.tb_Nachname.TabIndex = 7;
+            this.metroToolTip1.SetToolTip(this.tb_Nachname, "Tragen sie den Nachnamen des Kunden hier ein.");
             this.tb_Nachname.UseSelectable = true;
             this.tb_Nachname.WaterMark = "Nachname";
             this.tb_Nachname.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -305,7 +317,7 @@
             // 
             // 
             this.tb_Vorname.CustomButton.Image = null;
-            this.tb_Vorname.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_Vorname.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_Vorname.CustomButton.Name = "";
             this.tb_Vorname.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.tb_Vorname.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -326,9 +338,10 @@
             this.tb_Vorname.SelectionStart = 0;
             this.tb_Vorname.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Vorname, true);
-            this.tb_Vorname.Size = new System.Drawing.Size(175, 24);
+            this.tb_Vorname.Size = new System.Drawing.Size(245, 24);
             this.tb_Vorname.Style = MetroFramework.MetroColorStyle.Teal;
-            this.tb_Vorname.TabIndex = 4;
+            this.tb_Vorname.TabIndex = 6;
+            this.metroToolTip1.SetToolTip(this.tb_Vorname, "Tragen sie den Vornamen des Kunden hier ein.");
             this.tb_Vorname.UseSelectable = true;
             this.tb_Vorname.WaterMark = "Vorname";
             this.tb_Vorname.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -341,7 +354,7 @@
             // 
             // 
             this.tb_Strasse.CustomButton.Image = null;
-            this.tb_Strasse.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_Strasse.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_Strasse.CustomButton.Name = "";
             this.tb_Strasse.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.tb_Strasse.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -362,9 +375,10 @@
             this.tb_Strasse.SelectionStart = 0;
             this.tb_Strasse.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Strasse, true);
-            this.tb_Strasse.Size = new System.Drawing.Size(175, 24);
+            this.tb_Strasse.Size = new System.Drawing.Size(245, 24);
             this.tb_Strasse.Style = MetroFramework.MetroColorStyle.Teal;
-            this.tb_Strasse.TabIndex = 7;
+            this.tb_Strasse.TabIndex = 9;
+            this.metroToolTip1.SetToolTip(this.tb_Strasse, "Tragen sie die Strasse des Kunden hier ein.");
             this.tb_Strasse.UseSelectable = true;
             this.tb_Strasse.WaterMark = "Strasse";
             this.tb_Strasse.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -390,7 +404,7 @@
             // 
             // 
             this.tb_Mail.CustomButton.Image = null;
-            this.tb_Mail.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_Mail.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_Mail.CustomButton.Name = "";
             this.tb_Mail.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.tb_Mail.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -411,9 +425,10 @@
             this.tb_Mail.SelectionStart = 0;
             this.tb_Mail.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Mail, true);
-            this.tb_Mail.Size = new System.Drawing.Size(175, 24);
+            this.tb_Mail.Size = new System.Drawing.Size(245, 24);
             this.tb_Mail.Style = MetroFramework.MetroColorStyle.Teal;
-            this.tb_Mail.TabIndex = 12;
+            this.tb_Mail.TabIndex = 15;
+            this.metroToolTip1.SetToolTip(this.tb_Mail, "Tragen sie die E-Mail Adresse des Kunden hier ein.");
             this.tb_Mail.UseSelectable = true;
             this.tb_Mail.WaterMark = "Mail";
             this.tb_Mail.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -439,7 +454,7 @@
             // 
             // 
             this.tb_Hausnummer.CustomButton.Image = null;
-            this.tb_Hausnummer.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_Hausnummer.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_Hausnummer.CustomButton.Name = "";
             this.tb_Hausnummer.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.tb_Hausnummer.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -460,50 +475,15 @@
             this.tb_Hausnummer.SelectionStart = 0;
             this.tb_Hausnummer.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Hausnummer, true);
-            this.tb_Hausnummer.Size = new System.Drawing.Size(175, 24);
+            this.tb_Hausnummer.Size = new System.Drawing.Size(245, 24);
             this.tb_Hausnummer.Style = MetroFramework.MetroColorStyle.Teal;
-            this.tb_Hausnummer.TabIndex = 8;
+            this.tb_Hausnummer.TabIndex = 10;
+            this.metroToolTip1.SetToolTip(this.tb_Hausnummer, "Tragen sie die Hausnummer des Kunden hier ein.");
             this.tb_Hausnummer.UseSelectable = true;
             this.tb_Hausnummer.WaterMark = "Hausnummer";
             this.tb_Hausnummer.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Hausnummer.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_Hausnummer.TextChanged += new System.EventHandler(this.tb_Hausnummer_TextChanged);
-            // 
-            // tb_Klasse
-            // 
-            // 
-            // 
-            // 
-            this.tb_Klasse.CustomButton.Image = null;
-            this.tb_Klasse.CustomButton.Location = new System.Drawing.Point(153, 2);
-            this.tb_Klasse.CustomButton.Name = "";
-            this.tb_Klasse.CustomButton.Size = new System.Drawing.Size(19, 19);
-            this.tb_Klasse.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.tb_Klasse.CustomButton.TabIndex = 1;
-            this.tb_Klasse.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.tb_Klasse.CustomButton.UseSelectable = true;
-            this.tb_Klasse.CustomButton.Visible = false;
-            this.helpProvider.SetHelpString(this.tb_Klasse, "Tragen sie die Klasse ihres Kunden hier ein.");
-            this.tb_Klasse.Lines = new string[0];
-            this.tb_Klasse.Location = new System.Drawing.Point(113, 248);
-            this.tb_Klasse.MaxLength = 32767;
-            this.tb_Klasse.Name = "tb_Klasse";
-            this.tb_Klasse.PasswordChar = '\0';
-            this.tb_Klasse.PromptText = "Klasse";
-            this.tb_Klasse.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.tb_Klasse.SelectedText = "";
-            this.tb_Klasse.SelectionLength = 0;
-            this.tb_Klasse.SelectionStart = 0;
-            this.tb_Klasse.ShortcutsEnabled = true;
-            this.helpProvider.SetShowHelp(this.tb_Klasse, true);
-            this.tb_Klasse.Size = new System.Drawing.Size(175, 24);
-            this.tb_Klasse.Style = MetroFramework.MetroColorStyle.Teal;
-            this.tb_Klasse.TabIndex = 11;
-            this.tb_Klasse.UseSelectable = true;
-            this.tb_Klasse.WaterMark = "Klasse";
-            this.tb_Klasse.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.tb_Klasse.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.tb_Klasse.TextChanged += new System.EventHandler(this.tb_Klasse_TextChanged);
             // 
             // tb_Postleitzahl
             // 
@@ -511,7 +491,7 @@
             // 
             // 
             this.tb_Postleitzahl.CustomButton.Image = null;
-            this.tb_Postleitzahl.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_Postleitzahl.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_Postleitzahl.CustomButton.Name = "";
             this.tb_Postleitzahl.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.tb_Postleitzahl.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -532,9 +512,10 @@
             this.tb_Postleitzahl.SelectionStart = 0;
             this.tb_Postleitzahl.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Postleitzahl, true);
-            this.tb_Postleitzahl.Size = new System.Drawing.Size(175, 24);
+            this.tb_Postleitzahl.Size = new System.Drawing.Size(245, 24);
             this.tb_Postleitzahl.Style = MetroFramework.MetroColorStyle.Teal;
-            this.tb_Postleitzahl.TabIndex = 9;
+            this.tb_Postleitzahl.TabIndex = 11;
+            this.metroToolTip1.SetToolTip(this.tb_Postleitzahl, "Tragen sie die Postleitzahl des Kunden hier ein.");
             this.tb_Postleitzahl.UseSelectable = true;
             this.tb_Postleitzahl.WaterMark = "Postleitzahl";
             this.tb_Postleitzahl.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -547,7 +528,7 @@
             // 
             // 
             this.tb_Ort.CustomButton.Image = null;
-            this.tb_Ort.CustomButton.Location = new System.Drawing.Point(153, 2);
+            this.tb_Ort.CustomButton.Location = new System.Drawing.Point(223, 2);
             this.tb_Ort.CustomButton.Name = "";
             this.tb_Ort.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.tb_Ort.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -568,9 +549,10 @@
             this.tb_Ort.SelectionStart = 0;
             this.tb_Ort.ShortcutsEnabled = true;
             this.helpProvider.SetShowHelp(this.tb_Ort, true);
-            this.tb_Ort.Size = new System.Drawing.Size(175, 24);
+            this.tb_Ort.Size = new System.Drawing.Size(245, 24);
             this.tb_Ort.Style = MetroFramework.MetroColorStyle.Teal;
-            this.tb_Ort.TabIndex = 10;
+            this.tb_Ort.TabIndex = 12;
+            this.metroToolTip1.SetToolTip(this.tb_Ort, "Tragen sie den Wohnort des Kunden hier ein.");
             this.tb_Ort.UseSelectable = true;
             this.tb_Ort.WaterMark = "Wohnort";
             this.tb_Ort.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -592,11 +574,13 @@
             // 
             // lb_kunde_add
             // 
+            this.lb_kunde_add.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
             // 
             this.lb_kunde_add.CustomButton.Image = null;
-            this.lb_kunde_add.CustomButton.Location = new System.Drawing.Point(263, 2);
+            this.lb_kunde_add.CustomButton.Location = new System.Drawing.Point(332, 2);
             this.lb_kunde_add.CustomButton.Name = "";
             this.lb_kunde_add.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.lb_kunde_add.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -608,7 +592,7 @@
             this.lb_kunde_add.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.lb_kunde_add.Lines = new string[] {
         "Der Kunde wurde erfolgreich hinzugefügt!"};
-            this.lb_kunde_add.Location = new System.Drawing.Point(3, 612);
+            this.lb_kunde_add.Location = new System.Drawing.Point(3, 588);
             this.lb_kunde_add.MaxLength = 32767;
             this.lb_kunde_add.Multiline = true;
             this.lb_kunde_add.Name = "lb_kunde_add";
@@ -618,9 +602,10 @@
             this.lb_kunde_add.SelectionLength = 0;
             this.lb_kunde_add.SelectionStart = 0;
             this.lb_kunde_add.ShortcutsEnabled = true;
-            this.lb_kunde_add.Size = new System.Drawing.Size(285, 24);
+            this.lb_kunde_add.Size = new System.Drawing.Size(354, 24);
             this.lb_kunde_add.Style = MetroFramework.MetroColorStyle.Teal;
             this.lb_kunde_add.TabIndex = 40;
+            this.lb_kunde_add.TabStop = false;
             this.lb_kunde_add.Text = "Der Kunde wurde erfolgreich hinzugefügt!";
             this.lb_kunde_add.UseSelectable = true;
             this.lb_kunde_add.Visible = false;
@@ -629,16 +614,18 @@
             // 
             // bt_clear
             // 
+            this.bt_clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bt_clear.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_clear.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_clear, "Leeren sie alle oben liegenden Textfelder.");
-            this.bt_clear.Location = new System.Drawing.Point(3, 582);
+            this.bt_clear.Location = new System.Drawing.Point(3, 618);
             this.bt_clear.Name = "bt_clear";
             this.helpProvider.SetShowHelp(this.bt_clear, true);
-            this.bt_clear.Size = new System.Drawing.Size(135, 24);
+            this.bt_clear.Size = new System.Drawing.Size(122, 24);
             this.bt_clear.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_clear.TabIndex = 16;
+            this.bt_clear.TabIndex = 19;
             this.bt_clear.Text = "Leeren";
+            this.metroToolTip1.SetToolTip(this.bt_clear, "    Leeren sie hier alle oben liegenden Textfelder.    ");
             this.bt_clear.UseSelectable = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
@@ -648,13 +635,14 @@
             this.rb_KundeLoeschen.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_KundeLoeschen.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.helpProvider.SetHelpString(this.rb_KundeLoeschen, "Klicken sie hier, um einen vorhandenen Kunden zu löschen.");
-            this.rb_KundeLoeschen.Location = new System.Drawing.Point(213, 63);
+            this.rb_KundeLoeschen.Location = new System.Drawing.Point(285, 63);
             this.rb_KundeLoeschen.Name = "rb_KundeLoeschen";
             this.helpProvider.SetShowHelp(this.rb_KundeLoeschen, true);
             this.rb_KundeLoeschen.Size = new System.Drawing.Size(80, 19);
             this.rb_KundeLoeschen.Style = MetroFramework.MetroColorStyle.Teal;
-            this.rb_KundeLoeschen.TabIndex = 2;
+            this.rb_KundeLoeschen.TabIndex = 3;
             this.rb_KundeLoeschen.Text = "Entfernen";
+            this.metroToolTip1.SetToolTip(this.rb_KundeLoeschen, "    Klicken sie hier, um einen vorhandenen Kunden zu löschen.    ");
             this.rb_KundeLoeschen.UseSelectable = true;
             this.rb_KundeLoeschen.CheckedChanged += new System.EventHandler(this.rb_KundeLoeschen_CheckedChanged);
             // 
@@ -664,61 +652,64 @@
             this.rb_KundeBearbeiten.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_KundeBearbeiten.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.helpProvider.SetHelpString(this.rb_KundeBearbeiten, "Klicken sie hier, um einen vorhandenen Kunden zu bearbeiten.");
-            this.rb_KundeBearbeiten.Location = new System.Drawing.Point(119, 63);
+            this.rb_KundeBearbeiten.Location = new System.Drawing.Point(191, 63);
             this.rb_KundeBearbeiten.Name = "rb_KundeBearbeiten";
             this.helpProvider.SetShowHelp(this.rb_KundeBearbeiten, true);
             this.rb_KundeBearbeiten.Size = new System.Drawing.Size(88, 19);
             this.rb_KundeBearbeiten.Style = MetroFramework.MetroColorStyle.Teal;
-            this.rb_KundeBearbeiten.TabIndex = 1;
+            this.rb_KundeBearbeiten.TabIndex = 2;
             this.rb_KundeBearbeiten.Text = "Bearbeiten";
+            this.metroToolTip1.SetToolTip(this.rb_KundeBearbeiten, "    Klicken sie hier, um einen Kunden zu bearbeiten.    ");
             this.rb_KundeBearbeiten.UseSelectable = true;
             this.rb_KundeBearbeiten.CheckedChanged += new System.EventHandler(this.rb_KundeBearbeiten_CheckedChanged);
             // 
             // rb_Neukunde
             // 
             this.rb_Neukunde.AutoSize = true;
-            this.rb_Neukunde.Checked = true;
             this.rb_Neukunde.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
             this.rb_Neukunde.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.helpProvider.SetHelpString(this.rb_Neukunde, "Klicken sie hier, um einen neuen Kunden hinzuzufügen.");
-            this.rb_Neukunde.Location = new System.Drawing.Point(23, 63);
+            this.rb_Neukunde.Location = new System.Drawing.Point(95, 63);
             this.rb_Neukunde.Name = "rb_Neukunde";
             this.helpProvider.SetShowHelp(this.rb_Neukunde, true);
             this.rb_Neukunde.Size = new System.Drawing.Size(90, 19);
             this.rb_Neukunde.Style = MetroFramework.MetroColorStyle.Teal;
-            this.rb_Neukunde.TabIndex = 0;
-            this.rb_Neukunde.TabStop = true;
+            this.rb_Neukunde.TabIndex = 1;
             this.rb_Neukunde.Text = "Hinzufügen";
+            this.metroToolTip1.SetToolTip(this.rb_Neukunde, "    Klicken sie hier, um einen neuen Kunden hinzuzufügen.    ");
             this.rb_Neukunde.UseSelectable = true;
             this.rb_Neukunde.CheckedChanged += new System.EventHandler(this.rb_Neukunde_CheckedChanged);
             // 
             // bt_confirm
             // 
+            this.bt_confirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_confirm.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_confirm.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_confirm, "Speichern sie alle oben eingetragenen Daten.");
-            this.bt_confirm.Location = new System.Drawing.Point(153, 582);
+            this.bt_confirm.Location = new System.Drawing.Point(235, 618);
             this.bt_confirm.Name = "bt_confirm";
             this.helpProvider.SetShowHelp(this.bt_confirm, true);
-            this.bt_confirm.Size = new System.Drawing.Size(135, 24);
+            this.bt_confirm.Size = new System.Drawing.Size(122, 24);
             this.bt_confirm.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_confirm.TabIndex = 17;
+            this.bt_confirm.TabIndex = 20;
             this.bt_confirm.Text = "Speichern";
+            this.metroToolTip1.SetToolTip(this.bt_confirm, "    Speichern sie hier alle oben eingetragenen Daten.    ");
             this.bt_confirm.UseSelectable = true;
             this.bt_confirm.Click += new System.EventHandler(this.bt_confirm_click);
             // 
             // bt_OK
             // 
+            this.bt_OK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.bt_OK.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_OK.FontWeight = MetroFramework.MetroButtonWeight.Regular;
             this.helpProvider.SetHelpString(this.bt_OK, "Schließen sie das akuelle Fenster.");
-            this.bt_OK.Location = new System.Drawing.Point(1002, 703);
+            this.bt_OK.Location = new System.Drawing.Point(667, 3);
             this.bt_OK.Name = "bt_OK";
             this.helpProvider.SetShowHelp(this.bt_OK, true);
-            this.bt_OK.Size = new System.Drawing.Size(175, 24);
+            this.bt_OK.Size = new System.Drawing.Size(122, 24);
             this.bt_OK.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_OK.TabIndex = 21;
+            this.bt_OK.TabIndex = 30;
             this.bt_OK.Text = "Schließen";
             this.bt_OK.UseSelectable = true;
             // 
@@ -728,6 +719,9 @@
             this.gv_Kunde.AllowUserToDeleteRows = false;
             this.gv_Kunde.AllowUserToResizeColumns = false;
             this.gv_Kunde.AllowUserToResizeRows = false;
+            this.gv_Kunde.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gv_Kunde.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.gv_Kunde.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_Kunde.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -755,7 +749,7 @@
             this.gv_Kunde.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_Kunde.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.helpProvider.SetHelpString(this.gv_Kunde, "Hier werden all ihre Kunden angezeigt.");
-            this.gv_Kunde.Location = new System.Drawing.Point(319, 125);
+            this.gv_Kunde.Location = new System.Drawing.Point(385, 125);
             this.gv_Kunde.Name = "gv_Kunde";
             this.gv_Kunde.ReadOnly = true;
             this.gv_Kunde.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -772,14 +766,18 @@
             this.gv_Kunde.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gv_Kunde.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.helpProvider.SetShowHelp(this.gv_Kunde, true);
-            this.gv_Kunde.Size = new System.Drawing.Size(858, 572);
+            this.gv_Kunde.Size = new System.Drawing.Size(792, 572);
             this.gv_Kunde.Style = MetroFramework.MetroColorStyle.Teal;
-            this.gv_Kunde.TabIndex = 18;
+            this.gv_Kunde.TabIndex = 25;
             this.gv_Kunde.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Kunde_CellDoubleClick);
             this.gv_Kunde.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_Kunde_CellMouseDown);
+            this.gv_Kunde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Kunde_KeyDown);
+            this.gv_Kunde.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Gv_Kunde_MouseDown);
             // 
             // cm_kunde
             // 
+            this.cm_kunde.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cm_kunde.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.cm_kunde.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cm_kunde.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.kundeBearbeitenToolStripMenuItem,
@@ -818,7 +816,7 @@
             // 
             this.lb_faecher.AutoSize = true;
             this.helpProvider.SetHelpString(this.lb_faecher, "Tragen sie die Telefonnummer ihres Kunden hier ein.");
-            this.lb_faecher.Location = new System.Drawing.Point(3, 338);
+            this.lb_faecher.Location = new System.Drawing.Point(3, 341);
             this.lb_faecher.Margin = new System.Windows.Forms.Padding(3);
             this.lb_faecher.Name = "lb_faecher";
             this.helpProvider.SetShowHelp(this.lb_faecher, true);
@@ -827,21 +825,65 @@
             this.lb_faecher.TabIndex = 48;
             this.lb_faecher.Text = "Fächer:";
             // 
+            // bt_klasse_s
+            // 
+            this.bt_klasse_s.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_klasse_s.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.helpProvider.SetHelpString(this.bt_klasse_s, "Klicken sie auf diesen Button, um neue Autoren hinzuzufügen.");
+            this.bt_klasse_s.Location = new System.Drawing.Point(335, 248);
+            this.bt_klasse_s.MaximumSize = new System.Drawing.Size(22, 24);
+            this.bt_klasse_s.MinimumSize = new System.Drawing.Size(22, 24);
+            this.bt_klasse_s.Name = "bt_klasse_s";
+            this.helpProvider.SetShowHelp(this.bt_klasse_s, true);
+            this.bt_klasse_s.Size = new System.Drawing.Size(22, 24);
+            this.bt_klasse_s.TabIndex = 14;
+            this.bt_klasse_s.Text = "+";
+            this.bt_klasse_s.UseSelectable = true;
+            this.bt_klasse_s.Click += new System.EventHandler(this.Bt_klasse_s_Click);
+            // 
+            // cb_klasse
+            // 
+            this.cb_klasse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_klasse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_klasse.BorderColor = System.Drawing.Color.Gray;
+            this.cb_klasse.DataRowView = true;
+            this.cb_klasse.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cb_klasse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cb_klasse.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cb_klasse.ForeColor = System.Drawing.Color.Black;
+            this.cb_klasse.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_klasse, "Tragen sie den Autor ihres Buches hier ein.");
+            this.cb_klasse.HighlightColor = System.Drawing.Color.LightSeaGreen;
+            this.cb_klasse.ItemHeight = 18;
+            this.cb_klasse.Location = new System.Drawing.Point(113, 248);
+            this.cb_klasse.Name = "cb_klasse";
+            this.helpProvider.SetShowHelp(this.cb_klasse, true);
+            this.cb_klasse.Size = new System.Drawing.Size(216, 24);
+            this.cb_klasse.TabIndex = 13;
+            this.cb_klasse.TextChanged += new System.EventHandler(this.cb_klasse_TextChanged);
+            this.cb_klasse.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cb_klasse_KeyDown);
+            // 
             // mbt_Import
             // 
             this.mbt_Import.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mbt_Import.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.mbt_Import.Location = new System.Drawing.Point(504, 703);
+            this.mbt_Import.Location = new System.Drawing.Point(4, 3);
             this.mbt_Import.Name = "mbt_Import";
-            this.mbt_Import.Size = new System.Drawing.Size(175, 24);
+            this.mbt_Import.Size = new System.Drawing.Size(122, 24);
             this.mbt_Import.Style = MetroFramework.MetroColorStyle.Teal;
-            this.mbt_Import.TabIndex = 20;
-            this.mbt_Import.Text = "Kundendaten-Import";
+            this.mbt_Import.TabIndex = 27;
+            this.mbt_Import.Text = "Daten-Import";
+            this.metroToolTip1.SetToolTip(this.mbt_Import, "    Importieren Sie Daten von einer externen Quelle.    ");
             this.mbt_Import.UseSelectable = true;
             this.mbt_Import.Click += new System.EventHandler(this.bt_ImEx_Click);
             // 
             // metroPanel1
             // 
+            this.metroPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.metroPanel1.Controls.Add(this.tb_search);
+            this.metroPanel1.Controls.Add(this.cb_klasse);
+            this.metroPanel1.Controls.Add(this.bt_klasse_s);
             this.metroPanel1.Controls.Add(this.mdtp_GebDat);
             this.metroPanel1.Controls.Add(this.metroProgressSpinner2);
             this.metroPanel1.Controls.Add(this.lb_faecher);
@@ -857,7 +899,6 @@
             this.metroPanel1.Controls.Add(this.tb_Mail);
             this.metroPanel1.Controls.Add(this.lb_Mail);
             this.metroPanel1.Controls.Add(this.lb_Hausnummer);
-            this.metroPanel1.Controls.Add(this.tb_Klasse);
             this.metroPanel1.Controls.Add(this.lb_Ort);
             this.metroPanel1.Controls.Add(this.lb_Postleitzahl);
             this.metroPanel1.Controls.Add(this.lb_Strasse);
@@ -875,33 +916,73 @@
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
             this.metroPanel1.Location = new System.Drawing.Point(23, 88);
+            this.metroPanel1.MaximumSize = new System.Drawing.Size(420, 3000);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(290, 639);
+            this.metroPanel1.Size = new System.Drawing.Size(360, 647);
             this.metroPanel1.Style = MetroFramework.MetroColorStyle.Teal;
-            this.metroPanel1.TabIndex = 43;
+            this.metroPanel1.TabIndex = 4;
+            this.metroPanel1.TabStop = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
+            // tb_search
+            // 
+            // 
+            // 
+            // 
+            this.tb_search.CustomButton.Image = null;
+            this.tb_search.CustomButton.Location = new System.Drawing.Point(94, 1);
+            this.tb_search.CustomButton.Name = "";
+            this.tb_search.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.tb_search.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_search.CustomButton.TabIndex = 1;
+            this.tb_search.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_search.CustomButton.UseSelectable = true;
+            this.tb_search.CustomButton.Visible = false;
+            this.tb_search.Lines = new string[0];
+            this.tb_search.Location = new System.Drawing.Point(113, 338);
+            this.tb_search.MaxLength = 32767;
+            this.tb_search.Name = "tb_search";
+            this.tb_search.PasswordChar = '\0';
+            this.tb_search.PromptText = "Suche nach Kürzel";
+            this.tb_search.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_search.SelectedText = "";
+            this.tb_search.SelectionLength = 0;
+            this.tb_search.SelectionStart = 0;
+            this.tb_search.ShortcutsEnabled = true;
+            this.tb_search.Size = new System.Drawing.Size(116, 23);
+            this.tb_search.TabIndex = 49;
+            this.tb_search.UseSelectable = true;
+            this.tb_search.WaterMark = "Suche nach Kürzel";
+            this.tb_search.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_search.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_search.TextChanged += new System.EventHandler(this.tb_search_TextChanged);
+            // 
             // mdtp_GebDat
             // 
-            this.mdtp_GebDat.CustomFormat = " dd : MMMM : yyyy";
+            this.mdtp_GebDat.CustomFormat = " dd.MM.yyyy";
             this.mdtp_GebDat.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.mdtp_GebDat.Location = new System.Drawing.Point(113, 93);
             this.mdtp_GebDat.MinimumSize = new System.Drawing.Size(0, 29);
             this.mdtp_GebDat.Name = "mdtp_GebDat";
-            this.mdtp_GebDat.Size = new System.Drawing.Size(174, 29);
-            this.mdtp_GebDat.TabIndex = 49;
+            this.mdtp_GebDat.Size = new System.Drawing.Size(244, 29);
+            this.mdtp_GebDat.TabIndex = 8;
+            this.metroToolTip1.SetToolTip(this.mdtp_GebDat, "Tragen sie das Geburtsdatum des Kunden hier ein.");
+            this.mdtp_GebDat.ValueChanged += new System.EventHandler(this.Mdtp_GebDat_ValueChanged);
             // 
             // metroProgressSpinner2
             // 
+            this.metroProgressSpinner2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.metroProgressSpinner2.BackColor = System.Drawing.Color.Lavender;
-            this.metroProgressSpinner2.Location = new System.Drawing.Point(3, 363);
+            this.metroProgressSpinner2.Location = new System.Drawing.Point(22, 364);
             this.metroProgressSpinner2.Maximum = 100;
             this.metroProgressSpinner2.Name = "metroProgressSpinner2";
-            this.metroProgressSpinner2.Size = new System.Drawing.Size(193, 213);
+            this.metroProgressSpinner2.Size = new System.Drawing.Size(207, 207);
             this.metroProgressSpinner2.Style = MetroFramework.MetroColorStyle.Teal;
-            this.metroProgressSpinner2.TabIndex = 49;
+            this.metroProgressSpinner2.TabIndex = 17;
+            this.metroProgressSpinner2.TabStop = false;
             this.metroProgressSpinner2.UseSelectable = true;
             // 
             // gv_result
@@ -910,6 +991,8 @@
             this.gv_result.AllowUserToDeleteRows = false;
             this.gv_result.AllowUserToResizeColumns = false;
             this.gv_result.AllowUserToResizeRows = false;
+            this.gv_result.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gv_result.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_result.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_result.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -939,7 +1022,7 @@
             this.gv_result.EnableHeadersVisualStyles = false;
             this.gv_result.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_result.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_result.Location = new System.Drawing.Point(202, 360);
+            this.gv_result.Location = new System.Drawing.Point(235, 338);
             this.gv_result.MultiSelect = false;
             this.gv_result.Name = "gv_result";
             this.gv_result.ReadOnly = true;
@@ -959,11 +1042,13 @@
             this.gv_result.RowTemplate.Height = 24;
             this.gv_result.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.gv_result.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_result.Size = new System.Drawing.Size(85, 216);
+            this.gv_result.Size = new System.Drawing.Size(122, 238);
             this.gv_result.Style = MetroFramework.MetroColorStyle.Teal;
-            this.gv_result.TabIndex = 15;
+            this.gv_result.TabIndex = 18;
             this.gv_result.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_result_CellDoubleClick);
             this.gv_result.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_result_CellMouseDown);
+            this.gv_result.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_result_KeyDown);
+            this.gv_result.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Gv_result_MouseDown);
             // 
             // Kürzel
             // 
@@ -982,6 +1067,8 @@
             // 
             // cm_result
             // 
+            this.cm_result.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cm_result.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.cm_result.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cm_result.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.leistungskursAuswählenToolStripMenuItem});
@@ -1000,7 +1087,10 @@
             this.gv_faecher.AllowUserToAddRows = false;
             this.gv_faecher.AllowUserToDeleteRows = false;
             this.gv_faecher.AllowUserToResizeRows = false;
-            this.gv_faecher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.gv_faecher.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gv_faecher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_faecher.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.gv_faecher.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gv_faecher.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -1025,7 +1115,7 @@
             this.gv_faecher.EnableHeadersVisualStyles = false;
             this.gv_faecher.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.gv_faecher.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_faecher.Location = new System.Drawing.Point(3, 360);
+            this.gv_faecher.Location = new System.Drawing.Point(3, 364);
             this.gv_faecher.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.gv_faecher.MultiSelect = false;
             this.gv_faecher.Name = "gv_faecher";
@@ -1046,15 +1136,17 @@
             this.gv_faecher.RowTemplate.Height = 24;
             this.gv_faecher.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.gv_faecher.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_faecher.Size = new System.Drawing.Size(193, 216);
+            this.gv_faecher.Size = new System.Drawing.Size(226, 212);
             this.gv_faecher.Style = MetroFramework.MetroColorStyle.Teal;
-            this.gv_faecher.TabIndex = 14;
+            this.gv_faecher.TabIndex = 17;
             this.gv_faecher.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_faecher_CellDoubleClick);
+            this.gv_faecher.Sorted += new System.EventHandler(this.gv_faecher_Sorted);
+            this.gv_faecher.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_faecher_KeyDown);
             // 
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(323, 63);
+            this.metroLabel1.Location = new System.Drawing.Point(389, 63);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(42, 19);
@@ -1073,7 +1165,7 @@
             this.rb_FilterAlles.Name = "rb_FilterAlles";
             this.rb_FilterAlles.Size = new System.Drawing.Size(108, 19);
             this.rb_FilterAlles.Style = MetroFramework.MetroColorStyle.Teal;
-            this.rb_FilterAlles.TabIndex = 45;
+            this.rb_FilterAlles.TabIndex = 22;
             this.rb_FilterAlles.TabStop = true;
             this.rb_FilterAlles.Text = "Alles anzeigen";
             this.rb_FilterAlles.UseSelectable = true;
@@ -1089,7 +1181,8 @@
             this.rb_FilterSchueler.Name = "rb_FilterSchueler";
             this.rb_FilterSchueler.Size = new System.Drawing.Size(146, 19);
             this.rb_FilterSchueler.Style = MetroFramework.MetroColorStyle.Teal;
-            this.rb_FilterSchueler.TabIndex = 45;
+            this.rb_FilterSchueler.TabIndex = 23;
+            this.rb_FilterSchueler.TabStop = true;
             this.rb_FilterSchueler.Text = "nur Schüler anzeigen";
             this.rb_FilterSchueler.UseSelectable = true;
             this.rb_FilterSchueler.CheckedChanged += new System.EventHandler(this.rb_alles_CheckedChanged);
@@ -1104,13 +1197,16 @@
             this.rb_FilterAndere.Name = "rb_FilterAndere";
             this.rb_FilterAndere.Size = new System.Drawing.Size(161, 19);
             this.rb_FilterAndere.Style = MetroFramework.MetroColorStyle.Teal;
-            this.rb_FilterAndere.TabIndex = 45;
+            this.rb_FilterAndere.TabIndex = 24;
+            this.rb_FilterAndere.TabStop = true;
             this.rb_FilterAndere.Text = "alle Schüler ausblenden";
             this.rb_FilterAndere.UseSelectable = true;
             this.rb_FilterAndere.CheckedChanged += new System.EventHandler(this.rb_alles_CheckedChanged);
             // 
             // mtP_Filter
             // 
+            this.mtP_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.mtP_Filter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mtP_Filter.Controls.Add(this.rb_FilterSchueler);
             this.mtP_Filter.Controls.Add(this.rb_FilterAndere);
@@ -1118,10 +1214,10 @@
             this.mtP_Filter.HorizontalScrollbarBarColor = true;
             this.mtP_Filter.HorizontalScrollbarHighlightOnWheel = false;
             this.mtP_Filter.HorizontalScrollbarSize = 10;
-            this.mtP_Filter.Location = new System.Drawing.Point(319, 88);
+            this.mtP_Filter.Location = new System.Drawing.Point(389, 88);
             this.mtP_Filter.Name = "mtP_Filter";
-            this.mtP_Filter.Size = new System.Drawing.Size(858, 31);
-            this.mtP_Filter.TabIndex = 46;
+            this.mtP_Filter.Size = new System.Drawing.Size(788, 31);
+            this.mtP_Filter.TabIndex = 21;
             this.mtP_Filter.VerticalScrollbarBarColor = true;
             this.mtP_Filter.VerticalScrollbarHighlightOnWheel = false;
             this.mtP_Filter.VerticalScrollbarSize = 10;
@@ -1130,11 +1226,11 @@
             // 
             this.bt_cleanup.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_cleanup.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_cleanup.Location = new System.Drawing.Point(323, 703);
+            this.bt_cleanup.Location = new System.Drawing.Point(260, 3);
             this.bt_cleanup.Name = "bt_cleanup";
-            this.bt_cleanup.Size = new System.Drawing.Size(175, 24);
+            this.bt_cleanup.Size = new System.Drawing.Size(250, 24);
             this.bt_cleanup.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_cleanup.TabIndex = 19;
+            this.bt_cleanup.TabIndex = 29;
             this.bt_cleanup.Text = "Schülerdaten-Cleanup";
             this.bt_cleanup.UseSelectable = true;
             this.bt_cleanup.Click += new System.EventHandler(this.bt_cleanup_Click);
@@ -1146,8 +1242,11 @@
             // 
             // metroProgressSpinner1
             // 
+            this.metroProgressSpinner1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.metroProgressSpinner1.BackColor = System.Drawing.Color.White;
-            this.metroProgressSpinner1.Location = new System.Drawing.Point(469, 125);
+            this.metroProgressSpinner1.Location = new System.Drawing.Point(490, 125);
             this.metroProgressSpinner1.Maximum = 100;
             this.metroProgressSpinner1.Name = "metroProgressSpinner1";
             this.metroProgressSpinner1.Size = new System.Drawing.Size(572, 572);
@@ -1165,36 +1264,93 @@
             // 
             this.mbt_Export.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.mbt_Export.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.mbt_Export.Location = new System.Drawing.Point(685, 703);
+            this.mbt_Export.Location = new System.Drawing.Point(132, 3);
             this.mbt_Export.Name = "mbt_Export";
-            this.mbt_Export.Size = new System.Drawing.Size(175, 24);
+            this.mbt_Export.Size = new System.Drawing.Size(122, 24);
             this.mbt_Export.Style = MetroFramework.MetroColorStyle.Teal;
-            this.mbt_Export.TabIndex = 49;
-            this.mbt_Export.Text = "Kundendaten-Export";
+            this.mbt_Export.TabIndex = 28;
+            this.mbt_Export.Text = "Daten-Export";
+            this.metroToolTip1.SetToolTip(this.mbt_Export, "    Exportieren sie ihre Kundendaten in eine Exceltabelle.    ");
             this.mbt_Export.UseSelectable = true;
             this.mbt_Export.Click += new System.EventHandler(this.Mbt_Export_Click);
+            // 
+            // metroPanel2
+            // 
+            this.metroPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroPanel2.Controls.Add(this.bt_cleanup);
+            this.metroPanel2.Controls.Add(this.mbt_Export);
+            this.metroPanel2.Controls.Add(this.mbt_Import);
+            this.metroPanel2.Controls.Add(this.bt_OK);
+            this.metroPanel2.HorizontalScrollbarBarColor = true;
+            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.HorizontalScrollbarSize = 10;
+            this.metroPanel2.Location = new System.Drawing.Point(385, 703);
+            this.metroPanel2.Name = "metroPanel2";
+            this.metroPanel2.Size = new System.Drawing.Size(792, 32);
+            this.metroPanel2.TabIndex = 26;
+            this.metroPanel2.VerticalScrollbarBarColor = true;
+            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.VerticalScrollbarSize = 10;
+            // 
+            // rb_search
+            // 
+            this.rb_search.AutoSize = true;
+            this.rb_search.Checked = true;
+            this.rb_search.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rb_search.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
+            this.rb_search.Location = new System.Drawing.Point(23, 63);
+            this.rb_search.Name = "rb_search";
+            this.rb_search.Size = new System.Drawing.Size(66, 19);
+            this.rb_search.Style = MetroFramework.MetroColorStyle.Teal;
+            this.rb_search.TabIndex = 0;
+            this.rb_search.TabStop = true;
+            this.rb_search.Text = "Suchen";
+            this.metroToolTip1.SetToolTip(this.rb_search, "    Klicken sie hier, um nach einem Kunden zu suchen.    ");
+            this.rb_search.UseSelectable = true;
+            this.rb_search.CheckedChanged += new System.EventHandler(this.Rb_search_CheckedChanged);
+            // 
+            // metroStyleManager1
+            // 
+            this.metroStyleManager1.Owner = null;
+            this.metroStyleManager1.Style = MetroFramework.MetroColorStyle.Teal;
+            // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Default;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Default;
+            // 
+            // metroContextMenu1
+            // 
+            this.metroContextMenu1.Name = "metroContextMenu1";
+            this.metroContextMenu1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // timer_start
+            // 
+            this.timer_start.Interval = 1000;
+            this.timer_start.Tick += new System.EventHandler(this.timer_start_Tick);
             // 
             // w_s_Kunden
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1200, 750);
-            this.Controls.Add(this.mbt_Export);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(1200, 745);
+            this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.metroProgressSpinner1);
             this.Controls.Add(this.mtP_Filter);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.metroLabel1);
-            this.Controls.Add(this.bt_cleanup);
-            this.Controls.Add(this.mbt_Import);
-            this.Controls.Add(this.bt_OK);
             this.Controls.Add(this.rb_KundeLoeschen);
             this.Controls.Add(this.gv_Kunde);
             this.Controls.Add(this.rb_KundeBearbeiten);
+            this.Controls.Add(this.rb_search);
             this.Controls.Add(this.rb_Neukunde);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(983, 745);
             this.Name = "w_s_Kunden";
-            this.Resizable = false;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowInTaskbar = false;
             this.Style = MetroFramework.MetroColorStyle.Teal;
             this.Text = "Kundenverwaltung";
@@ -1208,6 +1364,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_faecher)).EndInit();
             this.mtP_Filter.ResumeLayout(false);
             this.mtP_Filter.PerformLayout();
+            this.metroPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1239,7 +1397,6 @@
         private MetroFramework.Controls.MetroTextBox tb_Mail;
         private MetroFramework.Controls.MetroLabel lb_Mail;
         private MetroFramework.Controls.MetroTextBox tb_Hausnummer;
-        private MetroFramework.Controls.MetroTextBox tb_Klasse;
         private MetroFramework.Controls.MetroTextBox tb_Postleitzahl;
         private MetroFramework.Controls.MetroTextBox tb_Ort;
         private MetroFramework.Controls.MetroLabel lb_KundenID;
@@ -1268,5 +1425,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Kürzel;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private MetroFramework.Controls.MetroButton mbt_Export;
+        private MetroFramework.Controls.MetroPanel metroPanel2;
+        private MetroFramework.Controls.MetroRadioButton rb_search;
+        private MetroFramework.Controls.MetroButton bt_klasse_s;
+        private AdvancedComboBox cb_klasse;
+        private MetroFramework.Components.MetroStyleManager metroStyleManager1;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
+        private MetroFramework.Controls.MetroTextBox tb_search;
+        private MetroFramework.Controls.MetroContextMenu metroContextMenu1;
+        private System.Windows.Forms.Timer timer_start;
     }
 }

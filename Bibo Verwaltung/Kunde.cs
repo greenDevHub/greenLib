@@ -113,7 +113,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public Kunde()
         {
-            FillObject();
+            FillObjectNeu();
         }
 
         /// <summary>
@@ -123,8 +123,8 @@ namespace Bibo_Verwaltung
         {
             this.kundenid = kundenid;
             LoadKunde();
-            LoadFaecher();
-            FillObject();
+            LoadFaecherNeu();
+            FillObjectNeu();
         }
         #endregion
 
@@ -163,6 +163,32 @@ namespace Bibo_Verwaltung
             con.Close();
         }
 
+        private void LoadFaecherNeu()
+        {
+            Faecher.Clear();
+            LeistungskursListe.Clear();
+            if (con.ConnectError()) return;
+            string RawCommand = "use greenLib Select f_kurzform from t_s_fach_kunde left join t_s_faecher on f_id = fs_fachid WHERE fs_kundenid = @0 and fs_lk = 1";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, KundenID);
+            while (dr.Read())
+            {
+                LeistungskursListe.Add(dr["f_kurzform"].ToString());
+            }
+            dr.Close();
+            RawCommand = "use greenLib Select f_kurzform from t_s_fach_kunde left join t_s_faecher on f_id = fs_fachid WHERE fs_kundenid = @0";
+            dr = con.ExcecuteCommand(RawCommand, KundenID);
+            while (dr.Read())
+            {
+                Faecher.Add(dr["f_kurzform"].ToString());
+            }
+            for (int i = LeistungskursListe.Count; i < 2; i++)
+            {
+                LeistungskursListe.Add("");
+            }
+            dr.Close();
+            con.Close();
+
+        }
         private void LoadFaecher()
         {
             Faecher.Clear();
@@ -204,6 +230,22 @@ namespace Bibo_Verwaltung
             catch { }
         }
 
+        private void FillObjectNeu()
+        {
+            try
+            {
+                if (con.ConnectError()) return;
+                string RawCommand = "use greenLib SELECT kunde_ID as 'Kunden-ID', kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_geburtsdatum as 'Geburtsdatum', k_bezeichnung as 'Klasse', stuff(( SELECT distinct ', '+ cast(f_kurzform as varchar(10)) FROM t_s_fach_kunde left join t_s_faecher on f_id = fs_fachid where fs_kundenid = kunde_id and fs_lk=1 FOR XML PATH('')),1,1,'') + ',' + stuff(( SELECT distinct ', '+ cast(f_kurzform as varchar(10)) FROM t_s_fach_kunde left join t_s_faecher on f_id = fs_fachid where fs_kundenid = kunde_id and fs_lk=0 FOR XML PATH('')),1,1,'') as 'Fächer', kunde_strasse as 'Straße', kunde_hausnummer as 'Hausnummer', kunde_postleitzahl as 'Postleitzahl', kunde_ort as 'Wohnort', kunde_mail as 'Mail', kunde_telefonnummer as 'Telefonnummer' FROM [dbo].[t_s_kunden] left join t_s_klassen on k_id=kunde_klasse WHERE kunde_activated = 1";
+                adapter = new SqlDataAdapter(RawCommand, con.Con);
+                adapter.Fill(ds);
+                con.Close();
+            }
+            catch
+            {
+
+            }
+        }
+
         /// <summary>
         /// Entfernt den gesamten Inhalt im DataSet 
         /// </summary>
@@ -222,93 +264,129 @@ namespace Bibo_Verwaltung
         public void FillGrid(ref MetroGrid grid, object value = null)
         {
             ClearDataSource();
-            FillObject();
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Kunden-ID");
-            dt.Columns.Add("Vorname");
-            dt.Columns.Add("Nachname");
-            dt.Columns.Add("Geburtsdatum");
-            dt.Columns.Add("Straße");
-            dt.Columns.Add("Hausnummer");
-            dt.Columns.Add("Postleitzahl");
-            dt.Columns.Add("Wohnort");
-            dt.Columns.Add("Klasse");
-            dt.Columns.Add("Mail");
-            dt.Columns.Add("Telefonnummer");
-            dt.Columns.Add("Fächer");
+            FillObjectNeu();
+            //FillObject();
+            //DataTable dt = new DataTable();
+            //dt.Columns.Add("Kunden-ID");
+            //dt.Columns.Add("Vorname");
+            //dt.Columns.Add("Nachname");
+            //dt.Columns.Add("Geburtsdatum");
+            //dt.Columns.Add("Straße");
+            //dt.Columns.Add("Hausnummer");
+            //dt.Columns.Add("Postleitzahl");
+            //dt.Columns.Add("Wohnort");
+            //dt.Columns.Add("Klasse");
+            //dt.Columns.Add("Mail");
+            //dt.Columns.Add("Telefonnummer");
+            //dt.Columns.Add("Fächer");
 
-            foreach (DataRow row in ds.Tables[0].Rows)
-            {
-                KundenID = row[ds.Tables[0].Columns.IndexOf("Kunden-ID")].ToString();
-                Vorname = row[ds.Tables[0].Columns.IndexOf("Vorname")].ToString();
-                Nachname = row[ds.Tables[0].Columns.IndexOf("Nachname")].ToString();
-                Gd = (DateTime)row[ds.Tables[0].Columns.IndexOf("Geburtsdatum")];
-                Strasse = row[ds.Tables[0].Columns.IndexOf("Straße")].ToString();
-                Hausnummer = row[ds.Tables[0].Columns.IndexOf("Hausnummer")].ToString();
-                Postleitzahl = row[ds.Tables[0].Columns.IndexOf("Postleitzahl")].ToString();
-                Ort = row[ds.Tables[0].Columns.IndexOf("Wohnort")].ToString();
-                Klasse.Klassename = row[ds.Tables[0].Columns.IndexOf("Klasse")].ToString();
-                Mail = row[ds.Tables[0].Columns.IndexOf("Mail")].ToString();
-                Telefonnummer = row[ds.Tables[0].Columns.IndexOf("Telefonnummer")].ToString();
-                LoadFaecher();
-                DataRow dataRow = dt.NewRow();
-                dataRow["Kunden-ID"] = KundenID;
-                dataRow["Vorname"] = Vorname;
-                dataRow["Nachname"] = Nachname;
-                dataRow["Geburtsdatum"] = Gd.ToShortDateString();
-                dataRow["Straße"] = Strasse;
-                dataRow["Hausnummer"] = Hausnummer;
-                dataRow["Postleitzahl"] = Postleitzahl;
-                dataRow["Wohnort"] = Ort;
-                dataRow["Klasse"] = Klasse.Klassename;
-                dataRow["Mail"] = Mail;
-                dataRow["Telefonnummer"] = Telefonnummer;
-                string fach = "";
-                foreach (string s in Faecher)
-                {
-                    fach = fach + s + ", ";
-                }
-                try
-                {
-                    if (fach.Length >= 2)
-                    {
-                        fach = fach.Substring(0, fach.Length - 2);
-                    }
-                }
-                catch
-                {
-                    fach = "";
-                }
-                dataRow["Fächer"] = fach;
-                dt.Rows.Add(dataRow);
-            }
-            grid.DataSource = dt;
+            //foreach (DataRow row in ds.Tables[0].Rows)
+            //{
+            //    KundenID = row[ds.Tables[0].Columns.IndexOf("Kunden-ID")].ToString();
+            //    Vorname = row[ds.Tables[0].Columns.IndexOf("Vorname")].ToString();
+            //    Nachname = row[ds.Tables[0].Columns.IndexOf("Nachname")].ToString();
+            //    Gd = (DateTime)row[ds.Tables[0].Columns.IndexOf("Geburtsdatum")];
+            //    Strasse = row[ds.Tables[0].Columns.IndexOf("Straße")].ToString();
+            //    Hausnummer = row[ds.Tables[0].Columns.IndexOf("Hausnummer")].ToString();
+            //    Postleitzahl = row[ds.Tables[0].Columns.IndexOf("Postleitzahl")].ToString();
+            //    Ort = row[ds.Tables[0].Columns.IndexOf("Wohnort")].ToString();
+            //    Klasse.Klassename = row[ds.Tables[0].Columns.IndexOf("Klasse")].ToString();
+            //    Mail = row[ds.Tables[0].Columns.IndexOf("Mail")].ToString();
+            //    Telefonnummer = row[ds.Tables[0].Columns.IndexOf("Telefonnummer")].ToString();
+            //    LoadFaecher();
+            //    DataRow dataRow = dt.NewRow();
+            //    dataRow["Kunden-ID"] = KundenID;
+            //    dataRow["Vorname"] = Vorname;
+            //    dataRow["Nachname"] = Nachname;
+            //    dataRow["Geburtsdatum"] = Gd.ToShortDateString();
+            //    dataRow["Straße"] = Strasse;
+            //    dataRow["Hausnummer"] = Hausnummer;
+            //    dataRow["Postleitzahl"] = Postleitzahl;
+            //    dataRow["Wohnort"] = Ort;
+            //    dataRow["Klasse"] = Klasse.Klassename;
+            //    dataRow["Mail"] = Mail;
+            //    dataRow["Telefonnummer"] = Telefonnummer;
+            //    string fach = "";
+            //    foreach (string s in Faecher)
+            //    {
+            //        fach = fach + s + ", ";
+            //    }
+            //    try
+            //    {
+            //        if (fach.Length >= 2)
+            //        {
+            //            fach = fach.Substring(0, fach.Length - 2);
+            //        }
+            //    }
+            //    catch
+            //    {
+            //        fach = "";
+            //    }
+            //    dataRow["Fächer"] = fach;
+            //    dt.Rows.Add(dataRow);
+            //}
+            //grid.DataSource = dt;
+            grid.DataSource = ds.Tables[0];
         }
 
         /// <summary>
         /// Prüft, ob ein Kunde bereits existiert
         /// </summary>
-        public bool AlreadyExists()
+        public bool AlreadyExists(bool edit)
         {
+            string newID = "";
+            if (!edit)
+            {
+                KundenID = "";
+            }
             if (con.ConnectError()) return false;
             string RawCommand = "SELECT * FROM [dbo].[t_s_kunden] WHERE kunde_vorname = @0 and kunde_nachname = @1 and kunde_geburtsdatum = @2";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, Vorname, Nachname, Gd.Date);
             while (dr.Read())
             {
-                KundenID = dr["kunde_id"].ToString();
+                newID = dr["kunde_id"].ToString();
             }
             dr.Close();
             con.Close();
-            if (KundenID == null || KundenID == "")
+            if (newID == null || newID == "")
+            {
+                KundenID = newID;
+                return false;
+            }
+            else if(edit && newID == KundenID)
             {
                 return false;
             }
             else
             {
+                KundenID = newID;
                 return true;
             }
         }
-
+        /// <summary>
+        /// Prüft, ob ein Kunde bereits existiert
+        /// </summary>
+        public bool IsActivated()
+        {
+            Activated = false;
+            if (con.ConnectError()) return false;
+            string RawCommand = "SELECT * FROM [dbo].[t_s_kunden] WHERE kunde_ID = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, KundenID);
+            while (dr.Read())
+            {
+                if (dr["kunde_activated"].ToString().Equals("True"))
+                {
+                    Activated = true;
+                }
+                else
+                {
+                    Activated = false;
+                }
+            }
+            dr.Close();
+            con.Close();
+            return Activated;
+        }
         /// <summary>
         /// Lädt die KundenID
         /// </summary>
@@ -330,7 +408,10 @@ namespace Bibo_Verwaltung
         {
 
             {
-                Klasse.AddKlasse(Klasse.Klassename);
+                if (!Klasse.Klassename.Equals(""))
+                {
+                    Klasse.AddKlasse(Klasse.Klassename);
+                }
                 string RawCommand = "INSERT INTO [dbo].[t_s_kunden] (kunde_vorname, kunde_nachname, kunde_geburtsdatum, kunde_ort, kunde_postleitzahl, kunde_strasse, kunde_telefonnummer, kunde_hausnummer, kunde_mail, kunde_klasse, kunde_activated) VALUES (@vorname, @nachname, @gd, @ort, @postleitzahl, @strasse, @telefonnummer, @hausnummer, @mail, @klasse, 1)";
                 con.ConnectError();
                 SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
@@ -343,7 +424,15 @@ namespace Bibo_Verwaltung
                 cmd.Parameters.AddWithValue("@telefonnummer", Telefonnummer);
                 cmd.Parameters.AddWithValue("@hausnummer", Hausnummer);
                 cmd.Parameters.AddWithValue("@mail", Mail);
-                cmd.Parameters.AddWithValue("@klasse", Klasse.GetID(Klasse.Klassename));
+                if (!Klasse.Klassename.Equals(""))
+                {
+                    cmd.Parameters.AddWithValue("@klasse", Klasse.GetID(Klasse.Klassename));
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@klasse", DBNull.Value);
+                }
+                
                 cmd.ExecuteNonQuery();
                 GetKundenID();
                 AddFaecherToKunde();
@@ -387,16 +476,31 @@ namespace Bibo_Verwaltung
         public void UpdateKunde()
         {
             {
-                string RawCommand = "UPDATE [dbo].[t_s_kunden] SET kunde_ort = @ort, kunde_postleitzahl = @postleitzahl, kunde_strasse = @strasse, kunde_telefonnummer = @telefonnummer, kunde_hausnummer = @hausnummer, kunde_mail = @mail, kunde_klasse = @klasse WHERE kunde_ID = @k_ID";
+                if (!Klasse.Klassename.Equals(""))
+                {
+                    Klasse.AddKlasse(Klasse.Klassename);
+                }
+                string RawCommand = "UPDATE [dbo].[t_s_kunden] SET kunde_vorname = @vorname, kunde_nachname = @nachname, kunde_geburtsdatum = @gd, kunde_ort = @ort, kunde_postleitzahl = @postleitzahl, kunde_strasse = @strasse, kunde_telefonnummer = @telefonnummer, kunde_hausnummer = @hausnummer, kunde_mail = @mail, kunde_klasse = @klasse WHERE kunde_ID = @k_ID";
                 con.ConnectError();
                 SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+                cmd.Parameters.AddWithValue("@vorname", Vorname);
+                cmd.Parameters.AddWithValue("@nachname", Nachname);
+                cmd.Parameters.AddWithValue("@gd", Gd.Date);
                 cmd.Parameters.AddWithValue("@ort", Ort);
                 cmd.Parameters.AddWithValue("@postleitzahl", Postleitzahl);
                 cmd.Parameters.AddWithValue("@strasse", Strasse);
                 cmd.Parameters.AddWithValue("@telefonnummer", Telefonnummer);
                 cmd.Parameters.AddWithValue("@hausnummer", Hausnummer);
                 cmd.Parameters.AddWithValue("@mail", Mail);
-                cmd.Parameters.AddWithValue("@klasse", Klasse.GetID(Klasse.Klassename));
+                if (!Klasse.Klassename.Equals(""))
+                {
+                    cmd.Parameters.AddWithValue("@klasse", Klasse.GetID(Klasse.Klassename));
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@klasse", DBNull.Value);
+
+                }
                 cmd.Parameters.AddWithValue("@k_ID", KundenID);
                 // Verbindung öffnen 
                 cmd.ExecuteNonQuery();
@@ -432,7 +536,16 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@id", KundenID);
             cmd.ExecuteNonQuery();
         }
-
+        /// <summary>
+        /// Löscht alle Fächer von allen deaktivierten Kunden
+        /// </summary>
+        private void DeleteAllFaecher()
+        {
+            string RawCommand = "DELETE FROM t_s_fach_kunde WHERE fs_kundenid in (SELECT kunde_id FROM t_s_kunden WHERE kunde_activated = 0)";
+            con.ConnectError();
+            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
+            cmd.ExecuteNonQuery();
+        }
         /// <summary>
         /// Aktiviert einen Kunden in der Datenbank 
         /// </summary>
@@ -449,9 +562,9 @@ namespace Bibo_Verwaltung
         public void DeactivateAllSchueler()
         {
             if (con.ConnectError()) return;
-            string RawCommand = "UPDATE t_s_kunden set kunde_activated = 0, kunde_klasse = null from t_s_kunden left join t_bd_ausgeliehen on kunde_ID=aus_kundenid WHERE kunde_klasse !='' and aus_leihnummer is NULL";
+            string RawCommand = "UPDATE t_s_kunden set kunde_activated = 0, kunde_klasse = null from t_s_kunden left join t_bd_ausgeliehen on kunde_ID=aus_kundenid WHERE kunde_klasse !='' AND kunde_klasse IS NOT NULL and aus_leihnummer is NULL";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
-            DeleteFaecherFromKunde();
+            DeleteAllFaecher();
             cmd.ExecuteNonQuery();
             con.Close();
         }
@@ -461,17 +574,17 @@ namespace Bibo_Verwaltung
         /// </summary>
         public bool Ausgeliehen()
         {
-            string leihnummer = "";
+            string anzahl = "";
             if (con.ConnectError()) return true;
-            string RawCommand = "SELECT aus_leihnummer from t_bd_ausgeliehen WHERE aus_kundenid = @0";
+            string RawCommand = "SELECT Count(aus_leihnummer) as 'Anzahl' from t_bd_ausgeliehen WHERE aus_kundenid = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, KundenID);
             while (dr.Read())
             {
-                leihnummer = dr["aus_leihnummer"].ToString();
+                anzahl = dr["Anzahl"].ToString();
             }
             dr.Close();
             con.Close();
-            if (leihnummer == null || leihnummer == "")
+            if (anzahl == "0" || anzahl == "")
             {
                 return false;
             }
@@ -479,6 +592,38 @@ namespace Bibo_Verwaltung
             {
                 return true;
             }
+        }
+
+        /// <summary>
+        /// Gibt ein DataTable-Objekt mit den ausgeliehen Büchern der Kunden zurück 
+        /// </summary>
+        public DataTable GetAusgeliehen(string KID)
+        {
+            KundenID = KID;
+            DataTable result = new DataTable();
+            if (con.ConnectError()) return result;
+            string RawCommand = "SELECT aus_buchid as 'ID', buch_isbn as 'ISBN', aus_leihdatum as 'Leihdatum', aus_rückgabedatum as 'Rückgabedatum' FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid left join t_s_buecher on buch_isbn = bu_isbn WHERE aus_kundenid = @0";
+            adapter = new SqlDataAdapter(RawCommand, con.Con);
+            adapter.SelectCommand.Parameters.AddWithValue("@0", KID);
+            adapter.Fill(result);
+            con.Close();
+            return result;
+        }
+
+        /// <summary>
+        /// Gibt ein DataTable-Objekt mit den ausgeliehen Schul-Büchern der Kunden zurück 
+        /// </summary>
+        public DataTable GetSchulbuchAusgeliehen(string KID)
+        {
+            KundenID = KID;
+            DataTable result = new DataTable();
+            if (con.ConnectError()) return result;
+            string RawCommand = "SELECT aus_buchid as 'ID', f_kurzform as 'Fach', buch_isbn as 'ISBN', aus_leihdatum as 'Leihdatum', aus_rückgabedatum as 'Rückgabedatum' FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid left join t_s_buecher on buch_isbn = bu_isbn left join t_s_buch_fach on bf_isbn = buch_isbn left join t_s_faecher on f_id = bf_fachid WHERE aus_kundenid = @0 AND buch_isbn IN (SELECT bf_isbn FROM t_s_buch_fach)";
+            adapter = new SqlDataAdapter(RawCommand, con.Con);
+            adapter.SelectCommand.Parameters.AddWithValue("@0", KID);
+            adapter.Fill(result);
+            con.Close();
+            return result;
         }
 
         /// <summary>
@@ -496,7 +641,7 @@ namespace Bibo_Verwaltung
                 if (con.ConnectError()) return;
                 if (!showKlasse)
                 {
-                    //nach klasse selectieren
+                    //nach klasse selektieren
                     string RawCommand = "SELECT kunde_ID, kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_klasse, k_bezeichnung as 'Klasse', ks_klassenstufe as 'Klassenstufe' FROM [dbo].[t_s_kunden] left join [dbo].[t_s_klassen] on k_id = kunde_klasse left join [dbo].[t_s_klasse_stufe] on ks_klasse = kunde_klasse WHERE kunde_activated = 1 AND kunde_klasse = @klasse order by Klasse";
                     adapter = new SqlDataAdapter(RawCommand, con.Con);
                     adapter.SelectCommand.Parameters.AddWithValue("@klasse", klasse);
@@ -504,8 +649,9 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
-                    string RawCommand = "SELECT kunde_ID, kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_klasse, k_bezeichnung as 'Klasse', ks_klassenstufe as 'Klassenstufe' FROM [dbo].[t_s_kunden] left join [dbo].[t_s_klassen] on k_id = kunde_klasse left join [dbo].[t_s_klasse_stufe] on ks_klasse = kunde_klasse WHERE kunde_activated = 1 order by Klasse";
+                    string RawCommand = "SELECT kunde_ID, kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_klasse, k_bezeichnung as 'Klasse', ks_klassenstufe as 'Klassenstufe' FROM [dbo].[t_s_kunden] left join [dbo].[t_s_klassen] on k_id = kunde_klasse left join [dbo].[t_s_klasse_stufe] on ks_klasse = kunde_klasse WHERE kunde_activated = 1 AND ks_klassenstufe = @klasse";
                     adapter = new SqlDataAdapter(RawCommand, con.Con);
+                    adapter.SelectCommand.Parameters.AddWithValue("@klasse", klasse);
                     adapter.Fill(ds.Tables["KundenListe"]);
                 }
                 con.Close();
@@ -530,6 +676,28 @@ namespace Bibo_Verwaltung
             {
                 grid.Columns["Klasse"].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+        }
+
+        /// <summary>
+        /// Gibt ein DataTable-Objekt mit den ausgeliehen Büchern der Kunden zurück 
+        /// </summary>
+        public List<string> BorrowedBooks(string KID)
+        {
+            KundenID = KID;
+            List<string> borrowedBooks = new List<string>();
+            DataTable result = new DataTable();
+            if (con.ConnectError()) return borrowedBooks;
+            string RawCommand = "SELECT aus_buchid as 'ID', buch_isbn as 'ISBN' FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid left join t_s_buecher on buch_isbn = bu_isbn WHERE aus_kundenid = @0";
+            adapter = new SqlDataAdapter(RawCommand, con.Con);
+            adapter.SelectCommand.Parameters.AddWithValue("@0", KID);
+            adapter.Fill(result);
+            con.Close();
+            for(int i = 0; i < result.Rows.Count; i++)
+            {
+                string isbn = result.Rows[i][1].ToString();
+                borrowedBooks.Add(isbn);
+            }
+            return borrowedBooks;
         }
     }
 }

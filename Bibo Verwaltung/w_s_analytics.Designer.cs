@@ -33,19 +33,20 @@
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_analytics));
             this.button1 = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.gv_ResultGrid = new System.Windows.Forms.DataGridView();
-            this.bt_PreisUpDown = new System.Windows.Forms.Button();
-            this.bt_bestesX = new System.Windows.Forms.Button();
-            this.bt_ZerstQuote = new System.Windows.Forms.Button();
-            this.bt_BZuwachs = new System.Windows.Forms.Button();
-            this.bt_AuslQuote = new System.Windows.Forms.Button();
-            this.bt_Dauer = new System.Windows.Forms.Button();
             this.bt_BAbNutz = new System.Windows.Forms.Button();
+            this.bt_Dauer = new System.Windows.Forms.Button();
+            this.bt_AuslQuote = new System.Windows.Forms.Button();
+            this.bt_BZuwachs = new System.Windows.Forms.Button();
+            this.bt_ZerstQuote = new System.Windows.Forms.Button();
+            this.bt_bestesX = new System.Windows.Forms.Button();
+            this.bt_PreisUpDown = new System.Windows.Forms.Button();
+            this.gv_ResultGrid = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_ResultGrid)).BeginInit();
@@ -131,6 +132,70 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
             // 
+            // bt_BAbNutz
+            // 
+            this.bt_BAbNutz.Location = new System.Drawing.Point(41, 212);
+            this.bt_BAbNutz.Name = "bt_BAbNutz";
+            this.bt_BAbNutz.Size = new System.Drawing.Size(75, 23);
+            this.bt_BAbNutz.TabIndex = 10;
+            this.bt_BAbNutz.Text = "Abnutzung";
+            this.bt_BAbNutz.UseVisualStyleBackColor = true;
+            this.bt_BAbNutz.Click += new System.EventHandler(this.bt_BAbNutz_Click);
+            // 
+            // bt_Dauer
+            // 
+            this.bt_Dauer.Location = new System.Drawing.Point(135, 179);
+            this.bt_Dauer.Name = "bt_Dauer";
+            this.bt_Dauer.Size = new System.Drawing.Size(75, 23);
+            this.bt_Dauer.TabIndex = 9;
+            this.bt_Dauer.Text = "Ausleihdauer";
+            this.bt_Dauer.UseVisualStyleBackColor = true;
+            // 
+            // bt_AuslQuote
+            // 
+            this.bt_AuslQuote.Location = new System.Drawing.Point(46, 176);
+            this.bt_AuslQuote.Name = "bt_AuslQuote";
+            this.bt_AuslQuote.Size = new System.Drawing.Size(75, 23);
+            this.bt_AuslQuote.TabIndex = 8;
+            this.bt_AuslQuote.Text = "Auslehquote";
+            this.bt_AuslQuote.UseVisualStyleBackColor = true;
+            // 
+            // bt_BZuwachs
+            // 
+            this.bt_BZuwachs.Location = new System.Drawing.Point(98, 129);
+            this.bt_BZuwachs.Name = "bt_BZuwachs";
+            this.bt_BZuwachs.Size = new System.Drawing.Size(75, 23);
+            this.bt_BZuwachs.TabIndex = 7;
+            this.bt_BZuwachs.Text = "Buchzuwachs";
+            this.bt_BZuwachs.UseVisualStyleBackColor = true;
+            // 
+            // bt_ZerstQuote
+            // 
+            this.bt_ZerstQuote.Location = new System.Drawing.Point(17, 129);
+            this.bt_ZerstQuote.Name = "bt_ZerstQuote";
+            this.bt_ZerstQuote.Size = new System.Drawing.Size(75, 23);
+            this.bt_ZerstQuote.TabIndex = 6;
+            this.bt_ZerstQuote.Text = "Zerstörungsquote";
+            this.bt_ZerstQuote.UseVisualStyleBackColor = true;
+            // 
+            // bt_bestesX
+            // 
+            this.bt_bestesX.Location = new System.Drawing.Point(87, 86);
+            this.bt_bestesX.Name = "bt_bestesX";
+            this.bt_bestesX.Size = new System.Drawing.Size(75, 23);
+            this.bt_bestesX.TabIndex = 5;
+            this.bt_bestesX.Text = "bestes X";
+            this.bt_bestesX.UseVisualStyleBackColor = true;
+            // 
+            // bt_PreisUpDown
+            // 
+            this.bt_PreisUpDown.Location = new System.Drawing.Point(6, 86);
+            this.bt_PreisUpDown.Name = "bt_PreisUpDown";
+            this.bt_PreisUpDown.Size = new System.Drawing.Size(75, 23);
+            this.bt_PreisUpDown.TabIndex = 4;
+            this.bt_PreisUpDown.Text = "Preisschwankung";
+            this.bt_PreisUpDown.UseVisualStyleBackColor = true;
+            // 
             // gv_ResultGrid
             // 
             this.gv_ResultGrid.AllowUserToAddRows = false;
@@ -163,70 +228,6 @@
             this.gv_ResultGrid.TabIndex = 6;
             this.gv_ResultGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gv_ResultGrid_ColumnHeaderMouseClick);
             // 
-            // bt_PreisUpDown
-            // 
-            this.bt_PreisUpDown.Location = new System.Drawing.Point(6, 86);
-            this.bt_PreisUpDown.Name = "bt_PreisUpDown";
-            this.bt_PreisUpDown.Size = new System.Drawing.Size(75, 23);
-            this.bt_PreisUpDown.TabIndex = 4;
-            this.bt_PreisUpDown.Text = "Preisschwankung";
-            this.bt_PreisUpDown.UseVisualStyleBackColor = true;
-            // 
-            // bt_bestesX
-            // 
-            this.bt_bestesX.Location = new System.Drawing.Point(87, 86);
-            this.bt_bestesX.Name = "bt_bestesX";
-            this.bt_bestesX.Size = new System.Drawing.Size(75, 23);
-            this.bt_bestesX.TabIndex = 5;
-            this.bt_bestesX.Text = "bestes X";
-            this.bt_bestesX.UseVisualStyleBackColor = true;
-            // 
-            // bt_ZerstQuote
-            // 
-            this.bt_ZerstQuote.Location = new System.Drawing.Point(17, 129);
-            this.bt_ZerstQuote.Name = "bt_ZerstQuote";
-            this.bt_ZerstQuote.Size = new System.Drawing.Size(75, 23);
-            this.bt_ZerstQuote.TabIndex = 6;
-            this.bt_ZerstQuote.Text = "Zerstörungsquote";
-            this.bt_ZerstQuote.UseVisualStyleBackColor = true;
-            // 
-            // bt_BZuwachs
-            // 
-            this.bt_BZuwachs.Location = new System.Drawing.Point(98, 129);
-            this.bt_BZuwachs.Name = "bt_BZuwachs";
-            this.bt_BZuwachs.Size = new System.Drawing.Size(75, 23);
-            this.bt_BZuwachs.TabIndex = 7;
-            this.bt_BZuwachs.Text = "Buchzuwachs";
-            this.bt_BZuwachs.UseVisualStyleBackColor = true;
-            // 
-            // bt_AuslQuote
-            // 
-            this.bt_AuslQuote.Location = new System.Drawing.Point(46, 176);
-            this.bt_AuslQuote.Name = "bt_AuslQuote";
-            this.bt_AuslQuote.Size = new System.Drawing.Size(75, 23);
-            this.bt_AuslQuote.TabIndex = 8;
-            this.bt_AuslQuote.Text = "Auslehquote";
-            this.bt_AuslQuote.UseVisualStyleBackColor = true;
-            // 
-            // bt_Dauer
-            // 
-            this.bt_Dauer.Location = new System.Drawing.Point(135, 179);
-            this.bt_Dauer.Name = "bt_Dauer";
-            this.bt_Dauer.Size = new System.Drawing.Size(75, 23);
-            this.bt_Dauer.TabIndex = 9;
-            this.bt_Dauer.Text = "Ausleihdauer";
-            this.bt_Dauer.UseVisualStyleBackColor = true;
-            // 
-            // bt_BAbNutz
-            // 
-            this.bt_BAbNutz.Location = new System.Drawing.Point(41, 212);
-            this.bt_BAbNutz.Name = "bt_BAbNutz";
-            this.bt_BAbNutz.Size = new System.Drawing.Size(75, 23);
-            this.bt_BAbNutz.TabIndex = 10;
-            this.bt_BAbNutz.Text = "Abnutzung";
-            this.bt_BAbNutz.UseVisualStyleBackColor = true;
-            this.bt_BAbNutz.Click += new System.EventHandler(this.bt_BAbNutz_Click);
-            // 
             // w_s_analytics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -236,6 +237,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.chart1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "w_s_analytics";
             this.Text = "Statistiken";
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();

@@ -25,7 +25,7 @@ namespace Bibo_Verwaltung
 
         private void bt_ImEx_Click(object sender, EventArgs e)
         {
-            Form import = new w_s_schuelerimport("t_s_schueler", true, "name");
+            Form import = new w_s_schuelerimport("t_s_schueler", true, "name",null);
             import.ShowDialog(this);
             s.FillGrid(false, ref gv_Kunde);
         }

@@ -13,6 +13,8 @@ using System.Media;
 using MetroFramework;
 using bpac;
 using MetroFramework.Controls;
+using System.Threading;
+using System.Net.Http;
 
 namespace Bibo_Verwaltung
 {
@@ -20,27 +22,70 @@ namespace Bibo_Verwaltung
     {
         #region Constructor
         string currentUser;
-        public w_s_buecher(string userName, bool bool1)
+        bool guest = false;
+        string buchIsbn = "";
+        public w_s_buecher(string userName, string isbn, MetroFramework.Components.MetroStyleManager msm)
+        {
+            WebRequest.DefaultWebProxy = null;
+            InitializeComponent();
+            msm_buecher = msm;
+            this.StyleManager = msm;
+            SetStyle();
+            Benutzer user = new Benutzer(userName);
+            this.currentUser = userName;
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+            buchIsbn = isbn;
+
+            if (user.Rechteid.Equals("0"))
+            {
+                guest = true;
+                guestMode(guest);
+            }
+            else if (user.Rechteid.Equals("1"))
+            {
+                guest = false;
+                guestMode(guest);
+            }
+            else if (user.Rechteid == "2")
+            {
+                guest = false;
+                guestMode(guest);
+            }
+            Comboboxen();
+            picBox_Gross.Visible = false;
+            gb_zoom.Visible = false;
+            comboBox1.Visible = false;
+            comboBox1.DropDownHeight = 1;
+            tb_ISBN.Focus();
+        }
+        Color fc = Color.Black;
+        Color bc = Color.White;
+        public w_s_buecher(string userName, bool bool1, MetroFramework.Components.MetroStyleManager msm)
         {
             InitializeComponent();
+            msm_buecher = msm;
+            this.StyleManager = msm;
+            SetStyle();
             Benutzer user = new Benutzer(userName);
             this.currentUser = userName;
             this.Text = Text + " - Angemeldet als: " + userName;
 
             if (user.Rechteid.Equals("0"))
             {
-                
+                guest = true;
+                guestMode(guest);
             }
             else if (user.Rechteid.Equals("1"))
             {
-                
+                guest = false;
+                guestMode(guest);
             }
             else if (user.Rechteid == "2")
             {
-                
+                guest = false;
+                guestMode(guest);
             }
 
-            timer1.Start();
             //b.FillGrid_Buch(ref Grid_Buch);
             Comboboxen();
             picBox_Gross.Visible = false;
@@ -48,9 +93,47 @@ namespace Bibo_Verwaltung
             comboBox1.Visible = false;
             comboBox1.DropDownHeight = 1;
             this.bool1 = bool1;
+            tb_ISBN.Focus();
+
         }
         #endregion
 
+        private void SetStyle()
+        {
+            this.StyleManager.Style = MetroColorStyle.Blue;
+            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+                fc = Color.White;
+                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
+                cb_Autor.ForeColor = fc;
+                cb_Autor.BackColor = bc;
+                cb_Verlag.ForeColor = fc;
+                cb_Verlag.BackColor = bc;
+                cb_Genre.ForeColor = fc;
+                cb_Genre.BackColor = bc;
+                cb_Sprache.ForeColor = fc;
+                cb_Sprache.BackColor = bc;
+                checkedListBox1.ForeColor = fc;
+                checkedListBox1.BackColor = bc;
+                picBox_Gross.BackColor = bc;
+                picBox_Klein.BackColor = bc;
+            }
+        }
+        private void guestMode(bool activate)
+        {
+            bt_speichern_buecher.Enabled = !activate;
+            bt_print.Enabled = !activate;
+            bt_pic_delete.Enabled = !activate;
+            bt_picture.Enabled = !activate;
+            bt_Excel.Enabled = !activate;
+            entfernenToolStripMenuItem.Enabled = !activate;
+            if (rb_search.Checked)
+            {
+                bt_speichern_buecher.Enabled = false;
+                bt_pic_delete.Enabled = false;
+                bt_picture.Enabled = false;
+            }
+        }
         bool loaded = false;
         private string location = "";
         Buch b = new Buch();
@@ -119,29 +202,37 @@ namespace Bibo_Verwaltung
 
         private void bt_Verlag_s_Click(object sender, EventArgs e)
         {
-            Form Verlag = new w_s_manage(currentUser, "Verlag");
+            w_s_manage Verlag = new w_s_manage(currentUser, "Verlag", msm_buecher);
+            msm_buecher.Clone(Verlag);
             Verlag.ShowDialog(this);
+            Verlag.Dispose();
             b.Verlag.FillCombobox(ref cb_Verlag, 0);
         }
 
         private void bt_Autor_s_Click(object sender, EventArgs e)
         {
-            Form Autor = new w_s_manage(currentUser, "Autor");
+            w_s_manage Autor = new w_s_manage(currentUser, "Autor", msm_buecher);
+            msm_buecher.Clone(Autor);
             Autor.ShowDialog(this);
+            Autor.Dispose();
             b.Autor.FillCombobox(ref cb_Autor, 0);
         }
 
         private void bt_Genre_s_Click(object sender, EventArgs e)
         {
-            Form Genres = new w_s_manage(currentUser, "Genre");
+            w_s_manage Genres = new w_s_manage(currentUser, "Genre", msm_buecher);
+            msm_buecher.Clone(Genres);
             Genres.ShowDialog(this);
+            Genres.Dispose();
             b.Genre.FillCombobox(ref cb_Genre, 0);
         }
 
         private void bt_Sprache_s_Click_1(object sender, EventArgs e)
         {
-            Form Sprache = new w_s_manage(currentUser, "Sprache");
+            w_s_manage Sprache = new w_s_manage(currentUser, "Sprache", msm_buecher);
+            msm_buecher.Clone(Sprache);
             Sprache.ShowDialog(this);
+            Sprache.Dispose();
             b.Sprache.FillCombobox(ref cb_Sprache, 0);
         }
 
@@ -261,17 +352,39 @@ namespace Bibo_Verwaltung
                 if (ifDownloaded)
                 {
                     b.SaveBuch();
-                    Form Buchid = new w_s_exemplare(currentUser, tb_ISBN.Text);
+                    w_s_exemplare Buchid = new w_s_exemplare(currentUser, tb_ISBN.Text, msm_buecher);
+                    msm_buecher.Clone(Buchid);
                     Buchid.ShowDialog(this);
-                    b.FillGrid_Buch(ref Grid_Buch);
+
+                    Buchid.Dispose();
+                    try
+                    {
+                        b.FillGrid_Buch(ref Grid_Buch);
+
+                    }
+                    catch
+                    {
+
+                    }
                     Clear_All();
                 }
-                else if (!ifDownloaded && ValidateISBN())
+                else if (!ifDownloaded && ValidateNewISBN())
                 {
                     b.SaveBuch();
-                    Form Buchid = new w_s_exemplare(currentUser, tb_ISBN.Text);
+                    w_s_exemplare Buchid = new w_s_exemplare(currentUser, tb_ISBN.Text, msm_buecher);
+                    msm_buecher.Clone(Buchid);
                     Buchid.ShowDialog(this);
-                    b.FillGrid_Buch(ref Grid_Buch);
+
+                    Buchid.Dispose();
+                    try
+                    {
+                        b.FillGrid_Buch(ref Grid_Buch);
+
+                    }
+                    catch
+                    {
+
+                    }
                     Clear_All();
                 }
                 else
@@ -280,9 +393,20 @@ namespace Bibo_Verwaltung
                     if (dialogResult == DialogResult.Yes)
                     {
                         b.SaveBuch();
-                        Form Buchid = new w_s_exemplare(currentUser, tb_ISBN.Text);
+                        w_s_exemplare Buchid = new w_s_exemplare(currentUser, tb_ISBN.Text, msm_buecher);
+                        msm_buecher.Clone(Buchid);
                         Buchid.ShowDialog(this);
-                        b.FillGrid_Buch(ref Grid_Buch);
+
+                        Buchid.Dispose();
+                        try
+                        {
+                            b.FillGrid_Buch(ref Grid_Buch);
+
+                        }
+                        catch
+                        {
+
+                        }
                         Clear_All();
                     }
                     else if (dialogResult == DialogResult.No)
@@ -296,7 +420,7 @@ namespace Bibo_Verwaltung
         
         private void Save_Buecher(object sender, EventArgs e)
         {
-            var t = new Timer();
+            var t = new System.Windows.Forms.Timer();
             t.Interval = 3000; // it will Tick in 3 seconds
             t.Tick += (s, a) =>
             {
@@ -434,7 +558,7 @@ namespace Bibo_Verwaltung
                 {
                     if (ifDownloaded)
                     {
-                        if (!ifVerlagExists)
+                        if (!b.Verlag.IfContains(cb_Verlag.Text))
                         {
                             b.Verlag.AddVerlag(cb_Verlag.Text);
                             int test = int.Parse(b.Verlag.GetVerlagsID(cb_Verlag.Text));
@@ -512,7 +636,7 @@ namespace Bibo_Verwaltung
                     }
 
                 }
-                catch
+                catch(Exception ex)
                 {
                     MetroMessageBox.Show(this,"Das Buch konnte nicht hinzugefügt werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -524,7 +648,7 @@ namespace Bibo_Verwaltung
                 {
                     if (ifDownloaded)
                     {
-                        if (!ifVerlagExists)
+                        if (!b.Verlag.IfContains(cb_Verlag.Text))
                         {
                             b.Verlag.AddVerlag(cb_Verlag.Text);
                             int test = int.Parse(b.Verlag.GetVerlagsID(cb_Verlag.Text));
@@ -615,10 +739,14 @@ namespace Bibo_Verwaltung
         {
             Clear_All();
             rb_Add_Buch.Checked = true;
+            tb_ISBN.Focus();
+            
+            //rb_Add_Buch.Checked = true;
         }
 
         private void Clear_All()
         {
+            dTP_Erscheinungsdatum.ResetText();
             tb_barcodePrinted.Text = "";
             tb_barcodeAdd.Text = "";
             tb_neu.Text = "";
@@ -634,31 +762,57 @@ namespace Bibo_Verwaltung
             tb_anzahl.Text = "";
             picBox_Gross.Image = null;
             picBox_Gross.ImageLocation = null;
+            picBox_Gross.Refresh();
             picBox_Klein.Image = null;
             picBox_Klein.ImageLocation = null;
+            picBox_Klein.Refresh();
             tb_ISBN.BackColor = Color.White;
             tb_Titel.BackColor = Color.White;
-            cb_Autor.BackColor = Color.White;
-            cb_Verlag.BackColor = Color.White;
-            cb_Genre.BackColor = Color.White;
-            cb_Sprache.BackColor = Color.White;
+            cb_Autor.BackColor = bc;
+            cb_Verlag.BackColor = bc;
+            cb_Genre.BackColor = bc;
+            cb_Sprache.BackColor = bc;
             tb_Auflage.BackColor = Color.White;
             tb_Neupreis.BackColor = Color.White;
             tb_anzahl.BackColor = Color.White;
+        }
+        /// <summary>
+        /// Sucht nach Büchern in einer GridView
+        /// </summary>
+        private void BuchFilter()
+        {
+            try
+            {
+                if (dTP_Erscheinungsdatum.Value.Date != DateTime.Now.Date)
+                {
+                    (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%' AND Autor LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Sprache LIKE '%{5}%' AND Convert([Erscheinungsdatum], System.String) LIKE '%{6}%'", tb_Titel.Text, tb_ISBN.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, cb_Sprache.Text, dTP_Erscheinungsdatum.Value.Date.ToShortDateString());
+
+                }
+                else
+                {
+                    (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%' AND Autor LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Sprache LIKE '%{5}%'", tb_Titel.Text, tb_ISBN.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, cb_Sprache.Text);
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+
         }
 
         #region Textboxfarbe
         private void tb_ISBN_TextChanged(object sender, EventArgs e)
         {
             tb_ISBN.Text = tb_ISBN.Text.Replace(" ", "");
-            (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '{0}%' and ISBN LIKE '{1}%'", tb_Titel.Text, tb_ISBN.Text);
+            BuchFilter();
             tb_ISBN.BackColor = Color.White;
         }
 
         private void tb_Titel_TextChanged(object sender, EventArgs e)
         {
-            (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '{0}%' and ISBN LIKE '{1}%'", tb_Titel.Text, tb_ISBN.Text);
+            BuchFilter();
             tb_Titel.BackColor = Color.White;
+            tb_Titel.UseCustomBackColor = false;
         }
         private void tb_Neupreis_TextChanged(object sender, EventArgs e)
         {
@@ -672,22 +826,26 @@ namespace Bibo_Verwaltung
 
         private void cb_Sprache_TextChanged(object sender, EventArgs e)
         {
-            cb_Sprache.BackColor = Color.White;
+            BuchFilter();
+            cb_Sprache.BackColor = bc;
         }
 
         private void cb_Genre_TextChanged(object sender, EventArgs e)
         {
-            cb_Genre.BackColor = Color.White;
+            BuchFilter();
+            cb_Genre.BackColor = bc;
         }
 
         private void cb_Verlag_TextChanged(object sender, EventArgs e)
         {
-            cb_Verlag.BackColor = Color.White;
+            BuchFilter();
+            cb_Verlag.BackColor = bc;
         }
 
         private void cb_Autor_TextChanged(object sender, EventArgs e)
         {
-            cb_Autor.BackColor = Color.White;
+            BuchFilter();
+            cb_Autor.BackColor = bc;
             if (checkbox_autor.Checked && checkedListBox1.Visible)
             {
                 int index = checkedListBox1.FindString(cb_Autor.Text);
@@ -709,10 +867,16 @@ namespace Bibo_Verwaltung
                 tb_neu.Enabled = true;
                 tb_ISBN.Enabled = true;
                 tb_Titel.Enabled = true;
-                cb_Autor.Enabled = true;
-                cb_Verlag.Enabled = true;
-                cb_Sprache.Enabled = true;
-                cb_Genre.Enabled = true;
+
+                cb_Autor.TabStop = true;
+                cb_Verlag.TabStop = true;
+                cb_Sprache.TabStop = true;
+                cb_Genre.TabStop = true;
+                p_autor.Visible = false;
+                p_verlag.Visible = false;
+                p_sprache.Visible = false;
+                p_genre.Visible = false;
+
                 tb_Auflage.Enabled = true;
                 tb_Neupreis.Enabled = true;
                 dTP_Erscheinungsdatum.Enabled = true;
@@ -740,10 +904,17 @@ namespace Bibo_Verwaltung
                 tb_neu.Enabled = false;
                 tb_ISBN.Enabled = false;
                 tb_Titel.Enabled = true;
-                cb_Autor.Enabled = !checkbox_autor.Checked;
-                cb_Verlag.Enabled = true;
-                cb_Sprache.Enabled = true;
-                cb_Genre.Enabled = true;
+
+                cb_Autor.TabStop = !checkbox_autor.Checked;
+                cb_Verlag.TabStop = true;
+                cb_Sprache.TabStop = true;
+                cb_Genre.TabStop = true;
+                readOnly = true;
+                p_autor.Visible = false;
+                p_verlag.Visible = false;
+                p_sprache.Visible = false;
+                p_genre.Visible = false;
+
                 tb_Auflage.Enabled = true;
                 tb_Neupreis.Enabled = true;
                 dTP_Erscheinungsdatum.Enabled = true;
@@ -771,10 +942,14 @@ namespace Bibo_Verwaltung
                 tb_neu.Enabled = false;
                 tb_ISBN.Enabled = true;
                 tb_Titel.Enabled = false;
-                cb_Autor.Enabled = false;
-                cb_Verlag.Enabled = false;
-                cb_Sprache.Enabled = false;
-                cb_Genre.Enabled = false;
+                cb_Autor.TabStop = false;
+                cb_Verlag.TabStop = false;
+                cb_Sprache.TabStop = false;
+                cb_Genre.TabStop = false;
+                p_autor.Visible = true;
+                p_verlag.Visible = true;
+                p_sprache.Visible = true;
+                p_genre.Visible = true;
                 tb_Auflage.Enabled = false;
                 tb_Neupreis.Enabled = false;
                 dTP_Erscheinungsdatum.Enabled = false;
@@ -794,6 +969,44 @@ namespace Bibo_Verwaltung
                 checkbox_autor.Enabled = false;
                 button1.Enabled = false;
             }
+            if (rb_search.Checked)
+            {
+                bt_speichern_buecher.Enabled = false;
+                bt_pic_delete.Enabled = false;
+                bt_picture.Enabled = false;
+
+                bt_print.Enabled = true;
+                tb_barcodeAdd.Enabled = true;
+                tb_neu.Enabled = false;
+                tb_ISBN.Enabled = true;
+                tb_Titel.Enabled = true;
+                cb_Autor.TabStop = true;
+                cb_Verlag.TabStop = true;
+                cb_Sprache.TabStop = true;
+                cb_Genre.TabStop = true;
+                p_autor.Visible = false;
+                p_verlag.Visible = false;
+                p_sprache.Visible = false;
+                p_genre.Visible = false;
+                tb_Auflage.Enabled = true;
+                tb_Neupreis.Enabled = true;
+                dTP_Erscheinungsdatum.Enabled = true;
+                bt_speichern_buecher.Text = "---";
+                picBox_Klein.Enabled = true;
+                mtb_Nachricht.Text = "Das Buch wurde erfolgreich hinzugefügt!";
+                lb_ISBN.Text = "ISBN:";
+                lb_Titel.Text = "Titel:";
+                lb_Autor.Text = "Autor:";
+                lb_Verlag.Text = "Verlag:";
+                lb_Genre.Text = "Genre:";
+                lb_Sprache.Text = "Sprache:";
+                lb_Erscheinungsdatum.Text = "Erscheinungsdatum:";
+                checkbox_autor.Enabled = false;
+                button1.Enabled = true;
+
+            }
+            guestMode(guest);
+            
         }
         #endregion
 
@@ -802,10 +1015,10 @@ namespace Bibo_Verwaltung
         {
             tb_ISBN.BackColor = Color.White;
             tb_Titel.BackColor = Color.White;
-            cb_Autor.BackColor = Color.White;
-            cb_Verlag.BackColor = Color.White;
-            cb_Genre.BackColor = Color.White;
-            cb_Sprache.BackColor = Color.White;
+            cb_Autor.BackColor = bc;
+            cb_Verlag.BackColor = bc;
+            cb_Genre.BackColor = bc;
+            cb_Sprache.BackColor = bc;
             tb_Auflage.BackColor = Color.White;
             tb_Neupreis.BackColor = Color.White;
             dTP_Erscheinungsdatum.BackColor = Color.White;
@@ -816,19 +1029,32 @@ namespace Bibo_Verwaltung
         private void rb_Neubuch_CheckedChanged(object sender, EventArgs e)
         {
             Modus();
+            
             Objekt_White();
+            tb_ISBN.Focus();
+
         }
 
         private void rb_Edit_CheckedChanged(object sender, EventArgs e)
         {
             Modus();
             Objekt_White();
+            tb_ISBN.Focus();
+
         }
 
         private void rb_Delete_CheckedChanged(object sender, EventArgs e)
         {
             Modus();
             Objekt_White();
+            tb_ISBN.Focus();
+
+        }
+        private void Rb_search_CheckedChanged(object sender, EventArgs e)
+        {
+            Modus();
+            Objekt_White();
+            tb_ISBN.Focus();
         }
         #endregion
 
@@ -888,7 +1114,7 @@ namespace Bibo_Verwaltung
                 {
                     MemoryStream mem = new MemoryStream(b.Image);
                     picBox_Klein.Image = Image.FromStream(mem);
-                    string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Bilder\\" + tb_ISBN.Text + ".png";
+                    string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\Bilder\\" + tb_ISBN.Text + ".png";
                     if (!File.Exists(filePath))
                     {
                         picBox_Klein.Image.Save(filePath, ImageFormat.Png);
@@ -950,12 +1176,24 @@ namespace Bibo_Verwaltung
 
         private void IsOK()
         {
+            if (tb_ISBN.Text.Equals(""))
+            {
+                tb_ISBN.UseCustomBackColor = true;
+                tb_ISBN.BackColor = Color.Red;
+            }
+            else
+            {
+                tb_ISBN.UseCustomBackColor = false;
+                tb_ISBN.BackColor = Color.White;
+            }
             if (tb_Titel.Text.Equals(""))
             {
+                tb_Titel.UseCustomBackColor = true;
                 tb_Titel.BackColor = Color.Red;
             }
             else
             {
+                tb_Titel.UseCustomBackColor = false;
                 tb_Titel.BackColor = Color.White;
             }
 
@@ -965,7 +1203,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                cb_Autor.BackColor = Color.White;
+                cb_Autor.BackColor = bc;
             }
 
             if (cb_Verlag.Text.Equals(""))
@@ -974,7 +1212,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                cb_Verlag.BackColor = Color.White;
+                cb_Verlag.BackColor = bc;
             }
 
             if (cb_Genre.Text.Equals(""))
@@ -983,7 +1221,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                cb_Genre.BackColor = Color.White;
+                cb_Genre.BackColor = bc;
             }
 
             if (cb_Sprache.Text.Equals(""))
@@ -992,14 +1230,16 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                cb_Sprache.BackColor = Color.White;
+                cb_Sprache.BackColor = bc;
             }
             if (dTP_Erscheinungsdatum.Text.Equals(""))
             {
+                dTP_Erscheinungsdatum.UseCustomBackColor = true;
                 dTP_Erscheinungsdatum.BackColor = Color.Red;
             }
             else
             {
+                dTP_Erscheinungsdatum.UseCustomBackColor = false;
                 dTP_Erscheinungsdatum.BackColor = Color.White;
             }
         }
@@ -1019,7 +1259,7 @@ namespace Bibo_Verwaltung
                     int i3 = location.IndexOf(s3) - 2;
                     location = location.Substring(i2, i3 - i2);
                     string bildURL = "http://www.buecher-nach-isbn.info/" + location;
-                    string fileURL = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Downloads\\" + tb_ISBN.Text + "_DOWNLOAD.jpg";
+                    string fileURL = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\Downloads\\" + tb_ISBN.Text + "_DOWNLOAD.jpg";
                     WebClient client = new WebClient();
                     client.DownloadFile(bildURL, fileURL);
                     return fileURL;
@@ -1126,13 +1366,56 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private bool ValidateISBN()
+        private bool ValidateNewISBN()
         {
+            Cursor.Current = Cursors.WaitCursor;
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             WebClient client = new WebClient();
+
             try
             {
-                htmlData = client.DownloadString("http://www.buecher-nach-isbn.info/" + tb_ISBN.Text);
+                client.UseDefaultCredentials = true;
+                client.Proxy = null;
+                client.Credentials = CredentialCache.DefaultCredentials;
+                htmlData = client.DownloadString("https://portal.dnb.de/opac.htm?query=" + tb_ISBN.Text + "&method=simpleSearch");
+                if (htmlData.Contains("Link zu diesem Datensatz"))
+                {
+                    return true;
+                }
+                else
+                {
+                    htmlData = client.DownloadString("https://portal.dnb.de/opac.htm?method=showFullRecord&currentResultId=" + tb_ISBN.Text + "%26any&currentPosition=0");
+                    if (htmlData.Contains("Link zu diesem Datensatz"))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            Cursor.Current = Cursors.Default;
+            
+        }
 
+        private bool ValidateISBN()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            WebClient client = new WebClient();
+
+            try
+            {
+                client.Headers.Add("User-Agent: Other");
+                client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                htmlData = client.DownloadString("http://www.buecher-nach-isbn.info/" + tb_ISBN.Text);
                 if (htmlData.Contains("<h1 class=\"title\">"))
                 {
                     return true;
@@ -1142,9 +1425,10 @@ namespace Bibo_Verwaltung
                     return false;
                 }
             }
-            catch
+            catch (Exception e)
             {
-                try {
+                try
+                {
                     client.UseDefaultCredentials = true;
                     client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
                     htmlData = client.DownloadString("http://www.buecher-nach-isbn.info/" + tb_ISBN.Text);
@@ -1162,7 +1446,8 @@ namespace Bibo_Verwaltung
                 {
                     return false;
                 }
-            }        
+            }
+            Cursor.Current = Cursors.Default;
         }
 
         private void Comboboxen()
@@ -1177,11 +1462,11 @@ namespace Bibo_Verwaltung
         private void bt_picture_Click(object sender, EventArgs e)
         {
             string imgLocation = "";
-            DialogResult dialogResult = MetroMessageBox.Show(this,"Soll das Bild anhand der ISBN automatisch geladen werden?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = MetroMessageBox.Show(this,"Soll das Bild anhand der ISBN automatisch geladen werden?", "Automatisch Laden?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                ValidateISBN();
-                imgLocation = GetPicture();
+                ValidateNewISBN();
+                imgLocation = GetPictureNeu();
                 picBox_Klein.ImageLocation = imgLocation;
             }
             if(dialogResult == DialogResult.No)
@@ -1207,7 +1492,16 @@ namespace Bibo_Verwaltung
         private void bt_Excel_Click(object sender, EventArgs e)
         {
             ExcelExport export = new ExcelExport();
-            export.ExportAsCSV(Grid_Buch);
+            try
+            {
+                export.ExportDataGridViewAsCSV(Grid_Buch);
+                MetroMessageBox.Show(this, "Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch
+            {
+                MetroMessageBox.Show(this, "Beim Exportvorgang ist ein Fehler aufgetreten!", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void tb_ISBN_Click(object sender, EventArgs e)
@@ -1223,7 +1517,7 @@ namespace Bibo_Verwaltung
         private void Copy_picture()
         {
             string oldLocation = picBox_Klein.ImageLocation;
-            string newLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Bilder\\" + tb_ISBN.Text +".png";
+            string newLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\Bilder\\" + tb_ISBN.Text +".png";
             if(!File.Exists(newLocation) && oldLocation != newLocation)
             {
                 picBox_Klein.Image.Save(newLocation, ImageFormat.Png);
@@ -1281,9 +1575,501 @@ namespace Bibo_Verwaltung
         bool ifDownloaded = false;
         bool ifVerlagExists = false;
 
-        private void AutoLoad()
+        private string GetGenreNeu()
         {
-            if (ValidateISBN() && !tb_ISBN.Text.Equals(""))
+            string str = "";
+            try
+            {
+                string s = "Art des Inhalts";
+                if (htmlData.Contains(s))
+                {
+                    int i = htmlData.IndexOf(s);
+                    if (i >= 0)
+                    {
+                        htmlData = htmlData.Substring(i);
+                        s = @"<td";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        s = @">";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        i = htmlData.IndexOf("</td>");
+                        str = htmlData.Substring(0, i).Trim();
+                        byte[] bytes = Encoding.Default.GetBytes(str);
+                        str = Encoding.UTF8.GetString(bytes);
+                        str = System.Net.WebUtility.HtmlDecode(str);
+                        str = Regex.Replace(str, "<.*?>", " ").Trim();
+
+
+                    }
+                }
+                return str;
+            }
+            catch
+            {
+                return str;
+            }
+        }
+        private string GetTitelNeu()
+        {
+            string str = "";
+            try
+            {
+                string s = "<strong>Titel</strong>";
+                if (htmlData.Contains(s))
+                {
+                    int i = htmlData.IndexOf(s) + s.Length;
+                    if (i >= 0)
+                    {
+                        htmlData = htmlData.Substring(i);
+                        s = @"<td";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        s = @">";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        i = htmlData.IndexOf("</td>");
+                        str = htmlData.Substring(0, i).Trim();
+                        byte[] bytes = Encoding.Default.GetBytes(str);
+                        str = Encoding.UTF8.GetString(bytes);
+                        str = System.Net.WebUtility.HtmlDecode(str);
+                        str = Regex.Replace(str, "<.*?>", " ").Trim();
+                    }
+                }
+                    
+                return str;
+            }
+            catch
+            {
+                return str;
+            }
+        }
+        private List<string> GetAutorNeu()
+        {
+            List<string> autoren = new List<string>();
+            string autor = "";
+            try
+            {
+                string s = "<strong>Person(en)</strong>";
+                if (htmlData.Contains(s))
+                {
+                    int i = htmlData.IndexOf(s) + s.Length;
+                    if (i >= 0)
+                    {
+                        htmlData = htmlData.Substring(i);
+                        s = @"<td";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        s = @">";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        string autorenData = htmlData;
+                        s = "</td>";
+                        i = autorenData.IndexOf(s);
+                        autorenData = autorenData.Substring(0, i).Trim();
+                        var a = Regex.Split(autorenData, "<.*?>");
+                        foreach(string au in a)
+                        {
+                            if (!au.Equals(""))
+                            {
+                                autor = au;
+                                byte[] bytes = Encoding.Default.GetBytes(autor);
+                                autor = Encoding.UTF8.GetString(bytes);
+                                autor = System.Net.WebUtility.HtmlDecode(autor);
+                                if (autor.Contains("(Verfasser)"))
+                                {
+                                    int i1 = autor.IndexOf("(");
+                                    autor = autor.Substring(0, i1).Trim();
+                                    if (autor.Contains(","))
+                                    {
+                                        string vorname = autor.Substring(autor.IndexOf(", ") + 2);
+                                        string nachname = autor.Substring(0, autor.IndexOf(", "));
+                                        autor = vorname + " " + nachname;
+                                    }
+                                    autoren.Add(autor);
+                                }
+                                //if (autor.Contains("(") && autor.Contains(")"))
+                                //{
+                                //    int i1 = autor.IndexOf("(");
+                                //    autor = autor.Substring(0, i1).Trim();
+
+                                //}
+
+                            }
+                            
+                        }
+                        //while (nextAutor)
+                        //{
+                        //    //Unformatierter Autorname
+                        //    s = "</a>";
+                        //    i = htmlData.IndexOf(s);
+                        //    autor = htmlData.Substring(0, i);
+                        //    if (!autor.Contains(",") || autor.Length > 200)
+                        //    {
+                        //        nextAutor = false;
+                        //    }
+                        //    else
+                        //    {
+                        //        htmlData = htmlData.Substring(i + s.Length);
+                        //        autor = autor.Trim();
+                        //        byte[] bytes = Encoding.Default.GetBytes(autor);
+                        //        autor = Encoding.UTF8.GetString(bytes);
+                        //        autor = System.Net.WebUtility.HtmlDecode(autor);
+                        //        if (autor.Contains("(") && autor.Contains(")"))
+                        //        {
+                        //            int i1 = autor.IndexOf("(");
+                        //            int i2 = autor.IndexOf(")");
+                        //            autor = autor.Substring(0, i1).Trim();
+                        //        }
+                        //        string vorname = autor.Substring(autor.IndexOf(", ") + 2);
+                        //        string nachname = autor.Substring(0, autor.IndexOf(", "));
+                        //        autor = vorname + " " + nachname;
+                        //        autoren.Add(autor);
+
+                        //    }
+                        //}
+
+
+
+                    }
+                }
+                
+                return autoren;
+            }
+            catch
+            {
+                return autoren;
+            }
+        }
+        private string GetAusgabeNeu()
+        {
+            string str = "";
+            try
+            {
+                string s = "<strong>Ausgabe</strong>";
+                if (htmlData.Contains(s))
+                {
+                    int i = htmlData.IndexOf(s) + s.Length;
+                    if (i >= 0)
+                    {
+                        htmlData = htmlData.Substring(i);
+                        s = "<td";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        s = ">";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        i = htmlData.IndexOf("</td>");
+                        str = htmlData.Substring(0, i).Trim();
+                        byte[] bytes = Encoding.Default.GetBytes(str);
+                        str = Encoding.UTF8.GetString(bytes);
+                        str = System.Net.WebUtility.HtmlDecode(str);
+                        str = Regex.Replace(str, "<.*?>", " ").Trim();
+                    }
+                }
+                
+                return str;
+            }
+            catch
+            {
+                return str;
+            }
+        }
+        private string GetVerlagNeu()
+        {
+            string str = "";
+            try
+            {
+                string s = "<strong>Verlag</strong>";
+                if (htmlData.Contains(s))
+                {
+                    int i = htmlData.IndexOf(s) + s.Length;
+                    if (i >= 0)
+                    {
+                        htmlData = htmlData.Substring(i);
+                        s = "<td";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        s = ">";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        i = htmlData.IndexOf("</td>");
+                        str = htmlData.Substring(0, i).Trim();
+                        byte[] bytes = Encoding.Default.GetBytes(str);
+                        str = Encoding.UTF8.GetString(bytes);
+                        str = System.Net.WebUtility.HtmlDecode(str);
+                        if (str.Contains(":"))
+                        {
+                            str = str.Substring(str.IndexOf(":") + 2);
+                        }
+                        str = Regex.Replace(str, "<.*?>", " ").Trim();
+
+                    }
+                }
+               
+                return str;
+            }
+            catch
+            {
+                return str;
+            }
+        }
+        private string GetDatumNeu()
+        {
+            string str = "";
+            try
+            {
+                string s = "<strong>Zeitliche Einordnung</strong>";
+                if (htmlData.Contains(s))
+                {
+                    int i = htmlData.IndexOf(s) + s.Length;
+                    if (i >= 0)
+                    {
+                        htmlData = htmlData.Substring(i);
+                        s = "<td";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        s = ">";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        i = htmlData.IndexOf("</td>");
+                        str = htmlData.Substring(0, i).Trim();
+                        byte[] bytes = Encoding.Default.GetBytes(str);
+                        str = Encoding.UTF8.GetString(bytes);
+                        str = System.Net.WebUtility.HtmlDecode(str);
+                        str = str.Replace("Erscheinungsdatum: ", "");
+                        str = Regex.Replace(str, "<.*?>", " ").Trim();
+                        str = Regex.Replace(str, "[^0-9.]", "").Trim();
+
+                    }
+                }
+                
+                return str;
+            }
+            catch
+            {
+                return str;
+            }
+        }
+        private string GetPreisNeu()
+        {
+            string str = "";
+            try
+            {
+                string s = "<strong>ISBN/Einband/Preis</strong>";
+                if (htmlData.Contains(s))
+                {
+                    int i = htmlData.IndexOf(s) + s.Length;
+                    if (i >= 0)
+                    {
+                        htmlData = htmlData.Substring(i);
+                        s = "<td";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        s = ">";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        i = htmlData.IndexOf("</td>");
+                        s = "EUR ";
+                        var pattern = @"(EUR )([0-9]+.[0-9]+)( \(DE\))";
+                        var pattern2 = @"(EUR )([0-9]+.[0-9]+)";
+
+                        if (Regex.IsMatch(htmlData, pattern))
+                        {
+                            var matches = Regex.Matches(htmlData, pattern);
+                            str = matches[0].Groups[2].Value;
+                            byte[] bytes = Encoding.Default.GetBytes(str);
+                            str = Encoding.UTF8.GetString(bytes);
+                            str = System.Net.WebUtility.HtmlDecode(str);
+                            str = Regex.Replace(str, "<.*?>", " ").Trim();
+                        }
+                        else if(Regex.IsMatch(htmlData, pattern2))
+                        {
+                            var matches = Regex.Matches(htmlData, pattern2);
+                            str = matches[0].Groups[2].Value;
+                            byte[] bytes = Encoding.Default.GetBytes(str);
+                            str = Encoding.UTF8.GetString(bytes);
+                            str = System.Net.WebUtility.HtmlDecode(str);
+                            str = Regex.Replace(str, "<.*?>", " ").Trim();
+                        }
+                        else return str;
+                        
+                    }
+                }
+
+                return str;
+            }
+            catch
+            {
+                return str;
+            }
+        }
+        private string GetSpracheNeu()
+        {
+            string str = "";
+            try
+            {
+                string s = "<strong>Sprache(n)</strong>";
+                if (htmlData.Contains(s))
+                {
+                    int i = htmlData.IndexOf(s) + s.Length;
+                    if (i >= 0)
+                    {
+                        htmlData = htmlData.Substring(i);
+                        s = "<td";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        s = ">";
+                        i = htmlData.IndexOf(s) + s.Length;
+                        htmlData = htmlData.Substring(i);
+                        i = htmlData.IndexOf("</td>");
+                        str = htmlData.Substring(0, i).Trim();
+                        byte[] bytes = Encoding.Default.GetBytes(str);
+                        str = Encoding.UTF8.GetString(bytes);
+                        str = System.Net.WebUtility.HtmlDecode(str);
+                        if (str.Contains("(") && str.Contains(")"))
+                        {
+                            int i1 = str.IndexOf("(");
+                            int i2 = str.IndexOf(")");
+                            str = str.Substring(0, i1).Trim();
+                        }
+                        str = Regex.Replace(str, "<.*?>", " ").Trim();
+                    }
+                }
+                
+                return str;
+            }
+            catch
+            {
+                return str;
+            }
+        }
+        private string GetPictureNeu()
+        {
+            try
+            {
+                string bildURL = "https://portal.dnb.de/opac/mvb/cover.htm?isbn=" + tb_ISBN.Text;
+                string fileURL = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\Downloads\\" + tb_ISBN.Text + "_DOWNLOAD.jpg";
+                WebClient client = new WebClient();
+                client.UseDefaultCredentials = true;
+                client.Proxy = WebRequest.DefaultWebProxy;
+                client.Credentials = CredentialCache.DefaultCredentials;
+                client.Proxy.Credentials = CredentialCache.DefaultCredentials;
+                client.DownloadFile(bildURL, fileURL);
+                return fileURL;
+            }
+            catch(Exception ex)
+            {
+                MetroMessageBox.Show(this, "Es konnte kein Bild geladen werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return "";
+            }
+
+        }
+        private void AutoLoadDNB()
+        {
+            if (!tb_ISBN.Text.Equals("") && ValidateNewISBN())
+            {
+
+                htmlData = Regex.Replace(htmlData, @"\t|\n|\r", "");
+                htmlData = Regex.Replace(htmlData, "<a href=.*?>", "");
+                var genre = GetGenreNeu().Replace("[", "(").Replace("]", ")");
+                if (!genre.Equals(""))
+                {
+                    cb_Genre.Text = genre;
+                }
+
+                var titel = GetTitelNeu().Replace("[", "(").Replace("]", ")");
+                if (!titel.Equals(""))
+                {
+                    tb_Titel.Text = titel;
+                }
+
+                var autoren = GetAutorNeu();
+                if (autoren.Count > 1)
+                {
+                    checkbox_autor.Checked = true;
+                }
+                else
+                {
+                    checkbox_autor.Checked = false;
+                }
+                string autorstring = "";
+                needAutor.Clear();
+                b.Autoren.Clear();
+                foreach (string s in autoren)
+                {
+                    autorstring = autorstring + s + ", ";
+
+                    b.Autoren.Add(s);
+                    if (!b.Autor.IfContains(s))
+                    {
+                        needAutor.Add(s.Replace("[", "(").Replace("]", ")"));
+                    }
+                }
+                if (!autorstring.Equals(""))
+                {
+                    cb_Autor.Text = autorstring.Substring(0, autorstring.Length - 2);
+                }
+
+                var ausgabe = GetAusgabeNeu().Replace("[", "(").Replace("]", ")");
+                if (!ausgabe.Equals(""))
+                {
+                    tb_Auflage.Text = ausgabe;
+                }
+
+                var verlag = GetVerlagNeu().Replace("[", "(").Replace("]", ")");
+                if (!verlag.Equals(""))
+                {
+                    cb_Verlag.Text = verlag;
+                }
+
+                var jahr = GetDatumNeu();
+                if (!jahr.Equals(""))
+                {
+                    try
+                    {
+                        DateTime date = new DateTime(int.Parse(jahr), 1, 1);
+                        dTP_Erscheinungsdatum.Value = date;
+                    }
+                    catch
+                    {
+                        dTP_Erscheinungsdatum.Value = DateTime.UtcNow;
+                    }
+                }
+                var preis = GetPreisNeu().Replace('.',',');
+                if (!preis.Equals(""))
+                {
+                    tb_Neupreis.Text = preis;
+                }
+                var sprache = GetSpracheNeu().Replace("[", "(").Replace("]", ")");
+                if (!sprache.Equals(""))
+                {
+                    cb_Sprache.Text = sprache;
+                }
+
+                var pictureLocation = GetPictureNeu();
+                if (!pictureLocation.Equals(""))    
+                {
+                    picBox_Klein.ImageLocation = pictureLocation;
+                }
+                ifDownloaded = true;
+                MetroMessageBox.Show(this, "Das Buch \"" + tb_Titel.Text + "\" wurde erfolgreich geladen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (tb_ISBN.Text.Equals(""))
+            {
+                MetroMessageBox.Show(this, "Bitte geben Sie eine ISBN ein!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                AutoLoadBuecherNachISBN();
+                //MetroMessageBox.Show(this, "Es konnten zu dieser ISBN keine Informationen gefunden werden. Bitte überprüfen Sie ihre Eingabe nach Fehlern!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+
+        }
+        private void AutoLoadBuecherNachISBN()
+        {
+            if (!tb_ISBN.Text.Equals("") && ValidateISBN())
             {
                 if (GetAutor().Count > 1)
                 {
@@ -1299,7 +2085,7 @@ namespace Bibo_Verwaltung
                 foreach (string s in GetAutor())
                 {
                     autorstring = autorstring + s + ", ";
-                    
+
                     b.Autoren.Add(s);
                     if (!b.Autor.IfContains(s))
                     {
@@ -1323,21 +2109,40 @@ namespace Bibo_Verwaltung
                 tb_Titel.Text = GetTitle().Replace("[", "(").Replace("]", ")");
                 picBox_Klein.ImageLocation = GetPicture();
                 ifDownloaded = true;
-                MetroMessageBox.Show(this,"Das Buch \"" + tb_Titel.Text + "\" wurde erfolgreich geladen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MetroMessageBox.Show(this, "Das Buch \"" + tb_Titel.Text + "\" wurde erfolgreich geladen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else if(tb_ISBN.Text.Equals(""))
+            else if (tb_ISBN.Text.Equals(""))
             {
-                MetroMessageBox.Show(this,"Bitte geben Sie eine ISBN ein!","Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MetroMessageBox.Show(this, "Bitte geben Sie eine ISBN ein!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                MetroMessageBox.Show(this,"Es konnten zu dieser ISBN keine Informationen gefunden werden. Bitte überprüfen Sie ihre Eingabe nach Fehlern!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MetroMessageBox.Show(this, "Es konnten zu dieser ISBN keine Informationen gefunden werden. Bitte überprüfen Sie ihre Eingabe nach Fehlern!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AutoLoad();
+            tb_ISBN.Text = tb_ISBN.Text.Replace("-", "");
+            if (Grid_Buch.Rows.Count == 0)
+            {
+                AutoLoadDNB();
+            }
+            else if (Grid_Buch.Rows.Count == 1)
+            {
+                DialogResult dr = MetroMessageBox.Show(this, "Möchten Sie die Daten neu aus dem Internet laden?", "Neu herunterladen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    AutoLoadDNB();
+                }
+                else
+                {
+                    LoadBuch();
+                }
+
+            }
+           
+            //AutoLoadBuecherNachISBN();
         }
 
         private void checkbox_autor_CheckedChanged(object sender, EventArgs e)
@@ -1346,8 +2151,13 @@ namespace Bibo_Verwaltung
             {
                 cb_Autor.AutoCompleteMode = AutoCompleteMode.None;
                 comboBox1.Visible = true;
+                checkedListBox1.BringToFront();
+                comboBox1.BackColor = bc;
+                comboBox1.ForeColor = fc;
                 cb_Autor.DataSource = null;
-                cb_Autor.Enabled = false;
+                //cb_Autor.Enabled = false;
+                cb_Autor.TabStop = false;
+                readOnly = true;
             }
             else
             {
@@ -1355,7 +2165,9 @@ namespace Bibo_Verwaltung
                 comboBox1.Visible = false;
                 checkedListBox1.Visible = false;
                 b.Autor.FillCombobox(ref cb_Autor, 0);
-                cb_Autor.Enabled = true;
+                readOnly = false;
+                //cb_Autor.Enabled = true;
+                cb_Autor.TabStop = true;
             }
         }
 
@@ -1412,9 +2224,10 @@ namespace Bibo_Verwaltung
         {
             if (e.KeyCode == Keys.Enter && !rb_Delete_Buch.Checked)
             {
+                tb_ISBN.Text = tb_ISBN.Text.Replace("-", "");
                 if (Grid_Buch.Rows.Count == 0)
                 {
-                    AutoLoad();
+                    AutoLoadDNB();
                 }
                 else if(Grid_Buch.Rows.Count == 1)
                 {
@@ -1427,7 +2240,9 @@ namespace Bibo_Verwaltung
         {
             if (checkbox_autor.Checked)
             {
-                cb_Autor.Enabled = false;
+                //cb_Autor.Enabled = false;
+                cb_Autor.TabStop = false;
+                readOnly = true;
                 comboBox1.DroppedDown = false;
                 if (checkedListBox1.Visible == false)
                 {
@@ -1452,12 +2267,13 @@ namespace Bibo_Verwaltung
 
         private void tb_Neupreis_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
+            char a = Convert.ToChar(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != a))
             {
                 SystemSounds.Beep.Play();
                 e.Handled = true;
             }
-            if ((e.KeyChar == ',') && ((sender as MetroFramework.Controls.MetroTextBox).Text.IndexOf(',') > -1))
+            if ((e.KeyChar == a) && ((sender as MetroFramework.Controls.MetroTextBox).Text.IndexOf(a) > -1))
             {
                 e.Handled = true;
             }
@@ -1531,6 +2347,7 @@ namespace Bibo_Verwaltung
                     exemplareToolStripMenuItem.Enabled = true;
                 }
             }
+            guestMode(guest);
         }
 
         private void ladenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1569,8 +2386,11 @@ namespace Bibo_Verwaltung
         {
             string isbnAktuell = Grid_Buch.SelectedRows[0].Cells["ISBN"].Value.ToString();
             tb_ISBN.Text = isbnAktuell;
-            Form Buchid = new w_s_exemplare(currentUser, isbnAktuell);
+            w_s_exemplare Buchid = new w_s_exemplare(currentUser, isbnAktuell, msm_buecher);
+            msm_buecher.Clone(Buchid);
             Buchid.ShowDialog(this);
+
+            Buchid.Dispose();
             //b.FillGrid_Buch(ref Grid_Buch);
             if (!backgroundWorker1.IsBusy)
             {
@@ -1581,7 +2401,7 @@ namespace Bibo_Verwaltung
 
         private void Grid_Buch_MouseDown(object sender, MouseEventArgs e)
         {
-            if (!(Grid_Buch.HitTest(e.X, e.Y).RowIndex >=0))
+            if (!(Grid_Buch.HitTest(e.X, e.Y).RowIndex >=0) || !(Grid_Buch.HitTest(e.X, e.Y).ColumnIndex >= 0))
             {
                 Grid_Buch.ClearSelection();
                 ladenToolStripMenuItem.Visible = false;
@@ -1594,18 +2414,6 @@ namespace Bibo_Verwaltung
                 entfernenToolStripMenuItem.Visible = true;
                 exemplareToolStripMenuItem.Visible = true;
             }
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (metroProgressBar1.Value == 100)
-            {
-                timer1.Stop();
-            }
-            metroProgressBar1.Invoke((Action)delegate ()
-            {
-                metroProgressBar1.PerformStep();
-            });
         }
 
         private void bt_Schliessen_Click(object sender, EventArgs e)
@@ -1629,7 +2437,7 @@ namespace Bibo_Verwaltung
                 if (test)
                 {
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    string strFilePath = path + "\\Bibliothek\\Einstellungen\\BarcodePreset.lbx";
+                    string strFilePath = path + "\\greenLib\\Einstellungen\\BarcodePreset.lbx";
                     IDocument doc = new Document();
                     doc.Open(strFilePath);
                     int barcodeIndex = doc.GetBarcodeIndex("Barcode");
@@ -1721,6 +2529,7 @@ namespace Bibo_Verwaltung
         {
             try
             {
+                Buch ladeBuch = new Buch();
                 BeginInvoke((Action)delegate ()
                 {
                     metroProgressSpinner1.Visible = true;
@@ -1728,14 +2537,20 @@ namespace Bibo_Verwaltung
                     metroProgressSpinner1.BringToFront();
                 });
                 MetroGrid mgBuch = new MetroGrid();
-                b.FillGrid_Buch(ref mgBuch);
+                ladeBuch.FillGrid_Buch(ref mgBuch);
                 var dtBuch = mgBuch.DataSource;
-                while(loaded == false)
+                while (loaded == false)
                 {
 
                 }
                 BeginInvoke((Action)delegate ()
                 {
+                    Grid_Buch.DataSource = null;
+                    Grid_Buch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                    Grid_Buch.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+                    Grid_Buch.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+                    Grid_Buch.AllowUserToResizeColumns = true;
+                    Grid_Buch.RowHeadersVisible = false;
                     Grid_Buch.DataSource = dtBuch;
                     metroProgressSpinner1.Visible = false;
                     Grid_Buch.Visible = true;
@@ -1743,6 +2558,21 @@ namespace Bibo_Verwaltung
             }
             catch
             {
+                //eventueller Fix vom Problem der einfrierenden Ladeanimation
+                //Prüfung notwendig
+                try
+                {
+                    BeginInvoke((Action)delegate ()
+                    {
+                        metroProgressSpinner1.Visible = false;
+                        Grid_Buch.Visible = true;
+                        MetroFramework.MetroMessageBox.Show(this, "Fehler beim Laden der Daten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    });
+                }
+                catch
+                {
+
+                }
 
             }
 
@@ -1755,7 +2585,158 @@ namespace Bibo_Verwaltung
 
         private void Mtb_Import_Click(object sender, EventArgs e)
         {
+            MetroMessageBox.Show(this, "Diese Funktion ist in der aktuellen Version noch nicht verfügbar.", "Noch nicht verfügbar.", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //Import
+        }
+
+        private void DTP_Erscheinungsdatum_ValueChanged(object sender, EventArgs e)
+        {
+            BuchFilter();
+            dTP_Erscheinungsdatum.UseCustomBackColor = false;
+            dTP_Erscheinungsdatum.BackColor = Color.White;
+        }
+
+        private void BackgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            BuchFilter();
+        }
+
+        private void Bt_exemplar_Click(object sender, EventArgs e)
+        {
+            if (Grid_Buch.SelectedRows.Count == 1)
+            {
+                w_s_exemplare Buchid = new w_s_exemplare(currentUser, Grid_Buch.SelectedRows[0].Cells[0].Value.ToString(), msm_buecher);
+                msm_buecher.Clone(Buchid);
+                Buchid.ShowDialog(this);
+
+                Buchid.Dispose();
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "Es wurde kein Buch ausgewählt. Bitte wählen Sie zuerst ein Buch in der Tabellenansicht aus.", "Kein Buch ausgewählt.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                bt_exemplar.Enabled = false;
+            }
+        }
+
+        private void Grid_Buch_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (Grid_Buch.SelectedRows.Count == 1)
+            {
+                bt_exemplar.Enabled = true;
+            }
+            else
+            {
+                bt_exemplar.Enabled = false;
+            }
+        }
+
+        private void Grid_Buch_Click(object sender, EventArgs e)
+        {
+            if (Grid_Buch.SelectedRows.Count == 1)
+            {
+                bt_exemplar.Enabled = true;
+            }
+            else
+            {
+                bt_exemplar.Enabled = false;
+            }
+        }
+
+        private void Tb_ISBN_Leave_1(object sender, EventArgs e)
+        {
+            tb_ISBN.Text = tb_ISBN.Text.Replace("-", "");
+        }
+
+        private void Grid_Buch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                if (Grid_Buch.SelectedRows.Count >= 1)
+                {
+                    DataGridViewRow row = this.Grid_Buch.SelectedRows[0];
+                    tb_ISBN.Text = row.Cells[0].Value.ToString();
+                    if (bool1)
+                    {
+                        LoadBuch();
+                    }
+                    else
+                    {
+                        LoadBuch();
+                        this.Hide();
+                    }
+                }
+                e.SuppressKeyPress = true;
+            }
+            else if(e.KeyCode == Keys.Tab)
+            {
+                mtb_Import.Focus();
+                e.SuppressKeyPress = true;
+            }
+        }
+        bool readOnly = false;
+
+        private void Cb_Autor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (readOnly)
+            {
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void cb_Genre_Enter(object sender, EventArgs e)
+        {
+            if (cb_Genre.Text == "") cb_Genre.SelectedIndex = -1;
+            if (cb_Genre.AutoCompleteSource == AutoCompleteSource.None) cb_Genre.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+        }
+
+        private void cb_Verlag_Enter(object sender, EventArgs e)
+        {
+            if (cb_Verlag.Text == "") cb_Verlag.SelectedIndex = -1;
+            if (cb_Verlag.AutoCompleteSource == AutoCompleteSource.None) cb_Verlag.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+        }
+
+        private void cb_Sprache_Enter(object sender, EventArgs e)
+        {
+            if (cb_Sprache.Text == "") cb_Sprache.SelectedIndex = -1;
+            if (cb_Sprache.AutoCompleteSource == AutoCompleteSource.None) cb_Sprache.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+        }
+
+        private void cb_Autor_Enter(object sender, EventArgs e)
+        {
+            if (cb_Autor.Text == "") cb_Autor.SelectedIndex = -1;
+            if (cb_Autor.AutoCompleteSource == AutoCompleteSource.None) cb_Autor.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        private void cb_Genre_MouseEnter(object sender, EventArgs e)
+        {
+            if (cb_Genre.Text == "") cb_Genre.SelectedIndex = -1;
+            if (cb_Genre.AutoCompleteSource == AutoCompleteSource.None) cb_Genre.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+        }
+
+        private void cb_Verlag_MouseEnter(object sender, EventArgs e)
+        {
+            if (cb_Verlag.Text == "") cb_Verlag.SelectedIndex = -1;
+            if (cb_Verlag.AutoCompleteSource == AutoCompleteSource.None) cb_Verlag.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+        }
+
+        private void cb_Sprache_MouseEnter(object sender, EventArgs e)
+        {
+            if (cb_Sprache.Text == "") cb_Sprache.SelectedIndex = -1;
+            if (cb_Sprache.AutoCompleteSource == AutoCompleteSource.None) cb_Sprache.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+        }
+
+        private void cb_Autor_MouseEnter(object sender, EventArgs e)
+        {
+            if (cb_Autor.Text == "") cb_Autor.SelectedIndex = -1;
+            if (cb_Autor.AutoCompleteSource == AutoCompleteSource.None) cb_Autor.AutoCompleteSource = AutoCompleteSource.ListItems;
+
         }
     }
 }

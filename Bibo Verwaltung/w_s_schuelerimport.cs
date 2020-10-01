@@ -43,18 +43,27 @@ namespace Bibo_Verwaltung
         List<string> files = new List<string>();
         List<string> filesShort = new List<string>();
         int errors = 0;
-        public w_s_schuelerimport(string target, bool modus, string userName)
+        public w_s_schuelerimport(string target, bool modus, string userName, MetroFramework.Components.MetroStyleManager msm)
         {
             this.currentUser = userName;
             this.target = target;
             InitializeComponent();
+            msm_schuelerimport = msm;
+            this.StyleManager = msm;
+            this.StyleManager.Style = MetroColorStyle.Teal;
+            if(this.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+
+            }
+
             tb_lines.Text = "0";
             setModus(modus);
             SetTarget();
             ImportMode();
             CheckSelected();
             SetSlider();
-            this.Text = Text + " - Angemeldet als: " + userName;
+            Benutzer user = new Benutzer(userName);
+            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             timer1.Start();
         }
         /// <summary>
@@ -382,6 +391,12 @@ namespace Bibo_Verwaltung
         /// <param name="e"></param>
         private void bt_Vorschau_Click(object sender, EventArgs e)
         {
+            noPreset();
+
+        }
+
+        private void noPreset()
+        {
             usePreset = false;
             removeAt.Clear();
             indexes.Clear();
@@ -418,7 +433,6 @@ namespace Bibo_Verwaltung
                     MetroMessageBox.Show(this, "Die Vorlage konnte nicht auf die Daten angewendet werden. Eventuell haben Sie die falsche Vorlage gewählt.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-
         }
 
         /// <summary>
@@ -749,6 +763,7 @@ namespace Bibo_Verwaltung
             {
                 foreach (DataRow row in sortedDT.Rows)
                 {
+                    if (singleImport) progressBar1.PerformStep();
                     if (target.Equals("t_s_schueler"))
                     {
                         Kunde k = new Kunde();
@@ -791,7 +806,7 @@ namespace Bibo_Verwaltung
                             {
                                 k.LeistungskursListe.Add("");
                             }
-                            if (!k.AlreadyExists())
+                            if (!k.AlreadyExists(false))
                             {
                                 k.AddKunde();
                             }
@@ -822,7 +837,7 @@ namespace Bibo_Verwaltung
                                     k.LeistungskursListe.Add(fach);
                                 }
                             }
-                            if (!k.AlreadyExists())
+                            if (!k.AlreadyExists(false))
                             {
                                 k.AddKunde();
                             }
@@ -889,6 +904,8 @@ namespace Bibo_Verwaltung
             //timer.Stop();
         }
 
+        bool singleImport;
+        int lineCount = 0;
         /// <summary>
         /// Startet den Importvorgang
         /// </summary>
@@ -896,6 +913,7 @@ namespace Bibo_Verwaltung
         /// <param name="singleImport"></param>
         private void StartImport(bool withPreset, bool singleImport)
         {
+            this.singleImport = singleImport;
             string file = "";
             errors = 0;
             errorMessage = "";
@@ -907,9 +925,15 @@ namespace Bibo_Verwaltung
             progressBar1.Maximum = filesTotal;
             progressBar1.Value = 0;
             progressBar1.Step = 1;
+            Cursor.Current = Cursors.WaitCursor;
+
             if (singleImport)
             {
                 file = files[slider_preview.Value - 1];
+                lineCount = File.ReadAllLines(file).Count();
+                progressBar1.Maximum = lineCount;
+                progressBar1.Value = 0;
+                progressBar1.Step = 1;
             }
             try
             {
@@ -994,6 +1018,7 @@ namespace Bibo_Verwaltung
             {
                 if (filesDone == 1)
                 {
+                    Cursor.Current = Cursors.Default;
                     DialogResult dr = MetroMessageBox.Show(this, "Die Datei wurde erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dr == DialogResult.Yes)
                     {
@@ -1006,6 +1031,7 @@ namespace Bibo_Verwaltung
                 }
                 else if (filesDone > 1)
                 {
+                    Cursor.Current = Cursors.Default;
                     DialogResult dr = MetroMessageBox.Show(this, "Die Dateien wurden erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dr == DialogResult.Yes)
                     {
@@ -1320,6 +1346,10 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
+            else
+            {
+                noPreset();
+            }
         }
 
         private void bt_right_Click(object sender, EventArgs e)
@@ -1345,14 +1375,22 @@ namespace Bibo_Verwaltung
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (progressBar1.Value == 100)
+            try
             {
-                timer1.Stop();
+                if (progressBar1.Value == 100)
+                {
+                    timer1.Stop();
+                }
+                progressBar1.Invoke((Action)delegate ()
+                {
+                    progressBar1.PerformStep();
+                });
+
             }
-            progressBar1.Invoke((Action)delegate ()
+            catch
             {
-                progressBar1.PerformStep();
-            });
+
+            }
         }
 
         /// <summary>
@@ -1445,6 +1483,47 @@ namespace Bibo_Verwaltung
             cb_FeldTrenn.Text = "";
             cb_TxtQuali.Text = "";
             metroGrid_Vorschau.DataSource = null;
+        }
+
+        private void SpalteEntfernenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                    int i = metroGrid_Vorschau.SelectedCells[0].ColumnIndex;
+                    metroGrid_Vorschau.Columns.RemoveAt(columnIndex);
+                    removeAt.Add(columnIndex);
+            }
+            catch
+            {
+                MetroMessageBox.Show(this, "Es konnte keine Spalte entfernt werden!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        int columnIndex = 0;
+        private void MetroGrid_Vorschau_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                metroGrid_Vorschau.ClearSelection();
+                metroGrid_Vorschau.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+                columnIndex = e.ColumnIndex;
+            }
+        }
+
+        private void MetroGrid_Vorschau_MouseDown(object sender, MouseEventArgs e)
+        {
+                if (!(metroGrid_Vorschau.HitTest(e.X, e.Y).RowIndex >= 0)||!(metroGrid_Vorschau.HitTest(e.X,e.Y).ColumnIndex>=0))
+                {
+                spalteEntfernenToolStripMenuItem.Visible = false;
+                }
+                else
+                {
+                spalteEntfernenToolStripMenuItem.Visible = true;
+                }
+        }
+
+        private void MetroToolTip1_Popup(object sender, PopupEventArgs e)
+        {
+            e.ToolTipSize = new Size(e.ToolTipSize.Width + 32, e.ToolTipSize.Height);
         }
     }
 }

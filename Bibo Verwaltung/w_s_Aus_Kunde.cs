@@ -68,7 +68,7 @@ namespace Bibo_Verwaltung
         #region Neuer Kunde
         private void bt_NeuKunde_Click(object sender, EventArgs e)
         {
-            Form Kunden = new w_s_Kunden(currentUser);
+            Form Kunden = new w_s_Kunden(currentUser,null);
             Kunden.ShowDialog(this);
             //kunde.FillGrid(ref gv_Aus_Kunde);
         }

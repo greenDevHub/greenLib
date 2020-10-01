@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
 using MetroFramework.Controls;
+using System.Collections;
 
 namespace Bibo_Verwaltung
 {
@@ -133,6 +134,7 @@ namespace Bibo_Verwaltung
         public void FillCombobox(ref AdvancedComboBox cb, object value)
         {
             ClearDataSource();
+            if (cb.AutoCompleteSource != AutoCompleteSource.None) cb.AutoCompleteSource = AutoCompleteSource.None;
             FillObject();
             cb.DataSource = dt;
             cb.ValueMember = "ver_id";
@@ -167,7 +169,60 @@ namespace Bibo_Verwaltung
                 return false;
             }
         }
+        /// <summary>
+        /// Entfernt Duplikate aus den Changes
+        /// </summary>
+        /// <param name="changes"></param>
+        /// <returns></returns>
+        private DataSet noDuplicates(DataSet changes)
+        {
+            try
+            {
+                Hashtable hTable = new Hashtable();
+                ArrayList duplicateList = new ArrayList();
 
+                //1. Die Changes-Tabelle auf duplikate überprüfen (mehrfache eingabe des selben Wertes)
+                foreach (DataRow drow in changes.Tables[0].Rows)
+                {
+                    if (hTable.Contains(drow[1]))
+                    {
+                        duplicateList.Add(drow);
+                    }
+                    else
+                    {
+                        hTable.Add(drow[1], string.Empty);
+                    }
+                }
+                //Entfernen der Duplikate von 1.
+                foreach (DataRow dRow in duplicateList)
+                {
+                    changes.Tables[0].Rows.Remove(dRow);
+                }
+
+                //2. Die Ausgangsdaten auf die Werte überprüfen, die in den Changes sind
+                duplicateList.Clear();
+                var s = dt.Rows;
+                for (int i = 0; i < changes.Tables[0].Rows.Count; i++)
+                {
+                    string str = changes.Tables[0].Rows[i][1].ToString();
+                    bool contains = dt.AsEnumerable().Any(row => str.Equals(row.Field<String>(1), StringComparison.InvariantCultureIgnoreCase));
+                    if (contains)
+                    {
+                        duplicateList.Add(changes.Tables[0].Rows[i]);
+                    }
+                }
+                //Entfernen der Duplikate von 2.
+                foreach (DataRow dRow in duplicateList)
+                {
+                    changes.Tables[0].Rows.Remove(dRow);
+                }
+                return changes;
+            }
+            catch (Exception ex)
+            {
+                return changes;
+            }
+        }
         /// <summary>
         /// Speichert die Daten aus einen DataGridView-Objekt in die Datenbank 
         /// </summary>
@@ -177,6 +232,7 @@ namespace Bibo_Verwaltung
             DataSet changes = ds.GetChanges();
             if (changes != null)
             {
+                changes = noDuplicates(changes);
                 adapter.Update(changes);
             }
         }

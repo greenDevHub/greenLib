@@ -22,7 +22,7 @@ namespace ScreenSize
             this.Close();
         }
         double scale = 0;
-        string homepath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Einstellungen";
+        string homepath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\Einstellungen";
         private void GetScale(ref double scale)
         {
             double curDPI = 0;

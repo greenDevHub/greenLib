@@ -1,5 +1,6 @@
 ﻿using MetroFramework.Controls;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -12,15 +13,27 @@ namespace Bibo_Verwaltung
 {
     class Klasse
     {
+        SQL_Verbindung con = new SQL_Verbindung();
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        SqlCommandBuilder comb = new SqlCommandBuilder();
+        DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
+
         string klasse;
         /// <summary>
         /// E-Mail Adresse des Kunden
         /// </summary>
         public string Klassename { get { return klasse; } set { klasse = value; } }
-        SQL_Verbindung con = new SQL_Verbindung();
-        SqlDataAdapter adapter = new SqlDataAdapter();
-        DataSet ds = new DataSet();
-        DataTable dt = new DataTable();
+
+        #region Objekt-Constructor
+        /// <summary>
+        /// Erschaft das Objekt Kunde
+        /// </summary>
+        public Klasse()
+        {
+            FillObject();
+        }
+        #endregion
 
         /// <summary>
         /// Füllt das DataSet 
@@ -35,6 +48,7 @@ namespace Bibo_Verwaltung
             adapter.Fill(dt);
             con.Close();
         }
+
 
         /// <summary>
         /// Entfernt den gesamten Inhalt im DataSet 
@@ -58,7 +72,88 @@ namespace Bibo_Verwaltung
             grid.DataSource = ds.Tables[0];
             grid.Columns["KlassenID"].Visible = false;
         }
+        /// <summary>
+        /// Prüft die Daten aus einen DataGridView-Objekt auf Veränderungen 
+        /// </summary>
+        public bool GetChangesGrid(ref MetroGrid grid)
+        {
+            DataSet changes = ds.GetChanges();
+            if (changes != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// Entfernt Duplikate aus den Changes
+        /// </summary>
+        /// <param name="changes"></param>
+        /// <returns></returns>
+        private DataSet noDuplicates(DataSet changes)
+        {
+            try
+            {
+                Hashtable hTable = new Hashtable();
+                ArrayList duplicateList = new ArrayList();
 
+                //1. Die Changes-Tabelle auf duplikate überprüfen (mehrfache eingabe des selben Wertes)
+                foreach(DataRow drow in changes.Tables[0].Rows)
+                {
+                    if (hTable.Contains(drow[1]))
+                    {
+                        duplicateList.Add(drow);
+                    }
+                    else
+                    {
+                        hTable.Add(drow[1], string.Empty);
+                    }
+                }
+                //Entfernen der Duplikate von 1.
+                foreach(DataRow dRow in duplicateList)
+                {
+                    changes.Tables[0].Rows.Remove(dRow);
+                }
+
+                //2. Die Ausgangsdaten auf die Werte überprüfen, die in den Changes sind
+                duplicateList.Clear();
+                var s = dt.Rows;
+                for(int i = 0; i< changes.Tables[0].Rows.Count; i++)
+                {
+                    string str = changes.Tables[0].Rows[i][1].ToString();
+                    bool contains = dt.AsEnumerable().Any(row => str.Equals(row.Field<String>(1),StringComparison.InvariantCultureIgnoreCase));
+                    if (contains)
+                    {
+                        duplicateList.Add(changes.Tables[0].Rows[i]);
+                    }
+                }
+                //Entfernen der Duplikate von 2.
+                foreach (DataRow dRow in duplicateList)
+                {
+                    changes.Tables[0].Rows.Remove(dRow);
+                }
+                return changes;
+            }
+            catch (Exception ex)
+            {
+                return changes;
+            }
+        }
+        /// <summary>
+        /// Speichert die Daten aus einen DataGridView-Objekt in die Datenbank 
+        /// </summary>
+        public void SaveGrid(ref MetroGrid grid)
+        {
+            comb = new SqlCommandBuilder(adapter);
+            DataSet changes = ds.GetChanges();
+            if (changes != null)
+            {
+                changes = noDuplicates(changes);
+                adapter.Update(changes);
+            }
+        }
         /// <summary>
         /// Gibt die ID der Klasse zurück (bei nicht gefunden Wert = 0) 
         /// </summary>

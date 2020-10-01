@@ -1,5 +1,6 @@
 ﻿using MetroFramework.Controls;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -63,13 +64,28 @@ namespace Bibo_Verwaltung
         public DataGridViewComboBoxColumn FillDataGridViewComboBox()
         {
             DataGridViewComboBoxColumn cb = new DataGridViewComboBoxColumn();
+            ClearDataSource();
+            DataRow relation;
+            string[] defaultValue = new string[2];
+
+            defaultValue[0] = "0";
+            defaultValue[1] = "--auswählen--";
+            if (dt.Columns.Count != 2)
+            {
+                dt.Columns.Add();
+            }
+            relation = dt.NewRow();
+            relation.ItemArray = defaultValue;
+            dt.Rows.Add(relation);
             FillObject();
             cb.HeaderText = "Zustand";
-            cb.Name = "cb";
+            cb.Name = "cbzustand";
+            cb.DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing;
+            cb.Width = 1500;
+            cb.SortMode = DataGridViewColumnSortMode.NotSortable;
             cb.DataSource = dt;
             cb.ValueMember = "zu_id";
             cb.DisplayMember = "zu_zustand";
-            //cb.SelectedValue = value;
             return cb;
         }
 
@@ -139,7 +155,60 @@ namespace Bibo_Verwaltung
                 return false;
             }
         }
+        /// <summary>
+        /// Entfernt Duplikate aus den Changes
+        /// </summary>
+        /// <param name="changes"></param>
+        /// <returns></returns>
+        private DataSet noDuplicates(DataSet changes)
+        {
+            try
+            {
+                Hashtable hTable = new Hashtable();
+                ArrayList duplicateList = new ArrayList();
 
+                //1. Die Changes-Tabelle auf duplikate überprüfen (mehrfache eingabe des selben Wertes)
+                foreach (DataRow drow in changes.Tables[0].Rows)
+                {
+                    if (hTable.Contains(drow[1]))
+                    {
+                        duplicateList.Add(drow);
+                    }
+                    else
+                    {
+                        hTable.Add(drow[1], string.Empty);
+                    }
+                }
+                //Entfernen der Duplikate von 1.
+                foreach (DataRow dRow in duplicateList)
+                {
+                    changes.Tables[0].Rows.Remove(dRow);
+                }
+
+                //2. Die Ausgangsdaten auf die Werte überprüfen, die in den Changes sind
+                duplicateList.Clear();
+                var s = dt.Rows;
+                for (int i = 0; i < changes.Tables[0].Rows.Count; i++)
+                {
+                    string str = changes.Tables[0].Rows[i][1].ToString();
+                    bool contains = dt.AsEnumerable().Any(row => str.Equals(row.Field<String>(1), StringComparison.InvariantCultureIgnoreCase));
+                    if (contains)
+                    {
+                        duplicateList.Add(changes.Tables[0].Rows[i]);
+                    }
+                }
+                //Entfernen der Duplikate von 2.
+                foreach (DataRow dRow in duplicateList)
+                {
+                    changes.Tables[0].Rows.Remove(dRow);
+                }
+                return changes;
+            }
+            catch (Exception ex)
+            {
+                return changes;
+            }
+        }
         /// <summary>
         /// Speichert die Daten aus einen DataGridView-Objekt in die Datenbank 
         /// </summary>
@@ -149,6 +218,7 @@ namespace Bibo_Verwaltung
             DataSet changes = ds.GetChanges();
             if (changes != null)
             {
+                changes = noDuplicates(changes);
                 adapter.Update(changes);
             }
         }
@@ -181,6 +251,23 @@ namespace Bibo_Verwaltung
             dr.Close();
             con.Close();
             return ZustandID;
+        }
+
+        /// <summary>
+        /// Gibt den ausgeschriebenen Buchzustand der ID zurück
+        /// </summary>
+        public string GetZustandsName(string id)
+        {
+            if (con.ConnectError()) return "";
+            string RawCommand = "SELECT zu_zustand FROM [dbo].[t_s_zustand] WHERE zu_id = @0";
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, id);
+            while (dr.Read())
+            {
+                Zustandname = dr["zu_zustand"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            return Zustandname;
         }
 
         public bool IfContains(string value)

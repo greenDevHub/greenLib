@@ -69,7 +69,7 @@ namespace Bibo_Verwaltung
 
         private void bt_import_Click_1(object sender, EventArgs e)
         {
-            Form Import = new w_s_schuelerimport("t_s_faecher", true, currentUser);
+            Form Import = new w_s_schuelerimport("t_s_faecher", true, currentUser,null);
             Import.ShowDialog(this);
             f.FillGrid(ref gv_Faecher);
         }
@@ -107,7 +107,7 @@ namespace Bibo_Verwaltung
 
         private void bt_Verwaltung_Click(object sender, EventArgs e)
         {
-            Form fachstufe = new w_s_fach_stufe(currentUser);
+            Form fachstufe = new w_s_fach_stufe(currentUser,null);
             fachstufe.ShowDialog(this);
         }
         #endregion
