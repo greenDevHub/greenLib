@@ -38,7 +38,7 @@ Folgen Sie den nachfolgenden Anweisungen Schritt für Schritt.
 
 5. Führen Sie nun das bereitgestellte [SQL-Skript](https://github.com/greenDevHub/greenLib/blob/master/Projektierung/greenLib_setup.sql "SQL-Skript") für die greenLib-Datenbank aus. Schließlich müssen für die Datenbank noch die Rechte vergeben werden. Entweder erfolgt der Login über die greenLib-Software per Windows-Authentifizierung oder über die SQL Authentifizierung. Für letztere müssen ein Benutzername und ein Kennwort, sowie die entsprechenden Berechtigungen vergeben werden.
 
-
+Beim ersten Start der Anwendung muss die Verbindung zur Datenbank konfiguriert werden. Melden Sie sich dazu mit dem Benutzer "admin" und dem passwort "admin" an. Das Standard-Passwort sollte nach dem ersten Start der Anwendung geändert werden.
 
  Funktionen
 ------------
