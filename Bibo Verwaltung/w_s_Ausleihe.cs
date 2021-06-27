@@ -172,10 +172,10 @@ namespace Bibo_Verwaltung
             {
                 try
                 {
-                    Exemplar buch_exemplar = new Exemplar(tb_BuchCode.Text);
-                    if (buch_exemplar.IsActivated())
+                    Copy copy = new Copy(int.Parse(tb_BuchCode.Text));
+                    if (copy.CopyActivated)
                     {
-                        ausleihe.ExemplarID = buch_exemplar.ExemplarID;
+                        ausleihe.ExemplarID = copy.CopyID;
                         if (ausleihe.CheckLeihList())
                         {
                             ausleihe.Rueckgabedatum = Convert.ToDateTime(ausleihe.LeihListe.Rows[ausleihe.GetIndexInLeihliste()][1]);
@@ -186,11 +186,11 @@ namespace Bibo_Verwaltung
                             ausleihe.Rueckgabedatum = DateTime.Now.Date;
                             bt_AddBuch.Text = "+";
                         }
-                        ausleihe.Verfuegbar = buch_exemplar.IsSpecificAvailable();
+                        ausleihe.Verfuegbar = copy.IsAvailable();
                         llb_BuchTitel.Enabled = true;
-                        llb_BuchTitel.Text = ausleihe.TrimText(buch_exemplar.Titel, 30);
+                        llb_BuchTitel.Text = ausleihe.TrimText(copy.CopyTitle, 30);
                         lb_BuchZustand.Enabled = true;
-                        lb_BuchZustand.Text = buch_exemplar.Zustand.Zustandname;
+                        lb_BuchZustand.Text = copy.Condition.ConditionName;
                         lb_BuchStatus.Enabled = true;
                         if (ausleihe.Verfuegbar)
                         {
@@ -478,7 +478,7 @@ namespace Bibo_Verwaltung
 
         private void llb_BuchTitel_Click(object sender, EventArgs e)
         {
-            w_s_information Info = new w_s_information(1, ausleihe.ExemplarID, currentUser,msm_ausleihe);
+            w_s_information Info = new w_s_information(1, ausleihe.ExemplarID.ToString(), currentUser,msm_ausleihe);
             msm_ausleihe.Clone(Info);
             Info.ShowDialog();
             Info.Dispose();

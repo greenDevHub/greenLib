@@ -24,6 +24,13 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
+        AuthorHelper authorHelper = new AuthorHelper();
+        PublisherHelper publisherHelper = new PublisherHelper();
+        GenreHelper genreHelper = new GenreHelper();
+
+
+
+
         SQL_Verbindung con = new SQL_Verbindung();
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
@@ -33,8 +40,8 @@ namespace Bibo_Verwaltung
         DateTime dt = new DateTime();
         DateTime now = new DateTime();
 
-        Autor buchautor = new Autor();
-        Verlag buchverlag = new Verlag();
+        Author buchautor = new Author();
+        Publisher buchverlag = new Publisher();
         Genre buchgenre = new Genre();
 
         /// <summary>
@@ -82,8 +89,8 @@ namespace Bibo_Verwaltung
             SqlDataReader dr = connection.ExcecuteCommand(RawCommand, isbn);
             while (dr.Read())
             {
-                Autor autor = new Autor(dr["ba_autorid"].ToString());
-                autoren.Add(autor.Autorname);
+                Author autor = new Author(int.Parse(dr["ba_autorid"].ToString()));
+                autoren.Add(autor.AuthorName);
             }
             dr.Close();
             connection.Close();
@@ -276,9 +283,9 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void FillComboBoxes(ref AdvancedComboBox autor, ref AdvancedComboBox verlag, ref AdvancedComboBox genre)
         {
-            buchautor.FillCombobox(ref autor, -1);
-            buchverlag.FillCombobox(ref verlag, -1);
-            buchgenre.FillCombobox(ref genre, -1);
+            authorHelper.FillCombobox(ref autor, -1);
+            publisherHelper.FillCombobox(ref verlag, -1);
+            genreHelper.FillCombobox(ref genre, -1);
             if (autor.Text == "")
             {
                 autor.Text = "Autor";

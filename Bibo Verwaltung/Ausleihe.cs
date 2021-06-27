@@ -28,11 +28,11 @@ namespace Bibo_Verwaltung
         /// </summary>
         public string KID { get { return kid; } set { kid = value; } }
 
-        string exemplarID;
+        int exemplarID;
         /// <summary>
         /// Leihdatum eines Exemplars
         /// </summary>
-        public string ExemplarID { get { return exemplarID; } set { exemplarID = value; } }
+        public int ExemplarID { get { return exemplarID; } set { exemplarID = value; } }
 
         DateTime rueckgabedatum;
         /// <summary>
@@ -61,7 +61,7 @@ namespace Bibo_Verwaltung
             bool result = false;
             for (int i = 0; i <= LeihListe.Rows.Count - 1; i++)
             {
-                if (LeihListe.Rows[i][0].ToString() == ExemplarID)
+                if (int.Parse(LeihListe.Rows[i][0].ToString()) == ExemplarID)
                 {
                     result = true;
                 }
@@ -82,8 +82,8 @@ namespace Bibo_Verwaltung
                 List<string> newList = new List<string>();
                 foreach(string s in inputList)
                 {
-                    Exemplar ex = new Exemplar(s);
-                    if (ex.IsSpecificAvailable())
+                    Copy ex = new Copy(int.Parse(s));
+                    if (ex.IsAvailable())
                     {
                         newList.Add(s);
                     }
@@ -118,7 +118,7 @@ namespace Bibo_Verwaltung
             int result = -1;
             for (int i = 0; i <= LeihListe.Rows.Count - 1; i++)
             {
-                if (LeihListe.Rows[i][0].ToString() == ExemplarID)
+                if (int.Parse(LeihListe.Rows[i][0].ToString()) == ExemplarID)
                 {
                     result = i;
                 }
@@ -131,7 +131,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public String GetListInfo()
         {
-            Buch exemplar;
+            Book book;
             StringBuilder sb = new StringBuilder();
             sb.Append("Derzeit sind folgende Titel in der Auswahlliste: ");
             sb.AppendLine();
@@ -141,9 +141,9 @@ namespace Bibo_Verwaltung
             {
                 for (int i = 0; i < LeihListe.Rows.Count; i++)
                 {
-                    exemplar = new Buch(new Exemplar(LeihListe.Rows[i][0].ToString()).ISBN);
+                    book = new Book(new Copy(int.Parse(LeihListe.Rows[i][0].ToString())).CopyIsbn,false);
                     sb.Append("-  ");
-                    sb.Append(TrimText(exemplar.Titel, 30));
+                    sb.Append(TrimText(book.BookTitle, 30));
                     if (i < LeihListe.Rows.Count)
                     {
                         sb.Append(", ");
@@ -166,10 +166,10 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                Buch buchCover = new Buch(new Exemplar(ExemplarID).ISBN);
-                if (buchCover.Image != null)
+                Book buchCover = new Book(new Copy(ExemplarID).CopyIsbn,false);
+                if (buchCover.BookImage != null)
                 {
-                    MemoryStream mem = new MemoryStream(buchCover.Image);
+                    MemoryStream mem = new MemoryStream(buchCover.BookImage);
                     picBox_Buchcover.Image = Image.FromStream(mem);
                 }
                 else
@@ -187,14 +187,13 @@ namespace Bibo_Verwaltung
         /// </summary>
         public String GetAusleihList()
         {
-            Buch exemplar;
             StringBuilder sb = new StringBuilder();
             sb.Append("Möchten Sie ");
 
             if (LeihListe.Rows.Count == 1)
             {
-                Exemplar ex = new Exemplar();
-                string titel = ex.GetTitel(LeihListe.Rows[0][0].ToString());
+                Copy copy = new Copy(int.Parse(LeihListe.Rows[0][0].ToString()));
+                string titel = copy.CopyTitle;
                 //exemplar = new Buch(new Exemplar(LeihListe.Rows[0][0].ToString()).ISBN);
                 sb.Append("das Buch: ");
                 sb.AppendLine();
@@ -211,8 +210,8 @@ namespace Bibo_Verwaltung
                 sb.AppendLine();
                 for (int i = 0; i < LeihListe.Rows.Count; i++)
                 {
-                    Exemplar ex = new Exemplar();
-                    string titel = ex.GetTitel(LeihListe.Rows[i][0].ToString());
+                    Copy ex = new Copy(int.Parse(LeihListe.Rows[i][0].ToString()));
+                    string titel = ex.CopyTitle;
                     //exemplar = new Buch(new Exemplar(LeihListe.Rows[i][0].ToString()).ISBN);
                     //string titel = exemplar.Titel;
                     sb.Append("-  ");
@@ -286,7 +285,7 @@ namespace Bibo_Verwaltung
                 DataRow relation;
                 string[] exemlarDetails = new string[2];
 
-                exemlarDetails[0] = ExemplarID;
+                exemlarDetails[0] = ExemplarID.ToString();
                 exemlarDetails[1] = Rueckgabedatum.ToShortDateString();
 
                 if (LeihListe.Columns.Count != 2)
@@ -314,7 +313,7 @@ namespace Bibo_Verwaltung
                 for (int i = LeihListe.Rows.Count - 1; i >= 0; i--)
                 {
                     DataRow row = LeihListe.Rows[i];
-                    if (row[0].ToString() == ExemplarID)
+                    if (int.Parse(row[0].ToString()) == ExemplarID)
                         row.Delete();
                 }
                 LeihListe.AcceptChanges();

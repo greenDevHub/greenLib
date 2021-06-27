@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bibo_Verwaltung.Helper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -12,7 +13,10 @@ namespace Bibo_Verwaltung
 {
     class BuchStufe
     {
-        Buch buch = new Buch();
+        BookHelper bookHelper = new BookHelper();
+
+
+        Book buch = new Book();
         SQL_Verbindung con = new SQL_Verbindung();
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
@@ -88,7 +92,7 @@ namespace Bibo_Verwaltung
         {
             ClearDataSource();
             FillObject();
-            buch.FillGrid_Short(ref Buecher);
+            bookHelper.FillGrid(ref Buecher,true);
             Set_Mark(ref Buecher, Stufe);
         }
 

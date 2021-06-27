@@ -149,18 +149,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdvancedCheckedListBox.cs">
+    <Compile Include="Controls\AdvancedCheckedListBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="AdvancedComboBox.cs">
+    <Compile Include="Controls\AdvancedComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Analytics.cs" />
-    <Compile Include="Autor.cs" />
+    <Compile Include="Helper\BookHelper.cs" />
+    <Compile Include="Helper\WebHelper.cs" />
+    <Compile Include="Models\Author.cs" />
+    <Compile Include="Helper\AuthorHelper.cs" />
     <Compile Include="Barcode.cs" />
     <Compile Include="Benutzer.cs" />
     <Compile Include="BitmapFilter.cs" />
     <Compile Include="BuchStufe.cs" />
+    <Compile Include="Helper\ConditionHelper.cs" />
+    <Compile Include="Helper\CopyHelper.cs" />
+    <Compile Include="Database\Command.cs" />
     <Compile Include="EasterEgg\Circle.cs" />
     <Compile Include="EasterEgg\form_snake.cs">
       <SubType>Form</SubType>
@@ -170,7 +176,7 @@
     </Compile>
     <Compile Include="EasterEgg\Input.cs" />
     <Compile Include="EasterEgg\Settings.cs" />
-    <Compile Include="Exemplar.cs" />
+    <Compile Include="Models\Copy.cs" />
     <Compile Include="Buchsuche.cs" />
     <Compile Include="Extension\Lehrbuchausgabe\BuchFach.cs" />
     <Compile Include="Extension\Lehrbuchausgabe\w_b_buch_fach.cs">
@@ -184,15 +190,18 @@
     <Compile Include="ExcelExport.cs" />
     <Compile Include="FachStufe.cs" />
     <Compile Include="Fach.cs" />
+    <Compile Include="Helper\GenreHelper.cs" />
     <Compile Include="Import.cs" />
     <Compile Include="Klasse.cs" />
     <Compile Include="Klassenstufe.cs" />
+    <Compile Include="Helper\LanguageHelper.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Protokoll.cs" />
+    <Compile Include="Helper\PublisherHelper.cs" />
     <Compile Include="Schuelerimport.cs" />
     <Compile Include="Schueler.cs" />
     <Compile Include="Screenshot.cs" />
@@ -305,18 +314,12 @@
     <Compile Include="w_s_Aus_Kunde.Designer.cs">
       <DependentUpon>w_s_Aus_Kunde.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_autoren.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_autoren.Designer.cs">
-      <DependentUpon>w_s_autoren.cs</DependentUpon>
-    </Compile>
     <Compile Include="Bibo_VerwaltungDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Bibo_VerwaltungDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Buch.cs" />
+    <Compile Include="Models\Book.cs" />
     <Compile Include="w_s_import_export.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -335,7 +338,7 @@
     <Compile Include="w_s_rueckgabe.Designer.cs">
       <DependentUpon>w_s_rueckgabe.cs</DependentUpon>
     </Compile>
-    <Compile Include="Genre.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="w_s_barcode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -348,11 +351,11 @@
     <Compile Include="w_s_bild_bearbeiten.Designer.cs">
       <DependentUpon>w_s_bild_bearbeiten.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_exemplare.cs">
+    <Compile Include="Forms\Form_Copy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_exemplare.Designer.cs">
-      <DependentUpon>w_s_exemplare.cs</DependentUpon>
+    <Compile Include="Forms\Form_Copy.Designer.cs">
+      <DependentUpon>Form_Copy.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_buchsuche.cs">
       <SubType>Form</SubType>
@@ -366,12 +369,6 @@
     <Compile Include="w_s_einstellungen.Designer.cs">
       <DependentUpon>w_s_einstellungen.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_genres.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_genres.Designer.cs">
-      <DependentUpon>w_s_genres.cs</DependentUpon>
-    </Compile>
     <Compile Include="Kunde.cs" />
     <Compile Include="w_s_kunden.cs">
       <SubType>Form</SubType>
@@ -381,37 +378,25 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sprache.cs" />
+    <Compile Include="Models\Language.cs" />
     <Compile Include="w_s_main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="w_s_main.Designer.cs">
       <DependentUpon>w_s_main.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_sprachen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_sprachen.Designer.cs">
-      <DependentUpon>w_s_sprachen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Verlag.cs" />
+    <Compile Include="Models\Publisher.cs" />
     <Compile Include="w_s_user.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="w_s_user.designer.cs">
       <DependentUpon>w_s_user.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_verlage.cs">
+    <Compile Include="Forms\Form_Books.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_verlage.Designer.cs">
-      <DependentUpon>w_s_verlage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="w_s_buecher.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_buecher.Designer.cs">
-      <DependentUpon>w_s_buecher.cs</DependentUpon>
+    <Compile Include="Forms\Form_Books.Designer.cs">
+      <DependentUpon>Form_Books.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_zuordnungen.cs">
       <SubType>Form</SubType>
@@ -419,13 +404,7 @@
     <Compile Include="w_s_zuordnungen.Designer.cs">
       <DependentUpon>w_s_zuordnungen.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_zustand.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_zustand.Designer.cs">
-      <DependentUpon>w_s_zustand.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Zustand.cs" />
+    <Compile Include="Models\Condition.cs" />
     <EmbeddedResource Include="EasterEgg\form_snake.resx">
       <DependentUpon>form_snake.cs</DependentUpon>
     </EmbeddedResource>
@@ -477,9 +456,6 @@
     <EmbeddedResource Include="w_s_Aus_Kunde.resx">
       <DependentUpon>w_s_Aus_Kunde.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_autoren.resx">
-      <DependentUpon>w_s_autoren.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="w_s_information.resx">
       <DependentUpon>w_s_information.cs</DependentUpon>
     </EmbeddedResource>
@@ -489,17 +465,14 @@
     <EmbeddedResource Include="w_s_bild_bearbeiten.resx">
       <DependentUpon>w_s_bild_bearbeiten.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_exemplare.resx">
-      <DependentUpon>w_s_exemplare.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Form_Copy.resx">
+      <DependentUpon>Form_Copy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_buchsuche.resx">
       <DependentUpon>w_s_buchsuche.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_einstellungen.resx">
       <DependentUpon>w_s_einstellungen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_genres.resx">
-      <DependentUpon>w_s_genres.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_kunden.resx">
       <DependentUpon>w_s_kunden.cs</DependentUpon>
@@ -524,23 +497,14 @@
     <EmbeddedResource Include="w_s_spalten_auswahl.resx">
       <DependentUpon>w_s_spalten_auswahl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_sprachen.resx">
-      <DependentUpon>w_s_sprachen.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="w_s_user.resx">
       <DependentUpon>w_s_user.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_verlage.resx">
-      <DependentUpon>w_s_verlage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_buecher.resx">
-      <DependentUpon>w_s_buecher.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Form_Books.resx">
+      <DependentUpon>Form_Books.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_zuordnungen.resx">
       <DependentUpon>w_s_zuordnungen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_zustand.resx">
-      <DependentUpon>w_s_zustand.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest">
       <SubType>Designer</SubType>
@@ -645,6 +609,7 @@
     <None Include="Resources\iconfinder_icon-ios7-arrow-right_211607.png" />
     <None Include="Resources\296812-64.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

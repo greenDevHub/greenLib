@@ -294,7 +294,8 @@ namespace Bibo_Verwaltung
             int result = -1;
             for (int i = 0; i <= gv_suggested.Rows.Count - 1; i++)
             {
-                if (gv_suggested.Rows[i].Cells["Titel"].Value.ToString() == new Exemplar().GetTitel(tb_ExemplarID.Text))
+                Copy copy = new Copy(int.Parse(tb_ExemplarID.Text));
+                if (gv_suggested.Rows[i].Cells["Titel"].Value.ToString() == copy.CopyTitle)
                 {
                     result = i;
                 }
@@ -312,8 +313,9 @@ namespace Bibo_Verwaltung
                 autoausleihe.AddToAusleihList();
                 DataRow relation;
                 string[] exemlarDetails = new string[2];
-                exemlarDetails[0] = autoausleihe.ExemplarID;
-                exemlarDetails[1] = new Exemplar().GetTitel(autoausleihe.LeihListe.Rows[autoausleihe.GetIndexInLeihliste()][0].ToString());
+                exemlarDetails[0] = autoausleihe.ExemplarID.ToString();
+                Copy copy = new Copy(int.Parse(autoausleihe.LeihListe.Rows[autoausleihe.GetIndexInLeihliste()][0].ToString()));
+                exemlarDetails[1] = copy.CopyTitle;
                 relation = selectedBuecher.NewRow();
                 relation.ItemArray = exemlarDetails;
                 selectedBuecher.Rows.Add(relation);
@@ -545,17 +547,17 @@ namespace Bibo_Verwaltung
                 {
                     try
                     {
-                        Exemplar buch_exemplar = new Exemplar(tb_ExemplarID.Text);
-                        if (buch_exemplar.IsActivated())
+                        Copy copy = new Copy(int.Parse(tb_ExemplarID.Text));
+                        if (copy.CopyActivated)
                         {
                             lb_selected.Text = "ausgewählte Bücher:";
-                            autoausleihe.ExemplarID = buch_exemplar.ExemplarID;
+                            autoausleihe.ExemplarID = copy.CopyID;
                             if (selectedBuecher.Columns.Count < 2)
                             {
                                 selectedBuecher.Columns.Add("ID");
                                 selectedBuecher.Columns.Add("Titel");
                             }
-                            if (buch_exemplar.IsSpecificAvailable())
+                            if (copy.IsAvailable())
                             {
                                 DataGridViewRow Buchrow = new DataGridViewRow();
                                 if (GetIndexInSuggestedBuecher() != -1)

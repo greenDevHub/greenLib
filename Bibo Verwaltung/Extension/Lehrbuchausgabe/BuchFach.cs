@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Bibo_Verwaltung.Helper;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -8,7 +9,9 @@ namespace Bibo_Verwaltung
 {
     class BuchFach
     {
-        Buch buecher = new Buch();
+        BookHelper helper = new BookHelper();
+
+
         SQL_Verbindung con = new SQL_Verbindung();
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
@@ -100,7 +103,7 @@ namespace Bibo_Verwaltung
         {
             ClearDataSource();
             FillObjectLK(lk);
-            buecher.FillGrid_Short(ref gridBuecher);
+            helper.FillGrid(ref gridBuecher,true);
             Set_Mark(ref gridBuecher, fachID);
         }
 

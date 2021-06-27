@@ -49,8 +49,10 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
+        ConditionHelper conditionHelper = new ConditionHelper();
+
+
         Rueckgabe autorueckgabe = new Rueckgabe();
-        Zustand zustand = new Zustand();
         Kunde kunden = new Kunde();
         DataTable selectedBuecher = new DataTable();
         bool inRueckAction;
@@ -303,9 +305,10 @@ namespace Bibo_Verwaltung
                 }
                 DataRow relation;
                 string[] exemlarDetails = new string[3];
-                exemlarDetails[0] = autorueckgabe.ExemplarID;
+                exemlarDetails[0] = autorueckgabe.ExemplarID.ToString();
                 exemlarDetails[1] = autorueckgabe.RueckListe.Rows[autorueckgabe.GetIndexInRueckliste()][1].ToString();
-                exemlarDetails[2] = new Exemplar().GetTitel(autorueckgabe.RueckListe.Rows[autorueckgabe.GetIndexInRueckliste()][0].ToString());
+                Copy copy = new Copy(int.Parse(autorueckgabe.RueckListe.Rows[autorueckgabe.GetIndexInRueckliste()][0].ToString()));
+                exemlarDetails[2] = copy.CopyTitle;
                 relation = selectedBuecher.NewRow();
                 relation.ItemArray = exemlarDetails;
                 selectedBuecher.Rows.Add(relation);
@@ -467,13 +470,16 @@ namespace Bibo_Verwaltung
                         {
                             for (int i = 0; i < selectedBuecher.Rows.Count; i++)
                             {
-                                autorueckgabe.ExemplarID = selectedBuecher.Rows[i]["ID"].ToString();
+                                autorueckgabe.ExemplarID = int.Parse(selectedBuecher.Rows[i]["ID"].ToString());
                                 autorueckgabe.RueckListe.Rows[autorueckgabe.GetIndexInRueckliste()][2] = gv_selected.Rows[i].Cells["cbzustand"].Value.ToString();
                             }
                             foreach (DataRow row in autorueckgabe.RueckListe.Rows)
                             {
-                                autorueckgabe.Load_Info(row[0].ToString());
-                                autorueckgabe.Execute_Rueckgabe(row[0].ToString(), autorueckgabe.KID, row[1].ToString(), row[2].ToString(), zustand.GetZustandsName(row[2].ToString()), autorueckgabe.Leihdatum.ToShortDateString(), DateTime.Now.Date.ToShortDateString()); //Später einbauen (das ist der fertig-funktionsfähige Befehl)
+                                Condition condition = new Condition(int.Parse(row[2].ToString()));
+                                autorueckgabe.Load_Info(int.Parse(row[0].ToString()));
+                                autorueckgabe.Execute_Rueckgabe(row[0].ToString(), autorueckgabe.KID, row[1].ToString(), 
+                                    row[2].ToString(), condition.ConditionName, autorueckgabe.Leihdatum.ToShortDateString(), 
+                                    DateTime.Now.Date.ToShortDateString()); //Später einbauen (das ist der fertig-funktionsfähige Befehl)
                             }
                             MetroMessageBox.Show(this, "Die Buchrückgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             if (IsComplete(ref gv_suggested))
@@ -539,19 +545,19 @@ namespace Bibo_Verwaltung
                 {
                     try
                     {
-                        Exemplar buch_exemplar = new Exemplar(tb_ExemplarID.Text);
-                        if (buch_exemplar.IsActivated())
+                        Copy copy = new Copy(int.Parse(tb_ExemplarID.Text));
+                        if (copy.CopyActivated)
                         {
                             lb_selected.Text = "ausgewählte Bücher:";
-                            autorueckgabe.ExemplarID = buch_exemplar.ExemplarID;
-                            autorueckgabe.ZustandStart = buch_exemplar.GetZustandLang(autorueckgabe.ExemplarID);
+                            autorueckgabe.ExemplarID = copy.CopyID;
+                            autorueckgabe.ZustandStart = copy.Condition.ConditionName;
                             if (selectedBuecher.Columns.Count < 2)
                             {
                                 selectedBuecher.Columns.Add("ID");
                                 selectedBuecher.Columns.Add("Vorheriger Zustand");
                                 selectedBuecher.Columns.Add("Titel");
                             }
-                            if (!buch_exemplar.IsSpecificAvailable())
+                            if (!copy.IsAvailable())
                             {
                                 DataGridViewRow Buchrow = new DataGridViewRow();
                                 if (GetIndexInLeihBuecher() != -1)
@@ -586,7 +592,7 @@ namespace Bibo_Verwaltung
                                 gv_selected.Columns.Remove("cbzustand");
                             }
                             DataGridViewComboBoxColumn combobox = new DataGridViewComboBoxColumn();
-                            combobox = zustand.FillDataGridViewComboBox();
+                            combobox = conditionHelper.FillDataGridViewComboBox();
                             gv_selected.Columns.Add(combobox);
                             gv_selected.Columns["cbzustand"].DisplayIndex = 2;
                             gv_selected.Columns["cbzustand"].HeaderText = "aktueller Ist-Zustand";
@@ -595,7 +601,8 @@ namespace Bibo_Verwaltung
                                 DataGridViewComboBoxCell comboValue = (DataGridViewComboBoxCell)(gv_selected.Rows[i].Cells["cbzustand"]);
                                 comboValue.Value = 0;
                                 string valueMember = gv_selected.Rows[i].Cells[1].Value.ToString();
-                                valueMember = zustand.GetZustandsID(valueMember);
+                                Condition condition = new Condition(conditionHelper.FindIdByName(valueMember));
+                                valueMember = condition.ConditionId.ToString();
                                 gv_selected.Rows[i].Cells[3].Value = int.Parse(valueMember);
 
                             }

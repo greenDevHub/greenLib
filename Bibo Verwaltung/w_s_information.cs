@@ -26,8 +26,8 @@ namespace Bibo_Verwaltung
                 Text = "Buch-Details";
                 bt_Verwaltung.Text = "Bücherverwaltung";
                 tLP_Information.RowStyles[8].Height = 0;
-                Buch buch = new Buch();
-                buch.LoadBuchByID(id);
+                Book book = new Book();
+                book.LoadBookByCopyId(id);
                 lb_1.Text = "Buch-ISBN:";
                 lb_2.Text = "Buchtitel:";
                 lb_3.Text = "Autor:";
@@ -36,26 +36,26 @@ namespace Bibo_Verwaltung
                 lb_6.Text = "Auflage:";
                 lb_7.Text = "Neupreis:";
                 lb_8.Text = "Erscheinungsdatum:";
-                lb_2_1.Text = buch.ISBN;
-                lb_2_2.Text = buch.Titel;
-                if (buch.Autoren.Count > 1)
+                lb_2_1.Text = book.BookIsbn;
+                lb_2_2.Text = book.BookTitle;
+                if (book.BookAuthors.Count > 1)
                 {
                     lb_2_3.Text = "";
-                    foreach(string s in buch.Autoren)
+                    foreach(Author author in book.BookAuthors)
                     {
-                        lb_2_3.Text = lb_2_3.Text + s + ", ";
+                        lb_2_3.Text = lb_2_3.Text + author.AuthorName + ", ";
                     }
                     lb_2_3.Text = lb_2_3.Text.Substring(0, lb_2_3.Text.Length - 2);
                 }
-                else if(buch.Autoren.Count == 0)
+                else if(book.BookAuthors.Count == 0)
                 {
                     lb_2_3.Text = "-";
                 }
-                lb_2_4.Text = buch.Genre.Genrename;
-                lb_2_5.Text = buch.Verlag.Verlagname;
-                lb_2_6.Text = buch.Auflage;
-                lb_2_7.Text = buch.Neupreis.ToString() + " €";
-                lb_2_8.Text = buch.Er_datum.ToShortDateString();
+                lb_2_4.Text = book.BookGenre.GenreName;
+                lb_2_5.Text = book.BookPublisher.PublisherName;
+                lb_2_6.Text = book.BookEdition;
+                lb_2_7.Text = book.BookPrice.ToString() + " €";
+                lb_2_8.Text = book.BookDatePublication.ToShortDateString();
             }
             else if (modus == 2)
             {
@@ -85,7 +85,7 @@ namespace Bibo_Verwaltung
         {
             if (Text == "Buch-Details")
             {
-                w_s_buecher Buecher = new w_s_buecher(currentUser, true, msm_info);
+                Form_Books Buecher = new Form_Books(currentUser, true, msm_info);
                 msm_info.Clone(Buecher);
                 Buecher.ShowDialog(this);
                 Buecher.Dispose();

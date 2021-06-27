@@ -220,7 +220,7 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                w_s_buecher Buecher = new w_s_buecher(currentUser, true, this.StyleManager);
+                Form_Books Buecher = new Form_Books(currentUser, true, this.StyleManager);
                 this.StyleManager.Clone(Buecher);
                 Buecher.ShowDialog();
 

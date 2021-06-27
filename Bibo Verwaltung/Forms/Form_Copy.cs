@@ -19,9 +19,20 @@ using System.Threading;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_exemplare : MetroFramework.Forms.MetroForm
+    public partial class Form_Copy : MetroFramework.Forms.MetroForm
     {
-        Exemplar exemplar = new Exemplar();
+        #region variables
+        AuthorHelper authorHelper = new AuthorHelper();
+        GenreHelper genreHelper = new GenreHelper();
+        ConditionHelper conditionHelper = new ConditionHelper();
+        CopyHelper copyHelper = new CopyHelper();
+        enum SaveOption
+        {
+            add,
+            update,
+            delete
+        }
+        #endregion
         Image resultImage = null;
         List<Image> images = new List<Image>();
         bool loaded = false;
@@ -31,13 +42,13 @@ namespace Bibo_Verwaltung
         string currentUser;
         Color fc = Color.Black;
         Color bc = Color.White;
-        public w_s_exemplare(string userName, string isbn, MetroFramework.Components.MetroStyleManager msm)
+        public Form_Copy(string userName, string isbn, MetroFramework.Components.MetroStyleManager msm)
         {
             InitializeComponent();
             msm_exemplare = msm;
             this.StyleManager = msm;
             this.StyleManager.Style = MetroColorStyle.Blue;
-            if(this.StyleManager.Theme == MetroThemeStyle.Dark)
+            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
             {
                 fc = Color.White;
                 bc = System.Drawing.ColorTranslator.FromHtml("#111111");
@@ -62,9 +73,8 @@ namespace Bibo_Verwaltung
                 guest = false;
                 guestMode(guest);
             }
-            exemplar.ISBN = isbn;
-            tb_ISBN.Text = exemplar.ISBN;
-            exemplar.Zustand.FillCombobox(ref acb_Zustand, 0);
+            tb_ISBN.Text = isbn;
+            conditionHelper.FillCombobox(ref acb_Zustand, 0);
             tb_ExempCount.Text = gv_Exemplare.RowCount.ToString();
         }
         #endregion
@@ -86,29 +96,29 @@ namespace Bibo_Verwaltung
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.gv_Exemplare.Rows[e.RowIndex];
-                exemplar.ExemplarID = row.Cells["Exemplar"].Value.ToString();
-                LoadForm();
+                string copyId = row.Cells["Exemplar"].Value.ToString();
+                Copy copy = new Copy(int.Parse(copyId));
+                LoadForm(copy);
             }
         }
 
         /// <summary>
         /// Lädt ein Exemplar
         /// </summary>
-        private void LoadForm()
+        private void LoadForm(Copy copy)
         {
-            Exemplar ex = new Exemplar(exemplar.ExemplarID);
-            tb_ID.Text = ex.ExemplarID;
-            tb_ISBN.Text = ex.ISBN;
-            acb_Zustand.Text = ex.Zustand.Zustandname;
-            dTP_AufDat.Value = ex.Aufnahmedatum;
-            GenerateBarcode(ex.ExemplarID);
-            
+            tb_ID.Text = copy.CopyID.ToString();
+            tb_ISBN.Text = copy.CopyIsbn;
+            acb_Zustand.Text = copy.Condition.ConditionName;
+            dTP_AufDat.Value = copy.DateRegistration;
+            GenerateBarcode(copy.CopyID);
+
 
             rb_edit.Checked = true;
 
             if (acb_Zustand.DataSource == null)
             {
-                exemplar.Zustand.FillCombobox(ref acb_Zustand, -1);
+                conditionHelper.FillCombobox(ref acb_Zustand, -1);
 
             }
         }
@@ -124,11 +134,11 @@ namespace Bibo_Verwaltung
             return code;
         }
 
-        private void GenerateBarcode(string id)
+        private void GenerateBarcode(int id)
         {
             #region Barcode generieren
             string code = "";
-            code = id;
+            code = id.ToString();
             for (int i = code.Length; i < 7;)
             {
                 code = "0" + code;
@@ -251,7 +261,7 @@ namespace Bibo_Verwaltung
             }
             guestMode(guest);
         }
-        
+
         /// <summary>
         /// Prüft ob ein Zustand und ein Aufnahmedatum gesetzt wurden
         /// </summary>
@@ -280,7 +290,182 @@ namespace Bibo_Verwaltung
 
         private void bt_Add_Click(object sender, EventArgs e)
         {
-            List<string> idList = new List<string>();
+            Submit();
+        }
+
+        private void Submit()
+        {
+            if (rb_neu.Checked)
+            {
+                if (IsInputOkay(SaveOption.add))
+                {
+                    try
+                    {
+                        AddCopy();
+                    }
+                    catch(SqlException)
+                    {
+                        MetroMessageBox.Show(this, "Das Exemplar konnte hinzugefügt werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Füllen Sie alle Felder aus, um ein neues Exemplar hinzuzufügen!", "Achtung",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    IsOK();
+
+                }
+            }
+            else if (rb_edit.Checked)
+            {
+                if (IsInputOkay(SaveOption.update))
+                {
+                    try
+                    {
+                        UpdateCopy();
+                    }
+                    catch (SqlException)
+                    {
+                        MetroMessageBox.Show(this, "Das Exemplar konnte bearbeitet werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Füllen Sie alle Felder aus, um ein Exemplar zu bearbeiten!", "Achtung",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    IsOK();
+                }
+            }
+            else if (rb_delete.Checked)
+            {
+                if (IsInputOkay(SaveOption.delete))
+                {
+                    try
+                    {
+                        DeleteCopy();
+                    }
+                    catch (SqlException)
+                    {
+                        MetroMessageBox.Show(this, "Das Exemplar konnte entfernt werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Füllen Sie alle Felder aus, um ein Exemplar zu löschen!", "Achtung",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (tb_ID.Text.Equals(""))
+                    {
+                        tb_ID.BackColor = Color.Red;
+                    }
+                }
+            }
+            if (!backgroundWorker.IsBusy)
+            {
+                backgroundWorker.RunWorkerAsync();
+            }
+        }
+        private bool IsInputOkay(SaveOption opt)
+        {
+            bool inputOkay = false;
+            switch (opt)
+            {
+                case SaveOption.add:
+                    if (!acb_Zustand.Text.Equals("")) inputOkay = true;
+                    break;
+                case SaveOption.update:
+                    if (!tb_ID.Text.Equals("") && !acb_Zustand.Text.Equals("")) inputOkay = true;
+                    break;
+                case SaveOption.delete:
+                    if (!tb_ID.Text.Equals("")) inputOkay = true;
+                    break;
+            }
+            return inputOkay;
+        }
+        
+        private void AddCopy()
+        {
+            Copy copy = new Copy();
+
+            Condition condition = new Condition();
+            if (!conditionHelper.AlreadyContains(acb_Zustand.Text))
+            {
+                condition.ConditionName = acb_Zustand.Text;
+                condition.Add();
+                conditionHelper.FillCombobox(ref acb_Zustand, conditionHelper.FindIdByName(acb_Zustand.Text));
+            }
+            condition = new Condition(conditionHelper.FindIdByName(acb_Zustand.Text));
+            copy.Condition = condition;
+            copy.CopyIsbn = tb_ISBN.Text;
+            copy.DateRegistration = dTP_AufDat.Value;
+            List<Copy> copies = new List<Copy>();
+            int copyCount = int.Parse(tb_ExempCount.Text);
+            for (int i = 0; i < copyCount; i++)
+            {
+                copy.Add();
+                copy.SelectLastRow();
+                copies.Add(copy);
+            }
+            Clear_Form();
+            ShowMessage(SaveOption.add);
+
+            DialogResult result = MetroMessageBox.Show(this, "Möchten Sie alle eben hinzugefügten Exemplare die entsprechenden Labels drucken?",
+                "Buchlabel drucken?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                List<string> barcodes = new List<string>();
+                foreach (Copy c in copies)
+                {
+                    string code = GetCode(c.CopyID.ToString());
+                    barcodes.Add(code);
+                }
+                PrintMultipleBarcodes(barcodes);
+            }
+        }
+
+        private void UpdateCopy()
+        {
+            Copy copy = new Copy(int.Parse(tb_ID.Text));
+            Condition condition = new Condition();
+            if (!conditionHelper.AlreadyContains(acb_Zustand.Text))
+            {
+                condition.ConditionName = acb_Zustand.Text;
+                condition.Add();
+                conditionHelper.FillCombobox(ref acb_Zustand, conditionHelper.FindIdByName(acb_Zustand.Text));
+            }
+            condition = new Condition(conditionHelper.FindIdByName(acb_Zustand.Text));
+            copy.Condition = condition;
+            copy.CopyIsbn = tb_ISBN.Text;
+            copy.DateRegistration = dTP_AufDat.Value;
+            copy.Update();
+            Clear_Form();
+            ShowMessage(SaveOption.update);
+        }
+
+        private void DeleteCopy()
+        {
+            Copy copy = new Copy(int.Parse(tb_ID.Text));
+            if (copy.IsAvailable())
+            {
+                copy.Delete();
+                Clear_Form();
+                ShowMessage(SaveOption.delete);
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "Das Exemplar konnte nicht gelöscht werden, da es sich noch im Verleih befindet. " +
+                    "Bitte markieren Sie es zuerst als 'zurückgegeben'!", "Achtung",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        /// <summary>
+        /// shows a message to tell the user that the action was successful
+        /// </summary>
+        /// <param name="opt"></param>
+        private void ShowMessage(SaveOption opt)
+        {
+            lb_Message.Text = "";
             var t = new System.Windows.Forms.Timer();
             t.Interval = 3000; // it will Tick in 3 seconds
             t.Tick += (s, a) =>
@@ -288,158 +473,37 @@ namespace Bibo_Verwaltung
                 lb_Message.Hide();
                 t.Stop();
             };
-            if (rb_neu.Checked && !acb_Zustand.Text.Equals(""))
+            string message = "";
+            switch (opt)
             {
-                try
-                {
-                    if (!exemplar.Zustand.IfContains(acb_Zustand.Text))
-                    {
-                        exemplar.Zustand.AddZustand(acb_Zustand.Text);
-                        exemplar.Zustand.FillCombobox(ref acb_Zustand, exemplar.Zustand.GetZustandsID(acb_Zustand.Text));
-                    }
-                    lb_Message.Visible = false;
-                    exemplar.ExemplarID = tb_ID.Text;
-                    exemplar.ISBN = tb_ISBN.Text;
-                    exemplar.Zustand.ZustandID = acb_Zustand.SelectedValue.ToString();
-                    exemplar.Aufnahmedatum = dTP_AufDat.Value;
-                    int number = int.Parse(tb_ExempCount.Text);
-                    idList.Clear();
-                    for (int i = 0; i < number; i++)
-                    {
-                        exemplar.Add_Exemplar();
-                        exemplar.SelectLastRow(tb_ISBN.Text);
-                        idList.Add(exemplar.ExemplarID);
-                    }
-                    Clear_Form();
-                    lb_Message.Visible = true;
-                    //exemplar.FillGrid(ref gv_Exemplare);
-                    //tb_Vorhanden.Text = gv_Exemplare.RowCount.ToString();
-                    t.Start();
-                    DialogResult result = MetroMessageBox.Show(this, "Möchten Sie alle eben hinzugefügten Exemplare die entsprechenden Labels drucken?", "Buchlabel drucken?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (result == DialogResult.Yes)
-                    {
-                        List<string> barcodes = new List<string>();
-                        //images.Clear();
-                        foreach (string id in idList)
-                        {
-                            //tb_ID.Text = id;
-                            //LoadForm();
-                            string code = GetCode(id);
-                            barcodes.Add(code);
-                            //images.Add(BarcodeBox.Image);
-                        }
-                        PrintMultipleBarcodes(barcodes);
-                        //PrintDocument doc = new PrintDocument();
-                        //PrintDialog pd = new PrintDialog();
-                        //doc.PrintPage += Doc_PrintMultiplePages;
-                        //pd.Document = doc;
-                        //if (pd.ShowDialog() == DialogResult.OK)
-                        //{
-                        //    doc.Print();
-                        //}
-
-                    }
-                }
-                catch (SqlException)
-                {
-                    MetroMessageBox.Show(this, "Das Exemplar konnte nicht hinzugefügt werden!", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                if (!backgroundWorker.IsBusy)
-                {
-                    backgroundWorker.RunWorkerAsync();
-                }
+                case SaveOption.add:
+                    message = "Das Exemplar wurde erfolgreich hinzugefügt.";
+                    break;
+                case SaveOption.update:
+                    message = "Das Exemplar wurde erfolgreich aktualisiert.";
+                    break;
+                case SaveOption.delete:
+                    message = "Das Exemplar mit seinen Exemplaren wurde erfolgreich gelöscht.";
+                    break;
             }
-            else if (rb_delete.Checked && !tb_ID.Text.Equals(""))
-            {
-                try
-                {
-                    lb_Message.Visible = false;
-                    exemplar.ExemplarID = tb_ID.Text;
-                    exemplar.ISBN = tb_ISBN.Text;
-                    exemplar.Zustand.ZustandID = acb_Zustand.SelectedValue.ToString();
-                    exemplar.Aufnahmedatum = dTP_AufDat.Value;
-                    //b.Delete();
-                    if (exemplar.IsSpecificAvailable())
-                    {
-                        exemplar.Deactivate_Exemplar();
-                        Clear_Form();
-                        lb_Message.Visible = true;
-                        //exemplar.FillGrid(ref gv_Exemplare);
-                        //tb_Vorhanden.Text = gv_Exemplare.RowCount.ToString();
-                        t.Start();
-                    }
-                    else
-                    {
-                        MetroMessageBox.Show(this, "Das Exemplar konnte nicht gelöscht werden, da es sich noch im Verleih befindet. Bitte markieren Sie es zuerst als 'zurückgegeben'!", "Achtung",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-
-
-                }
-                catch (SqlException)
-                {
-                    MetroMessageBox.Show(this, "Das Exemplar konnte nicht gelöscht werden!", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                if (!backgroundWorker.IsBusy)
-                {
-                    backgroundWorker.RunWorkerAsync();
-                }
-            }
-            else if (rb_edit.Checked && !acb_Zustand.Text.Equals(""))
-            {
-                try
-                {
-                    if (!exemplar.Zustand.IfContains(acb_Zustand.Text))
-                    {
-                        exemplar.Zustand.AddZustand(acb_Zustand.Text);
-                        exemplar.Zustand.FillCombobox(ref acb_Zustand, exemplar.Zustand.GetZustandsID(acb_Zustand.Text));
-                    }
-                    lb_Message.Visible = false;
-                    exemplar.ExemplarID = tb_ID.Text;
-                    exemplar.ISBN = tb_ISBN.Text;
-                    exemplar.Zustand.ZustandID = acb_Zustand.SelectedValue.ToString();
-                    exemplar.Aufnahmedatum = dTP_AufDat.Value;
-                    exemplar.Update_Exemplar();
-                    Clear_Form();
-                    lb_Message.Visible = true;
-                    //exemplar.FillGrid(ref gv_Exemplare);
-                    //tb_Vorhanden.Text = gv_Exemplare.RowCount.ToString();
-                    t.Start();
-                }
-                catch (SqlException)
-                {
-                    MetroMessageBox.Show(this, "Das Exemplar konnte nicht bearbeitet werden!", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                if (!backgroundWorker.IsBusy)
-                {
-                    backgroundWorker.RunWorkerAsync();
-                }
-            }
-            else if (rb_edit.Checked)
-            {
-                MetroMessageBox.Show(this, "Füllen Sie alle Felder aus, um ein Exemplar zu bearbeiten!", "Achtung",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                IsOK();
-            }
-            else if (rb_neu.Checked)
-            {
-                MetroMessageBox.Show(this, "Füllen Sie alle Felder aus, um ein neues Exemplar hinzuzufügen!", "Achtung",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                IsOK();
-            }
-            else if (rb_delete.Checked)
-            {
-                MetroMessageBox.Show(this, "Füllen Sie alle Felder aus, um ein Exemplar zu löschen!", "Achtung",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                if (tb_ID.Text.Equals(""))
-                {
-                    tb_ID.BackColor = Color.Red;
-                }
-            }
+            lb_Message.Text = message;
+            lb_Message.Visible = true;
+            t.Start();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         private void Filter()
         {
             try
@@ -453,12 +517,12 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
-                    (gv_Exemplare.DataSource as DataTable).DefaultView.RowFilter = string.Format("Convert([Exemplar], System.String) LIKE '%{0}%' AND Zustand LIKE '%{1}%'", tb_ID.Text,acb_Zustand.Text);
+                    (gv_Exemplare.DataSource as DataTable).DefaultView.RowFilter = string.Format("Convert([Exemplar], System.String) LIKE '%{0}%' AND Zustand LIKE '%{1}%'", tb_ID.Text, acb_Zustand.Text);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                
+
             }
         }
         private void tb_isbn_TextChanged(object sender, EventArgs e)
@@ -551,11 +615,11 @@ namespace Bibo_Verwaltung
 
         private void bt_zustand_Click(object sender, EventArgs e)
         {
-            w_s_manage Zustand = new w_s_manage(currentUser, "Zustand",msm_exemplare);
+            w_s_manage Zustand = new w_s_manage(currentUser, "Zustand", msm_exemplare);
             msm_exemplare.Clone(Zustand);
             Zustand.ShowDialog(this);
             Zustand.Dispose();
-            exemplar.Zustand.FillCombobox(ref acb_Zustand, 0);
+            conditionHelper.FillCombobox(ref acb_Zustand, 0);
         }
 
         private void w_s_buchid_FormClosing(object sender, FormClosingEventArgs e)
@@ -644,8 +708,8 @@ namespace Bibo_Verwaltung
         {
             Clear_Form();
             tb_ID.Text = gv_Exemplare.SelectedRows[0].Cells["Exemplar"].Value.ToString();
-            exemplar.ExemplarID = tb_ID.Text;
-            LoadForm();
+            int copyId = int.Parse(tb_ID.Text);
+            LoadForm(new Copy(copyId));
         }
 
         private void entfernenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -653,10 +717,11 @@ namespace Bibo_Verwaltung
             int errorCount = 0;
             for (int i = 0; i < gv_Exemplare.SelectedRows.Count; i++)
             {
-                exemplar.ExemplarID = gv_Exemplare.SelectedRows[i].Cells[0].Value.ToString();
-                if (exemplar.IsSpecificAvailable())
+                int copyId = int.Parse(gv_Exemplare.SelectedRows[i].Cells[0].Value.ToString());
+                Copy copy = new Copy(copyId);
+                if (copy.IsAvailable())
                 {
-                    exemplar.Deactivate_Exemplar();
+                    copy.Deactivate();
                 }
                 else
                 {
@@ -685,8 +750,8 @@ namespace Bibo_Verwaltung
                 //images.Clear();
                 foreach (DataGridViewRow row in gv_Exemplare.SelectedRows)
                 {
-                    exemplar.ExemplarID = row.Cells["Exemplar"].Value.ToString();
-                    GenerateBarcode(exemplar.ExemplarID);
+                    int copyId = int.Parse(row.Cells["Exemplar"].Value.ToString());
+                    GenerateBarcode(copyId);
                     //LoadForm();
                     barcodes.Add(mtb_Barcode.Text);
                     //images.Add(BarcodeBox.Image);
@@ -695,9 +760,9 @@ namespace Bibo_Verwaltung
                 Clear_Form();
                 PrintMultipleBarcodes(barcodes);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MetroMessageBox.Show(this, ex.Message+"Es gab einen Fehler bei dem Druckvorgang!", "Fehler",
+                MetroMessageBox.Show(this, ex.Message + "Es gab einen Fehler bei dem Druckvorgang!", "Fehler",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -787,9 +852,11 @@ namespace Bibo_Verwaltung
                     foreach (string barcodeData in barcodeList)
                     {
                         doc.SetBarcodeData(barcodeIndex, barcodeData);
-                        doc.Objects[textIndex].Text = exemplar.GetTitel(barcodeData.TrimStart('0'));
+                        int copyId = int.Parse(barcodeData.TrimStart('0'));
+                        Copy copy = new Copy(copyId);
+                        doc.Objects[textIndex].Text = copy.CopyTitle;
                         doc.PrintOut(1, PrintOptionConstants.bpoDefault);
-                        exemplar.Print(barcodeData.TrimStart('0'));
+                        copy.Print();
                     }
                     doc.EndPrint();
                     doc.Close();
@@ -801,7 +868,7 @@ namespace Bibo_Verwaltung
                     MetroMessageBox.Show(this, "Der Drucker ist nicht online!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 tb_ID.ResetText();
                 MetroMessageBox.Show(this, "Es gab einen Fehler bei der Kommunikation mit dem Drucker!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -835,7 +902,7 @@ namespace Bibo_Verwaltung
                     gv_Exemplare.Visible = false;
                 });
                 MetroGrid mgExemplar = new MetroGrid();
-                exemplar.FillGrid(ref mgExemplar);
+                copyHelper.FillGrid(ref mgExemplar, tb_ISBN.Text);
                 var dtExemplar = mgExemplar.DataSource;
                 while (loaded == false)
                 {
@@ -850,10 +917,10 @@ namespace Bibo_Verwaltung
                     metroProgressSpinner1.Visible = false;
                     gv_Exemplare.Visible = true;
                     tb_Vorhanden.Text = gv_Exemplare.RowCount.ToString();
-                    
+
                 });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 BeginInvoke((Action)delegate ()
                 {
@@ -870,12 +937,12 @@ namespace Bibo_Verwaltung
 
             if (acb_Zustand.DataSource == null)
             {
-                exemplar.Zustand.FillCombobox(ref acb_Zustand, -1);
+                conditionHelper.FillCombobox(ref acb_Zustand, -1);
 
             }
             if (tb_ID.Text != "")
             {
-                LoadForm();
+                LoadForm(new Copy(int.Parse(tb_ID.Text)));
             }
             ////gv_Exemplare.Sort(gv_Exemplare.Columns[0], ListSortDirection.Descending);
             //gv_Exemplare.Sort(gv_Exemplare.Columns[0],ListSortDirection.Ascending);
@@ -892,7 +959,7 @@ namespace Bibo_Verwaltung
 
         private void Gv_Exemplare_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Tab)
+            if (e.KeyCode == Keys.Tab)
             {
                 e.SuppressKeyPress = true;
                 mbt_Import.Select();

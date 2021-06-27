@@ -11,7 +11,7 @@ namespace Bibo_Verwaltung
 {
     class Verlauf
     {
-        public Verlauf(string id)
+        public Verlauf(int id)
         {
             FillObject(id);
         }
@@ -22,7 +22,7 @@ namespace Bibo_Verwaltung
         SqlCommandBuilder comb = new SqlCommandBuilder();
 
         #region FillObject
-        private void FillObject(string buchid)
+        private void FillObject(int buchid)
         {
             dt.Clear();
             SQL_Verbindung con = new SQL_Verbindung();

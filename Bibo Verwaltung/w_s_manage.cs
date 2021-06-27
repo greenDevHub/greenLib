@@ -21,11 +21,11 @@ namespace Bibo_Verwaltung
         bool suchmodus = false;
 
         Fach fach;
-        Sprache sprache;
-        Genre genre;
-        Zustand zustand;
-        Autor autor;
-        Verlag verlag;
+        LanguageHelper languageHelper;
+        GenreHelper genreHelper;
+        ConditionHelper conditionHelper;
+        AuthorHelper authorHelper;
+        PublisherHelper publisherHelper;
         Klasse klasse;
         Color fc = Color.Black;
         Color bc = Color.White;
@@ -80,39 +80,39 @@ namespace Bibo_Verwaltung
                 this.StyleManager.Style = MetroColorStyle.Blue;
 
                 Text = "Sprachen" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-                sprache = new Sprache();
-                sprache.FillGrid(ref gv_manage);
+                languageHelper = new LanguageHelper();
+                languageHelper.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Autor")
             {
                 this.StyleManager.Style = MetroColorStyle.Blue;
 
                 Text = "Autoren" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-                autor = new Autor();
-                autor.FillGrid(ref gv_manage);
+                authorHelper = new AuthorHelper();
+                authorHelper.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Genre")
             {
                 this.StyleManager.Style = MetroColorStyle.Blue;
 
                 Text = "Genres" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-                genre = new Genre();
-                genre.FillGrid(ref gv_manage);
+                genreHelper = new GenreHelper();
+                genreHelper.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Zustand")
             {
                 this.StyleManager.Style = MetroColorStyle.Blue;
 
                 Text = "Buchzustände" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-                zustand = new Zustand();
-                zustand.FillGrid(ref gv_manage);
+                conditionHelper = new ConditionHelper();
+                conditionHelper.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Verlag")
             {
                 this.StyleManager.Style = MetroColorStyle.Blue;
                 Text = "Verlage" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-                verlag = new Verlag();
-                verlag.FillGrid(ref gv_manage);
+                publisherHelper = new PublisherHelper();
+                publisherHelper.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Klasse")
             {
@@ -138,23 +138,23 @@ namespace Bibo_Verwaltung
             }
             else if (currentModus == "Sprache")
             {
-                sprache.FillGrid(ref gv_manage);
+                languageHelper.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Autor")
             {
-                autor.FillGrid(ref gv_manage);
+                authorHelper.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Genre")
             {
-                genre.FillGrid(ref gv_manage);
+                genreHelper.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Zustand")
             {
-                zustand.FillGrid(ref gv_manage);
+                conditionHelper.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Verlag")
             {
-                verlag.FillGrid(ref gv_manage);
+                publisherHelper.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Klasse")
             {
@@ -173,23 +173,23 @@ namespace Bibo_Verwaltung
             }
             else if (currentModus == "Sprache")
             {
-                sprache.SaveGrid(ref gv_manage);
+                languageHelper.SaveChangesToDatabase(ref gv_manage);
             }
             else if (currentModus == "Autor")
             {
-                autor.SaveGrid();
+                authorHelper.SaveChangesToDatabase(ref gv_manage);
             }
             else if (currentModus == "Genre")
             {
-                genre.SaveGrid(ref gv_manage);
+                genreHelper.SaveChangesToDatabase(ref gv_manage);
             }
             else if (currentModus == "Zustand")
             {
-                zustand.SaveGrid(ref gv_manage);
+                conditionHelper.SaveChangesToDatabase(ref gv_manage);
             }
             else if (currentModus == "Verlag")
             {
-                verlag.SaveGrid(ref gv_manage);
+                publisherHelper.SaveChangesToDatabase(ref gv_manage);
             }
             else if (currentModus == "Klasse")
             {
@@ -209,23 +209,23 @@ namespace Bibo_Verwaltung
             }
             else if (currentModus == "Sprache")
             {
-                result = sprache.GetChangesGrid(ref gv_manage);
+                result = languageHelper.GridViewHasChanges(ref gv_manage);
             }
             else if (currentModus == "Autor")
             {
-                result = autor.GetChangesGrid(ref gv_manage);
+                result = authorHelper.GridViewHasChanges(ref gv_manage);
             }
             else if (currentModus == "Genre")
             {
-                result = genre.GetChangesGrid(ref gv_manage);
+                result = genreHelper.GridViewHasChanges(ref gv_manage);
             }
             else if (currentModus == "Zustand")
             {
-                result = zustand.GetChangesGrid(ref gv_manage);
+                result = conditionHelper.GridViewHasChanges(ref gv_manage);
             }
             else if (currentModus == "Verlag")
             {
-                result = verlag.GetChangesGrid(ref gv_manage);
+                result = publisherHelper.GridViewHasChanges(ref gv_manage);
             }
             else if (currentModus == "Klasse")
             {

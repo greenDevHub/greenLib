@@ -1137,7 +1137,7 @@ namespace Bibo_Verwaltung
 
         private void BuchAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form Buch = new w_s_buecher(currentUser, gv_buchsuche.SelectedRows[0].Cells["ISBN"].Value.ToString(),msm_buchsuche);
+            Form Buch = new Form_Books(currentUser, gv_buchsuche.SelectedRows[0].Cells["ISBN"].Value.ToString(),msm_buchsuche);
             loadEnabled = false;
             Buch.ShowDialog(this);
             loadEnabled = true;

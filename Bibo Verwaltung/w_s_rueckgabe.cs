@@ -18,6 +18,7 @@ namespace Bibo_Verwaltung
     {
         #region Constructor
         string currentUser;
+        ConditionHelper conditionHelper = new ConditionHelper();
         public w_s_rueckgabe(string userName, MetroStyleManager msm)
         {
             InitializeComponent();
@@ -38,7 +39,7 @@ namespace Bibo_Verwaltung
                 bt_AddBuch.Enabled = true;
                 bt_Zu_aendern.Enabled = true;
                 bt_Rueckgabe.Enabled = true;
-                zustand.FillCombobox(ref cb_Zustand, -1);
+                conditionHelper.FillCombobox(ref cb_Zustand, -1);
             }
         }
 
@@ -62,7 +63,7 @@ namespace Bibo_Verwaltung
                 bt_AddBuch.Enabled = true;
                 bt_Zu_aendern.Enabled = true;
                 bt_Rueckgabe.Enabled = true;
-                zustand.FillCombobox(ref cb_Zustand, -1);
+                conditionHelper.FillCombobox(ref cb_Zustand, -1);
                 rueckgabe.FillRueckListe(list);
                 rueckgabe.SetSlider(ref rueckList_Slider, ref tb_listVon, ref tb_listBis);
                 //foreach (string exemplar in list)
@@ -89,7 +90,6 @@ namespace Bibo_Verwaltung
 
         }
         Rueckgabe rueckgabe = new Rueckgabe();
-        Zustand zustand = new Zustand();
         Kunde kunde = new Kunde();
         //DataTable rueckListe = new DataTable();
 
@@ -265,10 +265,10 @@ namespace Bibo_Verwaltung
             {
                 try
                 {
-                    Exemplar buch_exemplar = new Exemplar(tb_BuchCode.Text);
-                    if (buch_exemplar.IsActivated())
+                    Copy copy = new Copy(int.Parse(tb_BuchCode.Text));
+                    if (copy.CopyActivated)
                     {
-                        rueckgabe.ExemplarID = buch_exemplar.ExemplarID;
+                        rueckgabe.ExemplarID = copy.CopyID;
                         if (rueckgabe.CheckRueckList())
                         {
                             bt_AddBuch.Text = "-";
@@ -277,13 +277,13 @@ namespace Bibo_Verwaltung
                         {
                             bt_AddBuch.Text = "+";
                         }
-                        rueckgabe.Verfuegbar = buch_exemplar.IsSpecificAvailable();
+                        rueckgabe.Verfuegbar = copy.IsAvailable();
                         llb_BuchTitel.Enabled = true;
-                        llb_BuchTitel.Text =rueckgabe.TrimText( buch_exemplar.Titel,30);
+                        llb_BuchTitel.Text =rueckgabe.TrimText( copy.CopyTitle,30);
                         //llb_BuchTitel.Text = rueckgabe.TrimText(new Buch(buch_exemplar.ISBN).Titel, 30);
-                        cb_Zustand.SelectedValue = buch_exemplar.Zustand.ZustandID;
-                        rueckgabe.ZustandStart = buch_exemplar.Zustand.Zustandname;
-                        rueckgabe.ZustandEnde = buch_exemplar.Zustand.Zustandname;
+                        cb_Zustand.SelectedValue = copy.Condition.ConditionId;
+                        rueckgabe.ZustandStart = copy.Condition.ConditionName;
+                        rueckgabe.ZustandEnde = copy.Condition.ConditionName;
                         Verlauf verlauf = new Verlauf(rueckgabe.ExemplarID);
                         verlauf.FillGrid(ref gv_Verlauf);
 
@@ -393,8 +393,10 @@ namespace Bibo_Verwaltung
                 {
                     foreach (DataRow row in rueckgabe.RueckListe.Rows)
                     {
-                        rueckgabe.Load_Info(row[0].ToString());
-                        rueckgabe.Execute_Rueckgabe(rueckgabe.ExemplarID.ToString(), rueckgabe.KID, rueckgabe.ZustandStart.ToString(), zustand.GetZustandsID(rueckgabe.ZustandEnde.ToString()), rueckgabe.ZustandEnde.ToString(), rueckgabe.Leihdatum.ToShortDateString(), DateTime.Now.Date.ToShortDateString());
+                        rueckgabe.Load_Info(int.Parse(row[0].ToString()));
+                        Condition condition = new Condition(int.Parse(rueckgabe.ZustandEnde.ToString()));
+                        rueckgabe.Execute_Rueckgabe(rueckgabe.ExemplarID.ToString(), rueckgabe.KID, rueckgabe.ZustandStart.ToString(),
+                            condition.ConditionId.ToString(), rueckgabe.ZustandEnde.ToString(), rueckgabe.Leihdatum.ToShortDateString(), DateTime.Now.Date.ToShortDateString());
                     }
                     MetroMessageBox.Show(this, "Die Buchrückgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -438,7 +440,7 @@ namespace Bibo_Verwaltung
 
         private void llb_Buch_LinkClicked(object sender, EventArgs e)
         {
-            w_s_information Info = new w_s_information(1, rueckgabe.ExemplarID, currentUser, msm_rueckgabe);
+            w_s_information Info = new w_s_information(1, rueckgabe.ExemplarID.ToString(), currentUser, msm_rueckgabe);
             msm_rueckgabe.Clone(Info);
             Info.ShowDialog();
             Info.Dispose();
@@ -492,7 +494,7 @@ namespace Bibo_Verwaltung
             Zustand.Dispose();
             if (!new Benutzer(currentUser).Rechteid.Equals("0"))
             {
-                zustand.FillCombobox(ref cb_Zustand, -1);
+                conditionHelper.FillCombobox(ref cb_Zustand, -1);
             }
             cb_Zustand.SelectedIndex = index;
         }

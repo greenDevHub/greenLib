@@ -25,11 +25,11 @@ namespace Bibo_Verwaltung
         /// </summary>
         public string KID { get { return kid; } set { kid = value; } }
 
-        string exemplarID;
+        int exemplarID;
         /// <summary>
         /// Leihdatum eines Exemplars
         /// </summary>
-        public string ExemplarID { get { return exemplarID; } set { exemplarID = value; } }
+        public int ExemplarID { get { return exemplarID; } set { exemplarID = value; } }
 
         string zustand_AusleihStart;
         /// <summary>
@@ -71,7 +71,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Laden der KundenID, und des Ausleih- und Rückgabedatums eines Buches
         /// </summary>
-        public void Load_Info(string exemlarID)
+        public void Load_Info(int exemlarID)
         {
             if (con.ConnectError()) return;
             string RawCommand = "SELECT aus_leihdatum, aus_rückgabedatum, aus_kundenid, aus_buchid FROM t_bd_ausgeliehen WHERE aus_buchid = @0";
@@ -79,7 +79,7 @@ namespace Bibo_Verwaltung
             while (dr.Read())
             {
                 KID = dr["aus_kundenid"].ToString();
-                ExemplarID = dr["aus_buchid"].ToString();
+                ExemplarID = int.Parse(dr["aus_buchid"].ToString());
                 Leihdatum = (DateTime)dr["aus_leihdatum"];
                 Rueckgabedatum = (DateTime)dr["aus_rückgabedatum"];
             }
@@ -95,7 +95,7 @@ namespace Bibo_Verwaltung
             int result = -1;
             for (int i = 0; i <= RueckListe.Rows.Count - 1; i++)
             {
-                if (RueckListe.Rows[i][0].ToString() == ExemplarID)
+                if (int.Parse(RueckListe.Rows[i][0].ToString()) == ExemplarID)
                 {
                     result = i;
                 }
@@ -157,7 +157,7 @@ namespace Bibo_Verwaltung
             bool result = false;
             for (int i = 0; i <= RueckListe.Rows.Count - 1; i++)
             {
-                if (RueckListe.Rows[i][0].ToString() == ExemplarID)
+                if (int.Parse(RueckListe.Rows[i][0].ToString()) == ExemplarID)
                 {
                     result = true;
                 }
@@ -185,8 +185,8 @@ namespace Bibo_Verwaltung
 
                 for (int i = 0; i <= inputList.Length - 1; i++)
                 {
-                    Load_Info(inputList[i].ToString());
-                    exemlarDetails[0] = ExemplarID;
+                    Load_Info(int.Parse(inputList[i].ToString()));
+                    exemlarDetails[0] = ExemplarID.ToString();
                     exemlarDetails[1] = ZustandStart;
                     exemlarDetails[2] = ZustandEnde;
                     relation = RueckListe.NewRow();
@@ -205,7 +205,6 @@ namespace Bibo_Verwaltung
         /// </summary>
         public String GetListInfo()
         {
-            Buch exemplar;
             StringBuilder sb = new StringBuilder();
             sb.Append("Derzeit sind folgende Titel in der Auswahlliste: ");
             sb.AppendLine();
@@ -215,8 +214,8 @@ namespace Bibo_Verwaltung
             {
                 for (int i = 0; i < RueckListe.Rows.Count; i++)
                 {
-                    Exemplar ex = new Exemplar();
-                    string titel = ex.GetTitel(RueckListe.Rows[i][0].ToString());
+                    Copy copy = new Copy(int.Parse(RueckListe.Rows[i][0].ToString()));
+                    string titel = copy.CopyTitle;
 
 
                     //exemplar = new Buch(new Exemplar(RueckListe.Rows[i][0].ToString()).ISBN);
@@ -245,10 +244,10 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                Buch buchCover = new Buch(new Exemplar(ExemplarID).ISBN);
-                if (buchCover.Image != null)
+                Book buchCover = new Book(new Copy(ExemplarID).CopyIsbn,false);
+                if (buchCover.BookImage != null)
                 {
-                    MemoryStream mem = new MemoryStream(buchCover.Image);
+                    MemoryStream mem = new MemoryStream(buchCover.BookImage);
                     picBox_Buchcover.Image = Image.FromStream(mem);
                 }
                 else
@@ -281,13 +280,11 @@ namespace Bibo_Verwaltung
         /// </summary>
         public String GetRueckgabeList()
         {
-            Exemplar exemplar;
-            Buch exemplar_info;
             string resultString = "Möchten Sie ";
             if (RueckListe.Rows.Count == 1)
             {
-                Exemplar ex = new Exemplar();
-                string titel = ex.GetTitel(RueckListe.Rows[0][0].ToString());
+                Copy ex = new Copy(int.Parse(RueckListe.Rows[0][0].ToString()));
+                string titel = ex.CopyTitle;
                 //exemplar = new Exemplar(RueckListe.Rows[0][0].ToString());
                 //exemplar_info = new Buch(exemplar.ISBN);
                 resultString = resultString + "das Buch: " + Environment.NewLine + Environment.NewLine + TrimText(titel, 30) + ", " + Environment.NewLine + Environment.NewLine;
@@ -297,8 +294,8 @@ namespace Bibo_Verwaltung
                 resultString = resultString + "die Bücher: " + Environment.NewLine + Environment.NewLine;
                 foreach (DataRow row in RueckListe.Rows)
                 {
-                    Exemplar ex = new Exemplar();
-                    string titel = ex.GetTitel(row[0].ToString());
+                    Copy ex = new Copy(int.Parse(row[0].ToString()));
+                    string titel = ex.CopyTitle;
                     //exemplar = new Exemplar(row[0].ToString());
                     //exemplar_info = new Buch(exemplar.ISBN);
                     resultString = resultString + "-  " + TrimText(titel, 30) + ", " + Environment.NewLine;
@@ -351,7 +348,7 @@ namespace Bibo_Verwaltung
             {
                 DataRow relation;
                 string[] exemlarDetails = new string[3];
-                exemlarDetails[0] = ExemplarID;
+                exemlarDetails[0] = ExemplarID.ToString();
                 exemlarDetails[1] = ZustandStart;
                 exemlarDetails[2] = ZustandEnde;
                 if (RueckListe.Columns.Count != 3)
@@ -380,7 +377,7 @@ namespace Bibo_Verwaltung
                 for (int i = RueckListe.Rows.Count - 1; i >= 0; i--)
                 {
                     DataRow row = RueckListe.Rows[i];
-                    if (row[0].ToString() == ExemplarID)
+                    if (int.Parse(row[0].ToString()) == ExemplarID)
                         row.Delete();
                 }
                 RueckListe.AcceptChanges();
