@@ -160,7 +160,7 @@
             // 
             // metroLink1
             // 
-            this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Lock;
+            this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Lock32;
             this.metroLink1.ImageSize = 24;
             this.metroLink1.Location = new System.Drawing.Point(23, 25);
             this.metroLink1.Margin = new System.Windows.Forms.Padding(2);

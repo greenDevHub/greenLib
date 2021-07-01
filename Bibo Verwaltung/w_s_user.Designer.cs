@@ -343,7 +343,7 @@
             // 
             // bt_show
             // 
-            this.bt_show.Image = global::Bibo_Verwaltung.Properties.Resources.eye;
+            this.bt_show.Image = global::Bibo_Verwaltung.Properties.Resources.Eye16;
             this.bt_show.Location = new System.Drawing.Point(337, 88);
             this.bt_show.Name = "bt_show";
             this.bt_show.Size = new System.Drawing.Size(24, 24);

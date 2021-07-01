@@ -71,7 +71,8 @@
   <PropertyGroup />
   <PropertyGroup />
   <PropertyGroup>
-    <ApplicationIcon>greenLib.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
@@ -578,36 +579,26 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="greenLib.ico" />
-    <Content Include="Resources\DarkMode.png" />
-    <Content Include="Resources\Settings.png" />
-    <None Include="Resources\Exit.png" />
-    <Content Include="Resources\Lock.png" />
-    <Content Include="Resources\QuestionMark.png" />
-    <None Include="Resources\eye.png" />
+    <Content Include="Resources\DarkMode512.png" />
+    <None Include="Resources\Settings32.png" />
+    <None Include="Resources\Eye32.png" />
+    <None Include="Resources\Exit32.png" />
+    <None Include="Resources\DarkMode32.png" />
+    <None Include="Resources\QuestionMark32.png" />
+    <None Include="Resources\greenLib512.png" />
+    <None Include="Resources\greenLib.ico" />
+    <None Include="Resources\greenLib32.png" />
+    <None Include="Resources\Eye16.png" />
+    <None Include="Resources\Lock32.png" />
+    <Content Include="Resources\Settings512.png" />
+    <None Include="Resources\Exit512.png" />
+    <Content Include="Resources\Lock512.png" />
+    <Content Include="Resources\QuestionMark512.png" />
+    <None Include="Resources\Eye512.png" />
     <None Include="Resources\Handbuch.pdf" />
-    <None Include="Resources\question.png" />
-    <None Include="Resources\sun.png" />
-    <None Include="Resources\logout %281%29.png" />
-    <None Include="greenLib.png" />
-    <Content Include="icon.ico" />
-    <None Include="Resources\BarcodePreset.bmp" />
     <None Include="Resources\BarcodePreset.lbx" />
-    <None Include="Resources\Login.png" />
     <None Include="Resources\Arrow_Left.png" />
     <None Include="Resources\Arrow_Right.png" />
-    <None Include="Resources\Settings64.png" />
-    <None Include="Resources\Settings256.png" />
-    <None Include="Resources\Settings128.png" />
-    <None Include="Resources\iconfinder_Streamline-75_1850951.png" />
-    <None Include="Resources\iconfinder_Streamline-75_185095.png" />
-    <None Include="icon.png" />
-    <None Include="Resources\iconfinder_lock_5119421.png" />
-    <None Include="Resources\iconfinder_lock_511942.png" />
-    <None Include="Resources\iconfinder_723__minus__minimize__website_3838428.png" />
-    <None Include="Resources\iconfinder_icon-ios7-arrow-left_211689.png" />
-    <None Include="Resources\iconfinder_icon-ios7-arrow-right_211607.png" />
-    <None Include="Resources\296812-64.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

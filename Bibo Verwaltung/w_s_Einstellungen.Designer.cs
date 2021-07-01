@@ -431,7 +431,7 @@
             // 
             // metroLink1
             // 
-            this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Settings;
+            this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Settings32;
             this.metroLink1.ImageSize = 32;
             this.metroLink1.Location = new System.Drawing.Point(23, 19);
             this.metroLink1.Name = "metroLink1";

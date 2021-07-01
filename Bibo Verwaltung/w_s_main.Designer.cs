@@ -330,7 +330,7 @@
             // bt_help
             // 
             this.bt_help.DisplayFocus = true;
-            this.bt_help.Image = global::Bibo_Verwaltung.Properties.Resources.QuestionMark;
+            this.bt_help.Image = global::Bibo_Verwaltung.Properties.Resources.QuestionMark32;
             this.bt_help.ImageSize = 24;
             this.bt_help.Location = new System.Drawing.Point(671, 25);
             this.bt_help.Name = "bt_help";
@@ -342,7 +342,7 @@
             // bt_darkmode
             // 
             this.bt_darkmode.DisplayFocus = true;
-            this.bt_darkmode.Image = global::Bibo_Verwaltung.Properties.Resources.DarkMode;
+            this.bt_darkmode.Image = global::Bibo_Verwaltung.Properties.Resources.DarkMode32;
             this.bt_darkmode.ImageSize = 24;
             this.bt_darkmode.Location = new System.Drawing.Point(714, 25);
             this.bt_darkmode.Name = "bt_darkmode";
@@ -355,7 +355,7 @@
             // 
             this.bt_logout.DisplayFocus = true;
             this.bt_logout.FontWeight = MetroFramework.MetroLinkWeight.Light;
-            this.bt_logout.Image = global::Bibo_Verwaltung.Properties.Resources.Exit;
+            this.bt_logout.Image = global::Bibo_Verwaltung.Properties.Resources.Exit32;
             this.bt_logout.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bt_logout.ImageSize = 24;
             this.bt_logout.Location = new System.Drawing.Point(757, 26);
@@ -369,7 +369,7 @@
             // 
             // image
             // 
-            this.image.Image = global::Bibo_Verwaltung.Properties.Resources.greenLib;
+            this.image.Image = global::Bibo_Verwaltung.Properties.Resources.greenLib32;
             this.image.ImageSize = 32;
             this.image.Location = new System.Drawing.Point(10, 21);
             this.image.Margin = new System.Windows.Forms.Padding(2);
