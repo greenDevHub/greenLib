@@ -16,7 +16,6 @@ namespace Bibo_Verwaltung
     {
         Command c;
         DataTable table;
-        SqlDataAdapter adapter;
 
         public PublisherHelper()
         {
@@ -51,7 +50,7 @@ namespace Bibo_Verwaltung
         /// <param name="value"></param>
         public void FillCombobox(ref AdvancedComboBox cb, object value)
         {
-            c.FillCombobox(ref cb, value, ref adapter, ref table);
+            c.FillCombobox(ref cb, value, ref table);
         }
 
         /// <summary>
@@ -61,7 +60,7 @@ namespace Bibo_Verwaltung
         /// <param name="value"></param>
         public void FillGrid(ref MetroGrid grid, object value = null)
         {
-            c.FillGrid(ref grid, value, "Bezeichnung", ref adapter, ref table);
+            c.FillGrid(ref grid, value, "Bezeichnung", ref table);
         }
 
         /// <summary>
@@ -70,7 +69,7 @@ namespace Bibo_Verwaltung
         /// <param name="grid"></param>
         public void SaveChangesToDatabase(ref MetroGrid grid)
         {
-            c.SaveGridChangesToDataBase(ref grid, ref table, ref adapter);
+            c.SaveGridChangesToDataBase(ref grid, ref table);
         }
 
         /// <summary>

@@ -110,12 +110,12 @@ namespace Bibo_Verwaltung.Database
         /// fills a table object with data from a small entity
         /// </summary>
         /// <returns>a datatable filled with data</returns>
-        public DataTable FillObject(ref SqlDataAdapter adapter)
+        public DataTable FillObject()
         {
             DataTable table = new DataTable();
             if (con.ConnectError()) return table;
             string command = $"SELECT * FROM {TableName}";
-            adapter = new SqlDataAdapter(command, con.Con);
+            SqlDataAdapter adapter = new SqlDataAdapter(command, con.Con);
             adapter.Fill(table);
             con.Close();
             return table;
@@ -142,10 +142,10 @@ namespace Bibo_Verwaltung.Database
         /// <param name="value"></param>
         /// <param name="adapter"></param>
         /// <param name="table"></param>
-        public void FillCombobox(ref AdvancedComboBox cb, object value, ref SqlDataAdapter adapter, ref DataTable table)
+        public void FillCombobox(ref AdvancedComboBox cb, object value, ref DataTable table)
         {
             if (cb.AutoCompleteSource != AutoCompleteSource.None) cb.AutoCompleteSource = AutoCompleteSource.None;
-            table = FillObject(ref adapter);
+            table = FillObject();
             if (table == null) return;
             cb.DataSource = table;
             cb.ValueMember = FieldId;
@@ -161,19 +161,35 @@ namespace Bibo_Verwaltung.Database
         /// <param name="headerText"></param>
         /// <param name="adapter"></param>
         /// <param name="table"></param>
-        public void FillGrid(ref MetroGrid grid, object value, string headerText, ref SqlDataAdapter adapter, ref DataTable table)
+        public void FillGrid(ref MetroGrid grid, object value, string headerText, ref DataTable table)
         {
-            table = FillObject(ref adapter);
+            table = FillObject();
             if (table == null) return;
             grid.DataSource = table;
             grid.Columns[FieldId].Visible = false;
             grid.Columns[FieldName].HeaderText = headerText;
         }
 
-        public void SaveGridChangesToDataBase(ref MetroGrid grid, ref DataTable table, ref SqlDataAdapter adapter)
+        public void SaveGridChangesToDataBase(ref MetroGrid grid, ref DataTable table)
         {
             if (con.ConnectError()) return;
             DataTable changes = ReturnChanges(ref grid, ref table);
+            SqlDataAdapter adapter = new SqlDataAdapter();
+
+            adapter.SelectCommand = new SqlCommand($"SELECT * FROM {TableName}", con.Con);
+
+            SqlCommand insertCmd = new SqlCommand($"INSERT INTO {TableName} ({FieldName}) VALUES (@FieldName)", con.Con);
+            insertCmd.Parameters.Add("@FieldName", SqlDbType.NVarChar, 64, FieldName);
+            adapter.InsertCommand = insertCmd;
+
+            SqlCommand deleteCmd = new SqlCommand($"DELETE FROM {TableName} WHERE {FieldName} = @FieldName", con.Con);
+            deleteCmd.Parameters.Add("@FieldName", SqlDbType.NVarChar, 64, FieldName);
+            adapter.DeleteCommand = deleteCmd;
+
+            SqlCommand updateCmd = new SqlCommand($"UPDATE {TableName} SET {FieldName} = @FieldName WHERE {FieldId} = @FieldId", con.Con);
+            updateCmd.Parameters.Add("@FieldName", SqlDbType.NVarChar, 64, FieldName);
+            updateCmd.Parameters.Add("@FieldId", SqlDbType.Int, 32, FieldId);
+            adapter.UpdateCommand = updateCmd;
             if (changes == null) return;
             adapter.Update(changes);
         }
@@ -186,7 +202,7 @@ namespace Bibo_Verwaltung.Database
         {
             DataTable changes = new DataTable();
             changes = table.GetChanges();
-            if (changes != null)
+            if (changes != null && changes.Rows.Count>0)
             {
                 changes = noDuplicates(changes, table);
             }
@@ -240,7 +256,7 @@ namespace Bibo_Verwaltung.Database
                 for (int i = 0; i < changes.Rows.Count; i++)
                 {
                     string str = changes.Rows[i][1].ToString();
-                    bool contains = table.AsEnumerable().Any(row => str.Equals(row.Field<String>(1), StringComparison.InvariantCultureIgnoreCase));
+                    bool contains = table.AsEnumerable().Any(row => row.RowState == DataRowState.Unchanged && str.Equals(row.Field<String>(1), StringComparison.InvariantCultureIgnoreCase));
                     if (contains)
                     {
                         duplicateList.Add(changes.Rows[i]);
