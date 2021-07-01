@@ -312,6 +312,7 @@ namespace Bibo_Verwaltung
             Book book = new Book(tb_ISBN.Text, false);
 
             FinalizePublisherGenreLanguage(ref book);
+            book.BookAuthors.Clear();
             FinalizeAuthor(ref book, multipleAuthors);
 
             //update book values
@@ -320,21 +321,21 @@ namespace Bibo_Verwaltung
             book.BookEdition = tb_Auflage.Text;
             book.BookPrice = isEmpty(tb_Neupreis.Text) ? 0.00M : Convert.ToDecimal(tb_Neupreis.Text);
             book.BookDatePublication = dTP_Erscheinungsdatum.Value;
-            if (picBox_Klein.ImageLocation == null || picBox_Klein.ImageLocation.Equals(""))
+            if (picBox_Klein.Image == null)
             {
                 book.BookImage = null;
             }
             else
             {
-                book.BookImage = System.IO.File.ReadAllBytes(picBox_Klein.ImageLocation);
-                File.Delete(picBox_Klein.ImageLocation);
+                ImageConverter converter = new ImageConverter();
+                book.BookImage = (byte[])converter.ConvertTo(picBox_Klein.Image, typeof(byte[]));
             }
 
             //submit changes
             book.Update();
 
             //fill grid
-            bookHelper.FillGrid(ref Grid_Buch, false);
+            bookHelper.FillGrid(ref gridViewBook, false);
 
             //show success message
             ShowMessage(SaveOption.update);
@@ -357,7 +358,7 @@ namespace Bibo_Verwaltung
                 {
                     book.Deactivate();
                     ClearForm();
-                    bookHelper.FillGrid(ref Grid_Buch, false);
+                    bookHelper.FillGrid(ref gridViewBook, false);
 
                     //show success message
                     ShowMessage(SaveOption.delete);
@@ -389,14 +390,14 @@ namespace Bibo_Verwaltung
             book.BookEdition = tb_Auflage.Text;
             book.BookPrice = isEmpty(tb_Neupreis.Text) ? 0.00M : Convert.ToDecimal(tb_Neupreis.Text);
             book.BookDatePublication = dTP_Erscheinungsdatum.Value;
-            if (picBox_Klein.ImageLocation == null || picBox_Klein.ImageLocation.Equals(""))
+            if (picBox_Klein.Image == null)
             {
                 book.BookImage = null;
             }
             else
             {
-                book.BookImage = System.IO.File.ReadAllBytes(picBox_Klein.ImageLocation);
-                File.Delete(picBox_Klein.ImageLocation);
+                ImageConverter converter = new ImageConverter();
+                book.BookImage = (byte[])converter.ConvertTo(picBox_Klein.Image, typeof(byte[]));
             }
             book.Add();
 
@@ -415,7 +416,7 @@ namespace Bibo_Verwaltung
             string newConditionName = "neu";
             if (isEmpty(tb_neu.Text))
             {
-                int newCopyCount = int.Parse(tb_neu.Text);
+                int newCopyCount = isEmpty(tb_neu.Text) ? 0 : int.Parse(tb_neu.Text);
                 Condition newCondition = new Condition();
                 int conditionId = conditionHelper.FindIdByName(newConditionName);
                 if (conditionId < 0)
@@ -447,7 +448,7 @@ namespace Bibo_Verwaltung
 
                 formCopy.Dispose();
             }
-            bookHelper.FillGrid(ref Grid_Buch, false);
+            bookHelper.FillGrid(ref gridViewBook, false);
         }
 
         /// <summary>
@@ -573,14 +574,14 @@ namespace Bibo_Verwaltung
             switch (opt)
             {
                 case SaveOption.add:
-                    if (!checkbox_autor.Checked && !isEmpty(tb_ISBN.Text) && !isEmpty(tb_Titel.Text)
+                    if (!isEmpty(tb_ISBN.Text) && !isEmpty(tb_Titel.Text)
                         && !isEmpty(cb_Autor.Text) && !isEmpty(cb_Verlag.Text) && !isEmpty(cb_Genre.Text) && !isEmpty(cb_Sprache.Text))
                     {
                         inputOkay = true;
                     }
                     break;
                 case SaveOption.update:
-                    if (!checkbox_autor.Checked && !isEmpty(tb_ISBN.Text) && !isEmpty(tb_Titel.Text)
+                    if (!isEmpty(tb_ISBN.Text) && !isEmpty(tb_Titel.Text)
                         && !isEmpty(cb_Autor.Text) && !isEmpty(cb_Verlag.Text) && !isEmpty(cb_Genre.Text) && !isEmpty(cb_Sprache.Text))
                     {
                         inputOkay = true;
@@ -620,7 +621,6 @@ namespace Bibo_Verwaltung
             cb_Sprache.Text = "";
             tb_Auflage.Text = "";
             tb_Neupreis.Text = "";
-            tb_anzahl.Text = "";
             picBox_Gross.Image = null;
             picBox_Gross.ImageLocation = null;
             picBox_Gross.Refresh();
@@ -635,7 +635,6 @@ namespace Bibo_Verwaltung
             cb_Sprache.BackColor = bc;
             tb_Auflage.BackColor = Color.White;
             tb_Neupreis.BackColor = Color.White;
-            tb_anzahl.BackColor = Color.White;
         }
 
 
@@ -656,12 +655,12 @@ namespace Bibo_Verwaltung
             {
                 if (dTP_Erscheinungsdatum.Value.Date != DateTime.Now.Date)
                 {
-                    (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%' AND Autor LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Sprache LIKE '%{5}%' AND Convert([Erscheinungsdatum], System.String) LIKE '%{6}%'", tb_Titel.Text, tb_ISBN.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, cb_Sprache.Text, dTP_Erscheinungsdatum.Value.Date.ToShortDateString());
+                    (gridViewBook.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%' AND Autor LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Sprache LIKE '%{5}%' AND Convert([Erscheinungsdatum], System.String) LIKE '%{6}%'", tb_Titel.Text, tb_ISBN.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, cb_Sprache.Text, dTP_Erscheinungsdatum.Value.Date.ToShortDateString());
 
                 }
                 else
                 {
-                    (Grid_Buch.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%' AND Autor LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Sprache LIKE '%{5}%'", tb_Titel.Text, tb_ISBN.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, cb_Sprache.Text);
+                    (gridViewBook.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%' AND Autor LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Sprache LIKE '%{5}%'", tb_Titel.Text, tb_ISBN.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, cb_Sprache.Text);
                 }
             }
             catch (Exception ex)
@@ -925,6 +924,7 @@ namespace Bibo_Verwaltung
                 checkbox_autor.Checked = true;
                 foreach (DataRowView item in checkedListBox1.Items)
                 {
+                    var s = item["au_autor"];
                     Author author = new Author(authorHelper.FindIdByName(item["au_autor"].ToString()));
                     if (book.BookAuthors.Contains(author))
                     {
@@ -950,7 +950,6 @@ namespace Bibo_Verwaltung
             tb_Auflage.Text = book.BookEdition;
             tb_Neupreis.Text = book.BookPrice.ToString();
             dTP_Erscheinungsdatum.Value = book.BookDatePublication;
-
             if (book.BookImage != null)
             {
                 MemoryStream mem = new MemoryStream(book.BookImage);
@@ -965,6 +964,7 @@ namespace Bibo_Verwaltung
             genreHelper.FillCombobox(ref cb_Genre, book.BookGenre.GenreId);
             languageHelper.FillCombobox(ref cb_Sprache, book.BookLanguage.LanguageId);
             tb_barcodePrinted.Text = book.NumberOfPrintedCopies().ToString();
+            rb_Update_Buch.Checked = true;
         }
 
         /// <summary>
@@ -972,11 +972,11 @@ namespace Bibo_Verwaltung
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Grid_Buch_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void gridViewBookClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow row = Grid_Buch.Rows[e.RowIndex];
+                DataGridViewRow row = gridViewBook.Rows[e.RowIndex];
                 tb_ISBN.Text = row.Cells[0].Value.ToString();
                 LoadBuch(new Book(tb_ISBN.Text, false));
                 if (!bool1) Hide();
@@ -1099,7 +1099,7 @@ namespace Bibo_Verwaltung
             ExcelExport export = new ExcelExport();
             try
             {
-                export.ExportDataGridViewAsCSV(Grid_Buch);
+                export.ExportDataGridViewAsCSV(gridViewBook);
                 MetroMessageBox.Show(this, "Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
@@ -1149,10 +1149,6 @@ namespace Bibo_Verwaltung
             ZoomInOut(false);
         }
 
-        List<string> needAutor = new List<string>();
-        bool ifDownloaded = false;
-        bool ifVerlagExists = false;
-
         /// <summary>
         /// click on button to load book data from internet
         /// </summary>
@@ -1161,7 +1157,7 @@ namespace Bibo_Verwaltung
         private void bt_load_click(object sender, EventArgs e)
         {
             tb_ISBN.Text = tb_ISBN.Text.Replace("-", "");
-            if (Grid_Buch.Rows.Count == 0)
+            if (gridViewBook.Rows.Count == 0)
             {
                 //load data
                 if (!isEmpty(tb_ISBN.Text))
@@ -1211,7 +1207,7 @@ namespace Bibo_Verwaltung
             if (e.KeyCode == Keys.Enter && !rb_Delete_Buch.Checked)
             {
                 tb_ISBN.Text = tb_ISBN.Text.Replace("-", "");
-                if (Grid_Buch.Rows.Count == 0)
+                if (gridViewBook.Rows.Count == 0)
                 {
                     Book book = webHelper.AutoLoadDNB(tb_ISBN.Text);
                     if(book == null)
@@ -1223,7 +1219,7 @@ namespace Bibo_Verwaltung
                         LoadBuch(book);
                     }
                 }
-                else if (Grid_Buch.Rows.Count == 1)
+                else if (gridViewBook.Rows.Count == 1)
                 {
                     Book book = new Book(tb_ISBN.Text, false);
                     LoadBuch(book);
@@ -1372,16 +1368,16 @@ namespace Bibo_Verwaltung
         {
             if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                if (!Grid_Buch.Rows[e.RowIndex].Selected)
+                if (!gridViewBook.Rows[e.RowIndex].Selected)
                 {
-                    Grid_Buch.ClearSelection();
-                    Grid_Buch.Rows[e.RowIndex].Selected = true;
+                    gridViewBook.ClearSelection();
+                    gridViewBook.Rows[e.RowIndex].Selected = true;
                 }
-                if (Grid_Buch.SelectedRows.Count > 1)
+                if (gridViewBook.SelectedRows.Count > 1)
                 {
                     ladenToolStripMenuItem.Text = "Ausgewähltes Buch laden";
                     ladenToolStripMenuItem.Enabled = false;
-                    entfernenToolStripMenuItem.Text = "Ausgewählte Bücher mit ihren Exemplaren entfernen (" + Grid_Buch.SelectedRows.Count + ")";
+                    entfernenToolStripMenuItem.Text = "Ausgewählte Bücher mit ihren Exemplaren entfernen (" + gridViewBook.SelectedRows.Count + ")";
                     entfernenToolStripMenuItem.Enabled = true;
                     exemplareToolStripMenuItem.Text = "Alle Exemplare zu diesem Buch anzeigen";
                     exemplareToolStripMenuItem.Enabled = false;
@@ -1401,7 +1397,7 @@ namespace Bibo_Verwaltung
 
         private void ladenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            tb_ISBN.Text = Grid_Buch.SelectedRows[0].Cells["ISBN"].Value.ToString();
+            tb_ISBN.Text = gridViewBook.SelectedRows[0].Cells["ISBN"].Value.ToString();
             Book book = new Book(tb_ISBN.Text,false);
             if (bool1)
             {
@@ -1415,13 +1411,13 @@ namespace Bibo_Verwaltung
 
         private void entfernenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            tb_ISBN.Text = Grid_Buch.SelectedRows[0].Cells["ISBN"].Value.ToString();
+            tb_ISBN.Text = gridViewBook.SelectedRows[0].Cells["ISBN"].Value.ToString();
             Book book = new Book(tb_ISBN.Text, false);
             if (book.AreCopiesAvailable())
             {
                 book.Deactivate();
                 ClearForm();
-                bookHelper.FillGrid(ref Grid_Buch, false);
+                bookHelper.FillGrid(ref gridViewBook, false);
             }
             else
             {
@@ -1433,7 +1429,7 @@ namespace Bibo_Verwaltung
 
         private void exemplareToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string isbnAktuell = Grid_Buch.SelectedRows[0].Cells["ISBN"].Value.ToString();
+            string isbnAktuell = gridViewBook.SelectedRows[0].Cells["ISBN"].Value.ToString();
             tb_ISBN.Text = isbnAktuell;
             Form_Copy Buchid = new Form_Copy(currentUser, isbnAktuell, msm_buecher);
             msm_buecher.Clone(Buchid);
@@ -1450,9 +1446,9 @@ namespace Bibo_Verwaltung
 
         private void Grid_Buch_MouseDown(object sender, MouseEventArgs e)
         {
-            if (!(Grid_Buch.HitTest(e.X, e.Y).RowIndex >= 0) || !(Grid_Buch.HitTest(e.X, e.Y).ColumnIndex >= 0))
+            if (!(gridViewBook.HitTest(e.X, e.Y).RowIndex >= 0) || !(gridViewBook.HitTest(e.X, e.Y).ColumnIndex >= 0))
             {
-                Grid_Buch.ClearSelection();
+                gridViewBook.ClearSelection();
                 ladenToolStripMenuItem.Visible = false;
                 entfernenToolStripMenuItem.Visible = false;
                 exemplareToolStripMenuItem.Visible = false;
@@ -1583,7 +1579,7 @@ namespace Bibo_Verwaltung
                 BeginInvoke((Action)delegate ()
                 {
                     metroProgressSpinner1.Visible = true;
-                    Grid_Buch.Visible = false;
+                    gridViewBook.Visible = false;
                     metroProgressSpinner1.BringToFront();
                 });
                 MetroGrid mgBuch = new MetroGrid();
@@ -1595,15 +1591,15 @@ namespace Bibo_Verwaltung
                 }
                 BeginInvoke((Action)delegate ()
                 {
-                    Grid_Buch.DataSource = null;
-                    Grid_Buch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-                    Grid_Buch.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-                    Grid_Buch.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-                    Grid_Buch.AllowUserToResizeColumns = true;
-                    Grid_Buch.RowHeadersVisible = false;
-                    Grid_Buch.DataSource = dtBuch;
+                    gridViewBook.DataSource = null;
+                    gridViewBook.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                    gridViewBook.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+                    gridViewBook.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+                    gridViewBook.AllowUserToResizeColumns = true;
+                    gridViewBook.RowHeadersVisible = false;
+                    gridViewBook.DataSource = dtBuch;
                     metroProgressSpinner1.Visible = false;
-                    Grid_Buch.Visible = true;
+                    gridViewBook.Visible = true;
                 });
             }
             catch
@@ -1615,7 +1611,7 @@ namespace Bibo_Verwaltung
                     BeginInvoke((Action)delegate ()
                     {
                         metroProgressSpinner1.Visible = false;
-                        Grid_Buch.Visible = true;
+                        gridViewBook.Visible = true;
                         MetroFramework.MetroMessageBox.Show(this, "Fehler beim Laden der Daten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     });
                 }
@@ -1653,9 +1649,9 @@ namespace Bibo_Verwaltung
 
         private void Bt_exemplar_Click(object sender, EventArgs e)
         {
-            if (Grid_Buch.SelectedRows.Count == 1)
+            if (gridViewBook.SelectedRows.Count == 1)
             {
-                Form_Copy Buchid = new Form_Copy(currentUser, Grid_Buch.SelectedRows[0].Cells[0].Value.ToString(), msm_buecher);
+                Form_Copy Buchid = new Form_Copy(currentUser, gridViewBook.SelectedRows[0].Cells[0].Value.ToString(), msm_buecher);
                 msm_buecher.Clone(Buchid);
                 Buchid.ShowDialog(this);
 
@@ -1670,7 +1666,7 @@ namespace Bibo_Verwaltung
 
         private void Grid_Buch_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (Grid_Buch.SelectedRows.Count == 1)
+            if (gridViewBook.SelectedRows.Count == 1)
             {
                 bt_exemplar.Enabled = true;
             }
@@ -1682,7 +1678,7 @@ namespace Bibo_Verwaltung
 
         private void Grid_Buch_Click(object sender, EventArgs e)
         {
-            if (Grid_Buch.SelectedRows.Count == 1)
+            if (gridViewBook.SelectedRows.Count == 1)
             {
                 bt_exemplar.Enabled = true;
             }
@@ -1701,9 +1697,9 @@ namespace Bibo_Verwaltung
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (Grid_Buch.SelectedRows.Count >= 1)
+                if (gridViewBook.SelectedRows.Count >= 1)
                 {
-                    DataGridViewRow row = this.Grid_Buch.SelectedRows[0];
+                    DataGridViewRow row = this.gridViewBook.SelectedRows[0];
                     tb_ISBN.Text = row.Cells[0].Value.ToString();
                     Book book = new Book(tb_ISBN.Text,false);
                     if (bool1)

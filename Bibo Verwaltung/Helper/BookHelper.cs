@@ -64,9 +64,7 @@ namespace Bibo_Verwaltung.Helper
                 + "buch_erscheinungsdatum as 'Erscheinungsdatum',"
                 + "sprach_name as 'Sprache',"
                 + "buch_auflage as 'Auflage',"
-                + "buch_neupreis as 'Neupreis', "
-                + "buch_bild as 'Bild', "
-                + "buch_anzahl as 'Anzahl Exemplare' from t_s_buecher "
+                + "buch_neupreis as 'Neupreis' from t_s_buecher "
                 + "left join t_s_genre on buch_genre_id = ger_id "
                 + "left join t_s_verlag on buch_verlag_id = ver_id "
                 + "left join t_s_sprache on buch_sprache_id = sprach_id WHERE buch_activated = 1";

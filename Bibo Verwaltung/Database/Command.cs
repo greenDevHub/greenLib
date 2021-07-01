@@ -68,7 +68,7 @@ namespace Bibo_Verwaltung.Database
         public void AddSmallEntityIfNotExists(string value)
         {
             if (con.ConnectError()) return;
-            string command = $"begin if not exists (select {FieldName} from {TableName} where {FieldName}={value}) begin insert into {TableName} ({FieldName}) values ({value}) end end";
+            string command = $"begin if not exists (select {FieldName} from {TableName} where {FieldName}='{value}') begin insert into {TableName} ({FieldName}) values ('{value}') end end";
             SqlCommand cmd = new SqlCommand(command, con.Con);
             cmd.Parameters.AddWithValue("@0", value);
             cmd.ExecuteNonQuery();

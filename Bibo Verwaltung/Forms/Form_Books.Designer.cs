@@ -41,14 +41,12 @@
             this.checkbox_autor = new MetroFramework.Controls.MetroCheckBox();
             this.bt_clear_buecher = new MetroFramework.Controls.MetroButton();
             this.btSubmit = new MetroFramework.Controls.MetroButton();
-            this.lb_anzahl = new MetroFramework.Controls.MetroLabel();
             this.bt_pic_delete = new MetroFramework.Controls.MetroButton();
             this.bt_picture = new MetroFramework.Controls.MetroButton();
             this.lb_Erscheinungsdatum = new MetroFramework.Controls.MetroLabel();
             this.lb_Auflage = new MetroFramework.Controls.MetroLabel();
             this.bt_Sprache_s = new MetroFramework.Controls.MetroButton();
             this.lb_Neupreis = new MetroFramework.Controls.MetroLabel();
-            this.tb_anzahl = new MetroFramework.Controls.MetroTextBox();
             this.tb_Auflage = new MetroFramework.Controls.MetroTextBox();
             this.lb_Sprache = new MetroFramework.Controls.MetroLabel();
             this.tb_Neupreis = new MetroFramework.Controls.MetroTextBox();
@@ -66,7 +64,7 @@
             this.tb_ISBN = new MetroFramework.Controls.MetroTextBox();
             this.lb_ISBN = new MetroFramework.Controls.MetroLabel();
             this.button1 = new MetroFramework.Controls.MetroButton();
-            this.Grid_Buch = new MetroFramework.Controls.MetroGrid();
+            this.gridViewBook = new MetroFramework.Controls.MetroGrid();
             this.contextMenuStrip1 = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.ladenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entfernenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,7 +106,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Grid_Buch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewBook)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.gb_zoom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Gross)).BeginInit();
@@ -237,19 +235,6 @@
             this.btSubmit.UseSelectable = true;
             this.btSubmit.Click += new System.EventHandler(this.Submit_Click);
             // 
-            // lb_anzahl
-            // 
-            this.lb_anzahl.AutoSize = true;
-            this.helpProvider.SetHelpString(this.lb_anzahl, "Tragen sie die Anzahl der Exemplare ihres Buches hier ein.");
-            this.lb_anzahl.Location = new System.Drawing.Point(4, 333);
-            this.lb_anzahl.Margin = new System.Windows.Forms.Padding(3);
-            this.lb_anzahl.Name = "lb_anzahl";
-            this.helpProvider.SetShowHelp(this.lb_anzahl, true);
-            this.lb_anzahl.Size = new System.Drawing.Size(148, 19);
-            this.lb_anzahl.TabIndex = 49;
-            this.lb_anzahl.Text = "Vorhandene Exemplare:";
-            this.lb_anzahl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // bt_pic_delete
             // 
             this.bt_pic_delete.FontSize = MetroFramework.MetroButtonSize.Medium;
@@ -338,44 +323,6 @@
             this.lb_Neupreis.TabIndex = 3;
             this.lb_Neupreis.Text = "Neupreis in €:";
             this.lb_Neupreis.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // tb_anzahl
-            // 
-            // 
-            // 
-            // 
-            this.tb_anzahl.CustomButton.Image = null;
-            this.tb_anzahl.CustomButton.Location = new System.Drawing.Point(35, 2);
-            this.tb_anzahl.CustomButton.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_anzahl.CustomButton.Name = "";
-            this.tb_anzahl.CustomButton.Size = new System.Drawing.Size(19, 19);
-            this.tb_anzahl.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.tb_anzahl.CustomButton.TabIndex = 1;
-            this.tb_anzahl.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.tb_anzahl.CustomButton.UseSelectable = true;
-            this.tb_anzahl.CustomButton.Visible = false;
-            this.tb_anzahl.Enabled = false;
-            this.tb_anzahl.FontSize = MetroFramework.MetroTextBoxSize.Medium;
-            this.helpProvider.SetHelpString(this.tb_anzahl, "Tragen sie die Anzahl der Exemplare ihres Buches hier ein.");
-            this.tb_anzahl.Lines = new string[0];
-            this.tb_anzahl.Location = new System.Drawing.Point(158, 333);
-            this.tb_anzahl.MaximumSize = new System.Drawing.Size(375, 24);
-            this.tb_anzahl.MaxLength = 32767;
-            this.tb_anzahl.MinimumSize = new System.Drawing.Size(50, 24);
-            this.tb_anzahl.Name = "tb_anzahl";
-            this.tb_anzahl.PasswordChar = '\0';
-            this.tb_anzahl.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.tb_anzahl.SelectedText = "";
-            this.tb_anzahl.SelectionLength = 0;
-            this.tb_anzahl.SelectionStart = 0;
-            this.tb_anzahl.ShortcutsEnabled = true;
-            this.helpProvider.SetShowHelp(this.tb_anzahl, true);
-            this.tb_anzahl.Size = new System.Drawing.Size(57, 24);
-            this.tb_anzahl.TabIndex = 20;
-            this.metroToolTip1.SetToolTip(this.tb_anzahl, "    Die Anzahl der vorhandenen Exemplare in der Datenbank.    ");
-            this.tb_anzahl.UseSelectable = true;
-            this.tb_anzahl.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.tb_anzahl.WaterMarkFont = new System.Drawing.Font("Segoe UI", 10.5F);
             // 
             // tb_Auflage
             // 
@@ -728,20 +675,20 @@
             this.button1.UseSelectable = true;
             this.button1.Click += new System.EventHandler(this.bt_load_click);
             // 
-            // Grid_Buch
+            // gridViewBook
             // 
-            this.Grid_Buch.AllowUserToAddRows = false;
-            this.Grid_Buch.AllowUserToDeleteRows = false;
-            this.Grid_Buch.AllowUserToOrderColumns = true;
-            this.Grid_Buch.AllowUserToResizeRows = false;
-            this.Grid_Buch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.gridViewBook.AllowUserToAddRows = false;
+            this.gridViewBook.AllowUserToDeleteRows = false;
+            this.gridViewBook.AllowUserToOrderColumns = true;
+            this.gridViewBook.AllowUserToResizeRows = false;
+            this.gridViewBook.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Grid_Buch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.Grid_Buch.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.Grid_Buch.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Grid_Buch.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.Grid_Buch.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.gridViewBook.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gridViewBook.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gridViewBook.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gridViewBook.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.gridViewBook.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
@@ -749,9 +696,9 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Grid_Buch.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.Grid_Buch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Grid_Buch.ContextMenuStrip = this.contextMenuStrip1;
+            this.gridViewBook.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.gridViewBook.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridViewBook.ContextMenuStrip = this.contextMenuStrip1;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10.5F);
@@ -759,15 +706,15 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Grid_Buch.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Grid_Buch.EnableHeadersVisualStyles = false;
-            this.Grid_Buch.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.Grid_Buch.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.helpProvider.SetHelpString(this.Grid_Buch, "In diesem Feld werden all ihre Bücher angezeigt.");
-            this.Grid_Buch.Location = new System.Drawing.Point(376, 63);
-            this.Grid_Buch.Name = "Grid_Buch";
-            this.Grid_Buch.ReadOnly = true;
-            this.Grid_Buch.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.gridViewBook.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gridViewBook.EnableHeadersVisualStyles = false;
+            this.gridViewBook.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.gridViewBook.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.helpProvider.SetHelpString(this.gridViewBook, "In diesem Feld werden all ihre Bücher angezeigt.");
+            this.gridViewBook.Location = new System.Drawing.Point(376, 63);
+            this.gridViewBook.Name = "gridViewBook";
+            this.gridViewBook.ReadOnly = true;
+            this.gridViewBook.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -775,25 +722,25 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Grid_Buch.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.Grid_Buch.RowHeadersVisible = false;
-            this.Grid_Buch.RowHeadersWidth = 51;
-            this.Grid_Buch.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.Grid_Buch.RowTemplate.DividerHeight = 1;
-            this.Grid_Buch.RowTemplate.Height = 24;
-            this.Grid_Buch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.helpProvider.SetShowHelp(this.Grid_Buch, true);
-            this.Grid_Buch.Size = new System.Drawing.Size(801, 475);
-            this.Grid_Buch.Style = MetroFramework.MetroColorStyle.Blue;
-            this.Grid_Buch.TabIndex = 28;
-            this.metroToolTip1.SetToolTip(this.Grid_Buch, "      In diesem Bereich werden alle Bücher der Datenbank angezeigt. Mit einem Rec" +
+            this.gridViewBook.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.gridViewBook.RowHeadersVisible = false;
+            this.gridViewBook.RowHeadersWidth = 51;
+            this.gridViewBook.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.gridViewBook.RowTemplate.DividerHeight = 1;
+            this.gridViewBook.RowTemplate.Height = 24;
+            this.gridViewBook.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.helpProvider.SetShowHelp(this.gridViewBook, true);
+            this.gridViewBook.Size = new System.Drawing.Size(801, 475);
+            this.gridViewBook.Style = MetroFramework.MetroColorStyle.Blue;
+            this.gridViewBook.TabIndex = 28;
+            this.metroToolTip1.SetToolTip(this.gridViewBook, "      In diesem Bereich werden alle Bücher der Datenbank angezeigt. Mit einem Rec" +
         "htsklick können Sie weitere Aktionen wählen.      ");
-            this.Grid_Buch.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Buch_CellClick);
-            this.Grid_Buch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Buch_CellDoubleClick);
-            this.Grid_Buch.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Grid_Buch_CellMouseDown);
-            this.Grid_Buch.Click += new System.EventHandler(this.Grid_Buch_Click);
-            this.Grid_Buch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Grid_Buch_KeyDown);
-            this.Grid_Buch.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grid_Buch_MouseDown);
+            this.gridViewBook.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Grid_Buch_CellClick);
+            this.gridViewBook.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridViewBookClick);
+            this.gridViewBook.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Grid_Buch_CellMouseDown);
+            this.gridViewBook.Click += new System.EventHandler(this.Grid_Buch_Click);
+            this.gridViewBook.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Grid_Buch_KeyDown);
+            this.gridViewBook.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grid_Buch_MouseDown);
             // 
             // contextMenuStrip1
             // 
@@ -1062,13 +1009,11 @@
             this.metroPanel1.Controls.Add(this.tb_Neupreis);
             this.metroPanel1.Controls.Add(this.lb_Auflage);
             this.metroPanel1.Controls.Add(this.metroLabel1);
-            this.metroPanel1.Controls.Add(this.lb_anzahl);
             this.metroPanel1.Controls.Add(this.lb_Erscheinungsdatum);
             this.metroPanel1.Controls.Add(this.picBox_Klein);
             this.metroPanel1.Controls.Add(this.bt_pic_delete);
             this.metroPanel1.Controls.Add(this.bt_picture);
             this.metroPanel1.Controls.Add(this.tb_neu);
-            this.metroPanel1.Controls.Add(this.tb_anzahl);
             this.metroPanel1.Controls.Add(this.rb_search);
             this.metroPanel1.Controls.Add(this.rb_Add_Buch);
             this.metroPanel1.Controls.Add(this.rb_Update_Buch);
@@ -1420,7 +1365,7 @@
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.gb_zoom);
             this.Controls.Add(this.metroProgressSpinner1);
-            this.Controls.Add(this.Grid_Buch);
+            this.Controls.Add(this.gridViewBook);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1200, 600);
@@ -1435,7 +1380,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Grid_Buch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewBook)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.gb_zoom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Gross)).EndInit();
@@ -1475,7 +1420,7 @@
         private MetroFramework.Controls.MetroLabel lb_Titel;
         private MetroFramework.Controls.MetroLabel lb_ISBN;
         private MetroFramework.Controls.MetroButton bt_clear_buecher;
-        private MetroFramework.Controls.MetroGrid Grid_Buch;
+        private MetroFramework.Controls.MetroGrid gridViewBook;
         private MetroFramework.Controls.MetroRadioButton rb_Add_Buch;
         private MetroFramework.Controls.MetroRadioButton rb_Update_Buch;
         private MetroFramework.Controls.MetroRadioButton rb_Delete_Buch;
@@ -1485,8 +1430,6 @@
         private MetroFramework.Controls.MetroButton bt_picture;
         private System.Windows.Forms.PictureBox picBox_Klein;
         private MetroFramework.Controls.MetroButton bt_pic_delete;
-        private MetroFramework.Controls.MetroTextBox tb_anzahl;
-        private MetroFramework.Controls.MetroLabel lb_anzahl;
         private System.Windows.Forms.PictureBox picBox_Gross;
         private MetroFramework.Controls.MetroPanel gb_zoom;
         private MetroFramework.Controls.MetroButton button1;

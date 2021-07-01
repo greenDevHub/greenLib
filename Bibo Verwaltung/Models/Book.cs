@@ -226,6 +226,7 @@ namespace Bibo_Verwaltung
         {
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
+            DeleteBookAuthors();
             string command = "UPDATE [dbo].[t_s_buecher] set buch_titel = @bookTitle , buch_genre_id = @bookGenreId, " +
                 "buch_sprache_id = @bookLanguageId, buch_verlag_id = @bookPublisherId, buch_auflage = @bookEdition, " +
                 "buch_erscheinungsdatum = @bookDatePublication, buch_neupreis = @bookPrice, " +
@@ -257,7 +258,6 @@ namespace Bibo_Verwaltung
             }
             cmd.Parameters.AddWithValue("@bookIsbn", BookIsbn);
             cmd.ExecuteNonQuery();
-            DeleteBookAuthors();
             AddBookAuthors();
             con.Close();
         }
@@ -288,9 +288,9 @@ namespace Bibo_Verwaltung
             if (con.ConnectError()) return;
             string command = "INSERT INTO [dbo].[t_s_buecher] (buch_isbn, buch_titel, buch_genre_id, " +
                 "buch_verlag_id, buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, " +
-                "buch_image, buch_activated) VALUES " +
+                "buch_image, buch_activated, buch_anzahl) VALUES " +
                 "(@bookIsbn, @bookTitle, @bookGenreId, @bookPublisherId, @bookDatePublication, @bookLanguageId, @bookEdition, " +
-                "@bookPrice, @bookImage, 1)";
+                "@bookPrice, @bookImage, 1, 0)";
             SqlCommand cmd = new SqlCommand(command, con.Con);
             cmd.Parameters.AddWithValue("@bookIsbn", BookIsbn);
             cmd.Parameters.AddWithValue("@bookTitle", BookTitle);

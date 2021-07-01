@@ -350,7 +350,7 @@ namespace Bibo_Verwaltung.Helper
         private Byte[] GetPictureNeu(string isbn)
         {
 
-            string bildURL = $"https://portal.dnb.de/opac/mvb/cover.htm?isbn={isbn}";
+            string bildURL = $"https://portal.dnb.de/opac/mvb/cover?isbn={isbn}";
             string fileURL = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\Downloads\\" + isbn + "_DOWNLOAD.jpg";
             WebClient client = new WebClient();
             client.UseDefaultCredentials = true;
