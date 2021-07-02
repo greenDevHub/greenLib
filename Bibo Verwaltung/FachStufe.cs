@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bibo_Verwaltung.Helper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -12,7 +13,8 @@ namespace Bibo_Verwaltung
 {
     class FachStufe
     {
-        Fach faecher = new Fach();
+        SubjectHelper subjectHelper = new SubjectHelper();
+
         SQL_Verbindung con = new SQL_Verbindung();
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
@@ -22,8 +24,8 @@ namespace Bibo_Verwaltung
         string zuordnungid;
         public string ZuordnungID { get { return zuordnungid; } set { zuordnungid = value; } }
 
-        Fach fach = new Fach();
-        public Fach Fach { get { return fach; } set { fach = value; } }
+        Subject fach = new Subject();
+        public Subject Fach { get { return fach; } set { fach = value; } }
 
         List<string> fachListe = new List<string>();
         public List<string> FachListe { get { return fachListe; } set { fachListe = value; } }
@@ -60,8 +62,8 @@ namespace Bibo_Verwaltung
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, Klassenstufe.Stufe);
             while (dr.Read())
             {
-                Fach = new Fach(dr["bf_fachid"].ToString());
-                FachListe.Add(Fach.FachKurz);
+                Fach = new Subject(int.Parse(dr["bf_fachid"].ToString()));
+                FachListe.Add(Fach.SubjectNameShort);
             }
             dr.Close();
             con.Close();
@@ -127,7 +129,7 @@ namespace Bibo_Verwaltung
         {
             ClearDataSource();
             FillObject();
-            faecher.FillGrid(ref Faecher);
+            subjectHelper.FillGrid(ref Faecher);
             Set_Mark(ref Faecher, Stufe);
         }
 

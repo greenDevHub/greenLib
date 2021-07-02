@@ -1,4 +1,5 @@
-﻿using MetroFramework;
+﻿using Bibo_Verwaltung.Helper;
+using MetroFramework;
 using MetroFramework.Components;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,10 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_buch_fach : MetroFramework.Forms.MetroForm
     {
+        SubjectHelper subjectHelper = new SubjectHelper();
+
+
         BuchFach bf = new BuchFach();
-        Fach faecher = new Fach();
         private DataTable buecherListe = new DataTable();
         private bool aenderungungen = false;
         string currentUser;
@@ -45,7 +48,7 @@ namespace Bibo_Verwaltung
                 mbt_ImEx.Enabled = true;
             }
             this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-            faecher.FillGrid(ref gv_Faecher);
+            subjectHelper.FillGrid(ref gv_Faecher);
             foreach (DataGridViewColumn column in gv_Faecher.Columns) 
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;

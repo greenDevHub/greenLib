@@ -158,6 +158,7 @@
     </Compile>
     <Compile Include="Analytics.cs" />
     <Compile Include="Helper\BookHelper.cs" />
+    <Compile Include="Helper\SubjectHelper.cs" />
     <Compile Include="Helper\WebHelper.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Helper\AuthorHelper.cs" />
@@ -190,7 +191,7 @@
     <Compile Include="Ausleihe.cs" />
     <Compile Include="ExcelExport.cs" />
     <Compile Include="FachStufe.cs" />
-    <Compile Include="Fach.cs" />
+    <Compile Include="Models\Subject.cs" />
     <Compile Include="Helper\GenreHelper.cs" />
     <Compile Include="Import.cs" />
     <Compile Include="Klasse.cs" />
@@ -204,7 +205,6 @@
     <Compile Include="Protokoll.cs" />
     <Compile Include="Helper\PublisherHelper.cs" />
     <Compile Include="Schuelerimport.cs" />
-    <Compile Include="Schueler.cs" />
     <Compile Include="Screenshot.cs" />
     <Compile Include="TransparentPanel.cs">
       <SubType>Component</SubType>
@@ -245,12 +245,6 @@
     <Compile Include="w_s_fach_stufe.Designer.cs">
       <DependentUpon>w_s_fach_stufe.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_faecher.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_faecher.Designer.cs">
-      <DependentUpon>w_s_faecher.cs</DependentUpon>
-    </Compile>
     <Compile Include="w_s_analytics.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -275,17 +269,11 @@
     <Compile Include="w_s_login.designer.cs">
       <DependentUpon>w_s_login.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_manage.cs">
+    <Compile Include="Forms\Attribute Module\Form_Attribute.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_manage.Designer.cs">
-      <DependentUpon>w_s_manage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="w_s_schueler.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_schueler.Designer.cs">
-      <DependentUpon>w_s_schueler.cs</DependentUpon>
+    <Compile Include="Forms\Attribute Module\Form_Attribute.Designer.cs">
+      <DependentUpon>Form_Attribute.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_schuelerimport.cs">
       <SubType>Form</SubType>
@@ -352,10 +340,10 @@
     <Compile Include="w_s_bild_bearbeiten.Designer.cs">
       <DependentUpon>w_s_bild_bearbeiten.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Form_Copy.cs">
+    <Compile Include="Forms\Books Module\Form_Copy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form_Copy.Designer.cs">
+    <Compile Include="Forms\Books Module\Form_Copy.Designer.cs">
       <DependentUpon>Form_Copy.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_buchsuche.cs">
@@ -393,10 +381,10 @@
     <Compile Include="w_s_user.designer.cs">
       <DependentUpon>w_s_user.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Form_Books.cs">
+    <Compile Include="Forms\Books Module\Form_Books.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form_Books.Designer.cs">
+    <Compile Include="Forms\Books Module\Form_Books.Designer.cs">
       <DependentUpon>Form_Books.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_zuordnungen.cs">
@@ -430,9 +418,6 @@
     <EmbeddedResource Include="w_s_fach_stufe.resx">
       <DependentUpon>w_s_fach_stufe.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_faecher.resx">
-      <DependentUpon>w_s_faecher.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="w_s_analytics.resx">
       <DependentUpon>w_s_analytics.cs</DependentUpon>
     </EmbeddedResource>
@@ -448,8 +433,8 @@
     <EmbeddedResource Include="w_s_login.resx">
       <DependentUpon>w_s_login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_manage.resx">
-      <DependentUpon>w_s_manage.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Attribute Module\Form_Attribute.resx">
+      <DependentUpon>Form_Attribute.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_rueckgabe.resx">
       <DependentUpon>w_s_rueckgabe.cs</DependentUpon>
@@ -466,7 +451,7 @@
     <EmbeddedResource Include="w_s_bild_bearbeiten.resx">
       <DependentUpon>w_s_bild_bearbeiten.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form_Copy.resx">
+    <EmbeddedResource Include="Forms\Books Module\Form_Copy.resx">
       <DependentUpon>Form_Copy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_buchsuche.resx">
@@ -486,9 +471,6 @@
     <EmbeddedResource Include="w_s_main.resx">
       <DependentUpon>w_s_main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_schueler.resx">
-      <DependentUpon>w_s_schueler.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="w_s_schuelerimport.resx">
       <DependentUpon>w_s_schuelerimport.cs</DependentUpon>
     </EmbeddedResource>
@@ -501,7 +483,7 @@
     <EmbeddedResource Include="w_s_user.resx">
       <DependentUpon>w_s_user.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form_Books.resx">
+    <EmbeddedResource Include="Forms\Books Module\Form_Books.resx">
       <DependentUpon>Form_Books.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_zuordnungen.resx">

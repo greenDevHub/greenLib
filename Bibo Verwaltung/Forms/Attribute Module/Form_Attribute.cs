@@ -1,4 +1,5 @@
-﻿using MetroFramework;
+﻿using Bibo_Verwaltung.Helper;
+using MetroFramework;
 using MetroFramework.Controls;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace Bibo_Verwaltung
         float originalHeightText = 0;
         bool suchmodus = false;
 
-        Fach fach;
+        SubjectHelper subjectHelper;
         LanguageHelper languageHelper;
         GenreHelper genreHelper;
         ConditionHelper conditionHelper;
@@ -71,8 +72,8 @@ namespace Bibo_Verwaltung
             if (currentModus == "Fach")
             {
                 this.StyleManager.Style = MetroColorStyle.Teal;
-                fach = new Fach();
-                fach.FillGrid(ref gv_manage);
+                subjectHelper = new SubjectHelper();
+                subjectHelper.FillGrid(ref gv_manage);
                 Text = "Fächer" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
             }
             else if (currentModus == "Sprache")
@@ -134,7 +135,7 @@ namespace Bibo_Verwaltung
         {
             if (currentModus == "Fach")
             {
-                fach.FillGrid(ref gv_manage);
+                subjectHelper.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Sprache")
             {
@@ -169,7 +170,7 @@ namespace Bibo_Verwaltung
         {
             if (currentModus == "Fach")
             {
-                fach.SaveGrid(ref gv_manage);
+                subjectHelper.SaveGridChangesToDatabase(ref gv_manage);
             }
             else if (currentModus == "Sprache")
             {
@@ -205,7 +206,7 @@ namespace Bibo_Verwaltung
             bool result = false;
             if (currentModus == "Fach")
             {
-                result = fach.GetChangesGrid(ref gv_manage);
+                result = subjectHelper.GridViewHasChanges(ref gv_manage);
             }
             else if (currentModus == "Sprache")
             {

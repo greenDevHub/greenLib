@@ -1,4 +1,5 @@
-﻿using MetroFramework;
+﻿using Bibo_Verwaltung.Helper;
+using MetroFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,8 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_schuelerimport : MetroFramework.Forms.MetroForm
     {
+        SubjectHelper subjectHelper = new SubjectHelper();
+
         string currentUser;
         char seperator = ';';
         char feldquali = '"';
@@ -788,23 +791,26 @@ namespace Bibo_Verwaltung
                                 string fach = row[i].ToString();
                                 if(!fach.Equals(""))
                                 {
-                                    k.Fach.FachKurz = fach;
-                                    k.Fach.FachLang = "";
-                                    if (!k.Fach.AlreadyExists())
-                                    {
-                                        k.Fach.AddFach();
-                                    }
-                                    k.Faecher.Add(fach);
+                                    Subject subject = new Subject();
+                                    subject.SubjectNameShort = fach;
+                                    subject.SubjectNameLong = "";
+                                    subject.AddSubjectIfNotExists();
+                                    k.CostumerSubjects.Add(subject);
                                 }
 
                             }
-                            foreach (string fach in fs.FachListe)
+                            foreach (string subjectName in fs.FachListe)
                             {
-                                k.Faecher.Add(fach);
+                                Subject subject = new Subject();
+                                subject.SubjectNameShort = subjectName;
+                                subject.SubjectNameLong = "";
+                                subject.AddSubjectIfNotExists();
+                                subject = new Subject(subjectHelper.GetIdBySubjectShortName(subjectName));
+                                k.CostumerSubjects.Add(subject);
                             }
                             for (int i = 0; i < 2; i++)
                             {
-                                k.LeistungskursListe.Add("");
+                                k.CostumerAdvancedSubjects.Add(new Subject());
                             }
                             if (!k.AlreadyExists(false))
                             {
@@ -824,17 +830,16 @@ namespace Bibo_Verwaltung
                                 string fach = row[i].ToString();
                                 if (!fach.Equals(""))
                                 {
-                                    k.Fach.FachKurz = fach;
-                                    k.Fach.FachLang = "";
-                                    if (!k.Fach.AlreadyExists())
+                                    Subject subject = new Subject();
+                                    subject.SubjectNameShort = fach;
+                                    subject.SubjectNameLong = "";
+                                    subject.AddSubjectIfNotExists();
+                                    k.CostumerSubjects.Add(subject);
+
+                                    if (k.CostumerAdvancedSubjects.Count < 2)
                                     {
-                                        k.Fach.AddFach();
+                                        k.CostumerAdvancedSubjects.Add(subject);
                                     }
-                                    k.Faecher.Add(fach);
-                                }
-                                if (k.LeistungskursListe.Count < 2)
-                                {
-                                    k.LeistungskursListe.Add(fach);
                                 }
                             }
                             if (!k.AlreadyExists(false))
@@ -851,13 +856,14 @@ namespace Bibo_Verwaltung
                     }
                     else if (target.Equals("t_s_faecher"))
                     {
-                        Fach fach = new Fach();
-                        fach.FachKurz = row[0].ToString();
-                        fach.FachLang = row[1].ToString();
-                        if (!fach.AlreadyExists())
-                        {
-                            fach.AddFach();
-                        }
+                        Subject fach = new Subject();
+                        fach.SubjectNameShort = row[0].ToString();
+                        fach.SubjectNameLong = row[1].ToString();
+
+                        Subject subject = new Subject();
+                        subject.SubjectNameShort = row[0].ToString();
+                        subject.SubjectNameLong = row[1].ToString();
+                        subject.AddSubjectIfNotExists();
                     }
                 }
                 filesDone++;

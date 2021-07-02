@@ -71,7 +71,7 @@ namespace Bibo_Verwaltung
         }
 
         /// <summary>
-        /// gets the changes from the gridview
+        /// checks whether the gridview has changes or not
         /// </summary>
         /// <param name="grid"></param>
         /// <returns>true: if something was changed; false: if there are no changes</returns>

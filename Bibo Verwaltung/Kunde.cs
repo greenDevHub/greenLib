@@ -7,11 +7,14 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
 using MetroFramework.Controls;
+using Bibo_Verwaltung.Helper;
 
 namespace Bibo_Verwaltung
 {
     class Kunde
     {
+        SubjectHelper subjectHelper = new SubjectHelper();
+
         SQL_Verbindung con = new SQL_Verbindung();
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
@@ -89,16 +92,18 @@ namespace Bibo_Verwaltung
         /// Anzahl Leistungskurse (max 2)
         /// </summary>
         public int Leistungskurse { get { return leistungskurse; } set { leistungskurse = value; } }
-        List<string> leistungskursListe = new List<string>();
-        public List<string> LeistungskursListe { get { return leistungskursListe; } set { leistungskursListe = value; } }
 
-        Fach fach = new Fach();
+        List<Subject> costumerAdvancedSubjects = new List<Subject>();
         /// <summary>
-        /// Fach
+        /// get/set the advanced subjects of the costumer
         /// </summary>
-        public Fach Fach { get { return fach; } set { fach = value; } }
-        List<string> faecher = new List<string>();
-        public List<string> Faecher { get { return faecher; } set { faecher = value; } }
+        public List<Subject> CostumerAdvancedSubjects { get { return costumerAdvancedSubjects; } set { costumerAdvancedSubjects = value; } }
+
+        List<Subject> costumerSubjects = new List<Subject>();
+        /// <summary>
+        /// get/set the subjects of the costumer
+        /// </summary>
+        public List<Subject> CostumerSubjects { get { return costumerSubjects; } set { costumerSubjects = value; } }
 
         bool activated;
         /// <summary>
@@ -165,25 +170,27 @@ namespace Bibo_Verwaltung
 
         private void LoadFaecherNeu()
         {
-            Faecher.Clear();
-            LeistungskursListe.Clear();
+            CostumerSubjects.Clear();
+            CostumerAdvancedSubjects.Clear();
             if (con.ConnectError()) return;
             string RawCommand = "use greenLib Select f_kurzform from t_s_fach_kunde left join t_s_faecher on f_id = fs_fachid WHERE fs_kundenid = @0 and fs_lk = 1";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, KundenID);
             while (dr.Read())
             {
-                LeistungskursListe.Add(dr["f_kurzform"].ToString());
+                int subjectId = subjectHelper.GetIdBySubjectShortName(dr["f_kurzform"].ToString());
+                CostumerAdvancedSubjects.Add(new Subject(subjectId));
             }
             dr.Close();
             RawCommand = "use greenLib Select f_kurzform from t_s_fach_kunde left join t_s_faecher on f_id = fs_fachid WHERE fs_kundenid = @0";
             dr = con.ExcecuteCommand(RawCommand, KundenID);
             while (dr.Read())
             {
-                Faecher.Add(dr["f_kurzform"].ToString());
+                int subjectId = subjectHelper.GetIdBySubjectShortName(dr["f_kurzform"].ToString());
+                CostumerSubjects.Add(new Subject(subjectId));
             }
-            for (int i = LeistungskursListe.Count; i < 2; i++)
+            for (int i = CostumerAdvancedSubjects.Count; i < 2; i++)
             {
-                LeistungskursListe.Add("");
+                CostumerAdvancedSubjects.Add(new Subject());
             }
             dr.Close();
             con.Close();
@@ -191,23 +198,23 @@ namespace Bibo_Verwaltung
         }
         private void LoadFaecher()
         {
-            Faecher.Clear();
-            LeistungskursListe.Clear();
+            CostumerSubjects.Clear();
+            CostumerAdvancedSubjects.Clear();
             if (con.ConnectError()) return;
             string RawCommand = "SELECT * FROM [dbo].[t_s_fach_kunde] WHERE  fs_kundenid = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, KundenID);
             while (dr.Read())
             {
-                Fach = new Fach(dr["fs_fachid"].ToString());
-                Faecher.Add(Fach.FachKurz);
+                Subject subject = new Subject(int.Parse(dr["fs_fachid"].ToString()));
+                CostumerSubjects.Add(subject);
                 if (dr["fs_lk"].ToString() == "True")
                 {
-                    LeistungskursListe.Add(Fach.FachKurz);
+                    CostumerAdvancedSubjects.Add(subject);
                 }
             }
-            for (int i = LeistungskursListe.Count; i < 2; i++)
+            for (int i = CostumerAdvancedSubjects.Count; i < 2; i++)
             {
-                LeistungskursListe.Add("");
+                CostumerAdvancedSubjects.Add(new Subject());
             }
             dr.Close();
             con.Close();
@@ -406,7 +413,6 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void AddKunde()
         {
-
             {
                 if (!Klasse.Klassename.Equals(""))
                 {
@@ -447,18 +453,13 @@ namespace Bibo_Verwaltung
         {
             con.ConnectError();
             string RawCommand = "INSERT INTO [dbo].[t_s_fach_kunde] (fs_kundenid, fs_fachid, fs_lk) VALUES (@schuelerid, @fachid, @lk)";
-            foreach (string s in Faecher)
+            foreach (Subject subject in CostumerSubjects)
             {
-                Fach.FachKurz = s;
-                Fach.FachLang = "";
-                if (!Fach.FachExists())
-                {
-                    Fach.AddFach();
-                }
+                subject.AddSubjectIfNotExists();
                 SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
                 cmd.Parameters.AddWithValue("@schuelerid", KundenID);
-                cmd.Parameters.AddWithValue("@fachid", Fach.GetIDByShortform(s));
-                if (leistungskursListe[0] == s || leistungskursListe[1] == s)
+                cmd.Parameters.AddWithValue("@fachid", subject.SubjectId);
+                if (CostumerAdvancedSubjects[0].SubjectNameShort == subject.SubjectNameShort || CostumerAdvancedSubjects[1].SubjectNameShort == subject.SubjectNameShort)
                 {
                     cmd.Parameters.AddWithValue("@lk", true);
                 }
