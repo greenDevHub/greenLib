@@ -56,8 +56,8 @@ namespace Bibo_Verwaltung
 
         private void Mbt_Advanced_Click(object sender, EventArgs e)
         {
-            Form advanced = new w_s_import_export();
-            advanced.ShowDialog(this);
+            //Form advanced = new w_s_import_export();
+            //advanced.ShowDialog(this);
         }
 
         private void Mbt_finish_Click(object sender, EventArgs e)

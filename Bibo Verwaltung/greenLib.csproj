@@ -247,12 +247,6 @@
     <Compile Include="w_s_fach_stufe.Designer.cs">
       <DependentUpon>w_s_fach_stufe.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_analytics.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_analytics.Designer.cs">
-      <DependentUpon>w_s_analytics.cs</DependentUpon>
-    </Compile>
     <Compile Include="w_s_importAssist.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -289,34 +283,16 @@
     <Compile Include="w_s_selfmade_dialog.Designer.cs">
       <DependentUpon>w_s_selfmade_dialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_spalten_auswahl.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_spalten_auswahl.Designer.cs">
-      <DependentUpon>w_s_spalten_auswahl.cs</DependentUpon>
-    </Compile>
     <Compile Include="ImportExport.cs" />
     <Compile Include="Rueckgabe.cs" />
     <Compile Include="SQL_Verbindung.cs" />
     <Compile Include="Verlauf.cs" />
-    <Compile Include="w_s_Aus_Kunde.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_Aus_Kunde.Designer.cs">
-      <DependentUpon>w_s_Aus_Kunde.cs</DependentUpon>
-    </Compile>
     <Compile Include="Bibo_VerwaltungDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Bibo_VerwaltungDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Models\Book.cs" />
-    <Compile Include="w_s_import_export.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_import_export.Designer.cs">
-      <DependentUpon>w_s_import_export.cs</DependentUpon>
-    </Compile>
     <Compile Include="w_s_information.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -330,18 +306,6 @@
       <DependentUpon>w_s_rueckgabe.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Genre.cs" />
-    <Compile Include="w_s_barcode.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_barcode.Designer.cs">
-      <DependentUpon>w_s_barcode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="w_s_bild_bearbeiten.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_bild_bearbeiten.Designer.cs">
-      <DependentUpon>w_s_bild_bearbeiten.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Books Module\Form_Copy.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -420,14 +384,8 @@
     <EmbeddedResource Include="w_s_fach_stufe.resx">
       <DependentUpon>w_s_fach_stufe.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_analytics.resx">
-      <DependentUpon>w_s_analytics.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="w_s_importAssist.resx">
       <DependentUpon>w_s_importAssist.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_import_export.resx">
-      <DependentUpon>w_s_import_export.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_klasse_stufe.resx">
       <DependentUpon>w_s_klasse_stufe.cs</DependentUpon>
@@ -441,17 +399,8 @@
     <EmbeddedResource Include="w_s_rueckgabe.resx">
       <DependentUpon>w_s_rueckgabe.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_Aus_Kunde.resx">
-      <DependentUpon>w_s_Aus_Kunde.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="w_s_information.resx">
       <DependentUpon>w_s_information.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_barcode.resx">
-      <DependentUpon>w_s_barcode.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_bild_bearbeiten.resx">
-      <DependentUpon>w_s_bild_bearbeiten.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Books Module\Form_Copy.resx">
       <DependentUpon>Form_Copy.cs</DependentUpon>
@@ -478,9 +427,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_selfmade_dialog.resx">
       <DependentUpon>w_s_selfmade_dialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_spalten_auswahl.resx">
-      <DependentUpon>w_s_spalten_auswahl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_user.resx">
       <DependentUpon>w_s_user.cs</DependentUpon>
