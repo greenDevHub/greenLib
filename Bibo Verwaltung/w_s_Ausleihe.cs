@@ -1,4 +1,5 @@
-﻿using MetroFramework;
+﻿using Bibo_Verwaltung.Helper;
+using MetroFramework;
 using MetroFramework.Components;
 using MetroFramework.Controls;
 using System;
@@ -17,6 +18,8 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_ausleihe : MetroFramework.Forms.MetroForm
     {
+        CostumerHelper costumerHelper = new CostumerHelper();
+
         #region Constructor
         string currentUser;
         public w_s_ausleihe(string userName, MetroFramework.Components.MetroStyleManager msm)
@@ -84,7 +87,6 @@ namespace Bibo_Verwaltung
         }
         #endregion
         Ausleihe ausleihe = new Ausleihe();
-        Kunde kunde = new Kunde();
 
         #region Fenster-Methoden
         /// <summary>
@@ -287,8 +289,8 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void Buchausgabe()
         {
-            kunde = new Kunde(ausleihe.KID);
-            DialogResult dialogResult = MetroMessageBox.Show(this, ausleihe.GetAusleihList() + "an: '" + ausleihe.TrimText(kunde.Vorname + " " + kunde.Nachname, 30) + "' wirklich ausleihen?", "Achtung",
+            Costumer costumer = new Costumer(int.Parse(ausleihe.KID));
+            DialogResult dialogResult = MetroMessageBox.Show(this, ausleihe.GetAusleihList() + "an: '" + ausleihe.TrimText(costumer.CostumerFirstName + " " + costumer.CostumerSurname, 30) + "' wirklich ausleihen?", "Achtung",
                             MessageBoxButtons.OKCancel, MessageBoxIcon.Question, 211 + ausleihe.LeihListe.Rows.Count * 17);
             if (dialogResult == DialogResult.OK)
             {
@@ -296,7 +298,7 @@ namespace Bibo_Verwaltung
                 {
                     foreach (DataRow row in ausleihe.LeihListe.Rows)
                     {
-                        ausleihe.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(),dp_RueckDatum.Value.ToShortDateString(), Convert.ToInt32(kunde.KundenID));                    
+                        ausleihe.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(),dp_RueckDatum.Value.ToShortDateString(), Convert.ToInt32(costumer.CostumerId));                    
                         //ausleihe.Save_Transaction(); In Bearbeitung!!!
                     }
                     MetroMessageBox.Show(this, "Die Buchausgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -478,7 +480,7 @@ namespace Bibo_Verwaltung
 
         private void llb_BuchTitel_Click(object sender, EventArgs e)
         {
-            w_s_information Info = new w_s_information(1, ausleihe.ExemplarID.ToString(), currentUser,msm_ausleihe);
+            w_s_information Info = new w_s_information(1, ausleihe.ExemplarID, currentUser,msm_ausleihe);
             msm_ausleihe.Clone(Info);
             Info.ShowDialog();
             Info.Dispose();
@@ -569,7 +571,7 @@ namespace Bibo_Verwaltung
                         gv_Kunde.Visible = false;
                     });
                     MetroGrid mg = new MetroGrid();
-                    kunde.FillGrid(ref mg);
+                    costumerHelper.FillGrid(ref mg);
                     var ds = mg.DataSource;
                     BeginInvoke((Action)delegate ()
                     {

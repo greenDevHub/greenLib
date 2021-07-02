@@ -1129,7 +1129,7 @@ namespace Bibo_Verwaltung
 
         private void KundenAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form Kunde = new w_s_Kunden(currentUser, gv_buchsuche.SelectedRows[0].Cells["Kunden ID"].Value.ToString(), msm_buchsuche);
+            Form Kunde = new w_s_Kunden(currentUser, int.Parse(gv_buchsuche.SelectedRows[0].Cells["Kunden ID"].Value.ToString()), msm_buchsuche);
             loadEnabled = false;
             Kunde.ShowDialog(this);
             loadEnabled = true;

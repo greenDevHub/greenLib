@@ -90,7 +90,7 @@ namespace Bibo_Verwaltung
 
         }
         Rueckgabe rueckgabe = new Rueckgabe();
-        Kunde kunde = new Kunde();
+        Costumer kunde = new Costumer();
         //DataTable rueckListe = new DataTable();
 
         //bool buch_verfuegbar = false;
@@ -290,12 +290,12 @@ namespace Bibo_Verwaltung
                         if (!rueckgabe.Verfuegbar)
                         {
                             rueckgabe.Load_Info(rueckgabe.ExemplarID);
-                            kunde = new Kunde(rueckgabe.KID);
+                            kunde = new Costumer(int.Parse(rueckgabe.KID));
                             llb_Kunde.Enabled = true;
                             lb_AusleihStart.Enabled = true;
                             lb_AusleihEnde.Enabled = true;
                             bt_Zu_aendern.Enabled = true;
-                            llb_Kunde.Text = rueckgabe.TrimText(kunde.Vorname + ", " + kunde.Nachname, 30);
+                            llb_Kunde.Text = rueckgabe.TrimText(kunde.CostumerFirstName + ", " + kunde.CostumerSurname, 30);
                             lb_AusleihStart.Text = rueckgabe.Leihdatum.Date.ToShortDateString();
                             lb_AusleihEnde.Text = rueckgabe.Rueckgabedatum.Date.ToShortDateString();
                             if (rueckgabe.Rueckgabedatum.Date < DateTime.Now.Date)
@@ -385,7 +385,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void Buchrueckgabe()
         {
-            DialogResult dialogResult = MetroMessageBox.Show(this, rueckgabe.GetRueckgabeList() + "ausgeliehen von: '" + rueckgabe.TrimText(kunde.Vorname + " " + kunde.Nachname, 30) + "' wirklich als zurückgegeben markieren?", "Achtung",
+            DialogResult dialogResult = MetroMessageBox.Show(this, rueckgabe.GetRueckgabeList() + "ausgeliehen von: '" + rueckgabe.TrimText(kunde.CostumerFirstName + " " + kunde.CostumerSurname, 30) + "' wirklich als zurückgegeben markieren?", "Achtung",
                             MessageBoxButtons.OKCancel, MessageBoxIcon.Question, 211 + rueckgabe.RueckListe.Rows.Count * 17);
             if (dialogResult == DialogResult.OK)
             {
@@ -440,7 +440,7 @@ namespace Bibo_Verwaltung
 
         private void llb_Buch_LinkClicked(object sender, EventArgs e)
         {
-            w_s_information Info = new w_s_information(1, rueckgabe.ExemplarID.ToString(), currentUser, msm_rueckgabe);
+            w_s_information Info = new w_s_information(1, rueckgabe.ExemplarID, currentUser, msm_rueckgabe);
             msm_rueckgabe.Clone(Info);
             Info.ShowDialog();
             Info.Dispose();
@@ -448,7 +448,7 @@ namespace Bibo_Verwaltung
 
         private void llb_Kunde_LinkClicked(object sender, EventArgs e)
         {
-            w_s_information Info = new w_s_information(2, kunde.KundenID, currentUser,msm_rueckgabe);
+            w_s_information Info = new w_s_information(2, kunde.CostumerId, currentUser,msm_rueckgabe);
             msm_rueckgabe.Clone(Info);
             Info.ShowDialog();
             Info.Dispose();

@@ -158,6 +158,8 @@
     </Compile>
     <Compile Include="Analytics.cs" />
     <Compile Include="Helper\BookHelper.cs" />
+    <Compile Include="Helper\ClassHelper.cs" />
+    <Compile Include="Helper\CostumerHelper.cs" />
     <Compile Include="Helper\SubjectHelper.cs" />
     <Compile Include="Helper\WebHelper.cs" />
     <Compile Include="Models\Author.cs" />
@@ -194,7 +196,7 @@
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Helper\GenreHelper.cs" />
     <Compile Include="Import.cs" />
-    <Compile Include="Klasse.cs" />
+    <Compile Include="Class.cs" />
     <Compile Include="Klassenstufe.cs" />
     <Compile Include="Helper\LanguageHelper.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -358,12 +360,12 @@
     <Compile Include="w_s_einstellungen.Designer.cs">
       <DependentUpon>w_s_einstellungen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kunde.cs" />
-    <Compile Include="w_s_kunden.cs">
+    <Compile Include="Costumer.cs" />
+    <Compile Include="Forms\Costumer Module\Form_Costumer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_kunden.Designer.cs">
-      <DependentUpon>w_s_kunden.cs</DependentUpon>
+    <Compile Include="Forms\Costumer Module\Form_Costumer.Designer.cs">
+      <DependentUpon>Form_Costumer.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -460,8 +462,8 @@
     <EmbeddedResource Include="w_s_einstellungen.resx">
       <DependentUpon>w_s_einstellungen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_kunden.resx">
-      <DependentUpon>w_s_kunden.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Costumer Module\Form_Costumer.resx">
+      <DependentUpon>Form_Costumer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

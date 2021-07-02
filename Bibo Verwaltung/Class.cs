@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    class Klasse
+    class Class
     {
         SQL_Verbindung con = new SQL_Verbindung();
         SqlDataAdapter adapter = new SqlDataAdapter();
@@ -29,10 +29,15 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Erschaft das Objekt Kunde
         /// </summary>
-        public Klasse()
+        public Class()
         {
-            FillObject();
+
         }
+        public Class(int classId)
+        {
+            //LoadClass
+        }
+
         #endregion
 
         /// <summary>
@@ -186,15 +191,6 @@ namespace Bibo_Verwaltung
             return Klassename;
         }
 
-        public void FillCombobox(ref AdvancedComboBox cb, object value)
-        {
-            ClearDataSource();
-            FillObject();
-            cb.DataSource = dt;
-            cb.ValueMember = "KlassenID";
-            cb.DisplayMember = "Klasse";
-            cb.SelectedValue = value;
-        }
         private bool AlreadyExists(string klassename)
         {
             if (con.ConnectError()) return false;

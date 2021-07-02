@@ -1,4 +1,5 @@
-﻿using MetroFramework;
+﻿using Bibo_Verwaltung.Helper;
+using MetroFramework;
 using MetroFramework.Components;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_automatic : MetroFramework.Forms.MetroForm
     {
+        CostumerHelper costumerHelper = new CostumerHelper();
+        ClassHelper classHelper = new ClassHelper();
         #region Constructor
         string currentUser;
         Color fc = Color.Black;
@@ -52,7 +55,6 @@ namespace Bibo_Verwaltung
         #endregion
 
         Ausleihe autoausleihe = new Ausleihe();
-        Kunde kunden = new Kunde();
         DataTable schulBuecher = new DataTable();
         DataTable selectedBuecher = new DataTable();
         bool inAusleihAction;
@@ -101,7 +103,8 @@ namespace Bibo_Verwaltung
                     try
                     {
                         lb_selected.Text = "bereits geliehene Bücher:";
-                        DataTable rueck = new Kunde().GetSchulbuchAusgeliehen(row.Cells["kunde_ID"].Value.ToString());
+                        Costumer costumer = new Costumer(int.Parse(row.Cells["kunde_ID"].Value.ToString()));
+                        DataTable rueck = costumer.GetBorrowedSchoolBooks();
                         gv_selected.DataSource = rueck;
                         gv_selected.Refresh();
                         for (int i = 0; i <= gv_suggested.RowCount - 1; i++)
@@ -348,8 +351,8 @@ namespace Bibo_Verwaltung
         private void CompleteSchueler()
         {
             autoausleihe.KID = gv_Schueler.CurrentRow.Cells["kunde_ID"].Value.ToString();
-            kunden = new Kunde(autoausleihe.KID);
-            DialogResult dialogResult = MetroMessageBox.Show(this, autoausleihe.GetAusleihList() + "an: '" + autoausleihe.TrimText(kunden.Vorname + " " + kunden.Nachname, 30) + "' wirklich ausleihen?", "Bestätigung",
+            Costumer costumer = new Costumer(int.Parse(autoausleihe.KID));
+            DialogResult dialogResult = MetroMessageBox.Show(this, autoausleihe.GetAusleihList() + "an: '" + autoausleihe.TrimText(costumer.CostumerFirstName + " " + costumer.CostumerSurname, 30) + "' wirklich ausleihen?", "Bestätigung",
                             MessageBoxButtons.OKCancel, MessageBoxIcon.Question,211 + autoausleihe.LeihListe.Rows.Count*17);
             if (dialogResult == DialogResult.OK)
             {
@@ -358,7 +361,7 @@ namespace Bibo_Verwaltung
                 {
                     foreach (DataRow row in autoausleihe.LeihListe.Rows)
                     {
-                        autoausleihe.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(), row[1].ToString(), Convert.ToInt32(kunden.KundenID));
+                        autoausleihe.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(), row[1].ToString(), costumer.CostumerId);
                     }
                     if (IsComplete(ref gv_suggested))
                     {
@@ -409,11 +412,11 @@ namespace Bibo_Verwaltung
                     autoausleihe.Rueckgabedatum = dp_RueckDatum.Value;
                     if (a_cb_Modus.SelectedIndex == 0)
                     {
-                        kunden.GetKundenList(ref gv_Schueler, false, new Klasse().GetID(a_cb_Klasse.Text));
+                        costumerHelper.FillCostumerGrid(ref gv_Schueler, false, new Class().GetID(a_cb_Klasse.Text));
                     }
                     else
                     {
-                        kunden.GetKundenList(ref gv_Schueler, true, Convert.ToInt32(a_cb_Klasse.Text.Substring(13)));
+                        costumerHelper.FillCostumerGrid(ref gv_Schueler, true, Convert.ToInt32(a_cb_Klasse.Text.Substring(13)));
                     }
                     if (gv_Schueler.Rows.Count != 0)
                     {
@@ -445,38 +448,38 @@ namespace Bibo_Verwaltung
         {
             for (int i = 0; i < gv_Schueler.RowCount; i++)
             {
-                DataGridViewRow Kundenrow = gv_Schueler.Rows[i];
-                kunden.KundenID = gv_Schueler.Rows[i].Cells["kunde_ID"].Value.ToString();
-                List<string> suggestedBooks = autoausleihe.SuggestedBooks(kunden.KundenID);
-                List<string> borrowedBooks = kunden.BorrowedBooks(kunden.KundenID);
+                DataGridViewRow costumerRow = gv_Schueler.Rows[i];
+                Costumer costumer = new Costumer(int.Parse(gv_Schueler.Rows[i].Cells["kunde_ID"].Value.ToString()));
+                List<string> suggestedBooks = autoausleihe.SuggestedBooks(costumer.CostumerId.ToString());
+                List<string> borrowedBookIsbns = costumer.BorrowedBookIsbns();
                 int countBooks = 0;
                 foreach(string book in suggestedBooks)
                 {
-                    if (!borrowedBooks.Contains(book))
+                    if (!borrowedBookIsbns.Contains(book))
                     {
                         countBooks++;
                     }
                 }
                 if (countBooks >0 && countBooks==suggestedBooks.Count)
                 {
-                    Kundenrow.DefaultCellStyle.SelectionBackColor = default;
-                    Kundenrow.DefaultCellStyle.SelectionForeColor = default;
-                    Kundenrow.DefaultCellStyle.BackColor = default;
-                    Kundenrow.DefaultCellStyle.ForeColor = default;
+                    costumerRow.DefaultCellStyle.SelectionBackColor = default;
+                    costumerRow.DefaultCellStyle.SelectionForeColor = default;
+                    costumerRow.DefaultCellStyle.BackColor = default;
+                    costumerRow.DefaultCellStyle.ForeColor = default;
                 }
                 else if(countBooks>0 && countBooks < suggestedBooks.Count)
                 {
-                    Kundenrow.DefaultCellStyle.SelectionBackColor = Color.LightGray;
-                    Kundenrow.DefaultCellStyle.SelectionForeColor = Color.Black;
-                    Kundenrow.DefaultCellStyle.BackColor = Color.Gray;
-                    Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                    costumerRow.DefaultCellStyle.SelectionBackColor = Color.LightGray;
+                    costumerRow.DefaultCellStyle.SelectionForeColor = Color.Black;
+                    costumerRow.DefaultCellStyle.BackColor = Color.Gray;
+                    costumerRow.DefaultCellStyle.ForeColor = Color.Black;
                 }
                 else
                 {
-                    Kundenrow.DefaultCellStyle.SelectionBackColor = Color.GreenYellow;
-                    Kundenrow.DefaultCellStyle.SelectionForeColor = Color.Black;
-                    Kundenrow.DefaultCellStyle.BackColor = Color.LimeGreen;
-                    Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                    costumerRow.DefaultCellStyle.SelectionBackColor = Color.GreenYellow;
+                    costumerRow.DefaultCellStyle.SelectionForeColor = Color.Black;
+                    costumerRow.DefaultCellStyle.BackColor = Color.LimeGreen;
+                    costumerRow.DefaultCellStyle.ForeColor = Color.Black;
                 }
             }
         }
@@ -623,7 +626,7 @@ namespace Bibo_Verwaltung
                 a_cb_Klasse.Sorted = true;
                 lb_Klasse.Text = "Klasse:";
                 lb_Klasse.Visible = true;
-                new Klasse().FillCombobox(ref a_cb_Klasse,1);
+                classHelper.FillCombobox(ref a_cb_Klasse,1);
                 a_cb_Klasse.Visible = true;
                 a_cb_Klasse.TabStop = true;
                 p_klasse.Visible = false;
@@ -656,7 +659,7 @@ namespace Bibo_Verwaltung
         {
             if (a_cb_Modus.SelectedIndex == 0)
             {
-                using (w_s_exemplarSuche form = new w_s_exemplarSuche(currentUser, new Klassenstufe().GetStufe(new Klasse().GetID(a_cb_Klasse.Text)),msm_automatic))
+                using (w_s_exemplarSuche form = new w_s_exemplarSuche(currentUser, new Klassenstufe().GetStufe(new Class().GetID(a_cb_Klasse.Text)),msm_automatic))
                 {
                     msm_automatic.Clone(form);
                     var result = form.ShowDialog();

@@ -1,4 +1,5 @@
-﻿using MetroFramework;
+﻿using Bibo_Verwaltung.Helper;
+using MetroFramework;
 using MetroFramework.Components;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_autorueck : MetroFramework.Forms.MetroForm
     {
+        CostumerHelper costumerHelper = new CostumerHelper();
+        ClassHelper classHelper = new ClassHelper();
         #region Constructor
         string currentUser;
         Color fc = Color.Black;
@@ -53,7 +56,6 @@ namespace Bibo_Verwaltung
 
 
         Rueckgabe autorueckgabe = new Rueckgabe();
-        Kunde kunden = new Kunde();
         DataTable selectedBuecher = new DataTable();
         bool inRueckAction;
 
@@ -90,8 +92,8 @@ namespace Bibo_Verwaltung
             for (int i = 0; i < gv_Schueler.RowCount; i++)
             {
                 DataGridViewRow Kundenrow = gv_Schueler.Rows[i];
-                kunden.KundenID = gv_Schueler.Rows[i].Cells["kunde_ID"].Value.ToString();
-                if (kunden.Ausgeliehen())
+                Costumer costumer = new Costumer(int.Parse(gv_Schueler.Rows[i].Cells["kunde_ID"].Value.ToString()));
+                if (costumer.HasBorrowedSomething())
                 {
                     Kundenrow.DefaultCellStyle.SelectionBackColor = default;
                     Kundenrow.DefaultCellStyle.SelectionForeColor = default;
@@ -364,7 +366,7 @@ namespace Bibo_Verwaltung
                 a_cb_Klasse.Sorted = true;
                 lb_Klasse.Text = "Klasse:";
                 lb_Klasse.Visible = true;
-                new Klasse().FillCombobox(ref a_cb_Klasse, 1);
+                classHelper.FillCombobox(ref a_cb_Klasse, 1);
                 a_cb_Klasse.Visible = true;
                 a_cb_Klasse.TabStop = true;
                 p_klasse.Visible = false;
@@ -412,11 +414,11 @@ namespace Bibo_Verwaltung
                     bt_abschließen.Enabled = true;
                     if (a_cb_Modus.SelectedIndex == 0)
                     {
-                        kunden.GetKundenList(ref gv_Schueler, false, new Klasse().GetID(a_cb_Klasse.Text));
+                        costumerHelper.FillCostumerGrid(ref gv_Schueler, false, new Class().GetID(a_cb_Klasse.Text));
                     }
                     else
                     {
-                        kunden.GetKundenList(ref gv_Schueler, true, Convert.ToInt32(a_cb_Klasse.Text.Substring(13)));
+                        costumerHelper.FillCostumerGrid(ref gv_Schueler, true, Convert.ToInt32(a_cb_Klasse.Text.Substring(13)));
                     }
                     if (gv_Schueler.Rows.Count != 0)
                     {
@@ -458,8 +460,8 @@ namespace Bibo_Verwaltung
             if (autorueckgabe.RueckListe.Rows.Count != 0)
             {
                 autorueckgabe.KID = gv_Schueler.CurrentRow.Cells["kunde_ID"].Value.ToString();
-                kunden = new Kunde(autorueckgabe.KID);
-                DialogResult dialogResult = MetroMessageBox.Show(this, autorueckgabe.GetRueckgabeList() + "an: '" + autorueckgabe.TrimText(kunden.Vorname + " " + kunden.Nachname, 30) + "' wirklich zurücknehmen?", "Achtung",
+                Costumer costumer = new Costumer(int.Parse(autorueckgabe.KID));
+                DialogResult dialogResult = MetroMessageBox.Show(this, autorueckgabe.GetRueckgabeList() + "an: '" + autorueckgabe.TrimText(costumer.CostumerFirstName + " " + costumer.CostumerSurname, 30) + "' wirklich zurücknehmen?", "Achtung",
                                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question,211 + autorueckgabe.RueckListe.Rows.Count * 17);
                 if (dialogResult == DialogResult.OK)
                 {

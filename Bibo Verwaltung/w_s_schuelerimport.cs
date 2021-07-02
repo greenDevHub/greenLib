@@ -769,22 +769,22 @@ namespace Bibo_Verwaltung
                     if (singleImport) progressBar1.PerformStep();
                     if (target.Equals("t_s_schueler"))
                     {
-                        Kunde k = new Kunde();
-                        k.Vorname = row[0].ToString();
-                        k.Nachname = row[1].ToString();
+                        Costumer k = new Costumer();
+                        k.CostumerFirstName = row[0].ToString();
+                        k.CostumerSurname = row[1].ToString();
                         //k.Gd = DateTime.Now; //nur HotFix
-                        k.Gd = DateTime.Parse(row[2].ToString()); //funktioniert 
-                        k.Klasse.Klassename = row[3].ToString();
-                        k.Hausnummer = "";
-                        k.Ort = "";
-                        k.Postleitzahl = "";
-                        k.Strasse = "";
-                        k.Mail = "";
-                        k.Telefonnummer = "";
+                        k.CostumerBirthDate = DateTime.Parse(row[2].ToString()); //funktioniert 
+                        k.CostumerClass.Klassename = row[3].ToString();
+                        k.CostumerHouseNumber = "";
+                        k.CostumerCity = "";
+                        k.CostumerZipcode = "";
+                        k.CostumerStreet = "";
+                        k.CostumerEmail = "";
+                        k.CostumerTelephone = "";
                         if (rb_schueler1.Checked)
                         {
                             //SEK1 Import Schüler
-                            string klassenstufe = k.Klasse.Klassename.Substring(0, k.Klasse.Klassename.Length - 2);
+                            string klassenstufe = k.CostumerClass.Klassename.Substring(0, k.CostumerClass.Klassename.Length - 2);
                             FachStufe fs = new FachStufe(klassenstufe);
                             for (int i = 4; i < 7; i++)
                             {
@@ -814,12 +814,12 @@ namespace Bibo_Verwaltung
                             }
                             if (!k.AlreadyExists(false))
                             {
-                                k.AddKunde();
+                                k.AddCostumer();
                             }
                             else
                             {
-                                k.ActivateKunde();
-                                k.UpdateKunde();
+                                k.ActivateCostumer();
+                                k.UpdateCostumer();
                             }
                         }
                         else if (rb_schueler2.Checked)
@@ -844,13 +844,13 @@ namespace Bibo_Verwaltung
                             }
                             if (!k.AlreadyExists(false))
                             {
-                                k.AddKunde();
+                                k.AddCostumer();
                             }
                             else
                             {
-                                k.ActivateKunde();
-                                k.GetKundenID();
-                                k.UpdateKunde();
+                                k.ActivateCostumer();
+                                k.LoadCostumerId();
+                                k.UpdateCostumer();
                             }
                         }
                     }

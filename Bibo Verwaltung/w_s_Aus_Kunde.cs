@@ -45,7 +45,7 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        Kunde kunde = new Kunde();
+        Costumer kunde = new Costumer();
 
         #region Kunden Laden
         public void Load_Kunden(object sender, EventArgs e)

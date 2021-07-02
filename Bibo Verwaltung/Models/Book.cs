@@ -206,7 +206,7 @@ namespace Bibo_Verwaltung
         /// loads the book information by a given id of one of its copies
         /// </summary>
         /// <param name="copyId"></param>
-        public void LoadBookByCopyId(string copyId)
+        public void LoadBookByCopyId(int copyId)
         {
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;

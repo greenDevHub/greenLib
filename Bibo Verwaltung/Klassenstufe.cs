@@ -14,7 +14,7 @@ namespace Bibo_Verwaltung
     class Klassenstufe
     {
         SQL_Verbindung con = new SQL_Verbindung();
-        Klasse klasse = new Klasse();
+        Class klasse = new Class();
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
         SqlCommandBuilder comb = new SqlCommandBuilder();

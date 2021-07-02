@@ -14,7 +14,7 @@ namespace Bibo_Verwaltung
     public partial class w_s_information : MetroFramework.Forms.MetroForm
     {
         string currentUser;
-        public w_s_information(int modus, string id, string userName, MetroStyleManager msm)
+        public w_s_information(int modus, int id, string userName, MetroStyleManager msm)
         {           
             InitializeComponent();
             msm_info = msm;
@@ -61,7 +61,7 @@ namespace Bibo_Verwaltung
             {
                 Text = "Kunden-Details";
                 bt_Verwaltung.Text = "Kundenverwaltung";
-                Kunde kunde = new Kunde(id);
+                Costumer kunde = new Costumer(id);
                 lb_1.Text = "Vorname:";
                 lb_2.Text = "Nachname:";
                 lb_3.Text = "Straße, Hausnummer";
@@ -70,14 +70,14 @@ namespace Bibo_Verwaltung
                 lb_6.Text = "Klasse:";
                 lb_7.Text = "E-Mail:";
                 lb_8.Text = "Telefonnummer:";
-                lb_2_1.Text = kunde.Vorname;
-                lb_2_2.Text = kunde.Nachname;
-                lb_2_3.Text = kunde.Strasse + kunde.Hausnummer;
-                lb_2_4.Text = kunde.Postleitzahl;
-                lb_2_5.Text = kunde.Ort;
-                lb_2_6.Text=kunde.Klasse.Klassename;
-                lb_2_7.Text = kunde.Mail;
-                lb_2_8.Text = kunde.Telefonnummer;
+                lb_2_1.Text = kunde.CostumerFirstName;
+                lb_2_2.Text = kunde.CostumerSurname;
+                lb_2_3.Text = kunde.CostumerStreet + kunde.CostumerHouseNumber;
+                lb_2_4.Text = kunde.CostumerZipcode;
+                lb_2_5.Text = kunde.CostumerCity;
+                lb_2_6.Text=kunde.CostumerClass.Klassename;
+                lb_2_7.Text = kunde.CostumerEmail;
+                lb_2_8.Text = kunde.CostumerTelephone;
             }
         }
 

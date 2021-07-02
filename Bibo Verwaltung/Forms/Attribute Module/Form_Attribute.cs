@@ -27,7 +27,7 @@ namespace Bibo_Verwaltung
         ConditionHelper conditionHelper;
         AuthorHelper authorHelper;
         PublisherHelper publisherHelper;
-        Klasse klasse;
+        Class klasse;
         Color fc = Color.Black;
         Color bc = Color.White;
         public w_s_manage(string userName, string modus, MetroFramework.Components.MetroStyleManager msm)
@@ -119,7 +119,7 @@ namespace Bibo_Verwaltung
             {
                 this.StyleManager.Style = MetroColorStyle.Teal;
                 Text = "Klasse" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-                klasse = new Klasse();
+                klasse = new Class();
                 klasse.FillGrid(ref gv_manage);
             }
             originalHeightLabel = tLP_Faecher.RowStyles[0].Height;
