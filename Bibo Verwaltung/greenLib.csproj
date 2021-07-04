@@ -158,6 +158,7 @@
     </Compile>
     <Compile Include="Analytics.cs" />
     <Compile Include="Helper\BookHelper.cs" />
+    <Compile Include="Helper\GradeHelper.cs" />
     <Compile Include="Helper\SchoolClassHelper.cs" />
     <Compile Include="Helper\CostumerHelper.cs" />
     <Compile Include="Helper\SubjectHelper.cs" />
@@ -196,8 +197,8 @@
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Helper\GenreHelper.cs" />
     <Compile Include="Import.cs" />
-    <Compile Include="SchoolClass.cs" />
-    <Compile Include="Klassenstufe.cs" />
+    <Compile Include="Models\SchoolClass.cs" />
+    <Compile Include="Models\Grade.cs" />
     <Compile Include="Helper\LanguageHelper.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

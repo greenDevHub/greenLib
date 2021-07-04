@@ -17,6 +17,7 @@ namespace Bibo_Verwaltung
     {
         CostumerHelper costumerHelper = new CostumerHelper();
         SchoolClassHelper schoolClassHelper = new SchoolClassHelper();
+        GradeHelper gradeHelper = new GradeHelper();
         #region Constructor
         string currentUser;
         Color fc = Color.Black;
@@ -659,7 +660,7 @@ namespace Bibo_Verwaltung
         {
             if (a_cb_Modus.SelectedIndex == 0)
             {
-                using (w_s_exemplarSuche form = new w_s_exemplarSuche(currentUser, new Klassenstufe().GetStufe(schoolClassHelper.FindIdByName(a_cb_Klasse.Text)),msm_automatic))
+                using (w_s_exemplarSuche form = new w_s_exemplarSuche(currentUser, gradeHelper.GetGradeOfSchoolClass(schoolClassHelper.FindIdByName(a_cb_Klasse.Text)),msm_automatic))
                 {
                     msm_automatic.Clone(form);
                     var result = form.ShowDialog();

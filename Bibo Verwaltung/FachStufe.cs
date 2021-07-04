@@ -30,8 +30,8 @@ namespace Bibo_Verwaltung
         List<string> fachListe = new List<string>();
         public List<string> FachListe { get { return fachListe; } set { fachListe = value; } }
 
-        Klassenstufe klassenstufe = new Klassenstufe();
-        public Klassenstufe Klassenstufe { get { return klassenstufe; } set { klassenstufe = value; } }
+        Grade klassenstufe = new Grade();
+        public Grade Klassenstufe { get { return klassenstufe; } set { klassenstufe = value; } }
         #endregion
 
         #region Constructor
@@ -47,7 +47,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public FachStufe(string stufe)
         {
-            this.Klassenstufe.Stufe = stufe;
+            this.Klassenstufe.GradeName = stufe;
             LoadZuornung();
         }
         #endregion
@@ -59,7 +59,7 @@ namespace Bibo_Verwaltung
         {
             if (con.ConnectError()) return;
             string RawCommand = "SELECT * FROM [dbo].[t_s_fach_stufe] WHERE bf_klassenstufe = @0";
-            SqlDataReader dr = con.ExcecuteCommand(RawCommand, Klassenstufe.Stufe);
+            SqlDataReader dr = con.ExcecuteCommand(RawCommand, Klassenstufe.GradeName);
             while (dr.Read())
             {
                 Fach = new Subject(int.Parse(dr["bf_fachid"].ToString()));

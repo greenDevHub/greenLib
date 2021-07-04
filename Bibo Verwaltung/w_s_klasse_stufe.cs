@@ -1,4 +1,5 @@
-﻿using MetroFramework;
+﻿using Bibo_Verwaltung.Helper;
+using MetroFramework;
 using MetroFramework.Components;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,9 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_klasse_stufe : MetroFramework.Forms.MetroForm
     {
-        Klassenstufe kl_st = new Klassenstufe();
+        GradeHelper gradeHelper = new GradeHelper();
+
+
         DataTable klassenListe = new DataTable();
         bool aenderungungen = false;
         string currentUser;
@@ -78,11 +81,11 @@ namespace Bibo_Verwaltung
                 klassenListe.Rows.Clear();
                 if (gv_Klassenstufe.CurrentRow != null)
                 {
-                    kl_st.Show_StufenKlassen(ref gv_Klassen, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                    gradeHelper.FillGridClassGrade(ref gv_Klassen, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
                 }
                 else
                 {
-                    kl_st.Show_StufenKlassen(ref gv_Klassen, "1");
+                    gradeHelper.FillGridClassGrade(ref gv_Klassen, "1");
                 }
             }
             catch
@@ -102,15 +105,15 @@ namespace Bibo_Verwaltung
                 for (int i = 0; i <= gv_Klassen.Rows.Count - 1; i++)
                 {
                     DataGridViewRow row = gv_Klassen.Rows[i];
-                    string klasse = row.Cells["Klasse"].Value.ToString();
+                    string klasse = row.Cells["k_bezeichnung"].Value.ToString();
 
                     if (klasse.Contains("*"))
                     {
                         DataRow relation;
                         string[] klasseDetails = new string[1];
 
-                        klasseDetails[0] = row.Cells["KlassenID"].Value.ToString();
-                        row.Cells["Klasse"].Value.ToString().Replace("*", "");
+                        klasseDetails[0] = row.Cells["k_id"].Value.ToString();
+                        row.Cells["k_bezeichnung"].Value.ToString().Replace("*", "");
 
                         if (klassenListe.Columns.Count != 1)
                         {
@@ -139,7 +142,7 @@ namespace Bibo_Verwaltung
                 DataRow relation;
                 string[] klasseDetails = new string[1];
 
-                klasseDetails[0] = row.Cells["KlassenID"].Value.ToString();
+                klasseDetails[0] = row.Cells["k_id"].Value.ToString();
 
                 if (klassenListe.Columns.Count != 1)
                 {
@@ -149,7 +152,7 @@ namespace Bibo_Verwaltung
                 relation.ItemArray = klasseDetails;
                 klassenListe.Rows.Add(relation);
 
-                row.Cells["Klasse"].Value = "*" + row.Cells["Klasse"].Value.ToString();
+                row.Cells["k_bezeichnung"].Value = "*" + row.Cells["k_bezeichnung"].Value.ToString();
                 row.DefaultCellStyle.BackColor = Color.Yellow;
                 row.DefaultCellStyle.ForeColor = Color.Black;
             }
@@ -170,14 +173,14 @@ namespace Bibo_Verwaltung
                 for (int i = klassenListe.Rows.Count - 1; i >= 0; i--)
                 {
                     DataRow row = klassenListe.Rows[i];
-                    if (row[0].ToString() == gridrow.Cells["KlassenID"].Value.ToString())
+                    if (row[0].ToString() == gridrow.Cells["k_id"].Value.ToString())
                     {
                         row.Delete();
                     }
                 }
                 klassenListe.AcceptChanges();
 
-                gridrow.Cells["Klasse"].Value = gridrow.Cells["Klasse"].Value.ToString().Substring(1);
+                gridrow.Cells["k_bezeichnung"].Value = gridrow.Cells["k_bezeichnung"].Value.ToString().Substring(1);
                 gridrow.DefaultCellStyle.BackColor = default;
                 gridrow.DefaultCellStyle.ForeColor = default;
             }
@@ -201,7 +204,7 @@ namespace Bibo_Verwaltung
                     {
                         try
                         {
-                            kl_st.Save_Zuordnung(klassenListe, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                            gradeHelper.SaveAssignment(klassenListe, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
                             aenderungungen = false;
                         }
                         catch
@@ -242,7 +245,7 @@ namespace Bibo_Verwaltung
                     bt_back.Enabled = true;
                     gv_Klassen.Enabled = true;
                     gv_Klassenstufe.Enabled = false;
-                    kl_st.Show_AllKlassen(ref gv_Klassen, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                    gradeHelper.ShowAllSchoolClasses(ref gv_Klassen, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
                     gv_Klassen.Sort(gv_Klassen.Columns[1], ListSortDirection.Ascending);
                     SetColor();
                     FillKlassenList();
@@ -269,7 +272,7 @@ namespace Bibo_Verwaltung
         private void gv_Klassen_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = gv_Klassen.CurrentRow;
-            string klasse = row.Cells["Klasse"].Value.ToString();
+            string klasse = row.Cells["k_bezeichnung"].Value.ToString();
             if (!klasse.Contains("*"))
             {
                 AddToKlassenList();
@@ -338,7 +341,7 @@ namespace Bibo_Verwaltung
                     bt_back.Enabled = true;
                     gv_Klassen.Enabled = true;
                     gv_Klassenstufe.Enabled = false;
-                    kl_st.Show_AllKlassen(ref gv_Klassen, (e.RowIndex + 1).ToString());
+                    gradeHelper.ShowAllSchoolClasses(ref gv_Klassen, (e.RowIndex + 1).ToString());
                     FillKlassenList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
@@ -366,7 +369,7 @@ namespace Bibo_Verwaltung
                         bt_back.Enabled = true;
                         gv_Klassen.Enabled = true;
                         gv_Klassenstufe.Enabled = false;
-                        kl_st.Show_AllKlassen(ref gv_Klassen, (gv_Klassenstufe.SelectedRows[0].Index + 1).ToString());
+                        gradeHelper.ShowAllSchoolClasses(ref gv_Klassen, (gv_Klassenstufe.SelectedRows[0].Index + 1).ToString());
                         FillKlassenList();
                         bt_Bearbeiten.Text = "Übernehmen";
                     }
@@ -385,7 +388,7 @@ namespace Bibo_Verwaltung
             if(e.KeyCode == Keys.Enter)
             {
                 DataGridViewRow row = gv_Klassen.CurrentRow;
-                string klasse = row.Cells["Klasse"].Value.ToString();
+                string klasse = row.Cells["k_bezeichnung"].Value.ToString();
                 if (!klasse.Contains("*"))
                 {
                     AddToKlassenList();
