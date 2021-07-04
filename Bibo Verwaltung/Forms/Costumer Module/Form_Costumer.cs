@@ -89,14 +89,14 @@ namespace Bibo_Verwaltung
         }
         private void guestMode(bool activate)
         {
-            bt_confirm.Enabled = !activate;
+            btSubmit.Enabled = !activate;
             mbt_Import.Enabled = !activate;
             mbt_Export.Enabled = !activate;
             bt_cleanup.Enabled = !activate;
             kundeEntfernenToolStripMenuItem.Enabled = !activate;
-            if (rb_search.Checked)
+            if (rbSearch.Checked)
             {
-                bt_confirm.Enabled = false;
+                btSubmit.Enabled = false;
             }
         }
 
@@ -177,15 +177,16 @@ namespace Bibo_Verwaltung
         }
 
         bool readOnly = false;
+
         /// <summary>
         /// Setzt die Componenten auf den aktuellen Arbeits-Modus
         /// </summary>
         private void SetModus()
         {
 
-            if (rb_KundeBearbeiten.Checked)
+            if (rbUpdate.Checked)
             {
-                bt_confirm.Text = "Speichern";
+                btSubmit.Text = "Speichern";
                 tb_KundenID.Enabled = false;
                 tb_Vorname.Enabled = true;
                 tb_Nachname.Enabled = true;
@@ -207,9 +208,9 @@ namespace Bibo_Verwaltung
                 lb_Ort.Text = "Wohnort:";
                 lb_Postleitzahl.Text = "Postleitzahl:";
             }
-            else if (rb_Neukunde.Checked)
+            else if (rbAdd.Checked)
             {
-                bt_confirm.Text = "Hinzufügen";
+                btSubmit.Text = "Hinzufügen";
                 tb_KundenID.Text = "";
 
                 tb_KundenID.Enabled = false;
@@ -233,9 +234,9 @@ namespace Bibo_Verwaltung
                 lb_Ort.Text = "Wohnort:";
                 lb_Postleitzahl.Text = "Postleitzahl:";
             }
-            else if (rb_KundeLoeschen.Checked)
+            else if (rbDelete.Checked)
             {
-                bt_confirm.Text = "Löschen";
+                btSubmit.Text = "Löschen";
                 tb_KundenID.Enabled = true;
                 tb_Vorname.Enabled = false;
                 tb_Nachname.Enabled = false;
@@ -257,9 +258,9 @@ namespace Bibo_Verwaltung
                 lb_Hausnummer.Text = "Hausnummer:";
                 lb_Postleitzahl.Text = "Postleitzahl:";
             }
-            else if (rb_search.Checked)
+            else if (rbSearch.Checked)
             {
-                bt_confirm.Text = "---";
+                btSubmit.Text = "---";
                 tb_KundenID.Enabled = true;
                 tb_Vorname.Enabled = true;
                 tb_Nachname.Enabled = true;
@@ -280,7 +281,7 @@ namespace Bibo_Verwaltung
                 lb_Hausnummer.Text = "Hausnummer:";
                 lb_Ort.Text = "Wohnort:";
                 lb_Postleitzahl.Text = "Postleitzahl:";
-                bt_confirm.Enabled = false;
+                btSubmit.Enabled = false;
             }
             guestMode(guest);
             if (readOnly)
@@ -358,7 +359,7 @@ namespace Bibo_Verwaltung
                 }
                 setRadioButton();
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -407,252 +408,29 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Componenten-Aktionen
-        private void bt_confirm_click(object sender, EventArgs e)
+        private void btSubmitClicked(object sender, EventArgs e)
         {
-            System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
-            t.Interval = 3000; // it will Tick in 3 seconds
-            t.Tick += (s, a) =>
-            {
-                lb_kunde_add.Hide();
-                t.Stop();
-            };
-
-            if (rb_KundeBearbeiten.Checked)
-            {
-                if (!tb_Vorname.Text.Equals("")
-                && !tb_Nachname.Text.Equals("") && !tb_KundenID.Text.Equals(""))
-                {
-                    try
-                    {
-                        Costumer costumer = new Costumer();
-                        SetValues(ref costumer);
-                        if (costumer.AlreadyExists(true))
-                        {
-                            DialogResult dr = MetroMessageBox.Show(this, "Ein Kunde mit diesem Vornamen, Nachnamen und Geburtsdatum existiert bereits." +
-                                " Die betreffenden Kunden wären dann nur anhand der anderen Felder (ID, Straße, Ort,...) unterscheidbar. " +
-                                "Trotzdem hinzufügen?", "Kunde schon vorhanden.", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                            if (dr == DialogResult.Yes)
-                            {
-                                costumer.UpdateCostumer();
-                                ClearForm();
-                                costumerHelper.FillGrid(ref gv_Kunde);
-                                gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
-                                gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
-                                lb_kunde_add.Visible = false;
-                                lb_kunde_add.Text = "Der Kunde wurde bearbeitet!";
-                                lb_kunde_add.Visible = true;
-                                t.Start();
-                            }
-                            else
-                            {
-                                lb_kunde_add.Visible = false;
-                                lb_kunde_add.Text = "Der Kunde wurde nicht bearbeitet!";
-                                lb_kunde_add.Visible = true;
-                                t.Start();
-                            }
-                        }
-                        else
-                        {
-                            costumer.CostumerId = int.Parse(tb_KundenID.Text);
-                            costumer.UpdateCostumer();
-                            ClearForm();
-                            costumerHelper.FillGrid(ref gv_Kunde);
-                            gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
-                            gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
-                            lb_kunde_add.Visible = false;
-                            lb_kunde_add.Text = "Der Kunde wurde bearbeitet!";
-                            lb_kunde_add.Visible = true;
-                            t.Start();
-                        }
-
-                    }
-                    catch (SqlException ex)
-                    {
-                        MetroMessageBox.Show(this, "Der Kunde konnte nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                {
-                }
-            }
-
-            if (rb_KundeLoeschen.Checked)
-            {
-                if (!tb_KundenID.Text.Equals(""))
-                {
-                    try
-                    {
-                        Costumer costumer = new Costumer(int.Parse(tb_KundenID.Text));
-                        if (!costumer.HasBorrowedSomething())
-                        {
-                            costumer.DeactivateCostumer();
-                            ClearForm();
-                            costumerHelper.FillGrid(ref gv_Kunde);
-                            lb_kunde_add.Visible = false;
-                            lb_kunde_add.Text = "Der Kunde wurde gelöscht!";
-                            lb_kunde_add.Visible = true;
-                            t.Start();
-                        }
-                        else
-                        {
-                            MetroMessageBox.Show(this, "Der Kunde konnte nicht entfernt werden, da er noch in einem Ausleihvorgang involviert ist. Bitte markieren Sie zuerst alle Bücher als 'zurückgegeben', damit der Datensatz entfernt werden kann.", "Löschen nicht möglich", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
-                    catch (SqlException)
-                    {
-                        MetroMessageBox.Show(this, "Der Kunde konnte nicht gelöscht werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                {
-                }
-            }
-
-            if (rb_Neukunde.Checked)
-            {
-                if (!tb_Vorname.Text.Equals("")
-                && !tb_Nachname.Text.Equals(""))
-                {
-                    string errorMessage = "Folgende Felder haben unzulässige Werte: ";
-                    bool error = false;
-                    if (!IsStringOnly(tb_Vorname.Text))
-                    {
-                        errorMessage += "\n - Vorname enthält Zahlen";
-                        tb_Vorname.BackColor = Color.Red;
-                        error = true;
-                    }
-                    if (!IsStringOnly(tb_Nachname.Text))
-                    {
-                        errorMessage += "\n - Nachname enthält Zahlen";
-                        tb_Nachname.BackColor = Color.Red;
-                        error = true;
-                    }
-                    if (!IsStringOnly(tb_Strasse.Text))
-                    {
-                        errorMessage += "\n - Straßenname enthält Zahlen";
-                        tb_Strasse.BackColor = Color.Red;
-                        error = true;
-                    }
-                    if (!IsNumericOnly(tb_Postleitzahl.Text))
-                    {
-                        errorMessage += "\n - Postleitzahl enthält nicht nur Zahlen";
-                        tb_Postleitzahl.BackColor = Color.Red;
-                        error = true;
-                    }
-                    if (!IsStringOnly(tb_Ort.Text))
-                    {
-                        errorMessage += "\n - Ort enhält Zahlen";
-                        tb_Ort.BackColor = Color.Red;
-                        error = true;
-                    }
-                    if (!cb_klasse.Text.Equals("") && !CheckSpecialNumbers(cb_klasse.Text))
-                    {
-                        errorMessage += "\n - Klasse ist nicht richtig formatiert";
-                        cb_klasse.BackColor = Color.Red;
-                        error = true;
-                    }
-                    if (!tb_Telefonnummer.Text.Equals("") && !CheckSpecialNumbers(tb_Telefonnummer.Text))
-                    {
-                        errorMessage += "\n - Telefonnummer ist nicht richtig formatiert";
-                        tb_Telefonnummer.BackColor = Color.Red;
-                        error = true;
-                    }
-                    if (error)
-                    {
-                        MetroMessageBox.Show(this, errorMessage, "Fehler!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    try
-                    {
-                        Costumer costumer = new Costumer();
-                        SetValues(ref costumer);
-                        if (costumer.CostumerSubjects.Count > 1 && costumer.CostumerSchoolClass.SchoolClassId.Equals(""))
-                        {
-                            MetroMessageBox.Show(this, "Sie haben zwar Fächer ausgewählt, aber keine Klasse. Bitte geben Sie auch die Klasse des Schülers an!", "Klasse fehlt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                        else if (costumer.CostumerSubjects.Count.Equals(0) && !costumer.CostumerSchoolClass.SchoolClassId.Equals(""))
-                        {
-                            DialogResult dr = MetroMessageBox.Show(this, "Sie haben zwar eine Klasse ausgewählt, aber keine Fächer. Möchten Sie auch die Fächer angeben?", "Fächer fehlen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (dr == DialogResult.No)
-                            {
-                                if (costumer.AlreadyExists(false) && costumer.CostumerActivated)
-                                {
-                                    object[] args = new object[] { costumer.CostumerFirstName, costumer.CostumerSurname, costumer.CostumerBirthDate.ToShortDateString() };
-                                    string message = String.Format("Es existiert bereits ein Eintrag zu dem Kunden '{0} {1} ({2})'. Bitte überprüfen Sie ihre Angaben!", args);
-                                    MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                }
-                                else if (costumer.AlreadyExists(false) && !costumer.CostumerActivated)
-                                {
-                                    costumer.ActivateCostumer();
-                                    costumer.UpdateCostumer();
-                                    object[] args = new object[] { costumer.CostumerFirstName, costumer.CostumerSurname, costumer.CostumerBirthDate.ToShortDateString() };
-                                    string message = String.Format("Es existiert bereits ein deaktivierter Eintrag zu dem Kunden '{0} {1} ({2})'. Der betroffene Eintrag wurde stattdessen reaktiviert und aktualisiert.", args);
-                                    MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                }
-                                else
-                                {
-                                    costumer.AddCostumer();
-                                    ClearForm();
-                                    costumerHelper.FillGrid(ref gv_Kunde);
-                                    gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
-                                    gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
-
-                                    lb_kunde_add.Visible = false;
-                                    lb_kunde_add.Text = "Der Kunde wurde hinzugefügt!";
-                                    lb_kunde_add.Visible = true;
-                                    t.Start();
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (costumer.AlreadyExists(false) && costumer.CostumerActivated)
-                            {
-                                object[] args = new object[] { costumer.CostumerFirstName, costumer.CostumerSurname, costumer.CostumerBirthDate.ToShortDateString() };
-                                string message = String.Format("Es existiert bereits ein Eintrag zu dem Kunden '{0} {1} ({2})'. Bitte überprüfen Sie ihre Angaben!", args);
-                                MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            }
-                            else if (costumer.AlreadyExists(false) && !costumer.CostumerActivated)
-                            {
-                                costumer.ActivateCostumer();
-                                costumer.UpdateCostumer();
-                                object[] args = new object[] { costumer.CostumerFirstName, costumer.CostumerSurname, costumer.CostumerBirthDate.ToShortDateString() };
-                                string message = String.Format("Es existiert bereits ein deaktivierter Eintrag zu dem Kunden '{0} {1} ({2})'. Der betroffene Eintrag wurde stattdessen reaktiviert und aktualisiert.", args);
-                                MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            }
-                            else
-                            {
-                                costumer.AddCostumer();
-                                ClearForm();
-                                costumerHelper.FillGrid(ref gv_Kunde);
-                                gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
-                                gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
-                                lb_kunde_add.Visible = false;
-                                lb_kunde_add.Text = "Der Kunde wurde hinzugefügt!";
-                                lb_kunde_add.Visible = true;
-                                t.Start();
-                            }
-                        }
-                    }
-                    catch (SqlException ex)
-                    {
-                        MetroMessageBox.Show(this, ex.Message + "Der Kunde konnte nicht hinzugefügt werden!", "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                {
-                }
-            }
+            Submit();
         }
 
+        /// <summary>
+        /// submits the forms: add / update / delete
+        /// </summary>
         private void Submit()
         {
-            if (rb_Neukunde.Checked)
+            if (rbAdd.Checked)
             {
                 if (InputOkay())
                 {
-                    Add();
+                    try
+                    {
+                        Add();
+                    }
+                    catch
+                    {
+                        MetroMessageBox.Show(this, "Der Kunde konnte nicht hinzugefügt werden!", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
@@ -661,11 +439,18 @@ namespace Bibo_Verwaltung
                     SetBackground_Red();
                 }
             }
-            else if (rb_KundeBearbeiten.Checked)
+            else if (rbUpdate.Checked)
             {
                 if (InputOkay())
                 {
-                    Update();
+                    try
+                    {
+                        UpdateCostumer();
+                    }
+                    catch
+                    {
+                        MetroMessageBox.Show(this, "Der Kunde konnte nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
@@ -673,11 +458,18 @@ namespace Bibo_Verwaltung
                     SetBackground_Red();
                 }
             }
-            else if (rb_KundeLoeschen.Checked)
+            else if (rbDelete.Checked)
             {
                 if (InputOkay())
                 {
-                    Delete();
+                    try
+                    {
+                        Delete();
+                    }
+                    catch
+                    {
+                        MetroMessageBox.Show(this, "Der Kunde konnte nicht gelöscht werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
@@ -692,6 +484,7 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
+            KundenFilter();
         }
 
         /// <summary>
@@ -700,21 +493,25 @@ namespace Bibo_Verwaltung
         /// <returns></returns>
         private bool InputOkay()
         {
-            if (rb_Neukunde.Checked && !tb_Vorname.Text.Equals("") && !tb_Nachname.Text.Equals(""))
+            if (rbAdd.Checked && !tb_Vorname.Text.Equals("") && !tb_Nachname.Text.Equals(""))
             {
                 return true;
             }
-            else if (rb_KundeBearbeiten.Checked && !tb_Vorname.Text.Equals("") && !tb_Nachname.Text.Equals("") && !tb_KundenID.Text.Equals(""))
+            else if (rbUpdate.Checked && !tb_Vorname.Text.Equals("") && !tb_Nachname.Text.Equals("") && !tb_KundenID.Text.Equals(""))
             {
                 return true;
             }
-            else if (rb_KundeLoeschen.Checked && !tb_KundenID.Text.Equals(""))
+            else if (rbDelete.Checked && !tb_KundenID.Text.Equals(""))
             {
                 return true;
             }
             return false;
         }
 
+        /// <summary>
+        /// checks whether the form has input errors or not
+        /// </summary>
+        /// <returns></returns>
         private bool HasInputErrors()
         {
             string errorMessage = "Folgende Felder haben unzulässige Werte: ";
@@ -783,16 +580,19 @@ namespace Bibo_Verwaltung
             costumer.CostumerZipcode = tb_Postleitzahl.Text;
             costumer.CostumerCity = tb_Ort.Text;
 
-            int schoolClassId = classHelper.FindIdByName(cb_klasse.Text);
             SchoolClass schoolClass = new SchoolClass();
-            if (schoolClassId == -1)
+            if (!cb_klasse.Text.Equals(""))
             {
-                schoolClass = new SchoolClass();
-                schoolClass.SchoolClassName = cb_klasse.Text;
-                schoolClass.Add();
-                schoolClassId = classHelper.FindIdByName(cb_klasse.Text);
+                int schoolClassId = classHelper.FindIdByName(cb_klasse.Text);
+                if (schoolClassId == -1)
+                {
+                    schoolClass = new SchoolClass();
+                    schoolClass.SchoolClassName = cb_klasse.Text;
+                    schoolClass.Add();
+                    schoolClassId = classHelper.FindIdByName(cb_klasse.Text);
+                }
+                schoolClass = new SchoolClass(schoolClassId);
             }
-            schoolClass = new SchoolClass(schoolClassId);
             costumer.CostumerSchoolClass = schoolClass;
             costumer.CostumerEmail = tb_Mail.Text;
             costumer.CostumerTelephone = tb_Telefonnummer.Text;
@@ -815,66 +615,170 @@ namespace Bibo_Verwaltung
                 costumer.CostumerAdvancedSubjects.Add(new Subject());
             }
         }
+
+        /// <summary>
+        /// shows a success message
+        /// </summary>
+        private void ShowMessage()
+        {
+            System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
+            t.Interval = 3000; // it will Tick in 3 seconds
+            t.Tick += (s, a) =>
+            {
+                lb_kunde_add.Hide();
+                t.Stop();
+                t.Dispose();
+            };
+            lb_kunde_add.Visible = true;
+            t.Start();
+
+        }
+
+        /// <summary>
+        /// adds the costumer to database
+        /// </summary>
         private void Add()
         {
+            lb_kunde_add.Text = "Der Kunde wurde hinzugefügt!";
             if (HasInputErrors()) return;
-
             Costumer costumer = new Costumer();
             SetValues(ref costumer);
-            if (costumer.CostumerSubjects.Count > 1 && costumer.CostumerSchoolClass.SchoolClassId.Equals(""))
+            if (costumer.CostumerSubjects.Count > 1 && costumer.CostumerSchoolClass.SchoolClassName.Equals(""))
             {
                 MetroMessageBox.Show(this, "Sie haben zwar Fächer ausgewählt, aber keine Klasse. " +
                     "Bitte geben Sie auch die Klasse des Schülers an!", "Klasse fehlt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            else if (costumer.CostumerSubjects.Count.Equals(0) && costumer.CostumerSchoolClass.SchoolClassName != null && !costumer.CostumerSchoolClass.SchoolClassName.Equals(""))
+            {
+                DialogResult dr = MetroMessageBox.Show(this, "Sie haben zwar eine Klasse ausgewählt, aber keine Fächer. " +
+                    "Möchten Sie auch die Fächer angeben?", "Fächer fehlen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.No)
+                {
+                    //costumer will be added with a school class but without subjects
+                    PerformAddition(ref costumer);
+                }
+            }
+            else
+            {
+                PerformAddition(ref costumer);
+            }
 
         }
-        private void Update()
+
+        /// <summary>
+        /// performs the last steps to determine whether to add / reactivate and update / to abort the addition
+        /// </summary>
+        /// <param name="costumer"></param>
+        private void PerformAddition(ref Costumer costumer)
         {
-
+            object[] args = new object[] { costumer.CostumerFirstName, costumer.CostumerSurname, costumer.CostumerBirthDate.ToShortDateString() };
+            bool alreadyExists = costumer.AlreadyExists(false);
+            if (alreadyExists && costumer.CostumerActivated)
+            {
+                string message = string.Format("Es existiert bereits ein Eintrag zu dem Kunden '{0} {1} ({2})'. Bitte überprüfen Sie ihre Angaben!", args);
+                MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (alreadyExists && !costumer.CostumerActivated)
+            {
+                costumer.ActivateCostumer();
+                costumer.UpdateCostumer();
+                string message = String.Format("Es existiert bereits ein deaktivierter Eintrag zu dem Kunden '{0} {1} ({2})'. Der betroffene Eintrag wurde stattdessen reaktiviert und aktualisiert.", args);
+                MetroMessageBox.Show(this, message, "Eintrag bereits vorhanden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                costumer.AddCostumer();
+                ClearForm();
+                costumerHelper.FillGrid(ref gv_Kunde);
+                gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
+                gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
+                ShowMessage();
+            }
         }
+
+        /// <summary>
+        /// updates the costumer
+        /// </summary>
+        private void UpdateCostumer()
+        {
+            Costumer costumer = new Costumer();
+            SetValues(ref costumer);
+            if (costumer.AlreadyExists(true))
+            {
+                DialogResult dr = MetroMessageBox.Show(this, "Ein Kunde mit diesem Vornamen, Nachnamen und Geburtsdatum existiert bereits." +
+                    " Die betreffenden Kunden wären dann nur anhand der anderen Felder (ID, Straße, Ort,...) unterscheidbar. " +
+                    "Trotzdem hinzufügen?", "Kunde schon vorhanden.", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dr == DialogResult.Yes)
+                {
+                    PerformUpdate(ref costumer);
+                }
+                else
+                {
+                    lb_kunde_add.Text = "Der Kunde wurde nicht bearbeitet!";
+                }
+            }
+            else
+            {
+                costumer.CostumerId = int.Parse(tb_KundenID.Text);
+                PerformUpdate(ref costumer);
+            }
+            ShowMessage();
+        }
+
+        /// <summary>
+        /// performs the update
+        /// </summary>
+        /// <param name="costumer"></param>
+        private void PerformUpdate(ref Costumer costumer)
+        {
+            costumer.UpdateCostumer();
+            ClearForm();
+            costumerHelper.FillGrid(ref gv_Kunde);
+            gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Descending);
+            gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
+            lb_kunde_add.Text = "Der Kunde wurde bearbeitet!";
+        }
+        
+        /// <summary>
+        /// deactivates a costumer (will remain in database, but deactivated)
+        /// </summary>
         private void Delete()
         {
-
+            Costumer costumer = new Costumer(int.Parse(tb_KundenID.Text));
+            if (!costumer.HasBorrowedSomething())
+            {
+                costumer.DeactivateCostumer();
+                ClearForm();
+                costumerHelper.FillGrid(ref gv_Kunde);
+                lb_kunde_add.Text = "Der Kunde wurde gelöscht!";
+                ShowMessage();
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "Der Kunde konnte nicht entfernt werden, da er noch in einem Ausleihvorgang involviert ist. Bitte markieren Sie zuerst alle Bücher als 'zurückgegeben', damit der Datensatz entfernt werden kann.", "Löschen nicht möglich", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
+        private void btClearClicked(object sender, EventArgs e)
         {
             ClearForm();
         }
 
-        private void rb_KundeBearbeiten_CheckedChanged(object sender, EventArgs e)
+        /// <summary>
+        /// radio button checked changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void rbCheckedChanged(object sender, EventArgs e)
         {
             SetModus();
             SetBackground_White();
         }
-
-        private void rb_KundeLoeschen_CheckedChanged(object sender, EventArgs e)
-        {
-            SetModus();
-            SetBackground_White();
-        }
-
-        private void rb_Neukunde_CheckedChanged(object sender, EventArgs e)
-        {
-            SetModus();
-            SetBackground_White();
-        }
-
         private void Rb_search_CheckedChanged(object sender, EventArgs e)
         {
             SetModus();
             SetBackground_White();
         }
-
-        private void w_s_kunden_Activated(object sender, EventArgs e)
-        {
-            //SetModus();
-            //if (!backgroundWorker1.IsBusy)
-            //{
-            //    backgroundWorker1.RunWorkerAsync();
-            //}
-        }
-
         private void tb_KundenID_TextChanged(object sender, EventArgs e)
         {
             tb_KundenID.BackColor = Color.White;
@@ -945,7 +849,7 @@ namespace Bibo_Verwaltung
                 int index = int.Parse(row.Cells["Kunden-ID"].Value.ToString());
                 ClearForm();
                 LoadKunde(index);
-                rb_KundeBearbeiten.Checked = true;
+                rbUpdate.Checked = true;
             }
         }
 
@@ -1095,7 +999,7 @@ namespace Bibo_Verwaltung
 
         private void kundeBearbeitenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            rb_KundeBearbeiten.Checked = true;
+            rbUpdate.Checked = true;
             LoadKunde(int.Parse(gv_Kunde.SelectedRows[0].Cells["Kunden-ID"].Value.ToString()));
         }
 
@@ -1301,6 +1205,7 @@ namespace Bibo_Verwaltung
                 {
                     LoadKunde(costumerId);
                 }
+                //SetModus();
             }
             catch
             {
@@ -1441,7 +1346,7 @@ namespace Bibo_Verwaltung
             }
             else if (e.KeyCode == Keys.Tab)
             {
-                bt_clear.Focus();
+                btClear.Focus();
                 e.SuppressKeyPress = true;
             }
         }
@@ -1456,7 +1361,7 @@ namespace Bibo_Verwaltung
                     int index = int.Parse(row.Cells["Kunden-ID"].Value.ToString());
                     ClearForm();
                     LoadKunde(index);
-                    rb_KundeBearbeiten.Checked = true;
+                    rbUpdate.Checked = true;
                 }
                 e.SuppressKeyPress = true;
             }
@@ -1531,7 +1436,6 @@ namespace Bibo_Verwaltung
 
         private void timer_start_Tick(object sender, EventArgs e)
         {
-            SetModus();
             if (!backgroundWorker1.IsBusy)
             {
                 backgroundWorker1.RunWorkerAsync();

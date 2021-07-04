@@ -45,6 +45,7 @@ namespace Bibo_Verwaltung
         /// <param name="schoolClassId"></param>
         public SchoolClass(int schoolClassId)
         {
+            SchoolClassId = schoolClassId;
             LoadSchoolClass();
         }
         #endregion

@@ -59,11 +59,11 @@
             this.tb_Ort = new MetroFramework.Controls.MetroTextBox();
             this.lb_KundenID = new MetroFramework.Controls.MetroLabel();
             this.lb_kunde_add = new MetroFramework.Controls.MetroTextBox();
-            this.bt_clear = new MetroFramework.Controls.MetroButton();
-            this.rb_KundeLoeschen = new MetroFramework.Controls.MetroRadioButton();
-            this.rb_KundeBearbeiten = new MetroFramework.Controls.MetroRadioButton();
-            this.rb_Neukunde = new MetroFramework.Controls.MetroRadioButton();
-            this.bt_confirm = new MetroFramework.Controls.MetroButton();
+            this.btClear = new MetroFramework.Controls.MetroButton();
+            this.rbDelete = new MetroFramework.Controls.MetroRadioButton();
+            this.rbUpdate = new MetroFramework.Controls.MetroRadioButton();
+            this.rbAdd = new MetroFramework.Controls.MetroRadioButton();
+            this.btSubmit = new MetroFramework.Controls.MetroButton();
             this.bt_OK = new MetroFramework.Controls.MetroButton();
             this.gv_Kunde = new MetroFramework.Controls.MetroGrid();
             this.cm_kunde = new MetroFramework.Controls.MetroContextMenu(this.components);
@@ -73,7 +73,6 @@
             this.lb_geburtsdatum = new MetroFramework.Controls.MetroLabel();
             this.lb_faecher = new MetroFramework.Controls.MetroLabel();
             this.bt_klasse_s = new MetroFramework.Controls.MetroButton();
-            this.cb_klasse = new Bibo_Verwaltung.AdvancedComboBox();
             this.mbt_Import = new MetroFramework.Controls.MetroButton();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.tb_search = new MetroFramework.Controls.MetroTextBox();
@@ -96,11 +95,12 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.mbt_Export = new MetroFramework.Controls.MetroButton();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
-            this.rb_search = new MetroFramework.Controls.MetroRadioButton();
+            this.rbSearch = new MetroFramework.Controls.MetroRadioButton();
             this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.metroContextMenu1 = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.timer_start = new System.Windows.Forms.Timer(this.components);
+            this.cb_klasse = new Bibo_Verwaltung.AdvancedComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
             this.cm_kunde.SuspendLayout();
             this.metroPanel1.SuspendLayout();
@@ -612,90 +612,90 @@
             this.lb_kunde_add.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.lb_kunde_add.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // bt_clear
+            // btClear
             // 
-            this.bt_clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bt_clear.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.bt_clear.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.helpProvider.SetHelpString(this.bt_clear, "Leeren sie alle oben liegenden Textfelder.");
-            this.bt_clear.Location = new System.Drawing.Point(3, 618);
-            this.bt_clear.Name = "bt_clear";
-            this.helpProvider.SetShowHelp(this.bt_clear, true);
-            this.bt_clear.Size = new System.Drawing.Size(122, 24);
-            this.bt_clear.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_clear.TabIndex = 19;
-            this.bt_clear.Text = "Leeren";
-            this.metroToolTip1.SetToolTip(this.bt_clear, "    Leeren sie hier alle oben liegenden Textfelder.    ");
-            this.bt_clear.UseSelectable = true;
-            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            this.btClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btClear.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.btClear.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.helpProvider.SetHelpString(this.btClear, "Leeren sie alle oben liegenden Textfelder.");
+            this.btClear.Location = new System.Drawing.Point(3, 618);
+            this.btClear.Name = "btClear";
+            this.helpProvider.SetShowHelp(this.btClear, true);
+            this.btClear.Size = new System.Drawing.Size(122, 24);
+            this.btClear.Style = MetroFramework.MetroColorStyle.Teal;
+            this.btClear.TabIndex = 19;
+            this.btClear.Text = "Leeren";
+            this.metroToolTip1.SetToolTip(this.btClear, "    Leeren sie hier alle oben liegenden Textfelder.    ");
+            this.btClear.UseSelectable = true;
+            this.btClear.Click += new System.EventHandler(this.btClearClicked);
             // 
-            // rb_KundeLoeschen
+            // rbDelete
             // 
-            this.rb_KundeLoeschen.AutoSize = true;
-            this.rb_KundeLoeschen.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-            this.rb_KundeLoeschen.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.helpProvider.SetHelpString(this.rb_KundeLoeschen, "Klicken sie hier, um einen vorhandenen Kunden zu löschen.");
-            this.rb_KundeLoeschen.Location = new System.Drawing.Point(285, 63);
-            this.rb_KundeLoeschen.Name = "rb_KundeLoeschen";
-            this.helpProvider.SetShowHelp(this.rb_KundeLoeschen, true);
-            this.rb_KundeLoeschen.Size = new System.Drawing.Size(80, 19);
-            this.rb_KundeLoeschen.Style = MetroFramework.MetroColorStyle.Teal;
-            this.rb_KundeLoeschen.TabIndex = 3;
-            this.rb_KundeLoeschen.Text = "Entfernen";
-            this.metroToolTip1.SetToolTip(this.rb_KundeLoeschen, "    Klicken sie hier, um einen vorhandenen Kunden zu löschen.    ");
-            this.rb_KundeLoeschen.UseSelectable = true;
-            this.rb_KundeLoeschen.CheckedChanged += new System.EventHandler(this.rb_KundeLoeschen_CheckedChanged);
+            this.rbDelete.AutoSize = true;
+            this.rbDelete.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rbDelete.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
+            this.helpProvider.SetHelpString(this.rbDelete, "Klicken sie hier, um einen vorhandenen Kunden zu löschen.");
+            this.rbDelete.Location = new System.Drawing.Point(285, 63);
+            this.rbDelete.Name = "rbDelete";
+            this.helpProvider.SetShowHelp(this.rbDelete, true);
+            this.rbDelete.Size = new System.Drawing.Size(80, 19);
+            this.rbDelete.Style = MetroFramework.MetroColorStyle.Teal;
+            this.rbDelete.TabIndex = 3;
+            this.rbDelete.Text = "Entfernen";
+            this.metroToolTip1.SetToolTip(this.rbDelete, "    Klicken sie hier, um einen vorhandenen Kunden zu löschen.    ");
+            this.rbDelete.UseSelectable = true;
+            this.rbDelete.CheckedChanged += new System.EventHandler(this.rbCheckedChanged);
             // 
-            // rb_KundeBearbeiten
+            // rbUpdate
             // 
-            this.rb_KundeBearbeiten.AutoSize = true;
-            this.rb_KundeBearbeiten.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-            this.rb_KundeBearbeiten.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.helpProvider.SetHelpString(this.rb_KundeBearbeiten, "Klicken sie hier, um einen vorhandenen Kunden zu bearbeiten.");
-            this.rb_KundeBearbeiten.Location = new System.Drawing.Point(191, 63);
-            this.rb_KundeBearbeiten.Name = "rb_KundeBearbeiten";
-            this.helpProvider.SetShowHelp(this.rb_KundeBearbeiten, true);
-            this.rb_KundeBearbeiten.Size = new System.Drawing.Size(88, 19);
-            this.rb_KundeBearbeiten.Style = MetroFramework.MetroColorStyle.Teal;
-            this.rb_KundeBearbeiten.TabIndex = 2;
-            this.rb_KundeBearbeiten.Text = "Bearbeiten";
-            this.metroToolTip1.SetToolTip(this.rb_KundeBearbeiten, "    Klicken sie hier, um einen Kunden zu bearbeiten.    ");
-            this.rb_KundeBearbeiten.UseSelectable = true;
-            this.rb_KundeBearbeiten.CheckedChanged += new System.EventHandler(this.rb_KundeBearbeiten_CheckedChanged);
+            this.rbUpdate.AutoSize = true;
+            this.rbUpdate.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rbUpdate.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
+            this.helpProvider.SetHelpString(this.rbUpdate, "Klicken sie hier, um einen vorhandenen Kunden zu bearbeiten.");
+            this.rbUpdate.Location = new System.Drawing.Point(191, 63);
+            this.rbUpdate.Name = "rbUpdate";
+            this.helpProvider.SetShowHelp(this.rbUpdate, true);
+            this.rbUpdate.Size = new System.Drawing.Size(88, 19);
+            this.rbUpdate.Style = MetroFramework.MetroColorStyle.Teal;
+            this.rbUpdate.TabIndex = 2;
+            this.rbUpdate.Text = "Bearbeiten";
+            this.metroToolTip1.SetToolTip(this.rbUpdate, "    Klicken sie hier, um einen Kunden zu bearbeiten.    ");
+            this.rbUpdate.UseSelectable = true;
+            this.rbUpdate.CheckedChanged += new System.EventHandler(this.rbCheckedChanged);
             // 
-            // rb_Neukunde
+            // rbAdd
             // 
-            this.rb_Neukunde.AutoSize = true;
-            this.rb_Neukunde.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-            this.rb_Neukunde.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.helpProvider.SetHelpString(this.rb_Neukunde, "Klicken sie hier, um einen neuen Kunden hinzuzufügen.");
-            this.rb_Neukunde.Location = new System.Drawing.Point(95, 63);
-            this.rb_Neukunde.Name = "rb_Neukunde";
-            this.helpProvider.SetShowHelp(this.rb_Neukunde, true);
-            this.rb_Neukunde.Size = new System.Drawing.Size(90, 19);
-            this.rb_Neukunde.Style = MetroFramework.MetroColorStyle.Teal;
-            this.rb_Neukunde.TabIndex = 1;
-            this.rb_Neukunde.Text = "Hinzufügen";
-            this.metroToolTip1.SetToolTip(this.rb_Neukunde, "    Klicken sie hier, um einen neuen Kunden hinzuzufügen.    ");
-            this.rb_Neukunde.UseSelectable = true;
-            this.rb_Neukunde.CheckedChanged += new System.EventHandler(this.rb_Neukunde_CheckedChanged);
+            this.rbAdd.AutoSize = true;
+            this.rbAdd.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rbAdd.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
+            this.helpProvider.SetHelpString(this.rbAdd, "Klicken sie hier, um einen neuen Kunden hinzuzufügen.");
+            this.rbAdd.Location = new System.Drawing.Point(95, 63);
+            this.rbAdd.Name = "rbAdd";
+            this.helpProvider.SetShowHelp(this.rbAdd, true);
+            this.rbAdd.Size = new System.Drawing.Size(90, 19);
+            this.rbAdd.Style = MetroFramework.MetroColorStyle.Teal;
+            this.rbAdd.TabIndex = 1;
+            this.rbAdd.Text = "Hinzufügen";
+            this.metroToolTip1.SetToolTip(this.rbAdd, "    Klicken sie hier, um einen neuen Kunden hinzuzufügen.    ");
+            this.rbAdd.UseSelectable = true;
+            this.rbAdd.CheckedChanged += new System.EventHandler(this.rbCheckedChanged);
             // 
-            // bt_confirm
+            // btSubmit
             // 
-            this.bt_confirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bt_confirm.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.bt_confirm.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.helpProvider.SetHelpString(this.bt_confirm, "Speichern sie alle oben eingetragenen Daten.");
-            this.bt_confirm.Location = new System.Drawing.Point(235, 618);
-            this.bt_confirm.Name = "bt_confirm";
-            this.helpProvider.SetShowHelp(this.bt_confirm, true);
-            this.bt_confirm.Size = new System.Drawing.Size(122, 24);
-            this.bt_confirm.Style = MetroFramework.MetroColorStyle.Teal;
-            this.bt_confirm.TabIndex = 20;
-            this.bt_confirm.Text = "Speichern";
-            this.metroToolTip1.SetToolTip(this.bt_confirm, "    Speichern sie hier alle oben eingetragenen Daten.    ");
-            this.bt_confirm.UseSelectable = true;
-            this.bt_confirm.Click += new System.EventHandler(this.bt_confirm_click);
+            this.btSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btSubmit.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.btSubmit.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.helpProvider.SetHelpString(this.btSubmit, "Speichern sie alle oben eingetragenen Daten.");
+            this.btSubmit.Location = new System.Drawing.Point(235, 618);
+            this.btSubmit.Name = "btSubmit";
+            this.helpProvider.SetShowHelp(this.btSubmit, true);
+            this.btSubmit.Size = new System.Drawing.Size(122, 24);
+            this.btSubmit.Style = MetroFramework.MetroColorStyle.Teal;
+            this.btSubmit.TabIndex = 20;
+            this.btSubmit.Text = "Speichern";
+            this.metroToolTip1.SetToolTip(this.btSubmit, "    Speichern sie hier alle oben eingetragenen Daten.    ");
+            this.btSubmit.UseSelectable = true;
+            this.btSubmit.Click += new System.EventHandler(this.btSubmitClicked);
             // 
             // bt_OK
             // 
@@ -841,28 +841,6 @@
             this.bt_klasse_s.UseSelectable = true;
             this.bt_klasse_s.Click += new System.EventHandler(this.Bt_klasse_s_Click);
             // 
-            // cb_klasse
-            // 
-            this.cb_klasse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cb_klasse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cb_klasse.BorderColor = System.Drawing.Color.Gray;
-            this.cb_klasse.DataRowView = true;
-            this.cb_klasse.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cb_klasse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cb_klasse.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_klasse.ForeColor = System.Drawing.Color.Black;
-            this.cb_klasse.FormattingEnabled = true;
-            this.helpProvider.SetHelpString(this.cb_klasse, "Tragen sie den Autor ihres Buches hier ein.");
-            this.cb_klasse.HighlightColor = System.Drawing.Color.LightSeaGreen;
-            this.cb_klasse.ItemHeight = 18;
-            this.cb_klasse.Location = new System.Drawing.Point(113, 248);
-            this.cb_klasse.Name = "cb_klasse";
-            this.helpProvider.SetShowHelp(this.cb_klasse, true);
-            this.cb_klasse.Size = new System.Drawing.Size(216, 24);
-            this.cb_klasse.TabIndex = 13;
-            this.cb_klasse.TextChanged += new System.EventHandler(this.cb_klasse_TextChanged);
-            this.cb_klasse.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cb_klasse_KeyDown);
-            // 
             // mbt_Import
             // 
             this.mbt_Import.FontSize = MetroFramework.MetroButtonSize.Medium;
@@ -892,8 +870,8 @@
             this.metroPanel1.Controls.Add(this.lb_geburtsdatum);
             this.metroPanel1.Controls.Add(this.lb_kunde_add);
             this.metroPanel1.Controls.Add(this.lb_Telefonnummer);
-            this.metroPanel1.Controls.Add(this.bt_confirm);
-            this.metroPanel1.Controls.Add(this.bt_clear);
+            this.metroPanel1.Controls.Add(this.btSubmit);
+            this.metroPanel1.Controls.Add(this.btClear);
             this.metroPanel1.Controls.Add(this.tb_Telefonnummer);
             this.metroPanel1.Controls.Add(this.lb_Klasse);
             this.metroPanel1.Controls.Add(this.tb_Mail);
@@ -1293,22 +1271,22 @@
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
             // 
-            // rb_search
+            // rbSearch
             // 
-            this.rb_search.AutoSize = true;
-            this.rb_search.Checked = true;
-            this.rb_search.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-            this.rb_search.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
-            this.rb_search.Location = new System.Drawing.Point(23, 63);
-            this.rb_search.Name = "rb_search";
-            this.rb_search.Size = new System.Drawing.Size(66, 19);
-            this.rb_search.Style = MetroFramework.MetroColorStyle.Teal;
-            this.rb_search.TabIndex = 0;
-            this.rb_search.TabStop = true;
-            this.rb_search.Text = "Suchen";
-            this.metroToolTip1.SetToolTip(this.rb_search, "    Klicken sie hier, um nach einem Kunden zu suchen.    ");
-            this.rb_search.UseSelectable = true;
-            this.rb_search.CheckedChanged += new System.EventHandler(this.Rb_search_CheckedChanged);
+            this.rbSearch.AutoSize = true;
+            this.rbSearch.Checked = true;
+            this.rbSearch.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.rbSearch.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
+            this.rbSearch.Location = new System.Drawing.Point(23, 63);
+            this.rbSearch.Name = "rbSearch";
+            this.rbSearch.Size = new System.Drawing.Size(66, 19);
+            this.rbSearch.Style = MetroFramework.MetroColorStyle.Teal;
+            this.rbSearch.TabIndex = 0;
+            this.rbSearch.TabStop = true;
+            this.rbSearch.Text = "Suchen";
+            this.metroToolTip1.SetToolTip(this.rbSearch, "    Klicken sie hier, um nach einem Kunden zu suchen.    ");
+            this.rbSearch.UseSelectable = true;
+            this.rbSearch.CheckedChanged += new System.EventHandler(this.Rb_search_CheckedChanged);
             // 
             // metroStyleManager1
             // 
@@ -1331,6 +1309,28 @@
             this.timer_start.Interval = 1000;
             this.timer_start.Tick += new System.EventHandler(this.timer_start_Tick);
             // 
+            // cb_klasse
+            // 
+            this.cb_klasse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_klasse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_klasse.BorderColor = System.Drawing.Color.Gray;
+            this.cb_klasse.DataRowView = true;
+            this.cb_klasse.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cb_klasse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cb_klasse.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cb_klasse.ForeColor = System.Drawing.Color.Black;
+            this.cb_klasse.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_klasse, "Tragen sie den Autor ihres Buches hier ein.");
+            this.cb_klasse.HighlightColor = System.Drawing.Color.LightSeaGreen;
+            this.cb_klasse.ItemHeight = 18;
+            this.cb_klasse.Location = new System.Drawing.Point(113, 248);
+            this.cb_klasse.Name = "cb_klasse";
+            this.helpProvider.SetShowHelp(this.cb_klasse, true);
+            this.cb_klasse.Size = new System.Drawing.Size(216, 24);
+            this.cb_klasse.TabIndex = 13;
+            this.cb_klasse.TextChanged += new System.EventHandler(this.cb_klasse_TextChanged);
+            this.cb_klasse.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cb_klasse_KeyDown);
+            // 
             // w_s_Kunden
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1341,11 +1341,11 @@
             this.Controls.Add(this.mtP_Filter);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.metroLabel1);
-            this.Controls.Add(this.rb_KundeLoeschen);
+            this.Controls.Add(this.rbDelete);
             this.Controls.Add(this.gv_Kunde);
-            this.Controls.Add(this.rb_KundeBearbeiten);
-            this.Controls.Add(this.rb_search);
-            this.Controls.Add(this.rb_Neukunde);
+            this.Controls.Add(this.rbUpdate);
+            this.Controls.Add(this.rbSearch);
+            this.Controls.Add(this.rbAdd);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(983, 745);
@@ -1354,7 +1354,6 @@
             this.ShowInTaskbar = false;
             this.Style = MetroFramework.MetroColorStyle.Teal;
             this.Text = "Kundenverwaltung";
-            this.Activated += new System.EventHandler(this.w_s_kunden_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).EndInit();
             this.cm_kunde.ResumeLayout(false);
             this.metroPanel1.ResumeLayout(false);
@@ -1375,13 +1374,13 @@
         private MetroFramework.Controls.MetroLabel lb_Telefonnummer;
         private MetroFramework.Controls.MetroTextBox tb_Telefonnummer;
         private MetroFramework.Controls.MetroButton bt_OK;
-        private MetroFramework.Controls.MetroButton bt_confirm;
-        private MetroFramework.Controls.MetroRadioButton rb_KundeLoeschen;
-        private MetroFramework.Controls.MetroRadioButton rb_KundeBearbeiten;
-        private MetroFramework.Controls.MetroButton bt_clear;
+        private MetroFramework.Controls.MetroButton btSubmit;
+        private MetroFramework.Controls.MetroRadioButton rbDelete;
+        private MetroFramework.Controls.MetroRadioButton rbUpdate;
+        private MetroFramework.Controls.MetroButton btClear;
         private MetroFramework.Controls.MetroTextBox lb_kunde_add;
         private MetroFramework.Controls.MetroGrid gv_Kunde;
-        private MetroFramework.Controls.MetroRadioButton rb_Neukunde;
+        private MetroFramework.Controls.MetroRadioButton rbAdd;
         private System.Windows.Forms.HelpProvider helpProvider;
         private MetroFramework.Controls.MetroLabel lb_Vorname;
         private MetroFramework.Controls.MetroLabel lb_Nachname;
@@ -1426,7 +1425,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private MetroFramework.Controls.MetroButton mbt_Export;
         private MetroFramework.Controls.MetroPanel metroPanel2;
-        private MetroFramework.Controls.MetroRadioButton rb_search;
+        private MetroFramework.Controls.MetroRadioButton rbSearch;
         private MetroFramework.Controls.MetroButton bt_klasse_s;
         private AdvancedComboBox cb_klasse;
         private MetroFramework.Components.MetroStyleManager metroStyleManager1;

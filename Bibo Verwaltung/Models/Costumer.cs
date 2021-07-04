@@ -144,7 +144,9 @@ namespace Bibo_Verwaltung
                 CostumerTelephone = dr["kunde_telefonnummer"].ToString();
                 CostumerHouseNumber = dr["kunde_hausnummer"].ToString();
                 CostumerEmail = dr["kunde_mail"].ToString();
-                CostumerSchoolClass = new SchoolClass(int.Parse(dr["kunde_klasse"].ToString()));
+                string schoolClassId = dr["kunde_klasse"].ToString();
+                if (schoolClassId == "") CostumerSchoolClass = new SchoolClass();
+                else CostumerSchoolClass = new SchoolClass(int.Parse(schoolClassId));
                 CostumerActivated = dr["kunde_activated"].ToString().Equals("1") ? true : false;
             }
             dr.Close();
@@ -187,8 +189,11 @@ namespace Bibo_Verwaltung
         }
 
         /// <summary>
-        /// ??? TODO
+        /// Checks whether the current costumer already exists in database (first name, surname and birthdate).
+        /// If you want to update a costumer use this method in edit mode
         /// </summary>
+        /// <param name="edit"></param>
+        /// <returns></returns>
         public bool AlreadyExists(bool edit)
         {
             int newID = -1;
@@ -244,7 +249,7 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@costumerTelephone", CostumerTelephone);
             cmd.Parameters.AddWithValue("@costumerHouseNumber", CostumerHouseNumber);
             cmd.Parameters.AddWithValue("@costumerEmail", CostumerEmail);
-            if (CostumerSchoolClass != null && !CostumerSchoolClass.SchoolClassId.Equals(""))
+            if (CostumerSchoolClass != null && CostumerSchoolClass.SchoolClassName != null && !CostumerSchoolClass.SchoolClassName.Equals(""))
             {
                 cmd.Parameters.AddWithValue("@costumerClass", CostumerSchoolClass.SchoolClassId);
             }
