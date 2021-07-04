@@ -12,7 +12,7 @@ namespace Bibo_Verwaltung
         BookHelper helper = new BookHelper();
 
 
-        SQL_Verbindung con = new SQL_Verbindung();
+        CustomSqlConnection con = new CustomSqlConnection();
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
         SqlCommandBuilder comb = new SqlCommandBuilder();

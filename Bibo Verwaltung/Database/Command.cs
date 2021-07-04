@@ -13,7 +13,7 @@ namespace Bibo_Verwaltung.Database
 {
     class Command
     {
-        SQL_Verbindung con = new SQL_Verbindung();
+        CustomSqlConnection con = new CustomSqlConnection();
 
         private string _tableName = "";
         /// <summary>

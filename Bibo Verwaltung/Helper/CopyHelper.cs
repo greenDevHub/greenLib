@@ -21,7 +21,7 @@ namespace Bibo_Verwaltung
         /// <param name="bookIsbn">the isbn of a book</param>
         public void DeactivateByBookIsbn(string bookIsbn)
         {
-            SQL_Verbindung connection = new SQL_Verbindung();
+            CustomSqlConnection connection = new CustomSqlConnection();
             if (connection.ConnectError()) return;
             string RawCommand = "UPDATE t_s_buchid set bu_activated = @copyActivated WHERE bu_isbn = @copyIsbn";
             SqlCommand cmd = new SqlCommand(RawCommand, connection.Con);
@@ -39,7 +39,7 @@ namespace Bibo_Verwaltung
         public int FindIdByIsbn(string bookIsbn)
         {
             int id = -1;
-            SQL_Verbindung connection = new SQL_Verbindung();
+            CustomSqlConnection connection = new CustomSqlConnection();
             if (connection.ConnectError()) return id;
             string command = "SELECT bu_id from t_s_buchid where bu_isbn = @0";
             SqlDataReader dr = connection.ExcecuteCommand(command, bookIsbn);
@@ -61,7 +61,7 @@ namespace Bibo_Verwaltung
         public DataTable FillObjectSearch(int grade, string copyIsbn)
         {
             DataTable result = new DataTable();
-            SQL_Verbindung connection = new SQL_Verbindung();
+            CustomSqlConnection connection = new CustomSqlConnection();
             if (connection.ConnectError()) return result;
             string command = "SELECT bu_id as 'ExemplarID', buch_isbn as 'ISBN', buch_titel as 'Titel' " +
                 "FROM t_s_buchid left join t_s_buecher on buch_isbn = bu_isbn left join t_s_buch_stufe on bs_isbn = bu_isbn " +
@@ -81,7 +81,7 @@ namespace Bibo_Verwaltung
         /// <param name="bookIsbn">the isbn of a book</param>
         public void DeleteByBookIsbn(string bookIsbn)
         {
-            SQL_Verbindung connection = new SQL_Verbindung();
+            CustomSqlConnection connection = new CustomSqlConnection();
             if (connection.ConnectError()) return;
             string command = "DELETE FROM [dbo].[t_s_buchid] WHERE bu_isbn = @bookIsbn";
             SqlCommand cmd = new SqlCommand(command, connection.Con);
@@ -97,7 +97,7 @@ namespace Bibo_Verwaltung
         private DataTable FillObject(string copyIsbn)
         {
             DataTable table = new DataTable();
-            SQL_Verbindung connection = new SQL_Verbindung();
+            CustomSqlConnection connection = new CustomSqlConnection();
             SqlDataAdapter adapter = new SqlDataAdapter();
             if (connection.ConnectError()) return table;
             string command = "SELECT bu_id as Exemplar, bu_isbn as ISBN, buch_titel as Titel, " +

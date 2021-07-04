@@ -15,7 +15,7 @@ namespace Bibo_Verwaltung
 {
     class Import
     {
-        SQL_Verbindung con = new SQL_Verbindung();
+        CustomSqlConnection con = new CustomSqlConnection();
         DataTable CSVData_File = new DataTable();
         public DataTable CSVData_ToServer = new DataTable();
         SqlDataAdapter adapter = new SqlDataAdapter();

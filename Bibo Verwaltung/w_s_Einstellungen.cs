@@ -146,7 +146,7 @@ namespace Bibo_Verwaltung
             set.Pw = tb_Passwort.Text;
             set.Database = tb_Database.Text;
             set.SaveSettings(false);
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (!con.ConnectError())
             {
                 MetroMessageBox.Show(this,"Verbindung konnte erfolgreich hergestellt werden!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);

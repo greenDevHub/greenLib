@@ -291,7 +291,7 @@ namespace Bibo_Verwaltung
         private void getSchemaOfSQLTable(string table)
         {
             schema.Clear();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string RawCommand = "SELECT COLUMN_NAME, DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @0";
             // Verbindung öffnen 
@@ -359,7 +359,7 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                SQL_Verbindung con = new SQL_Verbindung();
+                CustomSqlConnection con = new CustomSqlConnection();
                 if (con.ConnectError()) return;
                 using (var bulkCopy = new SqlBulkCopy(con.Con))
                 {
@@ -490,7 +490,7 @@ namespace Bibo_Verwaltung
         public List<string> GetSQLColumns(string tableName)
         {
             List<string> cols = new List<string>();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return cols;
             string RawCommand = "SELECT column_name FROM information_schema.columns WHERE table_name = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, tableName);

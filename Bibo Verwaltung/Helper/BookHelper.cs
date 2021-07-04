@@ -52,7 +52,7 @@ namespace Bibo_Verwaltung.Helper
         private DataTable FillObject(bool shortLoad)
         {
             DataTable table = new DataTable();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return table;
             string command = shortLoad ? "SELECT buch_isbn as 'ISBN', buch_titel as 'Titel' " +
                 "from t_s_buecher WHERE buch_activated = 1" :
@@ -98,7 +98,7 @@ namespace Bibo_Verwaltung.Helper
         private DataTable FillObjectSearch(int grade)
         {
             DataTable table = new DataTable();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return table;
             string command = "SELECT buch_isbn as 'ISBN', buch_titel as 'Titel' FROM t_s_buchid " +
                 "left join t_s_buecher on buch_isbn = bu_isbn left join t_s_buch_stufe on bs_isbn = bu_isbn " +

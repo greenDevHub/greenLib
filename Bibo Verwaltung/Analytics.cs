@@ -79,7 +79,7 @@ namespace Bibo_Verwaltung
         private DataSet getMaxPreisanstieg()
         {
             ResultMaxPreisanstieg.Clear();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return null;
             string RawCommand = "";
             // Verbindung öffnen 
@@ -127,7 +127,7 @@ namespace Bibo_Verwaltung
         private DataSet getPreisanstieg(string isbn)
         {
             ResultPreisanstieg.Clear();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return null;
             string RawCommand = "SELECT [p_datum] AS 'Datum', [p_preis] AS 'Preis in €' FROM [dbo].[t_s_preis] WHERE [b_isbn] = @isbn order by [p_datum] ASC";
             // Verbindung öffnen 
@@ -154,7 +154,7 @@ namespace Bibo_Verwaltung
         private DataSet getPreisschwankungVerlag()
         {
             ResultPreisentwicklung.Clear();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return null;
             string RawCommand = "";
             // Verbindung öffnen 
@@ -174,7 +174,7 @@ namespace Bibo_Verwaltung
         private DataSet getISBNs()
         {
             ResultISBNs.Clear();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return null;
             string RawCommand = "SELECT [buch_verlag_id] as 'VerlagID', [ver_name] as 'Verlag', [buch_isbn] as 'ISBN' FROM [dbo].[t_s_buecher] left join [t_s_verlag] on [buch_verlag_id] = [ver_id]";
             // Verbindung öffnen 
@@ -267,7 +267,7 @@ namespace Bibo_Verwaltung
         private DataSet getAbnutzung(string isbn)
         {
             ResultAbzutzung.Clear();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return null;
             string RawCommand = "SELECT [id_buch], [zu_vor], [zu_nach], [aus_geliehen], [aus_ruckgabe] FROM [dbo].[t_s_verlauf]";
             // Verbindung öffnen 

@@ -127,7 +127,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void LoadCostumer()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             LoadCostumerSubjects();
             string command = "SELECT * FROM [dbo].[t_s_kunden] WHERE  kunde_id = @0";
@@ -161,7 +161,7 @@ namespace Bibo_Verwaltung
             CostumerSubjects.Clear();
             CostumerAdvancedSubjects.Clear();
 
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string RawCommand = "use greenLib Select f_kurzform from t_s_fach_kunde " +
                 "left join t_s_faecher on f_id = fs_fachid WHERE fs_kundenid = @0 and fs_lk = 1";
@@ -201,7 +201,7 @@ namespace Bibo_Verwaltung
             {
                 CostumerId = -1;
             }
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return false;
             string RawCommand = "SELECT * FROM [dbo].[t_s_kunden] WHERE kunde_vorname = @0 and kunde_nachname = @1 and kunde_geburtsdatum = @2";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, CostumerFirstName, CostumerSurname, CostumerBirthDate.Date);
@@ -231,7 +231,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void AddCostumer()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "INSERT INTO [dbo].[t_s_kunden] (kunde_vorname, kunde_nachname, " +
                 "kunde_geburtsdatum, kunde_ort, kunde_postleitzahl, kunde_strasse, kunde_telefonnummer, kunde_hausnummer, " +
@@ -268,7 +268,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void LoadCostumerId()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             CostumerId = -1;
             string command = "SELECT kunde_id FROM [dbo].[t_s_kunden] WHERE kunde_vorname = @0 and kunde_nachname = @1 and kunde_geburtsdatum = @2";
@@ -284,7 +284,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void AddSubjectsToCostumer()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "INSERT INTO [dbo].[t_s_fach_kunde] (fs_kundenid, fs_fachid, fs_lk) VALUES (@costumerId, @subjectId, @isAdvanced)";
             foreach (Subject subject in CostumerSubjects)
@@ -311,7 +311,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void UpdateCostumer()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "UPDATE [dbo].[t_s_kunden] SET kunde_vorname = @costumerFirstName, kunde_nachname = @costumerSurname, " +
                 "kunde_geburtsdatum = @costumerBirthDate, kunde_ort = @costumerCity, kunde_postleitzahl = @costumerZipcode, " +
@@ -350,7 +350,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void DeleteSubjectsOfCostumer()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "DELETE FROM [dbo].[t_s_fach_kunde] WHERE fs_kundenid = @costumerId";
             SqlCommand cmd = new SqlCommand(command, con.Con);
@@ -364,7 +364,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void DeactivateCostumer()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string RawCommand = "UPDATE [dbo].[t_s_kunden] set kunde_activated = 0 WHERE kunde_ID = @costumerId";
             SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
@@ -379,7 +379,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void ActivateCostumer()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "UPDATE [dbo].[t_s_kunden] set kunde_activated = 1 WHERE kunde_ID = @costumerId";
             SqlCommand cmd = new SqlCommand(command, con.Con);
@@ -394,7 +394,7 @@ namespace Bibo_Verwaltung
         /// <returns></returns>
         public bool HasBorrowedSomething()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return true;
             int number = 0;
             string command = "SELECT Count(aus_leihnummer) as 'Anzahl' from t_bd_ausgeliehen WHERE aus_kundenid = @0";
@@ -416,7 +416,7 @@ namespace Bibo_Verwaltung
         public DataTable GetBorrowedBooks()
         {
             DataTable table = new DataTable();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return table;
             string command = "SELECT aus_buchid as 'ID', buch_isbn as 'ISBN', aus_leihdatum as 'Leihdatum', " +
                 "aus_rückgabedatum as 'Rückgabedatum' FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid " +
@@ -436,7 +436,7 @@ namespace Bibo_Verwaltung
         public DataTable GetBorrowedSchoolBooks()
         {
             DataTable table = new DataTable();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return table;
             string command = "SELECT DISTINCT aus_buchid as 'ID', f_kurzform as 'Fach', buch_isbn as 'ISBN', aus_leihdatum as 'Leihdatum', " +
                 "aus_rückgabedatum as 'Rückgabedatum' FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid " +
@@ -458,7 +458,7 @@ namespace Bibo_Verwaltung
         {
             List<string> borrowedBooks = new List<string>();
             DataTable table = new DataTable();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return borrowedBooks;
             string command = "SELECT aus_buchid as 'ID', buch_isbn as 'ISBN' " +
                 "FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid " +

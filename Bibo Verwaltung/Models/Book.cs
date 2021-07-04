@@ -118,7 +118,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void LoadBookShort()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "SELECT buch_isbn, buch_titel FROM [dbo].[t_s_buecher] WHERE buch_isbn = @0";
             SqlDataReader dr = con.ExcecuteCommand(command, bookIsbn);
@@ -138,7 +138,7 @@ namespace Bibo_Verwaltung
         {
             LoadBookAuthors();
             LoadBookCopies();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' " +
                 "FROM [dbo].[t_s_buecher] left join [dbo].[t_s_genre] on buch_genre_id = ger_id " +
@@ -171,7 +171,7 @@ namespace Bibo_Verwaltung
         private void LoadBookAuthors()
         {
             BookAuthors.Clear();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "SELECT * FROM [dbo].[t_s_buch_autor] WHERE  ba_isbn = @0";
             SqlDataReader dr = con.ExcecuteCommand(command, BookIsbn);
@@ -189,7 +189,7 @@ namespace Bibo_Verwaltung
         private void LoadBookCopies()
         {
             BookCopies.Clear();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "SELECT * FROM [dbo].[t_s_buchid] WHERE  bu_isbn = @0";
             SqlDataReader dr = con.ExcecuteCommand(command, BookIsbn);
@@ -208,7 +208,7 @@ namespace Bibo_Verwaltung
         /// <param name="copyId"></param>
         public void LoadBookByCopyId(int copyId)
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "SELECT bu_isbn FROM [dbo].[t_s_buchid] WHERE bu_id = @0";
             SqlDataReader dr = con.ExcecuteCommand(command, copyId);
@@ -224,7 +224,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void Update()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             DeleteBookAuthors();
             string command = "UPDATE [dbo].[t_s_buecher] set buch_titel = @bookTitle , buch_genre_id = @bookGenreId, " +
@@ -267,7 +267,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void AddBookAuthors()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             con.ConnectError();
             string command = "INSERT INTO [dbo].[t_s_buch_autor] (ba_isbn, ba_autorid) VALUES (@bookIsbn, @bookAuthor)";
             foreach (Author author in BookAuthors)
@@ -284,7 +284,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void Add()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "INSERT INTO [dbo].[t_s_buecher] (buch_isbn, buch_titel, buch_genre_id, " +
                 "buch_verlag_id, buch_erscheinungsdatum, buch_sprache_id, buch_auflage, buch_neupreis, " +
@@ -326,7 +326,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void Delete()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             DeleteBookAuthors();
             string command = "DELETE FROM [dbo].[t_s_buecher] WHERE buch_isbn = @bookIsbn";
@@ -341,7 +341,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void DeleteBookAuthors()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             con.ConnectError();
             string command = "DELETE FROM [dbo].[t_s_buch_autor] WHERE ba_isbn = @bookIsbn";
             SqlCommand cmd = new SqlCommand(command, con.Con);
@@ -355,7 +355,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void Deactivate()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "UPDATE [dbo].[t_s_buecher] set buch_activated = 0 WHERE buch_isbn = @bookIsbn";
             SqlCommand cmd = new SqlCommand(command, con.Con);
@@ -370,7 +370,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void Activate()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "UPDATE [dbo].[t_s_buecher] set buch_activated = 1 WHERE buch_isbn = @bookIsbn";
             SqlCommand cmd = new SqlCommand(command, con.Con);

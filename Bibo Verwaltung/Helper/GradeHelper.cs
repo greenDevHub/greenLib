@@ -24,7 +24,7 @@ namespace Bibo_Verwaltung.Helper
         /// <returns></returns>
         private DataTable FillObject()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             DataTable table = new DataTable();
             if (con.ConnectError()) return table;
             string RawCommand = "SELECT ks_klassenstufe as 'Klassenstufe', ks_klasse, k_bezeichnung as 'Klasse' FROM [dbo].[t_s_klasse_stufe] " +
@@ -43,7 +43,7 @@ namespace Bibo_Verwaltung.Helper
         public int GetGradeOfSchoolClass(int schoolClassId)
         {
             int grade = -1;
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return grade;
             string RawCommand = "SELECT ks_klassenstufe FROM [dbo].[t_s_klasse_stufe] WHERE ks_klasse = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, schoolClassId);
@@ -119,7 +119,7 @@ namespace Bibo_Verwaltung.Helper
         /// <param name="grade"></param>
         public void SaveAssignment(DataTable assignmentTable, string grade)
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string RawCommand1 = "DELETE FROM [dbo].[t_s_klasse_stufe] WHERE ks_klassenstufe = @stufe";
             con.ConnectError();

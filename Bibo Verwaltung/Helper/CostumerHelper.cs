@@ -22,7 +22,7 @@ namespace Bibo_Verwaltung.Helper
         /// </summary>
         private void DeleteSubjectsOfDeactivatedCostumers()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "DELETE FROM t_s_fach_kunde WHERE fs_kundenid in (SELECT kunde_id FROM t_s_kunden WHERE kunde_activated = 0)";
             SqlCommand cmd = new SqlCommand(command, con.Con);
@@ -35,7 +35,7 @@ namespace Bibo_Verwaltung.Helper
         /// </summary>
         public void DeactivateAllStudents()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "UPDATE t_s_kunden set kunde_activated = 0, kunde_klasse = null from t_s_kunden " +
                 "left join t_bd_ausgeliehen on kunde_ID=aus_kundenid WHERE kunde_klasse !='' AND kunde_klasse IS NOT NULL and aus_leihnummer is NULL";
@@ -53,7 +53,7 @@ namespace Bibo_Verwaltung.Helper
         private DataTable FillObject()
         {
             DataTable table = new DataTable();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return table;
             string RawCommand = "use greenLib SELECT kunde_ID as 'Kunden-ID', kunde_vorname as 'Vorname', " +
                 "kunde_nachname as 'Nachname', kunde_geburtsdatum as 'Geburtsdatum', k_bezeichnung as 'Klasse', " +
@@ -88,7 +88,7 @@ namespace Bibo_Verwaltung.Helper
         private DataTable FillCostumerDataTable(bool showCostumerClass, int classId)
         {
             DataTable table = new DataTable();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return table;
             string command = showCostumerClass ? "SELECT kunde_ID, kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', " +
                     "kunde_klasse, k_bezeichnung as 'Klasse', ks_klassenstufe as 'Klassenstufe' FROM [dbo].[t_s_kunden] " +

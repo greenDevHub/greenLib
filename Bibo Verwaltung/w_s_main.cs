@@ -22,7 +22,7 @@ namespace Bibo_Verwaltung
         string currentUser;
         bool connected = false;
         private PictureBox picBox;
-        SQL_Verbindung connection = new SQL_Verbindung();
+        CustomSqlConnection connection = new CustomSqlConnection();
 
         #region Constructor
         public w_s_main(string userName, MetroFramework.Components.MetroStyleManager msm)
@@ -238,7 +238,7 @@ namespace Bibo_Verwaltung
             this.StyleManager.Clone(Einstellungen);
             Einstellungen.ShowDialog(this);
             Einstellungen.Dispose();
-            connection = new SQL_Verbindung();
+            connection = new CustomSqlConnection();
             connected = connection.ConnectError();
         }
 

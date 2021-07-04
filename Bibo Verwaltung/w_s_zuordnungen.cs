@@ -17,7 +17,7 @@ namespace Bibo_Verwaltung
     {
         bool connected = false;
         string currentUser = "";
-        SQL_Verbindung connection = new SQL_Verbindung();
+        CustomSqlConnection connection = new CustomSqlConnection();
         public w_s_zuordnungen(MetroStyleManager msm, string currentUser)
         {
             InitializeComponent();

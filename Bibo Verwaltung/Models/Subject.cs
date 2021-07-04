@@ -57,7 +57,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void LoadSubject()
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string RawCommand = "SELECT * FROM t_s_faecher WHERE f_id = @0";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, SubjectId);
@@ -77,7 +77,7 @@ namespace Bibo_Verwaltung
         public void AddSubjectIfNotExists()
         {
             string command = $"begin if not exists (select f_kurzform from t_s_faecher where f_kurzform=@0) begin insert into t_s_faecher (f_kurzform, f_langform) values (@1, @2) end end";
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             SqlCommand cmd = new SqlCommand(command, con.Con);
             cmd.Parameters.AddWithValue("@0", SubjectNameShort);

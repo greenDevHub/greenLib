@@ -24,7 +24,7 @@ namespace Bibo_Verwaltung.Helper
         /// <param name="subjectNameShort">the short name of a subject</param>
         public bool SubjectExists(string subjectNameShort)
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             int subjectId = -1;
             if (con.ConnectError()) return true;
             string RawCommand = "SELECT f_id FROM t_s_faecher WHERE f_kurzform = @0";
@@ -46,7 +46,7 @@ namespace Bibo_Verwaltung.Helper
         public int GetIdBySubjectShortName(string subjectNameShort)
         {
             int subjectId = -1;
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return subjectId;
             string command = "SELECT f_id FROM [dbo].[t_s_faecher] WHERE f_kurzform = @0";
             SqlDataReader dr = con.ExcecuteCommand(command, subjectNameShort);
@@ -65,7 +65,7 @@ namespace Bibo_Verwaltung.Helper
         private DataTable FillObject()
         {
             table = new DataTable();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return table;
             string command = "SELECT f_id as 'ID', f_kurzform as 'Kürzel', f_langform as 'Langbezeichnung' FROM t_s_faecher";
             SqlDataAdapter adapter = new SqlDataAdapter(command, con.Con);
@@ -181,7 +181,7 @@ namespace Bibo_Verwaltung.Helper
         /// <param name="grid"></param>
         public void SaveGridChangesToDatabase(ref MetroFramework.Controls.MetroGrid grid)
         {
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             DataTable changes = table.GetChanges();
 

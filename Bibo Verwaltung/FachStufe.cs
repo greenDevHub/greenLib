@@ -15,7 +15,7 @@ namespace Bibo_Verwaltung
     {
         SubjectHelper subjectHelper = new SubjectHelper();
 
-        SQL_Verbindung con = new SQL_Verbindung();
+        CustomSqlConnection con = new CustomSqlConnection();
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
         SqlCommandBuilder comb = new SqlCommandBuilder();

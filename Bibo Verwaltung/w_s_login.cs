@@ -48,7 +48,7 @@ namespace Bibo_Verwaltung
             //Form Main = new w_s_main("test");
             //Main.Closed += (s, args) => this.Close();
             //Main.Show();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             //string test = con.ConnectionString;
             if (con.ConnectError())
             {

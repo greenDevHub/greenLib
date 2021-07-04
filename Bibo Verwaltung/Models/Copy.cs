@@ -61,7 +61,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void LoadCopy()
         {
-            SQL_Verbindung connection = new SQL_Verbindung();
+            CustomSqlConnection connection = new CustomSqlConnection();
             if (connection.ConnectError()) return;
             string command = "SELECT bu_id, bu_isbn, buch_titel, " +
                 "bu_zustandsid, isnull(bu_aufnahmedatum, '01.01.1990') as 'verified_aufnahmedatum', " +
@@ -87,7 +87,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void Add()
         {
-            SQL_Verbindung connection = new SQL_Verbindung();
+            CustomSqlConnection connection = new CustomSqlConnection();
             if (connection.ConnectError()) return;
             string command = "Insert INTO t_s_buchid (bu_isbn, bu_zustandsid, bu_aufnahmedatum, bu_activated, bu_printed) " +
                 "VALUES (@isbn, @conditionId, @dateRegistration, @activated, @printed)";
@@ -106,7 +106,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void Update()
         {
-            SQL_Verbindung connection = new SQL_Verbindung();
+            CustomSqlConnection connection = new CustomSqlConnection();
             if (connection.ConnectError()) return;
             string command = "UPDATE t_s_buchid set bu_zustandsid = @conditionId, bu_aufnahmedatum = @dateRegistration " +
                 "WHERE bu_id = @copyId";
@@ -123,7 +123,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void Delete()
         {
-            SQL_Verbindung connection = new SQL_Verbindung();
+            CustomSqlConnection connection = new CustomSqlConnection();
             if (connection.ConnectError()) return;
             string command = "DELETE FROM [dbo].[t_s_buchid] WHERE bu_id = @copyId";
             SqlCommand cmd = new SqlCommand(command, connection.Con);
@@ -137,7 +137,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void Deactivate()
         {
-            SQL_Verbindung connection = new SQL_Verbindung();
+            CustomSqlConnection connection = new CustomSqlConnection();
             if (connection.ConnectError()) return;
             string command = "UPDATE t_s_buchid set bu_activated = @activated WHERE bu_id = @copyId";
             SqlCommand cmd = new SqlCommand(command, connection.Con);
@@ -154,7 +154,7 @@ namespace Bibo_Verwaltung
         /// <param name="isbn"></param>
         public void SelectLastRow()
         {
-            SQL_Verbindung connection = new SQL_Verbindung();
+            CustomSqlConnection connection = new CustomSqlConnection();
             if (connection.ConnectError()) return;
             string RawCommand = "Select top(1) bu_id from t_s_buchid where bu_isbn = @0 order by bu_id desc";
             SqlDataReader dr = connection.ExcecuteCommand(RawCommand, CopyIsbn);
@@ -172,7 +172,7 @@ namespace Bibo_Verwaltung
         /// <returns>returns true if the copy is available or false if its not available</returns>
         public bool IsAvailable()
         {
-            SQL_Verbindung connection = new SQL_Verbindung();
+            CustomSqlConnection connection = new CustomSqlConnection();
             if (connection.ConnectError()) return false;
             string command = "SELECT COUNT(*) FROM t_bd_ausgeliehen where aus_buchid = @copyId";
             int count = 0;
@@ -190,7 +190,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void Print()
         {
-            SQL_Verbindung connection = new SQL_Verbindung();
+            CustomSqlConnection connection = new CustomSqlConnection();
             string command = "UPDATE t_s_buchid set bu_printed = @copyPrinted WHERE bu_id = @copyId";
             if (connection.ConnectError()) return;
             SqlCommand cmd = new SqlCommand(command, connection.Con);

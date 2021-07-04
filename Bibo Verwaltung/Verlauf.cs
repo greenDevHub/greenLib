@@ -25,7 +25,7 @@ namespace Bibo_Verwaltung
         private void FillObject(int buchid)
         {
             dt.Clear();
-            SQL_Verbindung con = new SQL_Verbindung();
+            CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string RawCommand = "SELECT ver_id, id_buch, k_id, kunde_vorname, kunde_nachname, zu_vor, zu_nach, aus_geliehen, aus_ruckgabe FROM [dbo].[t_s_verlauf]  left join t_s_kunden on kunde_id = k_id WHERE id_buch = @0";
 

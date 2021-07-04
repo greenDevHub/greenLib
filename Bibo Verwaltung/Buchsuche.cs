@@ -31,7 +31,7 @@ namespace Bibo_Verwaltung
 
 
 
-        SQL_Verbindung con = new SQL_Verbindung();
+        CustomSqlConnection con = new CustomSqlConnection();
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
         SqlCommandBuilder comb = new SqlCommandBuilder();
@@ -83,7 +83,7 @@ namespace Bibo_Verwaltung
         private List<string> LoadAutoren(string isbn)
         {
             List<string> autoren = new List<string>();
-            SQL_Verbindung connection = new SQL_Verbindung();
+            CustomSqlConnection connection = new CustomSqlConnection();
             if (connection.ConnectError()) return autoren;
             string RawCommand = "SELECT * FROM [dbo].[t_s_buch_autor] WHERE  ba_isbn = @0";
             SqlDataReader dr = connection.ExcecuteCommand(RawCommand, isbn);
