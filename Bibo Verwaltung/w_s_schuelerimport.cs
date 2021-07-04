@@ -20,6 +20,7 @@ namespace Bibo_Verwaltung
     public partial class w_s_schuelerimport : MetroFramework.Forms.MetroForm
     {
         SubjectHelper subjectHelper = new SubjectHelper();
+        SchoolClassHelper schoolClassHelper = new SchoolClassHelper();
 
         string currentUser;
         char seperator = ';';
@@ -769,22 +770,35 @@ namespace Bibo_Verwaltung
                     if (singleImport) progressBar1.PerformStep();
                     if (target.Equals("t_s_schueler"))
                     {
-                        Costumer k = new Costumer();
-                        k.CostumerFirstName = row[0].ToString();
-                        k.CostumerSurname = row[1].ToString();
-                        //k.Gd = DateTime.Now; //nur HotFix
-                        k.CostumerBirthDate = DateTime.Parse(row[2].ToString()); //funktioniert 
-                        k.CostumerClass.Klassename = row[3].ToString();
-                        k.CostumerHouseNumber = "";
-                        k.CostumerCity = "";
-                        k.CostumerZipcode = "";
-                        k.CostumerStreet = "";
-                        k.CostumerEmail = "";
-                        k.CostumerTelephone = "";
+                        Costumer costumer = new Costumer();
+                        costumer.CostumerFirstName = row[0].ToString();
+                        costumer.CostumerSurname = row[1].ToString();
+                        costumer.CostumerBirthDate = DateTime.Parse(row[2].ToString());
+                        SchoolClass schoolClass;
+                        if (row[3].ToString().Equals("")) costumer.CostumerSchoolClass = new SchoolClass();
+                        else
+                        {
+                            int schoolClassId = schoolClassHelper.FindIdByName(row[3].ToString());
+                            if (schoolClassId == -1)
+                            {
+                                schoolClass = new SchoolClass();
+                                schoolClass.SchoolClassName = row[3].ToString();
+                                schoolClass.Add();
+                                schoolClassId = schoolClassHelper.FindIdByName(row[3].ToString());
+                            }
+                            schoolClass = new SchoolClass(schoolClassId);
+                            costumer.CostumerSchoolClass = schoolClass;
+                        }
+                        costumer.CostumerHouseNumber = "";
+                        costumer.CostumerCity = "";
+                        costumer.CostumerZipcode = "";
+                        costumer.CostumerStreet = "";
+                        costumer.CostumerEmail = "";
+                        costumer.CostumerTelephone = "";
                         if (rb_schueler1.Checked)
                         {
                             //SEK1 Import Schüler
-                            string klassenstufe = k.CostumerClass.Klassename.Substring(0, k.CostumerClass.Klassename.Length - 2);
+                            string klassenstufe = costumer.CostumerSchoolClass.SchoolClassName.Substring(0, costumer.CostumerSchoolClass.SchoolClassName.Length - 2);
                             FachStufe fs = new FachStufe(klassenstufe);
                             for (int i = 4; i < 7; i++)
                             {
@@ -795,7 +809,7 @@ namespace Bibo_Verwaltung
                                     subject.SubjectNameShort = fach;
                                     subject.SubjectNameLong = "";
                                     subject.AddSubjectIfNotExists();
-                                    k.CostumerSubjects.Add(subject);
+                                    costumer.CostumerSubjects.Add(subject);
                                 }
 
                             }
@@ -806,20 +820,20 @@ namespace Bibo_Verwaltung
                                 subject.SubjectNameLong = "";
                                 subject.AddSubjectIfNotExists();
                                 subject = new Subject(subjectHelper.GetIdBySubjectShortName(subjectName));
-                                k.CostumerSubjects.Add(subject);
+                                costumer.CostumerSubjects.Add(subject);
                             }
                             for (int i = 0; i < 2; i++)
                             {
-                                k.CostumerAdvancedSubjects.Add(new Subject());
+                                costumer.CostumerAdvancedSubjects.Add(new Subject());
                             }
-                            if (!k.AlreadyExists(false))
+                            if (!costumer.AlreadyExists(false))
                             {
-                                k.AddCostumer();
+                                costumer.AddCostumer();
                             }
                             else
                             {
-                                k.ActivateCostumer();
-                                k.UpdateCostumer();
+                                costumer.ActivateCostumer();
+                                costumer.UpdateCostumer();
                             }
                         }
                         else if (rb_schueler2.Checked)
@@ -834,23 +848,23 @@ namespace Bibo_Verwaltung
                                     subject.SubjectNameShort = fach;
                                     subject.SubjectNameLong = "";
                                     subject.AddSubjectIfNotExists();
-                                    k.CostumerSubjects.Add(subject);
+                                    costumer.CostumerSubjects.Add(subject);
 
-                                    if (k.CostumerAdvancedSubjects.Count < 2)
+                                    if (costumer.CostumerAdvancedSubjects.Count < 2)
                                     {
-                                        k.CostumerAdvancedSubjects.Add(subject);
+                                        costumer.CostumerAdvancedSubjects.Add(subject);
                                     }
                                 }
                             }
-                            if (!k.AlreadyExists(false))
+                            if (!costumer.AlreadyExists(false))
                             {
-                                k.AddCostumer();
+                                costumer.AddCostumer();
                             }
                             else
                             {
-                                k.ActivateCostumer();
-                                k.LoadCostumerId();
-                                k.UpdateCostumer();
+                                costumer.ActivateCostumer();
+                                costumer.LoadCostumerId();
+                                costumer.UpdateCostumer();
                             }
                         }
                     }

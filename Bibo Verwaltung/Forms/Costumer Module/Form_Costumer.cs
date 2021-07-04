@@ -15,7 +15,7 @@ namespace Bibo_Verwaltung
     {
         SubjectHelper subjectHelper = new SubjectHelper();
         CostumerHelper costumerHelper = new CostumerHelper();
-        ClassHelper classHelper = new ClassHelper();
+        SchoolClassHelper classHelper = new SchoolClassHelper();
 
         Color fc = Color.Black;
         Color bc = Color.White;
@@ -99,49 +99,9 @@ namespace Bibo_Verwaltung
                 bt_confirm.Enabled = false;
             }
         }
+
         #region Fenster-Methoden
-        /// <summary>
-        /// Setzt die Kundendaten in ein Kunden-Objekt 
-        /// </summary>
-        private void SetKundenValues(ref Costumer costumer)
-        {
-            costumer.CostumerId = int.Parse(tb_KundenID.Text);
-            costumer.CostumerFirstName = tb_Vorname.Text;
-            costumer.CostumerSurname = tb_Nachname.Text;
-            costumer.CostumerBirthDate = mdtp_GebDat.Value.Date;
-            costumer.CostumerStreet = tb_Strasse.Text;
-            costumer.CostumerHouseNumber = tb_Hausnummer.Text;
-            costumer.CostumerZipcode = tb_Postleitzahl.Text;
-            costumer.CostumerCity = tb_Ort.Text;
-            costumer.CostumerClass.Klassename = cb_klasse.Text;
-            costumer.CostumerEmail = tb_Mail.Text;
-            costumer.CostumerTelephone = tb_Telefonnummer.Text;
-            costumer.CostumerSubjects.Clear();
-            costumer.CostumerAdvancedSubjects.Clear();
-            for (int i = 0; i < gv_result.Rows.Count; i++)
-            {
-                DataGridViewRow row = gv_result.Rows[i];
-                if (row.Cells["Kürzel"].Value != null)
-                {
-                    if (row.Cells["Kürzel"].Value.ToString() != "")
-                    {
-                        if (row.DefaultCellStyle.BackColor == Color.Yellow)
-                        {
-                            costumer.CostumerSubjects.Add(new Subject(subjectHelper.GetIdBySubjectShortName(row.Cells["Kürzel"].Value.ToString().Substring(1))));
-                            costumer.CostumerAdvancedSubjects.Add(new Subject(subjectHelper.GetIdBySubjectShortName(row.Cells["Kürzel"].Value.ToString().Substring(1))));
-                        }
-                        else
-                        {
-                            costumer.CostumerSubjects.Add(new Subject(subjectHelper.GetIdBySubjectShortName(row.Cells["Kürzel"].Value.ToString())));
-                        }
-                    }
-                }
-            }
-            for (int i = costumer.CostumerAdvancedSubjects.Count; i < 2; i++)
-            {
-                costumer.CostumerAdvancedSubjects.Add(new Subject());
-            }
-        }
+
 
         /// <summary>
         /// Prüft einen String - liefert TRUE wenn keine Zahl enthalten ist
@@ -419,7 +379,7 @@ namespace Bibo_Verwaltung
             tb_Hausnummer.Text = costumer.CostumerHouseNumber;
             tb_Postleitzahl.Text = costumer.CostumerZipcode;
             tb_Ort.Text = costumer.CostumerCity;
-            cb_klasse.Text = costumer.CostumerClass.Klassename;
+            cb_klasse.Text = costumer.CostumerSchoolClass.SchoolClassName;
             tb_Mail.Text = costumer.CostumerEmail;
             tb_Telefonnummer.Text = costumer.CostumerTelephone;
             if (costumer.CostumerSubjects.Count > 0)
@@ -465,7 +425,7 @@ namespace Bibo_Verwaltung
                     try
                     {
                         Costumer costumer = new Costumer();
-                        SetKundenValues(ref costumer);
+                        SetValues(ref costumer);
                         if (costumer.AlreadyExists(true))
                         {
                             DialogResult dr = MetroMessageBox.Show(this, "Ein Kunde mit diesem Vornamen, Nachnamen und Geburtsdatum existiert bereits." +
@@ -513,8 +473,6 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
-                    MetroMessageBox.Show(this, "Füllen Sie die markierten Felder aus, um einen Kunden zu speichern!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    SetBackground_Red();
                 }
             }
 
@@ -547,15 +505,6 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
-                    MetroMessageBox.Show(this, "Füllen Sie das markierte Felder aus, um einen Kunden zu löschen!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    if (tb_KundenID.Text.Equals(""))
-                    {
-                        tb_KundenID.BackColor = Color.Red;
-                    }
-                    else
-                    {
-                        tb_KundenID.BackColor = Color.White;
-                    }
                 }
             }
 
@@ -616,12 +565,12 @@ namespace Bibo_Verwaltung
                     try
                     {
                         Costumer costumer = new Costumer();
-                        SetKundenValues(ref costumer);
-                        if (costumer.CostumerSubjects.Count > 1 && costumer.CostumerClass.Klassename.Equals(""))
+                        SetValues(ref costumer);
+                        if (costumer.CostumerSubjects.Count > 1 && costumer.CostumerSchoolClass.SchoolClassId.Equals(""))
                         {
                             MetroMessageBox.Show(this, "Sie haben zwar Fächer ausgewählt, aber keine Klasse. Bitte geben Sie auch die Klasse des Schülers an!", "Klasse fehlt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
-                        else if (costumer.CostumerSubjects.Count.Equals(0) && !costumer.CostumerClass.Klassename.Equals(""))
+                        else if (costumer.CostumerSubjects.Count.Equals(0) && !costumer.CostumerSchoolClass.SchoolClassId.Equals(""))
                         {
                             DialogResult dr = MetroMessageBox.Show(this, "Sie haben zwar eine Klasse ausgewählt, aber keine Fächer. Möchten Sie auch die Fächer angeben?", "Fächer fehlen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                             if (dr == DialogResult.No)
@@ -693,11 +642,199 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
+                }
+            }
+        }
+
+        private void Submit()
+        {
+            if (rb_Neukunde.Checked)
+            {
+                if (InputOkay())
+                {
+                    Add();
+                }
+                else
+                {
                     MetroMessageBox.Show(this, "Füllen Sie alle Felder aus, um einen neuen Kunden hinzuzufügen!", "Achtung",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     SetBackground_Red();
                 }
             }
+            else if (rb_KundeBearbeiten.Checked)
+            {
+                if (InputOkay())
+                {
+                    Update();
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Füllen Sie die markierten Felder aus, um einen Kunden zu speichern!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    SetBackground_Red();
+                }
+            }
+            else if (rb_KundeLoeschen.Checked)
+            {
+                if (InputOkay())
+                {
+                    Delete();
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Füllen Sie das markierte Felder aus, um einen Kunden zu löschen!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (tb_KundenID.Text.Equals(""))
+                    {
+                        tb_KundenID.BackColor = Color.Red;
+                    }
+                    else
+                    {
+                        tb_KundenID.BackColor = Color.White;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// checks whether the input is okay
+        /// </summary>
+        /// <returns></returns>
+        private bool InputOkay()
+        {
+            if (rb_Neukunde.Checked && !tb_Vorname.Text.Equals("") && !tb_Nachname.Text.Equals(""))
+            {
+                return true;
+            }
+            else if (rb_KundeBearbeiten.Checked && !tb_Vorname.Text.Equals("") && !tb_Nachname.Text.Equals("") && !tb_KundenID.Text.Equals(""))
+            {
+                return true;
+            }
+            else if (rb_KundeLoeschen.Checked && !tb_KundenID.Text.Equals(""))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool HasInputErrors()
+        {
+            string errorMessage = "Folgende Felder haben unzulässige Werte: ";
+            bool error = false;
+            if (!IsStringOnly(tb_Vorname.Text))
+            {
+                errorMessage += "\n - Vorname enthält Zahlen";
+                tb_Vorname.BackColor = Color.Red;
+                error = true;
+            }
+            if (!IsStringOnly(tb_Nachname.Text))
+            {
+                errorMessage += "\n - Nachname enthält Zahlen";
+                tb_Nachname.BackColor = Color.Red;
+                error = true;
+            }
+            if (!IsStringOnly(tb_Strasse.Text))
+            {
+                errorMessage += "\n - Straßenname enthält Zahlen";
+                tb_Strasse.BackColor = Color.Red;
+                error = true;
+            }
+            if (!IsNumericOnly(tb_Postleitzahl.Text))
+            {
+                errorMessage += "\n - Postleitzahl enthält nicht nur Zahlen";
+                tb_Postleitzahl.BackColor = Color.Red;
+                error = true;
+            }
+            if (!IsStringOnly(tb_Ort.Text))
+            {
+                errorMessage += "\n - Ort enhält Zahlen";
+                tb_Ort.BackColor = Color.Red;
+                error = true;
+            }
+            if (!cb_klasse.Text.Equals("") && !CheckSpecialNumbers(cb_klasse.Text))
+            {
+                errorMessage += "\n - Klasse ist nicht richtig formatiert";
+                cb_klasse.BackColor = Color.Red;
+                error = true;
+            }
+            if (!tb_Telefonnummer.Text.Equals("") && !CheckSpecialNumbers(tb_Telefonnummer.Text))
+            {
+                errorMessage += "\n - Telefonnummer ist nicht richtig formatiert";
+                tb_Telefonnummer.BackColor = Color.Red;
+                error = true;
+            }
+            if (error)
+            {
+                MetroMessageBox.Show(this, errorMessage, "Fehler!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return error;
+        }
+
+        /// <summary>
+        /// fills a costumer object with form data
+        /// </summary>
+        /// <param name="costumer"></param>
+        private void SetValues(ref Costumer costumer)
+        {
+            if (!tb_KundenID.Text.Equals("")) costumer.CostumerId = int.Parse(tb_KundenID.Text);
+            costumer.CostumerFirstName = tb_Vorname.Text;
+            costumer.CostumerSurname = tb_Nachname.Text;
+            costumer.CostumerBirthDate = mdtp_GebDat.Value.Date;
+            costumer.CostumerStreet = tb_Strasse.Text;
+            costumer.CostumerHouseNumber = tb_Hausnummer.Text;
+            costumer.CostumerZipcode = tb_Postleitzahl.Text;
+            costumer.CostumerCity = tb_Ort.Text;
+
+            int schoolClassId = classHelper.FindIdByName(cb_klasse.Text);
+            SchoolClass schoolClass = new SchoolClass();
+            if (schoolClassId == -1)
+            {
+                schoolClass = new SchoolClass();
+                schoolClass.SchoolClassName = cb_klasse.Text;
+                schoolClass.Add();
+                schoolClassId = classHelper.FindIdByName(cb_klasse.Text);
+            }
+            schoolClass = new SchoolClass(schoolClassId);
+            costumer.CostumerSchoolClass = schoolClass;
+            costumer.CostumerEmail = tb_Mail.Text;
+            costumer.CostumerTelephone = tb_Telefonnummer.Text;
+            costumer.CostumerSubjects.Clear();
+            costumer.CostumerAdvancedSubjects.Clear();
+            foreach (DataGridViewRow row in gv_result.Rows)
+            {
+                if (row.Cells["Kürzel"].Value != null && row.Cells["Kürzel"].Value.ToString() != "")
+                {
+                    Subject subject = new Subject(int.Parse(row.Cells["ID"].Value.ToString()));
+                    if (row.DefaultCellStyle.BackColor == Color.Yellow)
+                    {
+                        costumer.CostumerAdvancedSubjects.Add(subject);
+                    }
+                    costumer.CostumerSubjects.Add(subject);
+                }
+            }
+            for (int i = costumer.CostumerAdvancedSubjects.Count; i < 2; i++)
+            {
+                costumer.CostumerAdvancedSubjects.Add(new Subject());
+            }
+        }
+        private void Add()
+        {
+            if (HasInputErrors()) return;
+
+            Costumer costumer = new Costumer();
+            SetValues(ref costumer);
+            if (costumer.CostumerSubjects.Count > 1 && costumer.CostumerSchoolClass.SchoolClassId.Equals(""))
+            {
+                MetroMessageBox.Show(this, "Sie haben zwar Fächer ausgewählt, aber keine Klasse. " +
+                    "Bitte geben Sie auch die Klasse des Schülers an!", "Klasse fehlt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+        private void Update()
+        {
+
+        }
+        private void Delete()
+        {
+
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

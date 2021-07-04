@@ -75,7 +75,7 @@ namespace Bibo_Verwaltung
                 lb_2_3.Text = kunde.CostumerStreet + kunde.CostumerHouseNumber;
                 lb_2_4.Text = kunde.CostumerZipcode;
                 lb_2_5.Text = kunde.CostumerCity;
-                lb_2_6.Text=kunde.CostumerClass.Klassename;
+                lb_2_6.Text = kunde.CostumerSchoolClass.SchoolClassName;
                 lb_2_7.Text = kunde.CostumerEmail;
                 lb_2_8.Text = kunde.CostumerTelephone;
             }

@@ -16,7 +16,7 @@ namespace Bibo_Verwaltung
     public partial class w_s_autorueck : MetroFramework.Forms.MetroForm
     {
         CostumerHelper costumerHelper = new CostumerHelper();
-        ClassHelper classHelper = new ClassHelper();
+        SchoolClassHelper schoolClassHelper = new SchoolClassHelper();
         #region Constructor
         string currentUser;
         Color fc = Color.Black;
@@ -366,7 +366,7 @@ namespace Bibo_Verwaltung
                 a_cb_Klasse.Sorted = true;
                 lb_Klasse.Text = "Klasse:";
                 lb_Klasse.Visible = true;
-                classHelper.FillCombobox(ref a_cb_Klasse, 1);
+                schoolClassHelper.FillCombobox(ref a_cb_Klasse, 1);
                 a_cb_Klasse.Visible = true;
                 a_cb_Klasse.TabStop = true;
                 p_klasse.Visible = false;
@@ -414,7 +414,7 @@ namespace Bibo_Verwaltung
                     bt_abschließen.Enabled = true;
                     if (a_cb_Modus.SelectedIndex == 0)
                     {
-                        costumerHelper.FillCostumerGrid(ref gv_Schueler, false, new Class().GetID(a_cb_Klasse.Text));
+                        costumerHelper.FillCostumerGrid(ref gv_Schueler, false, schoolClassHelper.FindIdByName(a_cb_Klasse.Text));
                     }
                     else
                     {

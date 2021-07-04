@@ -14,7 +14,7 @@ namespace Bibo_Verwaltung
     class Costumer
     {
         SubjectHelper subjectHelper = new SubjectHelper();
-        ClassHelper classHelper = new ClassHelper();
+        SchoolClassHelper classHelper = new SchoolClassHelper();
 
         #region attributes
         int costumerId;
@@ -78,11 +78,11 @@ namespace Bibo_Verwaltung
         /// </summary>
         public string CostumerEmail { get { return costumerEmail; } set { costumerEmail = value; } }
 
-        Class costumerClass = new Class();
+        SchoolClass costumerSchoolClass = new SchoolClass();
         /// <summary>
         /// get/set the class of a costumer
         /// </summary>
-        public Class CostumerClass { get { return costumerClass; } set { costumerClass = value; } }
+        public SchoolClass CostumerSchoolClass { get { return costumerSchoolClass; } set { costumerSchoolClass = value; } }
 
         List<Subject> costumerAdvancedSubjects = new List<Subject>();
         /// <summary>
@@ -118,18 +118,18 @@ namespace Bibo_Verwaltung
         public Costumer(int costumerId)
         {
             CostumerId = costumerId;
-            LoadKunde();
+            LoadCostumer();
         }
         #endregion
 
         /// <summary>
         /// loads all the costumer data
         /// </summary>
-        private void LoadKunde()
+        private void LoadCostumer()
         {
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
-            LoadFaecherNeu();
+            LoadCostumerSubjects();
             string command = "SELECT * FROM [dbo].[t_s_kunden] WHERE  kunde_id = @0";
             SqlDataReader dr = con.ExcecuteCommand(command, costumerId);
             while (dr.Read())
@@ -144,14 +144,17 @@ namespace Bibo_Verwaltung
                 CostumerTelephone = dr["kunde_telefonnummer"].ToString();
                 CostumerHouseNumber = dr["kunde_hausnummer"].ToString();
                 CostumerEmail = dr["kunde_mail"].ToString();
-                CostumerClass = new Class(int.Parse(dr["kunde_klasse"].ToString()));
+                CostumerSchoolClass = new SchoolClass(int.Parse(dr["kunde_klasse"].ToString()));
                 CostumerActivated = dr["kunde_activated"].ToString().Equals("1") ? true : false;
             }
             dr.Close();
             con.Close();
         }
 
-        private void LoadFaecherNeu()
+        /// <summary>
+        /// loads the subjects of the costumer
+        /// </summary>
+        private void LoadCostumerSubjects()
         {
             CostumerSubjects.Clear();
             CostumerAdvancedSubjects.Clear();
@@ -181,11 +184,7 @@ namespace Bibo_Verwaltung
             }
             dr.Close();
             con.Close();
-
         }
-
-
-
 
         /// <summary>
         /// ??? TODO
@@ -229,8 +228,6 @@ namespace Bibo_Verwaltung
         {
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
-            if (!CostumerClass.Klassename.Equals(""))
-                CostumerClass.AddKlasse(CostumerClass.Klassename);
             string command = "INSERT INTO [dbo].[t_s_kunden] (kunde_vorname, kunde_nachname, " +
                 "kunde_geburtsdatum, kunde_ort, kunde_postleitzahl, kunde_strasse, kunde_telefonnummer, kunde_hausnummer, " +
                 "kunde_mail, kunde_klasse, kunde_activated) VALUES (@costumerFirstName, @costumerSurname, @costumerBirthDate, " +
@@ -247,9 +244,9 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@costumerTelephone", CostumerTelephone);
             cmd.Parameters.AddWithValue("@costumerHouseNumber", CostumerHouseNumber);
             cmd.Parameters.AddWithValue("@costumerEmail", CostumerEmail);
-            if (!CostumerClass.Klassename.Equals(""))
+            if (CostumerSchoolClass != null && !CostumerSchoolClass.SchoolClassId.Equals(""))
             {
-                cmd.Parameters.AddWithValue("@costumerClass", CostumerClass.GetID(CostumerClass.Klassename));
+                cmd.Parameters.AddWithValue("@costumerClass", CostumerSchoolClass.SchoolClassId);
             }
             else
             {
@@ -311,10 +308,6 @@ namespace Bibo_Verwaltung
         {
             SQL_Verbindung con = new SQL_Verbindung();
             if (con.ConnectError()) return;
-            if (!CostumerClass.Klassename.Equals(""))
-            {
-                CostumerClass.AddKlasse(CostumerClass.Klassename);
-            }
             string command = "UPDATE [dbo].[t_s_kunden] SET kunde_vorname = @costumerFirstName, kunde_nachname = @costumerSurname, " +
                 "kunde_geburtsdatum = @costumerBirthDate, kunde_ort = @costumerCity, kunde_postleitzahl = @costumerZipcode, " +
                 "kunde_strasse = @costumerStreet, kunde_telefonnummer = @costumerTelephone, kunde_hausnummer = @costumerHouseNumber, " +
@@ -329,9 +322,9 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@costumerTelephone", CostumerTelephone);
             cmd.Parameters.AddWithValue("@costumerHouseNumber", CostumerHouseNumber);
             cmd.Parameters.AddWithValue("@costumerEmail", CostumerEmail);
-            if (!CostumerClass.Klassename.Equals(""))
+            if (CostumerSchoolClass != null && !CostumerSchoolClass.SchoolClassId.Equals(""))
             {
-                cmd.Parameters.AddWithValue("@costumerClass", CostumerClass.GetID(CostumerClass.Klassename));
+                cmd.Parameters.AddWithValue("@costumerClass", CostumerSchoolClass.SchoolClassId);
             }
             else
             {
@@ -389,7 +382,6 @@ namespace Bibo_Verwaltung
             cmd.ExecuteNonQuery();
             con.Close();
         }
-
 
         /// <summary>
         /// checks whether the costumer has borrowed a book or not

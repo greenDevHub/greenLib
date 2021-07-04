@@ -59,6 +59,11 @@ namespace Bibo_Verwaltung.Database
                     FieldName = "zu_zustand";
                     FieldId = "zu_id";
                     break;
+                case Table.schoolClass:
+                    TableName = "t_s_klassen";
+                    FieldName = "k_bezeichnung";
+                    FieldId = "k_id";
+                    break;
             }
         }
 
@@ -285,7 +290,8 @@ namespace Bibo_Verwaltung.Database
             genre,
             language,
             publisher,
-            condition
+            condition,
+            schoolClass
         }
     }
 }

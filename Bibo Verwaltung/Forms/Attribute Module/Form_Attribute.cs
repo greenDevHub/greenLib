@@ -27,7 +27,7 @@ namespace Bibo_Verwaltung
         ConditionHelper conditionHelper;
         AuthorHelper authorHelper;
         PublisherHelper publisherHelper;
-        Class klasse;
+        SchoolClassHelper schoolClassHelper;
         Color fc = Color.Black;
         Color bc = Color.White;
         public w_s_manage(string userName, string modus, MetroFramework.Components.MetroStyleManager msm)
@@ -119,8 +119,8 @@ namespace Bibo_Verwaltung
             {
                 this.StyleManager.Style = MetroColorStyle.Teal;
                 Text = "Klasse" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-                klasse = new Class();
-                klasse.FillGrid(ref gv_manage);
+                schoolClassHelper = new SchoolClassHelper();
+                schoolClassHelper.FillGrid(ref gv_manage);
             }
             originalHeightLabel = tLP_Faecher.RowStyles[0].Height;
             originalHeightText = tLP_Faecher.RowStyles[1].Height;
@@ -159,7 +159,7 @@ namespace Bibo_Verwaltung
             }
             else if (currentModus == "Klasse")
             {
-                klasse.FillGrid(ref gv_manage);
+                schoolClassHelper.FillGrid(ref gv_manage);
             }
         }
 
@@ -194,7 +194,7 @@ namespace Bibo_Verwaltung
             }
             else if (currentModus == "Klasse")
             {
-                klasse.SaveGrid(ref gv_manage);
+                schoolClassHelper.SaveChangesToDatabase(ref gv_manage);
             }
         }
 
@@ -230,7 +230,7 @@ namespace Bibo_Verwaltung
             }
             else if (currentModus == "Klasse")
             {
-                result = klasse.GetChangesGrid(ref gv_manage);
+                result = schoolClassHelper.GridViewHasChanges(ref gv_manage);
             }
             return result;
         }

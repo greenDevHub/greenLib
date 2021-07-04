@@ -1,4 +1,5 @@
-﻿using MetroFramework.Controls;
+﻿using Bibo_Verwaltung.Helper;
+using MetroFramework.Controls;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,8 +14,10 @@ namespace Bibo_Verwaltung
 {
     class Klassenstufe
     {
+        SchoolClassHelper schoolClassHelper = new SchoolClassHelper();
+
         SQL_Verbindung con = new SQL_Verbindung();
-        Class klasse = new Class();
+        SchoolClass klasse = new SchoolClass();
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
         SqlCommandBuilder comb = new SqlCommandBuilder();
@@ -107,7 +110,7 @@ namespace Bibo_Verwaltung
         {
             ClearDataSource();
             FillObject();
-            klasse.FillGrid(ref grid);
+            schoolClassHelper.FillGrid(ref grid);
             Set_Mark(ref grid, Stufe);
         }
 
