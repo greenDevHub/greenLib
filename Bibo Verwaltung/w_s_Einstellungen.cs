@@ -15,7 +15,7 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_einstellungen : MetroFramework.Forms.MetroForm
     {
-        Einstellung set = new Einstellung();
+        Settings set = new Settings();
         int originalHeight = 0;
         float originalRowHeight = 0;
         Color fc = Color.Black;
@@ -40,7 +40,7 @@ namespace Bibo_Verwaltung
 
         private bool File_Exists()
         {
-            if (File.Exists(set.path))
+            if (File.Exists(set.ConnectionSettingPath))
             {
                 return true;
             }
@@ -58,8 +58,8 @@ namespace Bibo_Verwaltung
                 SetWhite();
                 set.Server = tb_Server.Text;
                 set.Security = cb_Security.Text;
-                set.Name = tb_Benutzername.Text;
-                set.Pw = tb_Passwort.Text;
+                set.DatabaseLoginName = tb_Benutzername.Text;
+                set.DatabaseLoginPassword = tb_Passwort.Text;
                 set.Database = tb_Database.Text;
                 int i = set.SaveSettings(true);
                 if(i == 0)
@@ -89,8 +89,8 @@ namespace Bibo_Verwaltung
             tb_Server.Text = set.Server;
             tb_Database.Text = set.Database;
             cb_Security.Text = set.Security;
-            tb_Benutzername.Text = set.Name;
-            tb_Passwort.Text = set.Pw;
+            tb_Benutzername.Text = set.DatabaseLoginName;
+            tb_Passwort.Text = set.DatabaseLoginPassword;
         }
         #endregion
 
@@ -142,8 +142,8 @@ namespace Bibo_Verwaltung
         {
             set.Server = tb_Server.Text;
             set.Security = cb_Security.Text;
-            set.Name = tb_Benutzername.Text;
-            set.Pw = tb_Passwort.Text;
+            set.DatabaseLoginName = tb_Benutzername.Text;
+            set.DatabaseLoginPassword = tb_Passwort.Text;
             set.Database = tb_Database.Text;
             set.SaveSettings(false);
             CustomSqlConnection con = new CustomSqlConnection();

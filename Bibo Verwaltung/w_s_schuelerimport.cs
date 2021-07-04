@@ -138,9 +138,9 @@ namespace Bibo_Verwaltung
         }
         private void getValuesFromPreset()
         {
-            Einstellung set = new Einstellung();
+            Settings set = new Settings();
             //sek1
-            string path = set.HomePath + "\\profil_" + filename + ".txt";
+            string path = set.SettingsPath + "\\profil_" + filename + ".txt";
             if (File.Exists(path))
             {
                 try
@@ -1101,8 +1101,8 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void saveProfile()
         {
-            Einstellung set = new Einstellung();
-            string path = set.HomePath + "\\profil_";
+            Settings set = new Settings();
+            string path = set.SettingsPath + "\\profil_";
             if (File.Exists(path + filename + ".txt"))
             {
                 File.Delete(path + filename + ".txt");

@@ -157,6 +157,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Analytics.cs" />
+    <Compile Include="Database\CustomSqlConnection.cs" />
     <Compile Include="Helper\BookHelper.cs" />
     <Compile Include="Helper\GradeHelper.cs" />
     <Compile Include="Helper\SchoolClassHelper.cs" />
@@ -190,7 +191,6 @@
     <Compile Include="Extension\Lehrbuchausgabe\w_b_buch_fach.Designer.cs">
       <DependentUpon>w_b_buch_fach.cs</DependentUpon>
     </Compile>
-    <Compile Include="Einstellung.cs" />
     <Compile Include="Ausleihe.cs" />
     <Compile Include="ExcelExport.cs" />
     <Compile Include="FachStufe.cs" />
@@ -209,6 +209,7 @@
     <Compile Include="Helper\PublisherHelper.cs" />
     <Compile Include="Schuelerimport.cs" />
     <Compile Include="Screenshot.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="TransparentPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -286,7 +287,6 @@
     </Compile>
     <Compile Include="ImportExport.cs" />
     <Compile Include="Rueckgabe.cs" />
-    <Compile Include="SQL_Verbindung.cs" />
     <Compile Include="Verlauf.cs" />
     <Compile Include="Bibo_VerwaltungDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
