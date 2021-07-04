@@ -651,6 +651,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void BuchFilter()
         {
+            if (gridViewBook.DataSource == null) return;
             try
             {
                 if (dTP_Erscheinungsdatum.Value.Date != DateTime.Now.Date)

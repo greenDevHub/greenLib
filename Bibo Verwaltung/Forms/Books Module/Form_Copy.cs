@@ -506,6 +506,7 @@ namespace Bibo_Verwaltung
 
         private void Filter()
         {
+            if (gv_Exemplare.DataSource == null) return;
             try
             {
                 string s = dTP_AufDat.Value.Date.ToString();
