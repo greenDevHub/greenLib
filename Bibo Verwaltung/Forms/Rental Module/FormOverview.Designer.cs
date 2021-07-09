@@ -1,6 +1,6 @@
 ﻿namespace Bibo_Verwaltung
 {
-    partial class w_s_buchsuche
+    partial class FormOverview
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_buchsuche));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormOverview));
             this.gv_buchsuche = new MetroFramework.Controls.MetroGrid();
             this.CM_Ausleihen = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.ausleihen = new System.Windows.Forms.ToolStripMenuItem();

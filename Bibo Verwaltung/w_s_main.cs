@@ -196,7 +196,7 @@ namespace Bibo_Verwaltung
         {
             if (!connected)
             {
-                w_s_buchsuche Details = new w_s_buchsuche(currentUser, this.StyleManager);
+                FormOverview Details = new FormOverview(currentUser, this.StyleManager);
                 this.StyleManager.Clone(Details);
                 Details.ShowDialog(this);
                 Details.Dispose();

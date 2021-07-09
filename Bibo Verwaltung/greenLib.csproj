@@ -183,7 +183,7 @@
     <Compile Include="EasterEgg\Input.cs" />
     <Compile Include="EasterEgg\Settings.cs" />
     <Compile Include="Models\Copy.cs" />
-    <Compile Include="Buchsuche.cs" />
+    <Compile Include="Helper\OverviewHelper.cs" />
     <Compile Include="Extension\Lehrbuchausgabe\BuchFach.cs" />
     <Compile Include="Extension\Lehrbuchausgabe\w_b_buch_fach.cs">
       <SubType>Form</SubType>
@@ -313,11 +313,11 @@
     <Compile Include="Forms\Books Module\Form_Copy.Designer.cs">
       <DependentUpon>Form_Copy.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_buchsuche.cs">
+    <Compile Include="Forms\Rental Module\FormOverview.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_buchsuche.Designer.cs">
-      <DependentUpon>w_s_buchsuche.cs</DependentUpon>
+    <Compile Include="Forms\Rental Module\FormOverview.Designer.cs">
+      <DependentUpon>FormOverview.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_einstellungen.cs">
       <SubType>Form</SubType>
@@ -406,8 +406,8 @@
     <EmbeddedResource Include="Forms\Books Module\Form_Copy.resx">
       <DependentUpon>Form_Copy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_buchsuche.resx">
-      <DependentUpon>w_s_buchsuche.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Rental Module\FormOverview.resx">
+      <DependentUpon>FormOverview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_einstellungen.resx">
       <DependentUpon>w_s_einstellungen.cs</DependentUpon>

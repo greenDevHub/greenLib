@@ -14,12 +14,8 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_buchsuche : MetroFramework.Forms.MetroForm
+    public partial class FormOverview : MetroFramework.Forms.MetroForm
     {
-        #region Objekt Constructor
-        /// <summary>
-        /// Erschaft die Form
-        /// </summary>
         string currentUser;
         bool loaded = false;
         Color red = Color.Tomato;
@@ -29,7 +25,7 @@ namespace Bibo_Verwaltung
         Color bc = Color.White;
         Color listfc = Color.White;
         Color listbc = Color.Black;
-        public w_s_buchsuche(string userName, MetroFramework.Components.MetroStyleManager msm)
+        public FormOverview(string userName, MetroFramework.Components.MetroStyleManager msm)
         {
             InitializeComponent();
             msm_buchsuche = msm;
@@ -105,12 +101,16 @@ namespace Bibo_Verwaltung
             }
             this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
         }
-        #endregion
 
-        Buchsuche buchsuche = new Buchsuche();
+        OverviewHelper overviewHelper = new OverviewHelper();
+
         string[] leih;
 
-        #region Fenster-Methoden
+        /// <summary>
+        /// checks a code if its ean8 and converts it to a simple id
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         static int _checksum_ean8(String data)
         {
             // Test string for correct length
@@ -134,7 +134,6 @@ namespace Bibo_Verwaltung
             int mod = sum % 10;
             return mod == 0 ? 0 : 10 - mod;
         }
-        #endregion
 
         #region Componenten-Aktionen
         private void bt_Clear_Click(object sender, EventArgs e)
@@ -157,19 +156,19 @@ namespace Bibo_Verwaltung
             cb_Verfügbar_Anz.Checked = false;
             cb_KundeAnz.Checked = false;
             rb_Default.Checked = true;
-            buchsuche.Show_AlleExemplare(ref gv_buchsuche);
+            overviewHelper.ShowAllCopies(ref gv_buchsuche);
             filterActive = true;
             if (leihListe.Count != 0)
             {
-                buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
+                overviewHelper.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
             }
             else if (rueckListe.Count != 0)
             {
-                buchsuche.Set_StatusMark(ref gv_buchsuche, rueckListe, red, yellow, green, listfc, listbc);
+                overviewHelper.Set_StatusMark(ref gv_buchsuche, rueckListe, red, yellow, green, listfc, listbc);
             }
             else
             {
-                buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
+                overviewHelper.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
             }
         }
 
@@ -177,11 +176,11 @@ namespace Bibo_Verwaltung
         {
             if (cb_KundeAnz.Checked == true)
             {
-                buchsuche.Show_KundenDetails(ref gv_buchsuche);
+                overviewHelper.ShowCostumerInformation(ref gv_buchsuche);
             }
             else
             {
-                buchsuche.Hide_KundenDetails(ref gv_buchsuche);
+                overviewHelper.HideCostumerInformation(ref gv_buchsuche);
             }
         }
         private void cb_KundeAnz_CheckedChanged(object sender, EventArgs e)
@@ -221,34 +220,31 @@ namespace Bibo_Verwaltung
                 (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter.Replace("ExemplarID IS NOT NULL", string.Format("Leihnummer IS NULL"));
                 if (leihListe.Count != 0)
                 {
-                    buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe,red,yellow,green,listfc,listbc);
+                    overviewHelper.Set_StatusMark(ref gv_buchsuche, leihListe,red,yellow,green,listfc,listbc);
                 }
                 else if (rueckListe.Count != 0)
                 {
-                    buchsuche.Set_StatusMark(ref gv_buchsuche, rueckListe, red, yellow, green, listfc, listbc);
+                    overviewHelper.Set_StatusMark(ref gv_buchsuche, rueckListe, red, yellow, green, listfc, listbc);
                 }
                 else
                 {
-                    buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
+                    overviewHelper.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
                 }
-
-                //buchsuche.Show_VerfuegbareExemplare(ref gv_buchsuche);
             }
             else
             {
                 (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter.Replace("Leihnummer IS NULL", string.Format("ExemplarID IS NOT NULL"));
-                //buchsuche.Show_AlleExemplare(ref gv_buchsuche);
                 if (leihListe.Count != 0)
                 {
-                    buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
+                    overviewHelper.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
                 }
                 else if (rueckListe.Count != 0)
                 {
-                    buchsuche.Set_StatusMark(ref gv_buchsuche, rueckListe, red, yellow, green, listfc, listbc);
+                    overviewHelper.Set_StatusMark(ref gv_buchsuche, rueckListe, red, yellow, green, listfc, listbc);
                 }
                 else
                 {
-                    buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
+                    overviewHelper.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
                 }
             }
         }
@@ -307,30 +303,25 @@ namespace Bibo_Verwaltung
 
         private void w_s_buchsuche_Activated(object sender, EventArgs e)
         {
-            //Procesdialog start
             if (!backgroundWorker1.IsBusy)
             {
                 backgroundWorker1.RunWorkerAsync();
             }
-            //buchsuche.FillComboBoxes(ref cb_Autor, ref cb_Verlag, ref cb_Genre);
-            //buchsuche.FillGrid(ref gv_buchsuche);
-            //buchsuche.Hide_KundenDetails(ref gv_buchsuche);
-            //buchsuche.Set_StatusMark(ref gv_buchsuche);
         }
 
         private void gv_buchsuche_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (leihListe.Count != 0)
             {
-                buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
+                overviewHelper.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
             }
             else if (rueckListe.Count != 0)
             {
-                buchsuche.Set_StatusMark(ref gv_buchsuche, rueckListe, red, yellow, green, listfc, listbc);
+                overviewHelper.Set_StatusMark(ref gv_buchsuche, rueckListe, red, yellow, green, listfc, listbc);
             }
             else
             {
-                buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
+                overviewHelper.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
             }
         }
         bool filterActive = true;
@@ -433,17 +424,17 @@ namespace Bibo_Verwaltung
             {
                 if (searchActivated)
                 {
-                    buchsuche.Execute_Search(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
+                    overviewHelper.ExecuteSearch(ref gv_buchsuche, tb_ExemplarID.Text, tb_ISBN.Text, tb_Titel.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, tb_VName.Text, tb_NName.Text, tb_Klasse.Text);
 
                     addRowFilter();
                     checkedChanged();
                     if (rueckListe.Count != 0)
                     {
-                        buchsuche.Set_StatusMark(ref gv_buchsuche, rueckListe, red, yellow, green, listfc, listbc);
+                        overviewHelper.Set_StatusMark(ref gv_buchsuche, rueckListe, red, yellow, green, listfc, listbc);
                     }
                     else
                     {
-                        buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
+                        overviewHelper.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
                     }
                 }
             }
@@ -738,31 +729,31 @@ namespace Bibo_Verwaltung
             (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = rowfilter;
             if (rb_GREENonly.Checked)
             {
-                buchsuche.Show_GreenExemplare(ref gv_buchsuche);
+                overviewHelper.ShowGreenCopies(ref gv_buchsuche);
             }
             else if (rb_YELLOWonly.Checked)
             {
-                buchsuche.Show_YellowExemplare(ref gv_buchsuche);
+                overviewHelper.ShowYellowCopies(ref gv_buchsuche);
             }
             else if (rb_REDonly.Checked)
             {
-                buchsuche.Show_RedExemplare(ref gv_buchsuche);
+                overviewHelper.ShowRedCopies(ref gv_buchsuche);
             }
             else if (rb_allColors.Checked)
             {
-                buchsuche.Show_AllColors(ref gv_buchsuche);
+                overviewHelper.ShowBorrowedCopies(ref gv_buchsuche);
             }
             if (leihListe.Count != 0)
             {
-                buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
+                overviewHelper.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
             }
             else if (rueckListe.Count != 0)
             {
-                buchsuche.Set_StatusMark(ref gv_buchsuche, rueckListe, red, yellow, green, listfc, listbc);
+                overviewHelper.Set_StatusMark(ref gv_buchsuche, rueckListe, red, yellow, green, listfc, listbc);
             }
             else
             {
-                buchsuche.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
+                overviewHelper.Set_StatusMark(ref gv_buchsuche, leihListe, red, yellow, green, listfc, listbc);
             }
             gv_buchsuche.Refresh();
         }
@@ -778,15 +769,6 @@ namespace Bibo_Verwaltung
                     gb_liste.Enabled = false;
                     metroProgressSpinner1.Visible = true;
                     metroProgressSpinner2.Visible = true;
-                    try
-                    {
-                        //gv_buchsuche.DataSource = null;
-
-                    }
-                    catch(Exception ex)
-                    {
-
-                    }
                     cb_Autor.DataSource = null;
                     cb_Genre.DataSource = null;
                     cb_Verlag.DataSource = null;
@@ -806,16 +788,9 @@ namespace Bibo_Verwaltung
                 List<int> YellowBlack = new List<int>();
                 List<int> LimeBlack = new List<int>();
                 List<int> BlackWhite = new List<int>();
-                buchsuche.FillComboBoxes(ref cbAutor, ref cbVerlag, ref cbGenre);
-                buchsuche.FillGrid(ref mgBuSu);
-                //if (rueckListe.Count != 0)
-                //{
-                //    buchsuche.Set_StatusMarkNew(ref mgBuSu, ref RedBlack, ref YellowBlack, ref LimeBlack, ref BlackWhite, rueckListe);
-                //}
-                //else
-                //{
-                //    buchsuche.Set_StatusMarkNew(ref mgBuSu, ref RedBlack, ref YellowBlack, ref LimeBlack, ref BlackWhite, leihListe);
-                //}
+                overviewHelper = new OverviewHelper();
+                overviewHelper.FillComboBoxes(ref cbAutor, ref cbVerlag, ref cbGenre);
+                overviewHelper.FillGrid(ref mgBuSu);
                 var dtBuSu = mgBuSu.DataSource;
                 while (loaded == false)
                 {
@@ -831,7 +806,6 @@ namespace Bibo_Verwaltung
                     gv_buchsuche.RowHeadersVisible = false;
                     gv_buchsuche.DataSource = dtBuSu;
 
-                    //gv_buchsuche.Sort(gv_buchsuche.Columns[1], ListSortDirection.Descending);
                     gv_buchsuche.Columns["Kunden ID"].Visible = false;
                     gv_buchsuche.Columns["Leihnummer"].Visible = false;
                     gv_buchsuche.Columns["Kunden ID"].Visible = false;
@@ -866,26 +840,6 @@ namespace Bibo_Verwaltung
                     string rawFilter = string.Format("Convert([ExemplarID], System.String) LIKE '{0}%' AND ISBN LIKE '{1}%' AND Titel LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Autor LIKE '%{5}%'", "", "", "", "", "", "");
                     (gv_buchsuche.DataSource as DataTable).DefaultView.RowFilter = rawFilter;
                     addRowFilter();
-                    //foreach (int i in RedBlack)
-                    //{
-                    //    gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = red;
-                    //    gv_buchsuche.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
-                    //}
-                    //foreach (int i in YellowBlack)
-                    //{
-                    //    gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = yellow;
-                    //    gv_buchsuche.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
-                    //}
-                    //foreach (int i in LimeBlack)
-                    //{
-                    //    gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = green;
-                    //    gv_buchsuche.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
-                    //}
-                    //foreach (int i in BlackWhite)
-                    //{
-                    //    gv_buchsuche.Rows[i].DefaultCellStyle.BackColor = listbc;
-                    //    gv_buchsuche.Rows[i].DefaultCellStyle.ForeColor = listfc;
-                    //}
                     gv_buchsuche.Refresh();
                     searchActivated = true;
                     ShowKundeDetails();
@@ -917,7 +871,7 @@ namespace Bibo_Verwaltung
                 {
 
                 }
-                }
+            }
 
         }
 
@@ -1082,13 +1036,9 @@ namespace Bibo_Verwaltung
             rueckListe.Clear();
             leihListe.Clear();
             lb_liste.Text = "";
-            buchsuche.Set_StatusMark(ref gv_buchsuche, rueckListe, red, yellow, green, listfc, listbc);
+            overviewHelper.Set_StatusMark(ref gv_buchsuche, rueckListe, red, yellow, green, listfc, listbc);
             rueckgabelisteToolStripMenuItem.Enabled = true;
             ausleihlisteToolStripMenuItem.Enabled = true;
-        }
-        private void ClearListe()
-        {
-
         }
 
         private void Rb_REDonly_CheckedChanged(object sender, EventArgs e)
