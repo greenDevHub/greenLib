@@ -1,4 +1,5 @@
-﻿using MetroFramework;
+﻿using Bibo_Verwaltung.Helper;
+using MetroFramework;
 using MetroFramework.Components;
 using System;
 using System.Collections.Generic;
@@ -17,86 +18,54 @@ namespace Bibo_Verwaltung
     public partial class w_s_rueckgabe : MetroFramework.Forms.MetroForm
     {
         #region Constructor
-        string currentUser;
         ConditionHelper conditionHelper = new ConditionHelper();
-        public w_s_rueckgabe(string userName, MetroStyleManager msm)
+        public w_s_rueckgabe()
         {
             InitializeComponent();
-            msm_rueckgabe = msm;
-            this.StyleManager = msm;
-            SetStyle();
-            Benutzer user = new Benutzer(userName);
-            this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-            if (user.Rechteid.Equals("0"))
-            {
-                bt_AddBuch.Enabled = false;
-                bt_Zu_aendern.Enabled = false;
-                bt_Rueckgabe.Enabled = false;
-            }
-            else
-            {
-                bt_AddBuch.Enabled = true;
-                bt_Zu_aendern.Enabled = true;
-                bt_Rueckgabe.Enabled = true;
-                conditionHelper.FillCombobox(ref cb_Zustand, -1);
-            }
+            LoadTheme();
+            SetPermissions();
+            this.Text = Text + AuthInfo.FormInfo();
         }
-
-        public w_s_rueckgabe(string userName, string[] list, MetroStyleManager msm)
+        public w_s_rueckgabe(string[] list)
         {
             InitializeComponent();
-            msm_rueckgabe = msm;
-            this.StyleManager = msm;
-            SetStyle();
-            Benutzer user = new Benutzer(userName);
-            this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-            if (user.Rechteid.Equals("0"))
-            {
-                bt_AddBuch.Enabled = false;
-                bt_Zu_aendern.Enabled = false;
-                bt_Rueckgabe.Enabled = false;
-            }
-            else
-            {
-                bt_AddBuch.Enabled = true;
-                bt_Zu_aendern.Enabled = true;
-                bt_Rueckgabe.Enabled = true;
-                conditionHelper.FillCombobox(ref cb_Zustand, -1);
-                rueckgabe.FillRueckListe(list);
-                rueckgabe.SetSlider(ref rueckList_Slider, ref tb_listVon, ref tb_listBis);
-                //foreach (string exemplar in list)
-                //{
-                //    tb_BuchCode.Text = exemplar;
-                //    EnterBuch();
-                //}
-            }
+            LoadTheme();
+            SetPermissions();
+            rueckgabe.FillRueckListe(list);
+            rueckgabe.SetSlider(ref rueckList_Slider, ref tb_listVon, ref tb_listBis);
+            this.Text = Text + AuthInfo.FormInfo();
         }
         #endregion
-        Color fc = Color.Black;
-        Color bc = Color.White;
-        private void SetStyle()
-        {
-            this.StyleManager.Style = MetroColorStyle.Green;
-            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
-            {
-                fc = Color.White;
-                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
-                cb_Zustand.ForeColor = fc;
-                cb_Zustand.BackColor = bc;
-                picBox_Buchcover.BackColor = bc;
-            }
 
+        private void LoadTheme()
+        {
+            this.StyleManager = styleManagerReturn;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.ReturnStyle;
+            cb_Zustand.ForeColor = ThemeInfo.ForeColor;
+            cb_Zustand.BackColor = ThemeInfo.BackColor;
+            picBox_Buchcover.BackColor = ThemeInfo.BackColor;
         }
+
+        private void SetPermissions()
+        {
+            if (AuthInfo.CurrentUser.PermissionId.Equals("0"))
+            {
+                bt_AddBuch.Enabled = false;
+                bt_Zu_aendern.Enabled = false;
+                bt_Rueckgabe.Enabled = false;
+            }
+            else
+            {
+                bt_AddBuch.Enabled = true;
+                bt_Zu_aendern.Enabled = true;
+                bt_Rueckgabe.Enabled = true;
+                conditionHelper.FillCombobox(ref cb_Zustand, -1);
+            }
+        }
+
         Rueckgabe rueckgabe = new Rueckgabe();
         Costumer kunde = new Costumer();
-        //DataTable rueckListe = new DataTable();
-
-        //bool buch_verfuegbar = false;
-        //string rueckgabe_ExemplarID = "";
-        //string zustand_AusleihStart = "";
-        //string zustand_AusleihEnde = "";
 
         #region Fenster-Methoden
         /// <summary>
@@ -440,18 +409,16 @@ namespace Bibo_Verwaltung
 
         private void llb_Buch_LinkClicked(object sender, EventArgs e)
         {
-            w_s_information Info = new w_s_information(1, rueckgabe.ExemplarID, currentUser, msm_rueckgabe);
-            msm_rueckgabe.Clone(Info);
-            Info.ShowDialog();
-            Info.Dispose();
+            w_s_information formBookInformation = new w_s_information(1, rueckgabe.ExemplarID);
+            formBookInformation.ShowDialog();
+            formBookInformation.Dispose();
         }
 
         private void llb_Kunde_LinkClicked(object sender, EventArgs e)
         {
-            w_s_information Info = new w_s_information(2, kunde.CostumerId, currentUser,msm_rueckgabe);
-            msm_rueckgabe.Clone(Info);
-            Info.ShowDialog();
-            Info.Dispose();
+            w_s_information formCostumerInformation = new w_s_information(2, kunde.CostumerId);
+            formCostumerInformation.ShowDialog();
+            formCostumerInformation.Dispose();
         }
 
         private void bt_Rueckgabe_Click(object sender, EventArgs e)
@@ -488,11 +455,10 @@ namespace Bibo_Verwaltung
         private void bt_open_Click(object sender, EventArgs e)
         {
             int index = cb_Zustand.SelectedIndex;
-            w_s_manage Zustand = new w_s_manage(currentUser, "Zustand",this.StyleManager);
-            this.StyleManager.Clone(Zustand);
+            FormAttribute Zustand = new FormAttribute("Zustand");
             Zustand.ShowDialog(this);
             Zustand.Dispose();
-            if (!new Benutzer(currentUser).Rechteid.Equals("0"))
+            if (!AuthInfo.CurrentUser.PermissionId.Equals("0"))
             {
                 conditionHelper.FillCombobox(ref cb_Zustand, -1);
             }
@@ -506,7 +472,7 @@ namespace Bibo_Verwaltung
 
         private void Tb_BuchCode_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!new Benutzer(currentUser).Rechteid.Equals("0"))
+            if (!AuthInfo.CurrentUser.PermissionId.Equals("0"))
             {
                 if (e.KeyChar == (char)13)
                 {

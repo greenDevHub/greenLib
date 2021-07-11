@@ -87,7 +87,7 @@
             this.bt_Schliessen = new MetroFramework.Controls.MetroButton();
             this.bt_clear = new MetroFramework.Controls.MetroButton();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            this.msm_schuelerimport = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.styleManagerImport = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gv_columns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid_Vorschau)).BeginInit();
@@ -97,7 +97,7 @@
             this.metroPanel3.SuspendLayout();
             this.metroPanel4.SuspendLayout();
             this.metroPanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_schuelerimport)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerImport)).BeginInit();
             this.SuspendLayout();
             // 
             // lb_TxtQuali
@@ -1092,10 +1092,10 @@
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroToolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.MetroToolTip1_Popup);
             // 
-            // msm_schuelerimport
+            // styleManagerImport
             // 
-            this.msm_schuelerimport.Owner = this;
-            this.msm_schuelerimport.Style = MetroFramework.MetroColorStyle.Teal;
+            this.styleManagerImport.Owner = this;
+            this.styleManagerImport.Style = MetroFramework.MetroColorStyle.Teal;
             // 
             // w_s_schuelerimport
             // 
@@ -1135,7 +1135,7 @@
             this.metroPanel4.PerformLayout();
             this.metroPanel5.ResumeLayout(false);
             this.metroPanel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_schuelerimport)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerImport)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1193,6 +1193,6 @@
         private MetroFramework.Controls.MetroContextMenu metroContextMenu1;
         private System.Windows.Forms.ToolStripMenuItem spalteEntfernenToolStripMenuItem;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
-        private MetroFramework.Components.MetroStyleManager msm_schuelerimport;
+        private MetroFramework.Components.MetroStyleManager styleManagerImport;
     }
 }

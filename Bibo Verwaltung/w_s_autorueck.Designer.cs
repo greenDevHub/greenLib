@@ -55,13 +55,13 @@
             this.a_cb_Klasse = new Bibo_Verwaltung.AdvancedComboBox();
             this.a_cb_Modus = new Bibo_Verwaltung.AdvancedComboBox();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            this.msm_autorueck = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.stylemManagerAutoReturn = new MetroFramework.Components.MetroStyleManager(this.components);
             this.p_modus = new Bibo_Verwaltung.TransparentPanel();
             this.p_klasse = new Bibo_Verwaltung.TransparentPanel();
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_suggested)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Schueler)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_autorueck)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stylemManagerAutoReturn)).BeginInit();
             this.SuspendLayout();
             // 
             // lb_Klasse
@@ -459,8 +459,8 @@
             // 
             // msm_autorueck
             // 
-            this.msm_autorueck.Owner = this;
-            this.msm_autorueck.Style = MetroFramework.MetroColorStyle.Yellow;
+            this.stylemManagerAutoReturn.Owner = this;
+            this.stylemManagerAutoReturn.Style = MetroFramework.MetroColorStyle.Yellow;
             // 
             // p_modus
             // 
@@ -512,7 +512,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_suggested)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Schueler)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_autorueck)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stylemManagerAutoReturn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -536,7 +536,7 @@
         private MetroFramework.Controls.MetroGrid gv_suggested;
         private MetroFramework.Controls.MetroGrid gv_Schueler;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
-        private MetroFramework.Components.MetroStyleManager msm_autorueck;
+        private MetroFramework.Components.MetroStyleManager stylemManagerAutoReturn;
         private TransparentPanel p_klasse;
         private TransparentPanel p_modus;
     }

@@ -34,8 +34,8 @@
             this.mbt_Choice2 = new MetroFramework.Controls.MetroButton();
             this.mbt_Cancel = new MetroFramework.Controls.MetroButton();
             this.mlb_Message = new MetroFramework.Controls.MetroLabel();
-            this.msm_dialog = new MetroFramework.Components.MetroStyleManager(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.msm_dialog)).BeginInit();
+            this.styleManagerDialog = new MetroFramework.Components.MetroStyleManager(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerDialog)).BeginInit();
             this.SuspendLayout();
             // 
             // mbt_Choice1
@@ -86,8 +86,8 @@
             // 
             // msm_dialog
             // 
-            this.msm_dialog.Owner = this;
-            this.msm_dialog.Style = MetroFramework.MetroColorStyle.Silver;
+            this.styleManagerDialog.Owner = this;
+            this.styleManagerDialog.Style = MetroFramework.MetroColorStyle.Silver;
             // 
             // w_s_selfmade_dialog
             // 
@@ -111,7 +111,7 @@
             this.Style = MetroFramework.MetroColorStyle.Silver;
             this.Text = "-";
             this.TopMost = true;
-            ((System.ComponentModel.ISupportInitialize)(this.msm_dialog)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerDialog)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -121,6 +121,6 @@
         private MetroFramework.Controls.MetroButton mbt_Choice2;
         private MetroFramework.Controls.MetroButton mbt_Cancel;
         private MetroFramework.Controls.MetroLabel mlb_Message;
-        private MetroFramework.Components.MetroStyleManager msm_dialog;
+        private MetroFramework.Components.MetroStyleManager styleManagerDialog;
     }
 }

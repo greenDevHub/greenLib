@@ -37,9 +37,9 @@
             this.mbt_OK = new MetroFramework.Controls.MetroButton();
             this.mlb_Suche = new MetroFramework.Controls.MetroLabel();
             this.a_cb_Buecher = new Bibo_Verwaltung.AdvancedComboBox();
-            this.msm_exemplarsuche = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.styleManagerCopySearch = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_exemplarsuche)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerCopySearch)).BeginInit();
             this.SuspendLayout();
             // 
             // gv_Exemplare
@@ -140,8 +140,8 @@
             // 
             // msm_exemplarsuche
             // 
-            this.msm_exemplarsuche.Owner = this;
-            this.msm_exemplarsuche.Style = MetroFramework.MetroColorStyle.Yellow;
+            this.styleManagerCopySearch.Owner = this;
+            this.styleManagerCopySearch.Style = MetroFramework.MetroColorStyle.Yellow;
             // 
             // w_s_exemplarSuche
             // 
@@ -163,7 +163,7 @@
             this.Style = MetroFramework.MetroColorStyle.Yellow;
             this.Text = "Exemplar-Suche";
             ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_exemplarsuche)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerCopySearch)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,6 +175,6 @@
         private MetroFramework.Controls.MetroGrid gv_Exemplare;
         private MetroFramework.Controls.MetroButton mbt_OK;
         private MetroFramework.Controls.MetroLabel mlb_Suche;
-        private MetroFramework.Components.MetroStyleManager msm_exemplarsuche;
+        private MetroFramework.Components.MetroStyleManager styleManagerCopySearch;
     }
 }

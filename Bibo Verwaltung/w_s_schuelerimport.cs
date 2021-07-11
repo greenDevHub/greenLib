@@ -22,7 +22,6 @@ namespace Bibo_Verwaltung
         SubjectHelper subjectHelper = new SubjectHelper();
         SchoolClassHelper schoolClassHelper = new SchoolClassHelper();
 
-        string currentUser;
         char seperator = ';';
         char feldquali = '"';
         char dattrenn = '.';
@@ -47,18 +46,11 @@ namespace Bibo_Verwaltung
         List<string> files = new List<string>();
         List<string> filesShort = new List<string>();
         int errors = 0;
-        public w_s_schuelerimport(string target, bool modus, string userName, MetroFramework.Components.MetroStyleManager msm)
+        public w_s_schuelerimport(string target, bool modus)
         {
-            this.currentUser = userName;
             this.target = target;
             InitializeComponent();
-            msm_schuelerimport = msm;
-            this.StyleManager = msm;
-            this.StyleManager.Style = MetroColorStyle.Teal;
-            if(this.StyleManager.Theme == MetroThemeStyle.Dark)
-            {
-
-            }
+            LoadTheme();
 
             tb_lines.Text = "0";
             setModus(modus);
@@ -66,10 +58,16 @@ namespace Bibo_Verwaltung
             ImportMode();
             CheckSelected();
             SetSlider();
-            Benutzer user = new Benutzer(userName);
-            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+            this.Text = Text + AuthInfo.FormInfo();
             timer1.Start();
         }
+        private void LoadTheme()
+        {
+            this.StyleManager = styleManagerImport;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.CostumerStyle;
+        }
+
         /// <summary>
         /// Umschaltung zwischen Importieren und Exportieren
         /// </summary>

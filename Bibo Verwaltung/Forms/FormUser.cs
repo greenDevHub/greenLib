@@ -1,4 +1,5 @@
-﻿using MetroFramework;
+﻿using Bibo_Verwaltung.Helper;
+using MetroFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,33 +13,33 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_user : MetroFramework.Forms.MetroForm
+    public partial class FormUser : MetroFramework.Forms.MetroForm
     {
+        UserHelper userHelper = new UserHelper();
+
         #region Constructor
-        string currentUser;
         Color fc = Color.Black;
         Color bc = Color.White;
-        public w_s_user(string userName, MetroFramework.Components.MetroStyleManager msm)
+        public FormUser()
         {
             InitializeComponent();
-            this.StyleManager = msm;
+            this.StyleManager = ThemeInfo.StyleManager;
             this.StyleManager.Style = MetroColorStyle.Teal;
             if (this.StyleManager.Theme == MetroThemeStyle.Dark)
             {
                 fc = Color.White;
                 bc = System.Drawing.ColorTranslator.FromHtml("#111111");
-                cb_Rechte.ForeColor = fc;
-                cb_Rechte.BackColor = bc;
             }
+            cbPermissions.ForeColor = fc;
+            cbPermissions.BackColor = bc;
 
-            this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName;
-            user.FillGrid(ref gv_Benutzer);
-            rb_Neukunde.Select();
+            this.Text = Text + AuthInfo.FormInfo();
+            userHelper.FillGrid(ref gridUser);
+            radioAdd.Select();
         }
         #endregion
 
-        Benutzer user = new Benutzer();
+        User user = new User();
 
         #region Fenster-Methoden
         /// <summary>
@@ -46,49 +47,49 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void SetModus()
         {
-            if (rb_Neukunde.Checked)
+            if (radioAdd.Checked)
             {
-                lb_user.Enabled = !false;
-                tb_user.Enabled = !false;
-                tb_pw.Enabled = !false;
-                cb_Rechte.Enabled = !false;
-                lb_rechte.Enabled = !false;
-                lb_pw.Enabled = !false;
-                lb_Benutzer_add.Text = "Der Benutzer wurde erfolgreich hinzugefügt!";
-                bt_confirm.Text = "Hinzufügen";
+                lbUsername.Enabled = !false;
+                tbUsername.Enabled = !false;
+                tbUserPassword.Enabled = !false;
+                cbPermissions.Enabled = !false;
+                lbPermissions.Enabled = !false;
+                lbUserPassword.Enabled = !false;
+                lbSuccessMessage.Text = "Der Benutzer wurde erfolgreich hinzugefügt!";
+                btConfirm.Text = "Hinzufügen";
             }
-            if (rb_KundeBearbeiten.Checked)
+            if (radioUpdate.Checked)
             {
-                tb_user.Enabled = false;
-                lb_user.Enabled = false;
-                tb_pw.Enabled = !false;
-                cb_Rechte.Enabled = !false;
-                lb_rechte.Enabled = !false;
-                lb_pw.Enabled = !false;
-                lb_Benutzer_add.Text = "Der Benutzer wurde erfolgreich bearbeitet!";
-                bt_confirm.Text = "Speichern";
+                tbUsername.Enabled = false;
+                lbUsername.Enabled = false;
+                tbUserPassword.Enabled = !false;
+                cbPermissions.Enabled = !false;
+                lbPermissions.Enabled = !false;
+                lbUserPassword.Enabled = !false;
+                lbSuccessMessage.Text = "Der Benutzer wurde erfolgreich bearbeitet!";
+                btConfirm.Text = "Speichern";
             }
-            if (rb_KundeLoeschen.Checked)
+            if (radioDelete.Checked)
             {
-                lb_user.Enabled = !false;
-                tb_user.Enabled = !false;
-                tb_pw.Enabled = false;
-                cb_Rechte.Enabled = false;
-                lb_rechte.Enabled = false;
-                lb_pw.Enabled = false;
-                lb_Benutzer_add.Text = "Der Benutzer wurde erfolgreich gelöscht!";
-                bt_confirm.Text = "Löschen";
+                lbUsername.Enabled = !false;
+                tbUsername.Enabled = !false;
+                tbUserPassword.Enabled = false;
+                cbPermissions.Enabled = false;
+                lbPermissions.Enabled = false;
+                lbUserPassword.Enabled = false;
+                lbSuccessMessage.Text = "Der Benutzer wurde erfolgreich gelöscht!";
+                btConfirm.Text = "Löschen";
             }
         }
 
         private void Clear()
         {
-            tb_user.Text = "";
-            tb_pw.Text = "";
-            tb_pw2.Text = "";
-            cb_Rechte.Text = "";
-            cb_Rechte.SelectedIndex = -1;
-            user.FillGrid(ref gv_Benutzer);
+            tbUsername.Text = "";
+            tbUserPassword.Text = "";
+            tbUserPasswordRepeat.Text = "";
+            cbPermissions.Text = "";
+            cbPermissions.SelectedIndex = -1;
+            userHelper.FillGrid(ref gridUser);
         }
 
         /// <summary>
@@ -103,21 +104,21 @@ namespace Bibo_Verwaltung
         #region Componenten-Aktionen
         private void bt_confirm_Click(object sender, EventArgs e)
         {
-            string name = tb_user.Text;
-            string pw = tb_pw.Text;
-            string rechte = cb_Rechte.SelectedIndex.ToString();
-            Benutzer aUser = new Benutzer(true);
-            if (bt_confirm.Text.Equals("Hinzufügen"))
+            string name = tbUsername.Text;
+            string pw = tbUserPassword.Text;
+            string rechte = cbPermissions.SelectedIndex.ToString();
+            User aUser = new User();
+            if (btConfirm.Text.Equals("Hinzufügen"))
             {
                 if (rechte.Equals("-1"))
                 {
                     MetroMessageBox.Show(this, "Sie dürfen bei den Rechten nur eine der auswählbaren Gruppen angeben!", "Falsche Rechte!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    cb_Rechte.Text = "";
+                    cbPermissions.Text = "";
                     return;
                 }
                 try
                 {
-                    if (tb_pw.Text == "Passwort123456" || tb_pw.Text == "" || tb_user.Text == "" || tb_pw2.Text == "")
+                    if (tbUserPassword.Text == "Passwort123456" || tbUserPassword.Text == "" || tbUsername.Text == "" || tbUserPasswordRepeat.Text == "")
                     {
                         MetroMessageBox.Show(this, "Bitte geben Sie alle nötigen Informationen an!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
@@ -125,7 +126,10 @@ namespace Bibo_Verwaltung
                     {
                         if (PasswordCorrect())
                         {
-                            aUser.AddUser(name, SetPassword(pw), rechte);
+                            aUser.UserName = name;
+                            aUser.UserPassword = HashPassword(pw);
+                            aUser.PermissionId = int.Parse(rechte);
+                            aUser.AddUser();
                             Clear();
                         }
                         else
@@ -141,15 +145,14 @@ namespace Bibo_Verwaltung
                     MetroMessageBox.Show(this, "Der angegebene Name ist bereits vorhanden. Bitte wählen Sie einen anderen.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else if (bt_confirm.Text.Equals("Löschen"))
+            else if (btConfirm.Text.Equals("Löschen"))
             {
                 try
                 {
-                    Benutzer userLoggedIn = new Benutzer(currentUser);
-                    Benutzer userDelete = new Benutzer(tb_user.Text);
-                    if (userLoggedIn.BenutzerName != userDelete.BenutzerName)
+                    User userDelete = new User(tbUsername.Text);
+                    if (AuthInfo.CurrentUser.UserName != userDelete.UserName)
                     {
-                        aUser.DeleteUser(name);
+                        //aUser.DeleteUser();
                         Clear();
                     }
                     else
@@ -166,26 +169,26 @@ namespace Bibo_Verwaltung
 
 
             }
-            else if (bt_confirm.Text.Equals("Speichern"))
+            else if (btConfirm.Text.Equals("Speichern"))
             {
                 if (rechte.Equals("-1"))
                 {
                     MetroMessageBox.Show(this, "Sie dürfen bei den Rechten nur eine der auswählbaren Gruppen angeben!", "Falsche Rechte!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    cb_Rechte.Text = "";
+                    cbPermissions.Text = "";
                     return;
                 }
                 try
                 {
-                    if(tb_pw.Text == "Passwort123456" || tb_pw.Text == "" || tb_user.Text == "" || tb_pw2.Text == "")
+                    if(tbUserPassword.Text == "Passwort123456" || tbUserPassword.Text == "" || tbUsername.Text == "" || tbUserPasswordRepeat.Text == "")
                     {
                         MetroMessageBox.Show(this, "Bitte geben Sie alle nötigen Informationen an!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        tb_pw.Clear();
+                        tbUserPassword.Clear();
                     }
                     else
                     {
                         if (PasswordCorrect())
                         {
-                            aUser.UpdateUser(name, SetPassword(pw), rechte);
+                            //aUser.UpdateUser(name, HashPassword(pw), rechte);
                             Clear();
                         }
                         else
@@ -205,7 +208,7 @@ namespace Bibo_Verwaltung
         private bool PasswordCorrect()
         {
             bool correct = false;
-            if(tb_pw.Text == tb_pw2.Text && tb_pw.Text != "")
+            if(tbUserPassword.Text == tbUserPasswordRepeat.Text && tbUserPassword.Text != "")
             {
                 correct = true;
             }
@@ -214,21 +217,6 @@ namespace Bibo_Verwaltung
                 correct = false;
             }
             return correct;
-        }
-        private string SetPassword(string password)
-        {
-            byte[] salt;
-            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
-
-            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100000);
-            byte[] hash = pbkdf2.GetBytes(20);
-
-            byte[] hashBytes = new byte[36];
-            Array.Copy(salt, 0, hashBytes, 0, 16);
-            Array.Copy(hash, 0, hashBytes, 16, 20);
-
-            return Convert.ToBase64String(hashBytes);
-
         }
         private void rb_Neukunde_CheckedChanged(object sender, EventArgs e)
         {
@@ -249,13 +237,13 @@ namespace Bibo_Verwaltung
         {
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow row = this.gv_Benutzer.Rows[e.RowIndex];
-                tb_user.Text = row.Cells["Name"].Value.ToString();
-                Benutzer user = new Benutzer(tb_user.Text);
-                tb_pw.Text = "Passwort123456";
-                tb_pw2.Text = "";
-                cb_Rechte.SelectedIndex = int.Parse(user.Rechteid);
-                rb_KundeBearbeiten.Checked = true;
+                DataGridViewRow row = this.gridUser.Rows[e.RowIndex];
+                tbUsername.Text = row.Cells["Name"].Value.ToString();
+                User user = new User(tbUsername.Text);
+                tbUserPassword.Text = "Passwort123456";
+                tbUserPasswordRepeat.Text = "";
+                cbPermissions.SelectedIndex = user.PermissionId;
+                radioUpdate.Checked = true;
             }
         }
         #endregion
@@ -266,9 +254,9 @@ namespace Bibo_Verwaltung
             //{
             //    tb_pw.Clear();
             //}
-            if(tb_pw.Text == "Passwort123456")
+            if(tbUserPassword.Text == "Passwort123456")
             {
-                tb_pw.Text = "";
+                tbUserPassword.Text = "";
             }
         }
 
@@ -276,10 +264,10 @@ namespace Bibo_Verwaltung
         {
             if(e.Button == MouseButtons.Left)
             {
-                tb_pw.UseSystemPasswordChar = false;
-                tb_pw2.UseSystemPasswordChar = false;
-                tb_pw.PasswordChar = '\0';
-                tb_pw2.PasswordChar = '\0';
+                tbUserPassword.UseSystemPasswordChar = false;
+                tbUserPasswordRepeat.UseSystemPasswordChar = false;
+                tbUserPassword.PasswordChar = '\0';
+                tbUserPasswordRepeat.PasswordChar = '\0';
             }
         }
 
@@ -287,9 +275,26 @@ namespace Bibo_Verwaltung
         {
             if (e.Button == MouseButtons.Left)
             {
-                tb_pw.UseSystemPasswordChar = true;
-                tb_pw2.UseSystemPasswordChar = true;
+                tbUserPassword.UseSystemPasswordChar = true;
+                tbUserPasswordRepeat.UseSystemPasswordChar = true;
             }
         }
+
+        private string HashPassword(string clearPassword)
+        {
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+
+            var pbkdf2 = new Rfc2898DeriveBytes(clearPassword, salt, 100000);
+            byte[] hash = pbkdf2.GetBytes(20);
+
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+
+            return Convert.ToBase64String(hashBytes);
+
+        }
+
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Bibo_Verwaltung
+﻿using Bibo_Verwaltung.Helper;
+
+namespace Bibo_Verwaltung
 {
     partial class Form_Books
     {
@@ -102,7 +104,7 @@
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.bt_exemplar = new MetroFramework.Controls.MetroButton();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            this.msm_buecher = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.styleManagerBooks = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).BeginInit();
@@ -113,7 +115,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Klein)).BeginInit();
             this.metroPanel1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_buecher)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerBooks)).BeginInit();
             this.SuspendLayout();
             // 
             // tsspracheBindingSource
@@ -1352,9 +1354,9 @@
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Default;
             // 
-            // msm_buecher
+            // styleManagerBooks
             // 
-            this.msm_buecher.Owner = this;
+            this.styleManagerBooks.Owner = this;
             // 
             // Form_Books
             // 
@@ -1388,7 +1390,7 @@
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
             this.metroPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.msm_buecher)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerBooks)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1459,7 +1461,7 @@
         private MetroFramework.Components.MetroToolTip metroToolTip1;
         private MetroFramework.Controls.MetroButton bt_exemplar;
         private MetroFramework.Controls.MetroRadioButton rb_search;
-        private MetroFramework.Components.MetroStyleManager msm_buecher;
+        private MetroFramework.Components.MetroStyleManager styleManagerBooks;
         private TransparentPanel p_sprache;
         private TransparentPanel p_genre;
         private TransparentPanel p_verlag;

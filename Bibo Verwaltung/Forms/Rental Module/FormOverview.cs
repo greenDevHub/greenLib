@@ -1,4 +1,5 @@
-﻿using MetroFramework;
+﻿using Bibo_Verwaltung.Helper;
+using MetroFramework;
 using MetroFramework.Controls;
 using System;
 using System.Collections.Generic;
@@ -16,42 +17,42 @@ namespace Bibo_Verwaltung
 {
     public partial class FormOverview : MetroFramework.Forms.MetroForm
     {
-        string currentUser;
         bool loaded = false;
         Color red = Color.Tomato;
         Color yellow = Color.Gold;
         Color green = Color.LimeGreen;
-        Color fc = Color.Black;
-        Color bc = Color.White;
         Color listfc = Color.White;
         Color listbc = Color.Black;
-        public FormOverview(string userName, MetroFramework.Components.MetroStyleManager msm)
+        public FormOverview()
         {
             InitializeComponent();
-            msmOverview = msm;
-            this.StyleManager = msm;
-            this.StyleManager.Style = MetroColorStyle.Lime;
-            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
-            {
-                listfc = Color.Silver;
-                listbc = Color.DimGray;
-                red = Color.Firebrick;
-                yellow = Color.Goldenrod;
-                green = Color.OliveDrab;
-                fc = Color.White;
-                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
-                cbAuthor.BackColor = bc;
-                cbGenre.BackColor = bc;
-                cbPublisher.BackColor = bc;
-                
-            }
+            LoadTheme();
+            SetPermissions();
+            this.Text = Text + AuthInfo.FormInfo();
+        }
+
+        private void LoadTheme()
+        {
+            this.StyleManager = styleManagerOverview;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.OverviewStyle;
+
+            listfc = Color.Silver;
+            listbc = Color.DimGray;
+            red = Color.Firebrick;
+            yellow = Color.Goldenrod;
+            green = Color.OliveDrab;
+            cbAuthor.BackColor = ThemeInfo.BackColor;
+            cbGenre.BackColor = ThemeInfo.BackColor;
+            cbPublisher.BackColor = ThemeInfo.BackColor;
+
             lbLegendGreen.ForeColor = green;
             lbLegendRed.ForeColor = red;
             lbLegendYellow.ForeColor = yellow;
-
-            Benutzer user = new Benutzer(userName);
-            this.currentUser = userName;
-            if (user.Rechteid.Equals("0"))
+        }
+        private void SetPermissions()
+        {
+            if (AuthInfo.CurrentUser.PermissionId.Equals("0"))
             {
                 tbCopyId.Enabled = false;
                 tbCopyIsbn.Enabled = false;
@@ -99,7 +100,6 @@ namespace Bibo_Verwaltung
                 btResetList.Enabled = true;
                 btClearFilter.Enabled = true;
             }
-            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
         }
 
         OverviewHelper overviewHelper = new OverviewHelper();
@@ -215,12 +215,11 @@ namespace Bibo_Verwaltung
         {
             if (leihListe.Count != 0)
             {
-                w_s_ausleihe Ausleihe = new w_s_ausleihe(currentUser,leihListe.ToArray(), msmOverview);
-                msmOverview.Clone(Ausleihe);
+                w_s_ausleihe formBorrowing = new w_s_ausleihe(leihListe.ToArray());
                 loadEnabled = false;
-                Ausleihe.ShowDialog(this);
+                formBorrowing.ShowDialog(this);
                 loadEnabled = true;
-                Ausleihe.Dispose();
+                formBorrowing.Dispose();
                 lbListElements.Text = "";
                 leihListe.Clear();
                 rueckgabelisteToolStripMenuItem.Enabled = true;
@@ -231,12 +230,11 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                w_s_ausleihe Ausleihe = new w_s_ausleihe(currentUser, msmOverview);
-                msmOverview.Clone(Ausleihe);
+                w_s_ausleihe formBorrowing = new w_s_ausleihe();
                 loadEnabled = false;
-                Ausleihe.ShowDialog(this);
+                formBorrowing.ShowDialog(this);
                 loadEnabled = true;
-                Ausleihe.Dispose();
+                formBorrowing.Dispose();
                 if (!workerMain.IsBusy)
                 {
                     workerMain.RunWorkerAsync();
@@ -289,7 +287,7 @@ namespace Bibo_Verwaltung
             {
                 filterActive = true;
             }
-            cbAuthor.ForeColor = fc;
+            cbAuthor.ForeColor = ThemeInfo.ForeColor;
         }
 
         private void cb_Autor_Leave(object sender, EventArgs e)
@@ -303,7 +301,7 @@ namespace Bibo_Verwaltung
             else
             {
                 filterActive = true;
-                cbAuthor.ForeColor = fc;
+                cbAuthor.ForeColor = ThemeInfo.ForeColor;
             }
         }
 
@@ -320,7 +318,7 @@ namespace Bibo_Verwaltung
             {
                 filterActive = true;
             }
-            cbPublisher.ForeColor = fc;
+            cbPublisher.ForeColor = ThemeInfo.ForeColor;
         }
 
         private void cb_Verlag_Leave(object sender, EventArgs e)
@@ -334,7 +332,7 @@ namespace Bibo_Verwaltung
             else
             {
                 filterActive = true;
-                cbPublisher.ForeColor = fc;
+                cbPublisher.ForeColor = ThemeInfo.ForeColor;
             }
         }
 
@@ -351,7 +349,7 @@ namespace Bibo_Verwaltung
             {
                 filterActive = true;
             }
-            cbGenre.ForeColor = fc;
+            cbGenre.ForeColor = ThemeInfo.ForeColor;
         }
 
         private void cb_Genre_Leave(object sender, EventArgs e)
@@ -365,7 +363,7 @@ namespace Bibo_Verwaltung
             else
             {
                 filterActive = true;
-                cbGenre.ForeColor = fc;
+                cbGenre.ForeColor = ThemeInfo.ForeColor;
             }
         }
 
@@ -535,12 +533,11 @@ namespace Bibo_Verwaltung
         {
             string[] borrow = new string[1];
             borrow[0]= gridOverview.SelectedRows[0].Cells["ExemplarID"].Value.ToString();
-            w_s_ausleihe Ausleihe = new w_s_ausleihe(currentUser, borrow, msmOverview);
-            msmOverview.Clone(Ausleihe);
+            w_s_ausleihe formBorrowing = new w_s_ausleihe(borrow);
             loadEnabled = false;
-            Ausleihe.ShowDialog(this);
+            formBorrowing.ShowDialog(this);
             loadEnabled = true;
-            Ausleihe.Dispose();
+            formBorrowing.Dispose();
             if (!workerMain.IsBusy)
             {
                 workerMain.RunWorkerAsync();
@@ -549,7 +546,7 @@ namespace Bibo_Verwaltung
 
         private void gv_buchsuche_MouseDown(object sender, MouseEventArgs e)
         {
-            if (new Benutzer(currentUser).Rechteid != "0")
+            if (AuthInfo.CurrentUser.PermissionId != 0)
             {
                 if (!(gridOverview.HitTest(e.X, e.Y).RowIndex >= 0) || !(gridOverview.HitTest(e.X,e.Y).ColumnIndex >=0))
                 {
@@ -587,7 +584,7 @@ namespace Bibo_Verwaltung
 
         private void gv_buchsuche_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (new Benutzer(currentUser).Rechteid != "0")
+            if (AuthInfo.CurrentUser.PermissionId != 0)
             {
                 if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
                 {
@@ -815,12 +812,11 @@ namespace Bibo_Verwaltung
         private void LeihlisteAusleihenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string[] borrow = leihListe.ToArray();
-            w_s_ausleihe Ausleihe = new w_s_ausleihe(currentUser, borrow, msmOverview);
-            StyleManager.Clone(Ausleihe);
+            w_s_ausleihe formBorrowing = new w_s_ausleihe(borrow);
             loadEnabled = false;
-            Ausleihe.ShowDialog(this);
+            formBorrowing.ShowDialog(this);
             loadEnabled = true;
-            Ausleihe.Dispose();
+            formBorrowing.Dispose();
             leihListe.Clear();
             lbListElements.Text = "";
             rueckgabelisteToolStripMenuItem.Enabled = true;
@@ -834,12 +830,11 @@ namespace Bibo_Verwaltung
         {
             string[] rueck = new string[1];
             rueck[0] = gridOverview.SelectedRows[0].Cells["ExemplarID"].Value.ToString();
-            w_s_rueckgabe Rueckgabe = new w_s_rueckgabe(currentUser, rueck,msmOverview);
-            msmOverview.Clone(Rueckgabe);
+            w_s_rueckgabe formReturn = new w_s_rueckgabe(rueck);
             loadEnabled = false;
-            Rueckgabe.ShowDialog(this);
+            formReturn.ShowDialog(this);
             loadEnabled = true;
-            Rueckgabe.Dispose();
+            formReturn.Dispose();
             if (!workerMain.IsBusy)
             {
                 workerMain.RunWorkerAsync();
@@ -850,12 +845,12 @@ namespace Bibo_Verwaltung
         {
             if (rueckListe.Count != 0)
             {
-                w_s_rueckgabe Rueckgabe = new w_s_rueckgabe(currentUser, rueckListe.ToArray(),msmOverview);
-                msmOverview.Clone(Rueckgabe);
+                w_s_rueckgabe formReturn = new w_s_rueckgabe(rueckListe.ToArray());
+                styleManagerOverview.Clone(formReturn);
                 loadEnabled = false;
-                Rueckgabe.ShowDialog(this);
+                formReturn.ShowDialog(this);
                 loadEnabled = true;
-                Rueckgabe.Dispose();
+                formReturn.Dispose();
                 lbListElements.Text = "";
                 rueckListe.Clear();
                 ausleihlisteToolStripMenuItem.Enabled = true;
@@ -866,12 +861,11 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                w_s_rueckgabe Rueckgabe = new w_s_rueckgabe(currentUser,msmOverview);
-                msmOverview.Clone(Rueckgabe);
+                w_s_rueckgabe formReturn = new w_s_rueckgabe();
                 loadEnabled = false;
-                Rueckgabe.ShowDialog(this);
+                formReturn.ShowDialog(this);
                 loadEnabled = true;
-                Rueckgabe.Dispose();
+                formReturn.Dispose();
                 if (!workerMain.IsBusy)
                 {
                     workerMain.RunWorkerAsync();
@@ -947,12 +941,11 @@ namespace Bibo_Verwaltung
 
         private void ZurueckgebenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            w_s_rueckgabe Rueckgabe = new w_s_rueckgabe(currentUser, rueckListe.ToArray(), msmOverview);
-            msmOverview.Clone(Rueckgabe);
+            w_s_rueckgabe formReturn = new w_s_rueckgabe(rueckListe.ToArray());
             loadEnabled = false;
-            Rueckgabe.ShowDialog(this);
+            formReturn.ShowDialog(this);
             loadEnabled = true;
-            Rueckgabe.Dispose();
+            formReturn.Dispose();
             rueckListe.Clear();
             lbListElements.Text = "";
             ausleihlisteToolStripMenuItem.Enabled = true;
@@ -1009,15 +1002,15 @@ namespace Bibo_Verwaltung
 
         private void KundenAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form Kunde = new w_s_Kunden(currentUser, int.Parse(gridOverview.SelectedRows[0].Cells["Kunden ID"].Value.ToString()), msmOverview);
+            Form formCostumer = new FormCostumer(int.Parse(gridOverview.SelectedRows[0].Cells["Kunden ID"].Value.ToString()));
             loadEnabled = false;
-            Kunde.ShowDialog(this);
+            formCostumer.ShowDialog(this);
             loadEnabled = true;
         }
 
         private void BuchAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form Buch = new Form_Books(currentUser, gridOverview.SelectedRows[0].Cells["ISBN"].Value.ToString(),msmOverview);
+            Form Buch = new Form_Books(gridOverview.SelectedRows[0].Cells["ISBN"].Value.ToString());
             loadEnabled = false;
             Buch.ShowDialog(this);
             loadEnabled = true;

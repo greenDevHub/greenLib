@@ -49,9 +49,9 @@
             this.lb_2_2 = new MetroFramework.Controls.MetroLabel();
             this.lb_2_1 = new MetroFramework.Controls.MetroLabel();
             this.bt_Verwaltung = new MetroFramework.Controls.MetroButton();
-            this.msm_info = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.styleManagerInformation = new MetroFramework.Components.MetroStyleManager(this.components);
             this.tLP_Information.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_info)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerInformation)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_Ok
@@ -285,7 +285,7 @@
             // 
             // msm_info
             // 
-            this.msm_info.Owner = this;
+            this.styleManagerInformation.Owner = this;
             // 
             // w_s_information
             // 
@@ -304,7 +304,7 @@
             this.Text = "Details";
             this.tLP_Information.ResumeLayout(false);
             this.tLP_Information.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_info)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerInformation)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -330,7 +330,7 @@
         private MetroFramework.Controls.MetroLabel lb_2_2;
         private MetroFramework.Controls.MetroLabel lb_2_1;
         private MetroFramework.Controls.MetroButton bt_Verwaltung;
-        private MetroFramework.Components.MetroStyleManager msm_info;
+        private MetroFramework.Components.MetroStyleManager styleManagerInformation;
 
         public object CustomValue { get; internal set; }
     }

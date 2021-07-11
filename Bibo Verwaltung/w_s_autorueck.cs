@@ -18,39 +18,40 @@ namespace Bibo_Verwaltung
         CostumerHelper costumerHelper = new CostumerHelper();
         SchoolClassHelper schoolClassHelper = new SchoolClassHelper();
         #region Constructor
-        string currentUser;
-        Color fc = Color.Black;
-        Color bc = Color.White;
-        public w_s_autorueck(string userName, MetroStyleManager msm)
+        public w_s_autorueck()
         {
             InitializeComponent();
-            msm_autorueck = msm;
-            this.StyleManager = msm;
-            this.StyleManager.Style = MetroColorStyle.Yellow;
-            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
-            {
-                fc = Color.White;
-                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
-                a_cb_Klasse.ForeColor = fc;
-                a_cb_Klasse.BackColor = bc;
-                a_cb_Modus.ForeColor = fc;
-                a_cb_Modus.BackColor = bc;
-            }
-            Benutzer user = new Benutzer(userName);
-            this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+            LoadTheme();
+            SetPermissions();
+            this.Text = Text + AuthInfo.FormInfo();
 
             a_cb_Modus.SelectedIndex = 0;
             bt_bestaetigen.Text = "Schüler laden";
             inRueckAction = false;
-            bool b = !user.Rechteid.Equals("0");
-            a_cb_Modus.TabStop = b;
-            p_modus.Visible = !b;
-            a_cb_Klasse.TabStop = b;
-            p_klasse.Visible = !b;
-            bt_bestaetigen.Enabled = b;
         }
         #endregion
+        private void LoadTheme()
+        {
+            this.StyleManager = stylemManagerAutoReturn;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.AutoReturnStyle;
+            a_cb_Klasse.ForeColor = ThemeInfo.ForeColor;
+            a_cb_Klasse.BackColor = ThemeInfo.BackColor;
+            a_cb_Modus.ForeColor = ThemeInfo.ForeColor;
+            a_cb_Modus.BackColor = ThemeInfo.BackColor;
+
+        }
+
+        private void SetPermissions()
+        {
+            bool isNoGuest = !AuthInfo.CurrentUser.PermissionId.Equals("0");
+            a_cb_Modus.TabStop = isNoGuest;
+            p_modus.Visible = !isNoGuest;
+            a_cb_Klasse.TabStop = isNoGuest;
+            p_klasse.Visible = !isNoGuest;
+            bt_bestaetigen.Enabled = isNoGuest;
+
+        }
 
         ConditionHelper conditionHelper = new ConditionHelper();
 

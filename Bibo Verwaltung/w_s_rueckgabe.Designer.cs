@@ -62,7 +62,7 @@
             this.bt_Abbrechen = new MetroFramework.Controls.MetroButton();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            this.msm_rueckgabe = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.styleManagerReturn = new MetroFramework.Components.MetroStyleManager(this.components);
             this.timer_input = new System.Windows.Forms.Timer(this.components);
             this.tpanel = new Bibo_Verwaltung.TransparentPanel();
             this.cb_Zustand = new Bibo_Verwaltung.AdvancedComboBox();
@@ -70,7 +70,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).BeginInit();
             this.metroPanel1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_rueckgabe)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerReturn)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_Rueckgabe
@@ -610,8 +610,8 @@
             // 
             // msm_rueckgabe
             // 
-            this.msm_rueckgabe.Owner = this;
-            this.msm_rueckgabe.Style = MetroFramework.MetroColorStyle.Green;
+            this.styleManagerReturn.Owner = this;
+            this.styleManagerReturn.Style = MetroFramework.MetroColorStyle.Green;
             // 
             // timer_input
             // 
@@ -672,7 +672,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).EndInit();
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.msm_rueckgabe)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerReturn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -710,7 +710,7 @@
         private MetroFramework.Controls.MetroButton bt_Abbrechen;
         private MetroFramework.Controls.MetroPanel metroPanel2;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
-        private MetroFramework.Components.MetroStyleManager msm_rueckgabe;
+        private MetroFramework.Components.MetroStyleManager styleManagerReturn;
         private TransparentPanel tpanel;
         private System.Windows.Forms.Timer timer_input;
     }

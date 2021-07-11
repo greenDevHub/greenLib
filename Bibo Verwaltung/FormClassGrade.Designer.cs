@@ -1,6 +1,6 @@
 ﻿namespace Bibo_Verwaltung
 {
-    partial class w_s_fach_stufe
+    partial class FormClassGrade
     {
         /// <summary>
         /// Required designer variable.
@@ -35,37 +35,36 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_fach_stufe));
-            this.gv_Faecher = new MetroFramework.Controls.MetroGrid();
-            this.bt_Bearbeiten = new MetroFramework.Controls.MetroButton();
-            this.btAbbrechen = new MetroFramework.Controls.MetroButton();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormClassGrade));
+            this.gv_Klassen = new MetroFramework.Controls.MetroGrid();
             this.gv_Klassenstufe = new MetroFramework.Controls.MetroGrid();
             this.bt_back = new MetroFramework.Controls.MetroButton();
+            this.lb_Klassen = new MetroFramework.Controls.MetroLabel();
+            this.lb_Klassenstufe = new MetroFramework.Controls.MetroLabel();
+            this.bt_Abbrechen = new MetroFramework.Controls.MetroButton();
+            this.bt_Bearbeiten = new MetroFramework.Controls.MetroButton();
             this.mbt_ImEx = new MetroFramework.Controls.MetroButton();
-            this.msm_fach_stufe = new MetroFramework.Components.MetroStyleManager(this.components);
-            this.tb_lang = new MetroFramework.Controls.MetroTextBox();
-            this.tb_kurz = new MetroFramework.Controls.MetroTextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.gv_Faecher)).BeginInit();
+            this.styleManagerClassGrade = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.tb_klasse = new MetroFramework.Controls.MetroTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Klassen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Klassenstufe)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_fach_stufe)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerClassGrade)).BeginInit();
             this.SuspendLayout();
             // 
-            // gv_Faecher
+            // gv_Klassen
             // 
-            this.gv_Faecher.AllowUserToAddRows = false;
-            this.gv_Faecher.AllowUserToDeleteRows = false;
-            this.gv_Faecher.AllowUserToResizeColumns = false;
-            this.gv_Faecher.AllowUserToResizeRows = false;
-            this.gv_Faecher.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.gv_Klassen.AllowUserToAddRows = false;
+            this.gv_Klassen.AllowUserToDeleteRows = false;
+            this.gv_Klassen.AllowUserToResizeColumns = false;
+            this.gv_Klassen.AllowUserToResizeRows = false;
+            this.gv_Klassen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gv_Faecher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.gv_Faecher.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_Faecher.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gv_Faecher.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.gv_Faecher.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.gv_Klassen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gv_Klassen.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gv_Klassen.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gv_Klassen.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.gv_Klassen.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(119)))), ((int)(((byte)(53)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
@@ -73,9 +72,9 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(133)))), ((int)(((byte)(72)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gv_Faecher.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.gv_Faecher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_Faecher.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gv_Klassen.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.gv_Klassen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gv_Klassen.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -83,16 +82,16 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(133)))), ((int)(((byte)(72)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gv_Faecher.DefaultCellStyle = dataGridViewCellStyle2;
-            this.gv_Faecher.Enabled = false;
-            this.gv_Faecher.EnableHeadersVisualStyles = false;
-            this.gv_Faecher.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.gv_Faecher.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_Faecher.Location = new System.Drawing.Point(302, 82);
-            this.gv_Faecher.MultiSelect = false;
-            this.gv_Faecher.Name = "gv_Faecher";
-            this.gv_Faecher.ReadOnly = true;
-            this.gv_Faecher.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.gv_Klassen.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gv_Klassen.Enabled = false;
+            this.gv_Klassen.EnableHeadersVisualStyles = false;
+            this.gv_Klassen.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.gv_Klassen.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gv_Klassen.Location = new System.Drawing.Point(302, 82);
+            this.gv_Klassen.MultiSelect = false;
+            this.gv_Klassen.Name = "gv_Klassen";
+            this.gv_Klassen.ReadOnly = true;
+            this.gv_Klassen.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(119)))), ((int)(((byte)(53)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10.5F);
@@ -100,75 +99,24 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(133)))), ((int)(((byte)(72)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gv_Faecher.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.gv_Faecher.RowHeadersWidth = 5;
-            this.gv_Faecher.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.gv_Faecher.RowTemplate.DividerHeight = 1;
-            this.gv_Faecher.RowTemplate.ReadOnly = true;
-            this.gv_Faecher.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_Faecher.ShowCellErrors = false;
-            this.gv_Faecher.ShowCellToolTips = false;
-            this.gv_Faecher.ShowEditingIcon = false;
-            this.gv_Faecher.ShowRowErrors = false;
-            this.gv_Faecher.Size = new System.Drawing.Size(595, 360);
-            this.gv_Faecher.Style = MetroFramework.MetroColorStyle.Orange;
-            this.gv_Faecher.TabIndex = 1;
-            this.gv_Faecher.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Faecher_CellClick);
-            this.gv_Faecher.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Faecher_CellDoubleClick);
-            this.gv_Faecher.Sorted += new System.EventHandler(this.Gv_Faecher_Sorted);
-            this.gv_Faecher.EnabledChanged += new System.EventHandler(this.Gv_Faecher_EnabledChanged);
-            this.gv_Faecher.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Faecher_KeyDown);
-            // 
-            // bt_Bearbeiten
-            // 
-            this.bt_Bearbeiten.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bt_Bearbeiten.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.bt_Bearbeiten.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_Bearbeiten.Location = new System.Drawing.Point(483, 453);
-            this.bt_Bearbeiten.Name = "bt_Bearbeiten";
-            this.bt_Bearbeiten.Size = new System.Drawing.Size(175, 24);
-            this.bt_Bearbeiten.Style = MetroFramework.MetroColorStyle.Orange;
-            this.bt_Bearbeiten.TabIndex = 5;
-            this.bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
-            this.bt_Bearbeiten.UseSelectable = true;
-            this.bt_Bearbeiten.Click += new System.EventHandler(this.bt_Bearbeiten_Click);
-            // 
-            // btAbbrechen
-            // 
-            this.btAbbrechen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAbbrechen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btAbbrechen.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.btAbbrechen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.btAbbrechen.Location = new System.Drawing.Point(722, 453);
-            this.btAbbrechen.Name = "btAbbrechen";
-            this.btAbbrechen.Size = new System.Drawing.Size(175, 24);
-            this.btAbbrechen.Style = MetroFramework.MetroColorStyle.Orange;
-            this.btAbbrechen.TabIndex = 6;
-            this.btAbbrechen.Text = "Schließen";
-            this.btAbbrechen.UseSelectable = true;
-            this.btAbbrechen.Click += new System.EventHandler(this.btAbbrechen_Click);
-            // 
-            // metroLabel2
-            // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel2.Location = new System.Drawing.Point(302, 60);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(133, 19);
-            this.metroLabel2.Style = MetroFramework.MetroColorStyle.Orange;
-            this.metroLabel2.TabIndex = 71;
-            this.metroLabel2.Text = "zugeordnete Fächer:";
-            // 
-            // metroLabel3
-            // 
-            this.metroLabel3.AutoSize = true;
-            this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel3.Location = new System.Drawing.Point(23, 60);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(95, 19);
-            this.metroLabel3.Style = MetroFramework.MetroColorStyle.Orange;
-            this.metroLabel3.TabIndex = 72;
-            this.metroLabel3.Text = "Klassenstufen:";
+            this.gv_Klassen.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.gv_Klassen.RowHeadersWidth = 5;
+            this.gv_Klassen.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.gv_Klassen.RowTemplate.DividerHeight = 1;
+            this.gv_Klassen.RowTemplate.ReadOnly = true;
+            this.gv_Klassen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gv_Klassen.ShowCellErrors = false;
+            this.gv_Klassen.ShowCellToolTips = false;
+            this.gv_Klassen.ShowEditingIcon = false;
+            this.gv_Klassen.ShowRowErrors = false;
+            this.gv_Klassen.Size = new System.Drawing.Size(595, 360);
+            this.gv_Klassen.Style = MetroFramework.MetroColorStyle.Orange;
+            this.gv_Klassen.TabIndex = 1;
+            this.gv_Klassen.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Klassen_CellClick);
+            this.gv_Klassen.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_Klassen_CellDoubleClick);
+            this.gv_Klassen.Sorted += new System.EventHandler(this.Gv_Klassen_Sorted);
+            this.gv_Klassen.EnabledChanged += new System.EventHandler(this.Gv_Klassen_EnabledChanged);
+            this.gv_Klassen.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Klassen_KeyDown);
             // 
             // gv_Klassenstufe
             // 
@@ -242,10 +190,61 @@
             this.bt_back.Name = "bt_back";
             this.bt_back.Size = new System.Drawing.Size(175, 24);
             this.bt_back.Style = MetroFramework.MetroColorStyle.Orange;
-            this.bt_back.TabIndex = 4;
+            this.bt_back.TabIndex = 3;
             this.bt_back.Text = "Zurück";
             this.bt_back.UseSelectable = true;
             this.bt_back.Click += new System.EventHandler(this.bt_back_Click);
+            // 
+            // lb_Klassen
+            // 
+            this.lb_Klassen.AutoSize = true;
+            this.lb_Klassen.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lb_Klassen.Location = new System.Drawing.Point(307, 60);
+            this.lb_Klassen.Name = "lb_Klassen";
+            this.lb_Klassen.Size = new System.Drawing.Size(138, 19);
+            this.lb_Klassen.Style = MetroFramework.MetroColorStyle.Orange;
+            this.lb_Klassen.TabIndex = 81;
+            this.lb_Klassen.Text = "zugeordnete Klassen:";
+            // 
+            // lb_Klassenstufe
+            // 
+            this.lb_Klassenstufe.AutoSize = true;
+            this.lb_Klassenstufe.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lb_Klassenstufe.Location = new System.Drawing.Point(28, 60);
+            this.lb_Klassenstufe.Name = "lb_Klassenstufe";
+            this.lb_Klassenstufe.Size = new System.Drawing.Size(95, 19);
+            this.lb_Klassenstufe.Style = MetroFramework.MetroColorStyle.Orange;
+            this.lb_Klassenstufe.TabIndex = 80;
+            this.lb_Klassenstufe.Text = "Klassenstufen:";
+            // 
+            // bt_Abbrechen
+            // 
+            this.bt_Abbrechen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bt_Abbrechen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.bt_Abbrechen.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_Abbrechen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.bt_Abbrechen.Location = new System.Drawing.Point(722, 453);
+            this.bt_Abbrechen.Name = "bt_Abbrechen";
+            this.bt_Abbrechen.Size = new System.Drawing.Size(175, 24);
+            this.bt_Abbrechen.Style = MetroFramework.MetroColorStyle.Orange;
+            this.bt_Abbrechen.TabIndex = 5;
+            this.bt_Abbrechen.Text = "Schließen";
+            this.bt_Abbrechen.UseSelectable = true;
+            this.bt_Abbrechen.Click += new System.EventHandler(this.bt_Abbrechen_Click);
+            // 
+            // bt_Bearbeiten
+            // 
+            this.bt_Bearbeiten.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.bt_Bearbeiten.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.bt_Bearbeiten.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.bt_Bearbeiten.Location = new System.Drawing.Point(483, 453);
+            this.bt_Bearbeiten.Name = "bt_Bearbeiten";
+            this.bt_Bearbeiten.Size = new System.Drawing.Size(175, 24);
+            this.bt_Bearbeiten.Style = MetroFramework.MetroColorStyle.Orange;
+            this.bt_Bearbeiten.TabIndex = 4;
+            this.bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
+            this.bt_Bearbeiten.UseSelectable = true;
+            this.bt_Bearbeiten.Click += new System.EventHandler(this.bt_Bearbeiten_Click);
             // 
             // mbt_ImEx
             // 
@@ -257,132 +256,93 @@
             this.mbt_ImEx.Name = "mbt_ImEx";
             this.mbt_ImEx.Size = new System.Drawing.Size(175, 24);
             this.mbt_ImEx.Style = MetroFramework.MetroColorStyle.Orange;
-            this.mbt_ImEx.TabIndex = 7;
+            this.mbt_ImEx.TabIndex = 6;
             this.mbt_ImEx.Text = "Daten Import/Export";
             this.mbt_ImEx.UseSelectable = true;
             this.mbt_ImEx.Click += new System.EventHandler(this.mbt_ImEx_Click);
             // 
-            // msm_fach_stufe
+            // msm_klasse_stufe
             // 
-            this.msm_fach_stufe.Owner = this;
-            this.msm_fach_stufe.Style = MetroFramework.MetroColorStyle.Orange;
+            this.styleManagerClassGrade.Owner = this;
+            this.styleManagerClassGrade.Style = MetroFramework.MetroColorStyle.Orange;
             // 
-            // tb_lang
-            // 
-            this.tb_lang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            // tb_klasse
             // 
             // 
             // 
-            this.tb_lang.CustomButton.Image = null;
-            this.tb_lang.CustomButton.Location = new System.Drawing.Point(178, 1);
-            this.tb_lang.CustomButton.Name = "";
-            this.tb_lang.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.tb_lang.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.tb_lang.CustomButton.TabIndex = 1;
-            this.tb_lang.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.tb_lang.CustomButton.UseSelectable = true;
-            this.tb_lang.CustomButton.Visible = false;
-            this.tb_lang.Enabled = false;
-            this.tb_lang.Lines = new string[0];
-            this.tb_lang.Location = new System.Drawing.Point(697, 56);
-            this.tb_lang.MaxLength = 32767;
-            this.tb_lang.Name = "tb_lang";
-            this.tb_lang.PasswordChar = '\0';
-            this.tb_lang.PromptText = "Suche nach Langbezeichnung";
-            this.tb_lang.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.tb_lang.SelectedText = "";
-            this.tb_lang.SelectionLength = 0;
-            this.tb_lang.SelectionStart = 0;
-            this.tb_lang.ShortcutsEnabled = true;
-            this.tb_lang.Size = new System.Drawing.Size(200, 23);
-            this.tb_lang.TabIndex = 3;
-            this.tb_lang.UseSelectable = true;
-            this.tb_lang.WaterMark = "Suche nach Langbezeichnung";
-            this.tb_lang.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.tb_lang.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.tb_lang.TextChanged += new System.EventHandler(this.Tb_lang_TextChanged);
             // 
-            // tb_kurz
+            this.tb_klasse.CustomButton.Image = null;
+            this.tb_klasse.CustomButton.Location = new System.Drawing.Point(178, 1);
+            this.tb_klasse.CustomButton.Name = "";
+            this.tb_klasse.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.tb_klasse.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_klasse.CustomButton.TabIndex = 1;
+            this.tb_klasse.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_klasse.CustomButton.UseSelectable = true;
+            this.tb_klasse.CustomButton.Visible = false;
+            this.tb_klasse.Enabled = false;
+            this.tb_klasse.Lines = new string[0];
+            this.tb_klasse.Location = new System.Drawing.Point(697, 56);
+            this.tb_klasse.MaxLength = 32767;
+            this.tb_klasse.Name = "tb_klasse";
+            this.tb_klasse.PasswordChar = '\0';
+            this.tb_klasse.PromptText = "Suche nach Klasse";
+            this.tb_klasse.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_klasse.SelectedText = "";
+            this.tb_klasse.SelectionLength = 0;
+            this.tb_klasse.SelectionStart = 0;
+            this.tb_klasse.ShortcutsEnabled = true;
+            this.tb_klasse.Size = new System.Drawing.Size(200, 23);
+            this.tb_klasse.TabIndex = 2;
+            this.tb_klasse.UseSelectable = true;
+            this.tb_klasse.WaterMark = "Suche nach Klasse";
+            this.tb_klasse.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_klasse.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_klasse.TextChanged += new System.EventHandler(this.Tb_kurz_TextChanged);
             // 
-            this.tb_kurz.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            // 
-            // 
-            // 
-            this.tb_kurz.CustomButton.Image = null;
-            this.tb_kurz.CustomButton.Location = new System.Drawing.Point(178, 1);
-            this.tb_kurz.CustomButton.Name = "";
-            this.tb_kurz.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.tb_kurz.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.tb_kurz.CustomButton.TabIndex = 1;
-            this.tb_kurz.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.tb_kurz.CustomButton.UseSelectable = true;
-            this.tb_kurz.CustomButton.Visible = false;
-            this.tb_kurz.Enabled = false;
-            this.tb_kurz.Lines = new string[0];
-            this.tb_kurz.Location = new System.Drawing.Point(491, 56);
-            this.tb_kurz.MaxLength = 32767;
-            this.tb_kurz.Name = "tb_kurz";
-            this.tb_kurz.PasswordChar = '\0';
-            this.tb_kurz.PromptText = "Suche nach Kurzbezeichnung";
-            this.tb_kurz.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.tb_kurz.SelectedText = "";
-            this.tb_kurz.SelectionLength = 0;
-            this.tb_kurz.SelectionStart = 0;
-            this.tb_kurz.ShortcutsEnabled = true;
-            this.tb_kurz.Size = new System.Drawing.Size(200, 23);
-            this.tb_kurz.TabIndex = 2;
-            this.tb_kurz.UseSelectable = true;
-            this.tb_kurz.WaterMark = "Suche nach Kurzbezeichnung";
-            this.tb_kurz.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.tb_kurz.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.tb_kurz.TextChanged += new System.EventHandler(this.Tb_kurz_TextChanged);
-            // 
-            // w_s_fach_stufe
+            // w_s_klasse_stufe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.CancelButton = this.btAbbrechen;
             this.ClientSize = new System.Drawing.Size(920, 500);
-            this.Controls.Add(this.tb_lang);
-            this.Controls.Add(this.tb_kurz);
+            this.Controls.Add(this.tb_klasse);
             this.Controls.Add(this.mbt_ImEx);
+            this.Controls.Add(this.gv_Klassen);
             this.Controls.Add(this.gv_Klassenstufe);
             this.Controls.Add(this.bt_back);
-            this.Controls.Add(this.gv_Faecher);
-            this.Controls.Add(this.metroLabel3);
-            this.Controls.Add(this.metroLabel2);
-            this.Controls.Add(this.btAbbrechen);
+            this.Controls.Add(this.lb_Klassen);
+            this.Controls.Add(this.lb_Klassenstufe);
+            this.Controls.Add(this.bt_Abbrechen);
             this.Controls.Add(this.bt_Bearbeiten);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(1);
             this.MinimumSize = new System.Drawing.Size(862, 500);
-            this.Name = "w_s_fach_stufe";
+            this.Name = "w_s_klasse_stufe";
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Orange;
-            this.Text = "Zuordnung der Fächer zu einer Klassenstufe";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_fach_stufe_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.gv_Faecher)).EndInit();
+            this.Text = "Zuordnung der Klassen zu einer Klassenstufe";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_klassenstufe_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Klassen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Klassenstufe)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_fach_stufe)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerClassGrade)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private MetroFramework.Controls.MetroGrid gv_Faecher;
-        private MetroFramework.Controls.MetroButton bt_Bearbeiten;
-        private MetroFramework.Controls.MetroButton btAbbrechen;
-        private MetroFramework.Controls.MetroLabel metroLabel2;
-        private MetroFramework.Controls.MetroLabel metroLabel3;
+
+        private MetroFramework.Controls.MetroGrid gv_Klassen;
         private MetroFramework.Controls.MetroGrid gv_Klassenstufe;
         private MetroFramework.Controls.MetroButton bt_back;
+        private MetroFramework.Controls.MetroLabel lb_Klassen;
+        private MetroFramework.Controls.MetroLabel lb_Klassenstufe;
+        private MetroFramework.Controls.MetroButton bt_Abbrechen;
+        private MetroFramework.Controls.MetroButton bt_Bearbeiten;
         private MetroFramework.Controls.MetroButton mbt_ImEx;
-        private MetroFramework.Components.MetroStyleManager msm_fach_stufe;
-        private MetroFramework.Controls.MetroTextBox tb_lang;
-        private MetroFramework.Controls.MetroTextBox tb_kurz;
+        private MetroFramework.Components.MetroStyleManager styleManagerClassGrade;
+        private MetroFramework.Controls.MetroTextBox tb_klasse;
     }
 }

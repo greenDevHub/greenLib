@@ -16,6 +16,7 @@ using bpac;
 using System.IO;
 using MetroFramework.Controls;
 using System.Threading;
+using Bibo_Verwaltung.Helper;
 
 namespace Bibo_Verwaltung
 {
@@ -33,51 +34,54 @@ namespace Bibo_Verwaltung
             delete
         }
         #endregion
+
         Image resultImage = null;
         List<Image> images = new List<Image>();
         bool loaded = false;
         bool guest = false;
 
         #region Constructor
-        string currentUser;
-        Color fc = Color.Black;
-        Color bc = Color.White;
-        public Form_Copy(string userName, string isbn, MetroFramework.Components.MetroStyleManager msm)
+        public Form_Copy(string isbn)
         {
             InitializeComponent();
-            msm_exemplare = msm;
-            this.StyleManager = msm;
-            this.StyleManager.Style = MetroColorStyle.Blue;
-            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
-            {
-                fc = Color.White;
-                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
-                acb_Zustand.ForeColor = fc;
-                acb_Zustand.BackColor = bc;
-            }
-            Benutzer user = new Benutzer(userName);
-            this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-            if (user.Rechteid.Equals("0"))
-            {
-                guest = true;
-                guestMode(guest);
-            }
-            else if (user.Rechteid.Equals("1"))
-            {
-                guest = false;
-                guestMode(guest);
-            }
-            else if (user.Rechteid == "2")
-            {
-                guest = false;
-                guestMode(guest);
-            }
+            LoadTheme();
+            SetPermissions();
+            this.Text = Text + AuthInfo.FormInfo();
             tb_ISBN.Text = isbn;
             conditionHelper.FillCombobox(ref acb_Zustand, 0);
             tb_ExempCount.Text = gv_Exemplare.RowCount.ToString();
         }
         #endregion
+
+        private void LoadTheme()
+        {
+            this.StyleManager = styleManagerCopy;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.BookStyle;
+            acb_Zustand.ForeColor = ThemeInfo.ForeColor;
+            acb_Zustand.BackColor = ThemeInfo.BackColor;
+
+        }
+
+        private void SetPermissions()
+        {
+            if (AuthInfo.CurrentUser.PermissionId == 0)
+            {
+                guest = true;
+                guestMode(guest);
+            }
+            else if (AuthInfo.CurrentUser.PermissionId == 1)
+            {
+                guest = false;
+                guestMode(guest);
+            }
+            else if (AuthInfo.CurrentUser.PermissionId == 2)
+            {
+                guest = false;
+                guestMode(guest);
+            }
+        }
+
         private void guestMode(bool activate)
         {
             bt_Add.Enabled = !activate;
@@ -282,10 +286,10 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void White()
         {
-            tb_ID.BackColor = Color.White;
-            tb_ISBN.BackColor = Color.White;
-            acb_Zustand.BackColor = bc;
-            dTP_AufDat.BackColor = Color.White;
+            tb_ID.BackColor = ThemeInfo.BackColor;
+            tb_ISBN.BackColor = ThemeInfo.BackColor;
+            acb_Zustand.BackColor = ThemeInfo.BackColor;
+            dTP_AufDat.BackColor = ThemeInfo.BackColor;
         }
 
         private void bt_Add_Click(object sender, EventArgs e)
@@ -303,7 +307,7 @@ namespace Bibo_Verwaltung
                     {
                         AddCopy();
                     }
-                    catch(SqlException)
+                    catch (SqlException)
                     {
                         MetroMessageBox.Show(this, "Das Exemplar konnte hinzugefügt werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -382,7 +386,7 @@ namespace Bibo_Verwaltung
             }
             return inputOkay;
         }
-        
+
         private void AddCopy()
         {
             Copy copy = new Copy();
@@ -574,7 +578,7 @@ namespace Bibo_Verwaltung
         private void cb_zustand_TextChanged(object sender, EventArgs e)
         {
             Filter();
-            acb_Zustand.BackColor = bc;
+            acb_Zustand.BackColor = ThemeInfo.BackColor;
         }
 
         private void rb_Neu_CheckedChanged(object sender, EventArgs e)
@@ -616,8 +620,7 @@ namespace Bibo_Verwaltung
 
         private void bt_zustand_Click(object sender, EventArgs e)
         {
-            w_s_manage Zustand = new w_s_manage(currentUser, "Zustand", msm_exemplare);
-            msm_exemplare.Clone(Zustand);
+            FormAttribute Zustand = new FormAttribute("Zustand");
             Zustand.ShowDialog(this);
             Zustand.Dispose();
             conditionHelper.FillCombobox(ref acb_Zustand, 0);

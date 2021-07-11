@@ -1,6 +1,6 @@
 ﻿namespace Bibo_Verwaltung
 {
-    partial class w_s_buch_fach
+    partial class FormBookGrade
     {
         /// <summary>
         /// Required designer variable.
@@ -35,39 +35,36 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_buch_fach));
-            this.gv_Faecher = new MetroFramework.Controls.MetroGrid();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBookGrade));
+            this.gv_Klassenstufe = new MetroFramework.Controls.MetroGrid();
             this.gv_Buecher = new MetroFramework.Controls.MetroGrid();
             this.btAbbrechen = new MetroFramework.Controls.MetroButton();
             this.bt_Bearbeiten = new MetroFramework.Controls.MetroButton();
-            this.lb_titel = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.bt_back = new MetroFramework.Controls.MetroButton();
             this.mbt_ImEx = new MetroFramework.Controls.MetroButton();
-            this.msm_buch_fach = new MetroFramework.Components.MetroStyleManager(this.components);
-            this.tb_isbn = new MetroFramework.Controls.MetroTextBox();
+            this.styleManagerBookGrade = new MetroFramework.Components.MetroStyleManager(this.components);
             this.tb_titel = new MetroFramework.Controls.MetroTextBox();
-            this.bt_lk = new MetroFramework.Controls.MetroButton();
-            this.tb_fach = new MetroFramework.Controls.MetroTextBox();
-            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            ((System.ComponentModel.ISupportInitialize)(this.gv_Faecher)).BeginInit();
+            this.tb_isbn = new MetroFramework.Controls.MetroTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Klassenstufe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Buecher)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_buch_fach)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerBookGrade)).BeginInit();
             this.SuspendLayout();
             // 
-            // gv_Faecher
+            // gv_Klassenstufe
             // 
-            this.gv_Faecher.AllowUserToAddRows = false;
-            this.gv_Faecher.AllowUserToDeleteRows = false;
-            this.gv_Faecher.AllowUserToResizeColumns = false;
-            this.gv_Faecher.AllowUserToResizeRows = false;
-            this.gv_Faecher.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.gv_Klassenstufe.AllowUserToAddRows = false;
+            this.gv_Klassenstufe.AllowUserToDeleteRows = false;
+            this.gv_Klassenstufe.AllowUserToResizeColumns = false;
+            this.gv_Klassenstufe.AllowUserToResizeRows = false;
+            this.gv_Klassenstufe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.gv_Faecher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gv_Faecher.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_Faecher.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gv_Faecher.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.gv_Faecher.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.gv_Klassenstufe.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gv_Klassenstufe.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gv_Klassenstufe.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gv_Klassenstufe.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.gv_Klassenstufe.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(119)))), ((int)(((byte)(53)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
@@ -75,49 +72,47 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(133)))), ((int)(((byte)(72)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gv_Faecher.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.gv_Faecher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_Faecher.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.gv_Klassenstufe.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.gv_Klassenstufe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gv_Klassenstufe.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(133)))), ((int)(((byte)(72)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gv_Faecher.DefaultCellStyle = dataGridViewCellStyle2;
-            this.gv_Faecher.EnableHeadersVisualStyles = false;
-            this.gv_Faecher.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.gv_Faecher.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.gv_Faecher.Location = new System.Drawing.Point(26, 114);
-            this.gv_Faecher.MultiSelect = false;
-            this.gv_Faecher.Name = "gv_Faecher";
-            this.gv_Faecher.ReadOnly = true;
-            this.gv_Faecher.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.gv_Klassenstufe.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gv_Klassenstufe.EnableHeadersVisualStyles = false;
+            this.gv_Klassenstufe.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.gv_Klassenstufe.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.gv_Klassenstufe.Location = new System.Drawing.Point(26, 82);
+            this.gv_Klassenstufe.MultiSelect = false;
+            this.gv_Klassenstufe.Name = "gv_Klassenstufe";
+            this.gv_Klassenstufe.ReadOnly = true;
+            this.gv_Klassenstufe.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(119)))), ((int)(((byte)(53)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(133)))), ((int)(((byte)(72)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gv_Faecher.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.gv_Faecher.RowHeadersWidth = 5;
-            this.gv_Faecher.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.gv_Faecher.RowTemplate.DividerHeight = 1;
-            this.gv_Faecher.RowTemplate.ReadOnly = true;
-            this.gv_Faecher.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gv_Faecher.ShowCellErrors = false;
-            this.gv_Faecher.ShowCellToolTips = false;
-            this.gv_Faecher.ShowEditingIcon = false;
-            this.gv_Faecher.ShowRowErrors = false;
-            this.gv_Faecher.Size = new System.Drawing.Size(270, 328);
-            this.gv_Faecher.Style = MetroFramework.MetroColorStyle.Orange;
-            this.gv_Faecher.TabIndex = 0;
-            this.gv_Faecher.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Faecher_CellDoubleClick);
-            this.gv_Faecher.SelectionChanged += new System.EventHandler(this.gv_Faecher_SelectionChanged);
-            this.gv_Faecher.EnabledChanged += new System.EventHandler(this.Gv_Faecher_EnabledChanged);
-            this.gv_Faecher.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Faecher_KeyDown);
+            this.gv_Klassenstufe.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.gv_Klassenstufe.RowHeadersWidth = 5;
+            this.gv_Klassenstufe.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.gv_Klassenstufe.RowTemplate.DividerHeight = 1;
+            this.gv_Klassenstufe.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gv_Klassenstufe.ShowCellErrors = false;
+            this.gv_Klassenstufe.ShowCellToolTips = false;
+            this.gv_Klassenstufe.ShowEditingIcon = false;
+            this.gv_Klassenstufe.ShowRowErrors = false;
+            this.gv_Klassenstufe.Size = new System.Drawing.Size(270, 360);
+            this.gv_Klassenstufe.Style = MetroFramework.MetroColorStyle.Orange;
+            this.gv_Klassenstufe.TabIndex = 0;
+            this.gv_Klassenstufe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Gv_Klassenstufe_CellDoubleClick);
+            this.gv_Klassenstufe.SelectionChanged += new System.EventHandler(this.gv_Klassenstufe_SelectionChanged);
+            this.gv_Klassenstufe.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Gv_Klassenstufe_KeyDown);
             // 
             // gv_Buecher
             // 
@@ -162,7 +157,7 @@
             this.gv_Buecher.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(119)))), ((int)(((byte)(53)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(133)))), ((int)(((byte)(72)))));
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
@@ -189,11 +184,9 @@
             // btAbbrechen
             // 
             this.btAbbrechen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAbbrechen.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btAbbrechen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btAbbrechen.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.btAbbrechen.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.btAbbrechen.ForeColor = System.Drawing.Color.White;
             this.btAbbrechen.Location = new System.Drawing.Point(722, 453);
             this.btAbbrechen.Name = "btAbbrechen";
             this.btAbbrechen.Size = new System.Drawing.Size(175, 24);
@@ -201,15 +194,13 @@
             this.btAbbrechen.TabIndex = 6;
             this.btAbbrechen.Text = "Schließen";
             this.btAbbrechen.UseSelectable = true;
-            this.btAbbrechen.Click += new System.EventHandler(this.bt_close_Click);
+            this.btAbbrechen.Click += new System.EventHandler(this.btAbbrechen_Click);
             // 
             // bt_Bearbeiten
             // 
             this.bt_Bearbeiten.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bt_Bearbeiten.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.bt_Bearbeiten.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.bt_Bearbeiten.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_Bearbeiten.ForeColor = System.Drawing.Color.White;
             this.bt_Bearbeiten.Location = new System.Drawing.Point(483, 453);
             this.bt_Bearbeiten.Name = "bt_Bearbeiten";
             this.bt_Bearbeiten.Size = new System.Drawing.Size(175, 24);
@@ -219,16 +210,16 @@
             this.bt_Bearbeiten.UseSelectable = true;
             this.bt_Bearbeiten.Click += new System.EventHandler(this.bt_Bearbeiten_Click);
             // 
-            // lb_titel
+            // metroLabel1
             // 
-            this.lb_titel.AutoSize = true;
-            this.lb_titel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lb_titel.Location = new System.Drawing.Point(23, 60);
-            this.lb_titel.Name = "lb_titel";
-            this.lb_titel.Size = new System.Drawing.Size(82, 19);
-            this.lb_titel.Style = MetroFramework.MetroColorStyle.Orange;
-            this.lb_titel.TabIndex = 68;
-            this.lb_titel.Text = "Fächer (GK):";
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel1.Location = new System.Drawing.Point(23, 60);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(95, 19);
+            this.metroLabel1.Style = MetroFramework.MetroColorStyle.Orange;
+            this.metroLabel1.TabIndex = 69;
+            this.metroLabel1.Text = "Klassenstufen:";
             // 
             // metroLabel2
             // 
@@ -238,7 +229,7 @@
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(135, 19);
             this.metroLabel2.Style = MetroFramework.MetroColorStyle.Orange;
-            this.metroLabel2.TabIndex = 69;
+            this.metroLabel2.TabIndex = 70;
             this.metroLabel2.Text = "zugeordnete Bücher:";
             // 
             // bt_back
@@ -271,45 +262,10 @@
             this.mbt_ImEx.UseSelectable = true;
             this.mbt_ImEx.Click += new System.EventHandler(this.mbt_ImEx_Click);
             // 
-            // msm_buch_fach
+            // styleManagerBookGrade
             // 
-            this.msm_buch_fach.Owner = this;
-            this.msm_buch_fach.Style = MetroFramework.MetroColorStyle.Orange;
-            // 
-            // tb_isbn
-            // 
-            this.tb_isbn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            // 
-            // 
-            // 
-            this.tb_isbn.CustomButton.Image = null;
-            this.tb_isbn.CustomButton.Location = new System.Drawing.Point(178, 1);
-            this.tb_isbn.CustomButton.Name = "";
-            this.tb_isbn.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.tb_isbn.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.tb_isbn.CustomButton.TabIndex = 1;
-            this.tb_isbn.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.tb_isbn.CustomButton.UseSelectable = true;
-            this.tb_isbn.CustomButton.Visible = false;
-            this.tb_isbn.Enabled = false;
-            this.tb_isbn.Lines = new string[0];
-            this.tb_isbn.Location = new System.Drawing.Point(491, 56);
-            this.tb_isbn.MaxLength = 32767;
-            this.tb_isbn.Name = "tb_isbn";
-            this.tb_isbn.PasswordChar = '\0';
-            this.tb_isbn.PromptText = "Suche nach ISBN";
-            this.tb_isbn.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.tb_isbn.SelectedText = "";
-            this.tb_isbn.SelectionLength = 0;
-            this.tb_isbn.SelectionStart = 0;
-            this.tb_isbn.ShortcutsEnabled = true;
-            this.tb_isbn.Size = new System.Drawing.Size(200, 23);
-            this.tb_isbn.TabIndex = 2;
-            this.tb_isbn.UseSelectable = true;
-            this.tb_isbn.WaterMark = "Suche nach ISBN";
-            this.tb_isbn.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.tb_isbn.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.tb_isbn.TextChanged += new System.EventHandler(this.Tb_isbn_TextChanged);
+            this.styleManagerBookGrade.Owner = this;
+            this.styleManagerBookGrade.Style = MetroFramework.MetroColorStyle.Orange;
             // 
             // tb_titel
             // 
@@ -346,113 +302,86 @@
             this.tb_titel.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_titel.TextChanged += new System.EventHandler(this.Tb_titel_TextChanged);
             // 
-            // bt_lk
+            // tb_isbn
             // 
-            this.bt_lk.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.bt_lk.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.bt_lk.Location = new System.Drawing.Point(124, 85);
-            this.bt_lk.Name = "bt_lk";
-            this.bt_lk.Size = new System.Drawing.Size(172, 23);
-            this.bt_lk.TabIndex = 70;
-            this.bt_lk.Text = "Zu Leistungskurs wechseln";
-            this.metroToolTip1.SetToolTip(this.bt_lk, "    Wechseln Sie zwischen Leistungskurs und Grundkurs (Nur für Bücher der Sekunda" +
-        "rstufe II)    ");
-            this.bt_lk.UseSelectable = true;
-            this.bt_lk.Click += new System.EventHandler(this.Bt_lk_Click);
-            // 
-            // tb_fach
-            // 
-            this.tb_fach.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tb_isbn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
             // 
-            this.tb_fach.CustomButton.Image = null;
-            this.tb_fach.CustomButton.Location = new System.Drawing.Point(150, 1);
-            this.tb_fach.CustomButton.Name = "";
-            this.tb_fach.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.tb_fach.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.tb_fach.CustomButton.TabIndex = 1;
-            this.tb_fach.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.tb_fach.CustomButton.UseSelectable = true;
-            this.tb_fach.CustomButton.Visible = false;
-            this.tb_fach.Lines = new string[0];
-            this.tb_fach.Location = new System.Drawing.Point(124, 56);
-            this.tb_fach.MaxLength = 32767;
-            this.tb_fach.Name = "tb_fach";
-            this.tb_fach.PasswordChar = '\0';
-            this.tb_fach.PromptText = "Suche nach Fach (Lang)";
-            this.tb_fach.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.tb_fach.SelectedText = "";
-            this.tb_fach.SelectionLength = 0;
-            this.tb_fach.SelectionStart = 0;
-            this.tb_fach.ShortcutsEnabled = true;
-            this.tb_fach.ShowClearButton = true;
-            this.tb_fach.Size = new System.Drawing.Size(172, 23);
-            this.tb_fach.TabIndex = 2;
-            this.tb_fach.UseSelectable = true;
-            this.tb_fach.WaterMark = "Suche nach Fach (Lang)";
-            this.tb_fach.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.tb_fach.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.tb_fach.TextChanged += new System.EventHandler(this.Tb_fach_TextChanged);
+            this.tb_isbn.CustomButton.Image = null;
+            this.tb_isbn.CustomButton.Location = new System.Drawing.Point(178, 1);
+            this.tb_isbn.CustomButton.Name = "";
+            this.tb_isbn.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.tb_isbn.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.tb_isbn.CustomButton.TabIndex = 1;
+            this.tb_isbn.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.tb_isbn.CustomButton.UseSelectable = true;
+            this.tb_isbn.CustomButton.Visible = false;
+            this.tb_isbn.Enabled = false;
+            this.tb_isbn.Lines = new string[0];
+            this.tb_isbn.Location = new System.Drawing.Point(491, 56);
+            this.tb_isbn.MaxLength = 32767;
+            this.tb_isbn.Name = "tb_isbn";
+            this.tb_isbn.PasswordChar = '\0';
+            this.tb_isbn.PromptText = "Suche nach ISBN";
+            this.tb_isbn.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.tb_isbn.SelectedText = "";
+            this.tb_isbn.SelectionLength = 0;
+            this.tb_isbn.SelectionStart = 0;
+            this.tb_isbn.ShortcutsEnabled = true;
+            this.tb_isbn.Size = new System.Drawing.Size(200, 23);
+            this.tb_isbn.TabIndex = 2;
+            this.tb_isbn.UseSelectable = true;
+            this.tb_isbn.WaterMark = "Suche nach ISBN";
+            this.tb_isbn.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.tb_isbn.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.tb_isbn.TextChanged += new System.EventHandler(this.Tb_isbn_TextChanged);
             // 
-            // metroToolTip1
-            // 
-            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroToolTip1.StyleManager = null;
-            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
-            // 
-            // w_s_buch_fach
+            // w_s_buch_stufe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.btAbbrechen;
             this.ClientSize = new System.Drawing.Size(920, 500);
-            this.Controls.Add(this.bt_lk);
             this.Controls.Add(this.tb_titel);
-            this.Controls.Add(this.tb_fach);
             this.Controls.Add(this.tb_isbn);
             this.Controls.Add(this.mbt_ImEx);
-            this.Controls.Add(this.bt_back);
             this.Controls.Add(this.gv_Buecher);
+            this.Controls.Add(this.gv_Klassenstufe);
+            this.Controls.Add(this.bt_back);
             this.Controls.Add(this.metroLabel2);
-            this.Controls.Add(this.gv_Faecher);
-            this.Controls.Add(this.lb_titel);
+            this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.btAbbrechen);
             this.Controls.Add(this.bt_Bearbeiten);
-            this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(1);
             this.MinimumSize = new System.Drawing.Size(862, 500);
-            this.Name = "w_s_buch_fach";
+            this.Name = "w_s_buch_stufe";
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Orange;
-            this.Text = "Zuordnung der Bücher zu einem Fach";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_buch_fach_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.gv_Faecher)).EndInit();
+            this.Text = "Zuordnung der Bücher zu einer Klassenstufe";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.w_s_buch_stufe_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Klassenstufe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Buecher)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_buch_fach)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerBookGrade)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private MetroFramework.Controls.MetroGrid gv_Faecher;
+        private MetroFramework.Controls.MetroGrid gv_Klassenstufe;
         private MetroFramework.Controls.MetroGrid gv_Buecher;
         private MetroFramework.Controls.MetroButton btAbbrechen;
         private MetroFramework.Controls.MetroButton bt_Bearbeiten;
-        private MetroFramework.Controls.MetroLabel lb_titel;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroButton bt_back;
         private MetroFramework.Controls.MetroButton mbt_ImEx;
-        private MetroFramework.Components.MetroStyleManager msm_buch_fach;
+        private MetroFramework.Components.MetroStyleManager styleManagerBookGrade;
         private MetroFramework.Controls.MetroTextBox tb_titel;
         private MetroFramework.Controls.MetroTextBox tb_isbn;
-        private MetroFramework.Controls.MetroButton bt_lk;
-        private MetroFramework.Controls.MetroTextBox tb_fach;
-        private MetroFramework.Components.MetroToolTip metroToolTip1;
     }
 }

@@ -11,83 +11,63 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_Kunden : MetroFramework.Forms.MetroForm
+    public partial class FormCostumer : MetroFramework.Forms.MetroForm
     {
         SubjectHelper subjectHelper = new SubjectHelper();
         CostumerHelper costumerHelper = new CostumerHelper();
         SchoolClassHelper classHelper = new SchoolClassHelper();
 
-        Color fc = Color.Black;
-        Color bc = Color.White;
         #region Constructor
-        string currentUser;
         bool loaded = false;
         bool guest = false;
         int costumerId = -1;
-        public w_s_Kunden(string userName, int costumerId, MetroFramework.Components.MetroStyleManager msm)
+        public FormCostumer(int costumerId)
         {
             InitializeComponent();
-            this.StyleManager = msm;
-            SetStyle();
-            Benutzer user = new Benutzer(userName);
-            this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-            if (user.Rechteid.Equals("0"))
-            {
-                guest = true;
-                guestMode(guest);
-            }
-            else if (user.Rechteid.Equals("1"))
-            {
-                guest = false;
-                guestMode(guest);
-            }
-            else if (user.Rechteid == "2")
-            {
-                guest = false;
-                guestMode(guest);
-            }
+            LoadTheme();
+            SetPermissions();
+
+            this.Text = Text + AuthInfo.FormInfo();
             this.costumerId = costumerId;
             timer_start.Start();
         }
-        public w_s_Kunden(string userName, MetroFramework.Components.MetroStyleManager msm)
+        public FormCostumer()
         {
-            this.StyleManager = msm;
             InitializeComponent();
-            SetStyle();
-            Benutzer user = new Benutzer(userName);
-            this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-            if (user.Rechteid.Equals("0"))
-            {
-                guest = true;
-                guestMode(guest);
-            }
-            else if (user.Rechteid.Equals("1"))
-            {
-                guest = false;
-                guestMode(guest);
-            }
-            else if (user.Rechteid == "2")
-            {
-                guest = false;
-                guestMode(guest);
-            }
+            LoadTheme();
+            SetPermissions();
+
+            this.Text = Text + AuthInfo.FormInfo();
             timer_start.Start();
         }
         #endregion
-        private void SetStyle()
+        private void LoadTheme()
         {
-            this.StyleManager.Style = MetroColorStyle.Teal;
-            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
+            this.StyleManager = styleManagerCostumer;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.CostumerStyle;
+            cb_klasse.ForeColor = ThemeInfo.ForeColor;
+            cb_klasse.BackColor = ThemeInfo.BackColor;
+        }
+        private void SetPermissions()
+        {
+            if (AuthInfo.CurrentUser.PermissionId == 0)
             {
-                fc = Color.White;
-                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
-                cb_klasse.ForeColor = fc;
-                cb_klasse.BackColor = bc;
+                guest = true;
+                GuestMode(guest);
+            }
+            else if (AuthInfo.CurrentUser.PermissionId == 1)
+            {
+                guest = false;
+                GuestMode(guest);
+            }
+            else if (AuthInfo.CurrentUser.PermissionId == 2)
+            {
+                guest = false;
+                GuestMode(guest);
             }
         }
-        private void guestMode(bool activate)
+        private void GuestMode(bool activate)
         {
             btSubmit.Enabled = !activate;
             mbt_Import.Enabled = !activate;
@@ -164,16 +144,16 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void SetBackground_White()
         {
-            tb_Vorname.BackColor = Color.White;
-            tb_Nachname.BackColor = Color.White;
-            tb_KundenID.BackColor = Color.White;
-            tb_Hausnummer.BackColor = Color.White;
-            tb_Strasse.BackColor = Color.White;
-            tb_Postleitzahl.BackColor = Color.White;
-            tb_Ort.BackColor = Color.White;
-            cb_klasse.BackColor = bc;
-            tb_Mail.BackColor = Color.White;
-            tb_Telefonnummer.BackColor = Color.White;
+            tb_Vorname.BackColor = ThemeInfo.BackColor;
+            tb_Nachname.BackColor = ThemeInfo.BackColor;
+            tb_KundenID.BackColor = ThemeInfo.BackColor;
+            tb_Hausnummer.BackColor = ThemeInfo.BackColor;
+            tb_Strasse.BackColor = ThemeInfo.BackColor;
+            tb_Postleitzahl.BackColor = ThemeInfo.BackColor;
+            tb_Ort.BackColor = ThemeInfo.BackColor;
+            cb_klasse.BackColor = ThemeInfo.BackColor;
+            tb_Mail.BackColor = ThemeInfo.BackColor;
+            tb_Telefonnummer.BackColor = ThemeInfo.BackColor;
         }
 
         bool readOnly = false;
@@ -283,7 +263,7 @@ namespace Bibo_Verwaltung
                 lb_Postleitzahl.Text = "Postleitzahl:";
                 btSubmit.Enabled = false;
             }
-            guestMode(guest);
+            GuestMode(guest);
             if (readOnly)
             {
                 cb_klasse.DataSource = null;
@@ -781,63 +761,63 @@ namespace Bibo_Verwaltung
         }
         private void tb_KundenID_TextChanged(object sender, EventArgs e)
         {
-            tb_KundenID.BackColor = Color.White;
+            tb_KundenID.BackColor = ThemeInfo.BackColor;
             KundenFilter();
         }
 
         private void tb_Vorname_TextChanged(object sender, EventArgs e)
         {
             tb_Vorname.UseCustomBackColor = false;
-            tb_Vorname.BackColor = Color.White;
+            tb_Vorname.BackColor = ThemeInfo.BackColor;
             KundenFilter();
         }
 
         private void tb_Nachname_TextChanged(object sender, EventArgs e)
         {
             tb_Nachname.UseCustomBackColor = false;
-            tb_Nachname.BackColor = Color.White;
+            tb_Nachname.BackColor = ThemeInfo.BackColor;
             KundenFilter();
         }
 
         private void tb_Strasse_TextChanged(object sender, EventArgs e)
         {
-            tb_Strasse.BackColor = Color.White;
+            tb_Strasse.BackColor = ThemeInfo.BackColor;
             KundenFilter();
         }
 
         private void tb_Hausnummer_TextChanged(object sender, EventArgs e)
         {
-            tb_Hausnummer.BackColor = Color.White;
+            tb_Hausnummer.BackColor = ThemeInfo.BackColor;
             KundenFilter();
         }
 
         private void tb_Postleitzahl_TextChanged(object sender, EventArgs e)
         {
-            tb_Postleitzahl.BackColor = Color.White;
+            tb_Postleitzahl.BackColor = ThemeInfo.BackColor;
             KundenFilter();
         }
 
         private void tb_Ort_TextChanged(object sender, EventArgs e)
         {
-            tb_Ort.BackColor = Color.White;
+            tb_Ort.BackColor = ThemeInfo.BackColor;
             KundenFilter();
         }
 
         private void cb_klasse_TextChanged(object sender, EventArgs e)
         {
-            cb_klasse.BackColor = bc;
+            cb_klasse.BackColor = ThemeInfo.BackColor;
             KundenFilter();
         }
 
         private void tb_Mail_TextChanged(object sender, EventArgs e)
         {
-            tb_Mail.BackColor = Color.White;
+            tb_Mail.BackColor = ThemeInfo.BackColor;
             KundenFilter();
         }
 
         private void tb_Telefonnummer_TextChanged(object sender, EventArgs e)
         {
-            tb_Telefonnummer.BackColor = Color.White;
+            tb_Telefonnummer.BackColor = ThemeInfo.BackColor;
             KundenFilter();
         }
 
@@ -855,8 +835,7 @@ namespace Bibo_Verwaltung
 
         private void bt_ImEx_Click(object sender, EventArgs e)
         {
-            w_s_schuelerimport import = new w_s_schuelerimport("t_s_schueler", true, currentUser, this.StyleManager);
-            this.StyleManager.Clone(import);
+            w_s_schuelerimport import = new w_s_schuelerimport("t_s_schueler", true);
             import.ShowDialog(this);
             import.Dispose();
             if (!backgroundWorker1.IsBusy)
@@ -1076,7 +1055,7 @@ namespace Bibo_Verwaltung
                     kundeEntfernenToolStripMenuItem.Enabled = true;
                 }
             }
-            guestMode(guest);
+            GuestMode(guest);
         }
 
         private void bt_cleanup_Click(object sender, EventArgs e)
@@ -1097,8 +1076,7 @@ namespace Bibo_Verwaltung
                         DialogResult drFinished = MetroMessageBox.Show(this, "Die Datenbank wurde erfolgreich von allen Schülern bereinigt. Wollen Sie zum Import wechseln?", "Vorgang erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (drFinished == DialogResult.Yes)
                         {
-                            w_s_schuelerimport import = new w_s_schuelerimport("t_s_schueler", true, currentUser, this.StyleManager);
-                            this.StyleManager.Clone(import);
+                            w_s_schuelerimport import = new w_s_schuelerimport("t_s_schueler", true);
                             this.Hide();
                             import.ShowDialog(this);
                             import.Dispose();
@@ -1270,10 +1248,9 @@ namespace Bibo_Verwaltung
 
         private void Bt_klasse_s_Click(object sender, EventArgs e)
         {
-            w_s_manage Klasse = new w_s_manage(currentUser, "Klasse", this.StyleManager);
-            this.StyleManager.Clone(Klasse);
-            Klasse.ShowDialog(this);
-            Klasse.Dispose();
+            FormAttribute formSchoolClass = new FormAttribute("Klasse");
+            formSchoolClass.ShowDialog(this);
+            formSchoolClass.Dispose();
             classHelper.FillCombobox(ref cb_klasse, 0);
         }
 

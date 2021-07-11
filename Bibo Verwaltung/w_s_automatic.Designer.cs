@@ -56,7 +56,7 @@
             this.dp_RueckDatum = new MetroFramework.Controls.MetroDateTime();
             this.mbt_Suche = new MetroFramework.Controls.MetroButton();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            this.msm_automatic = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.styleManagerAutoBorrow = new MetroFramework.Components.MetroStyleManager(this.components);
             this.p_klasse = new Bibo_Verwaltung.TransparentPanel();
             this.a_cb_Klasse = new Bibo_Verwaltung.AdvancedComboBox();
             this.a_cb_Modus = new Bibo_Verwaltung.AdvancedComboBox();
@@ -64,7 +64,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_Schueler)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_suggested)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_automatic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerAutoBorrow)).BeginInit();
             this.SuspendLayout();
             // 
             // lb_Jahr
@@ -454,8 +454,8 @@
             // 
             // msm_automatic
             // 
-            this.msm_automatic.Owner = this;
-            this.msm_automatic.Style = MetroFramework.MetroColorStyle.Yellow;
+            this.styleManagerAutoBorrow.Owner = this;
+            this.styleManagerAutoBorrow.Style = MetroFramework.MetroColorStyle.Yellow;
             // 
             // p_klasse
             // 
@@ -558,7 +558,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_Schueler)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_suggested)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_automatic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerAutoBorrow)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -584,7 +584,7 @@
         private AdvancedComboBox a_cb_Klasse;
         private MetroFramework.Controls.MetroButton mbt_Suche;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
-        private MetroFramework.Components.MetroStyleManager msm_automatic;
+        private MetroFramework.Components.MetroStyleManager styleManagerAutoBorrow;
         private TransparentPanel p_klasse;
         private TransparentPanel p_modus;
     }

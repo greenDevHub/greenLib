@@ -1,6 +1,6 @@
 ﻿namespace Bibo_Verwaltung
 {
-    partial class w_s_Kunden
+    partial class FormCostumer
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_Kunden));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCostumer));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -73,6 +73,7 @@
             this.lb_geburtsdatum = new MetroFramework.Controls.MetroLabel();
             this.lb_faecher = new MetroFramework.Controls.MetroLabel();
             this.bt_klasse_s = new MetroFramework.Controls.MetroButton();
+            this.cb_klasse = new Bibo_Verwaltung.AdvancedComboBox();
             this.mbt_Import = new MetroFramework.Controls.MetroButton();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.tb_search = new MetroFramework.Controls.MetroTextBox();
@@ -96,11 +97,10 @@
             this.mbt_Export = new MetroFramework.Controls.MetroButton();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.rbSearch = new MetroFramework.Controls.MetroRadioButton();
-            this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.styleManagerCostumer = new MetroFramework.Components.MetroStyleManager(this.components);
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.metroContextMenu1 = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.timer_start = new System.Windows.Forms.Timer(this.components);
-            this.cb_klasse = new Bibo_Verwaltung.AdvancedComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Kunde)).BeginInit();
             this.cm_kunde.SuspendLayout();
             this.metroPanel1.SuspendLayout();
@@ -109,7 +109,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_faecher)).BeginInit();
             this.mtP_Filter.SuspendLayout();
             this.metroPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerCostumer)).BeginInit();
             this.SuspendLayout();
             // 
             // lb_Telefonnummer
@@ -841,6 +841,28 @@
             this.bt_klasse_s.UseSelectable = true;
             this.bt_klasse_s.Click += new System.EventHandler(this.Bt_klasse_s_Click);
             // 
+            // cb_klasse
+            // 
+            this.cb_klasse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_klasse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_klasse.BorderColor = System.Drawing.Color.Gray;
+            this.cb_klasse.DataRowView = true;
+            this.cb_klasse.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cb_klasse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cb_klasse.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cb_klasse.ForeColor = System.Drawing.Color.Black;
+            this.cb_klasse.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_klasse, "Tragen sie den Autor ihres Buches hier ein.");
+            this.cb_klasse.HighlightColor = System.Drawing.Color.LightSeaGreen;
+            this.cb_klasse.ItemHeight = 18;
+            this.cb_klasse.Location = new System.Drawing.Point(113, 248);
+            this.cb_klasse.Name = "cb_klasse";
+            this.helpProvider.SetShowHelp(this.cb_klasse, true);
+            this.cb_klasse.Size = new System.Drawing.Size(216, 24);
+            this.cb_klasse.TabIndex = 13;
+            this.cb_klasse.TextChanged += new System.EventHandler(this.cb_klasse_TextChanged);
+            this.cb_klasse.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cb_klasse_KeyDown);
+            // 
             // mbt_Import
             // 
             this.mbt_Import.FontSize = MetroFramework.MetroButtonSize.Medium;
@@ -1288,10 +1310,10 @@
             this.rbSearch.UseSelectable = true;
             this.rbSearch.CheckedChanged += new System.EventHandler(this.Rb_search_CheckedChanged);
             // 
-            // metroStyleManager1
+            // styleManagerCostumer
             // 
-            this.metroStyleManager1.Owner = null;
-            this.metroStyleManager1.Style = MetroFramework.MetroColorStyle.Teal;
+            this.styleManagerCostumer.Owner = this;
+            this.styleManagerCostumer.Style = MetroFramework.MetroColorStyle.Teal;
             // 
             // metroToolTip1
             // 
@@ -1309,29 +1331,7 @@
             this.timer_start.Interval = 1000;
             this.timer_start.Tick += new System.EventHandler(this.timer_start_Tick);
             // 
-            // cb_klasse
-            // 
-            this.cb_klasse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cb_klasse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cb_klasse.BorderColor = System.Drawing.Color.Gray;
-            this.cb_klasse.DataRowView = true;
-            this.cb_klasse.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cb_klasse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cb_klasse.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_klasse.ForeColor = System.Drawing.Color.Black;
-            this.cb_klasse.FormattingEnabled = true;
-            this.helpProvider.SetHelpString(this.cb_klasse, "Tragen sie den Autor ihres Buches hier ein.");
-            this.cb_klasse.HighlightColor = System.Drawing.Color.LightSeaGreen;
-            this.cb_klasse.ItemHeight = 18;
-            this.cb_klasse.Location = new System.Drawing.Point(113, 248);
-            this.cb_klasse.Name = "cb_klasse";
-            this.helpProvider.SetShowHelp(this.cb_klasse, true);
-            this.cb_klasse.Size = new System.Drawing.Size(216, 24);
-            this.cb_klasse.TabIndex = 13;
-            this.cb_klasse.TextChanged += new System.EventHandler(this.cb_klasse_TextChanged);
-            this.cb_klasse.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cb_klasse_KeyDown);
-            // 
-            // w_s_Kunden
+            // FormCostumer
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -1349,7 +1349,7 @@
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(983, 745);
-            this.Name = "w_s_Kunden";
+            this.Name = "FormCostumer";
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowInTaskbar = false;
             this.Style = MetroFramework.MetroColorStyle.Teal;
@@ -1364,7 +1364,7 @@
             this.mtP_Filter.ResumeLayout(false);
             this.mtP_Filter.PerformLayout();
             this.metroPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerCostumer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1428,7 +1428,7 @@
         private MetroFramework.Controls.MetroRadioButton rbSearch;
         private MetroFramework.Controls.MetroButton bt_klasse_s;
         private AdvancedComboBox cb_klasse;
-        private MetroFramework.Components.MetroStyleManager metroStyleManager1;
+        private MetroFramework.Components.MetroStyleManager styleManagerCostumer;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
         private MetroFramework.Controls.MetroTextBox tb_search;
         private MetroFramework.Controls.MetroContextMenu metroContextMenu1;

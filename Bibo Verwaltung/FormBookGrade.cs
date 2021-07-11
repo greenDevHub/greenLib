@@ -13,60 +13,81 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_buch_fach : MetroFramework.Forms.MetroForm
+    public partial class FormBookGrade : MetroFramework.Forms.MetroForm
     {
-        SubjectHelper subjectHelper = new SubjectHelper();
-
-
-        BuchFach bf = new BuchFach();
+        BuchStufe bs = new BuchStufe();
         private DataTable buecherListe = new DataTable();
         private bool aenderungungen = false;
         string currentUser;
         bool gast = false;
-        public w_s_buch_fach(string userName, MetroStyleManager msm)
+        public FormBookGrade()
         {
             InitializeComponent();
-            msm_buch_fach = msm;
-            this.StyleManager = msm;
-            this.StyleManager.Style = MetroColorStyle.Orange;
-            Benutzer user = new Benutzer(userName);
-            this.currentUser = userName;
-            if (user.Rechteid.Equals("0"))
+            LoadTheme();
+            SetPermissions();
+            this.Text = Text + AuthInfo.FormInfo();
+            IniKlassenstufen();
+            LoadBuecher();
+        }
+        private void LoadTheme()
+        {
+            this.StyleManager = styleManagerBookGrade;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.AssignmentStyle;
+        }
+        private void SetPermissions()
+        {
+            if (AuthInfo.CurrentUser.PermissionId == 0)
             {
                 gast = true;
                 bt_Bearbeiten.Enabled = false;
             }
-            else if (user.Rechteid == "1")
+            else if (AuthInfo.CurrentUser.PermissionId == 1)
             {
                 gast = false;
                 bt_Bearbeiten.Enabled = true;
             }
-            else if (user.Rechteid == "2")
+            else if (AuthInfo.CurrentUser.PermissionId == 2)
             {
                 gast = false;
                 bt_Bearbeiten.Enabled = true;
                 mbt_ImEx.Enabled = true;
             }
-            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-            subjectHelper.FillGrid(ref gv_Faecher);
-            foreach (DataGridViewColumn column in gv_Faecher.Columns) 
-            {
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
         }
-
         #region Fenster-Methoden
         /// <summary>
-        /// Lädt die Zuordnungsübersicht für das gewählte Fach
+        /// Initialisiert die Klassenstufen-GridView
+        /// </summary>
+        private void IniKlassenstufen()
+        {
+            try
+            {
+                gv_Klassenstufe.Columns.Add("Klassenstufe", "Klassenstufen");
+                gv_Klassenstufe.Columns["Klassenstufe"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                for (int i = 1; i <= 13; i++)
+                {
+                    gv_Klassenstufe.Rows.Add("Klassenstufe " + i.ToString());
+                }
+                gv_Klassenstufe.Focus();
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Lädt die Zuordnungsübersicht für die gewählte Klassenstufe
         /// </summary>
         private void LoadBuecher()
         {
             try
             {
                 buecherListe.Rows.Clear();
-                if (gv_Faecher.CurrentRow != null)
+                if (gv_Klassenstufe.CurrentRow != null)
                 {
-                    bf.Show_FachBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString(), lk);
+                    bs.Show_StufenBuecher(ref gv_Buecher, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                }
+                else
+                {
+                    bs.Show_StufenBuecher(ref gv_Buecher, "1");
                 }
             }
             catch
@@ -78,7 +99,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Fügt alle vorhandenen Zuordnungen zur Zuornungs-Liste hinzu
         /// </summary>
-        private void FillBuecherList()
+        private void FillFaecherList()
         {
             try
             {
@@ -93,7 +114,7 @@ namespace Bibo_Verwaltung
                         DataRow relation;
                         string[] buchDetails = new string[1];
 
-                        buchDetails[0] = row.Cells["ISBN"].Value.ToString().Replace("*", "");
+                        buchDetails[0] = row.Cells["ISBN"].Value.ToString().Replace("*","");
 
                         if (buecherListe.Columns.Count != 1)
                         {
@@ -160,7 +181,7 @@ namespace Bibo_Verwaltung
                 }
                 buecherListe.AcceptChanges();
 
-                gridrow.Cells["ISBN"].Value = gridrow.Cells["ISBN"].Value.ToString().Replace("*", "");
+                gridrow.Cells["ISBN"].Value = gridrow.Cells["ISBN"].Value.ToString().Substring(1);
                 gridrow.DefaultCellStyle.BackColor = Color.White;
                 gridrow.DefaultCellStyle.ForeColor = Color.DimGray;
             }
@@ -171,11 +192,12 @@ namespace Bibo_Verwaltung
         }
 
         /// <summary>
-        /// Speichert die Zuordnungsdatendaten eines Faches mit vorhandenen Büchern in der Datenbank 
+        /// Speichert die Zuordnungsdatendaten einer Klassenstufe mit vorhandenen Büchern in der Datenbank 
         /// </summary>
         private void SaveZuordnungen()
         {
-            if (!gast && gv_Faecher.CurrentRow != null)
+
+            if (!gast && gv_Klassenstufe.CurrentRow != null)
             {
                 if (aenderungungen == true)
                 {
@@ -184,7 +206,7 @@ namespace Bibo_Verwaltung
                     {
                         try
                         {
-                            bf.Save_Zuordnung(buecherListe, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString(),lk);
+                            bs.Save_Zuordnung(buecherListe, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
                             aenderungungen = false;
                         }
                         catch
@@ -202,13 +224,13 @@ namespace Bibo_Verwaltung
         {
             if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
             {
-                if (gv_Faecher.CurrentRow != null)
+                if (gv_Klassenstufe.CurrentRow != null)
                 {
                     bt_back.Enabled = true;
                     gv_Buecher.Enabled = true;
-                    gv_Faecher.Enabled = false;
-                    bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString(),lk);
-                    FillBuecherList();
+                    gv_Klassenstufe.Enabled = false;
+                    bs.Show_AllBuecher(ref gv_Buecher, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());                 
+                    FillFaecherList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
             }
@@ -216,17 +238,15 @@ namespace Bibo_Verwaltung
             {
                 bt_back.Enabled = false;
                 gv_Buecher.Enabled = false;
-                gv_Faecher.Enabled = true;
+                gv_Klassenstufe.Enabled = true;
                 SaveZuordnungen();
                 bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
                 LoadBuecher();
-                gv_Faecher.Select();
-                tb_fach.Clear();
-
+                gv_Klassenstufe.Select();
             }
         }
 
-        private void gv_Faecher_SelectionChanged(object sender, EventArgs e)
+        private void gv_Klassenstufe_SelectionChanged(object sender, EventArgs e)
         {
             LoadBuecher();
         }
@@ -247,43 +267,40 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private void w_s_buch_fach_FormClosing(object sender, FormClosingEventArgs e)
+        private void w_s_buch_stufe_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveZuordnungen();
-        }
-        
-        private void bt_close_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        }     
 
         private void bt_back_Click(object sender, EventArgs e)
         {
             bt_back.Enabled = false;
             gv_Buecher.Enabled = false;
-            gv_Faecher.Enabled = true;
+            gv_Klassenstufe.Enabled = true;
             bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
             LoadBuecher();
-            tb_fach.Clear();
         }
         
+        private void btAbbrechen_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         private void mbt_ImEx_Click(object sender, EventArgs e)
         {
-            w_s_selfmade_dialog custom = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export", msm_buch_fach);
-            msm_buch_fach.Clone(custom);
+            w_s_selfmade_dialog custom = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export");
             custom.ShowDialog(this);
             if (custom.DialogResult == DialogResult.Yes)
             {
                 //Import
                 MetroMessageBox.Show(this, "Diese Funktion ist in der aktuellen Version noch nicht verfügbar.", "Noch nicht verfügbar.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
             else if (custom.DialogResult == DialogResult.No)
             {
                 try
                 {
                     ExcelExport export = new ExcelExport();
-                    string[] source = { "t_s_buch_fach" };
+                    string[] source = { "t_s_buch_stufe" };
                     export.ExportAsCSV(source);
                     MetroMessageBox.Show(this, "Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -296,31 +313,18 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        private void Gv_Faecher_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void Gv_Klassenstufe_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
             {
-                if (gv_Faecher.CurrentRow != null)
+                if (gv_Klassenstufe.CurrentRow != null)
                 {
-                    try
-                    {
-                        bt_back.Enabled = true;
-                        gv_Buecher.Enabled = true;
-                        gv_Faecher.Enabled = false;
-                        bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[e.RowIndex].Cells["ID"].Value.ToString(), lk);
-                        FillBuecherList();
-                        bt_Bearbeiten.Text = "Übernehmen";
-                    }
-                    catch
-                    {
-                        bt_back.Enabled = false;
-                        gv_Buecher.Enabled = false;
-                        gv_Faecher.Enabled = true;
-                        bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
-                        LoadBuecher();
-                        tb_fach.Clear();
-                    }
-
+                    bt_back.Enabled = true;
+                    gv_Buecher.Enabled = true;
+                    gv_Klassenstufe.Enabled = false;
+                    bs.Show_AllBuecher(ref gv_Buecher, (e.RowIndex + 1).ToString());
+                    FillFaecherList();
+                    bt_Bearbeiten.Text = "Übernehmen";
                 }
             }
         }
@@ -351,19 +355,19 @@ namespace Bibo_Verwaltung
             SetColor();
         }
 
-        private void Gv_Faecher_KeyDown(object sender, KeyEventArgs e)
+        private void Gv_Klassenstufe_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
                 {
-                    if (gv_Faecher.CurrentRow != null)
+                    if (gv_Klassenstufe.CurrentRow != null)
                     {
                         bt_back.Enabled = true;
                         gv_Buecher.Enabled = true;
-                        gv_Faecher.Enabled = false;
-                        bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.SelectedRows[0].Index].Cells["ID"].Value.ToString(),lk);
-                        FillBuecherList();
+                        gv_Klassenstufe.Enabled = false;
+                        bs.Show_AllBuecher(ref gv_Buecher, (gv_Klassenstufe.SelectedRows[0].Index + 1).ToString());
+                        FillFaecherList();
                         bt_Bearbeiten.Text = "Übernehmen";
                     }
                 }
@@ -410,24 +414,12 @@ namespace Bibo_Verwaltung
         {
             Filter();
         }
-
         private void Filter()
         {
             try
             {
                 (gv_Buecher.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%'", tb_titel.Text, tb_isbn.Text);
                 SetColor();
-            }
-            catch
-            {
-
-            }
-        }
-        private void FilterFach()
-        {
-            try
-            {
-                (gv_Faecher.DataSource as DataTable).DefaultView.RowFilter = string.Format("Langbezeichnung LIKE '%{0}%'", tb_fach.Text);
             }
             catch
             {
@@ -442,40 +434,6 @@ namespace Bibo_Verwaltung
             tb_titel.Text = "";
             tb_isbn.Text = "";
             (gv_Buecher.DataSource as DataTable).DefaultView.RowFilter = null;
-        }
-
-        private void Tb_fach_TextChanged(object sender, EventArgs e)
-        {
-            FilterFach();
-        }
-
-        private void Gv_Faecher_EnabledChanged(object sender, EventArgs e)
-        {
-            tb_fach.Enabled = gv_Faecher.Enabled;
-
-
-            bt_lk.Enabled = gv_Faecher.Enabled;
-
-        }
-        bool lk = false;
-        private void Bt_lk_Click(object sender, EventArgs e)
-        {
-            if(bt_lk.Text.Equals("Zu Leistungskurs wechseln",StringComparison.InvariantCultureIgnoreCase))
-            {
-                //ALLE FÄCHER LEISTUNGSKURS
-                bt_lk.Text = "Zu Grundkurs wechseln";
-                lb_titel.Text = "Fächer (LK):";
-                lk = true;
-            }
-            else
-            {
-                //ALLE FÄCHER GRUNDKURS
-                //STANDARD FALL
-                bt_lk.Text = "Zu Leistungskurs wechseln";
-                lb_titel.Text = "Fächer (GK):";
-                lk = false;
-            }
-            LoadBuecher();
         }
     }
 }

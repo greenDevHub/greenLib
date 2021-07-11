@@ -44,34 +44,15 @@ namespace Bibo_Verwaltung
         #endregion
 
         #region Constructor
-        string currentUser;
         bool guest = false;
-        public Form_Books(string userName, string isbn, MetroFramework.Components.MetroStyleManager msm)
+        public Form_Books(string bookIsbn)
         {
             WebRequest.DefaultWebProxy = null;
             InitializeComponent();
-            msm_buecher = msm;
-            this.StyleManager = msm;
-            SetStyle();
-            Benutzer user = new Benutzer(userName);
-            this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-
-            if (user.Rechteid.Equals("0"))
-            {
-                guest = true;
-                guestMode(guest);
-            }
-            else if (user.Rechteid.Equals("1"))
-            {
-                guest = false;
-                guestMode(guest);
-            }
-            else if (user.Rechteid == "2")
-            {
-                guest = false;
-                guestMode(guest);
-            }
+            LoadTheme();
+            SetPermissions();
+            this.Text = Text + AuthInfo.FormInfo();
+            tb_ISBN.Text = bookIsbn;
             FillComboboxes();
             picBox_Gross.Visible = false;
             gb_zoom.Visible = false;
@@ -79,35 +60,12 @@ namespace Bibo_Verwaltung
             comboBox1.DropDownHeight = 1;
             tb_ISBN.Focus();
         }
-        Color fc = Color.Black;
-        Color bc = Color.White;
-        public Form_Books(string userName, bool bool1, MetroFramework.Components.MetroStyleManager msm)
+        public Form_Books(bool bool1)
         {
             InitializeComponent();
-            msm_buecher = msm;
-            this.StyleManager = msm;
-            SetStyle();
-            Benutzer user = new Benutzer(userName);
-            this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName;
+            LoadTheme();
+            this.Text = Text + AuthInfo.FormInfo();
 
-            if (user.Rechteid.Equals("0"))
-            {
-                guest = true;
-                guestMode(guest);
-            }
-            else if (user.Rechteid.Equals("1"))
-            {
-                guest = false;
-                guestMode(guest);
-            }
-            else if (user.Rechteid == "2")
-            {
-                guest = false;
-                guestMode(guest);
-            }
-
-            //b.FillGrid_Buch(ref Grid_Buch);
             FillComboboxes();
             picBox_Gross.Visible = false;
             gb_zoom.Visible = false;
@@ -118,28 +76,6 @@ namespace Bibo_Verwaltung
 
         }
         #endregion
-
-        private void SetStyle()
-        {
-            this.StyleManager.Style = MetroColorStyle.Blue;
-            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
-            {
-                fc = Color.White;
-                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
-                cb_Autor.ForeColor = fc;
-                cb_Autor.BackColor = bc;
-                cb_Verlag.ForeColor = fc;
-                cb_Verlag.BackColor = bc;
-                cb_Genre.ForeColor = fc;
-                cb_Genre.BackColor = bc;
-                cb_Sprache.ForeColor = fc;
-                cb_Sprache.BackColor = bc;
-                checkedListBox1.ForeColor = fc;
-                checkedListBox1.BackColor = bc;
-                picBox_Gross.BackColor = bc;
-                picBox_Klein.BackColor = bc;
-            }
-        }
         private void guestMode(bool activate)
         {
             btSubmit.Enabled = !activate;
@@ -153,6 +89,44 @@ namespace Bibo_Verwaltung
                 btSubmit.Enabled = false;
                 bt_pic_delete.Enabled = false;
                 bt_picture.Enabled = false;
+            }
+        }
+        private void LoadTheme()
+        {
+            this.StyleManager = styleManagerBooks;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.BookStyle;
+
+            cb_Autor.ForeColor = ThemeInfo.ForeColor;
+            cb_Autor.BackColor = ThemeInfo.BackColor;
+            cb_Verlag.ForeColor = ThemeInfo.ForeColor;
+            cb_Verlag.BackColor = ThemeInfo.BackColor;
+            cb_Genre.ForeColor = ThemeInfo.ForeColor;
+            cb_Genre.BackColor = ThemeInfo.BackColor;
+            cb_Sprache.ForeColor = ThemeInfo.ForeColor;
+            cb_Sprache.BackColor = ThemeInfo.BackColor;
+            checkedListBox1.ForeColor = ThemeInfo.ForeColor;
+            checkedListBox1.BackColor = ThemeInfo.BackColor;
+            picBox_Gross.BackColor = ThemeInfo.BackColor;
+            picBox_Klein.BackColor = ThemeInfo.BackColor;
+        }
+
+        private void SetPermissions()
+        {
+            if (AuthInfo.CurrentUser.PermissionId == 0)
+            {
+                guest = true;
+                guestMode(guest);
+            }
+            else if (AuthInfo.CurrentUser.PermissionId == 1)
+            {
+                guest = false;
+                guestMode(guest);
+            }
+            else if (AuthInfo.CurrentUser.PermissionId == 2)
+            {
+                guest = false;
+                guestMode(guest);
             }
         }
         bool loaded = false;
@@ -218,8 +192,7 @@ namespace Bibo_Verwaltung
         #region click event - add new small entity
         private void bt_publisher_add_click(object sender, EventArgs e)
         {
-            w_s_manage manage = new w_s_manage(currentUser, "Verlag", msm_buecher);
-            msm_buecher.Clone(manage);
+            FormAttribute manage = new FormAttribute("Verlag");
             manage.ShowDialog(this);
             manage.Dispose();
             publisherHelper.FillCombobox(ref cb_Verlag, 0);
@@ -227,8 +200,7 @@ namespace Bibo_Verwaltung
 
         private void bt_author_add_click(object sender, EventArgs e)
         {
-            w_s_manage manage = new w_s_manage(currentUser, "Autor", msm_buecher);
-            msm_buecher.Clone(manage);
+            FormAttribute manage = new FormAttribute("Autor");
             manage.ShowDialog(this);
             manage.Dispose();
             authorHelper.FillCombobox(ref cb_Autor, 0);
@@ -236,8 +208,7 @@ namespace Bibo_Verwaltung
 
         private void bt_genre_add_click(object sender, EventArgs e)
         {
-            w_s_manage manage = new w_s_manage(currentUser, "Genre", msm_buecher);
-            msm_buecher.Clone(manage);
+            FormAttribute manage = new FormAttribute("Genre");
             manage.ShowDialog(this);
             manage.Dispose();
             genreHelper.FillCombobox(ref cb_Genre, 0);
@@ -245,8 +216,7 @@ namespace Bibo_Verwaltung
 
         private void bt_language_add_click(object sender, EventArgs e)
         {
-            w_s_manage manage = new w_s_manage(currentUser, "Sprache", msm_buecher);
-            msm_buecher.Clone(manage);
+            FormAttribute manage = new FormAttribute("Sprache");
             manage.ShowDialog(this);
             manage.Dispose();
             languageHelper.FillCombobox(ref cb_Sprache, 0);
@@ -442,8 +412,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                Form_Copy formCopy = new Form_Copy(currentUser, book.BookIsbn, msm_buecher);
-                msm_buecher.Clone(formCopy);
+                Form_Copy formCopy = new Form_Copy(book.BookIsbn);
                 formCopy.ShowDialog(this);
 
                 formCopy.Dispose();
@@ -627,14 +596,14 @@ namespace Bibo_Verwaltung
             picBox_Klein.Image = null;
             picBox_Klein.ImageLocation = null;
             picBox_Klein.Refresh();
-            tb_ISBN.BackColor = Color.White;
-            tb_Titel.BackColor = Color.White;
-            cb_Autor.BackColor = bc;
-            cb_Verlag.BackColor = bc;
-            cb_Genre.BackColor = bc;
-            cb_Sprache.BackColor = bc;
-            tb_Auflage.BackColor = Color.White;
-            tb_Neupreis.BackColor = Color.White;
+            tb_ISBN.BackColor = ThemeInfo.BackColor;
+            tb_Titel.BackColor = ThemeInfo.BackColor;
+            cb_Autor.BackColor = ThemeInfo.BackColor;
+            cb_Verlag.BackColor = ThemeInfo.BackColor;
+            cb_Genre.BackColor = ThemeInfo.BackColor;
+            cb_Sprache.BackColor = ThemeInfo.BackColor;
+            tb_Auflage.BackColor = ThemeInfo.BackColor;
+            tb_Neupreis.BackColor = ThemeInfo.BackColor;
         }
 
 
@@ -676,47 +645,47 @@ namespace Bibo_Verwaltung
         {
             tb_ISBN.Text = tb_ISBN.Text.Replace(" ", "");
             BuchFilter();
-            tb_ISBN.BackColor = Color.White;
+            tb_ISBN.BackColor = ThemeInfo.BackColor;
         }
 
         private void tb_Titel_TextChanged(object sender, EventArgs e)
         {
             BuchFilter();
-            tb_Titel.BackColor = Color.White;
+            tb_Titel.BackColor = ThemeInfo.BackColor;
             tb_Titel.UseCustomBackColor = false;
         }
         private void tb_Neupreis_TextChanged(object sender, EventArgs e)
         {
-            tb_Neupreis.BackColor = Color.White;
+            tb_Neupreis.BackColor = ThemeInfo.BackColor;
         }
 
         private void tb_Auflage_TextChanged(object sender, EventArgs e)
         {
-            tb_Auflage.BackColor = Color.White;
+            tb_Auflage.BackColor = ThemeInfo.BackColor;
         }
 
         private void cb_Sprache_TextChanged(object sender, EventArgs e)
         {
             BuchFilter();
-            cb_Sprache.BackColor = bc;
+            cb_Sprache.BackColor = ThemeInfo.BackColor;
         }
 
         private void cb_Genre_TextChanged(object sender, EventArgs e)
         {
             BuchFilter();
-            cb_Genre.BackColor = bc;
+            cb_Genre.BackColor = ThemeInfo.BackColor;
         }
 
         private void cb_Verlag_TextChanged(object sender, EventArgs e)
         {
             BuchFilter();
-            cb_Verlag.BackColor = bc;
+            cb_Verlag.BackColor = ThemeInfo.BackColor;
         }
 
         private void cb_Autor_TextChanged(object sender, EventArgs e)
         {
             BuchFilter();
-            cb_Autor.BackColor = bc;
+            cb_Autor.BackColor = ThemeInfo.BackColor;
             if (checkbox_autor.Checked && checkedListBox1.Visible)
             {
                 int index = checkedListBox1.FindString(cb_Autor.Text);
@@ -880,15 +849,15 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void ResetControlBackground()
         {
-            tb_ISBN.BackColor = Color.White;
-            tb_Titel.BackColor = Color.White;
-            cb_Autor.BackColor = bc;
-            cb_Verlag.BackColor = bc;
-            cb_Genre.BackColor = bc;
-            cb_Sprache.BackColor = bc;
-            tb_Auflage.BackColor = Color.White;
-            tb_Neupreis.BackColor = Color.White;
-            dTP_Erscheinungsdatum.BackColor = Color.White;
+            tb_ISBN.BackColor = ThemeInfo.BackColor;
+            tb_Titel.BackColor = ThemeInfo.BackColor;
+            cb_Autor.BackColor = ThemeInfo.BackColor;
+            cb_Verlag.BackColor = ThemeInfo.BackColor;
+            cb_Genre.BackColor = ThemeInfo.BackColor;
+            cb_Sprache.BackColor = ThemeInfo.BackColor;
+            tb_Auflage.BackColor = ThemeInfo.BackColor;
+            tb_Neupreis.BackColor = ThemeInfo.BackColor;
+            dTP_Erscheinungsdatum.BackColor = ThemeInfo.BackColor;
         }
 
         /// <summary>
@@ -994,7 +963,7 @@ namespace Bibo_Verwaltung
             else
             {
                 tb_ISBN.UseCustomBackColor = false;
-                tb_ISBN.BackColor = Color.White;
+                tb_ISBN.BackColor = ThemeInfo.BackColor;
             }
             if (tb_Titel.Text.Equals(""))
             {
@@ -1004,7 +973,7 @@ namespace Bibo_Verwaltung
             else
             {
                 tb_Titel.UseCustomBackColor = false;
-                tb_Titel.BackColor = Color.White;
+                tb_Titel.BackColor = ThemeInfo.BackColor;
             }
 
             if (cb_Autor.Text.Equals(""))
@@ -1013,7 +982,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                cb_Autor.BackColor = bc;
+                cb_Autor.BackColor = ThemeInfo.BackColor;
             }
 
             if (cb_Verlag.Text.Equals(""))
@@ -1022,7 +991,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                cb_Verlag.BackColor = bc;
+                cb_Verlag.BackColor = ThemeInfo.BackColor;
             }
 
             if (cb_Genre.Text.Equals(""))
@@ -1031,7 +1000,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                cb_Genre.BackColor = bc;
+                cb_Genre.BackColor = ThemeInfo.BackColor;
             }
 
             if (cb_Sprache.Text.Equals(""))
@@ -1040,7 +1009,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                cb_Sprache.BackColor = bc;
+                cb_Sprache.BackColor = ThemeInfo.BackColor;
             }
             if (dTP_Erscheinungsdatum.Text.Equals(""))
             {
@@ -1164,7 +1133,7 @@ namespace Bibo_Verwaltung
                 if (!isEmpty(tb_ISBN.Text))
                 {
                     Book book = webHelper.AutoLoadDNB(tb_ISBN.Text);
-                    if(book == null)
+                    if (book == null)
                     {
                         MetroMessageBox.Show(this, "Das Buch konnte nicht geladen werden!", "Fehler beim Laden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
@@ -1183,7 +1152,7 @@ namespace Bibo_Verwaltung
                 {
                     //load new data from web source
                     Book book = webHelper.AutoLoadDNB(tb_ISBN.Text);
-                    if(book == null)
+                    if (book == null)
                     {
                         MetroMessageBox.Show(this, "Das Buch konnte nicht geladen werden!", "Fehler beim Laden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
@@ -1211,7 +1180,7 @@ namespace Bibo_Verwaltung
                 if (gridViewBook.Rows.Count == 0)
                 {
                     Book book = webHelper.AutoLoadDNB(tb_ISBN.Text);
-                    if(book == null)
+                    if (book == null)
                     {
                         MetroMessageBox.Show(this, "Das Buch konnte nicht geladen werden!", "Fehler beim Laden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
@@ -1235,8 +1204,8 @@ namespace Bibo_Verwaltung
                 cb_Autor.AutoCompleteMode = AutoCompleteMode.None;
                 comboBox1.Visible = true;
                 checkedListBox1.BringToFront();
-                comboBox1.BackColor = bc;
-                comboBox1.ForeColor = fc;
+                comboBox1.BackColor = ThemeInfo.BackColor;
+                comboBox1.ForeColor = ThemeInfo.ForeColor;
                 cb_Autor.DataSource = null;
                 cb_Autor.TabStop = false;
                 readOnly = true;
@@ -1399,7 +1368,7 @@ namespace Bibo_Verwaltung
         private void ladenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tb_ISBN.Text = gridViewBook.SelectedRows[0].Cells["ISBN"].Value.ToString();
-            Book book = new Book(tb_ISBN.Text,false);
+            Book book = new Book(tb_ISBN.Text, false);
             if (bool1)
             {
                 LoadBuch(book);
@@ -1432,11 +1401,10 @@ namespace Bibo_Verwaltung
         {
             string isbnAktuell = gridViewBook.SelectedRows[0].Cells["ISBN"].Value.ToString();
             tb_ISBN.Text = isbnAktuell;
-            Form_Copy Buchid = new Form_Copy(currentUser, isbnAktuell, msm_buecher);
-            msm_buecher.Clone(Buchid);
-            Buchid.ShowDialog(this);
+            Form_Copy formCopy = new Form_Copy(isbnAktuell);
+            formCopy.ShowDialog(this);
 
-            Buchid.Dispose();
+            formCopy.Dispose();
             //b.FillGrid_Buch(ref Grid_Buch);
             if (!backgroundWorker1.IsBusy)
             {
@@ -1652,11 +1620,10 @@ namespace Bibo_Verwaltung
         {
             if (gridViewBook.SelectedRows.Count == 1)
             {
-                Form_Copy Buchid = new Form_Copy(currentUser, gridViewBook.SelectedRows[0].Cells[0].Value.ToString(), msm_buecher);
-                msm_buecher.Clone(Buchid);
-                Buchid.ShowDialog(this);
+                Form_Copy formCopy = new Form_Copy(gridViewBook.SelectedRows[0].Cells[0].Value.ToString());
+                formCopy.ShowDialog(this);
 
-                Buchid.Dispose();
+                formCopy.Dispose();
             }
             else
             {
@@ -1702,7 +1669,7 @@ namespace Bibo_Verwaltung
                 {
                     DataGridViewRow row = this.gridViewBook.SelectedRows[0];
                     tb_ISBN.Text = row.Cells[0].Value.ToString();
-                    Book book = new Book(tb_ISBN.Text,false);
+                    Book book = new Book(tb_ISBN.Text, false);
                     if (bool1)
                     {
                         LoadBuch(book);

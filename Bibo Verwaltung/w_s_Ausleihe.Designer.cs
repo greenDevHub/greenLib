@@ -64,7 +64,7 @@
             this.spinner = new MetroFramework.Controls.MetroProgressSpinner();
             this.lb_Kunden = new MetroFramework.Controls.MetroLabel();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            this.msm_ausleihe = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.styleManagerBorrowing = new MetroFramework.Components.MetroStyleManager(this.components);
             this.timer_input = new System.Windows.Forms.Timer(this.components);
             this.worker = new System.ComponentModel.BackgroundWorker();
             this.timer_start = new System.Windows.Forms.Timer(this.components);
@@ -72,7 +72,7 @@
             this.gb_Exemplar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).BeginInit();
             this.metroPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_ausleihe)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerBorrowing)).BeginInit();
             this.SuspendLayout();
             // 
             // dp_RueckDatum
@@ -649,8 +649,8 @@
             // 
             // msm_ausleihe
             // 
-            this.msm_ausleihe.Owner = this;
-            this.msm_ausleihe.Style = MetroFramework.MetroColorStyle.Green;
+            this.styleManagerBorrowing.Owner = this;
+            this.styleManagerBorrowing.Style = MetroFramework.MetroColorStyle.Green;
             // 
             // timer_input
             // 
@@ -696,7 +696,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Buchcover)).EndInit();
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_ausleihe)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerBorrowing)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -733,7 +733,7 @@
         private MetroFramework.Controls.MetroLabel lb_Kunden;
         private MetroFramework.Controls.MetroLink llb_gesListe;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
-        private MetroFramework.Components.MetroStyleManager msm_ausleihe;
+        private MetroFramework.Components.MetroStyleManager styleManagerBorrowing;
         private System.Windows.Forms.Timer timer_input;
         private MetroFramework.Controls.MetroProgressSpinner spinner;
         private System.ComponentModel.BackgroundWorker worker;

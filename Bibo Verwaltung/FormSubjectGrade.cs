@@ -13,44 +13,45 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_klasse_stufe : MetroFramework.Forms.MetroForm
+    public partial class FormSubjectGrade : MetroFramework.Forms.MetroForm
     {
-        GradeHelper gradeHelper = new GradeHelper();
-
-
-        DataTable klassenListe = new DataTable();
-        bool aenderungungen = false;
-        string currentUser;
+        FachStufe fs = new FachStufe();
+        private DataTable faecherListe = new DataTable();
+        private bool aenderungungen = false;
         bool gast = false;
-        #region Constructor
-        public w_s_klasse_stufe(string userName, MetroStyleManager msm)
+        public FormSubjectGrade()
         {
             InitializeComponent();
-            msm_klasse_stufe = msm;
-            this.StyleManager = msm;
-            this.StyleManager.Style = MetroColorStyle.Orange;
-            Benutzer user = new Benutzer(userName);
-            this.currentUser = userName;
-            if (user.Rechteid.Equals("0"))
+            LoadTheme();
+            SetPermissions();
+            this.Text = Text + AuthInfo.FormInfo();
+            IniKlassenstufen();
+        }
+        private void LoadTheme()
+        {
+            this.StyleManager = styleManagerSubjectGrade;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.AssignmentStyle;
+        }
+        private void SetPermissions()
+        {
+            if (AuthInfo.CurrentUser.PermissionId == 0)
             {
                 gast = true;
                 bt_Bearbeiten.Enabled = false;
             }
-            else if (user.Rechteid == "1")
+            else if (AuthInfo.CurrentUser.PermissionId == 1)
             {
                 gast = false;
                 bt_Bearbeiten.Enabled = true;
             }
-            else if (user.Rechteid == "2")
+            else if (AuthInfo.CurrentUser.PermissionId == 2)
             {
                 gast = false;
                 bt_Bearbeiten.Enabled = true;
                 mbt_ImEx.Enabled = true;
             }
-            this.Text = "Zuordnung der Klassen zu einer Klassenstufe - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-            IniKlassenstufen();
         }
-        #endregion
 
         #region Fenster-Methoden
         /// <summary>
@@ -74,18 +75,18 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Lädt die Zuordnungsübersicht für die gewählte Klassenstufe
         /// </summary>
-        private void LoadKlassen()
+        private void LoadFaecher()
         {
             try
             {
-                klassenListe.Rows.Clear();
+                faecherListe.Rows.Clear();
                 if (gv_Klassenstufe.CurrentRow != null)
                 {
-                    gradeHelper.FillGridClassGrade(ref gv_Klassen, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                    fs.Show_StufenFaecher(ref gv_Faecher, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
                 }
                 else
                 {
-                    gradeHelper.FillGridClassGrade(ref gv_Klassen, "1");
+                    fs.Show_StufenFaecher(ref gv_Faecher, "1");
                 }
             }
             catch
@@ -97,101 +98,100 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Fügt alle vorhandenen Zuordnungen zur Zuornungs-Liste hinzu
         /// </summary>
-        private void FillKlassenList()
+        private void FillFaecherList()
         {
             try
             {
-                klassenListe.Rows.Clear();
-                for (int i = 0; i <= gv_Klassen.Rows.Count - 1; i++)
+                faecherListe.Rows.Clear();
+                for (int i = 0; i <= gv_Faecher.Rows.Count - 1; i++)
                 {
-                    DataGridViewRow row = gv_Klassen.Rows[i];
-                    string klasse = row.Cells["k_bezeichnung"].Value.ToString();
+                    DataGridViewRow row = gv_Faecher.Rows[i];
+                    string fach = row.Cells["Kürzel"].Value.ToString();
 
-                    if (klasse.Contains("*"))
+                    if (fach.Contains("*"))
                     {
                         DataRow relation;
-                        string[] klasseDetails = new string[1];
+                        string[] fachDetails = new string[1];
 
-                        klasseDetails[0] = row.Cells["k_id"].Value.ToString();
-                        row.Cells["k_bezeichnung"].Value.ToString().Replace("*", "");
+                        fachDetails[0] = row.Cells["ID"].Value.ToString();
 
-                        if (klassenListe.Columns.Count != 1)
+                        if (faecherListe.Columns.Count != 1)
                         {
-                            klassenListe.Columns.Add();
+                            faecherListe.Columns.Add();
                         }
-                        relation = klassenListe.NewRow();
-                        relation.ItemArray = klasseDetails;
-                        klassenListe.Rows.Add(relation);
+                        relation = faecherListe.NewRow();
+                        relation.ItemArray = fachDetails;
+                        faecherListe.Rows.Add(relation);
                     }
                 }
             }
             catch
             {
-                MetroMessageBox.Show(this, "Beim Anzeigen der bisher zugeordneten Klassen ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Beim Anzeigen der bisher zugeordneten Fächer ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         /// <summary>
         /// Fügt einen Eintrag zur Zuornungs-Liste hinzu
         /// </summary>
-        private void AddToKlassenList()
+        private void AddToFaecherList()
         {
             try
             {
-                DataGridViewRow row = gv_Klassen.CurrentRow;
+                DataGridViewRow row = gv_Faecher.CurrentRow;
                 DataRow relation;
-                string[] klasseDetails = new string[1];
+                string[] exemlarDetails = new string[1];
 
-                klasseDetails[0] = row.Cells["k_id"].Value.ToString();
+                exemlarDetails[0] = row.Cells["ID"].Value.ToString();
 
-                if (klassenListe.Columns.Count != 1)
+                if (faecherListe.Columns.Count != 1)
                 {
-                    klassenListe.Columns.Add();
+                    faecherListe.Columns.Add();
                 }
-                relation = klassenListe.NewRow();
-                relation.ItemArray = klasseDetails;
-                klassenListe.Rows.Add(relation);
+                relation = faecherListe.NewRow();
+                relation.ItemArray = exemlarDetails;
+                faecherListe.Rows.Add(relation);
 
-                row.Cells["k_bezeichnung"].Value = "*" + row.Cells["k_bezeichnung"].Value.ToString();
+                row.Cells["Kürzel"].Value = "*" + row.Cells["Kürzel"].Value.ToString();
                 row.DefaultCellStyle.BackColor = Color.Yellow;
                 row.DefaultCellStyle.ForeColor = Color.Black;
             }
             catch
             {
-                MetroMessageBox.Show(this, "Beim Hinzufügen dieser Klasse zur Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Beim Hinzufügen dieses Faches zur Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         /// <summary>
         /// Entfernt einen Eintrag aus der Zuornungs-Liste
         /// </summary>
-        private void RemoveFromKlassenList()
+        private void RemoveFromFaecherList()
         {
             try
             {
-                DataGridViewRow gridrow = gv_Klassen.CurrentRow;
-                for (int i = klassenListe.Rows.Count - 1; i >= 0; i--)
+                DataGridViewRow gridrow = gv_Faecher.CurrentRow;
+                for (int i = faecherListe.Rows.Count - 1; i >= 0; i--)
                 {
-                    DataRow row = klassenListe.Rows[i];
-                    if (row[0].ToString() == gridrow.Cells["k_id"].Value.ToString())
+                    DataRow row = faecherListe.Rows[i];
+                    if (row[0].ToString() == gridrow.Cells["ID"].Value.ToString())
                     {
                         row.Delete();
                     }
                 }
-                klassenListe.AcceptChanges();
+                faecherListe.AcceptChanges();
 
-                gridrow.Cells["k_bezeichnung"].Value = gridrow.Cells["k_bezeichnung"].Value.ToString().Substring(1);
-                gridrow.DefaultCellStyle.BackColor = default;
-                gridrow.DefaultCellStyle.ForeColor = default;
+                gridrow.Cells["Kürzel"].Value = gridrow.Cells["Kürzel"].Value.ToString().Substring(1);
+                gridrow.DefaultCellStyle.BackColor = Color.White;
+                gridrow.DefaultCellStyle.ForeColor = Color.DimGray;
             }
             catch
             {
-                MetroMessageBox.Show(this, "Beim Entfernen dieser Klasse aus der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Beim Entfernen dieses Faches aus der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         /// <summary>
-        /// Speichert die Zuordnungsdatendaten einer Klassenstufe mit vorhandenen Büchern in der Datenbank 
+        /// Speichert die Zuordnungsdatendaten einer Klassenstufe mit vorhandenen Fächern in der Datenbank 
         /// </summary>
         private void SaveZuordnungen()
         {
@@ -204,7 +204,7 @@ namespace Bibo_Verwaltung
                     {
                         try
                         {
-                            gradeHelper.SaveAssignment(klassenListe, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                            fs.Save_Zuordnung(faecherListe, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
                             aenderungungen = false;
                         }
                         catch
@@ -217,24 +217,6 @@ namespace Bibo_Verwaltung
         }
         #endregion
 
-        private void SetColor()
-        {
-            for(int i = 0; i < gv_Klassen.Rows.Count; i++)
-            {
-                string klassename = gv_Klassen.Rows[i].Cells[1].Value.ToString();
-                if (klassename.Contains("*"))
-                {
-                    gv_Klassen.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
-                    gv_Klassen.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
-                }
-                else
-                {
-                    gv_Klassen.Rows[i].DefaultCellStyle.BackColor = default;
-                    gv_Klassen.Rows[i].DefaultCellStyle.ForeColor = default;
-                }
-            }
-        }
-
         #region Componenten-Aktionen
         private void bt_Bearbeiten_Click(object sender, EventArgs e)
         {
@@ -243,49 +225,47 @@ namespace Bibo_Verwaltung
                 if (gv_Klassenstufe.CurrentRow != null)
                 {
                     bt_back.Enabled = true;
-                    gv_Klassen.Enabled = true;
+                    gv_Faecher.Enabled = true;
                     gv_Klassenstufe.Enabled = false;
-                    gradeHelper.ShowAllSchoolClasses(ref gv_Klassen, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
-                    gv_Klassen.Sort(gv_Klassen.Columns[1], ListSortDirection.Ascending);
-                    SetColor();
-                    FillKlassenList();
+                    fs.Show_AllFaecher(ref gv_Faecher, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                    FillFaecherList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
             }
             else
             {
                 bt_back.Enabled = false;
-                gv_Klassen.Enabled = false;
+                gv_Faecher.Enabled = false;
                 gv_Klassenstufe.Enabled = true;
                 SaveZuordnungen();
                 bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
-                LoadKlassen();
+                LoadFaecher();
                 gv_Klassenstufe.Select();
             }
         }
 
         private void gv_Klassenstufe_SelectionChanged(object sender, EventArgs e)
         {
-            LoadKlassen();
+            LoadFaecher();
         }
 
-        private void gv_Klassen_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void gv_Faecher_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow row = gv_Klassen.CurrentRow;
-            string klasse = row.Cells["k_bezeichnung"].Value.ToString();
-            if (!klasse.Contains("*"))
+            DataGridViewRow row = gv_Faecher.CurrentRow;
+            string fach = row.Cells["Kürzel"].Value.ToString();
+            if (!fach.Contains("*"))
             {
-                AddToKlassenList();
+                AddToFaecherList();
                 aenderungungen = true;
             }
             else
             {
-                RemoveFromKlassenList();
+                RemoveFromFaecherList();
                 aenderungungen = true;
             }
         }
 
-        private void w_s_klassenstufe_FormClosing(object sender, FormClosingEventArgs e)
+        private void w_s_fach_stufe_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveZuordnungen();
         }
@@ -293,33 +273,33 @@ namespace Bibo_Verwaltung
         private void bt_back_Click(object sender, EventArgs e)
         {
             bt_back.Enabled = false;
-            gv_Klassen.Enabled = false;
+            gv_Faecher.Enabled = false;
             gv_Klassenstufe.Enabled = true;
             bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
-            LoadKlassen();
+            LoadFaecher();
         }
 
-        private void bt_Abbrechen_Click(object sender, EventArgs e)
+        private void btAbbrechen_Click(object sender, EventArgs e)
         {
             Close();
         }
+        #endregion
 
         private void mbt_ImEx_Click(object sender, EventArgs e)
         {
-            w_s_selfmade_dialog custom = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export",msm_klasse_stufe);
-            msm_klasse_stufe.Clone(custom);
-            custom.ShowDialog(this);
-            if (custom.DialogResult == DialogResult.Yes)
+            w_s_selfmade_dialog formDialog = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export");
+            formDialog.ShowDialog(this);
+            if (formDialog.DialogResult == DialogResult.Yes)
             {
                 //Import
                 MetroMessageBox.Show(this, "Diese Funktion ist in der aktuellen Version noch nicht verfügbar.", "Noch nicht verfügbar.", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else if (custom.DialogResult == DialogResult.No)
+            else if (formDialog.DialogResult == DialogResult.No)
             {
                 try
                 {
                     ExcelExport export = new ExcelExport();
-                    string[] source = { "t_s_klasse_stufe" };
+                    string[] source = { "t_s_fach_stufe" };
                     export.ExportAsCSV(source);
                     MetroMessageBox.Show(this, "Export erfolgreich abgeschlossen", "Datenbank Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -330,8 +310,6 @@ namespace Bibo_Verwaltung
             }
             else { }
         }
-        #endregion
-
         private void Gv_Klassenstufe_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
@@ -339,38 +317,55 @@ namespace Bibo_Verwaltung
                 if (gv_Klassenstufe.CurrentRow != null)
                 {
                     bt_back.Enabled = true;
-                    gv_Klassen.Enabled = true;
+                    gv_Faecher.Enabled = true;
                     gv_Klassenstufe.Enabled = false;
-                    gradeHelper.ShowAllSchoolClasses(ref gv_Klassen, (e.RowIndex + 1).ToString());
-                    FillKlassenList();
+                    fs.Show_AllFaecher(ref gv_Faecher, (e.RowIndex + 1).ToString());
+                    FillFaecherList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
             }
+            
         }
-
-        private void Gv_Klassen_Sorted(object sender, EventArgs e)
+        private void SetColor()
+        {
+            for (int i = 0; i < gv_Faecher.Rows.Count; i++)
+            {
+                string klassename = gv_Faecher.Rows[i].Cells[1].Value.ToString();
+                if (klassename.Contains("*"))
+                {
+                    gv_Faecher.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
+                    gv_Faecher.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    gv_Faecher.Rows[i].DefaultCellStyle.BackColor = default;
+                    gv_Faecher.Rows[i].DefaultCellStyle.ForeColor = default;
+                }
+            }
+        }
+        private void Gv_Faecher_Sorted(object sender, EventArgs e)
         {
             SetColor();
         }
 
-        private void Gv_Klassen_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void Gv_Faecher_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             SetColor();
         }
 
         private void Gv_Klassenstufe_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
                 {
                     if (gv_Klassenstufe.CurrentRow != null)
                     {
                         bt_back.Enabled = true;
-                        gv_Klassen.Enabled = true;
+                        gv_Faecher.Enabled = true;
                         gv_Klassenstufe.Enabled = false;
-                        gradeHelper.ShowAllSchoolClasses(ref gv_Klassen, (gv_Klassenstufe.SelectedRows[0].Index + 1).ToString());
-                        FillKlassenList();
+                        fs.Show_AllFaecher(ref gv_Faecher, (gv_Klassenstufe.SelectedRows[0].Index+1).ToString());
+                        FillFaecherList();
                         bt_Bearbeiten.Text = "Übernehmen";
                     }
                 }
@@ -381,31 +376,42 @@ namespace Bibo_Verwaltung
                 bt_Bearbeiten.Select();
                 e.SuppressKeyPress = true;
             }
+
         }
 
-        private void Gv_Klassen_KeyDown(object sender, KeyEventArgs e)
+        private void Gv_Faecher_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
-                DataGridViewRow row = gv_Klassen.CurrentRow;
-                string klasse = row.Cells["k_bezeichnung"].Value.ToString();
-                if (!klasse.Contains("*"))
+                DataGridViewRow row = gv_Faecher.CurrentRow;
+                string fach = row.Cells["Kürzel"].Value.ToString();
+                if (!fach.Contains("*"))
                 {
-                    AddToKlassenList();
+                    AddToFaecherList();
                     aenderungungen = true;
                 }
                 else
                 {
-                    RemoveFromKlassenList();
+                    RemoveFromFaecherList();
                     aenderungungen = true;
                 }
                 e.SuppressKeyPress = true;
             }
-            else if (e.KeyCode == Keys.Tab)
+            else if(e.KeyCode == Keys.Tab)
             {
                 bt_back.Select();
                 e.SuppressKeyPress = true;
             }
+            
+        }
+
+        private void Gv_Faecher_EnabledChanged(object sender, EventArgs e)
+        {
+            tb_kurz.Enabled = gv_Faecher.Enabled;
+            tb_lang.Enabled = gv_Faecher.Enabled;
+            tb_lang.Clear();
+            tb_kurz.Clear();
+            (gv_Faecher.DataSource as DataTable).DefaultView.RowFilter = null;
         }
 
         private void Tb_kurz_TextChanged(object sender, EventArgs e)
@@ -413,17 +419,15 @@ namespace Bibo_Verwaltung
             Filter();
         }
 
-        private void Gv_Klassen_EnabledChanged(object sender, EventArgs e)
+        private void Tb_lang_TextChanged(object sender, EventArgs e)
         {
-            tb_klasse.Enabled = gv_Klassen.Enabled;
-            tb_klasse.Clear();
-
+            Filter();
         }
         private void Filter()
         {
             try
             {
-                (gv_Klassen.DataSource as DataTable).DefaultView.RowFilter = string.Format("Klasse LIKE '%{0}%'", tb_klasse.Text);
+                (gv_Faecher.DataSource as DataTable).DefaultView.RowFilter = string.Format("Kürzel LIKE '%{0}%' and Langbezeichnung LIKE '%{1}%'", tb_kurz.Text, tb_lang.Text);
                 SetColor();
             }
             catch

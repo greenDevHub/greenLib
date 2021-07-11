@@ -1,4 +1,5 @@
-﻿using MetroFramework.Components;
+﻿using Bibo_Verwaltung.Helper;
+using MetroFramework.Components;
 using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
@@ -21,20 +22,11 @@ namespace Bibo_Verwaltung.EasterEgg
         Color foodColor = Color.Crimson;
         private List<Circle> Snake = new List<Circle>();
         private Circle food = new Circle();
-        public form_snake(MetroStyleManager msm)
+        public form_snake()
         {
             InitializeComponent();
-            msm_snake = msm;
-            this.StyleManager = msm;
-            this.StyleManager.Style = MetroFramework.MetroColorStyle.Red;
-            if(this.StyleManager.Theme == MetroFramework.MetroThemeStyle.Dark)
-            {
-                fc = Color.White;
-                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
-                headColor = Color.DimGray;
-                bodyColor = Color.Silver;
-                pbCanvas.BackColor = bc;
-            }
+            LoadTheme();
+
             //Default Settings
             new Settings();
             Settings.Speed = int.Parse(lbSpeed.Text);
@@ -46,6 +38,15 @@ namespace Bibo_Verwaltung.EasterEgg
 
             //Start new game
             StartGame();
+        }
+        private void LoadTheme()
+        {
+            this.StyleManager = styleManagerSnake;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.SnakeStyle;
+            headColor = Color.DimGray;
+            bodyColor = Color.Silver;
+            pbCanvas.BackColor = ThemeInfo.BackColor;
         }
 
         /// <summary>

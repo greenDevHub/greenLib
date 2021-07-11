@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using MetroFramework;
+using Bibo_Verwaltung.Helper;
+using MetroFramework.Components;
 
 namespace Bibo_Verwaltung
 {
@@ -18,24 +20,23 @@ namespace Bibo_Verwaltung
         Settings set = new Settings();
         int originalHeight = 0;
         float originalRowHeight = 0;
-        Color fc = Color.Black;
-        Color bc = Color.White;
-        public w_s_einstellungen(MetroFramework.Components.MetroStyleManager msm)
+        public w_s_einstellungen()
         {
             InitializeComponent();
-            this.StyleManager = msm;
-            this.StyleManager.Style = MetroColorStyle.Silver;
-            if(this.StyleManager.Theme == MetroThemeStyle.Dark)
-            {
-                fc = Color.White;
-                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
-                cb_Security.ForeColor = fc;
-                cb_Security.BackColor = bc;
-            }
+            LoadTheme();
+
             this.StartPosition = FormStartPosition.CenterScreen;
             originalHeight = ClientSize.Height;
             originalRowHeight = tLP_Top.RowStyles[3].Height;
             GetSettings();
+        }
+        private void LoadTheme()
+        {
+            this.StyleManager = styleManagerSettings;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.SettingsStyle;
+            cb_Security.ForeColor = ThemeInfo.ForeColor;
+            cb_Security.BackColor = ThemeInfo.BackColor;
         }
 
         private bool File_Exists()
@@ -118,11 +119,11 @@ namespace Bibo_Verwaltung
 
         private void SetWhite()
         {
-            tb_Database.BackColor = Color.White;
-            tb_Server.BackColor = Color.White;
-            tb_Benutzername.BackColor = Color.White;
-            tb_Passwort.BackColor = Color.White;
-            cb_Security.BackColor = bc;
+            tb_Database.BackColor = ThemeInfo.BackColor;
+            tb_Server.BackColor = ThemeInfo.BackColor;
+            tb_Benutzername.BackColor = ThemeInfo.BackColor;
+            tb_Passwort.BackColor = ThemeInfo.BackColor;
+            cb_Security.BackColor = ThemeInfo.BackColor;
         }
         #endregion
 

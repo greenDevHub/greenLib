@@ -98,7 +98,7 @@
             this.btResetList = new MetroFramework.Controls.MetroButton();
             this.groupList = new MetroFramework.Controls.MetroPanel();
             this.toolTipMain = new MetroFramework.Components.MetroToolTip();
-            this.msmOverview = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.styleManagerOverview = new MetroFramework.Components.MetroStyleManager(this.components);
             this.timerKeyInput = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gridOverview)).BeginInit();
             this.contextMenuBorrow.SuspendLayout();
@@ -108,7 +108,7 @@
             this.groupMain.SuspendLayout();
             this.panelLegend.SuspendLayout();
             this.groupList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.msmOverview)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerOverview)).BeginInit();
             this.SuspendLayout();
             // 
             // gridOverview
@@ -1206,10 +1206,10 @@
             this.toolTipMain.Theme = MetroFramework.MetroThemeStyle.Light;
             this.toolTipMain.Popup += new System.Windows.Forms.PopupEventHandler(this.MetroToolTip1_Popup);
             // 
-            // msmOverview
+            // styleManagerOverview
             // 
-            this.msmOverview.Owner = this;
-            this.msmOverview.Style = MetroFramework.MetroColorStyle.Lime;
+            this.styleManagerOverview.Owner = this;
+            this.styleManagerOverview.Style = MetroFramework.MetroColorStyle.Lime;
             // 
             // timerKeyInput
             // 
@@ -1250,7 +1250,7 @@
             this.panelLegend.ResumeLayout(false);
             this.groupList.ResumeLayout(false);
             this.groupList.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.msmOverview)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerOverview)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1321,7 +1321,7 @@
         private System.Windows.Forms.ToolStripMenuItem kundenAnzeigenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buchAnzeigenToolStripMenuItem;
         private MetroFramework.Components.MetroToolTip toolTipMain;
-        private MetroFramework.Components.MetroStyleManager msmOverview;
+        private MetroFramework.Components.MetroStyleManager styleManagerOverview;
         private System.Windows.Forms.Timer timerKeyInput;
         private MetroFramework.Controls.MetroRadioButton radioShowBorrowed;
     }

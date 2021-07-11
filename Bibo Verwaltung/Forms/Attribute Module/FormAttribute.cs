@@ -13,9 +13,8 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_manage : MetroFramework.Forms.MetroForm
+    public partial class FormAttribute : MetroFramework.Forms.MetroForm
     {
-        string currentUser;
         string currentModus;
         float originalHeightLabel = 0;
         float originalHeightText = 0;
@@ -28,59 +27,25 @@ namespace Bibo_Verwaltung
         AuthorHelper authorHelper;
         PublisherHelper publisherHelper;
         SchoolClassHelper schoolClassHelper;
-        Color fc = Color.Black;
-        Color bc = Color.White;
-        public w_s_manage(string userName, string modus, MetroFramework.Components.MetroStyleManager msm)
+        public FormAttribute(string modus)
         {
             InitializeComponent();
-            msm_manage = msm;
-            this.StyleManager = msm;
-            this.StyleManager.Style = MetroColorStyle.Teal;
-            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
-            {
-                fc = Color.White;
-                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
-            }
+            LoadTheme();
 
-            Benutzer user = new Benutzer(userName);
-            this.currentUser = userName;
             this.currentModus = modus;
-            if (user.Rechteid.Equals("0"))
-            {
-                mbt_Import.Enabled = false;
-                mtb_Export.Enabled = false;
-                mbt_Uebernehmen.Enabled = false;
-                gv_manage.ReadOnly = true;
-                gv_manage.AllowUserToDeleteRows = false;
-            }
-            else if (user.Rechteid.Equals("1"))
-            {
-                mbt_Import.Enabled = true;
-                mtb_Export.Enabled = false;
-                mbt_Uebernehmen.Enabled = true;
-                gv_manage.ReadOnly = false;
-                gv_manage.AllowUserToDeleteRows = true;
-            }
-            else if (user.Rechteid == "2")
-            {
-                mbt_Import.Enabled = true;
-                mtb_Export.Enabled = true;
-                mbt_Uebernehmen.Enabled = true;
-                gv_manage.ReadOnly = false;
-                gv_manage.AllowUserToDeleteRows = true;
-            }
+            
             if (currentModus == "Fach")
             {
                 this.StyleManager.Style = MetroColorStyle.Teal;
                 subjectHelper = new SubjectHelper();
                 subjectHelper.FillGrid(ref gv_manage);
-                Text = "Fächer" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+                Text = "Fächer" + AuthInfo.FormInfo();
             }
             else if (currentModus == "Sprache")
             {
                 this.StyleManager.Style = MetroColorStyle.Blue;
 
-                Text = "Sprachen" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+                Text = "Sprachen" + AuthInfo.FormInfo();
                 languageHelper = new LanguageHelper();
                 languageHelper.FillGrid(ref gv_manage);
             }
@@ -88,7 +53,7 @@ namespace Bibo_Verwaltung
             {
                 this.StyleManager.Style = MetroColorStyle.Blue;
 
-                Text = "Autoren" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+                Text = "Autoren" + AuthInfo.FormInfo();
                 authorHelper = new AuthorHelper();
                 authorHelper.FillGrid(ref gv_manage);
             }
@@ -96,7 +61,7 @@ namespace Bibo_Verwaltung
             {
                 this.StyleManager.Style = MetroColorStyle.Blue;
 
-                Text = "Genres" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+                Text = "Genres" + AuthInfo.FormInfo();
                 genreHelper = new GenreHelper();
                 genreHelper.FillGrid(ref gv_manage);
             }
@@ -104,21 +69,21 @@ namespace Bibo_Verwaltung
             {
                 this.StyleManager.Style = MetroColorStyle.Blue;
 
-                Text = "Buchzustände" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+                Text = "Buchzustände" + AuthInfo.FormInfo();
                 conditionHelper = new ConditionHelper();
                 conditionHelper.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Verlag")
             {
                 this.StyleManager.Style = MetroColorStyle.Blue;
-                Text = "Verlage" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+                Text = "Verlage" + AuthInfo.FormInfo();
                 publisherHelper = new PublisherHelper();
                 publisherHelper.FillGrid(ref gv_manage);
             }
             else if (currentModus == "Klasse")
             {
                 this.StyleManager.Style = MetroColorStyle.Teal;
-                Text = "Klasse" + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+                Text = "Klasse" + AuthInfo.FormInfo();
                 schoolClassHelper = new SchoolClassHelper();
                 schoolClassHelper.FillGrid(ref gv_manage);
             }
@@ -126,6 +91,40 @@ namespace Bibo_Verwaltung
             originalHeightText = tLP_Faecher.RowStyles[1].Height;
             tLP_Faecher.RowStyles[0].Height = 0;
             tLP_Faecher.RowStyles[1].Height = 0;
+        }
+       
+        private void LoadTheme()
+        {
+            this.StyleManager = styleManagerAttribute;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.SettingsStyle;
+        }
+        private void SetPermissions()
+        {
+            if (AuthInfo.CurrentUser.PermissionId == 0)
+            {
+                mbt_Import.Enabled = false;
+                mtb_Export.Enabled = false;
+                mbt_Uebernehmen.Enabled = false;
+                gv_manage.ReadOnly = true;
+                gv_manage.AllowUserToDeleteRows = false;
+            }
+            else if (AuthInfo.CurrentUser.PermissionId == 1)
+            {
+                mbt_Import.Enabled = true;
+                mtb_Export.Enabled = false;
+                mbt_Uebernehmen.Enabled = true;
+                gv_manage.ReadOnly = false;
+                gv_manage.AllowUserToDeleteRows = true;
+            }
+            else if (AuthInfo.CurrentUser.PermissionId == 2)
+            {
+                mbt_Import.Enabled = true;
+                mtb_Export.Enabled = true;
+                mbt_Uebernehmen.Enabled = true;
+                gv_manage.ReadOnly = false;
+                gv_manage.AllowUserToDeleteRows = true;
+            }
         }
 
         /// <summary>
@@ -266,8 +265,7 @@ namespace Bibo_Verwaltung
             //Form import;
             if (currentModus == "Fach")
             {
-                w_s_schuelerimport Import = new w_s_schuelerimport("t_s_faecher", true, currentUser, msm_manage);
-                msm_manage.Clone(Import);
+                w_s_schuelerimport Import = new w_s_schuelerimport("t_s_faecher", true);
                 Import.ShowDialog(this);
                 Import.Dispose();
             }
@@ -276,49 +274,6 @@ namespace Bibo_Verwaltung
                 MetroMessageBox.Show(this, "Diese Funktion ist in der aktuellen Version noch nicht verfügbar.", "Noch nicht verfügbar.", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
-            //else if (currentModus == "Sprache")
-            //{
-            //    import = new w_s_importAssist("t_s_sprache", msm_manage);
-            //    msm_manage.Clone(import);
-            //    import.ShowDialog(this);
-            //    import.Dispose();
-            //}
-            //else if (currentModus == "Autor")
-            //{
-            //    import = new w_s_importAssist("t_s_autor", msm_manage);
-            //    msm_manage.Clone(import);
-            //    import.ShowDialog(this);
-            //    import.Dispose();
-            //}
-            //else if (currentModus == "Genre")
-            //{
-            //    import = new w_s_importAssist("t_s_genre", msm_manage);
-            //    msm_manage.Clone(import);
-            //    import.ShowDialog(this);
-            //    import.Dispose();
-            //}
-            //else if (currentModus == "Zustand")
-            //{
-            //    import = new w_s_importAssist("t_s_zustand", msm_manage);
-            //    msm_manage.Clone(import);
-            //    import.ShowDialog(this);
-            //    import.Dispose();
-            //}
-            //else if (currentModus == "Verlag")
-            //{
-            //    import = new w_s_importAssist("t_s_verlag", msm_manage);
-            //    msm_manage.Clone(import);
-            //    import.ShowDialog(this);
-            //    import.Dispose();
-            //}
-            //else if (currentModus == "Klasse")
-            //{
-            //    import = new w_s_importAssist("t_s_klasse", msm_manage);
-            //    msm_manage.Clone(import);
-            //    import.ShowDialog(this);
-            //    import.Dispose();
-            //}
-            //LoadContent();
         }
 
         private void Mtb_Export_Click(object sender, EventArgs e)

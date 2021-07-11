@@ -35,8 +35,8 @@
             this.mT_klassenstufefach = new MetroFramework.Controls.MetroTile();
             this.mT_fachbuch = new MetroFramework.Controls.MetroTile();
             this.mT_Klassenstufen = new MetroFramework.Controls.MetroTile();
-            this.msm_zuordnung = new MetroFramework.Components.MetroStyleManager(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.msm_zuordnung)).BeginInit();
+            this.styleManagerAssignment = new MetroFramework.Components.MetroStyleManager(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerAssignment)).BeginInit();
             this.SuspendLayout();
             // 
             // mT_klassenstufebuch
@@ -50,7 +50,7 @@
             this.mT_klassenstufebuch.TabIndex = 14;
             this.mT_klassenstufebuch.Text = "Klassenstufe - Bücher";
             this.mT_klassenstufebuch.UseSelectable = true;
-            this.mT_klassenstufebuch.Click += new System.EventHandler(this.MT_klassenstufebuch_Click);
+            this.mT_klassenstufebuch.Click += new System.EventHandler(this.btBookGradeClick);
             // 
             // metroTile1
             // 
@@ -63,7 +63,7 @@
             this.metroTile1.TabIndex = 18;
             this.metroTile1.Text = "Zurück";
             this.metroTile1.UseSelectable = true;
-            this.metroTile1.Click += new System.EventHandler(this.MetroTile1_Click);
+            this.metroTile1.Click += new System.EventHandler(this.btCloseClick);
             // 
             // mT_klassenstufefach
             // 
@@ -76,7 +76,7 @@
             this.mT_klassenstufefach.TabIndex = 16;
             this.mT_klassenstufefach.Text = "Klassenstufe - Fächer";
             this.mT_klassenstufefach.UseSelectable = true;
-            this.mT_klassenstufefach.Click += new System.EventHandler(this.MT_klassenstufefach_Click);
+            this.mT_klassenstufefach.Click += new System.EventHandler(this.btSubjectGradeClick);
             // 
             // mT_fachbuch
             // 
@@ -89,7 +89,7 @@
             this.mT_fachbuch.TabIndex = 15;
             this.mT_fachbuch.Text = "Fächer - Bücher";
             this.mT_fachbuch.UseSelectable = true;
-            this.mT_fachbuch.Click += new System.EventHandler(this.MT_fachbuch_Click);
+            this.mT_fachbuch.Click += new System.EventHandler(this.btBookSubjectClick);
             // 
             // mT_Klassenstufen
             // 
@@ -103,12 +103,12 @@
             this.mT_Klassenstufen.TabIndex = 17;
             this.mT_Klassenstufen.Text = "Klassenstufe - Klassen";
             this.mT_Klassenstufen.UseSelectable = true;
-            this.mT_Klassenstufen.Click += new System.EventHandler(this.MT_Klassenstufen_Click);
+            this.mT_Klassenstufen.Click += new System.EventHandler(this.btClassGradeClick);
             // 
-            // msm_zuordnung
+            // styleManagerAssignment
             // 
-            this.msm_zuordnung.Owner = this;
-            this.msm_zuordnung.Style = MetroFramework.MetroColorStyle.White;
+            this.styleManagerAssignment.Owner = this;
+            this.styleManagerAssignment.Style = MetroFramework.MetroColorStyle.White;
             // 
             // w_s_zuordnungen
             // 
@@ -133,7 +133,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Style = MetroFramework.MetroColorStyle.Orange;
             this.Text = "w_s_zuordnungen";
-            ((System.ComponentModel.ISupportInitialize)(this.msm_zuordnung)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerAssignment)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -144,6 +144,6 @@
         private MetroFramework.Controls.MetroTile mT_klassenstufefach;
         private MetroFramework.Controls.MetroTile mT_fachbuch;
         private MetroFramework.Controls.MetroTile mT_Klassenstufen;
-        private MetroFramework.Components.MetroStyleManager msm_zuordnung;
+        private MetroFramework.Components.MetroStyleManager styleManagerAssignment;
     }
 }

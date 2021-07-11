@@ -76,7 +76,7 @@
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
-            this.msm_exemplare = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.styleManagerCopy = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gv_Exemplare)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.gb_BarcodeBox.SuspendLayout();
@@ -85,7 +85,7 @@
             this.metroPanel1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             this.metroPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_exemplare)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerCopy)).BeginInit();
             this.SuspendLayout();
             // 
             // gv_Exemplare
@@ -836,7 +836,7 @@
             // 
             // msm_exemplare
             // 
-            this.msm_exemplare.Owner = this;
+            this.styleManagerCopy.Owner = this;
             // 
             // w_s_exemplare
             // 
@@ -868,7 +868,7 @@
             this.metroPanel1.PerformLayout();
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.msm_exemplare)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerCopy)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -917,7 +917,7 @@
         private MetroFramework.Controls.MetroPanel metroPanel3;
         private MetroFramework.Controls.MetroPanel metroPanel4;
         private MetroFramework.Controls.MetroRadioButton rb_search;
-        private MetroFramework.Components.MetroStyleManager msm_exemplare;
+        private MetroFramework.Components.MetroStyleManager styleManagerCopy;
         private TransparentPanel tpanel;
     }
 }

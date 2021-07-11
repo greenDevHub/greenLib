@@ -29,28 +29,25 @@ namespace Bibo_Verwaltung
 
         #region Constructor
         string currentUser;
-        public w_s_exemplarSuche(string userName, int stufe, MetroStyleManager msm)
+        public w_s_exemplarSuche(int stufe)
         {
             InitializeComponent();
-            msm_exemplarsuche = msm;
-            this.StyleManager = msm;
-            this.StyleManager.Style = MetroColorStyle.Yellow;
-            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
-            {
-                fc = Color.White;
-                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
-                a_cb_Buecher.ForeColor = fc;
-                a_cb_Buecher.BackColor = bc;
-
-            }
-            this.currentUser = userName;
+            LoadTheme();
             this.currentstufe = stufe;
-            Benutzer user = new Benutzer(userName);
-            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
+            this.Text = Text + AuthInfo.FormInfo();
             bookHelper.FillComboboxSearch(ref a_cb_Buecher, CurrentStufe, 0);
             a_cb_Buecher.SelectedIndex = 0;
         }
         #endregion
+        private void LoadTheme()
+        {
+            this.StyleManager = styleManagerCopySearch;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.AutoBorrowStyle;
+            a_cb_Buecher.ForeColor = ThemeInfo.ForeColor;
+            a_cb_Buecher.BackColor = ThemeInfo.BackColor;
+
+        }
 
         private void AdvancedComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {

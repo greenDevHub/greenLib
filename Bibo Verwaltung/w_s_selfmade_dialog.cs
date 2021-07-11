@@ -1,4 +1,5 @@
-﻿using MetroFramework.Components;
+﻿using Bibo_Verwaltung.Helper;
+using MetroFramework.Components;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -13,16 +14,20 @@ namespace Bibo_Verwaltung
 {
     public partial class w_s_selfmade_dialog : MetroFramework.Forms.MetroForm
     {
-        public w_s_selfmade_dialog(string Caption, string Message, string ButtonCapion1, string ButtonCapion2,MetroStyleManager msm)
+        public w_s_selfmade_dialog(string caption, string message, string buttonCaption1, string buttonCaption2)
         {
             InitializeComponent();
-            msm_dialog = msm;
-            this.StyleManager = msm;
-            this.StyleManager.Style = MetroFramework.MetroColorStyle.Silver;
-            Text = Caption;
-            mlb_Message.Text = Message;
-            mbt_Choice1.Text = ButtonCapion1;
-            mbt_Choice2.Text = ButtonCapion2;
+            LoadTheme();
+            Text = caption;
+            mlb_Message.Text = message;
+            mbt_Choice1.Text = buttonCaption1;
+            mbt_Choice2.Text = buttonCaption2;
+        }
+        private void LoadTheme()
+        {
+            this.StyleManager = styleManagerDialog;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.DialogStyle;
         }
     }
 }

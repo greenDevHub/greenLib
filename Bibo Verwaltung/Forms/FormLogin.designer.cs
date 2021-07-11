@@ -1,6 +1,6 @@
 ﻿namespace Bibo_Verwaltung
 {
-    partial class w_s_login
+    partial class FormLogin
     {
         /// <summary>
         /// Required designer variable.
@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_login));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             this.tb_User = new MetroFramework.Controls.MetroTextBox();
             this.tb_Password = new MetroFramework.Controls.MetroTextBox();
             this.bt_Login = new MetroFramework.Controls.MetroButton();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.animationTimer = new System.Windows.Forms.Timer(this.components);
             this.metroProgressBar1 = new MetroFramework.Controls.MetroProgressBar();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            this.msm_login = new MetroFramework.Components.MetroStyleManager(this.components);
             this.metroLink1 = new MetroFramework.Controls.MetroLink();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_login)).BeginInit();
+            this.styleManagerLogin = new MetroFramework.Components.MetroStyleManager(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerLogin)).BeginInit();
             this.SuspendLayout();
             // 
             // tb_User
@@ -114,7 +114,7 @@
             this.tb_Password.WaterMark = "Passwort";
             this.tb_Password.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_Password.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.tb_Password.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_Password_KeyDown);
+            this.tb_Password.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbPasswordKeydown);
             // 
             // bt_Login
             // 
@@ -128,11 +128,11 @@
             this.bt_Login.Text = "Login";
             this.metroToolTip1.SetToolTip(this.bt_Login, "Loggen Sie sich hier mit Ihren eingegebenen Daten ein.");
             this.bt_Login.UseSelectable = true;
-            this.bt_Login.Click += new System.EventHandler(this.bt_Login_Click);
+            this.bt_Login.Click += new System.EventHandler(this.btLoginClicked);
             // 
             // timer1
             // 
-            this.timer1.Interval = 25;
+            this.animationTimer.Interval = 25;
             // 
             // metroProgressBar1
             // 
@@ -153,11 +153,6 @@
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
-            // msm_login
-            // 
-            this.msm_login.Owner = this;
-            this.msm_login.Style = MetroFramework.MetroColorStyle.Black;
-            // 
             // metroLink1
             // 
             this.metroLink1.Image = global::Bibo_Verwaltung.Properties.Resources.Lock32;
@@ -169,7 +164,12 @@
             this.metroLink1.Style = MetroFramework.MetroColorStyle.Black;
             this.metroLink1.TabIndex = 5;
             this.metroLink1.UseSelectable = true;
-            this.metroLink1.Click += new System.EventHandler(this.MetroLink1_Click);
+            this.metroLink1.Click += new System.EventHandler(this.IconCLick);
+            // 
+            // msm_login
+            // 
+            this.styleManagerLogin.Owner = this;
+            this.styleManagerLogin.Style = MetroFramework.MetroColorStyle.Black;
             // 
             // w_s_login
             // 
@@ -189,7 +189,7 @@
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "     Login";
-            ((System.ComponentModel.ISupportInitialize)(this.msm_login)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerLogin)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -199,9 +199,9 @@
         private MetroFramework.Controls.MetroTextBox tb_Password;
         private MetroFramework.Controls.MetroButton bt_Login;
         private MetroFramework.Controls.MetroLink metroLink1;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer animationTimer;
         private MetroFramework.Controls.MetroProgressBar metroProgressBar1;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
-        private MetroFramework.Components.MetroStyleManager msm_login;
+        private MetroFramework.Components.MetroStyleManager styleManagerLogin;
     }
 }

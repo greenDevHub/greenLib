@@ -1,4 +1,5 @@
-﻿using MetroFramework.Components;
+﻿using Bibo_Verwaltung.Helper;
+using MetroFramework.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,13 +15,10 @@ namespace Bibo_Verwaltung
     public partial class w_s_information : MetroFramework.Forms.MetroForm
     {
         string currentUser;
-        public w_s_information(int modus, int id, string userName, MetroStyleManager msm)
+        public w_s_information(int modus, int id)
         {           
             InitializeComponent();
-            msm_info = msm;
-            this.StyleManager = msm;
-            this.StyleManager.Style = MetroFramework.MetroColorStyle.Blue;
-            this.currentUser = userName;
+            LoadTheme();
             if (modus == 1)
             {
                 Text = "Buch-Details";
@@ -81,21 +79,27 @@ namespace Bibo_Verwaltung
             }
         }
 
+        private void LoadTheme()
+        {
+            this.StyleManager = styleManagerInformation;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.MainStyle;
+
+        }
+
         private void bt_kunde_Click(object sender, EventArgs e)
         {
             if (Text == "Buch-Details")
             {
-                Form_Books Buecher = new Form_Books(currentUser, true, msm_info);
-                msm_info.Clone(Buecher);
-                Buecher.ShowDialog(this);
-                Buecher.Dispose();
+                Form_Books formBooks = new Form_Books(true);
+                formBooks.ShowDialog(this);
+                formBooks.Dispose();
             }
             else if (Text == "Kunden-Details")
             {
-                w_s_Kunden Kunden = new w_s_Kunden(currentUser,msm_info);
-                msm_info.Clone(Kunden);
-                Kunden.ShowDialog(this);
-                Kunden.Dispose();
+                FormCostumer formCostumer = new FormCostumer();
+                formCostumer.ShowDialog(this);
+                formCostumer.Dispose();
             }
         }
     }

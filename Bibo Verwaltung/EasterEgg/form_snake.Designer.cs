@@ -35,13 +35,13 @@
             this.lbScore = new MetroFramework.Controls.MetroLabel();
             this.gameTimer = new System.Windows.Forms.Timer(this.components);
             this.lbGameOver = new MetroFramework.Controls.MetroLabel();
-            this.msm_snake = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.styleManagerSnake = new MetroFramework.Components.MetroStyleManager(this.components);
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.lbSpeed = new MetroFramework.Controls.MetroLabel();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbCanvas)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_snake)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerSnake)).BeginInit();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -96,8 +96,8 @@
             // 
             // msm_snake
             // 
-            this.msm_snake.Owner = this;
-            this.msm_snake.Style = MetroFramework.MetroColorStyle.Red;
+            this.styleManagerSnake.Owner = this;
+            this.styleManagerSnake.Style = MetroFramework.MetroColorStyle.Red;
             // 
             // metroLabel2
             // 
@@ -166,7 +166,7 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form_snake_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form_snake_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pbCanvas)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.msm_snake)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.styleManagerSnake)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,7 +179,7 @@
         private MetroFramework.Controls.MetroLabel lbScore;
         private System.Windows.Forms.Timer gameTimer;
         private MetroFramework.Controls.MetroLabel lbGameOver;
-        private MetroFramework.Components.MetroStyleManager msm_snake;
+        private MetroFramework.Components.MetroStyleManager styleManagerSnake;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroLabel lbSpeed;
         private MetroFramework.Controls.MetroLabel metroLabel4;

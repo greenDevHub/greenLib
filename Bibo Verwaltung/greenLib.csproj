@@ -150,6 +150,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthInfo.cs" />
     <Compile Include="Controls\AdvancedCheckedListBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -163,11 +164,13 @@
     <Compile Include="Helper\SchoolClassHelper.cs" />
     <Compile Include="Helper\CostumerHelper.cs" />
     <Compile Include="Helper\SubjectHelper.cs" />
+    <Compile Include="Helper\UserHelper.cs" />
+    <Compile Include="ThemeInfo.cs" />
     <Compile Include="Helper\WebHelper.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Helper\AuthorHelper.cs" />
     <Compile Include="Barcode.cs" />
-    <Compile Include="Benutzer.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="BitmapFilter.cs" />
     <Compile Include="BuchStufe.cs" />
     <Compile Include="Helper\ConditionHelper.cs" />
@@ -185,11 +188,11 @@
     <Compile Include="Models\Copy.cs" />
     <Compile Include="Helper\OverviewHelper.cs" />
     <Compile Include="Extension\Lehrbuchausgabe\BuchFach.cs" />
-    <Compile Include="Extension\Lehrbuchausgabe\w_b_buch_fach.cs">
+    <Compile Include="Extension\Lehrbuchausgabe\FormBookSubject.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Extension\Lehrbuchausgabe\w_b_buch_fach.Designer.cs">
-      <DependentUpon>w_b_buch_fach.cs</DependentUpon>
+    <Compile Include="Extension\Lehrbuchausgabe\FormBookSubject.Designer.cs">
+      <DependentUpon>FormBookSubject.cs</DependentUpon>
     </Compile>
     <Compile Include="Ausleihe.cs" />
     <Compile Include="ExcelExport.cs" />
@@ -231,11 +234,11 @@
     <Compile Include="w_s_autorueck.Designer.cs">
       <DependentUpon>w_s_autorueck.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_buch_stufe.cs">
+    <Compile Include="FormBookGrade.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_buch_stufe.Designer.cs">
-      <DependentUpon>w_s_buch_stufe.cs</DependentUpon>
+    <Compile Include="FormBookGrade.Designer.cs">
+      <DependentUpon>FormBookGrade.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_exemplarSuche.cs">
       <SubType>Form</SubType>
@@ -243,11 +246,11 @@
     <Compile Include="w_s_exemplarSuche.Designer.cs">
       <DependentUpon>w_s_exemplarSuche.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_fach_stufe.cs">
+    <Compile Include="FormSubjectGrade.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_fach_stufe.Designer.cs">
-      <DependentUpon>w_s_fach_stufe.cs</DependentUpon>
+    <Compile Include="FormSubjectGrade.Designer.cs">
+      <DependentUpon>FormSubjectGrade.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_importAssist.cs">
       <SubType>Form</SubType>
@@ -255,23 +258,23 @@
     <Compile Include="w_s_importAssist.Designer.cs">
       <DependentUpon>w_s_importAssist.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_klasse_stufe.cs">
+    <Compile Include="FormClassGrade.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_klasse_stufe.Designer.cs">
-      <DependentUpon>w_s_klasse_stufe.cs</DependentUpon>
+    <Compile Include="FormClassGrade.Designer.cs">
+      <DependentUpon>FormClassGrade.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_login.cs">
+    <Compile Include="Forms\FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_login.designer.cs">
-      <DependentUpon>w_s_login.cs</DependentUpon>
+    <Compile Include="Forms\FormLogin.designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Attribute Module\Form_Attribute.cs">
+    <Compile Include="Forms\Attribute Module\FormAttribute.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Attribute Module\Form_Attribute.Designer.cs">
-      <DependentUpon>Form_Attribute.cs</DependentUpon>
+    <Compile Include="Forms\Attribute Module\FormAttribute.Designer.cs">
+      <DependentUpon>FormAttribute.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_schuelerimport.cs">
       <SubType>Form</SubType>
@@ -326,27 +329,27 @@
       <DependentUpon>w_s_einstellungen.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Costumer.cs" />
-    <Compile Include="Forms\Costumer Module\Form_Costumer.cs">
+    <Compile Include="Forms\Costumer Module\FormCostumer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Costumer Module\Form_Costumer.Designer.cs">
-      <DependentUpon>Form_Costumer.cs</DependentUpon>
+    <Compile Include="Forms\Costumer Module\FormCostumer.Designer.cs">
+      <DependentUpon>FormCostumer.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Language.cs" />
-    <Compile Include="w_s_main.cs">
+    <Compile Include="Forms\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_main.Designer.cs">
-      <DependentUpon>w_s_main.cs</DependentUpon>
+    <Compile Include="Forms\FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Publisher.cs" />
-    <Compile Include="w_s_user.cs">
+    <Compile Include="Forms\FormUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_user.designer.cs">
-      <DependentUpon>w_s_user.cs</DependentUpon>
+    <Compile Include="Forms\FormUser.designer.cs">
+      <DependentUpon>FormUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Books Module\Form_Books.cs">
       <SubType>Form</SubType>
@@ -364,8 +367,8 @@
     <EmbeddedResource Include="EasterEgg\form_snake.resx">
       <DependentUpon>form_snake.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Extension\Lehrbuchausgabe\w_b_buch_fach.resx">
-      <DependentUpon>w_b_buch_fach.cs</DependentUpon>
+    <EmbeddedResource Include="Extension\Lehrbuchausgabe\FormBookSubject.resx">
+      <DependentUpon>FormBookSubject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_Ausleihe.resx">
       <DependentUpon>w_s_ausleihe.cs</DependentUpon>
@@ -376,26 +379,26 @@
     <EmbeddedResource Include="w_s_autorueck.resx">
       <DependentUpon>w_s_autorueck.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_buch_stufe.resx">
-      <DependentUpon>w_s_buch_stufe.cs</DependentUpon>
+    <EmbeddedResource Include="FormBookGrade.resx">
+      <DependentUpon>FormBookGrade.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_exemplarSuche.resx">
       <DependentUpon>w_s_exemplarSuche.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_fach_stufe.resx">
-      <DependentUpon>w_s_fach_stufe.cs</DependentUpon>
+    <EmbeddedResource Include="FormSubjectGrade.resx">
+      <DependentUpon>FormSubjectGrade.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_importAssist.resx">
       <DependentUpon>w_s_importAssist.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_klasse_stufe.resx">
-      <DependentUpon>w_s_klasse_stufe.cs</DependentUpon>
+    <EmbeddedResource Include="FormClassGrade.resx">
+      <DependentUpon>FormClassGrade.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_login.resx">
-      <DependentUpon>w_s_login.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Attribute Module\Form_Attribute.resx">
-      <DependentUpon>Form_Attribute.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Attribute Module\FormAttribute.resx">
+      <DependentUpon>FormAttribute.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_rueckgabe.resx">
       <DependentUpon>w_s_rueckgabe.cs</DependentUpon>
@@ -412,16 +415,16 @@
     <EmbeddedResource Include="w_s_einstellungen.resx">
       <DependentUpon>w_s_einstellungen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Costumer Module\Form_Costumer.resx">
-      <DependentUpon>Form_Costumer.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Costumer Module\FormCostumer.resx">
+      <DependentUpon>FormCostumer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_main.resx">
-      <DependentUpon>w_s_main.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_schuelerimport.resx">
       <DependentUpon>w_s_schuelerimport.cs</DependentUpon>
@@ -429,8 +432,8 @@
     <EmbeddedResource Include="w_s_selfmade_dialog.resx">
       <DependentUpon>w_s_selfmade_dialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_user.resx">
-      <DependentUpon>w_s_user.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormUser.resx">
+      <DependentUpon>FormUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Books Module\Form_Books.resx">
       <DependentUpon>Form_Books.cs</DependentUpon>

@@ -20,19 +20,40 @@ namespace Bibo_Verwaltung
     {
         CostumerHelper costumerHelper = new CostumerHelper();
 
-        #region Constructor
-        string currentUser;
-        public w_s_ausleihe(string userName, MetroFramework.Components.MetroStyleManager msm)
+        #region constructor
+        public w_s_ausleihe()
         {
             HandleCreated += Form1_HandleCreated;
             InitializeComponent();
-            msm_ausleihe = msm;
-            this.StyleManager = msm;
-            this.StyleManager.Style = MetroColorStyle.Green;
-            Benutzer user = new Benutzer(userName);
-            this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-            if (user.Rechteid.Equals("0"))
+            LoadTheme();
+            SetPermissions();
+            this.Text = Text + AuthInfo.FormInfo();
+            timer_start.Start();
+        }
+
+        public w_s_ausleihe(string[] list)
+        {
+            HandleCreated += Form1_HandleCreated;
+            InitializeComponent();
+            LoadTheme();
+            SetPermissions();
+            this.Text = Text + AuthInfo.FormInfo();
+            timer_start.Start();
+            ausleihe.FillAusleihListe(list);
+            ausleihe.SetSlider(ref leihList_Slider, ref tb_listVon, ref tb_listBis);
+
+        }
+        #endregion
+
+        private void LoadTheme()
+        {
+            this.StyleManager = styleManagerBorrowing;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.BorrowingStyle;
+        }
+        private void SetPermissions()
+        {
+            if (AuthInfo.CurrentUser.PermissionId.Equals("0"))
             {
                 bt_AddBuch.Enabled = false;
                 dp_RueckDatum.Enabled = false;
@@ -49,43 +70,9 @@ namespace Bibo_Verwaltung
                 tb_VName.Enabled = true;
                 tb_NName.Enabled = true;
                 bt_Submit.Enabled = true;
-                timer_start.Start();
             }
         }
 
-        public w_s_ausleihe(string userName, string[] list, MetroFramework.Components.MetroStyleManager msm)
-        {
-            HandleCreated += Form1_HandleCreated;
-            InitializeComponent();
-            msm_ausleihe = msm;
-            this.StyleManager = msm;
-            this.StyleManager.Style = MetroColorStyle.Green;
-            Benutzer user = new Benutzer(userName);
-            this.currentUser = userName;
-            this.Text = Text + " - Angemeldet als: " + userName + " (" + user.Rechte + ")";
-            if (user.Rechteid.Equals("0"))
-            {
-                bt_AddBuch.Enabled = false;
-                dp_RueckDatum.Enabled = false;
-                bt_NeuKunde.Enabled = false;
-                tb_VName.Enabled = false;
-                tb_NName.Enabled = false;
-                bt_Submit.Enabled = false;
-            }
-            else
-            {
-                bt_AddBuch.Enabled = true;
-                dp_RueckDatum.Enabled = true;
-                bt_NeuKunde.Enabled = true;
-                tb_VName.Enabled = true;
-                tb_NName.Enabled = true;
-                bt_Submit.Enabled = true;
-                timer_start.Start();
-                ausleihe.FillAusleihListe(list);
-                ausleihe.SetSlider(ref leihList_Slider, ref tb_listVon, ref tb_listBis);
-            }
-        }
-        #endregion
         Ausleihe ausleihe = new Ausleihe();
 
         #region Fenster-Methoden
@@ -121,7 +108,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void Reset_Window()
         {
-            if (new Benutzer(currentUser).Rechteid.Equals("0"))
+            if (AuthInfo.CurrentUser.PermissionId.Equals("0"))
             {
                 llb_BuchTitel.Enabled = false;
                 llb_BuchTitel.Text = "keine Treffer";
@@ -393,8 +380,7 @@ namespace Bibo_Verwaltung
 
         private void bt_NeuKunde_Click(object sender, EventArgs e)
         {
-            w_s_Kunden Kunden = new w_s_Kunden(currentUser,msm_ausleihe);
-            msm_ausleihe.Clone(Kunden);
+            FormCostumer Kunden = new FormCostumer();
             Kunden.ShowDialog(this);
             Kunden.Dispose();
             if (!worker.IsBusy)
@@ -439,7 +425,7 @@ namespace Bibo_Verwaltung
 
         private void tb_BuchCode_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!new Benutzer(currentUser).Rechteid.Equals("0"))
+            if (!AuthInfo.CurrentUser.PermissionId.Equals("0"))
             {
                 if (e.KeyChar == (char)13)
                 {
@@ -480,10 +466,9 @@ namespace Bibo_Verwaltung
 
         private void llb_BuchTitel_Click(object sender, EventArgs e)
         {
-            w_s_information Info = new w_s_information(1, ausleihe.ExemplarID, currentUser,msm_ausleihe);
-            msm_ausleihe.Clone(Info);
-            Info.ShowDialog();
-            Info.Dispose();
+            w_s_information formBookInformation = new w_s_information(1, ausleihe.ExemplarID);
+            formBookInformation.ShowDialog();
+            formBookInformation.Dispose();
         }
 
         private void llb_gesListe_Click(object sender, EventArgs e)
