@@ -1,6 +1,6 @@
 ﻿namespace Bibo_Verwaltung
 {
-    partial class w_s_ausleihe
+    partial class FormBorrow
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_ausleihe));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBorrow));
             this.dp_RueckDatum = new MetroFramework.Controls.MetroDateTime();
             this.lb_BuchStatus = new MetroFramework.Controls.MetroLabel();
             this.lb_BuchZustand = new MetroFramework.Controls.MetroLabel();

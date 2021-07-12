@@ -217,7 +217,7 @@ namespace Bibo_Verwaltung
         {
             if (leihListe.Count != 0)
             {
-                w_s_ausleihe formBorrowing = new w_s_ausleihe(leihListe.ToArray());
+                FormBorrow formBorrowing = new FormBorrow(leihListe.ToArray());
                 loadEnabled = false;
                 formBorrowing.ShowDialog(this);
                 loadEnabled = true;
@@ -232,7 +232,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                w_s_ausleihe formBorrowing = new w_s_ausleihe();
+                FormBorrow formBorrowing = new FormBorrow();
                 loadEnabled = false;
                 formBorrowing.ShowDialog(this);
                 loadEnabled = true;
@@ -535,7 +535,7 @@ namespace Bibo_Verwaltung
         {
             string[] borrow = new string[1];
             borrow[0]= gridOverview.SelectedRows[0].Cells["ExemplarID"].Value.ToString();
-            w_s_ausleihe formBorrowing = new w_s_ausleihe(borrow);
+            FormBorrow formBorrowing = new FormBorrow(borrow);
             loadEnabled = false;
             formBorrowing.ShowDialog(this);
             loadEnabled = true;
@@ -814,7 +814,7 @@ namespace Bibo_Verwaltung
         private void LeihlisteAusleihenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string[] borrow = leihListe.ToArray();
-            w_s_ausleihe formBorrowing = new w_s_ausleihe(borrow);
+            FormBorrow formBorrowing = new FormBorrow(borrow);
             loadEnabled = false;
             formBorrowing.ShowDialog(this);
             loadEnabled = true;
@@ -832,7 +832,7 @@ namespace Bibo_Verwaltung
         {
             string[] rueck = new string[1];
             rueck[0] = gridOverview.SelectedRows[0].Cells["ExemplarID"].Value.ToString();
-            w_s_rueckgabe formReturn = new w_s_rueckgabe(rueck);
+            FormReturn formReturn = new FormReturn(rueck);
             loadEnabled = false;
             formReturn.ShowDialog(this);
             loadEnabled = true;
@@ -847,7 +847,7 @@ namespace Bibo_Verwaltung
         {
             if (rueckListe.Count != 0)
             {
-                w_s_rueckgabe formReturn = new w_s_rueckgabe(rueckListe.ToArray());
+                FormReturn formReturn = new FormReturn(rueckListe.ToArray());
                 styleManagerOverview.Clone(formReturn);
                 loadEnabled = false;
                 formReturn.ShowDialog(this);
@@ -863,7 +863,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                w_s_rueckgabe formReturn = new w_s_rueckgabe();
+                FormReturn formReturn = new FormReturn();
                 loadEnabled = false;
                 formReturn.ShowDialog(this);
                 loadEnabled = true;
@@ -943,7 +943,7 @@ namespace Bibo_Verwaltung
 
         private void ZurueckgebenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            w_s_rueckgabe formReturn = new w_s_rueckgabe(rueckListe.ToArray());
+            FormReturn formReturn = new FormReturn(rueckListe.ToArray());
             loadEnabled = false;
             formReturn.ShowDialog(this);
             loadEnabled = true;

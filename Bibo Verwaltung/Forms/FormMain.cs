@@ -185,7 +185,7 @@ namespace Bibo_Verwaltung
         private void btBorrowingClick(object sender, EventArgs e)
         {
             if (!IsConnected()) return;
-            w_s_ausleihe formBorrowing = new w_s_ausleihe();
+            FormBorrow formBorrowing = new FormBorrow();
             formBorrowing.ShowDialog(this);
             formBorrowing.Dispose();
         }
@@ -193,7 +193,7 @@ namespace Bibo_Verwaltung
         private void btReturnClick(object sender, EventArgs e)
         {
             if (!IsConnected()) return;
-            w_s_rueckgabe formReturn = new w_s_rueckgabe();
+            FormReturn formReturn = new FormReturn();
             formReturn.ShowDialog(this);
             formReturn.Dispose();
         }

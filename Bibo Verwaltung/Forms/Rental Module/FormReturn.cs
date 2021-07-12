@@ -15,18 +15,18 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_rueckgabe : MetroFramework.Forms.MetroForm
+    public partial class FormReturn : MetroFramework.Forms.MetroForm
     {
         #region Constructor
         ConditionHelper conditionHelper = new ConditionHelper();
-        public w_s_rueckgabe()
+        public FormReturn()
         {
             InitializeComponent();
             LoadTheme();
             SetPermissions();
             this.Text = Text + AuthInfo.FormInfo();
         }
-        public w_s_rueckgabe(string[] list)
+        public FormReturn(string[] list)
         {
             InitializeComponent();
             LoadTheme();

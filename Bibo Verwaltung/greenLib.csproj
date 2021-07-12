@@ -187,11 +187,11 @@
     <Compile Include="EasterEgg\Settings.cs" />
     <Compile Include="Models\Copy.cs" />
     <Compile Include="Helper\OverviewHelper.cs" />
-    <Compile Include="Extension\Lehrbuchausgabe\BuchFach.cs" />
-    <Compile Include="Extension\Lehrbuchausgabe\FormBookSubject.cs">
+    <Compile Include="BuchFach.cs" />
+    <Compile Include="Forms\Assignments\FormBookSubject.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Extension\Lehrbuchausgabe\FormBookSubject.Designer.cs">
+    <Compile Include="Forms\Assignments\FormBookSubject.Designer.cs">
       <DependentUpon>FormBookSubject.cs</DependentUpon>
     </Compile>
     <Compile Include="BorrowHelper.cs" />
@@ -216,11 +216,11 @@
     <Compile Include="TransparentPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="w_s_ausleihe.cs">
+    <Compile Include="Forms\Rental Module\FormBorrow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_ausleihe.Designer.cs">
-      <DependentUpon>w_s_ausleihe.cs</DependentUpon>
+    <Compile Include="Forms\Rental Module\FormBorrow.Designer.cs">
+      <DependentUpon>FormBorrow.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_automatic.cs">
       <SubType>Form</SubType>
@@ -234,10 +234,10 @@
     <Compile Include="w_s_autorueck.Designer.cs">
       <DependentUpon>w_s_autorueck.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormBookGrade.cs">
+    <Compile Include="Forms\Assignments\FormBookGrade.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormBookGrade.Designer.cs">
+    <Compile Include="Forms\Assignments\FormBookGrade.Designer.cs">
       <DependentUpon>FormBookGrade.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_exemplarSuche.cs">
@@ -246,10 +246,10 @@
     <Compile Include="w_s_exemplarSuche.Designer.cs">
       <DependentUpon>w_s_exemplarSuche.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormSubjectGrade.cs">
+    <Compile Include="Forms\Assignments\FormSubjectGrade.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormSubjectGrade.Designer.cs">
+    <Compile Include="Forms\Assignments\FormSubjectGrade.Designer.cs">
       <DependentUpon>FormSubjectGrade.cs</DependentUpon>
     </Compile>
     <Compile Include="w_s_importAssist.cs">
@@ -258,10 +258,10 @@
     <Compile Include="w_s_importAssist.Designer.cs">
       <DependentUpon>w_s_importAssist.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormClassGrade.cs">
+    <Compile Include="Forms\Assignments\FormClassGrade.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormClassGrade.Designer.cs">
+    <Compile Include="Forms\Assignments\FormClassGrade.Designer.cs">
       <DependentUpon>FormClassGrade.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormLogin.cs">
@@ -303,11 +303,11 @@
     <Compile Include="w_s_information.Designer.cs">
       <DependentUpon>w_s_information.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_rueckgabe.cs">
+    <Compile Include="Forms\Rental Module\FormReturn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_rueckgabe.Designer.cs">
-      <DependentUpon>w_s_rueckgabe.cs</DependentUpon>
+    <Compile Include="Forms\Rental Module\FormReturn.Designer.cs">
+      <DependentUpon>FormReturn.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Forms\Books Module\Form_Copy.cs">
@@ -367,11 +367,11 @@
     <EmbeddedResource Include="EasterEgg\form_snake.resx">
       <DependentUpon>form_snake.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Extension\Lehrbuchausgabe\FormBookSubject.resx">
+    <EmbeddedResource Include="Forms\Assignments\FormBookSubject.resx">
       <DependentUpon>FormBookSubject.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_Ausleihe.resx">
-      <DependentUpon>w_s_ausleihe.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Rental Module\FormBorrow.resx">
+      <DependentUpon>FormBorrow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_automatic.resx">
       <DependentUpon>w_s_automatic.cs</DependentUpon>
@@ -379,19 +379,19 @@
     <EmbeddedResource Include="w_s_autorueck.resx">
       <DependentUpon>w_s_autorueck.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormBookGrade.resx">
+    <EmbeddedResource Include="Forms\Assignments\FormBookGrade.resx">
       <DependentUpon>FormBookGrade.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_exemplarSuche.resx">
       <DependentUpon>w_s_exemplarSuche.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormSubjectGrade.resx">
+    <EmbeddedResource Include="Forms\Assignments\FormSubjectGrade.resx">
       <DependentUpon>FormSubjectGrade.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_importAssist.resx">
       <DependentUpon>w_s_importAssist.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormClassGrade.resx">
+    <EmbeddedResource Include="Forms\Assignments\FormClassGrade.resx">
       <DependentUpon>FormClassGrade.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLogin.resx">
@@ -400,8 +400,8 @@
     <EmbeddedResource Include="Forms\Attribute Module\FormAttribute.resx">
       <DependentUpon>FormAttribute.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_rueckgabe.resx">
-      <DependentUpon>w_s_rueckgabe.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Rental Module\FormReturn.resx">
+      <DependentUpon>FormReturn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_information.resx">
       <DependentUpon>w_s_information.cs</DependentUpon>

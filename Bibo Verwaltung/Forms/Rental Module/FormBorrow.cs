@@ -16,13 +16,13 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_ausleihe : MetroFramework.Forms.MetroForm
+    public partial class FormBorrow : MetroFramework.Forms.MetroForm
     {
         CostumerHelper costumerHelper = new CostumerHelper();
         BorrowHelper borrowHelper = new BorrowHelper();
 
         #region constructor
-        public w_s_ausleihe()
+        public FormBorrow()
         {
             HandleCreated += Form1_HandleCreated;
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace Bibo_Verwaltung
             timer_start.Start();
         }
 
-        public w_s_ausleihe(string[] list)
+        public FormBorrow(string[] list)
         {
             HandleCreated += Form1_HandleCreated;
             InitializeComponent();
