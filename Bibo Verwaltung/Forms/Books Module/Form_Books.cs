@@ -298,7 +298,7 @@ namespace Bibo_Verwaltung
             else
             {
                 ImageConverter converter = new ImageConverter();
-                book.BookImage = (byte[])converter.ConvertTo(picBox_Klein.Image, typeof(byte[]));
+                book.BookImage = picBox_Klein.Image;
             }
 
             //submit changes
@@ -367,7 +367,7 @@ namespace Bibo_Verwaltung
             else
             {
                 ImageConverter converter = new ImageConverter();
-                book.BookImage = (byte[])converter.ConvertTo(picBox_Klein.Image, typeof(byte[]));
+                book.BookImage = picBox_Klein.Image;
             }
             book.Add();
 
@@ -922,8 +922,7 @@ namespace Bibo_Verwaltung
             dTP_Erscheinungsdatum.Value = book.BookDatePublication;
             if (book.BookImage != null)
             {
-                MemoryStream mem = new MemoryStream(book.BookImage);
-                picBox_Klein.Image = Image.FromStream(mem);
+                picBox_Klein.Image = book.BookImage;
             }
             else
             {
@@ -1042,8 +1041,7 @@ namespace Bibo_Verwaltung
                 "Automatisch Laden?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                //imgLocation = webHelper.GetPictureNeu();
-                picBox_Klein.ImageLocation = imgLocation;
+                picBox_Klein.Image = webHelper.GetPictureNeu(tb_ISBN.Text);
             }
             else if (dialogResult == DialogResult.No)
             {
@@ -1059,9 +1057,8 @@ namespace Bibo_Verwaltung
 
         private void bt_pic_add_Click(object sender, EventArgs e)
         {
-            location = picBox_Klein.ImageLocation;
-            picBox_Klein.ImageLocation = null;
-            picBox_Gross.ImageLocation = null;
+            picBox_Klein.Image = null;
+            picBox_Gross.Image = null;
         }
 
         private void bt_Excel_Click(object sender, EventArgs e)

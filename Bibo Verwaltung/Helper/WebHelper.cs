@@ -1,6 +1,9 @@
 ﻿using MetroFramework;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -347,7 +350,7 @@ namespace Bibo_Verwaltung.Helper
                 return str;
             }
         }
-        private Byte[] GetPictureNeu(string isbn)
+        public Image GetPictureNeu(string isbn)
         {
 
             string bildURL = $"https://portal.dnb.de/opac/mvb/cover?isbn={isbn}";
@@ -357,8 +360,31 @@ namespace Bibo_Verwaltung.Helper
             client.Proxy = WebRequest.DefaultWebProxy;
             client.Credentials = CredentialCache.DefaultCredentials;
             client.Proxy.Credentials = CredentialCache.DefaultCredentials;
-            client.DownloadFile(bildURL, fileURL);
-            return client.DownloadData(bildURL);
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            byte[] imageData = client.DownloadData(bildURL);
+            Image image;
+            using (var ms = new MemoryStream(imageData))
+            {
+                image =  Image.FromStream(ms);
+            }
+            image = ScaleImage(image, 600, 600);
+            return image;
+        }
+        private Image ScaleImage(Image image, int maxWidth, int maxHeight)
+        {
+            var ratioX = (double)maxWidth / image.Width;
+            var ratioY = (double)maxHeight / image.Height;
+            var ratio = Math.Min(ratioX, ratioY);
+
+            var newWidth = (int)(image.Width * ratio);
+            var newHeight = (int)(image.Height * ratio);
+
+            var newImage = new Bitmap(newWidth, newHeight);
+
+            using (var graphics = Graphics.FromImage(newImage))
+                graphics.DrawImage(image, 0, 0, newWidth, newHeight);
+
+            return newImage;
         }
 
         /// <summary>

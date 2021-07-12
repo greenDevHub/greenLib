@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.IO;
 using MetroFramework.Controls;
 using MetroFramework;
+using System.Drawing.Imaging;
 
 namespace Bibo_Verwaltung
 {
@@ -72,11 +73,11 @@ namespace Bibo_Verwaltung
         /// </summary>
         public decimal BookPrice { get { return bookPrice; } set { bookPrice = value; } }
 
-        byte[] bookImage;
+        Image bookImage;
         /// <summary>
         /// get/set the image of a book
         /// </summary>
-        public byte[] BookImage { get { return bookImage; } set { bookImage = value; } }
+        public Image BookImage { get { return bookImage; } set { bookImage = value; } }
 
         bool bookActivated;
         /// <summary>
@@ -84,12 +85,9 @@ namespace Bibo_Verwaltung
         /// </summary>
         public bool BookActivated { get { return bookActivated; } set { bookActivated = value; } }
 
-        private List<Copy> bookCopies = new List<Copy>();
-        /// <summary>
-        /// get/set the copies of a book
-        /// </summary>
-        public List<Copy> BookCopies { get { return bookCopies; } set { bookCopies = value; } }
         #endregion
+
+        CopyHelper copyHelper = new CopyHelper();
 
         #region constructor
         /// <summary>
@@ -137,7 +135,6 @@ namespace Bibo_Verwaltung
         private void LoadBook()
         {
             LoadBookAuthors();
-            LoadBookCopies();
             CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "SELECT *, isnull(buch_erscheinungsdatum, '01.01.1990') as 'verified_erscheinungsdatum' " +
@@ -156,7 +153,10 @@ namespace Bibo_Verwaltung
                 BookEdition = dr["buch_auflage"].ToString();
                 if (dr["buch_image"] != null && dr["buch_image"].ToString() != "")
                 {
-                    BookImage = (Byte[])(dr["buch_image"]);
+                    using (var ms = new MemoryStream((byte[])(dr["buch_image"])))
+                    {
+                        BookImage = Image.FromStream(ms);
+                    }
                 }
                 BookPrice = Convert.ToDecimal(dr["buch_neupreis"].ToString().Replace(".", ","));
                 bookActivated = dr["buch_activated"].ToString().Equals("1");
@@ -164,7 +164,7 @@ namespace Bibo_Verwaltung
             dr.Close();
             con.Close();
         }
-       
+
         /// <summary>
         /// loads all the authors of a book
         /// </summary>
@@ -184,25 +184,6 @@ namespace Bibo_Verwaltung
         }
 
         /// <summary>
-        /// loads all the copies of a book
-        /// </summary>
-        private void LoadBookCopies()
-        {
-            BookCopies.Clear();
-            CustomSqlConnection con = new CustomSqlConnection();
-            if (con.ConnectError()) return;
-            string command = "SELECT * FROM [dbo].[t_s_buchid] WHERE  bu_isbn = @0";
-            SqlDataReader dr = con.ExcecuteCommand(command, BookIsbn);
-            while (dr.Read())
-            {
-                Copy copy = new Copy(int.Parse(dr["bu_id"].ToString()));
-                BookCopies.Add(copy);
-            }
-            dr.Close();
-
-        }
-        
-        /// <summary>
         /// loads the book information by a given id of one of its copies
         /// </summary>
         /// <param name="copyId"></param>
@@ -218,7 +199,7 @@ namespace Bibo_Verwaltung
             }
             LoadBook();
         }
-        
+
         /// <summary>
         /// updates the book
         /// </summary>
@@ -254,7 +235,11 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                cmd.Parameters["@bookImage"].Value = BookImage;
+                using (var ms = new MemoryStream())
+                {
+                    BookImage.Save(ms, ImageFormat.Png);
+                    cmd.Parameters["@bookImage"].Value = ms.ToArray();
+                }
             }
             cmd.Parameters.AddWithValue("@bookIsbn", BookIsbn);
             cmd.ExecuteNonQuery();
@@ -314,7 +299,11 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                cmd.Parameters["@bookImage"].Value = BookImage;
+                using (var ms = new MemoryStream())
+                {
+                    BookImage.Save(ms, ImageFormat.Png);
+                    cmd.Parameters["@bookImage"].Value = ms.ToArray();
+                }
             }
             cmd.ExecuteNonQuery();
             AddBookAuthors();
@@ -385,11 +374,7 @@ namespace Bibo_Verwaltung
         /// <returns>true if available; false if unavailable</returns>
         public bool AreCopiesAvailable()
         {
-            foreach(Copy copy in BookCopies)
-            {
-                if (!copy.IsAvailable()) return false;
-            }
-            return true;
+            return copyHelper.AreCopiesAvailable(BookIsbn);
         }
 
         /// <summary>
@@ -397,38 +382,25 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void DeactivateCopies()
         {
-            foreach(Copy copy in BookCopies)
-            {
-                copy.Deactivate();
-            }
+            copyHelper.DeactivateByBookIsbn(BookIsbn);
         }
-    
+
         /// <summary>
         /// the number of copies of a book that are already printed
         /// </summary>
         /// <returns>integer</returns>
         public int NumberOfPrintedCopies()
         {
-            int count = -1;
-            foreach(Copy copy in BookCopies)
-            {
-                count = copy.CopyPrinted ? count + 1 : count;
-            }
-            return count;
+            return copyHelper.GetNumberOfPrinted(BookIsbn);
         }
-    
+
         /// <summary>
         /// returns a list of unprinted copies of a book
         /// </summary>
         /// <returns></returns>
         public List<Copy> UnprintedCopies()
         {
-            List<Copy> unprintedCopies = new List<Copy>();
-            foreach(Copy copy in BookCopies)
-            {
-                if (!copy.CopyPrinted) unprintedCopies.Add(copy);
-            }
-            return unprintedCopies;
+            return copyHelper.GetUnprintedCopies(BookIsbn); ;
         }
     }
 }

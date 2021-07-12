@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -109,6 +111,28 @@ namespace Bibo_Verwaltung.Helper
             adapter.Fill(table);
             con.Close();
             return table;
+        }
+
+        public Image GetBookImage(string isbn)
+        {
+            Image image = null;
+            CustomSqlConnection con = new CustomSqlConnection();
+            if (con.ConnectError()) return image;
+            string command = "SELECT buch_image FROM [dbo].[t_s_buecher] WHERE buch_isbn = @0";
+            SqlDataReader dr = con.ExcecuteCommand(command, isbn);
+            while (dr.Read())
+            {
+                if (dr["buch_image"] != null && dr["buch_image"].ToString() != "")
+                {
+                    using (var ms = new MemoryStream((byte[])(dr["buch_image"])))
+                    {
+                        image = Image.FromStream(ms);
+                    }
+                }
+            }
+            dr.Close();
+            con.Close();
+            return image;
         }
     }
 }

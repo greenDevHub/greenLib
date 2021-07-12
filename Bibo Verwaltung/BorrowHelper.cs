@@ -1,4 +1,5 @@
-﻿using MetroFramework;
+﻿using Bibo_Verwaltung.Helper;
+using MetroFramework;
 using MetroFramework.Controls;
 using MetroFramework.Forms;
 using System;
@@ -17,6 +18,7 @@ namespace Bibo_Verwaltung
 {
     class BorrowHelper
     {
+        BookHelper bookHelper = new BookHelper();
         #region attributes
         Costumer costumer;
         /// <summary>
@@ -167,16 +169,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void ShowBuchCover(ref PictureBox picBox_Buchcover)
         {
-            Book book = new Book(Copy.CopyIsbn, false);
-            if (book.BookImage != null)
-            {
-                MemoryStream mem = new MemoryStream(book.BookImage);
-                picBox_Buchcover.Image = Image.FromStream(mem);
-            }
-            else
-            {
-                picBox_Buchcover.Image = null;
-            }
+            picBox_Buchcover.Image = bookHelper.GetBookImage(Copy.CopyIsbn);
         }
 
         /// <summary>

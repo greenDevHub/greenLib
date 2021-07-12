@@ -247,8 +247,7 @@ namespace Bibo_Verwaltung
                 Book buchCover = new Book(new Copy(ExemplarID).CopyIsbn,false);
                 if (buchCover.BookImage != null)
                 {
-                    MemoryStream mem = new MemoryStream(buchCover.BookImage);
-                    picBox_Buchcover.Image = Image.FromStream(mem);
+                    picBox_Buchcover.Image = buchCover.BookImage;
                 }
                 else
                 {

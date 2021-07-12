@@ -120,5 +120,94 @@ namespace Bibo_Verwaltung
             if (table == null) return;
             gridView.DataSource = table;
         }
+
+        /// <summary>
+        /// loads all the data for the copy object
+        /// </summary>
+        public List<Copy> LoadCopiesWhereIsbn(string isbn)
+        {
+            List<Copy> copies = new List<Copy>();
+            CustomSqlConnection connection = new CustomSqlConnection();
+            if (connection.ConnectError()) return copies;
+            string command = "SELECT bu_id, bu_isbn, buch_titel, " +
+                "bu_zustandsid, isnull(bu_aufnahmedatum, '01.01.1990') as 'verified_aufnahmedatum', " +
+                "bu_activated, bu_printed from t_s_buchid left join t_s_zustand on bu_zustandsid = zu_id " +
+                "left join t_s_buecher on bu_isbn = buch_isbn where bu_isbn = @0";
+            SqlDataReader dr = connection.ExcecuteCommand(command, isbn);
+            while (dr.Read())
+            {
+                Copy copy = new Copy();
+                copy.CopyId = int.Parse(dr["bu_id"].ToString());
+                copy.CopyIsbn = dr["bu_isbn"].ToString();
+                copy.CopyTitle = dr["buch_titel"].ToString();
+                copy.Condition = new Condition(int.Parse(dr["bu_zustandsid"].ToString()));
+                copy.DateRegistration = (DateTime)dr["verified_aufnahmedatum"];
+                copy.CopyActivated = dr["bu_activated"].ToString().Equals(0) ? false : true;
+                copy.CopyPrinted = dr["bu_printed"].ToString().Equals(0) ? false : true;
+                copies.Add(copy);
+            }
+            dr.Close();
+            connection.Close();
+            return copies;
+        }
+
+        public int GetNumberOfPrinted(string isbn)
+        {
+            int printedCount = 0;
+            CustomSqlConnection connection = new CustomSqlConnection();
+            if (connection.ConnectError()) return printedCount;
+            string command = "SELECT COUNT(bu_printed) as 'printed' FROM t_s_buchid WHERE bu_isbn = @0 AND bu_printed='1'";
+            SqlDataReader dr = connection.ExcecuteCommand(command, isbn);
+            while (dr.Read())
+            {
+                printedCount = int.Parse(dr["printed"].ToString());
+            }
+            dr.Close();
+            connection.Close();
+            return printedCount;
+        }
+
+        public List<Copy> GetUnprintedCopies(string isbn)
+        {
+            List<Copy> copies = new List<Copy>();
+            CustomSqlConnection connection = new CustomSqlConnection();
+            if (connection.ConnectError()) return copies;
+            string command = "SELECT bu_id, bu_isbn, " +
+                "bu_zustandsid, isnull(bu_aufnahmedatum, '01.01.1990') as 'verified_aufnahmedatum', " +
+                "bu_activated, bu_printed from t_s_buchid left join t_s_zustand on bu_zustandsid = zu_id where bu_isbn = @0 AND bu_printed='0'";
+            SqlDataReader dr = connection.ExcecuteCommand(command, isbn);
+            while (dr.Read())
+            {
+                Copy copy = new Copy();
+                copy.CopyId = int.Parse(dr["bu_id"].ToString());
+                copy.CopyIsbn = dr["bu_isbn"].ToString();
+                copy.Condition = new Condition(int.Parse(dr["bu_zustandsid"].ToString()));
+                copy.DateRegistration = (DateTime)dr["verified_aufnahmedatum"];
+                copy.CopyActivated = dr["bu_activated"].ToString().Equals(0) ? false : true;
+                copy.CopyPrinted = dr["bu_printed"].ToString().Equals(0) ? false : true;
+                copies.Add(copy);
+            }
+            dr.Close();
+            connection.Close();
+            return copies;
+        }
+
+        public bool AreCopiesAvailable(string isbn)
+        {
+            bool areAvailable = false;
+            CustomSqlConnection connection = new CustomSqlConnection();
+            if (connection.ConnectError()) return areAvailable;
+            string command = "SELECT COUNT(*) as 'num' FROM t_s_buchid JOIN t_bd_ausgeliehen on bu_id=aus_buchid WHERE bu_isbn=@0";
+            SqlDataReader dr = connection.ExcecuteCommand(command, isbn);
+            while (dr.Read())
+            {
+                areAvailable = int.Parse(dr["num"].ToString())>0?true:false;
+            }
+            dr.Close();
+            connection.Close();
+            return areAvailable;
+
+        }
+
     }
 }
