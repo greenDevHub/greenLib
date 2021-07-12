@@ -13,5 +13,8 @@
     <Setting Name="darkmode" Type="System.String" Scope="User">
       <Value Profile="(Default)">false</Value>
     </Setting>
+    <Setting Name="secretKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SecretKeyToGenerateSomeSecretAndCoolPasswords</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

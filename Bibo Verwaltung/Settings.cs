@@ -75,7 +75,7 @@ namespace Bibo_Verwaltung
 
         private string Encrypt(string clearText)
         {
-            string EncryptionKey = "MAKV2SPBNI99212";
+            string EncryptionKey = Properties.Settings.Default.secretKey;
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
             using (Aes encryptor = Aes.Create())
             {
@@ -96,7 +96,7 @@ namespace Bibo_Verwaltung
         }
         private string Decrypt(string cipherText)
         {
-            string EncryptionKey = "MAKV2SPBNI99212";
+            string EncryptionKey = Properties.Settings.Default.secretKey;
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
             using (Aes encryptor = Aes.Create())
             {
