@@ -111,11 +111,11 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void LoadForm(Copy copy)
         {
-            tb_ID.Text = copy.CopyID.ToString();
+            tb_ID.Text = copy.CopyId.ToString();
             tb_ISBN.Text = copy.CopyIsbn;
             acb_Zustand.Text = copy.Condition.ConditionName;
             dTP_AufDat.Value = copy.DateRegistration;
-            GenerateBarcode(copy.CopyID);
+            GenerateBarcode(copy.CopyId);
 
 
             rb_edit.Checked = true;
@@ -420,7 +420,7 @@ namespace Bibo_Verwaltung
                 List<string> barcodes = new List<string>();
                 foreach (Copy c in copies)
                 {
-                    string code = GetCode(c.CopyID.ToString());
+                    string code = GetCode(c.CopyId.ToString());
                     barcodes.Add(code);
                 }
                 PrintMultipleBarcodes(barcodes);

@@ -552,7 +552,7 @@ namespace Bibo_Verwaltung
                         if (copy.CopyActivated)
                         {
                             lb_selected.Text = "ausgewählte Bücher:";
-                            autorueckgabe.ExemplarID = copy.CopyID;
+                            autorueckgabe.ExemplarID = copy.CopyId;
                             autorueckgabe.ZustandStart = copy.Condition.ConditionName;
                             if (selectedBuecher.Columns.Count < 2)
                             {

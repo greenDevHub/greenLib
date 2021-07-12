@@ -194,7 +194,7 @@
     <Compile Include="Extension\Lehrbuchausgabe\FormBookSubject.Designer.cs">
       <DependentUpon>FormBookSubject.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ausleihe.cs" />
+    <Compile Include="BorrowHelper.cs" />
     <Compile Include="ExcelExport.cs" />
     <Compile Include="FachStufe.cs" />
     <Compile Include="Models\Subject.cs" />

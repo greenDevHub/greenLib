@@ -473,6 +473,29 @@ namespace Bibo_Verwaltung
             }
             return borrowedBooks;
         }
+
+        /// <summary>
+        /// returns the grade of the costumer
+        /// </summary>
+        /// <returns></returns>
+        public int ReturnGrade()
+        {
+            int grade = -1;
+            CustomSqlConnection con = new CustomSqlConnection();
+            if (con.ConnectError()) return grade;
+            string command = "SELECT ks_klassenstufe FROM [dbo].t_s_klasse_stufe WHERE ks_klasse = @0";
+            SqlDataReader dr = con.ExcecuteCommand(command, CostumerSchoolClass.SchoolClassId);
+            while (dr.Read())
+            {
+                if (dr.HasRows)
+                {
+                    grade = int.Parse(dr["ks_klassenstufe"].ToString());
+                }
+            }
+            dr.Close();
+            con.Close();
+            return grade;
+        }
     }
 }
 

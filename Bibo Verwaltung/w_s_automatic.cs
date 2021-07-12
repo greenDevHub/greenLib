@@ -52,7 +52,7 @@ namespace Bibo_Verwaltung
             dp_RueckDatum.Enabled = isNoGuest;
             bt_bestaetigen.Enabled = isNoGuest;
         }
-        Ausleihe autoausleihe = new Ausleihe();
+        BorrowHelper autoausleihe = new BorrowHelper();
         DataTable schulBuecher = new DataTable();
         DataTable selectedBuecher = new DataTable();
         bool inAusleihAction;
@@ -180,7 +180,7 @@ namespace Bibo_Verwaltung
             gv_suggested.DataSource = null;
             gv_Schueler.DataSource = null;
             gv_selected.DataSource = null;
-            autoausleihe.ClearLeihList();
+            autoausleihe.ClearBorrowTable();
             selectedBuecher.Rows.Clear();
             a_cb_Modus.SelectedIndex = -1;
             a_cb_Modus.SelectedIndex = 0;
@@ -205,7 +205,7 @@ namespace Bibo_Verwaltung
                 }
                 tb_ExemplarID.Text = "";
                 tb_ExemplarID.Focus();
-                autoausleihe.ClearLeihList();
+                autoausleihe.ClearBorrowTable();
                 selectedBuecher.Rows.Clear();
                 gv_selected.Refresh();
             }
@@ -281,7 +281,7 @@ namespace Bibo_Verwaltung
                 //}
                 tb_ExemplarID.Text = "";
                 tb_ExemplarID.Focus();
-                autoausleihe.ClearLeihList();
+                autoausleihe.ClearBorrowTable();
                 selectedBuecher.Rows.Clear();
                 gv_selected.Refresh();
             }
@@ -314,8 +314,8 @@ namespace Bibo_Verwaltung
                 autoausleihe.AddToAusleihList();
                 DataRow relation;
                 string[] exemlarDetails = new string[2];
-                exemlarDetails[0] = autoausleihe.ExemplarID.ToString();
-                Copy copy = new Copy(int.Parse(autoausleihe.LeihListe.Rows[autoausleihe.GetIndexInLeihliste()][0].ToString()));
+                exemlarDetails[0] = autoausleihe.Copy.CopyId.ToString();
+                Copy copy = new Copy(int.Parse(autoausleihe.BorrowTable.Rows[autoausleihe.GetIndexInLeihliste()][0].ToString()));
                 exemlarDetails[1] = copy.CopyTitle;
                 relation = selectedBuecher.NewRow();
                 relation.ItemArray = exemlarDetails;
@@ -348,18 +348,17 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void CompleteSchueler()
         {
-            autoausleihe.KID = gv_Schueler.CurrentRow.Cells["kunde_ID"].Value.ToString();
-            Costumer costumer = new Costumer(int.Parse(autoausleihe.KID));
-            DialogResult dialogResult = MetroMessageBox.Show(this, autoausleihe.GetAusleihList() + "an: '" + autoausleihe.TrimText(costumer.CostumerFirstName + " " + costumer.CostumerSurname, 30) + "' wirklich ausleihen?", "Bestätigung",
-                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question,211 + autoausleihe.LeihListe.Rows.Count*17);
+            autoausleihe.Costumer = new Costumer(int.Parse(gv_Schueler.CurrentRow.Cells["kunde_ID"].Value.ToString()));
+            DialogResult dialogResult = MetroMessageBox.Show(this, autoausleihe.GetAusleihList() + "an: '" + autoausleihe.TrimText(autoausleihe.Costumer.CostumerFirstName + " " + autoausleihe.Costumer.CostumerSurname, 30) + "' wirklich ausleihen?", "Bestätigung",
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question,211 + autoausleihe.BorrowTable.Rows.Count*17);
             if (dialogResult == DialogResult.OK)
             {
                 DataGridViewRow Kundenrow = gv_Schueler.CurrentRow;
                 try
                 {
-                    foreach (DataRow row in autoausleihe.LeihListe.Rows)
+                    foreach (DataRow row in autoausleihe.BorrowTable.Rows)
                     {
-                        autoausleihe.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(), row[1].ToString(), costumer.CostumerId);
+                        autoausleihe.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(), row[1].ToString(), autoausleihe.Costumer.CostumerId);
                     }
                     if (IsComplete(ref gv_suggested))
                     {
@@ -407,7 +406,7 @@ namespace Bibo_Verwaltung
                     //gv_suggested.Enabled = true;
                     gv_selected.Enabled = true;
                     bt_abschließen.Enabled = true;
-                    autoausleihe.Rueckgabedatum = dp_RueckDatum.Value;
+                    autoausleihe.ReturnDate = dp_RueckDatum.Value;
                     if (a_cb_Modus.SelectedIndex == 0)
                     {
                         costumerHelper.FillCostumerGrid(ref gv_Schueler, false, schoolClassHelper.FindIdByName(a_cb_Klasse.Text));
@@ -448,12 +447,13 @@ namespace Bibo_Verwaltung
             {
                 DataGridViewRow costumerRow = gv_Schueler.Rows[i];
                 Costumer costumer = new Costumer(int.Parse(gv_Schueler.Rows[i].Cells["kunde_ID"].Value.ToString()));
-                List<string> suggestedBooks = autoausleihe.SuggestedBooks(costumer.CostumerId.ToString());
+                autoausleihe.Costumer = costumer;
+                List<Book> suggestedBooks = autoausleihe.SuggestedBooks();
                 List<string> borrowedBookIsbns = costumer.BorrowedBookIsbns();
                 int countBooks = 0;
-                foreach(string book in suggestedBooks)
+                foreach(Book book in suggestedBooks)
                 {
-                    if (!borrowedBookIsbns.Contains(book))
+                    if (!borrowedBookIsbns.Contains(book.BookIsbn))
                     {
                         countBooks++;
                     }
@@ -498,7 +498,7 @@ namespace Bibo_Verwaltung
 
         private void bt_abschließen_Click(object sender, EventArgs e)
         {
-            if (autoausleihe.LeihListe.Rows.Count != 0)
+            if (autoausleihe.BorrowTable.Rows.Count != 0)
             {
                 bool isOK = true;
                 for (int i = 0; i <= gv_suggested.RowCount - 1; i++)
@@ -552,7 +552,7 @@ namespace Bibo_Verwaltung
                         if (copy.CopyActivated)
                         {
                             lb_selected.Text = "ausgewählte Bücher:";
-                            autoausleihe.ExemplarID = copy.CopyID;
+                            autoausleihe.Copy = copy;
                             if (selectedBuecher.Columns.Count < 2)
                             {
                                 selectedBuecher.Columns.Add("ID");
@@ -564,7 +564,7 @@ namespace Bibo_Verwaltung
                                 if (GetIndexInSuggestedBuecher() != -1)
                                 {
                                     Buchrow = gv_suggested.Rows[GetIndexInSuggestedBuecher()];
-                                    if (!autoausleihe.CheckLeihList())
+                                    if (!autoausleihe.CheckBorrowTable())
                                     {
                                         SelectExemplar();
                                         Buchrow.DefaultCellStyle.BackColor = Color.LimeGreen;
@@ -579,7 +579,7 @@ namespace Bibo_Verwaltung
                                 }
                                 else
                                 {
-                                    if (!autoausleihe.CheckLeihList())
+                                    if (!autoausleihe.CheckBorrowTable())
                                     {
                                         DialogResult dialogResult = MetroMessageBox.Show(this, "Dieses Buch ist als nicht notwendig eingestuft! Soll es ungeachtet dessen zur Buchausleihliste hinugefügt werden?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                                         if (dialogResult == DialogResult.Yes)

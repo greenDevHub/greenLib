@@ -1505,7 +1505,7 @@ namespace Bibo_Verwaltung
                     for (int i = 0; i < printNumber; i++)
                     {
                         string code = "";
-                        code = unprintedCopies[i].CopyID.ToString();
+                        code = unprintedCopies[i].CopyId.ToString();
                         for (int codeInt = code.Length; codeInt < 7; codeInt++)
                         {
                             code = "0" + code;

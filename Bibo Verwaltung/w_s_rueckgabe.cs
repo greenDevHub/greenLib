@@ -237,7 +237,7 @@ namespace Bibo_Verwaltung
                     Copy copy = new Copy(int.Parse(tb_BuchCode.Text));
                     if (copy.CopyActivated)
                     {
-                        rueckgabe.ExemplarID = copy.CopyID;
+                        rueckgabe.ExemplarID = copy.CopyId;
                         if (rueckgabe.CheckRueckList())
                         {
                             bt_AddBuch.Text = "-";

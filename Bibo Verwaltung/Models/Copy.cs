@@ -14,7 +14,7 @@ namespace Bibo_Verwaltung
     {
         #region attributes
         int copyId;
-        public int CopyID { get { return copyId; } set { copyId = value; } }
+        public int CopyId { get { return copyId; } set { copyId = value; } }
 
         string copyIsbn;
         public string CopyIsbn { get { return copyIsbn; } set { copyIsbn = value; } }
@@ -67,10 +67,10 @@ namespace Bibo_Verwaltung
                 "bu_zustandsid, isnull(bu_aufnahmedatum, '01.01.1990') as 'verified_aufnahmedatum', " +
                 "bu_activated, bu_printed from t_s_buchid left join t_s_zustand on bu_zustandsid = zu_id " +
                 "left join t_s_buecher on bu_isbn = buch_isbn where bu_id = @0";
-            SqlDataReader dr = connection.ExcecuteCommand(command, CopyID);
+            SqlDataReader dr = connection.ExcecuteCommand(command, CopyId);
             while (dr.Read())
             {
-                CopyID = int.Parse(dr["bu_id"].ToString());
+                CopyId = int.Parse(dr["bu_id"].ToString());
                 CopyIsbn = dr["bu_isbn"].ToString();
                 CopyTitle = dr["buch_titel"].ToString();
                 Condition = new Condition(int.Parse(dr["bu_zustandsid"].ToString()));
@@ -113,7 +113,7 @@ namespace Bibo_Verwaltung
             SqlCommand cmd = new SqlCommand(command, connection.Con);
             cmd.Parameters.AddWithValue("@conditionId", Condition.ConditionId);
             cmd.Parameters.AddWithValue("@dateRegistration", DateRegistration);
-            cmd.Parameters.AddWithValue("@copyId", CopyID);
+            cmd.Parameters.AddWithValue("@copyId", CopyId);
             cmd.ExecuteNonQuery();
             connection.Close();
         }
@@ -127,7 +127,7 @@ namespace Bibo_Verwaltung
             if (connection.ConnectError()) return;
             string command = "DELETE FROM [dbo].[t_s_buchid] WHERE bu_id = @copyId";
             SqlCommand cmd = new SqlCommand(command, connection.Con);
-            cmd.Parameters.AddWithValue("@copyId", CopyID);
+            cmd.Parameters.AddWithValue("@copyId", CopyId);
             cmd.ExecuteNonQuery();
             connection.Close();
         }
@@ -142,7 +142,7 @@ namespace Bibo_Verwaltung
             string command = "UPDATE t_s_buchid set bu_activated = @activated WHERE bu_id = @copyId";
             SqlCommand cmd = new SqlCommand(command, connection.Con);
             cmd.Parameters.AddWithValue("@activated", 0);
-            cmd.Parameters.AddWithValue("@copyId", CopyID);
+            cmd.Parameters.AddWithValue("@copyId", CopyId);
             cmd.ExecuteNonQuery();
             connection.Close();
             CopyActivated = false;
@@ -160,7 +160,7 @@ namespace Bibo_Verwaltung
             SqlDataReader dr = connection.ExcecuteCommand(RawCommand, CopyIsbn);
             while (dr.Read())
             {
-                CopyID = int.Parse(dr["bu_id"].ToString());
+                CopyId = int.Parse(dr["bu_id"].ToString());
             }
             dr.Close();
             connection.Close();
@@ -178,7 +178,7 @@ namespace Bibo_Verwaltung
             int count = 0;
             using (SqlCommand cmdCount = new SqlCommand(command, connection.Con))
             {
-                cmdCount.Parameters.AddWithValue("@copyId", CopyID);
+                cmdCount.Parameters.AddWithValue("@copyId", CopyId);
                 count = (int)cmdCount.ExecuteScalar();
                 connection.Close();
             }
@@ -195,7 +195,7 @@ namespace Bibo_Verwaltung
             if (connection.ConnectError()) return;
             SqlCommand cmd = new SqlCommand(command, connection.Con);
             cmd.Parameters.AddWithValue("@copyPrinted", 1);
-            cmd.Parameters.AddWithValue("@copyId", CopyID);
+            cmd.Parameters.AddWithValue("@copyId", CopyId);
             cmd.ExecuteNonQuery();
             connection.Close();
             CopyPrinted = true;
