@@ -36,12 +36,14 @@ namespace Bibo_Verwaltung
             this.StyleManager = styleManagerOverview;
             this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
             this.StyleManager.Style = ThemeInfo.OverviewStyle;
-
-            listfc = Color.Silver;
-            listbc = Color.DimGray;
-            red = Color.Firebrick;
-            yellow = Color.Goldenrod;
-            green = Color.OliveDrab;
+            if(ThemeInfo.StyleManager.Theme == MetroThemeStyle.Dark)
+            {
+                listfc = Color.Silver;
+                listbc = Color.DimGray;
+                red = Color.Firebrick;
+                yellow = Color.Goldenrod;
+                green = Color.OliveDrab;
+            }
             cbAuthor.BackColor = ThemeInfo.BackColor;
             cbGenre.BackColor = ThemeInfo.BackColor;
             cbPublisher.BackColor = ThemeInfo.BackColor;
