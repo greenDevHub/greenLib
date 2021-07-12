@@ -167,9 +167,9 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Zeigt das Buchcoder eines Exemplars in einer PictureBox
         /// </summary>
-        public void ShowBuchCover(ref PictureBox picBox_Buchcover)
+        public void ShowBuchCover(ref PictureBox pictureBox)
         {
-            picBox_Buchcover.Image = bookHelper.GetBookImage(Copy.CopyIsbn);
+            pictureBox.Image = bookHelper.GetBookImage(Copy.CopyIsbn);
         }
 
         /// <summary>

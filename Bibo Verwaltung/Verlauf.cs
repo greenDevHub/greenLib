@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework.Controls;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,38 +12,32 @@ namespace Bibo_Verwaltung
 {
     class Verlauf
     {
+        int copyId;
         public Verlauf(int id)
         {
-            FillObject(id);
+            copyId = id;
         }
 
-        SqlDataAdapter adapter = new SqlDataAdapter();
-        DataSet ds = new DataSet();
-        DataTable dt = new DataTable();
-        SqlCommandBuilder comb = new SqlCommandBuilder();
-
         #region FillObject
-        private void FillObject(int buchid)
+        private DataTable FillObject()
         {
-            dt.Clear();
+            DataTable table = new DataTable();
             CustomSqlConnection con = new CustomSqlConnection();
-            if (con.ConnectError()) return;
-            string RawCommand = "SELECT ver_id, id_buch, k_id, kunde_vorname, kunde_nachname, zu_vor, zu_nach, aus_geliehen, aus_ruckgabe FROM [dbo].[t_s_verlauf]  left join t_s_kunden on kunde_id = k_id WHERE id_buch = @0";
-
-            // Verbindung öffnen 
-            adapter = new SqlDataAdapter(RawCommand, con.Con);
-            adapter.SelectCommand.Parameters.AddWithValue("@0", buchid);
-            adapter.Fill(ds);
-            adapter.Fill(dt);
-
+            if (con.ConnectError()) return table;
+            string command = "SELECT ver_id, id_buch, k_id, kunde_vorname, kunde_nachname, zu_vor, zu_nach, aus_geliehen, aus_ruckgabe " +
+                "FROM [dbo].[t_s_verlauf]  left join t_s_kunden on kunde_id = k_id WHERE id_buch = @0";
+            SqlDataAdapter adapter = new SqlDataAdapter(command, con.Con);
+            adapter.SelectCommand.Parameters.AddWithValue("@0", copyId);
+            adapter.Fill(table);
             con.Close();
+            return table;
         }
         #endregion
 
         #region Fillgrid
-        public void FillGrid(ref MetroFramework.Controls.MetroGrid grid, object value = null)
+        public void FillGrid(ref MetroGrid grid, object value = null)
         {
-            grid.DataSource = ds.Tables[0];
+            grid.DataSource = FillObject();
             grid.Columns[0].Visible = false;
             grid.Columns[1].Visible = false;
             grid.Columns[2].Visible = false;

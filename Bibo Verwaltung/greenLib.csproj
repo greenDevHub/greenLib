@@ -289,7 +289,7 @@
       <DependentUpon>w_s_selfmade_dialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ImportExport.cs" />
-    <Compile Include="Rueckgabe.cs" />
+    <Compile Include="ReturnHelper.cs" />
     <Compile Include="Verlauf.cs" />
     <Compile Include="Bibo_VerwaltungDataSet.Designer.cs">
       <AutoGen>True</AutoGen>

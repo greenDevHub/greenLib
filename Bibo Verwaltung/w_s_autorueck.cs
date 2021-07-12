@@ -56,7 +56,7 @@ namespace Bibo_Verwaltung
         ConditionHelper conditionHelper = new ConditionHelper();
 
 
-        Rueckgabe autorueckgabe = new Rueckgabe();
+        ReturnHelper autorueckgabe = new ReturnHelper();
         DataTable selectedBuecher = new DataTable();
         bool inRueckAction;
 
@@ -263,7 +263,7 @@ namespace Bibo_Verwaltung
                 if (gv_Schueler.CurrentRow != null)
                 {
                     DataGridViewRow row = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index];
-                    autorueckgabe.KID = row.Cells["kunde_ID"].Value.ToString();
+                    autorueckgabe.Costumer = new Costumer(int.Parse(row.Cells["kunde_ID"].Value.ToString()));
                     autorueckgabe.FillGrid(ref gv_suggested);
                     gv_suggested.ClearSelection();
                 }
@@ -300,7 +300,7 @@ namespace Bibo_Verwaltung
                 autorueckgabe.AddToRueckgabeList();
                 for (int i = 0; i < selectedBuecher.Rows.Count; i++)
                 {
-                    if (selectedBuecher.Rows[i]["ID"].ToString() == autorueckgabe.RueckListe.Rows[autorueckgabe.GetIndexInRueckliste()][0].ToString())
+                    if (selectedBuecher.Rows[i]["ID"].ToString() == autorueckgabe.ReturnDataTable.Rows[autorueckgabe.GetIndexInRueckliste()][0].ToString())
                     {
                         i = 0;
                         UnSelectExemplar();
@@ -308,9 +308,9 @@ namespace Bibo_Verwaltung
                 }
                 DataRow relation;
                 string[] exemlarDetails = new string[3];
-                exemlarDetails[0] = autorueckgabe.ExemplarID.ToString();
-                exemlarDetails[1] = autorueckgabe.RueckListe.Rows[autorueckgabe.GetIndexInRueckliste()][1].ToString();
-                Copy copy = new Copy(int.Parse(autorueckgabe.RueckListe.Rows[autorueckgabe.GetIndexInRueckliste()][0].ToString()));
+                exemlarDetails[0] = autorueckgabe.Copy.ToString();
+                exemlarDetails[1] = autorueckgabe.ReturnDataTable.Rows[autorueckgabe.GetIndexInRueckliste()][1].ToString();
+                Copy copy = new Copy(int.Parse(autorueckgabe.ReturnDataTable.Rows[autorueckgabe.GetIndexInRueckliste()][0].ToString()));
                 exemlarDetails[2] = copy.CopyTitle;
                 relation = selectedBuecher.NewRow();
                 relation.ItemArray = exemlarDetails;
@@ -458,12 +458,11 @@ namespace Bibo_Verwaltung
 
         private void Bt_abschließen_Click(object sender, EventArgs e)
         {
-            if (autorueckgabe.RueckListe.Rows.Count != 0)
+            if (autorueckgabe.ReturnDataTable.Rows.Count != 0)
             {
-                autorueckgabe.KID = gv_Schueler.CurrentRow.Cells["kunde_ID"].Value.ToString();
-                Costumer costumer = new Costumer(int.Parse(autorueckgabe.KID));
-                DialogResult dialogResult = MetroMessageBox.Show(this, autorueckgabe.GetRueckgabeList() + "an: '" + autorueckgabe.TrimText(costumer.CostumerFirstName + " " + costumer.CostumerSurname, 30) + "' wirklich zurücknehmen?", "Achtung",
-                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question,211 + autorueckgabe.RueckListe.Rows.Count * 17);
+                autorueckgabe.Costumer = new Costumer(int.Parse(gv_Schueler.CurrentRow.Cells["kunde_ID"].Value.ToString()));
+                DialogResult dialogResult = MetroMessageBox.Show(this, autorueckgabe.GetRueckgabeList() + "an: '" + autorueckgabe.TrimText(autorueckgabe.Costumer.CostumerFirstName + " " + autorueckgabe.Costumer.CostumerSurname, 30) + "' wirklich zurücknehmen?", "Achtung",
+                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question,211 + autorueckgabe.ReturnDataTable.Rows.Count * 17);
                 if (dialogResult == DialogResult.OK)
                 {
                     DataGridViewRow Kundenrow = gv_Schueler.CurrentRow;
@@ -473,15 +472,15 @@ namespace Bibo_Verwaltung
                         {
                             for (int i = 0; i < selectedBuecher.Rows.Count; i++)
                             {
-                                autorueckgabe.ExemplarID = int.Parse(selectedBuecher.Rows[i]["ID"].ToString());
-                                autorueckgabe.RueckListe.Rows[autorueckgabe.GetIndexInRueckliste()][2] = gv_selected.Rows[i].Cells["cbzustand"].Value.ToString();
+                                autorueckgabe.Copy = new Copy(int.Parse(selectedBuecher.Rows[i]["ID"].ToString()));
+                                autorueckgabe.ReturnDataTable.Rows[autorueckgabe.GetIndexInRueckliste()][2] = gv_selected.Rows[i].Cells["cbzustand"].Value.ToString();
                             }
-                            foreach (DataRow row in autorueckgabe.RueckListe.Rows)
+                            foreach (DataRow row in autorueckgabe.ReturnDataTable.Rows)
                             {
                                 Condition condition = new Condition(int.Parse(row[2].ToString()));
-                                autorueckgabe.Load_Info(int.Parse(row[0].ToString()));
-                                autorueckgabe.Execute_Rueckgabe(row[0].ToString(), autorueckgabe.KID, row[1].ToString(), 
-                                    row[2].ToString(), condition.ConditionName, autorueckgabe.Leihdatum.ToShortDateString(), 
+                                autorueckgabe.LoadInfo(int.Parse(row[0].ToString()));
+                                autorueckgabe.Execute_Rueckgabe(int.Parse(row[0].ToString()), autorueckgabe.Costumer.CostumerId, row[1].ToString(), 
+                                    int.Parse(row[2].ToString()), condition.ConditionName, autorueckgabe.BorrowDate.ToShortDateString(), 
                                     DateTime.Now.Date.ToShortDateString()); //Später einbauen (das ist der fertig-funktionsfähige Befehl)
                             }
                             MetroMessageBox.Show(this, "Die Buchrückgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -552,8 +551,8 @@ namespace Bibo_Verwaltung
                         if (copy.CopyActivated)
                         {
                             lb_selected.Text = "ausgewählte Bücher:";
-                            autorueckgabe.ExemplarID = copy.CopyId;
-                            autorueckgabe.ZustandStart = copy.Condition.ConditionName;
+                            autorueckgabe.Copy = copy;
+                            autorueckgabe.StartCondition = copy.Condition;
                             if (selectedBuecher.Columns.Count < 2)
                             {
                                 selectedBuecher.Columns.Add("ID");
