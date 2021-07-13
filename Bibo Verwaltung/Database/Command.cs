@@ -144,9 +144,9 @@ namespace Bibo_Verwaltung.Database
         /// <param name="value"></param>
         /// <param name="adapter"></param>
         /// <param name="table"></param>
-        public void FillCombobox(ref AdvancedComboBox cb, object value, ref DataTable table)
+        public void FillCombobox(ref AdvancedComboBox cb, object value, ref DataTable table, AutoCompleteSource autoCompleteSource=AutoCompleteSource.None)
         {
-            if (cb.AutoCompleteSource != AutoCompleteSource.None) cb.AutoCompleteSource = AutoCompleteSource.None;
+            if (cb.AutoCompleteSource != autoCompleteSource) cb.AutoCompleteSource = autoCompleteSource;
             table = FillObject();
             if (table == null) return;
             cb.DataSource = table;

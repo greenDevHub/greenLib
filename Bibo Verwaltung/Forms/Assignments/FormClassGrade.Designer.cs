@@ -286,7 +286,6 @@
             this.tb_klasse.MaxLength = 32767;
             this.tb_klasse.Name = "tb_klasse";
             this.tb_klasse.PasswordChar = '\0';
-            this.tb_klasse.PromptText = "Suche nach Klasse";
             this.tb_klasse.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_klasse.SelectedText = "";
             this.tb_klasse.SelectionLength = 0;

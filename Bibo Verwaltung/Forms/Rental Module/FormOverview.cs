@@ -779,7 +779,7 @@ namespace Bibo_Verwaltung
                     groupList.Enabled = true;
                 });
             }
-            catch (Exception ex)
+            catch
             {
                 try
                 {
@@ -1132,52 +1132,44 @@ namespace Bibo_Verwaltung
                 {
                     blackList = rueckListe;
                 }
-                try
+                DataGridViewRow row = gridOverview.Rows[rowIndex];
+                DateTime now = DateTime.Today;
+                row.DefaultCellStyle.BackColor = default;
+                row.DefaultCellStyle.ForeColor = default;
+                row.DefaultCellStyle.SelectionBackColor = default;
+                if (row.Cells["Leihnummer"].Value.ToString() != "")
                 {
-                    DataGridViewRow row = gridOverview.Rows[rowIndex];
-                    DateTime now = DateTime.Today;
-                    row.DefaultCellStyle.BackColor = default;
-                    row.DefaultCellStyle.ForeColor = default;
-                    row.DefaultCellStyle.SelectionBackColor = default;
-                    if (row.Cells["Leihnummer"].Value.ToString() != "")
+                    string s = row.Cells["Rückgabedatum"].Value.ToString();
+                    DateTime dt = DateTime.Parse(s);
+                    dt.ToShortDateString();
+                    if (dt < now)
                     {
-                        string s = row.Cells["Rückgabedatum"].Value.ToString();
-                        DateTime dt = DateTime.Parse(s);
-                        dt.ToShortDateString();
-                        if (dt < now)
-                        {
-                            row.DefaultCellStyle.BackColor = red;
-                            row.DefaultCellStyle.ForeColor = Color.Black;
-                            row.DefaultCellStyle.SelectionBackColor = Color.Red;
+                        row.DefaultCellStyle.BackColor = red;
+                        row.DefaultCellStyle.ForeColor = Color.Black;
+                        row.DefaultCellStyle.SelectionBackColor = Color.Red;
 
-                        }
-                        else if (dt == now)
-                        {
-                            row.DefaultCellStyle.BackColor = yellow;
-                            row.DefaultCellStyle.ForeColor = Color.Black;
-                            row.DefaultCellStyle.SelectionBackColor = Color.Yellow;
-
-                        }
-                        else
-                        {
-                            row.DefaultCellStyle.BackColor = green;
-                            row.DefaultCellStyle.ForeColor = Color.Black;
-                            row.DefaultCellStyle.SelectionBackColor = Color.Lime;
-
-                        }
                     }
-                    if (blackList.Contains(row.Cells["ExemplarID"].Value.ToString()))
+                    else if (dt == now)
                     {
-                        row.DefaultCellStyle.ForeColor = listfc;
-                        row.DefaultCellStyle.BackColor = listbc;
-                        row.DefaultCellStyle.SelectionBackColor = Color.DimGray;
+                        row.DefaultCellStyle.BackColor = yellow;
+                        row.DefaultCellStyle.ForeColor = Color.Black;
+                        row.DefaultCellStyle.SelectionBackColor = Color.Yellow;
+
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = green;
+                        row.DefaultCellStyle.ForeColor = Color.Black;
+                        row.DefaultCellStyle.SelectionBackColor = Color.Lime;
+
                     }
                 }
-                catch (Exception ex)
+                if (blackList.Contains(row.Cells["ExemplarID"].Value.ToString()))
                 {
-
+                    row.DefaultCellStyle.ForeColor = listfc;
+                    row.DefaultCellStyle.BackColor = listbc;
+                    row.DefaultCellStyle.SelectionBackColor = Color.DimGray;
                 }
-
             }
         }
 

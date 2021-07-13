@@ -62,7 +62,6 @@
             this.tb_User.MaxLength = 32767;
             this.tb_User.Name = "tb_User";
             this.tb_User.PasswordChar = '\0';
-            this.tb_User.PromptText = "Benutzername";
             this.tb_User.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_User.SelectedText = "";
             this.tb_User.SelectionLength = 0;
@@ -98,7 +97,6 @@
             this.tb_Password.MaxLength = 32767;
             this.tb_Password.Name = "tb_Password";
             this.tb_Password.PasswordChar = '●';
-            this.tb_Password.PromptText = "Passwort";
             this.tb_Password.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Password.SelectedText = "";
             this.tb_Password.SelectionLength = 0;

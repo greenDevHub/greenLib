@@ -297,7 +297,7 @@ namespace Bibo_Verwaltung
                         mbt_Uebernehmen.Focus();
                         SaveContent();
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         MetroMessageBox.Show(this, "Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }

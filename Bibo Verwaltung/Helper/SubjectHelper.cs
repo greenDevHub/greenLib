@@ -166,7 +166,7 @@ namespace Bibo_Verwaltung.Helper
                 }
                 return changes;
             }
-            catch (Exception ex)
+            catch
             {
                 return changes;
             }

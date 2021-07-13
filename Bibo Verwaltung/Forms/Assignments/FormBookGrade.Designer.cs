@@ -288,7 +288,6 @@
             this.tb_titel.MaxLength = 32767;
             this.tb_titel.Name = "tb_titel";
             this.tb_titel.PasswordChar = '\0';
-            this.tb_titel.PromptText = "Suche nach Titel";
             this.tb_titel.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_titel.SelectedText = "";
             this.tb_titel.SelectionLength = 0;
@@ -323,7 +322,6 @@
             this.tb_isbn.MaxLength = 32767;
             this.tb_isbn.Name = "tb_isbn";
             this.tb_isbn.PasswordChar = '\0';
-            this.tb_isbn.PromptText = "Suche nach ISBN";
             this.tb_isbn.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_isbn.SelectedText = "";
             this.tb_isbn.SelectionLength = 0;

@@ -12,7 +12,6 @@ namespace Bibo_Verwaltung
         BookGradeHelper bs = new BookGradeHelper();
         private DataTable buecherListe = new DataTable();
         private bool aenderungungen = false;
-        string currentUser;
         bool gast = false;
         public FormBookGrade()
         {

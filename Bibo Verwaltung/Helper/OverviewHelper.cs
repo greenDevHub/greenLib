@@ -26,9 +26,6 @@ namespace Bibo_Verwaltung
 
         Protocol log = new Protocol();
 
-        DateTime dt = new DateTime();
-        DateTime now = new DateTime();
-
         /// <summary>
         /// fills a datatable with all necessary information
         /// </summary>

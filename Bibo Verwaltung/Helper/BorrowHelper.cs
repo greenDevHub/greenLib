@@ -328,7 +328,7 @@ namespace Bibo_Verwaltung
             for (int i = 0; i < Costumer.CostumerSubjects.Count; i++)
             {
                 SqlDataAdapter adapter = new SqlDataAdapter(command, con.Con);
-                adapter.SelectCommand.Parameters.AddWithValue("@0", Costumer.CostumerSubjects[i]);
+                adapter.SelectCommand.Parameters.AddWithValue("@0", Costumer.CostumerSubjects[i].SubjectId);
                 adapter.SelectCommand.Parameters.AddWithValue("@1", schoolGrade);
                 adapter.SelectCommand.Parameters.AddWithValue("@2", Costumer.CostumerAdvancedSubjects.Contains(Costumer.CostumerSubjects[i]) ? "1" : "0");
                 adapter.Fill(table);

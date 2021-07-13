@@ -288,7 +288,6 @@
             this.tb_lang.MaxLength = 32767;
             this.tb_lang.Name = "tb_lang";
             this.tb_lang.PasswordChar = '\0';
-            this.tb_lang.PromptText = "Suche nach Langbezeichnung";
             this.tb_lang.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_lang.SelectedText = "";
             this.tb_lang.SelectionLength = 0;
@@ -323,7 +322,6 @@
             this.tb_kurz.MaxLength = 32767;
             this.tb_kurz.Name = "tb_kurz";
             this.tb_kurz.PasswordChar = '\0';
-            this.tb_kurz.PromptText = "Suche nach Kurzbezeichnung";
             this.tb_kurz.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_kurz.SelectedText = "";
             this.tb_kurz.SelectionLength = 0;

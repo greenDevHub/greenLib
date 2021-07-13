@@ -244,7 +244,6 @@
             this.mtb_Barcode.MaxLength = 32767;
             this.mtb_Barcode.Name = "mtb_Barcode";
             this.mtb_Barcode.PasswordChar = '\0';
-            this.mtb_Barcode.PromptText = "Code";
             this.mtb_Barcode.ReadOnly = true;
             this.mtb_Barcode.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.mtb_Barcode.SelectedText = "";
@@ -305,7 +304,6 @@
             this.tb_ExempCount.MaxLength = 32767;
             this.tb_ExempCount.Name = "tb_ExempCount";
             this.tb_ExempCount.PasswordChar = '\0';
-            this.tb_ExempCount.PromptText = "Anzahl";
             this.tb_ExempCount.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_ExempCount.SelectedText = "";
             this.tb_ExempCount.SelectionLength = 0;
@@ -578,7 +576,6 @@
             this.tb_ID.MaxLength = 32767;
             this.tb_ID.Name = "tb_ID";
             this.tb_ID.PasswordChar = '\0';
-            this.tb_ID.PromptText = "ID";
             this.tb_ID.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_ID.SelectedText = "";
             this.tb_ID.SelectionLength = 0;
@@ -616,7 +613,6 @@
             this.tb_ISBN.MaxLength = 32767;
             this.tb_ISBN.Name = "tb_ISBN";
             this.tb_ISBN.PasswordChar = '\0';
-            this.tb_ISBN.PromptText = "ISBN";
             this.tb_ISBN.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_ISBN.SelectedText = "";
             this.tb_ISBN.SelectionLength = 0;

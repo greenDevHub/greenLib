@@ -145,7 +145,6 @@
             this.tb_Telefonnummer.MaxLength = 32767;
             this.tb_Telefonnummer.Name = "tb_Telefonnummer";
             this.tb_Telefonnummer.PasswordChar = '\0';
-            this.tb_Telefonnummer.PromptText = "Telefonnummer";
             this.tb_Telefonnummer.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Telefonnummer.SelectedText = "";
             this.tb_Telefonnummer.SelectionLength = 0;
@@ -281,7 +280,6 @@
             this.tb_Nachname.MaxLength = 32767;
             this.tb_Nachname.Name = "tb_Nachname";
             this.tb_Nachname.PasswordChar = '\0';
-            this.tb_Nachname.PromptText = "Nachname";
             this.tb_Nachname.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Nachname.SelectedText = "";
             this.tb_Nachname.SelectionLength = 0;
@@ -331,7 +329,6 @@
             this.tb_Vorname.MaxLength = 32767;
             this.tb_Vorname.Name = "tb_Vorname";
             this.tb_Vorname.PasswordChar = '\0';
-            this.tb_Vorname.PromptText = "Vorname";
             this.tb_Vorname.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Vorname.SelectedText = "";
             this.tb_Vorname.SelectionLength = 0;
@@ -368,7 +365,6 @@
             this.tb_Strasse.MaxLength = 32767;
             this.tb_Strasse.Name = "tb_Strasse";
             this.tb_Strasse.PasswordChar = '\0';
-            this.tb_Strasse.PromptText = "Strasse";
             this.tb_Strasse.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Strasse.SelectedText = "";
             this.tb_Strasse.SelectionLength = 0;
@@ -418,7 +414,6 @@
             this.tb_Mail.MaxLength = 32767;
             this.tb_Mail.Name = "tb_Mail";
             this.tb_Mail.PasswordChar = '\0';
-            this.tb_Mail.PromptText = "Mail";
             this.tb_Mail.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Mail.SelectedText = "";
             this.tb_Mail.SelectionLength = 0;
@@ -468,7 +463,6 @@
             this.tb_Hausnummer.MaxLength = 32767;
             this.tb_Hausnummer.Name = "tb_Hausnummer";
             this.tb_Hausnummer.PasswordChar = '\0';
-            this.tb_Hausnummer.PromptText = "Hausnummer";
             this.tb_Hausnummer.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Hausnummer.SelectedText = "";
             this.tb_Hausnummer.SelectionLength = 0;
@@ -505,7 +499,6 @@
             this.tb_Postleitzahl.MaxLength = 32767;
             this.tb_Postleitzahl.Name = "tb_Postleitzahl";
             this.tb_Postleitzahl.PasswordChar = '\0';
-            this.tb_Postleitzahl.PromptText = "Postleitzahl";
             this.tb_Postleitzahl.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Postleitzahl.SelectedText = "";
             this.tb_Postleitzahl.SelectionLength = 0;
@@ -542,7 +535,6 @@
             this.tb_Ort.MaxLength = 32767;
             this.tb_Ort.Name = "tb_Ort";
             this.tb_Ort.PasswordChar = '\0';
-            this.tb_Ort.PromptText = "Wohnort";
             this.tb_Ort.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Ort.SelectedText = "";
             this.tb_Ort.SelectionLength = 0;
@@ -945,7 +937,6 @@
             this.tb_search.MaxLength = 32767;
             this.tb_search.Name = "tb_search";
             this.tb_search.PasswordChar = '\0';
-            this.tb_search.PromptText = "Suche nach Kürzel";
             this.tb_search.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_search.SelectedText = "";
             this.tb_search.SelectionLength = 0;

@@ -365,7 +365,6 @@
             this.tbCopyId.MaxLength = 32767;
             this.tbCopyId.Name = "tbCopyId";
             this.tbCopyId.PasswordChar = '\0';
-            this.tbCopyId.PromptText = "Exemplar ID";
             this.tbCopyId.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbCopyId.SelectedText = "";
             this.tbCopyId.SelectionLength = 0;
@@ -407,7 +406,6 @@
             this.tbCopyIsbn.MaxLength = 32767;
             this.tbCopyIsbn.Name = "tbCopyIsbn";
             this.tbCopyIsbn.PasswordChar = '\0';
-            this.tbCopyIsbn.PromptText = "ISBN";
             this.tbCopyIsbn.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbCopyIsbn.SelectedText = "";
             this.tbCopyIsbn.SelectionLength = 0;
@@ -448,7 +446,6 @@
             this.tbTitle.MaxLength = 32767;
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.PasswordChar = '\0';
-            this.tbTitle.PromptText = "Titel";
             this.tbTitle.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbTitle.SelectedText = "";
             this.tbTitle.SelectionLength = 0;
@@ -489,7 +486,6 @@
             this.tbSurname.MaxLength = 32767;
             this.tbSurname.Name = "tbSurname";
             this.tbSurname.PasswordChar = '\0';
-            this.tbSurname.PromptText = "Nachname";
             this.tbSurname.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbSurname.SelectedText = "";
             this.tbSurname.SelectionLength = 0;
@@ -530,7 +526,6 @@
             this.tbFirstName.MaxLength = 32767;
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.PasswordChar = '\0';
-            this.tbFirstName.PromptText = "Vorname";
             this.tbFirstName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbFirstName.SelectedText = "";
             this.tbFirstName.SelectionLength = 0;
@@ -588,7 +583,6 @@
             this.tbClass.MaxLength = 32767;
             this.tbClass.Name = "tbClass";
             this.tbClass.PasswordChar = '\0';
-            this.tbClass.PromptText = "Klasse";
             this.tbClass.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbClass.SelectedText = "";
             this.tbClass.SelectionLength = 0;

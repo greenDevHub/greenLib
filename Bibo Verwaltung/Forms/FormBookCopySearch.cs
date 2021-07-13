@@ -20,7 +20,6 @@ namespace Bibo_Verwaltung
         Color bc = Color.White;
 
         #region Constructor
-        string currentUser;
         public FormBookCopySearch(int stufe)
         {
             InitializeComponent();

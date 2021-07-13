@@ -98,7 +98,6 @@
             this.tb_ExemplarID.MaxLength = 32767;
             this.tb_ExemplarID.Name = "tb_ExemplarID";
             this.tb_ExemplarID.PasswordChar = '\0';
-            this.tb_ExemplarID.PromptText = "Exemplar ID";
             this.tb_ExemplarID.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_ExemplarID.SelectedText = "";
             this.tb_ExemplarID.SelectionLength = 0;

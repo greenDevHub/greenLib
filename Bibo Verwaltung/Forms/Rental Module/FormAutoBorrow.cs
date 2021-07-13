@@ -91,7 +91,8 @@ namespace Bibo_Verwaltung
                 if (gv_Schueler.CurrentRow != null)
                 {
                     DataGridViewRow row = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index];
-                    autoausleihe.FillSuggestGrid(ref gv_suggested, row.Cells["kunde_ID"].Value.ToString());
+                    autoausleihe.Costumer = new Costumer(int.Parse(row.Cells["kunde_ID"].Value.ToString()));
+                    autoausleihe.FillSuggestGrid(ref gv_suggested);
 
                     try
                     {
@@ -147,7 +148,7 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 MetroMessageBox.Show(this, "Beim Laden der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -619,7 +620,7 @@ namespace Bibo_Verwaltung
                 a_cb_Klasse.Sorted = true;
                 lb_Klasse.Text = "Klasse:";
                 lb_Klasse.Visible = true;
-                schoolClassHelper.FillCombobox(ref a_cb_Klasse, 1);
+                schoolClassHelper.FillCombobox(ref a_cb_Klasse, 1, AutoCompleteSource.ListItems);
                 a_cb_Klasse.Visible = true;
                 a_cb_Klasse.TabStop = true;
                 p_klasse.Visible = false;

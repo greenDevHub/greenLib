@@ -1,6 +1,7 @@
 ﻿using Bibo_Verwaltung.Database;
 using MetroFramework.Controls;
 using System.Data;
+using System.Windows.Forms;
 
 namespace Bibo_Verwaltung.Helper
 {
@@ -58,9 +59,9 @@ namespace Bibo_Verwaltung.Helper
         /// </summary>
         /// <param name="cb"></param>
         /// <param name="value"></param>
-        public void FillCombobox(ref AdvancedComboBox cb, object value)
+        public void FillCombobox(ref AdvancedComboBox cb, object value, AutoCompleteSource autoCompleteSource = AutoCompleteSource.None)
         {
-            c.FillCombobox(ref cb, value, ref table);
+            c.FillCombobox(ref cb, value, ref table, autoCompleteSource);
             cb.SelectedValue = value;
         }
 

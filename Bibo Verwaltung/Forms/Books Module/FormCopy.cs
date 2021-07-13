@@ -488,40 +488,19 @@ namespace Bibo_Verwaltung
             lb_Message.Visible = true;
             t.Start();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private void Filter()
         {
             if (gv_Exemplare.DataSource == null) return;
-            try
+            string s = dTP_AufDat.Value.Date.ToString();
+            if (dTP_AufDat.Value.Date != DateTime.Now.Date)
             {
-                string s = dTP_AufDat.Value.Date.ToString();
-                if (dTP_AufDat.Value.Date != DateTime.Now.Date)
-                {
-                    s = dTP_AufDat.Value.Date.ToString();
-                    (gv_Exemplare.DataSource as DataTable).DefaultView.RowFilter = string.Format("Convert([Exemplar], System.String) LIKE '%{0}%' AND Zustand LIKE '%{1}%' AND Convert([Aufnahmedatum],System.String) LIKE '%{2}%'", tb_ID.Text, acb_Zustand.Text, s);
+                s = dTP_AufDat.Value.Date.ToString();
+                (gv_Exemplare.DataSource as DataTable).DefaultView.RowFilter = string.Format("Convert([Exemplar], System.String) LIKE '%{0}%' AND Zustand LIKE '%{1}%' AND Convert([Aufnahmedatum],System.String) LIKE '%{2}%'", tb_ID.Text, acb_Zustand.Text, s);
 
-                }
-                else
-                {
-                    (gv_Exemplare.DataSource as DataTable).DefaultView.RowFilter = string.Format("Convert([Exemplar], System.String) LIKE '%{0}%' AND Zustand LIKE '%{1}%'", tb_ID.Text, acb_Zustand.Text);
-                }
             }
-            catch (Exception ex)
+            else
             {
-
+                (gv_Exemplare.DataSource as DataTable).DefaultView.RowFilter = string.Format("Convert([Exemplar], System.String) LIKE '%{0}%' AND Zustand LIKE '%{1}%'", tb_ID.Text, acb_Zustand.Text);
             }
         }
         private void tb_isbn_TextChanged(object sender, EventArgs e)
@@ -866,7 +845,7 @@ namespace Bibo_Verwaltung
                     MetroMessageBox.Show(this, "Der Drucker ist nicht online!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 tb_ID.ResetText();
                 MetroMessageBox.Show(this, "Es gab einen Fehler bei der Kommunikation mit dem Drucker!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -918,7 +897,7 @@ namespace Bibo_Verwaltung
 
                 });
             }
-            catch (Exception ex)
+            catch
             {
                 BeginInvoke((Action)delegate ()
                 {

@@ -532,7 +532,7 @@ namespace Bibo_Verwaltung.Helper
                     }
                 }
             }
-            catch (Exception e)
+            catch
             {
                 return false;
             }

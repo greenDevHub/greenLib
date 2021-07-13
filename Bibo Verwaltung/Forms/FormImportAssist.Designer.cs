@@ -294,7 +294,6 @@
             this.mtb_Filename.MaxLength = 32767;
             this.mtb_Filename.Name = "mtb_Filename";
             this.mtb_Filename.PasswordChar = '\0';
-            this.mtb_Filename.PromptText = "Dateiname";
             this.mtb_Filename.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.mtb_Filename.SelectedText = "";
             this.mtb_Filename.SelectionLength = 0;

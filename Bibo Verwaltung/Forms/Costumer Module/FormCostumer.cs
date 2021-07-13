@@ -1086,7 +1086,7 @@ namespace Bibo_Verwaltung
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         MetroMessageBox.Show(this, "Bei dem Vorgang ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }

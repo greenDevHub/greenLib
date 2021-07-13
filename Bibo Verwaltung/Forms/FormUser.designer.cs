@@ -111,7 +111,6 @@
             this.tbUsername.MaxLength = 32767;
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.PasswordChar = '\0';
-            this.tbUsername.PromptText = "Benutzername";
             this.tbUsername.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbUsername.SelectedText = "";
             this.tbUsername.SelectionLength = 0;
@@ -146,7 +145,6 @@
             this.tbUserPassword.MaxLength = 32767;
             this.tbUserPassword.Name = "tbUserPassword";
             this.tbUserPassword.PasswordChar = '●';
-            this.tbUserPassword.PromptText = "Passwort";
             this.tbUserPassword.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbUserPassword.SelectedText = "";
             this.tbUserPassword.SelectionLength = 0;
@@ -384,7 +382,6 @@
             this.tbUserPasswordRepeat.MaxLength = 32767;
             this.tbUserPasswordRepeat.Name = "tbUserPasswordRepeat";
             this.tbUserPasswordRepeat.PasswordChar = '●';
-            this.tbUserPasswordRepeat.PromptText = "Passwort wiederholen";
             this.tbUserPasswordRepeat.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tbUserPasswordRepeat.SelectedText = "";
             this.tbUserPasswordRepeat.SelectionLength = 0;

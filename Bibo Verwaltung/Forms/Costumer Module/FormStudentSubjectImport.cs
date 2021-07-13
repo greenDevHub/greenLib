@@ -20,9 +20,6 @@ namespace Bibo_Verwaltung
 
         char seperator = ';';
         char feldquali = '"';
-        char dattrenn = '.';
-        char zeittrenn = ':';
-        char dezsym = ',';
         string target = "";
         string filename = "";
         bool multiselect = false;
