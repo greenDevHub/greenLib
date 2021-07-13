@@ -133,7 +133,7 @@ namespace Bibo_Verwaltung
 
         private void btSettingsClick(object sender, EventArgs e)
         {
-            w_s_einstellungen formSettings = new w_s_einstellungen();
+            FormSettings formSettings = new FormSettings();
             formSettings.ShowDialog(this);
             formSettings.Dispose();
         }

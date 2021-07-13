@@ -31,7 +31,7 @@ namespace Bibo_Verwaltung
             {
                 MetroMessageBox.Show(this, "Die Verbindung zum SQL-Server konnte nicht hergestellt werden. " +
                     "Bitte überprüfen Sie die Verbindungseinstellungen.", "Keine Verbindung.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                w_s_einstellungen formSettings = new w_s_einstellungen();
+                FormSettings formSettings = new FormSettings();
                 formSettings.ShowDialog(this);
                 formSettings.Dispose();
                 return;

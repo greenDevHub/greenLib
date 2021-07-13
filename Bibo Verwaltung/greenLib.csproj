@@ -322,11 +322,11 @@
     <Compile Include="Forms\Rental Module\FormOverview.Designer.cs">
       <DependentUpon>FormOverview.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_einstellungen.cs">
+    <Compile Include="Forms\FormSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_einstellungen.Designer.cs">
-      <DependentUpon>w_s_einstellungen.cs</DependentUpon>
+    <Compile Include="Forms\FormSettings.Designer.cs">
+      <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Costumer.cs" />
     <Compile Include="Forms\Costumer Module\FormCostumer.cs">
@@ -412,8 +412,8 @@
     <EmbeddedResource Include="Forms\Rental Module\FormOverview.resx">
       <DependentUpon>FormOverview.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_einstellungen.resx">
-      <DependentUpon>w_s_einstellungen.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormSettings.resx">
+      <DependentUpon>FormSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Costumer Module\FormCostumer.resx">
       <DependentUpon>FormCostumer.cs</DependentUpon>
