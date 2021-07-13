@@ -16,12 +16,12 @@ namespace Bibo_Verwaltung
     public partial class FormBookSubject : MetroFramework.Forms.MetroForm
     {
         SubjectHelper subjectHelper = new SubjectHelper();
+        BookSubjectHelper bookSubjectHelper = new BookSubjectHelper();
 
+        bool isAdvancedCourseMode = false;
 
-        BuchFach bf = new BuchFach();
         private DataTable buecherListe = new DataTable();
         private bool aenderungungen = false;
-        string currentUser;
         bool gast = false;
         public FormBookSubject()
         {
@@ -72,7 +72,7 @@ namespace Bibo_Verwaltung
                 buecherListe.Rows.Clear();
                 if (gv_Faecher.CurrentRow != null)
                 {
-                    bf.Show_FachBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString(), lk);
+                    bookSubjectHelper.FillGridBookSubject(ref gv_Buecher, int.Parse(gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString()), isAdvancedCourseMode);
                 }
             }
             catch
@@ -190,7 +190,7 @@ namespace Bibo_Verwaltung
                     {
                         try
                         {
-                            bf.Save_Zuordnung(buecherListe, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString(),lk);
+                            bookSubjectHelper.SaveAssignment(buecherListe, int.Parse(gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString()),isAdvancedCourseMode);
                             aenderungungen = false;
                         }
                         catch
@@ -213,7 +213,7 @@ namespace Bibo_Verwaltung
                     bt_back.Enabled = true;
                     gv_Buecher.Enabled = true;
                     gv_Faecher.Enabled = false;
-                    bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString(),lk);
+                    bookSubjectHelper.FillGridAllBooks(ref gv_Buecher, int.Parse(gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString()),isAdvancedCourseMode);
                     FillBuecherList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
@@ -275,7 +275,7 @@ namespace Bibo_Verwaltung
         
         private void mbt_ImEx_Click(object sender, EventArgs e)
         {
-            w_s_selfmade_dialog custom = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export");
+            CustomDialog custom = new CustomDialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export");
             custom.ShowDialog(this);
             if (custom.DialogResult == DialogResult.Yes)
             {
@@ -312,7 +312,7 @@ namespace Bibo_Verwaltung
                         bt_back.Enabled = true;
                         gv_Buecher.Enabled = true;
                         gv_Faecher.Enabled = false;
-                        bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[e.RowIndex].Cells["ID"].Value.ToString(), lk);
+                        bookSubjectHelper.FillGridAllBooks(ref gv_Buecher, int.Parse(gv_Faecher.Rows[e.RowIndex].Cells["ID"].Value.ToString()), isAdvancedCourseMode);
                         FillBuecherList();
                         bt_Bearbeiten.Text = "Übernehmen";
                     }
@@ -367,7 +367,7 @@ namespace Bibo_Verwaltung
                         bt_back.Enabled = true;
                         gv_Buecher.Enabled = true;
                         gv_Faecher.Enabled = false;
-                        bf.Show_AllBuecher(ref gv_Buecher, gv_Faecher.Rows[gv_Faecher.SelectedRows[0].Index].Cells["ID"].Value.ToString(),lk);
+                        bookSubjectHelper.FillGridAllBooks(ref gv_Buecher, int.Parse(gv_Faecher.Rows[gv_Faecher.SelectedRows[0].Index].Cells["ID"].Value.ToString()),isAdvancedCourseMode);
                         FillBuecherList();
                         bt_Bearbeiten.Text = "Übernehmen";
                     }
@@ -432,7 +432,7 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                (gv_Faecher.DataSource as DataTable).DefaultView.RowFilter = string.Format("Langbezeichnung LIKE '%{0}%'", tb_fach.Text);
+                (gv_Faecher.DataSource as DataTable).DefaultView.RowFilter = string.Format("Langbezeichnung LIKE '%{0}%' OR Kürzel LIKE '%{0}%'", tb_fach.Text);
             }
             catch
             {
@@ -462,7 +462,6 @@ namespace Bibo_Verwaltung
             bt_lk.Enabled = gv_Faecher.Enabled;
 
         }
-        bool lk = false;
         private void Bt_lk_Click(object sender, EventArgs e)
         {
             if(bt_lk.Text.Equals("Zu Leistungskurs wechseln",StringComparison.InvariantCultureIgnoreCase))
@@ -470,7 +469,7 @@ namespace Bibo_Verwaltung
                 //ALLE FÄCHER LEISTUNGSKURS
                 bt_lk.Text = "Zu Grundkurs wechseln";
                 lb_titel.Text = "Fächer (LK):";
-                lk = true;
+                isAdvancedCourseMode = true;
             }
             else
             {
@@ -478,7 +477,7 @@ namespace Bibo_Verwaltung
                 //STANDARD FALL
                 bt_lk.Text = "Zu Leistungskurs wechseln";
                 lb_titel.Text = "Fächer (GK):";
-                lk = false;
+                isAdvancedCourseMode = false;
             }
             LoadBuecher();
         }

@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_exemplarSuche : MetroFramework.Forms.MetroForm
+    public partial class FormBookCopySearch : MetroFramework.Forms.MetroForm
     {
         BookHelper bookHelper = new BookHelper();
         CopyHelper copyHelper = new CopyHelper();
@@ -29,7 +29,7 @@ namespace Bibo_Verwaltung
 
         #region Constructor
         string currentUser;
-        public w_s_exemplarSuche(int stufe)
+        public FormBookCopySearch(int stufe)
         {
             InitializeComponent();
             LoadTheme();

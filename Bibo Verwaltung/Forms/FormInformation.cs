@@ -1,22 +1,12 @@
 ﻿using Bibo_Verwaltung.Helper;
-using MetroFramework.Components;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_information : MetroFramework.Forms.MetroForm
+    public partial class FormInformation : MetroFramework.Forms.MetroForm
     {
-        string currentUser;
-        public w_s_information(int modus, int id)
-        {           
+        public FormInformation(int modus, int id)
+        {
             InitializeComponent();
             LoadTheme();
             if (modus == 1)
@@ -39,13 +29,13 @@ namespace Bibo_Verwaltung
                 if (book.BookAuthors.Count > 1)
                 {
                     lb_2_3.Text = "";
-                    foreach(Author author in book.BookAuthors)
+                    foreach (Author author in book.BookAuthors)
                     {
                         lb_2_3.Text = lb_2_3.Text + author.AuthorName + ", ";
                     }
                     lb_2_3.Text = lb_2_3.Text.Substring(0, lb_2_3.Text.Length - 2);
                 }
-                else if(book.BookAuthors.Count == 0)
+                else if (book.BookAuthors.Count == 0)
                 {
                     lb_2_3.Text = "-";
                 }

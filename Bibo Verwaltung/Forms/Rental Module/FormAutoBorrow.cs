@@ -13,13 +13,13 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_automatic : MetroFramework.Forms.MetroForm
+    public partial class FormAutoBorrow : MetroFramework.Forms.MetroForm
     {
         CostumerHelper costumerHelper = new CostumerHelper();
         SchoolClassHelper schoolClassHelper = new SchoolClassHelper();
         GradeHelper gradeHelper = new GradeHelper();
         #region Constructor
-        public w_s_automatic()
+        public FormAutoBorrow()
         {
             InitializeComponent();
             LoadTheme();
@@ -657,7 +657,7 @@ namespace Bibo_Verwaltung
         {
             if (a_cb_Modus.SelectedIndex == 0)
             {
-                using (w_s_exemplarSuche formCopySearch = new w_s_exemplarSuche(gradeHelper.GetGradeOfSchoolClass(schoolClassHelper.FindIdByName(a_cb_Klasse.Text))))
+                using (FormBookCopySearch formCopySearch = new FormBookCopySearch(gradeHelper.GetGradeOfSchoolClass(schoolClassHelper.FindIdByName(a_cb_Klasse.Text))))
                 {
                     var result = formCopySearch.ShowDialog();
                     if (result == DialogResult.OK)
@@ -671,7 +671,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                using (var formCopySearch = new w_s_exemplarSuche(Convert.ToInt32(a_cb_Klasse.Text.Substring(13))))
+                using (var formCopySearch = new FormBookCopySearch(Convert.ToInt32(a_cb_Klasse.Text.Substring(13))))
                 {
                     var result = formCopySearch.ShowDialog();
                     if (result == DialogResult.OK)

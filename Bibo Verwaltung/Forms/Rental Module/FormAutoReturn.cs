@@ -13,12 +13,12 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_autorueck : MetroFramework.Forms.MetroForm
+    public partial class FormAutoReturn : MetroFramework.Forms.MetroForm
     {
         CostumerHelper costumerHelper = new CostumerHelper();
         SchoolClassHelper schoolClassHelper = new SchoolClassHelper();
         #region Constructor
-        public w_s_autorueck()
+        public FormAutoReturn()
         {
             InitializeComponent();
             LoadTheme();

@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    class Verlauf
+    class HistoryHelper
     {
         int copyId;
-        public Verlauf(int id)
+        public HistoryHelper(int id)
         {
             copyId = id;
         }

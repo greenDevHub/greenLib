@@ -30,7 +30,7 @@ namespace Bibo_Verwaltung
 
         DataTable table = new DataTable();
 
-        Protokoll log = new Protokoll();
+        Protocol log = new Protocol();
 
         DateTime dt = new DateTime();
         DateTime now = new DateTime();

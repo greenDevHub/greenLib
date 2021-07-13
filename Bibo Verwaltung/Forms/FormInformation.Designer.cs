@@ -1,6 +1,6 @@
 ﻿namespace Bibo_Verwaltung
 {
-    partial class w_s_information
+    partial class FormInformation
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_information));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInformation));
             this.bt_Ok = new MetroFramework.Controls.MetroButton();
             this.lb_1 = new MetroFramework.Controls.MetroLabel();
             this.lb_4 = new MetroFramework.Controls.MetroLabel();
@@ -283,11 +283,11 @@
             this.bt_Verwaltung.UseSelectable = true;
             this.bt_Verwaltung.Click += new System.EventHandler(this.bt_kunde_Click);
             // 
-            // msm_info
+            // styleManagerInformation
             // 
             this.styleManagerInformation.Owner = this;
             // 
-            // w_s_information
+            // FormInformation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -296,7 +296,7 @@
             this.Controls.Add(this.tLP_Information);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "w_s_information";
+            this.Name = "FormInformation";
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowInTaskbar = false;

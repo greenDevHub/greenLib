@@ -234,18 +234,18 @@ namespace Bibo_Verwaltung
         private void btAutoReturnClick(object sender, EventArgs e)
         {
             if (!IsConnected()) return;
-            w_s_selfmade_dialog formDialog = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Ausleih- oder den Rückgabe-Modus!",
+            CustomDialog formDialog = new CustomDialog("Modusauswahl", "Wählen Sie den Ausleih- oder den Rückgabe-Modus!",
                 "Ausleih-Modus", "Rückgabe-Modus");
             formDialog.ShowDialog(this);
             if (formDialog.DialogResult == DialogResult.Yes)
             {
-                w_s_automatic formAutoBorrow = new w_s_automatic();
+                FormAutoBorrow formAutoBorrow = new FormAutoBorrow();
                 formAutoBorrow.ShowDialog(this);
                 formAutoBorrow.Dispose();
             }
             else if (formDialog.DialogResult == DialogResult.No)
             {
-                w_s_autorueck formAutoReturn = new w_s_autorueck();
+                FormAutoReturn formAutoReturn = new FormAutoReturn();
                 formAutoReturn.ShowDialog(this);
                 formAutoReturn.Dispose();
             }

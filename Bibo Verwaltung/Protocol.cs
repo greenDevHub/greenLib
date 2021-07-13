@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Bibo_Verwaltung
 {
-    class Protokoll
+    class Protocol
     {
         public string pathpublic = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\LogFiles\\error_reports.txt";
         public string pathprivate = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\greenLib\\LogFiles\\system_error_reports.txt";
 
-        public Protokoll()
+        public Protocol()
         {
 
         }

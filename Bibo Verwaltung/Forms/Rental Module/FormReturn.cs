@@ -253,7 +253,7 @@ namespace Bibo_Verwaltung
                         cb_Zustand.SelectedValue = copy.Condition.ConditionId;
                         rueckgabe.StartCondition = copy.Condition;
                         rueckgabe.EndCondition = copy.Condition;
-                        Verlauf verlauf = new Verlauf(rueckgabe.Copy.CopyId);
+                        HistoryHelper verlauf = new HistoryHelper(rueckgabe.Copy.CopyId);
                         verlauf.FillGrid(ref gv_Verlauf);
 
                         if (!rueckgabe.IsAvailable)
@@ -409,14 +409,14 @@ namespace Bibo_Verwaltung
 
         private void llb_Buch_LinkClicked(object sender, EventArgs e)
         {
-            w_s_information formBookInformation = new w_s_information(1, rueckgabe.Copy.CopyId);
+            FormInformation formBookInformation = new FormInformation(1, rueckgabe.Copy.CopyId);
             formBookInformation.ShowDialog();
             formBookInformation.Dispose();
         }
 
         private void llb_Kunde_LinkClicked(object sender, EventArgs e)
         {
-            w_s_information formCostumerInformation = new w_s_information(2, kunde.CostumerId);
+            FormInformation formCostumerInformation = new FormInformation(2, kunde.CostumerId);
             formCostumerInformation.ShowDialog();
             formCostumerInformation.Dispose();
         }

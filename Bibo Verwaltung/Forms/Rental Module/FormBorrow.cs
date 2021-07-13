@@ -466,7 +466,7 @@ namespace Bibo_Verwaltung
 
         private void llb_BuchTitel_Click(object sender, EventArgs e)
         {
-            w_s_information formBookInformation = new w_s_information(1, borrowHelper.Copy.CopyId);
+            FormInformation formBookInformation = new FormInformation(1, borrowHelper.Copy.CopyId);
             formBookInformation.ShowDialog();
             formBookInformation.Dispose();
         }

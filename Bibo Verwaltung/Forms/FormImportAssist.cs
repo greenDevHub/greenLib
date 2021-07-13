@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_importAssist : MetroFramework.Forms.MetroForm
+    public partial class FormImportAssist : MetroFramework.Forms.MetroForm
     {
         Import import = new Import();
         DataTable typ = new DataTable();
@@ -24,7 +24,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Öffnet den Import-Assist zum importieren von CSV-Dateien
         /// </summary>
-        public w_s_importAssist(string targetDBTable, MetroStyleManager msm)
+        public FormImportAssist(string targetDBTable, MetroStyleManager msm)
         {
             InitializeComponent();
             msm_import = msm;

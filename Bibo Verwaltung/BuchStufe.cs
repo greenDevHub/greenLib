@@ -39,7 +39,6 @@ namespace Bibo_Verwaltung
         {
             if (con.ConnectError()) return;
             string RawCommand = "SELECT bs_isbn as 'ISBN', bs_klassenstufe, buch_titel as 'Titel' FROM [dbo].[t_s_buch_stufe] left join [dbo].[t_s_buecher] on buch_isbn = bs_isbn order by buch_titel";
-            SqlCommand cmd = new SqlCommand(RawCommand, con.Con);
             adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.Fill(ds);
             con.Close();

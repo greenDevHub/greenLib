@@ -13,7 +13,7 @@ namespace Bibo_Verwaltung
 {
     class ExcelExport
     {
-        Protokoll log = new Protokoll();
+        Protocol log = new Protocol();
         CustomSqlConnection con = new CustomSqlConnection();
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();

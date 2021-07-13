@@ -380,7 +380,7 @@
             this.tb_fach.MaxLength = 32767;
             this.tb_fach.Name = "tb_fach";
             this.tb_fach.PasswordChar = '\0';
-            this.tb_fach.PromptText = "Suche nach Fach (Lang)";
+            this.tb_fach.PromptText = "Suche nach Fach";
             this.tb_fach.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_fach.SelectedText = "";
             this.tb_fach.SelectionLength = 0;
@@ -390,7 +390,7 @@
             this.tb_fach.Size = new System.Drawing.Size(172, 23);
             this.tb_fach.TabIndex = 2;
             this.tb_fach.UseSelectable = true;
-            this.tb_fach.WaterMark = "Suche nach Fach (Lang)";
+            this.tb_fach.WaterMark = "Suche nach Fach";
             this.tb_fach.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_fach.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_fach.TextChanged += new System.EventHandler(this.Tb_fach_TextChanged);

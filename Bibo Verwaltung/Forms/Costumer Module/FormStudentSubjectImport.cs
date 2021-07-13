@@ -17,7 +17,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_schuelerimport : MetroFramework.Forms.MetroForm
+    public partial class FormStudentSubjectImport : MetroFramework.Forms.MetroForm
     {
         SubjectHelper subjectHelper = new SubjectHelper();
         SchoolClassHelper schoolClassHelper = new SchoolClassHelper();
@@ -42,11 +42,11 @@ namespace Bibo_Verwaltung
         /// Nummer der aktuellen Datei
         /// </summary>
         int fileNum = 0;
-        Schuelerimport schuelerImport = new Schuelerimport();
+        StudentSubjectImport schuelerImport = new StudentSubjectImport();
         List<string> files = new List<string>();
         List<string> filesShort = new List<string>();
         int errors = 0;
-        public w_s_schuelerimport(string target, bool modus)
+        public FormStudentSubjectImport(string target, bool modus)
         {
             this.target = target;
             InitializeComponent();
@@ -210,7 +210,7 @@ namespace Bibo_Verwaltung
         /// <param name="file"></param>
         private void fillPreviewDT(string file, ref DataTable privateDataTable, ref DataTable sortedDataTable)
         {
-            Schuelerimport si = new Schuelerimport();
+            StudentSubjectImport si = new StudentSubjectImport();
             privateDataTable.Reset();
             si.Path = file;
             si.Textqualifizierer = schuelerImport.Textqualifizierer;
@@ -282,7 +282,7 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
-                    Schuelerimport im = new Schuelerimport();
+                    StudentSubjectImport im = new StudentSubjectImport();
                     im.Path = schuelerImport.Path;
                     im.Separator = schuelerImport.Separator;
                     im.Textqualifizierer = schuelerImport.Textqualifizierer;
@@ -520,7 +520,7 @@ namespace Bibo_Verwaltung
                 DataTable privateDT = new DataTable();
                 DataTable sortedDT = new DataTable();
                 getValuesFromPreset();
-                Schuelerimport im = new Schuelerimport();
+                StudentSubjectImport im = new StudentSubjectImport();
                 im.Path = tb_aktuell.Text;
                 im.Separator = schuelerImport.Separator;
                 cb_FeldTrenn.Text = schuelerImport.Separator.ToString();
@@ -797,7 +797,7 @@ namespace Bibo_Verwaltung
                         {
                             //SEK1 Import Schüler
                             string klassenstufe = costumer.CostumerSchoolClass.SchoolClassName.Substring(0, costumer.CostumerSchoolClass.SchoolClassName.Length - 2);
-                            FachStufe fs = new FachStufe(klassenstufe);
+                            SubjectGradeHelper fs = new SubjectGradeHelper(klassenstufe);
                             for (int i = 4; i < 7; i++)
                             {
                                 string fach = row[i].ToString();
@@ -1175,7 +1175,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void CheckSelected()
         {
-            Schuelerimport si = new Schuelerimport();
+            StudentSubjectImport si = new StudentSubjectImport();
             if (rb_schueler1.Checked)
             {
                 //Sek1

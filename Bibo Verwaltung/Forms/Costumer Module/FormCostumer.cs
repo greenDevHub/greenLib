@@ -835,7 +835,7 @@ namespace Bibo_Verwaltung
 
         private void bt_ImEx_Click(object sender, EventArgs e)
         {
-            w_s_schuelerimport import = new w_s_schuelerimport("t_s_schueler", true);
+            FormStudentSubjectImport import = new FormStudentSubjectImport("t_s_schueler", true);
             import.ShowDialog(this);
             import.Dispose();
             if (!backgroundWorker1.IsBusy)
@@ -1076,7 +1076,7 @@ namespace Bibo_Verwaltung
                         DialogResult drFinished = MetroMessageBox.Show(this, "Die Datenbank wurde erfolgreich von allen Schülern bereinigt. Wollen Sie zum Import wechseln?", "Vorgang erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (drFinished == DialogResult.Yes)
                         {
-                            w_s_schuelerimport import = new w_s_schuelerimport("t_s_schueler", true);
+                            FormStudentSubjectImport import = new FormStudentSubjectImport("t_s_schueler", true);
                             this.Hide();
                             import.ShowDialog(this);
                             import.Dispose();

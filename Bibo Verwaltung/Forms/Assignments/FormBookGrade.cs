@@ -288,7 +288,7 @@ namespace Bibo_Verwaltung
 
         private void mbt_ImEx_Click(object sender, EventArgs e)
         {
-            w_s_selfmade_dialog custom = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export");
+            CustomDialog custom = new CustomDialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export");
             custom.ShowDialog(this);
             if (custom.DialogResult == DialogResult.Yes)
             {

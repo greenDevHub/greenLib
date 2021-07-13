@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_selfmade_dialog : MetroFramework.Forms.MetroForm
+    public partial class CustomDialog : MetroFramework.Forms.MetroForm
     {
-        public w_s_selfmade_dialog(string caption, string message, string buttonCaption1, string buttonCaption2)
+        public CustomDialog(string caption, string message, string buttonCaption1, string buttonCaption2)
         {
             InitializeComponent();
             LoadTheme();

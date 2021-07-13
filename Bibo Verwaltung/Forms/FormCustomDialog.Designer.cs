@@ -1,6 +1,6 @@
 ﻿namespace Bibo_Verwaltung
 {
-    partial class w_s_selfmade_dialog
+    partial class CustomDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_selfmade_dialog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomDialog));
             this.mbt_Choice1 = new MetroFramework.Controls.MetroButton();
             this.mbt_Choice2 = new MetroFramework.Controls.MetroButton();
             this.mbt_Cancel = new MetroFramework.Controls.MetroButton();

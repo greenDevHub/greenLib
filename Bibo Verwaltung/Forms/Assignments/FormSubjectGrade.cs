@@ -15,7 +15,7 @@ namespace Bibo_Verwaltung
 {
     public partial class FormSubjectGrade : MetroFramework.Forms.MetroForm
     {
-        FachStufe fs = new FachStufe();
+        SubjectGradeHelper fs = new SubjectGradeHelper();
         private DataTable faecherListe = new DataTable();
         private bool aenderungungen = false;
         bool gast = false;
@@ -287,7 +287,7 @@ namespace Bibo_Verwaltung
 
         private void mbt_ImEx_Click(object sender, EventArgs e)
         {
-            w_s_selfmade_dialog formDialog = new w_s_selfmade_dialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export");
+            CustomDialog formDialog = new CustomDialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export");
             formDialog.ShowDialog(this);
             if (formDialog.DialogResult == DialogResult.Yes)
             {

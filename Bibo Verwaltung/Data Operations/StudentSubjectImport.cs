@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    class Schuelerimport
+    class StudentSubjectImport
     {
         private DataTable dt = new DataTable();
 
@@ -107,7 +107,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Erschafft ein Objekt zum importieren/exportieren von CSV-Dateien.
         /// </summary>
-        public Schuelerimport()
+        public StudentSubjectImport()
         {
         }
         #endregion

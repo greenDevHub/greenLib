@@ -265,7 +265,7 @@ namespace Bibo_Verwaltung
             //Form import;
             if (currentModus == "Fach")
             {
-                w_s_schuelerimport Import = new w_s_schuelerimport("t_s_faecher", true);
+                FormStudentSubjectImport Import = new FormStudentSubjectImport("t_s_faecher", true);
                 Import.ShowDialog(this);
                 Import.Dispose();
             }
