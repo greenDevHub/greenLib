@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml;
 using System.Data;
-using System.IO;
 using System.Data.SqlClient;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
@@ -79,7 +74,7 @@ namespace Bibo_Verwaltung
             dialog.Filter = "CSV|*.csv";
             dialog.Title = "Als Tabelle(n) abspeichern";
             dialog.FileName = "Tabelle.csv";
-            if(dialog.ShowDialog() == DialogResult.OK)
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
                 string FileNames = dialog.FileName.Replace(".csv", "");
                 foreach (DataTable tb in ds.Tables)

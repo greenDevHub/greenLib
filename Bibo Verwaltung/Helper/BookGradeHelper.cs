@@ -1,13 +1,8 @@
 ﻿using Bibo_Verwaltung.Helper;
 using MetroFramework.Controls;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -30,29 +25,29 @@ namespace Bibo_Verwaltung
 
         private void SetMark(ref MetroGrid gridBooks, int grade, DataTable table, object value = null)
         {
-                for (int j = 0; j <= gridBooks.Rows.Count - 1; j++)
-                {
-                    DataGridViewRow row = gridBooks.Rows[j];
+            for (int j = 0; j <= gridBooks.Rows.Count - 1; j++)
+            {
+                DataGridViewRow row = gridBooks.Rows[j];
 
-                    for (int i = 0; i <= table.Rows.Count - 1; i++)
+                for (int i = 0; i <= table.Rows.Count - 1; i++)
+                {
+                    if (row.Cells["ISBN"].Value.ToString() == table.Rows[i]["ISBN"].ToString())
                     {
-                        if (row.Cells["ISBN"].Value.ToString() == table.Rows[i]["ISBN"].ToString())
+                        if (int.Parse(table.Rows[i]["bs_klassenstufe"].ToString()) == grade)
                         {
-                            if (int.Parse(table.Rows[i]["bs_klassenstufe"].ToString()) == grade)
-                            {
-                                row.Cells["ISBN"].Value = "*" + row.Cells["ISBN"].Value.ToString();
-                                row.DefaultCellStyle.BackColor = Color.Yellow;
-                                row.DefaultCellStyle.ForeColor = Color.Black;
-                            }
+                            row.Cells["ISBN"].Value = "*" + row.Cells["ISBN"].Value.ToString();
+                            row.DefaultCellStyle.BackColor = Color.Yellow;
+                            row.DefaultCellStyle.ForeColor = Color.Black;
                         }
                     }
                 }
+            }
         }
 
         public void FillGridAllBooks(ref MetroGrid gridBooks, int grade, object value = null)
         {
             DataTable table = FillObject();
-            bookHelper.FillGrid(ref gridBooks,true);
+            bookHelper.FillGrid(ref gridBooks, true);
             SetMark(ref gridBooks, grade, table);
         }
 

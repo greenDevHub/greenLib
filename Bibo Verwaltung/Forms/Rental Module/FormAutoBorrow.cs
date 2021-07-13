@@ -1,14 +1,9 @@
 ﻿using Bibo_Verwaltung.Helper;
 using MetroFramework;
-using MetroFramework.Components;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -97,7 +92,7 @@ namespace Bibo_Verwaltung
                 {
                     DataGridViewRow row = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index];
                     autoausleihe.FillSuggestGrid(ref gv_suggested, row.Cells["kunde_ID"].Value.ToString());
-                    
+
                     try
                     {
                         lb_selected.Text = "bereits geliehene Bücher:";
@@ -350,7 +345,7 @@ namespace Bibo_Verwaltung
         {
             autoausleihe.Costumer = new Costumer(int.Parse(gv_Schueler.CurrentRow.Cells["kunde_ID"].Value.ToString()));
             DialogResult dialogResult = MetroMessageBox.Show(this, autoausleihe.GetAusleihList() + "an: '" + autoausleihe.TrimText(autoausleihe.Costumer.CostumerFirstName + " " + autoausleihe.Costumer.CostumerSurname, 30) + "' wirklich ausleihen?", "Bestätigung",
-                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question,211 + autoausleihe.BorrowTable.Rows.Count*17);
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Question, 211 + autoausleihe.BorrowTable.Rows.Count * 17);
             if (dialogResult == DialogResult.OK)
             {
                 DataGridViewRow Kundenrow = gv_Schueler.CurrentRow;
@@ -451,21 +446,21 @@ namespace Bibo_Verwaltung
                 List<Book> suggestedBooks = autoausleihe.SuggestedBooks();
                 List<string> borrowedBookIsbns = costumer.BorrowedBookIsbns();
                 int countBooks = 0;
-                foreach(Book book in suggestedBooks)
+                foreach (Book book in suggestedBooks)
                 {
                     if (!borrowedBookIsbns.Contains(book.BookIsbn))
                     {
                         countBooks++;
                     }
                 }
-                if (countBooks >0 && countBooks==suggestedBooks.Count)
+                if (countBooks > 0 && countBooks == suggestedBooks.Count)
                 {
                     costumerRow.DefaultCellStyle.SelectionBackColor = default;
                     costumerRow.DefaultCellStyle.SelectionForeColor = default;
                     costumerRow.DefaultCellStyle.BackColor = default;
                     costumerRow.DefaultCellStyle.ForeColor = default;
                 }
-                else if(countBooks>0 && countBooks < suggestedBooks.Count)
+                else if (countBooks > 0 && countBooks < suggestedBooks.Count)
                 {
                     costumerRow.DefaultCellStyle.SelectionBackColor = Color.LightGray;
                     costumerRow.DefaultCellStyle.SelectionForeColor = Color.Black;
@@ -624,7 +619,7 @@ namespace Bibo_Verwaltung
                 a_cb_Klasse.Sorted = true;
                 lb_Klasse.Text = "Klasse:";
                 lb_Klasse.Visible = true;
-                schoolClassHelper.FillCombobox(ref a_cb_Klasse,1);
+                schoolClassHelper.FillCombobox(ref a_cb_Klasse, 1);
                 a_cb_Klasse.Visible = true;
                 a_cb_Klasse.TabStop = true;
                 p_klasse.Visible = false;

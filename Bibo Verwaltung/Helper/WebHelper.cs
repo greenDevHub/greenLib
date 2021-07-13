@@ -1,14 +1,10 @@
-﻿using MetroFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung.Helper
@@ -365,7 +361,7 @@ namespace Bibo_Verwaltung.Helper
             Image image;
             using (var ms = new MemoryStream(imageData))
             {
-                image =  Image.FromStream(ms);
+                image = Image.FromStream(ms);
             }
             image = ScaleImage(image, 600, 600);
             return image;
@@ -487,7 +483,7 @@ namespace Bibo_Verwaltung.Helper
                 }
 
                 var image = GetPictureNeu(isbn);
-                if(image != null)
+                if (image != null)
                 {
                     book.BookImage = image;
                 }

@@ -1,17 +1,11 @@
 ﻿using Bibo_Verwaltung.Helper;
 using MetroFramework;
-using MetroFramework.Components;
 using MetroFramework.Controls;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -285,7 +279,7 @@ namespace Bibo_Verwaltung
                 {
                     foreach (DataRow row in borrowHelper.BorrowTable.Rows)
                     {
-                        borrowHelper.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(),dp_RueckDatum.Value.ToShortDateString(), Convert.ToInt32(costumer.CostumerId));                    
+                        borrowHelper.Execute_Ausleihe(Convert.ToInt32(row[0].ToString()), DateTime.Now.Date.ToShortDateString(), dp_RueckDatum.Value.ToShortDateString(), Convert.ToInt32(costumer.CostumerId));
                         //ausleihe.Save_Transaction(); In Bearbeitung!!!
                     }
                     MetroMessageBox.Show(this, "Die Buchausgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -409,7 +403,7 @@ namespace Bibo_Verwaltung
                     }
                     if (borrowHelper.BorrowTable.Rows.Count != 0)
                     {
-                        Buchausgabe();                   
+                        Buchausgabe();
                     }
                 }
                 else
@@ -500,7 +494,7 @@ namespace Bibo_Verwaltung
         private void tb_NName_TextChanged(object sender, EventArgs e)
         {
             SearchKunde(tb_VName.Text, tb_NName.Text);
-        }    
+        }
 
         private void W_s_ausleihe_Shown(object sender, EventArgs e)
         {
@@ -526,7 +520,7 @@ namespace Bibo_Verwaltung
 
         private void Gv_Kunde_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Tab || e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Tab || e.KeyCode == Keys.Enter)
             {
                 bt_Submit.Focus();
                 e.SuppressKeyPress = true;
@@ -580,7 +574,7 @@ namespace Bibo_Verwaltung
                     });
                 }
             }
-            
+
 
 
         }

@@ -1,17 +1,10 @@
 ﻿using Bibo_Verwaltung.Helper;
-using MetroFramework;
 using MetroFramework.Controls;
-using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -328,7 +321,7 @@ namespace Bibo_Verwaltung
         {
             CustomSqlConnection con = new CustomSqlConnection();
             DataTable table = new DataTable();
-            if (con.ConnectError()  || Costumer == null || Costumer.CostumerSubjects == null || Costumer.CostumerAdvancedSubjects == null) return table;
+            if (con.ConnectError() || Costumer == null || Costumer.CostumerSubjects == null || Costumer.CostumerAdvancedSubjects == null) return table;
             string command = "SELECT f_kurzform as 'Fach', bf_isbn as 'ISBN', buch_titel as 'Titel', bf_fachid FROM [dbo].[t_s_buch_fach] " +
                 "left join t_s_buecher on buch_isbn = bf_isbn left join t_s_faecher on f_id = bf_fachid left join t_s_buch_stufe on bs_isbn = bf_isbn " +
                 "WHERE bf_fachid = @0 AND bs_klassenstufe = @1 AND bf_lk = @2";
@@ -361,7 +354,7 @@ namespace Bibo_Verwaltung
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 string isbn = table.Rows[i][1].ToString();
-                Book book = new Book(isbn,false);
+                Book book = new Book(isbn, false);
                 suggestedBooks.Add(book);
             }
             return suggestedBooks;

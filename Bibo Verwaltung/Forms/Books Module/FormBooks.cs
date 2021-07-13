@@ -1,21 +1,16 @@
-﻿using System;
+﻿using Bibo_Verwaltung.Helper;
+using bpac;
+using MetroFramework;
+using MetroFramework.Controls;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Windows.Forms;
-using System.Text.RegularExpressions;
-using System.Net;
-using System.IO;
-using System.Drawing.Imaging;
-using System.Text;
 using System.Media;
-using MetroFramework;
-using bpac;
-using MetroFramework.Controls;
+using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading;
-using System.Net.Http;
-using Bibo_Verwaltung.Helper;
+using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {

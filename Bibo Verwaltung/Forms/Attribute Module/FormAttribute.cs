@@ -1,14 +1,8 @@
 ﻿using Bibo_Verwaltung.Helper;
 using MetroFramework;
-using MetroFramework.Controls;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -33,7 +27,7 @@ namespace Bibo_Verwaltung
             LoadTheme();
 
             this.currentModus = modus;
-            
+
             if (currentModus == "Fach")
             {
                 this.StyleManager.Style = MetroColorStyle.Teal;
@@ -92,7 +86,7 @@ namespace Bibo_Verwaltung
             tLP_Faecher.RowStyles[0].Height = 0;
             tLP_Faecher.RowStyles[1].Height = 0;
         }
-       
+
         private void LoadTheme()
         {
             this.StyleManager = styleManagerAttribute;
@@ -303,7 +297,7 @@ namespace Bibo_Verwaltung
                         mbt_Uebernehmen.Focus();
                         SaveContent();
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         MetroMessageBox.Show(this, "Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -357,13 +351,13 @@ namespace Bibo_Verwaltung
 
         private void Bt_sort_on_off_Click(object sender, EventArgs e)
         {
-            if(bt_sort_on_off.Text == "unsortiert")
+            if (bt_sort_on_off.Text == "unsortiert")
             {
                 bt_sort_on_off.Text = "aufsteigend";
                 gv_manage.Sort(gv_manage.Columns[1], ListSortDirection.Ascending);
 
             }
-            else if(bt_sort_on_off.Text == "aufsteigend")
+            else if (bt_sort_on_off.Text == "aufsteigend")
             {
                 bt_sort_on_off.Text = "absteigend";
                 gv_manage.Sort(gv_manage.Columns[1], ListSortDirection.Descending);
@@ -379,13 +373,13 @@ namespace Bibo_Verwaltung
 
         private void Gv_manage_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 //gv_manage.CurrentCell = gv_manage.SelectedCells[0];
                 gv_manage.BeginEdit(true);
                 e.SuppressKeyPress = true;
             }
-            else if(e.KeyCode == Keys.Tab)
+            else if (e.KeyCode == Keys.Tab)
             {
                 mbt_Suchen.Focus();
                 e.SuppressKeyPress = true;

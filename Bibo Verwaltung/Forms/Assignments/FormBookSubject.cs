@@ -1,14 +1,8 @@
 ﻿using Bibo_Verwaltung.Helper;
 using MetroFramework;
-using MetroFramework.Components;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -30,7 +24,7 @@ namespace Bibo_Verwaltung
             SetPermissions();
             this.Text = Text + AuthInfo.FormInfo();
             subjectHelper.FillGrid(ref gv_Faecher);
-            foreach (DataGridViewColumn column in gv_Faecher.Columns) 
+            foreach (DataGridViewColumn column in gv_Faecher.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
@@ -77,7 +71,7 @@ namespace Bibo_Verwaltung
             }
             catch
             {
-                MetroMessageBox.Show(this,"Beim Laden der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Beim Laden der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -113,7 +107,7 @@ namespace Bibo_Verwaltung
             }
             catch
             {
-                MetroMessageBox.Show(this,"Beim Anzeigen der bisher zugeordneten Bücher ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Beim Anzeigen der bisher zugeordneten Bücher ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -144,7 +138,7 @@ namespace Bibo_Verwaltung
             }
             catch
             {
-                MetroMessageBox.Show(this,"Beim Hinzufügen dieses Buches zur Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Beim Hinzufügen dieses Buches zur Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -172,7 +166,7 @@ namespace Bibo_Verwaltung
             }
             catch
             {
-                MetroMessageBox.Show(this,"Beim Entfernen dieses Buches aus der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Beim Entfernen dieses Buches aus der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -185,17 +179,17 @@ namespace Bibo_Verwaltung
             {
                 if (aenderungungen == true)
                 {
-                    DialogResult dr = MetroMessageBox.Show(this,"Sollen die Änderungen gespeichert werden?", "Warnung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    DialogResult dr = MetroMessageBox.Show(this, "Sollen die Änderungen gespeichert werden?", "Warnung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (dr == DialogResult.Yes)
                     {
                         try
                         {
-                            bookSubjectHelper.SaveAssignment(buecherListe, int.Parse(gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString()),isAdvancedCourseMode);
+                            bookSubjectHelper.SaveAssignment(buecherListe, int.Parse(gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString()), isAdvancedCourseMode);
                             aenderungungen = false;
                         }
                         catch
                         {
-                            MetroMessageBox.Show(this,"Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MetroMessageBox.Show(this, "Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
@@ -213,7 +207,7 @@ namespace Bibo_Verwaltung
                     bt_back.Enabled = true;
                     gv_Buecher.Enabled = true;
                     gv_Faecher.Enabled = false;
-                    bookSubjectHelper.FillGridAllBooks(ref gv_Buecher, int.Parse(gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString()),isAdvancedCourseMode);
+                    bookSubjectHelper.FillGridAllBooks(ref gv_Buecher, int.Parse(gv_Faecher.Rows[gv_Faecher.CurrentRow.Index].Cells["ID"].Value.ToString()), isAdvancedCourseMode);
                     FillBuecherList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
@@ -257,7 +251,7 @@ namespace Bibo_Verwaltung
         {
             SaveZuordnungen();
         }
-        
+
         private void bt_close_Click(object sender, EventArgs e)
         {
             Close();
@@ -272,7 +266,7 @@ namespace Bibo_Verwaltung
             LoadBuecher();
             tb_fach.Clear();
         }
-        
+
         private void mbt_ImEx_Click(object sender, EventArgs e)
         {
             CustomDialog custom = new CustomDialog("Modusauswahl", "Wählen Sie den Import- oder den Export-Modus!", "Daten-Import", "Daten-Export");
@@ -367,7 +361,7 @@ namespace Bibo_Verwaltung
                         bt_back.Enabled = true;
                         gv_Buecher.Enabled = true;
                         gv_Faecher.Enabled = false;
-                        bookSubjectHelper.FillGridAllBooks(ref gv_Buecher, int.Parse(gv_Faecher.Rows[gv_Faecher.SelectedRows[0].Index].Cells["ID"].Value.ToString()),isAdvancedCourseMode);
+                        bookSubjectHelper.FillGridAllBooks(ref gv_Buecher, int.Parse(gv_Faecher.Rows[gv_Faecher.SelectedRows[0].Index].Cells["ID"].Value.ToString()), isAdvancedCourseMode);
                         FillBuecherList();
                         bt_Bearbeiten.Text = "Übernehmen";
                     }
@@ -464,7 +458,7 @@ namespace Bibo_Verwaltung
         }
         private void Bt_lk_Click(object sender, EventArgs e)
         {
-            if(bt_lk.Text.Equals("Zu Leistungskurs wechseln",StringComparison.InvariantCultureIgnoreCase))
+            if (bt_lk.Text.Equals("Zu Leistungskurs wechseln", StringComparison.InvariantCultureIgnoreCase))
             {
                 //ALLE FÄCHER LEISTUNGSKURS
                 bt_lk.Text = "Zu Grundkurs wechseln";

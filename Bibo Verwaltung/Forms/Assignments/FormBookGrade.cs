@@ -1,14 +1,8 @@
 ﻿using Bibo_Verwaltung.Helper;
 using MetroFramework;
-using MetroFramework.Components;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -92,7 +86,7 @@ namespace Bibo_Verwaltung
             }
             catch
             {
-                MetroMessageBox.Show(this,"Beim Laden der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Beim Laden der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -114,7 +108,7 @@ namespace Bibo_Verwaltung
                         DataRow relation;
                         string[] buchDetails = new string[1];
 
-                        buchDetails[0] = row.Cells["ISBN"].Value.ToString().Replace("*","");
+                        buchDetails[0] = row.Cells["ISBN"].Value.ToString().Replace("*", "");
 
                         if (buecherListe.Columns.Count != 1)
                         {
@@ -128,7 +122,7 @@ namespace Bibo_Verwaltung
             }
             catch
             {
-                MetroMessageBox.Show(this,"Beim Anzeigen der bisher zugeordneten Bücher ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Beim Anzeigen der bisher zugeordneten Bücher ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -159,7 +153,7 @@ namespace Bibo_Verwaltung
             }
             catch
             {
-                MetroMessageBox.Show(this,"Beim Hinzufügen dieses Buches zur Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Beim Hinzufügen dieses Buches zur Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -187,7 +181,7 @@ namespace Bibo_Verwaltung
             }
             catch
             {
-                MetroMessageBox.Show(this,"Beim Entfernen dieses Buches aus der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Beim Entfernen dieses Buches aus der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -201,7 +195,7 @@ namespace Bibo_Verwaltung
             {
                 if (aenderungungen == true)
                 {
-                    DialogResult dr = MetroMessageBox.Show(this,"Sollen die Änderungen gespeichert werden?", "Warnung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    DialogResult dr = MetroMessageBox.Show(this, "Sollen die Änderungen gespeichert werden?", "Warnung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (dr == DialogResult.Yes)
                     {
                         try
@@ -211,7 +205,7 @@ namespace Bibo_Verwaltung
                         }
                         catch
                         {
-                            MetroMessageBox.Show(this,"Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MetroMessageBox.Show(this, "Die Änderungen konnten nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
@@ -229,7 +223,7 @@ namespace Bibo_Verwaltung
                     bt_back.Enabled = true;
                     gv_Buecher.Enabled = true;
                     gv_Klassenstufe.Enabled = false;
-                    bs.FillGridAllBooks(ref gv_Buecher, (gv_Klassenstufe.CurrentRow.Index + 1));                 
+                    bs.FillGridAllBooks(ref gv_Buecher, (gv_Klassenstufe.CurrentRow.Index + 1));
                     FillFaecherList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
@@ -270,7 +264,7 @@ namespace Bibo_Verwaltung
         private void w_s_buch_stufe_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveZuordnungen();
-        }     
+        }
 
         private void bt_back_Click(object sender, EventArgs e)
         {
@@ -280,7 +274,7 @@ namespace Bibo_Verwaltung
             bt_Bearbeiten.Text = "Zuordnungen bearbeiten";
             LoadBuecher();
         }
-        
+
         private void btAbbrechen_Click(object sender, EventArgs e)
         {
             Close();

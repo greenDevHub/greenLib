@@ -5,12 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
 using System.Media;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -36,7 +32,7 @@ namespace Bibo_Verwaltung
             this.StyleManager = styleManagerOverview;
             this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
             this.StyleManager.Style = ThemeInfo.OverviewStyle;
-            if(ThemeInfo.StyleManager.Theme == MetroThemeStyle.Dark)
+            if (ThemeInfo.StyleManager.Theme == MetroThemeStyle.Dark)
             {
                 listfc = Color.Silver;
                 listbc = Color.DimGray;
@@ -204,7 +200,7 @@ namespace Bibo_Verwaltung
         {
             if (checkShowAvailable.Checked == true)
             {
-                
+
                 (gridOverview.DataSource as DataTable).DefaultView.RowFilter = (gridOverview.DataSource as DataTable).DefaultView.RowFilter.Replace("ExemplarID IS NOT NULL", string.Format("Leihnummer IS NULL"));
             }
             else
@@ -242,7 +238,7 @@ namespace Bibo_Verwaltung
                     workerMain.RunWorkerAsync();
                 }
             }
-            
+
         }
 
         private void tb_ISBN_KeyPress(object sender, KeyPressEventArgs e)
@@ -381,7 +377,7 @@ namespace Bibo_Verwaltung
                     checkedChanged();
                 }
             }
-            
+
 
         }
         private void tb_ExemplarID_TextChanged(object sender, EventArgs e)
@@ -424,7 +420,7 @@ namespace Bibo_Verwaltung
 
         private void cb_Autor_TextChanged(object sender, EventArgs e)
         {
-            if(cbAuthor.Text != "Autor")
+            if (cbAuthor.Text != "Autor")
             {
                 loadEnabled = false;
 
@@ -534,7 +530,7 @@ namespace Bibo_Verwaltung
         private void ausleihen_Click(object sender, EventArgs e)
         {
             string[] borrow = new string[1];
-            borrow[0]= gridOverview.SelectedRows[0].Cells["ExemplarID"].Value.ToString();
+            borrow[0] = gridOverview.SelectedRows[0].Cells["ExemplarID"].Value.ToString();
             FormBorrow formBorrowing = new FormBorrow(borrow);
             loadEnabled = false;
             formBorrowing.ShowDialog(this);
@@ -550,7 +546,7 @@ namespace Bibo_Verwaltung
         {
             if (AuthInfo.CurrentUser.PermissionId != 0)
             {
-                if (!(gridOverview.HitTest(e.X, e.Y).RowIndex >= 0) || !(gridOverview.HitTest(e.X,e.Y).ColumnIndex >=0))
+                if (!(gridOverview.HitTest(e.X, e.Y).RowIndex >= 0) || !(gridOverview.HitTest(e.X, e.Y).ColumnIndex >= 0))
                 {
                     gridOverview.ClearSelection();
                     hinzufügenToolStripMenuItem.Visible = false;
@@ -650,7 +646,7 @@ namespace Bibo_Verwaltung
                         }
 
                     }
-                    if(!gridOverview.SelectedRows[0].Cells["Kunden ID"].Value.ToString().Equals(""))
+                    if (!gridOverview.SelectedRows[0].Cells["Kunden ID"].Value.ToString().Equals(""))
                     {
                         kundenAnzeigenToolStripMenuItem.Enabled = true;
                     }
@@ -703,7 +699,7 @@ namespace Bibo_Verwaltung
                     this.cbGenre.DataSource = null;
                     cbPublisher.DataSource = null;
                     gridOverview.Visible = false;
-                    if(cbAuthor.AutoCompleteSource != AutoCompleteSource.None) cbAuthor.AutoCompleteSource = AutoCompleteSource.None;
+                    if (cbAuthor.AutoCompleteSource != AutoCompleteSource.None) cbAuthor.AutoCompleteSource = AutoCompleteSource.None;
                     if (cbPublisher.AutoCompleteSource != AutoCompleteSource.None) cbPublisher.AutoCompleteSource = AutoCompleteSource.None;
                     if (this.cbGenre.AutoCompleteSource != AutoCompleteSource.None) this.cbGenre.AutoCompleteSource = AutoCompleteSource.None;
                     cbAuthor.Visible = false;
@@ -783,7 +779,8 @@ namespace Bibo_Verwaltung
                     groupList.Enabled = true;
                 });
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 try
                 {
                     BeginInvoke((Action)delegate
@@ -1020,12 +1017,12 @@ namespace Bibo_Verwaltung
 
         private void Gv_buchsuche_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 contextMenuBorrow.Show(gridOverview.PointToScreen(gridOverview.GetCellDisplayRectangle(0, gridOverview.SelectedRows[0].Index, false).Location));
                 e.SuppressKeyPress = true;
             }
-            else if(e.KeyCode == Keys.Tab)
+            else if (e.KeyCode == Keys.Tab)
             {
                 btResetList.Select();
                 e.SuppressKeyPress = true;
@@ -1035,7 +1032,7 @@ namespace Bibo_Verwaltung
         private void Cb_Autor_KeyDown(object sender, KeyEventArgs e)
         {
             filterActive = true;
-    
+
         }
 
         private void Cb_Verlag_KeyDown(object sender, KeyEventArgs e)
@@ -1065,7 +1062,7 @@ namespace Bibo_Verwaltung
 
         private void MetroToolTip1_Popup(object sender, PopupEventArgs e)
         {
-            e.ToolTipSize = new Size(e.ToolTipSize.Width+32, e.ToolTipSize.Height);
+            e.ToolTipSize = new Size(e.ToolTipSize.Width + 32, e.ToolTipSize.Height);
         }
 
         private void w_s_buchsuche_Deactivate(object sender, EventArgs e)
@@ -1176,7 +1173,7 @@ namespace Bibo_Verwaltung
                         row.DefaultCellStyle.SelectionBackColor = Color.DimGray;
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
 
                 }
@@ -1198,5 +1195,5 @@ namespace Bibo_Verwaltung
             }
         }
     }
-    
+
 }

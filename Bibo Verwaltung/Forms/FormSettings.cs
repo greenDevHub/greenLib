@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.IO;
+﻿using Bibo_Verwaltung.Helper;
 using MetroFramework;
-using Bibo_Verwaltung.Helper;
-using MetroFramework.Components;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
@@ -49,29 +40,29 @@ namespace Bibo_Verwaltung
                 settings.DatabaseLoginPassword = tb_Passwort.Text;
                 settings.Database = tb_Database.Text;
                 int i = settings.SaveSettings(true);
-                if(i == 0)
+                if (i == 0)
                 {
                     MetroMessageBox.Show(this, "Datenbankserver-Verbindung erfolgreich gespeichert!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else if(i == 1)
+                else if (i == 1)
                 {
                     MetroMessageBox.Show(this, "Speichern fehlgeschlagen. Die Konfigurationsdatei ist schreibgeschützt!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MetroMessageBox.Show(this,"Die Änderungen konnten nicht übernommen werden. Die Konfigurationsdatei ist schreibgeschützt!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this, "Die Änderungen konnten nicht übernommen werden. Die Konfigurationsdatei ist schreibgeschützt!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
-                    
-                
+
+
+
             }
         }
 
         private void GetSettings()
         {
-            if(settings.LoadSettings() == 2)
+            if (settings.LoadSettings() == 2)
             {
-                MetroMessageBox.Show(this,"Unbekannte Authentifizierungsart. Windows Authentifizierung wurde ausgewählt", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MetroMessageBox.Show(this, "Unbekannte Authentifizierungsart. Windows Authentifizierung wurde ausgewählt", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             tb_Server.Text = settings.Server;
             tb_Database.Text = settings.Database;
@@ -99,7 +90,7 @@ namespace Bibo_Verwaltung
                 if (tb_Benutzername.Text == "") { tb_Benutzername.BackColor = Color.Red; error = true; }
                 if (tb_Passwort.Text == "") { tb_Passwort.BackColor = Color.Red; error = true; }
             }
-            if (error) { MetroMessageBox.Show(this,"Bitte füllen Sie alle Felder aus!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+            if (error) { MetroMessageBox.Show(this, "Bitte füllen Sie alle Felder aus!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
             return error;
         }
 
@@ -136,7 +127,7 @@ namespace Bibo_Verwaltung
             CustomSqlConnection con = new CustomSqlConnection();
             if (!con.ConnectError())
             {
-                MetroMessageBox.Show(this,"Verbindung konnte erfolgreich hergestellt werden!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MetroMessageBox.Show(this, "Verbindung konnte erfolgreich hergestellt werden!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 bt_Save.Focus();
             }
             else

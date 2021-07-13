@@ -1,13 +1,7 @@
-﻿using MetroFramework.Controls;
-using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
@@ -60,9 +54,9 @@ namespace Bibo_Verwaltung
 
         public enum Permission
         {
-            Gast =  0,
+            Gast = 0,
             Benutzer = 1,
-            Admin =2,
+            Admin = 2,
             unbekannt
         }
         /// <summary>
@@ -120,7 +114,7 @@ namespace Bibo_Verwaltung
                 {
                     return false;
                 }
-                
+
             }
             else
             {

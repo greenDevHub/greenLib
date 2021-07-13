@@ -1,14 +1,8 @@
 ﻿using Bibo_Verwaltung.Helper;
-using MetroFramework.Components;
 using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung.EasterEgg
@@ -89,7 +83,7 @@ namespace Bibo_Verwaltung.EasterEgg
         private void UpdateScreen(object sender, EventArgs e)
         {
             //Check for game over
-            if(Settings.GameOver == true)
+            if (Settings.GameOver == true)
             {
                 //Check if enter is pressed
                 if (Input.KeyPressed(Keys.Enter))
@@ -99,11 +93,11 @@ namespace Bibo_Verwaltung.EasterEgg
             }
             else
             {
-                if(Input.KeyPressed(Keys.Right) && Settings.direction != Direction.Left)
+                if (Input.KeyPressed(Keys.Right) && Settings.direction != Direction.Left)
                 {
                     Settings.direction = Direction.Right;
                 }
-                else if (Input.KeyPressed(Keys.Left)&&Settings.direction != Direction.Right)
+                else if (Input.KeyPressed(Keys.Left) && Settings.direction != Direction.Right)
                 {
                     Settings.direction = Direction.Left;
                 }
@@ -125,13 +119,13 @@ namespace Bibo_Verwaltung.EasterEgg
         private void PbCanvas_Paint(object sender, PaintEventArgs e)
         {
             Graphics canvas = e.Graphics;
-            if(Settings.GameOver == false)
+            if (Settings.GameOver == false)
             {
                 //Set color of snake
                 SolidBrush snakeColor;
 
                 //Draw snake
-                for(int i = 0; i < Snake.Count; i++)
+                for (int i = 0; i < Snake.Count; i++)
                 {
                     //Draw head
                     if (i == 0)
@@ -161,7 +155,7 @@ namespace Bibo_Verwaltung.EasterEgg
 
         private void MovePlayer()
         {
-            for(int i = Snake.Count - 1; i>=0; i--)
+            for (int i = Snake.Count - 1; i >= 0; i--)
             {
                 //Move Head
                 if (i == 0)
@@ -180,7 +174,7 @@ namespace Bibo_Verwaltung.EasterEgg
                         case Direction Down:
                             Snake[i].Y++;
                             break;
-                        
+
                     }
 
                     //Get maximum X and Y Pos
@@ -188,22 +182,22 @@ namespace Bibo_Verwaltung.EasterEgg
                     int maxYPos = pbCanvas.Size.Height / Settings.Height;
 
                     //Detect collission with borders
-                    if(Snake[i].X < 0 || Snake[i].Y < 0 || Snake[i].X >= maxXPos || Snake[i].Y >= maxYPos)
+                    if (Snake[i].X < 0 || Snake[i].Y < 0 || Snake[i].X >= maxXPos || Snake[i].Y >= maxYPos)
                     {
                         Die();
                     }
 
                     //Detect collision with body
-                    for(int j = 1; j< Snake.Count; j++)
+                    for (int j = 1; j < Snake.Count; j++)
                     {
-                        if(Snake[i].X == Snake[j].X && Snake[i].Y == Snake[j].Y)
+                        if (Snake[i].X == Snake[j].X && Snake[i].Y == Snake[j].Y)
                         {
                             Die();
                         }
                     }
 
                     //Detect collission with food piece
-                    if(Snake[0].X == food.X && Snake[0].Y == food.Y)
+                    if (Snake[0].X == food.X && Snake[0].Y == food.Y)
                     {
                         Eat();
                     }
@@ -226,14 +220,14 @@ namespace Bibo_Verwaltung.EasterEgg
             }
             else if (e.KeyCode == Keys.OemMinus)
             {
-                if(Settings.Speed > 1)
+                if (Settings.Speed > 1)
                 {
                     Settings.Speed--;
                     gameTimer.Interval = 200 / Settings.Speed;
                     lbSpeed.Text = Settings.Speed.ToString();
                 }
             }
-            else if(e.KeyCode == Keys.Oemplus)
+            else if (e.KeyCode == Keys.Oemplus)
             {
                 Settings.Speed++;
                 gameTimer.Interval = 200 / Settings.Speed;

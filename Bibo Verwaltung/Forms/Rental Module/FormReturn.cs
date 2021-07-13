@@ -1,16 +1,9 @@
 ﻿using Bibo_Verwaltung.Helper;
 using MetroFramework;
-using MetroFramework.Components;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -248,7 +241,7 @@ namespace Bibo_Verwaltung
                         }
                         rueckgabe.IsAvailable = copy.IsAvailable();
                         llb_BuchTitel.Enabled = true;
-                        llb_BuchTitel.Text =rueckgabe.TrimText( copy.CopyTitle,30);
+                        llb_BuchTitel.Text = rueckgabe.TrimText(copy.CopyTitle, 30);
                         //llb_BuchTitel.Text = rueckgabe.TrimText(new Buch(buch_exemplar.ISBN).Titel, 30);
                         cb_Zustand.SelectedValue = copy.Condition.ConditionId;
                         rueckgabe.StartCondition = copy.Condition;
@@ -390,7 +383,7 @@ namespace Bibo_Verwaltung
                 ShowBuchResults();
 
             }
-            else if( tb_BuchCode.Text == "")
+            else if (tb_BuchCode.Text == "")
             {
                 ShowBuchResults();
 

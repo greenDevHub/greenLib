@@ -1,13 +1,6 @@
 ﻿using Bibo_Verwaltung.Database;
 using MetroFramework.Controls;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -42,7 +35,7 @@ namespace Bibo_Verwaltung
         {
             return c.TableAlreadyContains(ref table, conditionName);
         }
-        
+
 
         /// <summary>
         /// fills a combobox with all the condition data

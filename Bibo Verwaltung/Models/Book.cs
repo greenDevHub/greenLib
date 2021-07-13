@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
 using System.Data;
-using System.Windows.Forms;
-using System.Diagnostics;
+using System.Data.SqlClient;
 using System.Drawing;
-using System.ComponentModel;
-using System.IO;
-using MetroFramework.Controls;
-using MetroFramework;
 using System.Drawing.Imaging;
+using System.IO;
 
 namespace Bibo_Verwaltung
 {

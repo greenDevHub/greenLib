@@ -1,14 +1,4 @@
 ﻿using Bibo_Verwaltung.Helper;
-using MetroFramework.Components;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {

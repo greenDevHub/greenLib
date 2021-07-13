@@ -1,14 +1,8 @@
 ﻿using Bibo_Verwaltung.Helper;
 using MetroFramework;
-using MetroFramework.Components;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -462,7 +456,7 @@ namespace Bibo_Verwaltung
             {
                 autorueckgabe.Costumer = new Costumer(int.Parse(gv_Schueler.CurrentRow.Cells["kunde_ID"].Value.ToString()));
                 DialogResult dialogResult = MetroMessageBox.Show(this, autorueckgabe.GetRueckgabeList() + "an: '" + autorueckgabe.TrimText(autorueckgabe.Costumer.CostumerFirstName + " " + autorueckgabe.Costumer.CostumerSurname, 30) + "' wirklich zurücknehmen?", "Achtung",
-                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question,211 + autorueckgabe.ReturnDataTable.Rows.Count * 17);
+                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question, 211 + autorueckgabe.ReturnDataTable.Rows.Count * 17);
                 if (dialogResult == DialogResult.OK)
                 {
                     DataGridViewRow Kundenrow = gv_Schueler.CurrentRow;
@@ -479,8 +473,8 @@ namespace Bibo_Verwaltung
                             {
                                 Condition condition = new Condition(int.Parse(row[2].ToString()));
                                 autorueckgabe.LoadInfo(int.Parse(row[0].ToString()));
-                                autorueckgabe.Execute_Rueckgabe(int.Parse(row[0].ToString()), autorueckgabe.Costumer.CostumerId, row[1].ToString(), 
-                                    int.Parse(row[2].ToString()), condition.ConditionName, autorueckgabe.BorrowDate.ToShortDateString(), 
+                                autorueckgabe.Execute_Rueckgabe(int.Parse(row[0].ToString()), autorueckgabe.Costumer.CostumerId, row[1].ToString(),
+                                    int.Parse(row[2].ToString()), condition.ConditionName, autorueckgabe.BorrowDate.ToShortDateString(),
                                     DateTime.Now.Date.ToShortDateString()); //Später einbauen (das ist der fertig-funktionsfähige Befehl)
                             }
                             MetroMessageBox.Show(this, "Die Buchrückgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);

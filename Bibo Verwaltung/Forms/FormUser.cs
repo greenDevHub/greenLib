@@ -1,14 +1,8 @@
 ﻿using Bibo_Verwaltung.Helper;
 using MetroFramework;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -179,7 +173,7 @@ namespace Bibo_Verwaltung
                 }
                 try
                 {
-                    if(tbUserPassword.Text == "Passwort123456" || tbUserPassword.Text == "" || tbUsername.Text == "" || tbUserPasswordRepeat.Text == "")
+                    if (tbUserPassword.Text == "Passwort123456" || tbUserPassword.Text == "" || tbUsername.Text == "" || tbUserPasswordRepeat.Text == "")
                     {
                         MetroMessageBox.Show(this, "Bitte geben Sie alle nötigen Informationen an!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         tbUserPassword.Clear();
@@ -197,7 +191,7 @@ namespace Bibo_Verwaltung
                         }
 
                     }
-                    
+
                 }
                 catch
                 {
@@ -208,7 +202,7 @@ namespace Bibo_Verwaltung
         private bool PasswordCorrect()
         {
             bool correct = false;
-            if(tbUserPassword.Text == tbUserPasswordRepeat.Text && tbUserPassword.Text != "")
+            if (tbUserPassword.Text == tbUserPasswordRepeat.Text && tbUserPassword.Text != "")
             {
                 correct = true;
             }
@@ -254,7 +248,7 @@ namespace Bibo_Verwaltung
             //{
             //    tb_pw.Clear();
             //}
-            if(tbUserPassword.Text == "Passwort123456")
+            if (tbUserPassword.Text == "Passwort123456")
             {
                 tbUserPassword.Text = "";
             }
@@ -262,7 +256,7 @@ namespace Bibo_Verwaltung
 
         private void bt_show_MouseDown(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
                 tbUserPassword.UseSystemPasswordChar = false;
                 tbUserPasswordRepeat.UseSystemPasswordChar = false;

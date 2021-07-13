@@ -1,11 +1,6 @@
 ﻿using MetroFramework.Controls;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung.Helper
@@ -90,7 +85,7 @@ namespace Bibo_Verwaltung.Helper
             string command = showCostumerClass ? "SELECT kunde_ID, kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', " +
                     "kunde_klasse, k_bezeichnung as 'Klasse', ks_klassenstufe as 'Klassenstufe' FROM [dbo].[t_s_kunden] " +
                     "left join [dbo].[t_s_klassen] on k_id = kunde_klasse left join [dbo].[t_s_klasse_stufe] on ks_klasse = kunde_klasse " +
-                    "WHERE kunde_activated = 1 AND ks_klassenstufe = @classId" : 
+                    "WHERE kunde_activated = 1 AND ks_klassenstufe = @classId" :
                     "SELECT kunde_ID, kunde_vorname as 'Vorname', kunde_nachname as 'Nachname', kunde_klasse, k_bezeichnung as 'Klasse', " +
                     "ks_klassenstufe as 'Klassenstufe' FROM [dbo].[t_s_kunden] left join [dbo].[t_s_klassen] on k_id = kunde_klasse " +
                     "left join [dbo].[t_s_klasse_stufe] on ks_klasse = kunde_klasse WHERE kunde_activated = 1 AND kunde_klasse = @classId " +

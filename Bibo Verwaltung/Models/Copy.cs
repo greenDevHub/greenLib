@@ -1,12 +1,5 @@
-﻿using MetroFramework.Controls;
-using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
@@ -32,7 +25,7 @@ namespace Bibo_Verwaltung
         public bool CopyActivated { get { return copyActivated; } set { copyActivated = value; } }
 
         bool copyPrinted;
-        public bool CopyPrinted { get { return copyPrinted; }set { copyPrinted = value; } }
+        public bool CopyPrinted { get { return copyPrinted; } set { copyPrinted = value; } }
         #endregion
 
         #region constructor
@@ -165,7 +158,7 @@ namespace Bibo_Verwaltung
             dr.Close();
             connection.Close();
         }
-        
+
         /// <summary>
         /// checks whether a copy is available and can be deactivated or not
         /// </summary>
@@ -184,7 +177,7 @@ namespace Bibo_Verwaltung
             }
             return count == 0;
         }
-        
+
         /// <summary>
         /// sets the 'printed' attribute of the copy to true
         /// </summary>
@@ -200,6 +193,6 @@ namespace Bibo_Verwaltung
             connection.Close();
             CopyPrinted = true;
         }
-        
+
     }
 }

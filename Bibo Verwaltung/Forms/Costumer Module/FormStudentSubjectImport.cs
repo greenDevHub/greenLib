@@ -4,14 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Media;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 
@@ -801,7 +797,7 @@ namespace Bibo_Verwaltung
                             for (int i = 4; i < 7; i++)
                             {
                                 string fach = row[i].ToString();
-                                if(!fach.Equals(""))
+                                if (!fach.Equals(""))
                                 {
                                     Subject subject = new Subject();
                                     subject.SubjectNameShort = fach;
@@ -1504,9 +1500,9 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                    int i = metroGrid_Vorschau.SelectedCells[0].ColumnIndex;
-                    metroGrid_Vorschau.Columns.RemoveAt(columnIndex);
-                    removeAt.Add(columnIndex);
+                int i = metroGrid_Vorschau.SelectedCells[0].ColumnIndex;
+                metroGrid_Vorschau.Columns.RemoveAt(columnIndex);
+                removeAt.Add(columnIndex);
             }
             catch
             {
@@ -1526,14 +1522,14 @@ namespace Bibo_Verwaltung
 
         private void MetroGrid_Vorschau_MouseDown(object sender, MouseEventArgs e)
         {
-                if (!(metroGrid_Vorschau.HitTest(e.X, e.Y).RowIndex >= 0)||!(metroGrid_Vorschau.HitTest(e.X,e.Y).ColumnIndex>=0))
-                {
+            if (!(metroGrid_Vorschau.HitTest(e.X, e.Y).RowIndex >= 0) || !(metroGrid_Vorschau.HitTest(e.X, e.Y).ColumnIndex >= 0))
+            {
                 spalteEntfernenToolStripMenuItem.Visible = false;
-                }
-                else
-                {
+            }
+            else
+            {
                 spalteEntfernenToolStripMenuItem.Visible = true;
-                }
+            }
         }
 
         private void MetroToolTip1_Popup(object sender, PopupEventArgs e)

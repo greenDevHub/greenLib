@@ -1,14 +1,8 @@
 ﻿using Bibo_Verwaltung.Helper;
 using MetroFramework;
-using MetroFramework.Components;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -325,7 +319,7 @@ namespace Bibo_Verwaltung
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
             }
-            
+
         }
         private void SetColor()
         {
@@ -365,7 +359,7 @@ namespace Bibo_Verwaltung
                         bt_back.Enabled = true;
                         gv_Faecher.Enabled = true;
                         gv_Klassenstufe.Enabled = false;
-                        subjectGradeHelper.FillGridAllSubjects(ref gv_Faecher, (gv_Klassenstufe.SelectedRows[0].Index+1));
+                        subjectGradeHelper.FillGridAllSubjects(ref gv_Faecher, (gv_Klassenstufe.SelectedRows[0].Index + 1));
                         FillFaecherList();
                         bt_Bearbeiten.Text = "Übernehmen";
                     }
@@ -398,12 +392,12 @@ namespace Bibo_Verwaltung
                 }
                 e.SuppressKeyPress = true;
             }
-            else if(e.KeyCode == Keys.Tab)
+            else if (e.KeyCode == Keys.Tab)
             {
                 bt_back.Select();
                 e.SuppressKeyPress = true;
             }
-            
+
         }
 
         private void Gv_Faecher_EnabledChanged(object sender, EventArgs e)

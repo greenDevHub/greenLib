@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bibo_Verwaltung
 {
@@ -201,7 +198,7 @@ namespace Bibo_Verwaltung
             SqlDataReader dr = connection.ExcecuteCommand(command, isbn);
             while (dr.Read())
             {
-                areAvailable = int.Parse(dr["num"].ToString())>0?true:false;
+                areAvailable = int.Parse(dr["num"].ToString()) > 0 ? true : false;
             }
             dr.Close();
             connection.Close();

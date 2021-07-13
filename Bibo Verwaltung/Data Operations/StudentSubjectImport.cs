@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -206,7 +203,7 @@ namespace Bibo_Verwaltung
                                 throw new Exception("Problem bei Zeile " + errorcount);
                             }
                         }
-                        catch(System.NullReferenceException)
+                        catch (System.NullReferenceException)
                         {
                             throw new Exception("Fehler bei Datei");
                         }
@@ -273,12 +270,12 @@ namespace Bibo_Verwaltung
                     file.Close();
                 }
             }
-            catch(IOException)
+            catch (IOException)
             {
                 throw new Exception("failed preset");
             }
-            
-            
+
+
         }
         #endregion
         #region Ziel-Schema ermitteln
@@ -523,7 +520,7 @@ namespace Bibo_Verwaltung
                 table.Columns.Add("Profil");
                 table.Columns.Add("Religionsunterricht");
             }
-            else if(target.Equals("SEK2"))
+            else if (target.Equals("SEK2"))
             {
                 table.Columns.Add("Vorname");
                 table.Columns.Add("Nachname");

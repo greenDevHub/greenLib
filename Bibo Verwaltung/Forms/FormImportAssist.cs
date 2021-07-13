@@ -1,15 +1,9 @@
 ﻿using MetroFramework;
 using MetroFramework.Components;
-using MetroFramework.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -34,7 +28,7 @@ namespace Bibo_Verwaltung
             {
                 fc = Color.White;
                 bc = System.Drawing.ColorTranslator.FromHtml("#111111");
-                foreach(TabPage tp in tc_ImportAssist.TabPages)
+                foreach (TabPage tp in tc_ImportAssist.TabPages)
                 {
                     tp.ForeColor = fc;
                     tp.BackColor = bc;

@@ -1,12 +1,9 @@
 ﻿using MetroFramework.Controls;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung.Database
@@ -32,7 +29,7 @@ namespace Bibo_Verwaltung.Database
         public string FieldId { get { return _id; } set { _id = value; } }
         public Command(Table table)
         {
-            switch(table)
+            switch (table)
             {
                 case Table.author:
                     TableName = "t_s_autor";
@@ -207,7 +204,7 @@ namespace Bibo_Verwaltung.Database
         {
             DataTable changes = new DataTable();
             changes = table.GetChanges();
-            if (changes != null && changes.Rows.Count>0)
+            if (changes != null && changes.Rows.Count > 0)
             {
                 changes = noDuplicates(changes, table);
             }

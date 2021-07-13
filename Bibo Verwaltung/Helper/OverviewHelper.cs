@@ -1,13 +1,7 @@
 ﻿using MetroFramework.Controls;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
@@ -58,7 +52,7 @@ namespace Bibo_Verwaltung
             con.Close();
             return table;
         }
-        
+
         /// <summary>
         /// fills a gridview with the necessary data
         /// </summary>
@@ -120,7 +114,7 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                if (grid.Columns.Count==0) return;
+                if (grid.Columns.Count == 0) return;
                 grid.Columns["Kunden ID"].Visible = false;
                 grid.Columns["Vorname"].Visible = false;
                 grid.Columns["Nachname"].Visible = false;
@@ -177,7 +171,7 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                table.DefaultView.RowFilter = table.DefaultView.RowFilter+string.Format(" AND Rückgabedatum = '#{0}#'", DateTime.Now.Date);
+                table.DefaultView.RowFilter = table.DefaultView.RowFilter + string.Format(" AND Rückgabedatum = '#{0}#'", DateTime.Now.Date);
                 grid.Refresh();
             }
             catch (Exception exceptionObject)
@@ -202,7 +196,7 @@ namespace Bibo_Verwaltung
                 log.CreateReport(exceptionObject);
             }
         }
-        
+
         /// <summary>
         /// shows all borrowed copies
         /// </summary>
@@ -236,7 +230,7 @@ namespace Bibo_Verwaltung
                 log.CreateReport(exceptionObject);
             }
         }
-        
+
         /// <summary>
         /// searches costumer and book
         /// </summary>
@@ -250,7 +244,7 @@ namespace Bibo_Verwaltung
         /// <param name="firstName"></param>
         /// <param name="surname"></param>
         /// <param name="schoolClass"></param>
-        public void ExecuteSearch(ref MetroGrid grid, string copyId, string isbn, string title, string authorName, string publisherName, 
+        public void ExecuteSearch(ref MetroGrid grid, string copyId, string isbn, string title, string authorName, string publisherName,
             string genreName, string firstName, string surname, string schoolClass)
         {
             try
@@ -287,7 +281,7 @@ namespace Bibo_Verwaltung
                 }
                 else
                 {
-                    rawFilter = rawFilter + string.Format(" AND Vorname LIKE '%{0}%'",firstName);
+                    rawFilter = rawFilter + string.Format(" AND Vorname LIKE '%{0}%'", firstName);
                 }
                 if (surname == "Nachname" || surname == "")
                 {

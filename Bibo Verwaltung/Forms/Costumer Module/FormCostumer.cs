@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -718,7 +717,7 @@ namespace Bibo_Verwaltung
             gv_Kunde.Sort(gv_Kunde.Columns["Nachname"], System.ComponentModel.ListSortDirection.Ascending);
             lb_kunde_add.Text = "Der Kunde wurde bearbeitet!";
         }
-        
+
         /// <summary>
         /// deactivates a costumer (will remain in database, but deactivated)
         /// </summary>
