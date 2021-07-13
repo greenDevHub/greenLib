@@ -157,7 +157,6 @@
     <Compile Include="Controls\AdvancedComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Analytics.cs" />
     <Compile Include="Database\CustomSqlConnection.cs" />
     <Compile Include="Helper\BookHelper.cs" />
     <Compile Include="Helper\GradeHelper.cs" />
@@ -209,9 +208,8 @@
     <Compile Include="Protokoll.cs" />
     <Compile Include="Helper\PublisherHelper.cs" />
     <Compile Include="Schuelerimport.cs" />
-    <Compile Include="Screenshot.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="TransparentPanel.cs">
+    <Compile Include="Controls\TransparentPanel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\Rental Module\FormBorrow.cs">
@@ -286,7 +284,6 @@
     <Compile Include="w_s_selfmade_dialog.Designer.cs">
       <DependentUpon>w_s_selfmade_dialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="ImportExport.cs" />
     <Compile Include="ReturnHelper.cs" />
     <Compile Include="Verlauf.cs" />
     <Compile Include="Models\Book.cs" />
@@ -421,6 +418,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_schuelerimport.resx">
       <DependentUpon>w_s_schuelerimport.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="w_s_selfmade_dialog.resx">
       <DependentUpon>w_s_selfmade_dialog.cs</DependentUpon>

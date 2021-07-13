@@ -36,7 +36,6 @@ namespace Bibo_Verwaltung
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Books));
             this.tsspracheBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.biboVerwaltungDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.mtb_Nachricht = new MetroFramework.Controls.MetroTextBox();
             this.checkbox_autor = new MetroFramework.Controls.MetroCheckBox();
             this.bt_clear_buecher = new MetroFramework.Controls.MetroButton();
@@ -104,7 +103,6 @@ namespace Bibo_Verwaltung
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.styleManagerBooks = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewBook)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.gb_zoom.SuspendLayout();
@@ -114,10 +112,6 @@ namespace Bibo_Verwaltung
             this.metroPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.styleManagerBooks)).BeginInit();
             this.SuspendLayout();
-            // 
-            // tsspracheBindingSource
-            // 
-            this.tsspracheBindingSource.DataSource = this.biboVerwaltungDataSetBindingSource;
             // 
             // mtb_Nachricht
             // 
@@ -1362,7 +1356,6 @@ namespace Bibo_Verwaltung
             this.Activated += new System.EventHandler(this.w_s_buecher_Activated);
             this.Click += new System.EventHandler(this.w_s_buecher_Click);
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewBook)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.gb_zoom.ResumeLayout(false);
@@ -1377,7 +1370,6 @@ namespace Bibo_Verwaltung
         }
 
         #endregion
-        private System.Windows.Forms.BindingSource biboVerwaltungDataSetBindingSource;
         private System.Windows.Forms.BindingSource tsspracheBindingSource;
         private MetroFramework.Controls.MetroButton btSubmit;
         private MetroFramework.Controls.MetroLabel lb_Erscheinungsdatum;

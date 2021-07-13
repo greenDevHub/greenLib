@@ -14,9 +14,9 @@ using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
 {
-    public partial class w_s_zuordnungen : MetroForm
+    public partial class FormAssignments : MetroForm
     {
-        public w_s_zuordnungen()
+        public FormAssignments()
         {
             InitializeComponent();
             LoadTheme();

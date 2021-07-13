@@ -227,7 +227,7 @@ namespace Bibo_Verwaltung
 
         private void btAssignmentClick(object sender, EventArgs e)
         {
-            w_s_zuordnungen formAssignment = new w_s_zuordnungen();
+            FormAssignments formAssignment = new FormAssignments();
             formAssignment.ShowDialog(this);
             formAssignment.Dispose();
         }

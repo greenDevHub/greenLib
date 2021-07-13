@@ -1,6 +1,6 @@
 ﻿namespace Bibo_Verwaltung
 {
-    partial class w_s_zuordnungen
+    partial class FormAssignments
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(w_s_zuordnungen));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAssignments));
             this.mT_klassenstufebuch = new MetroFramework.Controls.MetroTile();
             this.metroTile1 = new MetroFramework.Controls.MetroTile();
             this.mT_klassenstufefach = new MetroFramework.Controls.MetroTile();
