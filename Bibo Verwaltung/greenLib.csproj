@@ -169,7 +169,7 @@
     <Compile Include="Models\Author.cs" />
     <Compile Include="Helper\AuthorHelper.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="BuchStufe.cs" />
+    <Compile Include="Helper\BookGradeHelper.cs" />
     <Compile Include="Helper\ConditionHelper.cs" />
     <Compile Include="Helper\CopyHelper.cs" />
     <Compile Include="Database\Command.cs" />
@@ -193,7 +193,7 @@
     </Compile>
     <Compile Include="Helper\BorrowHelper.cs" />
     <Compile Include="Data Operations\ExcelExport.cs" />
-    <Compile Include="FachStufe.cs" />
+    <Compile Include="Helper\SubjectGradeHelper.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Helper\GenreHelper.cs" />
     <Compile Include="Data Operations\Import.cs" />
@@ -300,11 +300,11 @@
       <DependentUpon>FormReturn.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Genre.cs" />
-    <Compile Include="Forms\Books Module\Form_Copy.cs">
+    <Compile Include="Forms\Books Module\FormCopy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Books Module\Form_Copy.Designer.cs">
-      <DependentUpon>Form_Copy.cs</DependentUpon>
+    <Compile Include="Forms\Books Module\FormCopy.Designer.cs">
+      <DependentUpon>FormCopy.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Rental Module\FormOverview.cs">
       <SubType>Form</SubType>
@@ -341,11 +341,11 @@
     <Compile Include="Forms\FormUser.designer.cs">
       <DependentUpon>FormUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Books Module\Form_Books.cs">
+    <Compile Include="Forms\Books Module\FormBooks.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Books Module\Form_Books.Designer.cs">
-      <DependentUpon>Form_Books.cs</DependentUpon>
+    <Compile Include="Forms\Books Module\FormBooks.Designer.cs">
+      <DependentUpon>FormBooks.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Assignments\FormAssignments.cs">
       <SubType>Form</SubType>
@@ -396,8 +396,8 @@
     <EmbeddedResource Include="Forms\FormInformation.resx">
       <DependentUpon>FormInformation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Books Module\Form_Copy.resx">
-      <DependentUpon>Form_Copy.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Books Module\FormCopy.resx">
+      <DependentUpon>FormCopy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Rental Module\FormOverview.resx">
       <DependentUpon>FormOverview.cs</DependentUpon>
@@ -426,8 +426,8 @@
     <EmbeddedResource Include="Forms\FormUser.resx">
       <DependentUpon>FormUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Books Module\Form_Books.resx">
-      <DependentUpon>Form_Books.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Books Module\FormBooks.resx">
+      <DependentUpon>FormBooks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Assignments\FormAssignments.resx">
       <DependentUpon>FormAssignments.cs</DependentUpon>

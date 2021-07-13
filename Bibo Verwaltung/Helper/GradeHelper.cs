@@ -91,7 +91,7 @@ namespace Bibo_Verwaltung.Helper
         /// <param name="grid"></param>
         /// <param name="grade"></param>
         /// <param name="value"></param>
-        public void ShowAllSchoolClasses(ref MetroFramework.Controls.MetroGrid grid, string grade, object value = null)
+        public void FillGridAllSchoolClasses(ref MetroFramework.Controls.MetroGrid grid, string grade, object value = null)
         {
             schoolClassHelper.FillGrid(ref grid);
             MarkAssignedClasses(ref grid, grade);

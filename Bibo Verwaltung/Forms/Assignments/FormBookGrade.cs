@@ -15,7 +15,7 @@ namespace Bibo_Verwaltung
 {
     public partial class FormBookGrade : MetroFramework.Forms.MetroForm
     {
-        BuchStufe bs = new BuchStufe();
+        BookGradeHelper bs = new BookGradeHelper();
         private DataTable buecherListe = new DataTable();
         private bool aenderungungen = false;
         string currentUser;
@@ -83,11 +83,11 @@ namespace Bibo_Verwaltung
                 buecherListe.Rows.Clear();
                 if (gv_Klassenstufe.CurrentRow != null)
                 {
-                    bs.Show_StufenBuecher(ref gv_Buecher, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                    bs.FillGridBookGrade(ref gv_Buecher, (gv_Klassenstufe.CurrentRow.Index + 1));
                 }
                 else
                 {
-                    bs.Show_StufenBuecher(ref gv_Buecher, "1");
+                    bs.FillGridBookGrade(ref gv_Buecher, 1);
                 }
             }
             catch
@@ -206,7 +206,7 @@ namespace Bibo_Verwaltung
                     {
                         try
                         {
-                            bs.Save_Zuordnung(buecherListe, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                            bs.SaveAssignment(buecherListe, (gv_Klassenstufe.CurrentRow.Index + 1));
                             aenderungungen = false;
                         }
                         catch
@@ -229,7 +229,7 @@ namespace Bibo_Verwaltung
                     bt_back.Enabled = true;
                     gv_Buecher.Enabled = true;
                     gv_Klassenstufe.Enabled = false;
-                    bs.Show_AllBuecher(ref gv_Buecher, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());                 
+                    bs.FillGridAllBooks(ref gv_Buecher, (gv_Klassenstufe.CurrentRow.Index + 1));                 
                     FillFaecherList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
@@ -322,7 +322,7 @@ namespace Bibo_Verwaltung
                     bt_back.Enabled = true;
                     gv_Buecher.Enabled = true;
                     gv_Klassenstufe.Enabled = false;
-                    bs.Show_AllBuecher(ref gv_Buecher, (e.RowIndex + 1).ToString());
+                    bs.FillGridAllBooks(ref gv_Buecher, (e.RowIndex + 1));
                     FillFaecherList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
@@ -366,7 +366,7 @@ namespace Bibo_Verwaltung
                         bt_back.Enabled = true;
                         gv_Buecher.Enabled = true;
                         gv_Klassenstufe.Enabled = false;
-                        bs.Show_AllBuecher(ref gv_Buecher, (gv_Klassenstufe.SelectedRows[0].Index + 1).ToString());
+                        bs.FillGridAllBooks(ref gv_Buecher, (gv_Klassenstufe.SelectedRows[0].Index + 1));
                         FillFaecherList();
                         bt_Bearbeiten.Text = "Übernehmen";
                     }

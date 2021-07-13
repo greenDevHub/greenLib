@@ -15,7 +15,8 @@ namespace Bibo_Verwaltung
 {
     public partial class FormSubjectGrade : MetroFramework.Forms.MetroForm
     {
-        SubjectGradeHelper fs = new SubjectGradeHelper();
+        SubjectGradeHelper subjectGradeHelper = new SubjectGradeHelper();
+
         private DataTable faecherListe = new DataTable();
         private bool aenderungungen = false;
         bool gast = false;
@@ -82,11 +83,11 @@ namespace Bibo_Verwaltung
                 faecherListe.Rows.Clear();
                 if (gv_Klassenstufe.CurrentRow != null)
                 {
-                    fs.Show_StufenFaecher(ref gv_Faecher, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                    subjectGradeHelper.FillGridSubjectGrade(ref gv_Faecher, (gv_Klassenstufe.CurrentRow.Index + 1));
                 }
                 else
                 {
-                    fs.Show_StufenFaecher(ref gv_Faecher, "1");
+                    subjectGradeHelper.FillGridSubjectGrade(ref gv_Faecher, 1);
                 }
             }
             catch
@@ -204,7 +205,7 @@ namespace Bibo_Verwaltung
                     {
                         try
                         {
-                            fs.Save_Zuordnung(faecherListe, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                            subjectGradeHelper.SaveAssignment(faecherListe, (gv_Klassenstufe.CurrentRow.Index + 1));
                             aenderungungen = false;
                         }
                         catch
@@ -227,7 +228,7 @@ namespace Bibo_Verwaltung
                     bt_back.Enabled = true;
                     gv_Faecher.Enabled = true;
                     gv_Klassenstufe.Enabled = false;
-                    fs.Show_AllFaecher(ref gv_Faecher, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                    subjectGradeHelper.FillGridAllSubjects(ref gv_Faecher, (gv_Klassenstufe.CurrentRow.Index + 1));
                     FillFaecherList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
@@ -319,7 +320,7 @@ namespace Bibo_Verwaltung
                     bt_back.Enabled = true;
                     gv_Faecher.Enabled = true;
                     gv_Klassenstufe.Enabled = false;
-                    fs.Show_AllFaecher(ref gv_Faecher, (e.RowIndex + 1).ToString());
+                    subjectGradeHelper.FillGridAllSubjects(ref gv_Faecher, (e.RowIndex + 1));
                     FillFaecherList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
@@ -364,7 +365,7 @@ namespace Bibo_Verwaltung
                         bt_back.Enabled = true;
                         gv_Faecher.Enabled = true;
                         gv_Klassenstufe.Enabled = false;
-                        fs.Show_AllFaecher(ref gv_Faecher, (gv_Klassenstufe.SelectedRows[0].Index+1).ToString());
+                        subjectGradeHelper.FillGridAllSubjects(ref gv_Faecher, (gv_Klassenstufe.SelectedRows[0].Index+1));
                         FillFaecherList();
                         bt_Bearbeiten.Text = "Übernehmen";
                     }

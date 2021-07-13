@@ -55,16 +55,13 @@ namespace Bibo_Verwaltung.Helper
             DataTable table = new DataTable();
             CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return table;
-            string RawCommand = "use greenLib SELECT kunde_ID as 'Kunden-ID', kunde_vorname as 'Vorname', " +
-                "kunde_nachname as 'Nachname', kunde_geburtsdatum as 'Geburtsdatum', k_bezeichnung as 'Klasse', " +
-                "stuff(( SELECT distinct ', '+ cast(f_kurzform as varchar(10)) FROM t_s_fach_kunde " +
-                "left join t_s_faecher on f_id = fs_fachid where fs_kundenid = kunde_id and fs_lk=1 FOR XML PATH('')),1,1,'') + ',' + " +
-                "stuff(( SELECT distinct ', '+ cast(f_kurzform as varchar(10)) " +
-                "FROM t_s_fach_kunde left join t_s_faecher on f_id = fs_fachid where fs_kundenid = kunde_id " +
-                "and fs_lk=0 FOR XML PATH('')),1,1,'') as 'Fächer', kunde_strasse as 'Straße', kunde_hausnummer as 'Hausnummer', " +
-                "kunde_postleitzahl as 'Postleitzahl', kunde_ort as 'Wohnort', kunde_mail as 'Mail', kunde_telefonnummer as 'Telefonnummer' " +
-                "FROM [dbo].[t_s_kunden] left join t_s_klassen on k_id=kunde_klasse WHERE kunde_activated = 1";
-            SqlDataAdapter adapter = new SqlDataAdapter(RawCommand, con.Con);
+            string command = "use greenLib SELECT kunde_ID as 'Kunden-ID', kunde_vorname as 'Vorname',  kunde_nachname as 'Nachname', kunde_geburtsdatum as 'Geburtsdatum', " +
+                "k_bezeichnung as 'Klasse',CONCAT(stuff(( SELECT distinct ', '+ cast(f_kurzform as varchar(10)) FROM t_s_fach_kunde fk LEFT JOIN t_s_faecher f on fk.fs_fachid=f.f_id " +
+                "WHERE fk.fs_kundenid=k.kunde_ID AND fk.fs_lk=1 FOR XML PATH('')),1,1,'')+',',stuff(( SELECT distinct ', '+ cast(f_kurzform as varchar(10)) FROM t_s_fach_kunde fk " +
+                "LEFT JOIN t_s_faecher f on fk.fs_fachid=f.f_id WHERE fk.fs_kundenid=k.kunde_ID AND fk.fs_lk=0 FOR XML PATH('')),1,1,'')) as 'Fächer', kunde_strasse as 'Straße', " +
+                "kunde_hausnummer as 'Hausnummer', kunde_postleitzahl as 'Postleitzahl', kunde_ort as 'Wohnort', kunde_mail as 'Mail', kunde_telefonnummer as 'Telefonnummer' " +
+                "FROM t_s_kunden k JOIN t_s_klassen kl on k.kunde_klasse=kl.k_id";
+            SqlDataAdapter adapter = new SqlDataAdapter(command, con.Con);
             adapter.Fill(table);
             con.Close();
             return table;

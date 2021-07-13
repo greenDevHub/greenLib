@@ -384,7 +384,7 @@ namespace Bibo_Verwaltung
         private void AddNewCopies(Book book)
         {
             string newConditionName = "neu";
-            if (isEmpty(tb_neu.Text))
+            if (!isEmpty(tb_neu.Text))
             {
                 int newCopyCount = isEmpty(tb_neu.Text) ? 0 : int.Parse(tb_neu.Text);
                 Condition newCondition = new Condition();
@@ -933,7 +933,7 @@ namespace Bibo_Verwaltung
             genreHelper.FillCombobox(ref cb_Genre, book.BookGenre.GenreId);
             languageHelper.FillCombobox(ref cb_Sprache, book.BookLanguage.LanguageId);
             tb_barcodePrinted.Text = book.NumberOfPrintedCopies().ToString();
-            rb_Update_Buch.Checked = true;
+            rb_Add_Buch.Checked = true;
         }
 
         /// <summary>

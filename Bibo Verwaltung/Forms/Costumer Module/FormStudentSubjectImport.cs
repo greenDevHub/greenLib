@@ -796,8 +796,8 @@ namespace Bibo_Verwaltung
                         if (rb_schueler1.Checked)
                         {
                             //SEK1 Import Schüler
-                            string klassenstufe = costumer.CostumerSchoolClass.SchoolClassName.Substring(0, costumer.CostumerSchoolClass.SchoolClassName.Length - 2);
-                            SubjectGradeHelper fs = new SubjectGradeHelper(klassenstufe);
+                            int grade = int.Parse(costumer.CostumerSchoolClass.SchoolClassName.Substring(0, costumer.CostumerSchoolClass.SchoolClassName.Length - 2));
+                            SubjectGradeHelper subjectGradeHelper = new SubjectGradeHelper(grade);
                             for (int i = 4; i < 7; i++)
                             {
                                 string fach = row[i].ToString();
@@ -807,17 +807,13 @@ namespace Bibo_Verwaltung
                                     subject.SubjectNameShort = fach;
                                     subject.SubjectNameLong = "";
                                     subject.AddSubjectIfNotExists();
+                                    subject = new Subject(subjectHelper.GetIdBySubjectShortName(fach));
                                     costumer.CostumerSubjects.Add(subject);
                                 }
 
                             }
-                            foreach (string subjectName in fs.FachListe)
+                            foreach (Subject subject in subjectGradeHelper.SubjectList)
                             {
-                                Subject subject = new Subject();
-                                subject.SubjectNameShort = subjectName;
-                                subject.SubjectNameLong = "";
-                                subject.AddSubjectIfNotExists();
-                                subject = new Subject(subjectHelper.GetIdBySubjectShortName(subjectName));
                                 costumer.CostumerSubjects.Add(subject);
                             }
                             for (int i = 0; i < 2; i++)
@@ -846,6 +842,7 @@ namespace Bibo_Verwaltung
                                     subject.SubjectNameShort = fach;
                                     subject.SubjectNameLong = "";
                                     subject.AddSubjectIfNotExists();
+                                    subject = new Subject(subjectHelper.GetIdBySubjectShortName(fach));
                                     costumer.CostumerSubjects.Add(subject);
 
                                     if (costumer.CostumerAdvancedSubjects.Count < 2)

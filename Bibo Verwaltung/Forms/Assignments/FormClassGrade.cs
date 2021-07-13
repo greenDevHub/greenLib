@@ -226,7 +226,7 @@ namespace Bibo_Verwaltung
 
         private void SetColor()
         {
-            for(int i = 0; i < gv_Klassen.Rows.Count; i++)
+            for (int i = 0; i < gv_Klassen.Rows.Count; i++)
             {
                 string klassename = gv_Klassen.Rows[i].Cells[1].Value.ToString();
                 if (klassename.Contains("*"))
@@ -252,7 +252,7 @@ namespace Bibo_Verwaltung
                     bt_back.Enabled = true;
                     gv_Klassen.Enabled = true;
                     gv_Klassenstufe.Enabled = false;
-                    gradeHelper.ShowAllSchoolClasses(ref gv_Klassen, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
+                    gradeHelper.FillGridAllSchoolClasses(ref gv_Klassen, (gv_Klassenstufe.CurrentRow.Index + 1).ToString());
                     gv_Klassen.Sort(gv_Klassen.Columns[1], ListSortDirection.Ascending);
                     SetColor();
                     FillKlassenList();
@@ -347,7 +347,7 @@ namespace Bibo_Verwaltung
                     bt_back.Enabled = true;
                     gv_Klassen.Enabled = true;
                     gv_Klassenstufe.Enabled = false;
-                    gradeHelper.ShowAllSchoolClasses(ref gv_Klassen, (e.RowIndex + 1).ToString());
+                    gradeHelper.FillGridAllSchoolClasses(ref gv_Klassen, (e.RowIndex + 1).ToString());
                     FillKlassenList();
                     bt_Bearbeiten.Text = "Übernehmen";
                 }
@@ -366,7 +366,7 @@ namespace Bibo_Verwaltung
 
         private void Gv_Klassenstufe_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 if (bt_Bearbeiten.Text == "Zuordnungen bearbeiten")
                 {
@@ -375,7 +375,7 @@ namespace Bibo_Verwaltung
                         bt_back.Enabled = true;
                         gv_Klassen.Enabled = true;
                         gv_Klassenstufe.Enabled = false;
-                        gradeHelper.ShowAllSchoolClasses(ref gv_Klassen, (gv_Klassenstufe.SelectedRows[0].Index + 1).ToString());
+                        gradeHelper.FillGridAllSchoolClasses(ref gv_Klassen, (gv_Klassenstufe.SelectedRows[0].Index + 1).ToString());
                         FillKlassenList();
                         bt_Bearbeiten.Text = "Übernehmen";
                     }
@@ -391,7 +391,7 @@ namespace Bibo_Verwaltung
 
         private void Gv_Klassen_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 DataGridViewRow row = gv_Klassen.CurrentRow;
                 string klasse = row.Cells["k_bezeichnung"].Value.ToString();
@@ -427,15 +427,8 @@ namespace Bibo_Verwaltung
         }
         private void Filter()
         {
-            try
-            {
-                (gv_Klassen.DataSource as DataTable).DefaultView.RowFilter = string.Format("Klasse LIKE '%{0}%'", tb_klasse.Text);
-                SetColor();
-            }
-            catch
-            {
-
-            }
+            (gv_Klassen.DataSource as DataTable).DefaultView.RowFilter = string.Format("k_bezeichnung LIKE '%{0}%'", tb_klasse.Text);
+            SetColor();
         }
     }
 }
