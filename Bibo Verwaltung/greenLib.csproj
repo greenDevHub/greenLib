@@ -169,9 +169,7 @@
     <Compile Include="Helper\WebHelper.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Helper\AuthorHelper.cs" />
-    <Compile Include="Barcode.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="BitmapFilter.cs" />
     <Compile Include="BuchStufe.cs" />
     <Compile Include="Helper\ConditionHelper.cs" />
     <Compile Include="Helper\CopyHelper.cs" />
@@ -291,11 +289,6 @@
     <Compile Include="ImportExport.cs" />
     <Compile Include="ReturnHelper.cs" />
     <Compile Include="Verlauf.cs" />
-    <Compile Include="Bibo_VerwaltungDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Bibo_VerwaltungDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Models\Book.cs" />
     <Compile Include="w_s_information.cs">
       <SubType>Form</SubType>
@@ -443,17 +436,6 @@
     </EmbeddedResource>
     <None Include="app.manifest">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Bibo_VerwaltungDataSet.xsc">
-      <DependentUpon>Bibo_VerwaltungDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="Bibo_VerwaltungDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Bibo_VerwaltungDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Bibo_VerwaltungDataSet.xss">
-      <DependentUpon>Bibo_VerwaltungDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

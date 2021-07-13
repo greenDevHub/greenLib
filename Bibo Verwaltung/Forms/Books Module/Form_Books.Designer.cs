@@ -37,8 +37,6 @@ namespace Bibo_Verwaltung
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Books));
             this.tsspracheBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.biboVerwaltungDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.bibo_VerwaltungDataSet = new Bibo_Verwaltung.Bibo_VerwaltungDataSet();
-            this.t_s_spracheTableAdapter = new Bibo_Verwaltung.Bibo_VerwaltungDataSetTableAdapters.t_s_spracheTableAdapter();
             this.mtb_Nachricht = new MetroFramework.Controls.MetroTextBox();
             this.checkbox_autor = new MetroFramework.Controls.MetroCheckBox();
             this.bt_clear_buecher = new MetroFramework.Controls.MetroButton();
@@ -107,7 +105,6 @@ namespace Bibo_Verwaltung
             this.styleManagerBooks = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewBook)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.gb_zoom.SuspendLayout();
@@ -120,22 +117,7 @@ namespace Bibo_Verwaltung
             // 
             // tsspracheBindingSource
             // 
-            this.tsspracheBindingSource.DataMember = "t_s_sprache";
             this.tsspracheBindingSource.DataSource = this.biboVerwaltungDataSetBindingSource;
-            // 
-            // biboVerwaltungDataSetBindingSource
-            // 
-            this.biboVerwaltungDataSetBindingSource.DataSource = this.bibo_VerwaltungDataSet;
-            this.biboVerwaltungDataSetBindingSource.Position = 0;
-            // 
-            // bibo_VerwaltungDataSet
-            // 
-            this.bibo_VerwaltungDataSet.DataSetName = "Bibo_VerwaltungDataSet";
-            this.bibo_VerwaltungDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // t_s_spracheTableAdapter
-            // 
-            this.t_s_spracheTableAdapter.ClearBeforeFill = true;
             // 
             // mtb_Nachricht
             // 
@@ -1381,7 +1363,6 @@ namespace Bibo_Verwaltung
             this.Click += new System.EventHandler(this.w_s_buecher_Click);
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.biboVerwaltungDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewBook)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.gb_zoom.ResumeLayout(false);
@@ -1397,9 +1378,7 @@ namespace Bibo_Verwaltung
 
         #endregion
         private System.Windows.Forms.BindingSource biboVerwaltungDataSetBindingSource;
-        private Bibo_VerwaltungDataSet bibo_VerwaltungDataSet;
         private System.Windows.Forms.BindingSource tsspracheBindingSource;
-        private Bibo_VerwaltungDataSetTableAdapters.t_s_spracheTableAdapter t_s_spracheTableAdapter;
         private MetroFramework.Controls.MetroButton btSubmit;
         private MetroFramework.Controls.MetroLabel lb_Erscheinungsdatum;
         private MetroFramework.Controls.MetroTextBox tb_Auflage;

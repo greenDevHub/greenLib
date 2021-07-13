@@ -52,7 +52,6 @@
             this.lb_path = new MetroFramework.Controls.MetroLabel();
             this.bt_durchsuchen = new MetroFramework.Controls.MetroButton();
             this.tb_path = new MetroFramework.Controls.MetroTextBox();
-            this.bibo_VerwaltungDataSet1 = new Bibo_Verwaltung.Bibo_VerwaltungDataSet();
             this.bt_accept = new MetroFramework.Controls.MetroButton();
             this.bt_saveProfile = new MetroFramework.Controls.MetroButton();
             this.rb_single = new MetroFramework.Controls.MetroRadioButton();
@@ -89,7 +88,6 @@
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.styleManagerImport = new MetroFramework.Components.MetroStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gv_columns)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid_Vorschau)).BeginInit();
             this.metroContextMenu1.SuspendLayout();
             this.metroPanel1.SuspendLayout();
@@ -461,11 +459,6 @@
             this.tb_path.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_path.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.tb_path.TextChanged += new System.EventHandler(this.tb_path_TextChanged);
-            // 
-            // bibo_VerwaltungDataSet1
-            // 
-            this.bibo_VerwaltungDataSet1.DataSetName = "Bibo_VerwaltungDataSet";
-            this.bibo_VerwaltungDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // bt_accept
             // 
@@ -1123,7 +1116,6 @@
             this.Style = MetroFramework.MetroColorStyle.Teal;
             this.Text = "Import von Schülern";
             ((System.ComponentModel.ISupportInitialize)(this.gv_columns)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bibo_VerwaltungDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid_Vorschau)).EndInit();
             this.metroContextMenu1.ResumeLayout(false);
             this.metroPanel1.ResumeLayout(false);
@@ -1153,7 +1145,6 @@
         private MetroFramework.Controls.MetroLabel lb_path;
         private MetroFramework.Controls.MetroButton bt_durchsuchen;
         private MetroFramework.Controls.MetroTextBox tb_path;
-        private Bibo_VerwaltungDataSet bibo_VerwaltungDataSet1;
         private MetroFramework.Controls.MetroLabel label1;
         private MetroFramework.Controls.MetroTextBox tb_lines;
         private MetroFramework.Controls.MetroButton bt_accept;
