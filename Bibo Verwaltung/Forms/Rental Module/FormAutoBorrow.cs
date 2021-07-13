@@ -148,7 +148,7 @@ namespace Bibo_Verwaltung
                     }
                 }
             }
-            catch(Exception ex)
+            catch
             {
                 MetroMessageBox.Show(this, "Beim Laden der Zuordnungsliste ist ein Fehler aufgetreten.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
