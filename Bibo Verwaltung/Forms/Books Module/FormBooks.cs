@@ -897,7 +897,7 @@ namespace Bibo_Verwaltung
             {
                 autortext = autortext + author.AuthorName + ", ";
             }
-            autortext = autortext.Substring(0, autortext.Length - 2);
+            autortext = autortext.Equals("") ? "" : autortext.Substring(0, autortext.Length - 2);
             cb_Autor.Text = autortext;
 
             cb_Verlag.Text = book.BookPublisher.PublisherName;
@@ -906,7 +906,7 @@ namespace Bibo_Verwaltung
 
             tb_Auflage.Text = book.BookEdition;
             tb_Neupreis.Text = book.BookPrice.ToString();
-            dTP_Erscheinungsdatum.Value = book.BookDatePublication;
+            dTP_Erscheinungsdatum.Value = book.BookDatePublication == DateTime.MinValue ? DateTime.Now : book.BookDatePublication;
             if (book.BookImage != null)
             {
                 picBox_Klein.Image = book.BookImage;

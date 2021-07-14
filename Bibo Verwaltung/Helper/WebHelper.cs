@@ -387,10 +387,10 @@ namespace Bibo_Verwaltung.Helper
         /// </summary>
         public Book AutoLoadDNB(string isbn)
         {
+            Book book = new Book();
+            book.BookIsbn = isbn;
             if (IsbnValidated(isbn))
             {
-                Book book = new Book();
-                book.BookIsbn = isbn;
                 htmlData = Regex.Replace(htmlData, @"\t|\n|\r", "");
                 htmlData = Regex.Replace(htmlData, "<a href=.*?>", "");
                 var genreName = GetGenreNeu().Replace("[", "(").Replace("]", ")");
@@ -491,7 +491,7 @@ namespace Bibo_Verwaltung.Helper
             }
             else
             {
-                return new Book();
+                return book;
                 //AutoLoadBuecherNachISBN();
             }
 

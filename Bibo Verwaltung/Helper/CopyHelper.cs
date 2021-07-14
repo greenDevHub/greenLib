@@ -198,7 +198,7 @@ namespace Bibo_Verwaltung
             SqlDataReader dr = connection.ExcecuteCommand(command, isbn);
             while (dr.Read())
             {
-                areAvailable = int.Parse(dr["num"].ToString()) > 0 ? true : false;
+                areAvailable = int.Parse(dr["num"].ToString()) > 0 ? false : true;
             }
             dr.Close();
             connection.Close();
