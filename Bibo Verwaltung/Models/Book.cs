@@ -122,6 +122,25 @@ namespace Bibo_Verwaltung
         }
 
         /// <summary>
+        /// already exists in disabled mode
+        /// </summary>
+        private bool BookAlreadyExistsDisabled()
+        {
+            CustomSqlConnection con = new CustomSqlConnection();
+            if (con.ConnectError()) return false;
+            string command = "SELECT buch_isbn, buch_titel, buch_activated FROM [dbo].[t_s_buecher] WHERE buch_isbn = @0";
+            SqlDataReader dr = con.ExcecuteCommand(command, BookIsbn);
+            while (dr.Read())
+            {
+                return true;
+            }
+            dr.Close();
+            con.Close();
+            return false;
+        }
+
+
+        /// <summary>
         /// loads all the book information
         /// </summary>
         private void LoadBook()
@@ -261,6 +280,12 @@ namespace Bibo_Verwaltung
         /// </summary>
         public void Add()
         {
+            if (BookAlreadyExistsDisabled())
+            {
+                this.Activate();
+                this.Update();
+                return;
+            }
             CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "INSERT INTO [dbo].[t_s_buecher] (buch_isbn, buch_titel, buch_genre_id, " +
