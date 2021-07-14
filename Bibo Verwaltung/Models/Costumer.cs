@@ -158,22 +158,28 @@ namespace Bibo_Verwaltung
 
             CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
-            string RawCommand = "use greenLib Select f_kurzform from t_s_fach_kunde " +
+            string RawCommand = "use greenLib Select f_kurzform, f_langform, f_id from t_s_fach_kunde " +
                 "left join t_s_faecher on f_id = fs_fachid WHERE fs_kundenid = @0 and fs_lk = 1";
             SqlDataReader dr = con.ExcecuteCommand(RawCommand, CostumerId);
             while (dr.Read())
             {
-                int subjectId = subjectHelper.GetIdBySubjectShortName(dr["f_kurzform"].ToString());
-                CostumerAdvancedSubjects.Add(new Subject(subjectId));
+                Subject subject = new Subject();
+                subject.SubjectId = int.Parse(dr["f_id"].ToString());
+                subject.SubjectNameLong = dr["f_langform"].ToString();
+                subject.SubjectNameShort = dr["f_kurzform"].ToString();
+                CostumerAdvancedSubjects.Add(subject);
             }
             dr.Close();
-            RawCommand = "use greenLib Select f_kurzform from t_s_fach_kunde " +
+            RawCommand = "use greenLib Select f_kurzform, f_langform, f_id from t_s_fach_kunde " +
                 "left join t_s_faecher on f_id = fs_fachid WHERE fs_kundenid = @0";
             dr = con.ExcecuteCommand(RawCommand, CostumerId);
             while (dr.Read())
             {
-                int subjectId = subjectHelper.GetIdBySubjectShortName(dr["f_kurzform"].ToString());
-                CostumerSubjects.Add(new Subject(subjectId));
+                Subject subject = new Subject();
+                subject.SubjectId = int.Parse(dr["f_id"].ToString());
+                subject.SubjectNameLong = dr["f_langform"].ToString();
+                subject.SubjectNameShort = dr["f_kurzform"].ToString();
+                CostumerSubjects.Add(subject);
             }
             for (int i = CostumerAdvancedSubjects.Count; i < 2; i++)
             {

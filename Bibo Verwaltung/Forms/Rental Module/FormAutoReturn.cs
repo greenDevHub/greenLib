@@ -50,7 +50,7 @@ namespace Bibo_Verwaltung
         ConditionHelper conditionHelper = new ConditionHelper();
 
 
-        ReturnHelper autorueckgabe = new ReturnHelper();
+        ReturnHelper returnHelper = new ReturnHelper();
         DataTable selectedBuecher = new DataTable();
         bool inRueckAction;
 
@@ -84,23 +84,23 @@ namespace Bibo_Verwaltung
 
         private void MarkSchueler()
         {
-            for (int i = 0; i < gv_Schueler.RowCount; i++)
+            foreach (DataGridViewRow costumerRow in gv_Schueler.Rows)
             {
-                DataGridViewRow Kundenrow = gv_Schueler.Rows[i];
-                Costumer costumer = new Costumer(int.Parse(gv_Schueler.Rows[i].Cells["kunde_ID"].Value.ToString()));
+                Costumer costumer = new Costumer();
+                costumer.CostumerId = Convert.ToInt32(costumerRow.Cells["kunde_ID"].Value);
                 if (costumer.HasBorrowedSomething())
                 {
-                    Kundenrow.DefaultCellStyle.SelectionBackColor = default;
-                    Kundenrow.DefaultCellStyle.SelectionForeColor = default;
-                    Kundenrow.DefaultCellStyle.BackColor = default;
-                    Kundenrow.DefaultCellStyle.ForeColor = default;
+                    costumerRow.DefaultCellStyle.SelectionBackColor = default;
+                    costumerRow.DefaultCellStyle.SelectionForeColor = default;
+                    costumerRow.DefaultCellStyle.BackColor = default;
+                    costumerRow.DefaultCellStyle.ForeColor = default;
                 }
                 else
                 {
-                    Kundenrow.DefaultCellStyle.SelectionBackColor = Color.GreenYellow;
-                    Kundenrow.DefaultCellStyle.SelectionForeColor = Color.Black;
-                    Kundenrow.DefaultCellStyle.BackColor = Color.LimeGreen;
-                    Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
+                    costumerRow.DefaultCellStyle.SelectionBackColor = Color.GreenYellow;
+                    costumerRow.DefaultCellStyle.SelectionForeColor = Color.Black;
+                    costumerRow.DefaultCellStyle.BackColor = Color.LimeGreen;
+                    costumerRow.DefaultCellStyle.ForeColor = Color.Black;
                 }
             }
         }
@@ -128,7 +128,7 @@ namespace Bibo_Verwaltung
             gv_Schueler.DataSource = null;
             gv_selected.DataSource = null;
             gv_selected.Columns.Clear();
-            autorueckgabe.ClearRueckList();
+            returnHelper.ClearRueckList();
             selectedBuecher.Rows.Clear();
         }
 
@@ -158,7 +158,7 @@ namespace Bibo_Verwaltung
                         //}
                         tb_ExemplarID.Text = "";
                         tb_ExemplarID.Focus();
-                        autorueckgabe.ClearRueckList();
+                        returnHelper.ClearRueckList();
                         selectedBuecher.Rows.Clear();
                         gv_selected.Refresh();
                     }
@@ -238,7 +238,7 @@ namespace Bibo_Verwaltung
                         //}
                         tb_ExemplarID.Text = "";
                         tb_ExemplarID.Focus();
-                        autorueckgabe.ClearRueckList();
+                        returnHelper.ClearRueckList();
                         selectedBuecher.Rows.Clear();
                     }
                 }
@@ -257,8 +257,8 @@ namespace Bibo_Verwaltung
                 if (gv_Schueler.CurrentRow != null)
                 {
                     DataGridViewRow row = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index];
-                    autorueckgabe.Costumer = new Costumer(int.Parse(row.Cells["kunde_ID"].Value.ToString()));
-                    autorueckgabe.FillGrid(ref gv_suggested);
+                    returnHelper.Costumer = new Costumer(int.Parse(row.Cells["kunde_ID"].Value.ToString()));
+                    returnHelper.FillGrid(ref gv_suggested);
                     gv_suggested.ClearSelection();
                 }
             }
@@ -291,10 +291,10 @@ namespace Bibo_Verwaltung
         {
             try
             {
-                autorueckgabe.AddToRueckgabeList();
+                returnHelper.AddToRueckgabeList();
                 for (int i = 0; i < selectedBuecher.Rows.Count; i++)
                 {
-                    if (selectedBuecher.Rows[i]["ID"].ToString() == autorueckgabe.ReturnDataTable.Rows[autorueckgabe.GetIndexInRueckliste()][0].ToString())
+                    if (selectedBuecher.Rows[i]["ID"].ToString() == returnHelper.ReturnDataTable.Rows[returnHelper.GetIndexInRueckliste()][0].ToString())
                     {
                         i = 0;
                         UnSelectExemplar();
@@ -302,10 +302,9 @@ namespace Bibo_Verwaltung
                 }
                 DataRow relation;
                 string[] exemlarDetails = new string[3];
-                exemlarDetails[0] = autorueckgabe.Copy.ToString();
-                exemlarDetails[1] = autorueckgabe.ReturnDataTable.Rows[autorueckgabe.GetIndexInRueckliste()][1].ToString();
-                Copy copy = new Copy(int.Parse(autorueckgabe.ReturnDataTable.Rows[autorueckgabe.GetIndexInRueckliste()][0].ToString()));
-                exemlarDetails[2] = copy.CopyTitle;
+                exemlarDetails[0] = returnHelper.Copy.CopyId.ToString();
+                exemlarDetails[1] = returnHelper.StartCondition.ConditionName;
+                exemlarDetails[2] = returnHelper.Copy.CopyTitle;
                 relation = selectedBuecher.NewRow();
                 relation.ItemArray = exemlarDetails;
                 selectedBuecher.Rows.Add(relation);
@@ -318,7 +317,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void UnSelectExemplar()
         {
-            autorueckgabe.RemoveFromRueckgabeList();
+            returnHelper.RemoveFromRueckgabeList();
             try
             {
                 for (int i = selectedBuecher.Rows.Count - 1; i >= 0; i--)
@@ -361,7 +360,7 @@ namespace Bibo_Verwaltung
                 a_cb_Klasse.Sorted = true;
                 lb_Klasse.Text = "Klasse:";
                 lb_Klasse.Visible = true;
-                schoolClassHelper.FillCombobox(ref a_cb_Klasse, 1);
+                schoolClassHelper.FillCombobox(ref a_cb_Klasse, 1, AutoCompleteSource.ListItems);
                 a_cb_Klasse.Visible = true;
                 a_cb_Klasse.TabStop = true;
                 p_klasse.Visible = false;
@@ -396,6 +395,7 @@ namespace Bibo_Verwaltung
             {
                 if (a_cb_Modus.SelectedIndex != -1 && a_cb_Klasse.SelectedIndex != -1)
                 {
+                    Cursor.Current = Cursors.WaitCursor;
                     inRueckAction = true;
                     bt_bestaetigen.Text = "Rückgabe beenden";
                     a_cb_Modus.TabStop = false;
@@ -438,6 +438,7 @@ namespace Bibo_Verwaltung
             {
                 EndAusgabe();
             }
+            Cursor.Current = Cursors.Default;
         }
 
         private void Bt_back_Click(object sender, EventArgs e)
@@ -452,11 +453,11 @@ namespace Bibo_Verwaltung
 
         private void Bt_abschließen_Click(object sender, EventArgs e)
         {
-            if (autorueckgabe.ReturnDataTable.Rows.Count != 0)
+            if (returnHelper.ReturnDataTable.Rows.Count != 0)
             {
-                autorueckgabe.Costumer = new Costumer(int.Parse(gv_Schueler.CurrentRow.Cells["kunde_ID"].Value.ToString()));
-                DialogResult dialogResult = MetroMessageBox.Show(this, autorueckgabe.GetRueckgabeList() + "an: '" + autorueckgabe.TrimText(autorueckgabe.Costumer.CostumerFirstName + " " + autorueckgabe.Costumer.CostumerSurname, 30) + "' wirklich zurücknehmen?", "Achtung",
-                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question, 211 + autorueckgabe.ReturnDataTable.Rows.Count * 17);
+                returnHelper.Costumer = new Costumer(int.Parse(gv_Schueler.CurrentRow.Cells["kunde_ID"].Value.ToString()));
+                DialogResult dialogResult = MetroMessageBox.Show(this, returnHelper.GetRueckgabeList() + "an: '" + returnHelper.TrimText(returnHelper.Costumer.CostumerFirstName + " " + returnHelper.Costumer.CostumerSurname, 30) + "' wirklich zurücknehmen?", "Achtung",
+                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question, 211 + returnHelper.ReturnDataTable.Rows.Count * 17);
                 if (dialogResult == DialogResult.OK)
                 {
                     DataGridViewRow Kundenrow = gv_Schueler.CurrentRow;
@@ -466,15 +467,15 @@ namespace Bibo_Verwaltung
                         {
                             for (int i = 0; i < selectedBuecher.Rows.Count; i++)
                             {
-                                autorueckgabe.Copy = new Copy(int.Parse(selectedBuecher.Rows[i]["ID"].ToString()));
-                                autorueckgabe.ReturnDataTable.Rows[autorueckgabe.GetIndexInRueckliste()][2] = gv_selected.Rows[i].Cells["cbzustand"].Value.ToString();
+                                returnHelper.Copy = new Copy(int.Parse(selectedBuecher.Rows[i]["ID"].ToString()));
+                                returnHelper.ReturnDataTable.Rows[returnHelper.GetIndexInRueckliste()][2] = gv_selected.Rows[i].Cells["cbzustand"].Value.ToString();
                             }
-                            foreach (DataRow row in autorueckgabe.ReturnDataTable.Rows)
+                            foreach (DataRow row in returnHelper.ReturnDataTable.Rows)
                             {
                                 Condition condition = new Condition(int.Parse(row[2].ToString()));
-                                autorueckgabe.LoadInfo(int.Parse(row[0].ToString()));
-                                autorueckgabe.Execute_Rueckgabe(int.Parse(row[0].ToString()), autorueckgabe.Costumer.CostumerId, row[1].ToString(),
-                                    int.Parse(row[2].ToString()), condition.ConditionName, autorueckgabe.BorrowDate.ToShortDateString(),
+                                returnHelper.LoadInfo(int.Parse(row[0].ToString()));
+                                returnHelper.Execute_Rueckgabe(int.Parse(row[0].ToString()), returnHelper.Costumer.CostumerId, new Condition(Convert.ToInt32(row[1])).ConditionName,
+                                    int.Parse(row[2].ToString()), condition.ConditionName, returnHelper.BorrowDate.ToShortDateString(),
                                     DateTime.Now.Date.ToShortDateString()); //Später einbauen (das ist der fertig-funktionsfähige Befehl)
                             }
                             MetroMessageBox.Show(this, "Die Buchrückgabe wurde erfolgreich abgeschlossen!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -545,8 +546,9 @@ namespace Bibo_Verwaltung
                         if (copy.CopyActivated)
                         {
                             lb_selected.Text = "ausgewählte Bücher:";
-                            autorueckgabe.Copy = copy;
-                            autorueckgabe.StartCondition = copy.Condition;
+                            returnHelper.Copy = copy;
+                            returnHelper.StartCondition = copy.Condition;
+                            returnHelper.EndCondition = copy.Condition;
                             if (selectedBuecher.Columns.Count < 2)
                             {
                                 selectedBuecher.Columns.Add("ID");
@@ -559,7 +561,7 @@ namespace Bibo_Verwaltung
                                 if (GetIndexInLeihBuecher() != -1)
                                 {
                                     Buchrow = gv_suggested.Rows[GetIndexInLeihBuecher()];
-                                    if (!autorueckgabe.CheckRueckList())
+                                    if (!returnHelper.CheckRueckList())
                                     {
                                         SelectExemplar();
                                         Buchrow.DefaultCellStyle.BackColor = Color.LimeGreen;
@@ -595,7 +597,7 @@ namespace Bibo_Verwaltung
                             for (int i = 0; i < gv_selected.RowCount; i++)
                             {
                                 DataGridViewComboBoxCell comboValue = (DataGridViewComboBoxCell)(gv_selected.Rows[i].Cells["cbzustand"]);
-                                comboValue.Value = 0;
+                                //comboValue.Value = 0;
                                 string valueMember = gv_selected.Rows[i].Cells[1].Value.ToString();
                                 Condition condition = new Condition(conditionHelper.FindIdByName(valueMember));
                                 valueMember = condition.ConditionId.ToString();
@@ -608,7 +610,7 @@ namespace Bibo_Verwaltung
                             combobox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
                         }
                     }
-                    catch
+                    catch(Exception ex)
                     {
                         MetroMessageBox.Show(this, "Dieser Buchcode existiert nicht.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }

@@ -305,7 +305,7 @@ namespace Bibo_Verwaltung
                 string[] exemlarDetails = new string[3];
                 exemlarDetails[0] = Copy.CopyId.ToString();
                 exemlarDetails[1] = StartCondition.ConditionId.ToString();
-                exemlarDetails[2] = EndCondition.ConditionId.ToString();
+                exemlarDetails[2] = EndCondition!=null ? EndCondition.ConditionId.ToString() : StartCondition.ConditionId.ToString();
                 if (ReturnDataTable.Columns.Count != 3)
                 {
                     ReturnDataTable.Columns.Add();

@@ -347,9 +347,9 @@ namespace Bibo_Verwaltung
             grid.Columns["bf_fachid"].Visible = false;
         }
 
-        public List<Book> SuggestedBooks()
+        public List<Book> SuggestedBooks(int grade)
         {
-            DataTable table = SuggestBuecher(Costumer.ReturnGrade());
+            DataTable table = SuggestBuecher(grade);
             List<Book> suggestedBooks = new List<Book>();
             for (int i = 0; i < table.Rows.Count; i++)
             {

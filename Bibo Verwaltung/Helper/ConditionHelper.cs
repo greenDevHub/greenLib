@@ -90,7 +90,7 @@ namespace Bibo_Verwaltung
 
             defaultValue[0] = "0";
             defaultValue[1] = "--auswählen--";
-            if (table.Columns.Count != 2)
+            for(int i = table.Columns.Count; i < 2; i++)
             {
                 table.Columns.Add();
             }

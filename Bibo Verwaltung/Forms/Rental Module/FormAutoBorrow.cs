@@ -388,6 +388,7 @@ namespace Bibo_Verwaltung
             {
                 if (!inAusleihAction)
                 {
+                    Cursor.Current = Cursors.WaitCursor;
                     inAusleihAction = true;
                     bt_bestaetigen.Text = "Ausgabe beenden";
                     a_cb_Modus.TabStop = false;
@@ -403,20 +404,26 @@ namespace Bibo_Verwaltung
                     gv_selected.Enabled = true;
                     bt_abschließen.Enabled = true;
                     autoausleihe.ReturnDate = dp_RueckDatum.Value;
+                    int grade = 0;
                     if (a_cb_Modus.SelectedIndex == 0)
                     {
-                        costumerHelper.FillCostumerGrid(ref gv_Schueler, false, schoolClassHelper.FindIdByName(a_cb_Klasse.Text));
+                        SchoolClass schoolClass = new SchoolClass(schoolClassHelper.FindIdByName(a_cb_Klasse.Text));
+                        grade = gradeHelper.GetGradeOfSchoolClass(schoolClass.SchoolClassId);
+                        costumerHelper.FillCostumerGrid(ref gv_Schueler, false, schoolClass.SchoolClassId);
                     }
                     else
                     {
-                        costumerHelper.FillCostumerGrid(ref gv_Schueler, true, Convert.ToInt32(a_cb_Klasse.Text.Substring(13)));
+                        //TODO, does not work for whole grade
+                        SchoolClass schoolClass = new SchoolClass(Convert.ToInt32(a_cb_Klasse.Text.Substring(13)));
+                        grade = gradeHelper.GetGradeOfSchoolClass(schoolClass.SchoolClassId);
+                        costumerHelper.FillCostumerGrid(ref gv_Schueler, true, schoolClass.SchoolClassId);
                     }
                     if (gv_Schueler.Rows.Count != 0)
                     {
                         gv_Schueler.CurrentCell = gv_Schueler.Rows[0].Cells[1];
                         gv_Schueler.Rows[0].Selected = true;
                         //Hat Schüler alle Bücher, die er benötigt, ausgeliehen?
-                        MarkSchueler();
+                        MarkSchueler(grade);
                         tb_ExemplarID.Enabled = true;
                         tb_ExemplarID.Focus();
                         LoadSchulBuecher();
@@ -436,20 +443,24 @@ namespace Bibo_Verwaltung
             {
                 MetroMessageBox.Show(this, "Wählen Sie den Ausgabe-Modus und eine Klasse bzw. eine Klassenstufe aus!", "Hinweis", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            Cursor.Current = Cursors.Default;
         }
-        private void MarkSchueler()
+        private void MarkSchueler(int grade)
         {
-            for (int i = 0; i < gv_Schueler.RowCount; i++)
+            List<Book> suggestedBooks = autoausleihe.SuggestedBooks(grade);
+            foreach (DataGridViewRow costumerRow in gv_Schueler.Rows)
             {
-                DataGridViewRow costumerRow = gv_Schueler.Rows[i];
-                Costumer costumer = new Costumer(int.Parse(gv_Schueler.Rows[i].Cells["kunde_ID"].Value.ToString()));
-                autoausleihe.Costumer = costumer;
-                List<Book> suggestedBooks = autoausleihe.SuggestedBooks();
+                Costumer costumer = new Costumer();
+                costumer.CostumerId = Convert.ToInt32(costumerRow.Cells["kunde_ID"].Value);
+                //costumer.CostumerFirstName = costumerRow.Cells["Vorname"].Value.ToString();
+                //costumer.CostumerSurname = costumerRow.Cells["Nachname"].Value.ToString();
+                //costumer.CostumerSchoolClass.SchoolClassId = Convert.ToInt32(costumerRow.Cells["kunde_klasse"].Value);
                 List<string> borrowedBookIsbns = costumer.BorrowedBookIsbns();
                 int countBooks = 0;
-                foreach (Book book in suggestedBooks)
+                for(int i = 0; i<suggestedBooks.Count;i++)
+                //foreach (Book book in suggestedBooks)
                 {
-                    if (!borrowedBookIsbns.Contains(book.BookIsbn))
+                    if (!borrowedBookIsbns.Contains(suggestedBooks[i].BookIsbn))
                     {
                         countBooks++;
                     }
