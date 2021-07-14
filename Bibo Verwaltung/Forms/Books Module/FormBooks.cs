@@ -509,6 +509,7 @@ namespace Bibo_Verwaltung
                 {
                     author.AuthorName = cb_Autor.Text;
                     author.Add();
+                    authorId = authorHelper.FindIdByName(author.AuthorName);
                 }
                 author = new Author(authorId);
                 book.BookAuthors.Add(author);

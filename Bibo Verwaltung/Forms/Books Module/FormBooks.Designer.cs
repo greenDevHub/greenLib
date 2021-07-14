@@ -401,7 +401,7 @@ namespace Bibo_Verwaltung
             this.rb_Update_Buch.Location = new System.Drawing.Point(170, 3);
             this.rb_Update_Buch.Name = "rb_Update_Buch";
             this.helpProvider.SetShowHelp(this.rb_Update_Buch, true);
-            this.rb_Update_Buch.Size = new System.Drawing.Size(88, 19);
+            this.rb_Update_Buch.Size = new System.Drawing.Size(92, 20);
             this.rb_Update_Buch.TabIndex = 1;
             this.rb_Update_Buch.Text = "Bearbeiten";
             this.metroToolTip1.SetToolTip(this.rb_Update_Buch, "    Klicken sie hier, um ein vorhandenes Buch zu bearbeiten.    ");
@@ -417,7 +417,7 @@ namespace Bibo_Verwaltung
             this.rb_Add_Buch.Location = new System.Drawing.Point(74, 3);
             this.rb_Add_Buch.Name = "rb_Add_Buch";
             this.helpProvider.SetShowHelp(this.rb_Add_Buch, true);
-            this.rb_Add_Buch.Size = new System.Drawing.Size(90, 19);
+            this.rb_Add_Buch.Size = new System.Drawing.Size(97, 20);
             this.rb_Add_Buch.TabIndex = 1;
             this.rb_Add_Buch.Text = "Hinzufügen";
             this.metroToolTip1.SetToolTip(this.rb_Add_Buch, "    Klicken sie hier, um ein neues Buch hinzuzufügen.    ");
@@ -433,7 +433,7 @@ namespace Bibo_Verwaltung
             this.rb_Delete_Buch.Location = new System.Drawing.Point(264, 3);
             this.rb_Delete_Buch.Name = "rb_Delete_Buch";
             this.helpProvider.SetShowHelp(this.rb_Delete_Buch, true);
-            this.rb_Delete_Buch.Size = new System.Drawing.Size(80, 19);
+            this.rb_Delete_Buch.Size = new System.Drawing.Size(86, 20);
             this.rb_Delete_Buch.TabIndex = 1;
             this.rb_Delete_Buch.Text = "Entfernen";
             this.metroToolTip1.SetToolTip(this.rb_Delete_Buch, "    Klicken sie hier, um ein vorhandenes Buch zu löschen.    ");
@@ -730,28 +730,28 @@ namespace Bibo_Verwaltung
             this.entfernenToolStripMenuItem,
             this.exemplareToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(130, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 148);
             this.contextMenuStrip1.Style = MetroFramework.MetroColorStyle.Blue;
             this.contextMenuStrip1.UseStyleColors = true;
             // 
             // ladenToolStripMenuItem
             // 
             this.ladenToolStripMenuItem.Name = "ladenToolStripMenuItem";
-            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(233, 48);
             this.ladenToolStripMenuItem.Text = "Laden";
             this.ladenToolStripMenuItem.Click += new System.EventHandler(this.ladenToolStripMenuItem_Click);
             // 
             // entfernenToolStripMenuItem
             // 
             this.entfernenToolStripMenuItem.Name = "entfernenToolStripMenuItem";
-            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(233, 48);
             this.entfernenToolStripMenuItem.Text = "Entfernen";
             this.entfernenToolStripMenuItem.Click += new System.EventHandler(this.entfernenToolStripMenuItem_Click);
             // 
             // exemplareToolStripMenuItem
             // 
             this.exemplareToolStripMenuItem.Name = "exemplareToolStripMenuItem";
-            this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(233, 48);
             this.exemplareToolStripMenuItem.Text = "Exemplare";
             this.exemplareToolStripMenuItem.Click += new System.EventHandler(this.exemplareToolStripMenuItem_Click);
             // 
@@ -1041,7 +1041,7 @@ namespace Bibo_Verwaltung
             this.checkedListBox1.Location = new System.Drawing.Point(140, 111);
             this.checkedListBox1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(175, 137);
+            this.checkedListBox1.Size = new System.Drawing.Size(175, 107);
             this.checkedListBox1.TabIndex = 8;
             this.metroToolTip1.SetToolTip(this.checkedListBox1, "Wählen Sie hier mehrere Autoren aus.");
             this.checkedListBox1.Visible = false;
@@ -1081,7 +1081,7 @@ namespace Bibo_Verwaltung
             this.dTP_Erscheinungsdatum.Location = new System.Drawing.Point(140, 208);
             this.dTP_Erscheinungsdatum.MinimumSize = new System.Drawing.Size(0, 29);
             this.dTP_Erscheinungsdatum.Name = "dTP_Erscheinungsdatum";
-            this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(175, 29);
+            this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(175, 38);
             this.dTP_Erscheinungsdatum.TabIndex = 16;
             this.metroToolTip1.SetToolTip(this.dTP_Erscheinungsdatum, "    Wählen sie das Erscheinungsdatum ihres Buches hier aus.    ");
             this.dTP_Erscheinungsdatum.ValueChanged += new System.EventHandler(this.DTP_Erscheinungsdatum_ValueChanged);
@@ -1219,7 +1219,7 @@ namespace Bibo_Verwaltung
             this.metroLabel1.Location = new System.Drawing.Point(4, 303);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(147, 19);
+            this.metroLabel1.Size = new System.Drawing.Size(157, 20);
             this.metroLabel1.TabIndex = 49;
             this.metroLabel1.Text = "Exemplare (neu) hinzuf.:";
             this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1270,7 +1270,7 @@ namespace Bibo_Verwaltung
             this.rb_search.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.rb_search.Location = new System.Drawing.Point(3, 3);
             this.rb_search.Name = "rb_search";
-            this.rb_search.Size = new System.Drawing.Size(66, 19);
+            this.rb_search.Size = new System.Drawing.Size(71, 20);
             this.rb_search.TabIndex = 1;
             this.rb_search.TabStop = true;
             this.rb_search.Text = "Suchen";
