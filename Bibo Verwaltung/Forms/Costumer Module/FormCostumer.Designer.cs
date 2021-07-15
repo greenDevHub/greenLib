@@ -145,6 +145,7 @@
             this.tb_Telefonnummer.MaxLength = 32767;
             this.tb_Telefonnummer.Name = "tb_Telefonnummer";
             this.tb_Telefonnummer.PasswordChar = '\0';
+            this.tb_Telefonnummer.PromptText = "Telefonnummer";
             this.tb_Telefonnummer.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Telefonnummer.SelectedText = "";
             this.tb_Telefonnummer.SelectionLength = 0;
@@ -280,6 +281,7 @@
             this.tb_Nachname.MaxLength = 32767;
             this.tb_Nachname.Name = "tb_Nachname";
             this.tb_Nachname.PasswordChar = '\0';
+            this.tb_Nachname.PromptText = "Nachname";
             this.tb_Nachname.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Nachname.SelectedText = "";
             this.tb_Nachname.SelectionLength = 0;
@@ -329,6 +331,7 @@
             this.tb_Vorname.MaxLength = 32767;
             this.tb_Vorname.Name = "tb_Vorname";
             this.tb_Vorname.PasswordChar = '\0';
+            this.tb_Vorname.PromptText = "Vorname";
             this.tb_Vorname.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Vorname.SelectedText = "";
             this.tb_Vorname.SelectionLength = 0;
@@ -365,6 +368,7 @@
             this.tb_Strasse.MaxLength = 32767;
             this.tb_Strasse.Name = "tb_Strasse";
             this.tb_Strasse.PasswordChar = '\0';
+            this.tb_Strasse.PromptText = "Strasse";
             this.tb_Strasse.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Strasse.SelectedText = "";
             this.tb_Strasse.SelectionLength = 0;
@@ -414,6 +418,7 @@
             this.tb_Mail.MaxLength = 32767;
             this.tb_Mail.Name = "tb_Mail";
             this.tb_Mail.PasswordChar = '\0';
+            this.tb_Mail.PromptText = "Mail";
             this.tb_Mail.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Mail.SelectedText = "";
             this.tb_Mail.SelectionLength = 0;
@@ -463,6 +468,7 @@
             this.tb_Hausnummer.MaxLength = 32767;
             this.tb_Hausnummer.Name = "tb_Hausnummer";
             this.tb_Hausnummer.PasswordChar = '\0';
+            this.tb_Hausnummer.PromptText = "Hausnummer";
             this.tb_Hausnummer.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Hausnummer.SelectedText = "";
             this.tb_Hausnummer.SelectionLength = 0;
@@ -499,6 +505,7 @@
             this.tb_Postleitzahl.MaxLength = 32767;
             this.tb_Postleitzahl.Name = "tb_Postleitzahl";
             this.tb_Postleitzahl.PasswordChar = '\0';
+            this.tb_Postleitzahl.PromptText = "Postleitzahl";
             this.tb_Postleitzahl.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Postleitzahl.SelectedText = "";
             this.tb_Postleitzahl.SelectionLength = 0;
@@ -535,6 +542,7 @@
             this.tb_Ort.MaxLength = 32767;
             this.tb_Ort.Name = "tb_Ort";
             this.tb_Ort.PasswordChar = '\0';
+            this.tb_Ort.PromptText = "Wohnort";
             this.tb_Ort.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_Ort.SelectedText = "";
             this.tb_Ort.SelectionLength = 0;
@@ -630,7 +638,7 @@
             this.rbDelete.Location = new System.Drawing.Point(285, 63);
             this.rbDelete.Name = "rbDelete";
             this.helpProvider.SetShowHelp(this.rbDelete, true);
-            this.rbDelete.Size = new System.Drawing.Size(80, 19);
+            this.rbDelete.Size = new System.Drawing.Size(86, 20);
             this.rbDelete.Style = MetroFramework.MetroColorStyle.Teal;
             this.rbDelete.TabIndex = 3;
             this.rbDelete.Text = "Entfernen";
@@ -647,7 +655,7 @@
             this.rbUpdate.Location = new System.Drawing.Point(191, 63);
             this.rbUpdate.Name = "rbUpdate";
             this.helpProvider.SetShowHelp(this.rbUpdate, true);
-            this.rbUpdate.Size = new System.Drawing.Size(88, 19);
+            this.rbUpdate.Size = new System.Drawing.Size(92, 20);
             this.rbUpdate.Style = MetroFramework.MetroColorStyle.Teal;
             this.rbUpdate.TabIndex = 2;
             this.rbUpdate.Text = "Bearbeiten";
@@ -664,7 +672,7 @@
             this.rbAdd.Location = new System.Drawing.Point(95, 63);
             this.rbAdd.Name = "rbAdd";
             this.helpProvider.SetShowHelp(this.rbAdd, true);
-            this.rbAdd.Size = new System.Drawing.Size(90, 19);
+            this.rbAdd.Size = new System.Drawing.Size(97, 20);
             this.rbAdd.Style = MetroFramework.MetroColorStyle.Teal;
             this.rbAdd.TabIndex = 1;
             this.rbAdd.Text = "Hinzufügen";
@@ -775,19 +783,19 @@
             this.kundeBearbeitenToolStripMenuItem,
             this.kundeEntfernenToolStripMenuItem});
             this.cm_kunde.Name = "cm_kunde";
-            this.cm_kunde.Size = new System.Drawing.Size(168, 48);
+            this.cm_kunde.Size = new System.Drawing.Size(333, 100);
             // 
             // kundeBearbeitenToolStripMenuItem
             // 
             this.kundeBearbeitenToolStripMenuItem.Name = "kundeBearbeitenToolStripMenuItem";
-            this.kundeBearbeitenToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.kundeBearbeitenToolStripMenuItem.Size = new System.Drawing.Size(332, 48);
             this.kundeBearbeitenToolStripMenuItem.Text = "Kunde bearbeiten";
             this.kundeBearbeitenToolStripMenuItem.Click += new System.EventHandler(this.kundeBearbeitenToolStripMenuItem_Click);
             // 
             // kundeEntfernenToolStripMenuItem
             // 
             this.kundeEntfernenToolStripMenuItem.Name = "kundeEntfernenToolStripMenuItem";
-            this.kundeEntfernenToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.kundeEntfernenToolStripMenuItem.Size = new System.Drawing.Size(332, 48);
             this.kundeEntfernenToolStripMenuItem.Text = "Kunde entfernen";
             this.kundeEntfernenToolStripMenuItem.Click += new System.EventHandler(this.kundeEntfernenToolStripMenuItem_Click);
             // 
@@ -812,7 +820,7 @@
             this.lb_faecher.Margin = new System.Windows.Forms.Padding(3);
             this.lb_faecher.Name = "lb_faecher";
             this.helpProvider.SetShowHelp(this.lb_faecher, true);
-            this.lb_faecher.Size = new System.Drawing.Size(52, 19);
+            this.lb_faecher.Size = new System.Drawing.Size(55, 20);
             this.lb_faecher.Style = MetroFramework.MetroColorStyle.Teal;
             this.lb_faecher.TabIndex = 48;
             this.lb_faecher.Text = "Fächer:";
@@ -937,6 +945,7 @@
             this.tb_search.MaxLength = 32767;
             this.tb_search.Name = "tb_search";
             this.tb_search.PasswordChar = '\0';
+            this.tb_search.PromptText = "Suche nach Kürzel";
             this.tb_search.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_search.SelectedText = "";
             this.tb_search.SelectionLength = 0;
@@ -955,9 +964,9 @@
             this.mdtp_GebDat.CustomFormat = " dd.MM.yyyy";
             this.mdtp_GebDat.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.mdtp_GebDat.Location = new System.Drawing.Point(113, 93);
-            this.mdtp_GebDat.MinimumSize = new System.Drawing.Size(0, 29);
+            this.mdtp_GebDat.MinimumSize = new System.Drawing.Size(0, 30);
             this.mdtp_GebDat.Name = "mdtp_GebDat";
-            this.mdtp_GebDat.Size = new System.Drawing.Size(244, 29);
+            this.mdtp_GebDat.Size = new System.Drawing.Size(244, 30);
             this.mdtp_GebDat.TabIndex = 8;
             this.metroToolTip1.SetToolTip(this.mdtp_GebDat, "Tragen sie das Geburtsdatum des Kunden hier ein.");
             this.mdtp_GebDat.ValueChanged += new System.EventHandler(this.Mdtp_GebDat_ValueChanged);
@@ -1064,12 +1073,12 @@
             this.cm_result.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.leistungskursAuswählenToolStripMenuItem});
             this.cm_result.Name = "metroContextMenu1";
-            this.cm_result.Size = new System.Drawing.Size(206, 26);
+            this.cm_result.Size = new System.Drawing.Size(424, 52);
             // 
             // leistungskursAuswählenToolStripMenuItem
             // 
             this.leistungskursAuswählenToolStripMenuItem.Name = "leistungskursAuswählenToolStripMenuItem";
-            this.leistungskursAuswählenToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.leistungskursAuswählenToolStripMenuItem.Size = new System.Drawing.Size(423, 48);
             this.leistungskursAuswählenToolStripMenuItem.Text = "Leistungskurs auswählen";
             this.leistungskursAuswählenToolStripMenuItem.Click += new System.EventHandler(this.leistungskursAuswählenToolStripMenuItem_Click);
             // 
@@ -1140,7 +1149,7 @@
             this.metroLabel1.Location = new System.Drawing.Point(389, 63);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(42, 19);
+            this.metroLabel1.Size = new System.Drawing.Size(43, 20);
             this.metroLabel1.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroLabel1.TabIndex = 0;
             this.metroLabel1.Text = "Filter:";
@@ -1154,7 +1163,7 @@
             this.rb_FilterAlles.Location = new System.Drawing.Point(3, 3);
             this.rb_FilterAlles.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_FilterAlles.Name = "rb_FilterAlles";
-            this.rb_FilterAlles.Size = new System.Drawing.Size(108, 19);
+            this.rb_FilterAlles.Size = new System.Drawing.Size(115, 20);
             this.rb_FilterAlles.Style = MetroFramework.MetroColorStyle.Teal;
             this.rb_FilterAlles.TabIndex = 22;
             this.rb_FilterAlles.TabStop = true;
@@ -1170,7 +1179,7 @@
             this.rb_FilterSchueler.Location = new System.Drawing.Point(146, 3);
             this.rb_FilterSchueler.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_FilterSchueler.Name = "rb_FilterSchueler";
-            this.rb_FilterSchueler.Size = new System.Drawing.Size(146, 19);
+            this.rb_FilterSchueler.Size = new System.Drawing.Size(157, 20);
             this.rb_FilterSchueler.Style = MetroFramework.MetroColorStyle.Teal;
             this.rb_FilterSchueler.TabIndex = 23;
             this.rb_FilterSchueler.TabStop = true;
@@ -1186,7 +1195,7 @@
             this.rb_FilterAndere.Location = new System.Drawing.Point(327, 3);
             this.rb_FilterAndere.Margin = new System.Windows.Forms.Padding(3, 3, 32, 3);
             this.rb_FilterAndere.Name = "rb_FilterAndere";
-            this.rb_FilterAndere.Size = new System.Drawing.Size(161, 19);
+            this.rb_FilterAndere.Size = new System.Drawing.Size(172, 20);
             this.rb_FilterAndere.Style = MetroFramework.MetroColorStyle.Teal;
             this.rb_FilterAndere.TabIndex = 24;
             this.rb_FilterAndere.TabStop = true;
@@ -1292,7 +1301,7 @@
             this.rbSearch.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.rbSearch.Location = new System.Drawing.Point(23, 63);
             this.rbSearch.Name = "rbSearch";
-            this.rbSearch.Size = new System.Drawing.Size(66, 19);
+            this.rbSearch.Size = new System.Drawing.Size(71, 20);
             this.rbSearch.Style = MetroFramework.MetroColorStyle.Teal;
             this.rbSearch.TabIndex = 0;
             this.rbSearch.TabStop = true;
@@ -1314,6 +1323,7 @@
             // 
             // metroContextMenu1
             // 
+            this.metroContextMenu1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.metroContextMenu1.Name = "metroContextMenu1";
             this.metroContextMenu1.Size = new System.Drawing.Size(61, 4);
             // 

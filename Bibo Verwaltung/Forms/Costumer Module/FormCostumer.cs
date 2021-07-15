@@ -426,7 +426,7 @@ namespace Bibo_Verwaltung
                     {
                         UpdateCostumer();
                     }
-                    catch
+                    catch(Exception ex)
                     {
                         MetroMessageBox.Show(this, "Der Kunde konnte nicht gespeichert werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -559,7 +559,7 @@ namespace Bibo_Verwaltung
             costumer.CostumerZipcode = tb_Postleitzahl.Text;
             costumer.CostumerCity = tb_Ort.Text;
 
-            SchoolClass schoolClass = new SchoolClass();
+            SchoolClass schoolClass = null;
             if (!cb_klasse.Text.Equals(""))
             {
                 int schoolClassId = classHelper.FindIdByName(cb_klasse.Text);
@@ -627,7 +627,7 @@ namespace Bibo_Verwaltung
                 MetroMessageBox.Show(this, "Sie haben zwar Fächer ausgewählt, aber keine Klasse. " +
                     "Bitte geben Sie auch die Klasse des Schülers an!", "Klasse fehlt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if (costumer.CostumerSubjects.Count.Equals(0) && costumer.CostumerSchoolClass.SchoolClassName != null && !costumer.CostumerSchoolClass.SchoolClassName.Equals(""))
+            else if (costumer.CostumerSubjects.Count.Equals(0) && costumer.CostumerSchoolClass!=null && costumer.CostumerSchoolClass.SchoolClassName != null && !costumer.CostumerSchoolClass.SchoolClassName.Equals(""))
             {
                 DialogResult dr = MetroMessageBox.Show(this, "Sie haben zwar eine Klasse ausgewählt, aber keine Fächer. " +
                     "Möchten Sie auch die Fächer angeben?", "Fächer fehlen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);

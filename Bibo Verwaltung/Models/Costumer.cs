@@ -250,7 +250,7 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@costumerTelephone", CostumerTelephone);
             cmd.Parameters.AddWithValue("@costumerHouseNumber", CostumerHouseNumber);
             cmd.Parameters.AddWithValue("@costumerEmail", CostumerEmail);
-            if (CostumerSchoolClass != null && CostumerSchoolClass.SchoolClassName != null && !CostumerSchoolClass.SchoolClassName.Equals(""))
+            if (CostumerSchoolClass != null && CostumerSchoolClass.SchoolClassName != null && CostumerSchoolClass.SchoolClassId>=0)
             {
                 cmd.Parameters.AddWithValue("@costumerClass", CostumerSchoolClass.SchoolClassId);
             }
@@ -328,7 +328,7 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@costumerTelephone", CostumerTelephone);
             cmd.Parameters.AddWithValue("@costumerHouseNumber", CostumerHouseNumber);
             cmd.Parameters.AddWithValue("@costumerEmail", CostumerEmail);
-            if (CostumerSchoolClass != null && !CostumerSchoolClass.SchoolClassId.Equals(""))
+            if (CostumerSchoolClass != null && CostumerSchoolClass.SchoolClassId>=0)
             {
                 cmd.Parameters.AddWithValue("@costumerClass", CostumerSchoolClass.SchoolClassId);
             }

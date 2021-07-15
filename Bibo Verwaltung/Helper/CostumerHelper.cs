@@ -55,7 +55,7 @@ namespace Bibo_Verwaltung.Helper
                 "WHERE fk.fs_kundenid=k.kunde_ID AND fk.fs_lk=1 FOR XML PATH('')),1,1,'')+',',stuff(( SELECT distinct ', '+ cast(f_kurzform as varchar(10)) FROM t_s_fach_kunde fk " +
                 "LEFT JOIN t_s_faecher f on fk.fs_fachid=f.f_id WHERE fk.fs_kundenid=k.kunde_ID AND fk.fs_lk=0 FOR XML PATH('')),1,1,'')) as 'Fächer', kunde_strasse as 'Straße', " +
                 "kunde_hausnummer as 'Hausnummer', kunde_postleitzahl as 'Postleitzahl', kunde_ort as 'Wohnort', kunde_mail as 'Mail', kunde_telefonnummer as 'Telefonnummer' " +
-                "FROM t_s_kunden k JOIN t_s_klassen kl on k.kunde_klasse=kl.k_id";
+                "FROM t_s_kunden k LEFT JOIN t_s_klassen kl on k.kunde_klasse=kl.k_id WHERE kunde_activated = 1";
             SqlDataAdapter adapter = new SqlDataAdapter(command, con.Con);
             adapter.Fill(table);
             con.Close();
