@@ -129,82 +129,7 @@ namespace Bibo_Verwaltung
             bt_Zu_aendern.Enabled = false;
         }
 
-        ///// <summary>
-        ///// Löscht eine Bilddatei am angegebenen Pfad
-        ///// </summary>
-        //private void Delete_picture(string path)
-        //{
-        //    if (File.Exists(path))
-        //    {
-        //        File.Delete(path);
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Setzt den Auswahl-Slider anhand der Elemente der Rückgabeliste
-        ///// </summary>
-        //private void SetSlider()
-        //{
-        //    if (rueckListe.Rows.Count == 0)
-        //    {
-        //        rueckList_Slider.Enabled = false;
-        //        rueckList_Slider.Minimum = 0;
-        //        rueckList_Slider.Maximum = 0;
-        //    }
-        //    else
-        //    {
-        //        rueckList_Slider.Enabled = true;
-        //        rueckList_Slider.Minimum = 1;
-        //        rueckList_Slider.Maximum = rueckListe.Rows.Count;
-        //        rueckList_Slider.Value = rueckList_Slider.Maximum;
-        //    }
-        //    tb_listVon.Text = rueckList_Slider.Value.ToString();
-        //    tb_listBis.Text = rueckList_Slider.Maximum.ToString();
-        //}
-
-        ///// <summary>
-        ///// Prüft die Buchrückgabeliste auf das Vorhandensein der angegebenen Exemlar ID 
-        ///// </summary>
-        //private bool CheckRueckList(string ExemlarID)
-        //{
-        //    bool result = false;
-        //    for (int i = 0; i <= rueckListe.Rows.Count - 1; i++)
-        //    {
-        //        if (rueckListe.Rows[i][0].ToString() == ExemlarID)
-        //        {
-        //            result = true;
-        //        }
-        //    }
-        //    return result;
-        //}
-
-        ///// <summary>
-        ///// Baut einen Dialogstring abhängig von der Buchrückgabe-Anzahl
-        ///// </summary>
-        //private String GetRueckgabeList()
-        //{
-        //    Exemplar exemplar;
-        //    Buch exemplar_info;
-        //    string resultString = "Möchten Sie ";
-        //    if (rueckListe.Rows.Count == 1)
-        //    {
-        //        exemplar = new Exemplar(rueckListe.Rows[0][0].ToString());
-        //        exemplar_info = new Buch(exemplar.ISBN);
-        //        resultString = resultString + "das Buch: " + Environment.NewLine + Environment.NewLine + exemplar_info.Titel + ", " + Environment.NewLine + Environment.NewLine;
-        //    }
-        //    else
-        //    {
-        //        resultString = resultString + "die Bücher: " + Environment.NewLine + Environment.NewLine;
-        //        foreach (DataRow row in rueckListe.Rows)
-        //        {
-        //            exemplar = new Exemplar(row[0].ToString());
-        //            exemplar_info = new Buch(exemplar.ISBN);
-        //            resultString = resultString + "-  " + TrimText(exemplar_info.Titel) + ", " + Environment.NewLine;
-        //        }
-        //        resultString = resultString + Environment.NewLine;
-        //    }
-        //    return resultString;
-        //}
+       
 
         /// <summary>
         /// Zeigt die Suchergebnisse an
@@ -251,7 +176,7 @@ namespace Bibo_Verwaltung
 
                         if (!rueckgabe.IsAvailable)
                         {
-                            rueckgabe.LoadInfo(rueckgabe.Copy.CopyId);
+                            rueckgabe.LoadInfo(rueckgabe.Copy.CopyId, true);
                             kunde = rueckgabe.Costumer;
                             llb_Kunde.Enabled = true;
                             lb_AusleihStart.Enabled = true;
@@ -300,45 +225,53 @@ namespace Bibo_Verwaltung
         {
             if (tb_BuchCode.Text != "")
             {
-
-                if (!rueckgabe.IsAvailable)
+                if (llb_BuchTitel.Text != "keine Treffer")
                 {
-                    if (!rueckgabe.CheckRueckList())
+                    if (!rueckgabe.IsAvailable)
                     {
-                        if (bt_Zu_aendern.Text == "Übernehmen")
+                        if (!rueckgabe.CheckRueckList())
                         {
-                            DialogResult dr = MetroMessageBox.Show(this, "Möchten Sie die Zustandsänderung übernehmen?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                            if (dr == DialogResult.Yes)
+                            if (bt_Zu_aendern.Text == "Übernehmen")
                             {
-                                rueckgabe.EndCondition = new Condition(conditionHelper.FindIdByName(cb_Zustand.Text));
-                                cb_Zustand.TabStop = false;
-                                tpanel.Visible = true;
-                                bt_Zu_aendern.Text = "Buchzustand ändern";
+                                DialogResult dr = MetroMessageBox.Show(this, "Möchten Sie die Zustandsänderung übernehmen?", "Achtung", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                                if (dr == DialogResult.Yes)
+                                {
+                                    rueckgabe.EndCondition = new Condition(conditionHelper.FindIdByName(cb_Zustand.Text));
+                                    cb_Zustand.TabStop = false;
+                                    tpanel.Visible = true;
+                                    bt_Zu_aendern.Text = "Buchzustand ändern";
+                                }
+                                else
+                                {
+                                    rueckgabe.EndCondition = rueckgabe.StartCondition;
+                                    cb_Zustand.TabStop = false;
+                                    tpanel.Visible = true;
+                                    bt_Zu_aendern.Text = "Buchzustand ändern";
+                                }
                             }
-                            else
-                            {
-                                rueckgabe.EndCondition = rueckgabe.StartCondition;
-                                cb_Zustand.TabStop = false;
-                                tpanel.Visible = true;
-                                bt_Zu_aendern.Text = "Buchzustand ändern";
-                            }
+                            rueckgabe.AddToRueckgabeList();
+                            bt_AddBuch.Text = "-";
                         }
-                        rueckgabe.AddToRueckgabeList();
-                        bt_AddBuch.Text = "-";
+                        else
+                        {
+                            rueckgabe.RemoveFromRueckgabeList();
+                            bt_AddBuch.Text = "+";
+                        }
                     }
                     else
                     {
-                        rueckgabe.RemoveFromRueckgabeList();
-                        bt_AddBuch.Text = "+";
+                        MetroMessageBox.Show(this, "Dieses Buch wurde nicht verliehen. Es kann nicht zur Buchrückgabeliste hinzugefügt werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    rueckgabe.SetSlider(ref rueckList_Slider, ref tb_listVon, ref tb_listBis);
+                    tb_BuchCode.Focus();
+                    tb_BuchCode.SelectAll();
                 }
                 else
                 {
-                    MetroMessageBox.Show(this, "Dieses Buch wurde nicht verliehen. Es kann nicht zur Buchrückgabeliste hinzugefügt werden.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MetroMessageBox.Show(this, "Der eingegebene Buchcode ist nicht vorhanden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                rueckgabe.SetSlider(ref rueckList_Slider, ref tb_listVon, ref tb_listBis);
-                tb_BuchCode.Focus();
-                tb_BuchCode.SelectAll();
+
+                
             }
         }
 
@@ -416,13 +349,20 @@ namespace Bibo_Verwaltung
 
         private void bt_Rueckgabe_Click(object sender, EventArgs e)
         {
-            if (rueckgabe.ReturnDataTable.Rows.Count == 0)
+            if (llb_BuchTitel.Text != "keine Treffer")
             {
-                EnterBuch();
+                if (rueckgabe.ReturnDataTable.Rows.Count == 0)
+                {
+                    EnterBuch();
+                }
+                if (rueckgabe.ReturnDataTable.Rows.Count != 0)
+                {
+                    Buchrueckgabe();
+                }
             }
-            if (rueckgabe.ReturnDataTable.Rows.Count != 0)
+            else
             {
-                Buchrueckgabe();
+                MetroMessageBox.Show(this, "Der eingegebene Buchcode ist nicht vorhanden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

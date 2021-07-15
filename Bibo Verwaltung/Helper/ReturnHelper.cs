@@ -65,7 +65,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// Laden der KundenID, und des Ausleih- und Rückgabedatums eines Buches
         /// </summary>
-        public void LoadInfo(int copyId)
+        public void LoadInfo(int copyId, bool loadFullCostumerInfo = false)
         {
             CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
@@ -74,7 +74,14 @@ namespace Bibo_Verwaltung
             while (dr.Read())
             {
                 Costumer = new Costumer();
-                Costumer.CostumerId = int.Parse(dr["aus_kundenid"].ToString());
+                if (loadFullCostumerInfo)
+                {
+                    Costumer = new Costumer(int.Parse(dr["aus_kundenid"].ToString()));
+                }
+                else
+                {
+                    Costumer.CostumerId = int.Parse(dr["aus_kundenid"].ToString());
+                }
                 Copy = new Copy(int.Parse(dr["aus_buchid"].ToString()));
                 BorrowDate = (DateTime)dr["aus_leihdatum"];
                 ReturnDate = (DateTime)dr["aus_rückgabedatum"];

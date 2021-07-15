@@ -303,7 +303,7 @@ namespace Bibo_Verwaltung
                     }
                     catch (SqlException)
                     {
-                        MetroMessageBox.Show(this, "Das Exemplar konnte hinzugefügt werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MetroMessageBox.Show(this, "Das Exemplar konnte nicht hinzugefügt werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
                 }
@@ -325,7 +325,7 @@ namespace Bibo_Verwaltung
                     }
                     catch (SqlException)
                     {
-                        MetroMessageBox.Show(this, "Das Exemplar konnte bearbeitet werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MetroMessageBox.Show(this, "Das Exemplar konnte nicht bearbeitet werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -343,9 +343,9 @@ namespace Bibo_Verwaltung
                     {
                         DeleteCopy();
                     }
-                    catch (SqlException)
+                    catch (SqlException ex)
                     {
-                        MetroMessageBox.Show(this, "Das Exemplar konnte entfernt werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MetroMessageBox.Show(this, "Das Exemplar konnte nicht entfernt werden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -445,7 +445,7 @@ namespace Bibo_Verwaltung
             Copy copy = new Copy(int.Parse(tb_ID.Text));
             if (copy.IsAvailable())
             {
-                copy.Delete();
+                copy.Deactivate();
                 Clear_Form();
                 ShowMessage(SaveOption.delete);
             }

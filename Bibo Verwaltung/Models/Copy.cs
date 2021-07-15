@@ -68,7 +68,7 @@ namespace Bibo_Verwaltung
                 CopyTitle = dr["buch_titel"].ToString();
                 Condition = new Condition(int.Parse(dr["bu_zustandsid"].ToString()));
                 DateRegistration = (DateTime)dr["verified_aufnahmedatum"];
-                CopyActivated = dr["bu_activated"].ToString().Equals(0) ? false : true;
+                CopyActivated = Convert.ToBoolean(dr["bu_activated"].ToString());
                 CopyPrinted = dr["bu_printed"].ToString().Equals(0) ? false : true;
             }
             dr.Close();

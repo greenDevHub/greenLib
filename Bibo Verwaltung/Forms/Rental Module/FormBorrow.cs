@@ -187,51 +187,6 @@ namespace Bibo_Verwaltung
                             lb_BuchStatus.ForeColor = Color.Red;
                         }
                         borrowHelper.ShowBuchCover(ref picBox_Buchcover);
-                        #region Buchcover anzeigen
-                        //Buch buchCover = new Buch(buch_exemplar.ISBN);
-                        //if (buchCover.Image != null)
-                        //{
-                        //    try
-                        //    {
-                        //        MemoryStream mem = new MemoryStream(buchCover.Image);
-                        //        picBox_Buchcover.Image = Image.FromStream(mem);
-                        //        //string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Bibliothek\\Bilder\\" + buch.ISBN + ".png";
-                        //        //if (!File.Exists(filePath))
-                        //        //{
-                        //        //    picBox_Buchcover.Image.Save(filePath, ImageFormat.Png);
-                        //        //    picBox_Buchcover.ImageLocation = filePath;
-                        //        //}
-                        //        //else
-                        //        //{
-                        //        //    Delete_picture(filePath);
-                        //        //    picBox_Buchcover.Image.Save(filePath, ImageFormat.Png);
-                        //        //    picBox_Buchcover.ImageLocation = filePath;
-                        //        //}
-                        //    }
-                        //    catch
-                        //    {
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    //if (!buch.BildPfad.Equals(""))
-                        //    //{
-                        //    //    try
-                        //    //    {
-                        //    //        picBox_Buchcover.ImageLocation = buch.BildPfad;
-                        //    //    }
-                        //    //    catch
-                        //    //    {
-                        //    //        MetroMessageBox.Show(this,"Das Buchcover wurde nicht gefunden!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        //    //    }
-                        //    //}
-                        //    //else
-                        //    //{
-                        //    picBox_Buchcover.Image = null;
-                        //    //picBox_Buchcover.ImageLocation = null;
-                        //    //}
-                        //}
-                        #endregion
                     }
                     else
                     {
