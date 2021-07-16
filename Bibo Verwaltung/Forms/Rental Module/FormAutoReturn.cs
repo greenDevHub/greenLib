@@ -127,6 +127,7 @@ namespace Bibo_Verwaltung
             gv_suggested.DataSource = null;
             gv_Schueler.DataSource = null;
             gv_selected.DataSource = null;
+            lbProgress.Visible = false;
             gv_selected.Columns.Clear();
             returnHelper.ClearRueckList();
             selectedBuecher.Rows.Clear();
@@ -139,6 +140,12 @@ namespace Bibo_Verwaltung
         {
             try
             {
+                if (returnHelper.ReturnDataTable.Rows.Count != 0)
+                {
+                    DialogResult dialogResult = MetroMessageBox.Show(this, "Sie haben die eingegebenen Exemplare noch nicht zurückgegeben. Wenn Sie fortfahren, werden diese Exemplare verworfen. Trotzdem fortfahren?", "Weiter?",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (dialogResult == DialogResult.No) return;
+                }
                 if (inRueckAction)
                 {
                     if (gv_Schueler.CurrentRow.Index >= 1)
@@ -206,6 +213,12 @@ namespace Bibo_Verwaltung
         {
             try
             {
+                if (returnHelper.ReturnDataTable.Rows.Count != 0)
+                {
+                    DialogResult dialogResult = MetroMessageBox.Show(this, "Sie haben die eingegebenen Exemplare noch nicht zurückgegeben. Wenn Sie fortfahren, werden diese Exemplare verworfen. Trotzdem fortfahren?", "Weiter?",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (dialogResult == DialogResult.No) return;
+                }
                 if (IsComplete(ref gv_Schueler) || gv_Schueler.CurrentCell.RowIndex == gv_Schueler.RowCount - 1)
                 {
                     DialogResult dialogResult = MetroMessageBox.Show(this, "Sie sind am Ende der Schülerliste angekommen. Möchten Sie die Lehrbuch-Rückgabe abschließen?", "Warnung",
@@ -501,6 +514,7 @@ namespace Bibo_Verwaltung
                                 Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
                             }
                         }
+                        returnHelper.ClearRueckList();
                         NextSchueler();
                     }
                     else
@@ -520,7 +534,16 @@ namespace Bibo_Verwaltung
         private void Gv_Schueler_CurrentCellChanged(object sender, EventArgs e)
         {
             LoadRueckBuecher();
+            SetProgress();
         }
+        private void SetProgress()
+        {
+            lbProgress.Visible = true;
+            int totalCount = gv_Schueler.Rows != null ? gv_Schueler.Rows.Count : 0;
+            int currentNumber = gv_Schueler.SelectedRows != null && gv_Schueler.SelectedRows.Count > 0 ? gv_Schueler.SelectedRows[0].Index + 1 : 0;
+            lbProgress.Text = $"{currentNumber} von {totalCount}";
+        }
+
 
         private void Tb_ExemplarID_KeyPress(object sender, KeyPressEventArgs e)
         {

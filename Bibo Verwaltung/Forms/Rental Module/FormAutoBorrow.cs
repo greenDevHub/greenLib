@@ -176,6 +176,7 @@ namespace Bibo_Verwaltung
             gv_suggested.DataSource = null;
             gv_Schueler.DataSource = null;
             gv_selected.DataSource = null;
+            lbProgress.Visible = false;
             autoausleihe.ClearBorrowTable();
             selectedBuecher.Rows.Clear();
             a_cb_Modus.SelectedIndex = -1;
@@ -188,6 +189,12 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void LastSchueler()
         {
+            if (autoausleihe.BorrowTable.Rows.Count != 0)
+            {
+                DialogResult dialogResult = MetroMessageBox.Show(this, "Sie haben die eingegebenen Exemplare noch nicht verliehen. Wenn Sie fortfahren, werden diese Exemplare verworfen. Trotzdem fortfahren?", "Weiter?",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.No) return;
+            }
             if (gv_Schueler.CurrentRow.Index >= 1)
             {
                 gv_Schueler.CurrentCell = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index - 1].Cells[1];
@@ -246,11 +253,17 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void NextSchueler()
         {
+            if (autoausleihe.BorrowTable.Rows.Count != 0)
+            {
+                DialogResult dialogResult = MetroMessageBox.Show(this, "Sie haben die eingegebenen Exemplare noch nicht verliehen. Wenn Sie fortfahren, werden diese Exemplare verworfen. Trotzdem fortfahren?", "Weiter?",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.No) return;
+            }
             if (IsComplete(ref gv_Schueler) || gv_Schueler.CurrentCell.RowIndex == gv_Schueler.RowCount - 1)
             {
                 DialogResult dialogResult = MetroMessageBox.Show(this, "Sie sind am Ende der Schülerliste angekommen. Möchten Sie die Lehrbuch-Ausgabe abschließen?", "Information",
-                        MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                if (dialogResult == DialogResult.OK)
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.Yes)
                 {
                     EndAusgabe();
                 }
@@ -376,6 +389,7 @@ namespace Bibo_Verwaltung
                         Kundenrow.DefaultCellStyle.ForeColor = Color.Black;
                     }
                 }
+                autoausleihe.ClearBorrowTable();
                 NextSchueler();
             }
         }
@@ -491,8 +505,16 @@ namespace Bibo_Verwaltung
         private void gv_Schueler_SelectionChanged(object sender, EventArgs e)
         {
             LoadSchulBuecher();
+            SetProgress();
         }
 
+        private void SetProgress()
+        {
+            lbProgress.Visible = true;
+            int totalCount = gv_Schueler.Rows != null ? gv_Schueler.Rows.Count : 0;
+            int currentNumber = gv_Schueler.SelectedRows != null && gv_Schueler.SelectedRows.Count>0 ? gv_Schueler.SelectedRows[0].Index + 1 : 0;
+            lbProgress.Text = $"{currentNumber} von {totalCount}";
+        }
         private void bt_back_Click(object sender, EventArgs e)
         {
             LastSchueler();
@@ -573,15 +595,27 @@ namespace Bibo_Verwaltung
                                     Buchrow = gv_suggested.Rows[GetIndexInSuggestedBuecher()];
                                     if (!autoausleihe.CheckBorrowTable())
                                     {
+                                        if (autoausleihe.SuggestedBookAlreadyBorrowed(autoausleihe.Copy.CopyIsbn, autoausleihe.Costumer.CostumerId))
+                                        {
+                                            DialogResult dr = MetroMessageBox.Show(this, "Ein Exemplar von diesem Buch wurde bereits an die Person verliehen. Soll es trotzdem hinzugefügt werden?", "Vorgeschlagenes Buch bereits verliehen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                            if (dr == DialogResult.No) {
+                                                tb_ExemplarID.Focus();
+                                                tb_ExemplarID.SelectAll();
+                                                return;
+                                            }
+                                        }
                                         SelectExemplar();
                                         Buchrow.DefaultCellStyle.BackColor = Color.LimeGreen;
                                         Buchrow.DefaultCellStyle.ForeColor = Color.Black;
                                     }
-                                    else
+                                    else 
                                     {
                                         UnSelectExemplar();
-                                        Buchrow.DefaultCellStyle.BackColor = default;
-                                        Buchrow.DefaultCellStyle.ForeColor = default;
+                                        if (!autoausleihe.SuggestedBookAlreadyBorrowed(autoausleihe.Copy.CopyIsbn,autoausleihe.Costumer.CostumerId))
+                                        {
+                                            Buchrow.DefaultCellStyle.BackColor = default;
+                                            Buchrow.DefaultCellStyle.ForeColor = default;
+                                        }
                                     }
                                 }
                                 else

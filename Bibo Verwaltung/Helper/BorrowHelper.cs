@@ -359,5 +359,21 @@ namespace Bibo_Verwaltung
             }
             return suggestedBooks;
         }
+
+        public bool SuggestedBookAlreadyBorrowed(string bookIsbn, int costumerId)
+        {
+            bool alreadyBorrowed = false;
+            CustomSqlConnection con = new CustomSqlConnection();
+            if (con.ConnectError()) return alreadyBorrowed;
+            string command = "select count(*) as 'Anzahl' from t_bd_ausgeliehen WHERE aus_kundenid=@0 and aus_buchid in (select c.bu_id from t_s_buchid c WHERE c.bu_isbn=@1)";
+            SqlDataReader dr = con.ExcecuteCommand(command, costumerId, bookIsbn);
+            while (dr.Read())
+            {
+                alreadyBorrowed = Convert.ToInt32(dr["Anzahl"]) > 0;
+            }
+            dr.Close();
+            con.Close();
+            return alreadyBorrowed;
+        }
     }
 }

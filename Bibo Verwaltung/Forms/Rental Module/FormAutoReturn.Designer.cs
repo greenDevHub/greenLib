@@ -58,6 +58,7 @@
             this.stylemManagerAutoReturn = new MetroFramework.Components.MetroStyleManager(this.components);
             this.p_modus = new Bibo_Verwaltung.TransparentPanel();
             this.p_klasse = new Bibo_Verwaltung.TransparentPanel();
+            this.lbProgress = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_suggested)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Schueler)).BeginInit();
@@ -98,6 +99,7 @@
             this.tb_ExemplarID.MaxLength = 32767;
             this.tb_ExemplarID.Name = "tb_ExemplarID";
             this.tb_ExemplarID.PasswordChar = '\0';
+            this.tb_ExemplarID.PromptText = "Exemplar ID";
             this.tb_ExemplarID.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_ExemplarID.SelectedText = "";
             this.tb_ExemplarID.SelectionLength = 0;
@@ -456,7 +458,7 @@
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroToolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.MetroToolTip1_Popup);
             // 
-            // msm_autorueck
+            // stylemManagerAutoReturn
             // 
             this.stylemManagerAutoReturn.Owner = this;
             this.stylemManagerAutoReturn.Style = MetroFramework.MetroColorStyle.Yellow;
@@ -477,12 +479,24 @@
             this.p_klasse.TabIndex = 43;
             this.p_klasse.Visible = false;
             // 
-            // w_s_autorueck
+            // lbProgress
+            // 
+            this.lbProgress.AutoSize = true;
+            this.lbProgress.Location = new System.Drawing.Point(149, 115);
+            this.lbProgress.Name = "lbProgress";
+            this.lbProgress.Size = new System.Drawing.Size(52, 19);
+            this.lbProgress.Style = MetroFramework.MetroColorStyle.Yellow;
+            this.lbProgress.TabIndex = 44;
+            this.lbProgress.Text = "0 von 0";
+            this.lbProgress.Visible = false;
+            // 
+            // FormAutoReturn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1000, 500);
+            this.Controls.Add(this.lbProgress);
             this.Controls.Add(this.p_klasse);
             this.Controls.Add(this.p_modus);
             this.Controls.Add(this.a_cb_Klasse);
@@ -502,7 +516,7 @@
             this.Controls.Add(this.gv_Schueler);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1000, 500);
-            this.Name = "w_s_autorueck";
+            this.Name = "FormAutoReturn";
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -538,5 +552,6 @@
         private MetroFramework.Components.MetroStyleManager stylemManagerAutoReturn;
         private TransparentPanel p_klasse;
         private TransparentPanel p_modus;
+        private MetroFramework.Controls.MetroLabel lbProgress;
     }
 }

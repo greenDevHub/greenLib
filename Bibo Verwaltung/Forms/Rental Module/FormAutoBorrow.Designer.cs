@@ -57,10 +57,11 @@
             this.mbt_Suche = new MetroFramework.Controls.MetroButton();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.styleManagerAutoBorrow = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.lbProgress = new MetroFramework.Controls.MetroLabel();
+            this.p_modus = new Bibo_Verwaltung.TransparentPanel();
             this.p_klasse = new Bibo_Verwaltung.TransparentPanel();
             this.a_cb_Klasse = new Bibo_Verwaltung.AdvancedComboBox();
             this.a_cb_Modus = new Bibo_Verwaltung.AdvancedComboBox();
-            this.p_modus = new Bibo_Verwaltung.TransparentPanel();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Schueler)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_suggested)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_selected)).BeginInit();
@@ -390,6 +391,7 @@
             this.tb_ExemplarID.MaxLength = 32767;
             this.tb_ExemplarID.Name = "tb_ExemplarID";
             this.tb_ExemplarID.PasswordChar = '\0';
+            this.tb_ExemplarID.PromptText = "Exemplar ID";
             this.tb_ExemplarID.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.tb_ExemplarID.SelectedText = "";
             this.tb_ExemplarID.SelectionLength = 0;
@@ -451,10 +453,29 @@
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroToolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.MetroToolTip1_Popup);
             // 
-            // msm_automatic
+            // styleManagerAutoBorrow
             // 
             this.styleManagerAutoBorrow.Owner = this;
             this.styleManagerAutoBorrow.Style = MetroFramework.MetroColorStyle.Yellow;
+            // 
+            // lbProgress
+            // 
+            this.lbProgress.AutoSize = true;
+            this.lbProgress.Location = new System.Drawing.Point(149, 115);
+            this.lbProgress.Name = "lbProgress";
+            this.lbProgress.Size = new System.Drawing.Size(52, 19);
+            this.lbProgress.Style = MetroFramework.MetroColorStyle.Yellow;
+            this.lbProgress.TabIndex = 12;
+            this.lbProgress.Text = "0 von 0";
+            this.lbProgress.Visible = false;
+            // 
+            // p_modus
+            // 
+            this.p_modus.Location = new System.Drawing.Point(23, 82);
+            this.p_modus.Name = "p_modus";
+            this.p_modus.Size = new System.Drawing.Size(210, 24);
+            this.p_modus.TabIndex = 25;
+            this.p_modus.Visible = false;
             // 
             // p_klasse
             // 
@@ -512,15 +533,7 @@
             this.metroToolTip1.SetToolTip(this.a_cb_Modus, "Wählen Sie den Ausgabemodus.");
             this.a_cb_Modus.SelectedIndexChanged += new System.EventHandler(this.a_cb_Modus_SelectedIndexChanged);
             // 
-            // p_modus
-            // 
-            this.p_modus.Location = new System.Drawing.Point(23, 82);
-            this.p_modus.Name = "p_modus";
-            this.p_modus.Size = new System.Drawing.Size(210, 24);
-            this.p_modus.TabIndex = 25;
-            this.p_modus.Visible = false;
-            // 
-            // w_s_automatic
+            // FormAutoBorrow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -539,6 +552,7 @@
             this.Controls.Add(this.bt_next);
             this.Controls.Add(this.lb_selected);
             this.Controls.Add(this.lb_suggested);
+            this.Controls.Add(this.lbProgress);
             this.Controls.Add(this.lb_Schueler);
             this.Controls.Add(this.a_cb_Modus);
             this.Controls.Add(this.lb_Anweisung1);
@@ -548,7 +562,7 @@
             this.Controls.Add(this.lb_Jahr);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1000, 500);
-            this.Name = "w_s_automatic";
+            this.Name = "FormAutoBorrow";
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -586,5 +600,6 @@
         private MetroFramework.Components.MetroStyleManager styleManagerAutoBorrow;
         private TransparentPanel p_klasse;
         private TransparentPanel p_modus;
+        private MetroFramework.Controls.MetroLabel lbProgress;
     }
 }
