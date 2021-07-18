@@ -112,7 +112,6 @@ namespace Bibo_Verwaltung
         {
             inRueckAction = false;
             tb_ExemplarID.Enabled = false;
-            a_cb_Modus.SelectedIndex = 0;
             bt_bestaetigen.Text = "Schüler laden";
             tb_ExemplarID.Text = "";
             a_cb_Modus.TabStop = true;
@@ -133,46 +132,7 @@ namespace Bibo_Verwaltung
             selectedBuecher.Rows.Clear();
         }
 
-        /// <summary>
-        /// Wählt den vorherigen Schüler in der Schüler-Gridview aus
-        /// </summary>
-        private void LastSchueler()
-        {
-            try
-            {
-                if (returnHelper.ReturnDataTable.Rows.Count != 0)
-                {
-                    DialogResult dialogResult = MetroMessageBox.Show(this, "Sie haben die eingegebenen Exemplare noch nicht zurückgegeben. Wenn Sie fortfahren, werden diese Exemplare verworfen. Trotzdem fortfahren?", "Weiter?",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                    if (dialogResult == DialogResult.No) return;
-                }
-                if (inRueckAction)
-                {
-                    if (gv_Schueler.CurrentRow.Index >= 1)
-                    {
-                        gv_Schueler.CurrentCell = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index - 1].Cells[1];
-                        if (gv_Schueler.Rows.Count > 1)
-                        {
-                            bt_next.Enabled = true;
-                        }
-                        if (gv_Schueler.CurrentRow.Index == 0)
-                        {
-                            bt_back.Enabled = false;
-                        }
-                        //if (gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.LimeGreen || gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.Red)
-                        //{
-                        //    gv_Schueler.ClearSelection();
-                        //}
-                        tb_ExemplarID.Text = "";
-                        tb_ExemplarID.Focus();
-                        returnHelper.ClearRueckList();
-                        selectedBuecher.Rows.Clear();
-                        gv_selected.Refresh();
-                    }
-                }
-            }
-            catch { }
-        }
+       
 
         /// <summary>
         /// Prüft ob alle Schüler der aktuellen Auswahl ihnre Schulbücher erfolgreich erhalten haben
@@ -204,60 +164,6 @@ namespace Bibo_Verwaltung
             {
                 return false;
             }
-        }
-
-        /// <summary>
-        /// Wählt den nächsten Schüler in der Schüler-Gridview aus
-        /// </summary>
-        private void NextSchueler()
-        {
-            try
-            {
-                if (returnHelper.ReturnDataTable.Rows.Count != 0)
-                {
-                    DialogResult dialogResult = MetroMessageBox.Show(this, "Sie haben die eingegebenen Exemplare noch nicht zurückgegeben. Wenn Sie fortfahren, werden diese Exemplare verworfen. Trotzdem fortfahren?", "Weiter?",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                    if (dialogResult == DialogResult.No) return;
-                }
-                if (IsComplete(ref gv_Schueler) || gv_Schueler.CurrentCell.RowIndex == gv_Schueler.RowCount - 1)
-                {
-                    DialogResult dialogResult = MetroMessageBox.Show(this, "Sie sind am Ende der Schülerliste angekommen. Möchten Sie die Lehrbuch-Rückgabe abschließen?", "Warnung",
-                            MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                    if (dialogResult == DialogResult.OK)
-                    {
-                        EndAusgabe();
-                    }
-                    else
-                    {
-                        gv_Schueler.ClearSelection();
-                    }
-                }
-                if (inRueckAction)
-                {
-                    if (gv_Schueler.CurrentRow.Index < gv_Schueler.Rows.Count - 1)
-                    {
-                        if (gv_Schueler.Rows.Count > 1)
-                        {
-                            bt_back.Enabled = true;
-                        }
-                        gv_Schueler.CurrentCell = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index + 1].Cells[1];
-                        if (gv_Schueler.CurrentRow.Index == gv_Schueler.Rows.Count - 1)
-                        {
-                            bt_next.Enabled = false;
-                        }
-                        //if (gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.LimeGreen || gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.Red)
-                        //{
-                        //    gv_Schueler.ClearSelection();
-                        //}
-                        tb_ExemplarID.Text = "";
-                        tb_ExemplarID.Focus();
-                        returnHelper.ClearRueckList();
-                        selectedBuecher.Rows.Clear();
-                    }
-                }
-                gv_selected.Refresh();
-            }
-            catch { }
         }
 
         /// <summary>
@@ -456,14 +362,54 @@ namespace Bibo_Verwaltung
 
         private void Bt_back_Click(object sender, EventArgs e)
         {
-            LastSchueler();
+            SelectPreviousRow();
         }
 
         private void Bt_next_Click(object sender, EventArgs e)
         {
-            NextSchueler();
+            SelectNextRow();
+        }
+        private bool HasUnsavedChanges()
+        {
+            if (returnHelper.ReturnDataTable.Rows.Count != 0)
+            {
+                DialogResult dialogResult = MetroMessageBox.Show(this, "Sie haben die eingegebenen Exemplare noch nicht zurückgegeben. Wenn Sie fortfahren, werden diese Exemplare verworfen. Trotzdem fortfahren?", "Weiter?",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.No) return true;
+            }
+            return false;
         }
 
+        private void SelectNextRow()
+        {
+            if (HasUnsavedChanges()) return;
+            int rowIndex = gv_Schueler.CurrentCell.RowIndex;
+            int colIndex = gv_Schueler.CurrentCell.ColumnIndex;
+            if (IsComplete(ref gv_Schueler) || gv_Schueler.CurrentCell.RowIndex == gv_Schueler.RowCount - 1)
+            {
+                DialogResult dialogResult = MetroMessageBox.Show(this, "Sie sind am Ende der Schülerliste angekommen. Möchten Sie die Lehrbuch-Ausgabe abschließen?", "Information",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    EndAusgabe();
+                }
+                else
+                {
+                    gv_Schueler.ClearSelection();
+                }
+                return;
+            }
+            gv_Schueler.CurrentCell = gv_Schueler.Rows[rowIndex + 1].Cells[colIndex];
+
+        }
+        private void SelectPreviousRow()
+        {
+            if (HasUnsavedChanges()) return;
+            int rowIndex = gv_Schueler.CurrentCell.RowIndex;
+            int colIndex = gv_Schueler.CurrentCell.ColumnIndex;
+            if (rowIndex == 0) return;
+            gv_Schueler.CurrentCell = gv_Schueler.Rows[rowIndex - 1].Cells[colIndex];
+        }
         private void Bt_abschließen_Click(object sender, EventArgs e)
         {
             if (returnHelper.ReturnDataTable.Rows.Count != 0)
@@ -515,7 +461,7 @@ namespace Bibo_Verwaltung
                             }
                         }
                         returnHelper.ClearRueckList();
-                        NextSchueler();
+                        SelectNextRow();
                     }
                     else
                     {
@@ -525,7 +471,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MetroMessageBox.Show(this, "Es befinden sich keine Bücher in der Rückgabeliste!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Es befinden sich keine Bücher in der Rückgabeliste!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 tb_ExemplarID.Focus();
                 tb_ExemplarID.SelectAll();
             }
@@ -533,9 +479,25 @@ namespace Bibo_Verwaltung
 
         private void Gv_Schueler_CurrentCellChanged(object sender, EventArgs e)
         {
+            StudentChanged();
             LoadRueckBuecher();
             SetProgress();
         }
+        private void StudentChanged()
+        {
+            if (gv_Schueler.CurrentRow != null && gv_Schueler.CurrentRow.Index < gv_Schueler.Rows.Count - 1 && gv_Schueler.CurrentRow.Index >= 0)
+            {
+                bt_back.Enabled = (gv_Schueler.CurrentRow.Index > 0);
+                bt_next.Enabled = !(gv_Schueler.CurrentRow.Index == gv_Schueler.Rows.Count - 1);
+                tb_ExemplarID.Text = "";
+                tb_ExemplarID.Focus();
+                returnHelper.ClearRueckList();
+                selectedBuecher.Rows.Clear();
+                gv_selected.Refresh();
+            }
+
+        }
+
         private void SetProgress()
         {
             lbProgress.Visible = true;
@@ -599,7 +561,7 @@ namespace Bibo_Verwaltung
                                 }
                                 else
                                 {
-                                    DialogResult dialogResult = MetroMessageBox.Show(this, "Dieses Buch wurde nicht von diesem Kunden ausgeliehen!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    DialogResult dialogResult = MetroMessageBox.Show(this, "Dieses Buch wurde nicht von diesem Kunden ausgeliehen!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 }
                             }
                             else
@@ -631,6 +593,12 @@ namespace Bibo_Verwaltung
                             tb_ExemplarID.Focus();
                             tb_ExemplarID.SelectAll();
                             combobox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                        }
+                        else
+                        {
+                            tb_ExemplarID.Focus();
+                            tb_ExemplarID.SelectAll();
+                            MetroMessageBox.Show(this, "Dieser Buchcode existiert nicht.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     catch(Exception ex)

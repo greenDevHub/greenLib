@@ -530,7 +530,7 @@ namespace Bibo_Verwaltung
             }
             else
             {
-                MetroMessageBox.Show(this, "Es befinden sich keine Bücher in der Ausleihliste!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Es befinden sich keine Bücher in der Ausleihliste!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -625,6 +625,12 @@ namespace Bibo_Verwaltung
                             gv_selected.ClearSelection();
                             tb_ExemplarID.Focus();
                             tb_ExemplarID.SelectAll();
+                        }
+                        else
+                        {
+                            tb_ExemplarID.Focus();
+                            tb_ExemplarID.SelectAll();
+                            MetroMessageBox.Show(this, "Dieser Buchcode existiert nicht.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     catch
