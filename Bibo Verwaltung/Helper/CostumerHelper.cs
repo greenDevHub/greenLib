@@ -1,4 +1,5 @@
 ﻿using MetroFramework.Controls;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -121,6 +122,8 @@ namespace Bibo_Verwaltung.Helper
             {
                 grid.Columns["Klasse"].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+            grid.Sort(grid.Columns["Nachname"], ListSortDirection.Ascending);
+
         }
 
 

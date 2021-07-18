@@ -354,7 +354,7 @@ namespace Bibo_Verwaltung
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 string isbn = table.Rows[i][1].ToString();
-                Book book = new Book(isbn, false);
+                Book book = new Book(isbn, true);
                 suggestedBooks.Add(book);
             }
             return suggestedBooks;

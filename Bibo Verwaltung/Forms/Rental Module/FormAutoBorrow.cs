@@ -179,39 +179,8 @@ namespace Bibo_Verwaltung
             lbProgress.Visible = false;
             autoausleihe.ClearBorrowTable();
             selectedBuecher.Rows.Clear();
-            a_cb_Modus.SelectedIndex = -1;
-            a_cb_Modus.SelectedIndex = 0;
             a_cb_Modus.Focus();
-        }
-
-        /// <summary>
-        /// Wählt den vorherigen Schüler in der Schüler-Gridview aus
-        /// </summary>
-        private void LastSchueler()
-        {
-            if (autoausleihe.BorrowTable.Rows.Count != 0)
-            {
-                DialogResult dialogResult = MetroMessageBox.Show(this, "Sie haben die eingegebenen Exemplare noch nicht verliehen. Wenn Sie fortfahren, werden diese Exemplare verworfen. Trotzdem fortfahren?", "Weiter?",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (dialogResult == DialogResult.No) return;
-            }
-            if (gv_Schueler.CurrentRow.Index >= 1)
-            {
-                gv_Schueler.CurrentCell = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index - 1].Cells[1];
-                if (gv_Schueler.Rows.Count > 1)
-                {
-                    bt_next.Enabled = true;
-                }
-                if (gv_Schueler.CurrentRow.Index == 0)
-                {
-                    bt_back.Enabled = false;
-                }
-                tb_ExemplarID.Text = "";
-                tb_ExemplarID.Focus();
-                autoausleihe.ClearBorrowTable();
-                selectedBuecher.Rows.Clear();
-                gv_selected.Refresh();
-            }
+            p_klasse.Visible = false;
         }
 
         /// <summary>
@@ -248,52 +217,19 @@ namespace Bibo_Verwaltung
             return result;
         }
 
-        /// <summary>
-        /// Wählt den nächsten Schüler in der Schüler-Gridview aus
-        /// </summary>
-        private void NextSchueler()
+        private void StudentChanged()
         {
-            if (autoausleihe.BorrowTable.Rows.Count != 0)
+            if (gv_Schueler.CurrentRow != null && gv_Schueler.CurrentRow.Index < gv_Schueler.Rows.Count - 1 && gv_Schueler.CurrentRow.Index >= 0)
             {
-                DialogResult dialogResult = MetroMessageBox.Show(this, "Sie haben die eingegebenen Exemplare noch nicht verliehen. Wenn Sie fortfahren, werden diese Exemplare verworfen. Trotzdem fortfahren?", "Weiter?",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (dialogResult == DialogResult.No) return;
-            }
-            if (IsComplete(ref gv_Schueler) || gv_Schueler.CurrentCell.RowIndex == gv_Schueler.RowCount - 1)
-            {
-                DialogResult dialogResult = MetroMessageBox.Show(this, "Sie sind am Ende der Schülerliste angekommen. Möchten Sie die Lehrbuch-Ausgabe abschließen?", "Information",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    EndAusgabe();
-                }
-                else
-                {
-                    gv_Schueler.ClearSelection();
-                }
-            }
-            if (gv_Schueler.CurrentRow != null && gv_Schueler.CurrentRow.Index < gv_Schueler.Rows.Count - 1)
-            {
-                if (gv_Schueler.Rows.Count > 1)
-                {
-                    bt_back.Enabled = true;
-
-                }
-                gv_Schueler.CurrentCell = gv_Schueler.Rows[gv_Schueler.CurrentRow.Index + 1].Cells[1];
-                if (gv_Schueler.CurrentRow.Index == gv_Schueler.Rows.Count - 1)
-                {
-                    bt_next.Enabled = false;
-                }
-                //if (gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.LimeGreen || gv_Schueler.Rows[gv_Schueler.CurrentRow.Index].DefaultCellStyle.BackColor == Color.Red)
-                //{
-                //    gv_Schueler.ClearSelection();
-                //}
+                bt_back.Enabled = (gv_Schueler.CurrentRow.Index > 0);
+                bt_next.Enabled = !(gv_Schueler.CurrentRow.Index == gv_Schueler.Rows.Count - 1);
                 tb_ExemplarID.Text = "";
                 tb_ExemplarID.Focus();
                 autoausleihe.ClearBorrowTable();
                 selectedBuecher.Rows.Clear();
                 gv_selected.Refresh();
             }
+
         }
 
         /// <summary>
@@ -390,7 +326,7 @@ namespace Bibo_Verwaltung
                     }
                 }
                 autoausleihe.ClearBorrowTable();
-                NextSchueler();
+                SelectNextRow();
             }
         }
         #endregion
@@ -471,7 +407,7 @@ namespace Bibo_Verwaltung
                 //costumer.CostumerSchoolClass.SchoolClassId = Convert.ToInt32(costumerRow.Cells["kunde_klasse"].Value);
                 List<string> borrowedBookIsbns = costumer.BorrowedBookIsbns();
                 int countBooks = 0;
-                for(int i = 0; i<suggestedBooks.Count;i++)
+                for (int i = 0; i < suggestedBooks.Count; i++)
                 //foreach (Book book in suggestedBooks)
                 {
                     if (!borrowedBookIsbns.Contains(suggestedBooks[i].BookIsbn))
@@ -504,6 +440,7 @@ namespace Bibo_Verwaltung
         }
         private void gv_Schueler_SelectionChanged(object sender, EventArgs e)
         {
+            StudentChanged();
             LoadSchulBuecher();
             SetProgress();
         }
@@ -512,17 +449,57 @@ namespace Bibo_Verwaltung
         {
             lbProgress.Visible = true;
             int totalCount = gv_Schueler.Rows != null ? gv_Schueler.Rows.Count : 0;
-            int currentNumber = gv_Schueler.SelectedRows != null && gv_Schueler.SelectedRows.Count>0 ? gv_Schueler.SelectedRows[0].Index + 1 : 0;
+            int currentNumber = gv_Schueler.SelectedRows != null && gv_Schueler.SelectedRows.Count > 0 ? gv_Schueler.SelectedRows[0].Index + 1 : 0;
             lbProgress.Text = $"{currentNumber} von {totalCount}";
         }
         private void bt_back_Click(object sender, EventArgs e)
         {
-            LastSchueler();
+            SelectPreviousRow();
         }
 
         private void bt_next_Click(object sender, EventArgs e)
         {
-            NextSchueler();
+            SelectNextRow();
+        }
+
+        private bool HasUnsavedChanges(){
+            if (autoausleihe.BorrowTable.Rows.Count != 0)
+            {
+                DialogResult dialogResult = MetroMessageBox.Show(this, "Sie haben die eingegebenen Exemplare noch nicht verliehen. Wenn Sie fortfahren, werden diese Exemplare verworfen. Trotzdem fortfahren?", "Weiter?",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.No) return true;
+            }
+            return false;
+        }
+
+        private void SelectNextRow()
+        {
+            if(HasUnsavedChanges())return;
+            int rowIndex = gv_Schueler.CurrentCell.RowIndex;
+            int colIndex = gv_Schueler.CurrentCell.ColumnIndex;
+            if (IsComplete(ref gv_Schueler) || gv_Schueler.CurrentCell.RowIndex == gv_Schueler.RowCount - 1)
+            {
+                DialogResult dialogResult = MetroMessageBox.Show(this, "Sie sind am Ende der Schülerliste angekommen. Möchten Sie die Lehrbuch-Ausgabe abschließen?", "Information",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    EndAusgabe();
+                }
+                else
+                {
+                    gv_Schueler.ClearSelection();
+                }
+                return;
+            }
+            gv_Schueler.CurrentCell = gv_Schueler.Rows[rowIndex + 1].Cells[colIndex];
+        }
+        private void SelectPreviousRow()
+        {
+            if(HasUnsavedChanges())return;
+            int rowIndex = gv_Schueler.CurrentCell.RowIndex;
+            int colIndex = gv_Schueler.CurrentCell.ColumnIndex;
+            if (rowIndex == 0) return;
+            gv_Schueler.CurrentCell = gv_Schueler.Rows[rowIndex - 1].Cells[colIndex];
         }
 
         private void bt_abschließen_Click(object sender, EventArgs e)
@@ -598,7 +575,8 @@ namespace Bibo_Verwaltung
                                         if (autoausleihe.SuggestedBookAlreadyBorrowed(autoausleihe.Copy.CopyIsbn, autoausleihe.Costumer.CostumerId))
                                         {
                                             DialogResult dr = MetroMessageBox.Show(this, "Ein Exemplar von diesem Buch wurde bereits an die Person verliehen. Soll es trotzdem hinzugefügt werden?", "Vorgeschlagenes Buch bereits verliehen", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                                            if (dr == DialogResult.No) {
+                                            if (dr == DialogResult.No)
+                                            {
                                                 tb_ExemplarID.Focus();
                                                 tb_ExemplarID.SelectAll();
                                                 return;
@@ -608,10 +586,10 @@ namespace Bibo_Verwaltung
                                         Buchrow.DefaultCellStyle.BackColor = Color.LimeGreen;
                                         Buchrow.DefaultCellStyle.ForeColor = Color.Black;
                                     }
-                                    else 
+                                    else
                                     {
                                         UnSelectExemplar();
-                                        if (!autoausleihe.SuggestedBookAlreadyBorrowed(autoausleihe.Copy.CopyIsbn,autoausleihe.Costumer.CostumerId))
+                                        if (!autoausleihe.SuggestedBookAlreadyBorrowed(autoausleihe.Copy.CopyIsbn, autoausleihe.Costumer.CostumerId))
                                         {
                                             Buchrow.DefaultCellStyle.BackColor = default;
                                             Buchrow.DefaultCellStyle.ForeColor = default;
