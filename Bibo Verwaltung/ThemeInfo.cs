@@ -12,6 +12,7 @@ namespace Bibo_Verwaltung.Helper
         public static MetroColorStyle MainStyle { get; } = MetroColorStyle.Blue;
         public static MetroColorStyle SettingsStyle { get; } = MetroColorStyle.Silver;
         public static MetroColorStyle CostumerStyle { get; } = MetroColorStyle.Teal;
+        public static MetroColorStyle UserStyle { get; } = MetroColorStyle.Teal;
         public static MetroColorStyle BookStyle { get; } = MetroColorStyle.Blue;
         public static MetroColorStyle AssignmentStyle { get; } = MetroColorStyle.Orange;
         public static MetroColorStyle BorrowingStyle { get; } = MetroColorStyle.Green;

@@ -12,26 +12,26 @@ namespace Bibo_Verwaltung
         UserHelper userHelper = new UserHelper();
 
         #region Constructor
-        Color fc = Color.Black;
-        Color bc = Color.White;
         public FormUser()
         {
             InitializeComponent();
-            this.StyleManager = ThemeInfo.StyleManager;
-            this.StyleManager.Style = MetroColorStyle.Teal;
-            if (this.StyleManager.Theme == MetroThemeStyle.Dark)
-            {
-                fc = Color.White;
-                bc = System.Drawing.ColorTranslator.FromHtml("#111111");
-            }
-            cbPermissions.ForeColor = fc;
-            cbPermissions.BackColor = bc;
+            LoadTheme();
 
             this.Text = Text + AuthInfo.FormInfo();
             userHelper.FillGrid(ref gridUser);
             radioAdd.Select();
         }
         #endregion
+
+        private void LoadTheme()
+        {
+            this.StyleManager = styleManagerUser;
+            this.StyleManager.Theme = ThemeInfo.StyleManager.Theme;
+            this.StyleManager.Style = ThemeInfo.UserStyle;
+            cbPermissions.ForeColor = ThemeInfo.ForeColor;
+            cbPermissions.BackColor = ThemeInfo.BackColor;
+
+        }
 
         User user = new User();
 
