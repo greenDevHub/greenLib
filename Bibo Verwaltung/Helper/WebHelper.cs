@@ -356,14 +356,21 @@ namespace Bibo_Verwaltung.Helper
             client.Credentials = CredentialCache.DefaultCredentials;
             client.Proxy.Credentials = CredentialCache.DefaultCredentials;
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-            byte[] imageData = client.DownloadData(bildURL);
-            Image image;
-            using (var ms = new MemoryStream(imageData))
+            try
             {
-                image = Image.FromStream(ms);
+                byte[] imageData = client.DownloadData(bildURL);
+                Image image;
+                using (var ms = new MemoryStream(imageData))
+                {
+                    image = Image.FromStream(ms);
+                }
+                image = ScaleImage(image, 600, 600);
+                return image;
             }
-            image = ScaleImage(image, 600, 600);
-            return image;
+            catch
+            {
+                return null;
+            }
         }
         private Image ScaleImage(Image image, int maxWidth, int maxHeight)
         {
@@ -472,9 +479,9 @@ namespace Bibo_Verwaltung.Helper
                 {
                     LanguageHelper helper = new LanguageHelper();
                     Language language = new Language();
-                    if (helper.FindIdByName(publisherName) < 0)
+                    if (helper.FindIdByName(languageName) < 0)
                     {
-                        language.LanguageName = publisherName;
+                        language.LanguageName = languageName;
                         language.Add();
                     }
                     language = new Language(helper.FindIdByName(languageName));

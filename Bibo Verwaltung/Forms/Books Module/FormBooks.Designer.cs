@@ -730,28 +730,28 @@ namespace Bibo_Verwaltung
             this.entfernenToolStripMenuItem,
             this.exemplareToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(234, 148);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 76);
             this.contextMenuStrip1.Style = MetroFramework.MetroColorStyle.Blue;
             this.contextMenuStrip1.UseStyleColors = true;
             // 
             // ladenToolStripMenuItem
             // 
             this.ladenToolStripMenuItem.Name = "ladenToolStripMenuItem";
-            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(233, 48);
+            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.ladenToolStripMenuItem.Text = "Laden";
             this.ladenToolStripMenuItem.Click += new System.EventHandler(this.ladenToolStripMenuItem_Click);
             // 
             // entfernenToolStripMenuItem
             // 
             this.entfernenToolStripMenuItem.Name = "entfernenToolStripMenuItem";
-            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(233, 48);
+            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.entfernenToolStripMenuItem.Text = "Entfernen";
             this.entfernenToolStripMenuItem.Click += new System.EventHandler(this.entfernenToolStripMenuItem_Click);
             // 
             // exemplareToolStripMenuItem
             // 
             this.exemplareToolStripMenuItem.Name = "exemplareToolStripMenuItem";
-            this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(233, 48);
+            this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.exemplareToolStripMenuItem.Text = "Exemplare";
             this.exemplareToolStripMenuItem.Click += new System.EventHandler(this.exemplareToolStripMenuItem_Click);
             // 
@@ -1041,7 +1041,7 @@ namespace Bibo_Verwaltung
             this.checkedListBox1.Location = new System.Drawing.Point(140, 111);
             this.checkedListBox1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(175, 107);
+            this.checkedListBox1.Size = new System.Drawing.Size(175, 92);
             this.checkedListBox1.TabIndex = 8;
             this.metroToolTip1.SetToolTip(this.checkedListBox1, "Wählen Sie hier mehrere Autoren aus.");
             this.checkedListBox1.Visible = false;
@@ -1079,9 +1079,9 @@ namespace Bibo_Verwaltung
             this.dTP_Erscheinungsdatum.CustomFormat = " dd.MM.yyyy";
             this.dTP_Erscheinungsdatum.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dTP_Erscheinungsdatum.Location = new System.Drawing.Point(140, 208);
-            this.dTP_Erscheinungsdatum.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dTP_Erscheinungsdatum.MinimumSize = new System.Drawing.Size(0, 30);
             this.dTP_Erscheinungsdatum.Name = "dTP_Erscheinungsdatum";
-            this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(175, 38);
+            this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(175, 30);
             this.dTP_Erscheinungsdatum.TabIndex = 16;
             this.metroToolTip1.SetToolTip(this.dTP_Erscheinungsdatum, "    Wählen sie das Erscheinungsdatum ihres Buches hier aus.    ");
             this.dTP_Erscheinungsdatum.ValueChanged += new System.EventHandler(this.DTP_Erscheinungsdatum_ValueChanged);
@@ -1353,7 +1353,7 @@ namespace Bibo_Verwaltung
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Bücherverwaltung";
             this.Theme = MetroFramework.MetroThemeStyle.Default;
-            this.Activated += new System.EventHandler(this.w_s_buecher_Activated);
+            this.Shown += new System.EventHandler(this.w_s_buecher_Activated);
             this.Click += new System.EventHandler(this.w_s_buecher_Click);
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewBook)).EndInit();
