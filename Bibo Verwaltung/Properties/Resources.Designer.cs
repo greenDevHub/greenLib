@@ -191,16 +191,6 @@ namespace Bibo_Verwaltung.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
-        /// </summary>
-        internal static byte[] Handbuch {
-            get {
-                object obj = ResourceManager.GetObject("Handbuch", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Lock32 {
@@ -217,6 +207,16 @@ namespace Bibo_Verwaltung.Properties {
             get {
                 object obj = ResourceManager.GetObject("Lock512", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        /// </summary>
+        internal static byte[] Manual {
+            get {
+                object obj = ResourceManager.GetObject("Manual", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

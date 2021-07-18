@@ -251,7 +251,7 @@ namespace Bibo_Verwaltung
             try
             {
                 string openPDFFile = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\greenLib\greenLib Handbuch.pdf";
-                File.WriteAllBytes(openPDFFile, global::Bibo_Verwaltung.Properties.Resources.Handbuch);
+                File.WriteAllBytes(openPDFFile, global::Bibo_Verwaltung.Properties.Resources.Manual);
                 Process.Start(openPDFFile);
             }
             catch

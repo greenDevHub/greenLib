@@ -494,6 +494,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\DarkMode512.png" />
+    <None Include="Resources\Manual.pdf" />
+    <None Include="Resources\manual.pptx" />
     <None Include="Resources\Settings32.png" />
     <None Include="Resources\Eye32.png" />
     <None Include="Resources\Exit32.png" />
