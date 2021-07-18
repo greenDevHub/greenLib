@@ -115,8 +115,9 @@ namespace Bibo_Verwaltung
             CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return table;
             string RawCommand = "SELECT aus_buchid as 'ID', aus_leihdatum as 'Geliehen', aus_rückgabedatum as 'Rückgabe', buch_titel as 'Titel' " +
-                "FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid left join t_s_buecher on buch_isbn = bu_isbn WHERE aus_kundenid = @0 " +
-                "AND buch_isbn in (SELECT bf_isbn FROM t_s_buch_fach)";
+                "FROM t_bd_ausgeliehen left join t_s_buchid on bu_id = aus_buchid left join t_s_buecher on buch_isbn = bu_isbn WHERE aus_kundenid = @0 ";
+            // add following line to select command if you only want to select school books
+            // "AND buch_isbn in (SELECT bf_isbn FROM t_s_buch_fach)";
             SqlDataAdapter adapter = new SqlDataAdapter(RawCommand, con.Con);
             adapter.SelectCommand.Parameters.AddWithValue("@0", Costumer.CostumerId);
             adapter.Fill(table);

@@ -485,10 +485,9 @@ namespace Bibo_Verwaltung
         }
         private void StudentChanged()
         {
-            if (gv_Schueler.CurrentRow != null && gv_Schueler.CurrentRow.Index < gv_Schueler.Rows.Count - 1 && gv_Schueler.CurrentRow.Index >= 0)
+            if (gv_Schueler.CurrentRow != null && gv_Schueler.CurrentRow.Index < gv_Schueler.Rows.Count && gv_Schueler.CurrentRow.Index >= 0)
             {
                 bt_back.Enabled = (gv_Schueler.CurrentRow.Index > 0);
-                bt_next.Enabled = !(gv_Schueler.CurrentRow.Index == gv_Schueler.Rows.Count - 1);
                 tb_ExemplarID.Text = "";
                 tb_ExemplarID.Focus();
                 returnHelper.ClearRueckList();

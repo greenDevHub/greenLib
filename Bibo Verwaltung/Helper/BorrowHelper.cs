@@ -344,6 +344,7 @@ namespace Bibo_Verwaltung
         {
             DataTable table = SuggestBuecher(Costumer.ReturnGrade());
             grid.DataSource = table;
+            if (grid.Columns.Count == 0) return;
             grid.Columns["bf_fachid"].Visible = false;
         }
 

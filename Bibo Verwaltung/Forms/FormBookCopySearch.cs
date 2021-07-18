@@ -27,6 +27,7 @@ namespace Bibo_Verwaltung
             this.currentstufe = stufe;
             this.Text = Text + AuthInfo.FormInfo();
             bookHelper.FillComboboxSearch(ref a_cb_Buecher, CurrentStufe, 0);
+            if (stufe == -1) return;
             a_cb_Buecher.SelectedIndex = 0;
         }
         #endregion
@@ -53,11 +54,12 @@ namespace Bibo_Verwaltung
         {
             if (gv_Exemplare.CurrentRow != null)
             {
+                
                 this.ExemplarID = gv_Exemplare.Rows[gv_Exemplare.CurrentRow.Index].Cells["ExemplarID"].Value.ToString();
             }
             else
             {
-                this.ExemplarID = "0";
+                this.ExemplarID = "";
             }
             this.DialogResult = DialogResult.OK;
             this.Close();

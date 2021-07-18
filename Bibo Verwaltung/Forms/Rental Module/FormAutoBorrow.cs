@@ -219,17 +219,17 @@ namespace Bibo_Verwaltung
 
         private void StudentChanged()
         {
-            if (gv_Schueler.CurrentRow != null && gv_Schueler.CurrentRow.Index < gv_Schueler.Rows.Count - 1 && gv_Schueler.CurrentRow.Index >= 0)
-            {
-                bt_back.Enabled = (gv_Schueler.CurrentRow.Index > 0);
-                bt_next.Enabled = !(gv_Schueler.CurrentRow.Index == gv_Schueler.Rows.Count - 1);
-                tb_ExemplarID.Text = "";
-                tb_ExemplarID.Focus();
-                autoausleihe.ClearBorrowTable();
-                selectedBuecher.Rows.Clear();
-                gv_selected.Refresh();
+            if (gv_Schueler.CurrentRow != null){
+                if (gv_Schueler.CurrentRow.Index < gv_Schueler.Rows.Count && gv_Schueler.CurrentRow.Index >= 0)
+                {
+                    bt_back.Enabled = (gv_Schueler.CurrentRow.Index > 0);
+                    tb_ExemplarID.Text = "";
+                    tb_ExemplarID.Focus();
+                    autoausleihe.ClearBorrowTable();
+                    selectedBuecher.Rows.Clear();
+                    gv_selected.Refresh();
+                }
             }
-
         }
 
         /// <summary>
@@ -462,7 +462,8 @@ namespace Bibo_Verwaltung
             SelectNextRow();
         }
 
-        private bool HasUnsavedChanges(){
+        private bool HasUnsavedChanges()
+        {
             if (autoausleihe.BorrowTable.Rows.Count != 0)
             {
                 DialogResult dialogResult = MetroMessageBox.Show(this, "Sie haben die eingegebenen Exemplare noch nicht verliehen. Wenn Sie fortfahren, werden diese Exemplare verworfen. Trotzdem fortfahren?", "Weiter?",
@@ -474,7 +475,7 @@ namespace Bibo_Verwaltung
 
         private void SelectNextRow()
         {
-            if(HasUnsavedChanges())return;
+            if (HasUnsavedChanges()) return;
             int rowIndex = gv_Schueler.CurrentCell.RowIndex;
             int colIndex = gv_Schueler.CurrentCell.ColumnIndex;
             if (IsComplete(ref gv_Schueler) || gv_Schueler.CurrentCell.RowIndex == gv_Schueler.RowCount - 1)
@@ -495,7 +496,7 @@ namespace Bibo_Verwaltung
         }
         private void SelectPreviousRow()
         {
-            if(HasUnsavedChanges())return;
+            if (HasUnsavedChanges()) return;
             int rowIndex = gv_Schueler.CurrentCell.RowIndex;
             int colIndex = gv_Schueler.CurrentCell.ColumnIndex;
             if (rowIndex == 0) return;
