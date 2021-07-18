@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Media;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -74,7 +75,7 @@ namespace Bibo_Verwaltung
         private void guestMode(bool activate)
         {
             btSubmit.Enabled = !activate;
-            bt_print.Enabled = !activate;
+            bt_print.Enabled = bt_print.Enabled && !activate;
             bt_pic_delete.Enabled = !activate;
             bt_picture.Enabled = !activate;
             bt_Excel.Enabled = !activate;
@@ -735,7 +736,6 @@ namespace Bibo_Verwaltung
                 cb_Verlag.TabStop = true;
                 cb_Sprache.TabStop = true;
                 cb_Genre.TabStop = true;
-                readOnly = true;
                 p_autor.Visible = false;
                 p_verlag.Visible = false;
                 p_sprache.Visible = false;
@@ -758,7 +758,6 @@ namespace Bibo_Verwaltung
                 lb_Erscheinungsdatum.Text = "Erscheinungsdatum:*";
                 checkbox_autor.Enabled = true;
                 button1.Enabled = true;
-
             }
             if (rb_Delete_Buch.Checked)
             {
@@ -799,7 +798,7 @@ namespace Bibo_Verwaltung
                 btSubmit.Enabled = false;
                 bt_pic_delete.Enabled = false;
                 bt_picture.Enabled = false;
-                bt_print.Enabled = true;
+                bt_print.Enabled = false;
                 tb_barcodeAdd.Enabled = true;
                 tb_neu.Enabled = false;
                 tb_ISBN.Enabled = true;
@@ -828,6 +827,7 @@ namespace Bibo_Verwaltung
                 checkbox_autor.Enabled = false;
                 button1.Enabled = true;
             }
+            readOnly = checkbox_autor.Checked;
             guestMode(guest);
 
         }
@@ -880,11 +880,13 @@ namespace Bibo_Verwaltung
             if (book.BookAuthors.Count > 1)
             {
                 checkbox_autor.Checked = true;
-                foreach (DataRowView item in checkedListBox1.Items)
+                for(int i = 0; i<checkedListBox1.Items.Count;i++)
                 {
+                    DataRowView item = (DataRowView)checkedListBox1.Items[i];
                     var s = item["au_autor"];
                     Author author = new Author(authorHelper.FindIdByName(item["au_autor"].ToString()));
-                    if (book.BookAuthors.Contains(author))
+                    var matches = book.BookAuthors.Where(authorItem => String.Equals(authorItem.AuthorName, author.AuthorName, StringComparison.CurrentCulture));
+                    if (matches.ToList().Count > 0)
                     {
                         checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf(item), true);
                     }
@@ -921,7 +923,6 @@ namespace Bibo_Verwaltung
             genreHelper.FillCombobox(ref cb_Genre, book.BookGenre.GenreId);
             languageHelper.FillCombobox(ref cb_Sprache, book.BookLanguage.LanguageId);
             tb_barcodePrinted.Text = book.NumberOfPrintedCopies().ToString();
-            rb_Add_Buch.Checked = true;
         }
 
         /// <summary>
@@ -936,6 +937,7 @@ namespace Bibo_Verwaltung
                 DataGridViewRow row = gridViewBook.Rows[e.RowIndex];
                 tb_ISBN.Text = row.Cells[0].Value.ToString();
                 LoadBuch(new Book(tb_ISBN.Text, false));
+                rb_Update_Buch.Checked = true;
                 if (!bool1) Hide();
             }
         }
@@ -1118,6 +1120,7 @@ namespace Bibo_Verwaltung
                 if (!isEmpty(tb_ISBN.Text))
                 {
                     Book book = webHelper.AutoLoadDNB(tb_ISBN.Text);
+                    FillComboboxes();
                     if (book == null)
                     {
                         MetroMessageBox.Show(this, "Das Buch konnte nicht geladen werden!", "Fehler beim Laden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1125,6 +1128,7 @@ namespace Bibo_Verwaltung
                     else
                     {
                         LoadBuch(book);
+                        rb_Add_Buch.Checked = true;
                     }
                 }
 
@@ -1137,6 +1141,7 @@ namespace Bibo_Verwaltung
                 {
                     //load new data from web source
                     Book book = webHelper.AutoLoadDNB(tb_ISBN.Text);
+                    FillComboboxes();
                     if (book == null)
                     {
                         MetroMessageBox.Show(this, "Das Buch konnte nicht geladen werden!", "Fehler beim Laden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1144,12 +1149,14 @@ namespace Bibo_Verwaltung
                     else
                     {
                         LoadBuch(book);
+                        rb_Update_Buch.Checked = true;
                     }
                 }
                 else
                 {
                     //use data stored in database
                     LoadBuch(new Book(tb_ISBN.Text, false));
+                    rb_Update_Buch.Checked = true;
                 }
 
             }
@@ -1165,6 +1172,7 @@ namespace Bibo_Verwaltung
                 if (gridViewBook.Rows.Count == 0)
                 {
                     Book book = webHelper.AutoLoadDNB(tb_ISBN.Text);
+                    FillComboboxes();
                     if (book == null)
                     {
                         MetroMessageBox.Show(this, "Das Buch konnte nicht geladen werden!", "Fehler beim Laden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1172,12 +1180,14 @@ namespace Bibo_Verwaltung
                     else
                     {
                         LoadBuch(book);
+                        rb_Add_Buch.Checked = true;
                     }
                 }
                 else if (gridViewBook.Rows.Count == 1)
                 {
                     Book book = new Book(tb_ISBN.Text, false);
                     LoadBuch(book);
+                    rb_Update_Buch.Checked = true;
                 }
             }
         }
@@ -1431,9 +1441,13 @@ namespace Bibo_Verwaltung
             {
                 IPrinter printer = new Printer();
                 object[] x = printer.GetInstalledPrinters();
+                if (x == null || x.Length == 0)
+                {
+                    MetroMessageBox.Show(this, "Es wurde kein verfügbarer Drucker gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 string name = x[0].ToString();
-                bool test = printer.IsPrinterOnline(name);
-                if (test)
+                if (printer.IsPrinterOnline(name))
                 {
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                     string strFilePath = path + "\\greenLib\\Einstellungen\\BarcodePreset.lbx";
@@ -1475,7 +1489,7 @@ namespace Bibo_Verwaltung
             {
                 List<Copy> unprintedCopies = new List<Copy>();
                 List<string> newPrintedID = new List<string>();
-                Book book = new Book(tb_ISBN.Text, false);
+                Book book = new Book(tb_ISBN.Text, true);
 
                 unprintedCopies = book.UnprintedCopies();
 

@@ -364,9 +364,8 @@ namespace Bibo_Verwaltung
                     else
                     {
                         //TODO, does not work for whole grade
-                        SchoolClass schoolClass = new SchoolClass(Convert.ToInt32(a_cb_Klasse.Text.Substring(13)));
-                        grade = gradeHelper.GetGradeOfSchoolClass(schoolClass.SchoolClassId);
-                        costumerHelper.FillCostumerGrid(ref gv_Schueler, true, schoolClass.SchoolClassId);
+                        grade = Convert.ToInt32(a_cb_Klasse.Text.Substring(13));
+                        costumerHelper.FillCostumerGrid(ref gv_Schueler, true, grade);
                     }
                     if (gv_Schueler.Rows.Count != 0)
                     {

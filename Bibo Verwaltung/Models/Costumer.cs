@@ -181,10 +181,10 @@ namespace Bibo_Verwaltung
                 subject.SubjectNameShort = dr["f_kurzform"].ToString();
                 CostumerSubjects.Add(subject);
             }
-            for (int i = CostumerAdvancedSubjects.Count; i < 2; i++)
-            {
-                CostumerAdvancedSubjects.Add(new Subject());
-            }
+            //for (int i = CostumerAdvancedSubjects.Count; i < 2; i++)
+            //{
+            //    CostumerAdvancedSubjects.Add(new Subject());
+            //}
             dr.Close();
             con.Close();
         }

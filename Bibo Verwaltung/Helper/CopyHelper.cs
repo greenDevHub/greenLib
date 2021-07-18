@@ -178,8 +178,8 @@ namespace Bibo_Verwaltung
                 Copy copy = new Copy();
                 copy.CopyId = int.Parse(dr["bu_id"].ToString());
                 copy.CopyIsbn = dr["bu_isbn"].ToString();
-                copy.Condition = new Condition(int.Parse(dr["bu_zustandsid"].ToString()));
-                copy.DateRegistration = (DateTime)dr["verified_aufnahmedatum"];
+                //copy.Condition = new Condition(int.Parse(dr["bu_zustandsid"].ToString()));
+                //copy.DateRegistration = (DateTime)dr["verified_aufnahmedatum"];
                 copy.CopyActivated = dr["bu_activated"].ToString().Equals(0) ? false : true;
                 copy.CopyPrinted = dr["bu_printed"].ToString().Equals(0) ? false : true;
                 copies.Add(copy);

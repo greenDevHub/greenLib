@@ -625,14 +625,6 @@ namespace Bibo_Verwaltung
             barcodes.Add(mtb_Barcode.Text);
 
             PrintMultipleBarcodes(barcodes);
-            //PrintDocument doc = new PrintDocument();
-            //PrintDialog pd = new PrintDialog();
-            //doc.PrintPage += Doc_PrintPage;
-            //pd.Document = doc;
-            //if (pd.ShowDialog() == DialogResult.OK)
-            //{
-            //    doc.Print();
-            //}
         }
 
         int pageCount = 0;
@@ -811,9 +803,14 @@ namespace Bibo_Verwaltung
             {
                 IPrinter printer = new Printer();
                 object[] x = printer.GetInstalledPrinters();
+                if (x==null || x.Length == 0)
+                {
+                    tb_ID.ResetText();
+                    MetroMessageBox.Show(this, "Es wurde kein verfügbarer Drucker gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 string name = x[0].ToString();
-                bool test = printer.IsPrinterOnline(name);
-                if (test)
+                if (printer.IsPrinterOnline(name))
                 {
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                     string strFilePath = path + "\\greenLib\\Einstellungen\\BarcodePreset.lbx";
@@ -845,7 +842,7 @@ namespace Bibo_Verwaltung
                     MetroMessageBox.Show(this, "Der Drucker ist nicht online!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 tb_ID.ResetText();
                 MetroMessageBox.Show(this, "Es gab einen Fehler bei der Kommunikation mit dem Drucker!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);

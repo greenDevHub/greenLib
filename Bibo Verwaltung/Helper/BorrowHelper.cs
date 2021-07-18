@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -330,7 +331,7 @@ namespace Bibo_Verwaltung
                 SqlDataAdapter adapter = new SqlDataAdapter(command, con.Con);
                 adapter.SelectCommand.Parameters.AddWithValue("@0", Costumer.CostumerSubjects[i].SubjectId);
                 adapter.SelectCommand.Parameters.AddWithValue("@1", schoolGrade);
-                adapter.SelectCommand.Parameters.AddWithValue("@2", Costumer.CostumerAdvancedSubjects.Contains(Costumer.CostumerSubjects[i]) ? "1" : "0");
+                adapter.SelectCommand.Parameters.AddWithValue("@2", Costumer.CostumerAdvancedSubjects.Any(subj=>subj.SubjectNameShort== Costumer.CostumerSubjects[i].SubjectNameShort) ? "1" : "0");
                 adapter.Fill(table);
             }
             con.Close();

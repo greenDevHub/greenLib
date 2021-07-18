@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -120,6 +121,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void ClearForm()
         {
+            advancedSubjects.Clear();
             lb_kunde_add.Visible = false;
             tb_Vorname.Text = "";
             tb_Nachname.Text = "";
@@ -350,6 +352,7 @@ namespace Bibo_Verwaltung
         /// </summary>
         private void LoadKunde(int costumerId)
         {
+            advancedSubjects.Clear();
             Costumer costumer = new Costumer(costumerId);
             tb_KundenID.Text = costumer.CostumerId.ToString();
             tb_Vorname.Text = costumer.CostumerFirstName;
@@ -368,6 +371,7 @@ namespace Bibo_Verwaltung
                 foreach (Subject advancedSubject in costumer.CostumerAdvancedSubjects)
                 {
                     advancedSubjectIds.Add(advancedSubject.SubjectId);
+                    advancedSubjects.Add(advancedSubject);
                 }
                 foreach (Subject subject in costumer.CostumerSubjects)
                 {
@@ -380,6 +384,16 @@ namespace Bibo_Verwaltung
                     else
                     {
                         gv_result.Rows.Add(subject.SubjectNameShort, subject.SubjectId);
+                    }
+                    for (int i = 0; i < gv_faecher.Rows.Count; i++)
+                    {
+                        DataGridViewRow row = gv_faecher.Rows[i];
+                        if (row.Cells["ID"].Value.ToString().Equals(subject.SubjectId.ToString()))
+                        {
+                            row.DefaultCellStyle.BackColor = Color.Yellow;
+                            row.DefaultCellStyle.SelectionBackColor = Color.Gold;
+                            i = gv_faecher.Rows.Count;
+                        }
                     }
                 }
             }
@@ -899,22 +913,33 @@ namespace Bibo_Verwaltung
             }
         }
 
-        private void MarkAsAdvancedSubject(Costumer costumer)
+        List<Subject> advancedSubjects = new List<Subject>();
+        private void MarkAsAdvancedSubject()
         {
             if (leistungskursAuswählenToolStripMenuItem.Text == "als Leistungskurs markieren")
             {
-                if (costumer.CostumerAdvancedSubjects.Count >= 2)
+                if (advancedSubjects.Count >= 2)
                 {
                     MetroMessageBox.Show(this, "Sie haben bereits beide Leistungskurse vergeben. Bitte markieren Sie zunächst einen dieser als Grundkurs.", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
+                    advancedSubjects.Add(new Subject(subjectHelper.GetIdBySubjectShortName(gv_result.SelectedRows[0].Cells["Kürzel"].Value.ToString())));
                     gv_result.SelectedRows[0].Cells["Kürzel"].Value = "*" + gv_result.SelectedRows[0].Cells["Kürzel"].Value.ToString();
                     gv_result.SelectedRows[0].DefaultCellStyle.BackColor = Color.Yellow;
                 }
             }
             else
             {
+                for(int i = 0; i< advancedSubjects.Count;i++)
+                {
+                    Subject subj = advancedSubjects[i];
+                    if (subj.SubjectNameShort == gv_result.SelectedRows[0].Cells["Kürzel"].Value.ToString().Substring(1))
+                    {
+                        advancedSubjects.RemoveAt(i);
+
+                    }
+                }
                 gv_result.SelectedRows[0].Cells["Kürzel"].Value = gv_result.SelectedRows[0].Cells["Kürzel"].Value.ToString().Substring(1);
                 gv_result.SelectedRows[0].DefaultCellStyle.BackColor = Color.White;
             }
@@ -923,8 +948,7 @@ namespace Bibo_Verwaltung
         {
             if (tb_KundenID.Text != "")
             {
-                Costumer costumer = new Costumer(int.Parse(tb_KundenID.Text));
-                MarkAsAdvancedSubject(costumer);
+                MarkAsAdvancedSubject();
             }
         }
 
