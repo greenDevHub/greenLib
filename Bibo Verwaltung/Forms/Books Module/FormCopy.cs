@@ -21,6 +21,7 @@ namespace Bibo_Verwaltung
         GenreHelper genreHelper = new GenreHelper();
         ConditionHelper conditionHelper = new ConditionHelper();
         CopyHelper copyHelper = new CopyHelper();
+        PrinterHelper printerHelper = new PrinterHelper();
         enum SaveOption
         {
             add,
@@ -45,6 +46,20 @@ namespace Bibo_Verwaltung
             conditionHelper.FillCombobox(ref acb_Zustand, 0);
             tb_ExempCount.Text = gv_Exemplare.RowCount.ToString();
         }
+        public Form_Copy(int copyId)
+        {
+            InitializeComponent();
+            LoadTheme();
+            SetPermissions();
+            this.Text = Text + AuthInfo.FormInfo();
+            Copy copy = new Copy(copyId);
+            tb_ISBN.Text = copy.CopyIsbn;
+            tb_ID.Text = copy.CopyId.ToString();
+            conditionHelper.FillCombobox(ref acb_Zustand, 0);
+            tb_ExempCount.Text = gv_Exemplare.RowCount.ToString();
+            LoadForm(copy);
+        }
+
         #endregion
 
         private void LoadTheme()
@@ -109,7 +124,10 @@ namespace Bibo_Verwaltung
             tb_ISBN.Text = copy.CopyIsbn;
             acb_Zustand.Text = copy.Condition.ConditionName;
             dTP_AufDat.Value = copy.DateRegistration;
-            GenerateBarcode(copy.CopyId);
+            mtb_Barcode.Text = printerHelper.GenerateBarcode(copy.CopyId);
+            BarcodeBox.Height = printerHelper.BarcodeImage.Height;
+            BarcodeBox.Width = printerHelper.BarcodeImage.Width;
+            BarcodeBox.Image = printerHelper.BarcodeImage;
 
 
             rb_edit.Checked = true;
@@ -132,41 +150,6 @@ namespace Bibo_Verwaltung
             return code;
         }
 
-        private void GenerateBarcode(int id)
-        {
-            #region Barcode generieren
-            string code = "";
-            code = id.ToString();
-            for (int i = code.Length; i < 7;)
-            {
-                code = "0" + code;
-                i++;
-            }
-            mtb_Barcode.Text = code;
-            Zen.Barcode.CodeEan8BarcodeDraw barcode = Zen.Barcode.BarcodeDrawFactory.CodeEan8WithChecksum;
-            var barcodeImage = barcode.Draw(mtb_Barcode.Text, 70, 5);
-            resultImage = new Bitmap(barcodeImage.Width, barcodeImage.Height + 30); // 20 is bottom padding, adjust to your text
-            #endregion
-
-            #region Barcode darstellen
-            using (var graphics = Graphics.FromImage(resultImage))
-            using (var font = new Font("Calibri", 20))
-            using (var brush = new SolidBrush(Color.Black))
-            using (var format = new StringFormat()
-            {
-                Alignment = StringAlignment.Center, // Also, horizontally centered text, as in your example of the expected output
-                LineAlignment = StringAlignment.Far
-            })
-            {
-                graphics.Clear(Color.White);
-                graphics.DrawImage(barcodeImage, 0, 0);
-                graphics.DrawString(mtb_Barcode.Text, font, brush, resultImage.Width / 2, resultImage.Height, format);
-            }
-            BarcodeBox.Height = resultImage.Height;
-            BarcodeBox.Width = resultImage.Width;
-            BarcodeBox.Image = resultImage;
-            #endregion
-        }
 
         /// <summary>
         /// Setzt die Form zurück 
@@ -417,7 +400,7 @@ namespace Bibo_Verwaltung
                     string code = GetCode(c.CopyId.ToString());
                     barcodes.Add(code);
                 }
-                PrintMultipleBarcodes(barcodes);
+                printerHelper.PrintMultipleBarcodes(barcodes,this);
             }
         }
 
@@ -624,7 +607,7 @@ namespace Bibo_Verwaltung
             List<string> barcodes = new List<string>();
             barcodes.Add(mtb_Barcode.Text);
 
-            PrintMultipleBarcodes(barcodes);
+            printerHelper.PrintMultipleBarcodes(barcodes, this);
         }
 
         int pageCount = 0;
@@ -720,14 +703,17 @@ namespace Bibo_Verwaltung
                 foreach (DataGridViewRow row in gv_Exemplare.SelectedRows)
                 {
                     int copyId = int.Parse(row.Cells["Exemplar"].Value.ToString());
-                    GenerateBarcode(copyId);
+                    mtb_Barcode.Text = printerHelper.GenerateBarcode(copyId);
+                    BarcodeBox.Height = printerHelper.BarcodeImage.Height;
+                    BarcodeBox.Width = printerHelper.BarcodeImage.Width;
+                    BarcodeBox.Image = printerHelper.BarcodeImage;
                     //LoadForm();
                     barcodes.Add(mtb_Barcode.Text);
                     //images.Add(BarcodeBox.Image);
 
                 }
                 Clear_Form();
-                PrintMultipleBarcodes(barcodes);
+                printerHelper.PrintMultipleBarcodes(barcodes, this);
             }
             catch (Exception ex)
             {
@@ -797,57 +783,6 @@ namespace Bibo_Verwaltung
             Console.WriteLine("Printed event called");
         }
 
-        private void PrintMultipleBarcodes(List<string> barcodeList)
-        {
-            try
-            {
-                IPrinter printer = new Printer();
-                object[] x = printer.GetInstalledPrinters();
-                if (x==null || x.Length == 0)
-                {
-                    tb_ID.ResetText();
-                    MetroMessageBox.Show(this, "Es wurde kein verfügbarer Drucker gefunden.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                string name = x[0].ToString();
-                if (printer.IsPrinterOnline(name))
-                {
-                    string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    string strFilePath = path + "\\greenLib\\Einstellungen\\BarcodePreset.lbx";
-                    IDocument doc = new Document();
-                    doc.Open(strFilePath);
-                    int barcodeIndex = doc.GetBarcodeIndex("Barcode");
-                    IObjects ob = doc.Objects;
-                    int anzahlObs = ob.Count;
-                    int textInd = doc.GetTextIndex("Titel");
-                    int textIndex = barcodeIndex + 1;
-                    doc.SetPrinter(printer.Name, true);
-                    doc.StartPrint("", PrintOptionConstants.bpoDefault);
-                    foreach (string barcodeData in barcodeList)
-                    {
-                        doc.SetBarcodeData(barcodeIndex, barcodeData);
-                        int copyId = int.Parse(barcodeData.TrimStart('0'));
-                        Copy copy = new Copy(copyId);
-                        doc.Objects[textIndex].Text = copy.CopyTitle;
-                        doc.PrintOut(1, PrintOptionConstants.bpoDefault);
-                        copy.Print();
-                    }
-                    doc.EndPrint();
-                    doc.Close();
-                    MetroMessageBox.Show(this, String.Format("Es wurden erfolgreich '{0}' Barcodes gedruckt.", barcodeList.Count), "Drucken erfolgreich!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    tb_ID.ResetText();
-                    MetroMessageBox.Show(this, "Der Drucker ist nicht online!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch(Exception ex)
-            {
-                tb_ID.ResetText();
-                MetroMessageBox.Show(this, "Es gab einen Fehler bei der Kommunikation mit dem Drucker!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
         private void Timer_Tick(object sender, EventArgs e)
         {

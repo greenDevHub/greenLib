@@ -55,11 +55,13 @@ namespace Bibo_Verwaltung
             comboBox1.Visible = false;
             comboBox1.DropDownHeight = 1;
             tb_ISBN.Focus();
+            LoadBuch(new Book(tb_ISBN.Text,false));
         }
         public Form_Books(bool bool1)
         {
             InitializeComponent();
             LoadTheme();
+            SetPermissions();
             this.Text = Text + AuthInfo.FormInfo();
 
             FillComboboxes();
