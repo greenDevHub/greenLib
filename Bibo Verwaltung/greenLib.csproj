@@ -71,7 +71,8 @@
   <PropertyGroup />
   <PropertyGroup />
   <PropertyGroup>
-    <ApplicationIcon>greenLib.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
@@ -149,18 +150,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdvancedCheckedListBox.cs">
+    <Compile Include="AuthInfo.cs" />
+    <Compile Include="Controls\AdvancedCheckedListBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="AdvancedComboBox.cs">
+    <Compile Include="Controls\AdvancedComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Analytics.cs" />
-    <Compile Include="Autor.cs" />
-    <Compile Include="Barcode.cs" />
-    <Compile Include="Benutzer.cs" />
-    <Compile Include="BitmapFilter.cs" />
-    <Compile Include="BuchStufe.cs" />
+    <Compile Include="Database\CustomSqlConnection.cs" />
+    <Compile Include="Helper\BookHelper.cs" />
+    <Compile Include="Helper\GradeHelper.cs" />
+    <Compile Include="Helper\SchoolClassHelper.cs" />
+    <Compile Include="Helper\CostumerHelper.cs" />
+    <Compile Include="Helper\SubjectHelper.cs" />
+    <Compile Include="Helper\UserHelper.cs" />
+    <Compile Include="ThemeInfo.cs" />
+    <Compile Include="Helper\WebHelper.cs" />
+    <Compile Include="Models\Author.cs" />
+    <Compile Include="Helper\AuthorHelper.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Helper\BookGradeHelper.cs" />
+    <Compile Include="Helper\ConditionHelper.cs" />
+    <Compile Include="Helper\CopyHelper.cs" />
+    <Compile Include="Database\Command.cs" />
     <Compile Include="EasterEgg\Circle.cs" />
     <Compile Include="EasterEgg\form_snake.cs">
       <SubType>Form</SubType>
@@ -170,395 +182,262 @@
     </Compile>
     <Compile Include="EasterEgg\Input.cs" />
     <Compile Include="EasterEgg\Settings.cs" />
-    <Compile Include="Exemplar.cs" />
-    <Compile Include="Buchsuche.cs" />
-    <Compile Include="Extension\Lehrbuchausgabe\BuchFach.cs" />
-    <Compile Include="Extension\Lehrbuchausgabe\w_b_buch_fach.cs">
+    <Compile Include="Models\Copy.cs" />
+    <Compile Include="Helper\OverviewHelper.cs" />
+    <Compile Include="Helper\BookSubjectHelper.cs" />
+    <Compile Include="Forms\Assignments\FormBookSubject.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Extension\Lehrbuchausgabe\w_b_buch_fach.Designer.cs">
-      <DependentUpon>w_b_buch_fach.cs</DependentUpon>
+    <Compile Include="Forms\Assignments\FormBookSubject.Designer.cs">
+      <DependentUpon>FormBookSubject.cs</DependentUpon>
     </Compile>
-    <Compile Include="Einstellung.cs" />
-    <Compile Include="Ausleihe.cs" />
-    <Compile Include="ExcelExport.cs" />
-    <Compile Include="FachStufe.cs" />
-    <Compile Include="Fach.cs" />
-    <Compile Include="Import.cs" />
-    <Compile Include="Klasse.cs" />
-    <Compile Include="Klassenstufe.cs" />
+    <Compile Include="Helper\BorrowHelper.cs" />
+    <Compile Include="Data Operations\ExcelExport.cs" />
+    <Compile Include="Helper\SubjectGradeHelper.cs" />
+    <Compile Include="Models\Subject.cs" />
+    <Compile Include="Helper\GenreHelper.cs" />
+    <Compile Include="Data Operations\Import.cs" />
+    <Compile Include="Models\SchoolClass.cs" />
+    <Compile Include="Models\Grade.cs" />
+    <Compile Include="Helper\LanguageHelper.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Protokoll.cs" />
-    <Compile Include="Schuelerimport.cs" />
-    <Compile Include="Schueler.cs" />
-    <Compile Include="Screenshot.cs" />
-    <Compile Include="TransparentPanel.cs">
+    <Compile Include="Protocol.cs" />
+    <Compile Include="Helper\PublisherHelper.cs" />
+    <Compile Include="Data Operations\StudentSubjectImport.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Controls\TransparentPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="w_s_ausleihe.cs">
+    <Compile Include="Forms\Rental Module\FormBorrow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_ausleihe.Designer.cs">
-      <DependentUpon>w_s_ausleihe.cs</DependentUpon>
+    <Compile Include="Forms\Rental Module\FormBorrow.Designer.cs">
+      <DependentUpon>FormBorrow.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_automatic.cs">
+    <Compile Include="Forms\Rental Module\FormAutoBorrow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_automatic.Designer.cs">
-      <DependentUpon>w_s_automatic.cs</DependentUpon>
+    <Compile Include="Forms\Rental Module\FormAutoBorrow.Designer.cs">
+      <DependentUpon>FormAutoBorrow.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_autorueck.cs">
+    <Compile Include="Forms\Rental Module\FormAutoReturn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_autorueck.Designer.cs">
-      <DependentUpon>w_s_autorueck.cs</DependentUpon>
+    <Compile Include="Forms\Rental Module\FormAutoReturn.Designer.cs">
+      <DependentUpon>FormAutoReturn.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_buch_stufe.cs">
+    <Compile Include="Forms\Assignments\FormBookGrade.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_buch_stufe.Designer.cs">
-      <DependentUpon>w_s_buch_stufe.cs</DependentUpon>
+    <Compile Include="Forms\Assignments\FormBookGrade.Designer.cs">
+      <DependentUpon>FormBookGrade.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_exemplarSuche.cs">
+    <Compile Include="Forms\FormBookCopySearch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_exemplarSuche.Designer.cs">
-      <DependentUpon>w_s_exemplarSuche.cs</DependentUpon>
+    <Compile Include="Forms\FormBookCopySearch.Designer.cs">
+      <DependentUpon>FormBookCopySearch.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_fach_stufe.cs">
+    <Compile Include="Forms\Assignments\FormSubjectGrade.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_fach_stufe.Designer.cs">
-      <DependentUpon>w_s_fach_stufe.cs</DependentUpon>
+    <Compile Include="Forms\Assignments\FormSubjectGrade.Designer.cs">
+      <DependentUpon>FormSubjectGrade.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_faecher.cs">
+    <Compile Include="Forms\FormImportAssist.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_faecher.Designer.cs">
-      <DependentUpon>w_s_faecher.cs</DependentUpon>
+    <Compile Include="Forms\FormImportAssist.Designer.cs">
+      <DependentUpon>FormImportAssist.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_analytics.cs">
+    <Compile Include="Forms\Assignments\FormClassGrade.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_analytics.Designer.cs">
-      <DependentUpon>w_s_analytics.cs</DependentUpon>
+    <Compile Include="Forms\Assignments\FormClassGrade.Designer.cs">
+      <DependentUpon>FormClassGrade.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_importAssist.cs">
+    <Compile Include="Forms\FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_importAssist.Designer.cs">
-      <DependentUpon>w_s_importAssist.cs</DependentUpon>
+    <Compile Include="Forms\FormLogin.designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_klasse_stufe.cs">
+    <Compile Include="Forms\Attribute Module\FormAttribute.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_klasse_stufe.Designer.cs">
-      <DependentUpon>w_s_klasse_stufe.cs</DependentUpon>
+    <Compile Include="Forms\Attribute Module\FormAttribute.Designer.cs">
+      <DependentUpon>FormAttribute.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_login.cs">
+    <Compile Include="Forms\Costumer Module\FormStudentSubjectImport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_login.designer.cs">
-      <DependentUpon>w_s_login.cs</DependentUpon>
+    <Compile Include="Forms\Costumer Module\FormStudentSubjectImport.Designer.cs">
+      <DependentUpon>FormStudentSubjectImport.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_manage.cs">
+    <Compile Include="Forms\FormCustomDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_manage.Designer.cs">
-      <DependentUpon>w_s_manage.cs</DependentUpon>
+    <Compile Include="Forms\FormCustomDialog.Designer.cs">
+      <DependentUpon>FormCustomDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_schueler.cs">
+    <Compile Include="Helper\ReturnHelper.cs" />
+    <Compile Include="Helper\HistoryHelper.cs" />
+    <Compile Include="Models\Book.cs" />
+    <Compile Include="Forms\FormInformation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_schueler.Designer.cs">
-      <DependentUpon>w_s_schueler.cs</DependentUpon>
+    <Compile Include="Forms\FormInformation.Designer.cs">
+      <DependentUpon>FormInformation.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_schuelerimport.cs">
+    <Compile Include="Forms\Rental Module\FormReturn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_schuelerimport.Designer.cs">
-      <DependentUpon>w_s_schuelerimport.cs</DependentUpon>
+    <Compile Include="Forms\Rental Module\FormReturn.Designer.cs">
+      <DependentUpon>FormReturn.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_selfmade_dialog.cs">
+    <Compile Include="Models\Genre.cs" />
+    <Compile Include="Forms\Books Module\FormCopy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_selfmade_dialog.Designer.cs">
-      <DependentUpon>w_s_selfmade_dialog.cs</DependentUpon>
+    <Compile Include="Forms\Books Module\FormCopy.Designer.cs">
+      <DependentUpon>FormCopy.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_spalten_auswahl.cs">
+    <Compile Include="Forms\Rental Module\FormOverview.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_spalten_auswahl.Designer.cs">
-      <DependentUpon>w_s_spalten_auswahl.cs</DependentUpon>
+    <Compile Include="Forms\Rental Module\FormOverview.Designer.cs">
+      <DependentUpon>FormOverview.cs</DependentUpon>
     </Compile>
-    <Compile Include="ImportExport.cs" />
-    <Compile Include="Rueckgabe.cs" />
-    <Compile Include="SQL_Verbindung.cs" />
-    <Compile Include="Verlauf.cs" />
-    <Compile Include="w_s_Aus_Kunde.cs">
+    <Compile Include="Forms\FormSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_Aus_Kunde.Designer.cs">
-      <DependentUpon>w_s_Aus_Kunde.cs</DependentUpon>
+    <Compile Include="Forms\FormSettings.Designer.cs">
+      <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_autoren.cs">
+    <Compile Include="Models\Costumer.cs" />
+    <Compile Include="Forms\Costumer Module\FormCostumer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_autoren.Designer.cs">
-      <DependentUpon>w_s_autoren.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Bibo_VerwaltungDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Bibo_VerwaltungDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Buch.cs" />
-    <Compile Include="w_s_import_export.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_import_export.Designer.cs">
-      <DependentUpon>w_s_import_export.cs</DependentUpon>
-    </Compile>
-    <Compile Include="w_s_information.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_information.Designer.cs">
-      <DependentUpon>w_s_information.cs</DependentUpon>
-    </Compile>
-    <Compile Include="w_s_rueckgabe.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_rueckgabe.Designer.cs">
-      <DependentUpon>w_s_rueckgabe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Genre.cs" />
-    <Compile Include="w_s_barcode.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_barcode.Designer.cs">
-      <DependentUpon>w_s_barcode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="w_s_bild_bearbeiten.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_bild_bearbeiten.Designer.cs">
-      <DependentUpon>w_s_bild_bearbeiten.cs</DependentUpon>
-    </Compile>
-    <Compile Include="w_s_exemplare.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_exemplare.Designer.cs">
-      <DependentUpon>w_s_exemplare.cs</DependentUpon>
-    </Compile>
-    <Compile Include="w_s_buchsuche.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_buchsuche.Designer.cs">
-      <DependentUpon>w_s_buchsuche.cs</DependentUpon>
-    </Compile>
-    <Compile Include="w_s_einstellungen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_einstellungen.Designer.cs">
-      <DependentUpon>w_s_einstellungen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="w_s_genres.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_genres.Designer.cs">
-      <DependentUpon>w_s_genres.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Kunde.cs" />
-    <Compile Include="w_s_kunden.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_kunden.Designer.cs">
-      <DependentUpon>w_s_kunden.cs</DependentUpon>
+    <Compile Include="Forms\Costumer Module\FormCostumer.Designer.cs">
+      <DependentUpon>FormCostumer.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sprache.cs" />
-    <Compile Include="w_s_main.cs">
+    <Compile Include="Models\Language.cs" />
+    <Compile Include="Forms\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_main.Designer.cs">
-      <DependentUpon>w_s_main.cs</DependentUpon>
+    <Compile Include="Forms\FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_sprachen.cs">
+    <Compile Include="Models\Publisher.cs" />
+    <Compile Include="Forms\FormUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_sprachen.Designer.cs">
-      <DependentUpon>w_s_sprachen.cs</DependentUpon>
+    <Compile Include="Forms\FormUser.designer.cs">
+      <DependentUpon>FormUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Verlag.cs" />
-    <Compile Include="w_s_user.cs">
+    <Compile Include="Forms\Books Module\FormBooks.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_user.designer.cs">
-      <DependentUpon>w_s_user.cs</DependentUpon>
+    <Compile Include="Forms\Books Module\FormBooks.Designer.cs">
+      <DependentUpon>FormBooks.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_verlage.cs">
+    <Compile Include="Forms\Assignments\FormAssignments.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="w_s_verlage.Designer.cs">
-      <DependentUpon>w_s_verlage.cs</DependentUpon>
+    <Compile Include="Forms\Assignments\FormAssignments.Designer.cs">
+      <DependentUpon>FormAssignments.cs</DependentUpon>
     </Compile>
-    <Compile Include="w_s_buecher.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_buecher.Designer.cs">
-      <DependentUpon>w_s_buecher.cs</DependentUpon>
-    </Compile>
-    <Compile Include="w_s_zuordnungen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_zuordnungen.Designer.cs">
-      <DependentUpon>w_s_zuordnungen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="w_s_zustand.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="w_s_zustand.Designer.cs">
-      <DependentUpon>w_s_zustand.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Zustand.cs" />
+    <Compile Include="Models\Condition.cs" />
     <EmbeddedResource Include="EasterEgg\form_snake.resx">
       <DependentUpon>form_snake.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Extension\Lehrbuchausgabe\w_b_buch_fach.resx">
-      <DependentUpon>w_b_buch_fach.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Assignments\FormBookSubject.resx">
+      <DependentUpon>FormBookSubject.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_Ausleihe.resx">
-      <DependentUpon>w_s_ausleihe.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Rental Module\FormBorrow.resx">
+      <DependentUpon>FormBorrow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_automatic.resx">
-      <DependentUpon>w_s_automatic.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Rental Module\FormAutoBorrow.resx">
+      <DependentUpon>FormAutoBorrow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_autorueck.resx">
-      <DependentUpon>w_s_autorueck.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Rental Module\FormAutoReturn.resx">
+      <DependentUpon>FormAutoReturn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_buch_stufe.resx">
-      <DependentUpon>w_s_buch_stufe.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Assignments\FormBookGrade.resx">
+      <DependentUpon>FormBookGrade.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_exemplarSuche.resx">
-      <DependentUpon>w_s_exemplarSuche.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormBookCopySearch.resx">
+      <DependentUpon>FormBookCopySearch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_fach_stufe.resx">
-      <DependentUpon>w_s_fach_stufe.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Assignments\FormSubjectGrade.resx">
+      <DependentUpon>FormSubjectGrade.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_faecher.resx">
-      <DependentUpon>w_s_faecher.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormImportAssist.resx">
+      <DependentUpon>FormImportAssist.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_analytics.resx">
-      <DependentUpon>w_s_analytics.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Assignments\FormClassGrade.resx">
+      <DependentUpon>FormClassGrade.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_importAssist.resx">
-      <DependentUpon>w_s_importAssist.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_import_export.resx">
-      <DependentUpon>w_s_import_export.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Attribute Module\FormAttribute.resx">
+      <DependentUpon>FormAttribute.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_klasse_stufe.resx">
-      <DependentUpon>w_s_klasse_stufe.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Rental Module\FormReturn.resx">
+      <DependentUpon>FormReturn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_login.resx">
-      <DependentUpon>w_s_login.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormInformation.resx">
+      <DependentUpon>FormInformation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_manage.resx">
-      <DependentUpon>w_s_manage.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Books Module\FormCopy.resx">
+      <DependentUpon>FormCopy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_rueckgabe.resx">
-      <DependentUpon>w_s_rueckgabe.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Rental Module\FormOverview.resx">
+      <DependentUpon>FormOverview.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_Aus_Kunde.resx">
-      <DependentUpon>w_s_Aus_Kunde.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormSettings.resx">
+      <DependentUpon>FormSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_autoren.resx">
-      <DependentUpon>w_s_autoren.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_information.resx">
-      <DependentUpon>w_s_information.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_barcode.resx">
-      <DependentUpon>w_s_barcode.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_bild_bearbeiten.resx">
-      <DependentUpon>w_s_bild_bearbeiten.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_exemplare.resx">
-      <DependentUpon>w_s_exemplare.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_buchsuche.resx">
-      <DependentUpon>w_s_buchsuche.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_einstellungen.resx">
-      <DependentUpon>w_s_einstellungen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_genres.resx">
-      <DependentUpon>w_s_genres.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_kunden.resx">
-      <DependentUpon>w_s_kunden.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Costumer Module\FormCostumer.resx">
+      <DependentUpon>FormCostumer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_main.resx">
-      <DependentUpon>w_s_main.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_schueler.resx">
-      <DependentUpon>w_s_schueler.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Costumer Module\FormStudentSubjectImport.resx">
+      <DependentUpon>FormStudentSubjectImport.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_schuelerimport.resx">
-      <DependentUpon>w_s_schuelerimport.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormCustomDialog.resx">
+      <DependentUpon>FormCustomDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_selfmade_dialog.resx">
-      <DependentUpon>w_s_selfmade_dialog.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormUser.resx">
+      <DependentUpon>FormUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_spalten_auswahl.resx">
-      <DependentUpon>w_s_spalten_auswahl.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Books Module\FormBooks.resx">
+      <DependentUpon>FormBooks.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="w_s_sprachen.resx">
-      <DependentUpon>w_s_sprachen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_user.resx">
-      <DependentUpon>w_s_user.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_verlage.resx">
-      <DependentUpon>w_s_verlage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_buecher.resx">
-      <DependentUpon>w_s_buecher.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_zuordnungen.resx">
-      <DependentUpon>w_s_zuordnungen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="w_s_zustand.resx">
-      <DependentUpon>w_s_zustand.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Assignments\FormAssignments.resx">
+      <DependentUpon>FormAssignments.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Bibo_VerwaltungDataSet.xsc">
-      <DependentUpon>Bibo_VerwaltungDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="Bibo_VerwaltungDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Bibo_VerwaltungDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Bibo_VerwaltungDataSet.xss">
-      <DependentUpon>Bibo_VerwaltungDataSet.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Compile Include="Properties\Settings.Designer.cs">
@@ -594,15 +473,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>5</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="Microsoft.Office.Interop.Excel">
       <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -623,37 +493,30 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="greenLib.ico" />
-    <Content Include="Resources\DarkMode.png" />
-    <Content Include="Resources\Settings.png" />
-    <None Include="Resources\Exit.png" />
-    <Content Include="Resources\Lock.png" />
-    <Content Include="Resources\QuestionMark.png" />
-    <None Include="Resources\eye.png" />
+    <Content Include="Resources\DarkMode512.png" />
+    <None Include="Resources\Manual.pdf" />
+    <None Include="Resources\manual.pptx" />
+    <None Include="Resources\Settings32.png" />
+    <None Include="Resources\Eye32.png" />
+    <None Include="Resources\Exit32.png" />
+    <None Include="Resources\DarkMode32.png" />
+    <None Include="Resources\QuestionMark32.png" />
+    <None Include="Resources\greenLib512.png" />
+    <None Include="Resources\greenLib.ico" />
+    <None Include="Resources\greenLib32.png" />
+    <None Include="Resources\Eye16.png" />
+    <None Include="Resources\Lock32.png" />
+    <Content Include="Resources\Settings512.png" />
+    <None Include="Resources\Exit512.png" />
+    <Content Include="Resources\Lock512.png" />
+    <Content Include="Resources\QuestionMark512.png" />
+    <None Include="Resources\Eye512.png" />
     <None Include="Resources\Handbuch.pdf" />
-    <None Include="Resources\question.png" />
-    <None Include="Resources\sun.png" />
-    <None Include="Resources\logout %281%29.png" />
-    <None Include="greenLib.png" />
-    <Content Include="icon.ico" />
-    <None Include="Resources\BarcodePreset.bmp" />
     <None Include="Resources\BarcodePreset.lbx" />
-    <None Include="Resources\Login.png" />
     <None Include="Resources\Arrow_Left.png" />
     <None Include="Resources\Arrow_Right.png" />
-    <None Include="Resources\Settings64.png" />
-    <None Include="Resources\Settings256.png" />
-    <None Include="Resources\Settings128.png" />
-    <None Include="Resources\iconfinder_Streamline-75_1850951.png" />
-    <None Include="Resources\iconfinder_Streamline-75_185095.png" />
-    <None Include="icon.png" />
-    <None Include="Resources\iconfinder_lock_5119421.png" />
-    <None Include="Resources\iconfinder_lock_511942.png" />
-    <None Include="Resources\iconfinder_723__minus__minimize__website_3838428.png" />
-    <None Include="Resources\iconfinder_icon-ios7-arrow-left_211689.png" />
-    <None Include="Resources\iconfinder_icon-ios7-arrow-right_211607.png" />
-    <None Include="Resources\296812-64.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

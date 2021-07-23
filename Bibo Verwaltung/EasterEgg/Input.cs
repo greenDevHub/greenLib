@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung.EasterEgg
@@ -16,7 +11,7 @@ namespace Bibo_Verwaltung.EasterEgg
         // check if button is pressed
         public static bool KeyPressed(Keys key)
         {
-            if(keyTable[key] == null)
+            if (keyTable[key] == null)
             {
                 return false;
             }
