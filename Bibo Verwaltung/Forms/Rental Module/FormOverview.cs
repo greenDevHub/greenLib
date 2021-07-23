@@ -184,15 +184,15 @@ namespace Bibo_Verwaltung
             }
             if (radioShowGreen.Checked)
             {
-                rowfilter = rowfilter + string.Format(" AND Rückgabedatum > #{0}#", DateTime.Now.Date);
+                rowfilter = rowfilter + string.Format(" AND Rückgabedatum > '#{0}#'", DateTime.Now.Date);
             }
             else if (radioShowRed.Checked)
             {
-                rowfilter = rowfilter + string.Format(" AND Rückgabedatum < #{0}# AND Rückgabedatum <> #{1}#", DateTime.Now.Date, DateTime.MinValue.Date);
+                rowfilter = rowfilter + string.Format(" AND Rückgabedatum < '#{0}#' AND Rückgabedatum <> '#{1}#'", DateTime.Now.Date, DateTime.MinValue.Date);
             }
             else if (radioShowYellow.Checked)
             {
-                rowfilter = rowfilter + string.Format(" AND Rückgabedatum = #{0}#", DateTime.Now.Date);
+                rowfilter = rowfilter + string.Format(" AND Rückgabedatum = '#{0}#'", DateTime.Now.Date);
             }
             (gridOverview.DataSource as DataTable).DefaultView.RowFilter = (gridOverview.DataSource as DataTable).DefaultView.RowFilter + " AND " + rowfilter;
         }
@@ -367,18 +367,13 @@ namespace Bibo_Verwaltung
 
         private void Filter()
         {
-            if (filterActive)
+            if (searchActivated)
             {
-                if (searchActivated)
-                {
-                    overviewHelper.ExecuteSearch(ref gridOverview, tbCopyId.Text, tbCopyIsbn.Text, tbTitle.Text, cbAuthor.Text, cbPublisher.Text, cbGenre.Text, tbFirstName.Text, tbSurname.Text, tbClass.Text);
+                overviewHelper.ExecuteSearch(ref gridOverview, tbCopyId.Text, tbCopyIsbn.Text, tbTitle.Text, cbAuthor.Text, cbPublisher.Text, cbGenre.Text, tbFirstName.Text, tbSurname.Text, tbClass.Text);
 
-                    addRowFilter();
-                    checkedChanged();
-                }
+                addRowFilter();
+                checkedChanged();
             }
-
-
         }
         private void tb_ExemplarID_TextChanged(object sender, EventArgs e)
         {
