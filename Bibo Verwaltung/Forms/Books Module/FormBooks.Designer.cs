@@ -730,28 +730,28 @@ namespace Bibo_Verwaltung
             this.entfernenToolStripMenuItem,
             this.exemplareToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 76);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(361, 203);
             this.contextMenuStrip1.Style = MetroFramework.MetroColorStyle.Blue;
             this.contextMenuStrip1.UseStyleColors = true;
             // 
             // ladenToolStripMenuItem
             // 
             this.ladenToolStripMenuItem.Name = "ladenToolStripMenuItem";
-            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
+            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(360, 48);
             this.ladenToolStripMenuItem.Text = "Laden";
             this.ladenToolStripMenuItem.Click += new System.EventHandler(this.ladenToolStripMenuItem_Click);
             // 
             // entfernenToolStripMenuItem
             // 
             this.entfernenToolStripMenuItem.Name = "entfernenToolStripMenuItem";
-            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
+            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(360, 48);
             this.entfernenToolStripMenuItem.Text = "Entfernen";
             this.entfernenToolStripMenuItem.Click += new System.EventHandler(this.entfernenToolStripMenuItem_Click);
             // 
             // exemplareToolStripMenuItem
             // 
             this.exemplareToolStripMenuItem.Name = "exemplareToolStripMenuItem";
-            this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
+            this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(360, 48);
             this.exemplareToolStripMenuItem.Text = "Exemplare";
             this.exemplareToolStripMenuItem.Click += new System.EventHandler(this.exemplareToolStripMenuItem_Click);
             // 
@@ -1041,7 +1041,7 @@ namespace Bibo_Verwaltung
             this.checkedListBox1.Location = new System.Drawing.Point(140, 111);
             this.checkedListBox1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(175, 92);
+            this.checkedListBox1.Size = new System.Drawing.Size(175, 72);
             this.checkedListBox1.TabIndex = 8;
             this.metroToolTip1.SetToolTip(this.checkedListBox1, "Wählen Sie hier mehrere Autoren aus.");
             this.checkedListBox1.Visible = false;
@@ -1081,7 +1081,7 @@ namespace Bibo_Verwaltung
             this.dTP_Erscheinungsdatum.Location = new System.Drawing.Point(140, 208);
             this.dTP_Erscheinungsdatum.MinimumSize = new System.Drawing.Size(0, 30);
             this.dTP_Erscheinungsdatum.Name = "dTP_Erscheinungsdatum";
-            this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(175, 30);
+            this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(175, 38);
             this.dTP_Erscheinungsdatum.TabIndex = 16;
             this.metroToolTip1.SetToolTip(this.dTP_Erscheinungsdatum, "    Wählen sie das Erscheinungsdatum ihres Buches hier aus.    ");
             this.dTP_Erscheinungsdatum.ValueChanged += new System.EventHandler(this.DTP_Erscheinungsdatum_ValueChanged);

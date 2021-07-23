@@ -880,7 +880,7 @@ namespace Bibo_Verwaltung
             if (book.BookAuthors.Count > 1)
             {
                 checkbox_autor.Checked = true;
-                for(int i = 0; i<checkedListBox1.Items.Count;i++)
+                for (int i = 0; i < checkedListBox1.Items.Count; i++)
                 {
                     DataRowView item = (DataRowView)checkedListBox1.Items[i];
                     var s = item["au_autor"];
@@ -1376,19 +1376,25 @@ namespace Bibo_Verwaltung
 
         private void entfernenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            tb_ISBN.Text = gridViewBook.SelectedRows[0].Cells["ISBN"].Value.ToString();
-            Book book = new Book(tb_ISBN.Text, false);
-            if (book.AreCopiesAvailable())
+            DialogResult dialogResult = MetroMessageBox.Show(this, "Sämtliche zu diesem Buch " + 
+                "gehörende Exemplare werden auch aus der Datenbank gelöscht. Fortfahren?", 
+                "Achtung",MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if(dialogResult == DialogResult.Yes)
             {
-                book.Deactivate();
-                ClearForm();
-                bookHelper.FillGrid(ref gridViewBook, false);
-            }
-            else
-            {
-                MetroMessageBox.Show(this, "Das Buch konnte nicht gelöscht werden, da eines der dazugehörigen " +
-                    "Exemplare zur Zeit verliehen ist. Bitte melden Sie dieses zuerst als 'zurückgegeben', bevor Sie das Buch löschen!",
-                    "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                tb_ISBN.Text = gridViewBook.SelectedRows[0].Cells["ISBN"].Value.ToString();
+                Book book = new Book(tb_ISBN.Text, false);
+                if (book.AreCopiesAvailable())
+                {
+                    book.Deactivate();
+                    ClearForm();
+                    bookHelper.FillGrid(ref gridViewBook, false);
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Das Buch konnte nicht gelöscht werden, da eines der dazugehörigen " +
+                        "Exemplare zur Zeit verliehen ist. Bitte melden Sie dieses zuerst als 'zurückgegeben', bevor Sie das Buch löschen!",
+                        "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 
