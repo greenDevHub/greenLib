@@ -643,55 +643,6 @@ namespace Bibo_Verwaltung
             }
         }
 
-        /// <summary>
-        /// Erstellt einen neuen DataTable mit den Vorschaudaten
-        /// </summary>
-        /// <param name="dt"></param>
-        /// <param name="usePreset"></param>
-        //private void createNewDT(DataTable dt, bool usePreset)
-        //{
-        //    if (!usePreset)
-        //    {
-        //        int y = 0;
-        //        for (int i = 0; i < metroGrid_Vorschau.Columns.Count;)
-        //        {
-        //            int test = metroGrid_Vorschau.Columns[i].DisplayIndex;
-        //            if (test == y)
-        //            {
-        //                dt.Columns.Add(metroGrid_Vorschau.Columns[i].Name);
-        //                indexes.Add(i);
-        //                y++;
-        //                i = 0;
-        //            }
-        //            else
-        //            {
-        //                i++;
-        //            }
-
-        //        }
-        //    }
-        //    else
-        //    {
-        //        foreach(int i in indexes)
-        //        {
-        //            dt.Columns.Add(metroGrid_Vorschau.Columns[i].Name);
-
-        //        }
-        //    }
-
-        //    foreach (DataGridViewRow row in metroGrid_Vorschau.Rows)
-        //    {
-        //        DataRow dr = dt.NewRow();
-        //        for (int i = 0; i < row.Cells.Count; i++)
-        //        {
-        //            DataGridViewCell cell = row.Cells[indexes[i]];
-        //            dr[i] = cell.Value;
-        //        }
-        //        dt.Rows.Add(dr);
-        //    }
-        //    newDT = dt;
-        //}
-
 
         /// <summary>
         /// Inhalt der Error-Nachricht
@@ -758,7 +709,7 @@ namespace Bibo_Verwaltung
             {
                 foreach (DataRow row in sortedDT.Rows)
                 {
-                    if (singleImport) progressBar1.PerformStep();
+                    if (singleImport) importBackgroundWorker.ReportProgress(1);
                     if (target.Equals("t_s_schueler"))
                     {
                         Costumer costumer = new Costumer();
@@ -766,16 +717,17 @@ namespace Bibo_Verwaltung
                         costumer.CostumerSurname = row[1].ToString();
                         costumer.CostumerBirthDate = DateTime.Parse(row[2].ToString());
                         SchoolClass schoolClass;
-                        if (row[3].ToString().Equals("")) costumer.CostumerSchoolClass = new SchoolClass();
+                        string schoolClassName = row[3].ToString();
+                        if (schoolClassName.Equals("")) costumer.CostumerSchoolClass = new SchoolClass();
                         else
                         {
-                            int schoolClassId = schoolClassHelper.FindIdByName(row[3].ToString());
+                            int schoolClassId = schoolClassHelper.FindIdByName(schoolClassName);
                             if (schoolClassId == -1)
                             {
                                 schoolClass = new SchoolClass();
-                                schoolClass.SchoolClassName = row[3].ToString();
+                                schoolClass.SchoolClassName = schoolClassName;
                                 schoolClass.Add();
-                                schoolClassId = schoolClassHelper.FindIdByName(row[3].ToString());
+                                schoolClassId = schoolClassHelper.FindIdByName(schoolClassName);
                             }
                             schoolClass = new SchoolClass(schoolClassId);
                             costumer.CostumerSchoolClass = schoolClass;
@@ -799,8 +751,6 @@ namespace Bibo_Verwaltung
                                     Subject subject = new Subject();
                                     subject.SubjectNameShort = fach;
                                     subject.SubjectNameLong = "";
-                                    subject.AddSubjectIfNotExists();
-                                    subject = new Subject(subjectHelper.GetIdBySubjectShortName(fach));
                                     costumer.CostumerSubjects.Add(subject);
                                 }
 
@@ -834,8 +784,6 @@ namespace Bibo_Verwaltung
                                     Subject subject = new Subject();
                                     subject.SubjectNameShort = fach;
                                     subject.SubjectNameLong = "";
-                                    subject.AddSubjectIfNotExists();
-                                    subject = new Subject(subjectHelper.GetIdBySubjectShortName(fach));
                                     costumer.CostumerSubjects.Add(subject);
 
                                     if (costumer.CostumerAdvancedSubjects.Count < 2)
@@ -878,38 +826,12 @@ namespace Bibo_Verwaltung
         private void ForeachImport()
         {
             fileNum = 1;
-            //List<Task> tasks = new List<Task>();
-            //System.Timers.Timer timer = new System.Timers.Timer();
-            //timer.Interval = 10;
-            //timer.Elapsed += timer_Elapsed;
-            //timer.Start();
-
-            progressBar1.Value = 0;
             foreach (string file in files)
             {
                 DoImport(file);
+                importBackgroundWorker.ReportProgress(1);
                 fileNum++;
-                progressBar1.Value = filesDone;
-
-                //Console.WriteLine($"Processing {fileNum} on thread {Thread.CurrentThread.ManagedThreadId}");
-                //metroLabel6.Invoke((Action)delegate ()
-                //{
-                //    metroLabel6.Text = fileNum.ToString();
-                //});
             };
-            //foreach (string file in files)
-            //{
-            //    tasks.Add(Task.Run(() =>
-            //    {
-            //        DoImport(file);
-            //        fileNum++;
-            //    }));
-
-            //}
-            //Task.WaitAll(tasks.ToArray());
-            //foreach (Task task in tasks) task.Dispose();
-            //tasks.Clear();
-            //timer.Stop();
         }
 
         bool singleImport;
@@ -974,12 +896,14 @@ namespace Bibo_Verwaltung
                 fileNum = 0;
                 if (!singleImport)
                 {
-                    ForeachImport();
+                    transparentPanel.Visible = true;
+                    importBackgroundWorker.RunWorkerAsync();
                 }
                 else
                 {
                     fileNum++;
-                    DoImport(file);
+                    transparentPanel.Visible = true;
+                    importBackgroundWorker.RunWorkerAsync(argument: file);
                 }
                 //progressBar1.Value = (filesDone * 100) / files.Count;
             }
@@ -1002,55 +926,7 @@ namespace Bibo_Verwaltung
                 }
                 errorMessages.Add(errorMessage);
             }
-            if (errorMessages.Count > 0)
-            {
-                usePreset = false;
-                DialogResult result = MetroMessageBox.Show(this, String.Format("Es wurden '{0}' von '{1}' Dateien importiert und es sind '{2}' Fehler aufgetreten. Möchten Sie diese einsehen?", filesDone, filesTotal, errors), "Fehler beim Importvorgang.", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                if (result == DialogResult.Yes)
-                {
-                    for (int i = 0; i < errorMessages.Count; i++)
-                    {
-                        DialogResult dr = MetroMessageBox.Show(this, errorMessages[i] + "Wählen Sie 'Ja' für den nächsten Fehler oder 'Nein' zum Beenden.", String.Format("Fehler '{0}' von '{1}'", i + 1, errorMessages.Count.ToString()), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                        if (dr == DialogResult.Yes)
-                        {
-
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (filesDone == 1)
-                {
-                    Cursor.Current = Cursors.Default;
-                    DialogResult dr = MetroMessageBox.Show(this, "Die Datei wurde erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (dr == DialogResult.Yes)
-                    {
-                        RemoveFromImportList();
-                    }
-                    else
-                    {
-                        this.Close();
-                    }
-                }
-                else if (filesDone > 1)
-                {
-                    Cursor.Current = Cursors.Default;
-                    DialogResult dr = MetroMessageBox.Show(this, "Die Dateien wurden erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (dr == DialogResult.Yes)
-                    {
-                        clearForm();
-                    }
-                    else
-                    {
-                        this.Close();
-                    }
-                }
-            }
+            
         }
         List<int> removeAt = new List<int>();
 
@@ -1532,6 +1408,80 @@ namespace Bibo_Verwaltung
         private void MetroToolTip1_Popup(object sender, PopupEventArgs e)
         {
             e.ToolTipSize = new Size(e.ToolTipSize.Width + 32, e.ToolTipSize.Height);
+        }
+
+        private void importBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            progressBar1.Value = 0;
+            if (e.Argument == null)
+            {
+                //multiple import
+                ForeachImport();
+            }
+            else
+            {
+                //single import
+                DoImport((string)e.Argument);
+            }
+        }
+
+        private void importBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.PerformStep();
+        }
+
+        private void importBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            transparentPanel.Visible = false;
+            if (errorMessages.Count > 0)
+            {
+                usePreset = false;
+                DialogResult result = MetroMessageBox.Show(this, String.Format("Es wurden '{0}' von '{1}' Dateien importiert und es sind '{2}' Fehler aufgetreten. Möchten Sie diese einsehen?", filesDone, filesTotal, errors), "Fehler beim Importvorgang.", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (result == DialogResult.Yes)
+                {
+                    for (int i = 0; i < errorMessages.Count; i++)
+                    {
+                        DialogResult dr = MetroMessageBox.Show(this, errorMessages[i] + "Wählen Sie 'Ja' für den nächsten Fehler oder 'Nein' zum Beenden.", String.Format("Fehler '{0}' von '{1}'", i + 1, errorMessages.Count.ToString()), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                        if (dr == DialogResult.Yes)
+                        {
+
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (filesDone == 1)
+                {
+                    Cursor.Current = Cursors.Default;
+                    DialogResult dr = MetroMessageBox.Show(this, "Die Datei wurde erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dr == DialogResult.Yes)
+                    {
+                        RemoveFromImportList();
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
+                }
+                else if (filesDone > 1)
+                {
+                    Cursor.Current = Cursors.Default;
+                    DialogResult dr = MetroMessageBox.Show(this, "Die Dateien wurden erfolgreich importiert. Möchten Sie weitere Daten importieren?", "Import erfolgreich", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dr == DialogResult.Yes)
+                    {
+                        clearForm();
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
+                }
+            }
         }
     }
 }
