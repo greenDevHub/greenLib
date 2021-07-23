@@ -21,13 +21,31 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_61B7552422B44511A522FDF8B3A0F2DA"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_11E9A16F87E159804F454EC7E1354C55"
+        "OwnerKey" = "8:_8BDAC7DF8C0645919DA2842FDBD5ABC5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_75C37C855772B338A32DEF2802D30887"
+        "MsmKey" = "8:_2ABB8C7FD38CE90DF66A2D79DE9DAE78"
+        "OwnerKey" = "8:_8BDAC7DF8C0645919DA2842FDBD5ABC5"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_686CC872ED4E580C553AAE36E4DEEADE"
+        "OwnerKey" = "8:_11E9A16F87E159804F454EC7E1354C55"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_686CC872ED4E580C553AAE36E4DEEADE"
+        "OwnerKey" = "8:_2ABB8C7FD38CE90DF66A2D79DE9DAE78"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_686CC872ED4E580C553AAE36E4DEEADE"
         "OwnerKey" = "8:_8BDAC7DF8C0645919DA2842FDBD5ABC5"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -39,32 +57,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_94DDAB5C81623356C763D8BAFD4697B5"
+        "MsmKey" = "8:_CF949B17F03F11638F01A28CEF28D60A"
         "OwnerKey" = "8:_8BDAC7DF8C0645919DA2842FDBD5ABC5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_9B7E9C396112D9428D51BB053EF14087"
-        "OwnerKey" = "8:_8BDAC7DF8C0645919DA2842FDBD5ABC5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DF508A3D47734ECAF9AB75D302CC3977"
-        "OwnerKey" = "8:_9B7E9C396112D9428D51BB053EF14087"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DF508A3D47734ECAF9AB75D302CC3977"
-        "OwnerKey" = "8:_94DDAB5C81623356C763D8BAFD4697B5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DF508A3D47734ECAF9AB75D302CC3977"
-        "OwnerKey" = "8:_8BDAC7DF8C0645919DA2842FDBD5ABC5"
+        "MsmKey" = "8:_F0A8107D63304EDAACD500D137936B7E"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -76,25 +76,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_75C37C855772B338A32DEF2802D30887"
+        "OwnerKey" = "8:_CF949B17F03F11638F01A28CEF28D60A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_94DDAB5C81623356C763D8BAFD4697B5"
+        "OwnerKey" = "8:_2ABB8C7FD38CE90DF66A2D79DE9DAE78"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9B7E9C396112D9428D51BB053EF14087"
+        "OwnerKey" = "8:_11E9A16F87E159804F454EC7E1354C55"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DF508A3D47734ECAF9AB75D302CC3977"
+        "OwnerKey" = "8:_686CC872ED4E580C553AAE36E4DEEADE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -111,7 +111,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:D:\\greenLib Setup Neu\\greenLib Setup.msi"
+        "OutputFilename" = "8:..\\..\\..\\Installer\\greenLib Setup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -229,96 +229,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_61B7552422B44511A522FDF8B3A0F2DA"
-            {
-            "SourcePath" = "8:..\\Bibo Verwaltung\\greenLib.ico"
-            "TargetName" = "8:app.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_6C669211C9B64DACB5638056081D42C8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_75C37C855772B338A32DEF2802D30887"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Zen.Barcode.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b5ae55aa76d2d9de, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_75C37C855772B338A32DEF2802D30887"
-                    {
-                    "Name" = "8:Zen.Barcode.Core.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Zen.Barcode.Core.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_6C669211C9B64DACB5638056081D42C8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_94DDAB5C81623356C763D8BAFD4697B5"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_94DDAB5C81623356C763D8BAFD4697B5"
-                    {
-                    "Name" = "8:MetroFramework.Fonts.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:MetroFramework.Fonts.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_6C669211C9B64DACB5638056081D42C8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9B7E9C396112D9428D51BB053EF14087"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_11E9A16F87E159804F454EC7E1354C55"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_9B7E9C396112D9428D51BB053EF14087"
+                    "_11E9A16F87E159804F454EC7E1354C55"
                     {
                     "Name" = "8:MetroFramework.Design.dll"
                     "Attributes" = "3:512"
@@ -342,14 +260,45 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DF508A3D47734ECAF9AB75D302CC3977"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2ABB8C7FD38CE90DF66A2D79DE9DAE78"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_2ABB8C7FD38CE90DF66A2D79DE9DAE78"
+                    {
+                    "Name" = "8:MetroFramework.Fonts.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:MetroFramework.Fonts.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_6C669211C9B64DACB5638056081D42C8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_686CC872ED4E580C553AAE36E4DEEADE"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_DF508A3D47734ECAF9AB75D302CC3977"
+                    "_686CC872ED4E580C553AAE36E4DEEADE"
                     {
                     "Name" = "8:MetroFramework.dll"
                     "Attributes" = "3:512"
@@ -371,6 +320,57 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CF949B17F03F11638F01A28CEF28D60A"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Zen.Barcode.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b5ae55aa76d2d9de, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_CF949B17F03F11638F01A28CEF28D60A"
+                    {
+                    "Name" = "8:Zen.Barcode.Core.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Zen.Barcode.Core.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_6C669211C9B64DACB5638056081D42C8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F0A8107D63304EDAACD500D137936B7E"
+            {
+            "SourcePath" = "8:..\\Bibo Verwaltung\\Resources\\greenLib.ico"
+            "TargetName" = "8:greenLib.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_6C669211C9B64DACB5638056081D42C8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
@@ -440,15 +440,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:greenLib"
-        "ProductCode" = "8:{E84D238A-88CF-454F-94DF-9C866B0E5286}"
-        "PackageCode" = "8:{B0252FC6-9F9C-4F41-BEB5-82C4673CC8EB}"
+        "ProductCode" = "8:{0838AFEC-7F9A-41E9-8B6F-FE3DCC8044BD}"
+        "PackageCode" = "8:{EC8CCF08-C160-4111-B66D-FBDBDD9197F7}"
         "UpgradeCode" = "8:{840B81A5-7A89-4941-BA52-0BC7F08D4F55}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.1.0"
         "Manufacturer" = "8:greenDev"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -458,7 +458,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:greenLib"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:_61B7552422B44511A522FDF8B3A0F2DA"
+        "ARPPRODUCTICON" = "8:_F0A8107D63304EDAACD500D137936B7E"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -572,7 +572,7 @@
             "Target" = "8:_8BDAC7DF8C0645919DA2842FDBD5ABC5"
             "Folder" = "8:_863AFCBCAA85416CAB3217492488946C"
             "WorkingFolder" = "8:_6C669211C9B64DACB5638056081D42C8"
-            "Icon" = "8:_61B7552422B44511A522FDF8B3A0F2DA"
+            "Icon" = "8:_F0A8107D63304EDAACD500D137936B7E"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_CC64B6BBFA0B4E46BDD9E672C1B4EBE3"
@@ -586,7 +586,7 @@
             "Target" = "8:_8BDAC7DF8C0645919DA2842FDBD5ABC5"
             "Folder" = "8:_4338E8BA280E4B8CB7489FA1004C1148"
             "WorkingFolder" = "8:_6C669211C9B64DACB5638056081D42C8"
-            "Icon" = "8:_61B7552422B44511A522FDF8B3A0F2DA"
+            "Icon" = "8:_F0A8107D63304EDAACD500D137936B7E"
             "Feature" = "8:"
             }
         }
@@ -990,7 +990,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_8BDAC7DF8C0645919DA2842FDBD5ABC5"
             {
-            "SourcePath" = "8:..\\Bibo Verwaltung\\obj\\x86\\Debug\\greenLib.exe"
+            "SourcePath" = "8:..\\Bibo Verwaltung\\obj\\Debug\\greenLib.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6C669211C9B64DACB5638056081D42C8"

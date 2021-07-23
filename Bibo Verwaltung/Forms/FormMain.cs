@@ -47,7 +47,7 @@ namespace Bibo_Verwaltung
         }
         private void SetPermissions()
         {
-            if (AuthInfo.CurrentUser.PermissionId.Equals("0") || AuthInfo.CurrentUser.PermissionId.Equals("1"))
+            if (AuthInfo.CurrentUser.PermissionId == 0 || AuthInfo.CurrentUser.PermissionId == 1)
             {
                 mT_Benutzerverwaltung.Enabled = false;
                 mT_Einstellungen.Enabled = false;
