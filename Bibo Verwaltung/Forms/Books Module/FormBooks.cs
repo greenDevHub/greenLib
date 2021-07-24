@@ -400,10 +400,7 @@ namespace Bibo_Verwaltung
                 copy.DateRegistration = DateTime.UtcNow.Date;
                 copy.Condition = newCondition;
 
-                for (int i = 0; i < newCopyCount; i++)
-                {
-                    copy.Add();
-                }
+                copy.Add(newCopyCount);
 
                 ClearForm();
             }

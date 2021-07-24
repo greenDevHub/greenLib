@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace Bibo_Verwaltung
@@ -78,7 +79,7 @@ namespace Bibo_Verwaltung
         /// <summary>
         /// adds a copy with the given information to database
         /// </summary>
-        public void Add()
+        public void Add(int amount)
         {
             CustomSqlConnection connection = new CustomSqlConnection();
             if (connection.ConnectError()) return;
@@ -90,7 +91,10 @@ namespace Bibo_Verwaltung
             cmd.Parameters.AddWithValue("@dateRegistration", DateRegistration);
             cmd.Parameters.AddWithValue("@activated", 1);
             cmd.Parameters.AddWithValue("@printed", 0);
-            cmd.ExecuteNonQuery();
+            for(int i = 0; i < amount; i++)
+            {
+                cmd.ExecuteNonQuery();
+            }
             connection.Close();
         }
 
@@ -145,18 +149,22 @@ namespace Bibo_Verwaltung
         /// TODO
         /// </summary>
         /// <param name="isbn"></param>
-        public void SelectLastRow()
+        public List<Copy> SelectAddedCopies(int addedAmount)
         {
+            List<Copy> copies = new List<Copy>();
             CustomSqlConnection connection = new CustomSqlConnection();
-            if (connection.ConnectError()) return;
-            string RawCommand = "Select top(1) bu_id from t_s_buchid where bu_isbn = @0 order by bu_id desc";
-            SqlDataReader dr = connection.ExcecuteCommand(RawCommand, CopyIsbn);
+            if (connection.ConnectError()) return copies;
+            string RawCommand = "Select top(@0) bu_id from t_s_buchid where bu_isbn = @1 order by bu_id desc";
+            SqlDataReader dr = connection.ExcecuteCommand(RawCommand, addedAmount, CopyIsbn);
             while (dr.Read())
             {
-                CopyId = int.Parse(dr["bu_id"].ToString());
+                Copy copy = new Copy();
+                copy.CopyId = Convert.ToInt32(dr["bu_id"]);
+                copies.Add(copy);
             }
             dr.Close();
             connection.Close();
+            return copies;
         }
 
         /// <summary>

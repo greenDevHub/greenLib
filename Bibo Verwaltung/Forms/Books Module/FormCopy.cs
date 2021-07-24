@@ -381,12 +381,8 @@ namespace Bibo_Verwaltung
             copy.DateRegistration = dTP_AufDat.Value;
             List<Copy> copies = new List<Copy>();
             int copyCount = int.Parse(tb_ExempCount.Text);
-            for (int i = 0; i < copyCount; i++)
-            {
-                copy.Add();
-                copy.SelectLastRow();
-                copies.Add(copy);
-            }
+            copy.Add(copyCount);
+            copies = copy.SelectAddedCopies(copyCount);
             Clear_Form();
             ShowMessage(SaveOption.add);
 
