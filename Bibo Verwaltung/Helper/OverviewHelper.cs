@@ -37,8 +37,8 @@ namespace Bibo_Verwaltung
             if (con.ConnectError()) return table;
             string RawCommand = "SELECT bu_id as 'ExemplarID', bu_isbn as 'ISBN', aus_rückgabedatum as 'Rückgabedatum', " +
                 "buch_titel as 'Titel', kunde_id as 'Kunden ID', kunde_vorname as 'Vorname', kunde_Nachname as 'Nachname', " +
-                "k_Bezeichnung as 'Klasse', stuff(( SELECT distinct ', '+ cast(au_autor as varchar(512)) FROM t_s_buch_autor " +
-                "left join t_s_autor on au_id = ba_autorid where ba_isbn = buch_isbn FOR XML PATH('')),1,1,'') as 'Autor', ger_name as 'Genre', " +
+                "k_Bezeichnung as 'Klasse', ISNULL(stuff(( SELECT distinct ', '+ cast(au_autor as varchar(512)) FROM t_s_buch_autor " +
+                "left join t_s_autor on au_id = ba_autorid where ba_isbn = buch_isbn FOR XML PATH('')),1,1,''),'') as 'Autor', ger_name as 'Genre', " +
                 "ver_name as 'Verlag', sprach_name as 'Sprache', zu_zustand as 'Zustand', aus_leihnummer as 'Leihnummer' FROM t_s_buchid " +
                 "left join t_s_buecher on bu_isbn = buch_isbn left join t_s_genre on buch_genre_id = ger_id left join t_s_verlag on " +
                 "buch_verlag_id = ver_id left join t_s_sprache on buch_sprache_id = sprach_id left join t_s_zustand on bu_zustandsid = zu_id " +

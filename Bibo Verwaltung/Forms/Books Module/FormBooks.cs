@@ -490,6 +490,7 @@ namespace Bibo_Verwaltung
         /// <param name="multipleAuthors"></param>
         private void FinalizeAuthor(ref Book book, bool multipleAuthors)
         {
+            if (cb_Autor.Text.Equals("")) return;
             if (multipleAuthors)
             {
                 //multiple authors
@@ -539,14 +540,14 @@ namespace Bibo_Verwaltung
             {
                 case SaveOption.add:
                     if (!isEmpty(tb_ISBN.Text) && !isEmpty(tb_Titel.Text)
-                        && !isEmpty(cb_Autor.Text) && !isEmpty(cb_Verlag.Text) && !isEmpty(cb_Genre.Text) && !isEmpty(cb_Sprache.Text))
+                         && !isEmpty(cb_Verlag.Text) && !isEmpty(cb_Genre.Text) && !isEmpty(cb_Sprache.Text))
                     {
                         inputOkay = true;
                     }
                     break;
                 case SaveOption.update:
                     if (!isEmpty(tb_ISBN.Text) && !isEmpty(tb_Titel.Text)
-                        && !isEmpty(cb_Autor.Text) && !isEmpty(cb_Verlag.Text) && !isEmpty(cb_Genre.Text) && !isEmpty(cb_Sprache.Text))
+                        && !isEmpty(cb_Verlag.Text) && !isEmpty(cb_Genre.Text) && !isEmpty(cb_Sprache.Text))
                     {
                         inputOkay = true;
                     }
@@ -618,12 +619,14 @@ namespace Bibo_Verwaltung
             if (gridViewBook.DataSource == null) return;
             if (dTP_Erscheinungsdatum.Value.Date != DateTime.Now.Date)
             {
-                (gridViewBook.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%' AND Autor LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Sprache LIKE '%{5}%' AND Convert([Erscheinungsdatum], System.String) LIKE '%{6}%'", tb_Titel.Text, tb_ISBN.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, cb_Sprache.Text, dTP_Erscheinungsdatum.Value.Date.ToShortDateString());
+                (gridViewBook.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%' AND Autor LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Sprache LIKE '%{5}%' AND Convert([Erscheinungsdatum], System.String) LIKE '%{6}%'", 
+                    tb_Titel.Text, tb_ISBN.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, cb_Sprache.Text, dTP_Erscheinungsdatum.Value.Date.ToShortDateString());
 
             }
             else
             {
-                (gridViewBook.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%' AND Autor LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Sprache LIKE '%{5}%'", tb_Titel.Text, tb_ISBN.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, cb_Sprache.Text);
+                (gridViewBook.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%' AND Autor LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Sprache LIKE '%{5}%'", 
+                    tb_Titel.Text, tb_ISBN.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, cb_Sprache.Text);
             }
 
         }
@@ -716,7 +719,6 @@ namespace Bibo_Verwaltung
                 mtb_Nachricht.Text = "Das Buch wurde erfolgreich hinzugefügt!";
                 lb_ISBN.Text = "ISBN:*";
                 lb_Titel.Text = "Titel:*";
-                lb_Autor.Text = "Autor:*";
                 lb_Verlag.Text = "Verlag:*";
                 lb_Genre.Text = "Genre:*";
                 lb_Sprache.Text = "Sprache:*";
@@ -750,7 +752,6 @@ namespace Bibo_Verwaltung
                 mtb_Nachricht.Text = "Das Buch wurde erfolgreich bearbeitet!";
                 lb_ISBN.Text = "ISBN:";
                 lb_Titel.Text = "Titel:*";
-                lb_Autor.Text = "Autor:*";
                 lb_Verlag.Text = "Verlag:*";
                 lb_Genre.Text = "Genre:*";
                 lb_Sprache.Text = "Sprache:*";
@@ -878,13 +879,16 @@ namespace Bibo_Verwaltung
             string autortext = "";
             if (book.BookAuthors.Count > 1)
             {
+                book.BookAuthors = book.BookAuthors.OrderBy(o => o.AuthorName).ToList();
                 checkbox_autor.Checked = true;
+                for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                    checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
                 for (int i = 0; i < checkedListBox1.Items.Count; i++)
                 {
                     DataRowView item = (DataRowView)checkedListBox1.Items[i];
                     var s = item["au_autor"];
                     Author author = new Author(authorHelper.FindIdByName(item["au_autor"].ToString()));
-                    var matches = book.BookAuthors.Where(authorItem => String.Equals(authorItem.AuthorName, author.AuthorName, StringComparison.CurrentCulture));
+                    var matches = book.BookAuthors.Where(authorItem => String.Equals(authorItem.AuthorName, author.AuthorName, StringComparison.CurrentCultureIgnoreCase));
                     if (matches.ToList().Count > 0)
                     {
                         checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf(item), true);

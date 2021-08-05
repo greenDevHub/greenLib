@@ -76,20 +76,10 @@ namespace Bibo_Verwaltung
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.mtb_Import = new MetroFramework.Controls.MetroButton();
             this.picBox_Klein = new System.Windows.Forms.PictureBox();
-            this.cb_Genre = new Bibo_Verwaltung.AdvancedComboBox();
-            this.cb_Verlag = new Bibo_Verwaltung.AdvancedComboBox();
-            this.cb_Sprache = new Bibo_Verwaltung.AdvancedComboBox();
-            this.cb_Autor = new Bibo_Verwaltung.AdvancedComboBox();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.p_autor = new Bibo_Verwaltung.TransparentPanel();
-            this.checkedListBox1 = new Bibo_Verwaltung.AdvancedCheckedListBox();
-            this.comboBox1 = new Bibo_Verwaltung.AdvancedComboBox();
-            this.p_sprache = new Bibo_Verwaltung.TransparentPanel();
             this.dTP_Erscheinungsdatum = new MetroFramework.Controls.MetroDateTime();
             this.bt_print = new MetroFramework.Controls.MetroButton();
-            this.p_verlag = new Bibo_Verwaltung.TransparentPanel();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.p_genre = new Bibo_Verwaltung.TransparentPanel();
             this.tb_barcodePrinted = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.tb_barcodeAdd = new MetroFramework.Controls.MetroTextBox();
@@ -102,6 +92,16 @@ namespace Bibo_Verwaltung
             this.bt_exemplar = new MetroFramework.Controls.MetroButton();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.styleManagerBooks = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.p_autor = new Bibo_Verwaltung.TransparentPanel();
+            this.checkedListBox1 = new Bibo_Verwaltung.AdvancedCheckedListBox();
+            this.comboBox1 = new Bibo_Verwaltung.AdvancedComboBox();
+            this.cb_Genre = new Bibo_Verwaltung.AdvancedComboBox();
+            this.p_sprache = new Bibo_Verwaltung.TransparentPanel();
+            this.p_verlag = new Bibo_Verwaltung.TransparentPanel();
+            this.p_genre = new Bibo_Verwaltung.TransparentPanel();
+            this.cb_Verlag = new Bibo_Verwaltung.AdvancedComboBox();
+            this.cb_Sprache = new Bibo_Verwaltung.AdvancedComboBox();
+            this.cb_Autor = new Bibo_Verwaltung.AdvancedComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.tsspracheBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewBook)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -401,7 +401,7 @@ namespace Bibo_Verwaltung
             this.rb_Update_Buch.Location = new System.Drawing.Point(170, 3);
             this.rb_Update_Buch.Name = "rb_Update_Buch";
             this.helpProvider.SetShowHelp(this.rb_Update_Buch, true);
-            this.rb_Update_Buch.Size = new System.Drawing.Size(92, 20);
+            this.rb_Update_Buch.Size = new System.Drawing.Size(88, 19);
             this.rb_Update_Buch.TabIndex = 1;
             this.rb_Update_Buch.Text = "Bearbeiten";
             this.metroToolTip1.SetToolTip(this.rb_Update_Buch, "    Klicken sie hier, um ein vorhandenes Buch zu bearbeiten.    ");
@@ -417,7 +417,7 @@ namespace Bibo_Verwaltung
             this.rb_Add_Buch.Location = new System.Drawing.Point(74, 3);
             this.rb_Add_Buch.Name = "rb_Add_Buch";
             this.helpProvider.SetShowHelp(this.rb_Add_Buch, true);
-            this.rb_Add_Buch.Size = new System.Drawing.Size(97, 20);
+            this.rb_Add_Buch.Size = new System.Drawing.Size(90, 19);
             this.rb_Add_Buch.TabIndex = 1;
             this.rb_Add_Buch.Text = "Hinzufügen";
             this.metroToolTip1.SetToolTip(this.rb_Add_Buch, "    Klicken sie hier, um ein neues Buch hinzuzufügen.    ");
@@ -433,7 +433,7 @@ namespace Bibo_Verwaltung
             this.rb_Delete_Buch.Location = new System.Drawing.Point(264, 3);
             this.rb_Delete_Buch.Name = "rb_Delete_Buch";
             this.helpProvider.SetShowHelp(this.rb_Delete_Buch, true);
-            this.rb_Delete_Buch.Size = new System.Drawing.Size(86, 20);
+            this.rb_Delete_Buch.Size = new System.Drawing.Size(80, 19);
             this.rb_Delete_Buch.TabIndex = 1;
             this.rb_Delete_Buch.Text = "Entfernen";
             this.metroToolTip1.SetToolTip(this.rb_Delete_Buch, "    Klicken sie hier, um ein vorhandenes Buch zu löschen.    ");
@@ -730,28 +730,28 @@ namespace Bibo_Verwaltung
             this.entfernenToolStripMenuItem,
             this.exemplareToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(361, 203);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(130, 70);
             this.contextMenuStrip1.Style = MetroFramework.MetroColorStyle.Blue;
             this.contextMenuStrip1.UseStyleColors = true;
             // 
             // ladenToolStripMenuItem
             // 
             this.ladenToolStripMenuItem.Name = "ladenToolStripMenuItem";
-            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(360, 48);
+            this.ladenToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.ladenToolStripMenuItem.Text = "Laden";
             this.ladenToolStripMenuItem.Click += new System.EventHandler(this.ladenToolStripMenuItem_Click);
             // 
             // entfernenToolStripMenuItem
             // 
             this.entfernenToolStripMenuItem.Name = "entfernenToolStripMenuItem";
-            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(360, 48);
+            this.entfernenToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.entfernenToolStripMenuItem.Text = "Entfernen";
             this.entfernenToolStripMenuItem.Click += new System.EventHandler(this.entfernenToolStripMenuItem_Click);
             // 
             // exemplareToolStripMenuItem
             // 
             this.exemplareToolStripMenuItem.Name = "exemplareToolStripMenuItem";
-            this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(360, 48);
+            this.exemplareToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.exemplareToolStripMenuItem.Text = "Exemplare";
             this.exemplareToolStripMenuItem.Click += new System.EventHandler(this.exemplareToolStripMenuItem_Click);
             // 
@@ -863,103 +863,6 @@ namespace Bibo_Verwaltung
             this.picBox_Klein.MouseEnter += new System.EventHandler(this.pictureBox1_MouseEnter);
             this.picBox_Klein.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
             // 
-            // cb_Genre
-            // 
-            this.cb_Genre.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cb_Genre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cb_Genre.BorderColor = System.Drawing.Color.Gray;
-            this.cb_Genre.DataRowView = true;
-            this.cb_Genre.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cb_Genre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cb_Genre.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.cb_Genre.ForeColor = System.Drawing.Color.Black;
-            this.cb_Genre.FormattingEnabled = true;
-            this.helpProvider.SetHelpString(this.cb_Genre, "Tragen sie das Genre ihres Buches hier ein.");
-            this.cb_Genre.HighlightColor = System.Drawing.Color.DeepSkyBlue;
-            this.cb_Genre.ItemHeight = 18;
-            this.cb_Genre.Location = new System.Drawing.Point(140, 148);
-            this.cb_Genre.Name = "cb_Genre";
-            this.helpProvider.SetShowHelp(this.cb_Genre, true);
-            this.cb_Genre.Size = new System.Drawing.Size(175, 24);
-            this.cb_Genre.TabIndex = 12;
-            this.metroToolTip1.SetToolTip(this.cb_Genre, "    Tragen sie das Genre ihres Buches hier ein.    ");
-            this.cb_Genre.TextChanged += new System.EventHandler(this.cb_Genre_TextChanged);
-            this.cb_Genre.Enter += new System.EventHandler(this.cb_Genre_Enter);
-            this.cb_Genre.MouseEnter += new System.EventHandler(this.cb_Genre_MouseEnter);
-            // 
-            // cb_Verlag
-            // 
-            this.cb_Verlag.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cb_Verlag.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cb_Verlag.BorderColor = System.Drawing.Color.Gray;
-            this.cb_Verlag.DataRowView = true;
-            this.cb_Verlag.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cb_Verlag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cb_Verlag.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.cb_Verlag.ForeColor = System.Drawing.Color.Black;
-            this.cb_Verlag.FormattingEnabled = true;
-            this.helpProvider.SetHelpString(this.cb_Verlag, "Tragen sie den Verlag ihres Buches hier ein.");
-            this.cb_Verlag.HighlightColor = System.Drawing.Color.DeepSkyBlue;
-            this.cb_Verlag.ItemHeight = 18;
-            this.cb_Verlag.Location = new System.Drawing.Point(140, 118);
-            this.cb_Verlag.Name = "cb_Verlag";
-            this.helpProvider.SetShowHelp(this.cb_Verlag, true);
-            this.cb_Verlag.Size = new System.Drawing.Size(175, 24);
-            this.cb_Verlag.TabIndex = 10;
-            this.metroToolTip1.SetToolTip(this.cb_Verlag, "    Tragen sie den Verlag ihres Buches hier ein.    ");
-            this.cb_Verlag.TextChanged += new System.EventHandler(this.cb_Verlag_TextChanged);
-            this.cb_Verlag.Enter += new System.EventHandler(this.cb_Verlag_Enter);
-            this.cb_Verlag.MouseEnter += new System.EventHandler(this.cb_Verlag_MouseEnter);
-            // 
-            // cb_Sprache
-            // 
-            this.cb_Sprache.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cb_Sprache.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cb_Sprache.BorderColor = System.Drawing.Color.Gray;
-            this.cb_Sprache.DataRowView = true;
-            this.cb_Sprache.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cb_Sprache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cb_Sprache.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.cb_Sprache.ForeColor = System.Drawing.Color.Black;
-            this.cb_Sprache.FormattingEnabled = true;
-            this.helpProvider.SetHelpKeyword(this.cb_Sprache, "Tragen sie die Sprache ihres Buches hier ein.");
-            this.cb_Sprache.HighlightColor = System.Drawing.Color.DeepSkyBlue;
-            this.cb_Sprache.ItemHeight = 18;
-            this.cb_Sprache.Location = new System.Drawing.Point(140, 178);
-            this.cb_Sprache.Name = "cb_Sprache";
-            this.helpProvider.SetShowHelp(this.cb_Sprache, true);
-            this.cb_Sprache.Size = new System.Drawing.Size(175, 24);
-            this.cb_Sprache.TabIndex = 14;
-            this.metroToolTip1.SetToolTip(this.cb_Sprache, "    Tragen sie die Sprache ihres Buches hier ein.    ");
-            this.cb_Sprache.TextChanged += new System.EventHandler(this.cb_Sprache_TextChanged);
-            this.cb_Sprache.Enter += new System.EventHandler(this.cb_Sprache_Enter);
-            this.cb_Sprache.MouseEnter += new System.EventHandler(this.cb_Sprache_MouseEnter);
-            // 
-            // cb_Autor
-            // 
-            this.cb_Autor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cb_Autor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cb_Autor.BorderColor = System.Drawing.Color.Gray;
-            this.cb_Autor.DataRowView = true;
-            this.cb_Autor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cb_Autor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cb_Autor.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.cb_Autor.ForeColor = System.Drawing.Color.Black;
-            this.cb_Autor.FormattingEnabled = true;
-            this.helpProvider.SetHelpString(this.cb_Autor, "Tragen sie den Autor ihres Buches hier ein.");
-            this.cb_Autor.HighlightColor = System.Drawing.Color.DeepSkyBlue;
-            this.cb_Autor.ItemHeight = 18;
-            this.cb_Autor.Location = new System.Drawing.Point(140, 88);
-            this.cb_Autor.Name = "cb_Autor";
-            this.helpProvider.SetShowHelp(this.cb_Autor, true);
-            this.cb_Autor.Size = new System.Drawing.Size(175, 24);
-            this.cb_Autor.TabIndex = 6;
-            this.metroToolTip1.SetToolTip(this.cb_Autor, "    Tragen sie den Autor ihres Buches hier ein.    ");
-            this.cb_Autor.TextChanged += new System.EventHandler(this.cb_Autor_TextChanged);
-            this.cb_Autor.Enter += new System.EventHandler(this.cb_Autor_Enter);
-            this.cb_Autor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cb_Autor_KeyDown);
-            this.cb_Autor.MouseEnter += new System.EventHandler(this.cb_Autor_MouseEnter);
-            // 
             // metroPanel1
             // 
             this.metroPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1024,64 +927,14 @@ namespace Bibo_Verwaltung
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 8;
             // 
-            // p_autor
-            // 
-            this.p_autor.Location = new System.Drawing.Point(140, 88);
-            this.p_autor.Name = "p_autor";
-            this.p_autor.Size = new System.Drawing.Size(175, 24);
-            this.p_autor.TabIndex = 56;
-            this.p_autor.Visible = false;
-            // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.checkedListBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.HighlightColor = System.Drawing.Color.Green;
-            this.checkedListBox1.Location = new System.Drawing.Point(140, 111);
-            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(175, 72);
-            this.checkedListBox1.TabIndex = 8;
-            this.metroToolTip1.SetToolTip(this.checkedListBox1, "Wählen Sie hier mehrere Autoren aus.");
-            this.checkedListBox1.Visible = false;
-            this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.BackColor = System.Drawing.Color.White;
-            this.comboBox1.BorderColor = System.Drawing.Color.Gray;
-            this.comboBox1.DataRowView = true;
-            this.comboBox1.DropDownHeight = 1;
-            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.HighlightColor = System.Drawing.Color.Gray;
-            this.comboBox1.IntegralHeight = false;
-            this.comboBox1.ItemHeight = 18;
-            this.comboBox1.Location = new System.Drawing.Point(297, 88);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.comboBox1.Size = new System.Drawing.Size(18, 24);
-            this.comboBox1.TabIndex = 7;
-            this.comboBox1.Click += new System.EventHandler(this.comboBox1_Click);
-            // 
-            // p_sprache
-            // 
-            this.p_sprache.Location = new System.Drawing.Point(140, 178);
-            this.p_sprache.Name = "p_sprache";
-            this.p_sprache.Size = new System.Drawing.Size(175, 24);
-            this.p_sprache.TabIndex = 56;
-            this.p_sprache.Visible = false;
-            // 
             // dTP_Erscheinungsdatum
             // 
             this.dTP_Erscheinungsdatum.CustomFormat = " dd.MM.yyyy";
             this.dTP_Erscheinungsdatum.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dTP_Erscheinungsdatum.Location = new System.Drawing.Point(140, 208);
-            this.dTP_Erscheinungsdatum.MinimumSize = new System.Drawing.Size(0, 30);
+            this.dTP_Erscheinungsdatum.MinimumSize = new System.Drawing.Size(0, 29);
             this.dTP_Erscheinungsdatum.Name = "dTP_Erscheinungsdatum";
-            this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(175, 38);
+            this.dTP_Erscheinungsdatum.Size = new System.Drawing.Size(175, 30);
             this.dTP_Erscheinungsdatum.TabIndex = 16;
             this.metroToolTip1.SetToolTip(this.dTP_Erscheinungsdatum, "    Wählen sie das Erscheinungsdatum ihres Buches hier aus.    ");
             this.dTP_Erscheinungsdatum.ValueChanged += new System.EventHandler(this.DTP_Erscheinungsdatum_ValueChanged);
@@ -1100,14 +953,6 @@ namespace Bibo_Verwaltung
             this.bt_print.UseSelectable = true;
             this.bt_print.Click += new System.EventHandler(this.bt_print_Click);
             // 
-            // p_verlag
-            // 
-            this.p_verlag.Location = new System.Drawing.Point(140, 118);
-            this.p_verlag.Name = "p_verlag";
-            this.p_verlag.Size = new System.Drawing.Size(175, 24);
-            this.p_verlag.TabIndex = 56;
-            this.p_verlag.Visible = false;
-            // 
             // metroLabel3
             // 
             this.metroLabel3.Location = new System.Drawing.Point(4, 453);
@@ -1117,14 +962,6 @@ namespace Bibo_Verwaltung
             this.metroLabel3.TabIndex = 55;
             this.metroLabel3.Text = "Neue Barcodes drucken:";
             this.metroLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // p_genre
-            // 
-            this.p_genre.Location = new System.Drawing.Point(140, 148);
-            this.p_genre.Name = "p_genre";
-            this.p_genre.Size = new System.Drawing.Size(175, 24);
-            this.p_genre.TabIndex = 56;
-            this.p_genre.Visible = false;
             // 
             // tb_barcodePrinted
             // 
@@ -1219,7 +1056,7 @@ namespace Bibo_Verwaltung
             this.metroLabel1.Location = new System.Drawing.Point(4, 303);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(157, 20);
+            this.metroLabel1.Size = new System.Drawing.Size(147, 19);
             this.metroLabel1.TabIndex = 49;
             this.metroLabel1.Text = "Exemplare (neu) hinzuf.:";
             this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1270,7 +1107,7 @@ namespace Bibo_Verwaltung
             this.rb_search.FontWeight = MetroFramework.MetroCheckBoxWeight.Light;
             this.rb_search.Location = new System.Drawing.Point(3, 3);
             this.rb_search.Name = "rb_search";
-            this.rb_search.Size = new System.Drawing.Size(71, 20);
+            this.rb_search.Size = new System.Drawing.Size(66, 19);
             this.rb_search.TabIndex = 1;
             this.rb_search.TabStop = true;
             this.rb_search.Text = "Suchen";
@@ -1333,6 +1170,169 @@ namespace Bibo_Verwaltung
             // styleManagerBooks
             // 
             this.styleManagerBooks.Owner = this;
+            // 
+            // p_autor
+            // 
+            this.p_autor.Location = new System.Drawing.Point(140, 88);
+            this.p_autor.Name = "p_autor";
+            this.p_autor.Size = new System.Drawing.Size(175, 24);
+            this.p_autor.TabIndex = 56;
+            this.p_autor.Visible = false;
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.checkedListBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.HighlightColor = System.Drawing.Color.Green;
+            this.checkedListBox1.Location = new System.Drawing.Point(140, 111);
+            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(175, 92);
+            this.checkedListBox1.TabIndex = 8;
+            this.metroToolTip1.SetToolTip(this.checkedListBox1, "Wählen Sie hier mehrere Autoren aus.");
+            this.checkedListBox1.Visible = false;
+            this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.BackColor = System.Drawing.Color.White;
+            this.comboBox1.BorderColor = System.Drawing.Color.Gray;
+            this.comboBox1.DataRowView = true;
+            this.comboBox1.DropDownHeight = 1;
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.HighlightColor = System.Drawing.Color.Gray;
+            this.comboBox1.IntegralHeight = false;
+            this.comboBox1.ItemHeight = 18;
+            this.comboBox1.Location = new System.Drawing.Point(297, 88);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.comboBox1.Size = new System.Drawing.Size(18, 24);
+            this.comboBox1.TabIndex = 7;
+            this.comboBox1.Click += new System.EventHandler(this.comboBox1_Click);
+            // 
+            // cb_Genre
+            // 
+            this.cb_Genre.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_Genre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Genre.BorderColor = System.Drawing.Color.Gray;
+            this.cb_Genre.DataRowView = true;
+            this.cb_Genre.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cb_Genre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cb_Genre.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.cb_Genre.ForeColor = System.Drawing.Color.Black;
+            this.cb_Genre.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_Genre, "Tragen sie das Genre ihres Buches hier ein.");
+            this.cb_Genre.HighlightColor = System.Drawing.Color.DeepSkyBlue;
+            this.cb_Genre.ItemHeight = 18;
+            this.cb_Genre.Location = new System.Drawing.Point(140, 148);
+            this.cb_Genre.Name = "cb_Genre";
+            this.helpProvider.SetShowHelp(this.cb_Genre, true);
+            this.cb_Genre.Size = new System.Drawing.Size(175, 24);
+            this.cb_Genre.TabIndex = 12;
+            this.metroToolTip1.SetToolTip(this.cb_Genre, "    Tragen sie das Genre ihres Buches hier ein.    ");
+            this.cb_Genre.TextChanged += new System.EventHandler(this.cb_Genre_TextChanged);
+            this.cb_Genre.Enter += new System.EventHandler(this.cb_Genre_Enter);
+            this.cb_Genre.MouseEnter += new System.EventHandler(this.cb_Genre_MouseEnter);
+            // 
+            // p_sprache
+            // 
+            this.p_sprache.Location = new System.Drawing.Point(140, 178);
+            this.p_sprache.Name = "p_sprache";
+            this.p_sprache.Size = new System.Drawing.Size(175, 24);
+            this.p_sprache.TabIndex = 56;
+            this.p_sprache.Visible = false;
+            // 
+            // p_verlag
+            // 
+            this.p_verlag.Location = new System.Drawing.Point(140, 118);
+            this.p_verlag.Name = "p_verlag";
+            this.p_verlag.Size = new System.Drawing.Size(175, 24);
+            this.p_verlag.TabIndex = 56;
+            this.p_verlag.Visible = false;
+            // 
+            // p_genre
+            // 
+            this.p_genre.Location = new System.Drawing.Point(140, 148);
+            this.p_genre.Name = "p_genre";
+            this.p_genre.Size = new System.Drawing.Size(175, 24);
+            this.p_genre.TabIndex = 56;
+            this.p_genre.Visible = false;
+            // 
+            // cb_Verlag
+            // 
+            this.cb_Verlag.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_Verlag.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Verlag.BorderColor = System.Drawing.Color.Gray;
+            this.cb_Verlag.DataRowView = true;
+            this.cb_Verlag.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cb_Verlag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cb_Verlag.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.cb_Verlag.ForeColor = System.Drawing.Color.Black;
+            this.cb_Verlag.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_Verlag, "Tragen sie den Verlag ihres Buches hier ein.");
+            this.cb_Verlag.HighlightColor = System.Drawing.Color.DeepSkyBlue;
+            this.cb_Verlag.ItemHeight = 18;
+            this.cb_Verlag.Location = new System.Drawing.Point(140, 118);
+            this.cb_Verlag.Name = "cb_Verlag";
+            this.helpProvider.SetShowHelp(this.cb_Verlag, true);
+            this.cb_Verlag.Size = new System.Drawing.Size(175, 24);
+            this.cb_Verlag.TabIndex = 10;
+            this.metroToolTip1.SetToolTip(this.cb_Verlag, "    Tragen sie den Verlag ihres Buches hier ein.    ");
+            this.cb_Verlag.TextChanged += new System.EventHandler(this.cb_Verlag_TextChanged);
+            this.cb_Verlag.Enter += new System.EventHandler(this.cb_Verlag_Enter);
+            this.cb_Verlag.MouseEnter += new System.EventHandler(this.cb_Verlag_MouseEnter);
+            // 
+            // cb_Sprache
+            // 
+            this.cb_Sprache.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_Sprache.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Sprache.BorderColor = System.Drawing.Color.Gray;
+            this.cb_Sprache.DataRowView = true;
+            this.cb_Sprache.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cb_Sprache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cb_Sprache.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.cb_Sprache.ForeColor = System.Drawing.Color.Black;
+            this.cb_Sprache.FormattingEnabled = true;
+            this.helpProvider.SetHelpKeyword(this.cb_Sprache, "Tragen sie die Sprache ihres Buches hier ein.");
+            this.cb_Sprache.HighlightColor = System.Drawing.Color.DeepSkyBlue;
+            this.cb_Sprache.ItemHeight = 18;
+            this.cb_Sprache.Location = new System.Drawing.Point(140, 178);
+            this.cb_Sprache.Name = "cb_Sprache";
+            this.helpProvider.SetShowHelp(this.cb_Sprache, true);
+            this.cb_Sprache.Size = new System.Drawing.Size(175, 24);
+            this.cb_Sprache.TabIndex = 14;
+            this.metroToolTip1.SetToolTip(this.cb_Sprache, "    Tragen sie die Sprache ihres Buches hier ein.    ");
+            this.cb_Sprache.TextChanged += new System.EventHandler(this.cb_Sprache_TextChanged);
+            this.cb_Sprache.Enter += new System.EventHandler(this.cb_Sprache_Enter);
+            this.cb_Sprache.MouseEnter += new System.EventHandler(this.cb_Sprache_MouseEnter);
+            // 
+            // cb_Autor
+            // 
+            this.cb_Autor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_Autor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_Autor.BorderColor = System.Drawing.Color.Gray;
+            this.cb_Autor.DataRowView = true;
+            this.cb_Autor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cb_Autor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cb_Autor.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.cb_Autor.ForeColor = System.Drawing.Color.Black;
+            this.cb_Autor.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.cb_Autor, "Tragen sie den Autor ihres Buches hier ein.");
+            this.cb_Autor.HighlightColor = System.Drawing.Color.DeepSkyBlue;
+            this.cb_Autor.ItemHeight = 18;
+            this.cb_Autor.Location = new System.Drawing.Point(140, 88);
+            this.cb_Autor.Name = "cb_Autor";
+            this.helpProvider.SetShowHelp(this.cb_Autor, true);
+            this.cb_Autor.Size = new System.Drawing.Size(175, 24);
+            this.cb_Autor.TabIndex = 6;
+            this.metroToolTip1.SetToolTip(this.cb_Autor, "    Tragen sie den Autor ihres Buches hier ein.    ");
+            this.cb_Autor.TextChanged += new System.EventHandler(this.cb_Autor_TextChanged);
+            this.cb_Autor.Enter += new System.EventHandler(this.cb_Autor_Enter);
+            this.cb_Autor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cb_Autor_KeyDown);
+            this.cb_Autor.MouseEnter += new System.EventHandler(this.cb_Autor_MouseEnter);
             // 
             // Form_Books
             // 

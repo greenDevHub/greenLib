@@ -82,6 +82,7 @@ namespace Bibo_Verwaltung
         public void FillList(ref AdvancedCheckedListBox clb)
         {
             DataTable table = c.FillObject();
+            clb.Sorted = true;
             ((ListBox)clb).DataSource = table;
             ((ListBox)clb).DisplayMember = c.FieldName;
             ((ListBox)clb).ValueMember = c.FieldId;

@@ -57,7 +57,7 @@ namespace Bibo_Verwaltung.Helper
                 + "buch_titel as 'Titel',"
                 + "ger_name as 'Genre',"
                 + "ver_name as 'Verlag',"
-                + "stuff(( SELECT distinct ', '+ cast(au_autor as varchar(512)) FROM t_s_buch_autor left join t_s_autor on au_id = ba_autorid where ba_isbn = buch_isbn FOR XML PATH('')),1,1,'') as 'Autor',"
+                + "ISNULL(stuff((SELECT distinct ', '+ cast(au_autor as varchar(512)) FROM t_s_buch_autor left join t_s_autor on au_id = ba_autorid where ba_isbn = buch_isbn FOR XML PATH('')),1,2,''),'') as 'Autor',"
                 + "buch_erscheinungsdatum as 'Erscheinungsdatum',"
                 + "sprach_name as 'Sprache',"
                 + "buch_auflage as 'Auflage',"
