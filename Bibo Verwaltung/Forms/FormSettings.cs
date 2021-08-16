@@ -1,4 +1,5 @@
-﻿using Bibo_Verwaltung.Helper;
+﻿using Bibo_Verwaltung.Forms;
+using Bibo_Verwaltung.Helper;
 using MetroFramework;
 using System;
 using System.Drawing;
@@ -168,6 +169,18 @@ namespace Bibo_Verwaltung
         private void Bt_close_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btAbout_Click(object sender, EventArgs e)
+        {
+            ShowAboutPage();
+        }
+
+        private void ShowAboutPage()
+        {
+            FormAboutPage aboutForm = new FormAboutPage();
+            aboutForm.ShowDialog(this);
+            aboutForm.Dispose();
         }
     }
 }

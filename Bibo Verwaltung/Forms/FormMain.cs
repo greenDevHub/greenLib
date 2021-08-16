@@ -1,8 +1,10 @@
 ﻿using Bibo_Verwaltung.Helper;
 using MetroFramework;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bibo_Verwaltung
@@ -23,6 +25,25 @@ namespace Bibo_Verwaltung
             animationTimer.Start();
         }
         #endregion
+        private void CheckForNewVersion()
+        {
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += worker_doWork;
+            worker.RunWorkerAsync();
+        }
+        private void worker_doWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            VersionHelper helper = new VersionHelper();
+            if (helper.isNewVersionAvailable())
+            {
+                DialogResult dr = MetroMessageBox.Show(this, $"Ein Update ({helper.NewestVersion}) ist verfügbar. Sie haben aktuell die Version {helper.CurrentVersion} installiert. Möchten Sie das Update herunterladen?", "Update verfügbar!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    //load update
+                    helper.DownloadNewVersion();
+                }
+            }
+        }
 
         private bool IsConnected()
         {
@@ -258,6 +279,11 @@ namespace Bibo_Verwaltung
             {
                 MetroMessageBox.Show(this, "Es ist ein Fehler aufgetreten.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void FormMain_Shown(object sender, EventArgs e)
+        {
+            if (AuthInfo.CurrentUser.PermissionId == 2) CheckForNewVersion();
         }
     }
     #endregion

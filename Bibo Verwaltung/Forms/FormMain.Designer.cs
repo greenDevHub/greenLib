@@ -399,6 +399,7 @@
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Text = "     greenLib";
             this.Theme = MetroFramework.MetroThemeStyle.Default;
+            this.Shown += new System.EventHandler(this.FormMain_Shown);
             this.panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.styleManagerMain)).EndInit();
             this.ResumeLayout(false);

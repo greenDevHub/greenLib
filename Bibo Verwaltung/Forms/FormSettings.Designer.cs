@@ -40,6 +40,7 @@
             this.lb_Benutzername = new MetroFramework.Controls.MetroLabel();
             this.tb_Benutzername = new MetroFramework.Controls.MetroTextBox();
             this.tLP_Top = new System.Windows.Forms.TableLayoutPanel();
+            this.btAbout = new MetroFramework.Controls.MetroButton();
             this.cb_Security = new Bibo_Verwaltung.AdvancedComboBox();
             this.tLP_2 = new System.Windows.Forms.TableLayoutPanel();
             this.bt_Test = new MetroFramework.Controls.MetroButton();
@@ -282,6 +283,7 @@
             this.tLP_Top.ColumnCount = 2;
             this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.72917F));
             this.tLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.27083F));
+            this.tLP_Top.Controls.Add(this.btAbout, 0, 6);
             this.tLP_Top.Controls.Add(this.tb_Server, 1, 0);
             this.tLP_Top.Controls.Add(this.cb_Security, 1, 2);
             this.tLP_Top.Controls.Add(this.tb_Database, 1, 1);
@@ -305,9 +307,24 @@
             this.tLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28582F));
             this.tLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28582F));
             this.tLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28816F));
+            this.tLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tLP_Top.Size = new System.Drawing.Size(497, 213);
             this.tLP_Top.TabIndex = 0;
             this.tLP_Top.TabStop = true;
+            // 
+            // btAbout
+            // 
+            this.btAbout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btAbout.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.btAbout.FontWeight = MetroFramework.MetroButtonWeight.Light;
+            this.btAbout.Location = new System.Drawing.Point(3, 183);
+            this.btAbout.MaximumSize = new System.Drawing.Size(500, 24);
+            this.btAbout.Name = "btAbout";
+            this.btAbout.Size = new System.Drawing.Size(146, 24);
+            this.btAbout.TabIndex = 14;
+            this.btAbout.Text = "Über greenLib";
+            this.btAbout.UseSelectable = true;
+            this.btAbout.Click += new System.EventHandler(this.btAbout_Click);
             // 
             // cb_Security
             // 
@@ -492,5 +509,6 @@
         private MetroFramework.Controls.MetroButton bt_close;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
         private MetroFramework.Components.MetroStyleManager styleManagerSettings;
+        private MetroFramework.Controls.MetroButton btAbout;
     }
 }
