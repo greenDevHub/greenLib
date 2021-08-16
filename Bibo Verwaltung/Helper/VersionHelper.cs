@@ -22,7 +22,7 @@ namespace Bibo_Verwaltung.Helper
         private void GetCurrentVersion()
         {
             //to be done later, hard coded for now
-            CurrentVersion = "1.0.0";
+            CurrentVersion = "1.2.0";
         }
         public bool isNewVersionAvailable()
         {
