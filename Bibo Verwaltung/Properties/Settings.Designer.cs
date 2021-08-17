@@ -36,7 +36,7 @@ namespace Bibo_Verwaltung.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("false")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public string darkmode {
             get {
                 return ((string)(this["darkmode"]));
@@ -52,6 +52,18 @@ namespace Bibo_Verwaltung.Properties {
         public string secretKey {
             get {
                 return ((string)(this["secretKey"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool startedAfterInstall {
+            get {
+                return ((bool)(this["startedAfterInstall"]));
+            }
+            set {
+                this["startedAfterInstall"] = value;
             }
         }
     }

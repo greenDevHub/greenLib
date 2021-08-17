@@ -122,9 +122,9 @@ namespace Bibo_Verwaltung.Forms
             this.lbNewestVersionText.AutoSize = true;
             this.lbNewestVersionText.Location = new System.Drawing.Point(319, 123);
             this.lbNewestVersionText.Name = "lbNewestVersionText";
-            this.lbNewestVersionText.Size = new System.Drawing.Size(104, 19);
+            this.lbNewestVersionText.Size = new System.Drawing.Size(98, 19);
             this.lbNewestVersionText.TabIndex = 0;
-            this.lbNewestVersionText.Text = "Aktuelle Version:";
+            this.lbNewestVersionText.Text = "Neuste Version:";
             // 
             // FormAboutPage
             // 

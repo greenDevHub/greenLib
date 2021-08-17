@@ -1,4 +1,5 @@
-﻿using Bibo_Verwaltung.Helper;
+﻿using Bibo_Verwaltung.Forms;
+using Bibo_Verwaltung.Helper;
 using MetroFramework;
 using System;
 using System.ComponentModel;
@@ -29,18 +30,37 @@ namespace Bibo_Verwaltung
         {
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += worker_doWork;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             worker.RunWorkerAsync();
         }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (!Properties.Settings.Default.startedAfterInstall)
+            {
+                FormUpdateLog updateLog = new FormUpdateLog();
+                updateLog.ShowDialog(this);
+                updateLog.Dispose();
+            }
+        }
+
         private void worker_doWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             VersionHelper helper = new VersionHelper();
             if (helper.isNewVersionAvailable())
             {
-                DialogResult dr = MetroMessageBox.Show(this, $"Ein Update ({helper.NewestVersion}) ist verfügbar. Sie haben aktuell die Version {helper.CurrentVersion} installiert. Möchten Sie das Update herunterladen?", "Update verfügbar!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dr == DialogResult.Yes)
+                if (AuthInfo.CurrentUser.PermissionId == 2)
                 {
-                    //load update
-                    helper.DownloadNewVersion();
+                    DialogResult dr = MetroMessageBox.Show(this, $"Ein Update ({helper.NewestVersion}) ist verfügbar. Sie haben aktuell die Version {helper.CurrentVersion} installiert. Möchten Sie das Update herunterladen?", "Update verfügbar!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dr == DialogResult.Yes)
+                    {
+                        //load update
+                        helper.DownloadNewVersion();
+                    }
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, $"Ein Update ({helper.NewestVersion}) ist verfügbar. Sie haben aktuell die Version {helper.CurrentVersion} installiert. Bitte geben Sie Ihrem Administrator Bescheid, damit dieser das Update installieren kann.", "Update verfügbar!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -283,7 +303,7 @@ namespace Bibo_Verwaltung
 
         private void FormMain_Shown(object sender, EventArgs e)
         {
-            if (AuthInfo.CurrentUser.PermissionId == 2) CheckForNewVersion();
+            CheckForNewVersion();
         }
     }
     #endregion

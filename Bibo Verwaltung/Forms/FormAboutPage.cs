@@ -41,12 +41,10 @@ namespace Bibo_Verwaltung.Forms
         }
         private void CheckForNewVersion()
         {
-            helper.CheckForNewVersion();
-            lbNewestVersionNumber.Text = helper.NewestVersion;
-            if (helper.CurrentVersion != helper.NewestVersion)
+            if (helper.isNewVersionAvailable())
             {
-                DialogResult dr =  MetroMessageBox.Show(this, $"Ein Update ({helper.NewestVersion}) ist verfügbar. Sie haben aktuell die Version {helper.CurrentVersion} installiert. Möchten Sie das Update herunterladen?", "Update verfügbar!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if(dr == DialogResult.Yes)
+                DialogResult dr = MetroMessageBox.Show(this, $"Ein Update ({helper.NewestVersion}) ist verfügbar. Sie haben aktuell die Version {helper.CurrentVersion} installiert. Möchten Sie das Update herunterladen?", "Update verfügbar!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
                 {
                     //load update
                     helper.DownloadNewVersion();
@@ -56,6 +54,7 @@ namespace Bibo_Verwaltung.Forms
             {
                 MetroMessageBox.Show(this, $"Sie haben bereits die neuste Version ({helper.CurrentVersion}) der Software installiert.", "Keine Neue Version gefunden", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            lbNewestVersionNumber.Text = helper.NewestVersion;
         }
 
         private void btClose_Click(object sender, EventArgs e)
