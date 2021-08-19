@@ -46,9 +46,8 @@ namespace Bibo_Verwaltung.Forms
             // lbNews
             // 
             this.lbNews.AutoSize = true;
-            this.lbNews.Dock = System.Windows.Forms.DockStyle.Top;
             this.lbNews.Location = new System.Drawing.Point(0, 0);
-            this.lbNews.MaximumSize = new System.Drawing.Size(650, 0);
+            this.lbNews.MaximumSize = new System.Drawing.Size(425, 0);
             this.lbNews.Name = "lbNews";
             this.lbNews.Size = new System.Drawing.Size(0, 0);
             this.lbNews.TabIndex = 2;
@@ -59,7 +58,7 @@ namespace Bibo_Verwaltung.Forms
             this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btClose.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.btClose.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.btClose.Location = new System.Drawing.Point(522, 193);
+            this.btClose.Location = new System.Drawing.Point(404, 254);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(135, 24);
             this.btClose.TabIndex = 4;
@@ -69,31 +68,32 @@ namespace Bibo_Verwaltung.Forms
             // 
             // metroPanel1
             // 
-            this.metroPanel1.AutoSize = true;
+            this.metroPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroPanel1.AutoScroll = true;
             this.metroPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.metroPanel1.Controls.Add(this.btClose);
             this.metroPanel1.Controls.Add(this.lbNews);
-            this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.metroPanel1.HorizontalScrollbar = true;
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
             this.metroPanel1.Location = new System.Drawing.Point(20, 60);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 30);
-            this.metroPanel1.Size = new System.Drawing.Size(660, 220);
+            this.metroPanel1.Size = new System.Drawing.Size(519, 188);
             this.metroPanel1.TabIndex = 5;
+            this.metroPanel1.VerticalScrollbar = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 10;
+            this.metroPanel1.VerticalScrollbarSize = 5;
             // 
             // FormUpdateLog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(700, 300);
+            this.ClientSize = new System.Drawing.Size(562, 293);
             this.Controls.Add(this.metroPanel1);
+            this.Controls.Add(this.btClose);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -105,7 +105,6 @@ namespace Bibo_Verwaltung.Forms
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

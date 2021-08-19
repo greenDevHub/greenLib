@@ -61,5 +61,12 @@ namespace Bibo_Verwaltung.Forms
         {
             this.Close();
         }
+
+        private void btNews_Click(object sender, EventArgs e)
+        {
+            FormUpdateLog updateLog = new FormUpdateLog();
+            updateLog.ShowDialog(this);
+            updateLog.Dispose();
+        }
     }
 }

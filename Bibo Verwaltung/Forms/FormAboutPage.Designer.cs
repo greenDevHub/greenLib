@@ -39,6 +39,7 @@ namespace Bibo_Verwaltung.Forms
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.lbNewestVersionNumber = new MetroFramework.Controls.MetroLabel();
             this.lbNewestVersionText = new MetroFramework.Controls.MetroLabel();
+            this.btNews = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.styleManagerAbout)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +52,7 @@ namespace Bibo_Verwaltung.Forms
             this.lbVersionText.AutoSize = true;
             this.lbVersionText.Location = new System.Drawing.Point(23, 123);
             this.lbVersionText.Name = "lbVersionText";
-            this.lbVersionText.Size = new System.Drawing.Size(104, 19);
+            this.lbVersionText.Size = new System.Drawing.Size(112, 20);
             this.lbVersionText.TabIndex = 0;
             this.lbVersionText.Text = "Aktuelle Version:";
             // 
@@ -60,7 +61,7 @@ namespace Bibo_Verwaltung.Forms
             this.lbVersionNumber.AutoSize = true;
             this.lbVersionNumber.Location = new System.Drawing.Point(133, 123);
             this.lbVersionNumber.Name = "lbVersionNumber";
-            this.lbVersionNumber.Size = new System.Drawing.Size(36, 19);
+            this.lbVersionNumber.Size = new System.Drawing.Size(39, 20);
             this.lbVersionNumber.TabIndex = 1;
             this.lbVersionNumber.Text = "0.0.0";
             // 
@@ -88,7 +89,7 @@ namespace Bibo_Verwaltung.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btClose.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.btClose.FontWeight = MetroFramework.MetroButtonWeight.Light;
-            this.btClose.Location = new System.Drawing.Point(23, 175);
+            this.btClose.Location = new System.Drawing.Point(23, 205);
             this.btClose.MaximumSize = new System.Drawing.Size(0, 24);
             this.btClose.MinimumSize = new System.Drawing.Size(38, 24);
             this.btClose.Name = "btClose";
@@ -113,7 +114,7 @@ namespace Bibo_Verwaltung.Forms
             this.lbNewestVersionNumber.AutoSize = true;
             this.lbNewestVersionNumber.Location = new System.Drawing.Point(429, 123);
             this.lbNewestVersionNumber.Name = "lbNewestVersionNumber";
-            this.lbNewestVersionNumber.Size = new System.Drawing.Size(15, 19);
+            this.lbNewestVersionNumber.Size = new System.Drawing.Size(15, 20);
             this.lbNewestVersionNumber.TabIndex = 1;
             this.lbNewestVersionNumber.Text = "-";
             // 
@@ -122,15 +123,33 @@ namespace Bibo_Verwaltung.Forms
             this.lbNewestVersionText.AutoSize = true;
             this.lbNewestVersionText.Location = new System.Drawing.Point(319, 123);
             this.lbNewestVersionText.Name = "lbNewestVersionText";
-            this.lbNewestVersionText.Size = new System.Drawing.Size(98, 19);
+            this.lbNewestVersionText.Size = new System.Drawing.Size(107, 20);
             this.lbNewestVersionText.TabIndex = 0;
             this.lbNewestVersionText.Text = "Neuste Version:";
+            // 
+            // btNews
+            // 
+            this.btNews.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btNews.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.btNews.FontWeight = MetroFramework.MetroButtonWeight.Light;
+            this.btNews.Location = new System.Drawing.Point(23, 175);
+            this.btNews.MaximumSize = new System.Drawing.Size(0, 24);
+            this.btNews.MinimumSize = new System.Drawing.Size(38, 24);
+            this.btNews.Name = "btNews";
+            this.btNews.Size = new System.Drawing.Size(442, 24);
+            this.btNews.TabIndex = 7;
+            this.btNews.Text = "Neuigkeiten für die aktuelle Version";
+            this.btNews.UseSelectable = true;
+            this.btNews.Click += new System.EventHandler(this.btNews_Click);
             // 
             // FormAboutPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(488, 222);
+            this.ClientSize = new System.Drawing.Size(488, 241);
             this.Controls.Add(this.btClose);
+            this.Controls.Add(this.btNews);
             this.Controls.Add(this.btCheckForVersion);
             this.Controls.Add(this.lbNewestVersionNumber);
             this.Controls.Add(this.lbVersionNumber);
@@ -159,5 +178,6 @@ namespace Bibo_Verwaltung.Forms
         private MetroFramework.Controls.MetroLabel lbNewestVersionNumber;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroLabel lbNewestVersionText;
+        private MetroFramework.Controls.MetroButton btNews;
     }
 }
