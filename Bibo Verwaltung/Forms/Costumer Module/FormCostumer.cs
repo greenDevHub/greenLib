@@ -1025,7 +1025,6 @@ namespace Bibo_Verwaltung
                         errors++;
                         errorMessages.Add(String.Format("Der Kunde '{0}, {1}' konnte nicht entfernt werden, da er noch in einem Ausleihvorgang involviert ist. Bitte markieren Sie zuerst alle Bücher als 'zurückgegeben', damit der Datensatz entfernt werden kann.", row.Cells["Nachname"].Value, row.Cells["Vorname"].Value));
                     }
-                    ClearForm();
                 }
                 catch (SqlException)
                 {
@@ -1033,6 +1032,7 @@ namespace Bibo_Verwaltung
                     errors++;
                 }
             }
+            ClearForm();
             if (!backgroundWorker1.IsBusy)
             {
                 backgroundWorker1.RunWorkerAsync();
