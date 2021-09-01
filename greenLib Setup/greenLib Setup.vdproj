@@ -3,7 +3,7 @@
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
-"ProjectName" = "8:greenLibSetup32"
+"ProjectName" = "8:greenLib Setup 32"
 "LanguageId" = "3:1031"
 "CodePage" = "3:1252"
 "UILanguageId" = "3:1031"
@@ -63,8 +63,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F38B8D0315AAA692E804A061730C9557"
-        "OwnerKey" = "8:_8BDAC7DF8C0645919DA2842FDBD5ABC5"
+        "MsmKey" = "8:_F0A8107D63304EDAACD500D137936B7E"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -362,24 +362,13 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F38B8D0315AAA692E804A061730C9557"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F0A8107D63304EDAACD500D137936B7E"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_F38B8D0315AAA692E804A061730C9557"
-                    {
-                    "Name" = "8:MetroFramework.Fonts.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:MetroFramework.Fonts.dll"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\Bibo Verwaltung\\Resources\\greenLib.ico"
+            "TargetName" = "8:greenLib.ico"
             "Tag" = "8:"
             "Folder" = "8:_6C669211C9B64DACB5638056081D42C8"
             "Condition" = "8:"
@@ -393,7 +382,7 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F38B8D0315AAA692E804A061730C9557"
@@ -494,8 +483,8 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:greenLib"
-        "ProductCode" = "8:{940D9B62-4A44-4DF4-BD6C-8B79E8B17E20}"
-        "PackageCode" = "8:{DD5B6C46-9A20-4E90-9564-E653F252CD4E}"
+        "ProductCode" = "8:{094F0A13-3BC1-445A-9F40-5E54DB12253E}"
+        "PackageCode" = "8:{B3DB375C-F3D7-498C-B9F5-63716F4488BC}"
         "UpgradeCode" = "8:{840B81A5-7A89-4941-BA52-0BC7F08D4F55}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
