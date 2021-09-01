@@ -51,7 +51,7 @@ namespace Bibo_Verwaltung
             {
                 if (AuthInfo.CurrentUser.PermissionId == 2)
                 {
-                    DialogResult dr = MetroMessageBox.Show(this, $"Ein Update ({helper.NewestVersion}) ist verfügbar. Sie haben aktuell die Version {helper.CurrentVersion} installiert. Möchten Sie das Update herunterladen?", "Update verfügbar!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult dr = MetroMessageBox.Show(this, $"Ein Update ({helper.NewestVersion}) ist verfügbar. Sie haben aktuell die Version {helper.CurrentVersion} installiert. Möchten Sie das Update herunterladen? \nAchtung: Das Programm wird dabei automatisch beendet.", "Update verfügbar!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dr == DialogResult.Yes)
                     {
                         //load update
