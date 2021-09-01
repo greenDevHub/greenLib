@@ -288,13 +288,12 @@ namespace Bibo_Verwaltung
             CustomSqlConnection con = new CustomSqlConnection();
             if (con.ConnectError()) return;
             string command = "INSERT INTO [dbo].[t_s_fach_kunde] (fs_kundenid, fs_fachid, fs_lk) VALUES (@costumerId, @subjectId, @isAdvanced)";
-            foreach (Subject subject in CostumerSubjects)
+            for(int i = 0; i<CostumerSubjects.Count;i++)
             {
-                subject.AddSubjectIfNotExists();
                 SqlCommand cmd = new SqlCommand(command, con.Con);
                 cmd.Parameters.AddWithValue("@costumerId", CostumerId);
-                cmd.Parameters.AddWithValue("@subjectId", subject.SubjectId);
-                if (CostumerAdvancedSubjects.Contains(subject))
+                cmd.Parameters.AddWithValue("@subjectId", subjectHelper.AddOrGetSubject(CostumerSubjects[i].SubjectNameShort).SubjectId);
+                if (CostumerAdvancedSubjects.Contains(CostumerSubjects[i]))
                 {
                     cmd.Parameters.AddWithValue("@isAdvanced", true);
                 }

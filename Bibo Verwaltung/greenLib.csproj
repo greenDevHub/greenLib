@@ -176,6 +176,7 @@
     </Compile>
     <Compile Include="Helper\BookHelper.cs" />
     <Compile Include="Helper\GradeHelper.cs" />
+    <Compile Include="Helper\PrinterHelper.cs" />
     <Compile Include="Helper\SchoolClassHelper.cs" />
     <Compile Include="Helper\CostumerHelper.cs" />
     <Compile Include="Helper\SubjectHelper.cs" />

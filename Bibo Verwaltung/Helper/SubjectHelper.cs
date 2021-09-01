@@ -57,6 +57,62 @@ namespace Bibo_Verwaltung.Helper
         }
 
         /// <summary>
+        /// returns a subject by its short name
+        /// </summary>
+        /// <param name="subjectNameShort"></param>
+        /// <returns></returns>
+        public Subject GetSubjectByShortName(string subjectNameShort)
+        {
+            Subject subject = new Subject();
+            CustomSqlConnection con = new CustomSqlConnection();
+            if (con.ConnectError()) return subject;
+            string command = "SELECT * FROM [dbo].[t_s_faecher] WHERE f_kurzform = @0";
+            SqlDataReader dr = con.ExcecuteCommand(command, subjectNameShort);
+            while (dr.Read())
+            {
+                subject.SubjectId = int.Parse(dr["f_id"].ToString());
+                subject.SubjectNameShort = dr["f_kurzform"].ToString();
+                subject.SubjectNameLong = dr["f_langform"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            return subject;
+        }
+
+        /// <summary>
+        /// returns a subject by its short name or adds it and then gets it
+        /// </summary>
+        /// <param name="subjectNameShort"></param>
+        /// <returns></returns>
+        public Subject AddOrGetSubject(string subjectNameShort)
+        {
+            Subject subject = new Subject();
+            CustomSqlConnection con = new CustomSqlConnection();
+            if (con.ConnectError()) return subject;
+
+            string command = $"begin if not exists (select f_kurzform from t_s_faecher where f_kurzform=@0) begin insert into t_s_faecher (f_kurzform, f_langform) values (@1, @2) end end";
+            SqlCommand cmd = new SqlCommand(command, con.Con);
+            cmd.Parameters.AddWithValue("@0", subjectNameShort);
+            cmd.Parameters.AddWithValue("@1", subjectNameShort);
+            cmd.Parameters.AddWithValue("@2", "");
+            cmd.ExecuteNonQuery();
+
+            command = "SELECT * FROM [dbo].[t_s_faecher] WHERE f_kurzform = @0";
+            SqlDataReader dr = con.ExcecuteCommand(command, subjectNameShort);
+            while (dr.Read())
+            {
+                subject.SubjectId = int.Parse(dr["f_id"].ToString());
+                subject.SubjectNameShort = dr["f_kurzform"].ToString();
+                subject.SubjectNameLong = dr["f_langform"].ToString();
+            }
+            dr.Close();
+            con.Close();
+            return subject;
+        }
+
+
+
+        /// <summary>
         /// fills a datatable with information
         /// </summary>
         private DataTable FillObject()

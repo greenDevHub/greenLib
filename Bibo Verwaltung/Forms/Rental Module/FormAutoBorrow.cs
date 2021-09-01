@@ -396,11 +396,11 @@ namespace Bibo_Verwaltung
         }
         private void MarkSchueler(int grade)
         {
-            List<Book> suggestedBooks = autoausleihe.SuggestedBooks(grade);
             foreach (DataGridViewRow costumerRow in gv_Schueler.Rows)
             {
-                Costumer costumer = new Costumer();
-                costumer.CostumerId = Convert.ToInt32(costumerRow.Cells["kunde_ID"].Value);
+                Costumer costumer = new Costumer(Convert.ToInt32(costumerRow.Cells["kunde_ID"].Value));
+                autoausleihe.Costumer = costumer;
+                List<Book> suggestedBooks = autoausleihe.SuggestedBooks(grade);
                 //costumer.CostumerFirstName = costumerRow.Cells["Vorname"].Value.ToString();
                 //costumer.CostumerSurname = costumerRow.Cells["Nachname"].Value.ToString();
                 //costumer.CostumerSchoolClass.SchoolClassId = Convert.ToInt32(costumerRow.Cells["kunde_klasse"].Value);

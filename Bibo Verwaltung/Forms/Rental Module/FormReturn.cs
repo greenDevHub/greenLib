@@ -225,6 +225,8 @@ namespace Bibo_Verwaltung
         {
             if (tb_BuchCode.Text != "")
             {
+                timer_input.Stop();
+                ShowBuchResults();
                 if (llb_BuchTitel.Text != "keine Treffer")
                 {
                     if (!rueckgabe.IsAvailable)

@@ -55,11 +55,13 @@ namespace Bibo_Verwaltung
             comboBox1.Visible = false;
             comboBox1.DropDownHeight = 1;
             tb_ISBN.Focus();
+            LoadBuch(new Book(tb_ISBN.Text,false));
         }
         public Form_Books(bool bool1)
         {
             InitializeComponent();
             LoadTheme();
+            SetPermissions();
             this.Text = Text + AuthInfo.FormInfo();
 
             FillComboboxes();
@@ -398,10 +400,7 @@ namespace Bibo_Verwaltung
                 copy.DateRegistration = DateTime.UtcNow.Date;
                 copy.Condition = newCondition;
 
-                for (int i = 0; i < newCopyCount; i++)
-                {
-                    copy.Add();
-                }
+                copy.Add(newCopyCount);
 
                 ClearForm();
             }
@@ -491,6 +490,7 @@ namespace Bibo_Verwaltung
         /// <param name="multipleAuthors"></param>
         private void FinalizeAuthor(ref Book book, bool multipleAuthors)
         {
+            if (cb_Autor.Text.Equals("")) return;
             if (multipleAuthors)
             {
                 //multiple authors
@@ -540,14 +540,14 @@ namespace Bibo_Verwaltung
             {
                 case SaveOption.add:
                     if (!isEmpty(tb_ISBN.Text) && !isEmpty(tb_Titel.Text)
-                        && !isEmpty(cb_Autor.Text) && !isEmpty(cb_Verlag.Text) && !isEmpty(cb_Genre.Text) && !isEmpty(cb_Sprache.Text))
+                         && !isEmpty(cb_Verlag.Text) && !isEmpty(cb_Genre.Text) && !isEmpty(cb_Sprache.Text))
                     {
                         inputOkay = true;
                     }
                     break;
                 case SaveOption.update:
                     if (!isEmpty(tb_ISBN.Text) && !isEmpty(tb_Titel.Text)
-                        && !isEmpty(cb_Autor.Text) && !isEmpty(cb_Verlag.Text) && !isEmpty(cb_Genre.Text) && !isEmpty(cb_Sprache.Text))
+                        && !isEmpty(cb_Verlag.Text) && !isEmpty(cb_Genre.Text) && !isEmpty(cb_Sprache.Text))
                     {
                         inputOkay = true;
                     }
@@ -619,12 +619,14 @@ namespace Bibo_Verwaltung
             if (gridViewBook.DataSource == null) return;
             if (dTP_Erscheinungsdatum.Value.Date != DateTime.Now.Date)
             {
-                (gridViewBook.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%' AND Autor LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Sprache LIKE '%{5}%' AND Convert([Erscheinungsdatum], System.String) LIKE '%{6}%'", tb_Titel.Text, tb_ISBN.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, cb_Sprache.Text, dTP_Erscheinungsdatum.Value.Date.ToShortDateString());
+                (gridViewBook.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%' AND Autor LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Sprache LIKE '%{5}%' AND Convert([Erscheinungsdatum], System.String) LIKE '%{6}%'", 
+                    tb_Titel.Text, tb_ISBN.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, cb_Sprache.Text, dTP_Erscheinungsdatum.Value.Date.ToShortDateString());
 
             }
             else
             {
-                (gridViewBook.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%' AND Autor LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Sprache LIKE '%{5}%'", tb_Titel.Text, tb_ISBN.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, cb_Sprache.Text);
+                (gridViewBook.DataSource as DataTable).DefaultView.RowFilter = string.Format("Titel LIKE '%{0}%' and ISBN LIKE '%{1}%' AND Autor LIKE '%{2}%' AND Verlag LIKE '%{3}%' AND Genre LIKE '%{4}%' AND Sprache LIKE '%{5}%'", 
+                    tb_Titel.Text, tb_ISBN.Text, cb_Autor.Text, cb_Verlag.Text, cb_Genre.Text, cb_Sprache.Text);
             }
 
         }
@@ -717,7 +719,6 @@ namespace Bibo_Verwaltung
                 mtb_Nachricht.Text = "Das Buch wurde erfolgreich hinzugefügt!";
                 lb_ISBN.Text = "ISBN:*";
                 lb_Titel.Text = "Titel:*";
-                lb_Autor.Text = "Autor:*";
                 lb_Verlag.Text = "Verlag:*";
                 lb_Genre.Text = "Genre:*";
                 lb_Sprache.Text = "Sprache:*";
@@ -751,7 +752,6 @@ namespace Bibo_Verwaltung
                 mtb_Nachricht.Text = "Das Buch wurde erfolgreich bearbeitet!";
                 lb_ISBN.Text = "ISBN:";
                 lb_Titel.Text = "Titel:*";
-                lb_Autor.Text = "Autor:*";
                 lb_Verlag.Text = "Verlag:*";
                 lb_Genre.Text = "Genre:*";
                 lb_Sprache.Text = "Sprache:*";
@@ -879,13 +879,16 @@ namespace Bibo_Verwaltung
             string autortext = "";
             if (book.BookAuthors.Count > 1)
             {
+                book.BookAuthors = book.BookAuthors.OrderBy(o => o.AuthorName).ToList();
                 checkbox_autor.Checked = true;
-                for(int i = 0; i<checkedListBox1.Items.Count;i++)
+                for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                    checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
+                for (int i = 0; i < checkedListBox1.Items.Count; i++)
                 {
                     DataRowView item = (DataRowView)checkedListBox1.Items[i];
                     var s = item["au_autor"];
                     Author author = new Author(authorHelper.FindIdByName(item["au_autor"].ToString()));
-                    var matches = book.BookAuthors.Where(authorItem => String.Equals(authorItem.AuthorName, author.AuthorName, StringComparison.CurrentCulture));
+                    var matches = book.BookAuthors.Where(authorItem => String.Equals(authorItem.AuthorName, author.AuthorName, StringComparison.CurrentCultureIgnoreCase));
                     if (matches.ToList().Count > 0)
                     {
                         checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf(item), true);
@@ -1376,19 +1379,25 @@ namespace Bibo_Verwaltung
 
         private void entfernenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            tb_ISBN.Text = gridViewBook.SelectedRows[0].Cells["ISBN"].Value.ToString();
-            Book book = new Book(tb_ISBN.Text, false);
-            if (book.AreCopiesAvailable())
+            DialogResult dialogResult = MetroMessageBox.Show(this, "Sämtliche zu diesem Buch " + 
+                "gehörende Exemplare werden auch aus der Datenbank gelöscht. Fortfahren?", 
+                "Achtung",MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if(dialogResult == DialogResult.Yes)
             {
-                book.Deactivate();
-                ClearForm();
-                bookHelper.FillGrid(ref gridViewBook, false);
-            }
-            else
-            {
-                MetroMessageBox.Show(this, "Das Buch konnte nicht gelöscht werden, da eines der dazugehörigen " +
-                    "Exemplare zur Zeit verliehen ist. Bitte melden Sie dieses zuerst als 'zurückgegeben', bevor Sie das Buch löschen!",
-                    "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                tb_ISBN.Text = gridViewBook.SelectedRows[0].Cells["ISBN"].Value.ToString();
+                Book book = new Book(tb_ISBN.Text, false);
+                if (book.AreCopiesAvailable())
+                {
+                    book.Deactivate();
+                    ClearForm();
+                    bookHelper.FillGrid(ref gridViewBook, false);
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Das Buch konnte nicht gelöscht werden, da eines der dazugehörigen " +
+                        "Exemplare zur Zeit verliehen ist. Bitte melden Sie dieses zuerst als 'zurückgegeben', bevor Sie das Buch löschen!",
+                        "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 

@@ -45,8 +45,6 @@
             this.hinzufügenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.entfernenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.zurueckgebenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.kundenAnzeigenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buchAnzeigenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkShowCostumer = new MetroFramework.Controls.MetroCheckBox();
             this.checkShowAvailable = new MetroFramework.Controls.MetroCheckBox();
             this.btBorrow = new MetroFramework.Controls.MetroButton();
@@ -100,6 +98,11 @@
             this.toolTipMain = new MetroFramework.Components.MetroToolTip();
             this.styleManagerOverview = new MetroFramework.Components.MetroStyleManager(this.components);
             this.timerKeyInput = new System.Windows.Forms.Timer(this.components);
+            this.mehrToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buchAnzeigenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exemplarAnzeigenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.barcodeFürExemplarDruckenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kundenAnzeigenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridOverview)).BeginInit();
             this.contextMenuBorrow.SuspendLayout();
             this.metroPanel1.SuspendLayout();
@@ -189,10 +192,9 @@
             this.exemplarZurückgebenToolStripMenuItem,
             this.ausleihlisteToolStripMenuItem,
             this.rueckgabelisteToolStripMenuItem,
-            this.kundenAnzeigenToolStripMenuItem,
-            this.buchAnzeigenToolStripMenuItem});
+            this.mehrToolStripMenuItem});
             this.contextMenuBorrow.Name = "ContextMenu";
-            this.contextMenuBorrow.Size = new System.Drawing.Size(195, 136);
+            this.contextMenuBorrow.Size = new System.Drawing.Size(398, 299);
             this.contextMenuBorrow.Style = MetroFramework.MetroColorStyle.Lime;
             // 
             // ausleihen
@@ -270,20 +272,6 @@
             this.zurueckgebenToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.zurueckgebenToolStripMenuItem.Text = "Zurückgeben";
             this.zurueckgebenToolStripMenuItem.Click += new System.EventHandler(this.ZurueckgebenToolStripMenuItem_Click);
-            // 
-            // kundenAnzeigenToolStripMenuItem
-            // 
-            this.kundenAnzeigenToolStripMenuItem.Name = "kundenAnzeigenToolStripMenuItem";
-            this.kundenAnzeigenToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.kundenAnzeigenToolStripMenuItem.Text = "Kunden anzeigen";
-            this.kundenAnzeigenToolStripMenuItem.Click += new System.EventHandler(this.KundenAnzeigenToolStripMenuItem_Click);
-            // 
-            // buchAnzeigenToolStripMenuItem
-            // 
-            this.buchAnzeigenToolStripMenuItem.Name = "buchAnzeigenToolStripMenuItem";
-            this.buchAnzeigenToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.buchAnzeigenToolStripMenuItem.Text = "Buch anzeigen";
-            this.buchAnzeigenToolStripMenuItem.Click += new System.EventHandler(this.BuchAnzeigenToolStripMenuItem_Click);
             // 
             // checkShowCostumer
             // 
@@ -1210,6 +1198,45 @@
             this.timerKeyInput.Interval = 500;
             this.timerKeyInput.Tick += new System.EventHandler(this.timer_input_Tick);
             // 
+            // mehrToolStripMenuItem
+            // 
+            this.mehrToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buchAnzeigenToolStripMenuItem1,
+            this.exemplarAnzeigenToolStripMenuItem,
+            this.barcodeFürExemplarDruckenToolStripMenuItem,
+            this.kundenAnzeigenToolStripMenuItem1});
+            this.mehrToolStripMenuItem.Name = "mehrToolStripMenuItem";
+            this.mehrToolStripMenuItem.Size = new System.Drawing.Size(397, 48);
+            this.mehrToolStripMenuItem.Text = "mehr";
+            // 
+            // buchAnzeigenToolStripMenuItem1
+            // 
+            this.buchAnzeigenToolStripMenuItem1.Name = "buchAnzeigenToolStripMenuItem1";
+            this.buchAnzeigenToolStripMenuItem1.Size = new System.Drawing.Size(580, 54);
+            this.buchAnzeigenToolStripMenuItem1.Text = "Buch anzeigen";
+            this.buchAnzeigenToolStripMenuItem1.Click += new System.EventHandler(this.BuchAnzeigenToolStripMenuItem_Click);
+            // 
+            // exemplarAnzeigenToolStripMenuItem
+            // 
+            this.exemplarAnzeigenToolStripMenuItem.Name = "exemplarAnzeigenToolStripMenuItem";
+            this.exemplarAnzeigenToolStripMenuItem.Size = new System.Drawing.Size(580, 54);
+            this.exemplarAnzeigenToolStripMenuItem.Text = "Exemplar anzeigen";
+            this.exemplarAnzeigenToolStripMenuItem.Click += new System.EventHandler(this.exemplarAnzeigenToolStripMenuItem_Click);
+            // 
+            // barcodeFürExemplarDruckenToolStripMenuItem
+            // 
+            this.barcodeFürExemplarDruckenToolStripMenuItem.Name = "barcodeFürExemplarDruckenToolStripMenuItem";
+            this.barcodeFürExemplarDruckenToolStripMenuItem.Size = new System.Drawing.Size(580, 54);
+            this.barcodeFürExemplarDruckenToolStripMenuItem.Text = "Barcode für Exemplar drucken";
+            this.barcodeFürExemplarDruckenToolStripMenuItem.Click += new System.EventHandler(this.printBarcodeForCopyToolStripMenuItem_Click);
+            // 
+            // kundenAnzeigenToolStripMenuItem1
+            // 
+            this.kundenAnzeigenToolStripMenuItem1.Name = "kundenAnzeigenToolStripMenuItem1";
+            this.kundenAnzeigenToolStripMenuItem1.Size = new System.Drawing.Size(580, 54);
+            this.kundenAnzeigenToolStripMenuItem1.Text = "Kunden anzeigen";
+            this.kundenAnzeigenToolStripMenuItem1.Click += new System.EventHandler(this.KundenAnzeigenToolStripMenuItem_Click);
+            // 
             // FormOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1318,5 +1345,10 @@
         private MetroFramework.Components.MetroStyleManager styleManagerOverview;
         private System.Windows.Forms.Timer timerKeyInput;
         private MetroFramework.Controls.MetroRadioButton radioShowBorrowed;
+        private System.Windows.Forms.ToolStripMenuItem mehrToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem buchAnzeigenToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem exemplarAnzeigenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem barcodeFürExemplarDruckenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kundenAnzeigenToolStripMenuItem1;
     }
 }
