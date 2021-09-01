@@ -11,10 +11,13 @@
       <Value Profile="(Default)">Data Source=DESKTOP-1ALAVSD;Initial Catalog=Bibo_Verwaltung;Integrated Security=True</Value>
     </Setting>
     <Setting Name="darkmode" Type="System.String" Scope="User">
-      <Value Profile="(Default)">false</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="secretKey" Type="System.String" Scope="Application">
       <Value Profile="(Default)">SecretKeyToGenerateSomeSecretAndCoolPasswords</Value>
+    </Setting>
+    <Setting Name="startedAfterInstall" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>
