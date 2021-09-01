@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -65,11 +66,13 @@ namespace Bibo_Verwaltung.Helper
         public void DownloadNewVersion()
         {
             if (downloadUrl == "" || NewestVersion == "" || NewestVersion == CurrentVersion) return;
+            string fileUrl = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}/greenLibSetupDownload.msi";
+            if (File.Exists(fileUrl)) File.Delete(fileUrl);
             using (var client = new WebClient())
             {
-                client.DownloadFile(downloadUrl, $"greenLibSetup-{NewestVersion}.msi");
+                client.DownloadFile(downloadUrl, fileUrl);
             }
-            Process.Start($"greenLibSetup-{NewestVersion}.msi");
+            Process.Start(fileUrl);
             Application.Exit();
         }
         public VersionChange GetChanges(string currentVersion)
