@@ -13,6 +13,8 @@ namespace Bibo_Verwaltung
 {
     public partial class FormOverview : MetroFramework.Forms.MetroForm
     {
+        PrinterHelper printerHelper = new PrinterHelper();
+
         bool loaded = false;
         Color red = Color.Tomato;
         Color yellow = Color.Gold;
@@ -184,15 +186,15 @@ namespace Bibo_Verwaltung
             }
             if (radioShowGreen.Checked)
             {
-                rowfilter = rowfilter + string.Format(" AND Rückgabedatum > #{0}#", DateTime.Now.Date);
+                rowfilter = rowfilter + string.Format(" AND Rückgabedatum > '#{0}#'", DateTime.Now.Date);
             }
             else if (radioShowRed.Checked)
             {
-                rowfilter = rowfilter + string.Format(" AND Rückgabedatum < #{0}# AND Rückgabedatum <> #{1}#", DateTime.Now.Date, DateTime.MinValue.Date);
+                rowfilter = rowfilter + string.Format(" AND Rückgabedatum < '#{0}#' AND Rückgabedatum <> '#{1}#'", DateTime.Now.Date, DateTime.MinValue.Date);
             }
             else if (radioShowYellow.Checked)
             {
-                rowfilter = rowfilter + string.Format(" AND Rückgabedatum = #{0}#", DateTime.Now.Date);
+                rowfilter = rowfilter + string.Format(" AND Rückgabedatum = '#{0}#'", DateTime.Now.Date);
             }
             (gridOverview.DataSource as DataTable).DefaultView.RowFilter = (gridOverview.DataSource as DataTable).DefaultView.RowFilter + " AND " + rowfilter;
         }
@@ -367,18 +369,13 @@ namespace Bibo_Verwaltung
 
         private void Filter()
         {
-            if (filterActive)
+            if (searchActivated)
             {
-                if (searchActivated)
-                {
-                    overviewHelper.ExecuteSearch(ref gridOverview, tbCopyId.Text, tbCopyIsbn.Text, tbTitle.Text, cbAuthor.Text, cbPublisher.Text, cbGenre.Text, tbFirstName.Text, tbSurname.Text, tbClass.Text);
+                overviewHelper.ExecuteSearch(ref gridOverview, tbCopyId.Text, tbCopyIsbn.Text, tbTitle.Text, cbAuthor.Text, cbPublisher.Text, cbGenre.Text, tbFirstName.Text, tbSurname.Text, tbClass.Text);
 
-                    addRowFilter();
-                    checkedChanged();
-                }
+                addRowFilter();
+                checkedChanged();
             }
-
-
         }
         private void tb_ExemplarID_TextChanged(object sender, EventArgs e)
         {
@@ -559,8 +556,9 @@ namespace Bibo_Verwaltung
                     hinzufügenToolStripMenuItem1.Visible = false;
                     entfernenToolStripMenuItem1.Visible = false;
                     zurueckgebenToolStripMenuItem.Visible = false;
-                    buchAnzeigenToolStripMenuItem.Visible = false;
-                    kundenAnzeigenToolStripMenuItem.Visible = false;
+                    buchAnzeigenToolStripMenuItem1.Visible = false;
+                    kundenAnzeigenToolStripMenuItem1.Visible = false;
+                    barcodeFürExemplarDruckenToolStripMenuItem.Visible = false;
                 }
                 else
                 {
@@ -574,8 +572,9 @@ namespace Bibo_Verwaltung
                     hinzufügenToolStripMenuItem1.Visible = true;
                     entfernenToolStripMenuItem1.Visible = true;
                     zurueckgebenToolStripMenuItem.Visible = true;
-                    buchAnzeigenToolStripMenuItem.Visible = true;
-                    kundenAnzeigenToolStripMenuItem.Visible = true;
+                    buchAnzeigenToolStripMenuItem1.Visible = true;
+                    kundenAnzeigenToolStripMenuItem1.Visible = true;
+                    barcodeFürExemplarDruckenToolStripMenuItem.Visible = true;
                 }
             }
         }
@@ -586,7 +585,7 @@ namespace Bibo_Verwaltung
             {
                 if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
                 {
-                    buchAnzeigenToolStripMenuItem.Enabled = true;
+                    buchAnzeigenToolStripMenuItem1.Enabled = true;
                     if (!gridOverview.Rows[e.RowIndex].Selected)
                     {
                         gridOverview.ClearSelection();
@@ -648,11 +647,11 @@ namespace Bibo_Verwaltung
                     }
                     if (!gridOverview.SelectedRows[0].Cells["Kunden ID"].Value.ToString().Equals(""))
                     {
-                        kundenAnzeigenToolStripMenuItem.Enabled = true;
+                        kundenAnzeigenToolStripMenuItem1.Enabled = true;
                     }
                     else
                     {
-                        kundenAnzeigenToolStripMenuItem.Enabled = false;
+                        kundenAnzeigenToolStripMenuItem1.Enabled = false;
                     }
 
                 }
@@ -1005,6 +1004,10 @@ namespace Bibo_Verwaltung
             loadEnabled = false;
             formCostumer.ShowDialog(this);
             loadEnabled = true;
+            if (!workerMain.IsBusy)
+            {
+                workerMain.RunWorkerAsync();
+            }
         }
 
         private void BuchAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1013,7 +1016,23 @@ namespace Bibo_Verwaltung
             loadEnabled = false;
             Buch.ShowDialog(this);
             loadEnabled = true;
+            if (!workerMain.IsBusy)
+            {
+                workerMain.RunWorkerAsync();
+            }
         }
+        private void exemplarAnzeigenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form copyForm = new Form_Copy(Convert.ToInt32(gridOverview.SelectedRows[0].Cells["ExemplarID"].Value));
+            loadEnabled = false;
+            copyForm.ShowDialog(this);
+            loadEnabled = true;
+            if (!workerMain.IsBusy)
+            {
+                workerMain.RunWorkerAsync();
+            }
+        }
+
 
         private void Gv_buchsuche_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1185,6 +1204,15 @@ namespace Bibo_Verwaltung
                 checkedChanged();
 
             }
+        }
+
+        private void printBarcodeForCopyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            loadEnabled = false;
+            int copyId = Convert.ToInt32(gridOverview.SelectedRows[0].Cells["ExemplarID"].Value);
+            List<string> barcodes = new List<string>();
+            barcodes.Add(printerHelper.GenerateBarcode(copyId));
+            printerHelper.PrintMultipleBarcodes(barcodes, this);
         }
     }
 

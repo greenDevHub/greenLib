@@ -26,7 +26,7 @@ namespace Bibo_Verwaltung
                 lb_8.Text = "Erscheinungsdatum:";
                 lb_2_1.Text = book.BookIsbn;
                 lb_2_2.Text = book.BookTitle;
-                if (book.BookAuthors.Count > 1)
+                if (book.BookAuthors.Count > 0)
                 {
                     lb_2_3.Text = "";
                     foreach (Author author in book.BookAuthors)
@@ -35,7 +35,7 @@ namespace Bibo_Verwaltung
                     }
                     lb_2_3.Text = lb_2_3.Text.Substring(0, lb_2_3.Text.Length - 2);
                 }
-                else if (book.BookAuthors.Count == 0)
+                else
                 {
                     lb_2_3.Text = "-";
                 }
