@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Text.RegularExpressions;
 using System.Timers;
 using System.Windows.Forms;
 
@@ -23,6 +24,7 @@ namespace Bibo_Verwaltung
         string target = "";
         string filename = "";
         bool multiselect = false;
+        private static readonly Regex rxNonDigits = new Regex(@"[^\d]+");
         /// <summary>
         /// Anzahl der Dateien insgesamt
         /// </summary>
@@ -741,7 +743,18 @@ namespace Bibo_Verwaltung
                         if (rb_schueler1.Checked)
                         {
                             //SEK1 Import Schüler
-                            int grade = int.Parse(costumer.CostumerSchoolClass.SchoolClassName.Substring(0, costumer.CostumerSchoolClass.SchoolClassName.Length - 2));
+                            int grade;
+                            if (costumer.CostumerSchoolClass.SchoolClassName.Contains("/"))
+                            {
+                                // Format: '07/1' or '7/a' -> Remove the part starting with '/'
+                                grade = int.Parse(costumer.CostumerSchoolClass.SchoolClassName.Substring(0, costumer.CostumerSchoolClass.SchoolClassName.Length - 2));
+                            }
+                            else
+                            {
+                                // Format: '07a' or '7a' -> Remove characters other than decimal digits with regex
+                                grade = int.Parse(rxNonDigits.Replace(costumer.CostumerSchoolClass.SchoolClassName, ""));
+                            }
+                            
                             SubjectGradeHelper subjectGradeHelper = new SubjectGradeHelper(grade);
                             for (int i = 4; i < 7; i++)
                             {
